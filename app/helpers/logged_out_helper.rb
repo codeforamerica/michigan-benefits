@@ -1,0 +1,2 @@
+module LoggedOutHelper
+end

@@ -1,0 +1,7 @@
+<h1>Signup</h1>
+
+<%= form_for @account do |f| %>
+E-mail: <%= f.text_field :email %><br />
+Password: <%= f.password_field :password %><br />
+<%= f.submit %>
+<% end %>
