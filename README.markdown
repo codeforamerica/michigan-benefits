@@ -1,4 +1,4 @@
-Setup
+SETUP
 =====
 
 1. Search the project for 'citizen' and change the name to match the project you're starting.
@@ -17,3 +17,10 @@ TOOLS
 Get code coverage with
 
     rake simplecov
+
+
+REFERENCES
+==========
+
+* [Configuring Rails for Heroku](https://devcenter.heroku.com/articles/getting-started-with-rails4)
+* [Setting up Postgres on Heroku](https://devcenter.heroku.com/articles/heroku-postgresql)
