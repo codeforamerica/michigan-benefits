@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'rails_helper'
 
 describe SessionsController do
   it "should get login" do

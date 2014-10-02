@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'rails_helper'
 
 describe LoggedInController do
   it "should get landing" do
