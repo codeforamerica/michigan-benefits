@@ -19,5 +19,10 @@ module CitizenRails
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # one password for the entire site, for while the site's in closed beta
+    config.require_beta_login = true
+    config.beta_username = 'citizen'
+    config.beta_password = 'code'
   end
 end
