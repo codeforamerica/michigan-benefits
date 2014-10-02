@@ -40,6 +40,8 @@ gem 'spring',        group: :development
 gem 'sorcery'
 gem 'postmark-rails'
 
+gem 'simplecov', group: [:development, :test]
+
 group :test do
   gem 'minitest'
   gem 'minitest-focus'
