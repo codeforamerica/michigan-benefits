@@ -44,6 +44,7 @@ gem 'rails_12factor', group: :production
 
 # authentication
 gem 'sorcery'
+gem 'pundit'
 
 # e-mail
 gem 'postmark-rails'
