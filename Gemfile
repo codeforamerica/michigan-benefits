@@ -39,6 +39,9 @@ gem 'spring',        group: :development
 
 # gem 'debugger', group: [:development, :test]
 
+# heroku support (static asset serving, logging)
+gem 'rails_12factor', group: :production
+
 gem 'sorcery'
 gem 'postmark-rails'
 
@@ -47,3 +50,7 @@ group(:development, :test) do
   gem 'simplecov'
   gem 'rspec-rails'
 end
+
+# heroku recommends specifying a ruby version,
+# but developers don't all have the same version on their computers (yet)
+# ruby "2.1.2"
