@@ -1,9 +1,10 @@
 require 'test_helper'
 
-class LoggedInControllerTest < ActionController::TestCase
-  test "should get landing" do
+describe LoggedInController do
+  it "should get landing" do
+    login_user Account.create!(email: 'bob@example.com', password: 'password')
     get :landing
     assert_response :success
   end
-
 end
+

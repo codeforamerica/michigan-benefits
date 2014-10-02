@@ -35,8 +35,13 @@ gem 'spring',        group: :development
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
 # gem 'debugger', group: [:development, :test]
 
 gem 'sorcery'
 gem 'postmark-rails'
+
+group :test do
+  gem 'minitest'
+  gem 'minitest-focus'
+  gem 'minitest-spec-rails'
+end
