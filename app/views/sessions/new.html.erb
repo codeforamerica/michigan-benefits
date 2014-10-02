@@ -1,7 +1,9 @@
 <h1>Log in</h1>
 
 <%= form_tag session_path, method: 'post' do %>
-E-mail: <%= text_field_tag :email %><br />
-Password: <%= password_field_tag :password %><br />
+<div class="row"><div class="large-12 columns">
+<label>E-mail: <%= text_field_tag :email %></label><br />
+<label>Password: <%= password_field_tag :password %></label><br />
 <%= submit_tag %>
+</div></div>
 <% end %>

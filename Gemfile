@@ -51,6 +51,10 @@ group(:development, :test) do
   gem 'rspec-rails'
 end
 
+# Zurb Foundation
+gem 'compass-rails'
+gem 'foundation-rails'
+
 # heroku recommends specifying a ruby version,
 # but developers don't all have the same version on their computers (yet)
 # ruby "2.1.2"
