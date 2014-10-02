@@ -42,10 +42,13 @@ gem 'spring',        group: :development
 # heroku support (static asset serving, logging)
 gem 'rails_12factor', group: :production
 
+# authentication
 gem 'sorcery'
+
+# e-mail
 gem 'postmark-rails'
 
-
+# testing
 group(:development, :test) do
   gem 'simplecov'
   gem 'rspec-rails'
@@ -56,5 +59,5 @@ gem 'compass-rails'
 gem 'foundation-rails'
 
 # heroku recommends specifying a ruby version,
-# but developers don't all have the same version on their computers (yet)
+# but we developers don't all have the same version on their computers (yet)
 # ruby "2.1.2"
