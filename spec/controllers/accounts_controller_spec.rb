@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe AccountsController, type: :controller do
+  before { beta_login_if_necessary }
+
   it "should get new" do
     get :new
     expect(response).to be_success
