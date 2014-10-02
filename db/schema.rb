@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141001182647) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accounts", force: true do |t|
     t.string   "email",                                       null: false
     t.string   "crypted_password",                            null: false
@@ -33,10 +36,10 @@ ActiveRecord::Schema.define(version: 20141001182647) do
     t.string   "last_login_from_ip_address"
   end
 
-  add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true
-  add_index "accounts", ["last_logout_at", "last_activity_at"], name: "index_accounts_on_last_logout_at_and_last_activity_at"
-  add_index "accounts", ["remember_me_token"], name: "index_accounts_on_remember_me_token"
-  add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token"
+  add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
+  add_index "accounts", ["last_logout_at", "last_activity_at"], name: "index_accounts_on_last_logout_at_and_last_activity_at", using: :btree
+  add_index "accounts", ["remember_me_token"], name: "index_accounts_on_remember_me_token", using: :btree
+  add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "account_id", null: false
