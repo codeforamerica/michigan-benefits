@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resource :session
   get 'my_account' => 'logged_in#landing'
 
+  namespace :admin do
+    get '/' => 'admin#index'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

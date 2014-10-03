@@ -3,8 +3,12 @@ class Mom
     Account.new email: email, password: password
   end
 
-  def role(name: 'Admin', key: nil)
+  def role(name: 'A Role', key: nil)
     Role.new name: name, key: (key || name)
+  end
+
+  def admin_role
+    role name: 'Admin', key: AdminPolicy::ADMIN_ROLE_KEY
   end
 
   def account_role(account: nil, role: nil)
