@@ -1,7 +1,9 @@
 <div class="small-12 large-12 columns">
 	<h1>LoggedOut#index</h1>
 	<p>Find me in app/views/logged_out/index.html.erb</p>
-
-	<p><%= link_to 'Sign Up', new_account_path %>
-	<p><%= link_to 'Log in', new_session_path %>
+	<p>Testing button styles and colors below...</p>
+	<div class="row">
+		<div class="small-12 large-6 columns"><%= link_to 'Sign Up', new_account_path, :class=>'button medium radius primary expand' %></div>
+		<div class="small-12 large-6 columns"><%= link_to 'Log in', new_session_path, :class=>'button medium radius success expand' %></div>
+	</div>
 </div>	
