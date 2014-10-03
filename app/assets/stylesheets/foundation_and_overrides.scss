@@ -86,22 +86,10 @@ $include-html-global-classes: $include-html-classes;
 // c. Global
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-@font-face {
-  font-family: 'misoregular';  
-	src: font-url('miso-regular-webfont.eot');
-	src: font-url('miso-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	     font-url('miso-regular-webfont.woff2') format('woff2'),
-	     font-url('miso-regular-webfont.woff') format('woff'),
-	     font-url('miso-regular-webfont.ttf') format('truetype'),
-	     font-url('miso-regular-webfont.svg#misoregular') format('svg');
-	    font-weight: normal;
-	    font-style: normal;
-}
-
 
 
 // We use these to define default font stacks
-$font-family-sans-serif: misoregular, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$font-family-sans-serif: Muli, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 // $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
@@ -110,9 +98,9 @@ $font-family-sans-serif: misoregular, "Helvetica Neue", Helvetica, Roboto, Arial
 // $font-weight-bold: bold !default;
 
 // We use these as default colors throughout
-// $primary-color: #008CBA;
+$primary-color: #25CAAE;
 // $secondary-color: #e7e7e7;
-// $alert-color: #f04124;
+$alert-color: #FF40A6;
 // $success-color: #43AC6A;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;

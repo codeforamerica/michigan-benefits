@@ -25,6 +25,7 @@ module CitizenRails
     config.beta_username = 'citizen'
     config.beta_password = 'code'
 
+
     # e-mail
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { :api_key => ENV['POSTMARK_API_KEY'] }
