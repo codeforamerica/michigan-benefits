@@ -3,5 +3,6 @@ class Account < ActiveRecord::Base
   has_many :account_roles
   has_many :roles, through: :account_roles
 
-  validates :email, uniqueness: true
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, on: :create
 end
