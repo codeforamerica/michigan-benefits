@@ -1,44 +1,54 @@
-App SETUP
-=====
+Customize this project for your app
+===================================
 
-1. Search the project for 'citizen' and change the name to match the project you're starting.
-1. In `config/database.yml`, change "citizen_rails_development" and "citizen_rails_test" to match the name of the application.
-2. 1. Edit `config.beta_username` and `config.beta_password` in `config/application.rb`, optionally disabling the beta HTTP authentication by setting `config.require_beta_login` to `false`.
-1. Install Postgres.app
-2. 
-		
+1. Search all files in the project for "citizen" and change the name to match the project you're starting, including the database names in `config/database.yml`.
+1. The site is password-protected by default. Edit `config/application.rb` and customize `config.beta_username` and `config.beta_password` for the site, or disable password-protection by setting `config.require_beta_login = false`.
+1. Delete this section. You only need to do these steps once.
+
+Local development setup
+=======================
+
+1. Install [Postgres.app](http://postgresapp.com).
+1. Install this project's gems by running:
+
 		bundle
-	if bundle fails to install the 'pg' gem, then use `env ARCHFLAGS="-arch x86_64" bundle`
-1. 
-		
+
+	If the "pg" gem fails to install on OS X, try running `env ARCHFLAGS="-arch x86_64" bundle` instead.
+
+1. Initialize the app's database:
+
 		rake db:create db:migrate
-		
-Heroku SETUP
-=====
-1. create the heroku app:
 
-		heroku apps:create my-app-name 		
 
-1. Turn on postmark for smtp mail: 
-		
+Heroku setup
+============
+
+1. Create the Heroku app:
+
+		heroku apps:create my-app-name
+
+1. Set the host name to use when generating URLs in e-mails:
+
+		heroku config:set ACTION_MAILER_HOST='your-app.herokuapp.com'
+
+1. Turn on Postmark for SMTP mail:
+
 		heroku addons:add postmark
 
-1. Click on sender signature at the top of the page opened by:
+1. Run this command and click on "Sender Signatures" at the top of the web page that opens:
 
 		heroku addons:open postmark
 
-1. confirm the email; setup DKIM if you are brave.
+1. Confirm an e-mail address to use for sending. Also set up DKIM for that sender if you are brave. (It involves editing DNS records for the sender's e-mail domain.)
 
-1.
-		heroku config:set ACTION_MAILER_HOST='your-app.herokuapp.com'
-
-1. Test it with
+1. Test e-mail by sending an e-mail to the address you configured in the last steps:
 
 		heroku run console
 		
 		m = "registred_email_from_last_step"; ActionMailer::Base.mail(from:m, to:m, subject: Time.now.to_s, body: rand.to_s).deliver
 
-TOOLS
+
+Tools
 =====
 
 Get code coverage with
@@ -46,7 +56,7 @@ Get code coverage with
     rake simplecov
 
 
-REFERENCES
+References
 ==========
 
 * [Configuring Rails for Heroku](https://devcenter.heroku.com/articles/getting-started-with-rails4)
