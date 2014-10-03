@@ -55,6 +55,8 @@ Get code coverage with
 
     rake simplecov
 
+(This doesn't seem to work since the transition to rspec.)
+
 
 References
 ==========
