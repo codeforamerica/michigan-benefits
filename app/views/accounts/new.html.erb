@@ -1,9 +1,13 @@
-<h1>Signup</h1>
+<div class="row">
+	<div class="small-12 large-6 large-centered columns">
+		<h1>Signup</h1>
 
-<%= form_for @account do |f| %>
-<div class="row"><div class="large-12 columns">
-<label>E-mail: <%= f.text_field :email %></label><br />
-<label>Password: <%= f.password_field :password %></label><br />
-<%= f.submit %>
-</div></div>
-<% end %>
+		<%= form_for @account do |f| %>
+		<div class="row"><div class="large-12 columns">
+		<label>E-mail: <%= f.text_field :email %></label><br />
+		<label>Password: <%= f.password_field :password %></label><br />
+		<%= f.submit :class=>'button primary medium'%>
+		</div></div>
+		<% end %>
+	</div>
+</div>

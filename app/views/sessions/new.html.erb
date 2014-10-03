@@ -1,9 +1,13 @@
-<h1>Log in</h1>
+<div class="row">
+	<div class="small-12 large-6 large-centered columns">
+		<h1>Log in</h1>
 
-<%= form_tag session_path, method: 'post' do %>
-<div class="row"><div class="large-12 columns">
-<label>E-mail: <%= text_field_tag :email %></label><br />
-<label>Password: <%= password_field_tag :password %></label><br />
-<%= submit_tag %>
-</div></div>
-<% end %>
+		<%= form_tag session_path, method: 'post' do %>
+		<div class="row"><div class="large-12 columns">
+		<label>E-mail: <%= text_field_tag :email %></label><br />
+		<label>Password: <%= password_field_tag :password %></label><br />
+		<%= submit_tag :class=>'button primary medium' %>
+		</div></div>
+		<% end %>
+	</div>
+</div>
