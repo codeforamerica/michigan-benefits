@@ -1,6 +1,4 @@
-class Admin::AdminController < ApplicationController
-  before_filter :require_admin
-
+class Admin::AdminController < Admin::AdminBaseController
   def index
   end
 end

@@ -1,5 +1,4 @@
-class Admin::AccountsController < ApplicationController
-  before_filter :require_admin
+class Admin::AccountsController < Admin::AdminBaseController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/accounts

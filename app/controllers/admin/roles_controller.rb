@@ -1,5 +1,4 @@
-class Admin::RolesController < ApplicationController
-  before_filter :require_admin
+class Admin::RolesController < Admin::AdminBaseController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/roles
