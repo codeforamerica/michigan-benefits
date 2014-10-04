@@ -20,10 +20,10 @@ module CitizenRails
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # one password for the entire site, for while the site's in closed beta
-    config.require_beta_login = true
-    config.beta_username = 'citizen'
-    config.beta_password = 'code'
+    # one HTTP auth password for the entire site
+    config.require_site_login = true
+    config.site_username = 'citizen'
+    config.site_password = 'code'
 
 
     # e-mail

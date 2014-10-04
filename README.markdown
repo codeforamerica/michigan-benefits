@@ -2,7 +2,7 @@ Customize this project for your app
 ===================================
 
 1. Search all files in the project for "citizen" and change the name to match the project you're starting, including the database names in `config/database.yml`.
-1. The site is password-protected by default. Edit `config/application.rb` and customize `config.beta_username` and `config.beta_password` for the site, or disable password-protection by setting `config.require_beta_login = false`.
+1. The site is password-protected by default. Edit `config/application.rb` and customize `config.site_username` and `config.site_password` for the site, or disable password-protection by setting `config.require_site_login = false`.
 1. Delete this section. You only need to do these steps once.
 
 Local development setup
