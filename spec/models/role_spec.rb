@@ -2,16 +2,18 @@ require 'rails_helper'
 
 describe Role do
   context 'invalid' do
-    subject(:role) { Role.new }
-    let(:existing_role) { create :role }
-
-    before { is_expected.not_to be_valid }
+    subject(:role) { create :role }
+    let(:existing_role) { create :role, name: 'Another Role' }
 
     it 'requires name' do
+      role.name = ''
+      expect(role).not_to be_valid
       expect(role.errors[:name]).not_to be_empty
     end
 
     it 'requires key' do
+      role.key = ''
+      expect(role).not_to be_valid
       expect(role.errors[:key]).not_to be_empty
     end
 

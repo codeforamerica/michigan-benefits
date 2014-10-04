@@ -11,7 +11,7 @@ class Mom
     role name: 'Admin', key: AdminPolicy::ADMIN_ROLE_KEY
   end
 
-  def account_role(account: nil, role: nil)
+  def account_role(account, role)
     AccountRole.new account: account, role: role
   end
 end
