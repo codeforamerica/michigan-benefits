@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe SessionsController do
-  before { beta_login_if_necessary }
-
   it "should get login" do
     get :new
     assert_response :success

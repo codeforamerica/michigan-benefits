@@ -19,6 +19,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include HttpAuthHelper, type: :controller
+  config.before(type: :controller) { beta_login_if_necessary }
 
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature

@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe Admin::AccountsController do
-  before { beta_login_if_necessary }
-
   describe 'not admin' do
     it 'redirects to login' do
       get :index

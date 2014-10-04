@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe Admin::AdminController do
-  before { beta_login_if_necessary }
-
   let(:account) { create :account }
 
   describe 'logged out' do
