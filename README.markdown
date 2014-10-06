@@ -23,29 +23,32 @@ Local development setup (without Vagrant)
 Local development setup (with Vagrant)
 ======================================
 
-1. download Vagrant: http://www.vagrantup.com/downloads.html
-1. in this project's root directory, type `vagrant up` (can take 10 minutes when run the first time)
+1. Download Vagrant: http://www.vagrantup.com/downloads.html
+1. Start Vagrant by running:
 
-Notes:
+		vagrant up
 
-* to ssh to the Vagrant box, type `vagrant ssh`
-* the Vagrant box's IP address is 10.0.50.50
+   This can take around 10 minutes when the first time.
+
+**Notes:**
+
+* To ssh to the Vagrant box, run `vagrant ssh`.
+* The Vagrant machine's IP address is 10.0.50.50.
 * Vagrant is configured to forward port 5000 on the host machine (your Mac) to port 5000 on the guest machine (Vagrant)
-* the Vagrant box is configured with the `/vagrant.sh` and `/vagrant_privileged.sh` scripts in this repo
+* The Vagrant box is configured with the `/vagrant.sh` and `/vagrant_privileged.sh` scripts in this repo.
 
-Limitations:
+**Limitations:**
 
-* you currently cannot connect directly to the database running on the Vagrant box
+* You currently cannot connect directly to the database running in Vagrant.
 
 Vagrant + RubyMine
 ------------------
 
-To get Vagrant set up in RubyMine, make sure you get RubyMine 7 (the EAP version). Then:
-
-1. Go to Settings > Languages and Frameworks > Ruby SDK and Gems
-1. Click the "+" button and add a new remote SDK
-1. Choose "Vagrant"
-1. Use "/home/vagrant/.rbenv/versions/2.1.2/bin/ruby" for the Ruby interpreter path
+1. Install RubyMine 7 (the EAP version).
+1. Go to Settings > Languages and Frameworks > Ruby SDK and Gems.
+1. Click the "+" button and add a new remote SDK.
+1. Choose "Vagrant".
+1. Use `/home/vagrant/.rbenv/versions/2.1.2/bin/ruby` for the Ruby interpreter path.
 
 You should be able to run tests as you normally do, plus you can run the server from the run configurations.
 
