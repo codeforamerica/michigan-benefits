@@ -60,6 +60,10 @@ Heroku setup
 
 		heroku apps:create my-app-name
 
+   Or if it's already created, add the git remote to your local repository like this:
+
+		git remote add heroku git@heroku.com:my-app-name.git
+
 1. Set the host name to use when generating URLs in e-mails:
 
 		heroku config:set ACTION_MAILER_HOST='your-app.herokuapp.com'
