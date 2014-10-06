@@ -1,39 +1,14 @@
-<% content_for :navigation do %>
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="active"><a href="#">Right Button Active</a></li>
-      <li class="has-dropdown">
-        <a href="#">Right Button Dropdown</a>
-        <ul class="dropdown">
-          <li><a href="#">First link in dropdown</a></li>
-          <li class="active"><a href="#">Active link in dropdown</a></li>
-        </ul>
-      </li>
-    </ul>
-
-    <!-- Left Nav Section -->
-    <ul class="left">
-      <li><a href="#">Left Nav Button</a></li>
-    </ul>
-  </section>
+<% content_for :app_navigation do %>
+  <ul class="side-nav">
+    <li><%= link_to 'Accounts', admin_accounts_path %>
+    <li><%= link_to 'Roles', admin_roles_path %>
+  </ul>
 <% end %>
 
-<div class="app-container">
-  <div class="app-nav">
-    <ul class="side-nav">
-      <li><%= link_to 'Accounts', admin_accounts_path %>
-      <li><%= link_to 'Roles', admin_roles_path %>
-    </ul>
-  </div>
+<% content_for :app_aside do %>
+  <p>I'm on the right side!
+<% end %>
 
-  <div class="app-content">
-    <!-- breadcrumbs -->
-    <h1>Admin::Admin#index</h1>
-    <p>Find me in app/views/admin/admin/index.html.erb</p>
-  </div>
-
-  <div class="app-aside">
-    <p>I'm on the right side!
-  </div>
-</div>
+<!-- breadcrumbs -->
+<h1>Admin::Admin#index</h1>
+<p>Find me in app/views/admin/admin/index.html.erb</p>

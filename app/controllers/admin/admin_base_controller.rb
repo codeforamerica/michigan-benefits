@@ -1,5 +1,5 @@
 class Admin::AdminBaseController < ApplicationController
   before_filter :require_admin
 
-  layout "raw"
+  layout "admin/admin"
 end

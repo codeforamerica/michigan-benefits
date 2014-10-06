@@ -1,3 +1,7 @@
+<% content_for :navigation do %>
+  <%= render partial: 'admin/admin/navigation' %>
+<% end %>
+
 <% content_for :body do %>
   <div class="app-container">
     <div class="app-nav">
@@ -14,4 +18,4 @@
   </div>
 <% end %>
 
-<%= render template: "layouts/raw" %>
+<%= render template: 'layouts/raw' %>
