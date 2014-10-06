@@ -1442,4 +1442,53 @@ $body-bg: $vapor;
 // $include-legacy-visibility-classes: true;
 // $include-accessibility-classes: true;
 
+@import 'compass';
 @import 'foundation';
+
+
+// Page-specific styling ===============
+
+.app-container{
+	@include grid-row($behavior: collapse);
+}
+
+.app-nav{
+	@include grid-column($columns: 12);
+
+	background: $primary-color;
+	li a:not(.button){
+		color: white;
+	}
+}
+.app-content{
+	@include grid-column($columns: 12);
+}
+.app-content-wide{
+	@include grid-column($columns: 12);
+}
+
+.app-aside{
+	@include grid-column($columns: 12);
+	@include padding-leader(.5);
+	background: darken($vapor, 15);
+}
+
+@media #{$medium-up}{
+	.app-container{
+		max-width: none;
+	}
+	.app-nav{
+		@include grid-column($columns: 2);
+		min-height: 400px;
+	}
+	.app-content{
+		@include grid-column($columns: 6);
+	}
+	.app-content-wide{
+		@include grid-column($columns: 10);
+	}
+	.app-aside{
+		@include grid-column($columns: 4);
+		min-height: 400px;
+	}
+}

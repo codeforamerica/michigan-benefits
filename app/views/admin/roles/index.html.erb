@@ -1,26 +1,38 @@
-<h1>Listing roles</h1>
+<div class="app-container">
+  <div class="app-nav">
+    <ul class="side-nav">
+      <li><%= link_to 'Accounts', admin_accounts_path %>
+      <li><%= link_to 'Roles', admin_roles_path %>
+    </ul>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Key</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="app-content-wide">
+    <!-- breadcrumbs -->
+    <h1>Listing roles</h1>
 
-  <tbody>
-    <% @roles.each do |role| %>
-      <tr>
-        <td><%= role.name %></td>
-        <td><%= role.key %></td>
-        <td><%= link_to 'Show', admin_role_path(role) %></td>
-        <td><%= link_to 'Edit', edit_admin_role_path(role) %></td>
-        <td><%= link_to 'Destroy', admin_role_path(role), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Key</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<p><%= link_to 'New Role', new_admin_role_path %>
-<p><%= link_to 'Back', admin_path %>
+      <tbody>
+        <% @roles.each do |role| %>
+          <tr>
+            <td><%= role.name %></td>
+            <td><%= role.key %></td>
+            <td><%= link_to 'Show', admin_role_path(role) %></td>
+            <td><%= link_to 'Edit', edit_admin_role_path(role) %></td>
+            <td><%= link_to 'Destroy', admin_role_path(role), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <p><%= link_to 'New Role', new_admin_role_path %>
+    <p><%= link_to 'Back', admin_path %>
+  </div>
+</div>
