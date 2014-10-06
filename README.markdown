@@ -5,8 +5,8 @@ Customize this project for your app
 1. The site is password-protected by default. Edit `config/application.rb` and customize `config.site_username` and `config.site_password` for the site, or disable password-protection by setting `config.require_site_login = false`.
 1. Delete this section. You only need to do these steps once.
 
-Local development setup
-=======================
+Local development setup (without Vagrant)
+=========================================
 
 1. Install [Postgres.app](http://postgresapp.com).
 1. Install this project's gems by running:
@@ -18,6 +18,36 @@ Local development setup
 1. Initialize the app's database:
 
 		rake db:create db:migrate
+
+
+Local development setup (with Vagrant)
+======================================
+
+1. download Vagrant: http://www.vagrantup.com/downloads.html
+1. in this project's root directory, type `vagrant up` (can take 10 minutes when run the first time)
+
+Notes:
+
+* to ssh to the Vagrant box, type `vagrant ssh`
+* the Vagrant box's IP address is 10.0.50.50
+* Vagrant is configured to forward port 5000 on the host machine (your Mac) to port 5000 on the guest machine (Vagrant)
+* the Vagrant box is configured with the `/vagrant.sh` and `/vagrant_privileged.sh` scripts in this repo
+
+Limitations:
+
+* you currently cannot connect directly to the database running on the Vagrant box
+
+Vagrant + RubyMine
+------------------
+
+To get Vagrant set up in RubyMine, make sure you get RubyMine 7 (the EAP version). Then:
+
+1. Go to Settings > Languages and Frameworks > Ruby SDK and Gems
+1. Click the "+" button and add a new remote SDK
+1. Choose "Vagrant"
+1. Use "/home/vagrant/.rbenv/versions/2.1.2/bin/ruby" for the Ruby interpreter path
+
+You should be able to run tests as you normally do, plus you can run the server from the run configurations.
 
 
 Heroku setup
