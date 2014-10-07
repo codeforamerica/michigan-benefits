@@ -1445,6 +1445,15 @@ $body-bg: $vapor;
 @import 'compass';
 @import 'foundation';
 
+// Helper mixins =======================
+
+@mixin fix-height($direction: left) {
+	position: absoulte;
+	height: 100%;
+	$direction: 0;
+	top: $topbar-height;
+}
+
 
 // Page-specific styling ===============
 
@@ -1453,11 +1462,10 @@ $body-bg: $vapor;
 }
 
 .app-nav{
-	@include grid-column($columns: 12);
-
-	background: $primary-color;
+	@include grid-column($columns: 12);	
+	background: $primary-color;	
 	li a:not(.button){
-		color: white;
+		color: white;		
 	}
 }
 .app-content{
