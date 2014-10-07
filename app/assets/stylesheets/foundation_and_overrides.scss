@@ -1476,7 +1476,7 @@ $body-bg: $vapor;
 }
 
 .app-aside{
-	@include grid-column($columns: 12);
+	@include grid-column($columns: 12);	
 	@include padding-leader(.5);
 	background: darken($vapor, 15);
 }
@@ -1487,7 +1487,7 @@ $body-bg: $vapor;
 	}
 	.app-nav{
 		@include grid-column($columns: 2);
-		min-height: 400px;
+		//min-height: 400px;
 	}
 	.app-content{
 		@include grid-column($columns: 6);

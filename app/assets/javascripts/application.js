@@ -10,28 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require foundation
+// = require jquery
+// = require jquery_ujs
+// = require foundation
 //= require turbolinks
 //= require_tree .
+//= require raw
 
 $(function(){ $(document).foundation(); });
 
 
-// TODO make this modular... for now it's all we need. 
 
-function setContainerHeight() {
-  var height = $(document).height();
-  $('.app-nav').height(height); 
-  $('.app-aside').height(height);        
-}
-
-$(window).resize(function(e) {
-  setContainerHeight();
-});
-
-$(document).ready(function(e) {
-  setContainerHeight();
-});    
 
