@@ -1,6 +1,6 @@
 function setContainerHeight() {
   var tabbarHeight = 45; // from $tabbar-height in foundation_and_overrides.scss
-  var height = $(window).height() - tabbarHeight;
+  var height = $(document).height() - tabbarHeight;
   $('.app-nav').height(height); 
   $('.app-aside').height(height);        
 }
