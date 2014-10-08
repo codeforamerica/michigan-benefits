@@ -6,5 +6,5 @@ function setContainerHeight() {
   $('.app-aside').height(height);        
 }
 
-$(document).on("page:load", setContainerHeight);
+$(document).on("ready page:load", setContainerHeight);
 $(window).resize(setContainerHeight);

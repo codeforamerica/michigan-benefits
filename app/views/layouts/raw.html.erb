@@ -10,7 +10,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'http://fonts.googleapis.com/css?family=Muli' %>
 
-
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     
@@ -30,6 +29,5 @@
     </nav>
 
     <%= content_for?(:body) ? yield(:body) : yield %>
-    <%= javascript_include_tag 'application' %>
   </body>
 </html>
