@@ -1463,6 +1463,7 @@ $body-bg: $vapor;
 
 .app-nav{
 	@include grid-column($columns: 12);	
+	@include padding-leader(.5);
 	background: $primary-color;	
 	li a:not(.button){
 		color: white;		
@@ -1470,9 +1471,11 @@ $body-bg: $vapor;
 }
 .app-content{
 	@include grid-column($columns: 12);
+	@include padding-leader(.5);
 }
 .app-content-wide{
 	@include grid-column($columns: 12);
+	@include padding-leader(.5);
 }
 
 .app-aside{
