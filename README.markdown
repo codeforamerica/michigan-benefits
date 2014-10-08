@@ -53,6 +53,17 @@ Vagrant + RubyMine
 You should be able to run tests as you normally do, plus you can run the server from the run configurations.
 
 
+Running the server locally
+==========================
+
+1. Install foreman:
+
+		gem install foreman
+
+1. Launch the server:
+
+		foreman start
+
 Heroku setup
 ============
 

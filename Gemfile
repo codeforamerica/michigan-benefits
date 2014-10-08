@@ -32,7 +32,7 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -59,6 +59,5 @@ end
 gem 'compass-rails'
 gem 'foundation-rails'
 
-# heroku recommends specifying a ruby version,
-# but we developers don't all have the same version on their computers (yet)
-# ruby "2.1.2"
+# heroku recommends specifying a ruby version
+ruby "2.1.2"
