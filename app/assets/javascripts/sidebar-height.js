@@ -1,7 +1,6 @@
-// TODO make this modular... for now it's all we need. 
-
 function setContainerHeight() {
-  var height = $(window).height();
+  var tabbarHeight = 45; // from $tabbar-height in foundation_and_overrides.scss
+  var height = $(window).height() - tabbarHeight;
   $('.app-nav').height(height); 
   $('.app-aside').height(height);        
 }

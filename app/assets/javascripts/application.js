@@ -19,7 +19,3 @@
 // initialize foundation on page,
 // and again when the page changes with turbolinks enabled
 $(document).on("ready page:load", function(){ $(document).foundation(); });
-
-
-
-
