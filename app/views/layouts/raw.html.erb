@@ -12,7 +12,7 @@
 
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    
+
     <%= csrf_meta_tags %>
   </head>
 
@@ -27,6 +27,13 @@
 
       <%= yield :navigation %>
     </nav>
+
+    <% flash.each do |name, msg| -%>
+      <div data-alert class="alert-box <%= name %>" aria-role="dialog" aria-labelledby="flash-msg-<%= name %>">
+        <div id="flash-msg-<%= name %>"><%= msg %></div>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end -%>
 
     <%= content_for?(:body) ? yield(:body) : yield %>
   </body>

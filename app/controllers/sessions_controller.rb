@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     if @account = login(params[:email], params[:password])
       redirect_back_or_to my_account_path
     else
+      flash.now.alert = "Email or password is invalid"
       render :new
     end
   end

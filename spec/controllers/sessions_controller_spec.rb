@@ -24,6 +24,7 @@ describe SessionsController do
       post :create, {email: 'bob@example.com', password: 'password'}
       assert_response :success
       assert_template 'sessions/new'
+      expect(flash.now[:alert]).not_to be_blank
     end
   end
 end
