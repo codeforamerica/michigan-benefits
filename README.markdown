@@ -4,6 +4,7 @@ Customize this project for your app
 1. Search all files in the project for "citizen" and change the name to match the project you're starting, including the database names in `config/database.yml`.
 1. The site is password-protected by default. Edit `config/application.rb` and customize `config.site_username` and `config.site_password` for the site, or disable password-protection by setting `config.require_site_login = false`.
 1. Delete this section. You only need to do these steps once.
+1. You can create a whitelist of emails which will automatically become admins when they sign up. Add these emails to `config/automatically_admins.yml`.
 
 Local development setup (without Vagrant)
 =========================================
@@ -95,6 +96,7 @@ Heroku setup
 		
 		m = "registred_email_from_last_step"; ActionMailer::Base.mail(from:m, to:m, subject: Time.now.to_s, body: rand.to_s).deliver
 
+1. Eventually, remove everyone from `config/automatically_admins.yml`. After a few admins exist, you should use the admin tools to grant new accounts admin permissions.
 
 Tools
 =====
