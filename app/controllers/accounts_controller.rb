@@ -7,8 +7,8 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.new(account_params)
-    if @account.save
+    @account = AccountCreator.create(account_params)
+    if @account.persisted?
       auto_login(@account)
       redirect_to my_account_path
     else

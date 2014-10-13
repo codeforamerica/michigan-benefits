@@ -16,7 +16,7 @@ describe AccountsController, type: :controller do
     end
 
     it 'failure' do
-      expect do 
+      expect do
         post :create, {account: { email: 'bob@example.com', password: 'password' } }
         post :create, {account: { email: 'bob@example.com', password: 'password' } }
       end.to change { Account.count }.by(1)

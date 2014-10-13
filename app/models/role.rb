@@ -4,4 +4,10 @@ class Role < ActiveRecord::Base
 
   validates :key, uniqueness: true
   validates :name, :key, presence: true
+
+  ADMIN_ROLE_KEY = 'admin'
+
+  def self.admin
+    find_by(key: ADMIN_ROLE_KEY)
+  end
 end

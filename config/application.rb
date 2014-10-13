@@ -25,6 +25,9 @@ module CitizenRails
     config.site_username = 'citizen'
     config.site_password = 'code'
 
+    # lib/ is for code that is entirely independent of your Rails app
+    # app/lib/ is for code that expects Rails (esp. models) but which is not itself a model
+    config.autoload_paths << Rails.root.join("app", "lib")
 
     # e-mail
     config.action_mailer.delivery_method = :postmark

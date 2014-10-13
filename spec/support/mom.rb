@@ -8,7 +8,7 @@ class Mom
   end
 
   def admin_role
-    role name: 'Admin', key: AdminPolicy::ADMIN_ROLE_KEY
+    role name: 'Admin', key: Role::ADMIN_ROLE_KEY
   end
 
   def account_role(account, role)
