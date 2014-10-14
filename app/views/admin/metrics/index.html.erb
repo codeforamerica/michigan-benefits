@@ -1,3 +1,25 @@
 <h1>Metrics</h1>
 
-<p>Your site's doing fine.
+<figure>
+  <figcaption>Sign-ups per week</figcaption>
+  <table role="grid">
+    <tr>
+      <th>Week Starting</th>
+      <th class="text-right">Signups</th>
+      <th width="300px"></th>
+    </tr>
+    <%= render partial: "daily_count_rows", locals: { metrics: Metrics.signups_per_week } %>
+  </table>
+</figure>
+
+<figure>
+  <figcaption>Sign-ups per day</figcaption>
+  <table role="grid">
+    <tr>
+      <th>Day</th>
+      <th class="text-right">Signups</th>
+      <th width="300px"></th>
+    </tr>
+    <%= render partial: "daily_count_rows", locals: { metrics: Metrics.signups_per_day } %>
+  </table>
+</figure>

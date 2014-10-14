@@ -1,0 +1,12 @@
+<%- max_weekly_signups = metrics.map { |signup| signup[:count] }.max %>
+<%- metrics.each do |signup| %>
+  <tr>
+    <th><%= signup[:start].to_formatted_s(:weekday) %></th>
+    <th class="text-right"><%= signup[:count] %></th>
+    <th>
+      <div class="progress">
+        <span class="meter" style="width: <%= signup[:count].to_f / max_weekly_signups  * 100 %>%"></span>
+      </div>
+    </th>
+  </tr>
+<%- end %>
