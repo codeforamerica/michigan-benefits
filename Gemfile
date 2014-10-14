@@ -47,6 +47,7 @@ gem 'postmark-rails'
 group(:development, :test) do
   gem 'simplecov'
   gem 'rspec-rails'
+  gem 'faker'
 end
 
 group(:development) do

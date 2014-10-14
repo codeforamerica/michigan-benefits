@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get '/' => 'admin#index'
     resources :accounts
     resources :roles
+    get '/metrics' => 'metrics#index'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,5 +1,8 @@
 class Mom
-  def account(email: 'bob@example.com', password: 'a password')
+  def account(
+    email: Faker::Internet.safe_email,
+    password: 'a password'
+  )
     Account.new email: email, password: password
   end
 
