@@ -5,7 +5,11 @@
 <% content_for :body do %>
   <div class="app-container">
     <div class="app-nav">
-      <%= yield :app_navigation %>
+      <% if content_for?(:app_navigation) %>
+        <%= yield :app_navigation %>
+      <% else %>
+        <%= render partial: 'admin/admin/side_nav' %>
+      <% end %>
     </div>
 
     <div class="app-content">
