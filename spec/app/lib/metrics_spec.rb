@@ -17,38 +17,38 @@ describe Metrics do
     travel_to Time.zone.local(2014, 10, 31) do # Friday
       metrics = Metrics.signups_per_week
 
-      expect(metrics[0][:count]).to eq(3)
-      expect(metrics[1][:count]).to eq(0)
-      expect(metrics[2][:count]).to eq(2)
+      expect(metrics[-1][:count]).to eq(3)
+      expect(metrics[-2][:count]).to eq(0)
+      expect(metrics[-3][:count]).to eq(2)
 
-      expect(metrics[0][:start]).to eq(Date.new(2014, 8, 11))
-      expect(metrics[1][:start]).to eq(Date.new(2014, 8, 18))
+      expect(metrics[-1][:start]).to eq(Time.current - 12.weeks)
+      expect(metrics[-2][:start]).to eq(Time.current - 11.weeks)
       expect(metrics.length).to eq(12)
     end
   end
 
   it "returns signups per day in the last week" do
-    travel_to Time.zone.local(2014, 10, 24) do
+    travel_to Time.zone.local(2014, 10, 23) do
       1.times { create(:account) }
     end
 
-    travel_to Time.zone.local(2014, 10, 25) do
+    travel_to Time.zone.local(2014, 10, 24) do
       3.times { create(:account) }
     end
 
-    travel_to Time.zone.local(2014, 10, 27) do
+    travel_to Time.zone.local(2014, 10, 26) do
       2.times { create(:account) }
     end
 
     travel_to Time.zone.local(2014, 10, 31) do # Friday
       metrics = Metrics.signups_per_day
 
-      expect(metrics[0][:count]).to eq(3)
-      expect(metrics[1][:count]).to eq(0)
-      expect(metrics[2][:count]).to eq(2)
+      expect(metrics[-1][:count]).to eq(3)
+      expect(metrics[-2][:count]).to eq(0)
+      expect(metrics[-3][:count]).to eq(2)
 
-      expect(metrics[0][:start]).to eq(Date.new(2014, 10, 25))
-      expect(metrics[1][:start]).to eq(Date.new(2014, 10, 26))
+      expect(metrics[-1][:start]).to eq(Time.current - 7.days)
+      expect(metrics[-2][:start]).to eq(Time.current - 6.days)
       expect(metrics.length).to eq(7)
     end
   end
@@ -65,7 +65,7 @@ describe Metrics do
       mark_active.call(accounts[1])
     end
 
-    travel_to Time.zone.local(2014, 8, 11) do
+    travel_to Time.zone.local(2014, 8, 15) do
       mark_active.call(accounts[2])
     end
 
@@ -96,40 +96,40 @@ describe Metrics do
     travel_to Time.zone.local(2014, 10, 31) do # Friday
       metrics = Metrics.churn_per_week
 
-      expect(metrics[0][:count]).to eq(3)
-      expect(metrics[1][:count]).to eq(0)
-      expect(metrics[2][:count]).to eq(2)
+      expect(metrics[-1][:count]).to eq(3)
+      expect(metrics[-2][:count]).to eq(0)
+      expect(metrics[-3][:count]).to eq(2)
 
-      expect(metrics[0][:start]).to eq(Date.new(2014, 8, 11))
-      expect(metrics[1][:start]).to eq(Date.new(2014, 8, 18))
+      expect(metrics[-1][:start]).to eq(Time.current - 12.weeks)
+      expect(metrics[-2][:start]).to eq(Time.current - 11.weeks)
       expect(metrics.length).to eq(12)
     end
   end
 
   it "returns count of users who were last active x days ago" do
     accounts = nil
-    travel_to Time.zone.local(2014, 10, 24) do
+    travel_to Time.zone.local(2014, 10, 23) do
       accounts = 6.times.map { create(:account) }
       mark_active.call(accounts[0])
     end
 
-    travel_to Time.zone.local(2014, 10, 25) do
+    travel_to Time.zone.local(2014, 10, 24) do
       accounts[1..3].each(&mark_active)
     end
 
-    travel_to Time.zone.local(2014, 10, 27) do
+    travel_to Time.zone.local(2014, 10, 26) do
       accounts[4..5].each(&mark_active)
     end
 
     travel_to Time.zone.local(2014, 10, 31) do # Friday
       metrics = Metrics.churn_per_day
 
-      expect(metrics[0][:count]).to eq(3)
-      expect(metrics[1][:count]).to eq(0)
-      expect(metrics[2][:count]).to eq(2)
+      expect(metrics[-1][:count]).to eq(3)
+      expect(metrics[-2][:count]).to eq(0)
+      expect(metrics[-3][:count]).to eq(2)
 
-      expect(metrics[0][:start]).to eq(Date.new(2014, 10, 25))
-      expect(metrics[1][:start]).to eq(Date.new(2014, 10, 26))
+      expect(metrics[-1][:start]).to eq(Time.current - 7.days)
+      expect(metrics[-2][:start]).to eq(Time.current - 6.days)
       expect(metrics.length).to eq(7)
     end
   end

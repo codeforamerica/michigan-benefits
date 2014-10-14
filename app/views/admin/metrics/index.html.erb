@@ -8,11 +8,12 @@
 <figure>
   <figcaption>Sign-ups per week</figcaption>
   <table role="grid">
+    <thead>
     <tr>
-      <th>Signed up</th>
-      <th class="text-right">Users</th>
-      <th width="300px"></th>
+      <th colspan="2">Signed up</th>
+      <th colspan="2">Users</th>
     </tr>
+    </thead>
     <%= render partial: "daily_count_rows", locals: { metrics: Metrics.signups_per_week } %>
   </table>
 </figure>
@@ -20,11 +21,12 @@
 <figure>
   <figcaption>Sign-ups per day</figcaption>
   <table role="grid">
+    <thead>
     <tr>
-      <th>Signed up</th>
-      <th class="text-right">Users</th>
-      <th width="300px"></th>
+      <th colspan="2">Signed up</th>
+      <th colspan="2">Users</th>
     </tr>
+    </thead>
     <%= render partial: "daily_count_rows", locals: { metrics: Metrics.signups_per_day } %>
   </table>
 </figure>
@@ -37,28 +39,30 @@
 <figure>
   <figcaption>Churn per week</figcaption>
   <table role="grid">
+    <thead>
     <tr>
-      <th>Last Active</th>
-      <th class="text-right">Users</th>
-      <th width="300px"></th>
+      <th colspan="2">Last Active</th>
+      <th colspan="2">Users</th>
     </tr>
+    </thead>
+    <%= render partial: "daily_count_rows", locals: { metrics: Metrics.churn_per_week } %>
     <tr>
-      <td>Lapsed</td>
+      <td colspan="2">Lapsed</td>
       <td class="text-right"><%= Metrics.lapsed[:count] %></td>
       <td></td>
     </tr>
-    <%= render partial: "daily_count_rows", locals: { metrics: Metrics.churn_per_week } %>
   </table>
 </figure>
 
 <figure>
   <figcaption>Churn per day</figcaption>
   <table role="grid">
+    <thead>
     <tr>
-      <th>Last Active</th>
-      <th class="text-right">Users</th>
-      <th width="300px"></th>
+      <th colspan="2">Last Active</th>
+      <th colspan="2">Users</th>
     </tr>
+    </thead>
     <%= render partial: "daily_count_rows", locals: { metrics: Metrics.churn_per_day } %>
   </table>
 </figure>
