@@ -8,10 +8,16 @@ class Metrics
       count_per_day(Account, :created_at)
     end
 
+    def lapsed
+      lapsed_as_of = 11.weeks.ago.beginning_of_week.beginning_of_day
+      lapsed = Account.
+        where("last_activity_at < ? OR last_activity_at IS NULL", lapsed_as_of).
+        count
+      { start: -Date::Infinity.new, count: lapsed}
+    end
+
     def churn_per_week
-      lapsed = Account.where("last_activity_at < ?", 11.weeks.ago.beginning_of_week.beginning_of_day).count
-      [{ start: -Date::Infinity.new, count: lapsed}] +
-        count_per_week(Account, :last_activity_at)
+      count_per_week(Account, :last_activity_at)
     end
 
     def churn_per_day

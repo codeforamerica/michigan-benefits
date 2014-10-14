@@ -1,11 +1,16 @@
 <h1>Metrics</h1>
 
+<h4>Empathy</h4>
+<h4 class="subheader">I've figured out how to solve a problem in a way my target market will adopt and pay for.</h4>
+
+<p>One measure of empathy is whether new users are signing up for the site.</p>
+
 <figure>
   <figcaption>Sign-ups per week</figcaption>
   <table role="grid">
     <tr>
-      <th>Week Starting</th>
-      <th class="text-right">Signups</th>
+      <th>Signed up</th>
+      <th class="text-right">Users</th>
       <th width="300px"></th>
     </tr>
     <%= render partial: "daily_count_rows", locals: { metrics: Metrics.signups_per_week } %>
@@ -16,10 +21,44 @@
   <figcaption>Sign-ups per day</figcaption>
   <table role="grid">
     <tr>
-      <th>Day</th>
-      <th class="text-right">Signups</th>
+      <th>Signed up</th>
+      <th class="text-right">Users</th>
       <th width="300px"></th>
     </tr>
     <%= render partial: "daily_count_rows", locals: { metrics: Metrics.signups_per_day } %>
+  </table>
+</figure>
+
+<h4>Stickiness</h4>
+<h4 class="subheader">I've built the right features that keep users around.</h4>
+
+<p>One measure of stickiness is how often users come back to the site. We don't have that information, but we know when they were last active on the site.</p>
+
+<figure>
+  <figcaption>Churn per week</figcaption>
+  <table role="grid">
+    <tr>
+      <th>Last Active</th>
+      <th class="text-right">Users</th>
+      <th width="300px"></th>
+    </tr>
+    <tr>
+      <td>Lapsed</td>
+      <td class="text-right"><%= Metrics.lapsed[:count] %></td>
+      <td></td>
+    </tr>
+    <%= render partial: "daily_count_rows", locals: { metrics: Metrics.churn_per_week } %>
+  </table>
+</figure>
+
+<figure>
+  <figcaption>Churn per day</figcaption>
+  <table role="grid">
+    <tr>
+      <th>Last Active</th>
+      <th class="text-right">Users</th>
+      <th width="300px"></th>
+    </tr>
+    <%= render partial: "daily_count_rows", locals: { metrics: Metrics.churn_per_day } %>
   </table>
 </figure>
