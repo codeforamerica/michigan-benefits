@@ -3,6 +3,6 @@ require 'rails_helper'
 describe LoggedOutController do
   it "should get index" do
     get :index
-    assert_response :success
+    expect(response).to be_success
   end
 end

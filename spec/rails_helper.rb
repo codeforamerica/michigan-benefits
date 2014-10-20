@@ -21,6 +21,9 @@ RSpec.configure do |config|
   config.include HttpAuthHelper, type: :controller
   config.before(type: :controller) { site_login_if_necessary }
 
+  config.include HttpAuthHelper, type: :request
+  config.include HttpAuthHelper::RequestOverrides, type: :request
+
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
 
