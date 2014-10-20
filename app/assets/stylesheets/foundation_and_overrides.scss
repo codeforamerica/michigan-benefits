@@ -1462,11 +1462,11 @@ $body-bg: $vapor;
 }
 
 .app-nav{
-	@include grid-column($columns: 12);	
+	@include grid-column($columns: 12);
 	@include padding-leader(.5);
-	background: $primary-color;	
+	background: $primary-color;
 	li a:not(.button){
-		color: white;		
+		color: white;
 	}
 }
 .app-content{
@@ -1479,7 +1479,7 @@ $body-bg: $vapor;
 }
 
 .app-aside{
-	@include grid-column($columns: 12);	
+	@include grid-column($columns: 12);
 	@include padding-leader(.5);
 	background: darken($vapor, 15);
 }
@@ -1502,4 +1502,8 @@ $body-bg: $vapor;
 		@include grid-column($columns: 4);
 		min-height: 400px;
 	}
+}
+
+.alert-box.flash-msg {
+  margin-bottom: 0;
 }
