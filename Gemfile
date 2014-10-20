@@ -43,6 +43,9 @@ gem 'pundit'
 # e-mail
 gem 'postmark-rails'
 
+# exception notification
+gem 'airbrake'
+
 # testing
 group(:development, :test) do
   gem 'simplecov'

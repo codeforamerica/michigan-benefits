@@ -99,6 +99,16 @@ Heroku setup
 
 1. Eventually, remove everyone from `config/automatically_admins.yml`. After a few admins exist, you should use the admin tools to grant new accounts admin permissions.
 
+1. Exception notification is done through Airbrake:
+
+  1. All exceptions are sent by email:
+    1. By default to the email group `errorhound@citizencode.io`
+    1. This should be changed for each project to: `errorhound+PROJECT_NAME@citizencode.io`
+  1. To view exceptions on the web, visit:
+    1. From Heroku: https://addons-sso.heroku.com/apps/citizen-rails-template/addons/airbrake
+    1. Or directly: https://herokuapp30290611herokucom.airbrake.io/projects/105755/groups
+  1. To create a fake error for testing the system:
+
 Tools
 =====
 
