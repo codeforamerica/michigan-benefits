@@ -106,6 +106,9 @@ Heroku setup
 1. Eventually, remove everyone from `config/automatically_admins.yml`. After a few admins exist, you should use the admin tools to grant new accounts admin permissions.
 
 1. Exception notification is done through Airbrake:
+    1. As an admin with payment configured, setup Airbrake on Heroku. This will add the heroku environment variable:
+
+            heroku addons:add airbrake
 
   	1. All exceptions are sent by email:
     	* By default to the email group associated with the heroku account that owns the project. **For example**: `accounts+heroku@citizencode.io`
