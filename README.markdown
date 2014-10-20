@@ -1,3 +1,9 @@
+Citizen Rails Template
+====
+This project is for jumpstarting Client and Citizen projects under the included MIT license. Feel free to license the client project or your own project as you see fit.
+
+There is not intent to make this a public project. But consider it sour dough for for friends, family, and clients.
+
 Customize this project for your app
 ===================================
 
@@ -101,13 +107,17 @@ Heroku setup
 
 1. Exception notification is done through Airbrake:
 
-  1. All exceptions are sent by email:
-    1. By default to the email group `errorhound@citizencode.io`
-    1. This should be changed for each project to: `errorhound+PROJECT_NAME@citizencode.io`
-  1. To view exceptions on the web, visit:
-    1. From Heroku: https://addons-sso.heroku.com/apps/citizen-rails-template/addons/airbrake
-    1. Or directly: https://herokuapp30290611herokucom.airbrake.io/projects/105755/groups
-  1. To create a fake error for testing the system:
+  	1. All exceptions are sent by email:
+    	* By default to the email group associated with the heroku account that owns the project. **For example**: `accounts+heroku@citizencode.io`
+    	* This should be changed to the Citizen Code error account with a email alias for filtering by project: `errorhound+PROJECT_NAME@citizencode.io`
+    	* You might have to accept a mailchimp "Newsletter Subscription" (!!?!?!) to receive airbrake notifications.
+    
+  	1. To view exceptions on the web, visit:
+    	* https://addons-sso.heroku.com/apps/YOUR_APP_NAME/addons/airbrake
+           Example: [citizen-rails-template airbrake](https://addons-sso.heroku.com/apps/citizen-rails-template/addons/airbrake)
+  	1. To create a fake error for testing the system:
+  	
+            heroku run rake airbrake:test
 
 Tools
 =====
