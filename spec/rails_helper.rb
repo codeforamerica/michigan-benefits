@@ -19,7 +19,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include HttpAuthHelper, type: :controller
-  config.before(type: :controller) { site_login_if_necessary }
+  config.before(type: :controller) { http_login }
 
   config.include HttpAuthHelper, type: :request
   config.include HttpAuthHelper::RequestOverrides, type: :request

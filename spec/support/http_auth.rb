@@ -6,6 +6,7 @@ module HttpAuthHelper
   end
 
   def http_login_headers
+    return {} unless site_login_required?
     username = Rails.application.config.site_username
     password = Rails.application.config.site_password
     { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(username, password) }
@@ -13,10 +14,6 @@ module HttpAuthHelper
 
   def site_login_required?
     Rails.application.config.require_site_login
-  end
-
-  def site_login_if_necessary
-    http_login if site_login_required?
   end
 
   # XXX: request.env doesn't work in request specs
