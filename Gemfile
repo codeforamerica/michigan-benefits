@@ -28,8 +28,8 @@ gem 'sdoc',          group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt'
 
-# Use unicorn as the app server
-gem 'unicorn'
+# Use puma as the app server
+gem 'puma'
 
 # gem 'debugger', group: [:development, :test]
 
