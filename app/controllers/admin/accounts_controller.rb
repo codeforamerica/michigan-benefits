@@ -23,6 +23,7 @@ class Admin::AccountsController < Admin::AdminBaseController
 
   # POST /admin/accounts
   def create
+    @roles = Role.all
     @account = Account.new(account_params)
     roles = Role.find(params[:account][:roles] || [])
 
@@ -35,6 +36,7 @@ class Admin::AccountsController < Admin::AdminBaseController
 
   # PATCH/PUT /admin/accounts/1
   def update
+    @roles = Role.all
     roles = Role.find(params[:account][:roles] || [])
 
     if @account.update(account_params) && @account.update(roles: roles)
