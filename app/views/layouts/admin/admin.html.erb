@@ -2,24 +2,10 @@
   <%= render partial: 'admin/admin/navigation' %>
 <% end %>
 
-<% content_for :body do %>
-  <div class="app-container">
-    <div class="app-nav">
-      <% if content_for?(:app_navigation) %>
-        <%= yield :app_navigation %>
-      <% else %>
-        <%= render partial: 'admin/admin/side_nav' %>
-      <% end %>
-    </div>
-
-    <div class="app-content">
-      <%= yield %>
-    </div>
-
-    <div class="app-aside">
-      <%= yield :app_aside %>
-    </div>
-  </div>
+<% if !content_for?(:app_navigation) %>
+  <% content_for :app_navigation do %>
+    <%= render partial: 'admin/admin/side_nav' %>
+  <% end %>
 <% end %>
 
-<%= render template: 'layouts/raw' %>
+<%= render template: 'layouts/application' %>

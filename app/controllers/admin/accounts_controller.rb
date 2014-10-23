@@ -1,8 +1,6 @@
 class Admin::AccountsController < Admin::AdminBaseController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
-  layout "admin/admin-wide"
-
   # GET /admin/accounts
   def index
     @accounts = Account.all

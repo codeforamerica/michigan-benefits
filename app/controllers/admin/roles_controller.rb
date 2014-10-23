@@ -1,8 +1,6 @@
 class Admin::RolesController < Admin::AdminBaseController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
-  layout "admin/admin-wide"
-
   # GET /admin/roles
   def index
     @roles = Role.all
