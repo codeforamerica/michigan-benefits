@@ -4,32 +4,15 @@ class Views::Admin::Accounts::Form < Views::Base
 
   def content
     form_for([:admin, account]) do |f|
-      if account.errors.any?
-        div(:id => "error_explanation") {
-          h2 {
-            text(pluralize(account.errors.count, "error"))
-            text " prohibited this account from being saved:"
-          }
-
-
-          ul {
-            account.errors.full_messages.each do |message|
-              li(message)
-            end
-          }
-        }
-      end
-
-      div {
+      with_errors(account, :email) {
         label {
           text "E-mail: "
           text(f.text_field :email)
         }
       }
 
-
       if account.new_record?
-        div {
+        with_errors(account, :password) {
           label {
             text "Password: "
             text(f.password_field :password)
@@ -48,7 +31,6 @@ class Views::Admin::Accounts::Form < Views::Base
           }
         end
       }
-
 
       div(:class => "actions") {
         text(f.submit)

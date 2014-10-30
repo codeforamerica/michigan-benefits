@@ -3,29 +3,14 @@ class Views::Admin::Roles::Form < Views::Base
 
   def content
     form_for([:admin, role]) do |f|
-      if role.errors.any?
-        div(:id => "error_explanation") {
-          h2 {
-            text(pluralize(role.errors.count, "error"))
-            text " prohibited this role from being saved:"
-          }
-
-          ul {
-            role.errors.full_messages.each do |message|
-              li(message)
-            end
-          }
-        }
-      end
-
-      div {
+      with_errors(role, :name) {
         label {
           text "Name: "
           text(f.text_field :name)
         }
       }
 
-      div {
+      with_errors(role, :key) {
         label {
           text "Key: "
           text(f.text_field :key)
