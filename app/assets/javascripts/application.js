@@ -14,8 +14,7 @@
 // = require jquery_ujs
 // = require foundation
 // = require turbolinks
+// = require jquery.turbolinks
 // = require_tree .
 
-// initialize foundation on page,
-// and again when the page changes with turbolinks enabled
-$(document).on("ready page:load", function(){ $(document).foundation(); });
+$(document).ready(function(){ $(document).foundation(); });
