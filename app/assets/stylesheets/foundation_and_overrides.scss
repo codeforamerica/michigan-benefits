@@ -1490,17 +1490,17 @@ $body-bg: $vapor;
 	}
 	.app-nav{
 		@include grid-column($columns: 2);
-		//min-height: 400px;
 	}
 	.app-content{
 		@include grid-column($columns: 6);
+		min-height: 800px;
 	}
 	.app-content-wide{
 		@include grid-column($columns: 10);
+		min-height: 800px;
 	}
 	.app-aside{
 		@include grid-column($columns: 4);
-		min-height: 400px;
 	}
 }
 

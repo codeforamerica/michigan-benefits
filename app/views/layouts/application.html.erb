@@ -1,19 +1,19 @@
 <% content_for :body do %>
-  <div class="app-container">
-    <div class="app-nav">
+  <div class="app-container" data-equalizer>
+    <div class="app-nav" data-equalizer-watch>
       <%= yield :app_navigation %>
     </div>
 
     <% if content_for?(:app_aside) %>
-      <div class="app-content">
+      <div class="app-content" data-equalizer-watch>
         <%= yield %>
       </div>
 
-      <div class="app-aside">
+      <div class="app-aside" data-equalizer-watch>
         <%= yield :app_aside %>
       </div>
     <% else %>
-      <div class="app-content-wide">
+      <div class="app-content-wide" data-equalizer-watch>
         <%= yield %>
       </div>
     <% end %>
