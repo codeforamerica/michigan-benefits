@@ -7,7 +7,7 @@ class Views::Admin::Roles::Edit < Views::Base
     render 'form'
 
     link_to 'Show', admin_role_path(role)
-    text " |"
+    text " | "
     link_to 'Back', admin_roles_path
   end
 end

@@ -12,7 +12,7 @@ class Views::Admin::Accounts::Show < Views::Base
     }
     p {
       link_to 'Edit', edit_admin_account_path(account)
-      text " |"
+      text " | "
       link_to 'Back', admin_accounts_path
     }
   end

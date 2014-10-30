@@ -1,3 +1,5 @@
+require 'metrics'
+
 class Views::Admin::Metrics::Index < Views::Base
   def content
     h1("Metrics")

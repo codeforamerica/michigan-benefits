@@ -1,4 +1,6 @@
 class Views::Admin::Metrics::DailyCountRows < Views::Base
+  needs :metrics
+
   def content
     max_count = metrics.map { |signup| signup[:count] }.max
     metrics.each do |signup|
