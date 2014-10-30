@@ -8,30 +8,26 @@ class Views::Accounts::New < Views::Base
 
         form_for account do |f|
           row {
-            div(:class => "large-12 columns #{"error" if f.object.errors[:email].any?}") {
-              label {
-                text "E-mail: "
-                text(f.text_field :email)
+            column(:"large-12") {
+              with_errors(account, :email) {
+                label {
+                  text "E-mail: "
+                  f.text_field :email
+                }
               }
-
-              if f.object.errors[:email].any?
-                small(f.object.errors[:email].to_sentence, :class => "error")
-              end
             }
 
-            div(:class => "large-12 columns #{"error" if f.object.errors[:password].any?}") {
-              label {
-                text "Password: "
-                text(f.password_field :password)
+            column(:"large-12") {
+              with_errors(account, :password) {
+                label {
+                  text "Password: "
+                  f.password_field :password
+                }
               }
-
-              if f.object.errors[:password].any?
-                small(f.object.errors[:password].to_sentence, :class => "error")
-              end
             }
 
-            div(:class => "large-12 columns") {
-              text(f.submit :class=>'button primary medium')
+            column(:"large-12") {
+              text f.submit class: %i[button primary medium]
             }
           }
         end

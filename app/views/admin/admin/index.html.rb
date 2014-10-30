@@ -4,8 +4,6 @@ class Views::Admin::Admin::Index < Views::Base
       p("I'm on the right side!")
     end
 
-    comment "breadcrumbs"
-
     h1("Admin::Admin#index")
     p("Find me in app/views/admin/admin/index.html.erb")
   end

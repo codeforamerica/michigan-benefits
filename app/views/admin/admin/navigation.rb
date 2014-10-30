@@ -1,7 +1,7 @@
 class Views::Admin::Admin::Navigation < Views::Base
   def content
     section(:class => "top-bar-section") {
-      comment "Right Nav Section"
+      # Right Nav Section
 
       ul(:class => "right") {
         li(:class => "active") {
@@ -23,7 +23,7 @@ class Views::Admin::Admin::Navigation < Views::Base
       }
 
 
-      comment "Left Nav Section"
+      # Left Nav Section
 
       ul(:class => "left") {
         li {

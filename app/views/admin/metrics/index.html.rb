@@ -36,7 +36,6 @@ class Views::Admin::Metrics::Index < Views::Base
       }
     }
 
-
     h4("Stickiness")
     h4("I've built the right features that keep users around.", :class => "subheader")
 
@@ -55,7 +54,6 @@ class Views::Admin::Metrics::Index < Views::Base
         render partial: "daily_count_rows", locals: { metrics: Metrics.churn_per_day }
       }
     }
-
 
     figure {
       figcaption("Churn per week")

@@ -1,10 +1,9 @@
 class Views::Admin::Accounts::Form < Views::Base
-  needs :account => nil
-  needs :roles => nil
+  needs :account
+  needs :roles
 
   def content
-    text(form_for([:admin, account]) do |f|
-
+    form_for([:admin, account]) do |f|
       if account.errors.any?
         div(:id => "error_explanation") {
           h2 {
@@ -21,7 +20,7 @@ class Views::Admin::Accounts::Form < Views::Base
         }
       end
 
-      div(:class => "") {
+      div {
         label {
           text "E-mail: "
           text(f.text_field :email)
@@ -30,7 +29,7 @@ class Views::Admin::Accounts::Form < Views::Base
 
 
       if account.new_record?
-        div(:class => "") {
+        div {
           label {
             text "Password: "
             text(f.password_field :password)
@@ -44,7 +43,6 @@ class Views::Admin::Accounts::Form < Views::Base
           li {
             label {
               check_box_tag "account[roles][]", role.id, account.roles.include?(role)
-text " "
               text(role.name)
             }
           }
@@ -55,6 +53,6 @@ text " "
       div(:class => "actions") {
         text(f.submit)
       }
-    end)
+    end
   end
 end

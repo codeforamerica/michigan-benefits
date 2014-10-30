@@ -1,9 +1,7 @@
 class Views::Admin::Roles::Index < Views::Base
-  needs :roles => nil
-  
-  def content
-    comment "breadcrumbs"
+  needs :roles
 
+  def content
     h1("Listing roles")
 
     table {
@@ -15,28 +13,18 @@ class Views::Admin::Roles::Index < Views::Base
         }
       }
 
-
       tbody {
         roles.each do |role|
           tr {
             td(role.name)
             td(role.key)
-            td {
-              link_to 'Show', admin_role_path(role)
-            }
-
-            td {
-              link_to 'Edit', edit_admin_role_path(role)
-            }
-
-            td {
-              link_to 'Destroy', admin_role_path(role), method: :delete, data: { confirm: 'Are you sure?' }
-            }
+            td { link_to 'Show', admin_role_path(role) }
+            td { link_to 'Edit', edit_admin_role_path(role) }
+            td { link_to 'Destroy', admin_role_path(role), method: :delete, data: { confirm: 'Are you sure?' } }
           }
         end
       }
     }
-
 
     p {
       link_to 'New Role', new_admin_role_path

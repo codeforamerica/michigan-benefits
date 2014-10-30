@@ -1,9 +1,7 @@
 class Views::Admin::Accounts::Index < Views::Base
-  needs :accounts => nil
-  
-  def content
-    comment "breadcrumbs"
+  needs :accounts
 
+  def content
     h1("Listing accounts")
 
     p {

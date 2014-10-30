@@ -1,6 +1,6 @@
 class Views::Admin::Roles::Show < Views::Base
-  needs :role => nil
-  
+  needs :role
+
   def content
     p {
       text "Name: "
@@ -10,10 +10,10 @@ class Views::Admin::Roles::Show < Views::Base
       text "Key: "
       text(role.key)
     }
+
     p {
       link_to 'Edit', edit_admin_role_path(role)
       text " |"
-
       link_to 'Back', admin_roles_path
     }
   end

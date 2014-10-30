@@ -16,7 +16,6 @@ class Views::Layouts::Raw < Views::Base
         csrf_meta_tags
       }
 
-
       body {
         nav(:class => "top-bar", "data-topbar" => "", :role => "navigation") {
           ul(:class => "title-area") {
@@ -33,10 +32,8 @@ class Views::Layouts::Raw < Views::Base
             }
           }
 
-
           yield :navigation
         }
-
 
         flash.each do |name, msg|
           div("aria-labelledby" => "flash-msg-#{name}", "aria-role" => "dialog", :class => "alert-box flash-msg #{name}", "data-alert" => "") {
