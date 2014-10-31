@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'logged_out#index'
 
-  resources :accounts
-  resource :session
+  resources :accounts, only: [:new, :create]
+  resource :session, only: [:new, :create, :destroy]
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
   get 'my_account' => 'logged_in#landing'
 
   namespace :admin do

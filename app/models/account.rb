@@ -4,5 +4,11 @@ class Account < ActiveRecord::Base
   has_many :roles, through: :account_roles
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, on: :create
+  validates :password, length: { minimum: 3 }, if: :password_required?
+
+  attr_writer :password_required
+
+  def password_required?
+    @password_required
+  end
 end

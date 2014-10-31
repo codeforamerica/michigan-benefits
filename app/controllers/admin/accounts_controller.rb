@@ -25,9 +25,8 @@ class Admin::AccountsController < Admin::AdminBaseController
   def create
     @roles = Role.all
     @account = Account.new(account_params)
-    roles = Role.find(params[:account][:roles] || [])
 
-    if @account.save && @account.update(roles: roles)
+    if @account.save
       redirect_to [:admin, @account], notice: 'Account was successfully created.'
     else
       render :new
@@ -37,9 +36,8 @@ class Admin::AccountsController < Admin::AdminBaseController
   # PATCH/PUT /admin/accounts/1
   def update
     @roles = Role.all
-    roles = Role.find(params[:account][:roles] || [])
 
-    if @account.update(account_params) && @account.update(roles: roles)
+    if @account.update(account_params)
       redirect_to [:admin, @account], notice: 'Account was successfully updated.'
     else
       render :edit
@@ -60,6 +58,9 @@ class Admin::AccountsController < Admin::AdminBaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:email, :password)
+      account_params = params.require(:account)
+      roles = Role.find(account_params[:roles] || [])
+      account_params.permit(:email, :password).
+        merge(roles: roles)
     end
 end

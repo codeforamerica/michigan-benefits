@@ -14,6 +14,7 @@ class Views::Sessions::New < Views::Base
               br
               label {
                 text "Password: "
+                link_to "Forgot?", new_password_reset_path
                 password_field_tag :password
               }
               br

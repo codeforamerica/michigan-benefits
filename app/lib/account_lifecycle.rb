@@ -1,12 +1,37 @@
-module AccountLifecycle
+class AccountLifecycle
   AUTOMATICALLY_ADMINS = YAML.load_file(
     Rails.root.join("config", "automatically_admins.yml")
   ).to_set
 
+  def self.from_reset_token(token)
+    new Account.load_from_reset_password_token(token)
+  end
+
   def self.create(attrs)
-    account = Account.new(attrs)
+    creator = new(Account.new)
+    creator.create(attrs)
+    creator
+  end
+
+  def initialize(account)
+    @account = account
+  end
+
+  attr_reader :account
+
+  def found?
+    @account.present?
+  end
+
+  def create(attrs)
+    account.password_required = true
+    account.attributes = attrs
     account.roles = [Role.admin] if AUTOMATICALLY_ADMINS.include? account.email
     account.save
-    account
+  end
+
+  def reset_password?(password)
+    account.password_required = true
+    account.change_password!(password)
   end
 end

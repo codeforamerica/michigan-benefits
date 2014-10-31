@@ -1,25 +1,59 @@
 require 'rails_helper'
 
 describe AccountLifecycle do
-  it "returns the created account" do
-    account = described_class.create(email: 'bob@example.com', password: 'password')
-    expect(account.email).to eq 'bob@example.com'
-    expect(Account.authenticate('bob@example.com', 'password')).to eq account
+  describe "create" do
+    it "contains the created account" do
+      account = described_class.create(email: 'bob@example.com', password: mom.valid_password).account
+      expect(account).to be_persisted
+      expect(account.email).to eq 'bob@example.com'
+      expect(Account.authenticate('bob@example.com', mom.valid_password)).to eq account
+    end
+
+    it "returns an unpersisted account if it is invalid" do
+      account = described_class.create(email: 'bob@example.com', password: '').account
+      expect(account).not_to be_persisted
+    end
+
+    it "defaults some accounts to be admins" do
+      admin_role = create(:admin_role)
+      stub_const('AccountLifecycle::AUTOMATICALLY_ADMINS', ['bob@example.com'].to_set)
+      account = described_class.create(email: 'bob@example.com', password: mom.valid_password).account
+      expect(account.roles.find(admin_role)).to be
+    end
+
+    it "requires password" do
+      account = described_class.create(email: 'bob@example.com').account
+      expect(account).not_to be_persisted
+    end
   end
 
-  it "returns an unpersisted account if it is invalid" do
-    account = described_class.create(email: 'bob@example.com', password: '')
-    expect(account).not_to be_persisted
+  describe "from_reset_token" do
+    it "is successful" do
+      account = create(:account)
+      account.deliver_reset_password_instructions!
+      creator = described_class.from_reset_token(account.reset_password_token)
+      expect(creator).to be_found
+    end
+
+    it "fails if account cannot be found" do
+      creator = described_class.from_reset_token('not-a-valid-reset-token')
+      expect(creator).not_to be_found
+    end
   end
 
-  it "defaults some accounts to be admins" do
-    admin_role = create(:admin_role)
-    stub_const('AccountLifecycle::AUTOMATICALLY_ADMINS', ['bob@example.com'].to_set)
-    account = described_class.create(email: 'bob@example.com', password: 'password')
-    expect(account.roles.find(admin_role)).to be
-  end
+  describe "reset_password?" do
+    it "is successful" do
+      account = create(:account)
+      account.deliver_reset_password_instructions!
+      creator = described_class.new(account)
+      expect(creator).to be_reset_password(mom.valid_password + "1")
+    end
 
-  it "has no accounts as admins initially" do
-    expect(described_class::AUTOMATICALLY_ADMINS).to be_empty
+    it "fails if password is invalid" do
+      account = create(:account)
+      account.deliver_reset_password_instructions!
+      creator = described_class.new(account)
+      expect(creator).not_to be_reset_password ""
+    end
   end
 end
