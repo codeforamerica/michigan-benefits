@@ -18,6 +18,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.render_views
   config.include HttpAuthHelper, type: :controller
   config.before(type: :controller) { http_login }
 

@@ -1,4 +1,4 @@
-class Views::Admin::Admin::Navigation < Views::Base
+class Views::Shared::Admin::Navigation < Views::Base
   def content
     section(:class => "top-bar-section") {
       # Right Nav Section
