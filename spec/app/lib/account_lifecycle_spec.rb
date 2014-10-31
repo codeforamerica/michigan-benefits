@@ -31,13 +31,13 @@ describe AccountLifecycle do
     it "is successful" do
       account = create(:account)
       account.deliver_reset_password_instructions!
-      creator = described_class.from_reset_token(account.reset_password_token)
-      expect(creator).to be_found
+      lifecycle = described_class.from_reset_token(account.reset_password_token)
+      expect(lifecycle).to be_found
     end
 
     it "fails if account cannot be found" do
-      creator = described_class.from_reset_token('not-a-valid-reset-token')
-      expect(creator).not_to be_found
+      lifecycle = described_class.from_reset_token('not-a-valid-reset-token')
+      expect(lifecycle).not_to be_found
     end
   end
 
@@ -45,15 +45,15 @@ describe AccountLifecycle do
     it "is successful" do
       account = create(:account)
       account.deliver_reset_password_instructions!
-      creator = described_class.new(account)
-      expect(creator).to be_reset_password(mom.valid_password + "1")
+      lifecycle = described_class.new(account)
+      expect(lifecycle).to be_reset_password(mom.valid_password + "1")
     end
 
     it "fails if password is invalid" do
       account = create(:account)
       account.deliver_reset_password_instructions!
-      creator = described_class.new(account)
-      expect(creator).not_to be_reset_password ""
+      lifecycle = described_class.new(account)
+      expect(lifecycle).not_to be_reset_password ""
     end
   end
 end

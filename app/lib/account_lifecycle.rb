@@ -8,9 +8,9 @@ class AccountLifecycle
   end
 
   def self.create(attrs)
-    creator = new(Account.new)
-    creator.create(attrs)
-    creator
+    lifecycle = new(Account.new)
+    lifecycle.create(attrs)
+    lifecycle
   end
 
   def initialize(account)

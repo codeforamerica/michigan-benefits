@@ -25,18 +25,18 @@ class PasswordResetsController < ApplicationController
   def update
     @token = params[:id]
 
-    creator = AccountLifecycle.from_reset_token(@token)
+    lifecycle = AccountLifecycle.from_reset_token(@token)
 
-    unless creator.found?
+    unless lifecycle.found?
       not_authenticated
       return
     end
 
-    if creator.reset_password?(params[:account][:password])
-      auto_login(creator.account)
+    if lifecycle.reset_password?(params[:account][:password])
+      auto_login(lifecycle.account)
       redirect_to my_account_url, notice: 'Password successfully set.'
     else
-      @account = creator.account
+      @account = lifecycle.account
       render :edit
     end
   end
