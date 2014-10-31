@@ -1,48 +1,37 @@
 class Admin::RolesController < Admin::AdminBaseController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
-  # GET /admin/roles
   def index
     @roles = Role.all
+    respond_with @roles
   end
 
-  # GET /admin/roles/1
   def show
+    respond_with @role
   end
 
-  # GET /admin/roles/new
   def new
     @role = Role.new
+    respond_with @role
   end
 
-  # GET /admin/roles/1/edit
-  def edit
-  end
-
-  # POST /admin/roles
   def create
-    @role = Role.new(role_params)
-
-    if @role.save
-      redirect_to admin_role_url(@role), notice: 'Role was successfully created.'
-    else
-      render :new
-    end
+    @role = Role.create(role_params)
+    respond_with @role, location: [:admin, @role]
   end
 
-  # PATCH/PUT /admin/roles/1
+  def edit
+    respond_with @role
+  end
+
   def update
-    if @role.update(role_params)
-      redirect_to admin_role_url(@role), notice: 'Role was successfully updated.'
-    else
-      render :edit
-    end
+    @role.update(role_params)
+    respond_with @role, location: [:admin, @role]
   end
 
-  # DELETE /admin/roles/1
   def destroy
     @role.destroy
-    redirect_to admin_roles_url, notice: 'Role was successfully destroyed.'
+    respond_with @role, location: admin_roles_url
   end
 
   private

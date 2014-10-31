@@ -1,65 +1,58 @@
 class Admin::AccountsController < Admin::AdminBaseController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_roles, only: [:new, :create, :edit, :update]
 
-  # GET /admin/accounts
   def index
     @accounts = Account.all
+
+    respond_with @accounts
   end
 
-  # GET /admin/accounts/1
   def show
+    respond_with @account
   end
 
-  # GET /admin/accounts/new
   def new
     @account = Account.new
-    @roles = Role.all
+    respond_with @account
   end
 
-  # GET /admin/accounts/1/edit
   def edit
-    @roles = Role.all
+    respond_with @account
   end
 
-  # POST /admin/accounts
   def create
-    @roles = Role.all
-    @account = Account.new(account_params)
-
-    if @account.save
-      redirect_to [:admin, @account], notice: 'Account was successfully created.'
-    else
-      render :new
-    end
+    @account = Account.create(account_params)
+    respond_with @account, location: [:admin, @account]
   end
 
-  # PATCH/PUT /admin/accounts/1
   def update
-    @roles = Role.all
-
-    if @account.update(account_params)
-      redirect_to [:admin, @account], notice: 'Account was successfully updated.'
-    else
-      render :edit
-    end
+    @account.update(account_params)
+    respond_with @account, location: [:admin, @account]
   end
 
-  # DELETE /admin/accounts/1
   def destroy
     @account.destroy
-    redirect_to admin_accounts_url, notice: 'Account was successfully destroyed.'
+    respond_with @account, location: admin_accounts_url
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find(params[:id])
+      @account = find_account
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def find_account
+      Account.find(params[:id])
+    end
+
+    def set_roles
+      @roles = Role.all
+    end
+
     def account_params
       account_params = params.require(:account)
       roles = Role.find(account_params[:roles] || [])
+
       account_params.permit(:email, :password).
         merge(roles: roles)
     end
