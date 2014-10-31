@@ -20,6 +20,9 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include HttpAuthHelper, type: :controller
   config.before(type: :controller) { http_login }
+  if ENV['THOROUGH'].present?
+    config.render_views # shows problems, but very slow
+  end
 
   config.include HttpAuthHelper, type: :request
   config.include HttpAuthHelper::RequestOverrides, type: :request
