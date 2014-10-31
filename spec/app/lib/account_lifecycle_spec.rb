@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AccountCreator do
+describe AccountLifecycle do
   it "returns the created account" do
     account = described_class.create(email: 'bob@example.com', password: 'password')
     expect(account.email).to eq 'bob@example.com'
@@ -14,7 +14,7 @@ describe AccountCreator do
 
   it "defaults some accounts to be admins" do
     admin_role = create(:admin_role)
-    stub_const('AccountCreator::AUTOMATICALLY_ADMINS', ['bob@example.com'].to_set)
+    stub_const('AccountLifecycle::AUTOMATICALLY_ADMINS', ['bob@example.com'].to_set)
     account = described_class.create(email: 'bob@example.com', password: 'password')
     expect(account.roles.find(admin_role)).to be
   end

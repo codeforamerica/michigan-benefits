@@ -1,4 +1,4 @@
-module AccountCreator
+module AccountLifecycle
   AUTOMATICALLY_ADMINS = YAML.load_file(
     Rails.root.join("config", "automatically_admins.yml")
   ).to_set
