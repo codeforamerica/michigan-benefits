@@ -1444,6 +1444,7 @@ $body-bg: $vapor;
 
 @import 'compass';
 @import 'foundation';
+@import 'foundation-icons';
 
 // Helper mixins =======================
 
@@ -1454,6 +1455,7 @@ $body-bg: $vapor;
 	top: $topbar-height;
 }
 
+i { margin: 5px }
 
 // Page-specific styling ===============
 

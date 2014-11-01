@@ -6,6 +6,6 @@ class AdminPolicy
   end
 
   def admin?
-    user.roles.include? Role.admin
+    user && user.roles.include?(Role.admin)
   end
 end

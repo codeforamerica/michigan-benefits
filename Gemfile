@@ -68,6 +68,7 @@ end
 # Zurb Foundation
 gem 'compass-rails'
 gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
 
 # heroku recommends specifying a ruby version
 ruby "2.1.2"

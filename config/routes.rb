@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'logged_out#index'
 
-  resources :accounts, only: [:new, :create]
+  resources :accounts, only: [:new, :create, :edit, :update]
   resource :session, only: [:new, :create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update]
 

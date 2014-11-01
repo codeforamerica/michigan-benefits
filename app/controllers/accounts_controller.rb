@@ -1,9 +1,9 @@
 class AccountsController < ApplicationController
-  skip_before_filter :require_login
-  layout 'layouts/raw'
+  skip_before_filter :require_login, only: [:new, :create]
 
   def new
     @account = Account.new
+    render layout: 'layouts/logged_out'
   end
 
   def create
@@ -12,8 +12,31 @@ class AccountsController < ApplicationController
       auto_login(@account)
       redirect_to my_account_path
     else
-      render :new
+      render :new, layout: 'layouts/logged_out'
     end
+  end
+
+  def edit
+    @account = Account.find(params[:id])
+  end
+
+  def update
+    @account = Account.find(params[:id])
+
+    # Passing email to this conditional is a bit strange, but sorcery doesn't
+    # provide a way to ask an instance whether the password is valid
+    unless Account.authenticate(@account.email, params.require(:account)[:old_password])
+      flash.now.alert = "Old password invalid"
+      render :edit
+      return
+    end
+
+    unless AccountLifecycle.new(@account).reset_password?(params.require(:account)[:password])
+      render :edit
+      return
+    end
+
+    redirect_to my_account_path, notice: "Password changed!"
   end
 
   private

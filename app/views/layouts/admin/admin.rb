@@ -1,7 +1,7 @@
 class Views::Layouts::Admin::Admin < Views::Base
   def content
     content_for :navigation do
-      render partial: 'shared/admin/navigation'
+      render partial: 'shared/navigation'
     end
     if !content_for?(:app_navigation)
       content_for :app_navigation do

@@ -32,7 +32,11 @@ class Views::Layouts::Raw < Views::Base
             }
           }
 
-          yield :navigation
+          if content_for?(:navigation)
+            yield :navigation
+          else
+            render partial: 'shared/navigation'
+          end
         }
 
         flash.each do |name, msg|

@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :require_login
-  layout 'layouts/raw'
+  layout 'layouts/logged_out'
 
   def new
   end
