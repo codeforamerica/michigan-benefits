@@ -43,6 +43,12 @@ class Views::Layouts::Raw < Views::Base
         end
 
         content_for?(:body) ? yield(:body) : yield
+
+        if content_for?(:footer)
+          footer(class: :'fat-footer') {
+            yield :footer
+          }
+        end
       }
     }
   end
