@@ -23,9 +23,7 @@ class AccountsController < ApplicationController
   def update
     @account = Account.find(params[:id])
 
-    # Passing email to this conditional is a bit strange, but sorcery doesn't
-    # provide a way to ask an instance whether the password is valid
-    unless Account.authenticate(@account.email, params.require(:account)[:old_password])
+    unless @account.authenticate(params.require(:account)[:old_password])
       flash.now.alert = "Old password invalid"
       render :edit
       return

@@ -11,4 +11,10 @@ class Account < ActiveRecord::Base
   def password_required?
     @password_required
   end
+
+  def authenticate(password)
+    # Passing email is a bit strange, but sorcery doesn't
+    # provide a way to ask an instance whether a password is valid
+    self.class.authenticate(email, password)
+  end
 end
