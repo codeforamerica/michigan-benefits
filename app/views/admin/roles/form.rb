@@ -18,7 +18,7 @@ class Views::Admin::Roles::Form < Views::Base
       }
 
       div(:class => "actions") {
-        text(f.submit)
+        text(f.submit class: %i[button small radius])
       }
     end
   end
