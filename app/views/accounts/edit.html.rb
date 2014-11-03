@@ -28,7 +28,7 @@ module Views
                   f.password_field :password
                 }
               }
-              text(f.submit "Change", class: %i[button radius expand small])
+              text(f.submit "Change", class: buttonish(:small, :expand))
             end
           }
         }

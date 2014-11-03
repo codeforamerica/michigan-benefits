@@ -10,7 +10,7 @@ module Views
                 text "Email "
                 text_field_tag :email
               }
-              submit_tag "Reset my password!", class: %i[button radius expand small]
+              submit_tag "Reset my password!", class: buttonish(:small, :expand)
             end
           }
         }

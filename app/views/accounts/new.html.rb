@@ -27,7 +27,7 @@ class Views::Accounts::New < Views::Base
             }
 
             column(:"large-12") {
-              text f.submit class: %i[button primary medium]
+              text f.submit class: buttonish(:medium)
             }
           }
         end

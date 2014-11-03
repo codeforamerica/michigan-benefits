@@ -33,7 +33,7 @@ class Views::Admin::Accounts::Form < Views::Base
       }
 
       div(:class => "actions") {
-        text(f.submit class: %i[button small radius])
+        text(f.submit class: buttonish)
       }
     end
   end

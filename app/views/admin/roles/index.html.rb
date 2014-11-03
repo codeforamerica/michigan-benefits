@@ -28,7 +28,7 @@ class Views::Admin::Roles::Index < Views::Base
       }
 
       p {
-        link_to 'New Role', new_admin_role_path, class: %i[button small radius]
+        link_to 'New Role', new_admin_role_path, class: buttonish
       }
       p {
         link_to 'Back', admin_path

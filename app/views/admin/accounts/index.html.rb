@@ -43,7 +43,7 @@ class Views::Admin::Accounts::Index < Views::Base
 
 
       p {
-        link_to 'New Account', new_admin_account_path, class: %i[button small radius]
+        link_to 'New Account', new_admin_account_path, class: buttonish
       }
       p {
         link_to 'Back', admin_path

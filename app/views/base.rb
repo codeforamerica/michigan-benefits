@@ -20,6 +20,12 @@ module Views
       row { column { yield } }
     end
 
+    def buttonish(size = :small, *extras)
+      result = %i[button radius]
+      result << size
+      result.concat extras
+    end
+
     def with_errors(object, field)
       errors = object.errors[field]
       if errors.any?

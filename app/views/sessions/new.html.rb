@@ -18,7 +18,7 @@ class Views::Sessions::New < Views::Base
                 password_field_tag :password
               }
               br
-              submit_tag "Log In", class: %i[button primary medium]
+              submit_tag "Log In", class: buttonish(:medium)
             }
           }
         end
