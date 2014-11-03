@@ -1495,11 +1495,9 @@ i { margin: 5px }
 	}
 	.app-content{
 		@include grid-column($columns: 6);
-		min-height: 800px;
 	}
 	.app-content-wide{
 		@include grid-column($columns: 10);
-		min-height: 800px;
 	}
 	.app-aside{
 		@include grid-column($columns: 4);
