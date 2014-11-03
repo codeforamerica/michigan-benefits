@@ -1,5 +1,9 @@
-class Views::Layouts::Application < Views::Base
+class Views::Layouts::LoggedIn < Views::Base
   def content
+    content_for :navigation do
+      render partial: 'shared/navigation'
+    end
+
     content_for :body do
       div(:class => "app-container", "data-equalizer" => "") {
         div(:class => "app-nav", "data-equalizer-watch" => "") {
