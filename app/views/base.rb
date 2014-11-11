@@ -5,15 +5,11 @@ module Views
     private
 
     def row(args = {}, &block)
-      classes = [:row]
-      classes += Array(args.fetch(:class, []))
-      div(args.merge(class: classes), &block)
+      div(add_classes(args, [:row]), &block)
     end
 
     def column(size = :'small-12', args = {}, &block)
-      classes = [:columns, size]
-      classes += Array(args.fetch(:class, []))
-      div(args.merge(class: classes), &block)
+      div(add_classes(args, [:columns, size]), &block)
     end
 
     def full_row
@@ -31,7 +27,7 @@ module Views
       if errors.any?
         div(class: :error) {
           yield
-          small(class: :error) { text errors.to_sentence }
+          small(errors.to_sentence, class: :error)
         }
       else
         yield
@@ -40,6 +36,11 @@ module Views
 
     def to_json(*args)
       as_json(*args).to_json
+    end
+
+    def add_classes(args, classes)
+      classes += Array(args.fetch(:class, []))
+      args.merge(class: classes)
     end
   end
 end
