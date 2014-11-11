@@ -131,6 +131,13 @@ Get code coverage with
 
 (This doesn't seem to work since the transition to rspec.)
 
+[Rollback](https://devcenter.heroku.com/articles/heroku-postgres-rollback) a
+production Heroku database to a prior state.  Hobby dbs do not have rollback,
+Standard dbs can be rolled back to any time in the last day (in increments of 1
+minute), and Premium dbs any time in the last week.
+
+Set up [daily backups](https://devcenter.heroku.com/articles/pgbackups) of a
+production Heroku database.
 
 References
 ==========
