@@ -10,8 +10,9 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
+ * require_tree . # don't do this; it will import email stylesheets into main app... use @import in foundation_and_overrides
+ * require_self   # technically would be ok, but better to use @import in foundation_and_overrides
+ *
  *= require foundation_and_overrides
 
  */

@@ -14,9 +14,6 @@ Rails.application.routes.draw do
     get '/metrics' => 'metrics#index'
   end
 
-  # last route catches other requests and redirects to home page instead of 404
-  get '/*other', to: 'logged_out#not_found'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

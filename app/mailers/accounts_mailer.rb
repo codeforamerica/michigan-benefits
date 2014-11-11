@@ -1,5 +1,6 @@
 class AccountsMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "citizen-code@example.com"
+  layout "email"
 
   def reset_password_email(account)
     @account = account

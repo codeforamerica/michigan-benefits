@@ -48,6 +48,8 @@ gem 'pundit'
 
 # e-mail
 gem 'postmark-rails'
+gem 'premailer-rails'
+gem 'nokogiri' # required by premailer
 
 # exception notification
 gem 'airbrake'
