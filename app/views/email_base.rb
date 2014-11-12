@@ -37,16 +37,18 @@ module Views
 
     private
 
+    def container(&block)
+      table(class: :container) { tr(&block) }
+    end
+
     # http://zurb.com/ink/docs.php#grid
     def row(args = {}, &block)
-      table(class: :container) {
-        tr {
-          td {
-            table {
-              tr(add_classes(args, [:row]), &block)
-              # technically, more rows are allowed in a container, but this is
-              # easier?
-            }
+      container {
+        td {
+          table {
+            tr(add_classes(args, [:row]), &block)
+            # technically, more rows are allowed in a container, but this is
+            # easier?
           }
         }
       }
@@ -57,9 +59,7 @@ module Views
       table(add_classes(args, [:row])) {
         tr {
           center_td {
-            table(class: :container) {
-              tr(&block)
-            }
+            container(&block)
           }
         }
       }
