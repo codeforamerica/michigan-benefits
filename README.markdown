@@ -27,6 +27,17 @@ Local development setup (without Vagrant)
 
 		rake db:create db:migrate
 
+Local development setup (with Docker & Fig)
+======================================
+1. Install docker http://docs.docker.com/installation/mac/
+2. Install fig http://www.fig.sh/install.html
+3. Configure
+		map `boot2docker ip` to localdocker in /etc/hosts
+4. Build & Run
+		fig build
+		fig up
+5. Open localdocker:3000
+6. Test `fig run web bundle exec rake spec`
 
 Local development setup (with Vagrant)
 ======================================

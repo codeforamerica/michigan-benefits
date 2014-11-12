@@ -21,6 +21,20 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
 
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  database: postgres
+  pool: 5
+  username: postgres
+  password:
+  host: db
+
+test:
+  <<: *default
+  database: myapp_test
+
+
 development:
   <<: *default
   database: citizen_rails_development
