@@ -27,6 +27,12 @@ Local development setup (without Docker)
 
                rake db:setup
 
+1. Install foreman:
+
+    gem install foreman
+
+1. Launch the server with `foreman start` and see it running at http://localhost:3000
+
 1. To run tests, see Tools section below.
 
 Local development setup (with Docker & Fig)
