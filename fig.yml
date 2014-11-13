@@ -4,7 +4,7 @@ db:
     - "5432"
 web:
   build: .
-  command: bundle exec puma -C config/puma.rb
+  command: foreman start
   volumes:
     - .:/myapp
   ports:

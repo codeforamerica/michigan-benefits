@@ -13,75 +13,53 @@ Customize this project for your app
 1. Remove the `LICENSE` file from the root directory.
 1. Delete this section. You only need to do these steps once.
 
-Local development setup (without Vagrant)
+Local development setup (without Docker)
 =========================================
 
 1. Install [Postgres.app](http://postgresapp.com).
 1. Install this project's gems by running:
 
-		bundle
+               bundle
 
-	If the "pg" gem fails to install on OS X, try running `env ARCHFLAGS="-arch x86_64" bundle` instead.
+   a. If the "pg" gem fails to install on OS X, try running `env ARCHFLAGS="-arch x86_64" bundle` instead. Or better yet, switch to Docker (see below)
 
 1. Initialize the app's database:
 
-		rake db:create db:migrate
+               rake db:setup
+
+1. To run tests, see Tools section below.
 
 Local development setup (with Docker & Fig)
 ======================================
+
 1. Install docker http://docs.docker.com/installation/mac/
-2. Install fig http://www.fig.sh/install.html
-3. Configure
-		map `boot2docker ip` to localdocker in /etc/hosts
-4. Build & Run
-		fig build
-		fig up
-5. Open localdocker:3000
-6. Test `fig run web bundle exec rake spec`
+  a. By default boot2docker will create a VM that uses 2GB of memory.  If this is too much for your machine, use
 
-Local development setup (with Vagrant)
-======================================
+    boot2docker init -m 512
 
-1. Download Vagrant: http://www.vagrantup.com/downloads.html
-1. Start Vagrant by running:
+1. Install fig http://www.fig.sh/install.html
+1. Configure
+    map `boot2docker ip` to localdocker in /etc/hosts
+1. Build image
 
-		vagrant up
+    fig build
 
-   This can take around 10 minutes when the first time.
+1. Create database
 
-**Notes:**
+    fig run web db:setup db:test:prepare
 
-* To ssh to the Vagrant box, run `vagrant ssh`.
-* The Vagrant machine's IP address is 10.0.50.50.
-* Vagrant is configured to forward port 5000 on the host machine (your Mac) to port 5000 on the guest machine (Vagrant)
-* The Vagrant box is configured with the `/vagrant.sh` and `/vagrant_privileged.sh` scripts in this repo.
+1. Run db and web servers
 
-**Limitations:**
+    fig up
 
-* You currently cannot connect directly to the database running in Vagrant.
+1. Develop code on your local machine.  It will be updated in the image.
+  a. Open localdocker:3000 to see changes
+  a. If you change the Dockerfile or the Gemfile, stop fig, then re-run
+     `fig build` and `fig up`.
+1. To run tests, see Tools section below.  Prefix all commands with
+   `fig run web`
 
-Vagrant + RubyMine
-------------------
-
-1. Install RubyMine 7 (the EAP version).
-1. Go to Settings > Languages and Frameworks > Ruby SDK and Gems.
-1. Click the "+" button and add a new remote SDK.
-1. Choose "Vagrant".
-1. Use `/home/vagrant/.rbenv/versions/2.1.2/bin/ruby` for the Ruby interpreter path.
-
-You should be able to run tests as you normally do, plus you can run the server from the run configurations.
-
-
-Running the server locally
-==========================
-
-1. Install foreman:
-
-		gem install foreman
-
-1. Launch the server:
-
-		foreman start
+To shutdown fig, Ctrl-C it. To shutdown Docker `boot2docker down`.
 
 Heroku setup
 ============
@@ -133,22 +111,33 @@ Heroku setup
   	
             heroku run rake airbrake:test
 
+1. Set up [daily backups](https://devcenter.heroku.com/articles/pgbackups) of a
+   production Heroku database.
+
 Tools
 =====
 
-Get code coverage with
+Development
+-----------
 
-    rake simplecov
+Run tests
 
-(This doesn't seem to work since the transition to rspec.)
+    bin/spec
+
+Run more thorough tests (with `render_views` turned on, as coverage for templates)
+
+    bin/spect
+
+Production
+----------
 
 [Rollback](https://devcenter.heroku.com/articles/heroku-postgres-rollback) a
 production Heroku database to a prior state.  Hobby dbs do not have rollback,
 Standard dbs can be rolled back to any time in the last day (in increments of 1
 minute), and Premium dbs any time in the last week.
 
-Set up [daily backups](https://devcenter.heroku.com/articles/pgbackups) of a
-production Heroku database.
+If you have [daily backups set
+up](https://devcenter.heroku.com/articles/pgbackups) you can restore them.
 
 References
 ==========
