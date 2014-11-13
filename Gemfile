@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use postgresql as the database for Active Record
@@ -14,7 +14,7 @@ gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+gem 'therubyracer',  platforms: :ruby
 # Define views with Ruby
 gem 'fortitude'
 
@@ -73,4 +73,4 @@ gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
 
 # heroku recommends specifying a ruby version
-ruby "2.1.2"
+ruby "2.1.4"
