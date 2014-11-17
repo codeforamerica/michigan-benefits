@@ -11,3 +11,5 @@ web:
     - "3000:3000"
   links:
     - db
+  environment:
+    - LOCALHOST_AKA=localdocker
