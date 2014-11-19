@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/citizencode/letter_opener
+  revision: 74a440bfb3e310a7876ec5d7a4972e50eedf93eb
+  specs:
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,6 +88,8 @@ GEM
       turbolinks
     json (1.8.1)
     jwt (1.0.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     libv8 (3.16.14.7)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
@@ -219,6 +228,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-turbolinks
+  letter_opener!
   nokogiri
   pg
   postmark-rails
