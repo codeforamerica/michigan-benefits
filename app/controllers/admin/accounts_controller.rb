@@ -50,10 +50,8 @@ class Admin::AccountsController < Admin::AdminBaseController
     end
 
     def account_params
-      account_params = params.require(:account)
-      roles = Role.find(account_params[:roles] || [])
-
-      account_params.permit(:email, :password).
-        merge(roles: roles)
+      params.
+        require(:account).
+        permit(:email, :password, role_ids: [])
     end
 end

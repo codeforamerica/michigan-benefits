@@ -20,16 +20,9 @@ class Views::Admin::Accounts::Form < Views::Base
         }
       end
 
-      label("Roles:")
-      ul {
-        roles.each do |role|
-          li {
-            label {
-              check_box_tag "account[roles][]", role.id, account.roles.include?(role)
-              text(role.name)
-            }
-          }
-        end
+      full_row {
+        label("Roles: ")
+        f.collection_check_boxes :role_ids, roles, :id, :name
       }
 
       div(:class => "actions") {

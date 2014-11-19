@@ -67,6 +67,11 @@ describe Admin::AccountsController do
           expect(assigns(:account)).to be_persisted
         end
 
+        it "assigns roles" do
+          post :create, {:account => valid_attributes.merge(role_ids: [Role.admin.id])}
+          expect(AdminPolicy.new(assigns(:account), nil)).to be_admin
+        end
+
         it "redirects to the created account" do
           post :create, {:account => valid_attributes}
           expect(response).to redirect_to(admin_account_path(Account.last))
