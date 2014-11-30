@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/citizencode/letter_opener
-  revision: 74a440bfb3e310a7876ec5d7a4972e50eedf93eb
+  remote: https://github.com/ryanb/letter_opener.git
+  revision: 97b762f508184482d5d98416c550c9cff08c9d2f
   specs:
     letter_opener (1.2.0)
       launchy (~> 2.2)

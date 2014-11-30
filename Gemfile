@@ -48,7 +48,7 @@ gem 'pundit'
 
 # e-mail
 gem 'postmark-rails'
-gem "letter_opener", group: :development, git: 'https://github.com/citizencode/letter_opener' # in dev, open emails in a browser; git src can removed when https://github.com/ryanb/letter_opener/pull/99 is merged.
+gem "letter_opener", group: :development, git: 'https://github.com/ryanb/letter_opener.git' # in dev, open emails in a browser; git src can removed when letter_opener > 1.2.0 is cut
 gem 'premailer-rails'
 gem 'nokogiri' # required by premailer
 
