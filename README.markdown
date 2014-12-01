@@ -134,6 +134,10 @@ Run more thorough tests (with `render_views` turned on, as coverage for template
 
     bin/spect
 
+Run thorough tests and deploy
+
+    bin/shipit
+
 Production
 ----------
 
