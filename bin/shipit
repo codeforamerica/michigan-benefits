@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
+set -e
 
-bin/rspect && git push && git push heroku && heroku run rake db:migrate
+bin/rspect
+git push
+git push heroku
+heroku run rake db:migrate
