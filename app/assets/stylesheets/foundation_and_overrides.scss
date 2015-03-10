@@ -89,8 +89,8 @@ $include-html-global-classes: $include-html-classes;
 
 
 // We use these to define default font stacks
-$font-family-sans-serif: Muli, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-// $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-sans-serif: Lato, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$font-family-serif: "Roboto Slab", Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
 // We use these to define default font weights
@@ -123,7 +123,7 @@ $vapor       : #F6F6F6;
 // $aluminum    : #999999;
 // $jumbo       : #888888;
 // $monsoon     : #777777;
-// $steel       : #666666;
+$steel       : #666666;
 // $charcoal    : #555555;
 // $tuatara     : #444444;
 // $oil         : #333333;
@@ -133,6 +133,7 @@ $vapor       : #F6F6F6;
 // We use these to control various global styles
 $body-bg: $snow;
 // $body-font-color: $jet;
+$body-font-color: $steel;
 // $body-font-family: $font-family-sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
@@ -206,6 +207,7 @@ $body-bg: $snow;
 // $header-font-weight: $font-weight-normal;
 // $header-font-style: normal;
 // $header-font-color: $jet;
+$header-font-color: $steel;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
@@ -1533,6 +1535,8 @@ i { margin: 5px }
   background-color: rgba($body-bg, .9);
   h1, h2, h3, .button {
     text-transform: uppercase;
+    font-family: $font-family-serif;
+    letter-spacing: 0.4em;
   }
 }
 

@@ -10,7 +10,8 @@ class Views::Layouts::Raw < Views::Base
         title(content_for?(:title) ? yield(:title) : "CitizenRails")
 
         stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-        stylesheet_link_tag    '//fonts.googleapis.com/css?family=Muli'
+        stylesheet_link_tag    '//fonts.googleapis.com/css?family=Lato'
+        stylesheet_link_tag    '//fonts.googleapis.com/css?family=Roboto+Slab'
         javascript_include_tag 'vendor/modernizr'
         javascript_include_tag 'application', 'data-turbolinks-track' => true
         csrf_meta_tags
