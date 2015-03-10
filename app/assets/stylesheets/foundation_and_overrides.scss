@@ -90,7 +90,7 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to define default font stacks
 $font-family-sans-serif: Lato, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-$font-family-serif: "Roboto Slab", Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-serif: "Slabo 27px", Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
 // We use these to define default font weights
@@ -1516,7 +1516,7 @@ i { margin: 5px }
 %chunko-text {
   text-transform: uppercase;
   font-family: $font-family-serif;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.3em;
 }
 
 .palate-white-on-green {
