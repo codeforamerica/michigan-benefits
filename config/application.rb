@@ -21,7 +21,7 @@ module CitizenRails
     # config.i18n.default_locale = :de
 
     # one HTTP auth password for the entire site
-    config.require_site_login = true
+    config.require_site_login = false # disabled by default
     config.site_username = 'citizen'
     config.site_password = 'code'
 
