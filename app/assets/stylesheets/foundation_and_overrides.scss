@@ -1513,6 +1513,29 @@ i { margin: 5px }
 	}
 }
 
+%chunko-text {
+  text-transform: uppercase;
+  font-family: $font-family-serif;
+  letter-spacing: 0.4em;
+}
+
+.palate-white-on-green {
+  color: $snow;
+  blockquote, cite {
+    color: $snow;
+  }
+  background-color: $palate1-primary;
+}
+
+.blockquote-grande {
+  @extend %chunko-text;
+  border-left: none;
+
+  cite {
+    font-style: normal;
+  }
+}
+
 .alert-box.flash-msg {
   margin-bottom: 0;
 }
@@ -1534,9 +1557,7 @@ i { margin: 5px }
   padding: $panel-padding;
   background-color: rgba($body-bg, .9);
   h1, h2, h3, .button {
-    text-transform: uppercase;
-    font-family: $font-family-serif;
-    letter-spacing: 0.4em;
+    @extend %chunko-text;
   }
 }
 
