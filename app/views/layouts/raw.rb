@@ -21,7 +21,9 @@ class Views::Layouts::Raw < Views::Base
           ul(:class => "title-area") {
             li(:class => "name") {
               h1 {
-                a("Citizen Code", :href => "/")
+                a(:href => "/") {
+                  image_tag "http://placekitten.com/g/90/57", class: "logo", alt: "Citizen Code Logo"
+                }
               }
             }
 

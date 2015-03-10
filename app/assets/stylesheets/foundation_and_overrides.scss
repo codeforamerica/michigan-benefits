@@ -96,18 +96,23 @@ $font-family-sans-serif: Muli, "Helvetica Neue", Helvetica, Roboto, Arial, sans-
 // We use these to define default font weights
 // $font-weight-normal: normal !default;
 // $font-weight-bold: bold !default;
+$palate1-primary: #6AB79A;
+$palate1-alert: #EC4853;
 
 // We use these as default colors throughout
-$primary-color: #25CAAE;
-// $secondary-color: #e7e7e7;
-$alert-color: #ED4735;
-$success-color: #6CB144;
-// $warning-color: #f08a24;
-// $info-color: #a0d3e8;
+$primary-color: $palate1-primary; // teal
+$secondary-color: #e7e7e7;        // another gray
+$alert-color: $palate1-alert;     // redish
+$success-color: #6CB144;          // greenish
+$warning-color: #f08a24;          // orange
+$info-color: #a0d3e8;             // blue
+
+.text-primary { color: $palate1-primary; }
+.text-alert { color: $palate1-alert; }
 
 // $white       : #FFFFFF;
 // $ghost       : #FAFAFA;
-// $snow        : #F9F9F9;
+$snow        : #F9F9F9;
 $vapor       : #F6F6F6;
 // $white-smoke : #F5F5F5;
 // $silver      : #EFEFEF;
@@ -126,7 +131,7 @@ $vapor       : #F6F6F6;
 // $black       : #000000;
 
 // We use these to control various global styles
-$body-bg: $vapor;
+$body-bg: $snow;
 // $body-font-color: $jet;
 // $body-font-family: $font-family-sans-serif;
 // $body-font-weight: $font-weight-normal;
@@ -1364,10 +1369,12 @@ $body-bg: $vapor;
 
 // Background color for the top bar
 // $topbar-bg-color: $oil;
+$topbar-bg-color: $palate1-primary;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin
 // $topbar-height: 45px;
+$topbar-height: 90px;
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
@@ -1506,4 +1513,11 @@ i { margin: 5px }
 
 .alert-box.flash-msg {
   margin-bottom: 0;
+}
+
+.logo {
+  width: rem-calc(90);
+  height: auto;
+  padding: $topbar-height/6 0 $topbar-height/5 0;
+  max-height: $topbar-height;
 }
