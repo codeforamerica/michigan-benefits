@@ -1527,8 +1527,25 @@ i { margin: 5px }
   background-color: $palate1-primary;
 }
 
+.button a {
+  @extend %chunko-text;
+  color: $snow;
+}
+
+.palate-green-on-white {
+  h4 {
+    @extend %chunko-text;
+    color: $palate1-primary;
+  }
+  p {
+    text-align: left;
+  }
+  background-color: $snow;
+}
 .top-bar-section ul li > a {
   @extend %chunko-text;
+  text-align: right;
+  padding-right: 15px;
 }
 
 .blockquote-grande {

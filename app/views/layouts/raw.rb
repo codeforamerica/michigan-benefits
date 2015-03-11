@@ -39,8 +39,8 @@ class Views::Layouts::Raw < Views::Base
             section(class: "top-bar-section") {
               ul(class: "right") {
                 li(class: "active") {
-                  a(href: "#") {
-                    text "Call to action"
+                  a(href: take_action_path) {
+                    text "Take Action"
                   }
                 }
               }
