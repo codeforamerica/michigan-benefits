@@ -11,7 +11,7 @@ class Views::LoggedOut::Index < Views::Base
 
         p "Why this is right for you. " * 8
 
-        div(class: buttonish(:large, :alert)) {
+        div(class: buttonish(:large, :alert), onclick: "analytics.track('acquisition/no-abandon')") {
           text "Take Action"
         }
       }
@@ -22,6 +22,7 @@ class Views::LoggedOut::Index < Views::Base
         cite "First User"
       }
     }
+    javascript "analytics.track('acquisition/visit')"
   end
 
   private
