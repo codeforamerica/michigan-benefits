@@ -1526,10 +1526,17 @@ i { margin: 5px }
   }
   background-color: $palate1-primary;
 }
+ .white-text {
+   color: $snow;
+ }
 
 .button a {
   @extend %chunko-text;
   color: $snow;
+}
+
+.button.bordered {
+  border: solid 2px $snow;
 }
 
 .palate-green-on-white {
@@ -1575,10 +1582,13 @@ i { margin: 5px }
 }
 
 .clear-panel {
+  @include border-radius(3px);
   padding: $panel-padding;
-  background-color: rgba($body-bg, .9);
-  h1, h2, h3, .button {
+  background-color: rgba($body-bg, .95);
+  h1, h2, h3, h4, .button {
     @extend %chunko-text;
+    text-align: center;
+    color: $palate1-primary;
   }
 }
 
@@ -1587,4 +1597,8 @@ i { margin: 5px }
    margin-left: auto;
    margin-right: auto;
    max-width: initial;
+}
+
+body {
+  background-color: $palate1-primary;
 }
