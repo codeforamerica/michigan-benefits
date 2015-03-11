@@ -6,6 +6,7 @@ class Views::Layouts::Raw < Views::Base
         meta(:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type")
         meta(:charset => "utf-8")
         meta(:content => "width=device-width, initial-scale=1.0", :name => "viewport")
+        meta(:content => "Citizen Rails is an incredible template for early customer development work!", :name => "description")
 
         title(content_for?(:title) ? yield(:title) : "CitizenRails")
 
