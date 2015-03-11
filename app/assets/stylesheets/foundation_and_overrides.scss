@@ -1376,7 +1376,7 @@ $topbar-bg-color: $palate1-primary;
 
 // Height and margin
 // $topbar-height: 45px;
-$topbar-height: 90px;
+$topbar-height: 70px;
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
@@ -1525,6 +1525,10 @@ i { margin: 5px }
     color: $snow;
   }
   background-color: $palate1-primary;
+}
+
+.top-bar-section ul li > a {
+  @extend %chunko-text;
 }
 
 .blockquote-grande {
