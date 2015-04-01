@@ -9,16 +9,16 @@ class Views::Sessions::New < Views::Base
             column(:"large-12") {
               label {
                 text "E-mail: "
-                text_field_tag :email
+                text_field_tag :email, nil, tabindex: 1, type: 'email'
               }
               br
               label {
                 text "Password: "
                 link_to "Forgot?", new_password_reset_path
-                password_field_tag :password
+                password_field_tag :password, nil, tabindex: 2
               }
               br
-              submit_tag "Log In", class: buttonish(:medium)
+              submit_tag "Log In", class: buttonish(:medium), tabindex: 3
             }
           }
         end
