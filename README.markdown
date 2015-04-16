@@ -95,7 +95,7 @@ Heroku setup
 1. Test e-mail by sending an e-mail to the address you configured in the last steps:
 
 		heroku run console
-		
+
 		m = "registred_email_from_last_step"; ActionMailer::Base.mail(from:m, to:m, subject: Time.now.to_s, body: rand.to_s).deliver
 
 1. Eventually, remove everyone from `config/automatically_admins.yml`. After a few admins exist, you should use the admin tools to grant new accounts admin permissions.
@@ -109,13 +109,18 @@ Heroku setup
     	* By default to the email group associated with the heroku account that owns the project. **For example**: `accounts+heroku@citizencode.io`
     	* This should be changed to the Citizen Code error account with a email alias for filtering by project: `errorhound+PROJECT_NAME@citizencode.io`
     	* You might have to accept a mailchimp "Newsletter Subscription" (!!?!?!) to receive airbrake notifications.
-    
+
   	1. To view exceptions on the web, visit:
     	* https://addons-sso.heroku.com/apps/YOUR_APP_NAME/addons/airbrake
            Example: [citizen-rails-template airbrake](https://addons-sso.heroku.com/apps/citizen-rails-template/addons/airbrake)
   	1. To create a fake error for testing the system:
-  	
+
             heroku run rake airbrake:test
+
+    1. To set up client-side Javascript error reporting, set the environment variable `AIRBRAKE_PROJECT_ID`
+       to the project ID, which can be foundin the URL of the Airbrake admin console for your app.
+
+    1. To differentiate between staging and production, `AIRBRAKE_ENV` can be set to 'staging' on the staging site.
 
 1. Set up [daily backups](https://devcenter.heroku.com/articles/pgbackups) of a
    production Heroku database.

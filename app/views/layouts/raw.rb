@@ -14,6 +14,12 @@ class Views::Layouts::Raw < Views::Base
         stylesheet_link_tag '//fonts.googleapis.com/css?family=Lato|Slabo+27px'
         javascript_include_tag 'vendor/modernizr'
         javascript_include_tag 'application', 'data-turbolinks-track' => true
+        if Airbrake.configuration.project_id && Airbrake.configuration.api_key
+          javascript_include_tag "airbrake-shim",
+                                 "data-airbrake-project-id" => Airbrake.configuration.project_id,
+                                 "data-airbrake-project-key" => Airbrake.configuration.api_key,
+                                 "data-airbrake-environment-name" => Airbrake.configuration.environment_name
+        end
         csrf_meta_tags
       }
 
