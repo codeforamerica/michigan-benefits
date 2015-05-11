@@ -122,8 +122,10 @@ Heroku setup
 
     1. To differentiate between staging and production, `AIRBRAKE_ENV` can be set to 'staging' on the staging site.
 
-1. Set up [daily backups](https://devcenter.heroku.com/articles/pgbackups) of a
-   production Heroku database.
+1. Set up daily backups of a
+   production Heroku database:
+
+        heroku pg:backups schedule DATABASE_URL --at '03:00 PST' -a <app name>
 
 Tools
 =====
