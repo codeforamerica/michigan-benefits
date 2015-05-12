@@ -6,9 +6,9 @@ class Views::Layouts::Raw < Views::Base
         meta(:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type")
         meta(:charset => "utf-8")
         meta(:content => "width=device-width, initial-scale=1.0", :name => "viewport")
-        meta(:content => "Citizen Rails is an incredible template for early customer development work!", :name => "description")
+        meta(:content => Rails.application.config.project_description, :name => "description")
 
-        title(content_for?(:title) ? yield(:title) : "CitizenRails")
+        title(content_for?(:title) ? yield(:title) : Rails.application.config.project_name)
 
         stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
         stylesheet_link_tag '//fonts.googleapis.com/css?family=Lato|Slabo+27px'
@@ -30,7 +30,7 @@ class Views::Layouts::Raw < Views::Base
               li(:class => "name") {
                 h1 {
                   a(:href => "/") {
-                    image_tag "http://placekitten.com/g/90/57", class: "logo", alt: "Citizen Code Logo"
+                    image_tag "http://placekitten.com/g/90/57", class: "logo", alt: "#{Rails.application.config.project_name} Logo"
                   }
                 }
               }

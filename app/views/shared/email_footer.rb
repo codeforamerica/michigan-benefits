@@ -9,7 +9,7 @@ class Views::Shared::EmailFooter < Views::EmailBase
 
     full_row {
       center_td {
-        div raw("&copy; 2014 Citizen Code, Inc. All Rights Reserved.")
+        div raw("&copy; #{Date.current.year} #{Rails.application.config.company_name} All Rights Reserved.")
       }
     }
   end

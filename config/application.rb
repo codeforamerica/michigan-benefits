@@ -25,6 +25,13 @@ module CitizenRails
     config.site_username = 'citizen'
     config.site_password = 'code'
 
+    config.company_name = "Citizen Code"
+    config.project_name = "Citizen Rails"
+    config.project_slug = "citizen_rails" # must not use dashes
+    # appears in main layout meta tag
+    config.project_description = "Citizen Rails is an incredible template for early customer development work!"
+    config.contact_email = "contact@example.com"
+
     # lib/ is for code that is entirely independent of your Rails app
     # app/lib/ is for code that expects Rails (esp. models) but which is not itself a model
     config.autoload_paths << Rails.root.join("app", "lib")

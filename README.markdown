@@ -16,10 +16,12 @@ One way to do this:
 Customize this project for your app
 ===================================
 
-1. Search all files in the project for "citizen" and "Citizen" and change the name to match the project you're starting, including the database names in `config/database.yml`.
+1. Change the name of `module CitizenRails` in `config/application.rb` to match the projects' name
+1. Change other config settings in `config/application.rb` which refer to Citizen Rails or Citizen Code
 1. The site can be password-protected while in alpha. Edit `config/application.rb` and customize `config.site_username` and `config.site_password` for the site, and enable password-protection by setting `config.require_site_login = true`.
 1. You can create a whitelist of emails which will automatically become admins when they sign up. Add these emails to `config/automatically_admins.yml`.
 1. Remove the `LICENSE` file from the root directory.
+1. Search all files in the project for "citizen" and "Citizen", in case those show up anywhere.
 1. Delete this section. You only need to do these steps once.
 
 Local development setup (without Docker)
