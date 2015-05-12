@@ -14,13 +14,6 @@ describe AccountLifecycle do
       expect(account).not_to be_persisted
     end
 
-    it "defaults some accounts to be admins" do
-      admin_role = create(:admin_role)
-      stub_const('AccountLifecycle::AUTOMATICALLY_ADMINS', ['bob@example.com'].to_set)
-      account = described_class.create(email: 'bob@example.com', password: mom.valid_password).account
-      expect(account.roles.find(admin_role.id)).to be
-    end
-
     it "requires password" do
       account = described_class.create(email: 'bob@example.com').account
       expect(account).not_to be_persisted
