@@ -1376,7 +1376,7 @@ $topbar-bg-color: $palate1-primary;
 
 // Height and margin
 // $topbar-height: 45px;
-$topbar-height: 70px;
+$topbar-height: rem-calc(70);
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
@@ -1409,7 +1409,7 @@ $topbar-height: 70px;
 // $topbar-link-text-transform: none;
 // $topbar-link-padding: $topbar-height / 3;
 // $topbar-back-link-size: $h5-font-size;
-// $topbar-link-dropdown-padding: 20px;
+$topbar-link-dropdown-padding: ($topbar-height / 3);
 
 // $topbar-button-font-size: 0.75rem;
 // $topbar-button-top: 7px;

@@ -84,7 +84,7 @@ describe PasswordResetsController do
       it "does not work if link was created more than 12 hours ago" do
         account = create(:account)
         account.deliver_reset_password_instructions!
-        travel_to 12.hours.from_now do
+        travel_to (12.hours + 1.minute).from_now do
           put :update, id: account.reset_password_token, account: { password: mom.valid_password + "1" }
         end
         assert_response :redirect

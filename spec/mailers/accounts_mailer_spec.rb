@@ -4,7 +4,8 @@ describe AccountsMailer do
   describe ".reset_password_email" do
     before do
       @claimed = create(:account)
-      mail = @claimed.deliver_reset_password_instructions!
+      @claimed.deliver_reset_password_instructions!
+      mail = ActionMailer::Base.deliveries.last
       expect(mail.to).to eq [@claimed.email]
       @body = mail.body.encoded
     end

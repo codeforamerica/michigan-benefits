@@ -54,7 +54,7 @@ describe Metrics do
   end
 
   let(:mark_active) do
-    Proc.new { |a| a.update_single_attribute(:last_activity_at, Time.current) }
+    Proc.new { |a| a.update_attribute(:last_activity_at, Time.current) }
   end
 
   it "returns count of lapsed users" do
