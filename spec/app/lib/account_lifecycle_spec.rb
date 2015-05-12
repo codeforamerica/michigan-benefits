@@ -18,7 +18,7 @@ describe AccountLifecycle do
       admin_role = create(:admin_role)
       stub_const('AccountLifecycle::AUTOMATICALLY_ADMINS', ['bob@example.com'].to_set)
       account = described_class.create(email: 'bob@example.com', password: mom.valid_password).account
-      expect(account.roles.find(admin_role)).to be
+      expect(account.roles.find(admin_role.id)).to be
     end
 
     it "requires password" do

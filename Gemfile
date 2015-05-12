@@ -72,4 +72,4 @@ gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
 
 # heroku recommends specifying a ruby version
-ruby "2.1.4"
+ruby "2.2.2"
