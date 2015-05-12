@@ -4,6 +4,15 @@ This project is for jumpstarting Client and Citizen projects under the included 
 
 There is not intent to make this a public project. But consider it sour dough for for friends, family, and clients.
 
+One way to do this:
+
+    mkdir your-new-project
+    cd your-new-project
+    git init
+    git remote add citizen-rails git@github.com:citizencode/citizen-rails
+    git fetch citizen-rails
+    git reset --hard citizen-rails/master
+
 Customize this project for your app
 ===================================
 
