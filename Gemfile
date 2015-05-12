@@ -46,7 +46,7 @@ gem 'pundit'
 
 # e-mail
 gem 'postmark-rails'
-gem "letter_opener", group: :development, git: 'https://github.com/ryanb/letter_opener.git' # in dev, open emails in a browser; git src can removed when letter_opener > 1.2.0 is cut
+gem "letter_opener", group: :development # in dev, open emails in a browser
 gem 'premailer-rails'
 gem 'nokogiri' # required by premailer
 
