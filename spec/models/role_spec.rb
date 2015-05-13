@@ -5,23 +5,9 @@ describe Role do
     subject(:role) { create :role }
     let(:existing_role) { create :role, name: 'Another Role' }
 
-    it 'requires name' do
-      role.name = ''
-      expect(role).not_to be_valid
-      expect(role.errors[:name]).not_to be_empty
-    end
-
-    it 'requires key' do
-      role.key = ''
-      expect(role).not_to be_valid
-      expect(role.errors[:key]).not_to be_empty
-    end
-
-    it 'requires a unique key' do
-      role.key = existing_role.key
-      is_expected.not_to be_valid
-      expect(role.errors[:key]).not_to be_empty
-    end
+    specify { expect_invalid_value(:name, '') }
+    specify { expect_invalid_value(:key, '') }
+    specify { expect_invalid_value(:key, existing_role.key) }
   end
 
   context 'valid' do
