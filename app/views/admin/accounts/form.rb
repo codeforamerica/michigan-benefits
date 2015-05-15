@@ -7,7 +7,7 @@ class Views::Admin::Accounts::Form < Views::Base
       with_errors(account, :email) {
         label {
           text "E-mail: "
-          text(f.text_field :email)
+          f.text_field :email
         }
       }
 
@@ -15,7 +15,7 @@ class Views::Admin::Accounts::Form < Views::Base
         with_errors(account, :password) {
           label {
             text "Password: "
-            text(f.password_field :password)
+            f.password_field :password
           }
         }
       end
@@ -26,7 +26,7 @@ class Views::Admin::Accounts::Form < Views::Base
       }
 
       div(:class => "actions") {
-        text(f.submit class: buttonish)
+        f.submit class: buttonish
       }
     end
   end

@@ -30,7 +30,7 @@ module Views
               }
               row {
                 column {
-                  text(f.submit "Save", class: buttonish(:small, :expand))
+                  f.submit "Save", class: buttonish(:small, :expand)
                 }
               }
             end
