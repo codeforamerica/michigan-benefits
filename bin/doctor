@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+# See https://github.com/citizencode/citizen-rails/wiki/doctor for more sample checks
+
+class Doctor
+  def initialize
+    @problems = []
+  end
+
+  def run
+    print "Checking: "
+
+    check name: "Postgres launchctl script is linked", command: "ls -1 ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist", remedy: "ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents"
+    check name: "Postgres is running", command: "psql -l", remedy: "launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+    check name: "postgres role exists", command: "psql -U postgres -l", remedy: "createuser --superuser postgres"
+    check name: "Gemfile dependencies are up to date", command: "bundle check", remedy: "bundle"
+    check name: "DB is migrated", command: "rails runner 'ActiveRecord::Migration.check_pending!'", remedy: "rake db:migrate"
+
+    report
+  end
+
+  private
+
+  def check(name:, command:, remedy:)
+    if system "#{command} > /dev/null 2>&1"
+      print '.'
+    else
+      print red 'f'
+      @problems << %|Check "#{name}" failed. To fix, run "#{remedy}"|
+    end
+  end
+
+  def report
+    puts
+    if @problems.empty?
+      puts "All checks passed"
+    else
+      puts @problems.join("\n")
+    end
+  end
+
+  def red(s)
+    colorize s, 31
+  end
+
+  def colorize(s, code)
+    "\e[#{code}m#{s}\e[0m"
+  end
+end
+
+Doctor.new.run
