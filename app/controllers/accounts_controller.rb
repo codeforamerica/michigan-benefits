@@ -3,11 +3,13 @@ class AccountsController < ApplicationController
 
   def new
     @account = Account.new
+    authorize @account
     render layout: 'layouts/logged_out'
   end
 
   def create
     @account = AccountLifecycle.create(account_params).account
+    authorize @account
     if @account.persisted?
       auto_login(@account)
       redirect_to my_account_path
@@ -18,10 +20,12 @@ class AccountsController < ApplicationController
 
   def edit
     @account = Account.find(params[:id])
+    authorize @account
   end
 
   def update
     @account = Account.find(params[:id])
+    authorize @account
 
     unless @account.authenticate(params.require(:account)[:old_password])
       flash.now.alert = "Old password invalid"

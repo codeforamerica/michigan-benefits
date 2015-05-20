@@ -11,7 +11,7 @@ class Views::Shared::Navigation < Views::Base
           }
           ul(:class => "dropdown") {
             if logged_in?
-              if policy(:admin).admin?
+              if policy(:application).admin?
                 li { link_to 'Admin', admin_path }
               end
 

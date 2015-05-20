@@ -69,7 +69,7 @@ describe Admin::AccountsController do
 
         it "assigns roles" do
           post :create, {:account => valid_attributes.merge(role_ids: [Role.admin.id])}
-          expect(AdminPolicy.new(assigns(:account), nil)).to be_admin
+          expect(Role).to be_admin assigns(:account)
         end
 
         it "redirects to the created account" do

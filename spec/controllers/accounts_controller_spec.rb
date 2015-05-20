@@ -47,6 +47,11 @@ describe AccountsController, type: :controller do
         expect(assigns[:account]).to eq account
         expect(response.code).to eq "200"
       end
+
+      it "rejects other accounts" do
+        get :edit, id: create(:account)
+        expect(response).to redirect_to new_session_path
+      end
     end
   end
 
@@ -89,6 +94,13 @@ describe AccountsController, type: :controller do
         expect(assigns[:account]).to eq account
         expect(flash[:alert]).to be nil
         expect(Account.authenticate("carl@example.com", "oldpass")).to eq account
+      end
+
+      it "rejects other accounts" do
+        other_account = create(:account, email: "another-carl@example.com", password: "oldpass")
+        put :update, id: other_account, account: { old_password: "oldpass", password: "new_account" }
+
+        expect(response).to redirect_to new_session_path
       end
     end
   end

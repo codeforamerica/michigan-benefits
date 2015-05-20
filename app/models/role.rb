@@ -10,4 +10,9 @@ class Role < ActiveRecord::Base
   def self.admin
     find_by(key: ADMIN_ROLE_KEY)
   end
+
+  def self.admin?(user)
+    # load and iterate, instead of asking DB, so multiple calls are efficient
+    user && user.roles.include?(admin)
+  end
 end

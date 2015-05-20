@@ -34,6 +34,6 @@ class ApplicationController < ActionController::Base
 
   # use like: before_filter :require_admin
   def require_admin
-    authorize :admin, :admin?
+    authorize :application, :admin?
   end
 end
