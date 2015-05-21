@@ -1,15 +1,11 @@
 #!/usr/bin/env ruby
 
-# See https://github.com/citizencode/citizen-rails/wiki/doctor for more sample checks
-
 class Doctor
   def initialize
     @problems = []
   end
 
   def run
-    print "Checking: "
-
     check name: "Postgres launchctl script is linked", command: "ls -1 ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist", remedy: "ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents"
     check name: "Postgres is running", command: "psql -l", remedy: "launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
     check name: "postgres role exists", command: "psql -U postgres -l", remedy: "createuser --superuser postgres"
@@ -22,21 +18,18 @@ class Doctor
   private
 
   def check(name:, command:, remedy:)
+    print "Checking: #{name}... "
     if system "#{command} > /dev/null 2>&1"
-      print '.'
+      puts 'OK'
     else
       print red 'f'
-      @problems << %|Check "#{name}" failed. To fix, run "#{remedy}"|
+      puts %| To fix, run "#{remedy}"|
+      @problems << name
     end
   end
 
   def report
-    puts
-    if @problems.empty?
-      puts "All checks passed"
-    else
-      puts @problems.join("\n")
-    end
+    exit @problems.size
   end
 
   def red(s)
