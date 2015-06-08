@@ -9,7 +9,6 @@ gem 'foundation-rails'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
-gem 'letter_opener', group: :development
 gem 'nokogiri'
 gem 'pg'
 gem 'postmark-rails'
@@ -26,15 +25,19 @@ gem 'turbolinks'
 gem 'uglifier'
 
 group(:development, :test) do
-  gem 'simplecov'
-  gem 'rspec-rails'
   gem 'faker'
+  gem 'rspec-rails'
+  gem 'simplecov'
 end
 
 group(:development) do
   gem 'html2fortitude'
+  gem 'letter_opener'
+  gem 'meta_request'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'web-console'
+  gem 'xray-rails'
 end
 
 ruby '2.2.2'
