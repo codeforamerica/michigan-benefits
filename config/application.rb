@@ -25,6 +25,7 @@ module CitizenRails
     config.site_username = 'citizen'
     config.site_password = 'code'
 
+    config.allow_signup = true
     config.company_name = "Citizen Code"
     config.project_name = "Citizen Rails"
     config.project_slug = "citizen_rails" # must not use dashes

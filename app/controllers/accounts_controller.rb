@@ -8,7 +8,9 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = AccountLifecycle.create(account_params).account
+    @account = Account.new
+    authorize @account
+    AccountLifecycle.new(@account).create(account_params)
     authorize @account
     if @account.persisted?
       auto_login(@account)

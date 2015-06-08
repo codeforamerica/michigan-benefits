@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe AccountsController, type: :controller do
+  before { allow(Rails.application.config).to receive(:allow_signup) { true } }
+
   it 'should get new' do
     get :new
     expect(response).to be_success
@@ -13,7 +15,7 @@ describe AccountsController, type: :controller do
 
       expect(Account.last.email).to eq('bob@example.com')
 
-      expect(response).to be_redirect
+      expect(response).to redirect_to my_account_path
     end
 
     it 'failure' do
@@ -26,6 +28,16 @@ describe AccountsController, type: :controller do
 
       assert_template 'accounts/new'
       assert_template 'layouts/logged_out'
+    end
+
+    it "fails if account creation is not allowed" do
+      expect(Rails.application.config).to receive(:allow_signup) { false }
+
+      expect {
+        post :create, {account: { email: 'bob@example.com', password: 'password' } }
+      }.to_not change { Account.count }
+
+      expect(response).to redirect_to new_session_path
     end
   end
 

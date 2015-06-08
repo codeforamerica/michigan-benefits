@@ -1,6 +1,6 @@
 class AccountPolicy < ApplicationPolicy
   def new?
-    true
+    Rails.application.config.allow_signup
   end
   alias_method :create?, :new?
 
