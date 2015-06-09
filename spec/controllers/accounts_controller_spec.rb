@@ -18,6 +18,12 @@ describe AccountsController, type: :controller do
       expect(response).to redirect_to my_account_path
     end
 
+    it 'sets last_login_at' do
+      post :create, {account: { email: 'bob@example.com', password: 'password' } }
+
+      expect(Account.last.last_login_at).to be
+    end
+
     it 'failure' do
       expect do
         post :create, {account: { email: 'bob@example.com', password: 'password' } }

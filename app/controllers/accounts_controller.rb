@@ -13,7 +13,7 @@ class AccountsController < ApplicationController
     AccountLifecycle.new(@account).create(account_params)
     authorize @account
     if @account.persisted?
-      auto_login(@account)
+      login_without_credentials(@account)
       redirect_to my_account_path
     else
       render :new, layout: 'layouts/logged_out'

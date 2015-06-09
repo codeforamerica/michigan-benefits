@@ -55,6 +55,19 @@ describe PasswordResetsController do
       expect(controller.send(:logged_in?)).to be true
     end
 
+    it 'sets last_login_at' do
+      long_ago = 3.days.ago.at_beginning_of_day
+      recently = 1.day.ago.at_beginning_of_day
+
+      account = create(:account)
+      account.update(last_login_at: long_ago)
+      account.deliver_reset_password_instructions!
+      travel_to recently do
+        put :update, id: account.reset_password_token, account: { password: mom.valid_password + "1" }
+      end
+      expect(account.reload.last_login_at).to eq recently
+    end
+
     it "fails if account cannot be found" do
       put :update, id:  'not-a-valid-reset-token', account: { password: mom.valid_password + "1" }
       assert_response :redirect

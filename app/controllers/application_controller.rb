@@ -36,4 +36,9 @@ class ApplicationController < ActionController::Base
   def require_admin
     authorize :application, :admin?
   end
+
+  def login_without_credentials(account)
+    auto_login(account)
+    after_login!(account)
+  end
 end

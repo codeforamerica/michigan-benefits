@@ -33,7 +33,7 @@ class PasswordResetsController < ApplicationController
     end
 
     if lifecycle.reset_password?(params[:account][:password])
-      auto_login(lifecycle.account)
+      login_without_credentials(lifecycle.account)
       redirect_to my_account_url, notice: 'Password successfully set.'
     else
       @account = lifecycle.account
