@@ -19,3 +19,4 @@
 # Others
 .idea
 .vagrant
+.ruby-gemset
