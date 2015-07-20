@@ -10,10 +10,10 @@ class Views::Layouts::Raw < Views::Base
 
         title(content_for?(:title) ? yield(:title) : Rails.application.config.project_name)
 
-        stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+        stylesheet_link_tag 'application', media: 'all'
         stylesheet_link_tag '//fonts.googleapis.com/css?family=Lato|Slabo+27px'
         javascript_include_tag 'vendor/modernizr'
-        javascript_include_tag 'application', 'data-turbolinks-track' => true
+        javascript_include_tag 'application'
         if Airbrake.configuration.project_id && Airbrake.configuration.api_key
           javascript_include_tag "airbrake-shim",
                                  "data-airbrake-project-id" => Airbrake.configuration.project_id,

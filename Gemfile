@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.2'
 
 gem 'airbrake'
 gem 'coffee-rails'
@@ -8,7 +9,6 @@ gem 'foundation-icons-sass-rails'
 gem 'foundation-rails'
 gem 'jbuilder'
 gem 'jquery-rails'
-gem 'jquery-turbolinks'
 gem 'nokogiri'
 gem 'pg'
 gem 'postmark-rails'
@@ -21,7 +21,6 @@ gem 'responders'
 gem 'sass-rails'
 gem 'sdoc',          group: :doc
 gem 'sorcery'
-gem 'turbolinks'
 gem 'uglifier'
 
 group(:development, :test) do
@@ -39,5 +38,3 @@ group(:development) do
   gem 'web-console'
   gem 'xray-rails'
 end
-
-ruby '2.2.2'
