@@ -61,16 +61,15 @@ class Views::Layouts::Raw < Views::Base
               a("×", :class => "close", :href => "#")
             }
           end
-
-
-          content_for?(:body) ? yield(:body) : yield
-
-          if content_for?(:footer)
-            footer(class: :'fat-footer') {
-              yield :footer
-            }
-          end
         }
+
+        content_for?(:body) ? yield(:body) : yield
+
+        if content_for?(:footer)
+          footer(class: :'fat-footer') {
+            yield :footer
+          }
+        end
       }
     }
   end
