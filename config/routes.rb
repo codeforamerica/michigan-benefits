@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'logged_out#index'
 
-  resources :accounts, only: %i[new create edit update]
   get 'take_action' => "logged_out#take_action"
 
   resources :accounts, only: [:new, :create, :edit, :update]
