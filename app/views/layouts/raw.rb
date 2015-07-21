@@ -23,7 +23,7 @@ class Views::Layouts::Raw < Views::Base
         csrf_meta_tags
       }
 
-      body {
+      body(class: "#{controller_name}-#{action_name}") {
         div(class: "contain-to-grid") {
           nav(:class => "top-bar", "data-topbar" => "", :role => "navigation") {
             ul(:class => "title-area") {
