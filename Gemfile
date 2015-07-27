@@ -33,6 +33,7 @@ group(:development) do
   gem 'html2fortitude'
   gem 'letter_opener'
   gem 'meta_request'
+  gem 'quiet_assets'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'web-console'

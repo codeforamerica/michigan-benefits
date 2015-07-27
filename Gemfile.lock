@@ -158,6 +158,8 @@ GEM
       rack (>= 1.1, < 2.0)
     pundit (1.0.0)
       activesupport (>= 3.0.0)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -291,6 +293,7 @@ DEPENDENCIES
   premailer-rails
   puma
   pundit
+  quiet_assets
   rails
   rails_12factor
   responders
@@ -304,3 +307,6 @@ DEPENDENCIES
   uglifier
   web-console
   xray-rails
+
+BUNDLED WITH
+   1.10.6
