@@ -22,6 +22,7 @@ gem 'sass-rails'
 gem 'sdoc',          group: :doc
 gem 'sorcery'
 gem 'uglifier'
+gem 'sucker_punch'
 
 group(:development, :test) do
   gem 'faker'
