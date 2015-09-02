@@ -45,8 +45,8 @@ module Views
     def row(args = {}, &block)
       container {
         td {
-          table {
-            tr(add_classes(args, [:row]), &block)
+          table(class: :row) {
+            tr(add_classes(args, []), &block)
             # technically, more rows are allowed in a container, but this is
             # easier?
           }
@@ -67,7 +67,8 @@ module Views
 
     # http://zurb.com/ink/docs.php#grid
     def column(size = :twelve, args = {})
-      td(class: :wrapper) {
+      wrapper_args = args.delete(:wrapper) || {}
+      td(add_classes(wrapper_args, [:wrapper])) {
         table(add_classes(args, [size, :columns])) {
           tr {
             yield # must return a td, or a series of tds for sub-grids
@@ -93,6 +94,22 @@ module Views
 
     def full_row(args = {}, &block)
       row(args) { last_column(&block) }
+    end
+
+    def block_grid(size, args = {})
+      container {
+        td {
+          table(class: "block-grid #{size}-up") {
+            tr {
+              yield # series of td's
+            }
+          }
+        }
+      }
+    end
+
+    def center_img(src, args = {})
+      center_td(args) { image_tag src, html: { width: args[:width], height: args[:height] } }
     end
 
     # http://zurb.com/ink/docs.php#grid, see Centered Content
