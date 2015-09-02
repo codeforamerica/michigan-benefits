@@ -28,6 +28,11 @@ group(:development, :test) do
   gem 'faker'
   gem 'rspec-rails'
   gem 'simplecov'
+  gem 'awesome_print'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'guard-rspec', require: false
+  gem 'fuubar'
 end
 
 group(:development) do
