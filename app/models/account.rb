@@ -3,7 +3,9 @@ class Account < ActiveRecord::Base
   has_many :account_roles
   has_many :roles, through: :account_roles
 
-  validates :email, presence: true, uniqueness: true
+  before_save { email.try(:downcase!) }
+
+  validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, length: { minimum: 3 }, if: :password_required?
 
   attr_writer :password_required

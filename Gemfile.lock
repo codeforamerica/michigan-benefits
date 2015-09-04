@@ -362,7 +362,7 @@ DEPENDENCIES
   sass-rails
   sdoc
   simplecov
-  sorcery
+  sorcery (>= 0.9.1)
   spring
   spring-commands-rspec
   sucker_punch

@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211221238) do
+ActiveRecord::Schema.define(version: 20150701200149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "account_roles", force: true do |t|
+  create_table "account_roles", force: :cascade do |t|
     t.integer  "account_id", null: false
     t.integer  "role_id",    null: false
     t.datetime "created_at"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150211221238) do
 
   add_index "account_roles", ["account_id", "role_id"], name: "index_account_roles_on_account_id_and_role_id", unique: true, using: :btree
 
-  create_table "accounts", force: true do |t|
+  create_table "accounts", force: :cascade do |t|
     t.string   "email",                                       null: false
     t.string   "crypted_password",                            null: false
     t.string   "salt",                                        null: false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150211221238) do
   add_index "accounts", ["remember_me_token"], name: "index_accounts_on_remember_me_token", using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", using: :btree
 
-  create_table "authentications", force: true do |t|
+  create_table "authentications", force: :cascade do |t|
     t.integer  "account_id", null: false
     t.string   "provider",   null: false
     t.string   "uid",        null: false
@@ -58,21 +58,21 @@ ActiveRecord::Schema.define(version: 20150211221238) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "key",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "sites", force: true do |t|
+  create_table "sites", force: :cascade do |t|
     t.float    "lat"
     t.float    "long"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tours", force: true do |t|
+  create_table "tours", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.integer  "user_id"

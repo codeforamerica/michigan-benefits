@@ -12,19 +12,42 @@ describe SessionsController do
   end
 
   describe '#create' do
-    it 'success' do
-      Account.create!(email: 'bob@example.com', password: 'password')
+    let!(:account) { create(:account, email: 'bob@example.com', password: 'password') }
 
-      post :create, {email: 'bob@example.com', password: 'password'}
-      assert_response :redirect
-      assert_redirected_to my_account_path
+    context 'with valid login credentials' do
+      before { post :create, {email: 'bob@example.com', password: 'password'} }
+      it 'succeeds' do
+        assert_response :redirect
+        assert_redirected_to my_account_path
+        expect(logged_in?).to eq(true)
+      end
     end
-
-    it 'failure' do
-      post :create, {email: 'bob@example.com', password: 'password'}
-      assert_response :success
-      assert_template 'sessions/new'
-      expect(flash.now[:alert]).not_to be_blank
+    context 'with valid mixed-case login credentials' do
+      before { post :create, {email: 'Bob@example.Com', password: 'password'} }
+      it 'succeeds' do
+        assert_response :redirect
+        assert_redirected_to my_account_path
+        expect(logged_in?).to eq(true)
+      end
+    end
+    context 'with invalid mixed-case login credentials' do
+      before { post :create, {email: 'bob@example.com', password: 'NOTTHEPASSWORD'} }
+      it 'fails' do
+        assert_response :success
+        assert_template 'sessions/new'
+        expect(flash.now[:alert]).not_to be_blank
+        expect(logged_in?).to eq(false)
+      end
+    end
+    context 'with an unknown user' do
+      before { post :create, {email: 'notbob@example.com', password: 'password'} }
+      it 'fails' do
+        post :create, {email: 'notbob@example.com', password: 'password'}
+        assert_response :success
+        assert_template 'sessions/new'
+        expect(flash.now[:alert]).not_to be_blank
+        expect(logged_in?).to eq(false)
+      end
     end
   end
 end
