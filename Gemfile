@@ -44,4 +44,6 @@ group(:development) do
   gem 'spring-commands-rspec'
   gem 'web-console'
   gem 'xray-rails'
+  gem 'pivotal_git_scripts'
+  gem 'git-storyid'
 end
