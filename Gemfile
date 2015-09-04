@@ -20,7 +20,7 @@ gem 'rails_12factor', group: :production
 gem 'responders'
 gem 'sass-rails'
 gem 'sdoc',          group: :doc
-gem 'sorcery'
+gem 'sorcery', '>= 0.9.1'
 gem 'uglifier'
 gem 'sucker_punch'
 
