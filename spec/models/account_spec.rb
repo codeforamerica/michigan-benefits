@@ -21,4 +21,12 @@ describe Account do
     alice = create :account, email: 'ALICE@example.com'
     expect(alice.email).to eq('alice@example.com')
   end
+
+  it 'requires password to be 8 characters' do
+    account = Account.new(email:"foo@bar.com", password:"1234567")
+    account.password_required = true
+    expect(account).to_not be_valid
+    account.password = "12345678"
+    expect(account).to be_valid
+  end
 end

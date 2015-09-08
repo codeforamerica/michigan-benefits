@@ -85,38 +85,38 @@ describe AccountsController, type: :controller do
 
     context "logged in" do
       let(:account) {
-        create(:account, email: "carl@example.com", password: "oldpass")
+        create(:account, email: "carl@example.com", password: "oldpassword")
       }
       before { login_user(account) }
 
       it 'success' do
-        put :update, id: account, account: { old_password: "oldpass", password: "newpass" }
+        put :update, id: account, account: { old_password: "oldpassword", password: "newpassword" }
         expect(response).to redirect_to my_account_path
         expect(flash[:notice]).to be
-        expect(Account.authenticate("carl@example.com", "newpass")).to eq account
+        expect(Account.authenticate("carl@example.com", "newpassword")).to eq account
       end
 
       it 'failure when old password is wrong' do
-        put :update, id: account, account: { old_password: "badpass", password: "newpass" }
+        put :update, id: account, account: { old_password: "badpass", password: "newpassword" }
 
         assert_template "edit"
         expect(assigns[:account]).to eq account
         expect(flash[:alert]).to be
-        expect(Account.authenticate("carl@example.com", "oldpass")).to eq account
+        expect(Account.authenticate("carl@example.com", "oldpassword")).to eq account
       end
 
       it 'failure when new password is invalid' do
-        put :update, id: account, account: { old_password: "oldpass", password: "" }
+        put :update, id: account, account: { old_password: "oldpassword", password: "" }
 
         assert_template "edit"
         expect(assigns[:account]).to eq account
         expect(flash[:alert]).to be nil
-        expect(Account.authenticate("carl@example.com", "oldpass")).to eq account
+        expect(Account.authenticate("carl@example.com", "oldpassword")).to eq account
       end
 
       it "rejects other accounts" do
-        other_account = create(:account, email: "another-carl@example.com", password: "oldpass")
-        put :update, id: other_account, account: { old_password: "oldpass", password: "new_account" }
+        other_account = create(:account, email: "another-carl@example.com", password: "oldpassword")
+        put :update, id: other_account, account: { old_password: "oldpassword", password: "new_account" }
 
         expect(response).to redirect_to new_session_path
       end

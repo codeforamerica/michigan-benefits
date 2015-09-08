@@ -6,7 +6,7 @@ class Account < ActiveRecord::Base
   before_save { email.try(:downcase!) }
 
   validates :email, presence: true, uniqueness: {case_sensitive: false}
-  validates :password, length: { minimum: 3 }, if: :password_required?
+  validates :password, length: { minimum: 8 }, if: :password_required?
 
   attr_writer :password_required
 
