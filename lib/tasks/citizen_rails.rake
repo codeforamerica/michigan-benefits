@@ -23,6 +23,15 @@ namespace :citizen_rails do
       exit 1
     end
     puts "Created #{server_name} with remote #{remote_name}"
+    provision_server(server_name)
+  end
+
+  def provision_server(app)
+    quiet_system("heroku addons:create heroku-postgresql:hobby-dev --app #{app}")
+    quiet_system("heroku addons:create postmark:10k --app #{app}")
+    puts "**TODO** Run `heroku addons:open postmark:10k` and create your first sender
+signature."
+    quiet_system("heroku addons:create airbrake:free_heroku --app #{app}")
   end
 
   def exists?(name)
