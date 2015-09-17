@@ -26,12 +26,12 @@ module CitizenRails
     config.site_password = 'code'
 
     config.allow_signup = true
-    config.company_name = "Citizen Code"
-    config.project_name = "Citizen Rails"
-    config.project_slug = "citizen_rails" # must not use dashes
+    config.company_name = "##company_name##"
+    config.project_name = "##company_name##"
+    config.project_slug = "##company_name##".downcase.split(/[^a-z0-9]/).reject(&:blank?).join("_")
     # appears in main layout meta tag
-    config.project_description = "Citizen Rails is an incredible template for early customer development work!"
-    config.contact_email = "contact@example.com"
+    config.project_description = "##project_description##"
+    config.contact_email = "##contact_email##"
 
     # lib/ is for code that is entirely independent of your Rails app
     # app/lib/ is for code that expects Rails (esp. models) but which is not itself a model

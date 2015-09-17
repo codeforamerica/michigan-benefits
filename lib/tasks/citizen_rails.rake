@@ -15,6 +15,16 @@ namespace :citizen_rails do
 
     create_server(staging_name, "staging")
     create_server(prod_name, "prod")
+
+    replace_strings("company_name")
+    replace_strings("project_description")
+    replace_strings("contact_email")
+  end
+
+  def replace_strings(string)
+    puts "Please enter your #{string}:"
+    new = STDIN.gets.chomp
+    system("ruby -ei 'gsub(/###{string}##/, \"#{new}\")' config/application .rb")
   end
 
   def create_server(server_name, remote_name)
