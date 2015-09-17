@@ -64,20 +64,4 @@ ActiveRecord::Schema.define(version: 20150701200149) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "sites", force: :cascade do |t|
-    t.float    "lat"
-    t.float    "long"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tours", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
 end
