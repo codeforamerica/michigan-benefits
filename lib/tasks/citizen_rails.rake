@@ -24,11 +24,11 @@ namespace :citizen_rails do
   def replace_strings(string)
     puts "Please enter your #{string}:"
     new = STDIN.gets.chomp
-    system("ruby -ei 'gsub(/###{string}##/, \"#{new}\")' config/application .rb")
+    system("ruby -pi -e 'gsub(/###{string}##/, \"#{new}\")' config/application.rb")
   end
 
   def create_server(server_name, remote_name)
-    unless quiet_system("heroku apps:create #{server_name} --remote #{remote_name}")
+    unless system("heroku apps:create #{server_name} --remote #{remote_name}")
       puts "error creating server #{server_name}, bailing!"
       exit 1
     end
@@ -37,8 +37,8 @@ namespace :citizen_rails do
   end
 
   def provision_server(app)
-    quiet_system("heroku addons:create heroku-postgresql:hobby-dev --app #{app}")
-    quiet_system("heroku addons:create postmark:10k --app #{app}")
+    system("heroku addons:create heroku-postgresql:hobby-dev --app #{app}")
+    system("heroku addons:create postmark:10k --app #{app}")
     puts <<-EOL
 \n\n
 ****************************************************************
@@ -48,14 +48,10 @@ and create your first sender signature
 ****************************************************************
 \n\n
 EOL
-    quiet_system("heroku addons:create airbrake:free_heroku --app #{app}")
+    system("heroku addons:create airbrake:free_heroku --app #{app}")
   end
 
   def exists?(name)
-    quiet_system("heroku apps:info --app #{name}")
-  end
-
-  def quiet_system(cmd)
-    system("#{cmd} 2&>1 /dev/null")
+    system("heroku apps:info --app #{name}")
   end
 end
