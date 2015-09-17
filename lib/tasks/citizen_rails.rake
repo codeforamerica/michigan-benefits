@@ -29,8 +29,15 @@ namespace :citizen_rails do
   def provision_server(app)
     quiet_system("heroku addons:create heroku-postgresql:hobby-dev --app #{app}")
     quiet_system("heroku addons:create postmark:10k --app #{app}")
-    puts "**TODO** Run `heroku addons:open postmark:10k` and create your first sender
-signature."
+    puts <<-EOL
+\n\n
+****************************************************************
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+Run `heroku addons:open postmark:10k --app #{app}`
+and create your first sender signature
+****************************************************************
+\n\n
+EOL
     quiet_system("heroku addons:create airbrake:free_heroku --app #{app}")
   end
 
