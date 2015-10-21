@@ -43,4 +43,8 @@ module Views
       args.merge(class: classes)
     end
   end
+
+  def current_account
+    current_user
+  end
 end

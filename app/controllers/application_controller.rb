@@ -41,4 +41,8 @@ class ApplicationController < ActionController::Base
     auto_login(account)
     after_login!(account)
   end
+
+  def current_account
+    current_user
+  end
 end
