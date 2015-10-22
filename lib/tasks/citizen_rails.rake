@@ -28,7 +28,7 @@ namespace :citizen_rails do
   end
 
   def create_server(server_name, remote_name)
-    unless system("heroku apps:create #{server_name} --remote #{remote_name}")
+    unless heroku_command("heroku apps:create #{server_name} --remote #{remote_name}")
       puts "error creating server #{server_name}, bailing!"
       exit 1
     end
@@ -37,8 +37,8 @@ namespace :citizen_rails do
   end
 
   def provision_server(app)
-    system("heroku addons:create heroku-postgresql:hobby-dev --app #{app}")
-    system("heroku addons:create postmark:10k --app #{app}")
+    heroku_command("heroku addons:create heroku-postgresql:hobby-dev --app #{app}")
+    heroku_command("heroku addons:create postmark:10k --app #{app}")
     puts <<-EOL
 \n\n
 ****************************************************************
@@ -48,10 +48,14 @@ and create your first sender signature
 ****************************************************************
 \n\n
 EOL
-    system("heroku addons:create airbrake:free_heroku --app #{app}")
+    heroku_command("heroku addons:create airbrake:free_heroku --app #{app}")
   end
 
   def exists?(name)
-    system("heroku apps:info --app #{name}")
+    heroku_command "heroku apps:info --app #{name}"
+  end
+
+  def heroku_command(command)
+    Bundler.with_clean_env { system(command) }
   end
 end
