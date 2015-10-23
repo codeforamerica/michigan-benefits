@@ -7,4 +7,8 @@ module FeatureHelper
     puts "STEP: #{title}" unless ENV["QUIET_TESTS"]
     block.call
   end
+
+  def wut
+    save_and_open_page
+  end
 end
