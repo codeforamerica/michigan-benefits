@@ -8,7 +8,7 @@ module Views
       div(add_classes(args, [:row]), &block)
     end
 
-    def column(size = :'small-12', args = {}, &block)
+    def column(size = 'small-12', args = {}, &block)
       div(add_classes(args, [:columns, size]), &block)
     end
 

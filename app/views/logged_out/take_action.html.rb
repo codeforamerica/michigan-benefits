@@ -1,6 +1,6 @@
 class Views::LoggedOut::TakeAction < Views::Base
   def content
-    wide_row(:'background-cover') {
+    wide_row('background-cover') {
       form {
 
         div(class: %[clear-panel form]) {
@@ -50,7 +50,7 @@ class Views::LoggedOut::TakeAction < Views::Base
     row(class: classes) {
       column {
         row {
-          column(:'medium-8', class: :'medium-offset-2') {
+          column('medium-8', class: 'medium-offset-2') {
             br
             yield
           }
