@@ -1,7 +1,7 @@
 class Views::LoggedOut::TakeActionButton < Views::Base
   def content
-    div(class: buttonish(:large, :alert), onclick: "analytics.track('acquisition/no-abandon')") {
-      a(href: take_action_path) {
+    a(href: take_action_path) {
+      div(class: buttonish(:large, :alert, 'take-action'), onclick: "analytics.track('acquisition/no-abandon')") {
         text "Take Action"
       }
     }
