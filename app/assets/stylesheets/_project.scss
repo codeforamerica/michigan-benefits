@@ -1,0 +1,143 @@
+@import 'variables';
+@import 'functions';
+
+body {
+  background-color: $palate1-primary;
+}
+
+i { margin: 5px }
+
+.full-width {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+}
+
+.app-container{
+  @include grid-row($behavior: collapse);
+}
+
+.app-nav{
+  @include grid-column($columns: 12);
+  @include padding-leader(.5);
+  background: $primary-color;
+  li a:not(.button){
+    color: white;
+  }
+}
+
+.app-content{
+  @include grid-column($columns: 12);
+  @include padding-leader(.5);
+}
+
+.app-content-wide{
+  @include grid-column($columns: 12);
+  @include padding-leader(.5);
+}
+
+.app-aside{
+  @include grid-column($columns: 12);
+  @include padding-leader(.5);
+  background: darken($vapor, 15);
+}
+
+@media #{$medium-up}{
+  .app-container{
+    max-width: none;
+  }
+  .app-nav{
+    @include grid-column($columns: 2);
+  }
+  .app-content{
+    @include grid-column($columns: 6);
+  }
+  .app-content-wide{
+    @include grid-column($columns: 10);
+  }
+  .app-aside{
+    @include grid-column($columns: 4);
+  }
+}
+
+%chunko-text {
+  text-transform: uppercase;
+  font-family: $font-family-serif;
+  letter-spacing: 0.3em;
+}
+
+.palate-white-on-green {
+  color: $snow;
+  blockquote, cite {
+    color: $snow;
+  }
+  background-color: $palate1-primary;
+}
+
+.white-text {
+  color: $snow;
+}
+
+.button.bordered {
+  border: solid 2px $snow;
+}
+
+.palate-green-on-white {
+  h4 {
+    @extend %chunko-text;
+    color: $palate1-primary;
+  }
+  p {
+    text-align: left;
+  }
+  background-color: $snow;
+}
+
+.top-bar-section ul li > a {
+  @extend %chunko-text;
+  text-align: right;
+  padding-right: 15px;
+}
+
+.blockquote-grande {
+  @extend %chunko-text;
+  border-left: none;
+
+  cite {
+    font-style: normal;
+  }
+}
+
+.alert-box.flash-msg {
+  margin-bottom: 0;
+}
+
+.logo {
+  width: rem-calc(90);
+  height: auto;
+  padding: $topbar-height/6 0 $topbar-height/5 0;
+  max-height: $topbar-height;
+}
+
+.background-cover {
+  background-size: cover;
+  background-image: image-url("http://placekitten.com/g/1440/700");
+  height: 700px;
+}
+
+.clear-panel {
+  @include border-radius(3px);
+  padding: $panel-padding;
+  background-color: rgba($body-bg, .95);
+  h1, h2, h3, h4, .button {
+    @extend %chunko-text;
+    text-align: center;
+    color: $palate1-primary;
+  }
+}
+
+a .button, a .button.take-action {
+  @extend %chunko-text;
+  color: $snow;
+}

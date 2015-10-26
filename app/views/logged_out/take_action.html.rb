@@ -45,7 +45,7 @@ class Views::LoggedOut::TakeAction < Views::Base
   private
 
   def wide_row(add_class)
-    classes = [:fullWidth]
+    classes = ['full-width']
     classes << add_class
     row(class: classes) {
       column {

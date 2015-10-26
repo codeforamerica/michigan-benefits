@@ -2,52 +2,6 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-//
-
-// Table of Contents
-// Foundation Settings
-//
-// a. Base
-// b. Grid
-// c. Global
-// d. Media Query Ranges
-// e. Typography
-// 01. Accordion
-// 02. Alert Boxes
-// 03. Block Grid
-// 04. Breadcrumbs
-// 05. Buttons
-// 06. Button Groups
-// 07. Clearing
-// 08. Dropdown
-// 09. Dropdown Buttons
-// 10. Flex Video
-// 11. Forms
-// 12. Icon Bar
-// 13. Inline Lists
-// 14. Joyride
-// 15. Keystrokes
-// 16. Labels
-// 17. Magellan
-// 18. Off-canvas
-// 19. Orbit
-// 20. Pagination
-// 21. Panels
-// 22. Pricing Tables
-// 23. Progress Bar
-// 24. Range Slider
-// 25. Reveal
-// 26. Side Nav
-// 27. Split Buttons
-// 28. Sub Nav
-// 29. Switch
-// 30. Tables
-// 31. Tabs
-// 32. Thumbnails
-// 33. Tooltips
-// 34. Top Bar
-// 36. Visibility Classes
-
 // a. Base
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -56,6 +10,7 @@
 
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
+@import "variables";
 
 // The default font-size is set to 100% of the browser style sheet (usually 16px)
 // for compatibility with browser-based text zoom or user-set defaults.
@@ -86,18 +41,9 @@ $include-html-global-classes: $include-html-classes;
 // c. Global
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
-
-// We use these to define default font stacks
-$font-family-sans-serif: Lato, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-$font-family-serif: "Slabo 27px", Georgia, Cambria, "Times New Roman", Times, serif;
-// $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
-
 // We use these to define default font weights
 // $font-weight-normal: normal !default;
 // $font-weight-bold: bold !default;
-$palate1-primary: #6AB79A;
-$palate1-alert: #EC4853;
 
 // We use these as default colors throughout
 $primary-color: $palate1-primary; // teal
@@ -1455,150 +1401,4 @@ $topbar-link-dropdown-padding: ($topbar-height / 3);
 @import 'foundation';
 @import 'foundation-icons';
 
-// Helper mixins =======================
-
-@mixin fix-height($direction: left) {
-	position: absoulte;
-	height: 100%;
-	$direction: 0;
-	top: $topbar-height;
-}
-
-i { margin: 5px }
-
-// Page-specific styling ===============
-
-.app-container{
-	@include grid-row($behavior: collapse);
-}
-
-.app-nav{
-	@include grid-column($columns: 12);
-	@include padding-leader(.5);
-	background: $primary-color;
-	li a:not(.button){
-		color: white;
-	}
-}
-.app-content{
-	@include grid-column($columns: 12);
-	@include padding-leader(.5);
-}
-.app-content-wide{
-	@include grid-column($columns: 12);
-	@include padding-leader(.5);
-}
-
-.app-aside{
-	@include grid-column($columns: 12);
-	@include padding-leader(.5);
-	background: darken($vapor, 15);
-}
-
-@media #{$medium-up}{
-	.app-container{
-		max-width: none;
-	}
-	.app-nav{
-		@include grid-column($columns: 2);
-	}
-	.app-content{
-		@include grid-column($columns: 6);
-	}
-	.app-content-wide{
-		@include grid-column($columns: 10);
-	}
-	.app-aside{
-		@include grid-column($columns: 4);
-	}
-}
-
-%chunko-text {
-  text-transform: uppercase;
-  font-family: $font-family-serif;
-  letter-spacing: 0.3em;
-}
-
-.palate-white-on-green {
-  color: $snow;
-  blockquote, cite {
-    color: $snow;
-  }
-  background-color: $palate1-primary;
-}
- .white-text {
-   color: $snow;
- }
-
-.button a {
-  @extend %chunko-text;
-  color: $snow;
-}
-
-.button.bordered {
-  border: solid 2px $snow;
-}
-
-.palate-green-on-white {
-  h4 {
-    @extend %chunko-text;
-    color: $palate1-primary;
-  }
-  p {
-    text-align: left;
-  }
-  background-color: $snow;
-}
-.top-bar-section ul li > a {
-  @extend %chunko-text;
-  text-align: right;
-  padding-right: 15px;
-}
-
-.blockquote-grande {
-  @extend %chunko-text;
-  border-left: none;
-
-  cite {
-    font-style: normal;
-  }
-}
-
-.alert-box.flash-msg {
-  margin-bottom: 0;
-}
-
-.logo {
-  width: rem-calc(90);
-  height: auto;
-  padding: $topbar-height/6 0 $topbar-height/5 0;
-  max-height: $topbar-height;
-}
-
-.background-cover {
-  background-size: cover;
-  background-image: image-url("http://placekitten.com/g/1440/700");
-  height: 700px;
-}
-
-.clear-panel {
-  @include border-radius(3px);
-  padding: $panel-padding;
-  background-color: rgba($body-bg, .95);
-  h1, h2, h3, h4, .button {
-    @extend %chunko-text;
-    text-align: center;
-    color: $palate1-primary;
-  }
-}
-
-.fullWidth {
-   width: 100%;
-   margin-left: auto;
-   margin-right: auto;
-   max-width: initial;
-}
-
-body {
-  background-color: $palate1-primary;
-}
+@import 'project';
