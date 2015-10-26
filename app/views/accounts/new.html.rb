@@ -8,7 +8,7 @@ class Views::Accounts::New < Views::Base
 
         form_for account do |f|
           row {
-            column(:"large-12") {
+            column("large-12") {
               with_errors(account, :email) {
                 label {
                   text "E-mail: "
@@ -17,7 +17,7 @@ class Views::Accounts::New < Views::Base
               }
             }
 
-            column(:"large-12") {
+            column("large-12") {
               with_errors(account, :password) {
                 label {
                   text "Password: "
@@ -26,7 +26,7 @@ class Views::Accounts::New < Views::Base
               }
             }
 
-            column(:"large-12") {
+            column("large-12") {
               f.submit class: buttonish(:medium)
             }
           }

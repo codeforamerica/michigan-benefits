@@ -118,7 +118,7 @@ module Views
     end
 
     def buttonish(size = :small, args = {}, &block)
-      table(add_classes(args, [:"#{size}-button"])) { tr { td(&block) } }
+      table(add_classes(args, ["#{size}-button"])) { tr { td(&block) } }
     end
 
     def add_classes(args, classes)
