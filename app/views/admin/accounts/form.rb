@@ -25,7 +25,7 @@ class Views::Admin::Accounts::Form < Views::Base
         f.collection_check_boxes :role_ids, roles, :id, :name
       }
 
-      div(:class => "actions") {
+      div(class: "actions") {
         f.submit class: buttonish
       }
     end

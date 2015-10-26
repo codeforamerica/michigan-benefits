@@ -1,12 +1,12 @@
 class Views::Layouts::Raw < Views::Base
   def content
     doctype!
-    html(:lang => "en") {
+    html(lang: "en") {
       head {
         meta(:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type")
-        meta(:charset => "utf-8")
-        meta(:content => "width=device-width, initial-scale=1.0", :name => "viewport")
-        meta(:content => Rails.application.config.project_description, :name => "description")
+        meta(charset: "utf-8")
+        meta(content: "width=device-width, initial-scale=1.0", name: "viewport")
+        meta(content: Rails.application.config.project_description, name: "description")
 
         title(content_for?(:title) ? yield(:title) : Rails.application.config.project_name)
 
@@ -25,18 +25,18 @@ class Views::Layouts::Raw < Views::Base
 
       body(class: "#{controller_name}-#{action_name}") {
         div(class: "contain-to-grid") {
-          nav(:class => "top-bar", "data-topbar" => "", :role => "navigation") {
-            ul(:class => "title-area") {
-              li(:class => "name") {
+          nav(class: "top-bar", "data-topbar" => "", role: "navigation") {
+            ul(class: "title-area") {
+              li(class: "name") {
                 h1 {
-                  a(:href => "/") {
+                  a(href: "/") {
                     image_tag "http://placekitten.com/g/90/57", class: "logo", alt: "#{Rails.application.config.project_name} Logo"
                   }
                 }
               }
 
-              li(:class => "toggle-topbar menu-icon") {
-                a(:href => "#") {
+              li(class: "toggle-topbar menu-icon") {
+                a(href: "#") {
                   span("Menu")
                 }
               }
@@ -56,9 +56,9 @@ class Views::Layouts::Raw < Views::Base
           }
 
           flash.each do |name, msg|
-            div("aria-labelledby" => "flash-msg-#{name}", "aria-role" => "dialog", :class => "alert-box flash-msg #{name}", "data-alert" => "") {
-              div(msg, :id => "flash-msg-#{name}")
-              a("×", :class => "close", :href => "#")
+            div("aria-labelledby" => "flash-msg-#{name}", "aria-role" => "dialog", class: ['alert-box', 'flash-msg', name], "data-alert" => "") {
+              div(msg, id: "flash-msg-#{name}")
+              a("×", class: "close", href: "#")
             }
           end
         }

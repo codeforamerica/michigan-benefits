@@ -15,7 +15,7 @@ class Views::Admin::Accounts::Index < Views::Base
           tr {
             th("E-mail")
             th("Roles")
-            th(:colspan => "3")
+            th(colspan: "3")
           }
         }
 

@@ -1,15 +1,15 @@
 class Views::Shared::Navigation < Views::Base
   def content
-    section(:class => "top-bar-section") {
+    section(class: "top-bar-section") {
       # Right Nav Section
 
-      ul(:class => "right") {
-        li(:class => "has-dropdown") {
+      ul(class: "right") {
+        li(class: "has-dropdown") {
           a {
             i(class: "fi-torso")
             text "Account"
           }
-          ul(:class => "dropdown") {
+          ul(class: "dropdown") {
             if logged_in?
               if policy(:application).admin?
                 li { link_to 'Admin', admin_path }
