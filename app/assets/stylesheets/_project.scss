@@ -5,7 +5,17 @@ body {
   background-color: $palate1-primary;
 }
 
-i { margin: 5px }
+.text-primary {
+  color: $palate1-primary;
+}
+
+.text-alert {
+  color: $palate1-alert;
+}
+
+i {
+  margin: 5px
+}
 
 .full-width {
   width: 100%;
@@ -14,11 +24,11 @@ i { margin: 5px }
   max-width: initial;
 }
 
-.app-container{
+.app-container {
   @include grid-row($behavior: collapse);
 }
 
-.app-nav{
+.app-nav {
   @include grid-column($columns: 12);
   @include padding-leader(.5);
   background: $primary-color;
@@ -27,36 +37,36 @@ i { margin: 5px }
   }
 }
 
-.app-content{
+.app-content {
   @include grid-column($columns: 12);
   @include padding-leader(.5);
 }
 
-.app-content-wide{
+.app-content-wide {
   @include grid-column($columns: 12);
   @include padding-leader(.5);
 }
 
-.app-aside{
+.app-aside {
   @include grid-column($columns: 12);
   @include padding-leader(.5);
   background: darken($vapor, 15);
 }
 
-@media #{$medium-up}{
-  .app-container{
+@media #{$medium-up} {
+  .app-container {
     max-width: none;
   }
-  .app-nav{
+  .app-nav {
     @include grid-column($columns: 2);
   }
-  .app-content{
+  .app-content {
     @include grid-column($columns: 6);
   }
-  .app-content-wide{
+  .app-content-wide {
     @include grid-column($columns: 10);
   }
-  .app-aside{
+  .app-aside {
     @include grid-column($columns: 4);
   }
 }
