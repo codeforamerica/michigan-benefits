@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'functions';
+@import 'extensions';
 
 body {
   background-color: $palate1-primary;
@@ -71,52 +72,30 @@ i {
   }
 }
 
-%chunko-text {
-  text-transform: uppercase;
-  font-family: $font-family-serif;
-  letter-spacing: 0.3em;
-}
-
-.palate-white-on-green {
-  color: $snow;
-  blockquote, cite {
-    color: $snow;
-  }
-  background-color: $palate1-primary;
-}
-
-.white-text {
-  color: $snow;
-}
-
 .button.bordered {
   border: solid 2px $snow;
 }
 
-.palate-green-on-white {
-  h4 {
-    @extend %chunko-text;
-    color: $palate1-primary;
+.landing-quote {
+  @extend %palate-white-on-green;
+
+  blockquote, cite {
+    color: $snow;
   }
-  p {
-    text-align: left;
+
+  blockquote {
+    @extend %blockquote-grande;
   }
-  background-color: $snow;
+}
+
+.landing-description {
+  @extend %palate-green-on-white;
 }
 
 .top-bar-section ul li > a {
   @extend %chunko-text;
   text-align: right;
   padding-right: 15px;
-}
-
-.blockquote-grande {
-  @extend %chunko-text;
-  border-left: none;
-
-  cite {
-    font-style: normal;
-  }
 }
 
 .alert-box.flash-msg {
@@ -134,20 +113,23 @@ i {
   background-size: cover;
   background-image: image-url("http://placekitten.com/g/1440/700");
   height: 700px;
+
+  .inner-background-cover {
+    @extend %clear-panel;
+    @extend .text-center;
+  }
 }
 
-.clear-panel {
-  @include border-radius(3px);
-  padding: $panel-padding;
-  background-color: rgba($body-bg, .95);
-  h1, h2, h3, h4, .button {
-    @extend %chunko-text;
-    text-align: center;
-    color: $palate1-primary;
-  }
+.take-action-background {
+  @extend %clear-panel;
+  @extend form;
 }
 
 a .button, a .button.take-action {
   @extend %chunko-text;
+  color: $snow;
+}
+
+form.take-action-form p.notice {
   color: $snow;
 }

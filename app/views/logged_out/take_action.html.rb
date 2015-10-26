@@ -1,9 +1,9 @@
 class Views::LoggedOut::TakeAction < Views::Base
   def content
     wide_row('background-cover') {
-      form {
+      form(class: 'take-action-form') {
 
-        div(class: %[clear-panel form]) {
+        div(class: 'take-action-background') {
           h4 "Take Action"
           p "Answering a few questions will help us decide whether to get in touch with you!"
           div(class: "row") {
@@ -34,7 +34,7 @@ class Views::LoggedOut::TakeAction < Views::Base
           br
           render partial: "activation_button"
         }
-        p(class: "white-text"){
+        p(class: "notice"){
          text "After you create your profile you will be contacted by a concierge to setup your first event!"
         }
       }
