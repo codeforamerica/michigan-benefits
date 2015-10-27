@@ -1,0 +1,42 @@
+%chunko-text {
+  text-transform: uppercase;
+  font-family: $font-family-serif;
+  letter-spacing: 0.3em;
+}
+
+%palate-white-on-green {
+  color: $snow;
+  background-color: $palate1-primary;
+}
+
+%palate-green-on-white {
+  h4 {
+    @extend %chunko-text;
+    color: $palate1-primary;
+  }
+  p {
+    text-align: left;
+  }
+
+  background-color: $snow;
+}
+
+%blockquote-grande {
+  @extend %chunko-text;
+  border-left: none;
+
+  cite {
+    font-style: normal;
+  }
+}
+
+%clear-panel {
+  @include border-radius(3px);
+  padding: $panel-padding;
+  background-color: rgba($body-bg, .95);
+  h1, h2, h3, h4, .button {
+    @extend %chunko-text;
+    text-align: center;
+    color: $palate1-primary;
+  }
+}

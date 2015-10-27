@@ -17,7 +17,7 @@ class Views::Admin::Roles::Form < Views::Base
         }
       }
 
-      div(:class => "actions") {
+      div(class: "actions") {
         f.submit class: buttonish
       }
     end

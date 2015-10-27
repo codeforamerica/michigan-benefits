@@ -1,0 +1,135 @@
+@import 'variables';
+@import 'functions';
+@import 'extensions';
+
+body {
+  background-color: $palate1-primary;
+}
+
+.text-primary {
+  color: $palate1-primary;
+}
+
+.text-alert {
+  color: $palate1-alert;
+}
+
+i {
+  margin: 5px
+}
+
+.full-width {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+}
+
+.app-container {
+  @include grid-row($behavior: collapse);
+}
+
+.app-nav {
+  @include grid-column($columns: 12);
+  @include padding-leader(.5);
+  background: $primary-color;
+  li a:not(.button){
+    color: white;
+  }
+}
+
+.app-content {
+  @include grid-column($columns: 12);
+  @include padding-leader(.5);
+}
+
+.app-content-wide {
+  @include grid-column($columns: 12);
+  @include padding-leader(.5);
+}
+
+.app-aside {
+  @include grid-column($columns: 12);
+  @include padding-leader(.5);
+  background: darken($vapor, 15);
+}
+
+@media #{$medium-up} {
+  .app-container {
+    max-width: none;
+  }
+  .app-nav {
+    @include grid-column($columns: 2);
+  }
+  .app-content {
+    @include grid-column($columns: 6);
+  }
+  .app-content-wide {
+    @include grid-column($columns: 10);
+  }
+  .app-aside {
+    @include grid-column($columns: 4);
+  }
+}
+
+.button.bordered {
+  border: solid 2px $snow;
+}
+
+.landing-quote {
+  @extend %palate-white-on-green;
+
+  blockquote, cite {
+    color: $snow;
+  }
+
+  blockquote {
+    @extend %blockquote-grande;
+  }
+}
+
+.landing-description {
+  @extend %palate-green-on-white;
+}
+
+.top-bar-section ul li > a {
+  @extend %chunko-text;
+  text-align: right;
+  padding-right: 15px;
+}
+
+.alert-box.flash-msg {
+  margin-bottom: 0;
+}
+
+.logo {
+  width: rem-calc(90);
+  height: auto;
+  padding: $topbar-height/6 0 $topbar-height/5 0;
+  max-height: $topbar-height;
+}
+
+.background-cover {
+  background-size: cover;
+  background-image: image-url("http://placekitten.com/g/1440/700");
+  height: 700px;
+
+  .inner-background-cover {
+    @extend %clear-panel;
+    @extend .text-center;
+  }
+}
+
+.take-action-background {
+  @extend %clear-panel;
+  @extend form;
+}
+
+a .button, a .button.take-action {
+  @extend %chunko-text;
+  color: $snow;
+}
+
+form.take-action-form p.notice {
+  color: $snow;
+}

@@ -10,7 +10,7 @@ class Views::Admin::Roles::Index < Views::Base
           tr {
             th("Name")
             th("Key")
-            th(:colspan => "3")
+            th(colspan: "3")
           }
         }
 

@@ -5,7 +5,7 @@ module Views
 
       def content
         row {
-          column(:'large-6') {
+          column('large-6') {
             h2("Account Profile")
 
             p {
