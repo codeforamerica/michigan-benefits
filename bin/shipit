@@ -2,6 +2,4 @@
 set -e
 
 bin/rspect
-git push
-git push heroku
-heroku run rake db:migrate
+git push origin HEAD

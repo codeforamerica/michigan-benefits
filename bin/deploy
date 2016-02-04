@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Usage: bin/deploy HEROKU_APP GIT_REF
+
+HEROKU_APP=$1
+GIT_REF=${2:-HEAD}
+
+if [ -z "${HEROKU_APP}" ]; then
+  echo "Usage: bin/deploy HEROKU_APP [GIT_REF]"
+  exit 1
+fi
+
+echo "Pushing $GIT_REF to heroku app $HEROKU_APP..."
+set -e
+git push --force git@heroku.com:$HEROKU_APP.git $GIT_REF:master
+heroku config:set GIT_REF=`git rev-parse $GIT_REF` --app $HEROKU_APP
+heroku run rake db:migrate --app $HEROKU_APP
+heroku restart --app $HEROKU_APP || heroku restart --app $HEROKU_APP || heroku restart --app $HEROKU_APP
