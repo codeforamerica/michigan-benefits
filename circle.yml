@@ -1,0 +1,16 @@
+machine:
+  timezone:
+    America/Los_Angeles
+
+test:
+  override:
+    - ./bin/rspect --format documentation:
+        parallel: true
+        files:
+          - spec/**/*_spec.rb
+
+deployment:
+  autodeploy:
+    branch: master
+    commands:
+      - bin/deploy citizen-rails-template $CIRCLE_SHA1
