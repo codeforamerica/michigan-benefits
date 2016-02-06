@@ -15,35 +15,35 @@ gem 'postmark-rails'
 gem 'premailer-rails'
 gem 'puma'
 gem 'pundit'
-gem 'rails', '4.2.4'
 gem 'rails_12factor', group: :production
+gem 'rails', '4.2.4'
 gem 'responders'
 gem 'sass-rails'
 gem 'sdoc',          group: :doc
 gem 'sorcery', '>= 0.9.1'
-gem 'uglifier'
 gem 'sucker_punch'
+gem 'uglifier'
 
 group(:development, :test) do
+  gem 'awesome_print'
   gem 'faker'
+  gem 'fuubar'
+  gem 'guard-rspec', require: false
+  gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'simplecov'
-  gem 'awesome_print'
-  gem 'pry-rails'
-  gem 'pry-byebug'
-  gem 'guard-rspec', require: false
-  gem 'fuubar'
 end
 
 group(:development) do
+  gem 'git-storyid'
   gem 'html2fortitude'
   gem 'letter_opener'
   gem 'meta_request'
+  gem 'pivotal_git_scripts'
   gem 'quiet_assets'
-  gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'spring'
   gem 'web-console'
   gem 'xray-rails'
-  gem 'pivotal_git_scripts'
-  gem 'git-storyid'
 end
