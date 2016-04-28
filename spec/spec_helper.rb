@@ -24,6 +24,7 @@ RSpec.configure do |config|
   # get run.
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
+  config.example_status_persistence_file_path = "tmp/examples.txt"
 
 =begin
   # Many RSpec users commonly either run the entire suite or an individual
