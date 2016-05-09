@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
 
-Things you may want to cover:
+After cloning this repo, run: `bin/setup`
 
-* Ruby version
 
-* System dependencies
+## Day-to-day
 
-* Configuration
+Make sure everything is up to date: `bin/update`
 
-* Database creation
+Run tests: `rails test`
 
-* Database initialization
 
-* How to run the test suite
+## Debugging
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Call `byebug` anywhere in the code to stop execution and get a debugger console.
+Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
