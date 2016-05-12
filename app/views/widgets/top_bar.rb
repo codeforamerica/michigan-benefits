@@ -13,8 +13,12 @@ class Views::Widgets::TopBar < Views::Base
 
       div class: "top-bar-right" do
         ul class: "menu" do
-          li do
-            link_to "Sign Up", new_user_path, class: "button"
+          if logged_in?
+            li current_user.name, class: "logged-in-as"
+          else
+            li do
+              link_to "Sign Up", new_user_path, class: "button"
+            end
           end
         end
       end
