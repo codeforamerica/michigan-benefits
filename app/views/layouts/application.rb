@@ -15,7 +15,7 @@ class Views::Layouts::Application < Views::Base
       end
 
       body class: "#{controller_name.underscore.dasherize}-#{action_name.underscore.dasherize}" do
-        # top_bar
+        top_bar title: Rails.application.config.site_name
 
         text yield
       end

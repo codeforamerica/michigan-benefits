@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module CitizenRailsReboot
   class Application < Rails::Application
-    config.site_name = ""
+    config.site_name = "Citizen Rails"
     config.project_description = ""
   end
 end
