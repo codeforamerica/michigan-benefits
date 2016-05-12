@@ -1,6 +1,6 @@
 class Views::Layouts::Application < Views::Base
   def content
-    html do
+    html lang: "en" do
       head do
         meta content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"
         meta charset: "utf-8"
