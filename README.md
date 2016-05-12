@@ -9,7 +9,7 @@ After cloning this repo, run: `bin/setup`
 
 Make sure everything is up to date: `bin/update`
 
-Run tests: `rails test`
+Run tests: `rails spec`
 
 
 ## Debugging
