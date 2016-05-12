@@ -10,10 +10,15 @@ describe "signing up" do
     fill_in "Password", with: "password"
     click_button "Continue"
 
-    expect(find(".logged-in-as").text).to eq "Alice Aardvark"
+    expect(page).to have_css ".logged-in-as", text: "Alice Aardvark"
+    expect(page).not_to have_css ".button", text: "Sign Up"
 
     new_user = User.last
     expect(new_user.name).to eq "Alice Aardvark"
     expect(new_user.email).to eq "alice@example.com"
+
+    click_on "Log Out"
+    expect(page).not_to have_css ".logged-in-as"
+    expect(page).to have_css ".button", text: "Sign Up"
   end
 end

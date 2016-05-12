@@ -6,19 +6,24 @@ class Views::Widgets::TopBar < Views::Base
   def content
     div class: "top-bar" do
       div class: "top-bar-left" do
-        ul class: "dropdown menu", "data-dropdown-menu" => "" do
+        ul class: "menu" do
           li title, class: "menu-text"
         end
       end
 
       div class: "top-bar-right" do
-        ul class: "menu" do
-          if logged_in?
-            li current_user.name, class: "logged-in-as"
-          else
+        if logged_in?
+          ul class: "menu" do
             li do
-              link_to "Sign Up", new_user_path, class: "button"
+              li current_user.name, class: "logged-in-as"
+              li do
+                link_to "Log Out", "sessions", method: :delete
+              end
             end
+          end
+        else
+          ul class: "menu" do
+            li link_to "Sign Up", new_user_path, class: "button"
           end
         end
       end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "landing#show"
 
-  resources :users
+  resource :sessions, only: %i[destroy]
+  resources :users, only: %i[new create]
 end
