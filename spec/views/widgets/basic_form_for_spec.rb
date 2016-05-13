@@ -26,7 +26,7 @@ describe "widgets/basic_form_for.html.rb" do
           <form class="new_user" id="new_user" action="/user/new" accept-charset="UTF-8" method="post">
             <input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" />
 
-            <label for="user_email">Email Address<input type="email" name="user[email]" id="user_email" /></label>
+            <label for="user_email">Email Address<input autofocus="autofocus" type="email" name="user[email]" id="user_email" /></label>
             <label for="user_name">Full Name<input type="text" name="user[name]" id="user_name" /></label>
             <label for="user_name">Name<input type="text" name="user[name]" id="user_name" /></label>
             <label for="user_password">Password<input type="password" name="user[password]" id="user_password" /></label>

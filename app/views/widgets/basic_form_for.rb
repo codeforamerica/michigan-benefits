@@ -9,10 +9,12 @@ class Views::Widgets::BasicFormFor < Views::Base
         h2 title
 
         form_for *form_for_params do |f|
-          fields.each do |x|
-            f.label(x.name) do
-              text x.title
-              text f.send("#{x.type}_field".to_sym, x.name)
+          fields.each.with_index do |form_field, index|
+            errors = f.object.present? ? f.object.errors[form_field.name] : nil
+            f.label(form_field.name) do
+              text form_field.title
+              span errors.to_sentence, class: "error-message" if errors.present?
+              text f.send("#{form_field.type}_field".to_sym, form_field.name, autofocus: index == 0)
             end
           end
 

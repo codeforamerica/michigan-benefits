@@ -13,7 +13,7 @@ class Views::Widgets::TopBar < Views::Base
 
       div class: "top-bar-right" do
         if logged_in?
-          ul class: "menu" do
+          ul class: "menu align-right" do
             li do
               li current_user.name, class: "logged-in-as"
               li do
@@ -22,8 +22,14 @@ class Views::Widgets::TopBar < Views::Base
             end
           end
         else
-          ul class: "menu" do
-            li link_to "Sign Up", new_user_path, class: "button"
+          ul class: "menu align-right" do
+            li do
+              link_to "Sign Up", new_user_path
+            end
+
+            li do
+              link_to "Log In", new_sessions_path
+            end
           end
         end
       end

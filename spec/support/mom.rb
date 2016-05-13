@@ -1,6 +1,6 @@
 class Mom
-  def user(name="user-#{sequence}")
-    User.new(name: name, email: "#{name.to_s.underscore.dasherize.parameterize}@example.com", password: "password")
+  def user(name="user-#{sequence}", email: "#{name.to_s.underscore.dasherize.parameterize}@example.com", password: "password")
+    User.new(name: name, email: email, password: password)
   end
 
   private
