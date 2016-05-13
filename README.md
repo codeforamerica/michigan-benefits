@@ -11,6 +11,8 @@ Make sure everything is up to date: `bin/update`
 
 Run tests: `rails spec`
 
+Push: `rails spec && git push`
+
 
 ## Debugging
 
