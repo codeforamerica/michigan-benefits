@@ -19,16 +19,16 @@ describe User do
     end
 
     it "does not validate the password when not changing the password" do
-      alice = build :user, password: "short"
-      expect(alice).not_to be_valid
+      user = build :user, password: "short"
+      expect(user).not_to be_valid
 
-      alice.password = "longlonglong"
-      expect(alice).to be_valid
+      user.password = "longlonglong"
+      expect(user).to be_valid
 
-      alice.save!
+      user.save!
 
-      alice.name = "Alice"
-      expect(alice).to be_valid
+      user.name = "Alice"
+      expect(user).to be_valid
     end
 
     it "requires a name" do
@@ -41,6 +41,15 @@ describe User do
   describe "email" do
     it "is downcased before user is saved" do
       expect(create(:user, email: "YELLING@EXAMPLE.COM").email).to eq "yelling@example.com"
+    end
+  end
+
+  describe "admin?" do
+    specify do
+      user = create :user
+      expect(user.admin?).to eq false
+      user.update! admin: true
+      expect(user.reload.admin?).to eq true
     end
   end
 end
