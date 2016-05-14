@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module CitizenRailsReboot
+module CitizenRails
   class Application < Rails::Application
     config.site_name = "Citizen Rails"
     config.project_description = ""
