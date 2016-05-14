@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
     allowed_level = allowed.fetch(action_name.to_sym, :admin)
 
     allowed = case
-      when current_user&.admin? then allowed_level.in? %i[admin user guest]
-      when current_user.present? then allowed_level.in? %i[user guest]
+      when current_user&.admin? then allowed_level.in? %i[admin member guest]
+      when current_user.present? then allowed_level.in? %i[member guest]
       else allowed_level.in? %i[guest]
     end
 

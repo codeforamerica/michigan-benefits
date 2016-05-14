@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     {
       new: :guest,
       create: :guest,
-      destroy: :user,
+      destroy: :member,
     }
   end
 

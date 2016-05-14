@@ -9,7 +9,7 @@ describe ApplicationController do
       case level
         when :admin then
           login_user(admin)
-        when :user then
+        when :member then
           login_user(user)
         else
           logout_user
@@ -33,7 +33,7 @@ describe ApplicationController do
 
       it "only lets admins in" do
         expect_allowed :admin, true
-        expect_allowed :user, false
+        expect_allowed :member, false
         expect_allowed :guest, false
       end
     end
@@ -53,16 +53,16 @@ describe ApplicationController do
 
       it "only lets admins in" do
         expect_allowed :admin, true
-        expect_allowed :user, false
+        expect_allowed :member, false
         expect_allowed :guest, false
       end
     end
 
-    context "actions that specify user" do
+    context "actions that specify member" do
       controller do
         def allowed
           {
-            index: :user
+            index: :member
           }
         end
 
@@ -71,9 +71,9 @@ describe ApplicationController do
         end
       end
 
-      it "lets admins and users in" do
+      it "lets admins and members in" do
         expect_allowed :admin, true
-        expect_allowed :user, true
+        expect_allowed :member, true
         expect_allowed :guest, false
       end
     end
@@ -91,9 +91,9 @@ describe ApplicationController do
         end
       end
 
-      it "lets admins and users in" do
+      it "lets admins and members in" do
         expect_allowed :admin, true
-        expect_allowed :user, true
+        expect_allowed :member, true
         expect_allowed :guest, true
       end
     end
