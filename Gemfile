@@ -20,8 +20,8 @@ group :development, :test do
   gem "byebug", platform: :mri
   gem "capybara"
   gem "poltergeist"
-  gem "rspec-rails"
-  gem "rspec_junit_formatter", "0.2.2"
+  gem "rspec-rails", git: "https://github.com/rspec/rspec-rails.git", tag: "v3.5.0.beta3"
+  gem "rspec_junit_formatter"
 end
 
 group :development do

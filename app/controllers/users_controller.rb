@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  def allowed
+    {
+      new: :guest,
+      create: :guest,
+    }
+  end
+
   def new
     @user = User.new
   end

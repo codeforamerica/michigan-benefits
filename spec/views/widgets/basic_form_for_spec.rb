@@ -19,7 +19,7 @@ describe "widgets/basic_form_for.html.rb" do
     render
 
     expect(rendered).to eq <<-HTML.squish.gsub(/>(\s)+</, '><')
-      <div class="align-center row">
+      <div class="align-center expanded row">
         <div class="columns small-12 medium-6">
           <h2>User Details</h2>
 

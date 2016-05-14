@@ -1,4 +1,12 @@
 class SessionsController < ApplicationController
+  def allowed
+    {
+      new: :guest,
+      create: :guest,
+      destroy: :user,
+    }
+  end
+
   def new
   end
 

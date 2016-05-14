@@ -6,8 +6,9 @@ module Views
 
     private
 
-    def row(classes=[], &block)
+    def row(classes=[], expanded: true, &block)
       class_array = classes_to_a(classes)
+      class_array << "expanded" if expanded
       class_array << "row"
 
       div class: class_array, &block

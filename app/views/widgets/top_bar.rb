@@ -17,7 +17,7 @@ class Views::Widgets::TopBar < Views::Base
             li do
               li current_user.name, class: "logged-in-as"
               li do
-                link_to "Log Out", "sessions", method: :delete
+                link_to "Log Out", sessions_path, method: :delete
               end
             end
           end

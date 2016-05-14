@@ -1,5 +1,10 @@
 class LandingController < ApplicationController
-  def show
+  def allowed
+    {
+      show: :guest
+    }
+  end
 
+  def show
   end
 end
