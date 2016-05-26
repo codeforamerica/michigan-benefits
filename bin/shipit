@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-bin/rspect
-git push origin HEAD

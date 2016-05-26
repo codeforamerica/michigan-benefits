@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-QUIET_TESTS=true THOROUGH=true bin/rspec $*
