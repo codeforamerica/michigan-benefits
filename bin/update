@@ -15,10 +15,10 @@ chdir APP_ROOT do
   # This script is a way to update your development environment automatically.
   # Add necessary update steps to this file.
 
-  puts "== Pulling from git =="
+  puts "\n== Pulling from git =="
   system! "git pull --rebase"
 
-  puts '== Installing dependencies =='
+  puts "\n== Installing dependencies =="
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
