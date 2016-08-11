@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+require 'pathname'
+require 'fileutils'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+
+def system!(*args)
+  puts args.join(" ")
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  # This script is a way to update your development environment automatically.
+  # Add necessary update steps to this file.
+
+  system! "bin/update"
+
+  puts "\n== Running tests =="
+  system! "QUIET_TESTS=true bin/rails spec"
+
+  puts "\n== Pushing =="
+  system! 'git push'
+end
