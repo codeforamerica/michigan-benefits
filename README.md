@@ -1,5 +1,9 @@
 # README
 
+This project is built on top of [Citizen Rails](https://github.com/citizencode/citizen-rails). 
+See [README-citizen-rails-template.md](README-citizen-rails-template.md) for instructions on
+using the Citizen Rails template project as a base for your own project.
+
 ## Getting Started
 
 After cloning this repo, run: `bin/setup`
@@ -11,7 +15,7 @@ Make sure everything is up to date: `bin/update`
 
 Run tests: `rails spec`
 
-Push: `rails spec && git push`
+Push: `bin/pushit`
 
 
 ## Debugging
