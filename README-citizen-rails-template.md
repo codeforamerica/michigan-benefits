@@ -1,6 +1,6 @@
 # Using Citizen Rails As A Template For A New Rails App
 
-## Create The Project
+## Create the project
 
 Create a new project, and set the Citizen Rails repo as a remote:
 
@@ -16,8 +16,22 @@ Create a new project, and set the Citizen Rails repo as a remote:
 You can keep `citizen-rails` as a remote to pull new changes from `citizen-rails` into your project. At some point,
 your project and `citizen-rails` will probably diverge too much to be able to pull new changes in.
 
-## Configure The Project
+
+## Configure the project
 
 1. Edit `application.rb` and change the module name and configuration settings.
 1. Edit the database names in `database.yml`
 1. Search the project for the word `citizen` to find other things to change.
+
+
+## Importing changes from Citizen Rails
+
+See what's changed: 
+    
+    git fetch citizen-rails
+    git log citizen-rails/master
+    
+Import a commit from the remote:
+
+    git cherry-pick <sha-from-other-remote>
+    
