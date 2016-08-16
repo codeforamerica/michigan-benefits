@@ -4,24 +4,32 @@ This project is built on top of [Citizen Rails](https://github.com/citizencode/c
 See [README-citizen-rails-template.md](README-citizen-rails-template.md) for instructions on
 using the Citizen Rails template project as a base for your own project.
 
-## Getting Started
+## Developing
 
-After cloning this repo, run: `bin/setup`
+### Getting Started
 
-
-## Day-to-day
-
-Make sure everything is up to date: `bin/update`
-
-Run tests: `rails spec`
-
-Push: `bin/pushit`
+* After cloning this repo, run: `bin/setup`
 
 
-## Debugging
+### Day-to-day
+
+* Make sure everything is up to date: `bin/update`
+* Run the server: `rails s` and [http://localhost:3000](http://localhost:3000)
+* Run tests: `rails spec`
+* Push: `bin/pushit`
+
+
+### Debugging
 
 Call `byebug` anywhere in the code to stop execution and get a debugger console.
 Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
+
+
+### Fortitude
+
+We use [Fortitude](https://github.com/ageweke/fortitude) for views. You'll love it.
+
+Use `bin/fortify` to convert HTML to Fortitude.
 
 
 ## What's Included
