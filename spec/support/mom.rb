@@ -4,7 +4,11 @@ class Mom
   end
 
   def admin
-    user("admin-#{sequence}", admin: true)
+    user "admin-#{sequence}", admin: true
+  end
+
+  def member
+    user "member-#{sequence}"
   end
 
   private

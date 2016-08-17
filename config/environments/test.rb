@@ -39,4 +39,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Debug mode disables concatenation and preprocessing of assets.
+  # This option may cause significant delays in view rendering with a large
+  # number of complex assets.
+  # THIS MUST BE SET TO TRUE FOR FILE PREVIEWS TO WORK IN TESTS
+  config.assets.debug = true
 end
