@@ -24,6 +24,12 @@ your project and `citizen-rails` will probably diverge too much to be able to pu
 1. Search the project for the word `citizen` to find other things to change.
 
 
+## Get started
+
+    bin/setup
+    rails spec
+    
+
 ## Importing changes from Citizen Rails
 
 See what's changed: 
