@@ -21,15 +21,9 @@ using the Citizen Rails template project as a base for your own project.
 
 ### Debugging
 
-Call `byebug` anywhere in the code to stop execution and get a debugger console.
-Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
-
-
-### Fortitude
-
-We use [Fortitude](https://github.com/ageweke/fortitude) for views. You'll love it.
-
-Use `bin/fortify` to convert HTML to Fortitude.
+* Call `byebug` anywhere in the code to stop execution and get a debugger console.
+* Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
+* (Of course, [RubyMine](https://www.jetbrains.com/ruby/) includes a great [visual debugger](https://www.jetbrains.com/ruby/features/ruby_debugger.html)).
 
 
 ## What's Included
@@ -51,3 +45,16 @@ in, override the `allowed` method in your controller to return a hash of actions
     end
     
 
+### Fortitude
+
+We use [Fortitude](https://github.com/ageweke/fortitude) for views. You'll love it.
+
+Use `bin/fortify` to convert HTML to Fortitude.
+
+
+
+### X-ray
+
+In your browser, press `command-shift-X` to see which controller, layout, and views rendered the page. Click on something
+in the view to have it open in your editor. (Use the gear icon in the lower right corner to configure your editor.)
+[Read more](https://github.com/brentd/xray-rails).
