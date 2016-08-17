@@ -19,6 +19,7 @@ gem "uglifier", ">= 1.3.0"
 group :development, :test do
   gem "byebug", platform: :mri
   gem "capybara"
+  gem "climate_control"
   gem "launchy"
   gem "poltergeist"
   gem "rspec-rails", git: "https://github.com/rspec/rspec-rails.git", tag: "v3.5.0.beta3"

@@ -73,7 +73,7 @@ objects, just use plain Ruby.
   (e.g., `create :team_with_members_and_locations, "Great team", member_names: %w[Alice Billy Cindy], locations: %w[SF NYC]`) 
 
 
-### Feature Spec Helpers
+### Spec Helpers
 
 * Use `step` to break up a long feature spec:
 
@@ -82,6 +82,14 @@ objects, just use plain Ruby.
         fill_in "Password", with: "password"
         click_button "Subnit"
       end
+
 * Use `wut` (or `save_and_open_preview`) to open a browser window at a particluar point in your test. If your local
   server is running, it will show the page with full styling (thanks to the `FilePreviewsController` which is only
   routable in the development and test environments).
+
+* Use `with_modified_env` to modify an env variable for one test:
+ 
+      with_modified_env INVITATION_CODE: "inv-code", INVITATIONS_ENABLED: "true" do
+        post :create, user: { name: "Alice", invitation_code: "wrong-code" }
+        expect(flash[:alert]).to equal "Invalid invitation code"
+      end  
