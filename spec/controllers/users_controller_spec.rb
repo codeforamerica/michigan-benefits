@@ -8,14 +8,14 @@ describe UsersController do
     end
   end
 
-  describe "#new" do
+  describe "#new", :guest do
     specify do
       get :new
       expect(response.code).to eq "200"
     end
   end
 
-  describe "#create" do
+  describe "#create", :guest do
     specify do
       process :create, method: :post, params: { user: { name: "Name", email: "email", password: "password" } }
       expect(response).to redirect_to root_path

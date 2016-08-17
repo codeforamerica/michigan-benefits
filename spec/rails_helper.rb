@@ -56,4 +56,18 @@ RSpec.configure do |config|
   config.include FeatureHelper, type: :feature
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
+
+  config.before :each, :admin do
+    @admin = create :admin
+    login_user @admin
+  end
+
+  config.before :each, :member do
+    @member = create :member
+    login_user @member
+  end
+
+  config.before :each, :guest do
+    logout_user
+  end
 end

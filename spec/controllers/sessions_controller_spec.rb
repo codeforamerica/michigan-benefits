@@ -36,10 +36,8 @@ describe SessionsController do
     end
   end
 
-  describe "#destroy" do
+  describe "#destroy", :member do
     specify do
-      login_user create(:user)
-
       expect {
         delete :destroy
       }.to change { logged_in? }.from(true).to(false)
