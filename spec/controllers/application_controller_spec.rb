@@ -98,4 +98,50 @@ describe ApplicationController do
       end
     end
   end
+
+  describe "basic auth" do
+    around(:each) do |example|
+      with_modified_env BASIC_AUTH: basic_auth do
+        example.run
+      end
+    end
+
+    controller do
+      def allowed
+        { index: :guest }
+      end
+
+      def index
+        head :ok
+      end
+    end
+
+    context "when no user or password specified" do
+      let(:basic_auth) { "" }
+
+      specify do
+        get :index
+        expect(response.code).to eq "200"
+      end
+    end
+
+    context "when user and password specified" do
+      let(:basic_auth) { "user:pass" }
+
+      specify "valid credentials" do
+        request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("user", "pass")
+
+        get :index
+        expect(response.code).to eq "200"
+      end
+
+      specify "invalid credentials" do
+        request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("user", "WRONG")
+
+        get :index
+        expect(response.code).to eq "401"
+      end
+    end
+  end
+
 end

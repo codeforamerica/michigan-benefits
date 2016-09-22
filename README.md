@@ -45,6 +45,12 @@ in, override the `allowed` method in your controller to return a hash of actions
     end
     
 
+### Basic Auth
+
+Set an environment variable called `BASIC_AUTH` in the format `<username>:<password>` (e.g., `chewie:r0000ar`).
+Basic auth will be enabled if that environment variable exists.
+
+
 ### Fortitude
 
 We use [Fortitude](https://github.com/ageweke/fortitude) for views. You'll love it.
