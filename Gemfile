@@ -22,7 +22,7 @@ group :development, :test do
   gem "climate_control"
   gem "launchy"
   gem "poltergeist"
-  gem "rspec-rails", git: "https://github.com/rspec/rspec-rails.git", tag: "v3.5.0.beta3"
+  gem "rspec-rails"
   gem "rspec_junit_formatter"
 end
 
