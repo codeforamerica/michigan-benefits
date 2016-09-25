@@ -1,20 +1,22 @@
 # README
 
 This project is built on top of [Citizen Rails](https://github.com/citizencode/citizen-rails). 
-See [README-citizen-rails-template.md](README-citizen-rails-template.md) for instructions on
-using the Citizen Rails template project as a base for your own project.
+
+**See [README-citizen-rails-template.md](README-citizen-rails-template.md) for instructions on
+using the Citizen Rails template project as a base for your own project.**
 
 ## Developing
 
 ### Getting Started
 
 * After cloning this repo, run: `bin/setup`
+* Copy `.env.sample` to `.env`
 
 
 ### Day-to-day
 
 * Make sure everything is up to date: `bin/update`
-* Run the server: `rails s` and [http://localhost:3000](http://localhost:3000)
+* Run the server: `heroku local` and [http://localhost:3000](http://localhost:3000)
 * Run tests: `rails spec`
 * Push: `bin/pushit`
 
