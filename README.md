@@ -38,14 +38,15 @@ There are 3 user levels: **admin**, **member**, and **guest**. **Admins** are us
 By default, only admins are authorized to call a controller action. To let other user levels
 in, override the `allowed` method in your controller to return a hash of actions and user levels:
 
-    def allowed
-      { 
-        index: :admin, # only admins
-        show: :member, # admins and members
-        new: :guest, # admins, members, and non-logged-in visitors (everyone)
-      }
-    end
-    
+```ruby
+def allowed
+  { 
+    index: :admin, # only admins
+    show: :member, # admins and members
+    new: :guest, # admins, members, and non-logged-in visitors (everyone)
+  }
+end
+```
 
 ### Basic Auth
 
@@ -85,11 +86,13 @@ objects, just use plain Ruby.
 
 * Use `step` to break up a long feature spec:
 
-      step "log in" do
-        fill_in "Email", with: "alice@example.com"
-        fill_in "Password", with: "password"
-        click_button "Subnit"
-      end
+```ruby
+step "log in" do
+  fill_in "Email", with: "alice@example.com"
+  fill_in "Password", with: "password"
+  click_button "Subnit"
+end
+```
 
 * Use `wut` (or `save_and_open_preview`) to open a browser window at a particluar point in your test. If your local
   server is running, it will show the page with full styling (thanks to the `FilePreviewsController` which is only
@@ -97,7 +100,9 @@ objects, just use plain Ruby.
 
 * Use `with_modified_env` to modify an env variable for one test:
  
-      with_modified_env INVITATION_CODE: "inv-code", INVITATIONS_ENABLED: "true" do
-        post :create, user: { name: "Alice", invitation_code: "wrong-code" }
-        expect(flash[:alert]).to equal "Invalid invitation code"
-      end  
+```ruby 
+with_modified_env INVITATION_CODE: "inv-code", INVITATIONS_ENABLED: "true" do
+  post :create, user: { name: "Alice", invitation_code: "wrong-code" }
+  expect(flash[:alert]).to equal "Invalid invitation code"
+end  
+```
