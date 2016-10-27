@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:citizencode/citizen_code_scripts.git
+  revision: d199f91ee808f21567fcdea242838a16b07e4e32
+  specs:
+    citizen_code_scripts (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -247,6 +253,7 @@ DEPENDENCIES
   awesome_print
   byebug
   capybara
+  citizen_code_scripts!
   climate_control
   coffee-rails (~> 4.1.0)
   fortitude
@@ -275,4 +282,4 @@ DEPENDENCIES
   xray-rails
 
 BUNDLED WITH
-   1.12.3
+   1.13.5

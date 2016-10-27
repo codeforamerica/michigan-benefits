@@ -30,6 +30,7 @@ group :development do
   gem "html2fortitude"
   gem "listen", "~> 3.0.5"
   gem "pivotal_git_scripts"
+  gem "citizen_code_scripts", git: "git@github.com:citizencode/citizen_code_scripts.git"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console"
