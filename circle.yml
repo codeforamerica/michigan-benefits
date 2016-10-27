@@ -1,6 +1,18 @@
 test:
   override:
     - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
+
+## To enable circle ci green deploys to staging:
+## - replace <<<< citizen-rails-staging >>>> with your staging's git remote name below
+## - uncomment the lines below
+## - get your Heroku API key and add it to CircleCI
+#deployment:
+#  staging:
+#    branch: master
+#    commands:
+#      - git push git@heroku.com:<<<< citizen-rails-staging  >>>>.git $CIRCLE_SHA1:master
+#      - heroku run rake db:migrate_seed --app <<<< citizen-rails-staging >>>>
+
 general:
   branches:
     ignore:
