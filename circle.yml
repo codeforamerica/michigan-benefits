@@ -6,7 +6,7 @@ deployment:
   staging:
     branch: master
     commands:
-      - bin/deploy staging $CIRCLE_SHA1 circle-ci
+      - bundle exec citizen deploy staging $CIRCLE_SHA1 circle-ci
 
 general:
   branches:
