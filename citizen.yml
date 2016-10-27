@@ -1,0 +1,3 @@
+heroku_app_names:
+  prod: citizen-rails-prod
+  staging: citizen-rails-staging
