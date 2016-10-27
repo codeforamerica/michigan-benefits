@@ -1,5 +1,6 @@
-PATH
-  remote: /Users/erik/Development/github/citizencode/citizen_code_scripts
+GIT
+  remote: git@github.com:citizencode/citizen_code_scripts.git
+  revision: 880d38fe7292911decacad350b37abe53a5ca105
   specs:
     citizen_code_scripts (0.0.1)
 
