@@ -281,5 +281,8 @@ DEPENDENCIES
   web-console
   xray-rails
 
+RUBY VERSION
+   ruby 2.3.1p112
+
 BUNDLED WITH
    1.13.5
