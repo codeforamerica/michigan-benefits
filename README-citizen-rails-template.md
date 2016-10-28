@@ -40,8 +40,4 @@ See what's changed:
 Merge all changes from the Citizen Rails:
 
     git merge citizen-rails/master
-    
-Or, import a single commit from the remote:
-
-    git cherry-pick <sha-from-other-remote>
-    
+        
