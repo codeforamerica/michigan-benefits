@@ -6,6 +6,7 @@
 
 /.bundle
 .env
+.envrc
 
 /log/*
 /tmp/*
