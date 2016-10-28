@@ -37,7 +37,11 @@ See what's changed:
     git fetch citizen-rails
     git log citizen-rails/master
     
-Import a commit from the remote:
+Merge all changes from the Citizen Rails:
+
+    git merge citizen-rails/master
+    
+Or, import a single commit from the remote:
 
     git cherry-pick <sha-from-other-remote>
     
