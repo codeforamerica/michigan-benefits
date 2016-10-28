@@ -11,7 +11,7 @@ chdir APP_ROOT do
   end
 
   step "Copying sample files" do
-    [".env"].each do |file|
+    [".envrc"].each do |file|
       unless File.exist?(file)
         cp "#{file}.sample", file
         puts "Copied #{file}.sample to #{file}"
