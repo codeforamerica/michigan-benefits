@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.3.1"
+#ruby "2.3.1"
 
 gem "awesome_print"
 gem "coffee-rails", "~> 4.1.0"
@@ -33,6 +33,7 @@ group :development do
   gem "listen", "~> 3.0.5"
   gem "pivotal_git_scripts"
   gem "citizen_code_scripts", git: "git@github.com:citizencode/citizen_code_scripts.git"
+  #gem "citizen_code_scripts", path: "/Users/glenn/workspace/cc/citizen_code_scripts"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console"
