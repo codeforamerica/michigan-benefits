@@ -78,8 +78,6 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
 production:
-  <<: *default
-  database: citizen_rails_production
-  username: citizen_rails
-  password: <%= ENV['CITIZEN_RAILS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
