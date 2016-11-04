@@ -12,6 +12,13 @@ class Views::Layouts::Application < Views::Base
         csrf_meta_tags
         stylesheet_link_tag 'application', media: 'all'
         javascript_include_tag 'application'
+        font = 'Open Sans'
+        link rel: "stylesheet", type: "text/css", href: "http://fonts.googleapis.com/css?family=#{font}"
+        style do
+          text(<<~STYLE.html_safe)
+                body, h1, h2, h3, h4, p { font-family: '#{font}', serif; }
+          STYLE
+        end
       end
 
       body class: "#{controller_name.underscore.dasherize}-#{action_name.underscore.dasherize}" do
