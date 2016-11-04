@@ -13,15 +13,44 @@ describe UsersController do
       get :new
       expect(response.code).to eq "200"
     end
+
+    context 'ENV has disabled sign-ups' do
+      before do
+        allow(ENV).to receive(:[]).and_return(nil)
+        allow(ENV).to receive(:[]).with('SIGNUPS_DISABLED').and_return(true)
+      end
+
+      it 'prevents sign-ups' do
+        get :new
+
+        expect(response.status).to eq(302)
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("Sorry, sign-ups are temporarily disabled")
+      end
+    end
   end
 
   describe "#create", :guest do
     specify do
-      process :create, method: :post, params: { user: { name: "Name", email: "email", password: "password" } }
+      post :create, params: {user: {name: "Name", email: "email", password: "password"}}
       expect(response).to redirect_to root_path
       expect(User.last.name).to eq "Name"
       expect(User.last.email).to eq "email"
     end
-  end
 
+    context 'ENV has disabled sign-ups' do
+      before do
+        allow(ENV).to receive(:[]).and_return(nil)
+        allow(ENV).to receive(:[]).with('SIGNUPS_DISABLED').and_return(true)
+      end
+
+      it 'prevents sign-ups' do
+        post :create, params: {user: {name: "Name", email: "email", password: "password"}}
+
+        expect(response.status).to eq(302)
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("Sorry, sign-ups are temporarily disabled")
+      end
+    end
+  end
 end
