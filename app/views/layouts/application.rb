@@ -12,7 +12,7 @@ class Views::Layouts::Application < Views::Base
         csrf_meta_tags
         stylesheet_link_tag 'application', media: 'all'
         javascript_include_tag 'application'
-        font = 'Open Sans'
+        font = 'Open Sans' # go to https://fonts.google.com/ for more free fonts!
         link rel: "stylesheet", type: "text/css", href: "http://fonts.googleapis.com/css?family=#{font}"
         style do
           text(<<~STYLE.html_safe)
