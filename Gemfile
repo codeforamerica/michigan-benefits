@@ -18,14 +18,19 @@ gem "sorcery"
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "uglifier", ">= 1.3.0"
 
+group :test do
+  gem "database_cleaner"
+  gem "faker"
+  gem "rails-controller-testing"
+  gem "selenium-webdriver"
+end
+
 group :development, :test do
   gem "byebug", platform: :mri
   gem "capybara"
   gem "climate_control"
-  gem "faker"
   gem "launchy"
   gem "poltergeist"
-  gem "rails-controller-testing"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
 end

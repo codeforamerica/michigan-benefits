@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "authenticating" do
+describe "authenticating", js: true do
   def expect_to_be_logged_in
     expect(page).to have_css ".logged-in-as", text: "Alice Aardvark"
     expect(page).not_to have_css ".top-bar a", text: "Sign Up"
