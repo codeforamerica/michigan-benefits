@@ -22,8 +22,10 @@ group :development, :test do
   gem "byebug", platform: :mri
   gem "capybara"
   gem "climate_control"
+  gem "faker"
   gem "launchy"
   gem "poltergeist"
+  gem "rails-controller-testing"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
 end

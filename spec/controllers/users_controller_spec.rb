@@ -12,6 +12,7 @@ describe UsersController do
     specify do
       get :new
       expect(response.code).to eq "200"
+      expect(assigns[:user]).to be_new_record
     end
 
     context 'ENV has disabled sign-ups' do
