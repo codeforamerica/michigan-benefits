@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module CitizenRails
   class Application < Rails::Application
+    config.action_controller.action_on_unpermitted_parameters = :raise
+
+    # Project configuration
     config.site_name = "Citizen Rails"
     config.project_description = ""
   end
