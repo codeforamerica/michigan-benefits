@@ -284,7 +284,7 @@ DEPENDENCIES
   pivotal_git_scripts
   poltergeist
   puma (~> 3.0)
-  rails (>= 5.0.0.rc1, < 5.1)
+  rails (>= 5.0.0.1)
   rails-controller-testing
   rake
   responders
