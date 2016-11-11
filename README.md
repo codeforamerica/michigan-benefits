@@ -15,7 +15,6 @@ using the Citizen Rails template project as a base for your own project.**
 
 ### Day-to-day
 
-* Make sure everything is up to date: `bin/update`
 * Run the server: `heroku local` and [http://localhost:3000](http://localhost:3000)
 * Run tests: `rails spec`
 * Push: `bin/pushit`
