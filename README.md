@@ -26,6 +26,13 @@ using the Citizen Rails template project as a base for your own project.**
 * Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
 * (Of course, [RubyMine](https://www.jetbrains.com/ruby/) includes a great [visual debugger](https://www.jetbrains.com/ruby/features/ruby_debugger.html)).
 
+### CircleCI green builds deploy to Heroku staging servers
+
+1. Get your Heroku API Key for a user from (https://dashboard.heroku.com/account)
+1. Paste API Key in the CircleCI account settings page (https://circleci.com/account/heroku)
+1. Set your user as the deploy user CircleCI per project settings page (https://circleci.com/gh/citizencode/skoshi/edit#heroku)
+1. Ensure that your <github username>@circleci.com and generated ssh key show up on heroku (https://dashboard.heroku.com/account)
+1. Click rebuild if necessary 
 
 ## What's Included
 
