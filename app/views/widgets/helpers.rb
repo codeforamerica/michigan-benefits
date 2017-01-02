@@ -8,6 +8,6 @@ module Views::Widgets::Helpers
   end
 
   def basic_table_for(enumerable, classes: nil, &block)
-    widget Views::Widget::BasicTableFor, enumerable: enumerable, classes: classes, definition: block
+    widget Views::Widgets::BasicTableFor, enumerable: enumerable, classes: classes, definition: block
   end
 end
