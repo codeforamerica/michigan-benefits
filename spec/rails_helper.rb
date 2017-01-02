@@ -6,6 +6,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require_relative "support/mom"
+require_relative "support/match_html"
 require_relative "support/generic_helper"
 require_relative "support/feature_helper"
 
