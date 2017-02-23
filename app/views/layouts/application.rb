@@ -25,7 +25,7 @@ class Views::Layouts::Application < Views::Base
         top_bar title: Rails.application.config.site_name
 
         flash.each do |name, msg|
-          div msg, "aria-labelledby" => "flash-msg-#{name}", "aria-role" => "dialog", class: ['callout', 'flash', name]
+          div msg, "aria-label" => name, "aria-role" => "dialog", class: ['callout', 'flash', name]
         end
 
         div style: "height: 3rem"
