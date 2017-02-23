@@ -28,6 +28,7 @@ end
 group :development, :test do
   gem "byebug", platform: :mri
   gem "capybara"
+  gem 'capybara-accessible'
   gem "climate_control"
   gem "launchy"
   gem "poltergeist"
@@ -36,14 +37,15 @@ group :development, :test do
 end
 
 group :development do
+  gem "citizen_code_scripts", git: "git@github.com:citizencode/citizen_code_scripts.git"
   gem "html2fortitude"
   gem "listen", "~> 3.0.5"
   gem "pivotal_git_scripts"
-  gem "citizen_code_scripts", git: "git@github.com:citizencode/citizen_code_scripts.git"
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
   #gem "citizen_code_scripts", path: "/Users/glenn/workspace/cc/citizen_code_scripts"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console"
   gem "xray-rails"
 end
-

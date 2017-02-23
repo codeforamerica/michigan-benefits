@@ -13,9 +13,11 @@ require_relative "support/feature_helper"
 headless_capybara = true
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara/accessible'
+
 if headless_capybara
   require 'capybara/poltergeist'
-  Capybara.javascript_driver = :poltergeist
+  Capybara.javascript_driver = :accessible_poltergeist
 else
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(app, :browser => :chrome)
