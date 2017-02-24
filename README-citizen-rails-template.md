@@ -11,10 +11,10 @@ Create a new project, and set the Citizen Rails repo as a remote:
     git fetch citizen-rails
     git reset --hard citizen-rails/master
     git remote add origin git@github.com:[organization/project-name]
+    git push -u origin master
     
     
-You can keep `citizen-rails` as a remote to pull new changes from `citizen-rails` into your project. At some point,
-your project and `citizen-rails` will probably diverge too much to be able to pull new changes in.
+You can keep `citizen-rails` as a remote to pull new changes from `citizen-rails` into your project.
 
 
 ## Configure the project
