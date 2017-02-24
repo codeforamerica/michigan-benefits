@@ -5,19 +5,27 @@ This project is built on top of [Citizen Rails](https://github.com/citizencode/c
 **See [README-citizen-rails-template.md](README-citizen-rails-template.md) for instructions on
 using the Citizen Rails template project as a base for your own project.**
 
+
 ## Developing
 
 ### Getting Started
 
 * After cloning this repo, run: `bin/setup`
-* Copy `.env.sample` to `.env`
+* Run `citizen doctor` repeatedly until all the failures are fixed.
+
+
+### citizen-scripts
+
+The Gemfile includes `citizen-scripts` which is a collection of useful dev utils. It includes a command
+called `citizen`. Running `citizen` with no arguments will show usage information. Depending on your 
+Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen`.
 
 
 ### Day-to-day
 
 * Run the server: `heroku local` and [http://localhost:3000](http://localhost:3000)
-* Run tests: `rails spec`
-* Push: `bin/pushit`
+* Run tests: `citizen test`
+* Pull, run tests, push: `citizen pushit`
 
 
 ### Debugging
@@ -111,4 +119,16 @@ with_modified_env INVITATION_CODE: "inv-code", INVITATIONS_ENABLED: "true" do
   post :create, user: { name: "Alice", invitation_code: "wrong-code" }
   expect(flash[:alert]).to equal "Invalid invitation code"
 end  
+```
+
+* Use `match_html` to test that two HTML strings match, excluding whitespace, order of attributes, etc.:
+
+```ruby
+expect(rendered).to match_html <<-HTML
+  <table class="foo bar">
+    <tr>
+      <td>Hi!</td>
+    </tr>
+  </table>
+HTML
 ```
