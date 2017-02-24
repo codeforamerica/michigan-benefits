@@ -1,8 +1,8 @@
 GIT
-  remote: git@github.com:citizencode/citizen_code_scripts.git
-  revision: e080a9cdd9198e86da2df6d6c5afb674994c59c9
+  remote: git@github.com:citizencode/citizen-scripts.git
+  revision: b5856f91f4c3e1e9de52f099821d55c6d5b22dcb
   specs:
-    citizen_code_scripts (0.0.1)
+    citizen-scripts (1.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -286,7 +286,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-accessible
-  citizen_code_scripts!
+  citizen-scripts!
   climate_control
   coffee-rails (~> 4.1.0)
   database_cleaner
@@ -321,4 +321,4 @@ DEPENDENCIES
   xray-rails
 
 BUNDLED WITH
-   1.14.4
+   1.14.5
