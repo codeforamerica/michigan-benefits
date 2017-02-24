@@ -27,7 +27,7 @@ your project and `citizen-rails` will probably diverge too much to be able to pu
 ## Get started
 
     bin/setup
-    rails spec
+    citizen doctor
     
 
 ## Importing changes from Citizen Rails
