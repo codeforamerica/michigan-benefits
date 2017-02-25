@@ -40,6 +40,7 @@ group :development do
   gem "citizen-scripts", git: "git@github.com:citizencode/citizen-scripts.git"
   gem "html2fortitude"
   gem "listen", "~> 3.0.5"
+  gem "meta_request"
   gem "pivotal_git_scripts"
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
