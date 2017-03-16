@@ -6,12 +6,12 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module CitizenRails
+module MichiganPrototype
   class Application < Rails::Application
     config.action_controller.action_on_unpermitted_parameters = :raise
 
     # Project configuration
-    config.site_name = "Citizen Rails"
+    config.site_name = "Michigan Prototype"
     config.project_description = ""
   end
 end
