@@ -1,6 +1,6 @@
 # README
 
-This project is built on top of [Citizen Rails](https://github.com/citizencode/citizen-rails). 
+This project is built on top of [Citizen Rails](https://github.com/citizencode/citizen-rails).
 
 **See [README-citizen-rails-template.md](README-citizen-rails-template.md) for instructions on
 using the Citizen Rails template project as a base for your own project.**
@@ -17,7 +17,7 @@ using the Citizen Rails template project as a base for your own project.**
 ### citizen-scripts
 
 The Gemfile includes `citizen-scripts` which is a collection of useful dev utils. It includes a command
-called `citizen`. Running `citizen` with no arguments will show usage information. Depending on your 
+called `citizen`. Running `citizen` with no arguments will show usage information. Depending on your
 Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen`.
 
 
@@ -40,7 +40,7 @@ Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen
 1. Paste API Key in the CircleCI account settings page (https://circleci.com/account/heroku)
 1. Set your user as the deploy user CircleCI per project settings page (https://circleci.com/gh/citizencode/skoshi/edit#heroku)
 1. Ensure that your <github username>@circleci.com and generated ssh key show up on heroku (https://dashboard.heroku.com/account)
-1. Click rebuild if necessary 
+1. Click rebuild if necessary
 
 ## What's Included
 
@@ -54,7 +54,7 @@ in, override the `allowed` method in your controller to return a hash of actions
 
 ```ruby
 def allowed
-  { 
+  {
     index: :admin, # only admins
     show: :member, # admins and members
     new: :guest, # admins, members, and non-logged-in visitors (everyone)
@@ -92,8 +92,8 @@ objects, just use plain Ruby.
 * Call `build` (e.g., `build :user`) to instantiate a new, unsaved object
 * Call `create` (e.g., `create :user`) to instantiate and save a new object
 * Define methods (e.g. `def user...end`) for each class you want to easily create objects for
-* You are not limited to just creating models; since it's plain Ruby, you can do anything 
-  (e.g., `create :team_with_members_and_locations, "Great team", member_names: %w[Alice Billy Cindy], locations: %w[SF NYC]`) 
+* You are not limited to just creating models; since it's plain Ruby, you can do anything
+  (e.g., `create :team_with_members_and_locations, "Great team", member_names: %w[Alice Billy Cindy], locations: %w[SF NYC]`)
 
 
 ### Spec Helpers
@@ -113,8 +113,8 @@ end
   routable in the development and test environments).
 
 * Use `with_modified_env` to modify an env variable for one test:
- 
-```ruby 
+
+```ruby
 with_modified_env INVITATION_CODE: "inv-code", INVITATIONS_ENABLED: "true" do
   post :create, user: { name: "Alice", invitation_code: "wrong-code" }
   expect(flash[:alert]).to equal "Invalid invitation code"
