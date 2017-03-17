@@ -4,8 +4,10 @@ module FeatureHelper
   end
 
   def step(title, &block)
-    puts "STEP: #{title}" unless ENV["QUIET_TESTS"]
+    expect(find(".subhead").text).to eq title
+    print title unless ENV["QUIET_TESTS"]
     block.call
+    puts unless ENV["QUIET_TESTS"]
   end
 
   def save_and_open_preview

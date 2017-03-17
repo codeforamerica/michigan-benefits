@@ -11,7 +11,7 @@ describe "authenticating", js: true do
     expect(page).to have_css ".top-bar a", text: "Sign Up"
   end
 
-  specify do
+  xspecify do
     visit root_path
 
     step "sign up with missing password" do

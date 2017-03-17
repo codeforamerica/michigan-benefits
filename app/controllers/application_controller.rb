@@ -36,4 +36,8 @@ class ApplicationController < ActionController::Base
       redirect_to new_sessions_path
     end
   end
+
+  def current_app
+    App.find_or_create_by!(user: current_user)
+  end
 end

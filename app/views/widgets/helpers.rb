@@ -3,8 +3,8 @@ module Views::Widgets::Helpers
     widget Views::Widgets::TopBar, title: title
   end
 
-  def basic_form_for(*form_for_params, title:, &block)
-    widget Views::Widgets::BasicFormFor, form_for_params: form_for_params, title: title, definition: block
+  def basic_form_for(*form_for_params, title:, submit: nil, &block)
+    widget Views::Widgets::BasicFormFor, form_for_params: form_for_params, title: title, submit: submit, definition: block
   end
 
   def basic_table_for(enumerable, classes: nil, &block)

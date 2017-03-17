@@ -13,5 +13,8 @@ module MichiganPrototype
     # Project configuration
     config.site_name = "Michigan Prototype"
     config.project_description = ""
+
+    config.autoload_paths << Rails.root.join("app/steps")
+    config.autoload_paths << Rails.root.join("app/questions")
   end
 end

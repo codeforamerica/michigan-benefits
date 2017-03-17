@@ -18,6 +18,14 @@ gem "sorcery"
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "uglifier", ">= 1.3.0"
 
+# from gcf
+# gem 'bourbon'
+# gem 'neat'
+# gem 'pdf-forms'
+# gem 'prawn'
+# gem 'StreetAddress', :require => "street_address"
+# gem 'twilio-ruby'
+
 group :test do
   gem "database_cleaner"
   gem "faker"
@@ -34,6 +42,9 @@ group :development, :test do
   gem "poltergeist"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
+
+  # from gcf
+  # gem 'pdf-inspector'
 end
 
 group :development do

@@ -18,7 +18,7 @@ describe UsersController do
     context 'ENV has disabled sign-ups' do
       before do
         allow(ENV).to receive(:[]).and_return(nil)
-        allow(ENV).to receive(:[]).with('SIGNUPS_DISABLED').and_return(true)
+        allow(ENV).to receive(:[]).with('SIGNUPS_DISABLED').and_return("true")
       end
 
       it 'prevents sign-ups' do
@@ -33,16 +33,17 @@ describe UsersController do
 
   describe "#create", :guest do
     specify do
-      post :create, params: {user: {name: "Name", email: "email", password: "password"}}
-      expect(response).to redirect_to root_path
-      expect(User.last.name).to eq "Name"
-      expect(User.last.email).to eq "email"
+      post :create, params: {}
+      expect(response).to redirect_to step_path("introduce-yourself")
+      expect(User.last.name).to be_present
+      expect(User.last.email).to match /\w*@example.com/
+      expect(User.last.crypted_password).to be_present
     end
 
     context 'ENV has disabled sign-ups' do
       before do
         allow(ENV).to receive(:[]).and_return(nil)
-        allow(ENV).to receive(:[]).with('SIGNUPS_DISABLED').and_return(true)
+        allow(ENV).to receive(:[]).with('SIGNUPS_DISABLED').and_return("true")
       end
 
       it 'prevents sign-ups' do

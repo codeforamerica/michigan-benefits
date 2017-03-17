@@ -1,10 +1,10 @@
 class Views::Widgets::BasicFormFor < Views::Base
-  needs :form_for_params, :title, :definition
+  needs :form_for_params, :title, :definition, :submit
 
   def content
     row do
       column medium: 6 do
-        h2 title
+        h2 title if title
 
         form_for(*form_for_params) do |f|
           definition.call(self)
@@ -27,7 +27,7 @@ class Views::Widgets::BasicFormFor < Views::Base
             end
           end
 
-          f.submit 'Continue', class: 'button special'
+          f.submit (submit or 'Continue'), class: 'button special'
         end
       end
     end

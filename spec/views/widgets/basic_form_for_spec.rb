@@ -15,6 +15,7 @@ describe "widgets/basic_form_for.html.rb" do
     assign(:form_for_params, [user, { url: "/user/new" }])
     assign(:title, "User Details")
     assign(:definition, definition)
+    assign(:submit, nil)
 
     render
 
