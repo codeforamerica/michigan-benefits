@@ -1,5 +1,11 @@
 class Question
-  class_attribute :title, :placeholder, :type
+  include ActiveModel::Model
+  # extend ActiveModel::Naming
+  # include ActiveModel::Conversion
+  # include ActiveModel::Validations
+
+  class_attribute :title, :placeholder, :type, :model_attribute
+  attr_accessor :value
 
   self.type = :text
 
@@ -13,9 +19,26 @@ class Question
 
   def initialize(app)
     @app = app
+    self.get
   end
 
   def name
     self.class.name.underscore.to_sym
+  end
+
+  def get
+    @app.send(model_attribute.to_sym)
+  end
+
+  def set
+    new_value = if value.nil?
+      nil
+    elsif type == :yes_no
+      value.downcase.in? %w[yes true 1]
+    else
+      value
+    end
+
+    @app.send("#{model_attribute.to_sym}=", new_value)
   end
 end

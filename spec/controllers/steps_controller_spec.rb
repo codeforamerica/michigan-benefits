@@ -27,6 +27,12 @@ describe StepsController do
       expect(response).to redirect_to step_path("choose-programs")
     end
 
-    xit "show validations errors if any exist"
+    xit "show validations errors if any exist" do
+      post :update, params: {
+        id: "introduce-yourself",
+        step: { first_name: "Alice", last_name: "Aardvark", phone_number: "415-867-5309", accept_text_messages: "false" }
+      }
+
+    end
   end
 end

@@ -6,7 +6,7 @@ class StepsController < ApplicationController
     }
   end
 
-  def show
+  def show # TODO: should be "edit"
     @step = Step.find(params[:id], current_app)
     respond_with @step
   end
@@ -14,7 +14,11 @@ class StepsController < ApplicationController
   def update
     @step = Step.find(params[:id], current_app)
     @step.update(step_params)
-    respond_with @step, location: step_path(@step.next.to_param)
+    if @step.valid?
+      redirect_to step_path(@step.next.to_param)
+    else
+      render :show
+    end
   end
 
   private
