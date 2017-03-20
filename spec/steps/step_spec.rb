@@ -1,16 +1,8 @@
 require "rails_helper"
 
 describe Step do
-  class TestQuestionA < Question
-    self.model_attribute = :first_name
-  end
-
-  class TestQuestionB < Question
-    self.model_attribute = :last_name
-  end
-
   class TestStep < Step
-    self.questions = [TestQuestionA, TestQuestionB]
+    self.questions = [FirstName, LastName]
   end
 
   describe ".find" do
@@ -28,7 +20,7 @@ describe Step do
 
     context "when everything is valid" do
       it "updates the app" do
-        step.update({ test_question_a: "Alice", test_question_b: "Aardvark" })
+        step.update({ first_name: "Alice", last_name: "Aardvark" })
         expect(step).to be_valid
         expect(app.reload.first_name).to eq "Alice"
         expect(app.reload.last_name).to eq "Aardvark"
@@ -36,7 +28,14 @@ describe Step do
     end
 
     context "when some fields are invalid" do
+      it "does not update the app" do
+        app.update! first_name: "Alice", last_name: "Aardvark"
 
+        step.update({ first_name: "Billy", last_name: nil })
+        expect(step).not_to be_valid
+        expect(app.reload.first_name).to eq "Alice"
+        expect(app.reload.last_name).to eq "Aardvark"
+      end
     end
   end
 end
