@@ -3,12 +3,12 @@ source "https://rubygems.org"
 ruby "2.3.1"
 
 gem "awesome_print"
-gem "bourbon"
+gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "coffee-rails", "~> 4.1.0"
 gem "fortitude"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
-gem "neat", "~> 1.8"
+gem "neat", "~> 1.8" # to keep in sync with getcalfresh
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.0"
