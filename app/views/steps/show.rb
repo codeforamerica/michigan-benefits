@@ -6,33 +6,38 @@ class Views::Steps::Show < Views::Base
     h2 step.headline, class: "headline"
     h3 step.subhead, class: "subhead"
 
-    form_tag(request.path, method: :put) do
-      step.questions.each do |question|
-        label question.title, "data-question-type" => question.type do
-          name = "step[#{question.name}]"
+    form_for step, url: step_path(step), method: :put do |f|
+      step.questions.each do |question, label_text|
+        field_name = "step[#{question}]"
+        field_type = step.type(question)
 
-          if question.invalid?
-            text question.errors[:value].to_sentence
+        label label_text, "data-field-type" => field_type do
+          if step.errors[question].present?
+            text step.errors[question].to_sentence
           end
 
-          case question.type
+          case field_type
             when :text
-              text text_field_tag(name, "", placeholder: question.placeholder)
+              f.text_field question, name: field_name, placeholder: step.placeholder(question)
             when :yes_no
-              label "Yes" do
-                text radio_button_tag(name, "true")
-              end
-              label "No" do
-                text radio_button_tag(name, "false")
+              div do
+                label do
+                  f.radio_button question, "true", name: field_name
+                  text "Yes"
+                end
+                label do
+                  f.radio_button question, "false", name: field_name
+                  text "No"
+                end
               end
             else
-              raise "Unknown question type: #{question.type}"
+              raise "Unknown field type #{field_type}"
           end
         end
       end
 
       link_to "Go back", step_path(step.previous) if step.previous.present?
-      submit_tag "Continue"
+      f.submit "Continue"
     end
   end
 end

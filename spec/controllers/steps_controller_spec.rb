@@ -12,7 +12,7 @@ describe StepsController do
     it "saves the answers to the questions" do
       post :update, params: {
         id: "introduce-yourself",
-        step: { first_name: "Alice", last_name: "Aardvark", phone_number: "415-867-5309", accept_text_messages: "false" }
+        step: { first_name: "Alice", last_name: "Aardvark", phone_number: "415-867-5309", accepts_text_messages: "false" }
       }
 
       app = @member.app.reload

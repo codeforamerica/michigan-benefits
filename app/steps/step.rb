@@ -1,8 +1,8 @@
 class Step
   include ActiveModel::Model
+  include ActiveModel::AttributeAssignment
 
-  class_attribute :title, :headline, :subhead
-  class_attribute :questions, instance_accessor: false
+  class_attribute :title, :headline, :subhead, :questions, :placeholders, :types
 
   def self.first
     IntroduceYourself
@@ -18,12 +18,7 @@ class Step
 
   def initialize(app)
     @app = app
-  end
-
-  def questions
-    @questions ||= self.class.questions.map do |question_class|
-      question_class.new(@app)
-    end
+    assign_from_app
   end
 
   def to_param
@@ -31,21 +26,26 @@ class Step
   end
 
   def update(params)
-    questions.each do |question|
-      question.value = params[question.name]
-    end
+    assign_attributes(params)
 
     if valid?
-      questions.each(&:set)
-      @app.save!
+      update_app!
     end
   end
 
-  def valid?
-    questions.all?(&:valid?)
+  def placeholder(field)
+    placeholders[field].present? ? "(#{placeholders[field]})" : ""
   end
 
-  def errors
-    questions.map(&:errors).flatten
+  def type(field)
+    types.fetch(field, :text)
+  end
+
+  def assign_from_app
+    raise "Implement Me"
+  end
+
+  def update_app!
+    raise "Implement Me"
   end
 end

@@ -11,4 +11,10 @@ class ChoosePrograms < Step
   def next
     nil
   end
+
+  def assign_from_app
+  end
+
+  def update_app!
+  end
 end

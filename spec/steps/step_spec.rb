@@ -1,29 +1,39 @@
 require "rails_helper"
 
 describe Step do
-  class TestStep < Step
-    self.questions = [FirstName, LastName]
+  describe ".find" do
+    specify { expect(Step.find("introduce-yourself", App.new)).to be_an_instance_of IntroduceYourself }
   end
 
-  describe ".find" do
-    specify { expect(Step.find("test-step", App.new)).to be_an_instance_of TestStep }
+  describe "#initialize" do
+    it "assigns fields from the app" do
+      app = App.new(first_name: "Alice", phone_number: "415-867-5309")
+      step = IntroduceYourself.new(app)
+
+      expect(step.first_name).to eq "Alice"
+      expect(step.last_name).to eq nil
+      expect(step.phone_number).to eq "415-867-5309"
+      expect(step.accepts_text_messages).to eq nil
+    end
   end
 
   describe "#to_param" do
-    specify { expect(TestStep.to_param).to eq "test-step" }
-    specify { expect(TestStep.new(App.new).to_param).to eq "test-step" }
+    specify { expect(IntroduceYourself.to_param).to eq "introduce-yourself" }
+    specify { expect(IntroduceYourself.new(App.new).to_param).to eq "introduce-yourself" }
   end
 
   describe "#update" do
     let(:app) { App.new }
-    let(:step) { TestStep.new(app) }
+    let(:step) { IntroduceYourself.new(app) }
 
     context "when everything is valid" do
       it "updates the app" do
-        step.update({ first_name: "Alice", last_name: "Aardvark" })
+        step.update({ first_name: "Alice", last_name: "Aardvark", phone_number: "123-456-7890", accepts_text_messages: "true" })
         expect(step).to be_valid
         expect(app.reload.first_name).to eq "Alice"
         expect(app.reload.last_name).to eq "Aardvark"
+        expect(app.reload.phone_number).to eq "123-456-7890"
+        expect(app.reload.accepts_text_messages).to eq true
       end
     end
 

@@ -22,9 +22,9 @@ describe "applying", js: true do
     questions.each { |q, a, _| enter(q, a)}
     continue
 
-    # back
-    # questions.each { |q, a, _| verify(q, a)}
-    # continue
+    back
+    questions.each { |q, a, _| verify(q, a)}
+    continue
   end
 
   def within_question(question)
@@ -40,7 +40,7 @@ describe "applying", js: true do
   end
 
   def enter(question, answer)
-    type = find("label", text: question)["data-question-type"]
+    type = find("label", text: question)["data-field-type"]
     case type
       when "text"
         fill_in question, with: answer
@@ -54,8 +54,17 @@ describe "applying", js: true do
   end
 
   def verify(question, expected_answer)
+    type = find("label", text: question)["data-field-type"]
+
     within_question(question) do
-      expect(find("input").value).to eq expected_answer
+      case type
+        when "text"
+          expect(find("input").value).to eq expected_answer
+        when "yes_no"
+          expect(find("label", text: expected_answer).find("input").checked?).to eq true
+        else
+          raise "Unsupported type: #{type}"
+      end
     end
   end
 

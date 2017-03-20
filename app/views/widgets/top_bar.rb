@@ -15,7 +15,7 @@ class Views::Widgets::TopBar < Views::Base
         if logged_in?
           ul class: "menu align-right" do
             li do
-              li current_user.name, class: "logged-in-as menu-text"
+              li current_user.full_name, class: "logged-in-as menu-text"
               li do
                 link_to "Log Out", sessions_path, method: :delete
               end

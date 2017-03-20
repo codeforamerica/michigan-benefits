@@ -24,7 +24,7 @@ class StepsController < ApplicationController
   private
 
   def step_params
-    params.require(:step).permit @step.questions.map(&:name)
+    params.require(:step).permit @step.questions.keys
   end
 
 end
