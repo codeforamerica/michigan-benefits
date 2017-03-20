@@ -6,8 +6,6 @@ describe StepsController do
       get :show, params: { id: "introduce-yourself" }
       expect(assigns(:step)).to be_an_instance_of IntroduceYourself
     end
-
-    xit "includes values from the database if present"
   end
 
   describe "#update", :member do
@@ -25,14 +23,6 @@ describe StepsController do
       expect(app.accepts_text_messages).to eq false
 
       expect(response).to redirect_to step_path("choose-programs")
-    end
-
-    xit "show validations errors if any exist" do
-      post :update, params: {
-        id: "introduce-yourself",
-        step: { first_name: "Alice", last_name: "Aardvark", phone_number: "415-867-5309", accept_text_messages: "false" }
-      }
-
     end
   end
 end

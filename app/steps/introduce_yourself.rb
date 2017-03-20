@@ -9,6 +9,10 @@ class IntroduceYourself < Step
     AcceptTextMessages,
   ]
 
+  def previous
+    nil
+  end
+
   def next
     ChoosePrograms.new(@app)
   end

@@ -6,18 +6,36 @@ describe "applying", js: true do
 
     click_on "Apply Now"
 
-    step "To start, please introduce yourself." do |s|
-      enter "What is your first name?", "Alice"
-      enter "What is your last name?", "Aardvark"
-      enter "What is the best phone number to reach you?", "415-867-5309"
-      enter "May we send text messages to that phone number help you through the enrollment process?", "Yes"
-      continue
+    check_step "To start, please introduce yourself.",
+      ["What is your first name?", "Alice", "Make sure to provide a first name"],
+      ["What is your last name?", "Aardvark", "Make sure to provide a last name"],
+      ["What is the best phone number to reach you?", "415-867-5309", "Make sure your phone number is 10 digits long"],
+      ["May we send text messages to that phone number help you through the enrollment process?", "Yes", "Make sure to answer this question"]
+  end
 
-      # back
-      # verify "What is your first name?", "Alice"
-      # verify "What is your last name?", "Aardvark"
-      # verify "What is the best phone number to reach you?", "415-867-5309"
-      # verify "May we send text messages to that phone number help you through the enrollment process?", "Yes"
+  def check_step(subhead, *questions)
+    expect(find(".subhead").text).to eq subhead
+
+    continue
+    questions.each { |q, _, e| expect_validation_error q, e }
+
+    questions.each { |q, a, _| enter(q, a)}
+    continue
+
+    # back
+    # questions.each { |q, a, _| verify(q, a)}
+    # continue
+  end
+
+  def within_question(question)
+    within("label", text: question) do
+      yield
+    end
+  end
+
+  def expect_validation_error(question, expected_error)
+    within_question(question) do
+      expect(page).to have_text expected_error
     end
   end
 
@@ -27,7 +45,7 @@ describe "applying", js: true do
       when "text"
         fill_in question, with: answer
       when "yes_no"
-        within("label", text: question) do
+        within_question(question) do
           choose answer
         end
       else
@@ -36,7 +54,7 @@ describe "applying", js: true do
   end
 
   def verify(question, expected_answer)
-    within("label", text: question) do
+    within_question(question) do
       expect(find("input").value).to eq expected_answer
     end
   end

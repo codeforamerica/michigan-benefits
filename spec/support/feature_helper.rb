@@ -4,7 +4,6 @@ module FeatureHelper
   end
 
   def step(title, &block)
-    expect(find(".subhead").text).to eq title
     print title unless ENV["QUIET_TESTS"]
     block.call
     puts unless ENV["QUIET_TESTS"]

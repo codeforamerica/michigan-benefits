@@ -4,6 +4,10 @@ class ChoosePrograms < Step
   self.subhead = "Choose the programs you want to apply for today."
   self.questions = []
 
+  def previous
+    IntroduceYourself.new(@app)
+  end
+
   def next
     nil
   end

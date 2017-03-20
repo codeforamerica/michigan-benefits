@@ -10,6 +10,11 @@ class Views::Steps::Show < Views::Base
       step.questions.each do |question|
         label question.title, "data-question-type" => question.type do
           name = "step[#{question.name}]"
+
+          if question.invalid?
+            text question.errors[:value].to_sentence
+          end
+
           case question.type
             when :text
               text text_field_tag(name, "", placeholder: question.placeholder)
@@ -26,6 +31,7 @@ class Views::Steps::Show < Views::Base
         end
       end
 
+      link_to "Go back", step_path(step.previous) if step.previous.present?
       submit_tag "Continue"
     end
   end

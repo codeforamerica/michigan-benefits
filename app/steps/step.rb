@@ -36,9 +36,7 @@ class Step
     end
 
     if valid?
-      questions.each do |question|
-        question.set
-      end
+      questions.each(&:set)
       @app.save!
     end
   end
