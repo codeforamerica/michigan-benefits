@@ -1,3 +1,3 @@
 heroku_app_names:
-  prod: michigan-prototype-prod
-  staging: michigan-prototype-staging
+  prod: michigan-benefits-prod
+  staging: michigan-benefits-staging
