@@ -21,9 +21,7 @@ class Views::Layouts::Application < Views::Base
           div msg, "aria-label" => name, "aria-role" => "dialog", class: ['callout', 'flash', name]
         end
 
-        div style: "height: 3rem"
-
-        div class: %i[container] do
+        div class: "page-wrapper" do
           yield
         end
       end

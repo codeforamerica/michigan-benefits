@@ -3,11 +3,12 @@ source "https://rubygems.org"
 #ruby "2.3.1"
 
 gem "awesome_print"
+gem "bourbon"
 gem "coffee-rails", "~> 4.1.0"
 gem "fortitude"
-gem "foundation-rails"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
+gem "neat", "~> 1.8"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.0"
@@ -19,8 +20,6 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows doe
 gem "uglifier", ">= 1.3.0"
 
 # from gcf
-# gem 'bourbon'
-# gem 'neat'
 # gem 'pdf-forms'
 # gem 'prawn'
 # gem 'StreetAddress', :require => "street_address"
