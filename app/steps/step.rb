@@ -2,7 +2,14 @@ class Step
   include ActiveModel::Model
   include ActiveModel::AttributeAssignment
 
-  class_attribute :title, :headline, :subhead, :questions, :placeholders, :types
+  class_attribute \
+    :icon,
+    :title,
+    :headline,
+    :subhead,
+    :questions,
+    :placeholders,
+    :types
 
   def self.first
     IntroduceYourself
@@ -34,7 +41,7 @@ class Step
   end
 
   def placeholder(field)
-    placeholders[field].present? ? "(#{placeholders[field]})" : ""
+    placeholders.fetch(field, "")
   end
 
   def type(field)

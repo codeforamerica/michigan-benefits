@@ -1,0 +1,14 @@
+$element-margin-top: 5rem;
+
+.step-section-header {
+  text-align: center;
+
+  &__headline {
+    color: $color-sky;
+  }
+
+  &__subhead {
+    font-weight: bold;
+    margin: 0;
+  }
+}

@@ -12,8 +12,6 @@ describe Step do
 
       expect(step.first_name).to eq "Alice"
       expect(step.last_name).to eq nil
-      expect(step.phone_number).to eq "415-867-5309"
-      expect(step.accepts_text_messages).to eq nil
     end
   end
 
@@ -28,12 +26,11 @@ describe Step do
 
     context "when everything is valid" do
       it "updates the app" do
-        step.update({ first_name: "Alice", last_name: "Aardvark", phone_number: "123-456-7890", accepts_text_messages: "true" })
+        step.update(first_name: "Alice", last_name: "Aardvark")
+
         expect(step).to be_valid
         expect(app.reload.first_name).to eq "Alice"
         expect(app.reload.last_name).to eq "Aardvark"
-        expect(app.reload.phone_number).to eq "123-456-7890"
-        expect(app.reload.accepts_text_messages).to eq true
       end
     end
 
@@ -42,6 +39,7 @@ describe Step do
         app.update! first_name: "Alice", last_name: "Aardvark"
 
         step.update({ first_name: "Billy", last_name: nil })
+
         expect(step).not_to be_valid
         expect(app.reload.first_name).to eq "Alice"
         expect(app.reload.last_name).to eq "Aardvark"

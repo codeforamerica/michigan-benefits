@@ -8,13 +8,13 @@ describe "applying", js: true do
 
     check_step "To start, please introduce yourself.",
       ["What is your first name?", "Alice", "Make sure to provide a first name"],
-      ["What is your last name?", "Aardvark", "Make sure to provide a last name"],
-      ["What is the best phone number to reach you?", "415-867-5309", "Make sure your phone number is 10 digits long"],
-      ["May we send text messages to that phone number help you through the enrollment process?", "Yes", "Make sure to answer this question"]
+      ["What is your last name?", "Aardvark", "Make sure to provide a last name"]
   end
 
   def check_step(subhead, *questions)
-    expect(page).to have_selector(".subhead", text: subhead)
+    expect(page).to have_selector \
+      ".step-section-header__subhead",
+      text: subhead
 
     continue
     questions.each { |q, _, e| expect_validation_error q, e }
@@ -28,42 +28,46 @@ describe "applying", js: true do
   end
 
   def within_question(question)
-    within("label", text: question) do
-      yield
+    label = find(".form-group label", text: question)
+
+    group = label.first(
+      :xpath,
+      "ancestor::*[local-name()='div' and contains(@class, 'form-group')]"
+    )
+
+    within(group) do
+      yield group
     end
   end
 
   def expect_validation_error(question, expected_error)
-    within_question(question) do
+    within_question(question) do |group|
       expect(page).to have_text expected_error
     end
   end
 
   def enter(question, answer)
-    type = find("label", text: question)["data-field-type"]
-    case type
+    within_question(question) do |group|
+      case group['data-field-type']
       when "text"
         fill_in question, with: answer
       when "yes_no"
-        within_question(question) do
-          choose answer
-        end
+        choose answer
       else
         raise "Unsupported type: #{type}"
+      end
     end
   end
 
   def verify(question, expected_answer)
-    type = find("label", text: question)["data-field-type"]
-
-    within_question(question) do
-      case type
-        when "text"
-          expect(find("input").value).to eq expected_answer
-        when "yes_no"
-          expect(find("label", text: expected_answer).find("input").checked?).to eq true
-        else
-          raise "Unsupported type: #{type}"
+    within_question(question) do |group|
+      case group['data-field-type']
+      when "text"
+        expect(find("input").value).to eq expected_answer
+      when "yes_no"
+        expect(find("label", text: expected_answer).find("input").checked?).to eq true
+      else
+        raise "Unsupported type: #{type}"
       end
     end
   end

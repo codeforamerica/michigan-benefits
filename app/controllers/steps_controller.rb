@@ -14,6 +14,7 @@ class StepsController < ApplicationController
   def update
     @step = Step.find(params[:id], current_app)
     @step.update(step_params)
+
     if @step.valid?
       redirect_to step_path(@step.next.to_param)
     else
@@ -26,5 +27,4 @@ class StepsController < ApplicationController
   def step_params
     params.require(:step).permit @step.questions.keys
   end
-
 end

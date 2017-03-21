@@ -1,3 +1,5 @@
+$active-field-color: $color-sky;
+
 fieldset {
 	border: 0;
 	padding: 0;
@@ -32,7 +34,7 @@ label {
 	background-color: transparent;
 	outline: none;
 	&:focus {
-		border-color: $color-teal;
+		border-color: $active-field-color;
 	}
 	@include placeholder() {
 		color: $color-grey;
@@ -61,8 +63,8 @@ label {
 	}
 
 	&.is-selected {
-		background-color: $color-teal;
-		border-color: $color-teal;
+		background-color: $active-field-color;
+		border-color: $active-field-color;
 		color: #fff;
 	}
 }
@@ -87,8 +89,8 @@ label {
 	}
 
 	&.is-selected {
-		background-color: $color-teal;
-		border-color: $color-teal;
+		background-color: $active-field-color;
+		border-color: $active-field-color;
 		color: #fff;
 	}
 }
@@ -103,7 +105,7 @@ label {
 	margin-bottom: .5em;
 
 	&:focus {
-		border-color: $color-teal;
+		border-color: $active-field-color;
 	}
 }
 
@@ -125,7 +127,7 @@ label {
     font-family: $font-icon;
     content: '\e313';
     background-color: $color-light-grey;
-    color: $color-teal;
+    color: $active-field-color;
     border: 2px solid $color-light-grey;
     width: 2em;
     text-align: center;
@@ -161,7 +163,7 @@ label {
   background-color: transparent;
 
   &:focus {
-    border-color: $color-teal;
+    border-color: $active-field-color;
   }
 }
 
@@ -178,7 +180,7 @@ label {
 	z-index: -1;
 	&:focus {
 		+ .file-upload__label {
-			outline: 2px solid tint($color-teal, 50%);
+			outline: 2px solid tint($active-field-color, 50%);
 		}
 	}
 }
