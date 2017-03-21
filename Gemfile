@@ -39,6 +39,7 @@ group :development, :test do
   gem "climate_control"
   gem "launchy"
   gem "poltergeist"
+  gem "pry-rails"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
 
