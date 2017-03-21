@@ -1,3 +1,3 @@
 .template--step {
-  margin-top: $step-header-height;
+  margin-top: ($step-header-height + (2 * $em-base));
 }

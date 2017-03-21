@@ -38,20 +38,6 @@
   overflow: hidden;
 }
 
-.card {
-    border: 2px solid $color-tan;
-    padding: 1.5em $site-margins/2;
-    background-color: #FFFFFF;
-    margin-bottom: 2em;
-    > *:last-child {
-        margin-bottom: 0;
-    }
-
-    @include media($tablet-up) {
-      padding: 1.5em 2em;
-    }
-}
-
 .textwell {
   padding: 2em;
   max-height: 30rem;

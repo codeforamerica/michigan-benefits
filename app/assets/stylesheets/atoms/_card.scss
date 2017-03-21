@@ -1,0 +1,23 @@
+.card {
+  border: 2px solid $color-tan;
+  padding: 1.5em $site-margins/2;
+  background-color: #FFFFFF;
+  margin-bottom: 2em;
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  @include media($tablet-up) {
+    padding: 1.5em 2em;
+  }
+
+  &--narrow {
+    border-width: 0;
+    width: 100%;
+
+    @include media($tablet-up) {
+      max-width: $mobile-up;
+      margin: 0 auto;
+    }
+  }
+}
