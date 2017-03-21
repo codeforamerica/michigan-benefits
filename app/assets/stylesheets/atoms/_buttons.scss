@@ -28,15 +28,15 @@
 
 .button--cta {
   color: #FFFFFF;
-  background-color: $color-magenta;
-  border-color: $color-magenta;
-  border-bottom-color: shade($color-magenta, 15%);
+  background-color: $color-sky;
+  border-color: $color-sky;
+  border-bottom-color: shade($color-sky, 15%);
   &:hover {
-      background-color: tint($color-magenta, 20%);
+      background-color: tint($color-sky, 20%);
       color: #FFFFFF;
   }
   &:active {
-      background-color: shade($color-magenta, 15%);
+      background-color: shade($color-sky, 15%);
   }
 }
 

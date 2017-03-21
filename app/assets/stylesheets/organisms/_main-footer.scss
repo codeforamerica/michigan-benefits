@@ -3,7 +3,6 @@ body {
   @include media($tablet-up) {
     margin-bottom: $footer-height;
   }
-  
 }
 
 .main-footer {
@@ -15,7 +14,7 @@ body {
   color: $color-grey;
   background-color: $color-darkest-grey;   
   padding: 2em $site-margins/2;
-  font-weight: 600;
+  font-weight: 300;
 
   @include media($tablet-up) {
     padding: 2em $site-margins;
@@ -31,12 +30,14 @@ body {
   }
 }
 
-.main-footer__cfa-logo {
-  margin-top: 2em;
+.main-footer {
+  .illustration--cfa, .illustration--civilla {
+    float: left;
+    margin-top: 2rem;
+  }
 
-  @include media($tablet-up) {
-    margin-top: 1em;
-    float: right;
+  .illustration--civilla {
+    margin-left: 2rem;
   }
 }
 

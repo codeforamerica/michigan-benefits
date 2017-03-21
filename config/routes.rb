@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :steps, only: %i[show update]
   resources :users, only: %i[new create]
 
+  get "/styleguide", to: "styleguides#index"
+
   # SSL/Let's Encrypt
   get '/.well-known/acme-challenge/:id' => 'acme_challenges#show'
 end

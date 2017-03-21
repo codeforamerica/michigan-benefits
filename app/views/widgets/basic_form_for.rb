@@ -7,7 +7,7 @@ class Views::Widgets::BasicFormFor < Views::Base
         h2 title if title
 
         form_for(*form_for_params) do |f|
-          definition.call(self)
+          definition&.call(self)
 
           fields.each.with_index do |form_field, index|
             errors = f.object.present? ? f.object.errors[form_field.name] : nil

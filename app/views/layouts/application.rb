@@ -14,13 +14,7 @@ class Views::Layouts::Application < Views::Base
         javascript_include_tag 'application'
       end
 
-      body class: "#{controller_name.underscore.dasherize}-#{action_name.underscore.dasherize}" do
-        top_bar title: Rails.application.config.site_name
-
-        flash.each do |name, msg|
-          div msg, "aria-label" => name, "aria-role" => "dialog", class: ['callout', 'flash', name]
-        end
-
+      body class: "template--#{content_for(:template_name) if content_for?(:template_name)}" do
         div class: "page-wrapper" do
           yield
         end

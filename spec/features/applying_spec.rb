@@ -4,7 +4,7 @@ describe "applying", js: true do
   specify do
     visit root_path
 
-    click_on "Apply Now"
+    click_on "Start Now"
 
     check_step "To start, please introduce yourself.",
       ["What is your first name?", "Alice", "Make sure to provide a first name"],

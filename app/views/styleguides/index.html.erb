@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Styleguide</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application', async: true  %>
+
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="template--styleguide">
+    <div class="page-wrapper">
+      <header class="main-header">
+        <div class="grid">
+          <div class="grid__item">
+            <h1 class="main-header__logo">GetCalFresh.org</h1>
+          </div>
+        </div>
+      </header>
+      <section class="slab slab--styleguide">
+        <div class="grid">
+          <div class="grid__item width-one-half shift-one-fourth">
+            <h1>Atoms</h1>
+            <p class="text--help">Atoms are the basic building blocks of matter. Applied to web interfaces, atoms are our HTML tags, such as a form label, an input or a button.</p>
+            <p class="text--help">Atoms can also include more abstract elements like color palettes, fonts and even more invisible aspects of an interface like animations.</p>
+            <p class="text--help">Like atoms in nature they’re fairly abstract and often not terribly useful on their own. However, they’re good as a reference in the context of a pattern library as you can see all your global styles laid out at a glance.</p>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Slab Layout</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+          <p>This is an example slab, it's used to section out content, especially on marketing pages. Inside of slabs, use the grid component to lay things out. Almost everything on this page is laid out using slabs and grids.</p> 
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid with-padding-large">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Grid Layout</p>
+          </div>
+          <div class="grid__item width-one-fourth">
+          <p>This is an example grid. Every element on the page should be within a grid element.</p> 
+          </div>
+          <div class="grid__item width-one-fourth">
+          <p>The grid allows you to size things from 1/12 to 1/1. Shift classes allow you to create empty spaces to the left of the grid item.</p> 
+          </div>
+          <div class="grid__item width-one-fourth">
+          <p>Grid items default to full width on mobile. More complex grid behaviors or nested grids should be created using the neat mixins.</p> 
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Layout</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="card">
+              <p>This is an example card. It's used to highlight and focus content. This may or may not be used for forms.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Colors</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <p>
+              <div class="color color--tan">#DEDED1</div>
+              <div class="color color--magenta">#A6005E</div>
+              <div class="color color--teal">#019C86</div>
+              <div class="color color--red">#D40000</div>
+              <div class="color color--green">#009933</div>
+            </p>
+            <p>
+              <div class="color color--background">#FAFAF9</div>
+              <div class="color color--light-grey">#EAEAE9</div>
+              <div class="color color--grey">#AAAAAA</div>
+              <div class="color color--darkest-grey">#333333</div>
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Icons</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <i class="example-icon icon-add"></i>
+            <i class="example-icon icon-add_a_photo"></i>
+            <i class="example-icon icon-add_circle"></i>
+            <i class="example-icon icon-control_point"></i>
+            <i class="example-icon icon-arrow_back"></i>
+            <i class="example-icon icon-arrow_downward"></i>
+            <i class="example-icon icon-arrow_drop_down"></i>
+            <i class="example-icon icon-arrow_drop_up"></i>
+            <i class="example-icon icon-arrow_forward"></i>
+            <i class="example-icon icon-arrow_upward"></i>
+            <i class="example-icon icon-call_made"></i>
+            <i class="example-icon icon-call_received"></i>
+            <i class="example-icon icon-cancel"></i>
+            <i class="example-icon icon-check"></i>
+            <i class="example-icon icon-check_box"></i>
+            <i class="example-icon icon-check_box_outline_blank"></i>
+            <i class="example-icon icon-check_circle"></i>
+            <i class="example-icon icon-navigate_before"></i>
+            <i class="example-icon icon-navigate_next"></i>
+            <i class="example-icon icon-close"></i>
+            <i class="example-icon icon-mode_edit"></i>
+            <i class="example-icon icon-delete"></i>
+            <i class="example-icon icon-delete_forever"></i>
+            <i class="example-icon icon-done"></i>
+            <i class="example-icon icon-done_all"></i>
+            <i class="example-icon icon-time_to_leave"></i>
+            <i class="example-icon icon-markunread"></i>
+            <i class="example-icon icon-expand_less"></i>
+            <i class="example-icon icon-favorite"></i>
+            <i class="example-icon icon-favorite_border"></i>
+            <i class="example-icon icon-get_app"></i>
+            <i class="example-icon icon-file_upload"></i>
+            <i class="example-icon icon-help"></i>
+            <i class="example-icon icon-help_outline"></i>
+            <i class="example-icon icon-highlight_off"></i>
+            <i class="example-icon icon-photo"></i>
+            <i class="example-icon icon-info"></i>
+            <i class="example-icon icon-info_outline"></i>
+            <i class="example-icon icon-insert_comment"></i>
+            <i class="example-icon icon-tag_faces"></i>
+            <i class="example-icon icon-keyboard_arrow_down"></i>
+            <i class="example-icon icon-keyboard_arrow_left"></i>
+            <i class="example-icon icon-keyboard_arrow_right"></i>
+            <i class="example-icon icon-keyboard_arrow_up"></i>
+            <i class="example-icon icon-keyboard_backspace"></i>
+            <i class="example-icon icon-language"></i>
+            <i class="example-icon icon-room"></i>
+            <i class="example-icon icon-lock_open"></i>
+            <i class="example-icon icon-lock_outline"></i>
+            <i class="example-icon icon-mood_bad"></i>
+            <i class="example-icon icon-move_to_inbox"></i>
+            <i class="example-icon icon-no_encryption"></i>
+            <i class="example-icon icon-notifications"></i>
+            <i class="example-icon icon-notifications_active"></i>
+            <i class="example-icon icon-notifications_off"></i>
+            <i class="example-icon icon-people"></i>
+            <i class="example-icon icon-group_add"></i>
+            <i class="example-icon icon-person"></i>
+            <i class="example-icon icon-person_add"></i>
+            <i class="example-icon icon-phone_in_talk"></i>
+            <i class="example-icon icon-phone_iphone"></i>
+            <i class="example-icon icon-visibility"></i>
+            <i class="example-icon icon-replay"></i>
+            <i class="example-icon icon-report"></i>
+            <i class="example-icon icon-warning"></i>
+            <i class="example-icon icon-sentiment_dissatisfied"></i>
+            <i class="example-icon icon-sentiment_neutral"></i>
+            <i class="example-icon icon-sentiment_satisfied"></i>
+            <i class="example-icon icon-sentiment_very_dissatisfied"></i>
+            <i class="example-icon icon-sentiment_very_satisfied"></i>
+            <i class="example-icon icon-settings"></i>
+            <i class="example-icon icon-star_border"></i>
+            <i class="example-icon icon-stars"></i>
+            <i class="example-icon icon-thumb_down"></i>
+            <i class="example-icon icon-thumb_up"></i>
+            <i class="example-icon icon-timer"></i>
+            <i class="example-icon icon-translate"></i>
+            <i class="example-icon icon-vertical_align_bottom"></i>
+            <i class="example-icon icon-vertical_align_top"></i>
+            <i class="example-icon icon-watch_later"></i>
+            <i class="example-icon icon-zoom_in"></i>
+            <i class="example-icon icon-zoom_out"></i>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Typography</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <h1>Heading Level 1</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, provident minima saepe recusandae consectetur. Cupiditate ex ut quasi, doloribus, velit quo, fugiat alias odit, saepe praesentium ipsam necessitatibus deleniti cum.</p> 
+            <h2>Heading Level 2</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, provident minima saepe recusandae consectetur. Cupiditate ex ut quasi, doloribus, velit quo, fugiat alias odit, saepe praesentium ipsam necessitatibus deleniti cum.</p>
+            <h3>Heading Level 3</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia harum fugit saepe, laudantium sit iure nihil alias voluptatibus neque sed perferendis ad quod maiores, fugiat tenetur. Adipisci modi cum at.</p>
+            <h4>Heading Level 4</h4>
+            <p><a href="#">This is what link text looks like. This is what link text looks like. This is what link text looks like.</a></p>
+            <p><a href="#" class="link--subtle">This is what subtle link text looks like</a></p>
+            <p class="text--small">This is what small text looks like. Used for legalize, small links, etc.</p>
+            <p class="text--help">This is what help text looks like. It's used to provide supporting information.</p>
+            <p class="text--error">This is what error text looks like.</p>
+            <ul>
+              <li>Unstyled list item 1</li>
+              <li>Unstyled list item 2</li>
+              <li>Unstyled list item 3</li>
+            </ul>
+            <ul class="list--padded">
+              <li>Padded list item 1</li>
+              <li>Padded list item 2</li>
+              <li>Padded list item 3</li>
+            </ul>
+            <ul class="list--bulleted">
+              <li>Bulleted list item 1</li>
+              <li>Bulleted list item 2</li>
+              <li>Bulleted list item 3</li>
+            </ul>
+            <ol class="list--numbered">
+              <li>Numbered list item 1</li>
+              <li>Numbered list item 2</li>
+              <li>Numbered list item 3</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Labels</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <p>
+              <span class="label">Beta</span>
+              <span class="label label--magenta">Featured</span>
+              <span class="label label--teal">New</span>
+              <span class="label label--green">Done</span>
+              <span class="label label--orange">In Progress</span>
+              <span class="label label--red">Error</span>
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Buttons</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <p>
+              <button class="button button--small button--cta">CTA Button</button>
+              <button class="button button--small button--primary">Primary Button</button>
+              <button class="button button--small">Button</button>
+              <button class="button button--small button--danger">Danger Button</button>
+            </p>
+            <p>
+              <button class="button button--cta">CTA Button</button>
+              <button class="button button--primary">Primary Button</button>
+              <button class="button">Button</button>
+              <button class="button button--danger">Danger Button</button>
+            </p>
+            <p>
+            <button class="button button--cta button--large">CTA Button</button>
+            <button class="button button--primary button--large">Primary Button</button>
+            <button class="button button--large">Button</button>
+            <button class="button button--danger button--large">Danger Button</button>  
+            </p>
+            <p>
+              <button class="button">Button with icon <i class="button__icon icon-arrow_forward"></i></span></button>
+              <button class="button"><i class="button__icon--left icon-arrow_back"></i></span> Button with icon</button>
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Form Elements</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <form action="POST">
+              <label class="form-question" for="example_text">Form question, usually posed as a question?</label>
+              <input type="text" class="text-input" placeholder="Text input" name="example_text">
+              <input type="text" class="text-input form-width--long" placeholder="Long" name="example_text">
+              <input type="text" class="text-input form-width--med" placeholder="Medium" name="example_text">
+              <input type="text" class="text-input form-width--short" placeholder="Short" name="example_text">
+              <input type="text" class="text-input form-width--name" placeholder="Name" name="example_text">
+              <input type="text" class="text-input form-width--phone" placeholder="Phone #" name="example_text">
+              <input type="text" class="text-input form-width--ssn" placeholder="SSN" name="example_text">
+              <input type="text" class="text-input form-width--zip" placeholder="ZIP" name="example_text">
+              <label for="example_radio" class="radio-button">
+                <input type="radio" name="example_radio" id="example_radio">
+                Example radio button
+              </label>
+              <label for="example_checkbox" class="checkbox">
+                <input type="checkbox" name="example_checkbox" id="example_checkbox">
+                Example checkbox
+              </label>
+              <div class="select">
+                <select class="select__element" name="example_select" id="example_select">
+                  <option selected disabled>Choose a selection</option>
+                  <option value="1">Selection 1</option>
+                  <option value="2">Selection 2</option>
+                  <option value="2">Selection 3</option>
+                </select>
+              </div>
+
+              <textarea name="example_textarea" class="textarea" id="" cols="30" rows="10"></textarea>
+              <div class="file-upload">
+                <input type="file" id="example_file_upload" name="example_file_upload" class="file-upload__input">
+                <label class="button" for="example_file_upload">Upload documents <i class="button__icon icon-file_upload"></i></label>
+              </div>
+              
+            </form>
+            <p class="text--help"><em>General atomic form elements have no knowledge about their size and default to full width. Form molecules and organisms or modifier classes should be used to define form element sizes and layout.</em></p>
+          </div>
+        </div>
+      </section>
+      <section class="slab slab--styleguide">
+        <div class="grid">
+          <div class="grid__item width-one-half shift-one-fourth">
+            <h1>Molecules</h1>
+            <p class="text--help">Things start getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. These molecules take on their own properties and serve as the backbone of our design systems.</p>
+            <p class="text--help">For example, a form label, input or button aren’t too useful by themselves, but combine them together as a form and now they can actually do something together.</p>
+            <p class="text--help">Building up to molecules from atoms encourages a “do one thing and do it well” mentality. While molecules can be complex, as a rule of thumb they are relatively simple combinations of atoms built for reuse.</p>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Media Box</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="media-box">
+              <div class="media-box__media media--icon">
+                <img src="<%= image_path 'calfresh_logo.png' %>" alt="calfresh logo">
+              </div>
+              <div class="media-box__content">
+                <p>A media box is used to juxtapose a piece of media (like an image) with a block of content. It is used when the media and content is treated holistically as one block and does not align to the grid.</p>
+              </div>
+              <div class="media-box media-box--reversed">
+                <div class="media-box__media media--small">
+                  <img src="<%= image_path 'calfresh_logo.png' %>" alt="calfresh logo">
+                </div>
+                <div class="media-box__content">
+                  <p> There are modifier classes on the media element to size the media and to present it either on the left or right.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Toolbar</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="toolbar">
+              <div class="toolbar__left"><b>Logo</b></div>
+              <div class="toolbar__right"><a href="#">Link</a></div>
+              <div class="toolbar__right"><a href="#">Link</a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Tab bar</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="tab-bar">
+              <a href="#" class="tab-bar__tab is-selected">Clients</a>
+              <a href="#" class="tab-bar__tab">Analytics</a>
+              <a href="#" class="tab-bar__tab">Team</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Flash messages</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="example-container">
+              <div class="flash">
+                <p class="flash__message">Your changes have been saved.</p>
+                <a href="#" class="flash__dismiss"><span class="icon icon-close"></span></a>
+              </div>
+            </div>
+            <div class="example-container">
+              <div class="flash flash--error">
+                <p class="flash__message">You must be signed in to continue.</p>
+                <a href="#" class="flash__dismiss"><span class="icon icon-close"></span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Progress indicator</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="progress-indicator">
+              <div class="progress-indicator__bar" style="width:50%"></div>
+              <div class="progress-indicator__percentage">50% complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Summary Table</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="summary-table">
+              <div class="grid">
+                <div class="grid__item width-one-third">
+                  <p class="summary-table__label">Household size</p>
+                  <p class="summary-table__value">1 <span class="icon icon-person"></span></p>
+                </div>
+                <div class="grid__item width-one-third">
+                  <p class="summary-table__label">Last month's income</p>
+                  <p class="summary-table__value">$1000</p>
+                </div>
+                <div class="grid__item width-one-third">
+                  <p class="summary-table__label">County</p>
+                  <p class="summary-table__value">Marin</p>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Data Table</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <table class="data-table">
+              <thead>
+                <tr>
+                 <th>Applicant</th>
+                 <th>Birth date</th>
+                 <th>Confirmation #</th> 
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Applicant 1</td>
+                  <td>04/02/1988</td>
+                  <td>AKJHSD83K</td>
+                </tr>
+                <tr class="row--warning">
+                  <td>Applicant 2</td>
+                  <td>04/02/1988</td>
+                  <td>AKJHSD83K</td>
+                </tr>
+                <tr>
+                  <td>Applicant 3</td>
+                  <td>04/02/1988</td>
+                  <td>AKJHSD83K</td>
+                </tr>
+                <tr>
+                  <td>Applicant 4</td>
+                  <td>04/02/1988</td>
+                  <td>AKJHSD83K</td>
+                </tr>
+                <tr class="row--error">
+                  <td>Applicant 5</td>
+                  <td>04/02/1988</td>
+                  <td>AKJHSD83K</td>
+                </tr>
+                <tr>
+                  <td>Applicant 6</td>
+                  <td>04/02/1988</td>
+                  <td>AKJHSD83K</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Searchbar</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <form class="searchbar form-width--searchbar toolbar__item">
+              <input type="text" class="searchbar__input" placeholder="Search applicants by name or confirmation #">
+              <label class="searchbar__button"><span class="icon icon-arrow_forward"></span><button type="submit"></button></label>
+            </form>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Text Input Group</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="text-input-group">
+              <div class="text-input-group__prefix">$</div>
+              <input type="text" class="text-input" placeholder="Text input with pre and post labels" name="example_text">
+              <div class="text-input-group__postfix">.00</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Incrementer</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <div class="incrementer">
+              <input type="number" class="text-input form-width--short" name="incrementer" value="1" min="0" max="10">
+              <span class="incrementer__subtract">-</span>
+              <span class="incrementer__add">+</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Block Input Group</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <form action="POST">
+              <radiogroup class="input-group--block">
+                <label for="example_radio_block_1" class="radio-button">
+                  <input type="radio" name="example_radio_block" id="example_radio_block_1">
+                  Radio button 1
+                </label>
+                <label for="example_radio_block_2" class="radio-button">
+                  <input type="radio" name="example_radio_block" id="example_radio_block_2">
+                  Radio button 2
+                </label>
+                <label for="example_radio_block_3" class="radio-button">
+                  <input type="radio" name="example_radio_block" id="example_radio_block_3">
+                  Radio button 3
+                </label>
+              </radiogroup>
+            </form>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Inline Input Group</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <form action="POST">
+              <radiogroup class="input-group--inline">
+                <label for="example_radio_inline_1" class="radio-button">
+                  <input type="radio" name="example_radio_inline" id="example_radio_inline_1">
+                  1
+                </label>
+                <label for="example_radio_inline_2" class="radio-button">
+                  <input type="radio" name="example_radio_inline" id="example_radio_inline_2">
+                  2
+                </label>
+                <label for="example_radio_inline_3" class="radio-button">
+                  <input type="radio" name="example_radio_inline" id="example_radio_inline_3">
+                  3
+                </label>
+                <label for="example_radio_inline_4" class="radio-button">
+                  <input type="radio" name="example_radio_inline" id="example_radio_inline_4">
+                  4
+                </label>
+                <label for="example_radio_inline_5" class="radio-button">
+                  <input type="radio" name="example_radio_inline" id="example_radio_inline_5">
+                  5
+                </label>
+                <label for="example_radio_inline_6" class="radio-button">
+                  <input type="radio" name="example_radio_inline" id="example_radio_inline_6">
+                  6
+                </label>
+              </radiogroup>
+            </form>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+          <div class="grid__item width-one-fourth">
+            <p class="text--help">Two-up Input Group</p>
+          </div>
+          <div class="grid__item width-three-fourths">
+            <form action="POST">
+              <radiogroup class="input-group--two-up">
+                <label for="example_radio_two-up_1" class="radio-button">
+                  <input type="radio" name="example_radio_two-up" id="example_radio_two-up_1">
+                  Radio button 1
+                </label>
+                <label for="example_radio_two-up_2" class="radio-button">
+                  <input type="radio" name="example_radio_two-up" id="example_radio_two-up_2">
+                  Radio button 2
+                </label>
+                <label for="example_radio_two-up_3" class="radio-button">
+                  <input type="radio" name="example_radio_two-up" id="example_radio_two-up_3">
+                  Radio button 3
+                </label>
+                <label for="example_radio_two-up_4" class="radio-button">
+                  <input type="radio" name="example_radio_two-up" id="example_radio_two-up_4">
+                  Radio button 4
+                </label>
+              </radiogroup>
+            </form>
+          </div>
+        </div>
+      </section>
+      <section class="slab">
+        <div class="grid">
+            <div class="grid__item width-one-fourth">
+              <p class="text--help">Form Group</p>
+            </div>
+            <div class="grid__item width-three-fourths">
+              <form action="POST">
+                <div class="form-group">
+                  <label class="form-question" for="example_form_question">How many people live in your household, including yourself?</label>
+                  <p class="text--help">Include family members and housemates you share food with.</p>
+                  <radiogroup class="input-group--inline">
+                    <label for="example_radio_inline_2_1" class="radio-button">
+                      <input type="radio" name="example_radio_inline_2" id="example_radio_inline_2_1">
+                      1
+                    </label>
+                    <label for="example_radio_inline_2_2" class="radio-button">
+                      <input type="radio" name="example_radio_inline_2" id="example_radio_inline_2_2">
+                      2
+                    </label>
+                    <label for="example_radio_inline_2_3" class="radio-button">
+                      <input type="radio" name="example_radio_inline_2" id="example_radio_inline_2_3">
+                      3
+                    </label>
+                    <label for="example_radio_inline_2_4" class="radio-button">
+                      <input type="radio" name="example_radio_inline_2" id="example_radio_inline_2_4">
+                      4
+                    </label>
+                    <label for="example_radio_inline_2_5" class="radio-button">
+                      <input type="radio" name="example_radio_inline_2" id="example_radio_inline_2_5">
+                      5
+                    </label>
+                    <label for="example_radio_inline_2_6" class="radio-button">
+                      <input type="radio" name="example_radio_inline_2" id="example_radio_inline_2_6">
+                      6
+                    </label>
+                  </radiogroup>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+        <section class="slab">
+          <div class="grid">
+              <div class="grid__item width-one-fourth">
+                <p class="text--help">Form Group Error State</p>
+              </div>
+              <div class="grid__item width-three-fourths">
+                <form action="POST">
+                  <div class="form-group form-group--error">
+                    <label class="form-question" for="example_form_question">How many people live in your household, including yourself?</label>
+                    <p class="text--help">Include family members and housemates you share food with.</p>
+                    <radiogroup class="input-group--inline">
+                      <label for="example_radio_inline_3_1" class="radio-button">
+                        <input type="radio" name="example_radio_inline_3" id="example_radio_inline_3_1">
+                        1
+                      </label>
+                      <label for="example_radio_inline_3_2" class="radio-button">
+                        <input type="radio" name="example_radio_inline_3" id="example_radio_inline_3_2">
+                        2
+                      </label>
+                      <label for="example_radio_inline_3_3" class="radio-button">
+                        <input type="radio" name="example_radio_inline_3" id="example_radio_inline_3_3">
+                        3
+                      </label>
+                      <label for="example_radio_inline_3_4" class="radio-button">
+                        <input type="radio" name="example_radio_inline_3" id="example_radio_inline_3_4">
+                        4
+                      </label>
+                      <label for="example_radio_inline_3_5" class="radio-button">
+                        <input type="radio" name="example_radio_inline_3" id="example_radio_inline_3_5">
+                        5
+                      </label>
+                      <label for="example_radio_inline_3_6" class="radio-button">
+                        <input type="radio" name="example_radio_inline_3" id="example_radio_inline_3_6">
+                        6
+                      </label>
+                    </radiogroup>
+                    <p class="text--error"><i class="icon-warning"></i> Make sure you answer this question.</p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+        <section class="slab slab--styleguide">
+          <div class="grid">
+            <div class="grid__item width-one-half shift-one-fourth">
+              <h1>Organisms</h1>
+              <p class="text--help">Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.</p>
+              <p class="text--help">Organisms can consist of similar and/or different molecule types. For example, a masthead organism might consist of diverse components like a logo, primary navigation, search form, and list of social media channels. But a “product grid” organism might consist of the same molecule (possibly containing a product image, product title and price) repeated over and over again.</p>
+              <p class="text--help">Building up from molecules to organisms encourages creating standalone, portable, reusable components.</p>
+            </div>
+          </div>
+        </section>
+        <section class="slab">
+          <div class="grid">
+            <div class="grid__item width-one-fourth">
+              <p class="text--help">Pagination</p>
+            </div>
+            <div class="grid__item width-three-fourths">
+              <div class="pagination">
+                <div class="pagination__info">
+                  <p class="text--help">Displaying 1-20 of 344 applicants</p>
+                </div>
+                <div class="pagination__buttons">
+                  <button class="button button--small"><i class="icon icon-keyboard_arrow_left"></i></button>
+                  <button class="button button--small pagination__selected">1</button>
+                  <button class="button button--small">2</button>
+                  <button class="button button--small">3</button>
+                  <span class="pagination__ellipsis">&hellip;</span>
+                  <button class="button button--small">6</button>
+                  <button class="button button--small"><i class="icon icon-keyboard_arrow_right"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="slab">
+          <div class="grid">
+            <div class="grid__item width-one-fourth">
+              <p class="text--help">Statistics Card</p>
+            </div>
+            <div class="grid__item width-one-fourth">
+              <div class="statistic-card">
+                <p class="statistic-card__label">Students</p>
+                <p class="statistic-card__number">8  🎓</p>
+              </div>
+            </div>
+            <div class="grid__item width-one-fourth">
+              <div class="statistic-card">
+                <p class="statistic-card__label">Children</p>
+                <p class="statistic-card__number">12 👶</p>
+              </div>
+            </div>
+            <div class="grid__item width-one-fourth">
+              <div class="statistic-card">
+                <p class="statistic-card__label">Seniors</p>
+                <p class="statistic-card__number">5 👵</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="slab">
+          <div class="grid">
+            <div class="grid__item width-one-fourth">
+              <p class="text--help">Form Card</p>
+            </div>
+            <div class="grid__item width-three-fourths">
+              <div class="form-card">
+                <header class="form-card__header">
+                  <h1 class="form-card__title">Let’s start with some basic information.</h1>
+                </header>
+                <div class="form-card__content">
+                  <div class="form-group form-group--error">
+                    <label for="first_name" class="form-question">What's your first name?</label>
+                    <input type="text" class="text-input form-width--name" id="first_name" placeholder="First name">
+                    <p class="text--error"><i class="icon-warning"></i> Make sure you answer this question.</p>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="last_name" class="form-question">What's your last name?</label>
+                    <input type="text" class="text-input form-width--name" id="last_name" placeholder="Last name">
+                  </div>
+                </div>
+                <div class="form-card__footer">
+                  <button class="button button--primary">Continue <i class="icon icon-arrow_forward"></i></button>
+                  <button class="button">Go back <i class="icon icon-replay"></i></button>
+                </div>
+              </div>
+
+              <div class="form-card form-card--transition">
+                  <div class="form-card__header">
+                    <div class="illustration illustration--success">Success</div>
+                    <h1 class="form-card__title">Great! It looks like your household will likely qualify for CalFresh.</h1>
+                  </div>
+                  <div class="form-card__content">
+                    <div class="summary-table">
+                      <div class="grid">
+                        <div class="grid__item width-one-third">
+                          <p class="summary-table__label">Household size</p>
+                          <p class="summary-table__value">1 <span class="icon icon-person"></span></p>
+                        </div>
+                        <div class="grid__item width-one-third">
+                          <p class="summary-table__label">Last month's income</p>
+                          <p class="summary-table__value">$1000</p>
+                        </div>
+                        <div class="grid__item width-one-third">
+                          <p class="summary-table__label">County</p>
+                          <p class="summary-table__value">Marin</p>
+                        </div>  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-card__footer">
+                    <button class="button button--primary">Continue <i class="icon icon-arrow_forward"></i></button>
+                    <button class="button">Go back <i class="icon icon-replay"></i></button>
+                  </div>
+              </div>
+
+
+              <div class="form-card form-card--transition">
+                  <div class="form-card__header">
+                    <h1 class="form-card__title">We suggest that you submit a copy of your ID to your county now.</h1>
+                  </div>
+                  <div class="form-card__content">
+                    <p>You can do this later but submitting your ID now may help to speed up the application process. If you've been asked to submit any other documents, you can also do so at this point.</p>
+                  </div>
+                  <div class="form-card__footer">
+                    <button class="button button--primary">Submit ID now <i class="icon icon-arrow_forward"></i></button>
+                    <button class="button">I'll do it later</button>
+                  </div>
+              </div>
+              <div class="form-card form-card--compact">
+                  <div class="form-card__header">
+                    <h1 class="form-card__title">Rachel Wood</h1>
+                    <h1 class="text--help">Account information</h1>
+                  </div>
+                  <div class="form-card__content">
+                    <div class="summary-table summary-table--left with-padding-med">
+                      <p class="summary-table__label">Your organization</p>
+                      <p class="summary-table__value">SF Marin Food Bank</span></p>
+                    </div>
+
+                    <div class="summary-table summary-table--left with-padding-med">
+                      <p class="summary-table__label">Your email</p>
+                      <p class="summary-table__value">rachel@sfmarinfoodbank.org</span></p>
+                    </div>
+
+                    <div class="toolbar">
+                      <div class="toolbar__left">
+                        <div class="summary-table summary-table--left">
+                          <p class="summary-table__label">Your password</p>
+                          <p class="summary-table__value">**********</span></p>
+                        </div>
+                      </div>
+                      <div class="toolbar__right nudge--med">
+                        <a href="#" class="button button--small">Change password</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-card__footer">
+                    <button class="button button--primary">Log out</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer class="main-footer">
+          <div class="grid">
+            <div class="grid__item">
+              <div class="main-footer__legal">
+                <p>GetCalFresh.org is a service delivered by <a class="link--subtle" href="#">Code for America</a> on behalf of the people of California.</p>
+                <p>Read our <a class="link--subtle" href="#">Privacy Policy</a> and <a class="link--subtle" href="#">Nondiscrimination Statement.</a></p>
+              </div>
+            </div>
+          </div>
+        </footer>
+    </div>
+    <script>
+    var incrementer = (function() {
+      var i = {
+        increment: function(input) {
+          var max = parseInt($(input).attr('max'));
+          var value = parseInt($(input).val());
+          if(max != undefined) {
+            if(value < max) {
+              $(input).val(value+1);
+            }
+          }
+          else {
+            $(input).val(parseInt($(input).val())+1);
+          }
+        },
+        decrement: function(input) {
+          var min = parseInt($(input).attr('min'));
+          var value = parseInt($(input).val());
+          if(min != undefined) {
+            if(value > min) {
+              $(input).val(value-1);
+            }
+          }
+          else {
+            $(input).val(value-1);
+          }
+          
+        },
+        init: function() {
+          $('.incrementer').each(function(index, incrementer) {
+            var addButton = $(incrementer).find('.incrementer__add');
+            var subtractButton = $(incrementer).find('.incrementer__subtract');
+            var input = $(incrementer).find('.text-input');
+
+            $(addButton).click(function(e) {
+              i.increment(input);
+            });
+
+            $(subtractButton).click(function(e) {
+              i.decrement(input);
+            });
+          });
+        }
+      }
+      return {
+        init: i.init
+      }
+    })();
+
+    var radioSelector = (function() {
+      var rs = {
+        init: function() {
+          $('.radio-button').each(function(index, button){
+            if($(this).find('input').is(':checked')) {
+              $(this).addClass('is-selected');
+            }
+
+            $(this).find('input').click(function(e) {
+              $(this).parent().siblings().removeClass('is-selected');
+              $(this).parent().addClass('is-selected');
+            })
+          })
+        }
+      }
+      return {
+        init: rs.init
+      }
+    })();
+
+    var checkboxSelector = (function() {
+      var cs = {
+        init: function() {
+          $('.checkbox').each(function(index, button){
+            if($(this).find('input').is(':checked')) {
+              $(this).addClass('is-selected');
+            }
+
+            $(this).find('input').click(function(e) {
+              if($(this).is(':checked')) {
+                $(this).parent().addClass('is-selected');
+              }
+              else {
+                $(this).parent().removeClass('is-selected');
+              }
+            })
+          })
+        }
+      }
+      return {
+        init: cs.init
+      }
+    })();
+
+    incrementer.init();
+    radioSelector.init();
+    checkboxSelector.init();
+    </script>
+  </body>
+</html>
