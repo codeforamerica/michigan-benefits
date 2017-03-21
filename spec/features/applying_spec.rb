@@ -4,7 +4,7 @@ describe "applying", js: true do
   specify do
     visit root_path
 
-    click_on "Start Now"
+    click_on "Apply now"
 
     check_step "To start, please introduce yourself.",
       ["What is your first name?", "Alice", "Make sure to provide a first name"],
@@ -14,7 +14,7 @@ describe "applying", js: true do
   end
 
   def check_step(subhead, *questions)
-    expect(find(".subhead").text).to eq subhead
+    expect(page).to have_selector(".subhead", text: subhead)
 
     continue
     questions.each { |q, _, e| expect_validation_error q, e }
