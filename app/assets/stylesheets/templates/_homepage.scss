@@ -32,17 +32,31 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: image-url('janice-mobile.jpg');
       background-size: cover;
       background-position: top center;
-      @include media($tablet-up) {
-        background-image: image-url('janice');
-      }
     }
 
     p {
       margin-bottom: 2em;
       font-weight: 500;
+    }
+  }
+
+  .slab--hero-dylan {
+    &:before {
+      background-image: image-url('dylan-mobile.jpg');
+      @include media($tablet-up) {
+        background-image: image-url('dylan');
+      }
+    }
+  }
+
+  .slab--hero-janice {
+    &:before {
+      background-image: image-url('janice-mobile.jpg');
+      @include media($tablet-up) {
+        background-image: image-url('janice');
+      }
     }
   }
 }

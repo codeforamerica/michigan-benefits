@@ -4,7 +4,7 @@ class Views::Users::New < Views::Base
   def content
     content_for :template_name, "homepage"
 
-    div class: "slab slab--hero" do
+    div class: "slab slab--hero slab--hero-#{%w[dylan janice].sample}" do
       div class: "illustration--michigan-gov"
       h1 "Get the support your family needs"
       p "Apply for Michigan Assistance Programs in 15 min"
