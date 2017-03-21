@@ -1,0 +1,27 @@
+.program-selector {
+  display: block;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  padding: 15px;
+  font-size: $font-size-normal;
+  line-height: $line-height-normal;
+  font-weight: normal;
+  border: 2px solid $color-light-grey;
+  margin-bottom: 2rem;
+
+  @include media($tablet-up) {
+    width: 315px;
+  }
+
+  &__checkbox {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
+  &__checkbox-input {
+    width: 30px;
+    height: 30px;
+  }
+}

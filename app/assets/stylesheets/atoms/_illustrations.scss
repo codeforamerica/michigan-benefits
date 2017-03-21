@@ -6,32 +6,62 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1em;
-}
 
-.illustration--michigan-gov {
-  @include retina-bg(michigan-gov, 144.76px 33.03px);
-  margin-left: 0;
-  width: 144.76px;
-  height: 33.03px;
-}
+  &--michigan-gov {
+    @include retina-bg(michigan-gov, 144.76px 33.03px);
+    margin-left: 0;
+    width: 144.76px;
+    height: 33.03px;
+  }
 
-.illustration--mdhhs {
-  @include retina-bg(mdhhs, 160px 60px);
-  margin-left: 0;
-  width: 160px;
-  height: 60px;
-}
+  &--mdhhs {
+    @include retina-bg(mdhhs, 160px 60px);
+    margin-left: 0;
+    width: 160px;
+    height: 60px;
+  }
 
-.illustration--cfa {
-  @include retina-bg(cfa, 101px 41px);
-  margin-left: 0;
-  width: 101px;
-  height: 41px;
-}
+  &--cfa {
+    @include retina-bg(cfa, 101px 41px);
+    margin-left: 0;
+    width: 101px;
+    height: 41px;
+  }
 
-.illustration--civilla {
-  @include retina-bg(civilla, 86px 31px);
-  margin-left: 0;
-  width: 86px;
-  height: 31px;
+  &--civilla {
+    @include retina-bg(civilla, 86px 31px);
+    margin-left: 0;
+    width: 86px;
+    height: 31px;
+  }
+
+  &--icn_cash {
+    @include retina-bg(icn_cash, 50px 50px);
+    width: 50px;
+    height: 50px;
+  }
+
+  &--icn_childcare {
+    @include retina-bg(icn_childcare, 50px 50px);
+    width: 50px;
+    height: 50px;
+  }
+
+  &--icn_food {
+    @include retina-bg(icn_food, 50px 50px);
+    width: 50px;
+    height: 50px;
+  }
+
+  &--icn_health {
+    @include retina-bg(icn_health, 50px 50px);
+    width: 50px;
+    height: 50px;
+  }
+
+  &--icn_ser {
+    @include retina-bg(icn_ser, 50px 50px);
+    width: 50px;
+    height: 50px;
+  }
 }

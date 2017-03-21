@@ -18,9 +18,11 @@
         background-color: tint($color-tan, 20%);
         color: #000000;
     }
+
     &:active {
         background-color: shade($color-tan, 15%);
     }
+
     &:focus {
         outline: 2px solid tint($color-teal, 50%);
     }
@@ -59,6 +61,15 @@
     &:hover {
         color: $color-red;
     }
+}
+
+.button--full-width {
+  text-align: left;
+  width: 100%;
+
+  @include media($tablet-up) {
+    width: auto;
+  }
 }
 
 .button--small {

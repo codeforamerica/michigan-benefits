@@ -79,14 +79,13 @@ label {
 	padding: .3em .7em;
 	border: 2px solid $color-light-grey;
 	border-radius: $border-radius;
+
 	input[type='checkbox'] {
 		position: relative;
 		top: -.1em;
 		margin-right: .5em;
 	}
-	&:hover {
-		background-color: $color-light-grey;
-	}
+
 	&.is-selected {
 		background-color: $color-teal;
 		border-color: $color-teal;
