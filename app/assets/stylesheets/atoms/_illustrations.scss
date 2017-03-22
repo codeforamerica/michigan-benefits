@@ -70,4 +70,10 @@
     width: 157px;
     height: 134px;
   }
+
+  &--celebrate {
+    @include retina-bg(celebrate, 255px 153px);
+    width: 255px;
+    height: 153px;
+  }
 }
