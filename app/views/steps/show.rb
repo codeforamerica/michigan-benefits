@@ -58,12 +58,12 @@ class Views::Steps::Show < Views::Base
                   class: 'text-input'
               when :yes_no
                 div do
-                  label do
+                  label class: "radio-button" do
                     f.radio_button question, "true"
                     text "Yes"
                   end
 
-                  label do
+                  label class: "radio-button" do
                     f.radio_button question, "false"
                     text "No"
                   end
@@ -83,9 +83,11 @@ class Views::Steps::Show < Views::Base
         end
 
         footer class: 'form-card__footer' do
-          link_to "Go back", step_path(step.previous) if step.previous.present?
+          if step.previous.present?
+            link_to "Go back", step_path(step.previous), class: "button button--transparent"
+          end
 
-          button type: 'submit', class: 'button button--cta button--full-width' do
+          button type: 'submit', class: "button button--cta" do
             text "Continue"
             i class: "button__icon icon-arrow_forward"
           end

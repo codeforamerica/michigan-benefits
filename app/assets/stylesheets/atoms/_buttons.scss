@@ -56,6 +56,16 @@
     }
 }
 
+.button--transparent {
+  border-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  color: $color-sky;
+  &:hover {
+    color: shade($color-sky, 20%);
+  }
+}
+
 .button--danger {
     color: $color-red;
     &:hover {

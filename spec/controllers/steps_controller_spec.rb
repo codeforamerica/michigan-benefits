@@ -20,7 +20,7 @@ describe StepsController do
       expect(app.first_name).to eq "Alice"
       expect(app.last_name).to eq "Aardvark"
 
-      expect(response).to redirect_to step_path("choose-programs")
+      expect(response).to redirect_to step_path("contact-information")
     end
   end
 end

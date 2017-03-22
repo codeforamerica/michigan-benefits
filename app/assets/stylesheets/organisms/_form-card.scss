@@ -50,16 +50,22 @@
 }
 
 .form-card__footer {
-    @include full-bleed();
+  @include full-bleed();
+  @include clearfix();
 
-    border-top: 1px solid $color-tan;
-    margin-top: 2em;
-    padding-top: 1.5em;
+  border-top: 1px solid $color-tan;
+  margin-top: 2em;
+  padding-top: 1.5em;
 
-    *:last-child {
-      margin-bottom: 0;
-    }
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  .button--cta {
+    float: right;
+  }
 }
+
 
 .form-card--transition {
   border-top: 8px solid $color-tan;

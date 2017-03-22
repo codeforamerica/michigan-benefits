@@ -16,10 +16,15 @@ class StepsController < ApplicationController
     @step.update(step_params)
 
     if @step.valid?
-      redirect_to step_path(@step.next.to_param)
+      redirect_to next_path
     else
       render :show
     end
+  end
+
+  def next_path
+    next_path = @step.next
+    (next_path.is_a? Step) ? step_path(next_path.to_param) : next_path
   end
 
   private

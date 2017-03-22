@@ -29,7 +29,7 @@ class IntroduceYourself < Step
   end
 
   def next
-    ChoosePrograms.new(@app)
+    ContactInformation.new(@app)
   end
 
   def assign_from_app

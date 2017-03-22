@@ -9,6 +9,10 @@ describe "applying", js: true do
     check_step "To start, please introduce yourself.",
       ["What is your first name?", "Alice", "Make sure to provide a first name"],
       ["What is your last name?", "Aardvark", "Make sure to provide a last name"]
+
+    check_step "Tell us the best ways to reach you.",
+      ["What is the best phone number to reach you?", "4158675309", "Make sure your phone number is 10 digits long"],
+      ["May we send text messages to that phone number help you through the enrollment process?", "Yes", "Make sure to answer this question"]
   end
 
   def check_step(subhead, *questions)
