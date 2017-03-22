@@ -15,6 +15,10 @@ class ContactInformation < Step
     accepts_text_messages: :yes_no
   }
 
+  self.section_headers = {
+    phone_number: "Phone"
+  }
+
   attr_accessor :phone_number, :accepts_text_messages
 
   validates :phone_number,

@@ -10,7 +10,8 @@ class Step
     :subhead,
     :questions,
     :placeholders,
-    :types
+    :types,
+    :section_headers
 
   def self.first
     IntroduceYourself
@@ -25,6 +26,11 @@ class Step
   end
 
   def initialize(app)
+    self.questions ||= {}
+    self.placeholders ||= {}
+    self.types ||= {}
+    self.section_headers ||= {}
+
     @app = app
     assign_from_app
   end
@@ -47,6 +53,10 @@ class Step
 
   def type(field)
     types.fetch(field, :text)
+  end
+
+  def section_header(field)
+    section_headers.fetch(field, nil)
   end
 
   def assign_from_app

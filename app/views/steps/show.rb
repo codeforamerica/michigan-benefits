@@ -21,6 +21,24 @@ class Views::Steps::Show < Views::Base
     end
   end
 
+  def step_form
+    form_for step, as: :step, url: step_path(step), method: :put do |f|
+      div class: 'form-card' do
+        header class: 'form-card__header' do
+          section_header
+        end
+
+        div class: 'form-card__content' do
+          questions(f)
+        end
+
+        footer class: 'form-card__footer' do
+          buttons
+        end
+      end
+    end
+  end
+
   def section_header
     div class: 'step-section-header' do
       if step.icon.present?
@@ -36,68 +54,62 @@ class Views::Steps::Show < Views::Base
     end
   end
 
-  def step_form
-    form_for step, as: :step, url: step_path(step), method: :put do |f|
-      div class: 'form-card' do
-        header class: 'form-card__header' do
-          section_header
+  def questions(f)
+    step.questions.each do |question, label_text|
+      group_classes = 'form-group'
+
+      if step.errors[question].present?
+        group_classes += ' form-group--error'
+      end
+
+      field_type = step.type(question)
+
+      div class: group_classes, 'data-field-type' => field_type do
+        if step.section_header(question)
+          h4 step.section_header(question), class: "step-section-header__headline"
         end
 
-        div class: 'form-card__content' do
-          step.questions.each do |question, label_text|
-            group_classes = 'form-group'
+        f.label question, label_text, class: 'form-question'
 
-            if step.errors[question].present?
-              group_classes += ' form-group--error'
-            end
-
-            field_type = step.type(question)
-
-            div class: group_classes, 'data-field-type' => field_type do
-              f.label question, label_text, class: 'form-question'
-
-              case field_type
-              when :text
-                f.text_field question,
-                  placeholder: step.placeholder(question),
-                  class: 'text-input'
-              when :yes_no
-                div do
-                  label class: "radio-button" do
-                    f.radio_button question, "true"
-                    text "Yes"
-                  end
-
-                  label class: "radio-button" do
-                    f.radio_button question, "false"
-                    text "No"
-                  end
-                end
-              else
-                raise "Unknown field type #{field_type}"
+        case field_type
+          when :text
+            f.text_field question,
+              placeholder: step.placeholder(question),
+              class: 'text-input'
+          when :yes_no
+            div do
+              label class: "radio-button" do
+                f.radio_button question, "true"
+                text "Yes"
               end
 
-              if step.errors[question].present?
-                p class: 'text--error' do
-                  i class: 'icon-warning'
-                  text step.errors[question].to_sentence
-                end
+              label class: "radio-button" do
+                f.radio_button question, "false"
+                text "No"
               end
             end
-          end
+          else
+            raise "Unknown field type #{field_type}"
         end
 
-        footer class: 'form-card__footer' do
-          if step.previous.present?
-            link_to "Go back", step_path(step.previous), class: "button button--transparent"
-          end
-
-          button type: 'submit', class: "button button--cta" do
-            text "Continue"
-            i class: "button__icon icon-arrow_forward"
+        if step.errors[question].present?
+          p class: 'text--error' do
+            i class: 'icon-warning'
+            text step.errors[question].to_sentence
           end
         end
       end
+    end
+  end
+
+  def buttons
+    if step.previous.present?
+      link_to "Go back", step_path(step.previous), class: "button button--transparent"
+    end
+
+    button type: 'submit', class: "button button--cta" do
+      text "Continue"
+      i class: "button__icon icon-arrow_forward"
     end
   end
 end

@@ -14,8 +14,6 @@ class IntroduceYourself < Step
     last_name: "Last name",
   }
 
-  self.types = {}
-
   attr_accessor :first_name, :last_name
 
   validates :first_name,

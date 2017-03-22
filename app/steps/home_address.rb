@@ -2,16 +2,6 @@ class HomeAddress < Step
   self.title = "Introduction"
   self.subhead = "Tell us where you currently live."
 
-  self.questions = {
-  }
-
-  self.placeholders = {
-  }
-
-  self.types = {
-  }
-
-
   def previous
     ContactInformation.new(@app)
   end
