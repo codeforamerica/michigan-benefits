@@ -23,7 +23,7 @@ class IntroduceYourself < Step
     presence: { message: "Make sure to provide a last name" }
 
   def previous
-    nil
+    "/"
   end
 
   def next

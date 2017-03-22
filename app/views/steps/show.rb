@@ -105,7 +105,7 @@ class Views::Steps::Show < Views::Base
 
   def buttons
     if step.previous.present?
-      link_to "Go back", step_path(step.previous), class: "button button--transparent"
+      link_to "Go back", path_to_step(step.previous), class: "button button--transparent"
     end
 
     button type: 'submit', class: "button button--cta" do

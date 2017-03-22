@@ -1,4 +1,6 @@
 class StepsController < ApplicationController
+  include ApplicationHelper
+
   def allowed
     {
       show: :member,
@@ -16,15 +18,10 @@ class StepsController < ApplicationController
     @step.update(step_params)
 
     if @step.valid?
-      redirect_to next_path
+      redirect_to path_to_step(@step.next)
     else
       render :show
     end
-  end
-
-  def next_path
-    next_path = @step.next
-    (next_path.is_a? Step) ? step_path(next_path.to_param) : next_path
   end
 
   private
