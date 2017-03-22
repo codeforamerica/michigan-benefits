@@ -67,7 +67,7 @@ class Views::Steps::Show < Views::Base
 
       div class: group_classes, 'data-field-type' => field_type do
         if step.section_header(question)
-          h4 step.section_header(question), class: "step-section-header__headline"
+          h4 step.section_header(question), class: "form-group__headline"
         end
 
         f.label question, label_text, class: 'form-question'
