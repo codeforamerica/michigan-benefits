@@ -61,7 +61,11 @@ class ContactInformation < Step
   end
 
   def next
-    HomeAddress.new(@app)
+    if @app.mailing_address_same_as_home_address
+      IntroductionComplete.new(@app)
+    else
+      HomeAddress.new(@app)
+    end
   end
 
   def assign_from_app

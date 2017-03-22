@@ -14,7 +14,11 @@ class IntroductionComplete < Step
   end
 
   def previous
-    HomeAddress.new(@app)
+    if @app.mailing_address_same_as_home_address
+      ContactInformation.new(@app)
+    else
+      HomeAddress.new(@app)
+    end
   end
 
   def next

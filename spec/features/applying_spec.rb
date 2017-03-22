@@ -17,19 +17,26 @@ describe "applying", js: true do
       ["Address", "123 Main St", "Make sure to answer this question"],
       ["City", "San Francisco", "Make sure to answer this question"],
       ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
-      ["Is this address the same as your home address?", "No", "Make sure to answer this question"]
+      ["Is this address the same as your home address?", "Yes", "Make sure to answer this question"]
+
+    expect_page("It should take about 10 more minutes to complete a full application.")
+    back
+    expect_page("Tell us the best ways to reach you.")
+    within_question("Is this address the same as your home address?") do
+      choose "No"
+    end
+    continue
 
     check_step "Tell us where you currently live.",
       ["Street", "1234 Fake Street", "Make sure to answer this question"],
       ["City", "San Francisco", "Make sure to answer this question"],
       ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
       ["Check if you do not have stable housing", false, nil]
+
   end
 
   def check_step(subhead, *questions)
-    expect(page).to have_selector \
-      ".step-section-header__subhead",
-      text: subhead
+    expect_page(subhead)
 
     continue
     questions.each { |q, _, e| expect_validation_error q, e }
@@ -40,6 +47,13 @@ describe "applying", js: true do
     back
     questions.each { |q, a, _| verify(q, a)}
     continue
+  end
+
+  def expect_page(subhead)
+    log "Expecting page: #{subhead}"
+    expect(page).to have_selector \
+      ".step-section-header__subhead",
+      text: subhead
   end
 
   def within_question(question)
@@ -56,12 +70,15 @@ describe "applying", js: true do
   end
 
   def expect_validation_error(question, expected_error)
+    log "Expecting validation error: #{expected_error} on #{question}"
     within_question(question) do |group|
       expect(page).to have_text expected_error
     end
   end
 
   def enter(question, answer)
+    log "Entering #{answer} on #{question}"
+
     within_question(question) do |group|
       case group['data-field-type']
       when "text"
@@ -81,6 +98,8 @@ describe "applying", js: true do
   end
 
   def verify(question, expected_answer)
+    log "Verifying #{expected_answer} on #{question}"
+
     within_question(question) do |group|
       case group['data-field-type']
       when "text"
@@ -96,10 +115,18 @@ describe "applying", js: true do
   end
 
   def continue
+    log "Continuing"
     click_on "Continue"
   end
 
   def back
+    log "Going back"
     click_on "Go back"
+  end
+
+  def log(message)
+    if ENV["VERBOSE_TESTS"]
+      puts ">> #{message}"
+    end
   end
 end

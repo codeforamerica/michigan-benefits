@@ -30,15 +30,15 @@ class Views::Steps::Show < Views::Base
   def step_form
     div class: 'form-card' do
       form_for step, as: :step, url: step_path(step), method: :put do |f|
+        header class: 'form-card__header' do
+          section_header
+        end
+
         if render_static_content?
           div class: 'form-card__content' do
             render step.static_template
           end
         else
-          header class: 'form-card__header' do
-            section_header
-          end
-
           div class: 'form-card__content' do
             questions(f)
           end
