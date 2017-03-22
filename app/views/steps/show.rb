@@ -6,6 +6,7 @@ class Views::Steps::Show < Views::Base
 
     menu_header
     step_form
+    render partial: "shared/footer"
   end
 
   private
@@ -22,8 +23,8 @@ class Views::Steps::Show < Views::Base
   end
 
   def step_form
-    form_for step, as: :step, url: step_path(step), method: :put do |f|
-      div class: 'form-card' do
+    div class: 'form-card' do
+      form_for step, as: :step, url: step_path(step), method: :put do |f|
         header class: 'form-card__header' do
           section_header
         end
@@ -95,7 +96,7 @@ class Views::Steps::Show < Views::Base
         if step.errors[question].present?
           p class: 'text--error' do
             i class: 'icon-warning'
-            text step.errors[question].to_sentence
+            text " #{step.errors[question].to_sentence}"
           end
         end
       end

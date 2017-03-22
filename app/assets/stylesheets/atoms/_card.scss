@@ -2,13 +2,14 @@
   border: 2px solid $color-tan;
   padding: 1.5em $site-margins/2;
   background-color: #FFFFFF;
-  margin-bottom: 2em;
+  margin-bottom: 0;
   > *:last-child {
     margin-bottom: 0;
   }
 
   @include media($tablet-up) {
     padding: 1.5em 2em;
+    margin-bottom: 2em;
   }
 
   &--narrow {

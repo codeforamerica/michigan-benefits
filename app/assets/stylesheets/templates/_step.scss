@@ -1,3 +1,7 @@
 .template--step {
-  margin-top: ($step-header-height + (2 * $em-base));
+  margin-top: $step-header-height;
+
+  @include media($tablet-up) {
+    padding-top: 2em;
+  }
 }
