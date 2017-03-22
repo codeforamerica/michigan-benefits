@@ -43,6 +43,16 @@ RSpec.configure do |config|
 
   config.example_status_persistence_file_path = "tmp/examples.txt"
 
+  config.filter_gems_from_backtrace \
+    "actionpack",
+    "activesupport",
+    "actionview",
+    "capybara",
+    "fortitude",
+    "rack",
+    "railties",
+    "responders"
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

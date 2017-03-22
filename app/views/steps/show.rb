@@ -6,10 +6,15 @@ class Views::Steps::Show < Views::Base
 
     menu_header
     step_form
+
     render partial: "shared/footer"
   end
 
   private
+
+  def render_static_content?
+    step.static_template.present?
+  end
 
   def menu_header
     div class: 'step-header' do
@@ -25,12 +30,18 @@ class Views::Steps::Show < Views::Base
   def step_form
     div class: 'form-card' do
       form_for step, as: :step, url: step_path(step), method: :put do |f|
-        header class: 'form-card__header' do
-          section_header
-        end
+        if render_static_content?
+          div class: 'form-card__content' do
+            render step.static_template
+          end
+        else
+          header class: 'form-card__header' do
+            section_header
+          end
 
-        div class: 'form-card__content' do
-          questions(f)
+          div class: 'form-card__content' do
+            questions(f)
+          end
         end
 
         footer class: 'form-card__footer' do
@@ -70,14 +81,16 @@ class Views::Steps::Show < Views::Base
           h4 step.section_header(question), class: "form-group__headline"
         end
 
-        f.label question, label_text, class: 'form-question'
-
         case field_type
           when :text
+            f.label question, label_text, class: 'form-question'
+
             f.text_field question,
               placeholder: step.placeholder(question),
               class: 'text-input'
           when :yes_no
+            f.label question, label_text, class: 'form-question'
+
             div do
               label class: "radio-button" do
                 f.radio_button question, "true"
@@ -88,6 +101,11 @@ class Views::Steps::Show < Views::Base
                 f.radio_button question, "false"
                 text "No"
               end
+            end
+          when :checkbox
+            label class: "checkbox" do
+              f.check_box question
+              text label_text
             end
           else
             raise "Unknown field type #{field_type}"

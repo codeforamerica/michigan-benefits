@@ -18,14 +18,18 @@ describe "applying", js: true do
       ["City", "San Francisco", "Make sure to answer this question"],
       ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
       ["Is this address the same as your home address?", "No", "Make sure to answer this question"]
+
+    check_step "Tell us where you currently live.",
+      ["Street", "1234 Fake Street", "Make sure to answer this question"],
+      ["City", "San Francisco", "Make sure to answer this question"],
+      ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
+      ["Check if you do not have stable housing", false, nil]
   end
 
   def check_step(subhead, *questions)
     expect(page).to have_selector \
       ".step-section-header__subhead",
       text: subhead
-
-    # fill_in "What is your email address?", with: "" rescue nil
 
     continue
     questions.each { |q, _, e| expect_validation_error q, e }
@@ -64,6 +68,12 @@ describe "applying", js: true do
         fill_in question, with: answer
       when "yes_no"
         choose answer
+      when "checkbox"
+        if answer
+          check question
+        else
+          uncheck question
+        end
       else
         raise "Unsupported type: #{type}"
       end
@@ -77,6 +87,8 @@ describe "applying", js: true do
         expect(find("input").value).to eq expected_answer
       when "yes_no"
         expect(find("label", text: expected_answer).find("input").checked?).to eq true
+      when "checkbox"
+        expect(find("input").checked?).to eq(expected_answer)
       else
         raise "Unsupported type: #{type}"
       end

@@ -35,6 +35,10 @@ class Step
     assign_from_app
   end
 
+  def static_template
+    nil
+  end
+
   def to_param
     self.class.to_param
   end
