@@ -12,7 +12,12 @@ class Views::Steps::Show < Views::Base
 
   def menu_header
     div class: 'step-header' do
-      h4 step.title, class: 'step-header__title'
+      h4 class: 'step-header__title' do
+        text step.title
+        if Rails.env.development?
+          code " (#{step.class.name})", style: "opacity: 0.5"
+        end
+      end
     end
   end
 

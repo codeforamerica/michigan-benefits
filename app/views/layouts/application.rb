@@ -7,7 +7,7 @@ class Views::Layouts::Application < Views::Base
         meta content: "width=device-width, initial-scale=1.0", name: "viewport"
         meta content: Rails.application.config.project_description, name: "description"
 
-        title(content_for?(:title) ? yield(:title) : Rails.application.config.site_name)
+        title(content_for?(:title) ? capture { yield(:title) } : Rails.application.config.site_name)
 
         csrf_meta_tags
         stylesheet_link_tag 'application', media: 'all'
