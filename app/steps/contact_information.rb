@@ -5,27 +5,54 @@ class ContactInformation < Step
   self.questions = {
     phone_number: "What is the best phone number to reach you?",
     accepts_text_messages: "May we send text messages to that phone number help you through the enrollment process?",
+    email: "What is your email address?",
+    street_address: "Address",
+    city: "City",
+    zip: "ZIP Code",
+    mailing_address_same_as_home_address: "Is this address the same as your home address?",
   }
 
   self.placeholders = {
-    phone_number: "555-555-5555",
+    phone_number: "Phone #",
+    email: "youremail@email.com",
+    street_address: "Street Address",
+    city: "City",
+    zip: "ZIP"
   }
 
   self.types = {
-    accepts_text_messages: :yes_no
+    accepts_text_messages: :yes_no,
+    mailing_address_same_as_home_address: :yes_no
   }
 
   self.section_headers = {
-    phone_number: "Phone"
+    phone_number: "Phone",
+    email: "Email",
+    street_address: "Mail"
   }
 
-  attr_accessor :phone_number, :accepts_text_messages
+  attr_accessor \
+    :phone_number,
+    :accepts_text_messages,
+    :email,
+    :street_address,
+    :city,
+    :zip,
+    :mailing_address_same_as_home_address
 
   validates :phone_number,
     length: { is: 10, message: "Make sure your phone number is 10 digits long" }
 
-  validates :accepts_text_messages,
-    presence: {message: "Make sure to answer this question"}
+  validates :zip,
+    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" }
+
+  validates \
+    :accepts_text_messages,
+    :email,
+    :street_address,
+    :city,
+    :mailing_address_same_as_home_address,
+    presence: { message: "Make sure to answer this question" }
 
   before_validation :strip_non_digits_from_phone_number
 
@@ -38,16 +65,30 @@ class ContactInformation < Step
   end
 
   def assign_from_app
-    assign_attributes @app.attributes.slice(*%w[
-      phone_number
-      accepts_text_messages
-    ])
+    assign_attributes(
+      phone_number: @app.phone_number,
+      accepts_text_messages: @app.accepts_text_messages,
+      street_address: @app.mailing_street,
+      city: @app.mailing_city,
+      zip: @app.mailing_zip,
+      mailing_address_same_as_home_address: @app.mailing_address_same_as_home_address
+    )
+
+    self.email = @app.user.email unless @app.user.email.ends_with? "-auto@example.com"
   end
 
   def update_app!
     @app.update!(
       phone_number: phone_number,
-      accepts_text_messages: accepts_text_messages
+      accepts_text_messages: accepts_text_messages,
+      mailing_address_same_as_home_address: mailing_address_same_as_home_address,
+      mailing_street: street_address,
+      mailing_city: city,
+      mailing_zip: zip
+    )
+
+    @app.user.update!(
+      email: email
     )
   end
 
