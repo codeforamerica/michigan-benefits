@@ -76,9 +76,9 @@
   }
 
   &--celebrate {
-    @include retina-bg(celebrate, 255px 153px);
-    width: 255px;
-    height: 153px;
+    @include retina-bg(celebrate, 134px 134px);
+    width: 134px;
+    height: 134px;
   }
 
   &--success {
