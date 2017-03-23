@@ -1,2 +1,4 @@
 PORT=3000
 SIGNUPS_DISABLED=false
+FORM_RECIPIENT=test@example.com
+MAILER_FROM=from@example.com
