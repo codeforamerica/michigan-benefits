@@ -42,20 +42,13 @@
     }
   }
 
-  .slab--hero-dylan {
-    &:before {
-      background-image: image-url('dylan-mobile.jpg');
-      @include media($tablet-up) {
-        background-image: image-url('dylan');
-      }
-    }
-  }
-
-  .slab--hero-janice {
-    &:before {
-      background-image: image-url('janice-mobile.jpg');
-      @include media($tablet-up) {
-        background-image: image-url('janice');
+  @for $i from 1 through 4 {
+    .slab--hero-#{$i} {
+      &:before {
+        background-image: image-url('hero-#{$i}-mobile');
+        @include media($tablet-up) {
+          background-image: image-url('hero-#{$i}-landscape');
+        }
       }
     }
   }
