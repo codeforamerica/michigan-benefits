@@ -10,5 +10,9 @@ $element-margin-top: 5rem;
   &__subhead {
     font-weight: bold;
     margin: 0;
+
+    &--standalone {
+      text-align: left;
+    }
   }
 }

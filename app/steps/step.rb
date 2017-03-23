@@ -11,7 +11,8 @@ class Step
     :questions,
     :placeholders,
     :types,
-    :section_headers
+    :section_headers,
+    :overviews
 
   def self.first
     IntroduceYourself
@@ -30,6 +31,7 @@ class Step
     self.placeholders ||= {}
     self.types ||= {}
     self.section_headers ||= {}
+    self.overviews ||= {}
 
     @app = app
     assign_from_app
@@ -37,6 +39,14 @@ class Step
 
   def static_template
     nil
+  end
+
+  def overview(question)
+    overviews[question]
+  end
+
+  def only_subhead?
+    subhead && !headline && !icon
   end
 
   def to_param
@@ -57,6 +67,10 @@ class Step
 
   def type(field)
     types.fetch(field, :text)
+  end
+
+  def submit_label
+    "Continue"
   end
 
   def section_header(field)

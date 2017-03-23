@@ -33,6 +33,10 @@ describe "applying", js: true do
       ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
       ["Check if you do not have stable housing", false, nil]
 
+    continue
+
+    check_step "Enter your full legal name here to sign this application.",
+      ["Your signature", "Jeff Name", "Make sure you enter your signature"]
   end
 
   def check_step(subhead, *questions)
@@ -116,7 +120,8 @@ describe "applying", js: true do
 
   def continue
     log "Continuing"
-    click_on "Continue"
+
+    first('button[type="submit"]').click
   end
 
   def back

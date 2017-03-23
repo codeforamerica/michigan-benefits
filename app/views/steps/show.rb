@@ -61,8 +61,14 @@ class Views::Steps::Show < Views::Base
         ]
       end
 
+      subhead_classes = "step-section-header__subhead"
+
+      if step.only_subhead?
+        subhead_classes += " step-section-header__subhead--standalone"
+      end
+
       h4 step.headline, class: "step-section-header__headline"
-      h3 step.subhead, class: "step-section-header__subhead"
+      h3 step.subhead, class: subhead_classes
     end
   end
 
@@ -79,6 +85,10 @@ class Views::Steps::Show < Views::Base
       div class: group_classes, 'data-field-type' => field_type do
         if step.section_header(question)
           h4 step.section_header(question), class: "form-group__headline"
+        end
+
+        if step.overview(question)
+          p step.overview(question)
         end
 
         case field_type
@@ -127,7 +137,7 @@ class Views::Steps::Show < Views::Base
     end
 
     button type: 'submit', class: "button button--cta" do
-      text "Continue"
+      text step.submit_label
       i class: "button__icon icon-arrow_forward"
     end
   end
