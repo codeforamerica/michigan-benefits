@@ -9,6 +9,7 @@ gem "fortitude"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
+gem "paperclip", "~> 5.0.0"
 gem "pdf-forms"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"

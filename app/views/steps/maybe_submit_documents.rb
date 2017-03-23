@@ -5,17 +5,17 @@ class Views::Steps::MaybeSubmitDocuments < Views::Base
     TEXT
 
     p <<~TEXT
-      You can do this later but submitting documents now will help the 
+      You can do this later but submitting documents now will help the
       application process go faster.
     TEXT
 
     p <<~TEXT
-      If you're on a smartphone right now, you 
+      If you're on a smartphone right now, you
       can take a picture and upload it.
     TEXT
 
     p <<~TEXT, class: "text--help"
-      You may also share documents with MDHHS via pst mail or by delivering 
+      You may also share documents with MDHHS via pst mail or by delivering
       them to your local office in person.
     TEXT
 
@@ -25,7 +25,7 @@ class Views::Steps::MaybeSubmitDocuments < Views::Base
     end
 
     footer class: 'form-card__footer' do
-      link_to step_path(::DummyFinalStep.new(nil)), class: "button button--cta" do
+      link_to documents_path, class: "button button--cta" do
         text "Submit documents now"
         i class: "button__icon icon-arrow_forward"
       end

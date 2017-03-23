@@ -38,6 +38,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_app
-    App.find_or_create_by!(user: current_user)
+    @current_app ||= App.find_or_create_by!(user: current_user)
   end
 end
