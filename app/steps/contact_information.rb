@@ -48,7 +48,6 @@ class ContactInformation < Step
 
   validates \
     :accepts_text_messages,
-    :email,
     :street_address,
     :city,
     :mailing_address_same_as_home_address,
@@ -75,10 +74,10 @@ class ContactInformation < Step
       street_address: @app.mailing_street,
       city: @app.mailing_city,
       zip: @app.mailing_zip,
-      mailing_address_same_as_home_address: @app.mailing_address_same_as_home_address
+      mailing_address_same_as_home_address: @app
+        .mailing_address_same_as_home_address,
+      email: @app.email
     )
-
-    self.email = @app.user.email unless @app.user.email.ends_with? "-auto@example.com"
   end
 
   def update_app!
@@ -88,10 +87,7 @@ class ContactInformation < Step
       mailing_address_same_as_home_address: mailing_address_same_as_home_address,
       mailing_street: street_address,
       mailing_city: city,
-      mailing_zip: zip
-    )
-
-    @app.user.update!(
+      mailing_zip: zip,
       email: email
     )
   end

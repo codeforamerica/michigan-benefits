@@ -19,7 +19,7 @@ describe "applying", js: true do
     check_step "Tell us the best ways to reach you.",
       ["What is the best phone number to reach you?", "4158675309", "Make sure your phone number is 10 digits long"],
       ["May we send text messages to that phone number help you through the enrollment process?", "Yes", "Make sure to answer this question"],
-      ["What is your email address?", "test@example.com", "Make sure to answer this question"],
+      ["What is your email address?", "test@example.com", nil],
       ["Address", "123 Main St", "Make sure to answer this question"],
       ["City", "San Francisco", "Make sure to answer this question"],
       ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
