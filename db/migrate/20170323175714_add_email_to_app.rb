@@ -11,7 +11,7 @@ class AddEmailToApp < ActiveRecord::Migration[5.0]
     add_column :apps, :email, :string
 
     User.find_each do |user|
-      user.app.update! email: user.email
+      user.app&.update! email: user.email
     end
   end
 
