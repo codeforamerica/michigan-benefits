@@ -9,6 +9,7 @@ gem "fortitude"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
+gem "pdf-forms"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.0"
@@ -20,7 +21,6 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows doe
 gem "uglifier", ">= 1.3.0"
 
 # from gcf
-# gem 'pdf-forms'
 # gem 'prawn'
 # gem 'StreetAddress', :require => "street_address"
 # gem 'twilio-ruby'
