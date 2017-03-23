@@ -27,6 +27,10 @@ class StepsController < ApplicationController
   private
 
   def step_params
-    params.require(:step).permit @step.questions.keys
+    if params.has_key?(:step)
+      params.require(:step).permit(@step.questions.keys)
+    else
+      {}
+    end
   end
 end
