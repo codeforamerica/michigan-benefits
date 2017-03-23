@@ -44,8 +44,10 @@ class Views::Steps::Show < Views::Base
           end
         end
 
-        footer class: 'form-card__footer' do
-          buttons
+        if step.previous.present? or step.next.present?
+          footer class: 'form-card__footer' do
+            buttons
+          end
         end
       end
     end
@@ -136,9 +138,11 @@ class Views::Steps::Show < Views::Base
       link_to "Go back", path_to_step(step.previous), class: "button button--transparent"
     end
 
-    button type: 'submit', class: "button button--cta" do
-      text step.submit_label
-      i class: "button__icon icon-arrow_forward"
+    if step.next.present?
+      button type: 'submit', class: "button button--cta" do
+        text step.submit_label
+        i class: "button__icon icon-arrow_forward"
+      end
     end
   end
 end

@@ -28,7 +28,7 @@ class SignAndSubmit < Step
   end
 
   def next
-    clear_sessions_path(redirect_to: confirmations_path)
+    MaybeSubmitDocuments.new(@app)
   end
 
   def assign_from_app
