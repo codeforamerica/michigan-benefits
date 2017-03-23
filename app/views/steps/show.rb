@@ -2,29 +2,25 @@ class Views::Steps::Show < Views::Base
   needs :step
 
   def content
-    content_for :template_name, "step"
+    content_for :header_title, header_title
 
-    menu_header
     step_form
-
-    render partial: "shared/footer"
   end
 
   private
 
-  def render_static_content?
-    step.static_template.present?
+  def header_title
+    title = step.title
+
+    if Rails.env.development?
+      title += " <code style='opacity: 0.5'>(#{step.class.name})</code>"
+    end
+
+    title.html_safe
   end
 
-  def menu_header
-    div class: 'step-header' do
-      h4 class: 'step-header__title' do
-        text step.title
-        if Rails.env.development?
-          code " (#{step.class.name})", style: "opacity: 0.5"
-        end
-      end
-    end
+  def render_static_content?
+    step.static_template.present?
   end
 
   def step_form

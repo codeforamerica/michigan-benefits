@@ -1,6 +1,8 @@
 class StepsController < ApplicationController
   include ApplicationHelper
 
+  layout 'step'
+
   def allowed
     {
       show: :member,
