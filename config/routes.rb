@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   resource :file_preview, only: %i[show] if Rails.env.test? || Rails.env.development?
 
-  resource :sessions, only: %i[new create destroy]
+  resource :confirmations, only: %i[show]
+  resource :sessions, only: %i[new destroy] do
+    collection do
+      get :clear, to: "sessions#destroy"
+    end
+  end
   resources :steps, only: %i[show update]
   resources :users, only: %i[new create]
 

@@ -7,6 +7,10 @@
   margin-right: auto;
   margin-bottom: 1em;
 
+  &--compact {
+    margin-bottom: 0;
+  }
+
   &--michigan-gov {
     @include retina-bg(michigan-gov, 144.76px 33.03px);
     margin-left: 0;
@@ -75,5 +79,23 @@
     @include retina-bg(celebrate, 255px 153px);
     width: 255px;
     height: 153px;
+  }
+
+  &--success {
+    @include retina-bg(success, 248px 153px);
+    width: 248px;
+    height: 153px;
+  }
+
+  &--interview {
+    @include retina-bg(interview, 90px 79px);
+    width: 90px;
+    height: 79px;
+  }
+
+  &--submit-docs {
+    @include retina-bg(submit-docs, 103px 70px);
+    width: 103px;
+    height: 70px;
   }
 }

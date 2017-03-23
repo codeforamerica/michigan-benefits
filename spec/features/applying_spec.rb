@@ -42,10 +42,11 @@ describe "applying", js: true do
     continue
 
     check_step "Enter your full legal name here to sign this application.",
-      ["Your signature", "Jeff Name", "Make sure you enter your signature"]
+      ["Your signature", "Jeff Name", "Make sure you enter your signature"],
+      verify: false
   end
 
-  def check_step(subhead, *questions)
+  def check_step(subhead, *questions, verify: true)
     expect_page(subhead)
 
     continue
@@ -54,9 +55,11 @@ describe "applying", js: true do
     questions.each { |q, a, _| enter(q, a)}
     continue
 
-    back
-    questions.each { |q, a, _| verify(q, a)}
-    continue
+    if verify
+      back
+      questions.each { |q, a, _| verify(q, a)}
+      continue
+    end
   end
 
   def expect_page(subhead)

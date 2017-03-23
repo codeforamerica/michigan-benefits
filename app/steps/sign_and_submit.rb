@@ -1,4 +1,6 @@
 class SignAndSubmit < Step
+  include Rails.application.routes.url_helpers
+
   self.title = "Legal"
   self.subhead = "Enter your full legal name here to sign this application."
 
@@ -26,7 +28,7 @@ class SignAndSubmit < Step
   end
 
   def next
-    DummyFinalStep.new(@app)
+    clear_sessions_path(redirect_to: confirmations_path)
   end
 
   def assign_from_app

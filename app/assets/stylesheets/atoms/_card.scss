@@ -18,7 +18,7 @@
 
     @include media($tablet-up) {
       max-width: $mobile-up;
-      margin: 0 auto;
+      margin: 1.5em auto;
     }
   }
 }

@@ -47,6 +47,13 @@ h4, .h4 {
   }
 }
 
+h5, .h5 {
+  text-transform: uppercase;
+  color: $color-grey;
+  font-size: $font-size-small;
+  font-weight: 600;
+}
+
 a {
   color: $color-teal;
   &:hover {
