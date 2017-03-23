@@ -7,6 +7,12 @@
 * [Staging](https://michigan-benefits-staging.herokuapp.com)
 * [Production](https://michigan-benefits-prod.herokuapp.com)
 
+## Deploying
+
+### Requirements
+
+* pdftk - see [https://elements.heroku.com/buildpacks/fxtentacle/heroku-pdftk-buildpack](https://elements.heroku.com/buildpacks/fxtentacle/heroku-pdftk-buildpack)
+
 
 ## Developing
 
