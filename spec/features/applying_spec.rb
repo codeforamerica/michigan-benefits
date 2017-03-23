@@ -1,6 +1,12 @@
 require "rails_helper"
 
 describe "applying", js: true do
+  around(:each) do |example|
+    with_modified_env FORM_RECIPIENT: 'test@example.com' do
+      example.run
+    end
+  end
+
   specify do
     visit root_path
 
