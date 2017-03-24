@@ -194,7 +194,7 @@ describe "applying", js: true do
 
   def back
     log "Going back"
-    first('.step-header__back-link').click
+    first('.step-header__back-link').trigger('click')
   end
 
   def log(message)
