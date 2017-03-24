@@ -1,0 +1,14 @@
+.attachment-preview {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px 10px 0;
+  padding: 0.5em 0;
+  text-align: center;
+  border: 1px solid $color-tan;
+
+  &__delete {
+    display: block;
+    color: $color-red;
+  }
+}

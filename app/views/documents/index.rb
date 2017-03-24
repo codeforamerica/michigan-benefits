@@ -24,20 +24,42 @@ class Views::Documents::Index < Views::Base
       TEXT
     end
 
-    div class: "slab slab--white" do
+    div class: "slab slab--white slab--clearfix" do
       if documents.empty?
         p "No documents uploaded yet.", class: 'text--centered'
       end
+
+      documents.each do |document|
+        div class: "attachment-preview" do
+          image_tag document.file.url(:thumb)
+
+          link_to "Delete",
+            document_path(document),
+            method: :delete,
+            class: "attachment-preview__delete"
+        end
+      end
     end
 
     div class: "slab slab--white" do
-      link_to "Add a document", "#", class: "button button--cta"
+      link_to "Add a document", new_document_path, class: "button button--cta"
 
       if documents.empty?
         link_to "I'll do this later",
-          clear_sessions_path(redirect_to: confirmations_path),
+          next_page,
           class: "button button--secondary-cta"
+      else
+        link_to next_page, class: "button button--secondary-cta" do
+          text "I'm finished"
+          i class: "icon-arrow_forward"
+        end
       end
     end
+  end
+
+  private
+
+  def next_page
+    clear_sessions_path(redirect_to: confirmations_path)
   end
 end

@@ -22,17 +22,21 @@ class DocumentsController < ApplicationController
     @document = current_app.documents.build(document_params)
     @document.save
 
-    respond_with @document, location: documents_path
+    respond_with @document, location: redirect_path
   end
 
   def destroy
     @document = current_app.documents.find(params[:id])
     @document.destroy!
 
-    redirect_to documents_path
+    redirect_to redirect_path
   end
 
   private
+
+  def redirect_path
+    documents_path
+  end
 
   def document_params
     params.fetch(:document, {}).permit(:file)

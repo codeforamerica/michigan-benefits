@@ -16,6 +16,10 @@
   background-color: #FFFFFF;
 }
 
+.slab--clearfix {
+  @include clearfix();
+}
+
 .slab--teal {
   background-color: rgba($color-teal, .05);
 }

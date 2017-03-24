@@ -44,6 +44,47 @@ describe "applying", js: true do
     check_step "Enter your full legal name here to sign this application.",
       ["Your signature", "Jeff Name", "Make sure you enter your signature"],
       verify: false
+
+    click_on "Submit documents now"
+
+    expect(page).to have_text("No documents uploaded yet.")
+
+    upload_file("kermit.jpg")
+    expect_page_to_have_attachments(count: 1)
+
+    upload_file("oscar.jpg")
+    expect_page_to_have_attachments(count: 2)
+
+    delete_first_attachment
+    expect_page_to_have_attachments(count: 1)
+
+    click_on "I'm finished"
+
+    expect_application_to_be_submitted
+  end
+
+  def expect_application_to_be_submitted
+    expect(page).to have_text \
+      "Your application has been successfully submitted."
+  end
+
+  def delete_first_attachment
+    attachment = first('.attachment-preview')
+
+    within attachment do
+      click_on "Delete"
+    end
+  end
+
+  def expect_page_to_have_attachments(count:)
+    expect(page).to have_selector(".attachment-preview", count: count)
+  end
+
+  def upload_file(file)
+    click_on "Add a document"
+
+    attach_file "document_file", attachment_file_path(file)
+    click_on "Upload"
   end
 
   def check_step(subhead, *questions, verify: true)
@@ -125,6 +166,10 @@ describe "applying", js: true do
         raise "Unsupported type: #{type}"
       end
     end
+  end
+
+  def attachment_file_path(file)
+    Rails.root.join("spec/fixtures/uploads/#{file}")
   end
 
   def continue
