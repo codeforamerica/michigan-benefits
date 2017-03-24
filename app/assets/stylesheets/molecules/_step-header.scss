@@ -10,14 +10,14 @@
   display: flex;
   align-items: center;
   z-index: 9999;
+  font-size: $font-size-small;
 
   &__back-link {
     color: inherit;
     text-decoration: none;
     margin-left: 0.5rem;
-    font-size: $font-size-h4;
     position: relative;
-    top: -2px;
+    top: -4px;
 
     &:active, &:visited {
       color: inherit;
@@ -27,5 +27,6 @@
   &__title {
     margin: 0;
     margin-left: 1.5rem;
+    font-size: $font-size-small;
   }
 }

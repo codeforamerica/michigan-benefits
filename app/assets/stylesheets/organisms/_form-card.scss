@@ -45,9 +45,11 @@
 }
 
 .form-card__content {
-    > *:last-child {
-        margin-bottom: 0;
-    }
+  margin-bottom: 54px;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .form-card__footer {
@@ -55,7 +57,6 @@
   @include clearfix();
 
   border-top: 1px solid $color-tan;
-  margin-top: 2em;
   padding-top: 1.5em;
 
   *:last-child {
