@@ -31,7 +31,14 @@ class Views::Documents::Index < Views::Base
 
       documents.each do |document|
         div class: "attachment-preview" do
-          image_tag document.file.url(:thumb)
+          link_to document.file.url, class: "attachment-preview__link", target: "_blank" do
+            if document.image?
+              image_tag document.file.url(:thumb)
+            else
+              # TODO placeholder image for non-images
+              i class: "icon-photo", style: "font-size: 50px;"
+            end
+          end
 
           link_to "Delete",
             document_path(document),

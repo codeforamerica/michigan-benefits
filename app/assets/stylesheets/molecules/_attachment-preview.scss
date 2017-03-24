@@ -11,4 +11,9 @@
     display: block;
     color: $color-red;
   }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+  }
 }

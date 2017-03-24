@@ -13,4 +13,14 @@ class Document < ActiveRecord::Base
       ]
     },
     size: { in: 0..10.megabytes }
+
+  before_post_process :skip_processing_for_non_images
+
+  def image?
+    !!file_content_type.match(/^image/)
+  end
+
+  def skip_processing_for_non_images
+    image?
+  end
 end

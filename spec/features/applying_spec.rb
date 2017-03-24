@@ -58,6 +58,14 @@ describe "applying", js: true do
     delete_first_attachment
     expect_page_to_have_attachments(count: 1)
 
+    upload_file("bad.txt")
+
+    expect(page).to have_text("Invalid file type")
+
+    click_on "Go back"
+
+    expect_page_to_have_attachments(count: 1)
+
     click_on "I'm finished"
 
     expect_application_to_be_submitted
