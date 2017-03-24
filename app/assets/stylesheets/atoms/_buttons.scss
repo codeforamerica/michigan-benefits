@@ -105,6 +105,9 @@
 
 .button__icon {
   margin-left: .5em;
+  float: right;
+  position: relative;
+  top: 4px;
 }
 
 .button__icon--left {

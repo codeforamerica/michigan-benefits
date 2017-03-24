@@ -2,12 +2,13 @@
   .slab--hero {
     position: relative;
     background: rgba(shade($color-dark-grey, 80%), .3);
+    min-height: 530px;
 
     color: #FFFFFF;
 
     padding: {
-      top: 1em;
-      bottom: 1em;
+      top: $site-margins / 2;
+      bottom: $site-margins / 1.2;
     }
 
     @include media($tablet-up) {

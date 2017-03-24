@@ -3,12 +3,28 @@
   width: 100%;
   text-align: center;
   position: relative;
-  padding: 15px;
+  padding: 23px 15px 27px 15px;
   font-size: $font-size-normal;
   line-height: $line-height-normal;
   font-weight: normal;
   border: 2px solid $color-light-grey;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+
+  &:last-of-type {
+    margin-bottom: 3.5rem;
+  }
+
+  &__icon {
+    margin-bottom: 9px;
+  }
+
+  &__title {
+    margin-top: 0;
+  }
+
+  &__subtitle {
+    margin-bottom: 4px;
+  }
 
   &__checkbox {
     position: absolute;
@@ -17,7 +33,7 @@
   }
 
   &__checkbox-input {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
   }
 }

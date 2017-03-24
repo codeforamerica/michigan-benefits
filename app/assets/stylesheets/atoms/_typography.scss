@@ -36,12 +36,17 @@ h3, .h3 {
   }
 }
 
+.h3--strong {
+  font-weight: 600;
+}
+
 h4, .h4 {
   font-size: $font-size-h4;
   font-weight: 600;
   line-height: $line-height-display;
   margin-top: 1.5em;
   margin-bottom: .5em;
+
   &:first-child {
     margin-top: 0em;
   }
@@ -68,6 +73,10 @@ a {
 .text--small {
     font-size: $font-size-small;
     line-height: $line-height-normal;
+}
+
+.text--light {
+  font-weight: 300;
 }
 
 .text--caps {
@@ -134,6 +143,10 @@ ol, ul {
 
 .text--teal {
   color: $color-teal;
+}
+
+.text--padded {
+  margin-bottom: 2em;
 }
 
 .list--padded {

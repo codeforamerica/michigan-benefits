@@ -16,7 +16,10 @@ class Views::Users::New < Views::Base
       end
 
       if current_user
-        link_to "Resume an application", step_path(Step.first.to_param), style: "color: white; text-decoration: underline"
+        link_to "Resume an application",
+          step_path(Step.first.to_param),
+          class: "text--small",
+          style: "color: white"
       end
     end
 
@@ -25,9 +28,9 @@ class Views::Users::New < Views::Base
         div class: "illustration--mdhhs"
       end
 
-      p <<~TEXT
-        The Michigan Department of Health and Human Services offers temporary assistance programs that
-        support families when times are tough.
+      p <<~TEXT, class: 'text--light'
+        The Michigan Department of Health and Human Services offers temporary
+        assistance programs that support families when times are tough.
       TEXT
     end
 
@@ -38,41 +41,39 @@ class Views::Users::New < Views::Base
   def apply_form
     div id: 'apply-for-programs', class: "slab slab--white" do
       div class: "card--narrow" do
-        h2 "Choose the programs you want to apply for today."
-        p "You can choose more than one", class: "text--help"
+        h3 "Choose the programs you want to apply for today.",
+          class: "h3--strong"
+
+        p "You can choose more than one",
+          class: "text--help text--padded"
 
         form_for user do |f|
-          program_selector \
-          icon: "health",
+          program_selector icon: "health",
             checked: true,
             title: "Healthcare Coverage",
             subtitle: "Medicaid, CHIP, and marketplace health insurance",
             description: "Free or low-cost health coverage that helps pay for "\
             "medical bills, doctors visits and prescriptions."
 
-          program_selector \
-          icon: "food",
+          program_selector icon: "food",
             checked: true,
             title: "Food Assistance",
             subtitle: "Food Stamps, FAP or SNAP",
             description: "Provides benefits to buy or grow food."
 
-          program_selector \
-          icon: "cash",
+          program_selector icon: "cash",
             title: "Cash Assistance",
             subtitle: "FIP, RCA, and SDA",
             description: "Temporary cash assistance for eligible pregnant "\
             "women, low-income families with young children, refugees, "\
             "and adults with disabilities."
 
-          program_selector \
-          icon: "childcare",
+          program_selector icon: "childcare",
             title: "Child Development + Care",
             subtitle: "CDC",
             description: "Helps pay for childcare."
 
-          program_selector \
-          icon: "ser",
+          program_selector icon: "ser",
             title: "State Emergency Relief",
             subtitle: "SER",
             description: "Provides help or assistance for emergency situations."
@@ -100,11 +101,12 @@ class Views::Users::New < Views::Base
           checked: options[:checked]
       end
 
-      div class: "illustration illustration--icn_#{options[:icon]}"
+      div class: "program-selector__icon illustration "\
+        "illustration--icn_#{options[:icon]}"
 
-      h4 options[:title]
-      p options[:subtitle]
-      p options[:description], class: "text--help"
+      h4 options[:title], class: 'program-selector__title'
+      div options[:subtitle], class: 'program-selector__subtitle text--small'
+      div options[:description], class: "text--help"
     end
   end
 end
