@@ -22,7 +22,7 @@ class IntroductionComplete < Step
   end
 
   def next
-    SignAndSubmit.new(@app)
+    LegalAgreement.new(@app)
   end
 
   def assign_from_app

@@ -26,11 +26,14 @@ describe "applying", js: true do
       ["Is this address the same as your home address?", "Yes", "Make sure to answer this question"]
 
     expect_page("It should take about 10 more minutes to complete a full application.")
+
     back
     expect_page("Tell us the best ways to reach you.")
+
     within_question("Is this address the same as your home address?") do
       choose "No"
     end
+
     continue
 
     check_step "Tell us where you currently live.",
@@ -39,6 +42,9 @@ describe "applying", js: true do
       ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
       ["Check if you do not have stable housing", false, nil]
 
+    continue
+
+    expect(page).to have_text("Scroll down to agree")
     continue
 
     check_step "Enter your full legal name here to sign this application.",

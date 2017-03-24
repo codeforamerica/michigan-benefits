@@ -24,7 +24,7 @@ class SignAndSubmit < Step
     presence: { message: "Make sure you enter your signature" }
 
   def previous
-    IntroductionComplete.new(@app)
+    LegalAgreement.new(@app)
   end
 
   def next
