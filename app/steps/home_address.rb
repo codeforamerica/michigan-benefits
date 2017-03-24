@@ -15,6 +15,10 @@ class HomeAddress < Step
     home_zip: "ZIP",
   }
 
+  self.overviews = {
+    home_address: "What is your home address?"
+  }
+
   self.types = {
     unstable_housing: :checkbox
   }
@@ -26,12 +30,14 @@ class HomeAddress < Step
     :unstable_housing
 
   validates :home_zip,
-    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" }
+    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" },
+    unless: :unstable_housing
 
   validates \
     :home_address,
     :home_city,
-    presence: { message: "Make sure to answer this question" }
+    presence: { message: "Make sure to answer this question" },
+    unless: :unstable_housing
 
   def previous
     ContactInformation.new(@app)
