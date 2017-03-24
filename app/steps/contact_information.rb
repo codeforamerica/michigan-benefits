@@ -20,6 +20,16 @@ class ContactInformation < Step
     zip: "ZIP"
   }
 
+  self.overviews = {
+    street_address: "Where can we send you mail?"
+  }
+
+  self.help_messages = {
+    email: "If you don’t have one or you don’t want to receive emails "\
+      "from us you can leave this blank.",
+    street_address: "This can be a street address or P.O. Box."
+  }
+
   self.types = {
     accepts_text_messages: :yes_no,
     mailing_address_same_as_home_address: :yes_no
@@ -39,6 +49,13 @@ class ContactInformation < Step
     :city,
     :zip,
     :mailing_address_same_as_home_address
+
+  validates :email,
+    format: {
+      with: /\A.+@.+\..+\z/,
+      message: "Make sure you enter a valid email address"
+    },
+    allow_blank: true
 
   validates :phone_number,
     length: { is: 10, message: "Make sure your phone number is 10 digits long" }

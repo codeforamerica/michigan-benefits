@@ -61,7 +61,7 @@
 }
 
 .form-group {
-  margin-bottom: 3em;
+  margin-bottom: 70px;
   position: relative;
 
   .form-question + .text--help {
@@ -72,7 +72,9 @@
   &__headline {
     color: $color-sky;
     border-top: 1px solid $color-tan;
-    padding: 1em 0;
+    padding: 0;
+    padding-top: 1em;
+    margin-bottom: 0;
   }
 
   &:first-of-type .form-group__headline {

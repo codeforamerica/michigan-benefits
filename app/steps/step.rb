@@ -12,7 +12,8 @@ class Step
     :placeholders,
     :types,
     :section_headers,
-    :overviews
+    :overviews,
+    :help_messages
 
   def self.first
     IntroduceYourself
@@ -32,6 +33,7 @@ class Step
     self.types ||= {}
     self.section_headers ||= {}
     self.overviews ||= {}
+    self.help_messages ||= {}
 
     @app = app
     assign_from_app
@@ -43,6 +45,10 @@ class Step
 
   def overview(question)
     overviews[question]
+  end
+
+  def help_message(question)
+    help_messages[question]
   end
 
   def only_subhead?

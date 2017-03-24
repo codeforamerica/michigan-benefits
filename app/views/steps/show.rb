@@ -100,6 +100,10 @@ class Views::Steps::Show < Views::Base
           when :text
             f.label question, label_text, class: 'form-question'
 
+            if step.help_message(question)
+              p step.help_message(question), class: "text--help"
+            end
+
             f.text_field question,
               placeholder: step.placeholder(question),
               class: 'text-input'
