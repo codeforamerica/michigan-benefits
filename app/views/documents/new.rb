@@ -27,14 +27,22 @@ class Views::Documents::New < Views::Base
         end
 
         footer class: "form-card__footer" do
-          link_to "Go back", documents_path, class: "button button--transparent"
+          link_to "Back", documents_path, class: "button button--transparent"
 
-          button type: "submit", class: "button button--cta" do
+          button type: "submit", class: "button button--cta", disabled: true do
             text "Upload"
             i class: "button__icon icon-file_upload"
           end
         end
       end
+    end
+
+    content_for(:javascript) do
+      javascript <<~JAVASCRIPT
+        $("#document_file").change(function() { 
+          $("button[type='submit']").prop("disabled", false); 
+        });
+      JAVASCRIPT
     end
   end
 

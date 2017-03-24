@@ -11,13 +11,9 @@ label {
 }
 
 .form-question {
-	display: block;
-	margin-bottom: 1em;
-  font-weight: 500;
-
-  @include media($tablet-up) {
-    font-weight: 400;
-  }
+  display: block;
+  margin-bottom: 1em;
+  font-weight: 400;
 }
 
 .text-input {

@@ -35,7 +35,7 @@ class DocumentsController < ApplicationController
   private
 
   def redirect_path
-    documents_path
+    documents_path(anchor: "attachments")
   end
 
   def document_params

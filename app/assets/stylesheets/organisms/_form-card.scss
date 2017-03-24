@@ -62,8 +62,18 @@
     margin-bottom: 0;
   }
 
-  .button--cta, .button--secondary-cta {
-    float: right;
+  .button--cta {
+    float: left;
+  }
+
+  .button--secondary-cta {
+    color: $color-dark-grey;
+    float: left;
+    margin-right: 0.5em;
+    i {
+      margin-left: 0;
+      margin-right: 0.5em;
+    }
   }
 }
 

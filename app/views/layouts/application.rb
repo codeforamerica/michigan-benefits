@@ -18,6 +18,8 @@ class Views::Layouts::Application < Views::Base
         div class: "page-wrapper" do
           yield
         end
+
+        text capture { content_for(:javascript) }
       end
     end
   end

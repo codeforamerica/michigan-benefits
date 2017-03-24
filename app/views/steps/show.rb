@@ -131,7 +131,10 @@ class Views::Steps::Show < Views::Base
 
   def buttons
     if step.previous.present?
-      link_to "Go back", path_to_step(step.previous), class: "button button--transparent"
+      link_to path_to_step(step.previous), class: "button button--secondary-cta" do
+        i class: "button__icon icon-arrow_back"
+        text "Back"
+      end
     end
 
     if step.next.present?
@@ -140,5 +143,6 @@ class Views::Steps::Show < Views::Base
         i class: "button__icon icon-arrow_forward"
       end
     end
+
   end
 end

@@ -34,11 +34,16 @@
   border-color: $color-sky;
   border-bottom-color: shade($color-sky, 15%);
   &:hover {
-      background-color: tint($color-sky, 20%);
-      color: #FFFFFF;
+    background-color: tint($color-sky, 20%);
+    color: #FFFFFF;
   }
   &:active {
-      background-color: shade($color-sky, 15%);
+    background-color: shade($color-sky, 15%);
+  }
+  &:disabled {
+    background-color: $color-light-grey;
+    color: $color-dark-grey;
+    border-color: $color-light-grey;
   }
 }
 

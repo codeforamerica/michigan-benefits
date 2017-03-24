@@ -1,7 +1,9 @@
 .template--step {
-  margin-top: $step-header-height;
-
-  @include media($tablet-up) {
-    padding-top: 2em;
+  &::before {
+    width: 100%;
+    height: $step-header-height;
+    min-height: $step-header-height;
+    content: "";
+    display: block;
   }
 }

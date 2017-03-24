@@ -1,6 +1,4 @@
 class Views::Steps::LegalAgreement < Views::Base
-  include Rails.application.routes.url_helpers
-
   def content
     div class: "card legal-agreement" do
       p "LEGAL"

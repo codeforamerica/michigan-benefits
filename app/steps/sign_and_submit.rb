@@ -41,6 +41,6 @@ class SignAndSubmit < Step
   end
 
   def submit_label
-    "Sign and submit application"
+    "Sign & submit"
   end
 end

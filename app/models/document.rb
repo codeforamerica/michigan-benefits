@@ -1,7 +1,7 @@
 class Document < ActiveRecord::Base
   belongs_to :app, inverse_of: :documents
 
-  has_attached_file :file, styles: { thumb: "50x50>" }
+  has_attached_file :file, styles: { thumb: "100x100#" }
 
   validates_attachment :file,
     content_type: {
@@ -17,7 +17,7 @@ class Document < ActiveRecord::Base
   before_post_process :skip_processing_for_non_images
 
   def image?
-    !!file_content_type.match(/^image/)
+    !!file_content_type&.match(/^image/)
   end
 
   def skip_processing_for_non_images
