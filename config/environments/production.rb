@@ -99,16 +99,13 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # AWS setup
-  credentials = AWS::Credentials.new(
-    ENV['BUCKETEER_AWS_ACCESS_KEY_ID'],
-    ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY']
-  )
-
-  Aws.config.update(credentials: credentials)
-
   config.paperclip_defaults = {
     storage: :s3,
-    bucket: ENV['BUCKETEER_BUCKET_NAME']
+    s3_region: ENV['BUCKETEER_REGION'],
+    s3_credentials: {
+      bucket: ENV['BUCKETEER_BUCKET_NAME'],
+      access_key_id: ENV['BUCKETEER_AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY']
+    }
   }
 end
