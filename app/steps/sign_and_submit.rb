@@ -1,6 +1,4 @@
 class SignAndSubmit < Step
-  include Rails.application.routes.url_helpers
-
   self.title = "Legal"
   self.subhead = "Enter your full legal name here to sign this application."
 
@@ -41,6 +39,6 @@ class SignAndSubmit < Step
   end
 
   def submit_label
-    "Sign & submit"
+    "Sign and submit"
   end
 end

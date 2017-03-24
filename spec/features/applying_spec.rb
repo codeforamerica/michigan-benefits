@@ -68,7 +68,7 @@ describe "applying", js: true do
 
     expect(page).to have_text("Invalid file type")
 
-    click_on "Back"
+    back
 
     expect_page_to_have_attachments(count: 1)
 
@@ -194,7 +194,7 @@ describe "applying", js: true do
 
   def back
     log "Going back"
-    click_on "Back"
+    first('.step-header__back-link').click
   end
 
   def log(message)

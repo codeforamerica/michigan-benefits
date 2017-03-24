@@ -14,7 +14,15 @@ class Views::Layouts::Step < Views::Layouts::Application
   private
 
   def menu_header
+    back_path = content_for :back_path
+
     div class: 'step-header' do
+      if back_path
+        link_to back_path, class: 'step-header__back-link' do
+          i class: "button__icon icon-arrow_back"
+        end
+      end
+
       h4 class: 'step-header__title' do
         text header_title
       end

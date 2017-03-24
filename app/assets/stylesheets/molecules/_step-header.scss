@@ -9,10 +9,23 @@
   color: #fff;
   display: flex;
   align-items: center;
-  padding-left: 2rem;
   z-index: 9999;
+
+  &__back-link {
+    color: inherit;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    font-size: $font-size-h4;
+    position: relative;
+    top: -2px;
+
+    &:active, &:visited {
+      color: inherit;
+    }
+  }
 
   &__title {
     margin: 0;
+    margin-left: 1.5rem;
   }
 }

@@ -3,11 +3,18 @@ class Views::Steps::Show < Views::Base
 
   def content
     content_for :header_title, header_title
+    content_for :back_path, back_path
 
     step_form
   end
 
   private
+
+  def back_path
+    if step.previous.present?
+      path_to_step(step.previous)
+    end
+  end
 
   def header_title
     title = step.title
@@ -130,19 +137,11 @@ class Views::Steps::Show < Views::Base
   end
 
   def buttons
-    if step.previous.present?
-      link_to path_to_step(step.previous), class: "button button--secondary-cta" do
-        i class: "button__icon icon-arrow_back"
-        text "Back"
-      end
-    end
-
     if step.next.present?
-      button type: 'submit', class: "button button--cta" do
+      button type: 'submit', class: "button button--cta button--full-width" do
         text step.submit_label
         i class: "button__icon icon-arrow_forward"
       end
     end
-
   end
 end

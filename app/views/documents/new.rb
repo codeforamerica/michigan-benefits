@@ -3,6 +3,7 @@ class Views::Documents::New < Views::Base
 
   def content
     content_for :header_title, "Submit Documents"
+    content_for :back_path, documents_path
 
     div class: 'form-card' do
       form_for document do |f|
@@ -27,8 +28,6 @@ class Views::Documents::New < Views::Base
         end
 
         footer class: "form-card__footer" do
-          link_to "Back", documents_path, class: "button button--transparent"
-
           button type: "submit", class: "button button--cta", disabled: true do
             text "Upload"
             i class: "button__icon icon-file_upload"
@@ -39,8 +38,8 @@ class Views::Documents::New < Views::Base
 
     content_for(:javascript) do
       javascript <<~JAVASCRIPT
-        $("#document_file").change(function() { 
-          $("button[type='submit']").prop("disabled", false); 
+        $("#document_file").change(function() {
+          $("button[type='submit']").prop("disabled", false);
         });
       JAVASCRIPT
     end
