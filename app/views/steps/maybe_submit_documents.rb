@@ -1,15 +1,11 @@
 class Views::Steps::MaybeSubmitDocuments < Views::Base
   def content
-    p <<~TEXT, class: "text--help"
-      For example: ID, proof of income, proof of residency.
-    TEXT
-
-    p <<~TEXT
+    p <<~TEXT, class: 'text--small'
       You can do this later but submitting documents now will help the
       application process go faster.
     TEXT
 
-    p <<~TEXT
+    p <<~TEXT, class: 'text--small'
       If you're on a smartphone right now, you
       can take a picture and upload it.
     TEXT

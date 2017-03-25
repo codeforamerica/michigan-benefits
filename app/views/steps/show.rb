@@ -74,6 +74,11 @@ class Views::Steps::Show < Views::Base
 
       h4 step.headline, class: "step-section-header__headline"
       h3 step.subhead, class: subhead_classes
+
+      if step.subhead_help
+        p step.subhead_help,
+          class: 'text--help step-section-header__subhead-help'
+      end
     end
   end
 

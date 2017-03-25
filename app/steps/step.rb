@@ -8,6 +8,7 @@ class Step
     :title,
     :headline,
     :subhead,
+    :subhead_help,
     :questions,
     :placeholders,
     :types,

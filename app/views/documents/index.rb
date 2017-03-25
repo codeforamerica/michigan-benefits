@@ -26,12 +26,12 @@ class Views::Documents::Index < Views::Base
 
     a class: "step-anchor", id: "attachments"
     div class: "slab slab--white" do
-
       if documents.empty?
-        p "No documents uploaded yet.", class: 'text--centered'
+        p "No documents uploaded yet.",
+          class: 'text--centered'
       end
 
-      div class: "slab--clearfix" do
+      div class: "slab--clearfix attachment-container" do
         documents.each do |document|
           div class: "attachment-preview" do
             link_to document.file.url, class: "attachment-preview__link", target: "_blank" do
