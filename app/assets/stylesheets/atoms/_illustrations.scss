@@ -98,4 +98,10 @@
     width: 103px;
     height: 70px;
   }
+
+  &--safety {
+    @include retina-bg(safety, 18px 22px);
+    width: 18px;
+    height: 22px;
+  }
 }

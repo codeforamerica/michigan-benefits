@@ -29,7 +29,6 @@ describe "applying", js: true do
 
     back
     expect_page("Tell us the best ways to reach you.")
-
     within_question("Is this address the same as your home address?") do
       choose "No"
     end
@@ -217,6 +216,8 @@ describe "applying", js: true do
       @log_depth += 2
       yield
       @log_depth -= 2
+    else
+      yield
     end
   end
 end

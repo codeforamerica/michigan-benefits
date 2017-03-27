@@ -16,7 +16,7 @@ class Views::Steps::MaybeSubmitDocuments < Views::Base
     TEXT
 
     p class: "text--secure" do
-      i class: "icon-check_circle"
+      i class: "illustration illustration--safety"
       text "MDHSS maintains strict security guidelines to protect the identities of our residents."
     end
 
