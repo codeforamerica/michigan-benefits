@@ -30,14 +30,14 @@ class HomeAddress < Step
     :unstable_housing
 
   validates :home_zip,
-    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" },
-    unless: :unstable_housing
+    length: {is: 5, message: "Make sure your ZIP code is 5 digits long"},
+    unless: -> (home_address) { home_address.unstable_housing.in? ["1", "true", true] }
 
   validates \
     :home_address,
     :home_city,
     presence: { message: "Make sure to answer this question" },
-    unless: :unstable_housing
+    unless: -> (home_address) { home_address.unstable_housing.in? ["1", "true", true] }
 
   def previous
     ContactInformation.new(@app)
