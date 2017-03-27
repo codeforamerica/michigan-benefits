@@ -102,26 +102,35 @@ describe "applying", js: true do
   end
 
   def check_step(subhead, *questions, verify: true)
-    expect_page(subhead)
+    log subhead do
+      expect_page(subhead)
 
-    continue
-    questions.each { |q, _, e| expect_validation_error q, e }
+      log "Checking validation errors" do
+        continue
+        questions.each { |q, _, e| expect_validation_error q, e }
+      end
 
-    questions.each { |q, a, _| enter(q, a)}
-    continue
+      log "Answering questions" do
+        questions.each { |q, a, _| enter(q, a)}
+        continue
+      end
 
-    if verify
-      back
-      questions.each { |q, a, _| verify(q, a)}
-      continue
+      if verify
+        log "Verifying that answers were saved" do
+          back
+          questions.each { |q, a, _| verify(q, a)}
+          continue
+        end
+      end
     end
   end
 
   def expect_page(subhead)
-    log "Expecting page: #{subhead}"
-    expect(page).to have_selector \
+    log "Checking page title" do
+      expect(page).to have_selector \
       ".step-section-header__subhead",
-      text: subhead
+        text: subhead
+    end
   end
 
   def within_question(question)
@@ -138,46 +147,49 @@ describe "applying", js: true do
   end
 
   def expect_validation_error(question, expected_error)
-    log "Expecting validation error: #{expected_error} on #{question}"
-    within_question(question) do |group|
-      expect(page).to have_text expected_error
+    if expected_error.present?
+      log "#{question} => #{expected_error}" do
+        within_question(question) do
+          expect(page).to have_text expected_error
+        end
+      end
     end
   end
 
   def enter(question, answer)
-    log "Entering #{answer} on #{question}"
-
-    within_question(question) do |group|
-      case group['data-field-type']
-      when "text"
-        fill_in question, with: answer
-      when "yes_no"
-        choose answer
-      when "checkbox"
-        if answer
-          check question
+    log "#{question} => #{answer}" do
+      within_question(question) do |group|
+        case group['data-field-type']
+        when "text"
+          fill_in question, with: answer
+        when "yes_no"
+          choose answer
+        when "checkbox"
+          if answer
+            check question
+          else
+            uncheck question
+          end
         else
-          uncheck question
+          raise "Unsupported type: #{type}"
         end
-      else
-        raise "Unsupported type: #{type}"
       end
     end
   end
 
   def verify(question, expected_answer)
-    log "Verifying #{expected_answer} on #{question}"
-
-    within_question(question) do |group|
-      case group['data-field-type']
-      when "text"
-        expect(find("input").value).to eq expected_answer
-      when "yes_no"
-        expect(find("label", text: expected_answer).find("input").checked?).to eq true
-      when "checkbox"
-        expect(find("input").checked?).to eq(expected_answer)
-      else
-        raise "Unsupported type: #{type}"
+    log "#{question} => #{expected_answer}" do
+      within_question(question) do |group|
+        case group['data-field-type']
+        when "text"
+          expect(find("input").value).to eq expected_answer
+        when "yes_no"
+          expect(find("label", text: expected_answer).find("input").checked?).to eq true
+        when "checkbox"
+          expect(find("input").checked?).to eq(expected_answer)
+        else
+          raise "Unsupported type: #{type}"
+        end
       end
     end
   end
@@ -187,19 +199,24 @@ describe "applying", js: true do
   end
 
   def continue
-    log "Continuing"
-
-    first('button[type="submit"]').click
+    log "Continuing" do
+      first('button[type="submit"]').click
+    end
   end
 
   def back
-    log "Going back"
-    first('.step-header__back-link').trigger('click')
+    log "Going back" do
+      first('.step-header__back-link').trigger('click')
+    end
   end
 
   def log(message)
     if ENV["VERBOSE_TESTS"]
-      puts ">> #{message}"
+      @log_depth ||= 0
+      puts ">> #{' ' * @log_depth}#{message}"
+      @log_depth += 2
+      yield
+      @log_depth -= 2
     end
   end
 end
