@@ -85,6 +85,10 @@
   @include media($tablet-up) {
     width: auto;
   }
+
+  &.text--centered {
+    text-align: center;
+  }
 }
 
 .button--small {

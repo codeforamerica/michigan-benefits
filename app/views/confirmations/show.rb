@@ -14,35 +14,38 @@ class Views::Confirmations::Show < Views::Base
 
         p "Submitted to MDHHS on #{Date.today}.", class: "text--help"
 
-        p do
-          div "You applied for", class: "h5"
-          icon "icn_health"
-          b "Healthcare Coverage", class: "text--small"
+        div "You applied for", class: "h6"
+
+        label class: 'program-selector program-selector__unbordered' do
+          div class: "program-selector__icon illustration " \
+            "illustration--icn_health"
+          h4 "Healthcare Coverage", class: 'program-selector__title'
         end
 
-        p do
-          icon "icn_food"
-          b "Food Assistance", class: "text--small"
+        label class: 'program-selector program-selector__unbordered' do
+          div class: "program-selector__icon illustration " \
+            "illustration--icn_food"
+          h4 "Food Assistance", class: 'program-selector__title'
         end
       end
 
       div class: "slab slab--not-padded" do
         div class: "card card--narrow" do
-          h4 "What happens next?"
+          h4 "What happens next?", class: "text--centered"
 
           div style: "text-align: center" do
             div style: "margin-top: 4rem" do
               icon "interview"
               h4 "Do an interview"
               div "to go over your situation", class: "text--help"
-              div "In about 1 week", class: "h5"
+              div "In about 1 week", class: "h6"
             end
 
             div style: "margin-top: 4rem" do
               icon "submit-docs"
               h4 "Submit documents"
               div "to verify your eligibility", class: "text--help"
-              div "Within 30 days", class: "h5"
+              div "Within 30 days", class: "h6"
             end
           end
         end
@@ -74,7 +77,7 @@ class Views::Confirmations::Show < Views::Base
       end
 
       div class: "slab" do
-        link_to "Find community services nearby", "/", class: "button button--cta"
+        link_to "Find community services nearby", "/", class: "button button--cta button--full-width text--centered"
       end
     end
 

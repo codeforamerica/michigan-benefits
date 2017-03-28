@@ -59,6 +59,11 @@ h5, .h5 {
   font-weight: 600;
 }
 
+h6, .h6 {
+  @extend h5;
+  font-size: 14px;
+}
+
 a {
   color: $color-teal;
   &:hover {
