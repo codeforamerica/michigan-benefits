@@ -1,5 +1,7 @@
 class ConfirmationsController < ApplicationController
 
+  layout "step"
+
   def allowed
     {
       show: :guest

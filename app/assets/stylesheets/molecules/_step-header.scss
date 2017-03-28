@@ -29,4 +29,10 @@
     margin-left: 1.5rem;
     font-size: $font-size-small;
   }
+
+  @include media($tablet-up) {
+    + .form-card {
+      margin-top: $site-margins / 2;
+    }
+  }
 }

@@ -8,7 +8,7 @@
   }
 
   @include media($tablet-up) {
-    padding: 1.5em 2em;
+    padding: 1.5em $site-margins;
     margin-bottom: 2em;
   }
 
