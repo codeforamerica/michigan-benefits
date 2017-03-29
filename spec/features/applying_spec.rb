@@ -50,6 +50,9 @@ describe "applying", js: true do
     expect_page "There are 4 sections you need to complete to submit a full application."
     continue
 
+    expect_page "Next, describe your financial situation for us."
+    continue
+
     expect(page).to have_text("Scroll down to agree")
     continue
 

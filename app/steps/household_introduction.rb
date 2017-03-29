@@ -12,7 +12,7 @@ class HouseholdIntroduction < Step
   end
 
   def next
-    LegalAgreement.new(@app)
+    IncomeIntroduction.new(@app)
   end
 
   def assign_from_app

@@ -19,6 +19,16 @@ module Views
       p text, class: "text--help"
     end
 
+    def small_text(text=nil)
+      if block_given?
+        p class: "text--small" do
+          yield
+        end
+      else
+        p text, class: "text--small"
+      end
+    end
+
     def row(classes=[], expanded: true, &block)
       classes = CssClasses.new(classes, ("expanded" if expanded), "row")
       div class: classes.to_s, &block
