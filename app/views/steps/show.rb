@@ -20,7 +20,7 @@ class Views::Steps::Show < Views::Base
     title = step.title
 
     if Rails.env.development?
-      title += " <code style='opacity: 0.5'>(#{step.class.name})</code>"
+      title += " <code style='opacity: 0.5'>(#{step.class.name}, app #{current_user.app.id})</code>"
     end
 
     title.html_safe

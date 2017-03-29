@@ -22,7 +22,7 @@ class IncomeChangeExplanation < Step
   end
 
   def next
-    LegalAgreement.new(@app)
+    AdditionalIncome.new(@app)
   end
 
   def assign_from_app

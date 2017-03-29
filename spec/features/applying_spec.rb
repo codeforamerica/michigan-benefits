@@ -60,6 +60,17 @@ describe "applying", js: true do
       ["Explanation", "I lost my job", nil],
       validations: false
 
+    check_step "Check all additional sources of income received by your household, if any.",
+      ["Unemployment insurance", true, nil],
+      ["SSI or Disability", false, nil],
+      ["Worker's compensation", true, nil],
+      ["Pension", false, nil],
+      ["Social Security", true, nil],
+      ["Child Support", false, nil],
+      ["Foster Care or Adoption Subsidies", true, nil],
+      ["Other income", false, nil],
+      validations: false
+
     expect(page).to have_text("Scroll down to agree")
     continue
 
