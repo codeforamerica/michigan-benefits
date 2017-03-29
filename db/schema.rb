@@ -33,6 +33,10 @@ ActiveRecord::Schema.define(version: 20170329195054) do
     t.boolean  "unstable_housing",                     default: false
     t.string   "signature"
     t.string   "email"
+    t.date     "birthday"
+    t.string   "sex"
+    t.string   "marital_status"
+    t.integer  "household_size"
     t.boolean  "income_change"
     t.text     "income_change_explanation"
     t.text     "additional_income",                    default: [],                 array: true

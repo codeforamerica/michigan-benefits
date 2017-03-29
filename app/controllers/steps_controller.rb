@@ -30,9 +30,37 @@ class StepsController < ApplicationController
 
   def step_params
     if params.has_key?(:step)
-      params.require(:step).permit(@step.questions.keys)
+      this_step_params = params.require(:step)
+      consolidate_multiparam_date_attrs!(this_step_params)
+      this_step_params.permit(@step.questions.keys)
     else
       {}
+    end
+  end
+
+  def consolidate_multiparam_date_attrs!(params)
+    multiparam_date_attrs = Hash.new
+    delete_params = []
+
+    params.each do |key, val|
+      # first capture is attr name, second is order
+      multiparam_regex = /(\w+)\((\d)i\)/
+
+      if key =~ /\(\di\)/
+        puts key
+        delete_params << key
+        attr_name = key[multiparam_regex, 1]
+        order = key[multiparam_regex, 2].to_i
+
+        multiparam_date_attrs[attr_name] ||= []
+        multiparam_date_attrs[attr_name][order] = val
+      end
+    end
+
+    delete_params.each { |param| params.delete(param) }
+
+    multiparam_date_attrs.each do |key, vals|
+      params[key] = Date.new(*vals.compact.map(&:to_i))
     end
   end
 end

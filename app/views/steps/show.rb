@@ -103,23 +103,51 @@ class Views::Steps::Show < Views::Base
 
         case field_type
           when :text
-            f.label question, label_text, class: 'form-question'
-
-            if step.help_message(question)
-              p step.help_message(question), class: "text--help"
-            end
+            question_label(f, question, label_text, label_option)
 
             f.text_field question,
               placeholder: step.placeholder(question),
               class: 'text-input'
           when :text_area
-            f.label question, label_text, class: "form-question #{'hidden' if label_option == :hidden}"
+            question_label(f, question, label_text, label_option)
 
             f.text_area question,
               placeholder: step.placeholder(question),
               class: 'textarea'
+          when :incrementer
+            question_label(f, question, label_text, label_option)
+
+            div class: "incrementer" do
+              span "-", class: "incrementer__subtract"
+              f.number_field question, {
+                class: "text-input form-width--short",
+                min: 1,
+                max: 30
+              }
+              span "+", class: "incrementer__add"
+            end
+          when :select
+            f.label question, label_text, class: 'form-question'
+
+            div class: "select" do
+              f.select question,
+                step.options_for(question).map(&:titleize),
+                { include_blank: "Choose one" },
+                { class: "select__element" }
+            end
+          when :radios
+            question_label(f, question, label_text, label_option)
+
+            div do
+              step.options_for(question).each do |option|
+                label class: "radio-button" do
+                  f.radio_button question, option
+                  text option.titleize
+                end
+              end
+            end
           when :yes_no
-            f.label question, label_text, class: "form-question #{'hidden' if label_option == :hidden}"
+            question_label(f, question, label_text, label_option)
 
             div do
               label class: "radio-button" do
@@ -137,6 +165,32 @@ class Views::Steps::Show < Views::Base
               f.check_box question
               text label_text
             end
+          when :date
+            f.label question,
+              label_text,
+              class: 'form-question',
+              id: "date-label-#{question}"
+
+            div class: "input-group--inline" do
+              div class: "select" do
+                date_options = {
+                  date_separator: '</div><div class="select">',
+                  order: %i[month day year],
+                  use_month_numbers: true,
+                  start_year: Date.today.year - 130,
+                  end_year: Date.today.year - 18,
+                  prompt: true,
+                  prefix: "step"
+                }
+
+                html_options = {
+                  class: "select__element",
+                  aria: { labelledby: "date-label-#{question}" }
+                }
+
+                date_select(f, question, date_options, html_options)
+              end
+            end
           else
             raise "Unknown field type #{field_type}"
         end
@@ -148,6 +202,16 @@ class Views::Steps::Show < Views::Base
           end
         end
       end
+    end
+  end
+
+  def question_label(f, question, label_text, label_option)
+    f.label question,
+      label_text,
+      class: "form-question #{'hidden' if label_option == :hidden}"
+
+    if step.help_message(question)
+      p step.help_message(question), class: "text--help"
     end
   end
 
