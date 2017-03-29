@@ -7,7 +7,7 @@ class LegalAgreement < Step
   end
 
   def previous
-    IntroductionComplete.new(@app)
+    YourHousehold.new(@app)
   end
 
   def next

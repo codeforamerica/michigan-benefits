@@ -52,7 +52,9 @@ describe "applying", js: true do
 
 
     check_step "Provide us with some personal details.",
-               ["birthday", "<today>", "You need a date"]
+      ["What is your sex?", "Female", "Make sure to answer this question."],
+      ["What is your marital status?", "Single", "Make sure to answer this question."],
+      ["How many people are in your household?", "2", nil]
 
     expect(page).to have_text("Scroll down to agree")
     submit
@@ -125,7 +127,12 @@ describe "applying", js: true do
   end
 
   def within_question(question)
-    label = find(".form-group label", text: question)
+    begin
+      label = find(".form-group label", text: question)
+    rescue
+      puts "current page: #{find(".step-section-header__subhead").text}"
+      raise
+    end
 
     group = label.first(
       :xpath,
@@ -150,16 +157,22 @@ describe "applying", js: true do
   def enter(question, answer)
     log "#{question} => #{answer}" do
       within_question(question) do |group|
-        case group['data-field-type']
+        type = group['data-field-type']
+
+        case type
         when "date"
           date = Date.today - 40.years
-          select "app_#{question}_1i", with: date.year
-          select "app_#{question}_2i", with: date.month
-          select "app_#{question}_3i", with: date.day
-        when "text", "incremeter"
+          date_parts = [date.month, date.day, date.year]
+
+          all('select').each_with_index do |date_select, i|
+            select date_parts[i], from: date_select[:name]
+          end
+        when "text", "incrementer"
           fill_in question, with: answer
-        when "yes_no", "radios", "select"
+        when "yes_no", "radios"
           choose answer
+        when "select"
+          select answer
         when "checkbox"
           if answer
             check question
@@ -176,11 +189,15 @@ describe "applying", js: true do
   def verify(question, expected_answer)
     log "#{question} => #{expected_answer}" do
       within_question(question) do |group|
-        case group['data-field-type']
-          when "text"
+        type = group['data-field-type']
+
+        case type
+          when "text", 'incrementer'
             expect(find("input").value).to eq expected_answer
-          when "yes_no"
+          when "yes_no", 'radios'
             expect(find("label", text: expected_answer).find("input").checked?).to eq true
+          when 'select'
+            expect(page).to have_select(question, selected: expected_answer)
           when "checkbox"
             expect(find("input").checked?).to eq(expected_answer)
           else
