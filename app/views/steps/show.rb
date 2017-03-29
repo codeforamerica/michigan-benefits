@@ -60,10 +60,10 @@ class Views::Steps::Show < Views::Base
     div class: 'step-section-header' do
       if step.icon.present?
         div class: [
-          "step-section-header__icon",
-          "illustration",
-          "illustration--#{step.icon}"
-        ]
+                     "step-section-header__icon",
+                     "illustration",
+                     "illustration--#{step.icon}"
+                   ]
       end
 
       subhead_classes = "step-section-header__subhead"
@@ -110,8 +110,39 @@ class Views::Steps::Show < Views::Base
             end
 
             f.text_field question,
-              placeholder: step.placeholder(question),
-              class: 'text-input'
+                         placeholder: step.placeholder(question),
+                         class:       'text-input'
+          when :incrementer
+            f.label question, label_text, class: 'form-question'
+
+            if step.help_message(question)
+              p step.help_message(question), class: "text--help"
+            end
+            div class: "incrementer" do
+              span "-", class: "incrementer__subtract"
+              f.number_field question, { class: "text-input form-width--short", value: "1", min: "0", max: "30" }
+              span "+", class: "incrementer__add"
+            end
+          when :select
+            f.label question, label_text, class: 'form-question'
+            div class: "select" do
+              f.select question, step.options_for(question), { include_blank: "Choose one" }, { class: "select__element" }
+            end
+          when :radios
+            f.label question, label_text, class: 'form-question'
+
+            if step.help_message(question)
+              p step.help_message(question), class: "text--help"
+            end
+
+            div do
+              step.options_for(question).each do |option|
+                label class: "radio-button" do
+                  f.radio_button question, option
+                  text option.titleize
+                end
+              end
+            end
           when :yes_no
             f.label question, label_text, class: 'form-question'
 
@@ -130,6 +161,21 @@ class Views::Steps::Show < Views::Base
             label class: "checkbox" do
               f.check_box question
               text label_text
+            end
+          when :date
+            f.label question, label_text, class: 'form-question'
+            div class: "input-group--inline" do
+              div class: "select" do
+                date_select(f, question, {
+                  date_separator:    '</div><div class="select">',
+                  order:             [:month, :day, :year],
+                  use_month_numbers: true,
+                  start_year:        Date.today.year - 130,
+                  end_year:          Date.today.year - 18,
+                  prompt:  true,
+                  prefix: "app"
+                }, {class: "select__element", aria: {labelledby: "label" }})
+              end
             end
           else
             raise "Unknown field type #{field_type}"

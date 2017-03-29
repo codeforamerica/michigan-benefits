@@ -11,6 +11,7 @@ class Step
     :subhead_help,
     :questions,
     :placeholders,
+    :field_options,
     :types,
     :section_headers,
     :overviews,
@@ -66,6 +67,10 @@ class Step
     if valid?
       update_app!
     end
+  end
+
+  def options_for(field)
+    field_options.fetch(field, "")
   end
 
   def placeholder(field)

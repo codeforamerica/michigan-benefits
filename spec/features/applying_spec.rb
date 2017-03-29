@@ -17,17 +17,17 @@ describe "applying", js: true do
     click_on "Apply now"
 
     check_step "To start, please introduce yourself.",
-      ["What is your first name?", "Alice", "Make sure to provide a first name"],
-      ["What is your last name?", "Aardvark", "Make sure to provide a last name"]
+               ["What is your first name?", "Alice", "Make sure to provide a first name"],
+               ["What is your last name?", "Aardvark", "Make sure to provide a last name"]
 
     check_step "Tell us the best ways to reach you.",
-      ["What is the best phone number to reach you?", "4158675309", "Make sure your phone number is 10 digits long"],
-      ["May we send text messages to that phone number help you through the enrollment process?", "Yes", "Make sure to answer this question"],
-      ["What is your email address?", "test@example.com", nil],
-      ["Address", "123 Main St", "Make sure to answer this question"],
-      ["City", "San Francisco", "Make sure to answer this question"],
-      ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
-      ["Is this address the same as your home address?", "Yes", "Make sure to answer this question"]
+               ["What is the best phone number to reach you?", "4158675309", "Make sure your phone number is 10 digits long"],
+               ["May we send text messages to that phone number help you through the enrollment process?", "Yes", "Make sure to answer this question"],
+               ["What is your email address?", "test@example.com", nil],
+               ["Address", "123 Main St", "Make sure to answer this question"],
+               ["City", "San Francisco", "Make sure to answer this question"],
+               ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
+               ["Is this address the same as your home address?", "Yes", "Make sure to answer this question"]
 
     expect_page("It should take about 10 more minutes to complete a full application.")
 
@@ -37,7 +37,7 @@ describe "applying", js: true do
       choose "No"
     end
 
-    continue
+    submit
 
     check_step "Tell us where you currently live.",
       ["Street", "1234 Fake Street", "Make sure to answer this question"],
@@ -45,13 +45,17 @@ describe "applying", js: true do
       ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
       ["Check if you do not have stable housing", false, nil]
 
-    continue
+    submit
 
     expect_page "There are 4 sections you need to complete to submit a full application."
-    continue
+    submit
+
+
+    check_step "Provide us with some personal details.",
+               ["birthday", "<today>", "You need a date"]
 
     expect(page).to have_text("Scroll down to agree")
-    continue
+    submit
 
     check_step "Enter your full legal name here to sign this application.",
       ["Your signature", "Jeff Name", "Make sure you enter your signature"],
@@ -93,20 +97,20 @@ describe "applying", js: true do
       expect_page(subhead)
 
       log "Checking validation errors" do
-        continue
+        submit
         questions.each { |q, _, e| expect_validation_error q, e }
       end
 
       log "Answering questions" do
-        questions.each { |q, a, _| enter(q, a)}
-        continue
+        questions.each { |q, a, _| enter(q, a) }
+        submit
       end
 
       if verify
         log "Verifying that answers were saved" do
           back
-          questions.each { |q, a, _| verify(q, a)}
-          continue
+          questions.each { |q, a, _| verify(q, a) }
+          submit
         end
       end
     end
@@ -116,7 +120,7 @@ describe "applying", js: true do
     log "Checking page title" do
       expect(page).to have_selector \
       ".step-section-header__subhead",
-        text: subhead
+      text: subhead
     end
   end
 
@@ -147,9 +151,14 @@ describe "applying", js: true do
     log "#{question} => #{answer}" do
       within_question(question) do |group|
         case group['data-field-type']
-        when "text"
+        when "date"
+          date = Date.today - 40.years
+          select "app_#{question}_1i", with: date.year
+          select "app_#{question}_2i", with: date.month
+          select "app_#{question}_3i", with: date.day
+        when "text", "incremeter"
           fill_in question, with: answer
-        when "yes_no"
+        when "yes_no", "radios", "select"
           choose answer
         when "checkbox"
           if answer
@@ -168,14 +177,14 @@ describe "applying", js: true do
     log "#{question} => #{expected_answer}" do
       within_question(question) do |group|
         case group['data-field-type']
-        when "text"
-          expect(find("input").value).to eq expected_answer
-        when "yes_no"
-          expect(find("label", text: expected_answer).find("input").checked?).to eq true
-        when "checkbox"
-          expect(find("input").checked?).to eq(expected_answer)
-        else
-          raise "Unsupported type: #{type}"
+          when "text"
+            expect(find("input").value).to eq expected_answer
+          when "yes_no"
+            expect(find("label", text: expected_answer).find("input").checked?).to eq true
+          when "checkbox"
+            expect(find("input").checked?).to eq(expected_answer)
+          else
+            raise "Unsupported type: #{type}"
         end
       end
     end
@@ -185,7 +194,7 @@ describe "applying", js: true do
     Rails.root.join("spec/fixtures/uploads/#{file}")
   end
 
-  def continue
+  def submit
     log "Continuing" do
       first('button[type="submit"]').click
     end
