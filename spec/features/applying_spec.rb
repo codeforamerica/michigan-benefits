@@ -47,6 +47,9 @@ describe "applying", js: true do
 
     continue
 
+    expect_page "There are 4 sections you need to complete to submit a full application."
+    continue
+
     expect(page).to have_text("Scroll down to agree")
     continue
 
@@ -54,26 +57,7 @@ describe "applying", js: true do
       ["Your signature", "Jeff Name", "Make sure you enter your signature"],
       verify: false
 
-    click_on "Submit documents now"
-
-    expect(page).to have_text("No documents uploaded yet.")
-
-    upload_file("kermit.jpg")
-    expect_page_to_have_attachments(count: 1)
-
-    upload_file("oscar.jpg")
-    expect_page_to_have_attachments(count: 2)
-
-    delete_first_attachment
-    expect_page_to_have_attachments(count: 1)
-
-    upload_file("bad.txt")
-
-    expect(page).to have_text("Invalid file type")
-
-    back
-
-    expect_page_to_have_attachments(count: 1)
+    check_doc_uploads
 
     click_on "I'm finished"
 
@@ -211,6 +195,29 @@ describe "applying", js: true do
     log "Going back" do
       first('.step-header__back-link').trigger('click')
     end
+  end
+
+  def check_doc_uploads
+    click_on "Submit documents now"
+
+    expect(page).to have_text("No documents uploaded yet.")
+
+    upload_file("kermit.jpg")
+    expect_page_to_have_attachments(count: 1)
+
+    upload_file("oscar.jpg")
+    expect_page_to_have_attachments(count: 2)
+
+    delete_first_attachment
+    expect_page_to_have_attachments(count: 1)
+
+    upload_file("bad.txt")
+
+    expect(page).to have_text("Invalid file type")
+
+    back
+
+    expect_page_to_have_attachments(count: 1)
   end
 
   def log(message)
