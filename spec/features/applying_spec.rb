@@ -1,6 +1,10 @@
 require "rails_helper"
 
 describe "applying", js: true do
+  before do
+    allow(FormMailer).to receive_message_chain(:submission, :deliver_now)
+  end
+
   around(:each) do |example|
     with_modified_env FORM_RECIPIENT: 'test@example.com' do
       example.run
