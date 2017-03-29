@@ -1,4 +1,37 @@
 .template--homepage {
+  .already-started {
+    a.button {
+      display: block;
+      width: 100%;
+      font-size: 16px;
+      text-align: left;
+      padding: 12px;
+      padding-left: 58px;
+
+      .button__icon {
+        top: 6px;
+      }
+
+      &.resume {
+        background: url(image-path('btnicn_resume@2x.png')) no-repeat;
+        background-size: 26px 32px;
+        background-position: 18px;
+      }
+
+      &.contact {
+        background: url(image-path('btnicn_contact@2x.png')) no-repeat;
+        background-size: 31px 33px;
+        background-position: 14px;
+      }
+
+      &.upload {
+        background: url(image-path('btnicn_upload@2x.png')) no-repeat;
+        background-size: 40px 28px;
+        background-position: 12px;
+      }
+    }
+  }
+
   .slab--hero {
     position: relative;
     background: rgba(shade($color-dark-grey, 80%), .3);

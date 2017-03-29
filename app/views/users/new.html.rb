@@ -35,7 +35,46 @@ class Views::Users::New < Views::Base
     end
 
     apply_form
+    already_started
     render partial: "shared/footer"
+  end
+
+  def already_started
+    div class: 'slab already-started' do
+      div class: 'card--narrow' do
+        h3 class: 'h3--strong' do
+          text 'Already started your application?'
+        end
+
+        current_upload_path = current_user ? documents_path : '#'
+
+        link_to current_upload_path, class: 'button upload' do
+          text 'Submit verification documents'
+        end
+
+        p 'Upload photos of documents requested by MDHHS staff',
+          class: 'text--help text--padded'
+
+        link_to '#', class: 'button contact' do
+          text 'Contact your local office'
+        end
+
+        p 'For missed interview and other issues',
+          class: 'text--help text--padded'
+
+        current_resume_path = current_user ?
+          step_path(Step.first.to_param) :
+          '#'
+
+        link_to current_resume_path, class: 'button resume' do
+          text 'Resume your application'
+          i class: "button__icon icon-arrow_forward"
+        end
+
+        p 'If you need to finish an application you started previously',
+          class: 'text--help text--padded'
+      end
+    end
   end
 
   def apply_form
