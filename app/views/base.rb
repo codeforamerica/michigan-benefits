@@ -7,6 +7,18 @@ module Views
 
     private
 
+    def slab_with_card
+      div class: "slab slab--not-padded" do
+        div class: "card card--narrow" do
+          yield
+        end
+      end
+    end
+
+    def help_text(text)
+      p text, class: "text--help"
+    end
+
     def row(classes=[], expanded: true, &block)
       classes = CssClasses.new(classes, ("expanded" if expanded), "row")
       div class: classes.to_s, &block

@@ -104,4 +104,28 @@
     width: 18px;
     height: 22px;
   }
+
+  &--section-1 {
+    @include retina-bg(section-1, 236px 128px);
+    width: 236px;
+    height: 128px;
+  }
+
+  &--section-2 {
+    @include retina-bg(section-2, 213px 128px);
+    width: 213px;
+    height: 128px;
+  }
+
+  &--section-3 {
+    @include retina-bg(section-3, 213px 128px);
+    width: 213px;
+    height: 128px;
+  }
+
+  &--section-4 {
+    @include retina-bg(section-4, 236px 128px);
+    width: 236px;
+    height: 128px;
+  }
 }
