@@ -15,6 +15,10 @@ label {
   margin-bottom: 1em;
   font-weight: 400;
   font-size: $font-size-small;
+
+  &.hidden {
+    display: none;
+  }
 }
 
 .text-input {

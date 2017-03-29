@@ -83,7 +83,7 @@ class Views::Steps::Show < Views::Base
   end
 
   def questions(f)
-    step.questions.each do |question, label_text|
+    step.questions.each do |question, (label_text, label_option)|
       group_classes = 'form-group'
 
       if step.errors[question].present?
@@ -113,7 +113,7 @@ class Views::Steps::Show < Views::Base
               placeholder: step.placeholder(question),
               class: 'text-input'
           when :yes_no
-            f.label question, label_text, class: 'form-question'
+            f.label question, label_text, class: "form-question #{'hidden' if label_option == :hidden}"
 
             div do
               label class: "radio-button" do

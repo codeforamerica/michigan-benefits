@@ -53,6 +53,9 @@ describe "applying", js: true do
     expect_page "Next, describe your financial situation for us."
     continue
 
+    check_step "Has your household had a change in income in the past 30 days?",
+      ["Income change", "Yes"]
+
     expect(page).to have_text("Scroll down to agree")
     continue
 
@@ -124,7 +127,7 @@ describe "applying", js: true do
   end
 
   def within_question(question)
-    label = find(".form-group label", text: question)
+    label = find(".form-group label", text: question, visible: false)
 
     group = label.first(
       :xpath,
