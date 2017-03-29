@@ -112,6 +112,12 @@ class Views::Steps::Show < Views::Base
             f.text_field question,
               placeholder: step.placeholder(question),
               class: 'text-input'
+          when :text_area
+            f.label question, label_text, class: "form-question #{'hidden' if label_option == :hidden}"
+
+            f.text_area question,
+              placeholder: step.placeholder(question),
+              class: 'textarea'
           when :yes_no
             f.label question, label_text, class: "form-question #{'hidden' if label_option == :hidden}"
 

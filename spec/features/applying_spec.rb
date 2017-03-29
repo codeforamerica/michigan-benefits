@@ -54,7 +54,11 @@ describe "applying", js: true do
     continue
 
     check_step "Has your household had a change in income in the past 30 days?",
-      ["Income change", "Yes"]
+      ["Income change", "Yes", nil]
+
+    check_step "In your own words, tell us about the recent change in your household's income.",
+      ["Explanation", "I lost my job", nil],
+      validations: false
 
     expect(page).to have_text("Scroll down to agree")
     continue
@@ -94,13 +98,15 @@ describe "applying", js: true do
     click_on "Upload"
   end
 
-  def check_step(subhead, *questions, verify: true)
+  def check_step(subhead, *questions, verify: true, validations: true)
     log subhead do
       expect_page(subhead)
 
-      log "Checking validation errors" do
-        continue
-        questions.each { |q, _, e| expect_validation_error q, e }
+      if validations
+        log "Checking validation errors" do
+          continue
+          questions.each { |q, _, e| expect_validation_error q, e }
+        end
       end
 
       log "Answering questions" do
@@ -153,7 +159,7 @@ describe "applying", js: true do
     log "#{question} => #{answer}" do
       within_question(question) do |group|
         case group['data-field-type']
-        when "text"
+        when "text", "text_area"
           fill_in question, with: answer
         when "yes_no"
           choose answer
@@ -173,9 +179,12 @@ describe "applying", js: true do
   def verify(question, expected_answer)
     log "#{question} => #{expected_answer}" do
       within_question(question) do |group|
-        case group['data-field-type']
+        type = group['data-field-type']
+        case type
         when "text"
           expect(find("input").value).to eq expected_answer
+        when "text_area"
+          expect(find("textarea").value).to eq expected_answer
         when "yes_no"
           expect(find("label", text: expected_answer).find("input").checked?).to eq true
         when "checkbox"

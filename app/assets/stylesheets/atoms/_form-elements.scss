@@ -100,17 +100,18 @@ label {
 }
 
 .textarea {
-	border: 2px solid $color-dark-grey;
-	border-radius: $border-radius;
-	width: 100%;
-	outline: 0;
-	padding: 1em;
-	line-height: $line-height-normal;
-	margin-bottom: .5em;
+  border: 2px solid $color-dark-grey;
+  border-radius: $border-radius;
+  width: 100%;
+  outline: 0;
+  padding: 1em;
+  line-height: $line-height-normal;
+  margin-bottom: .5em;
+  height: 10em;
 
-	&:focus {
-		border-color: $active-field-color;
-	}
+  &:focus {
+    border-color: $active-field-color;
+  }
 }
 
 .select {

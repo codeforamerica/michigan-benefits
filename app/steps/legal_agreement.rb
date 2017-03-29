@@ -7,7 +7,11 @@ class LegalAgreement < Step
   end
 
   def previous
-    IncomeChange.new(@app)
+    if @app.income_change
+      IncomeChangeExplanation.new(@app)
+    else
+      IncomeChange.new(@app)
+    end
   end
 
   def next
