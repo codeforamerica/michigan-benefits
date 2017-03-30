@@ -9,7 +9,7 @@ class IncomeIntroduction < Step
   end
 
   def previous
-    YourHousehold.new(@app)
+    AnotherHouseholdMember.new(@app)
   end
 
   def next

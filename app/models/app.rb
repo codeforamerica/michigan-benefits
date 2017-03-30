@@ -1,6 +1,7 @@
 class App < ApplicationRecord
   belongs_to :user
   has_many :documents, inverse_of: :app
+  has_many :household_members
 
   delegate :full_name, to: :user
 

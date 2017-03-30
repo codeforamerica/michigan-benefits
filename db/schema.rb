@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329195054) do
+ActiveRecord::Schema.define(version: 20170330063047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 20170329195054) do
     t.boolean  "unstable_housing",                     default: false
     t.string   "signature"
     t.string   "email"
+    t.boolean  "income_change"
+    t.text     "income_change_explanation"
+    t.text     "additional_income",                    default: [],                 array: true
     t.date     "birthday"
     t.string   "sex"
     t.string   "marital_status"
     t.integer  "household_size"
-    t.boolean  "income_change"
-    t.text     "income_change_explanation"
-    t.text     "additional_income",                    default: [],                 array: true
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 
@@ -52,6 +52,20 @@ ActiveRecord::Schema.define(version: 20170329195054) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.index ["app_id"], name: "index_documents_on_app_id", using: :btree
+  end
+
+  create_table "household_members", force: :cascade do |t|
+    t.integer  "app_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "sex"
+    t.string   "relationship"
+    t.string   "ssn"
+    t.boolean  "in_home"
+    t.boolean  "buy_food_with"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["app_id"], name: "index_household_members_on_app_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,4 +81,5 @@ ActiveRecord::Schema.define(version: 20170329195054) do
 
   add_foreign_key "apps", "users"
   add_foreign_key "documents", "apps"
+  add_foreign_key "household_members", "apps"
 end

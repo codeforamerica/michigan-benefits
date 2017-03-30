@@ -54,7 +54,27 @@ describe "applying", js: true do
     check_step "Provide us with some personal details.",
       ["What is your sex?", "Female", "Make sure to answer this question."],
       ["What is your marital status?", "Single", "Make sure to answer this question."],
-      ["How many people are in your household?", "2", nil]
+      ["How many people are in your household?", "3", nil]
+
+    check_step "Tell us about another person you are applying with.",
+      ["What is their first name?", "Alice", nil],
+      ["What is their last name?", "Aardvark", nil],
+      ["What is their sex?", "Female", nil],
+      ["What is their relationship to you?", "Child", nil],
+      ["What is their social security number?", "444-44-4444", nil],
+      ["Is this person living in your home?", "Yes", nil],
+      ["Do you buy and prepare food with this person?", "Yes", nil],
+      validations: false
+
+    # check_step "Tell us about another person you are applying with.",
+    #   ["What is their first name?", "Billy", nil],
+    #   ["What is their last name?", "Bobcat", nil],
+    #   ["What is their sex?", "Male", nil],
+    #   ["What is their relationship to you?", "Sibling", nil],
+    #   ["What is their social security number?", "555-55-5555", nil],
+    #   ["Is this person living in your home?", "Yes", nil],
+    #   ["Do you buy and prepare food with this person?", "Yes", nil],
+    #   validations: false
 
     expect_page "Next, describe your financial situation for us."
     submit

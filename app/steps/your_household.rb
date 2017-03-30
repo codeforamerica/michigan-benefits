@@ -37,7 +37,7 @@ class YourHousehold < Step
   end
 
   def next
-    IncomeIntroduction.new(@app)
+    AnotherHouseholdMember.new(@app)
   end
 
   def assign_from_app
