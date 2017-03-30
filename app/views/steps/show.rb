@@ -115,6 +115,16 @@ class Views::Steps::Show < Views::Base
         end
 
         case field_type
+          when :nested_checkbox
+            question_label(f, question, label_text, label_option)
+            current_user.app.household_members.each do |member|
+              f.fields_for "household_members[]", member, :hidden_field_id => true do |member_fields|
+                label class: "checkbox" do
+                  member_fields.check_box question
+                  text member.first_name.titleize
+                end
+              end
+            end
           when :text
             question_label(f, question, label_text, label_option)
 

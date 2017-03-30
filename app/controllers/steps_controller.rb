@@ -35,9 +35,19 @@ class StepsController < ApplicationController
 
   def step_params
     if params.has_key?(:step)
-      this_step_params = params.require(:step)
-      consolidate_multiparam_date_attrs!(this_step_params)
-      this_step_params.permit(@step.questions.keys)
+      if params["step"].has_key?("household_members")
+        this_step_params = params.require(:step)
+        this_step_params.permit(
+          household_members: [
+            :in_college,
+            :is_disabled
+          ]
+        )
+      else
+        this_step_params = params.require(:step)
+        consolidate_multiparam_date_attrs!(this_step_params)
+        this_step_params.permit(@step.questions.keys)
+      end
     else
       {}
     end
