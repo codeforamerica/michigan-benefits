@@ -11,7 +11,7 @@ class HouseholdMembers < Step
   end
 
   def next
-    IncomeIntroduction.new(@app)
+    HouseholdMeta.new(@app)
   end
 
   def assign_from_app

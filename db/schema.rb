@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330063047) do
+ActiveRecord::Schema.define(version: 20170330083707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,13 +33,19 @@ ActiveRecord::Schema.define(version: 20170330063047) do
     t.boolean  "unstable_housing",                     default: false
     t.string   "signature"
     t.string   "email"
-    t.boolean  "income_change"
-    t.text     "income_change_explanation"
-    t.text     "additional_income",                    default: [],                 array: true
     t.date     "birthday"
     t.string   "sex"
     t.string   "marital_status"
     t.integer  "household_size"
+    t.boolean  "income_change"
+    t.text     "income_change_explanation"
+    t.text     "additional_income",                    default: [],                 array: true
+    t.boolean  "everyone_a_citizen"
+    t.boolean  "anyone_disabled"
+    t.boolean  "any_new_moms"
+    t.boolean  "any_medical_bill_help"
+    t.boolean  "anyone_in_college"
+    t.boolean  "anyone_living_elsewhere"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 

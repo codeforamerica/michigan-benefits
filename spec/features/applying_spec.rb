@@ -84,6 +84,14 @@ describe "applying", js: true do
 
     submit
 
+    check_step "Tell us a bit more about your household.",
+      ["Is each person a citizen?", "Yes", nil],
+      ["Does anyone have a disability?", "Yes", nil],
+      ["Is anyone pregnant or has been pregnant recently?", "Yes", nil],
+      ["Does anyone need help paying for recent medical bills?", "Yes", nil],
+      ["Is anyone enrolled in college?", "Yes", nil],
+      ["Is anyone temporarily living outside the home?", "Yes", nil]
+
     expect_page "Next, describe your financial situation for us."
     submit
 
