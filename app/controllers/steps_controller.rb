@@ -11,12 +11,13 @@ class StepsController < ApplicationController
   end
 
   def show # TODO: should be "edit"
-    @step = Step.find(params[:id], current_app)
+    @app = current_app
+    @step = find_step
     respond_with @step
   end
 
   def update
-    @step = Step.find(params[:id], current_app)
+    @step = find_step
     @step.update(step_params)
 
     if @step.valid?
@@ -27,6 +28,10 @@ class StepsController < ApplicationController
   end
 
   private
+
+  def find_step
+    Step.find(params[:id], current_app, params.slice(*%w[member_id]))
+  end
 
   def step_params
     if params.has_key?(:step)

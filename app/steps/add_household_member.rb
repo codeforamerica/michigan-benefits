@@ -1,4 +1,4 @@
-class AnotherHouseholdMember < Step
+class AddHouseholdMember < Step
   self.title = "Your Household"
   self.subhead = "Tell us about another person you are applying with."
   self.subhead_help = "If you don't know the answer to a question, that's okay."
@@ -40,31 +40,38 @@ class AnotherHouseholdMember < Step
     :buy_food_with
 
   def previous
-    YourHousehold.new(@app)
+    HouseholdMembers.new(@app)
   end
 
   def next
-    IncomeIntroduction.new(@app)
+    HouseholdMembers.new(@app)
   end
 
-  def assign_from_app
-    member = @app.household_members.first
-    if member
-      assign_attributes member.attributes.slice *%w[
-        first_name
-        last_name
-        sex
-        relationship
-        ssn
-        in_home
-        buy_food_with
-      ]
+  def member
+    if member_id
+      @app.household_members.find_by(id: member_id)
+    else
+      @app.household_members.build
     end
   end
 
+  def member_id
+    @params["member_id"]
+  end
+
+  def assign_from_app
+    assign_attributes member.attributes.slice *%w[
+      first_name
+      last_name
+      sex
+      relationship
+      ssn
+      in_home
+      buy_food_with
+    ]
+  end
+
   def update_app!
-    member = @app.household_members.first
-    member = @app.household_members.create! unless member
     member.update!(
       first_name: first_name,
       last_name: last_name,

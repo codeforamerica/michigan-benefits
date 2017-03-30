@@ -37,7 +37,11 @@ class YourHousehold < Step
   end
 
   def next
-    AnotherHouseholdMember.new(@app)
+    if @app.household_size.to_i > 1
+      HouseholdMembers.new(@app)
+    else
+      IncomeIntroduction.new(@app)
+    end
   end
 
   def assign_from_app

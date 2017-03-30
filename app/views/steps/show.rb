@@ -33,6 +33,13 @@ class Views::Steps::Show < Views::Base
   def step_form
     div class: 'form-card' do
       form_for step, as: :step, url: step_path(step), method: :put do |f|
+
+        if step.params
+          step.params.each do |k, v|
+            hidden_field_tag k, v
+          end
+        end
+
         header class: 'form-card__header' do
           section_header
         end

@@ -56,6 +56,8 @@ describe "applying", js: true do
       ["What is your marital status?", "Single", "Make sure to answer this question."],
       ["How many people are in your household?", "3", nil]
 
+    click_on "Add a household member"
+
     check_step "Tell us about another person you are applying with.",
       ["What is their first name?", "Alice", nil],
       ["What is their last name?", "Aardvark", nil],
@@ -64,17 +66,23 @@ describe "applying", js: true do
       ["What is their social security number?", "444-44-4444", nil],
       ["Is this person living in your home?", "Yes", nil],
       ["Do you buy and prepare food with this person?", "Yes", nil],
-      validations: false
+      validations: false,
+      verify: false
 
-    # check_step "Tell us about another person you are applying with.",
-    #   ["What is their first name?", "Billy", nil],
-    #   ["What is their last name?", "Bobcat", nil],
-    #   ["What is their sex?", "Male", nil],
-    #   ["What is their relationship to you?", "Sibling", nil],
-    #   ["What is their social security number?", "555-55-5555", nil],
-    #   ["Is this person living in your home?", "Yes", nil],
-    #   ["Do you buy and prepare food with this person?", "Yes", nil],
-    #   validations: false
+    click_on "Add a household member"
+
+    check_step "Tell us about another person you are applying with.",
+      ["What is their first name?", "Billy", nil],
+      ["What is their last name?", "Bobcat", nil],
+      ["What is their sex?", "Male", nil],
+      ["What is their relationship to you?", "Sibling", nil],
+      ["What is their social security number?", "555-55-5555", nil],
+      ["Is this person living in your home?", "Yes", nil],
+      ["Do you buy and prepare food with this person?", "Yes", nil],
+      validations: false,
+      verify: false
+
+    submit
 
     expect_page "Next, describe your financial situation for us."
     submit

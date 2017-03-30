@@ -17,19 +17,21 @@ class Step
     :overviews,
     :help_messages
 
+  attr_reader :params
+
   def self.first
     IntroduceYourself
   end
 
-  def self.find(id, app)
-    id.gsub("-", "_").camelize.constantize.new(app)
+  def self.find(id, app, params={})
+    id.gsub("-", "_").camelize.constantize.new(app, params)
   end
 
   def self.to_param
     self.name.underscore.dasherize
   end
 
-  def initialize(app)
+  def initialize(app, params={})
     self.questions ||= {}
     self.placeholders ||= {}
     self.types ||= {}
@@ -38,6 +40,7 @@ class Step
     self.help_messages ||= {}
 
     @app = app
+    @params = params
     assign_from_app
   end
 
