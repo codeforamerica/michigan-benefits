@@ -69,7 +69,7 @@ class AdditionalIncome < Step
   end
 
   def next
-    LegalAgreement.new(@app)
+    ChildSupport.new(@app)
   end
 
   def assign_from_app

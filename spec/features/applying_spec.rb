@@ -128,6 +128,9 @@ describe "applying", js: true do
       ["Other income", false, nil],
       validations: false
 
+    check_step "Tell us more about your additional income.",
+      ["Monthly pay", "500", nil],
+
     expect(page).to have_text("Scroll down to agree")
     submit
 
