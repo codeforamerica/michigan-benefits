@@ -9,7 +9,7 @@ class IncomeIntroduction < Step
   end
 
   def previous
-    HouseholdHealth.new(@app)
+    HouseholdTax.new(@app)
   end
 
   def next

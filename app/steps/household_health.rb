@@ -30,7 +30,7 @@ class HouseholdHealth < Step
   end
 
   def next
-    IncomeIntroduction.new(@app)
+    HouseholdTax.new(@app)
   end
 
   def assign_from_app
