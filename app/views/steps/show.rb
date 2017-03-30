@@ -90,6 +90,12 @@ class Views::Steps::Show < Views::Base
         group_classes += ' form-group--error'
       end
 
+      field_option = step.options_for(question)
+
+      if field_option.present? && field_option.is_a?(Hash)
+        group_classes += " #{field_option[:form_group_class]}"
+      end
+
       field_type = step.type(question)
 
       div class: group_classes, 'data-field-type' => field_type do

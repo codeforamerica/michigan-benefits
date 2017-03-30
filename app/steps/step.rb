@@ -70,7 +70,7 @@ class Step
   end
 
   def options_for(field)
-    field_options.fetch(field, "")
+    field_options&.fetch(field, "")
   end
 
   def placeholder(field)

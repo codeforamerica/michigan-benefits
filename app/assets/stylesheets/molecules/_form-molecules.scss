@@ -69,6 +69,10 @@
     margin-bottom: 1em;
   }
 
+  &.no-bottom-space {
+    margin-bottom: 0;
+  }
+
   &__headline {
     color: $color-sky;
     border-top: 1px solid $color-tan;

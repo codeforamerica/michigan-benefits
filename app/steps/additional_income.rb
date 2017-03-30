@@ -24,6 +24,19 @@ class AdditionalIncome < Step
     other: :checkbox,
   }
 
+  NOSPACE_FIELD_OPTION = { form_group_class: 'no-bottom-space' }
+
+  self.field_options = {
+    unemployment: NOSPACE_FIELD_OPTION,
+    ssi: NOSPACE_FIELD_OPTION,
+    workers_comp: NOSPACE_FIELD_OPTION,
+    pension: NOSPACE_FIELD_OPTION,
+    social_security: NOSPACE_FIELD_OPTION,
+    child_support: NOSPACE_FIELD_OPTION,
+    foster_care: NOSPACE_FIELD_OPTION,
+    other: NOSPACE_FIELD_OPTION
+  }
+
   attr_accessor \
     :unemployment,
     :ssi,
