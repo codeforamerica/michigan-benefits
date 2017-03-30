@@ -98,6 +98,11 @@ describe "applying", js: true do
     #   validations: false,
     #   verify: false
 
+    check_step "Tell us about your household health coverage in the past 3 months.",
+      ["Does anyone need help paying for medical bills from the past 3 months?", "No", "Make sure to answer this question"],
+      ["Did anyone have insurance through a job and lose it in the last 3 months?", "No", "Make sure to answer this question"],
+      validations: false
+
     expect_page "Next, describe your financial situation for us."
     submit
 

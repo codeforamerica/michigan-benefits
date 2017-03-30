@@ -9,7 +9,7 @@ class IncomeIntroduction < Step
   end
 
   def previous
-    HouseholdMeta.new(@app)
+    HouseholdHealth.new(@app)
   end
 
   def next
