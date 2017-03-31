@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331081744) do
+ActiveRecord::Schema.define(version: 20170331084615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20170331081744) do
     t.string   "phone_number"
     t.boolean  "accepts_text_messages"
     t.integer  "user_id"
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.boolean  "mailing_address_same_as_home_address"
     t.string   "mailing_street"
     t.string   "mailing_city"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20170331081744) do
     t.string   "home_address"
     t.string   "home_city"
     t.string   "home_zip"
-    t.boolean  "unstable_housing",                     default: false
+    t.boolean  "unstable_housing"
     t.string   "signature"
     t.string   "email"
     t.date     "birthday"
@@ -39,20 +39,20 @@ ActiveRecord::Schema.define(version: 20170331081744) do
     t.integer  "household_size"
     t.boolean  "income_change"
     t.text     "income_change_explanation"
-    t.text     "additional_income",                    default: [],                 array: true
+    t.text     "additional_income",                    default: [],              array: true
     t.boolean  "everyone_a_citizen"
     t.boolean  "anyone_disabled"
     t.boolean  "any_new_moms"
     t.boolean  "any_medical_bill_help"
     t.boolean  "anyone_in_college"
     t.boolean  "anyone_living_elsewhere"
-    t.boolean  "any_medical_bill_help_last_3_months",  default: false
-    t.boolean  "any_lost_insurance_last_3_months",     default: false
+    t.boolean  "any_medical_bill_help_last_3_months"
+    t.boolean  "any_lost_insurance_last_3_months"
     t.boolean  "household_tax"
     t.integer  "child_support"
-    t.boolean  "has_accounts",                         default: false
-    t.boolean  "has_home",                             default: false
-    t.boolean  "has_vehicle",                          default: false
+    t.boolean  "has_accounts"
+    t.boolean  "has_home"
+    t.boolean  "has_vehicle"
     t.integer  "total_money"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
@@ -77,10 +77,10 @@ ActiveRecord::Schema.define(version: 20170331081744) do
     t.string   "ssn"
     t.boolean  "in_home"
     t.boolean  "buy_food_with"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "in_college",    default: false
-    t.boolean  "is_disabled",   default: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.boolean  "in_college"
+    t.boolean  "is_disabled"
     t.index ["app_id"], name: "index_household_members_on_app_id", using: :btree
   end
 
