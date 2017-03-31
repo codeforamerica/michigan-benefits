@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331200455) do
+ActiveRecord::Schema.define(version: 20170331220753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 20170331200455) do
     t.integer  "child_support"
     t.boolean  "has_accounts"
     t.integer  "total_money"
+    t.integer  "rent_expense"
+    t.integer  "property_tax_expense"
+    t.integer  "insurance_expense"
+    t.boolean  "utility_heat"
+    t.boolean  "utility_cooling"
+    t.boolean  "utility_electrity"
+    t.boolean  "utility_water_sewer"
+    t.boolean  "utility_trash"
+    t.boolean  "utility_phone"
+    t.boolean  "utility_other"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 

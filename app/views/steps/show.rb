@@ -256,6 +256,10 @@ class Views::Steps::Show < Views::Base
             end
           end
         when :checkbox
+          if step.help_message(question)
+            p step.help_message(question), class: "text--help"
+          end
+
           label class: "checkbox" do
             f.check_box question
             text label_text

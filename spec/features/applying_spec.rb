@@ -164,6 +164,11 @@ describe "applying", js: true do
     expect_page "Next, describe your household expenses."
     submit
 
+    check_step "Tell us about your housing expenses.",
+      ["How much does your household pay in rent or mortgage each month?", "300", "Make sure to answer this question"],
+      ["How much do you pay in property tax each month?", "100", "Make sure to answer this question"],
+      ["How much do you pay in insurance each month?", "20", "Make sure to answer this question"]
+
     check_step "Enter your full legal name here to sign this application.",
       ["Your signature", "Jeff Name", "Make sure you enter your signature"],
       verify: false

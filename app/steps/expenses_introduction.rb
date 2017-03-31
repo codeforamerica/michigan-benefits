@@ -13,7 +13,7 @@ class ExpensesIntroduction < Step
   end
 
   def next
-    SignAndSubmit.new(@app)
+    ExpensesHousing.new(@app)
   end
 
   def assign_from_app
