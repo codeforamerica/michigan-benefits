@@ -10,7 +10,6 @@ class Step
     :subhead,
     :subhead_help,
     :questions,
-    :has_many_of,
     :placeholders,
     :field_options,
     :types,
