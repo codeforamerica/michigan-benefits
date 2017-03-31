@@ -30,6 +30,14 @@ class HouseholdAddMember < Step
     ssn: "If they don’t have one or you don’t know it you can skip this"
   }
 
+  self.safeties = {
+    ssn: <<~TEXT
+      Social security numbers help ensure you receive the correct benefits. 
+      MDHSS maintains strict security guidelines to protect the identities of 
+      our residents.
+  TEXT
+  }
+
   attr_accessor \
     :first_name,
     :last_name,
