@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330134115) do
+ActiveRecord::Schema.define(version: 20170331081744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,13 +46,13 @@ ActiveRecord::Schema.define(version: 20170330134115) do
     t.boolean  "any_medical_bill_help"
     t.boolean  "anyone_in_college"
     t.boolean  "anyone_living_elsewhere"
-    t.boolean  "any_medical_bill_help_last_3_months",  default: false, null: false
-    t.boolean  "any_lost_insurance_last_3_months",     default: false, null: false
+    t.boolean  "any_medical_bill_help_last_3_months",  default: false
+    t.boolean  "any_lost_insurance_last_3_months",     default: false
     t.boolean  "household_tax"
     t.integer  "child_support"
-    t.boolean  "has_accounts",                         default: false, null: false
-    t.boolean  "has_home",                             default: false, null: false
-    t.boolean  "has_vehicle",                          default: false, null: false
+    t.boolean  "has_accounts",                         default: false
+    t.boolean  "has_home",                             default: false
+    t.boolean  "has_vehicle",                          default: false
     t.integer  "total_money"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20170330134115) do
     t.boolean  "buy_food_with"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "in_college",    default: false, null: false
-    t.boolean  "is_disabled",   default: false, null: false
+    t.boolean  "in_college",    default: false
+    t.boolean  "is_disabled",   default: false
     t.index ["app_id"], name: "index_household_members_on_app_id", using: :btree
   end
 
