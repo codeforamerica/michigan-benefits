@@ -21,7 +21,7 @@ class HouseholdTax < Step
     presence: { message: "Make sure to answer this question" }
 
   def previous
-    HealthWho.new(@app)
+    HouseholdHealthSituations.new(@app)
   end
 
   def next

@@ -4,7 +4,7 @@ describe StepsController do
   describe "#show", :member do
     it "shows the right step" do
       get :show, params: { id: "introduce-yourself" }
-      expect(assigns(:step)).to be_an_instance_of IntroduceYourself
+      expect(assigns(:step)).to be_an_instance_of IntroductionIntroduceYourself
     end
   end
 

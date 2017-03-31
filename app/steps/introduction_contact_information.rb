@@ -1,4 +1,4 @@
-class ContactInformation < Step
+class IntroductionContactInformation < Step
   self.title = "Introduction"
   self.subhead = "Tell us the best ways to reach you."
 
@@ -73,14 +73,14 @@ class ContactInformation < Step
   before_validation :strip_non_digits_from_phone_number
 
   def previous
-    IntroduceYourself.new(@app)
+    IntroductionIntroduceYourself.new(@app)
   end
 
   def next
     if @app.mailing_address_same_as_home_address
       IntroductionComplete.new(@app)
     else
-      HomeAddress.new(@app)
+      IntroductionHomeAddress.new(@app)
     end
   end
 

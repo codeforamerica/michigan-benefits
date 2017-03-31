@@ -7,7 +7,7 @@ class LegalAgreement < Step
   end
 
   def previous
-    OtherAssetsContinued.new(@app)
+    IncomeOtherAssetsContinued.new(@app)
   end
 
   def next

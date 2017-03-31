@@ -1,4 +1,4 @@
-class IntroduceYourself < Step
+class IntroductionIntroduceYourself < Step
   self.icon = "hello"
   self.title = "Introduction"
   self.headline = "We're here to help."
@@ -27,7 +27,7 @@ class IntroduceYourself < Step
   end
 
   def next
-    ContactInformation.new(@app)
+    IntroductionContactInformation.new(@app)
   end
 
   def assign_from_app

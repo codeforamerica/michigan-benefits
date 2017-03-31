@@ -26,11 +26,11 @@ class HouseholdHealth < Step
     presence: { message: "Make sure to answer this question" }
 
   def previous
-    MemberMeta.new(@app)
+    HouseholdSituations.new(@app)
   end
 
   def next
-    HealthWho.new(@app)
+    HouseholdHealthSituations.new(@app)
   end
 
   def assign_from_app

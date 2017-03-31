@@ -1,4 +1,4 @@
-class OtherAssetsContinued < Step
+class IncomeOtherAssetsContinued < Step
   self.title = "Money & Income"
   self.subhead = "Tell us more about those assets."
 
@@ -18,7 +18,7 @@ class OtherAssetsContinued < Step
     presence: { message: "Make sure to answer this question" }
 
   def previous
-    OtherAssets.new(@app)
+    IncomeOtherAssets.new(@app)
   end
 
   def next

@@ -1,4 +1,4 @@
-class AddHouseholdMember < Step
+class HouseholdAddMember < Step
   self.title = "Your Household"
   self.subhead = "Tell us about another person you are applying with."
   self.subhead_help = "If you don't know the answer to a question, that's okay."

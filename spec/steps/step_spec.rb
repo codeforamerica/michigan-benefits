@@ -2,13 +2,13 @@ require "rails_helper"
 
 describe Step do
   describe ".find" do
-    specify { expect(Step.find("introduce-yourself", App.new)).to be_an_instance_of IntroduceYourself }
+    specify { expect(Step.find("introduce-yourself", App.new)).to be_an_instance_of IntroductionIntroduceYourself }
   end
 
   describe "#initialize" do
     it "assigns fields from the app" do
       app = App.new(first_name: "Alice", phone_number: "415-867-5309")
-      step = IntroduceYourself.new(app)
+      step = IntroductionIntroduceYourself.new(app)
 
       expect(step.first_name).to eq "Alice"
       expect(step.last_name).to eq nil
@@ -16,13 +16,13 @@ describe Step do
   end
 
   describe "#to_param" do
-    specify { expect(IntroduceYourself.to_param).to eq "introduce-yourself" }
-    specify { expect(IntroduceYourself.new(App.new).to_param).to eq "introduce-yourself" }
+    specify { expect(IntroductionIntroduceYourself.to_param).to eq "introduce-yourself" }
+    specify { expect(IntroductionIntroduceYourself.new(App.new).to_param).to eq "introduce-yourself" }
   end
 
   describe "#update" do
     let(:app) { App.new }
-    let(:step) { IntroduceYourself.new(app) }
+    let(:step) { IntroductionIntroduceYourself.new(app) }
 
     context "when everything is valid" do
       it "updates the app" do

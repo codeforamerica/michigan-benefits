@@ -1,4 +1,4 @@
-class AdditionalIncome < Step
+class IncomeAdditionalSources < Step
   self.title = "Money & Income"
   self.subhead = "Check all additional sources of income received by your household, if any."
 
@@ -69,7 +69,7 @@ class AdditionalIncome < Step
   end
 
   def next
-    ChildSupport.new(@app)
+    IncomeChildSupport.new(@app)
   end
 
   def assign_from_app

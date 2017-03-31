@@ -22,7 +22,7 @@ class IncomeChangeExplanation < Step
   end
 
   def next
-    CurrentlyEmployed.new(@app)
+    IncomeCurrentlyEmployed.new(@app)
   end
 
   def assign_from_app

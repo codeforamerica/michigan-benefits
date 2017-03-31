@@ -1,4 +1,4 @@
-class HouseholdMeta < Step
+class HouseholdMoreInfo < Step
   self.title = "Your Household"
   self.subhead = "Tell us a bit more about your household."
   self.subhead_help = "These questions help us determine eligibility and could help you qualify for waivers to certain program rules."
@@ -47,7 +47,7 @@ class HouseholdMeta < Step
   end
 
   def next
-    MemberMeta.new(@app)
+    HouseholdSituations.new(@app)
   end
 
   def assign_from_app

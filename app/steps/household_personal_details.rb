@@ -1,4 +1,4 @@
-class YourHousehold < Step
+class HouseholdPersonalDetails < Step
   self.title = "Your Household"
   self.subhead = "Provide us with some personal details."
 

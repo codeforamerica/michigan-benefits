@@ -7,11 +7,11 @@ class HouseholdMembers < Step
   end
 
   def previous
-    YourHousehold.new(@app)
+    HouseholdPersonalDetails.new(@app)
   end
 
   def next
-    HouseholdMeta.new(@app)
+    HouseholdMoreInfo.new(@app)
   end
 
   def assign_from_app

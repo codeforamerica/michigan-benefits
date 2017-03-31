@@ -1,4 +1,4 @@
-class MemberMeta < ManyMemberUpdateStep
+class HouseholdSituations < ManyMemberUpdateStep
   self.title = "Your Household"
   self.subhead = "Ok, let us know which people these situations apply to."
 
@@ -8,7 +8,7 @@ class MemberMeta < ManyMemberUpdateStep
   }
 
   def previous
-    HouseholdMeta.new(@app)
+    HouseholdMoreInfo.new(@app)
   end
 
   def next

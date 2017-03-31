@@ -22,7 +22,7 @@ class Step
   attr_reader :params
 
   def self.first
-    IntroduceYourself
+    IntroductionIntroduceYourself
   end
 
   def self.find(id, app, params={})

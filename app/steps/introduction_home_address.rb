@@ -1,4 +1,4 @@
-class HomeAddress < Step
+class IntroductionHomeAddress < Step
   self.title = "Introduction"
   self.subhead = "Tell us where you currently live."
 
@@ -40,7 +40,7 @@ class HomeAddress < Step
     unless: -> (home_address) { home_address.unstable_housing.in? ["1", "true", true] }
 
   def previous
-    ContactInformation.new(@app)
+    IntroductionContactInformation.new(@app)
   end
 
   def next

@@ -12,7 +12,7 @@ class HouseholdIntroduction < Step
   end
 
   def next
-    YourHousehold.new(@app)
+    HouseholdPersonalDetails.new(@app)
   end
 
   def assign_from_app

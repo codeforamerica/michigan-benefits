@@ -1,4 +1,4 @@
-class CurrentlyEmployed < ManyMemberUpdateStep
+class IncomeCurrentlyEmployed < ManyMemberUpdateStep
   self.title = "Money & Income"
   self.subhead = "Who in your household is currently employed, or has been in the past 30 days?"
   self.subhead_help = "Employment includes temporary or contract jobs. Self employment includes odd jobs, home businesses, online businesses, etc."
@@ -18,6 +18,6 @@ class CurrentlyEmployed < ManyMemberUpdateStep
   end
 
   def next
-    AdditionalIncome.new(@app)
+    IncomeAdditionalSources.new(@app)
   end
 end

@@ -1,4 +1,4 @@
-class ChildSupport < Step
+class IncomeChildSupport < Step
   self.title = "Money & Income"
   self.subhead = "Tell us more about your additional income."
 
@@ -22,11 +22,11 @@ class ChildSupport < Step
     presence: { message: "Make sure to answer this question" }
 
   def previous
-    AdditionalIncome.new(@app)
+    IncomeAdditionalSources.new(@app)
   end
 
   def next
-    OtherAssets.new(@app)
+    IncomeOtherAssets.new(@app)
   end
 
   def assign_from_app

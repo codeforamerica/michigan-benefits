@@ -1,4 +1,4 @@
-class OtherAssets < Step
+class IncomeOtherAssets < Step
   self.title = "Money & Income"
   self.subhead = "Tell us about the assets and money you have on hand."
   self.subhead_help = "If you don't know the answer to a question, that's okay."
@@ -33,11 +33,11 @@ class OtherAssets < Step
     presence: { message: "Make sure to answer this question" }
 
   def previous
-    ChildSupport.new(@app)
+    IncomeChildSupport.new(@app)
   end
 
   def next
-    OtherAssetsContinued.new(@app)
+    IncomeOtherAssetsContinued.new(@app)
   end
 
   def assign_from_app

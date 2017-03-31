@@ -5,7 +5,7 @@ class ChoosePrograms < Step
   self.questions = []
 
   def previous
-    IntroduceYourself.new(@app)
+    IntroductionIntroduceYourself.new(@app)
   end
 
   def next
