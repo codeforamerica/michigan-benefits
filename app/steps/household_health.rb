@@ -26,7 +26,7 @@ class HouseholdHealth < Step
     presence: { message: "Make sure to answer this question" }
 
   def previous
-    HouseholdMeta.new(@app)
+    MemberMeta.new(@app)
   end
 
   def next

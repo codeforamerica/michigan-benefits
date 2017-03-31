@@ -47,7 +47,7 @@ class HouseholdMeta < Step
   end
 
   def next
-    HouseholdHealth.new(@app)
+    MemberMeta.new(@app)
   end
 
   def assign_from_app

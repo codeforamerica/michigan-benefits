@@ -92,11 +92,8 @@ describe "applying", js: true do
       ["Is anyone enrolled in college?", "Yes", nil],
       ["Is anyone temporarily living outside the home?", "Yes", nil]
 
-    # check_step "Ok, let us know which people these situations apply to.",
-    #   ["Who is enrolled in college?", "Billy", nil],
-    #   ["Who has a disability?", "Alice", nil],
-    #   validations: false,
-    #   verify: false
+    expect_page "Ok, let us know which people these situations apply to."
+    submit
 
     check_step "Tell us about your household health coverage in the past 3 months.",
       ["Does anyone need help paying for medical bills from the past 3 months?", "No", "Make sure to answer this question"],
