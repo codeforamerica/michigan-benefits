@@ -131,6 +131,12 @@ describe "applying", js: true do
     check_step "Tell us more about your additional income.",
       ["Monthly pay", "500", nil]
 
+    check_step "Tell us about the assets and money you have on hand.",
+      ["Does your household have any money or accounts?", "Yes", nil]
+
+    check_step "Tell us more about those assets.",
+      ["In total, how much money does your household have in cash and accounts?", "500", nil]
+
     expect(page).to have_text("Scroll down to agree")
     submit
 
