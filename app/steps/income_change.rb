@@ -24,7 +24,7 @@ class IncomeChange < Step
     if @app.income_change?
       IncomeChangeExplanation.new(@app)
     else
-      AdditionalIncome.new(@app)
+      CurrentlyEmployed.new(@app)
     end
   end
 
