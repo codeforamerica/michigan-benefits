@@ -7,6 +7,7 @@ class HouseholdPersonalDetails < Step
   self.questions = {
     sex: "What is your sex?",
     marital_status: "What is your marital status?",
+    ssn: "What is your social security number?",
     household_size: "How many people are in your household?"
   }
 
@@ -18,6 +19,7 @@ class HouseholdPersonalDetails < Step
 
   self.help_messages = {
     sex: "As it appears on your birth certificate",
+    ssn: "If you don't have one or don't want to answer now it's okay to skip this",
     household_size: "This includes everyone who lives in your home "\
       "(including you) and anyone you list on your federal tax returns."
     }
@@ -27,10 +29,15 @@ class HouseholdPersonalDetails < Step
     marital_status: %w|single married divorced separated|
   }
 
+  self.placeholders = {
+    ssn: "SSN"
+  }
+
   attr_accessor \
     :sex,
     :marital_status,
-    :household_size
+    :household_size,
+    :ssn
 
   def initialize(*_)
     super
@@ -52,7 +59,7 @@ class HouseholdPersonalDetails < Step
   def assign_from_app
     attrs = @app.attributes.slice('marital_status', 'household_size')
     self.assign_attributes(attrs)
-    self.sex = @app.applicant.sex
+    self.assign_attributes(@app.applicant.attributes.slice('sex', 'ssn'))
   end
 
   def update_app!
@@ -61,7 +68,7 @@ class HouseholdPersonalDetails < Step
         marital_status: marital_status,
         household_size: household_size
 
-      @app.applicant.update! sex: sex
+      @app.applicant.update! sex: sex, ssn: ssn
     end
   end
 end
