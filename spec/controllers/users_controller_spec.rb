@@ -34,7 +34,7 @@ describe UsersController do
   describe "#create", :guest do
     specify do
       post :create, params: {}
-      expect(response).to redirect_to step_path("introduce-yourself")
+      expect(response).to redirect_to step_path("introduction-introduce-yourself")
       expect(User.last.name).to be_present
       expect(User.last.email).to match /\w*@example.com/
       expect(User.last.crypted_password).to be_present

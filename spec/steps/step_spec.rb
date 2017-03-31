@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Step do
   describe ".find" do
-    specify { expect(Step.find("introduce-yourself", App.new)).to be_an_instance_of IntroductionIntroduceYourself }
+    specify { expect(Step.find("introduction-introduce-yourself", App.new)).to be_an_instance_of IntroductionIntroduceYourself }
   end
 
   describe "#initialize" do
@@ -16,8 +16,8 @@ describe Step do
   end
 
   describe "#to_param" do
-    specify { expect(IntroductionIntroduceYourself.to_param).to eq "introduce-yourself" }
-    specify { expect(IntroductionIntroduceYourself.new(App.new).to_param).to eq "introduce-yourself" }
+    specify { expect(IntroductionIntroduceYourself.to_param).to eq "introduction-introduce-yourself" }
+    specify { expect(IntroductionIntroduceYourself.new(App.new).to_param).to eq "introduction-introduce-yourself" }
   end
 
   describe "#update" do
