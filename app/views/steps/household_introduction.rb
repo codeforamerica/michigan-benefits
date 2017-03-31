@@ -14,7 +14,7 @@ class Views::Steps::HouseholdIntroduction < Views::Base
     slab_with_card do
       h3 "Next, describe your household for us.", class: "h3--strong"
       help_text <<~TEXT
-        If you aren't sure about all the details right now — that's okay. 
+        If you aren't sure about all the details right now — that's okay.
         Do your best and we will work with you to clarify later.
       TEXT
     end

@@ -22,7 +22,7 @@ class SignAndSubmit < Step
     presence: { message: "Make sure you enter your signature" }
 
   def previous
-    LegalAgreement.new(@app)
+    ExpensesIntroduction.new(@app)
   end
 
   def next

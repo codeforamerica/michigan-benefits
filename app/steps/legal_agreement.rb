@@ -11,7 +11,7 @@ class LegalAgreement < Step
   end
 
   def next
-    SignAndSubmit.new(@app)
+    ExpensesIntroduction.new(@app)
   end
 
   def submit_label

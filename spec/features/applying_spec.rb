@@ -129,9 +129,20 @@ describe "applying", js: true do
       validations: false
 
     check_step "Tell us more about your additional income.",
-      ["Monthly pay", "500", nil],
+      ["Monthly pay", "500", nil]
 
     expect(page).to have_text("Scroll down to agree")
+    submit
+
+    back
+    expect_page "Scroll down to agree"
+    submit
+
+    expect_page "Next, describe your household expenses."
+    submit
+    back
+
+    expect_page "Next, describe your household expenses."
     submit
 
     check_step "Enter your full legal name here to sign this application.",
