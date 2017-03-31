@@ -92,6 +92,7 @@ class Views::Steps::Show < Views::Base
   def questions(f)
     general_questions(f)
     member_questions(f)
+    household_questions(f)
   end
 
   def member_questions(f)
@@ -113,6 +114,30 @@ class Views::Steps::Show < Views::Base
                 member_fields.radio_button question, option
                 text option.to_s.humanize
               end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def household_questions(f)
+    step.household_questions.each do |question, (label_text, label_option)|
+      group_classes = 'form-group'
+
+      if step.errors[question].present?
+        group_classes += ' form-group--error'
+      end
+
+      div class: group_classes, 'data-field-type' => :checkbox do
+
+        question_label(f, question, label_text, label_option)
+
+        current_user.app.household_members.each do |member|
+          f.fields_for "household_members[]", member, :hidden_field_id => true do |member_fields|
+            label class: "radio-button" do
+              member_fields.check_box question
+              text member.first_name.titleize
             end
           end
         end
@@ -146,16 +171,6 @@ class Views::Steps::Show < Views::Base
         end
 
         case field_type
-          when :nested_checkbox
-            question_label(f, question, label_text, label_option)
-            current_user.app.household_members.each do |member|
-              f.fields_for "household_members[]", member, :hidden_field_id => true do |member_fields|
-                label class: "checkbox" do
-                  member_fields.check_box question
-                  text member.first_name.titleize
-                end
-              end
-            end
           when :text
             question_label(f, question, label_text, label_option)
 

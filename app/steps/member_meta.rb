@@ -8,8 +8,8 @@ class MemberMeta < Step
   }
 
   self.types = {
-    in_college: :nested_checkbox,
-    is_disabled: :nested_checkbox
+    in_college: :checkbox,
+    is_disabled: :checkbox
   }
 
   attr_accessor \

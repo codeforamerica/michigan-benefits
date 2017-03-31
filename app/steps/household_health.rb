@@ -30,7 +30,7 @@ class HouseholdHealth < Step
   end
 
   def next
-    HouseholdTax.new(@app)
+    HealthWho.new(@app)
   end
 
   def assign_from_app
