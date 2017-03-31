@@ -123,6 +123,13 @@ describe "applying", js: true do
     expect_page "Who in your household is currently employed, or has been in the past 30 days?"
     submit
 
+    # check_step "Tell us more about your household's employment",
+    #   ["Employer name", "Acme"],
+    #   validations: false
+
+    expect_page "Tell us more about your household's employment"
+    submit
+
     check_step "Check all additional sources of income received by your household, if any.",
       ["Unemployment insurance", true, nil],
       ["SSI or Disability", false, nil],

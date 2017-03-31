@@ -12,6 +12,11 @@ class HouseholdHealthSituations < ManyMemberUpdateStep
     insurance_lost_last_3_months: :checkbox
   }
 
+  self.field_options = {
+    medical_help: FieldOption.form_group_no_bottom_space,
+    insurance_lost_last_3_months: FieldOption.form_group_no_bottom_space
+  }
+
   def previous
     HouseholdHealth.new(@app)
   end

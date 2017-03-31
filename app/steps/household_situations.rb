@@ -12,6 +12,11 @@ class HouseholdSituations < ManyMemberUpdateStep
     is_disabled: :checkbox
   }
 
+  self.field_options = {
+    in_college: FieldOption.form_group_no_bottom_space,
+    is_disabled: FieldOption.form_group_no_bottom_space
+  }
+
   def previous
     HouseholdMoreInfo.new(@app)
   end

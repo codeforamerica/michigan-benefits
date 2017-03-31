@@ -18,6 +18,6 @@ class IncomeCurrentlyEmployed < ManyMemberUpdateStep
   end
 
   def next
-    IncomeAdditionalSources.new(@app)
+    IncomePerMember.new(@app)
   end
 end

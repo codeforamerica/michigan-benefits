@@ -11,6 +11,7 @@ class Step
     :subhead_help,
     :questions,
     :member_questions,
+    :member_grouped_questions,
     :household_questions,
     :placeholders,
     :field_options,
@@ -37,6 +38,7 @@ class Step
     self.questions ||= {}
     self.member_questions ||= {}
     self.household_questions ||= {}
+    self.member_grouped_questions ||= {}
     self.placeholders ||= {}
     self.types ||= {}
     self.section_headers ||= {}

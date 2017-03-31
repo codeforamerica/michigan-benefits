@@ -93,6 +93,7 @@ class Views::Steps::Show < Views::Base
     general_questions(f)
     member_questions(f)
     household_questions(f)
+    member_grouped_questions(f)
   end
 
   def member_questions(f)
@@ -114,6 +115,20 @@ class Views::Steps::Show < Views::Base
 
         f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
           question_field(member_fields, question, member.first_name.titleize, label_option)
+        end
+      end
+    end
+  end
+
+  def member_grouped_questions(f)
+    return if step.member_grouped_questions.empty?
+
+    current_user.app.household_members.each do |member|
+      h4 member.first_name.titleize, class: "step-section-header__headline"
+
+      f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
+        step.member_grouped_questions.each do |question, (label_text, label_option)|
+          question_field(member_fields, question, label_text, label_option)
         end
       end
     end
@@ -168,6 +183,10 @@ class Views::Steps::Show < Views::Base
         p step.overview(question)
       end
       case field_type
+        when :number
+          question_label(f, question, label_text, label_option)
+
+          f.number_field question, class: "text-input form-width--short"
         when :text
           question_label(f, question, label_text, label_option)
 
@@ -184,7 +203,6 @@ class Views::Steps::Show < Views::Base
               class: 'text-input text--right'
             div ".00", class: "text-input-group__postfix"
           end
-
         when :text_area
           question_label(f, question, label_text, label_option)
 

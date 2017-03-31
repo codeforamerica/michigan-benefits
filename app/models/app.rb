@@ -9,6 +9,10 @@ class App < ApplicationRecord
     household_members.find_or_create_by!(relationship: 'self')
   end
 
+  def non_applicant_members
+    household_members - [applicant]
+  end
+
   def form
     Form.new(self)
   end
