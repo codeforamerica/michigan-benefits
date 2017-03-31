@@ -7,7 +7,7 @@ class IncomeChildSupport < Step
   }
 
   self.types = {
-    child_support: :text
+    child_support: :money
   }
 
   self.section_headers = {

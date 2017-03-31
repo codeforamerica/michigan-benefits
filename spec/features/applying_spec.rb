@@ -267,7 +267,7 @@ describe "applying", js: true do
           all('select').each_with_index do |date_select, i|
             select date_parts[i], from: date_select[:name]
           end
-        when "text", "incrementer", 'text_area'
+        when "text", "incrementer", 'text_area', "money"
           fill_in question, with: answer
         when "yes_no", "radios"
           choose answer
@@ -294,7 +294,7 @@ describe "applying", js: true do
         case type
           when "text_area"
             expect(find("textarea").value).to eq expected_answer
-          when "text", 'incrementer'
+          when "text", 'incrementer', "money"
             expect(find("input").value).to eq expected_answer
           when "yes_no", 'radios'
             expect(find("label", text: expected_answer).find("input").checked?).to eq true

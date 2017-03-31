@@ -135,7 +135,7 @@ class Views::Steps::Show < Views::Base
 
         current_user.app.household_members.each do |member|
           f.fields_for "household_members[]", member, :hidden_field_id => true do |member_fields|
-            label class: "radio-button" do
+            label class: "checkbox" do
               member_fields.check_box question
               text member.first_name.titleize
             end
@@ -177,6 +177,17 @@ class Views::Steps::Show < Views::Base
             f.text_field question,
                          placeholder: step.placeholder(question),
                          class: 'text-input'
+          when :money
+            question_label(f, question, label_text, label_option)
+
+            div class: "text-input-group" do
+              div "$", class: "text-input-group__prefix"
+              f.text_field question,
+                placeholder: step.placeholder(question),
+                class: 'text-input text--right'
+              div ".00", class: "text-input-group__postfix"
+            end
+
           when :text_area
             question_label(f, question, label_text, label_option)
 

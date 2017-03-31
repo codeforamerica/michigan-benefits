@@ -7,7 +7,7 @@ class IncomeOtherAssetsContinued < Step
   }
 
   self.types = {
-    total_money: :text
+    total_money: :money
   }
 
   attr_accessor \

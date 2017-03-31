@@ -32,6 +32,11 @@ class HouseholdPersonalDetails < Step
     :marital_status,
     :household_size
 
+  def initialize(*_)
+    super
+    self.household_size ||= 1
+  end
+
   def previous
     HouseholdIntroduction.new(@app)
   end

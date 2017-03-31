@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 20170331131953) do
     t.boolean  "unstable_housing"
     t.string   "signature"
     t.string   "email"
+    t.boolean  "income_change"
+    t.text     "income_change_explanation"
+    t.text     "additional_income",                    default: [],              array: true
     t.date     "birthday"
     t.string   "sex"
     t.string   "marital_status"
     t.integer  "household_size"
-    t.boolean  "income_change"
-    t.text     "income_change_explanation"
-    t.text     "additional_income",                    default: [],              array: true
     t.boolean  "everyone_a_citizen"
     t.boolean  "anyone_disabled"
     t.boolean  "any_new_moms"
