@@ -3,6 +3,9 @@ class Views::Steps::HouseholdMembers < Views::Base
 
   def content
     slab_with_card do
+      div do
+        div "#{app.applicant.full_name} (you)", class: "button buttonish button--full-width"
+      end
       app.non_applicant_members.each do |member|
         div do
           link_to member.full_name,

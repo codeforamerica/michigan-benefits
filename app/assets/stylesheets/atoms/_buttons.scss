@@ -28,6 +28,20 @@
     }
 }
 
+.buttonish {
+  @extend .button;
+  cursor: default;
+  border-color: $color-light-grey;
+
+  &:hover {
+    background-color: inherit;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
 .button--cta {
   color: #FFFFFF;
   background-color: $color-sky;
