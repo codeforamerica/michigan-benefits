@@ -25,7 +25,7 @@ class HouseholdTax < Step
   end
 
   def next
-    IncomeIntroduction.new(@app)
+    HouseholdTaxHow.new(@app)
   end
 
   def assign_from_app

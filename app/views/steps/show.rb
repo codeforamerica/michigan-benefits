@@ -90,6 +90,37 @@ class Views::Steps::Show < Views::Base
   end
 
   def questions(f)
+    general_questions(f)
+    member_questions(f)
+  end
+
+  def member_questions(f)
+    step.member_questions.each do |question|
+      group_classes = 'form-group'
+
+      if step.errors[question].present?
+        group_classes += ' form-group--error'
+      end
+
+      current_user.app.household_members.each do |member|
+        div class: group_classes, 'data-field-type' => :radios do
+
+          h4 member.first_name.titleize, class: "step-section-header__headline"
+
+          f.fields_for "household_members[]", member, :hidden_field_id => true do |member_fields|
+            step.options_for(question).each do |option|
+              label class: "radio-button" do
+                member_fields.radio_button question, option
+                text option.to_s.humanize
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def general_questions(f)
     step.questions.each do |question, (label_text, label_option)|
       group_classes = 'form-group'
 
@@ -129,14 +160,14 @@ class Views::Steps::Show < Views::Base
             question_label(f, question, label_text, label_option)
 
             f.text_field question,
-              placeholder: step.placeholder(question),
-              class: 'text-input'
+                         placeholder: step.placeholder(question),
+                         class: 'text-input'
           when :text_area
             question_label(f, question, label_text, label_option)
 
             f.text_area question,
-              placeholder: step.placeholder(question),
-              class: 'textarea'
+                        placeholder: step.placeholder(question),
+                        class: 'textarea'
           when :incrementer
             question_label(f, question, label_text, label_option)
 
@@ -154,9 +185,9 @@ class Views::Steps::Show < Views::Base
 
             div class: "select" do
               f.select question,
-                step.options_for(question).map(&:titleize),
-                { include_blank: "Choose one" },
-                { class: "select__element" }
+                       step.options_for(question).map(&:titleize),
+                       { include_blank: "Choose one" },
+                       { class: "select__element" }
             end
           when :radios
             question_label(f, question, label_text, label_option)
@@ -190,9 +221,9 @@ class Views::Steps::Show < Views::Base
             end
           when :date
             f.label question,
-              label_text,
-              class: 'form-question',
-              id: "date-label-#{question}"
+                    label_text,
+                    class: 'form-question',
+                    id: "date-label-#{question}"
 
             div class: "input-group--inline" do
               div class: "select" do
@@ -230,8 +261,8 @@ class Views::Steps::Show < Views::Base
 
   def question_label(f, question, label_text, label_option)
     f.label question,
-      label_text,
-      class: "form-question #{'hidden' if label_option == :hidden}"
+            label_text,
+            class: "form-question #{'hidden' if label_option == :hidden}"
 
     if step.help_message(question)
       p step.help_message(question), class: "text--help"

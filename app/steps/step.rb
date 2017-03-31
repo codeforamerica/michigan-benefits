@@ -10,6 +10,7 @@ class Step
     :subhead,
     :subhead_help,
     :questions,
+    :member_questions,
     :placeholders,
     :field_options,
     :types,
@@ -33,6 +34,7 @@ class Step
 
   def initialize(app, params={})
     self.questions ||= {}
+    self.member_questions ||= {}
     self.placeholders ||= {}
     self.types ||= {}
     self.section_headers ||= {}

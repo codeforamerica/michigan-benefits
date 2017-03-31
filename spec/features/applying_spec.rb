@@ -107,6 +107,9 @@ describe "applying", js: true do
       ["Does anyone plan to file a federal tax return next year?", "No", "Make sure to answer this question"],
       validations: false
 
+    expect_page "Describe how your household files taxes."
+    submit
+
     expect_page "Next, describe your financial situation for us."
     submit
 
