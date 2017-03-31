@@ -1,16 +1,15 @@
 .label {
   display: inline-block;
-  font-size: $font-size-smallest;
+  font-size: 12px;
   background-color: $color-dark-grey;
   color: #fff;
-  font-weight: 500;
-  border-radius: $border-radius;
-  text-transform: uppercase;
-  padding: 0 .5em;
+  font-weight: 600;
+  border-radius: 7em;
+  padding: 5px 1em;
   line-height: 1.4em;
   position: relative;
   top: -.1em;
-  margin-left: .2em;
+  margin-top: 1em;
 }
 
 .label--magenta {
@@ -31,4 +30,9 @@
 
 .label--red {
   background-color: $color-red;
+}
+
+.label--food-assistance {
+  background-color: #FFEFE6;
+  color: #FF9257;
 }

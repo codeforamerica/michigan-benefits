@@ -27,7 +27,10 @@ class HouseholdAddMember < Step
 
   self.help_messages = {
     sex: "As it appears on their birth certificate",
-    ssn: "If they don’t have one or you don’t know it you can skip this"
+    ssn: "If they don’t have one or you don’t know it you can skip this",
+    buy_food_with: <<~HTML.html_safe
+      <span class='label label--food-assistance'>Food Assistance</span>
+    HTML
   }
 
   self.safeties = {
@@ -35,7 +38,7 @@ class HouseholdAddMember < Step
       Social security numbers help ensure you receive the correct benefits. 
       MDHSS maintains strict security guidelines to protect the identities of 
       our residents.
-  TEXT
+    TEXT
   }
 
   attr_accessor \
