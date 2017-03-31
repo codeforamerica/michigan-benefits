@@ -110,11 +110,13 @@ class Views::Steps::Show < Views::Base
 
   def household_questions(f)
     step.household_questions.each do |question, (label_text, label_option)|
-      current_user.app.household_members.each do |member|
+      div class: "form-questions-group" do
         question_label(f, question, label_text, label_option)
 
-        f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
-          question_field(member_fields, question, member.first_name.titleize, label_option)
+        current_user.app.household_members.each do |member|
+          f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
+            question_field(member_fields, question, member.first_name.titleize, label_option)
+          end
         end
       end
     end
@@ -142,8 +144,8 @@ class Views::Steps::Show < Views::Base
 
   def question_label(f, question, label_text, label_option)
     f.label question,
-            label_text,
-            class: "form-question #{'hidden' if label_option == :hidden}"
+      label_text,
+      class: "form-question #{'hidden' if label_option == :hidden}"
 
     if step.help_message(question)
       p step.help_message(question), class: "text--help"
@@ -192,8 +194,8 @@ class Views::Steps::Show < Views::Base
           question_label(f, question, label_text, label_option)
 
           f.text_field question,
-                       placeholder: step.placeholder(question),
-                       class: 'text-input'
+            placeholder: step.placeholder(question),
+            class: 'text-input'
         when :money
           question_label(f, question, label_text, label_option)
 
@@ -208,8 +210,8 @@ class Views::Steps::Show < Views::Base
           question_label(f, question, label_text, label_option)
 
           f.text_area question,
-                      placeholder: step.placeholder(question),
-                      class: 'textarea'
+            placeholder: step.placeholder(question),
+            class: 'textarea'
         when :incrementer
           question_label(f, question, label_text, label_option)
 
@@ -227,9 +229,9 @@ class Views::Steps::Show < Views::Base
 
           div class: "select" do
             f.select question,
-                     step.options_for(question).map(&:titleize),
-                     { include_blank: "Choose one" },
-                     { class: "select__element" }
+              step.options_for(question).map(&:titleize),
+              { include_blank: "Choose one" },
+              { class: "select__element" }
           end
         when :radios
           question_label(f, question, label_text, label_option)
@@ -267,9 +269,9 @@ class Views::Steps::Show < Views::Base
           end
         when :date
           f.label question,
-                  label_text,
-                  class: 'form-question',
-                  id: "date-label-#{question}"
+            label_text,
+            class: 'form-question',
+            id: "date-label-#{question}"
 
           div class: "input-group--inline" do
             div class: "select" do

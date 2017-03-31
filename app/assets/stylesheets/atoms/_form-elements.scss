@@ -1,13 +1,13 @@
 $active-field-color: $color-sky;
 
 fieldset {
-	border: 0;
-	padding: 0;
-	margin: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
 
 label {
-	line-height: $line-height-normal;
+  line-height: $line-height-normal;
 }
 
 .form-question {
@@ -21,82 +21,86 @@ label {
   }
 }
 
+.form-questions-group {
+  margin-bottom: 3em;
+}
+
 .text-input {
-	display: block;
-	width: 100%;
-	font-size: $font-size-h3;
-	font-weight: 500;
-	margin-top: -.5em;
-	margin-bottom: 1em;
-	padding: .5em 0;
-	border: 0;
-	border-bottom: 2px solid $color-dark-grey;
+  display: block;
+  width: 100%;
+  font-size: $font-size-h3;
+  font-weight: 500;
+  margin-top: -.5em;
+  margin-bottom: 1em;
+  padding: .5em 0;
+  border: 0;
+  border-bottom: 2px solid $color-dark-grey;
   border-radius: 0;
-	background-color: transparent;
-	outline: none;
-	&:focus {
-		border-color: $active-field-color;
-	}
-	@include placeholder() {
-		color: $color-grey;
-	}
+  background-color: transparent;
+  outline: none;
+  &:focus {
+    border-color: $active-field-color;
+  }
+  @include placeholder() {
+    color: $color-grey;
+  }
 }
 
 .radio-button {
-	@include transition($animation-fast all);
+  @include transition($animation-fast all);
   @include user-select(none);
-	display: block;
-	cursor: pointer;
-	font-size: $font-size-h3;
-	font-weight: 500;
-	margin-bottom: .5em;
-	padding: .3em .7em;
-	background-color: #FFFFFF;
-	border: 2px solid $color-light-grey;
-	border-radius: $border-radius;
-	input[type='radio'] {
-		position: relative;
-		top: -.1em;
-		margin-right: .5em;
-	}
-	&:hover {
-		background-color: $color-light-grey;
-	}
+  display: block;
+  cursor: pointer;
+  font-size: $font-size-h3;
+  font-weight: 500;
+  margin-bottom: .5em;
+  padding: .3em .7em;
+  background-color: #FFFFFF;
+  border: 2px solid $color-light-grey;
+  border-radius: $border-radius;
+  input[type='radio'] {
+    position: relative;
+    top: -.1em;
+    margin-right: .5em;
+  }
+  &:hover {
+    background-color: $color-light-grey;
+  }
 
-	&.is-selected {
-		background-color: $active-field-color;
-		border-color: $active-field-color;
-		color: #fff;
-	}
+  &.is-selected {
+    background-color: $active-field-color;
+    border-color: $active-field-color;
+    color: #fff;
+  }
 }
 
 .checkbox {
-	@include transition($animation-fast all);
+  @include transition($animation-fast all);
   @include user-select(none);
-	cursor: pointer;
-	display: block;
-	font-size: $font-size-h3;
-	font-weight: 500;
-	background-color: #FFFFFF;
-	margin-bottom: .5em;
-	padding: .3em .7em .3em 1.7em;
-	border: 2px solid $color-light-grey;
-	border-radius: $border-radius;
+  cursor: pointer;
+  display: block;
+  font-size: $font-size-h3;
+  font-weight: 500;
+  background-color: #FFFFFF;
+  margin-bottom: .5em;
+  padding: .3em .7em .3em 1.7em;
+  border: 2px solid $color-light-grey;
+  border-radius: $border-radius;
   position: relative;
 
-	input[type='checkbox'] {
+  input[type='checkbox'] {
     top: 0.8em;
     left: 0.5em;
     width: 16px;
     height: 16px;
-		position: absolute;
-	}
+    position: absolute;
+  }
 
-	&.is-selected {
-		background-color: $active-field-color;
-		border-color: $active-field-color;
-		color: #fff;
-	}
+  &.is-selected {
+    background-color: $active-field-color;
+    border-color: $active-field-color;
+    color: #fff;
+  }
 }
 
 .textarea {
@@ -143,7 +147,7 @@ label {
     &:before {
       background-color: tint($color-light-grey, 30%);
       border-color: tint($color-light-grey, 30%);
-    } 
+    }
   }
 
   &:active {
@@ -173,19 +177,19 @@ label {
 }
 
 .file-upload {
-	
+
 }
 
 .file-upload__input {
-	width: .1px;
-	height: .1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-	&:focus {
-		+ .file-upload__label {
-			outline: 2px solid tint($active-field-color, 50%);
-		}
-	}
+  width: .1px;
+  height: .1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  &:focus {
+    + .file-upload__label {
+      outline: 2px solid tint($active-field-color, 50%);
+    }
+  }
 }
