@@ -33,6 +33,14 @@ class HouseholdPersonalDetails < Step
     ssn: "SSN"
   }
 
+  self.safeties = {
+    ssn: <<~TEXT
+      Social security numbers help ensure you receive the correct benefits. 
+      MDHSS maintains strict security guidelines to protect the identities of 
+      our residents.
+    TEXT
+  }
+
   attr_accessor \
     :sex,
     :marital_status,

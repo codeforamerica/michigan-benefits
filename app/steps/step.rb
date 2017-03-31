@@ -18,6 +18,7 @@ class Step
     :types,
     :section_headers,
     :overviews,
+    :safeties,
     :help_messages
 
   attr_reader :params
@@ -43,6 +44,7 @@ class Step
     self.types ||= {}
     self.section_headers ||= {}
     self.overviews ||= {}
+    self.safeties ||= {}
     self.help_messages ||= {}
 
     @app = app
@@ -56,6 +58,10 @@ class Step
 
   def overview(question)
     overviews[question]
+  end
+
+  def safety(question)
+    safeties[question]
   end
 
   def help_message(question)

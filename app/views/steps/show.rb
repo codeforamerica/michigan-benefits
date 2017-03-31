@@ -182,6 +182,7 @@ class Views::Steps::Show < Views::Base
       if step.overview(question)
         p step.overview(question)
       end
+
       case field_type
         when :number
           question_label(f, question, label_text, label_option)
@@ -299,6 +300,10 @@ class Views::Steps::Show < Views::Base
           i class: 'icon-warning'
           text " #{step.errors[question].to_sentence}"
         end
+      end
+
+      if step.safety(question)
+        safety step.safety(question)
       end
     end
   end

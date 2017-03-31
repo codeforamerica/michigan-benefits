@@ -29,6 +29,13 @@ module Views
       end
     end
 
+    def safety(text)
+      p class: "text--secure" do
+        i class: "illustration illustration--safety"
+        text text
+      end
+    end
+
     def row(classes=[], expanded: true, &block)
       classes = CssClasses.new(classes, ("expanded" if expanded), "row")
       div class: classes.to_s, &block

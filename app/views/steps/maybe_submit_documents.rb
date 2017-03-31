@@ -15,10 +15,9 @@ class Views::Steps::MaybeSubmitDocuments < Views::Base
       them to your local office in person.
     TEXT
 
-    p class: "text--secure" do
-      i class: "illustration illustration--safety"
-      text "MDHSS maintains strict security guidelines to protect the identities of our residents."
-    end
+    safety <<~TEXT
+      MDHSS maintains strict security guidelines to protect the identities of our residents.
+    TEXT
 
     footer class: 'form-card__footer' do
       link_to documents_path, class: "button button--cta" do
