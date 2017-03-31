@@ -5,8 +5,12 @@ class HouseholdTaxHow < ManyMemberUpdateStep
 
   self.member_questions = [:filing_status]
 
+  self.types = {
+    filing_status: :radios
+  }
+
   self.field_options = {
-    filing_status: HouseholdMember::FILING_STATUSES
+    filing_status: HouseholdMember::FILING_STATUSES.map(&:to_s)
   }
 
   def previous

@@ -7,6 +7,11 @@ class HouseholdHealthSituations < ManyMemberUpdateStep
     insurance_lost_last_3_months: "Who had insurance through a job and lost it in the last 3 months?"
   }
 
+  self.types = {
+    medical_help: :checkbox,
+    insurance_lost_last_3_months: :checkbox
+  }
+
   def previous
     HouseholdHealth.new(@app)
   end

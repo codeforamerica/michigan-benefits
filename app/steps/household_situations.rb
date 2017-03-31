@@ -7,6 +7,11 @@ class HouseholdSituations < ManyMemberUpdateStep
     is_disabled: "Who has a disability?"
   }
 
+  self.types = {
+    in_college: :checkbox,
+    is_disabled: :checkbox
+  }
+
   def previous
     HouseholdMoreInfo.new(@app)
   end
