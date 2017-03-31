@@ -10,8 +10,8 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
 
   def full_name
-    if app.first_name.present? || app.last_name.present?
-      [app.first_name, app.last_name].join(" ")
+    if app.applicant.first_name.present? || app.applicant.last_name.present?
+      [app.applicant.first_name, app.applicant.last_name].join(" ")
     else
       "Guest"
     end

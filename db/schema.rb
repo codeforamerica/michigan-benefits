@@ -10,14 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331131953) do
+ActiveRecord::Schema.define(version: 20170331185038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "apps", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "phone_number"
     t.boolean  "accepts_text_messages"
     t.integer  "user_id"
@@ -33,13 +31,12 @@ ActiveRecord::Schema.define(version: 20170331131953) do
     t.boolean  "unstable_housing"
     t.string   "signature"
     t.string   "email"
+    t.date     "birthday"
+    t.string   "marital_status"
+    t.integer  "household_size"
     t.boolean  "income_change"
     t.text     "income_change_explanation"
     t.text     "additional_income",                    default: [],              array: true
-    t.date     "birthday"
-    t.string   "sex"
-    t.string   "marital_status"
-    t.integer  "household_size"
     t.boolean  "everyone_a_citizen"
     t.boolean  "anyone_disabled"
     t.boolean  "any_new_moms"

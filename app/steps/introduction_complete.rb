@@ -6,7 +6,7 @@ class IntroductionComplete < Step
 
   def initialize(*args)
     super
-    self.headline = "Thank you #{@app.first_name}!"
+    self.headline = "Thank you #{@app.applicant.first_name}!"
   end
 
   def static_template

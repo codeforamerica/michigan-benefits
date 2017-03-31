@@ -31,16 +31,11 @@ class IntroductionIntroduceYourself < Step
   end
 
   def assign_from_app
-    assign_attributes @app.attributes.slice(*%w[
-      first_name
-      last_name
-    ])
+    self.first_name = @app.applicant.first_name
+    self.last_name = @app.applicant.last_name
   end
 
   def update_app!
-    @app.update!(
-      first_name: first_name,
-      last_name: last_name
-    )
+    @app.applicant.update!(first_name: first_name, last_name: last_name)
   end
 end

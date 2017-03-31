@@ -5,6 +5,10 @@ class App < ApplicationRecord
 
   delegate :full_name, to: :user
 
+  def applicant
+    household_members.find_or_create_by!(relationship: 'self')
+  end
+
   def form
     Form.new(self)
   end

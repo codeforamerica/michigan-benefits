@@ -17,8 +17,8 @@ describe StepsController do
 
       app = @member.app.reload
 
-      expect(app.first_name).to eq "Alice"
-      expect(app.last_name).to eq "Aardvark"
+      expect(app.applicant.first_name).to eq "Alice"
+      expect(app.applicant.last_name).to eq "Aardvark"
 
       expect(response).to redirect_to step_path("introduction-contact-information")
     end

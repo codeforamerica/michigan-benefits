@@ -50,14 +50,18 @@ class HouseholdPersonalDetails < Step
   end
 
   def assign_from_app
-    attrs = @app.attributes.slice('sex', 'marital_status', 'household_size')
+    attrs = @app.attributes.slice('marital_status', 'household_size')
     self.assign_attributes(attrs)
+    self.sex = @app.applicant.sex
   end
 
   def update_app!
-    @app.update! \
-      sex: sex,
-      marital_status: marital_status,
-      household_size: household_size
+    ActiveRecord::Base.transaction do
+      @app.update! \
+        marital_status: marital_status,
+        household_size: household_size
+
+      @app.applicant.update! sex: sex
+    end
   end
 end
