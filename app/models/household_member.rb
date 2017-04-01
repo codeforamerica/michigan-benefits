@@ -1,6 +1,8 @@
 class HouseholdMember < ApplicationRecord
   belongs_to :app
 
+  default_scope { order(id: :asc) }
+
   EMPLOYMENT_STATUSES = [
     :employed,
     :self_employed,
@@ -15,5 +17,9 @@ class HouseholdMember < ApplicationRecord
 
   def full_name
     [first_name, last_name].join(" ")
+  end
+
+  def applicant?
+    relationship == 'self'
   end
 end

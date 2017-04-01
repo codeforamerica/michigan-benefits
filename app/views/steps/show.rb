@@ -99,7 +99,10 @@ class Views::Steps::Show < Views::Base
   def member_questions(f)
     step.member_questions.each do |question, (label_text, label_option)|
       current_user.app.household_members.each do |member|
-        h4 member.first_name.titleize, class: "step-section-header__headline"
+        section_header = member.first_name.titleize
+        section_header += " (that's you!)" if member.applicant?
+
+        h4 section_header, class: "step-section-header__headline"
 
         f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
           question_field(member_fields, question, label_text, label_option)
