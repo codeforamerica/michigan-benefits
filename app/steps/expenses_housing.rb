@@ -58,12 +58,11 @@ class ExpensesHousing < Step
   }
 
   self.help_messages = {
-    utility_heat: <<-HELP_TEXT
+    utility_heat: <<-HELP_TEXT.html_safe
       <strong>What utilities do you pay?</strong>
       <br/>
       Only check utilities that are not included in your mortgage/rent payments.
     HELP_TEXT
-    .html_safe
   }
 
   def previous
