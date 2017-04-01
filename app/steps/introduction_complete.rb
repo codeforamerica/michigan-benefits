@@ -9,10 +9,6 @@ class IntroductionComplete < Step
     self.headline = "Thank you #{@app.applicant.first_name}!"
   end
 
-  def static_template
-    "steps/introduction_complete"
-  end
-
   def previous
     if @app.mailing_address_same_as_home_address
       IntroductionContactInformation.new(@app)

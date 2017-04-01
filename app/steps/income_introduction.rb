@@ -4,10 +4,6 @@ class IncomeIntroduction < Step
   self.icon = "section-2"
   self.headline = "You’re doing great!"
 
-  def static_template
-    "steps/income_introduction"
-  end
-
   def previous
     HouseholdTaxHow.new(@app)
   end

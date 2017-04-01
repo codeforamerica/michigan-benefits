@@ -2,10 +2,6 @@ class HouseholdMembers < Step
   self.title = "Your Household"
   self.subhead = "Members of your household"
 
-  def static_template
-    "steps/household_members"
-  end
-
   def previous
     HouseholdPersonalDetails.new(@app)
   end

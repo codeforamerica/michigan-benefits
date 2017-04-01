@@ -5,10 +5,6 @@ class MaybeSubmitDocuments < Step
   self.subhead = "Do you have any documents you can submit now?"
   self.subhead_help = "For example: ID, proof of income, proof of residency."
 
-  def static_template
-    "steps/maybe_submit_documents"
-  end
-
   def previous
     nil
   end

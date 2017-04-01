@@ -3,10 +3,6 @@ class HouseholdIntroduction < Step
   self.subhead = "There are 4 sections you need to complete to submit a full application."
   self.icon = "section-1"
 
-  def static_template
-    "steps/household_introduction"
-  end
-
   def previous
     IntroductionComplete.new(@app)
   end

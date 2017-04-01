@@ -35,6 +35,10 @@ class Step
     self.name.underscore.dasherize
   end
 
+  def self.template
+    self.name.underscore
+  end
+
   def initialize(app, params={})
     self.questions ||= {}
     self.member_questions ||= {}
@@ -52,8 +56,8 @@ class Step
     assign_from_app
   end
 
-  def static_template
-    nil
+  def template
+    self.class.template
   end
 
   def overview(question)

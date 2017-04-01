@@ -2,10 +2,6 @@ class LegalAgreement < Step
   self.title = "Legal"
   self.subhead = "Scroll down to agree. You will sign on the next page."
 
-  def static_template
-    "steps/legal_agreement"
-  end
-
   def previous
     IncomeOtherAssetsContinued.new(@app)
   end

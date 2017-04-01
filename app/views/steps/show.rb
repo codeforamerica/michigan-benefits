@@ -26,10 +26,6 @@ class Views::Steps::Show < Views::Base
     title.html_safe
   end
 
-  def render_static_content?
-    step.static_template.present?
-  end
-
   def step_form
     div class: 'form-card' do
       form_for step, as: :step, url: step_path(step), method: :put do |f|
@@ -44,9 +40,9 @@ class Views::Steps::Show < Views::Base
           section_header
         end
 
-        if render_static_content?
+        if lookup_context.template_exists? "steps/#{step.template}"
           div class: 'form-card__content' do
-            render step.static_template
+            render step.template
           end
         else
           div class: 'form-card__content' do
