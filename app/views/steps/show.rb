@@ -5,7 +5,13 @@ class Views::Steps::Show < Views::Base
     content_for :header_title, header_title
     content_for :back_path, back_path
 
-    step_form
+    step_form(step) do |f|
+      if lookup_context.template_exists? "steps/#{step.template}"
+        render step.template
+      else
+        questions(f)
+      end
+    end
   end
 
   private
@@ -26,65 +32,6 @@ class Views::Steps::Show < Views::Base
     title.html_safe
   end
 
-  def step_form
-    div class: 'form-card' do
-      form_for step, as: :step, url: step_path(step), method: :put do |f|
-
-        if step.params
-          step.params.each do |k, v|
-            hidden_field_tag k, v
-          end
-        end
-
-        header class: 'form-card__header' do
-          section_header
-        end
-
-        if lookup_context.template_exists? "steps/#{step.template}"
-          div class: 'form-card__content' do
-            render step.template
-          end
-        else
-          div class: 'form-card__content' do
-            questions(f)
-          end
-        end
-
-        if step.previous.present? or step.next.present?
-          footer class: 'form-card__footer' do
-            buttons
-          end
-        end
-      end
-    end
-  end
-
-  def section_header
-    div class: 'step-section-header' do
-      if step.icon.present?
-        div class: [
-          "step-section-header__icon",
-          "illustration",
-          "illustration--#{step.icon}"
-        ]
-      end
-
-      subhead_classes = "step-section-header__subhead"
-
-      if step.only_subhead?
-        subhead_classes += " step-section-header__subhead--standalone"
-      end
-
-      h4 step.headline, class: "step-section-header__headline"
-      h3 step.subhead, class: subhead_classes
-
-      if step.subhead_help
-        p step.subhead_help,
-          class: 'text--help step-section-header__subhead-help'
-      end
-    end
-  end
-
   def questions(f)
     general_questions(f)
     member_questions(f)
@@ -98,7 +45,7 @@ class Views::Steps::Show < Views::Base
         section_header = member.first_name.titleize
         section_header += " (that's you!)" if member.applicant?
 
-        h4 section_header, class: "step-section-header__headline"
+        headline(section_header)
 
         f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
           question_field(member_fields, question, label_text, label_option)
@@ -151,15 +98,6 @@ class Views::Steps::Show < Views::Base
     end
   end
 
-  def buttons
-    if step.next.present?
-      button type: 'submit', class: "button button--cta button--full-width" do
-        text step.submit_label
-        i class: "button__icon icon-arrow_forward"
-      end
-    end
-  end
-
   def question_field(f, question, label_text, label_option)
     group_classes = 'form-group'
 
@@ -176,9 +114,7 @@ class Views::Steps::Show < Views::Base
     field_type = step.type(question)
 
     div class: group_classes, 'data-field-type' => field_type do
-      if step.section_header(question)
-        h4 step.section_header(question), class: "form-group__headline"
-      end
+      headline step.section_header(question) if step.section_header(question)
 
       if step.overview(question)
         p step.overview(question)
@@ -187,85 +123,42 @@ class Views::Steps::Show < Views::Base
       case field_type
         when :number
           question_label(f, question, label_text, label_option)
+          number_field f, question
 
-          f.number_field question, class: "text-input form-width--short"
         when :text
           question_label(f, question, label_text, label_option)
+          text_field f, question, step.placeholder(question)
 
-          f.text_field question,
-            placeholder: step.placeholder(question),
-            class: 'text-input'
         when :money
           question_label(f, question, label_text, label_option)
+          money_field f, question, step.placeholder(question)
 
-          div class: "text-input-group" do
-            div "$", class: "text-input-group__prefix"
-            f.text_field question,
-              placeholder: step.placeholder(question),
-              class: 'text-input text--right'
-            div ".00", class: "text-input-group__postfix"
-          end
         when :text_area
           question_label(f, question, label_text, label_option)
+          text_area_field f, question, step.placeholder(question)
 
-          f.text_area question,
-            placeholder: step.placeholder(question),
-            class: 'textarea'
         when :incrementer
           question_label(f, question, label_text, label_option)
+          incrementer_field f, question
 
-          div class: "incrementer" do
-            span "-", class: "incrementer__subtract"
-            f.number_field question, {
-              class: "text-input form-width--short",
-              min: 1,
-              max: 30
-            }
-            span "+", class: "incrementer__add"
-          end
         when :select
           f.label question, label_text, class: 'form-question'
+          select_field f, question, step.options_for(question).map(&:titleize)
 
-          div class: "select" do
-            f.select question,
-              step.options_for(question).map(&:titleize),
-              { include_blank: "Choose one" },
-              { class: "select__element" }
-          end
         when :radios
           question_label(f, question, label_text, label_option)
+          radio_field f, question, step.options_for(question)
 
-          div do
-            step.options_for(question).each do |option|
-              label class: "radio-button" do
-                f.radio_button question, option
-                text option.titleize
-              end
-            end
-          end
         when :yes_no
           question_label(f, question, label_text, label_option)
+          yes_no_field f, question
 
-          div do
-            label class: "radio-button" do
-              f.radio_button question, "true"
-              text "Yes"
-            end
-
-            label class: "radio-button" do
-              f.radio_button question, "false"
-              text "No"
-            end
-          end
         when :checkbox
           if step.help_message(question)
             p step.help_message(question), class: "text--help"
           end
+          checkbox_field f, question, label_text
 
-          label class: "checkbox" do
-            f.check_box question
-            text label_text
-          end
         when :date
           f.label question,
             label_text,
@@ -296,16 +189,10 @@ class Views::Steps::Show < Views::Base
           raise "Unknown field type #{field_type}"
       end
 
-      if step.errors[question].present?
-        p class: 'text--error' do
-          i class: 'icon-warning'
-          text " #{step.errors[question].to_sentence}"
-        end
-      end
-
       if step.safety(question)
         safety step.safety(question)
       end
+
     end
   end
 end
