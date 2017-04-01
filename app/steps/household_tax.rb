@@ -6,7 +6,11 @@ class HouseholdTax < Step
   }
 
   self.help_messages = {
-    household_tax: "You do not need to file a tax return to receive benefits."
+    household_tax: <<~HTML.html_safe,
+      You do not need to file a tax return to receive benefits.
+      <br>
+      <span class='label label--healthcare'>Healthcare</span>
+    HTML
   }
 
   self.types = {
