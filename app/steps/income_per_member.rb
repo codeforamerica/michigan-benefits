@@ -18,6 +18,10 @@ class IncomePerMember < ManyMemberUpdateStep
     income_consistent: :yes_no
   }
 
+  self.placeholders = {
+    employer_name: 'Employer'
+  }
+
   self.help_messages = {
     pay_quantity: 'This includes money withheld from paychecks'
   }
