@@ -21,14 +21,6 @@ class IncomeChildSupport < Step
     :child_support,
     presence: { message: "Make sure to answer this question" }
 
-  def previous
-    IncomeAdditionalSources.new(@app)
-  end
-
-  def next
-    IncomeOtherAssets.new(@app)
-  end
-
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[
       child_support

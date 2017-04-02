@@ -13,7 +13,16 @@ class StepsController < ApplicationController
   def show # TODO: should be "edit"
     @app = current_app
     @step = find_step
-    respond_with @step
+
+    if @step.skip?
+      if going_backwards?
+        redirect_to previous_path
+      else
+        redirect_to next_path
+      end
+    else
+      respond_with @step
+    end
   end
 
   def update
@@ -21,7 +30,7 @@ class StepsController < ApplicationController
     @step.update(step_params)
 
     if @step.valid?
-      redirect_to path_to_step(@step.next)
+      redirect_to next_path
     else
       render :show
     end
@@ -31,6 +40,18 @@ class StepsController < ApplicationController
 
   def find_step
     Step.find(params[:id], current_app, params.slice(*%w[member_id]))
+  end
+
+  def next_path
+    step_path(Nav.new(@step).next.to_param)
+  end
+
+  def previous_path
+    step_path(Nav.new(@step).previous.to_param)
+  end
+
+  def going_backwards?
+    params["rel"] == "back"
   end
 
   def step_params

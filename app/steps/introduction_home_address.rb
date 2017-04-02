@@ -39,12 +39,9 @@ class IntroductionHomeAddress < Step
     presence: { message: "Make sure to answer this question" },
     unless: -> (home_address) { home_address.unstable_housing.in? ["1", "true", true] }
 
-  def previous
-    IntroductionContactInformation.new(@app)
-  end
 
-  def next
-    IntroductionComplete.new(@app)
+  def skip?
+    @app.mailing_address_same_as_home_address
   end
 
   def assign_from_app

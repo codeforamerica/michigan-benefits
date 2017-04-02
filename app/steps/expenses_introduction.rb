@@ -4,14 +4,6 @@ class ExpensesIntroduction < Step
   self.subhead = "Next, describe your household expenses."
   self.icon = "section-3"
 
-  def previous
-    LegalAgreement.new(@app)
-  end
-
-  def next
-    ExpensesHousing.new(@app)
-  end
-
   def assign_from_app
   end
 

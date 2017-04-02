@@ -72,18 +72,6 @@ class IntroductionContactInformation < Step
 
   before_validation :strip_non_digits_from_phone_number
 
-  def previous
-    IntroductionIntroduceYourself.new(@app)
-  end
-
-  def next
-    if @app.mailing_address_same_as_home_address
-      IntroductionComplete.new(@app)
-    else
-      IntroductionHomeAddress.new(@app)
-    end
-  end
-
   def assign_from_app
     assign_attributes(
       phone_number: @app.phone_number,

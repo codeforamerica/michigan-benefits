@@ -5,12 +5,4 @@ class IncomePerMember < ManyMemberUpdateStep
   def pay_intervals
     ["Day", "Week", "2 Weeks", "Month"].map {|title| [title, title.parameterize]}
   end
-
-  def previous
-    IncomeCurrentlyEmployed.new(@app)
-  end
-
-  def next
-    IncomeAdditionalSources.new(@app)
-  end
 end

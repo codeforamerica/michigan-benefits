@@ -14,16 +14,4 @@ class IncomeCurrentlyEmployed < ManyMemberUpdateStep
   self.field_options = {
     employment_status: HouseholdMember::EMPLOYMENT_STATUSES.map(&:to_s)
   }
-
-  def previous
-    if @app.income_change?
-      IncomeChangeExplanation.new(@app)
-    else
-      IncomeChange.new(@app)
-    end
-  end
-
-  def next
-    IncomePerMember.new(@app)
-  end
 end

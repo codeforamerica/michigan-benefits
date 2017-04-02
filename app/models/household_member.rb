@@ -19,6 +19,14 @@ class HouseholdMember < ApplicationRecord
     [first_name, last_name].join(" ")
   end
 
+  def reflected_name
+    if applicant?
+      "#{first_name.titleize} (that’s you!)"
+    else
+      first_name.titleize
+    end
+  end
+
   def applicant?
     relationship == 'self'
   end

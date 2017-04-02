@@ -2,12 +2,8 @@ class HouseholdMembers < Step
   self.title = "Your Household"
   self.subhead = "Members of your household"
 
-  def previous
-    HouseholdPersonalDetails.new(@app)
-  end
-
-  def next
-    HouseholdMoreInfo.new(@app)
+  def skip?
+    @app.household_size.to_i == 1
   end
 
   def assign_from_app

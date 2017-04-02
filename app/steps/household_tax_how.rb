@@ -14,12 +14,4 @@ class HouseholdTaxHow < ManyMemberUpdateStep
   self.field_options = {
     filing_status: HouseholdMember::FILING_STATUSES.map(&:to_s)
   }
-
-  def previous
-    HouseholdTax.new(@app)
-  end
-
-  def next
-    IncomeIntroduction.new(@app)
-  end
 end

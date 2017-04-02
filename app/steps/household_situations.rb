@@ -16,12 +16,4 @@ class HouseholdSituations < ManyMemberUpdateStep
     in_college: FieldOption.form_group_no_bottom_space,
     is_disabled: FieldOption.form_group_no_bottom_space
   }
-
-  def previous
-    HouseholdMoreInfo.new(@app)
-  end
-
-  def next
-    HouseholdHealth.new(@app)
-  end
 end

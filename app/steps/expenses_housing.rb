@@ -65,14 +65,6 @@ class ExpensesHousing < Step
     HTML
   }
 
-  def previous
-    ExpensesIntroduction.new(@app)
-  end
-
-  def next
-    SignAndSubmit.new(@app)
-  end
-
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[
       rent_expense

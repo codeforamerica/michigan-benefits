@@ -58,18 +58,6 @@ class IncomeAdditionalSources < Step
     ]
   end
 
-  def previous
-    if @app.income_change.present?
-      IncomeChangeExplanation.new(@app)
-    else
-      IncomeChange.new(@app)
-    end
-  end
-
-  def next
-    IncomeChildSupport.new(@app)
-  end
-
   def assign_from_app
     @app.additional_income.each do |checkbox|
       self.send("#{checkbox}=", true)

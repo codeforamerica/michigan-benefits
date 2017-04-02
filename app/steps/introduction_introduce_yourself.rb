@@ -22,14 +22,6 @@ class IntroductionIntroduceYourself < Step
   validates :last_name,
     presence: { message: "Make sure to provide a last name" }
 
-  def previous
-    "/"
-  end
-
-  def next
-    IntroductionContactInformation.new(@app)
-  end
-
   def assign_from_app
     self.first_name = @app.applicant.first_name
     self.last_name = @app.applicant.last_name

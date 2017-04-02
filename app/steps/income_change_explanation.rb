@@ -17,12 +17,9 @@ class IncomeChangeExplanation < Step
 
   attr_accessor :income_change_explanation
 
-  def previous
-    IncomeChange.new(@app)
-  end
 
-  def next
-    IncomeCurrentlyEmployed.new(@app)
+  def skip?
+    ! @app.income_change?
   end
 
   def assign_from_app

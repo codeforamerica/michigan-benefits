@@ -5,7 +5,7 @@
     top: 2em;
     bottom: 2em;
   }
-	border-bottom: 1px solid $color-tan;
+  border-bottom: 1px solid $color-tan;
 
   &:last-child {
     border-bottom: 0;
@@ -25,10 +25,10 @@
 }
 
 .slab--padded {
-    padding: {
-        top: 3em;
-        bottom: 3em;
-    }
+  padding: {
+    top: 3em;
+    bottom: 3em;
+  }
 }
 
 .slab--not-padded {
@@ -46,4 +46,11 @@
   overflow: auto;
   text-align: left;
   margin-bottom: 1em;
+}
+
+.debug {
+  font-size: 12px;
+  text-align: center;
+  display: block;
+  background-color: yellow;
 }

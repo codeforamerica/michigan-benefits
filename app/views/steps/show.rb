@@ -5,6 +5,14 @@ class Views::Steps::Show < Views::Base
     content_for :header_title, header_title
     content_for :back_path, back_path
 
+    if Rails.env.development?
+      code <<~STRING, class: "debug"
+        #{Nav.new(step).progress} |
+        #{step.class.name} |
+        app #{current_user.app.id}
+      STRING
+    end
+
     step_form(step) do |f|
       if lookup_context.template_exists? "steps/#{step.template}"
         render partial: step.template, locals: { f: f }
@@ -17,19 +25,15 @@ class Views::Steps::Show < Views::Base
   private
 
   def back_path
-    if step.previous.present?
-      path_to_step(step.previous)
+    if step.previous
+      step_path(step.previous.to_param)
+    else
+      root_path
     end
   end
 
   def header_title
-    title = step.title
-
-    if Rails.env.development?
-      title += " <code style='opacity: 0.5'>(#{step.class.name}, app #{current_user.app.id})</code>"
-    end
-
-    title.html_safe
+    step.title.html_safe
   end
 
   def questions(f)
@@ -42,10 +46,7 @@ class Views::Steps::Show < Views::Base
   def member_questions(f)
     step.member_questions.each do |question, (label_text, label_option)|
       current_user.app.household_members.each do |member|
-        section_header = member.first_name.titleize
-        section_header += " (that's you!)" if member.applicant?
-
-        headline(section_header)
+        headline(member.reflected_name)
 
         f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
           question_field(member_fields, question, label_text, label_option)

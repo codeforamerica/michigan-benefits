@@ -50,14 +50,6 @@ class HouseholdAddMember < Step
     :in_home,
     :buy_food_with
 
-  def previous
-    HouseholdMembers.new(@app)
-  end
-
-  def next
-    HouseholdMembers.new(@app)
-  end
-
   def member
     if member_id
       @app.household_members.find_by(id: member_id)

@@ -17,14 +17,6 @@ class IncomeOtherAssetsContinued < Step
     :total_money,
     presence: { message: "Make sure to answer this question" }
 
-  def previous
-    IncomeOtherAssets.new(@app)
-  end
-
-  def next
-    LegalAgreement.new(@app)
-  end
-
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[
       total_money

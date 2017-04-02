@@ -16,18 +16,6 @@ class IncomeChange < Step
   validates :income_change,
     presence: { message: "Make sure to answer this question" }
 
-  def previous
-    IncomeIntroduction.new(@app)
-  end
-
-  def next
-    if @app.income_change?
-      IncomeChangeExplanation.new(@app)
-    else
-      IncomeCurrentlyEmployed.new(@app)
-    end
-  end
-
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[
       income_change

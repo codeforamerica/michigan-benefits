@@ -32,14 +32,6 @@ class IncomeOtherAssets < Step
     # :has_vehicle,
     presence: { message: "Make sure to answer this question" }
 
-  def previous
-    IncomeChildSupport.new(@app)
-  end
-
-  def next
-    IncomeOtherAssetsContinued.new(@app)
-  end
-
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[
       has_accounts

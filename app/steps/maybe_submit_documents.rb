@@ -5,14 +5,6 @@ class MaybeSubmitDocuments < Step
   self.subhead = "Do you have any documents you can submit now?"
   self.subhead_help = "For example: ID, proof of income, proof of residency."
 
-  def previous
-    nil
-  end
-
-  def next
-    nil
-  end
-
   def assign_from_app
   end
 

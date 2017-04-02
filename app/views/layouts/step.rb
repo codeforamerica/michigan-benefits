@@ -18,7 +18,7 @@ class Views::Layouts::Step < Views::Layouts::Application
 
     div class: 'step-header' do
       if back_path
-        link_to back_path, class: 'step-header__back-link' do
+        link_to "#{back_path}?rel=back", class: 'step-header__back-link' do
           i class: "button__icon icon-arrow_back"
         end
       end

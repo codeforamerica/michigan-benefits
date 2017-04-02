@@ -1,8 +1,9 @@
 class HouseholdTax < Step
   self.title = "Your Household"
+  self.subhead = "Does anyone plan to file a federal tax return next year?"
 
   self.questions = {
-    household_tax: "Does anyone plan to file a federal tax return next year?"
+    household_tax: ["Does anyone plan to file a federal tax return next year?", :hidden]
   }
 
   self.help_messages = {
@@ -23,14 +24,6 @@ class HouseholdTax < Step
   validates \
     :household_tax,
     presence: { message: "Make sure to answer this question" }
-
-  def previous
-    HouseholdHealthSituations.new(@app)
-  end
-
-  def next
-    HouseholdTaxHow.new(@app)
-  end
 
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[

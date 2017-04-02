@@ -9,18 +9,6 @@ class IntroductionComplete < Step
     self.headline = "Thank you #{@app.applicant.first_name}!"
   end
 
-  def previous
-    if @app.mailing_address_same_as_home_address
-      IntroductionContactInformation.new(@app)
-    else
-      IntroductionHomeAddress.new(@app)
-    end
-  end
-
-  def next
-    HouseholdIntroduction.new(@app)
-  end
-
   def assign_from_app
   end
 

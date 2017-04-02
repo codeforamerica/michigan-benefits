@@ -60,14 +60,6 @@ class HouseholdMoreInfo < Step
     :anyone_living_elsewhere,
     presence: { message: "Make sure to answer this question" }
 
-  def previous
-    HouseholdMembers.new(@app)
-  end
-
-  def next
-    HouseholdSituations.new(@app)
-  end
-
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[
       everyone_a_citizen

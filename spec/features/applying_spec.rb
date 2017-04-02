@@ -146,13 +146,6 @@ describe "applying", js: true do
     check_step "Tell us more about those assets.",
       ["In total, how much money does your household have in cash and accounts?", "500", nil]
 
-    expect(page).to have_text("Scroll down to agree")
-    submit
-
-    back
-    expect_page "Scroll down to agree"
-    submit
-
     expect_page "Next, describe your household expenses."
     submit
     back
@@ -164,6 +157,13 @@ describe "applying", js: true do
       ["How much does your household pay in rent or mortgage each month?", "300", "Make sure to answer this question"],
       ["How much do you pay in property tax each month?", "100", "Make sure to answer this question"],
       ["How much do you pay in insurance each month?", "20", "Make sure to answer this question"]
+
+    expect(page).to have_text("Scroll down to agree")
+    submit
+
+    back
+    expect_page "Scroll down to agree"
+    submit
 
     check_step "Enter your full legal name here to sign this application.",
       ["Your signature", "Jeff Name", "Make sure you enter your signature"],

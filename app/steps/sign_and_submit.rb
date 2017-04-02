@@ -21,14 +21,6 @@ class SignAndSubmit < Step
   validates :signature,
     presence: { message: "Make sure you enter your signature" }
 
-  def previous
-    ExpensesHousing.new(@app)
-  end
-
-  def next
-    MaybeSubmitDocuments.new(@app)
-  end
-
   def assign_from_app
     self.signature = @app.signature
   end

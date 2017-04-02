@@ -60,6 +60,18 @@ class Step
     self.class.template
   end
 
+  def skip?
+    false # override me to skip
+  end
+
+  def next
+    Nav.new(self).next
+  end
+
+  def previous
+    Nav.new(self).previous
+  end
+
   def overview(question)
     overviews[question]
   end

@@ -3,6 +3,7 @@ class Views::Documents::Index < Views::Base
 
   def content
     content_for :header_title, "Submit Documents"
+    content_for :back_path, step_path(MaybeSubmitDocuments.to_param)
 
     div class: "slab slab--white" do
       h2 "Submit documents"

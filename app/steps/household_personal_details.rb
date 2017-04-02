@@ -52,18 +52,6 @@ class HouseholdPersonalDetails < Step
     self.household_size ||= 1
   end
 
-  def previous
-    HouseholdIntroduction.new(@app)
-  end
-
-  def next
-    if @app.household_size.to_i > 1
-      HouseholdMembers.new(@app)
-    else
-      IncomeIntroduction.new(@app)
-    end
-  end
-
   def assign_from_app
     attrs = @app.attributes.slice('marital_status', 'household_size')
     self.assign_attributes(attrs)

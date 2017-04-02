@@ -34,14 +34,6 @@ class HouseholdHealth < Step
     :any_lost_insurance_last_3_months,
     presence: { message: "Make sure to answer this question" }
 
-  def previous
-    HouseholdSituations.new(@app)
-  end
-
-  def next
-    HouseholdHealthSituations.new(@app)
-  end
-
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[
       any_medical_bill_help_last_3_months

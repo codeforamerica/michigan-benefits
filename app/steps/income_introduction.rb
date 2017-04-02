@@ -4,14 +4,6 @@ class IncomeIntroduction < Step
   self.icon = "section-2"
   self.headline = "You’re doing great!"
 
-  def previous
-    HouseholdTaxHow.new(@app)
-  end
-
-  def next
-    IncomeChange.new(@app)
-  end
-
   def assign_from_app
   end
 
