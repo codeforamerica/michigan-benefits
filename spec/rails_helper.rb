@@ -9,6 +9,7 @@ require_relative "support/mom"
 require_relative "support/match_html"
 require_relative "support/generic_helper"
 require_relative "support/feature_helper"
+require_relative "support/step_helper"
 
 headless_capybara = true
 require 'capybara/rails'
@@ -83,6 +84,7 @@ RSpec.configure do |config|
 
   config.include FeatureHelper, type: :feature
   config.include GenericHelper
+  config.include StepHelper
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
 
