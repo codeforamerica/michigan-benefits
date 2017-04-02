@@ -7,7 +7,7 @@ class Views::Steps::Show < Views::Base
 
     if Rails.env.development?
       code <<~STRING, class: "debug"
-        #{Nav.new(step).progress} |
+        #{step.nav.progress} |
         #{step.class.name} |
         app #{current_user.app.id}
       STRING

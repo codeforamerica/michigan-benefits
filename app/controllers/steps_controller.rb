@@ -5,9 +5,13 @@ class StepsController < ApplicationController
 
   def allowed
     {
+      index: :member,
       show: :member,
       update: :member
     }
+  end
+
+  def index
   end
 
   def show # TODO: should be "edit"
@@ -43,11 +47,11 @@ class StepsController < ApplicationController
   end
 
   def next_path
-    step_path(Nav.new(@step).next.to_param)
+    step_path(@step.next.to_param)
   end
 
   def previous_path
-    step_path(Nav.new(@step).previous.to_param)
+    step_path(@step.previous.to_param)
   end
 
   def going_backwards?

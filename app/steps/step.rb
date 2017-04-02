@@ -65,11 +65,15 @@ class Step
   end
 
   def next
-    Nav.new(self).next
+    nav.next
   end
 
   def previous
-    Nav.new(self).previous
+    nav.previous
+  end
+
+  def nav
+    StepNavigation.new(self)
   end
 
   def overview(question)

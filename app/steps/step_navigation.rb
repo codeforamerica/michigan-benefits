@@ -1,4 +1,4 @@
-class Nav
+class StepNavigation
   ALL = {
     "Introduction" => [
       IntroductionIntroduceYourself,
@@ -91,6 +91,6 @@ class Nav
   end
 
   def parent
-    Nav.new(SUBSTEPS[@step])
+    self.class.new(SUBSTEPS[@step])
   end
 end

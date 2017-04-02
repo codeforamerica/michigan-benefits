@@ -4,13 +4,12 @@ Rails.application.routes.draw do
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]
   resource :file_preview, only: %i[show] if Rails.env.test? || Rails.env.development?
-  resource :nav, only: %i[show]
   resource :sessions, only: %i[new destroy] do
     collection do
       get :clear, to: "sessions#destroy"
     end
   end
-  resources :steps, only: %i[show update]
+  resources :steps, only: %i[index show update]
   resources :users, only: %i[new create]
 
   get "/form", to: "forms#show"

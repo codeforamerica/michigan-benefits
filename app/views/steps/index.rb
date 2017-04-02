@@ -1,9 +1,9 @@
-class Views::Navs::Show < Views::Base
+class Views::Steps::Index < Views::Base
   def content
-    content_for :header_title, "Nav"
+    content_for :header_title, "Navigation"
 
     div class: "slab" do
-      Nav.sections.each do |section, steps|
+      StepNavigation.sections.each do |section, steps|
         h3 section
 
         steps.each do |step|
