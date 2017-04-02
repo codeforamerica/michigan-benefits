@@ -7,7 +7,7 @@ class Views::Steps::Show < Views::Base
 
     step_form(step) do |f|
       if lookup_context.template_exists? "steps/#{step.template}"
-        render step.template
+        render partial: step.template, locals: { f: f }
       else
         questions(f)
       end

@@ -65,6 +65,13 @@ module Views::Steps::Helpers
     end
   end
 
+  def question(f, method, title)
+    div class: "form-group" do
+      f.label method, title, class: "form-question" if f && title
+      yield
+    end
+  end
+
   def text_field(f, method, placeholder)
     f.text_field method,
       placeholder: placeholder,
@@ -77,7 +84,7 @@ module Views::Steps::Helpers
     errors f, method
   end
 
-  def money_field(f, method, placeholder)
+  def money_field(f, method, placeholder=nil)
     div class: "text-input-group" do
       div "$", class: "text-input-group__prefix"
       f.text_field method,

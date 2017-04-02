@@ -22,4 +22,16 @@ class HouseholdMember < ApplicationRecord
   def applicant?
     relationship == 'self'
   end
+
+  def employed?
+    employment_status == "employed"
+  end
+
+  def self_employed?
+    employment_status == "self_employed"
+  end
+
+  def unemployed?
+    employment_status == "not_employed"
+  end
 end

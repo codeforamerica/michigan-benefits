@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331220753) do
+ActiveRecord::Schema.define(version: 20170402180918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,9 @@ ActiveRecord::Schema.define(version: 20170331220753) do
     t.integer  "pay_quantity"
     t.string   "pay_interval"
     t.boolean  "income_consistent"
+    t.string   "profession"
+    t.integer  "monthly_pay"
+    t.integer  "monthly_expenses"
     t.index ["app_id"], name: "index_household_members_on_app_id", using: :btree
   end
 
