@@ -65,10 +65,22 @@ module Views::Steps::Helpers
     end
   end
 
-  def question(f, method, title)
-    div class: "form-group" do
+  def question(f, method, title, field_type=nil)
+    div class: "form-group",
+      "data-md5" => md5(title),
+      "data-field-type" => field_type do
       f.label method, title, class: "form-question" if f && title
       yield
+    end
+  end
+
+  def household_question(f, method, title, household_members)
+    question f, method, title, "checkbox" do
+      household_members.each do |member|
+        f.fields_for "household_members[]", member, hidden_field_id: true do |ff|
+          checkbox_field ff, method, member.name
+        end
+      end
     end
   end
 
@@ -167,5 +179,9 @@ module Views::Steps::Helpers
         text " #{f.object.errors[method].to_sentence}"
       end
     end
+  end
+
+  def md5(s)
+    Digest::MD5.hexdigest(s)
   end
 end

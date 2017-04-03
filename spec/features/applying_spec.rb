@@ -81,7 +81,7 @@ describe "applying", js: true do
     submit
 
     check_step "Tell us a bit more about your household.",
-      ["Is each person a citizen?", "Yes", nil],
+      ["Is each person a citizen?", "No", nil],
       ["Does anyone have a disability?", "Yes", nil],
       ["Is anyone pregnant or has been pregnant recently?", "Yes", nil],
       ["Does anyone need help paying for recent medical bills?", "Yes", nil],
@@ -89,8 +89,12 @@ describe "applying", js: true do
       ["Is anyone temporarily living outside the home?", "Yes", nil]
 
     check_step "Ok, let us know which people these situations apply to.",
-      ["Who is enrolled in college?", ["Alice", "Billy"], nil],
+      ["Who is a citizen?", ["Billy"], nil],
       ["Who has a disability?", ["Cindy"], nil],
+      ["Who is pregnant or has been pregnant recently?", ["Cindy"], nil],
+      ["Who needs help paying for recent medical bills?", ["Alice"], nil],
+      ["Who is enrolled in college?", ["Alice", "Billy"], nil],
+      ["Who is temporarily living outside the home?", ["Alice", "Billy"], nil],
       validations: false
 
     check_step "Tell us about your household health coverage in the past 3 months.",

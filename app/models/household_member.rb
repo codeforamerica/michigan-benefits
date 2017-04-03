@@ -19,11 +19,11 @@ class HouseholdMember < ApplicationRecord
     [first_name, last_name].join(" ")
   end
 
-  def reflected_name
-    if applicant?
-      "#{first_name.titleize} (that’s you!)"
+  def name(for_header: false)
+    if for_header && applicant?
+      "#{first_name} (that’s you!)"
     else
-      first_name.titleize
+      first_name
     end
   end
 

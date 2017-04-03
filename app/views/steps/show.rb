@@ -50,7 +50,7 @@ class Views::Steps::Show < Views::Base
   def member_questions(f)
     step.member_questions.each do |question, (label_text, label_option)|
       current_user.app.household_members.each do |member|
-        headline(member.reflected_name)
+        headline(member.name(for_header: true))
 
         f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
           question_field(member_fields, question, label_text, label_option)
@@ -63,7 +63,7 @@ class Views::Steps::Show < Views::Base
     step.household_questions.each do |question, (label_text, label_option)|
       div class: "form-questions-group",
         "data-field-type" => step.type(question),
-        "data-md5" => Digest::MD5.hexdigest(label_text) do
+        "data-md5" => md5(label_text) do
         question_label(f, question, label_text, label_option)
 
         current_user.app.household_members.each do |member|
@@ -121,8 +121,8 @@ class Views::Steps::Show < Views::Base
     field_type = step.type(question)
 
     div class: group_classes,
-      'data-field-type' => field_type, '
-      data-md5' => Digest::MD5.hexdigest(label_text) do
+      'data-field-type' => field_type,
+      'data-md5' => md5(label_text) do
       headline step.section_header(question) if step.section_header(question)
 
       if step.overview(question)
