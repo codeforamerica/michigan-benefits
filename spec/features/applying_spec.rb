@@ -41,7 +41,7 @@ describe "applying", js: true do
       ["Street", "1234 Fake Street", "Make sure to answer this question"],
       ["City", "San Francisco", "Make sure to answer this question"],
       ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
-      ["Check if you do not have stable housing", false, nil]
+      ["Check if you do not have stable housing.", false, nil]
 
     static_step "It should take about 10 more minutes to complete a full application."
     static_step "There are 4 sections you need to complete to submit a full application."
@@ -49,14 +49,14 @@ describe "applying", js: true do
     check_step "Provide us with some personal details.",
       ["What is your sex?", "Female", "Make sure to answer this question."],
       ["What is your marital status?", "Single", "Make sure to answer this question."],
-      ["What is your social security number", "123-45-6789", nil],
+      ["What is your social security number?", "123-45-6789", nil],
       ["How many people are in your household?", "3", nil]
 
     click_on "Add a household member"
 
     check_step "Tell us about another person you are applying with.",
-      ["What is their first name?", "Alice", nil],
-      ["What is their last name?", "Aardvark", nil],
+      ["What is their first name?", "Cindy", nil],
+      ["What is their last name?", "Crayfish", nil],
       ["What is their sex?", "Female", nil],
       ["What is their relationship to you?", "Child", nil],
       ["What is their social security number?", "444-44-4444", nil],
@@ -88,8 +88,10 @@ describe "applying", js: true do
       ["Is anyone enrolled in college?", "Yes", nil],
       ["Is anyone temporarily living outside the home?", "Yes", nil]
 
-    expect_page "Ok, let us know which people these situations apply to."
-    submit
+    check_step "Ok, let us know which people these situations apply to.",
+      ["Who is enrolled in college?", ["Alice", "Billy"], nil],
+      ["Who has a disability?", ["Cindy"], nil],
+      validations: false
 
     check_step "Tell us about your household health coverage in the past 3 months.",
       ["Does anyone need help paying for medical bills from the past 3 months?", "No", "Make sure to answer this question"],
@@ -166,7 +168,7 @@ describe "applying", js: true do
     submit
 
     check_step "Enter your full legal name here to sign this application.",
-      ["Your signature", "Jeff Name", "Make sure you enter your signature"],
+      ["Your signature", "Alice Aardvark", "Make sure you enter your signature"],
       verify: false
 
     check_doc_uploads

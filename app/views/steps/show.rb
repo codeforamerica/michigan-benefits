@@ -6,11 +6,15 @@ class Views::Steps::Show < Views::Base
     content_for :back_path, back_path
 
     if Rails.env.development?
-      code <<~STRING, class: "debug"
-        #{step.nav.progress} |
-        #{step.class.name} |
-        app #{current_user.app.id}
-      STRING
+      div class: "debug" do
+        text step.nav.progress
+        text " | "
+        text step.class.name
+        text " | app "
+        text current_user.app.id
+        text " | "
+        link_to "Nav", steps_path
+      end
     end
 
     step_form(step) do |f|
@@ -57,7 +61,9 @@ class Views::Steps::Show < Views::Base
 
   def household_questions(f)
     step.household_questions.each do |question, (label_text, label_option)|
-      div class: "form-questions-group" do
+      div class: "form-questions-group",
+        "data-field-type" => step.type(question),
+        "data-md5" => Digest::MD5.hexdigest(label_text) do
         question_label(f, question, label_text, label_option)
 
         current_user.app.household_members.each do |member|
@@ -114,7 +120,9 @@ class Views::Steps::Show < Views::Base
 
     field_type = step.type(question)
 
-    div class: group_classes, 'data-field-type' => field_type do
+    div class: group_classes,
+      'data-field-type' => field_type, '
+      data-md5' => Digest::MD5.hexdigest(label_text) do
       headline step.section_header(question) if step.section_header(question)
 
       if step.overview(question)

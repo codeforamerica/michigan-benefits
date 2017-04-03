@@ -40,16 +40,13 @@ module StepHelper
 
   def within_question(question)
     begin
-      label = find(".form-group label", text: question, visible: false)
+      group = find(<<~CSS, visible: false)
+        .form-questions-group[data-md5='#{Digest::MD5.hexdigest(question)}'],
+        .form-group[data-md5='#{Digest::MD5.hexdigest(question)}']
+      CSS
     rescue
-      puts "current page: #{find(".step-section-header__subhead").text}"
-      raise
+      raise %|Could not find question: "#{question}" on "#{find('.step-section-header__subhead').text}"|
     end
-
-    group = label.first(
-      :xpath,
-      "ancestor::*[local-name()='div' and contains(@class, 'form-group')]"
-    )
 
     within(group) do
       yield group
@@ -86,7 +83,11 @@ module StepHelper
           when "select"
             select answer
           when "checkbox"
-            if answer
+            if answer.is_a?(Array)
+              answer.each do |checkbox|
+                check checkbox
+              end
+            elsif answer
               check question
             else
               uncheck question
@@ -113,7 +114,13 @@ module StepHelper
           when 'select'
             expect(page).to have_select(question, selected: expected_answer)
           when "checkbox"
-            expect(find("input").checked?).to eq(expected_answer)
+            if expected_answer.is_a?(Array)
+              expected_answer.each do |checkbox|
+                expect(find("label", text: checkbox).find("input")).to be_checked
+              end
+            else
+              expect(find("input").checked?).to eq(expected_answer)
+            end
           else
             raise "Unsupported type: #{type}"
         end
