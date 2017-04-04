@@ -19,13 +19,13 @@ gem "rake"
 gem "responders"
 gem "sass-rails", "~> 5.0"
 gem "sorcery"
+gem "twilio-ruby"
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "uglifier", ">= 1.3.0"
 
 # from gcf
 # gem 'prawn'
 # gem 'StreetAddress', :require => "street_address"
-# gem 'twilio-ruby'
 
 group :test do
   gem "database_cleaner"

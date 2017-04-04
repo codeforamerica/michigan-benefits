@@ -95,6 +95,11 @@ class IntroductionContactInformation < Step
       mailing_zip: zip,
       email: email
     )
+
+    unless @app.welcome_sms_sent
+      Sms.new(@app).deliver_welcome_message
+      @app.update! welcome_sms_sent: true
+    end
   end
 
   def strip_non_digits_from_phone_number

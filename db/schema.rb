@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403004711) do
+ActiveRecord::Schema.define(version: 20170404191709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20170403004711) do
     t.string   "phone_number"
     t.boolean  "accepts_text_messages"
     t.integer  "user_id"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.boolean  "mailing_address_same_as_home_address"
     t.string   "mailing_street"
     t.string   "mailing_city"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20170403004711) do
     t.string   "email"
     t.boolean  "income_change"
     t.text     "income_change_explanation"
-    t.text     "additional_income",                    default: [],              array: true
+    t.text     "additional_income",                    default: [],                 array: true
     t.date     "birthday"
     t.string   "marital_status"
     t.integer  "household_size"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170403004711) do
     t.boolean  "utility_trash"
     t.boolean  "utility_phone"
     t.boolean  "utility_other"
+    t.boolean  "welcome_sms_sent",                     default: false
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 

@@ -6,7 +6,9 @@ describe "applying", js: true do
   end
 
   around(:each) do |example|
-    with_modified_env FORM_RECIPIENT: 'test@example.com' do
+    with_modified_env FORM_RECIPIENT: 'test@example.com',
+      TWILIO_PHONE_NUMBER: "8005551212",
+      TWILIO_RECIPIENT_WHITELIST: "4158675309" do
       example.run
     end
   end
@@ -36,6 +38,8 @@ describe "applying", js: true do
       choose "No"
     end
     submit
+
+    expect(FakeTwilioClient.messages.count).to eq 1
 
     check_step "Tell us where you currently live.",
       ["Street", "1234 Fake Street", "Make sure to answer this question"],
