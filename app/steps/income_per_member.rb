@@ -5,4 +5,8 @@ class IncomePerMember < ManyMemberUpdateStep
   def pay_intervals
     ["Day", "Week", "2 Weeks", "Month"].map {|title| [title, title.parameterize]}
   end
+
+  def skip?
+    @app.household_members.none? { |member| member.employed? or member.self_employed? }
+  end
 end
