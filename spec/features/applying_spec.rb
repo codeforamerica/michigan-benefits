@@ -18,17 +18,17 @@ describe "applying", js: true do
     click_on "Apply now"
 
     check_step "To start, please introduce yourself.",
-               ["What is your first name?", "Alice", "Make sure to provide a first name"],
-               ["What is your last name?", "Aardvark", "Make sure to provide a last name"]
+      ["What is your first name?", "Alice", "Make sure to provide a first name"],
+      ["What is your last name?", "Aardvark", "Make sure to provide a last name"]
 
     check_step "Tell us the best ways to reach you.",
-               ["What is the best phone number to reach you?", "4158675309", "Make sure your phone number is 10 digits long"],
-               ["May we send text messages to that phone number help you through the enrollment process?", "Yes", "Make sure to answer this question"],
-               ["What is your email address?", "test@example.com", nil],
-               ["Address", "123 Main St", "Make sure to answer this question"],
-               ["City", "San Francisco", "Make sure to answer this question"],
-               ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
-               ["Is this address the same as your home address?", "Yes", "Make sure to answer this question"]
+      ["What is the best phone number to reach you?", "4158675309", "Make sure your phone number is 10 digits long"],
+      ["May we send text messages to that phone number help you through the enrollment process?", "Yes", "Make sure to answer this question"],
+      ["What is your email address?", "test@example.com", nil],
+      ["Address", "123 Main St", "Make sure to answer this question"],
+      ["City", "San Francisco", "Make sure to answer this question"],
+      ["ZIP Code", "94110", "Make sure your ZIP code is 5 digits long"],
+      ["Is this address the same as your home address?", "Yes", "Make sure to answer this question"]
 
     expect_page("It should take about 10 more minutes to complete a full application.")
     back
@@ -177,7 +177,15 @@ describe "applying", js: true do
       ["Does your household own any vehicles?", "No", "Make sure to answer this question"]
 
     check_step "Tell us more about those assets.",
-      ["In total, how much money does your household have in cash and accounts?", "500", nil]
+      ["In total, how much money does your household have in cash and accounts?", "500", nil],
+      ["Checking account", true, nil],
+      ["Savings account", true, nil],
+      ["401k", true, nil],
+      ["Life insurance", true, nil],
+      ["IRAs", true, nil],
+      ["Mutual funds", true, nil],
+      ["Stocks", true, nil],
+      ["Trusts", true, nil]
 
     expect_page "Next, describe your household expenses."
     submit
