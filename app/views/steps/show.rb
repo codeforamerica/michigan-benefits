@@ -82,11 +82,15 @@ class Views::Steps::Show < Views::Base
     return if step.member_grouped_questions.empty?
 
     step.household_members.each do |member|
-      h4 member.first_name.titleize, class: "step-section-header__headline"
+      headline_text = member.name(for_header: true)
 
-      f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
-        step.member_grouped_questions.each do |question, (label_text, label_option)|
-          question_field(member_fields, question, label_text, label_option)
+      div class: "household-member-group", "data-md5" => md5(headline_text) do
+        h4 headline_text, class: "step-section-header__headline"
+
+        f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
+          step.member_grouped_questions.each do |question, (label_text, label_option)|
+            question_field(member_fields, question, label_text, label_option)
+          end
         end
       end
     end

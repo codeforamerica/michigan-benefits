@@ -139,6 +139,24 @@ describe "applying", js: true do
     expect_page "Tell us more about your household's employment"
     submit
 
+    check_household_step \
+      "Since Alice, Cindy, and Billy's income fluctuates, tell us more about their annual income",
+      {
+        "Alice (that’s you!)" => [
+          ["Expected income this year", "2000"],
+          ["Expected income next year", "1000"]
+        ],
+        "Cindy" => [
+          ["Expected income this year", "4000"],
+          ["Expected income next year", "1500"]
+        ],
+        "Billy" => [
+          ["Expected income this year", "5000"],
+          ["Expected income next year", "1020"]
+        ]
+      },
+      validations: false
+
     check_step "Check all additional sources of income received by your household, if any.",
       ["Unemployment insurance", true, nil],
       ["SSI or Disability", false, nil],
