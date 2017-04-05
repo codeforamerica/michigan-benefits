@@ -1,27 +1,45 @@
 module StepHelper
-  def check_step(subhead, *questions, verify: true, validations: true)
+  def check_step(subhead, *questions, household_members: nil, verify: true, validations: true)
     log subhead do
       expect_page(subhead)
 
       if validations
         log "Checking validation errors" do
           submit
-          questions.each { |q, _, e| expect_validation_error q, e }
+          maybe_member_questions(household_members, questions) do |qq|
+            qq.each { |q, _, e| expect_validation_error q, e }
+          end
         end
       end
 
       log "Answering questions" do
-        questions.each { |q, a, _| enter(q, a) }
+        maybe_member_questions(household_members, questions) do |qq|
+          qq.each { |q, a, _| enter(q, a) }
+        end
         submit
       end
 
       if verify
         log "Verifying that answers were saved" do
           back
-          questions.each { |q, a, _| verify(q, a) }
+          maybe_member_questions(household_members, questions) do |qq|
+            qq.each { |q, a, _| verify(q, a) }
+          end
           submit
         end
       end
+    end
+  end
+
+  def maybe_member_questions(hash, array)
+    if hash
+      hash.each do |member, qq|
+        within_member(member) do
+          yield qq
+        end
+      end
+    else
+      yield array
     end
   end
 
@@ -38,9 +56,16 @@ module StepHelper
     submit
   end
 
+  def within_member(member_name)
+    within(".household-member-group[data-md5='#{Digest::MD5.hexdigest(member_name)}']") do
+      yield
+    end
+  end
+
   def within_question(question)
     begin
       group = find(<<~CSS, visible: false)
+        .household-member-group[data-md5='#{Digest::MD5.hexdigest(question)}'],
         .form-questions-group[data-md5='#{Digest::MD5.hexdigest(question)}'],
         .form-group[data-md5='#{Digest::MD5.hexdigest(question)}']
       CSS
@@ -110,7 +135,7 @@ module StepHelper
           when "text", 'incrementer', "money"
             expect(find("input").value).to eq expected_answer
           when "yes_no", 'radios'
-            expect(find("label", text: expected_answer).find("input").checked?).to eq true
+            expect(find("label", exact_text: expected_answer).find("input").checked?).to eq true
           when 'select'
             expect(page).to have_select(question, selected: expected_answer)
           when "checkbox"

@@ -126,8 +126,12 @@ describe "applying", js: true do
       ["Explanation", "I lost my job", nil],
       validations: false
 
-    expect_page "Who in your household is currently employed, or has been in the past 30 days?"
-    submit
+    check_step "Who in your household is currently employed, or has been in the past 30 days?",
+      household_members: {
+        "Alice (that’s you!)" => [["Employment status", "Employed", "Make sure you answer this question"]],
+        "Billy" => [["Employment status", "Self Employed", "Make sure you answer this question"]],
+        "Cindy" => [["Employment status", "Not Employed", "Make sure you answer this question"]]
+      }
 
     # check_step "Tell us more about your household's employment",
     #   ["Employer name", "Acme"],

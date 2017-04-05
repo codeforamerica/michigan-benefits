@@ -49,11 +49,14 @@ class Views::Steps::Show < Views::Base
 
   def member_questions(f)
     step.member_questions.each do |question, (label_text, label_option)|
-      current_user.app.household_members.each do |member|
-        headline(member.name(for_header: true))
+      step.household_members.each do |member|
+        headline_text = member.name(for_header: true)
+        div class: "household-member-group", "data-md5" => md5(headline_text) do
+          headline(headline_text)
 
-        f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
-          question_field(member_fields, question, label_text, label_option)
+          f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
+            question_field(member_fields, question, label_text, label_option)
+          end
         end
       end
     end
@@ -66,7 +69,7 @@ class Views::Steps::Show < Views::Base
         "data-md5" => md5(label_text) do
         question_label(f, question, label_text, label_option)
 
-        current_user.app.household_members.each do |member|
+        step.household_members.each do |member|
           f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
             question_field(member_fields, question, member.first_name.titleize, label_option)
           end
@@ -78,7 +81,7 @@ class Views::Steps::Show < Views::Base
   def member_grouped_questions(f)
     return if step.member_grouped_questions.empty?
 
-    current_user.app.household_members.each do |member|
+    step.household_members.each do |member|
       h4 member.first_name.titleize, class: "step-section-header__headline"
 
       f.fields_for "household_members[]", member, hidden_field_id: true do |member_fields|
@@ -108,7 +111,7 @@ class Views::Steps::Show < Views::Base
   def question_field(f, question, label_text, label_option)
     group_classes = 'form-group'
 
-    if step.errors[question].present?
+    if f.object.errors[question].present?
       group_classes += ' form-group--error'
     end
 

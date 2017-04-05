@@ -14,4 +14,10 @@ class IncomeCurrentlyEmployed < ManyMemberUpdateStep
   self.field_options = {
     employment_status: HouseholdMember::EMPLOYMENT_STATUSES.map(&:to_s)
   }
+
+  def validate_household_member(member)
+    unless member.employment_status.present?
+      member.errors.add(:employment_status, "Make sure you answer this question")
+    end
+  end
 end

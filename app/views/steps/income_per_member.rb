@@ -21,8 +21,7 @@ class Views::Steps::IncomePerMember < Views::Base
             help_text "This includes money withheld from paychecks"
             money_field ff, :pay_quantity
 
-            div do
-              text "per"
+            label "per" do
               select_field ff, :pay_interval, step.pay_intervals
             end
           end
