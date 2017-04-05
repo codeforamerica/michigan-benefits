@@ -132,10 +132,6 @@ describe "applying", js: true do
       "Cindy" => [["Employment status", "Not Employed", "Make sure you answer this question"]]
     }
 
-    # check_step "Tell us more about your household's employment",
-    #   ["Employer name", "Acme"],
-    #   validations: false
-
     expect_page "Tell us more about your household's employment"
     submit
 
@@ -172,7 +168,9 @@ describe "applying", js: true do
       ["Monthly pay", "500", nil]
 
     check_step "Tell us about the assets and money you have on hand.",
-      ["Does your household have any money or accounts?", "Yes", nil]
+      ["Does your household have any money or accounts?", "Yes", "Make sure to answer this question"],
+      ["Does your household own any property or real estate?", "Yes", "Make sure to answer this question"],
+      ["Does your household own any vehicles?", "No", "Make sure to answer this question"]
 
     check_step "Tell us more about those assets.",
       ["In total, how much money does your household have in cash and accounts?", "500", nil]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405201405) do
+ActiveRecord::Schema.define(version: 20170405222214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20170405201405) do
     t.boolean  "utility_phone"
     t.boolean  "utility_other"
     t.boolean  "welcome_sms_sent",                     default: false
+    t.boolean  "has_home"
+    t.boolean  "has_vehicle"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 
