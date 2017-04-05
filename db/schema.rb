@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 20170405222214) do
     t.boolean  "unstable_housing"
     t.string   "signature"
     t.string   "email"
-    t.date     "birthday"
-    t.string   "marital_status"
-    t.integer  "household_size"
     t.boolean  "income_change"
     t.text     "income_change_explanation"
     t.text     "additional_income",                    default: [],                 array: true
+    t.date     "birthday"
+    t.string   "marital_status"
+    t.integer  "household_size"
     t.boolean  "everyone_a_citizen"
     t.boolean  "anyone_disabled"
     t.boolean  "any_new_moms"
@@ -60,8 +60,6 @@ ActiveRecord::Schema.define(version: 20170405222214) do
     t.boolean  "utility_phone"
     t.boolean  "utility_other"
     t.boolean  "welcome_sms_sent",                     default: false
-    t.boolean  "has_home"
-    t.boolean  "has_vehicle"
     t.integer  "income_unemployment"
     t.integer  "income_ssi"
     t.integer  "income_workers_comp"
@@ -69,6 +67,8 @@ ActiveRecord::Schema.define(version: 20170405222214) do
     t.integer  "income_social_security"
     t.integer  "income_foster_care"
     t.integer  "income_other"
+    t.boolean  "has_home"
+    t.boolean  "has_vehicle"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 
