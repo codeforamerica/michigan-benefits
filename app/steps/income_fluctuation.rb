@@ -1,5 +1,6 @@
 class IncomeFluctuation < ManyMemberUpdateStep
   self.title = "Money & Income"
+  self.subhead = "Since their income fluctuates, tell us more about their annual income"
 
   self.member_grouped_questions = {
     expected_income_this_year: "Expected income this year",
