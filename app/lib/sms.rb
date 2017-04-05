@@ -5,7 +5,7 @@ class Sms
 
   def deliver_welcome_message
     deliver <<~TEXT
-      Hi #{@app.applicant.first_name}! It takes ~15 min to finish this application. If you can't finish now, don't worry. Reply to this msg to pick up where you left off.
+      Hi #{@app.applicant.name}! It takes ~15 min to finish this application. If you can't finish now, don't worry. Reply to this msg to pick up where you left off.
 
       Best,
       MDHHS
