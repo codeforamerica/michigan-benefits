@@ -28,6 +28,7 @@ class SignAndSubmit < Step
   def update_app!
     @app.update!(signature: signature)
     FormMailer.submission(form: @app.form).deliver_now
+    Sms.new(@app).deliver_submission_message
   end
 
   def submit_label

@@ -207,6 +207,7 @@ describe "applying", js: true do
     click_on "I'm finished"
 
     expect_application_to_be_submitted
+    expect(FakeTwilioClient.messages.count).to eq 2
   end
 
   def expect_application_to_be_submitted
