@@ -1,20 +1,46 @@
 module StepHelper
-  def check_step(subhead, *questions, household_members: nil, verify: true, validations: true)
+  def check_step(subhead, *questions, verify: true, validations: true)
     log subhead do
       expect_page(subhead)
 
       if validations
         log "Checking validation errors" do
           submit
-          maybe_member_questions(household_members, questions) do |qq|
-            qq.each { |q, _, e| expect_validation_error q, e }
+          expect_validation_errors(questions)
+        end
+      end
+
+      log "Answering questions" do
+        enter_questions(questions)
+        submit
+      end
+
+      if verify
+        log "Verifying that answers were saved" do
+          back
+          verify_questions(questions)
+          submit
+        end
+      end
+    end
+  end
+
+  def check_household_step(subhead, members_and_questions, verify: true, validations: true)
+    log subhead do
+      expect_page(subhead)
+
+      if validations
+        log "Checking validation errors" do
+          submit
+          within_members(members_and_questions) do |questions|
+            expect_validation_errors(questions)
           end
         end
       end
 
       log "Answering questions" do
-        maybe_member_questions(household_members, questions) do |qq|
-          qq.each { |q, a, _| enter(q, a) }
+        within_members(members_and_questions) do |questions|
+          enter_questions(questions)
         end
         submit
       end
@@ -22,8 +48,8 @@ module StepHelper
       if verify
         log "Verifying that answers were saved" do
           back
-          maybe_member_questions(household_members, questions) do |qq|
-            qq.each { |q, a, _| verify(q, a) }
+          within_members(members_and_questions) do |questions|
+            verify_questions(questions)
           end
           submit
         end
@@ -31,16 +57,24 @@ module StepHelper
     end
   end
 
-  def maybe_member_questions(hash, array)
-    if hash
-      hash.each do |member, qq|
-        within_member(member) do
-          yield qq
-        end
+  def within_members(members_and_questions)
+    members_and_questions.each do |member, questions|
+      within_member(member) do
+        yield questions
       end
-    else
-      yield array
     end
+  end
+
+  def verify_questions(questions)
+    questions.each { |q, a, _| verify(q, a) }
+  end
+
+  def enter_questions(questions)
+    questions.each { |q, a, _| enter(q, a) }
+  end
+
+  def expect_validation_errors(questions)
+    questions.each { |q, _, e| expect_validation_error q, e }
   end
 
   def expect_page(subhead)
