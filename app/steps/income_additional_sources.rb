@@ -3,14 +3,14 @@ class IncomeAdditionalSources < Step
   self.subhead = "Check all additional sources of income received by your household, if any."
 
   self.questions = {
-    unemployment: "Unemployment insurance",
+    unemployment: "Unemployment Insurance",
     ssi: "SSI or Disability",
-    workers_comp: "Worker's compensation",
+    workers_comp: "Worker's Compensation",
     pension: "Pension",
     social_security: "Social Security",
     child_support: "Child Support",
     foster_care: "Foster Care or Adoption Subsidies",
-    other: "Other income",
+    other: "Other Income",
   }
 
   self.types = {

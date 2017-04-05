@@ -154,18 +154,22 @@ describe "applying", js: true do
       validations: false
 
     check_step "Check all additional sources of income received by your household, if any.",
-      ["Unemployment insurance", true, nil],
+      ["Unemployment Insurance", true, nil],
       ["SSI or Disability", false, nil],
-      ["Worker's compensation", true, nil],
+      ["Worker's Compensation", true, nil],
       ["Pension", false, nil],
       ["Social Security", true, nil],
       ["Child Support", false, nil],
       ["Foster Care or Adoption Subsidies", true, nil],
-      ["Other income", false, nil],
+      ["Other Income", false, nil],
       validations: false
 
     check_step "Tell us more about your additional income.",
-      ["Monthly pay", "500", nil]
+      ["Unemployment Insurance", "100", "Make sure you answer this question"],
+      ["Worker's Compensation", "200", "Make sure you answer this question"],
+      ["Social Security", "300", "Make sure you answer this question"],
+      ["Foster Care or Adoption Subsidies", "400", "Make sure you answer this question"],
+      validations: false
 
     check_step "Tell us about the assets and money you have on hand.",
       ["Does your household have any money or accounts?", "Yes", "Make sure to answer this question"],

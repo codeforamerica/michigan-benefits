@@ -152,7 +152,7 @@ module StepHelper
               uncheck question
             end
           else
-            raise "Unsupported type: #{type}"
+            fill_in question, with: answer
         end
       end
     end
@@ -180,8 +180,6 @@ module StepHelper
             else
               expect(find("input").checked?).to eq(expected_answer)
             end
-          else
-            raise "Unsupported type: #{type}"
         end
       end
     end

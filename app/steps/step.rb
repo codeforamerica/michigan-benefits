@@ -131,4 +131,8 @@ class Step
   def update_app!
     raise "Implement Me"
   end
+
+  def allowed_params
+    questions.keys
+  end
 end

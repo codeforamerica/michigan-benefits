@@ -66,7 +66,7 @@ class StepsController < ApplicationController
         this_step_params.permit!
       else
         consolidate_multiparam_date_attrs!(this_step_params)
-        this_step_params.permit(@step.questions.keys)
+        this_step_params.permit(@step.allowed_params)
       end
     else
       {}

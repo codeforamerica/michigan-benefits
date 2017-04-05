@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170405222214) do
     t.boolean  "any_medical_bill_help_last_3_months"
     t.boolean  "any_lost_insurance_last_3_months"
     t.boolean  "household_tax"
-    t.integer  "child_support"
+    t.integer  "income_child_support"
     t.boolean  "has_accounts"
     t.integer  "total_money"
     t.integer  "rent_expense"
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 20170405222214) do
     t.boolean  "welcome_sms_sent",                     default: false
     t.boolean  "has_home"
     t.boolean  "has_vehicle"
+    t.integer  "income_unemployment"
+    t.integer  "income_ssi"
+    t.integer  "income_workers_comp"
+    t.integer  "income_pension"
+    t.integer  "income_social_security"
+    t.integer  "income_foster_care"
+    t.integer  "income_other"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 

@@ -25,7 +25,7 @@ class StepNavigation
       IncomePerMember,
       IncomeFluctuation,
       IncomeAdditionalSources,
-      IncomeChildSupport,
+      IncomeAdditional,
       IncomeOtherAssets,
       IncomeOtherAssetsContinued,
     ],

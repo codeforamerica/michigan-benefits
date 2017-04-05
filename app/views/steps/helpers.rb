@@ -65,6 +65,12 @@ module Views::Steps::Helpers
     end
   end
 
+  def question_group(title)
+    div class: "form-questions-group", "data-md5" => md5(title) do
+      yield
+    end
+  end
+
   def question(f, method, title, field_type=nil)
     div class: "form-group",
       "data-md5" => md5(title),
