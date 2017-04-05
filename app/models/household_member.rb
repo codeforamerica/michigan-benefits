@@ -15,6 +15,10 @@ class HouseholdMember < ApplicationRecord
     :dependent_claimed_by_someone_else_living_outside_the_home
   ]
 
+  def income_inconsistent?
+    !income_consistent
+  end
+
   def full_name
     [first_name, last_name].join(" ")
   end

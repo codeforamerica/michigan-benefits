@@ -23,6 +23,7 @@ class StepNavigation
       IncomeChangeExplanation,
       IncomeCurrentlyEmployed,
       IncomePerMember,
+      IncomeFluctuation,
       IncomeAdditionalSources,
       IncomeChildSupport,
       IncomeOtherAssets,

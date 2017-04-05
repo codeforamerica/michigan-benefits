@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404191709) do
+ActiveRecord::Schema.define(version: 20170405201405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 20170404191709) do
     t.boolean  "unstable_housing"
     t.string   "signature"
     t.string   "email"
-    t.boolean  "income_change"
-    t.text     "income_change_explanation"
-    t.text     "additional_income",                    default: [],                 array: true
     t.date     "birthday"
     t.string   "marital_status"
     t.integer  "household_size"
+    t.boolean  "income_change"
+    t.text     "income_change_explanation"
+    t.text     "additional_income",                    default: [],                 array: true
     t.boolean  "everyone_a_citizen"
     t.boolean  "anyone_disabled"
     t.boolean  "any_new_moms"
@@ -103,6 +103,8 @@ ActiveRecord::Schema.define(version: 20170404191709) do
     t.boolean  "is_new_mom"
     t.boolean  "needs_medical_bill_help"
     t.boolean  "is_living_elsewhere"
+    t.integer  "expected_income_this_year"
+    t.integer  "expected_income_next_year"
     t.index ["app_id"], name: "index_household_members_on_app_id", using: :btree
   end
 
