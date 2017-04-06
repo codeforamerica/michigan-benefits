@@ -171,6 +171,15 @@ ol, ul {
   li {
     margin-bottom: .5em;
   }
+
+  &.list--padded {
+    li {
+      margin-bottom: 2em;
+    }
+    li + li {
+      margin-bottom: .5em;
+    }
+  }
 }
 
 .list--numbered {

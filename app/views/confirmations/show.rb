@@ -77,7 +77,7 @@ class Views::Confirmations::Show < Views::Base
       end
 
       div class: "slab" do
-        link_to "Find community services nearby", "/", class: "button button--cta button--full-width text--centered"
+        link_to "Find community services nearby", resource_path, class: "button button--cta button--full-width text--centered"
       end
     end
 
