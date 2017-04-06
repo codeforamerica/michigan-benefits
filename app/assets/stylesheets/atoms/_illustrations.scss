@@ -128,4 +128,10 @@
     width: 236px;
     height: 128px;
   }
+
+  &--confirmation-message {
+    @include retina-bg(confirmation-message, 128px 122px);
+    width: 128px;
+    height: 122px;
+  }
 }
