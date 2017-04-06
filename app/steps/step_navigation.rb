@@ -32,7 +32,8 @@ class StepNavigation
     "Expenses" => [
       ExpensesIntroduction,
       ExpensesHousing,
-      ExpensesAdditionalSources
+      ExpensesAdditionalSources,
+      ExpensesAdditional
     ],
     "Legal" => [
       LegalAgreement,

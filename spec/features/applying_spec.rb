@@ -205,6 +205,16 @@ describe "applying", js: true do
       ["Does your household have court-ordered expenses?", "Yes", "Make sure to answer this question"],
       ["Does your household have tax deductible expenses?", "Yes", "Make sure to answer this question"]
 
+    check_step "Tell us more about the other expenses you listed.",
+      ["In total, how much do you pay in care expenses each month?", "100", "Make sure to answer this question"],
+      ["Childcare", true, nil],
+      ["In total, how much do you pay in medical expenses each month?", "200", "Make sure to answer this question"],
+      ["Transportation", true, nil],
+      ["In total, how much do you pay in court ordered expenses each month?", "300", "Make sure to answer this question"],
+      ["Alimony", true, nil],
+      ["In total, how much do you pay in tax deductible expenses each month?", "400", "Make sure to answer this question"],
+      ["Student loan interest", true, nil]
+
     expect(page).to have_text("Scroll down to agree")
     submit
 

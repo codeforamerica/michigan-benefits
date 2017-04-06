@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405234339) do
+ActiveRecord::Schema.define(version: 20170406140329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(version: 20170405234339) do
     t.boolean  "medical"
     t.boolean  "court_ordered"
     t.boolean  "tax_deductible"
+    t.integer  "monthly_care_expenses"
+    t.text     "care_expenses",                        default: [],                 array: true
+    t.integer  "monthly_medical_expenses"
+    t.text     "medical_expenses",                     default: [],                 array: true
+    t.integer  "monthly_court_ordered_expenses"
+    t.text     "court_ordered_expenses",               default: [],                 array: true
+    t.integer  "monthly_tax_deductible_expenses"
+    t.text     "tax_deductible_expenses",              default: [],                 array: true
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 

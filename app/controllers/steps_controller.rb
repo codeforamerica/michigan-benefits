@@ -36,6 +36,7 @@ class StepsController < ApplicationController
     if @step.valid?
       redirect_to next_path
     else
+      @app = current_app
       render :show
     end
   end

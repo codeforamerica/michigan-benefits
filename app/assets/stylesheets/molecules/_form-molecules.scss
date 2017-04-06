@@ -84,6 +84,10 @@
   &:first-of-type .form-group__headline {
     border-top: 0;
   }
+
+  &--compact {
+    margin-bottom: 0;
+  }
 }
 
 .form-group--error {

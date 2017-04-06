@@ -66,7 +66,7 @@ class IncomeAdditionalSources < Step
 
   def update_app!
     @app.update!(
-      additional_income: checkboxes.select {|c| self.send(c) == "1" }.map(&:to_s),
+      additional_income: check(checkboxes),
     )
   end
 end

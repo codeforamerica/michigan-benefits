@@ -83,7 +83,7 @@ class IncomeOtherAssetsContinued < Step
   def update_app!
     @app.update!(
       total_money: total_money,
-      financial_accounts: checkboxes.select {|c| self.send(c) == "1" }.map(&:to_s)
+      financial_accounts: check(checkboxes)
     )
   end
 end

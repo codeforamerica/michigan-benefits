@@ -96,6 +96,10 @@ class Step
     self.class.to_param
   end
 
+  def check(checkboxes)
+    checkboxes.select { |c| self.send(c) == "1" }.map(&:to_s)
+  end
+
   def update(params)
     assign_attributes(params)
 
