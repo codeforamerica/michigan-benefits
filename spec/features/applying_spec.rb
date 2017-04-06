@@ -220,6 +220,9 @@ describe "applying", js: true do
       ["Email me", true, nil],
       validations: false
 
+    check_step "The next step after you apply is a brief interview with your county.",
+      ["What do you prefer?", "Telephone Interview", "Make sure to answer this question"]
+
     expect(page).to have_text("Scroll down to agree")
     submit
 
