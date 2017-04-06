@@ -35,6 +35,9 @@ class StepNavigation
       ExpensesAdditionalSources,
       ExpensesAdditional
     ],
+    "Preferences" => [
+      PreferencesReminders,
+    ],
     "Legal" => [
       LegalAgreement,
       SignAndSubmit,

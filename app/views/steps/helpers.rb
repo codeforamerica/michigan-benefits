@@ -71,8 +71,10 @@ module Views::Steps::Helpers
     end
   end
 
-  def question(f, method, title, field_type=nil)
-    div class: "form-group",
+  def question(f, method, title, field_type=nil, margin: true)
+    class_names = CssClasses.new("form-group")
+    class_names << "no-bottom-space" unless margin
+    div class: class_names,
       "data-md5" => md5(title),
       "data-field-type" => field_type do
       f.label method, title, class: "form-question" if f && title

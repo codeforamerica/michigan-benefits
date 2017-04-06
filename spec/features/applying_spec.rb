@@ -215,6 +215,11 @@ describe "applying", js: true do
       ["In total, how much do you pay in tax deductible expenses each month?", "400", "Make sure to answer this question"],
       ["Student loan interest", true, nil]
 
+    check_step "We'll make sure you don't miss a thing. Tell us how to follow up with you.",
+      ["Text message me", true, nil],
+      ["Email me", true, nil],
+      validations: false
+
     expect(page).to have_text("Scroll down to agree")
     submit
 

@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 20170406140329) do
     t.text     "court_ordered_expenses",               default: [],                 array: true
     t.integer  "monthly_tax_deductible_expenses"
     t.text     "tax_deductible_expenses",              default: [],                 array: true
+    t.boolean  "sms_reminders"
+    t.boolean  "email_reminders"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 
