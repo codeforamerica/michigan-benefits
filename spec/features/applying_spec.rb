@@ -199,6 +199,12 @@ describe "applying", js: true do
       ["How much do you pay in property tax each month?", "100", "Make sure to answer this question"],
       ["How much do you pay in insurance each month?", "20", "Make sure to answer this question"]
 
+    check_step "Tell us more about your expenses.",
+      ["Does your household have dependent care expenses?", "Yes", "Make sure to answer this question"],
+      ["Does your household have medical expenses?", "Yes", "Make sure to answer this question"],
+      ["Does your household have court-ordered expenses?", "Yes", "Make sure to answer this question"],
+      ["Does your household have tax deductible expenses?", "Yes", "Make sure to answer this question"]
+
     expect(page).to have_text("Scroll down to agree")
     submit
 
