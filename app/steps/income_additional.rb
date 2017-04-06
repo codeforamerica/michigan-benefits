@@ -10,9 +10,14 @@ class IncomeAdditional < Step
     :income_pension,
     :income_social_security,
     :income_foster_care,
-    :income_other]
+    :income_other
+  ]
 
   attr_accessor *ATTRS
+
+  def skip?
+    ATTRS.none? { |attr| @app.additional_income.include?(attr.to_s.remove("income_")) }
+  end
 
   def allowed_params
     ATTRS.map(&:to_s)
