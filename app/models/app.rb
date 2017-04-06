@@ -5,6 +5,11 @@ class App < ApplicationRecord
 
   delegate :full_name, to: :user
 
+  PREFERENCES_FOR_INTERVIEW = [
+    "Telephone interview",
+    "In-person interview"
+  ]
+
   def applicant
     household_members.find_or_create_by!(relationship: 'self')
   end
