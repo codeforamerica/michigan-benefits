@@ -115,7 +115,7 @@ module Views::Steps::Helpers
     errors f, method
   end
 
-  def text_area_field(f, method, placeholder)
+  def text_area_field(f, method, placeholder=nil)
     f.text_area method,
       placeholder: placeholder,
       class: 'textarea'
@@ -190,6 +190,6 @@ module Views::Steps::Helpers
   end
 
   def md5(s)
-    Digest::MD5.hexdigest(s)
+    s.nil? ? nil : Digest::MD5.hexdigest(s)
   end
 end

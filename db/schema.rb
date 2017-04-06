@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406183835) do
+ActiveRecord::Schema.define(version: 20170406224506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170406183835) do
     t.integer  "monthly_tax_deductible_expenses"
     t.text     "tax_deductible_expenses",              default: [],                 array: true
     t.string   "preference_for_interview"
+    t.text     "anything_else"
     t.index ["user_id"], name: "index_apps_on_user_id", using: :btree
   end
 

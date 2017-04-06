@@ -225,6 +225,8 @@ describe "applying", js: true do
     check_step "The next step after you apply is a brief interview with your county.",
       ["What do you prefer?", "Telephone Interview", "Make sure to answer this question"]
 
+    static_step "Is there anything else you'd like us to know about your situation?"
+
     expect(page).to have_text("Scroll down to agree")
     submit
 

@@ -38,7 +38,8 @@ class StepNavigation
     "Preferences" => [
       PreferencesReminders,
       PreferencesRemindersConfirmation,
-      PreferencesForInterview
+      PreferencesForInterview,
+      PreferencesAnythingElse,
     ],
     "Legal" => [
       LegalAgreement,
