@@ -55,7 +55,7 @@ class Views::Confirmations::Show < Views::Base
         div class: "card card--narrow" do
           h4 "What to expect:", class: "step-section-header__headline"
 
-          ul class: "list--bulleted" do
+          ul class: "list--bulleted list--padded" do
             li do
               b "Your local office will call you in the next week for your phone interview."
               text " The call may come from a blocked number."

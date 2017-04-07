@@ -21,7 +21,7 @@ class Views::Steps::HouseholdIntroduction < Views::Base
   end
 
   def list(*items)
-    ul class: "list--bulleted" do
+    ul class: "list--bulleted list--padded" do
       items.each do |item|
         li do
           b item.first
