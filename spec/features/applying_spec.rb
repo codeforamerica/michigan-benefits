@@ -56,7 +56,7 @@ describe "applying", js: true do
       ["What is your social security number?", "123-45-6789", nil],
       ["How many people are in your household?", "3", nil]
 
-    click_on "Add a household member"
+    click_on "Add a member"
 
     check_step "Tell us about another person you are applying with.",
       ["What is their first name?", "Cindy", nil],
@@ -69,7 +69,7 @@ describe "applying", js: true do
       validations: false,
       verify: false
 
-    click_on "Add a household member"
+    click_on "Add a member"
 
     check_step "Tell us about another person you are applying with.",
       ["What is their first name?", "Billy", nil],

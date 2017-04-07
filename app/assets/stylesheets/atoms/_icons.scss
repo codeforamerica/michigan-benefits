@@ -52,6 +52,11 @@
   top: .1em;
 }
 
+.icon-check--color {
+  @extend .icon-check;
+  color: $color-green;
+}
+
 
 // Paste style.css file from icomoon here
 
