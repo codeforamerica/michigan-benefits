@@ -42,13 +42,20 @@ class Sms
     return undeliverable("TWILIO_PHONE_NUMBER not present") unless twilio_phone_number.present?
     return undeliverable("app does not accept text messages") unless @app.accepts_text_messages
     return undeliverable("app does not have a phone number") unless @app.phone_number.present?
-    return undeliverable("whitelist does not include phone number") unless whitelist.include?(@app.phone_number)
+
+    if whitelist?
+      return undeliverable("whitelist does not include phone number") unless whitelist.include?(@app.phone_number)
+    end
 
     true
   end
 
+  def whitelist?
+    ENV.has_key? "TWILIO_RECIPIENT_WHITELIST"
+  end
+
   def whitelist
-    ENV.fetch("TWILIO_RECIPIENT_WHITELIST", "").split
+    ENV["TWILIO_RECIPIENT_WHITELIST"].split
   end
 
   def undeliverable(message)
