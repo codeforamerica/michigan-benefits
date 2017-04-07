@@ -198,14 +198,15 @@ describe "applying", js: true do
       ["Does your household have tax deductible expenses?", "Yes", "Make sure to answer this question"]
 
     check_step "Tell us more about the other expenses you listed.",
-      ["In total, how much do you pay in care expenses each month?", "100", "Make sure to answer this question"],
+      ["In total, how much do you pay in care expenses each month?", "100", nil],
       ["Childcare", true, nil],
-      ["In total, how much do you pay in medical expenses each month?", "200", "Make sure to answer this question"],
+      ["In total, how much do you pay in medical expenses each month?", "200", nil],
       ["Transportation", true, nil],
-      ["In total, how much do you pay in court ordered expenses each month?", "300", "Make sure to answer this question"],
+      ["In total, how much do you pay in court ordered expenses each month?", "300", nil],
       ["Alimony", true, nil],
-      ["In total, how much do you pay in tax deductible expenses each month?", "400", "Make sure to answer this question"],
-      ["Student loan interest", true, nil]
+      ["In total, how much do you pay in tax deductible expenses each month?", "400", nil],
+      ["Student loan interest", true, nil],
+      validations: false
 
     check_step "We'll make sure you don't miss a thing. Tell us how to follow up with you.",
       ["Text message me", true, nil],

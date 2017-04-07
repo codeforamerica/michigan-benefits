@@ -26,13 +26,6 @@ class ExpensesAdditional < Step
 
   attr_accessor *ATTRS
 
-  validates \
-    :monthly_care_expenses,
-    :monthly_medical_expenses,
-    :monthly_court_ordered_expenses,
-    :monthly_tax_deductible_expenses,
-    presence: { message: "Make sure to answer this question" }
-
   def allowed_params
     ATTRS.map(&:to_s)
   end
