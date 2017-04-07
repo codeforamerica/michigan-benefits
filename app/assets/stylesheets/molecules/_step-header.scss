@@ -15,9 +15,12 @@
   &__back-link {
     color: inherit;
     text-decoration: none;
-    margin-left: 0.5rem;
+    margin-left: 0;
     position: relative;
-    top: -4px;
+    top: 2px;
+    height: 40px;
+    width: 40px;
+    padding: 6px 10px;
 
     &:active, &:visited {
       color: inherit;
@@ -26,7 +29,7 @@
 
   &__title {
     margin: 0;
-    margin-left: 1.5rem;
+    margin-left: 10px;
     font-size: $font-size-small;
   }
 
