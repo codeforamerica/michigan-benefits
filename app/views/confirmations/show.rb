@@ -58,19 +58,19 @@ class Views::Confirmations::Show < Views::Base
           ul class: "list--bulleted list--padded" do
             li do
               b "Your local office will call you in the next week for your phone interview."
-              text " The call may come from a blocked number."
+              span " The call may come from a blocked number."
             end
             li do
               b "The interview will take about 30 minutes. "
-              text "A worker will ask you about your household, income, expenses, and other eligibility requirements."
+              span "A worker will ask you about your household, income, expenses, and other eligibility requirements."
             end
             li do
               b "Your county will provide you with a list of documents "
-              text "that you will need to submit within 30 days from today to verify your eligibility. You can submit documents any time at michigan.gov/docs"
+              span "that you will need to submit within 30 days from today to verify your eligibility. You can submit documents any time at michigan.gov/docs"
             end
             li do
               b "We’ll occassionally follow up with you"
-              text " by text message and email to help you through the rest of the 30-day process."
+              span " by text message and email to help you through the rest of the 30-day process."
             end
           end
         end

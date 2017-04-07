@@ -13,11 +13,11 @@ class Views::Documents::Index < Views::Base
       TEXT
 
       ul class: "list--bulleted" do
-        li "Copy of your ID"
-        li "Pay stubs (from the last 30 days)"
-        li "Checking account statement"
-        li "Rent receipt"
-        li "Child care receipt"
+        li { span "Copy of your ID" }
+        li { span "Pay stubs (from the last 30 days)" }
+        li { span "Checking account statement" }
+        li { span "Rent receipt" }
+        li { span "Child care receipt" }
       end
 
       p <<-TEXT, class: "text--help"

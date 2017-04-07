@@ -19,17 +19,4 @@ class Views::Steps::IncomeIntroduction < Views::Base
       TEXT
     end
   end
-
-  def list(*items)
-    ul class: "list--bulleted" do
-      items.each do |item|
-        li do
-          b item.first
-          br
-          span item.last, class: "text--small"
-        end
-      end
-    end
-  end
-
 end
