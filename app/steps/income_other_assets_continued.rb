@@ -53,11 +53,6 @@ class IncomeOtherAssetsContinued < Step
     :stocks,
     :trusts
 
-  validates \
-    :total_money,
-    presence: { message: "Make sure to answer this question" }
-
-
   def skip?
     ! @app.has_accounts
   end

@@ -176,16 +176,7 @@ describe "applying", js: true do
       ["Does your household own any property or real estate?", "Yes", "Make sure to answer this question"],
       ["Does your household own any vehicles?", "No", "Make sure to answer this question"]
 
-    check_step "Tell us more about those assets.",
-      ["In total, how much money does your household have in cash and accounts?", "500", nil],
-      ["Checking account", true, nil],
-      ["Savings account", true, nil],
-      ["401k", true, nil],
-      ["Life insurance", true, nil],
-      ["IRAs", true, nil],
-      ["Mutual funds", true, nil],
-      ["Stocks", true, nil],
-      ["Trusts", true, nil]
+    static_step "Tell us more about those assets."
 
     expect_page "Next, describe your household expenses."
     submit
