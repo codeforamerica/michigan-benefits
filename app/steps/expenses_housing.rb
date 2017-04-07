@@ -15,12 +15,6 @@ class ExpensesHousing < Step
     :utility_phone,
     :utility_other
 
-  validates \
-    :rent_expense,
-    :property_tax_expense,
-    :insurance_expense,
-    presence: { message: "Make sure to answer this question" }
-
   self.questions = {
     rent_expense: "How much does your household pay in rent or mortgage each month?",
     property_tax_expense: "How much do you pay in property tax each month?",

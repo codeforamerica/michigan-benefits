@@ -197,7 +197,8 @@ describe "applying", js: true do
     check_step "Tell us about your housing expenses.",
       ["How much does your household pay in rent or mortgage each month?", "300", "Make sure to answer this question"],
       ["How much do you pay in property tax each month?", "100", "Make sure to answer this question"],
-      ["How much do you pay in insurance each month?", "20", "Make sure to answer this question"]
+      ["How much do you pay in insurance each month?", "20", "Make sure to answer this question"],
+      validations: false
 
     check_step "Tell us more about your expenses.",
       ["Does your household have dependent care expenses?", "Yes", "Make sure to answer this question"],
