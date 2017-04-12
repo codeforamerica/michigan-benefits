@@ -1,4 +1,4 @@
-$active-field-color: $color-sky;
+$active-field-color: $color-light-grey;
 
 fieldset {
   border: 0;
@@ -70,7 +70,6 @@ label {
   &.is-selected {
     background-color: $active-field-color;
     border-color: $active-field-color;
-    color: #fff;
   }
 }
 
@@ -99,7 +98,6 @@ label {
   &.is-selected {
     background-color: $active-field-color;
     border-color: $active-field-color;
-    color: #fff;
   }
 }
 
