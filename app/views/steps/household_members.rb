@@ -19,7 +19,7 @@ class Views::Steps::HouseholdMembers < Views::Base
         end
       end
 
-      link_to step_path(HouseholdAddMember.to_param), class: "button button--full-width" do
+      link_to step_path(HouseholdAddMember.to_param), class: "button button--full-width button--bold" do
         i class: "button__icon--left icon-add"
         text "Add a member"
       end
