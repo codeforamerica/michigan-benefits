@@ -2,6 +2,7 @@ class Views::Resources::Show < Views::Base
   def content
     content_for :template_name, "step"
     content_for :header_title, "Other Resources"
+    content_for :back_path, confirmations_path
 
     div class: "form-card", style: "padding-top: 4em" do
       div class: "slab step-section-header slab--white" do
