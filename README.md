@@ -40,6 +40,12 @@ Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen
 * Run tests: `citizen test`
 * Pull, run tests, push: `citizen pushit`
 
+### Deploying
+
+* [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits) is currently set up to 
+  deploy green builds to **staging**.
+* Use `citizen promote` to promote from staging to **production**. If you want to promote
+  from the Heroku web page or CLI, be sure to run migrations afterwards. 
 
 ### Debugging
 
