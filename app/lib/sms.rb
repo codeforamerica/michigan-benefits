@@ -5,9 +5,7 @@ class Sms
 
   def deliver_welcome_message
     deliver <<~TEXT
-      Hi #{@app.applicant.name}! It takes ~15 min to finish this application. \
-      If you can't finish now, don't worry. Reply to this msg to pick up where \
-      you left off.
+      Hi #{@app.applicant.name}! It takes ~15 min to finish this application. If you can't finish now, don't worry. Reply to this msg to pick up where you left off.
 
       Best,
       MDHHS
@@ -16,9 +14,7 @@ class Sms
 
   def deliver_submission_message
     deliver <<~TEXT
-      Your application for Healthcare Coverage & Food Assistance was \
-      submitted! The next step: an interview w/ MDHSS staff. Reply to this msg \
-      any time for more info.
+      Your application for Healthcare Coverage & Food Assistance was submitted! The next step: an interview w/ MDHSS staff. Reply to this msg any time for more info.
     TEXT
   end
 
