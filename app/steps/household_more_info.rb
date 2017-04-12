@@ -12,22 +12,7 @@ class HouseholdMoreInfo < Step
   }
 
   self.help_messages = {
-    anyone_disabled: <<~HTML.html_safe,
-      This includes physical, mental, or emotional health challenges.
-      <br>
-      <span class='label label--healthcare'>Healthcare</span>
-    HTML
-    any_new_moms: <<~HTML.html_safe,
-      <span class='label label--healthcare'>Healthcare</span>
-    HTML
-    anyone_in_college: <<~HTML.html_safe,
-      <span class='label label--healthcare'>Healthcare</span>
-    HTML
-    anyone_living_elsewhere: <<~HTML.html_safe,
-      <span class='label label--healthcare'>Healthcare</span>
-      +
-      <span class='label label--food-assistance'>Food Assistance</span>
-    HTML
+    anyone_disabled: "This includes physical, mental, or emotional health challenges.",
   }
 
   self.types = {

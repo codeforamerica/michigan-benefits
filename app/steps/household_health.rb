@@ -8,15 +8,10 @@ class HouseholdHealth < Step
   }
 
   self.help_messages = {
-    any_medical_bill_help_last_3_months: <<~HTML.html_safe,
-      <span class='label label--healthcare'>Healthcare</span>
-    HTML
     any_lost_insurance_last_3_months: <<~HTML.html_safe,
       Including Medicaid, CHIP/MIChild, Medicare, VA Healthcare Programs, 
       Peace Corps, Employer Insurance, TRICARE (unless you have direct care or 
       Line of Duty), and Other.
-      <br>
-      <span class='label label--healthcare'>Healthcare</span>
     HTML
   }
 
