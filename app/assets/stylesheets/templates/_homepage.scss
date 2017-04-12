@@ -82,7 +82,7 @@
     }
   }
 
-  @for $i from 1 through 4 {
+  @for $i from 1 through 3 {
     .slab--hero-#{$i} {
       &:before {
         background-image: image-url('hero-#{$i}-mobile');
