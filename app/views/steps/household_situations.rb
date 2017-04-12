@@ -24,13 +24,6 @@ class Views::Steps::HouseholdSituations < Views::Base
         app.household_members
     end
 
-    if app.any_medical_bill_help
-      household_question f,
-        :needs_medical_bill_help,
-        "Who needs help paying for recent medical bills?",
-        app.household_members
-    end
-
     if app.anyone_in_college
       household_question f,
         :in_college,

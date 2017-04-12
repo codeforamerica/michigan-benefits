@@ -6,7 +6,6 @@ class HouseholdSituations < ManyMemberUpdateStep
     @app.everyone_a_citizen &&
       ! @app.anyone_disabled &&
       ! @app.any_new_moms &&
-      ! @app.any_medical_bill_help &&
       ! @app.anyone_in_college &&
       ! @app.anyone_living_elsewhere
   end

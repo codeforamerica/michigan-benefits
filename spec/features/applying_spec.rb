@@ -87,7 +87,6 @@ describe "applying", js: true do
       ["Is each person a citizen?", "No", nil],
       ["Does anyone have a disability?", "Yes", nil],
       ["Is anyone pregnant or has been pregnant recently?", "Yes", nil],
-      ["Does anyone need help paying for recent medical bills?", "Yes", nil],
       ["Is anyone enrolled in college?", "Yes", nil],
       ["Is anyone temporarily living outside the home?", "Yes", nil]
 
@@ -95,7 +94,6 @@ describe "applying", js: true do
       ["Who is a citizen?", ["Billy"], nil],
       ["Who has a disability?", ["Cindy"], nil],
       ["Who is pregnant or has been pregnant recently?", ["Cindy"], nil],
-      ["Who needs help paying for recent medical bills?", ["Alice"], nil],
       ["Who is enrolled in college?", ["Alice", "Billy"], nil],
       ["Who is temporarily living outside the home?", ["Alice", "Billy"], nil],
       validations: false
