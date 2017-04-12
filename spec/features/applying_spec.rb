@@ -101,8 +101,8 @@ describe "applying", js: true do
       validations: false
 
     check_step "Tell us about your household health coverage in the past 3 months.",
-      ["Does anyone need help paying for medical bills from the past 3 months?", "No", "Make sure to answer this question"],
-      ["Did anyone have insurance through a job and lose it in the last 3 months?", "No", "Make sure to answer this question"],
+      ["Does anyone need help paying for medical bills from the past 3 months?", "Yes", "Make sure to answer this question"],
+      ["Did anyone have insurance through a job and lose it in the last 3 months?", "Yes", "Make sure to answer this question"],
       validations: false
 
     expect_page "Ok, let us know which people these situations apply to."
