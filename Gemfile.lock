@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:citizencode/citizen-scripts.git
-  revision: 212166075e097fce4920ea9111405b5bca69ec56
+  remote: git://github.com/citizencode/citizen-scripts.git
+  revision: 725afd6ebf692ae7f6b2fb824fc7c5eec54760e7
   specs:
     citizen-scripts (1.1.1)
 

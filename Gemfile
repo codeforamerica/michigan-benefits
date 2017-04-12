@@ -50,7 +50,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "citizen-scripts", git: "git@github.com:citizencode/citizen-scripts.git"
+  gem "citizen-scripts", github: "citizencode/citizen-scripts"
   gem "html2fortitude"
   gem "listen", "~> 3.0.5"
   gem "meta_request"
