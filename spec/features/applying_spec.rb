@@ -53,8 +53,7 @@ describe "applying", js: true do
     check_step "Provide us with some personal details.",
       ["What is your sex?", "Female", "Make sure to answer this question."],
       ["What is your marital status?", "Single", "Make sure to answer this question."],
-      ["What is your social security number?", "123-45-6789", nil],
-      ["How many people are in your household?", "3", nil]
+      ["What is your social security number?", "123-45-6789", nil]
 
     click_on "Add a member"
 
