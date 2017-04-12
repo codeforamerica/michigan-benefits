@@ -1,4 +1,10 @@
 .template--homepage {
+  #fold {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+
   .already-started {
     a.button {
       display: block;

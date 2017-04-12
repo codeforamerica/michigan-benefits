@@ -7,21 +7,15 @@ class Views::Users::New < Views::Base
     div class: "slab slab--hero slab--hero-#{rand(1..4)}" do
       div class: "illustration--michigan-gov"
       h1 "Get the support your family needs"
-      p "Apply for Michigan Assistance Programs in 15 min"
+      p "Apply for Michigan Assistance Programs in 15 minutes"
 
-      div do
-        link_to "Start Now",
-          "#apply-for-programs",
-          class: "button button--cta button--block"
-      end
-
-      if current_user
-        link_to "Resume an application",
-          step_path(Step.first.to_param),
-          class: "text--small",
-          style: "color: white"
+      link_to "#fold", id: "fold" do
+        i class: "icon-below-the-fold"
       end
     end
+
+    apply_form
+    already_started
 
     div class: "slab slab--mdhhs" do
       h1 do
@@ -34,8 +28,6 @@ class Views::Users::New < Views::Base
       TEXT
     end
 
-    apply_form
-    already_started
     render partial: "shared/footer"
   end
 
