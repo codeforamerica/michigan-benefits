@@ -14,4 +14,8 @@ class HouseholdTaxHow < ManyMemberUpdateStep
   self.field_options = {
     filing_status: HouseholdMember::FILING_STATUSES.map(&:to_s)
   }
+
+  def skip?
+    ! @app.household_tax
+  end
 end

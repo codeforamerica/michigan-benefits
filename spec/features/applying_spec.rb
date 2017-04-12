@@ -109,7 +109,7 @@ describe "applying", js: true do
     submit
 
     check_step "",
-      ["Does anyone plan to file a federal tax return next year?", "No", "Make sure to answer this question"],
+      ["Does anyone plan to file a federal tax return next year?", "Yes", "Make sure to answer this question"],
       validations: false
 
     expect_page "Describe how your household files taxes."
