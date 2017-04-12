@@ -20,14 +20,11 @@ class IntroductionContactInformation < Step
     zip: "ZIP"
   }
 
-  self.overviews = {
-    street_address: "Where can we send you mail?"
-  }
-
   self.help_messages = {
     email: "If you don’t have one or you don’t want to receive emails "\
       "from us you can leave this blank.",
-    street_address: "This can be a street address or P.O. Box."
+    street_address: "This can be a street address or P.O. Box. If you don’t have a mailing address right now, that’s okay, just use ours:
+4800 Collins Rd, Lansing, 48924"
   }
 
   self.types = {
@@ -38,7 +35,7 @@ class IntroductionContactInformation < Step
   self.section_headers = {
     phone_number: "Phone",
     email: "Email",
-    street_address: "Mail"
+    street_address: "Where can we send you mail?"
   }
 
   attr_accessor \
@@ -61,12 +58,11 @@ class IntroductionContactInformation < Step
     length: { is: 10, message: "Make sure your phone number is 10 digits long" }
 
   validates :zip,
-    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" }
+    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" },
+    allow_blank: true
 
   validates \
     :accepts_text_messages,
-    :street_address,
-    :city,
     :mailing_address_same_as_home_address,
     presence: { message: "Make sure to answer this question" }
 
