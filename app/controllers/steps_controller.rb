@@ -20,7 +20,7 @@ class StepsController < ApplicationController
 
     if @step.skip?
       if going_backwards?
-        redirect_to previous_path
+        redirect_to previous_path(rel: "back")
       else
         redirect_to next_path
       end
@@ -51,8 +51,8 @@ class StepsController < ApplicationController
     step_path(@step.next.to_param)
   end
 
-  def previous_path
-    step_path(@step.previous.to_param)
+  def previous_path(params=nil)
+    step_path(@step.previous.to_param, params)
   end
 
   def going_backwards?
