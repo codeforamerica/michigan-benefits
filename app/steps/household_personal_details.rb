@@ -16,7 +16,7 @@ class HouseholdPersonalDetails < Step
   }
 
   self.help_messages = {
-    sex: "As it appears on your birth certificate",
+    sex: "As it appears on your driver’s license",
     ssn: "If you don't have one or don't want to answer now it's okay to skip this",
   }
 
