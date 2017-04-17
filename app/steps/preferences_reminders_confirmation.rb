@@ -10,10 +10,6 @@ class PreferencesRemindersConfirmation < Step
 
   validates :email, presence: { message: "Make sure to answer this question" }
 
-  def subhead_help
-    "We'll send text messages to you at <b>#{number_to_phone @app.phone_number}</b>.".html_safe
-  end
-
   def assign_from_app
     assign_attributes @app.attributes.slice(*%w[
       email
@@ -28,5 +24,9 @@ class PreferencesRemindersConfirmation < Step
     @app.update!(
       email: email
     )
+  end
+
+  def skip?
+    ! @app.sms_reminders? && ! @app.email_reminders?
   end
 end
