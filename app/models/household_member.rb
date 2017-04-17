@@ -12,7 +12,8 @@ class HouseholdMember < ApplicationRecord
   FILING_STATUSES = [
     :primary_tax_filer,
     :spouse_to_primary_filer,
-    :dependent_claimed_by_someone_else_living_outside_the_home
+    :dependent_claimed_by_someone_else_living_outside_the_home,
+    :i_do_not_know
   ]
 
   def income_inconsistent?
