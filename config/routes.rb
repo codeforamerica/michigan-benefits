@@ -10,8 +10,17 @@ Rails.application.routes.draw do
       get :clear, to: "sessions#destroy"
     end
   end
-  resources :steps, only: %i[index show update]
   resources :users, only: %i[new create]
+
+  scope :steps do
+    get '/introduction-introduce-yourself',
+      to: 'introduction_introduce_yourself#edit'
+
+    post '/introduction-introduce-yourself',
+      to: 'introduction_introduce_yourself#update'
+  end
+
+  resources :steps, only: %i[index show update]
 
   get "/form", to: "forms#show"
   get "/styleguide", to: "styleguides#index"

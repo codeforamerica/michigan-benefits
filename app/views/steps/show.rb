@@ -30,7 +30,7 @@ class Views::Steps::Show < Views::Base
 
   def back_path
     if step.previous
-      step_path(step.previous.to_param)
+      path_to_step(step.previous)
     else
       root_path
     end
