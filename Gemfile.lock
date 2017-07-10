@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/citizencode/citizen-scripts.git
+  remote: https://github.com/citizencode/citizen-scripts
   revision: c671dcd228b2f55bcad6a0221269dda2b41f5f46
   specs:
     citizen-scripts (1.1.1)
@@ -357,7 +357,7 @@ DEPENDENCIES
   xray-rails
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.4.1p111
 
 BUNDLED WITH
    1.15.1

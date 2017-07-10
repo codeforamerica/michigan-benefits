@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.3.1"
+ruby "2.4.1"
 
 gem "awesome_print"
 gem "aws-sdk"
@@ -50,7 +50,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "citizen-scripts", github: "citizencode/citizen-scripts"
+  gem "citizen-scripts", git: "https://github.com/citizencode/citizen-scripts"
   gem "html2fortitude"
   gem "listen", "~> 3.0.5"
   gem "meta_request"
