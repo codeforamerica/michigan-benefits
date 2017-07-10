@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/citizencode/citizen-scripts.git
-  revision: 725afd6ebf692ae7f6b2fb824fc7c5eec54760e7
+  revision: c671dcd228b2f55bcad6a0221269dda2b41f5f46
   specs:
     citizen-scripts (1.1.1)
 
@@ -360,4 +360,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
