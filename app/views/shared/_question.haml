@@ -5,10 +5,11 @@
   - when :text_field
     = f.text_field method, placeholder: placeholder, class: "text-input"
   - when :yes_no
-    = f.label class: 'radio-button' do
+    %label.radio-button
       = f.radio_button method, 'true'
       Yes
-    = f.label class: 'radio-button' do
+
+    %label.radio-button
       = f.radio_button method, 'false'
       No
 
