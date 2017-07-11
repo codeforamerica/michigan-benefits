@@ -5,7 +5,7 @@
     -# TODO: Reconcile this with section_header in app/views/steps/helpers.rb
     %header.form-card__header
       .step-section-header
-        %h3.step-section-header__subhead Tell us the best ways to reach you.
+        .step-section-header__subhead Tell us the best ways to reach you.
 
     .form-card__content
       = render 'shared/question',
@@ -55,7 +55,4 @@
         type: :yes_no,
         method: :mailing_address_same_as_home_address
 
-    %footer.form-card__footer
-      %button.button.button--cta.button--full-width(type="submit")
-        Continue
-        %i.button__icon.icon-arrow_forward
+    = render partial: 'shared/next_step'

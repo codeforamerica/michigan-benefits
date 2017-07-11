@@ -5,9 +5,9 @@
     -# TODO: Reconcile this with section_header in app/views/steps/helpers.rb
     %header.form-card__header
       .step-section-header
-        .step-section-header__icon.illustration.illustration--hello
-        %h4.step-section-header__headline We're here to help.
-        %h3.step-section-header__subhead To start, please introduce yourself.
+        - icon :hello
+        .step-section-header__headline We're here to help.
+        .step-section-header__subhead To start, please introduce yourself.
 
     .form-card__content
       = render 'shared/question',
@@ -24,7 +24,4 @@
         method: :last_name,
         placeholder: "Last name"
 
-    %footer.form-card__footer
-      %button.button.button--cta.button--full-width(type="submit")
-        Continue
-        %i.button__icon.icon-arrow_forward
+    = render partial: 'shared/next_step'
