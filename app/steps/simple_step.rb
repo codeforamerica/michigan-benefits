@@ -6,8 +6,12 @@ class SimpleStep
   # TODO: We should be using a path helper here because this info exists here and
   # in routes.rb
   def self.path
-    "/steps/#{name.underscore.dasherize}"
+    "/steps/#{to_param}"
   end
 
   delegate :path, to: :class
+
+  def self.to_param
+    name.underscore.dasherize
+  end
 end
