@@ -58,6 +58,7 @@ group :development do
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
   gem "spring"
+  gem 'spring-commands-rspec'
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console"
   gem "xray-rails"
