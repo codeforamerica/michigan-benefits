@@ -210,7 +210,7 @@ describe "applying", js: true do
       ["Email me", true, nil],
       validations: false
 
-    check_step "Great! You'll receive a confirmation message soon."
+    static_step "Great! You'll receive a confirmation message soon."
 
     check_step "The next step after you apply is a brief interview with your county.",
       ["What do you prefer?", "Telephone Interview", "Make sure to answer this question"]
