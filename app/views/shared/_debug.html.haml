@@ -1,8 +1,8 @@
 - if Rails.env.development?
   .debug
-    = StepNavigation.new(step).progress
+    = StepNavigation.new(@step).progress
     |
-    = step.class.name
+    = @step.class.name
     | app
     = current_user.app.id
     |

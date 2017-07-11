@@ -2,13 +2,13 @@
 
 - content_for :step_header do
   .step-header
-    = link_to "#{back_path(@step)}?rel=back", class: 'step-header__back-link' do
+    = link_to "#{back_path}?rel=back", class: 'step-header__back-link' do
       %i.button__icon.icon-arrow_back
 
     %h4.step-header__title
       = content_for :header_title
 
-  = render 'shared/debug', step: @step
+  = render 'shared/debug'
 
 - content_for :footer do
   = render 'shared/footer'
