@@ -1,4 +1,5 @@
-class IntroductionContactInformation < Step
+class IntroductionContactInformation < SimpleStep
+=begin
   self.title = "Introduction"
   self.subhead = "Tell us the best ways to reach you."
 
@@ -37,14 +38,15 @@ class IntroductionContactInformation < Step
     email: "Email",
     street_address: "Where can we send you mail?"
   }
+=end
 
   attr_accessor \
     :phone_number,
     :accepts_text_messages,
     :email,
-    :street_address,
-    :city,
-    :zip,
+    :mailing_street,
+    :mailing_city,
+    :mailing_zip,
     :mailing_address_same_as_home_address
 
   validates :email,
@@ -57,7 +59,7 @@ class IntroductionContactInformation < Step
   validates :phone_number,
     length: { is: 10, message: "Make sure your phone number is 10 digits long" }
 
-  validates :zip,
+  validates :mailing_zip,
     length: { is: 5, message: "Make sure your ZIP code is 5 digits long" },
     allow_blank: true
 
@@ -68,6 +70,7 @@ class IntroductionContactInformation < Step
 
   before_validation :strip_non_digits_from_phone_number
 
+=begin
   def assign_from_app
     assign_attributes(
       phone_number: @app.phone_number,
@@ -97,8 +100,9 @@ class IntroductionContactInformation < Step
       @app.update! welcome_sms_sent: true
     end
   end
+=end
 
   def strip_non_digits_from_phone_number
-    self.phone_number = phone_number.remove /[^\d]/
+    self.phone_number = phone_number.remove(/[^\d]/)
   end
 end

@@ -1,18 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controller do
-  let(:current_app) do
+  let!(:current_app) do
     App.create!(user: @member)
   end
 
   describe '#edit' do
     before do
       current_app.applicant.update(first_name: 'bob', last_name: 'smith')
-    end
-
-    it 'assigns the application' do
-      get :edit
-      expect(assigns(:current_app)).to eq(current_app)
     end
 
     it 'assigns the correct step' do
@@ -34,7 +29,7 @@ RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controll
   describe '#update' do
     it 'updates the applicant if the step is valid' do
       expect {
-        post :update, params: {
+        put :update, params: {
           step: {
             first_name: 'bob',
             last_name: 'smith'
@@ -46,7 +41,7 @@ RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controll
     end
 
     it 'redirects to the next step if the step is valid' do
-      post :update, params: {
+      put :update, params: {
         step: {
           first_name: 'bob',
           last_name: 'smith'
@@ -57,7 +52,7 @@ RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controll
     end
 
     it 'renders edit if the step is invalid' do
-      post :update, params: {
+      put :update, params: {
         step: {
           first_name: nil,
           last_name: nil

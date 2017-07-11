@@ -16,8 +16,14 @@ Rails.application.routes.draw do
     get '/introduction-introduce-yourself',
       to: 'introduction_introduce_yourself#edit'
 
-    post '/introduction-introduce-yourself',
+    put '/introduction-introduce-yourself',
       to: 'introduction_introduce_yourself#update'
+
+    get '/introduction-contact-information',
+      to: 'introduction_contact_information#edit'
+
+    put '/introduction-contact-information',
+      to: 'introduction_contact_information#update'
   end
 
   resources :steps, only: %i[index show update]
