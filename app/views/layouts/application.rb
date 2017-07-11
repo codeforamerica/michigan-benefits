@@ -16,7 +16,15 @@ class Views::Layouts::Application < Views::Base
 
       body class: "template--#{content_for(:template_name) if content_for?(:template_name)}" do
         div class: "page-wrapper" do
+          if content_for?(:step_header)
+            text capture { content_for(:step_header) }
+          end
+
           yield
+
+          if content_for?(:footer)
+            text capture { content_for(:footer) }
+          end
         end
 
         text capture { content_for(:javascript) }

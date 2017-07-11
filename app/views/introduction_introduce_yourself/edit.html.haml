@@ -1,7 +1,4 @@
 - content_for :header_title, 'Introduction'
-- content_for :back_path, root_path
-
-= render 'shared/debug', step: @step
 
 .form-card
   = form_for @step, as: :step, url: introduction_introduce_yourself_path, method: :put do |f|

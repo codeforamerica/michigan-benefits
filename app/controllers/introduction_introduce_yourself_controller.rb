@@ -1,5 +1,5 @@
 class IntroductionIntroduceYourselfController < ApplicationController
-  layout 'step'
+  layout 'simple_step'
 
   def allowed
     {
