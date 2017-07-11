@@ -1,3 +1,6 @@
+- content_for :header_title, 'Introduction'
+- content_for :back_path, root_path
+
 - if Rails.env.development?
   .debug
     = StepNavigation.new(@step).progress
@@ -18,19 +21,17 @@
         %h3.step-section-header__subhead To start, please introduce yourself.
 
     .form-card__content
-      .form-group{ "data-md5" => Digest::MD5.hexdigest("What is your first name?") }
-        = f.label :first_name, "What is your first name?", class: "form-question"
-        = f.text_field :first_name, placeholder: "First name", class: "text-input"
-        - if f.object.errors[:first_name].present?
-          %p.text--error
-            %i.icon-warning= " #{f.object.errors[:first_name].to_sentence}"
+      = render 'question',
+        f: f,
+        title: "What is your first name?",
+        method: :first_name,
+        placeholder: "First name"
 
-      .form-group{ "data-md5" => Digest::MD5.hexdigest("What is your last name?") }
-        = f.label :last_name, "What is your last name?", class: "form-question"
-        = f.text_field :last_name, placeholder: "last name", class: "text-input"
-        - if f.object.errors[:last_name].present?
-          %p.text--error
-            %i.icon-warning= " #{f.object.errors[:last_name].to_sentence}"
+      = render 'question',
+        f: f,
+        title: "What is your last name?",
+        method: :last_name,
+        placeholder: "Last name"
 
     %footer.form-card__footer
       %button.button.button--cta.button--full-width(type="submit")
