@@ -11,6 +11,7 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
       mailing_zip: '12345',
       mailing_address_same_as_home_address: true,
       email: 'email@example.com',
+      welcome_sms_sent: true
     )
   end
 
@@ -35,32 +36,63 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
   end
 
   describe '#update' do
-    let(:valid_params) do
-      {
-        phone_number: '0987654321',
-        accepts_text_messages: false,
-        mailing_street: '321 Real St',
-        mailing_city: 'Shelbyville',
-        mailing_zip: '54321',
-        mailing_address_same_as_home_address: false,
-        email: 'snailmail@example.com'
-      }
-    end
-
-    it 'updates the app if the step is valid' do
-      put :update, params: { step: valid_params }
-
-      current_app.reload
-
-      valid_params.each do |key, value|
-        expect(current_app[key]).to eq(value)
+    context 'when valid' do
+      let(:valid_params) do
+        {
+          phone_number: '0987654321',
+          accepts_text_messages: false,
+          mailing_street: '321 Real St',
+          mailing_city: 'Shelbyville',
+          mailing_zip: '54321',
+          mailing_address_same_as_home_address: false,
+          email: 'snailmail@example.com'
+        }
       end
-    end
 
-    it 'redirects to the next step if the step is valid' do
-      put :update, params: { step: valid_params }
+      let(:sms) do
+        instance_double('Sms')
+      end
 
-      expect(response).to redirect_to('/steps/introduction-home-address')
+      before do
+        allow(class_double('Sms').as_stubbed_const)
+          .to receive(:new)
+          .with(an_instance_of(App))
+          .and_return(sms)
+      end
+
+      it 'updates the app' do
+        put :update, params: { step: valid_params }
+
+        current_app.reload
+
+        valid_params.each do |key, value|
+          expect(current_app[key]).to eq(value)
+        end
+      end
+
+      it 'sends an SMS and updates the flag if one has not been sent' do
+        expect(sms).to receive(:deliver_welcome_message).with(no_args)
+
+        current_app.update!(welcome_sms_sent: false)
+
+        expect {
+          put :update, params: { step: valid_params }
+        }.to change { current_app.reload.welcome_sms_sent }
+      end
+
+      it 'does not send an SMS otherwise' do
+        expect(sms).not_to receive(:deliver_welcome_message)
+
+        expect {
+          put :update, params: { step: valid_params }
+        }.not_to change { current_app.reload.welcome_sms_sent }
+      end
+
+      it 'redirects to the next step' do
+        put :update, params: { step: valid_params }
+
+        expect(response).to redirect_to('/steps/introduction-home-address')
+      end
     end
 
     it 'renders edit if the step is invalid' do
