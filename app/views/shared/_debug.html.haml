@@ -1,0 +1,9 @@
+- if Rails.env.development?
+  .debug
+    = StepNavigation.new(step).progress
+    |
+    = step.class.name
+    | app
+    = current_user.app.id
+    |
+    = link_to "Nav", steps_path
