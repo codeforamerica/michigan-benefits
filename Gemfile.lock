@@ -323,6 +323,7 @@ DEPENDENCIES
   database_cleaner
   faker
   fortitude
+  haml
   html2fortitude
   jbuilder (~> 2.0)
   jquery-rails

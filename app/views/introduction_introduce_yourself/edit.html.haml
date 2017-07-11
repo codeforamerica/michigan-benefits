@@ -1,0 +1,38 @@
+- if Rails.env.development?
+  .debug
+    = StepNavigation.new(@step).progress
+    |
+    = @step.class.name
+    | app
+    = current_user.app.id
+    |
+    = link_to "Nav", steps_path
+
+.form-card
+  = form_for @step, as: :step, url: introduction_introduce_yourself_path do |f|
+    -# TODO: Reconcile this with section_header in app/views/steps/helpers.rb
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__icon.illustration.illustration--hello
+        %h4.step-section-header__headline We're here to help.
+        %h3.step-section-header__subhead To start, please introduce yourself.
+
+    .form-card__content
+      .form-group{ "data-md5" => Digest::MD5.hexdigest("What is your first name?") }
+        = f.label :first_name, "What is your first name?", class: "form-question"
+        = f.text_field :first_name, placeholder: "First name", class: "text-input"
+        - if f.object.errors[:first_name].present?
+          %p.text--error
+            %i.icon-warning= " #{f.object.errors[:first_name].to_sentence}"
+
+      .form-group{ "data-md5" => Digest::MD5.hexdigest("What is your last name?") }
+        = f.label :last_name, "What is your last name?", class: "form-question"
+        = f.text_field :last_name, placeholder: "last name", class: "text-input"
+        - if f.object.errors[:last_name].present?
+          %p.text--error
+            %i.icon-warning= " #{f.object.errors[:last_name].to_sentence}"
+
+    %footer.form-card__footer
+      %button.button.button--cta.button--full-width(type="submit")
+        Continue
+        %i.button__icon.icon-arrow_forward

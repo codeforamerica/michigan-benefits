@@ -7,6 +7,7 @@ gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "coffee-rails"
 gem "fortitude"
+gem "haml"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
