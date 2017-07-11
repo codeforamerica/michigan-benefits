@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
 
   respond_to :html
 
-  helper_method :path_to_step
-
   def basic_auth
     basic_auth_name, basic_auth_password = ENV.fetch("BASIC_AUTH", "").split(":")
 
@@ -41,15 +39,5 @@ class ApplicationController < ActionController::Base
 
   def current_app
     @current_app ||= App.find_or_create_by!(user: current_user)
-  end
-
-  def path_to_step(step_or_path)
-    if step_or_path.kind_of?(String)
-      step_or_path
-    elsif step_or_path < SimpleStep
-      step_or_path.path
-    elsif step_or_path < Step
-      step_path(step_or_path.to_param)
-    end
   end
 end

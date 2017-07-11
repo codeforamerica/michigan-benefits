@@ -13,17 +13,13 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
 
   scope :steps do
-    get '/introduction-introduce-yourself',
-      to: 'introduction_introduce_yourself#edit'
+    StepNavigation::SIMPLE_STEPS.each do |klass|
+      path = "/#{klass.to_param}"
+      name = klass.name.underscore
 
-    put '/introduction-introduce-yourself',
-      to: 'introduction_introduce_yourself#update'
-
-    get '/introduction-contact-information',
-      to: 'introduction_contact_information#edit'
-
-    put '/introduction-contact-information',
-      to: 'introduction_contact_information#update'
+      get path, to: "#{name}#edit"
+      put path, to: "#{name}#update"
+    end
   end
 
   resources :steps, only: %i[index show update]

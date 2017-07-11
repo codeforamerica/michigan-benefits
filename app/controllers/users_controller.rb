@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(name: SecureRandom.uuid, password: SecureRandom.uuid, email: "#{SecureRandom.uuid}-auto@example.com")
     @user.save and auto_login(@user)
-    respond_with @user, location: path_to_step(Step.first)
+    respond_with @user, location: step_path(Step.first.to_param)
   end
 
   private

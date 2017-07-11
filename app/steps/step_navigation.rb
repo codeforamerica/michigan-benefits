@@ -54,6 +54,11 @@ class StepNavigation
     HouseholdAddMember => HouseholdMembers,
   }
 
+  SIMPLE_STEPS = [
+    IntroductionIntroduceYourself,
+    IntroductionContactInformation
+  ]
+
   def self.sections
     ALL
   end
