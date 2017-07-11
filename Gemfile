@@ -7,7 +7,7 @@ gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "coffee-rails"
 gem "fortitude"
-gem "haml"
+gem "haml", "~> 5.0"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
@@ -52,7 +52,6 @@ end
 
 group :development do
   gem "citizen-scripts", git: "https://github.com/citizencode/citizen-scripts"
-  gem "html2fortitude"
   gem "listen", "~> 3.0.5"
   gem "meta_request"
   gem "pivotal_git_scripts"

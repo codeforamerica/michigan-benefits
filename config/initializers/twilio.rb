@@ -1,6 +1,8 @@
 if Rails.env.development? or Rails.env.test?
   require File.expand_path("#{Rails.root}/spec/support/fake_twilio_client")
-  Twilio::REST::Client = FakeTwilioClient
+  silence_warnings do
+    Twilio::REST::Client = FakeTwilioClient
+  end
 elsif Rails.env.production?
   Twilio.configure do |config|
     config.account_sid = ENV["TWILIO_ACCOUNT_SID"]
