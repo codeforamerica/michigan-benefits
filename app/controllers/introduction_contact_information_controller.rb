@@ -1,23 +1,7 @@
-class IntroductionContactInformationController < ApplicationController
-  layout 'simple_step'
-
-  def allowed
-    {
-      edit: :member,
-      update: :member
-    }
-  end
-
+class IntroductionContactInformationController < SimpleStepController
   def edit
     @step = IntroductionContactInformation.new(
-      phone_number: current_app.phone_number,
-      accepts_text_messages: current_app.accepts_text_messages,
-      mailing_street: current_app.mailing_street,
-      mailing_city: current_app.mailing_city,
-      mailing_zip: current_app.mailing_zip,
-      mailing_address_same_as_home_address: current_app
-        .mailing_address_same_as_home_address,
-      email: current_app.email
+      current_app.attributes.slice(*step_attrs)
     )
   end
 
@@ -40,8 +24,8 @@ class IntroductionContactInformationController < ApplicationController
 
   private
 
-  def step_params
-    params.require(:step).permit(%i[
+  def step_attrs
+    %w[
       phone_number
       accepts_text_messages
       mailing_street
@@ -49,10 +33,6 @@ class IntroductionContactInformationController < ApplicationController
       mailing_zip
       mailing_address_same_as_home_address
       email
-    ])
-  end
-
-  def next_step
-    step_path(StepNavigation.new(@step).next.to_param)
+    ]
   end
 end

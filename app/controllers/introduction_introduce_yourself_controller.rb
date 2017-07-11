@@ -1,28 +1,15 @@
-class IntroductionIntroduceYourselfController < ApplicationController
-  layout 'simple_step'
-
-  def allowed
-    {
-      edit: :member,
-      update: :member
-    }
-  end
-
+class IntroductionIntroduceYourselfController < SimpleStepController
   def edit
-    @step = IntroductionIntroduceYourself.new
-    @step.first_name = current_app.applicant.first_name
-    @step.last_name = current_app.applicant.last_name
+    @step = IntroductionIntroduceYourself.new(
+      current_app.applicant.attributes.slice(*step_attrs)
+    )
   end
 
   def update
     @step = IntroductionIntroduceYourself.new(step_params)
 
     if @step.valid?
-      current_app.applicant.update!(
-        first_name: @step.first_name,
-        last_name: @step.last_name
-      )
-
+      current_app.applicant.update!(step_params)
       redirect_to(next_step)
     else
       render :edit
@@ -31,11 +18,10 @@ class IntroductionIntroduceYourselfController < ApplicationController
 
   private
 
-  def step_params
-    params.require(:step).permit('first_name', 'last_name')
-  end
-
-  def next_step
-    step_path(StepNavigation.new(@step).next.to_param)
+  def step_attrs
+    %w[
+      first_name
+      last_name
+    ]
   end
 end
