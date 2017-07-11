@@ -12,7 +12,7 @@
     = link_to "Nav", steps_path
 
 .form-card
-  = form_for @step, as: :step, url: introduction_introduce_yourself_path do |f|
+  = form_for @step, as: :step, url: introduction_introduce_yourself_path, method: :put do |f|
     -# TODO: Reconcile this with section_header in app/views/steps/helpers.rb
     %header.form-card__header
       .step-section-header
@@ -21,15 +21,17 @@
         %h3.step-section-header__subhead To start, please introduce yourself.
 
     .form-card__content
-      = render 'question',
+      = render 'shared/question',
         f: f,
         title: "What is your first name?",
+        type: :text_field,
         method: :first_name,
         placeholder: "First name"
 
-      = render 'question',
+      = render 'shared/question',
         f: f,
         title: "What is your last name?",
+        type: :text_field,
         method: :last_name,
         placeholder: "Last name"
 

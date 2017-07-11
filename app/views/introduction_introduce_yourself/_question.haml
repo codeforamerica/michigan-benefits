@@ -1,6 +1,0 @@
-.form-group{ "data-md5" => Digest::MD5.hexdigest(title) }
-  = f.label method, title, class: "form-question"
-  = f.text_field method, placeholder: placeholder, class: "text-input"
-  - if f.object.errors[method].present?
-    %p.text--error
-      %i.icon-warning= " #{f.object.errors[method].to_sentence}"

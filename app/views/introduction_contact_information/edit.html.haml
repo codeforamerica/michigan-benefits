@@ -1,0 +1,72 @@
+- content_for :header_title, 'Introduction'
+- content_for :back_path, introduction_introduce_yourself_path
+
+- if Rails.env.development?
+  .debug
+    = StepNavigation.new(@step).progress
+    |
+    = @step.class.name
+    | app
+    = current_user.app.id
+    |
+    = link_to "Nav", steps_path
+
+.form-card
+  = form_for @step, as: :step, url: introduction_contact_information_path, method: :put do |f|
+    -# TODO: Reconcile this with section_header in app/views/steps/helpers.rb
+    %header.form-card__header
+      .step-section-header
+        %h3.step-section-header__subhead Tell us the best ways to reach you.
+
+    .form-card__content
+      = render 'shared/question',
+        f: f,
+        title: "What is your phone number to reach you?",
+        type: :text_field,
+        method: :phone_number,
+        placeholder: "Phone #"
+
+      = render 'shared/question',
+        f: f,
+        title: 'May we send text messages to that phone number to help you through the enrollment process?',
+        type: :yes_no,
+        method: :accepts_text_messages
+
+      = render 'shared/question',
+        f: f,
+        title: 'What is your email address?',
+        type: :text_field,
+        method: :email,
+        placeholder: 'youremail@email.com'
+
+      = render 'shared/question',
+        f: f,
+        title: 'Address',
+        type: :text_field,
+        method: :mailing_street,
+        placeholder: 'Street Address'
+
+      = render 'shared/question',
+        f: f,
+        title: 'City',
+        type: :text_field,
+        method: :mailing_city,
+        placeholder: 'City'
+
+      = render 'shared/question',
+        f: f,
+        title: 'ZIP Code',
+        type: :text_field,
+        method: :mailing_zip,
+        placeholder: 'ZIP'
+
+      = render 'shared/question',
+        f: f,
+        title: 'Is this address the same as your home address?',
+        type: :yes_no,
+        method: :mailing_address_same_as_home_address
+
+    %footer.form-card__footer
+      %button.button.button--cta.button--full-width(type="submit")
+        Continue
+        %i.button__icon.icon-arrow_forward
