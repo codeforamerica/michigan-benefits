@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 20170406224506) do
     t.boolean "unstable_housing"
     t.string "signature"
     t.string "email"
-    t.boolean "income_change"
-    t.text "income_change_explanation"
-    t.text "additional_income", default: [], array: true
     t.date "birthday"
     t.string "marital_status"
     t.integer "household_size"
+    t.boolean "income_change"
+    t.text "income_change_explanation"
+    t.text "additional_income", default: [], array: true
     t.boolean "everyone_a_citizen"
     t.boolean "anyone_disabled"
     t.boolean "any_new_moms"
@@ -69,8 +69,6 @@ ActiveRecord::Schema.define(version: 20170406224506) do
     t.integer "income_other"
     t.boolean "has_home"
     t.boolean "has_vehicle"
-    t.boolean "sms_reminders"
-    t.boolean "email_reminders"
     t.text "financial_accounts", default: [], array: true
     t.boolean "dependent_care"
     t.boolean "medical"
@@ -85,6 +83,8 @@ ActiveRecord::Schema.define(version: 20170406224506) do
     t.integer "monthly_tax_deductible_expenses"
     t.text "tax_deductible_expenses", default: [], array: true
     t.string "preference_for_interview"
+    t.boolean "sms_reminders"
+    t.boolean "email_reminders"
     t.text "anything_else"
     t.index ["user_id"], name: "index_apps_on_user_id"
   end
