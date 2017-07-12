@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HouseholdAddMemberController < SimpleStepController
+  helper_method :member_id
+
   def edit
     @step = step_class.new(member.attributes.slice(*step_attrs))
   end

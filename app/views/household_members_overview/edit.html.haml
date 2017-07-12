@@ -18,12 +18,12 @@
 
         - @step.non_applicant_members.each do |member|
           %div
-            - path = step_path(HouseholdAddMember.to_param, member_id: member.to_param)
-            - link_to path, class: 'button button-full-width' do
+            - path = step_path(HouseholdAddMemberController, member_id: member.to_param)
+            = link_to path, class: 'button button--full-width' do
               %i.button__icon--left.icon-check--color
-                = member.first_name.titleize
+              = member.first_name.titleize
 
-        = link_to step_path(HouseholdAddMember.to_param), class: 'button button-full-width button-bold' do
+        = link_to step_path(HouseholdAddMemberController), class: 'button button-full-width button-bold' do
           %i.button__icon--left.icon-add
           Add a member
 

@@ -17,7 +17,9 @@
           = option.titleize
 
   - when :text_field
-    = f.text_field method, placeholder: placeholder, class: "text-input"
+    = f.text_field method,
+      placeholder: local_assigns[:placeholder],
+      class: 'text-input'
 
   - when :select
     .select

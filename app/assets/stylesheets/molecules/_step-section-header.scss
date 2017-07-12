@@ -12,14 +12,9 @@ $element-margin-top: 5rem;
     @extend h3;
     font-weight: bold;
     margin: 0;
-
-    &--standalone {
-      text-align: left;
-    }
   }
 
   &__subhead-help {
-    text-align: left;
     margin-top: 1rem;
   }
 }
