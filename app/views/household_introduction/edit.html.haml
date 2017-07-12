@@ -1,0 +1,54 @@
+- content_for :header_title, 'Introduction'
+
+.form-card
+  %header.form-card__header
+    .step-section-header
+      - icon "section-1"
+      .step-section-header__subhead
+        There are 4 sections you need to complete to submit a full application.
+
+  .form-card__content
+    .slab.slab--not-padded
+      .card.card--narrow
+        %h4.step-section-header__headline
+          What are they?
+
+        %ul.list--bulleted.list--padded
+          %li
+            %p
+              %strong Household
+            %p.text--small
+              Information about yourself and each person in your household
+
+          %li
+            %p
+              %strong Money & Income
+            %p.text--small
+              Information about money you receive and valuable things you may
+              own
+
+          %li
+            %p
+              %strong Expenses
+            %p.text--small
+              We will ask about your expenses for things like housing,
+              medicine, dependent care and more
+
+          %li
+            %p
+              %strong Preferences
+            %p.text--small
+              We will ask about the best ways to reach you and to proceed with
+              your application, plus any additional information that you might
+              want to share with us.
+
+    .slab.slab--not-padded
+      .card.card--narrow
+        %h3.h3--strong
+          Next, describe your household for us.
+
+        %p.text--help
+          If you aren't sure about all the details right now — that's okay.
+          Do your best and we will work with you to clarify later.
+
+  = render partial: 'shared/next_step_link'

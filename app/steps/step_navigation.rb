@@ -7,7 +7,7 @@ class StepNavigation
       IntroductionCompleteController,
     ],
     "Your Household" => [
-      HouseholdIntroduction,
+      HouseholdIntroductionController,
       HouseholdPersonalDetails,
       HouseholdMembers,
       HouseholdMoreInfo,

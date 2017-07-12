@@ -31,5 +31,4 @@ class Views::Steps::HouseholdIntroduction < Views::Base
       end
     end
   end
-
 end
