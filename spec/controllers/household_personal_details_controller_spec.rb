@@ -57,7 +57,7 @@ RSpec.describe HouseholdPersonalDetailsController, :member, type: :controller do
       it 'redirects to the next step' do
         put :update, params: { step: valid_params }
 
-        expect(response).to redirect_to(step_path('household-members'))
+        expect(response).to redirect_to(step_path(HouseholdMembersOverviewController.to_param))
       end
     end
 

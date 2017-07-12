@@ -16,6 +16,14 @@ class SimpleStepController < ApplicationController
     }
   end
 
+  def edit
+    @step = step_class.new
+  end
+
+  def update
+    redirect_to next_path
+  end
+
   private
 
   def step_class

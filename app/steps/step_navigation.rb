@@ -9,7 +9,7 @@ class StepNavigation
     "Your Household" => [
       HouseholdIntroductionController,
       HouseholdPersonalDetailsController,
-      HouseholdMembers,
+      HouseholdMembersOverviewController,
       HouseholdMoreInfo,
       HouseholdSituations,
       HouseholdHealth,
@@ -51,7 +51,7 @@ class StepNavigation
   }
 
   SUBSTEPS = {
-    HouseholdAddMember => HouseholdMembers,
+    HouseholdAddMember => HouseholdMembersOverviewController,
   }
 
   def self.sections
