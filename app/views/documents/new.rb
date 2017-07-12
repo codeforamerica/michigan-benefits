@@ -59,7 +59,7 @@ class Views::Documents::New < Views::Base
     messages << 'file is too large' if document.errors.key?(:file_file_size)
 
     messages = document.errors.full_messages if messages.empty?
-    
+
     messages[0] = messages[0].capitalize
 
     messages

@@ -53,7 +53,7 @@ class StepNavigation
   }.freeze
 
   SUBSTEPS = {
-    HouseholdAddMember => HouseholdMembersOverviewController
+    HouseholdAddMemberController => HouseholdMembersOverviewController
   }.freeze
 
   def self.sections
@@ -65,7 +65,10 @@ class StepNavigation
   end
 
   def self.simple_step_controllers
-    steps.select { |klass| klass < SimpleStepController }
+    steps
+      .concat(SUBSTEPS.keys)
+      .uniq
+      .select { |klass| klass < SimpleStepController }
   end
 
   def steps
