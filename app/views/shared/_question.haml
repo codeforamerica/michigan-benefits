@@ -2,12 +2,30 @@
 - classes << "form-group--error" if f.object.errors[method].present?
 
 %div{ "data-md5" => Digest::MD5.hexdigest(title), "data-field-type" => type, class: classes }
-  - unless type == :checkbox
+  - if %i[text_field radios select yes_no].include?(type)
     = f.label method, title, class: "form-question"
 
+  - if local_assigns[:help]
+    %p.text--help= help
+
   - case type
+  - when :radios
+    %div
+      - options.each do |option|
+        %label.radio-button
+          = f.radio_button method, option
+          = option.titleize
+
   - when :text_field
     = f.text_field method, placeholder: placeholder, class: "text-input"
+
+  - when :select
+    .select
+      = f.select method,
+        options.map { |option| [option.titleize, option] },
+        { include_blank: "Choose one" },
+        { class: "select__element" }
+
   - when :yes_no
     %label.radio-button
       = f.radio_button method, 'true'
@@ -15,6 +33,7 @@
     %label.radio-button
       = f.radio_button method, 'false'
       No
+
   - when :checkbox
     %label.checkbox
       = f.check_box method
@@ -24,3 +43,8 @@
     %p.text--error
       %i.icon-warning
       = " #{f.object.errors[method].to_sentence}"
+
+  - if local_assigns[:safety]
+    %p.text--secure
+      %i.illustration.illustration--safety
+      = safety
