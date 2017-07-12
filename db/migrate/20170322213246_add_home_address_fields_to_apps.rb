@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddHomeAddressFieldsToApps < ActiveRecord::Migration[5.0]
   def change
     add_column :apps, :home_address, :string

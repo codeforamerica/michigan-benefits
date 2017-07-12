@@ -1,22 +1,24 @@
-class IncomeAdditional < Step
-  self.title = "Money & Income"
-  self.subhead = "Tell us more about your additional income."
+# frozen_string_literal: true
 
-  ATTRS = [
-    :income_child_support,
-    :income_unemployment,
-    :income_ssi,
-    :income_workers_comp,
-    :income_pension,
-    :income_social_security,
-    :income_foster_care,
-    :income_other
-  ]
+class IncomeAdditional < Step
+  self.title = 'Money & Income'
+  self.subhead = 'Tell us more about your additional income.'
+
+  ATTRS = %i[
+    income_child_support
+    income_unemployment
+    income_ssi
+    income_workers_comp
+    income_pension
+    income_social_security
+    income_foster_care
+    income_other
+  ].freeze
 
   attr_accessor *ATTRS
 
   def skip?
-    ATTRS.none? { |attr| @app.additional_income.include?(attr.to_s.remove("income_")) }
+    ATTRS.none? { |attr| @app.additional_income.include?(attr.to_s.remove('income_')) }
   end
 
   def allowed_params
@@ -29,7 +31,7 @@ class IncomeAdditional < Step
 
   def update_app!
     @app.update!(
-      ATTRS.each_with_object({}) { |attr, hash| hash[attr] = self.send(attr) }
+      ATTRS.each_with_object({}) { |attr, hash| hash[attr] = send(attr) }
     )
   end
 end

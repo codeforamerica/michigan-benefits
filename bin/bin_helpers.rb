@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pathname'
 require 'fileutils'
 include FileUtils
@@ -22,11 +24,11 @@ COLOR_CODES = {
   purple: 35,
   red: 31,
   white: 97,
-  yellow: 33,
-}
+  yellow: 33
+}.freeze
 
 def system!(*args)
-  puts colorize(light_cyan: args.join(" "))
+  puts colorize(light_cyan: args.join(' '))
   system(*args) || abort(colorize(light_red: "\n== Command #{args} failed =="))
 end
 

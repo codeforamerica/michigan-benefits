@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class IncomeAdditionalSources < Step
-  self.title = "Money & Income"
-  self.subhead = "Check all additional sources of income received by your household, if any."
+  self.title = 'Money & Income'
+  self.subhead = 'Check all additional sources of income received by your household, if any.'
 
   self.questions = {
-    unemployment: "Unemployment Insurance",
-    ssi: "SSI or Disability",
+    unemployment: 'Unemployment Insurance',
+    ssi: 'SSI or Disability',
     workers_comp: "Worker's Compensation",
-    pension: "Pension",
-    social_security: "Social Security",
-    child_support: "Child Support",
-    foster_care: "Foster Care or Adoption Subsidies",
-    other: "Other Income",
+    pension: 'Pension',
+    social_security: 'Social Security',
+    child_support: 'Child Support',
+    foster_care: 'Foster Care or Adoption Subsidies',
+    other: 'Other Income'
   }
 
   self.types = {
@@ -21,7 +23,7 @@ class IncomeAdditionalSources < Step
     social_security: :checkbox,
     child_support: :checkbox,
     foster_care: :checkbox,
-    other: :checkbox,
+    other: :checkbox
   }
 
   self.field_options = {
@@ -46,27 +48,27 @@ class IncomeAdditionalSources < Step
     :other
 
   def checkboxes
-    [
-      :unemployment,
-      :ssi,
-      :workers_comp,
-      :pension,
-      :social_security,
-      :child_support,
-      :foster_care,
-      :other,
+    %i[
+      unemployment
+      ssi
+      workers_comp
+      pension
+      social_security
+      child_support
+      foster_care
+      other
     ]
   end
 
   def assign_from_app
     @app.additional_income.each do |checkbox|
-      self.send("#{checkbox}=", true)
+      send("#{checkbox}=", true)
     end
   end
 
   def update_app!
     @app.update!(
-      additional_income: check(checkboxes),
+      additional_income: check(checkboxes)
     )
   end
 end

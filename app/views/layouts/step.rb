@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class Views::Layouts::Step < Views::Layouts::Application
   def content
-    content_for :template_name, "step"
+    content_for :template_name, 'step'
 
     super do
       menu_header
 
       yield
 
-      render partial: "shared/footer"
+      render partial: 'shared/footer'
     end
   end
 
@@ -19,7 +21,7 @@ class Views::Layouts::Step < Views::Layouts::Application
     div class: 'step-header' do
       if back_path
         link_to "#{back_path}?rel=back", class: 'step-header__back-link' do
-          i class: "button__icon icon-arrow_back"
+          i class: 'button__icon icon-arrow_back'
         end
       end
 

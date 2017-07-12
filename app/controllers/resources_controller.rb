@@ -1,6 +1,7 @@
-class ResourcesController < ApplicationController
+# frozen_string_literal: true
 
-  layout "step"
+class ResourcesController < ApplicationController
+  layout 'step'
 
   def allowed
     {
@@ -8,6 +9,5 @@ class ResourcesController < ApplicationController
     }
   end
 
-  def show
-  end
+  def show; end
 end

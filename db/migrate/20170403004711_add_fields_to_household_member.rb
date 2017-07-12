@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFieldsToHouseholdMember < ActiveRecord::Migration[5.0]
   def change
     add_column :household_members, :is_citizen, :boolean

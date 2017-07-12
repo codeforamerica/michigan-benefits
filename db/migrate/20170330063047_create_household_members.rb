@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHouseholdMembers < ActiveRecord::Migration[5.0]
   def change
     create_table :household_members do |t|

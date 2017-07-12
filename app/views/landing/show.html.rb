@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Views::Landing::Show < Views::Base
   def content
     row do

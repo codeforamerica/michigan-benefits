@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddHouseholdMetaFields < ActiveRecord::Migration[5.0]
   def change
     add_column :apps, :everyone_a_citizen, :boolean

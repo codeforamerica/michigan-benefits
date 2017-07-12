@@ -1,23 +1,23 @@
+# frozen_string_literal: true
+
 class PreferencesRemindersConfirmation < Step
   include ActionView::Helpers::NumberHelper
 
-  self.title = "Preferences"
+  self.title = 'Preferences'
   self.subhead = "Great! You'll receive a confirmation message soon."
-  self.icon = "confirmation-message"
+  self.icon = 'confirmation-message'
 
   attr_accessor \
     :email
 
-  validates :email, presence: { message: "Make sure to answer this question" }
+  validates :email, presence: { message: 'Make sure to answer this question' }
 
   def assign_from_app
-    assign_attributes @app.attributes.slice(*%w[
-      email
-    ])
+    assign_attributes @app.attributes.slice('email')
   end
 
   def allowed_params
-    [ :email ]
+    [:email]
   end
 
   def update_app!
@@ -27,6 +27,6 @@ class PreferencesRemindersConfirmation < Step
   end
 
   def skip?
-    ! @app.sms_reminders? && ! @app.email_reminders?
+    !@app.sms_reminders? && !@app.email_reminders?
   end
 end

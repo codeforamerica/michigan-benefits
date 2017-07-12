@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class HouseholdAddMember < Step
-  self.title = "Your Household"
-  self.subhead = "Tell us about another person you are applying with."
+  self.title = 'Your Household'
+  self.subhead = 'Tell us about another person you are applying with.'
   self.subhead_help = "If you don't know the answer to a question, that's okay."
 
   self.questions = {
-    first_name: "What is their first name?",
-    last_name: "What is their last name?",
-    sex: "What is their sex?",
-    relationship: "What is their relationship to you?",
-    ssn: "What is their social security number?",
-    in_home: "Is this person living in your home?",
-    buy_food_with: "Do you buy and prepare food with this person?"
+    first_name: 'What is their first name?',
+    last_name: 'What is their last name?',
+    sex: 'What is their sex?',
+    relationship: 'What is their relationship to you?',
+    ssn: 'What is their social security number?',
+    in_home: 'Is this person living in your home?',
+    buy_food_with: 'Do you buy and prepare food with this person?'
   }
 
   self.types = {
@@ -21,19 +23,19 @@ class HouseholdAddMember < Step
   }
 
   self.field_options = {
-    sex: %w|male female|,
-    relationship: %w|Spouse Parent Child Sibling Roommate|
+    sex: %w[male female],
+    relationship: %w[Spouse Parent Child Sibling Roommate]
   }
 
   self.help_messages = {
-    sex: "As it appears on their driver’s license",
-    ssn: "If they don’t have one or you don’t know it you can skip this",
+    sex: 'As it appears on their driver’s license',
+    ssn: 'If they don’t have one or you don’t know it you can skip this'
   }
 
   self.safeties = {
     ssn: <<~TEXT
-      Social security numbers help ensure you receive the correct benefits. 
-      MDHSS maintains strict security guidelines to protect the identities of 
+      Social security numbers help ensure you receive the correct benefits.
+      MDHSS maintains strict security guidelines to protect the identities of
       our residents.
     TEXT
   }
@@ -56,19 +58,11 @@ class HouseholdAddMember < Step
   end
 
   def member_id
-    @params["member_id"]
+    @params['member_id']
   end
 
   def assign_from_app
-    assign_attributes member.attributes.slice *%w[
-      first_name
-      last_name
-      sex
-      relationship
-      ssn
-      in_home
-      buy_food_with
-    ]
+    assign_attributes member.attributes.slice 'first_name', 'last_name', 'sex', 'relationship', 'ssn', 'in_home', 'buy_food_with'
   end
 
   def update_app!
@@ -79,7 +73,7 @@ class HouseholdAddMember < Step
       relationship: relationship,
       ssn: ssn,
       in_home: in_home,
-      buy_food_with: buy_food_with,
+      buy_food_with: buy_food_with
     )
   end
 end

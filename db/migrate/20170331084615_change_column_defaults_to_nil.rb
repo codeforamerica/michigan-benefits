@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeColumnDefaultsToNil < ActiveRecord::Migration[5.0]
   def change
     change_column_default(:apps, :unstable_housing, nil)

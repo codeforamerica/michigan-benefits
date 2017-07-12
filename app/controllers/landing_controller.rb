@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LandingController < ApplicationController
   def allowed
     {
@@ -5,6 +7,5 @@ class LandingController < ApplicationController
     }
   end
 
-  def show
-  end
+  def show; end
 end

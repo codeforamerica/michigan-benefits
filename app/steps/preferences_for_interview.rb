@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class PreferencesForInterview < Step
-  self.title = "Preferences"
-  self.subhead = "The next step after you apply is a brief interview "\
-    "with your county."
+  self.title = 'Preferences'
+  self.subhead = 'The next step after you apply is a brief interview '\
+    'with your county.'
 
   self.questions = {
-    preference_for_interview: "What do you prefer?"
+    preference_for_interview: 'What do you prefer?'
   }
 
   self.types = {
@@ -17,12 +19,10 @@ class PreferencesForInterview < Step
 
   attr_accessor :preference_for_interview
 
-  validates :preference_for_interview, presence: { message: "Make sure to answer this question"}
+  validates :preference_for_interview, presence: { message: 'Make sure to answer this question' }
 
   def assign_from_app
-    assign_attributes @app.attributes.slice(*%w[
-      preference_for_interview
-    ])
+    assign_attributes @app.attributes.slice('preference_for_interview')
   end
 
   def update_app!

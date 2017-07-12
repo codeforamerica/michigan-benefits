@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe "widgets/basic_form_for.html.rb" do
+describe 'widgets/basic_form_for.html.rb' do
   specify do
     user = User.new
 
-    definition = -> (f) do
-      f.field :email, title: "Email Address", type: :email, required: true
-      f.field :name, title: "Full Name"
+    definition = lambda do |f|
+      f.field :email, title: 'Email Address', type: :email, required: true
+      f.field :name, title: 'Full Name'
       f.field :name
 
       f.field :password, type: :password
     end
 
-    assign(:form_for_params, [user, { url: "/user/new" }])
-    assign(:title, "User Details")
+    assign(:form_for_params, [user, { url: '/user/new' }])
+    assign(:title, 'User Details')
     assign(:definition, definition)
     assign(:submit, nil)
 

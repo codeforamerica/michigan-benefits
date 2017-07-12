@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe IntroductionHomeAddressController, :member, type: :controller do
@@ -6,7 +8,7 @@ RSpec.describe IntroductionHomeAddressController, :member, type: :controller do
       home_address: '123 Fake St',
       home_city: 'Springfield',
       home_zip: '12345',
-      unstable_housing: false,
+      unstable_housing: false
     }
   end
 

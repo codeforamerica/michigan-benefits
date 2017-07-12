@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controller do
@@ -28,14 +30,14 @@ RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controll
 
   describe '#update' do
     it 'updates the applicant if the step is valid' do
-      expect {
+      expect do
         put :update, params: {
           step: {
             first_name: 'bob',
             last_name: 'smith'
           }
         }
-      }.to change {
+      end.to change {
         current_app.applicant.reload.attributes.slice('first_name', 'last_name')
       }
     end

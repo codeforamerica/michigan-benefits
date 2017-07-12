@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Views::Widgets::Helpers
-  def top_bar(title: )
+  def top_bar(title:)
     widget Views::Widgets::TopBar, title: title
   end
 

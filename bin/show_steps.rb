@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # run with `rails runner ./bin/show_steps.rb`
 
 puts

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
@@ -11,9 +13,9 @@ class User < ApplicationRecord
 
   def full_name
     if app.applicant.first_name.present? || app.applicant.last_name.present?
-      [app.applicant.first_name, app.applicant.last_name].join(" ")
+      [app.applicant.first_name, app.applicant.last_name].join(' ')
     else
-      "Guest"
+      'Guest'
     end
   end
 end

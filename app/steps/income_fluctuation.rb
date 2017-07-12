@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class IncomeFluctuation < ManyMemberUpdateStep
-  self.title = "Money & Income"
-  self.subhead = "Since their income fluctuates, tell us more about their annual income"
+  self.title = 'Money & Income'
+  self.subhead = 'Since their income fluctuates, tell us more about their annual income'
 
   self.member_grouped_questions = {
-    expected_income_this_year: "Expected income this year",
-    expected_income_next_year: "Expected income next year"
+    expected_income_this_year: 'Expected income this year',
+    expected_income_next_year: 'Expected income next year'
   }
 
   self.types = {
@@ -13,7 +15,7 @@ class IncomeFluctuation < ManyMemberUpdateStep
   }
 
   self.help_messages = {
-    expected_income_next_year: "If you think it will change"
+    expected_income_next_year: 'If you think it will change'
   }
 
   def initialize(*args)
@@ -29,7 +31,7 @@ class IncomeFluctuation < ManyMemberUpdateStep
 
   def build_subhead
     "Since <span class='text--sky'>#{inconsistent_members}'s</span> income "\
-      "fluctuates, tell us more about their annual income".html_safe
+      'fluctuates, tell us more about their annual income'.html_safe
   end
 
   def inconsistent_members

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Views::Steps::MaybeSubmitDocuments < Views::Base
   def content
     p <<~TEXT, class: 'text--small'
@@ -10,7 +12,7 @@ class Views::Steps::MaybeSubmitDocuments < Views::Base
       can take a picture and upload it.
     TEXT
 
-    p <<~TEXT, class: "text--help"
+    p <<~TEXT, class: 'text--help'
       You may also share documents with MDHHS via pst mail or by delivering
       them to your local office in person.
     TEXT
@@ -20,14 +22,14 @@ class Views::Steps::MaybeSubmitDocuments < Views::Base
     TEXT
 
     footer class: 'form-card__footer' do
-      link_to documents_path, class: "button button--cta" do
-        text "Submit documents now"
-        i class: "button__icon icon-arrow_forward"
+      link_to documents_path, class: 'button button--cta' do
+        text 'Submit documents now'
+        i class: 'button__icon icon-arrow_forward'
       end
 
-      link_to clear_sessions_path(redirect_to: confirmations_path), class: "button button--secondary-cta" do
-        text "I’ll do it later"
-        i class: "button__icon icon-arrow_forward"
+      link_to clear_sessions_path(redirect_to: confirmations_path), class: 'button button--secondary-cta' do
+        text 'I’ll do it later'
+        i class: 'button__icon icon-arrow_forward'
       end
     end
   end

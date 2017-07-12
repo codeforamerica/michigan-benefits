@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Views::Steps::ExpensesIntroduction < Views::Base
   def content
     slab_with_card do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SimpleStep
   include ActiveModel::Model
   include ActiveModel::AttributeAssignment

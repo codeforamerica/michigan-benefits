@@ -1,6 +1,7 @@
-class ConfirmationsController < ApplicationController
+# frozen_string_literal: true
 
-  layout "step"
+class ConfirmationsController < ApplicationController
+  layout 'step'
 
   def allowed
     {
@@ -8,6 +9,5 @@ class ConfirmationsController < ApplicationController
     }
   end
 
-  def show
-  end
+  def show; end
 end

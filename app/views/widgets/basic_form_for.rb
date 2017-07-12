@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Views::Widgets::BasicFormFor < Views::Base
   needs :form_for_params, :title, :definition, :submit
 
@@ -27,7 +29,7 @@ class Views::Widgets::BasicFormFor < Views::Base
             end
           end
 
-          f.submit (submit or 'Continue'), class: 'button special'
+          f.submit (submit || 'Continue'), class: 'button special'
         end
       end
     end

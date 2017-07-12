@@ -1,5 +1,6 @@
-class FormsController < ApplicationController
+# frozen_string_literal: true
 
+class FormsController < ApplicationController
   def allowed
     {
       show: :member
@@ -8,6 +9,6 @@ class FormsController < ApplicationController
 
   def show
     file = Form.new(current_user.app).fill
-    send_file file, type: "application/pdf", disposition: "inline"
+    send_file file, type: 'application/pdf', disposition: 'inline'
   end
 end

@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe "widgets/basic_table_for.html.rb" do
+describe 'widgets/basic_table_for.html.rb' do
   class Car < Struct.new(:kind, :color, :id); end
 
-  it "renders a table" do
+  it 'renders a table' do
     cars = [
-      Car.new("Toyota", "black", 1),
-      Car.new("Ford", "red", 2),
-      Car.new("Jeep", "green", 3)
+      Car.new('Toyota', 'black', 1),
+      Car.new('Ford', 'red', 2),
+      Car.new('Jeep', 'green', 3)
     ]
-    definition = -> (t) do
-      t.column("Kind") { |car| car.kind }
-      t.column("Color", classes: %w[color]) { |car| car.color }
-      t.actions {|car| link_to "Edit", "/cars/#{car.id}/edit" }
+    definition = lambda do |t|
+      t.column('Kind', &:kind)
+      t.column('Color', classes: %w[color], &:color)
+      t.actions { |car| link_to 'Edit', "/cars/#{car.id}/edit" }
     end
 
     assign(:classes, %i[foo bar])

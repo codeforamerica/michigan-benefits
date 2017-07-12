@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddOtherExpenseInfo < ActiveRecord::Migration[5.0]
   def change
     add_column :apps, :monthly_care_expenses, :integer

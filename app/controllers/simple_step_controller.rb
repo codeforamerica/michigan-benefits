@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SimpleStepController < ApplicationController
   layout 'simple_step'
 
@@ -33,7 +35,7 @@ class SimpleStepController < ApplicationController
   def maybe_skip
     if skip?
       if going_backwards?
-        redirect_to previous_path(rel: "back")
+        redirect_to previous_path(rel: 'back')
       else
         redirect_to next_path
       end
@@ -45,7 +47,7 @@ class SimpleStepController < ApplicationController
   end
 
   def going_backwards?
-    params["rel"] == "back"
+    params['rel'] == 'back'
   end
 
   def step_params
@@ -56,7 +58,7 @@ class SimpleStepController < ApplicationController
     step_class.attribute_names
   end
 
-  def previous_path(params=nil)
+  def previous_path(params = nil)
     previous = step_navigation.previous
     previous ? step_path(previous.to_param, params) : root_path
   end

@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class HouseholdTax < Step
-  self.title = "Your Household"
-  self.subhead = "Does anyone plan to file a federal tax return next year?"
+  self.title = 'Your Household'
+  self.subhead = 'Does anyone plan to file a federal tax return next year?'
 
   self.questions = {
-    household_tax: ["Does anyone plan to file a federal tax return next year?", :hidden]
+    household_tax: ['Does anyone plan to file a federal tax return next year?', :hidden]
   }
 
   self.help_messages = {
-    household_tax: "You do not need to file a tax return to receive benefits."
+    household_tax: 'You do not need to file a tax return to receive benefits.'
   }
 
   self.types = {
@@ -19,12 +21,10 @@ class HouseholdTax < Step
 
   validates \
     :household_tax,
-    presence: { message: "Make sure to answer this question" }
+    presence: { message: 'Make sure to answer this question' }
 
   def assign_from_app
-    assign_attributes @app.attributes.slice(*%w[
-      household_tax
-    ])
+    assign_attributes @app.attributes.slice('household_tax')
   end
 
   def update_app!

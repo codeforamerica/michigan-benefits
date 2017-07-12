@@ -1,12 +1,11 @@
+# frozen_string_literal: true
+
 module Views::Steps::Helpers
   def step_form(step)
     div class: 'form-card' do
       form_for step, as: :step, url: step_path(step), method: :put do |f|
-
-        if step.params
-          step.params.each do |k, v|
-            hidden_field_tag k, v
-          end
+        step.params&.each do |k, v|
+          hidden_field_tag k, v
         end
 
         header class: 'form-card__header' do
@@ -17,7 +16,7 @@ module Views::Steps::Helpers
           yield f
         end
 
-        if step.previous.present? or step.next.present?
+        if step.previous.present? || step.next.present?
           footer class: 'form-card__footer' do
             buttons
           end
@@ -30,16 +29,16 @@ module Views::Steps::Helpers
     div class: 'step-section-header' do
       if step.icon.present?
         div class: [
-          "step-section-header__icon",
-          "illustration",
+          'step-section-header__icon',
+          'illustration',
           "illustration--#{step.icon}"
         ]
       end
 
-      subhead_classes = "step-section-header__subhead"
+      subhead_classes = 'step-section-header__subhead'
 
       if step.only_subhead?
-        subhead_classes += " step-section-header__subhead--standalone"
+        subhead_classes += ' step-section-header__subhead--standalone'
       end
 
       headline(step.headline)
@@ -53,39 +52,39 @@ module Views::Steps::Helpers
   end
 
   def headline(s)
-    h4 s, class: "step-section-header__headline"
+    h4 s, class: 'step-section-header__headline'
   end
 
   def buttons
     if step.next.present?
-      button type: 'submit', class: "button button--cta button--full-width" do
+      button type: 'submit', class: 'button button--cta button--full-width' do
         text step.submit_label
-        i class: "button__icon icon-arrow_forward"
+        i class: 'button__icon icon-arrow_forward'
       end
     end
   end
 
   def question_group(title)
-    div class: "form-questions-group", "data-md5" => md5(title) do
+    div class: 'form-questions-group', 'data-md5' => md5(title) do
       yield
     end
   end
 
-  def question(f, method, title, field_type=nil, margin: true)
-    class_names = CssClasses.new("form-group")
-    class_names << "no-bottom-space" unless margin
+  def question(f, method, title, field_type = nil, margin: true)
+    class_names = CssClasses.new('form-group')
+    class_names << 'no-bottom-space' unless margin
     div class: class_names,
-      "data-md5" => md5(title),
-      "data-field-type" => field_type do
-      f.label method, title, class: "form-question" if f && title
+        'data-md5' => md5(title),
+        'data-field-type' => field_type do
+      f.label method, title, class: 'form-question' if f && title
       yield
     end
   end
 
   def household_question(f, method, title, household_members)
-    question f, method, title, "checkbox" do
+    question f, method, title, 'checkbox' do
       household_members.each do |member|
-        f.fields_for "household_members[]", member, hidden_field_id: true do |ff|
+        f.fields_for 'household_members[]', member, hidden_field_id: true do |ff|
           checkbox_field ff, method, member.name
         end
       end
@@ -94,53 +93,51 @@ module Views::Steps::Helpers
 
   def text_field(f, method, placeholder)
     f.text_field method,
-      placeholder: placeholder,
-      class: 'text-input'
+                 placeholder: placeholder,
+                 class: 'text-input'
     errors f, method
   end
 
   def number_field(f, method)
-    f.number_field method, class: "text-input form-width--short"
+    f.number_field method, class: 'text-input form-width--short'
     errors f, method
   end
 
-  def money_field(f, method, placeholder=nil)
-    div class: "text-input-group" do
-      div "$", class: "text-input-group__prefix"
+  def money_field(f, method, placeholder = nil)
+    div class: 'text-input-group' do
+      div '$', class: 'text-input-group__prefix'
       f.text_field method,
-        placeholder: placeholder,
-        class: 'text-input text--right'
-      div ".00", class: "text-input-group__postfix"
+                   placeholder: placeholder,
+                   class: 'text-input text--right'
+      div '.00', class: 'text-input-group__postfix'
     end
     errors f, method
   end
 
-  def text_area_field(f, method, placeholder=nil)
+  def text_area_field(f, method, placeholder = nil)
     f.text_area method,
-      placeholder: placeholder,
-      class: 'textarea'
+                placeholder: placeholder,
+                class: 'textarea'
     errors f, method
   end
 
   def incrementer_field(f, method)
-    div class: "incrementer" do
-      span "-", class: "incrementer__subtract"
-      f.number_field method, {
-        class: "text-input form-width--short",
-        min: 1,
-        max: 30
-      }
-      span "+", class: "incrementer__add"
+    div class: 'incrementer' do
+      span '-', class: 'incrementer__subtract'
+      f.number_field method, class: 'text-input form-width--short',
+                             min: 1,
+                             max: 30
+      span '+', class: 'incrementer__add'
     end
     errors f, method
   end
 
   def select_field(f, method, options)
-    div class: "select" do
+    div class: 'select' do
       f.select method,
-        options,
-        { include_blank: "Choose one" },
-        { class: "select__element" }
+               options,
+               { include_blank: 'Choose one' },
+               class: 'select__element'
     end
     errors f, method
   end
@@ -148,7 +145,7 @@ module Views::Steps::Helpers
   def radio_field(f, method, options)
     div do
       options.each do |option|
-        label class: "radio-button" do
+        label class: 'radio-button' do
           f.radio_button method, option
           text option.titleize
         end
@@ -159,21 +156,21 @@ module Views::Steps::Helpers
 
   def yes_no_field(f, method)
     div do
-      label class: "radio-button" do
-        f.radio_button method, "true"
-        text "Yes"
+      label class: 'radio-button' do
+        f.radio_button method, 'true'
+        text 'Yes'
       end
 
-      label class: "radio-button" do
-        f.radio_button method, "false"
-        text "No"
+      label class: 'radio-button' do
+        f.radio_button method, 'false'
+        text 'No'
       end
     end
     errors f, method
   end
 
   def checkbox_field(f, method, label_text)
-    label class: "checkbox" do
+    label class: 'checkbox' do
       f.check_box method
       text label_text
     end

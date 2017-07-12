@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Views::Widgets::BasicTableFor < Views::Base
   needs :enumerable, :classes, :definition
 
@@ -16,7 +18,7 @@ class Views::Widgets::BasicTableFor < Views::Base
         enumerable.each do |object|
           tr do
             columns.each do |column|
-              td capture { column[:block].call(object) if column[:block] }, class: CssClasses.new(column[:classes])
+              td capture { column[:block]&.call(object) }, class: CssClasses.new(column[:classes])
             end
           end
         end
@@ -30,7 +32,7 @@ class Views::Widgets::BasicTableFor < Views::Base
   end
 
   def actions(classes: nil, &block)
-    titles << ""
+    titles << ''
     columns << { block: block, classes: classes }
   end
 

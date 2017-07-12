@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Sms
   def initialize(app)
     @app = app
@@ -31,27 +33,27 @@ class Sms
   end
 
   def twilio_phone_number
-    ENV["TWILIO_PHONE_NUMBER"]
+    ENV['TWILIO_PHONE_NUMBER']
   end
 
   def deliverable?
-    return undeliverable("TWILIO_PHONE_NUMBER not present") unless twilio_phone_number.present?
-    return undeliverable("app does not accept text messages") unless @app.accepts_text_messages
-    return undeliverable("app does not have a phone number") unless @app.phone_number.present?
+    return undeliverable('TWILIO_PHONE_NUMBER not present') unless twilio_phone_number.present?
+    return undeliverable('app does not accept text messages') unless @app.accepts_text_messages
+    return undeliverable('app does not have a phone number') unless @app.phone_number.present?
 
     if whitelist?
-      return undeliverable("whitelist does not include phone number") unless whitelist.include?(@app.phone_number)
+      return undeliverable('whitelist does not include phone number') unless whitelist.include?(@app.phone_number)
     end
 
     true
   end
 
   def whitelist?
-    ENV.has_key? "TWILIO_RECIPIENT_WHITELIST"
+    ENV.key? 'TWILIO_RECIPIENT_WHITELIST'
   end
 
   def whitelist
-    ENV["TWILIO_RECIPIENT_WHITELIST"].split
+    ENV['TWILIO_RECIPIENT_WHITELIST'].split
   end
 
   def undeliverable(message)

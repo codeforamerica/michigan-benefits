@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class StyleguidesController < ApplicationController
   layout :false
-
 
   def allowed
     {
@@ -8,6 +9,5 @@ class StyleguidesController < ApplicationController
     }
   end
 
-  def index
-  end
+  def index; end
 end

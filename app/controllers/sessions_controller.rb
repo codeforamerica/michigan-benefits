@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def allowed
     {
       new: :guest,
-      destroy: :member,
+      destroy: :member
     }
   end
 
@@ -12,7 +14,7 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to params.fetch("redirect_to", root_path)
+    redirect_to params.fetch('redirect_to', root_path)
   end
 
   private

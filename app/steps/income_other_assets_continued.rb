@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class IncomeOtherAssetsContinued < Step
-  self.title = "Money & Income"
-  self.subhead = "Tell us more about those assets."
+  self.title = 'Money & Income'
+  self.subhead = 'Tell us more about those assets.'
 
   self.questions = {
-    total_money: "In total, how much money does your household have in cash and accounts?",
-    checking_account: "Checking account",
-    savings_account: "Savings account",
-    four_oh_one_k: "401k",
-    life_insurance: "Life insurance",
-    iras: "IRAs",
-    mutual_funds: "Mutual funds",
-    stocks: "Stocks",
-    trusts: "Trusts"
+    total_money: 'In total, how much money does your household have in cash and accounts?',
+    checking_account: 'Checking account',
+    savings_account: 'Savings account',
+    four_oh_one_k: '401k',
+    life_insurance: 'Life insurance',
+    iras: 'IRAs',
+    mutual_funds: 'Mutual funds',
+    stocks: 'Stocks',
+    trusts: 'Trusts'
   }
 
   self.types = {
@@ -27,9 +29,8 @@ class IncomeOtherAssetsContinued < Step
   }
 
   self.overviews = {
-    checking_account: "What kind of accounts or assets do you have?"
+    checking_account: 'What kind of accounts or assets do you have?'
   }
-
 
   self.field_options = {
     checking_account: FieldOption.form_group_no_bottom_space,
@@ -54,30 +55,28 @@ class IncomeOtherAssetsContinued < Step
     :trusts
 
   def skip?
-    ! @app.has_accounts
+    !@app.has_accounts
   end
 
   def checkboxes
-    [
-      :checking_account,
-      :savings_account,
-      :four_oh_one_k,
-      :life_insurance,
-      :iras,
-      :mutual_funds,
-      :stocks,
-      :trusts
+    %i[
+      checking_account
+      savings_account
+      four_oh_one_k
+      life_insurance
+      iras
+      mutual_funds
+      stocks
+      trusts
     ]
   end
 
   def assign_from_app
     @app.financial_accounts.each do |checkbox|
-      self.send("#{checkbox}=", true)
+      send("#{checkbox}=", true)
     end
 
-    assign_attributes @app.attributes.slice(*%w[
-      total_money
-    ])
+    assign_attributes @app.attributes.slice('total_money')
   end
 
   def update_app!

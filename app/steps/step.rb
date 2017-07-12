@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Step
   include ActiveModel::Model
   include ActiveModel::AttributeAssignment
@@ -27,19 +29,19 @@ class Step
     IntroductionIntroduceYourselfController
   end
 
-  def self.find(id, app, params={})
-    id.gsub("-", "_").camelize.constantize.new(app, params)
+  def self.find(id, app, params = {})
+    id.tr('-', '_').camelize.constantize.new(app, params)
   end
 
   def self.to_param
-    self.name.underscore.dasherize
+    name.underscore.dasherize
   end
 
   def self.template
-    self.name.underscore
+    name.underscore
   end
 
-  def initialize(app, params={})
+  def initialize(app, params = {})
     self.questions ||= {}
     self.member_questions ||= {}
     self.household_questions ||= {}
@@ -97,23 +99,21 @@ class Step
   end
 
   def check(checkboxes)
-    checkboxes.select { |c| self.send(c) == "1" }.map(&:to_s)
+    checkboxes.select { |c| send(c) == '1' }.map(&:to_s)
   end
 
   def update(params)
     assign_attributes(params)
 
-    if valid?
-      update_app!
-    end
+    update_app! if valid?
   end
 
   def options_for(field)
-    field_options&.fetch(field, "")
+    field_options&.fetch(field, '')
   end
 
   def placeholder(field)
-    placeholders.fetch(field, "")
+    placeholders.fetch(field, '')
   end
 
   def type(field)
@@ -121,7 +121,7 @@ class Step
   end
 
   def submit_label
-    "Continue"
+    'Continue'
   end
 
   def section_header(field)
@@ -129,11 +129,11 @@ class Step
   end
 
   def assign_from_app
-    raise "Implement Me"
+    raise 'Implement Me'
   end
 
   def update_app!
-    raise "Implement Me"
+    raise 'Implement Me'
   end
 
   def allowed_params

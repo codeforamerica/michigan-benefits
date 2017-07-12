@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ExpensesHousing < Step
-  self.title = "Expenses"
-  self.subhead = "Tell us about your housing expenses."
-  self.subhead_help = "Housing expenses help determine the amount of Food Assistance you may be eligible for."
+  self.title = 'Expenses'
+  self.subhead = 'Tell us about your housing expenses.'
+  self.subhead_help = 'Housing expenses help determine the amount of Food Assistance you may be eligible for.'
 
   attr_accessor \
     :rent_expense,
@@ -16,9 +18,9 @@ class ExpensesHousing < Step
     :utility_other
 
   self.questions = {
-    rent_expense: "How much does your household pay in rent or mortgage each month?",
-    property_tax_expense: "How much do you pay in property tax each month?",
-    insurance_expense: "How much do you pay in insurance each month?",
+    rent_expense: 'How much does your household pay in rent or mortgage each month?',
+    property_tax_expense: 'How much do you pay in property tax each month?',
+    insurance_expense: 'How much do you pay in insurance each month?',
     utility_heat: 'Heat',
     utility_cooling: 'Cooling',
     utility_electrity: 'Electricity',
@@ -60,18 +62,7 @@ class ExpensesHousing < Step
   }
 
   def assign_from_app
-    assign_attributes @app.attributes.slice(*%w[
-      rent_expense
-      property_tax_expense
-      insurance_expense
-      utility_heat
-      utility_cooling
-      utility_electrity
-      utility_water_sewer
-      utility_trash
-      utility_phone
-      utility_other
-    ])
+    assign_attributes @app.attributes.slice('rent_expense', 'property_tax_expense', 'insurance_expense', 'utility_heat', 'utility_cooling', 'utility_electrity', 'utility_water_sewer', 'utility_trash', 'utility_phone', 'utility_other')
   end
 
   def update_app!

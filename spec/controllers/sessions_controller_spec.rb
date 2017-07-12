@@ -1,25 +1,27 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 describe SessionsController do
-  describe "routing" do
+  describe 'routing' do
     specify do
-      expect(get: "/sessions/new").to route_to "sessions#new"
-      expect(delete: "/sessions").to route_to "sessions#destroy"
+      expect(get: '/sessions/new').to route_to 'sessions#new'
+      expect(delete: '/sessions').to route_to 'sessions#destroy'
     end
   end
 
-  describe "#new" do
+  describe '#new' do
     specify do
       get :new
       expect(response.code).to redirect_to root_path
     end
   end
 
-  describe "#destroy", :member do
+  describe '#destroy', :member do
     specify do
-      expect {
+      expect do
         delete :destroy
-      }.to change { logged_in? }.from(true).to(false)
+      end.to change { logged_in? }.from(true).to(false)
       expect(response).to redirect_to root_path
     end
   end

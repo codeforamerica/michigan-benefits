@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 class LegalAgreement < Step
-  self.title = "Legal"
-  self.subhead = "Scroll down to agree. You will sign on the next page."
+  self.title = 'Legal'
+  self.subhead = 'Scroll down to agree. You will sign on the next page.'
 
   def submit_label
-    "I agree"
+    'I agree'
   end
 
-  def assign_from_app
-  end
+  def assign_from_app; end
 
-  def update_app!
-  end
+  def update_app!; end
 end

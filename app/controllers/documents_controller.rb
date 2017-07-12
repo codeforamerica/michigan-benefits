@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DocumentsController < ApplicationController
   layout 'step'
 
@@ -35,7 +37,7 @@ class DocumentsController < ApplicationController
   private
 
   def redirect_path
-    documents_path(anchor: "attachments")
+    documents_path(anchor: 'attachments')
   end
 
   def document_params

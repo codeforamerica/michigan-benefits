@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class StepNavigation
   ALL = {
-    "Introduction" => [
+    'Introduction' => [
       IntroductionIntroduceYourselfController,
       IntroductionContactInformationController,
       IntroductionHomeAddressController,
-      IntroductionCompleteController,
+      IntroductionCompleteController
     ],
-    "Your Household" => [
+    'Your Household' => [
       HouseholdIntroductionController,
       HouseholdPersonalDetailsController,
       HouseholdMembersOverviewController,
@@ -15,9 +17,9 @@ class StepNavigation
       HouseholdHealth,
       HouseholdHealthSituations,
       HouseholdTax,
-      HouseholdTaxHow,
+      HouseholdTaxHow
     ],
-    "Money & Income" => [
+    'Money & Income' => [
       IncomeIntroduction,
       IncomeChange,
       IncomeChangeExplanation,
@@ -27,32 +29,32 @@ class StepNavigation
       IncomeAdditionalSources,
       IncomeAdditional,
       IncomeOtherAssets,
-      IncomeOtherAssetsContinued,
+      IncomeOtherAssetsContinued
     ],
-    "Expenses" => [
+    'Expenses' => [
       ExpensesIntroduction,
       ExpensesHousing,
       ExpensesAdditionalSources,
       ExpensesAdditional
     ],
-    "Preferences" => [
+    'Preferences' => [
       PreferencesReminders,
       PreferencesRemindersConfirmation,
       PreferencesForInterview,
-      PreferencesAnythingElse,
+      PreferencesAnythingElse
     ],
-    "Legal" => [
+    'Legal' => [
       LegalAgreement,
-      SignAndSubmit,
+      SignAndSubmit
     ],
-    "Submit Documents" => [
+    'Submit Documents' => [
       MaybeSubmitDocuments
     ]
-  }
+  }.freeze
 
   SUBSTEPS = {
-    HouseholdAddMember => HouseholdMembersOverviewController,
-  }
+    HouseholdAddMember => HouseholdMembersOverviewController
+  }.freeze
 
   def self.sections
     ALL
@@ -72,9 +74,9 @@ class StepNavigation
 
   def initialize(step_instance_or_class)
     @step = if step_instance_or_class.is_a?(Class)
-      step_instance_or_class
-    else
-      step_instance_or_class.class
+              step_instance_or_class
+            else
+              step_instance_or_class.class
     end
   end
 
@@ -89,14 +91,14 @@ class StepNavigation
   def previous
     if index
       new_index = index - 1
-      (new_index >= 0) ? steps.at(new_index) : nil
+      new_index >= 0 ? steps.at(new_index) : nil
     else
       steps.at(parent.index)
     end
   end
 
   def progress
-    index ? "#{index + 1}/#{steps.size}" : ""
+    index ? "#{index + 1}/#{steps.size}" : ''
   end
 
   def index

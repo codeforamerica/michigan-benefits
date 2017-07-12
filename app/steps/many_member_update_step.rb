@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class ManyMemberUpdateStep < Step
   attr_accessor :household_members
 
   def update(params)
     household_members.each do |household_member|
-      attrs = params.dig("household_members", household_member.to_param) || {}
+      attrs = params.dig('household_members', household_member.to_param) || {}
       household_member.assign_attributes(attrs)
       validate_household_member(household_member)
     end
@@ -20,7 +22,7 @@ class ManyMemberUpdateStep < Step
   end
 
   def valid?
-    self.household_members.all? { |member| member.errors.blank? }
+    household_members.all? { |member| member.errors.blank? }
   end
 
   def validate_household_member(household_member)

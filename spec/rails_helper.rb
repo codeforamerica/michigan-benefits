@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-require_relative "support/mom"
-require_relative "support/match_html"
-require_relative "support/generic_helper"
-require_relative "support/feature_helper"
-require_relative "support/step_helper"
+require_relative 'support/mom'
+require_relative 'support/match_html'
+require_relative 'support/generic_helper'
+require_relative 'support/feature_helper'
+require_relative 'support/step_helper'
 
 headless_capybara = true
 require 'capybara/rails'
@@ -22,11 +24,10 @@ if headless_capybara
   Capybara.javascript_driver = :accessible_poltergeist
 else
   Capybara.register_driver :chrome do |app|
-    Capybara::Selenium::Driver.new(app, :browser => :chrome)
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
   Capybara.javascript_driver = :chrome
 end
-
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -89,7 +90,7 @@ RSpec.configure do |config|
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
 
-  [:controller, :view, :request].each do |type|
+  %i[controller view request].each do |type|
     config.include ::Rails::Controller::Testing::TestProcess, type: type
     config.include ::Rails::Controller::Testing::TemplateAssertions, type: type
     config.include ::Rails::Controller::Testing::Integration, type: type

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class HouseholdTaxHow < ManyMemberUpdateStep
-  self.title = "Your Household"
-  self.subhead = "Describe how your household files taxes."
+  self.title = 'Your Household'
+  self.subhead = 'Describe how your household files taxes.'
   self.subhead_help = "If you aren't sure how your household files taxes right now, it is okay to skip these questions. We'll help you answer later."
 
   self.member_questions = {
-    filing_status: ["filing status", :hidden]
+    filing_status: ['filing status', :hidden]
   }
 
   self.types = {
@@ -16,6 +18,6 @@ class HouseholdTaxHow < ManyMemberUpdateStep
   }
 
   def skip?
-    ! @app.household_tax
+    !@app.household_tax
   end
 end

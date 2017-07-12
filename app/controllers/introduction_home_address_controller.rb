@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IntroductionHomeAddressController < SimpleStepController
   def edit
     @step = step_class.new(

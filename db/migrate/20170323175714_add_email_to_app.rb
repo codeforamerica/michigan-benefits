@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddEmailToApp < ActiveRecord::Migration[5.0]
   class User < ApplicationRecord
     has_one :app

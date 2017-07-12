@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe HouseholdPersonalDetailsController, :member, type: :controller do
   let(:params) do
     {
-      sex: "female",
-      ssn: "123-45-6789",
-      marital_status: "divorced"
+      sex: 'female',
+      ssn: '123-45-6789',
+      marital_status: 'divorced'
     }
   end
 
@@ -38,9 +40,9 @@ RSpec.describe HouseholdPersonalDetailsController, :member, type: :controller do
     context 'when valid' do
       let(:valid_params) do
         {
-          sex: "male",
-          ssn: "432-50-3432",
-          marital_status: "single"
+          sex: 'male',
+          ssn: '432-50-3432',
+          marital_status: 'single'
         }
       end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveNullFalseDefaultFalse < ActiveRecord::Migration[5.0]
   def change
     change_column :apps, :unstable_housing,                     :boolean, null: true

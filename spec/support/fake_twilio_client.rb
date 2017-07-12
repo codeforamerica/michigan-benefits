@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FakeTwilioClient
   # HT Thoughtbot: https://robots.thoughtbot.com/testing-sms-interactions
 
@@ -6,8 +8,7 @@ class FakeTwilioClient
   cattr_accessor :messages
   self.messages = []
 
-  def initialize
-  end
+  def initialize; end
 
   def messages
     self

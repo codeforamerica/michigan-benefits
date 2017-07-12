@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root "users#new"
+  root 'users#new'
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
   resource :resource, only: %i[show]
   resource :sessions, only: %i[new destroy] do
     collection do
-      get :clear, to: "sessions#destroy"
+      get :clear, to: 'sessions#destroy'
     end
   end
   resources :users, only: %i[new create]
@@ -22,8 +24,8 @@ Rails.application.routes.draw do
 
   resources :steps, only: %i[index show update]
 
-  get "/form", to: "forms#show"
-  get "/styleguide", to: "styleguides#index"
+  get '/form', to: 'forms#show'
+  get '/styleguide', to: 'styleguides#index'
 
   # SSL/Let's Encrypt
   get '/.well-known/acme-challenge/:id' => 'acme_challenges#show'

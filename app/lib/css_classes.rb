@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CssClasses < Array
   def initialize(*classes)
     self << classes
@@ -5,7 +7,7 @@ class CssClasses < Array
 
   def <<(classes)
     if classes.is_a?(String)
-      classes.split(" ").each { |c| super(c) }
+      classes.split(' ').each { |c| super(c) }
     elsif classes.is_a?(Array)
       classes.flatten.compact.each { |c| self << c }
     elsif classes.is_a?(Symbol)
@@ -14,6 +16,6 @@ class CssClasses < Array
   end
 
   def to_s
-    to_a.join(" ").presence
+    to_a.join(' ').presence
   end
 end

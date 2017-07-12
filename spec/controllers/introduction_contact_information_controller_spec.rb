@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe IntroductionContactInformationController, :member, type: :controller do
@@ -75,17 +77,17 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
 
         current_app.update!(welcome_sms_sent: false)
 
-        expect {
+        expect do
           put :update, params: { step: valid_params }
-        }.to change { current_app.reload.welcome_sms_sent }
+        end.to change { current_app.reload.welcome_sms_sent }
       end
 
       it 'does not send an SMS otherwise' do
         expect(sms).not_to receive(:deliver_welcome_message)
 
-        expect {
+        expect do
           put :update, params: { step: valid_params }
-        }.not_to change { current_app.reload.welcome_sms_sent }
+        end.not_to change { current_app.reload.welcome_sms_sent }
       end
 
       it 'redirects to the next step' do
