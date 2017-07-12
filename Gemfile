@@ -39,6 +39,7 @@ group :development, :test do
   gem "byebug", platform: :mri
   gem "capybara"
   gem 'capybara-accessible'
+  gem 'capybara-screenshot'
   gem "climate_control"
   gem "launchy"
   gem "poltergeist"

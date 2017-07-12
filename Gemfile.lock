@@ -75,6 +75,9 @@ GEM
       xpath (~> 2.0)
     capybara-accessible (0.2.1)
       capybara (~> 2.0)
+    capybara-screenshot (1.0.16)
+      capybara (>= 1.0, < 3)
+      launchy
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
     climate_control (0.2.0)
@@ -309,6 +312,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-accessible
+  capybara-screenshot
   citizen-scripts!
   climate_control
   coffee-rails
