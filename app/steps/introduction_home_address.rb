@@ -1,14 +1,8 @@
 class IntroductionHomeAddress < SimpleStep
-  def self.attributes
-    %w[
-      home_address
-      home_city
-      home_zip
-      unstable_housing
-    ]
-  end
-
-  attr_accessor(*attributes)
+  step_attributes :home_address,
+    :home_city,
+    :home_zip,
+    :unstable_housing
 
   validates :home_zip,
     length: {is: 5, message: "Make sure your ZIP code is 5 digits long"},

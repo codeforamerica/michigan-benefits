@@ -1,12 +1,12 @@
 class IntroductionContactInformationController < SimpleStepController
   def edit
-    @step = IntroductionContactInformation.new(
+    @step = step_class.new(
       current_app.attributes.slice(*step_attrs)
     )
   end
 
   def update
-    @step = IntroductionContactInformation.new(step_params)
+    @step = step_class.new(step_params)
 
     if @step.valid?
       current_app.update!(step_params)
@@ -20,19 +20,5 @@ class IntroductionContactInformationController < SimpleStepController
     else
       render :edit
     end
-  end
-
-  private
-
-  def step_attrs
-    %w[
-      phone_number
-      accepts_text_messages
-      mailing_street
-      mailing_city
-      mailing_zip
-      mailing_address_same_as_home_address
-      email
-    ]
   end
 end

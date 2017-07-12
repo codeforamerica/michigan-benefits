@@ -43,7 +43,7 @@ class SimpleStepController < ApplicationController
   end
 
   def step_attrs
-    step_class.attributes
+    step_class.attribute_names
   end
 
   def previous_path(params=nil)

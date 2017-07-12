@@ -21,8 +21,4 @@ class IntroductionHomeAddressController < SimpleStepController
   def skip?
     current_app.mailing_address_same_as_home_address
   end
-
-  def step_attrs
-    IntroductionHomeAddress.attributes
-  end
 end
