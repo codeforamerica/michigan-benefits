@@ -187,7 +187,7 @@ module StepHelper
 
   def submit
     log "Continuing" do
-      first('button[type="submit"]').click
+      first('button[type="submit"], .button--next').click
     end
   end
 

@@ -1,0 +1,17 @@
+.form-card
+  %header.form-card__header
+    .step-section-header
+      - icon :celebrate
+      .step-section-header__headline
+        Thank you #{@step.first_name}
+      .step-section-header__subhead
+        It should take about 10 more minutes to complete a full application.
+  .form-card__content
+    %h4 What happens next?
+
+    %p
+      We'll ask you about the people in your household, their citizenship or |
+      immigration status, income, and expenses to help us determine |
+      eligibility as quickly as possible.
+
+  = render partial: 'shared/next_step_link'

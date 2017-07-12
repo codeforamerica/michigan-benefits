@@ -3,6 +3,8 @@ class SimpleStepController < ApplicationController
 
   before_action :maybe_skip, only: :edit
 
+  helper_method :previous_path, :next_path
+
   def self.to_param
     controller_path.dasherize
   end
@@ -47,7 +49,8 @@ class SimpleStepController < ApplicationController
   end
 
   def previous_path(params=nil)
-    step_path(step_navigation.previous.to_param, params)
+    previous = step_navigation.previous
+    previous ? step_path(previous.to_param, params) : root_path
   end
 
   def next_path
