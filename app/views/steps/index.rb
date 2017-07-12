@@ -8,7 +8,9 @@ class Views::Steps::Index < Views::Base
 
         steps.each do |step|
           div do
-            link_to step.subhead, step_path(step.to_param), class: "button button--small button--full-width"
+            link_to step.name,
+              step_path(step.to_param),
+              class: "button button--small button--full-width"
           end
         end
       end
