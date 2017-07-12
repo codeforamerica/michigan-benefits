@@ -1,9 +1,9 @@
 class StepNavigation
   ALL = {
     "Introduction" => [
-      IntroductionIntroduceYourself,
-      IntroductionContactInformation,
-      IntroductionHomeAddress,
+      IntroductionIntroduceYourselfController,
+      IntroductionContactInformationController,
+      IntroductionHomeAddressController,
       IntroductionComplete,
     ],
     "Your Household" => [
@@ -54,17 +54,16 @@ class StepNavigation
     HouseholdAddMember => HouseholdMembers,
   }
 
-  SIMPLE_STEPS = [
-    IntroductionIntroduceYourself,
-    IntroductionContactInformation
-  ]
-
   def self.sections
     ALL
   end
 
   def self.steps
     ALL.values.flatten
+  end
+
+  def self.simple_step_controllers
+    steps.select { |klass| klass < SimpleStepController }
   end
 
   def steps

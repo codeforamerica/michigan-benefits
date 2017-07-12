@@ -1,12 +1,17 @@
 class IntroductionContactInformation < SimpleStep
-  attr_accessor \
-    :phone_number,
-    :accepts_text_messages,
-    :email,
-    :mailing_street,
-    :mailing_city,
-    :mailing_zip,
-    :mailing_address_same_as_home_address
+  def self.attributes
+    %w[
+      phone_number
+      accepts_text_messages
+      email
+      mailing_street
+      mailing_city
+      mailing_zip
+      mailing_address_same_as_home_address
+    ]
+  end
+
+  attr_accessor(*attributes)
 
   validates :email,
     format: {

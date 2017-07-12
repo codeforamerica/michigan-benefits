@@ -16,7 +16,7 @@ class IntroductionContactInformationController < SimpleStepController
         current_app.update!(welcome_sms_sent: true)
       end
 
-      redirect_to(next_step)
+      redirect_to(next_path)
     else
       render :edit
     end

@@ -2,7 +2,8 @@
 - classes << "form-group--error" if f.object.errors[method].present?
 
 %div{ "data-md5" => Digest::MD5.hexdigest(title), "data-field-type" => type, class: classes }
-  = f.label method, title, class: "form-question"
+  - unless type == :checkbox
+    = f.label method, title, class: "form-question"
 
   - case type
   - when :text_field
@@ -11,10 +12,13 @@
     %label.radio-button
       = f.radio_button method, 'true'
       Yes
-
     %label.radio-button
       = f.radio_button method, 'false'
       No
+  - when :checkbox
+    %label.checkbox
+      = f.check_box method
+      = title
 
   - if f.object.errors[method].present?
     %p.text--error

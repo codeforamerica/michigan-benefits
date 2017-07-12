@@ -10,7 +10,7 @@ class IntroductionIntroduceYourselfController < SimpleStepController
 
     if @step.valid?
       current_app.applicant.update!(step_params)
-      redirect_to(next_step)
+      redirect_to(next_path)
     else
       render :edit
     end

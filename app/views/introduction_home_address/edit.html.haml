@@ -1,0 +1,39 @@
+- content_for :header_title, 'Introduction'
+
+.form-card
+  = form_for @step, as: :step, url: introduction_home_address_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead Tell us where you currently live.
+
+    .form-card__content
+      %p What is your home address?
+
+      = render 'shared/question',
+        f: f,
+        title: 'Street',
+        type: :text_field,
+        method: :home_address,
+        placeholder: 'Street'
+
+      = render 'shared/question',
+        f: f,
+        title: 'City',
+        type: :text_field,
+        method: :home_city,
+        placeholder: 'City'
+
+      = render 'shared/question',
+        f: f,
+        title: 'ZIP Code',
+        type: :text_field,
+        method: :home_zip,
+        placeholder: 'ZIP'
+
+      = render 'shared/question',
+        f: f,
+        title: 'Check if you do not have stable housing.',
+        type: :checkbox,
+        method: :unstable_housing
+
+    = render 'shared/next_step'

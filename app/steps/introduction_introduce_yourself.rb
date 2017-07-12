@@ -1,5 +1,12 @@
 class IntroductionIntroduceYourself < SimpleStep
-  attr_accessor :first_name, :last_name
+  def self.attributes
+    %w[
+      first_name
+      last_name
+    ]
+  end
+
+  attr_accessor(*attributes)
 
   validates :first_name,
     presence: { message: "Make sure to provide a first name" }

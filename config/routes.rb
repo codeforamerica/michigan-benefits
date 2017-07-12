@@ -13,12 +13,10 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
 
   scope :steps do
-    StepNavigation::SIMPLE_STEPS.each do |klass|
-      path = "/#{klass.to_param}"
-      name = klass.name.underscore
-
-      get path, to: "#{name}#edit"
-      put path, to: "#{name}#update"
+    StepNavigation.simple_step_controllers.each do |controller_class|
+      path = "/#{controller_class.to_param}"
+      get path, action: :edit, controller: controller_class.controller_path
+      put path, action: :update, controller: controller_class.controller_path
     end
   end
 

@@ -24,7 +24,7 @@ class Step
   attr_reader :params
 
   def self.first
-    IntroductionIntroduceYourself
+    IntroductionIntroduceYourselfController
   end
 
   def self.find(id, app, params={})
