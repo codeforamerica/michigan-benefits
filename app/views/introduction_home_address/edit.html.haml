@@ -9,31 +9,33 @@
     .form-card__content
       %p What is your home address?
 
-      = render 'shared/question',
-        f: f,
-        title: 'Street',
-        type: :text_field,
-        method: :home_address,
-        placeholder: 'Street'
+      :ruby
+        qs = [
+          {
+            title: 'Street',
+            type: :text_field,
+            method: :home_address,
+            placeholder: 'Street'
+          },
+          {
+            title: 'City',
+            type: :text_field,
+            method: :home_city,
+            placeholder: 'City'
+          },
+          {
+            title: 'ZIP Code',
+            type: :text_field,
+            method: :home_zip,
+            placeholder: 'ZIP'
+          },
+          {
+            title: 'Check if you do not have stable housing.',
+            type: :checkbox,
+            method: :unstable_housing
+          }
+        ]
 
-      = render 'shared/question',
-        f: f,
-        title: 'City',
-        type: :text_field,
-        method: :home_city,
-        placeholder: 'City'
-
-      = render 'shared/question',
-        f: f,
-        title: 'ZIP Code',
-        type: :text_field,
-        method: :home_zip,
-        placeholder: 'ZIP'
-
-      = render 'shared/question',
-        f: f,
-        title: 'Check if you do not have stable housing.',
-        type: :checkbox,
-        method: :unstable_housing
+      - questions f, qs
 
     = render 'shared/next_step'

@@ -9,18 +9,22 @@
         .step-section-header__subhead To start, please introduce yourself.
 
     .form-card__content
-      = render 'shared/question',
-        f: f,
-        title: "What is your first name?",
-        type: :text_field,
-        method: :first_name,
-        placeholder: "First name"
+      :ruby
+        qs = [
+          {
+            title: "What is your first name?",
+            type: :text_field,
+            method: :first_name,
+            placeholder: "First name"
+          },
+          {
+            title: "What is your last name?",
+            type: :text_field,
+            method: :last_name,
+            placeholder: "Last name"
+          }
+        ]
 
-      = render 'shared/question',
-        f: f,
-        title: "What is your last name?",
-        type: :text_field,
-        method: :last_name,
-        placeholder: "Last name"
+      - questions f, qs
 
     = render partial: 'shared/next_step'
