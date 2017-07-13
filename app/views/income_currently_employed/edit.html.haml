@@ -1,0 +1,29 @@
+- content_for :header_title, 'Money & Income'
+
+.form-card
+  = form_for @step, as: :step, url: income_currently_employed_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Who in your household is currently employed, or has been in the past 30 days?
+
+        %p.text--help.step-section-header__subhead-help
+          Employment includes temporary or contract jobs. Self employment includes
+          odd jobs, home businesses, online businesses, etc.
+
+    .form-card__content
+      - fields_for_each_member(f, @step.household_members) do |ff, member|
+        - header = header_name(member)
+
+        .household-member-group{ 'data-md5': data_md5(header) }
+          = ff.label :employment_status, header, class: 'form-question'
+
+          = render 'shared/question',
+            f: ff,
+            type: :radios,
+            method: :employment_status,
+            title: 'Employment status',
+            options: HouseholdMember::EMPLOYMENT_STATUSES.map(&:to_s),
+            label_hidden: true
+
+    = render 'shared/next_step'

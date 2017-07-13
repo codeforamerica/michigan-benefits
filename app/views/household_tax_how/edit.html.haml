@@ -11,11 +11,16 @@
 
     .form-card__content
       - fields_for_each_member(f, @step.household_members) do |ff, member|
-        = render 'shared/question',
-          f: ff,
-          type: :radios,
-          method: :filing_status,
-          title: header_name(member),
-          options: HouseholdMember::FILING_STATUSES.map(&:to_s)
+        - header = header_name(member)
+
+        .household-member-group{ 'data-md5': data_md5(header) }
+          = ff.label :filing_status, header, class: 'form-question'
+
+          = render 'shared/question',
+            f: ff,
+            type: :radios,
+            method: :filing_status,
+            title: 'filing status',
+            options: HouseholdMember::FILING_STATUSES.map(&:to_s)
 
     = render 'shared/next_step'

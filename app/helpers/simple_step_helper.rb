@@ -25,4 +25,8 @@ module SimpleStepHelper
       )
     end
   end
+
+  def data_md5(str)
+    Digest::MD5.hexdigest(str.to_s.tr("\n", ' ').strip)
+  end
 end

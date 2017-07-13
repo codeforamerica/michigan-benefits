@@ -23,7 +23,7 @@ class StepNavigation
       IncomeIntroductionController,
       IncomeChangeController,
       IncomeChangeExplanation,
-      IncomeCurrentlyEmployed,
+      IncomeCurrentlyEmployedController,
       IncomePerMember,
       IncomeFluctuation,
       IncomeAdditionalSources,
