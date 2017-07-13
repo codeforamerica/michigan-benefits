@@ -20,7 +20,7 @@ class StepNavigation
       HouseholdTaxHowController
     ],
     'Money & Income' => [
-      IncomeIntroduction,
+      IncomeIntroductionController,
       IncomeChange,
       IncomeChangeExplanation,
       IncomeCurrentlyEmployed,

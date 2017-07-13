@@ -1,0 +1,28 @@
+- content_for(:title, 'Money & Income')
+
+.form-card
+  %header.form-card__header
+    .step-section-header
+      - icon 'section-2'
+      .step-section-header__headline
+        You’re doing great!
+      .step-section-header__subhead
+        Next, describe your financial situation for us.
+
+  .form-card__content
+    .slab.slab--not-padded
+      .card.card--narrow
+        %p
+          In the next section, we will ask you for information about money you
+          receive and valuable things you may own.
+
+        %p.text--small
+          %strong
+            This information is key to determine the benefits you're household
+            is eligible for.
+
+        %p.text--help
+          If you aren't sure about exact numbers right now — that's okay.
+          Do your best and we will work with you to clarify later.
+
+  = render partial: 'shared/next_step_link'

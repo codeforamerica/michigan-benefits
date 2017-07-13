@@ -39,7 +39,7 @@ RSpec.describe HouseholdTaxHowController, :member, type: :controller do
 
       get :edit
 
-      expect(response).to redirect_to(step_path(IncomeIntroduction))
+      expect(response).to redirect_to(step_path(IncomeIntroductionController))
     end
   end
 
@@ -84,7 +84,7 @@ RSpec.describe HouseholdTaxHowController, :member, type: :controller do
     it 'redirects to the next path' do
       do_put
 
-      expect(response).to redirect_to(step_path(IncomeIntroduction))
+      expect(response).to redirect_to(step_path(IncomeIntroductionController))
     end
   end
 end
