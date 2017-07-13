@@ -17,8 +17,10 @@
             placeholder: 'Phone #'
           },
           {
-            title: 'May we send text messages to that phone number to help you through \
-              the enrollment process?',
+            title: <<~STR,
+              May we send text messages to that phone number to help you through the
+              enrollment process?
+            STR
             type: :yes_no,
             method: :accepts_text_messages
           },
