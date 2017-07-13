@@ -48,7 +48,7 @@ RSpec.describe HouseholdHealthController, :member, type: :controller do
 
       it "redirects" do
         put :update, params: params
-        expect(response).to redirect_to step_path(HouseholdHealthSituations)
+        expect(response).to redirect_to step_path(HouseholdHealthSituationsController)
       end
     end
 

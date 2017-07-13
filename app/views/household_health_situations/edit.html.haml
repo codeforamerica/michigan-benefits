@@ -1,0 +1,27 @@
+- content_for :header_title, 'Your Household'
+
+.form-card
+  = form_for @step, as: :step, url: household_health_situations_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Ok, let us know which people these situations apply to.
+
+    .form-card__content
+      - if @step.any_medical_bill_help_last_3_months
+        = render 'shared/question',
+          f: f,
+          type: :household_checkboxes,
+          method: :medical_help,
+          title:  'Who needs help paying for medical bills?',
+          household_members: @step.household_members
+
+      - if @step.any_lost_insurance_last_3_months
+        = render 'shared/question',
+          f: f,
+          type: :household_checkboxes,
+          method: :insurance_lost_last_3_months,
+          title: 'Who had insurance through a job and lost it in the last 3 months?',
+          household_members: @step.household_members
+
+    = render 'shared/next_step'

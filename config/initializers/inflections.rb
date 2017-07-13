@@ -13,5 +13,8 @@
 # end
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
-  inflect.uncountable 'household_personal_details', 'household_situations'
+  inflect.uncountable \
+    'household_personal_details',
+    'household_situations',
+    'household_health_situations'
 end

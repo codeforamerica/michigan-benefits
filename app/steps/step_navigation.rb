@@ -15,7 +15,7 @@ class StepNavigation
       HouseholdMoreInfoController,
       HouseholdSituationsController,
       HouseholdHealthController,
-      HouseholdHealthSituations,
+      HouseholdHealthSituationsController,
       HouseholdTax,
       HouseholdTaxHow
     ],
