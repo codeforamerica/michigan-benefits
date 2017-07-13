@@ -1,35 +1,9 @@
 # frozen_string_literal: true
 
-class HouseholdTax < Step
-  self.title = 'Your Household'
-  self.subhead = 'Does anyone plan to file a federal tax return next year?'
-
-  self.questions = {
-    household_tax: ['Does anyone plan to file a federal tax return next year?', :hidden]
-  }
-
-  self.help_messages = {
-    household_tax: 'You do not need to file a tax return to receive benefits.'
-  }
-
-  self.types = {
-    household_tax: :yes_no
-  }
-
-  attr_accessor \
-    :household_tax
+class HouseholdTax < SimpleStep
+  step_attributes :household_tax
 
   validates \
     :household_tax,
     presence: { message: 'Make sure to answer this question' }
-
-  def assign_from_app
-    assign_attributes @app.attributes.slice('household_tax')
-  end
-
-  def update_app!
-    @app.update!(
-      household_tax: household_tax
-    )
-  end
 end

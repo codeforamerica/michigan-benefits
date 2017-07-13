@@ -40,7 +40,7 @@ RSpec.describe HouseholdHealthSituationsController, :member, type: :controller d
     it 'skips if there are no situations' do
       current_app.update!(skip_attributes)
       get :edit
-      expect(response).to redirect_to(step_path(HouseholdTax))
+      expect(response).to redirect_to(step_path(HouseholdTaxController))
     end
   end
 
@@ -86,7 +86,7 @@ RSpec.describe HouseholdHealthSituationsController, :member, type: :controller d
     it 'redirects to the next path' do
       do_put
 
-      expect(response).to redirect_to(step_path(HouseholdTax))
+      expect(response).to redirect_to(step_path(HouseholdTaxController))
     end
   end
 end

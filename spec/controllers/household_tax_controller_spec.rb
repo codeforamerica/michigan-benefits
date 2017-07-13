@@ -2,15 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe HouseholdHealthController, :member, type: :controller do
+RSpec.describe HouseholdTaxController, :member, type: :controller do
   let!(:current_app) do
     App.create!(attributes.merge(user: @member))
   end
 
   let(:attributes) do
     {
-      any_medical_bill_help_last_3_months: true,
-      any_lost_insurance_last_3_months: true
+      household_tax: true
     }.with_indifferent_access
   end
 
@@ -31,8 +30,7 @@ RSpec.describe HouseholdHealthController, :member, type: :controller do
       let(:params) do
         {
           step: {
-            any_medical_bill_help_last_3_months: false,
-            any_lost_insurance_last_3_months: false
+            household_tax: false
           }
         }
       end
@@ -42,13 +40,12 @@ RSpec.describe HouseholdHealthController, :member, type: :controller do
           put :update, params: params
         end.to change {
           current_app.reload.attributes.slice(*attributes.keys)
-        }.from('any_medical_bill_help_last_3_months' => true, 'any_lost_insurance_last_3_months' => true)
-          .to('any_medical_bill_help_last_3_months' => false, 'any_lost_insurance_last_3_months' => false)
+        }.from('household_tax' => true).to('household_tax' => false)
       end
 
       it 'redirects' do
         put :update, params: params
-        expect(response).to redirect_to step_path(HouseholdHealthSituationsController)
+        expect(response).to redirect_to step_path(HouseholdTaxHow)
       end
     end
 
@@ -56,7 +53,7 @@ RSpec.describe HouseholdHealthController, :member, type: :controller do
       it 're-renders' do
         put :update, params: { step: {} }
         expect(response).to render_template :edit
-        expect(assigns(:step)).to be_an_instance_of HouseholdHealth
+        expect(assigns(:step)).to be_an_instance_of(HouseholdTax)
       end
     end
   end

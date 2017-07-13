@@ -5,8 +5,6 @@ class HouseholdHealthSituations < SimpleStep
     :household_members,
     :any_medical_bill_help_last_3_months,
     :any_lost_insurance_last_3_months
-=begin
-  self.title = 'Your Household'
-  self.subhead = 'Ok, let us know which people these situations apply to.'
-=end
+  #   self.title = 'Your Household'
+  #   self.subhead = 'Ok, let us know which people these situations apply to.'
 end
