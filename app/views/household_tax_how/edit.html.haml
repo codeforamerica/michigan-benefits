@@ -1,7 +1,7 @@
 - content_for :header_title, 'Your Household'
 
 .form-card
-  = form_for @step, as: :step, url: household_health_situations_path, method: :put do |f|
+  = form_for @step, as: :step, url: household_tax_how_path, method: :put do |f|
     %header.form-card__header
       .step-section-header
         .step-section-header__subhead
@@ -10,11 +10,12 @@
           If you aren't sure how your household files taxes right now, it is okay to skip these questions. We'll help you answer later.
 
     .form-card__content
-      = render 'shared/question',
-        f: f,
-        type: :household_radios,
-        method: :filing_status,
-        household_members: @step.household_members,
-        options: HouseholdMember::FILING_STATUSES.map(&:to_s)
+      - fields_for_each_member(f, @step.household_members) do |ff, member|
+        = render 'shared/question',
+          f: ff,
+          type: :radios,
+          method: :filing_status,
+          title: header_name(member),
+          options: HouseholdMember::FILING_STATUSES.map(&:to_s)
 
     = render 'shared/next_step'

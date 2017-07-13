@@ -48,21 +48,10 @@
       = title
 
   - when :household_checkboxes
-    - household_members.each do |member|
-      = f.fields_for 'household_members[]', member, hidden_field_id: true do |ff|
-        %label.checkbox
-          = ff.check_box method
-          = member.name
-
-  - when :household_radios
-    - household_members.each do |member|
-      = f.fields_for 'household_members[]', member, hidden_field_id: true do |ff|
-        = ff.label method, header_name(member), class: 'form-question'
-        %div
-          - options.each do |option|
-            %label.radio-button<
-              = ff.radio_button method, option
-              = option.titleize
+    - fields_for_each_member(f, household_members) do |ff, member|
+      %label.checkbox
+        = ff.check_box method
+        = member.name
 
   - if errors.present?
     %p.text--error

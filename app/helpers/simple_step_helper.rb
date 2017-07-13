@@ -15,4 +15,14 @@ module SimpleStepHelper
     name = household_member.first_name.titleize
     household_member.applicant? ? "#{name} (that’s you!)" : name
   end
+
+  def fields_for_each_member(f, household_members)
+    household_members.each do |member|
+      haml_concat(
+        f.fields_for('household_members[]', member, hidden_field_id: true) do |ff|
+          yield ff, member
+        end
+      )
+    end
+  end
 end
