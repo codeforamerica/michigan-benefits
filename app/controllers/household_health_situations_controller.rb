@@ -1,35 +1,10 @@
 # frozen_string_literal: true
 
-class HouseholdHealthSituationsController < SimpleStepController
-  def edit
-    step
-  end
-
-  def update
-    step.household_members.each do |household_member|
-      attrs = params
-              .dig(:step, :household_members, household_member.to_param)
-              &.permit(%i[medical_help insurance_lost_last_3_months])
-
-      household_member.assign_attributes(attrs) if attrs.present?
-    end
-
-    ActiveRecord::Base.transaction do
-      step.household_members.each(&:save!)
-    end
-
-    redirect_to next_path
-  end
-
+class HouseholdHealthSituationsController < ManyMemberSimpleStepController
   private
 
-  def step
-    @step ||= step_class.new(
-      current_app
-        .attributes
-        .slice(*step_attrs)
-        .merge(household_members: current_app.household_members)
-    )
+  def household_member_attrs
+    %i[medical_help insurance_lost_last_3_months]
   end
 
   def skip?
