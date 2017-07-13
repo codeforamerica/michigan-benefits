@@ -45,7 +45,7 @@ RSpec.describe HouseholdTaxController, :member, type: :controller do
 
       it 'redirects' do
         put :update, params: params
-        expect(response).to redirect_to step_path(HouseholdTaxHow)
+        expect(response).to redirect_to step_path(HouseholdTaxHowController)
       end
     end
 

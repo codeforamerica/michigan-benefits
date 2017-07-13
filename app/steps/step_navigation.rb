@@ -17,7 +17,7 @@ class StepNavigation
       HouseholdHealthController,
       HouseholdHealthSituationsController,
       HouseholdTaxController,
-      HouseholdTaxHow
+      HouseholdTaxHowController
     ],
     'Money & Income' => [
       IncomeIntroduction,

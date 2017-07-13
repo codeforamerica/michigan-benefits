@@ -7,7 +7,7 @@ class ManyMemberSimpleStep < SimpleStep
       validate_household_member(member)
     end
 
-    household_members.map(&:errors).all(&:blank?)
+    household_members.map(&:errors).all?(&:blank?)
   end
 
   def validate_household_member(household_member); end

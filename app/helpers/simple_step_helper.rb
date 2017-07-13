@@ -10,4 +10,9 @@ module SimpleStepHelper
       haml_concat render 'shared/question', f: f, **question
     end
   end
+
+  def header_name(household_member)
+    name = household_member.first_name.titleize
+    household_member.applicant? ? "#{name} (that’s you!)" : name
+  end
 end
