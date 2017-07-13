@@ -43,7 +43,7 @@ RSpec.describe HouseholdSituationsController, :member, type: :controller do
 
       get :edit
 
-      expect(response).to redirect_to(step_path(HouseholdHealth))
+      expect(response).to redirect_to(step_path(HouseholdHealthController))
     end
   end
 
@@ -92,7 +92,7 @@ RSpec.describe HouseholdSituationsController, :member, type: :controller do
     it 'redirects to the next path' do
       do_put
 
-      expect(response).to redirect_to(step_path(HouseholdHealth))
+      expect(response).to redirect_to(step_path(HouseholdHealthController))
     end
   end
 end

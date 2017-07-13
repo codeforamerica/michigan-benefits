@@ -1,0 +1,32 @@
+- content_for :header_title, 'Your Household'
+
+.form-card
+  = form_for @step, as: :step, url: household_health_path,
+    method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead Tell us about your household health coverage in the past 3 months.
+
+    .form-card__content
+      :ruby
+        qs = [
+          {
+            title: 'Does anyone need help paying for medical bills from the past 3 months?',
+            type: :yes_no,
+            method: :any_medical_bill_help_last_3_months
+          },
+          {
+            title: 'Did anyone have insurance through a job and lose it in the last 3 months?',
+            help: <<~TEXT,
+              Including Medicaid, CHIP/MIChild, Medicare, VA Healthcare Programs,
+              Peace Corps, Employer Insurance, TRICARE (unless you have direct care or
+              Line of Duty), and Other.
+            TEXT
+            type: :yes_no,
+            method: :any_lost_insurance_last_3_months
+          },
+        ]
+
+      - questions f, qs
+
+    = render 'shared/next_step'

@@ -15,7 +15,7 @@
   - when :radios
     %div
       - options.each do |option|
-        %label.radio-button
+        %label.radio-button<
           = f.radio_button method, option
           = option.titleize
 
@@ -32,10 +32,10 @@
         class: 'select__element'
 
   - when :yes_no
-    %label.radio-button
+    %label.radio-button<
       = f.radio_button method, 'true'
       Yes
-    %label.radio-button
+    %label.radio-button<
       = f.radio_button method, 'false'
       No
 
