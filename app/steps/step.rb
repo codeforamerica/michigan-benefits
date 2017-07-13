@@ -66,13 +66,9 @@ class Step
     false # override me to skip
   end
 
-  def next
-    nav.next
-  end
+  delegate :next, to: :nav
 
-  def previous
-    nav.previous
-  end
+  delegate :previous, to: :nav
 
   def nav
     StepNavigation.new(self)

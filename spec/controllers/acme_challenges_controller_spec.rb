@@ -22,16 +22,19 @@ describe AcmeChallengesController do
 
     context 'when the challenge response is not set' do
       let(:challenge_response) { '' }
+
       specify { expect { get_show }.to raise_exception 'Challenge response not set' }
     end
 
     context 'when the challenge request is not set' do
       let(:challenge_request) { '' }
+
       specify { expect { get_show }.to raise_exception 'Challenge request not set' }
     end
 
     context 'when the challenge request does not match the expected one' do
       let(:id) { 'something-else' }
+
       specify { expect { get_show }.to raise_exception 'Challenge request does not match expected request' }
     end
 

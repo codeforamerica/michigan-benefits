@@ -47,9 +47,9 @@ class Views::Documents::Index < Views::Base
             end
 
             link_to 'Delete',
-                    document_path(document),
-                    method: :delete,
-                    class: 'attachment-preview__delete'
+              document_path(document),
+              method: :delete,
+              class: 'attachment-preview__delete'
           end
         end
       end
@@ -59,8 +59,8 @@ class Views::Documents::Index < Views::Base
 
         if documents.empty?
           link_to "I'll do this later",
-                  next_page,
-                  class: 'button button--secondary-cta'
+            next_page,
+            class: 'button button--secondary-cta'
         else
           link_to next_page, class: 'button button--secondary-cta' do
             text "I'm finished"

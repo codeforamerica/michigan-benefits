@@ -33,10 +33,10 @@ class ExpensesAdditionalSources < Step
     :tax_deductible
 
   validates :dependent_care,
-            :medical,
-            :court_ordered,
-            :tax_deductible,
-            presence: { message: 'Make sure to answer this question' }
+    :medical,
+    :court_ordered,
+    :tax_deductible,
+    presence: { message: 'Make sure to answer this question' }
 
   def assign_from_app
     assign_attributes @app.attributes.slice('dependent_care', 'medical', 'court_ordered', 'tax_deductible')

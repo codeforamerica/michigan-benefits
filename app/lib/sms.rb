@@ -37,9 +37,9 @@ class Sms
   end
 
   def deliverable?
-    return undeliverable('TWILIO_PHONE_NUMBER not present') unless twilio_phone_number.present?
+    return undeliverable('TWILIO_PHONE_NUMBER not present') if twilio_phone_number.blank?
     return undeliverable('app does not accept text messages') unless @app.accepts_text_messages
-    return undeliverable('app does not have a phone number') unless @app.phone_number.present?
+    return undeliverable('app does not have a phone number') if @app.phone_number.blank?
 
     if whitelist?
       return undeliverable('whitelist does not include phone number') unless whitelist.include?(@app.phone_number)

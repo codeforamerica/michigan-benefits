@@ -18,7 +18,7 @@ class IncomeCurrentlyEmployed < ManyMemberUpdateStep
   }
 
   def validate_household_member(member)
-    unless member.employment_status.present?
+    if member.employment_status.blank?
       member.errors.add(:employment_status, 'Make sure you answer this question')
     end
   end

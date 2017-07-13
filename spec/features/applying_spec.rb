@@ -7,7 +7,7 @@ describe 'applying', js: true do
     allow(FormMailer).to receive_message_chain(:submission, :deliver_now)
   end
 
-  around(:each) do |example|
+  around do |example|
     with_modified_env FORM_RECIPIENT: 'test@example.com',
                       TWILIO_PHONE_NUMBER: '8005551212',
                       TWILIO_RECIPIENT_WHITELIST: '4158675309' do
@@ -20,17 +20,17 @@ describe 'applying', js: true do
     click_on 'Apply now'
 
     check_step 'To start, please introduce yourself.',
-               ['What is your first name?', 'Alice', 'Make sure to provide a first name'],
-               ['What is your last name?', 'Aardvark', 'Make sure to provide a last name']
+      ['What is your first name?', 'Alice', 'Make sure to provide a first name'],
+      ['What is your last name?', 'Aardvark', 'Make sure to provide a last name']
 
     check_step 'Tell us the best ways to reach you.',
-               ['What is the best phone number to reach you?', '4158675309', 'Make sure your phone number is 10 digits long'],
-               ['May we send text messages to that phone number to help you through the enrollment process?', 'Yes', 'Make sure to answer this question'],
-               ['What is your email address?', 'test@example.com', nil],
-               ['Address', '123 Main St', nil],
-               ['City', 'San Francisco', nil],
-               ['ZIP Code', '94110', nil],
-               ['Is this address the same as your home address?', 'Yes', 'Make sure to answer this question']
+      ['What is the best phone number to reach you?', '4158675309', 'Make sure your phone number is 10 digits long'],
+      ['May we send text messages to that phone number to help you through the enrollment process?', 'Yes', 'Make sure to answer this question'],
+      ['What is your email address?', 'test@example.com', nil],
+      ['Address', '123 Main St', nil],
+      ['City', 'San Francisco', nil],
+      ['ZIP Code', '94110', nil],
+      ['Is this address the same as your home address?', 'Yes', 'Make sure to answer this question']
 
     expect_page('It should take about 10 more minutes to complete a full application.')
     back
@@ -44,73 +44,73 @@ describe 'applying', js: true do
     expect(FakeTwilioClient.messages.count).to eq 1
 
     check_step 'Tell us where you currently live.',
-               ['Street', '1234 Fake Street', 'Make sure to answer this question'],
-               ['City', 'San Francisco', 'Make sure to answer this question'],
-               ['ZIP Code', '94110', 'Make sure your ZIP code is 5 digits long'],
-               ['Check if you do not have stable housing.', false, nil]
+      ['Street', '1234 Fake Street', 'Make sure to answer this question'],
+      ['City', 'San Francisco', 'Make sure to answer this question'],
+      ['ZIP Code', '94110', 'Make sure your ZIP code is 5 digits long'],
+      ['Check if you do not have stable housing.', false, nil]
 
     static_step 'It should take about 10 more minutes to complete a full application.'
     static_step 'There are 4 sections you need to complete to submit a full application.'
 
     check_step 'Provide us with some personal details.',
-               ['What is your sex?', 'Female', 'Make sure to answer this question.'],
-               ['What is your marital status?', 'Single', 'Make sure to answer this question.'],
-               ['What is your social security number?', '123-45-6789', nil]
+      ['What is your sex?', 'Female', 'Make sure to answer this question.'],
+      ['What is your marital status?', 'Single', 'Make sure to answer this question.'],
+      ['What is your social security number?', '123-45-6789', nil]
 
     click_on 'Add a member'
 
     check_step 'Tell us about another person you are applying with.',
-               ['What is their first name?', 'Cindy', nil],
-               ['What is their last name?', 'Crayfish', nil],
-               ['What is their sex?', 'Female', nil],
-               ['What is their relationship to you?', 'Child', nil],
-               ['What is their social security number?', '444-44-4444', nil],
-               ['Is this person living in your home?', 'Yes', nil],
-               ['Do you buy and prepare food with this person?', 'Yes', nil],
-               validations: false,
-               verify: false
+      ['What is their first name?', 'Cindy', nil],
+      ['What is their last name?', 'Crayfish', nil],
+      ['What is their sex?', 'Female', nil],
+      ['What is their relationship to you?', 'Child', nil],
+      ['What is their social security number?', '444-44-4444', nil],
+      ['Is this person living in your home?', 'Yes', nil],
+      ['Do you buy and prepare food with this person?', 'Yes', nil],
+      validations: false,
+      verify: false
 
     click_on 'Add a member'
 
     check_step 'Tell us about another person you are applying with.',
-               ['What is their first name?', 'Billy', nil],
-               ['What is their last name?', 'Bobcat', nil],
-               ['What is their sex?', 'Male', nil],
-               ['What is their relationship to you?', 'Sibling', nil],
-               ['What is their social security number?', '555-55-5555', nil],
-               ['Is this person living in your home?', 'Yes', nil],
-               ['Do you buy and prepare food with this person?', 'Yes', nil],
-               validations: false,
-               verify: false
+      ['What is their first name?', 'Billy', nil],
+      ['What is their last name?', 'Bobcat', nil],
+      ['What is their sex?', 'Male', nil],
+      ['What is their relationship to you?', 'Sibling', nil],
+      ['What is their social security number?', '555-55-5555', nil],
+      ['Is this person living in your home?', 'Yes', nil],
+      ['Do you buy and prepare food with this person?', 'Yes', nil],
+      validations: false,
+      verify: false
 
     submit
 
     check_step 'Tell us a bit more about your household.',
-               ['Is each person a citizen?', 'No', nil],
-               ['Does anyone have a disability?', 'Yes', nil],
-               ['Is anyone pregnant or has been pregnant recently?', 'Yes', nil],
-               ['Is anyone enrolled in college?', 'Yes', nil],
-               ['Is anyone temporarily living outside the home?', 'Yes', nil]
+      ['Is each person a citizen?', 'No', nil],
+      ['Does anyone have a disability?', 'Yes', nil],
+      ['Is anyone pregnant or has been pregnant recently?', 'Yes', nil],
+      ['Is anyone enrolled in college?', 'Yes', nil],
+      ['Is anyone temporarily living outside the home?', 'Yes', nil]
 
     check_step 'Ok, let us know which people these situations apply to.',
-               ['Who is a citizen?', ['Billy'], nil],
-               ['Who has a disability?', ['Cindy'], nil],
-               ['Who is pregnant or has been pregnant recently?', ['Cindy'], nil],
-               ['Who is enrolled in college?', %w[Alice Billy], nil],
-               ['Who is temporarily living outside the home?', %w[Alice Billy], nil],
-               validations: false
+      ['Who is a citizen?', ['Billy'], nil],
+      ['Who has a disability?', ['Cindy'], nil],
+      ['Who is pregnant or has been pregnant recently?', ['Cindy'], nil],
+      ['Who is enrolled in college?', %w[Alice Billy], nil],
+      ['Who is temporarily living outside the home?', %w[Alice Billy], nil],
+      validations: false
 
     check_step 'Tell us about your household health coverage in the past 3 months.',
-               ['Does anyone need help paying for medical bills from the past 3 months?', 'Yes', 'Make sure to answer this question'],
-               ['Did anyone have insurance through a job and lose it in the last 3 months?', 'Yes', 'Make sure to answer this question'],
-               validations: false
+      ['Does anyone need help paying for medical bills from the past 3 months?', 'Yes', 'Make sure to answer this question'],
+      ['Did anyone have insurance through a job and lose it in the last 3 months?', 'Yes', 'Make sure to answer this question'],
+      validations: false
 
     expect_page 'Ok, let us know which people these situations apply to.'
     submit
 
     check_step '',
-               ['Does anyone plan to file a federal tax return next year?', 'Yes', 'Make sure to answer this question'],
-               validations: false
+      ['Does anyone plan to file a federal tax return next year?', 'Yes', 'Make sure to answer this question'],
+      validations: false
 
     expect_page 'Describe how your household files taxes.'
     submit
@@ -119,11 +119,11 @@ describe 'applying', js: true do
     submit
 
     check_step 'Has your household had a change in income in the past 30 days?',
-               ['Income change', 'Yes', nil]
+      ['Income change', 'Yes', nil]
 
     check_step "In your own words, tell us about the recent change in your household's income.",
-               ['Explanation', 'I lost my job', nil],
-               validations: false
+      ['Explanation', 'I lost my job', nil],
+      validations: false
 
     check_household_step 'Who in your household is currently employed, or has been in the past 30 days?', 'Alice (that’s you!)' => [['Employment status', 'Employed', 'Make sure you answer this question']],
                                                                                                           'Billy' => [['Employment status', 'Self Employed', 'Make sure you answer this question']],
@@ -151,27 +151,27 @@ describe 'applying', js: true do
       validations: false
 
     check_step 'Check all additional sources of income received by your household, if any.',
-               ['Unemployment Insurance', true, nil],
-               ['SSI or Disability', false, nil],
-               ["Worker's Compensation", true, nil],
-               ['Pension', false, nil],
-               ['Social Security', true, nil],
-               ['Child Support', false, nil],
-               ['Foster Care or Adoption Subsidies', true, nil],
-               ['Other Income', false, nil],
-               validations: false
+      ['Unemployment Insurance', true, nil],
+      ['SSI or Disability', false, nil],
+      ["Worker's Compensation", true, nil],
+      ['Pension', false, nil],
+      ['Social Security', true, nil],
+      ['Child Support', false, nil],
+      ['Foster Care or Adoption Subsidies', true, nil],
+      ['Other Income', false, nil],
+      validations: false
 
     check_step 'Tell us more about your additional income.',
-               ['Unemployment Insurance', '100', 'Make sure you answer this question'],
-               ["Worker's Compensation", '200', 'Make sure you answer this question'],
-               ['Social Security', '300', 'Make sure you answer this question'],
-               ['Foster Care or Adoption Subsidies', '400', 'Make sure you answer this question'],
-               validations: false
+      ['Unemployment Insurance', '100', 'Make sure you answer this question'],
+      ["Worker's Compensation", '200', 'Make sure you answer this question'],
+      ['Social Security', '300', 'Make sure you answer this question'],
+      ['Foster Care or Adoption Subsidies', '400', 'Make sure you answer this question'],
+      validations: false
 
     check_step 'Tell us about the assets and money you have on hand.',
-               ['Does your household have any money or accounts?', 'Yes', 'Make sure to answer this question'],
-               ['Does your household own any property or real estate?', 'Yes', 'Make sure to answer this question'],
-               ['Does your household own any vehicles?', 'No', 'Make sure to answer this question']
+      ['Does your household have any money or accounts?', 'Yes', 'Make sure to answer this question'],
+      ['Does your household own any property or real estate?', 'Yes', 'Make sure to answer this question'],
+      ['Does your household own any vehicles?', 'No', 'Make sure to answer this question']
 
     static_step 'Tell us more about those assets.'
 
@@ -183,37 +183,37 @@ describe 'applying', js: true do
     submit
 
     check_step 'Tell us about your housing expenses.',
-               ['How much does your household pay in rent or mortgage each month?', '300', 'Make sure to answer this question'],
-               ['How much do you pay in property tax each month?', '100', 'Make sure to answer this question'],
-               ['How much do you pay in insurance each month?', '20', 'Make sure to answer this question'],
-               validations: false
+      ['How much does your household pay in rent or mortgage each month?', '300', 'Make sure to answer this question'],
+      ['How much do you pay in property tax each month?', '100', 'Make sure to answer this question'],
+      ['How much do you pay in insurance each month?', '20', 'Make sure to answer this question'],
+      validations: false
 
     check_step 'Tell us more about your expenses.',
-               ['Does your household have dependent care expenses?', 'Yes', 'Make sure to answer this question'],
-               ['Does your household have medical expenses?', 'Yes', 'Make sure to answer this question'],
-               ['Does your household have court-ordered expenses?', 'Yes', 'Make sure to answer this question'],
-               ['Does your household have tax deductible expenses?', 'Yes', 'Make sure to answer this question']
+      ['Does your household have dependent care expenses?', 'Yes', 'Make sure to answer this question'],
+      ['Does your household have medical expenses?', 'Yes', 'Make sure to answer this question'],
+      ['Does your household have court-ordered expenses?', 'Yes', 'Make sure to answer this question'],
+      ['Does your household have tax deductible expenses?', 'Yes', 'Make sure to answer this question']
 
     check_step 'Tell us more about the other expenses you listed.',
-               ['In total, how much do you pay in care expenses each month?', '100', nil],
-               ['Childcare', true, nil],
-               ['In total, how much do you pay in medical expenses each month?', '200', nil],
-               ['Transportation', true, nil],
-               ['In total, how much do you pay in court ordered expenses each month?', '300', nil],
-               ['Alimony', true, nil],
-               ['In total, how much do you pay in tax deductible expenses each month?', '400', nil],
-               ['Student loan interest', true, nil],
-               validations: false
+      ['In total, how much do you pay in care expenses each month?', '100', nil],
+      ['Childcare', true, nil],
+      ['In total, how much do you pay in medical expenses each month?', '200', nil],
+      ['Transportation', true, nil],
+      ['In total, how much do you pay in court ordered expenses each month?', '300', nil],
+      ['Alimony', true, nil],
+      ['In total, how much do you pay in tax deductible expenses each month?', '400', nil],
+      ['Student loan interest', true, nil],
+      validations: false
 
     check_step "We'll make sure you don't miss a thing. Tell us how to follow up with you.",
-               ['Text message me', true, nil],
-               ['Email me', true, nil],
-               validations: false
+      ['Text message me', true, nil],
+      ['Email me', true, nil],
+      validations: false
 
     static_step "Great! You'll receive a confirmation message soon."
 
     check_step 'The next step after you apply is a brief interview with your county.',
-               ['What do you prefer?', 'Telephone Interview', 'Make sure to answer this question']
+      ['What do you prefer?', 'Telephone Interview', 'Make sure to answer this question']
 
     static_step "Is there anything else you'd like us to know about your situation?"
 
@@ -225,8 +225,8 @@ describe 'applying', js: true do
     submit
 
     check_step 'Enter your full legal name here to sign this application.',
-               ['Your signature', 'Alice Aardvark', 'Make sure you enter your signature'],
-               verify: false
+      ['Your signature', 'Alice Aardvark', 'Make sure you enter your signature'],
+      verify: false
 
     check_doc_uploads
 

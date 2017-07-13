@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe FormMailer do
   describe '#submission' do
-    around(:each) do |example|
+    around do |example|
       with_modified_env FORM_RECIPIENT: 'test@example.com' do
         example.run
       end
@@ -18,13 +18,13 @@ describe FormMailer do
       instance_double('Form', fill: form_path)
     end
 
-    it 'should mail to the correct recipient' do
+    it 'mails to the correct recipient' do
       mail = send_mail
 
       expect(mail.to).to eq(['test@example.com'])
     end
 
-    it 'should attach the form PDF' do
+    it 'attaches the form PDF' do
       mail = send_mail
 
       expect(mail.attachments.size).to eq(1)

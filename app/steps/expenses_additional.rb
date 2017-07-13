@@ -34,9 +34,9 @@ class ExpensesAdditional < Step
 
   def assign_from_app
     fields = @app.care_expenses +
-             @app.medical_expenses +
-             @app.court_ordered_expenses +
-             @app.tax_deductible_expenses
+      @app.medical_expenses +
+      @app.court_ordered_expenses +
+      @app.tax_deductible_expenses
 
     fields.each do |field|
       send("#{field}=", true)

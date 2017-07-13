@@ -102,7 +102,7 @@ describe ApplicationController do
   end
 
   describe 'basic auth' do
-    around(:each) do |example|
+    around do |example|
       with_modified_env BASIC_AUTH: basic_auth do
         example.run
       end

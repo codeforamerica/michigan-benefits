@@ -75,7 +75,7 @@ class Views::Users::New < Views::Base
     div id: 'apply-for-programs', class: 'slab slab--white' do
       div class: 'card--narrow' do
         h3 'Choose the programs you want to apply for today.',
-           class: 'h3--strong'
+          class: 'h3--strong'
 
         p 'You can choose more than one',
           class: 'text--help text--padded'

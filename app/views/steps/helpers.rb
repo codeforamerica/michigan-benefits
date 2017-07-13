@@ -93,8 +93,8 @@ module Views::Steps::Helpers
 
   def text_field(f, method, placeholder)
     f.text_field method,
-                 placeholder: placeholder,
-                 class: 'text-input'
+      placeholder: placeholder,
+      class: 'text-input'
     errors f, method
   end
 
@@ -107,8 +107,8 @@ module Views::Steps::Helpers
     div class: 'text-input-group' do
       div '$', class: 'text-input-group__prefix'
       f.text_field method,
-                   placeholder: placeholder,
-                   class: 'text-input text--right'
+        placeholder: placeholder,
+        class: 'text-input text--right'
       div '.00', class: 'text-input-group__postfix'
     end
     errors f, method
@@ -116,8 +116,8 @@ module Views::Steps::Helpers
 
   def text_area_field(f, method, placeholder = nil)
     f.text_area method,
-                placeholder: placeholder,
-                class: 'textarea'
+      placeholder: placeholder,
+      class: 'textarea'
     errors f, method
   end
 
@@ -135,9 +135,9 @@ module Views::Steps::Helpers
   def select_field(f, method, options)
     div class: 'select' do
       f.select method,
-               options,
-               { include_blank: 'Choose one' },
-               class: 'select__element'
+        options,
+        { include_blank: 'Choose one' },
+        class: 'select__element'
     end
     errors f, method
   end

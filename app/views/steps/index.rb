@@ -13,8 +13,8 @@ class Views::Steps::Index < Views::Base
 
           div do
             link_to "#{step.name} #{tag}",
-                    step_path(step.to_param),
-                    class: 'button button--small button--full-width'
+              step_path(step.to_param),
+              class: 'button button--small button--full-width'
           end
         end
       end

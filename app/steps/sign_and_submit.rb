@@ -21,7 +21,7 @@ class SignAndSubmit < Step
   attr_accessor :signature
 
   validates :signature,
-            presence: { message: 'Make sure you enter your signature' }
+    presence: { message: 'Make sure you enter your signature' }
 
   def assign_from_app
     self.signature = @app.signature

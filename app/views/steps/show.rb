@@ -106,8 +106,8 @@ class Views::Steps::Show < Views::Base
 
   def question_label(f, question, label_text, label_option)
     f.label question,
-            label_text,
-            class: "form-question #{'hidden' if label_option == :hidden}"
+      label_text,
+      class: "form-question #{'hidden' if label_option == :hidden}"
 
     if step.help_message(question)
       p step.help_message(question), class: 'text--help'
@@ -175,9 +175,9 @@ class Views::Steps::Show < Views::Base
 
       when :date
         f.label question,
-                label_text,
-                class: 'form-question',
-                id: "date-label-#{question}"
+          label_text,
+          class: 'form-question',
+          id: "date-label-#{question}"
 
         div class: 'input-group--inline' do
           div class: 'select' do

@@ -7,6 +7,6 @@ class HouseholdPersonalDetails < SimpleStep
     :ssn
 
   validates :sex,
-            :marital_status,
-            presence: { message: 'Make sure to answer this question.' }
+    :marital_status,
+    presence: { message: 'Make sure to answer this question.' }
 end
