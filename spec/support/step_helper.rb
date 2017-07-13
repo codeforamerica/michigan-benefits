@@ -143,7 +143,7 @@ module StepHelper
           choose answer
         when 'select'
           select answer
-        when 'checkbox'
+        when 'checkbox', 'household_checkboxes'
           if answer.is_a?(Array)
             answer.each do |checkbox|
               check checkbox

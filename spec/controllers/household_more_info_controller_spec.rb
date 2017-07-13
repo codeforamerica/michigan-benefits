@@ -44,7 +44,7 @@ RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
       put :update, params: { step: params }
 
       expect(current_app.reload.attributes).to include(params)
-      expect(response).to redirect_to(step_path(HouseholdSituations))
+      expect(response).to redirect_to(step_path(HouseholdSituationsController))
     end
 
     it 'sets the step and renders :edit otherwise' do
