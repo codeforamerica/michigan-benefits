@@ -1,1 +1,19 @@
+require: rubocop-rspec
+
 inherit_from: .rubocop_todo.yml
+
+Metrics/LineLength:
+  Max: 90
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+
+Rails:
+  Enabled: true
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'

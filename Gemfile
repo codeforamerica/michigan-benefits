@@ -43,13 +43,14 @@ group :development, :test do
   gem 'capybara-accessible'
   gem 'capybara-screenshot'
   gem 'climate_control'
+  gem 'haml-lint', require: false
   gem 'launchy'
   gem 'poltergeist'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter'
   gem 'rubocop', require: false
-  gem 'haml-lint', require: false
+  gem 'rubocop-rspec', require: false
 
   # from gcf
   # gem 'pdf-inspector'
