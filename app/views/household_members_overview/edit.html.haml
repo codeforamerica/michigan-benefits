@@ -6,7 +6,8 @@
       .step-section-header__subhead
         How many people are in your household?
       %p.text--help.step-section-header__subhead-help
-        This includes everyone who lives in your home (including you) and anyone you list on your federal tax returns.
+        This includes everyone who lives in your home (including you) and anyone you
+        list on your federal tax returns.
 
   .form-card__content
     .slab.slab--not-padded
@@ -14,7 +15,7 @@
         %div
           .button.buttonish.button--full-width
             %i.button__icon--left.icon-check--color
-            = "#{@step.first_name.titleize} (that's you!)"
+            #{@step.first_name.titleize} (that's you!)
 
         - @step.non_applicant_members.each do |member|
           %div
@@ -23,7 +24,8 @@
               %i.button__icon--left.icon-check--color
               = member.first_name.titleize
 
-        = link_to step_path(HouseholdAddMemberController), class: 'button button-full-width button-bold' do
+        = link_to step_path(HouseholdAddMemberController),
+          class: 'button button-full-width button-bold' do
           %i.button__icon--left.icon-add
           Add a member
 

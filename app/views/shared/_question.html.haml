@@ -1,9 +1,9 @@
-- classes = ["form-group"]
-- classes << "form-group--error" if f.object.errors[method].present?
+- classes = ['form-group']
+- classes << 'form-group--error' if f.object.errors[method].present?
 
-%div{ "data-md5" => Digest::MD5.hexdigest(title), "data-field-type" => type, class: classes }
+%div{ 'data-md5': Digest::MD5.hexdigest(title), 'data-field-type': type, class: classes }
   - if %i[text_field radios select yes_no].include?(type)
-    = f.label method, title, class: "form-question"
+    = f.label method, title, class: 'form-question'
 
   - if local_assigns[:help]
     %p.text--help= help
@@ -25,8 +25,8 @@
     .select
       = f.select method,
         options.map { |option| [option.titleize, option] },
-        { include_blank: "Choose one" },
-        { class: "select__element" }
+        { include_blank: 'Choose one' },
+        class: 'select__element'
 
   - when :yes_no
     %label.radio-button
@@ -44,7 +44,7 @@
   - if f.object.errors[method].present?
     %p.text--error
       %i.icon-warning
-      = " #{f.object.errors[method].to_sentence}"
+      = f.object.errors[method].to_sentence
 
   - if local_assigns[:safety]
     %p.text--secure

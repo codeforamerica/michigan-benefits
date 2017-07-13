@@ -1,7 +1,8 @@
 - content_for :header_title, 'Introduction'
 
 .form-card
-  = form_for @step, as: :step, url: introduction_introduce_yourself_path, method: :put do |f|
+  = form_for @step, as: :step, url: introduction_introduce_yourself_path,
+    method: :put do |f|
     %header.form-card__header
       .step-section-header
         - icon :hello
@@ -12,16 +13,16 @@
       :ruby
         qs = [
           {
-            title: "What is your first name?",
+            title: 'What is your first name?',
             type: :text_field,
             method: :first_name,
-            placeholder: "First name"
+            placeholder: 'First name'
           },
           {
-            title: "What is your last name?",
+            title: 'What is your last name?',
             type: :text_field,
             method: :last_name,
-            placeholder: "Last name"
+            placeholder: 'Last name'
           }
         ]
 

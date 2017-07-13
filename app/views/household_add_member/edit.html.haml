@@ -1,7 +1,8 @@
 - content_for :header_title, 'Your Household'
 
 .form-card
-  = form_for @step, as: :step, url: household_add_member_path(member_id: member_id), method: :put do |f|
+  = form_for @step, as: :step, url: household_add_member_path(member_id: member_id),
+    method: :put do |f|
     %header.form-card__header
       .step-section-header
         .step-section-header__subhead
@@ -24,7 +25,7 @@
           },
           {
             title: 'What is their sex?',
-            help: "As it appears on their driver’s license",
+            help: 'As it appears on their driver’s license',
             type: :radios,
             method: :sex,
             options: %w[male female]
@@ -40,7 +41,9 @@
             type: :text_field,
             method: :ssn,
             help: 'If they don’t have one or you don’t know it you can skip this',
-            safety: 'Social security numbers help ensure you receive the correct benefits. MDHSS maintains strict security guidelines to protect the identities of our residents.'
+            safety: 'Social security numbers help ensure you receive the correct \
+              benefits. MDHSS maintains strict security guidelines to protect the \
+              identities of our residents.'
           },
           {
             title: 'Is this person living in your home?',
