@@ -23,20 +23,23 @@ RSpec.describe HouseholdSituationsController, :member, type: :controller do
   end
 
   describe '#edit' do
-    it 'assigns the household members' do
-      get :edit
-      expect(step.household_members.map(&:first_name)).to eq(['alice'])
-    end
-
-
-    it 'skips if there are no situations' do
-      current_app.update!(
+    let(:skip_attributes) do
+      {
         everyone_a_citizen: true,
         anyone_disabled: false,
         any_new_moms: false,
         anyone_in_college: false,
         anyone_living_elsewhere: false
-      )
+      }
+    end
+
+    it 'assigns the household members' do
+      get :edit
+      expect(step.household_members.map(&:first_name)).to eq(['alice'])
+    end
+
+    it 'skips if there are no situations' do
+      current_app.update!(skip_attributes)
 
       get :edit
 
@@ -55,54 +58,39 @@ RSpec.describe HouseholdSituationsController, :member, type: :controller do
       }.stringify_keys
     end
 
-    it 'updates the member attributes if they are present' do
+    def do_put(param = household_member.to_param)
       put :update, params: {
         step: {
           household_members: {
-            household_member.to_param => params
+            param => params
           }
         }
       }
+    end
 
+    it 'updates the member attributes if they are present' do
+      do_put
       expect(household_member.reload.attributes.slice(*params.keys)).to eq(params)
     end
 
     it 'does not update the member attributes if they are not present' do
-      expect {
-        put :update, params: {
-          step: {
-            household_members: {
-              doesnotexist: params
-            }
-          }
-        }
-      }.not_to change { household_member.reload.attributes.slice(*params.keys) }
+      expect do
+        do_put 'doesnotexist'
+      end.not_to(change { household_member.reload.attributes.slice(*params.keys) })
     end
 
     it 'only updates the situational attributes' do
       params['first_name'] = 'bob'
 
-      expect {
-        put :update, params: {
-          step: {
-            household_members: {
-              household_member.to_param => params
-            }
-          }
-        }
-      }.to raise_error(ActionController::UnpermittedParameters)
+      expect do
+        do_put
+      end.to raise_error(ActionController::UnpermittedParameters)
 
       expect(household_member.reload.first_name).to eq('alice')
     end
 
     it 'redirects to the next path' do
-      put :update, params: {
-        step: {
-          household_members: {
-            household_member.to_param => params
-          }
-        }
-      }
+      do_put
 
       expect(response).to redirect_to(step_path(HouseholdHealth))
     end
