@@ -51,7 +51,7 @@ class SimpleStepController < ApplicationController
   end
 
   def step_params
-    params.require(:step).permit(step_attrs)
+    params.fetch(:step, {}).permit(step_attrs)
   end
 
   def step_attrs

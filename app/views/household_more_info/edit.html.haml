@@ -1,0 +1,45 @@
+- content_for :header_title, 'Your Household'
+
+.form-card
+  = form_for @step, as: :step, url: household_more_info_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Tell us a bit more about your household.
+        %p.text--help.step-section-header__subhead-help
+          These questions help us determine eligibility and could help you qualify for waivers to certain program rules.
+
+    .form-card__content
+      :ruby
+        qs = [
+          {
+            title: 'Is each person a citizen?',
+            type: :yes_no,
+            method: :everyone_a_citizen
+          },
+          {
+            title: 'Does anyone have a disability?',
+            type: :yes_no,
+            method: :anyone_disabled,
+            help: 'This includes physical, mental, or emotional health challenges.'
+          },
+          {
+            title: 'Is anyone pregnant or has been pregnant recently?',
+            type: :yes_no,
+            method: :any_new_moms
+          },
+          {
+            title: 'Is anyone enrolled in college?',
+            type: :yes_no,
+            method: :anyone_in_college,
+          },
+          {
+            title: 'Is anyone temporarily living outside the home?',
+            type: :yes_no,
+            method: :anyone_living_elsewhere
+          }
+        ]
+
+      - questions f, qs
+
+    = render 'shared/next_step'

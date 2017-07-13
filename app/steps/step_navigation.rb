@@ -12,7 +12,7 @@ class StepNavigation
       HouseholdIntroductionController,
       HouseholdPersonalDetailsController,
       HouseholdMembersOverviewController,
-      HouseholdMoreInfo,
+      HouseholdMoreInfoController,
       HouseholdSituations,
       HouseholdHealth,
       HouseholdHealthSituations,
