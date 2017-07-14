@@ -1,12 +1,26 @@
 # frozen_string_literal: true
 
 namespace :steps do
-  desc 'Prints all step names.'
+  desc 'Prints all step names and refactor progress.'
   task print: :environment do
-    StepNavigation.steps.each do |step|
+    steps = StepNavigation.steps
+    refactored = []
+
+    steps.each do |step|
       name = step.name
-      puts StepNavigation.refactored?(step) ? "#{name} (refactored)" : name
+      if StepNavigation.refactored?(step)
+        refactored << step
+        puts "#{name} (R)"
+      else
+        puts name
+      end
     end
+
+    puts '-----'
+
+    percent = ((refactored.length.to_f / steps.length) * 100).round
+
+    puts "#{refactored.length}/#{steps.length} steps have been refactored (#{percent}%)"
   end
 
   desc 'Opens the given step both locally and on staging for comparison.'
