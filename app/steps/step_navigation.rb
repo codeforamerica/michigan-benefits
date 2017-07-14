@@ -26,7 +26,7 @@ class StepNavigation
       IncomeCurrentlyEmployedController,
       IncomePerMemberController,
       IncomeFluctuationController,
-      IncomeAdditionalSources,
+      IncomeAdditionalSourcesController,
       IncomeAdditional,
       IncomeOtherAssets,
       IncomeOtherAssetsContinued

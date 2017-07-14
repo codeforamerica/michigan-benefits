@@ -1,5 +1,8 @@
-- form_classes = ['form-group']
-- form_classes << 'form-group--error' if f.object.errors[method].present?
+:ruby
+  form_classes ||= []
+  form_classes = Array.wrap(form_classes)
+  form_classes << 'form-group'
+  form_classes << 'form-group--error' if f.object.errors[method].present?
 
 %div{ 'data-md5': data_md5(title), 'data-field-type': type, class: form_classes }
   = render 'shared/question/content', local_assigns

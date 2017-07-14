@@ -13,8 +13,10 @@
 # end
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
-  inflect.uncountable \
-    'household_personal_details',
-    'household_situations',
-    'household_health_situations'
+  inflect.uncountable %w[
+    household_personal_details
+    household_situations
+    household_health_situations
+    income_additional_sources
+  ]
 end

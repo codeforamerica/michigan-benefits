@@ -33,7 +33,7 @@ RSpec.describe IncomeFluctuationController, :member, type: :controller do
 
       get :edit
 
-      expect(response).to redirect_to(step_path(IncomeAdditionalSources))
+      expect(response).to redirect_to(step_path(IncomeAdditionalSourcesController))
     end
   end
 
@@ -70,7 +70,7 @@ RSpec.describe IncomeFluctuationController, :member, type: :controller do
       it 'redirects to the next path' do
         do_put
 
-        expect(response).to redirect_to(step_path(IncomeAdditionalSources))
+        expect(response).to redirect_to(step_path(IncomeAdditionalSourcesController))
       end
     end
 
