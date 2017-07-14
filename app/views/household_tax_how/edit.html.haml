@@ -22,6 +22,7 @@
             type: :radios,
             method: :filing_status,
             title: 'filing status',
-            options: HouseholdMember::FILING_STATUSES.map(&:to_s)
+            options: HouseholdMember::FILING_STATUSES.map(&:to_s),
+            label_hidden: true
 
     = render 'shared/next_step'
