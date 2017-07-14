@@ -22,7 +22,7 @@ class StepNavigation
     'Money & Income' => [
       IncomeIntroductionController,
       IncomeChangeController,
-      IncomeChangeExplanation,
+      IncomeChangeExplanationController,
       IncomeCurrentlyEmployedController,
       IncomePerMember,
       IncomeFluctuation,

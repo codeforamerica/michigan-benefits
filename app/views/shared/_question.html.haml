@@ -6,7 +6,7 @@
   label_classes << 'hidden' if local_assigns[:label_hidden]
 
 %div{ 'data-md5': data_md5(title), 'data-field-type': type, class: form_classes }
-  - if %i[text_field household_checkboxes radios select yes_no].include?(type)
+  - if %i[text_field text_area household_checkboxes radios select yes_no].include?(type)
     = f.label method, title, class: label_classes
 
   - if local_assigns[:help]
@@ -39,6 +39,11 @@
     %label.radio-button<
       = f.radio_button method, 'false'
       No
+
+  - when :text_area
+    = f.text_area method,
+      placeholder: local_assigns[:placeholder],
+      class: 'textarea'
 
   - when :checkbox
     %label.checkbox

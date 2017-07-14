@@ -45,7 +45,7 @@ RSpec.describe IncomeChangeController, :member, type: :controller do
 
       it 'redirects' do
         put :update, params: params
-        expect(response).to redirect_to step_path(IncomeChangeExplanation)
+        expect(response).to redirect_to step_path(IncomeChangeExplanationController)
       end
     end
 
