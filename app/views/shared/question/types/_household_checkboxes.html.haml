@@ -1,0 +1,5 @@
+- fields_for_each_member(f, household_members) do |ff, member|
+  = render 'shared/question/types/checkbox',
+    f: ff,
+    method: method,
+    title: member.name

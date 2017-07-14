@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe IncomeCurrentlyEmployedController, :member, type: :controller do
+RSpec.describe IncomePerMemberController, :member, type: :controller do
   let!(:current_app) do
     App.create!(
       user: @member,
@@ -27,14 +27,28 @@ RSpec.describe IncomeCurrentlyEmployedController, :member, type: :controller do
       get :edit
       expect(step.household_members.map(&:first_name)).to eq(['alice'])
     end
+
+    it 'skips if nobody is employed or self employed' do
+      household_member.update!(employment_status: 'not_employed')
+
+      get :edit
+
+      expect(response).to redirect_to(step_path(IncomeFluctuation))
+    end
   end
 
   describe '#update' do
     context 'when valid' do
       let(:params) do
         {
-          'employment_status' => 'not_employed'
-        }
+          employer_name: 'employer',
+          hours_per_week: 123,
+          income_consistent: true,
+          monthly_pay: 123,
+          pay_interval: '2-weeks',
+          pay_quantity: 123,
+          profession: 'profession'
+        }.stringify_keys
       end
 
       it 'updates the member attributes if they are present' do
@@ -48,7 +62,7 @@ RSpec.describe IncomeCurrentlyEmployedController, :member, type: :controller do
         end.not_to(change { household_member.reload.attributes.slice(*params.keys) })
       end
 
-      it 'only updates the situational attributes' do
+      it 'only updates the pertinent attributes' do
         params['first_name'] = 'bob'
 
         expect do
@@ -61,15 +75,8 @@ RSpec.describe IncomeCurrentlyEmployedController, :member, type: :controller do
       it 'redirects to the next path' do
         do_put
 
-        expect(response).to redirect_to(step_path(IncomePerMemberController))
+        expect(response).to redirect_to(step_path(IncomeFluctuation))
       end
-    end
-
-    it 'renders edit when invalid' do
-      do_put params: { employment_status: '' }
-
-      expect(step).to be_an_instance_of(IncomeCurrentlyEmployed)
-      expect(response).to render_template(:edit)
     end
 
     def do_put(param: household_member.to_param, params: self.params)

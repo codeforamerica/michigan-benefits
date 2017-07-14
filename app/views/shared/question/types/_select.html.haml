@@ -1,0 +1,5 @@
+.select
+  = f.select method,
+    options.map { |option| [option.titleize, option] },
+    { include_blank: 'Choose one' },
+    class: 'select__element'

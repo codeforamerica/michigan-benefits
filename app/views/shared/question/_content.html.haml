@@ -1,0 +1,21 @@
+- label_classes = ['form-question']
+- label_classes << 'hidden' if local_assigns[:label_hidden]
+
+- if local_assigns[:title] && type != :checkbox
+  = f.label method, title, class: label_classes
+
+- if local_assigns[:help]
+  %p.text--help= help
+
+= render "shared/question/types/#{type}", local_assigns
+
+- errors = f.object.errors[method]
+- if errors.present?
+  %p.text--error
+    %i.icon-warning
+    = errors.to_sentence
+
+- if local_assigns[:safety]
+  %p.text--secure
+    %i.illustration.illustration--safety
+    = safety

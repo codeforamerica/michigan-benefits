@@ -1,0 +1,5 @@
+%div
+  - options.each do |option|
+    %label.radio-button<
+      = f.radio_button method, option
+      = option.titleize

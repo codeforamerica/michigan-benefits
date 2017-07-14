@@ -5,17 +5,24 @@ class HouseholdMember < ApplicationRecord
 
   default_scope { order(id: :asc) }
 
-  EMPLOYMENT_STATUSES = %i[
+  EMPLOYMENT_STATUSES = %w[
     employed
     self_employed
     not_employed
   ].freeze
 
-  FILING_STATUSES = %i[
+  FILING_STATUSES = %w[
     primary_tax_filer
     spouse_to_primary_filer
     dependent_claimed_by_someone_else_living_outside_the_home
     i_do_not_know
+  ].freeze
+
+  PAY_INTERVALS = %w[
+    day
+    week
+    2-weeks
+    month
   ].freeze
 
   def income_inconsistent?
