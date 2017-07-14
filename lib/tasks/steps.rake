@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 namespace :steps do
-  task all: :environment do
+  desc 'Prints all step names.'
+  task print: :environment do
     StepNavigation.steps.each do |step|
       name = step.name
       puts StepNavigation.refactored?(step) ? "#{name} (refactored)" : name
     end
   end
 
+  desc 'Opens the given step both locally and on staging for comparison.'
   task :open, [:step_name] => [:environment] do |_, args|
     step_name = args.step_name
 
@@ -33,6 +35,7 @@ namespace :steps do
     end
   end
 
+  desc 'Opens the last refactored step.'
   task open_last_refactored: :environment do
     open(
       StepNavigation.steps.reverse_each.detect do |step|
@@ -41,6 +44,7 @@ namespace :steps do
     )
   end
 
+  desc 'Opens the next step to be refactored.'
   task open_next_refactor: :environment do
     steps = StepNavigation.steps
     index = steps.rindex { |step| StepNavigation.refactored?(step) }
