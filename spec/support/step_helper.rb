@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 module StepHelper
+  def data_md5(*args)
+    SimpleStepHelper
+      .instance_method(:data_md5)
+      .bind(self)
+      .call(*args)
+  end
+
   def check_step(subhead, *questions, verify: true, validations: true)
     log subhead do
       expect_page(subhead)
@@ -93,7 +100,7 @@ module StepHelper
   end
 
   def within_member(member_name)
-    within(".household-member-group[data-md5='#{Digest::MD5.hexdigest(member_name)}']") do
+    within(".household-member-group[data-md5='#{data_md5(member_name)}']") do
       yield
     end
   end
@@ -101,9 +108,9 @@ module StepHelper
   def within_question(question)
     begin
       group = find(<<~CSS, visible: false)
-        .household-member-group[data-md5='#{Digest::MD5.hexdigest(question)}'],
-        .form-questions-group[data-md5='#{Digest::MD5.hexdigest(question)}'],
-        .form-group[data-md5='#{Digest::MD5.hexdigest(question)}']
+        .household-member-group[data-md5='#{data_md5(question)}'],
+        .form-questions-group[data-md5='#{data_md5(question)}'],
+        .form-group[data-md5='#{data_md5(question)}']
       CSS
     rescue
       raise %(Could not find question: "#{question}" on "#{find('.step-section-header__subhead').text}")

@@ -11,7 +11,7 @@
       - fields_for_each_member(f, @step.household_members) do |ff, member|
         - unless member.unemployed?
           .step-section-header__headline
-            = member.full_name
+            = header_name(member)
 
           %p.text--help
             = member.employment_status.titleize

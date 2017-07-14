@@ -25,6 +25,10 @@ class HouseholdMember < ApplicationRecord
     month
   ].freeze
 
+  def self.with_inconsistent_income
+    where(income_consistent: [false, nil])
+  end
+
   def income_inconsistent?
     !income_consistent
   end

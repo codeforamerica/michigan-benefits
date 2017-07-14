@@ -29,4 +29,8 @@ module SimpleStepHelper
   def data_md5(str)
     Digest::MD5.hexdigest(str.to_s.tr("\n", ' ').strip)
   end
+
+  def inconsistent_members(household_members)
+    household_members.with_inconsistent_income.map(&:name).to_sentence
+  end
 end

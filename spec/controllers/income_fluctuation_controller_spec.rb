@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe IncomePerMemberController, :member, type: :controller do
+RSpec.describe IncomeFluctuationController, :member, type: :controller do
   let!(:current_app) do
     App.create!(
       user: @member,
@@ -14,7 +14,7 @@ RSpec.describe IncomePerMemberController, :member, type: :controller do
   let!(:household_member) do
     HouseholdMember.create!(
       first_name: 'alice',
-      employment_status: 'employed'
+      income_consistent: false
     )
   end
 
@@ -29,11 +29,11 @@ RSpec.describe IncomePerMemberController, :member, type: :controller do
     end
 
     it 'skips if nobody is employed or self employed' do
-      household_member.update!(employment_status: 'not_employed')
+      household_member.update!(income_consistent: true)
 
       get :edit
 
-      expect(response).to redirect_to(step_path(IncomeFluctuationController))
+      expect(response).to redirect_to(step_path(IncomeAdditionalSources))
     end
   end
 
@@ -41,13 +41,8 @@ RSpec.describe IncomePerMemberController, :member, type: :controller do
     context 'when valid' do
       let(:params) do
         {
-          employer_name: 'employer',
-          hours_per_week: 123,
-          income_consistent: true,
-          monthly_pay: 123,
-          pay_interval: '2-weeks',
-          pay_quantity: 123,
-          profession: 'profession'
+          expected_income_this_year: 123,
+          expected_income_next_year: 123
         }.stringify_keys
       end
 
@@ -75,7 +70,7 @@ RSpec.describe IncomePerMemberController, :member, type: :controller do
       it 'redirects to the next path' do
         do_put
 
-        expect(response).to redirect_to(step_path(IncomeFluctuationController))
+        expect(response).to redirect_to(step_path(IncomeAdditionalSources))
       end
     end
 
