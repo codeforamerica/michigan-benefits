@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 namespace :steps do
-  def open(step)
-    local = 'http://localhost:3000'
-    staging = 'https://michigan-benefits-staging.herokuapp.com'
-
-    [local, staging].each do |host|
-      url = Rails.application.routes.url_helpers.step_url(step, host: host)
-      system("open #{url}")
+  task all: :environment do
+    StepNavigation.steps.each do |step|
+      name = step.name
+      puts StepNavigation.refactored?(step) ? "#{name} (refactored)" : name
     end
   end
 
@@ -39,8 +36,24 @@ namespace :steps do
   task open_last_refactored: :environment do
     open(
       StepNavigation.steps.reverse_each.detect do |step|
-        step < SimpleStepController
+        StepNavigation.refactored?(step)
       end
     )
+  end
+
+  task open_next_refactor: :environment do
+    steps = StepNavigation.steps
+    index = steps.rindex { |step| StepNavigation.refactored?(step) }
+    open(steps[index + 1])
+  end
+
+  def open(step)
+    local = 'http://localhost:3000'
+    staging = 'https://michigan-benefits-staging.herokuapp.com'
+
+    [local, staging].each do |host|
+      url = Rails.application.routes.url_helpers.step_url(step, host: host)
+      system("open #{url}")
+    end
   end
 end

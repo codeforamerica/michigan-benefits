@@ -68,7 +68,11 @@ class StepNavigation
     steps
       .concat(SUBSTEPS.keys)
       .uniq
-      .select { |klass| klass < SimpleStepController }
+      .select { |step_class| refactored?(step_class) }
+  end
+
+  def self.refactored?(step_class)
+    step_class < SimpleStepController
   end
 
   def steps
