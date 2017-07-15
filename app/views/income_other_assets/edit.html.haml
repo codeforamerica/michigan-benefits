@@ -1,0 +1,35 @@
+- content_for :header_title, 'Money & Income'
+
+.form-card
+  = form_for @step, as: :step, url: income_other_assets_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Tell us about the assets and money you have on hand.
+        %p.text--help.step-section-header__subhead-help
+          If you don't know the answer to a question, that's okay.
+
+    .form-card__content
+
+      = render 'shared/question',
+        f: f,
+        type: :yes_no,
+        method: :has_accounts,
+        title: 'Does your household have any money or accounts?',
+        help: 'This includes Checking/Savings accounts, 401Ks, Trusts, Stocks, etc. You will be asked to verify by providing bank and account statements.'
+
+      = render 'shared/question',
+        f: f,
+        type: :yes_no,
+        method: :has_home,
+        title: 'Does your household own any property or real estate?',
+        help: "You should include your primary home. But don't worry - it won't be counted against you."
+
+      = render 'shared/question',
+        f: f,
+        type: :yes_no,
+        method: :has_vehicle,
+        title: 'Does your household own any vehicles?',
+        help: "Don't worry - your first vehicle will not be counted against you."
+
+    = render 'shared/next_step'

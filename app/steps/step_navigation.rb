@@ -28,7 +28,7 @@ class StepNavigation
       IncomeFluctuationController,
       IncomeAdditionalSourcesController,
       IncomeAdditionalController,
-      IncomeOtherAssets,
+      IncomeOtherAssetsController,
       IncomeOtherAssetsContinued
     ],
     'Expenses' => [

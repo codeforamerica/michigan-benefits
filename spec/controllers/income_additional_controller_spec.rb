@@ -67,7 +67,7 @@ RSpec.describe IncomeAdditionalController, :member, type: :controller do
     it 'redirects to the next step' do
       put :update, params: { step: params }
 
-      expect(response).to redirect_to(step_path(IncomeOtherAssets))
+      expect(response).to redirect_to(step_path(IncomeOtherAssetsController))
     end
   end
 end
