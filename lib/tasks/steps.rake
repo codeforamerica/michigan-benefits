@@ -10,7 +10,7 @@ namespace :steps do
       name = step.name
       if StepNavigation.refactored?(step)
         refactored << step
-        puts "#{name} (R)"
+        puts "✅  #{name}"
       else
         puts name
       end

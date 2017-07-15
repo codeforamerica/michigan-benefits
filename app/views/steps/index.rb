@@ -9,10 +9,10 @@ class Views::Steps::Index < Views::Base
         h3 section
 
         steps.each do |step|
-          tag = step < SimpleStepController ? ' (refactored)' : ''
+          prefix = step < SimpleStepController ? '✅' : ''
 
           div do
-            link_to "#{step.name} #{tag}",
+            link_to "#{prefix} #{step.name}",
               step_path(step.to_param),
               class: 'button button--small button--full-width'
           end
