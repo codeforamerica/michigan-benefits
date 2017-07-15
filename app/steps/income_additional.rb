@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class IncomeAdditional < SimpleStep
-=begin
-  self.subhead = 'Tell us more about your additional income.'
-=end
-
   step_attributes \
     :income_child_support,
     :income_unemployment,
