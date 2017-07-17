@@ -27,7 +27,7 @@ module SimpleStepHelper
   end
 
   def data_md5(str)
-    Digest::MD5.hexdigest(str.to_s.tr("\n", ' ').strip)
+    Digest::MD5.hexdigest(str.squish)
   end
 
   def inconsistent_members(household_members)
