@@ -7,7 +7,7 @@ class IncomeAdditionalController < StandardSimpleStepController
     end
 
     @step = step_class.new(
-      @additional_income.map { |k| [k, true] }.to_h
+      @additional_income.map { |k| [k, current_app[k]] }.to_h
     )
   end
 

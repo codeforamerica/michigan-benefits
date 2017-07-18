@@ -17,26 +17,23 @@ RSpec.describe IncomeAdditionalController, :member, type: :controller do
   end
 
   let(:prefixed_additional_income) do
-    additional_income.map { |k| incomify(k) }
+    additional_income.map { |k| "income_#{k}" }
+  end
+
+  let(:expected) do
+    prefixed_additional_income.map { |k| [k, 1] }.to_h
   end
 
   let!(:current_app) do
     App.create!(
-      user: @member,
-      additional_income: additional_income
+      expected.merge(user: @member, additional_income: additional_income)
     )
   end
 
   let(:step) { assigns(:step) }
 
-  def incomify(s)
-    "income_#{s}"
-  end
-
   describe '#edit' do
     it 'assigns the fields to the step' do
-      expected = prefixed_additional_income.map { |k| [k, true] }.to_h
-
       get :edit
 
       actual = prefixed_additional_income.map { |k| [k, step.send(k)] }.to_h
