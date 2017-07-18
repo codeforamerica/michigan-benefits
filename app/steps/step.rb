@@ -30,7 +30,9 @@ class Step
   end
 
   def self.find(id, app, params = {})
-    id.tr('-', '_').camelize.constantize.new(app, params)
+    klass = id.tr('-', '_').camelize.constantize
+    raise TypeError, "Update StepNavigation for #{klass}!" if klass < SimpleStep
+    klass.new(app, params)
   end
 
   def self.to_param

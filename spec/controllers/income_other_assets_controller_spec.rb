@@ -11,7 +11,7 @@ RSpec.describe IncomeOtherAssetsController, :member, type: :controller do
     {
       has_accounts: true,
       has_home: true,
-      has_vehicle: true,
+      has_vehicle: true
     }.with_indifferent_access
   end
 
@@ -34,7 +34,7 @@ RSpec.describe IncomeOtherAssetsController, :member, type: :controller do
           step: {
             has_accounts: false,
             has_home: false,
-            has_vehicle: false,
+            has_vehicle: false
           }
         }
       end
@@ -44,13 +44,13 @@ RSpec.describe IncomeOtherAssetsController, :member, type: :controller do
           put :update, params: params
         end.to change {
           current_app.reload.attributes.slice(*attributes.keys)
-        }.from('has_accounts' => true, 'has_home' => true, 'has_vehicle' => true).
-          to('has_accounts' => false, 'has_home' => false, 'has_vehicle' => false)
+        }.from('has_accounts' => true, 'has_home' => true, 'has_vehicle' => true)
+          .to('has_accounts' => false, 'has_home' => false, 'has_vehicle' => false)
       end
 
       it 'redirects' do
         put :update, params: params
-        expect(response).to redirect_to step_path(IncomeOtherAssetsContinued)
+        expect(response).to redirect_to step_path(IncomeOtherAssetsContinuedController)
       end
     end
 
