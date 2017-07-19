@@ -1,0 +1,25 @@
+- content_for :header_title, 'Legal'
+
+.form-card
+  = form_for @step, as: :step, url: sign_and_submit_path,
+    method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Enter your full legal name here to sign this application.
+
+    .form-card__content
+      %p
+        By entering your name you agree that you want to apply for
+        FAB and Medicaid, that you have been honest on this application, and
+        that you have read and agreed to the terms on the previous page.
+
+    = render "shared/question",
+        f: f,
+        title: 'Your signature',
+        type: :text_field,
+        method: :signature,
+        placeholder: 'Your full legal name'
+
+    = render 'shared/next_step', button_label: "Sign and submit"
+

@@ -23,4 +23,8 @@ class FakeTwilioClient
       puts "BODY: #{args[:body]}\n\n"
     end
   end
+
+  def self.clear!
+    messages.clear
+  end
 end

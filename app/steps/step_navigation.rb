@@ -45,7 +45,7 @@ class StepNavigation
     ],
     'Legal' => [
       LegalAgreement,
-      SignAndSubmit
+      SignAndSubmitController
     ],
     'Submit Documents' => [
       MaybeSubmitDocumentsController

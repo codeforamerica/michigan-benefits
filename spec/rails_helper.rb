@@ -65,6 +65,7 @@ RSpec.configure do |config|
   end
   config.after(:each) do
     DatabaseCleaner.clean
+    FakeTwilioClient.clear!
   end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
