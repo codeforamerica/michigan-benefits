@@ -45,7 +45,7 @@ namespace :steps do
     if constant_name.present?
       open(constant_name.constantize)
     else
-      STDERR.puts(%(No step found with name "#{step_name}"!))
+      raise %(No step found with name "#{step_name}"!)
     end
   end
 
@@ -60,9 +60,12 @@ namespace :steps do
 
   desc 'Opens the next step to be refactored.'
   task open_next_refactor: :environment do
-    steps = StepNavigation.steps
-    index = steps.rindex { |step| StepNavigation.refactored?(step) }
-    open(steps[index + 1])
+    step = StepNavigation.steps.detect { |step| !StepNavigation.refactored?(step) }
+    if step.present?
+      open(steps[index])
+    else
+      puts 'No steps left to refactor!'
+    end
   end
 
   def open(step)
