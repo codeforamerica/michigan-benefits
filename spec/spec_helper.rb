@@ -66,6 +66,12 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
 
+  if ENV['CI']
+    config.before(:example, :focus) do |example|
+      raise "#{example.description} was committed with `:focus` and should not have been"
+    end
+  end
+
   #
   #   # Limits the available syntax to the non-monkey patched syntax that is recommended.
   #   # For more details, see:
