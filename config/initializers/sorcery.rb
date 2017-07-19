@@ -202,7 +202,7 @@ Rails.application.config.sorcery.configure do |config|
     # how many times to apply encryption to the password.
     # Default: `nil`
     #
-    # user.stretches =
+    user.stretches = 1 if Rails.env.test?
 
     # encryption key used to encrypt reversible encryptions such as AES256.
     # WARNING: If used for users' passwords, changing this key will leave passwords undecryptable!
@@ -218,7 +218,7 @@ Rails.application.config.sorcery.configure do |config|
     # encryption algorithm name. See 'encryption_algorithm=' for available options.
     # Default: `:bcrypt`
     #
-    # user.encryption_algorithm =
+    user.encryption_algorithm = :md5 if Rails.env.test?
 
     # make this configuration inheritable for subclasses. Useful for ActiveRecord's STI.
     # Default: `false`
