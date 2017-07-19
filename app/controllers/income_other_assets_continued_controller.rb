@@ -2,8 +2,7 @@
 
 class IncomeOtherAssetsContinuedController < SimpleStepController
   def edit
-    financial_accounts =
-      current_app.financial_accounts.map { |key| [key, true] }.to_h
+    financial_accounts = array_to_checkboxes(current_app.financial_accounts)
 
     @step = step_class.new(
       financial_accounts.merge(total_money: current_app.total_money)
@@ -11,8 +10,7 @@ class IncomeOtherAssetsContinuedController < SimpleStepController
   end
 
   def update
-    financial_accounts =
-      step_params.except(:total_money).select { |_, value| value == '1' }.keys
+    financial_accounts = checkboxes_to_array(step_params.except(:total_money).keys)
 
     current_app.update!(
       total_money: step_params[:total_money],
