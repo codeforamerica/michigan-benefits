@@ -27,7 +27,7 @@ module SimpleStepHelper
   end
 
   def data_md5(str)
-    Digest::MD5.hexdigest(str.squish)
+    Digest::MD5.hexdigest(str ? str.squish : '')
   end
 
   def inconsistent_members(household_members)

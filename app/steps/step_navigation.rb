@@ -41,7 +41,7 @@ class StepNavigation
       PreferencesRemindersController,
       PreferencesRemindersConfirmationController,
       PreferencesForInterviewController,
-      PreferencesAnythingElse
+      PreferencesAnythingElseController
     ],
     'Legal' => [
       LegalAgreement,

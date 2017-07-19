@@ -1,0 +1,22 @@
+- content_for :header_title, 'Preferences'
+
+.form-card
+  = form_for @step, as: :step, url: preferences_anything_else_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Is there anything else you'd like us to know about your situation?
+        %p.text--help.step-section-header__subhead-help
+          Feel free to give other details you think might be helpful for us to know.
+          Otherwise, you can skip this question.
+
+    .form-card__content
+      .slab.slab--not-padded
+        .card.card--narrow
+          = render 'shared/question',
+            f: f,
+            type: :text_area,
+            method: :anything_else,
+            placeholder: 'Write here'
+
+    = render partial: 'shared/next_step'
