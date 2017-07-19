@@ -1,0 +1,56 @@
+- content_for :header_title, 'Expenses'
+
+.form-card
+  = form_for @step, as: :step, url: expenses_housing_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Tell us about your housing expenses.
+        %p.text--help.step-section-header__subhead-help
+          Housing expenses help determine the amount of Food Assistance you may be
+          eligible for.
+
+    .form-card__content
+      :ruby
+        money = {
+          rent_expense:
+            'How much does your household pay in rent or mortgage each month?',
+          property_tax_expense: 'How much do you pay in property tax each month?',
+          insurance_expense: 'How much do you pay in insurance each month?'
+        }.map do |method, title|
+          {
+            type: :money_field,
+            method: method,
+            title: title
+          }
+        end
+
+      - questions f, money
+
+      :ruby
+        checkboxes = {
+          utility_heat: 'Heat',
+          utility_cooling: 'Cooling',
+          utility_electrity: 'Electricity',
+          utility_water_sewer: 'Water/Sewer',
+          utility_trash: 'Trash Pickup',
+          utility_phone: 'Phone',
+          utility_other: 'Other'
+        }.map do |method, title|
+          {
+            type: :checkbox,
+            method: method,
+            title: title,
+            form_classes: ['no-bottom-space']
+          }
+        end
+
+      %p.text--help
+        %strong
+          What utilities do you pay?
+        %br
+        Only check utilities that are not included in your mortgage/rent payments.
+
+      - questions f, checkboxes
+
+    = render 'shared/next_step'

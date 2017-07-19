@@ -33,7 +33,7 @@ class StepNavigation
     ],
     'Expenses' => [
       ExpensesIntroductionController,
-      ExpensesHousing,
+      ExpensesHousingController,
       ExpensesAdditionalSources,
       ExpensesAdditional
     ],
