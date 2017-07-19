@@ -38,7 +38,7 @@ RSpec.describe PreferencesAnythingElseController, :member, type: :controller do
     it 'redirects to the next step' do
       put :update, params: { step: valid_params }
 
-      expect(response).to redirect_to(step_path(LegalAgreement))
+      expect(response).to redirect_to(step_path(LegalAgreementController))
     end
   end
 end

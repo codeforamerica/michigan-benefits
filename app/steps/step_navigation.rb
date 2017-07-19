@@ -44,7 +44,7 @@ class StepNavigation
       PreferencesAnythingElseController
     ],
     'Legal' => [
-      LegalAgreement,
+      LegalAgreementController,
       SignAndSubmitController
     ],
     'Submit Documents' => [
