@@ -5,10 +5,14 @@ class SimpleStepController < ApplicationController
 
   before_action :maybe_skip, only: :edit
 
-  helper_method :previous_path, :next_path
+  helper_method :previous_path, :next_path, :current_app
 
   def self.to_param
     controller_path.dasherize
+  end
+
+  def self.step_class
+    controller_path.classify.constantize
   end
 
   def allowed
@@ -28,16 +32,14 @@ class SimpleStepController < ApplicationController
 
   private
 
+  delegate :step_class, to: :class
+
   def array_to_checkboxes(array)
     array.map { |k| [k, true] }.to_h
   end
 
   def checkboxes_to_array(checkboxes)
     checkboxes.select { |k| step_params[k].in?(['1', 1, true]) }.map(&:to_s)
-  end
-
-  def step_class
-    controller_path.classify.constantize
   end
 
   def maybe_skip

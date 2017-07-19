@@ -39,7 +39,9 @@ RSpec.describe PreferencesRemindersController, :member, type: :controller do
     it 'redirects to the next step' do
       put :update, params: { step: valid_params }
 
-      expect(response).to redirect_to(step_path(PreferencesRemindersConfirmation))
+      expect(response).to redirect_to(
+        step_path(PreferencesRemindersConfirmationController)
+      )
     end
   end
 end

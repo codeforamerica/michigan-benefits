@@ -39,7 +39,7 @@ class StepNavigation
     ],
     'Preferences' => [
       PreferencesRemindersController,
-      PreferencesRemindersConfirmation,
+      PreferencesRemindersConfirmationController,
       PreferencesForInterview,
       PreferencesAnythingElse
     ],
