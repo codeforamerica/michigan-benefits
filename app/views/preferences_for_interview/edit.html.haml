@@ -1,0 +1,24 @@
+- content_for :header_title, 'Preferences'
+
+.form-card
+  = form_for @step, as: :step, url: preferences_for_interview_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          The next step after you apply is a brief interview with your county.
+
+    .form-card__content
+      :ruby
+        options = {
+          telephone_interview: 'Telephone interview',
+          in_person_interview: 'In-person interview'
+        }
+
+      = render 'shared/question',
+        f: f,
+        title: 'What do you prefer?',
+        method: :preference_for_interview,
+        type: :radios,
+        options: options
+
+    = render partial: 'shared/next_step'

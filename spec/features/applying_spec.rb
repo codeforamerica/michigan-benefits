@@ -213,7 +213,7 @@ describe 'applying', js: true do
     static_step "Great! You'll receive a confirmation message soon."
 
     check_step 'The next step after you apply is a brief interview with your county.',
-      ['What do you prefer?', 'Telephone Interview', 'Make sure to answer this question']
+      ['What do you prefer?', 'Telephone interview', 'Make sure to answer this question']
 
     static_step "Is there anything else you'd like us to know about your situation?"
 

@@ -7,9 +7,9 @@ class App < ApplicationRecord
 
   delegate :full_name, to: :user
 
-  PREFERENCES_FOR_INTERVIEW = [
-    'Telephone interview',
-    'In-person interview'
+  PREFERENCES_FOR_INTERVIEW = %w[
+    telephone_interview
+    in_person_interview
   ].freeze
 
   def applicant

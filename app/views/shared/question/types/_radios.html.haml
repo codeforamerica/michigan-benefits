@@ -1,5 +1,5 @@
 %div
-  - options.each do |option|
+  - options.each do |option, title|
     %label.radio-button<
       = f.radio_button method, option
-      = option.titleize
+      = title.nil? ? option.titleize : title
