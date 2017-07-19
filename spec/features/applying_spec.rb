@@ -199,9 +199,9 @@ describe 'applying', js: true do
       ['Childcare', true, nil],
       ['In total, how much do you pay in medical expenses each month?', '200', nil],
       ['Transportation', true, nil],
-      ['In total, how much do you pay in court ordered expenses each month?', '300', nil],
+      ['In total, how much do you pay in court-ordered expenses each month?', '300', nil],
       ['Alimony', true, nil],
-      ['In total, how much do you pay in tax deductible expenses each month?', '400', nil],
+      ['In total, how much do you pay in tax-deductible expenses each month?', '400', nil],
       ['Student loan interest', true, nil],
       validations: false
 

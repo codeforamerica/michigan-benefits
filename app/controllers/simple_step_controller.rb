@@ -28,6 +28,14 @@ class SimpleStepController < ApplicationController
 
   private
 
+  def array_to_checkboxes(array)
+    array.map { |k| [k, true] }.to_h
+  end
+
+  def checkboxes_to_array(checkboxes)
+    checkboxes.select { |k| step_params[k].in?(['1', 1, true]) }.map(&:to_s)
+  end
+
   def step_class
     controller_path.classify.constantize
   end

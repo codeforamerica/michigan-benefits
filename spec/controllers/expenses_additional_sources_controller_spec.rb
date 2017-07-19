@@ -41,7 +41,7 @@ RSpec.describe ExpensesAdditionalSourcesController, :member, type: :controller d
 
       it 'redirects' do
         put :update, params: params
-        expect(response).to redirect_to step_path(ExpensesAdditional)
+        expect(response).to redirect_to step_path(ExpensesAdditionalController)
       end
     end
 

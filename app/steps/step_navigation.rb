@@ -35,7 +35,7 @@ class StepNavigation
       ExpensesIntroductionController,
       ExpensesHousingController,
       ExpensesAdditionalSourcesController,
-      ExpensesAdditional
+      ExpensesAdditionalController
     ],
     'Preferences' => [
       PreferencesReminders,
