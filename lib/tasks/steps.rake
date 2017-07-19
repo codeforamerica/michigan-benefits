@@ -60,9 +60,9 @@ namespace :steps do
 
   desc 'Opens the next step to be refactored.'
   task open_next_refactor: :environment do
-    step = StepNavigation.steps.detect { |step| !StepNavigation.refactored?(step) }
+    step = StepNavigation.steps.detect { |s| !StepNavigation.refactored?(s) }
     if step.present?
-      open(steps[index])
+      open(step)
     else
       puts 'No steps left to refactor!'
     end
