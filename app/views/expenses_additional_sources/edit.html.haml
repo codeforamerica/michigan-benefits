@@ -1,0 +1,49 @@
+- content_for :header_title, 'Expenses'
+
+.form-card
+  = form_for @step, as: :step, url: expenses_additional_sources_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Tell us more about your expenses.
+        %p.text--help.step-section-header__subhead-help
+          These expenses help inform how significant your benefits may be. Please include
+          all expenses you can.
+
+    .form-card__content
+      :ruby
+        qs = [
+          {
+            method: :dependent_care,
+            title: 'Does your household have dependent care expenses?',
+            help: <<~TEXT
+              This includes child care (including day care and after school programs),
+              elderly care, and adult disabled care.
+            TEXT
+          },
+          {
+            method: :medical,
+            title: 'Does your household have medical expenses?',
+            help: <<~TEXT
+              This includes health insurance, co-pays, prescriptions, dental, hospital
+              bills, etc.
+            TEXT
+          },
+          {
+            method: :court_ordered,
+            title: 'Does your household have court-ordered expenses?',
+            help: 'This includes child support, alimony, etc.'
+          },
+          {
+            method: :tax_deductible,
+            title: 'Does your household have tax deductible expenses?',
+            help: <<~TEXT
+              This includes student loan interest and any other expense that can be
+              deducted on your tax return.
+            TEXT
+          }
+        ].each { |q| q[:type] = :yes_no }
+
+      - questions f, qs
+
+    = render 'shared/next_step'

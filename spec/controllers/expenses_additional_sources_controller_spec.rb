@@ -2,23 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe ExpensesHousingController, :member, type: :controller do
+RSpec.describe ExpensesAdditionalSourcesController, :member, type: :controller do
   let!(:current_app) do
     App.create!(attributes.merge(user: @member))
   end
 
   let(:attributes) do
-    ExpensesHousing.attribute_names.map do |k|
-      [k, integer_type?(k) ? 123 : true]
-    end.to_h
+    ExpensesAdditionalSources.attribute_names.map { |k| [k, false] }.to_h
   end
 
   let(:step) do
     assigns(:step)
-  end
-
-  def integer_type?(k)
-    App.columns_hash[k].type == :integer
   end
 
   describe '#edit' do
@@ -33,9 +27,7 @@ RSpec.describe ExpensesHousingController, :member, type: :controller do
     context 'with valid params' do
       let(:params) do
         {
-          step: ExpensesHousing.attribute_names.map do |k|
-            [k, integer_type?(k) ? 321 : false]
-          end.to_h
+          step: ExpensesAdditionalSources.attribute_names.map { |k| [k, true] }.to_h
         }
       end
 
@@ -49,7 +41,15 @@ RSpec.describe ExpensesHousingController, :member, type: :controller do
 
       it 'redirects' do
         put :update, params: params
-        expect(response).to redirect_to step_path(ExpensesAdditionalSourcesController)
+        expect(response).to redirect_to step_path(ExpensesAdditional)
+      end
+    end
+
+    context 'with invalid params' do
+      it 're-renders' do
+        put :update, params: { step: {} }
+        expect(response).to render_template :edit
+        expect(assigns(:step)).to be_an_instance_of(ExpensesAdditionalSources)
       end
     end
   end

@@ -19,5 +19,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
     household_health_situations
     income_additional_sources
     income_other_assets
+    expenses_additional_sources
   ]
 end
