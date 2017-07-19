@@ -57,7 +57,7 @@ class Views::Users::New < Views::Base
           class: 'text--help text--padded'
 
         current_resume_path = current_user ?
-          step_path(Step.first.to_param) :
+          step_path(StepNavigation.first) :
           '#'
 
         link_to current_resume_path, class: 'button resume' do

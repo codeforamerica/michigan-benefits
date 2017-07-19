@@ -70,11 +70,11 @@ class SimpleStepController < ApplicationController
 
   def previous_path(params = nil)
     previous = step_navigation.previous
-    previous ? step_path(previous.to_param, params) : root_path
+    previous ? step_path(previous, params) : root_path
   end
 
   def next_path
-    step_path(step_navigation.next.to_param)
+    step_path(step_navigation.next)
   end
 
   def step_navigation

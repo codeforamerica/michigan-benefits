@@ -9,11 +9,9 @@ class Views::Steps::Index < Views::Base
         h3 section
 
         steps.each do |step|
-          prefix = step < SimpleStepController ? '✅' : ''
-
           div do
-            link_to "#{prefix} #{step.name}",
-              step_path(step.to_param),
+            link_to step.to_param.titleize,
+              step_path(step),
               class: 'button button--small button--full-width'
           end
         end

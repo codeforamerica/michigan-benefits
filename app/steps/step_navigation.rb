@@ -56,35 +56,31 @@ class StepNavigation
     HouseholdAddMemberController => HouseholdMembersOverviewController
   }.freeze
 
-  def self.sections
-    ALL
+  class << self
+    delegate :first, to: :steps
+
+    def sections
+      ALL
+    end
+
+    def steps
+      ALL.values.flatten
+    end
+
+    def steps_and_substeps
+      steps.concat(SUBSTEPS.keys).uniq
+    end
   end
 
-  def self.steps
-    ALL.values.flatten
-  end
-
-  def self.simple_step_controllers
-    steps
-      .concat(SUBSTEPS.keys)
-      .uniq
-      .select { |step_class| refactored?(step_class) }
-  end
-
-  def self.refactored?(step_class)
-    step_class < SimpleStepController
-  end
-
-  def steps
-    self.class.steps
-  end
+  delegate :steps, to: :class
 
   def initialize(step_instance_or_class)
-    @step = if step_instance_or_class.is_a?(Class)
-              step_instance_or_class
-            else
-              step_instance_or_class.class
-    end
+    @step =
+      if step_instance_or_class.is_a?(Class)
+        step_instance_or_class
+      else
+        step_instance_or_class.class
+      end
   end
 
   def next

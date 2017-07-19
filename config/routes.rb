@@ -15,14 +15,14 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
 
   scope :steps do
-    StepNavigation.simple_step_controllers.each do |controller_class|
+    StepNavigation.steps_and_substeps.each do |controller_class|
       path = "/#{controller_class.to_param}"
       get path, action: :edit, controller: controller_class.controller_path
       put path, action: :update, controller: controller_class.controller_path
     end
   end
 
-  resources :steps, only: %i[index show update]
+  resources :steps, only: %i[show update index]
 
   get '/form', to: 'forms#show'
   get '/styleguide', to: 'styleguides#index'
