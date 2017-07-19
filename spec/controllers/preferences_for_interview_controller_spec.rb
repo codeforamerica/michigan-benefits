@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe PreferencesAnythingElseController, :member, type: :controller do
+RSpec.describe PreferencesForInterviewController, :member, type: :controller do
   let(:params) do
     {
-      anything_else: 'no'
+      preference_for_interview: 'telephone_interview'
     }
   end
 
@@ -18,27 +18,41 @@ RSpec.describe PreferencesAnythingElseController, :member, type: :controller do
   describe '#edit' do
     it 'assigns the fields to the step' do
       get :edit
-      expect(step.anything_else).to eq('no')
+      expect(step.preference_for_interview).to eq('telephone_interview')
     end
   end
 
   describe '#update' do
-    let(:valid_params) do
-      {
-        anything_else: 'yes'
-      }
-    end
+    context 'when valid' do
+      let(:valid_params) do
+        {
+          preference_for_interview: 'in_person_interview'
+        }
+      end
 
-    it 'updates the app' do
-      expect do
+      it 'updates the app' do
+        expect do
+          put :update, params: { step: valid_params }
+        end.to change { current_app.reload.preference_for_interview }
+      end
+
+      it 'redirects to the next step' do
         put :update, params: { step: valid_params }
-      end.to change { current_app.reload.anything_else }
+
+        expect(response).to redirect_to(step_path(PreferencesAnythingElseController))
+      end
     end
 
-    it 'redirects to the next step' do
-      put :update, params: { step: valid_params }
+    context 'when not valid' do
+      it 'renders :edit' do
+        put :update, params: {}
+        expect(response).to render_template(:edit)
+      end
 
-      expect(response).to redirect_to(step_path(LegalAgreement))
+      it 'sets the step' do
+        put :update, params: {}
+        expect(step).to be_an_instance_of(described_class.step_class)
+      end
     end
   end
 end
