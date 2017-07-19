@@ -42,7 +42,7 @@ RSpec.describe IncomeOtherAssetsContinuedController, :member, type: :controller 
 
       get :edit
 
-      expect(response).to redirect_to(step_path(ExpensesIntroduction))
+      expect(response).to redirect_to(step_path(ExpensesIntroductionController))
     end
   end
 
@@ -65,7 +65,7 @@ RSpec.describe IncomeOtherAssetsContinuedController, :member, type: :controller 
 
     it 'redirects' do
       put :update, params: { step: params }
-      expect(response).to redirect_to(step_path(ExpensesIntroduction))
+      expect(response).to redirect_to(step_path(ExpensesIntroductionController))
     end
   end
 end

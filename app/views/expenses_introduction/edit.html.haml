@@ -1,0 +1,31 @@
+- content_for :header_title, 'Expenses'
+
+.form-card
+  %header.form-card__header
+    .step-section-header
+      - icon 'section-3'
+      .step-section-header__headline You're halfway there!
+      .step-section-header__subhead
+        Next, describe your household expenses.
+
+  .form-card__content
+    .slab.slab--not-padded
+      .card.card--narrow
+        %h3
+          In this section, we will ask you to document your expenses for things like
+          housing, medicine, dependent care and more.
+
+        %p.text--help
+          Sometime soon, you’ll be asked to provide documentation for those. You can share
+          photos of receipts, bills and statements on this website, or send them by mail
+          or fax later.
+
+        %h4
+          Expenses have a big impact on increasing the amount of assistance you may
+          qualify for.
+
+        %p.text--help
+          If you aren't sure about exact numbers right now — that's okay. Do your best and
+          we will work with you to clarify later.
+
+  = render partial: 'shared/next_step_link'

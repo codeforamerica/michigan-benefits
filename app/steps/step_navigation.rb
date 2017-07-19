@@ -32,7 +32,7 @@ class StepNavigation
       IncomeOtherAssetsContinuedController
     ],
     'Expenses' => [
-      ExpensesIntroduction,
+      ExpensesIntroductionController,
       ExpensesHousing,
       ExpensesAdditionalSources,
       ExpensesAdditional
