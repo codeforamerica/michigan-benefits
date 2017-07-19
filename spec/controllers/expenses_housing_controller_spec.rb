@@ -9,8 +9,12 @@ RSpec.describe ExpensesHousingController, :member, type: :controller do
 
   let(:attributes) do
     ExpensesHousing.attribute_names.map do |k|
-      [k, App.columns_hash[k].type == :integer ? 123 : true]
+      [k, integer_type?(k) ? 123 : true]
     end.to_h
+  end
+
+  def integer_type?(k)
+    App.columns_hash[k].type == :integer
   end
 
   let(:step) do
@@ -30,7 +34,7 @@ RSpec.describe ExpensesHousingController, :member, type: :controller do
       let(:params) do
         {
           step: ExpensesHousing.attribute_names.map do |k|
-            [k, App.columns_hash[k].type == :integer ? 321 : false]
+            [k, integer_type?(k) ? 321 : false]
           end.to_h
         }
       end
