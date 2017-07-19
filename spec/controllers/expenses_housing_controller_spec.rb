@@ -13,12 +13,12 @@ RSpec.describe ExpensesHousingController, :member, type: :controller do
     end.to_h
   end
 
-  def integer_type?(k)
-    App.columns_hash[k].type == :integer
-  end
-
   let(:step) do
     assigns(:step)
+  end
+
+  def integer_type?(k)
+    App.columns_hash[k].type == :integer
   end
 
   describe '#edit' do
