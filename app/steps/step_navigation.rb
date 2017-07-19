@@ -38,7 +38,7 @@ class StepNavigation
       ExpensesAdditionalController
     ],
     'Preferences' => [
-      PreferencesReminders,
+      PreferencesRemindersController,
       PreferencesRemindersConfirmation,
       PreferencesForInterview,
       PreferencesAnythingElse

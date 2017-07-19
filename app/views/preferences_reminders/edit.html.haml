@@ -1,0 +1,44 @@
+- content_for :header_title, 'Preferences'
+
+.form-card
+  = form_for @step, as: :step, url: preferences_reminders_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        - icon 'section-4'
+        .step-section-header__headline
+          Almost done!
+        .step-section-header__subhead
+          We'll make sure you don't miss a thing. Tell us how to follow up with you.
+
+    .form-card__content
+      .slab.slab--not-padded
+        .card.card--narrow
+          %h3
+            Would you like timely reminders to help you through the enrollment process?
+
+          %p.text--help
+            You'll receive messages about key steps and ways to submit required documents.
+            Let us know how you prefer to receive them. Select as many options as you
+            like.
+
+          :ruby
+            checkboxes = {
+              sms_reminders: 'Text message me',
+              email_reminders: 'Email me'
+            }.map do |method, title|
+              {
+                method: method,
+                title: title,
+                type: :checkbox,
+                form_classes: %w[no-bottom-space]
+              }
+            end
+
+          - questions f, checkboxes
+
+          %p.text--safety
+            No matter what, you will receive all official notices and legal information
+            via post mail to the address you provided. These e-mail and text message
+            reminders provide extra help.
+
+    = render 'shared/next_step'

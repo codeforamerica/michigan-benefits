@@ -61,7 +61,7 @@ RSpec.describe ExpensesAdditionalController, :member, type: :controller do
     it 'redirects to the next step' do
       put :update, params: { step: params }
 
-      expect(response).to redirect_to(step_path(PreferencesReminders))
+      expect(response).to redirect_to(step_path(PreferencesRemindersController))
     end
   end
 end
