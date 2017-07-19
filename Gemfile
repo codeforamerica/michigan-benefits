@@ -58,6 +58,8 @@ end
 
 group :development do
   gem 'citizen-scripts', git: 'https://github.com/citizencode/citizen-scripts'
+  gem 'guard', require: false
+  gem 'guard-rspec', require: false
   gem 'listen', '~> 3.0.5'
   gem 'meta_request'
   gem 'pivotal_git_scripts'
