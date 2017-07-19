@@ -48,7 +48,7 @@ class StepNavigation
       SignAndSubmit
     ],
     'Submit Documents' => [
-      MaybeSubmitDocuments
+      MaybeSubmitDocumentsController
     ]
   }.freeze
 

@@ -16,6 +16,4 @@
     = errors.to_sentence
 
 - if local_assigns[:safety]
-  %p.text--secure
-    %i.illustration.illustration--safety
-    = safety
+  = render 'shared/question/safety', safety: local_assigns[:safety]

@@ -1,0 +1,36 @@
+- content_for :header_title, 'Submit Documents'
+
+.form-card
+  = form_for @step, as: :step, url: income_additional_path, method: :put do |f|
+    %header.form-card__header
+      .step-section-header
+        .step-section-header__subhead
+          Do you have any documents you can submit now?
+        %p.text--help.step-section-header__subhead-help
+          For example: ID, proof of income, proof of residency
+
+    .form-card__content
+      %p.text--small
+        You can do this later but submitting documents now will help the
+        application process go faster.
+
+      %p.text--small
+        If you're on a smartphone right now, you
+        can take a picture and upload it.
+
+      %p.text--help
+        You may also share documents with MDHHS via pst mail or by delivering
+        them to your local office in person.
+
+      = render 'shared/question/safety',
+        safety: "MDHSS maintains strict security guidelines to protect the identities of our residents."
+
+    %footer.form-card__footer
+      = link_to documents_path, class: 'button button--cta' do
+        Submit documents now
+        %i.button__icon.icon-arrow_forward
+
+      = link_to clear_sessions_path(redirect_to: confirmations_path), class: 'button button--secondary-cta' do
+        I’ll do it later
+        %i.button__icon.icon-arrow_forward
+

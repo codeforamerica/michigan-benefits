@@ -20,5 +20,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
     income_additional_sources
     income_other_assets
     expenses_additional_sources
+    maybe_submit_documents
   ]
 end
