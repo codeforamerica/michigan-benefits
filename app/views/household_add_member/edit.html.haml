@@ -28,13 +28,13 @@
             help: 'As it appears on their driver’s license',
             type: :radios,
             method: :sex,
-            options: %w[male female]
+            options: HouseholdMember::SEXES
           },
           {
             title: 'What is their relationship to you?',
             type: :select,
             method: :relationship,
-            options: %w[Spouse Parent Child Sibling Roommate]
+            options: HouseholdMember::RELATIONSHIPS
           },
           {
             title: 'What is their social security number?',

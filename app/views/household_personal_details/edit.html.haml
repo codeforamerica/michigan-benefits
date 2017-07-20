@@ -14,13 +14,13 @@
             title: 'What is your sex?',
             help: 'As it appears on your driver’s license',
             type: :radios,
-            options: %w[male female],
+            options: HouseholdMember::SEXES,
             method: :sex
           },
           {
             title: 'What is your marital status?',
             type: :select,
-            options: %w[single married divorced separated],
+            options: HouseholdMember::MARITAL_STATUSES,
             method: :marital_status
           },
           {

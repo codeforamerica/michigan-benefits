@@ -5,11 +5,7 @@ class HouseholdMember < ApplicationRecord
 
   default_scope { order(id: :asc) }
 
-  EMPLOYMENT_STATUSES = %w[
-    employed
-    self_employed
-    not_employed
-  ].freeze
+  EMPLOYMENT_STATUSES = %w[employed self_employed not_employed].freeze
 
   FILING_STATUSES = %w[
     primary_tax_filer
@@ -18,12 +14,13 @@ class HouseholdMember < ApplicationRecord
     i_do_not_know
   ].freeze
 
-  PAY_INTERVALS = %w[
-    day
-    week
-    2-weeks
-    month
-  ].freeze
+  PAY_INTERVALS = %w[day week two_weeks month].freeze
+
+  SEXES = %w[male female].freeze
+
+  MARITAL_STATUSES = %w[single married divorced separated].freeze
+
+  RELATIONSHIPS = %w[spouse parent child sibling roommate].freeze
 
   def self.with_inconsistent_income
     where(income_consistent: [false, nil])

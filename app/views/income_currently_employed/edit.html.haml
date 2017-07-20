@@ -23,7 +23,7 @@
             type: :radios,
             method: :employment_status,
             title: 'Employment status',
-            options: HouseholdMember::EMPLOYMENT_STATUSES.map(&:to_s),
+            options: HouseholdMember::EMPLOYMENT_STATUSES,
             label_hidden: true
 
     = render 'shared/next_step'

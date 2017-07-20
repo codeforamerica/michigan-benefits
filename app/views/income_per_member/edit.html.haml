@@ -42,7 +42,7 @@
                   f: ff,
                   type: :select,
                   method: :pay_interval,
-                  options: HouseholdMember::PAY_INTERVALS.map(&:to_s)
+                  options: HouseholdMember::PAY_INTERVALS
 
           - if member.self_employed?
             = render 'shared/question',
