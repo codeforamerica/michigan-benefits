@@ -16,4 +16,8 @@ class Doctor < CitizenScripts::Doctor
       remedy: "http://www.pdflabs.com/tools/pdftk-server/"
     )
   end
+
+  def check_direnv_installed
+    #no-op
+  end
 end
