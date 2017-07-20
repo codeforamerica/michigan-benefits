@@ -23,7 +23,9 @@ class StepsController < ApplicationController
     }
   end
 
-  def index; end
+  def index
+    render layout: 'step'
+  end
 
   def edit
     @step = step_class.new
