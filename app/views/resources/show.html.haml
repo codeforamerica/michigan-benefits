@@ -1,0 +1,126 @@
+- content_for :template_name, 'step'
+- content_for :header_title, 'Other Resources'
+- content_for :back_path, confirmations_path
+
+.form-card{ style: 'padding-top: 4em' }
+  .slab.step-section-header.slab--white
+    .step-section-header__subhead
+      Other resources near you
+
+    %p.text--help
+      While you are completing the enrollment process, you may consider contacting one of
+      the many organizations in your community that offer additional assistance.
+
+  :ruby
+    lists = [
+      {
+        title: 'Food',
+        items: [
+          {
+            name: 'Gleaners',
+            addr1: '2131 Beaufait St',
+            addr2: 'Detroit, MI 48207',
+            phone: '313-923-3535',
+            url: 'www.gcfb.org',
+            body: <<~TEXT
+              A community food bank providing food to southeast Michigan residents. They
+              also teach nutritional education programs, provide meals for kids after
+              school and in the summer, operate mobile pantries and operate 3 free
+              community gardens.
+            TEXT
+          },
+          {
+            name: 'The Capuchin Soup Kitchen',
+            addr1: '4390 Conner',
+            addr2: 'Detroit, MI 48215',
+            phone: '313-822-8606 x217',
+            url: 'www.cskdetroit.org',
+            body: <<~TEXT
+              They provide food to Detroit residents through their two soup kitchens and
+              emergency food pantry. Additionally they offer clothing and run a treatment
+              facility for drug and alcohol addictions.
+            TEXT
+          }
+        ]
+      },
+      {
+        title: 'Health',
+        items: [
+          {
+            name: 'Community Health and Social Services (CHASS)',
+            addr1: '5635 West Fort Street',
+            addr2: 'Detroit, MI 48209',
+            phone: '313-849-3920',
+            url: 'chasscenter.org',
+            body: <<~TEXT
+              CHASS provides comprehensive and affordable primary health care and support
+              services to Detroit residents.
+            TEXT
+          },
+          {
+            name: 'Cass Community Social Services',
+            addr1: '11850 Woodrow Wilson St',
+            addr2: 'Detroit, MI 48206',
+            phone: '313-883-2277',
+            url: 'casscommunity.org',
+            body: <<~TEXT
+              Cass Community Social Services provides health services, food, housing and
+              job programs to Detroit residents.
+            TEXT
+          }
+        ]
+      },
+      {
+        title: 'Employment',
+        items: [
+          {
+            name: 'Focus Hope',
+            addr1: '1355 Oakman Boulevard',
+            addr2: 'Detroit, Michigan 48238',
+            phone: '313-494-5500',
+            url: 'www.focushope.edu',
+            body: <<~TEXT
+              Focus Hope serves residents in southeast Michigan by providing workforce
+              development trainings and education and addressing food and basic needs.
+            TEXT
+          },
+          {
+            name: 'SER Metro',
+            addr1: '9301 Michigan Avenue',
+            addr2: 'Detroit, MI 48210',
+            phone: '313-846-2240',
+            url: 'sermetro.org',
+            body: <<~TEXT
+              SER Metro provides training and job placement services for Metro-Detroit
+              residents.
+            TEXT
+          }
+        ]
+      }
+    ]
+
+  - lists.each do |list|
+    .slab.slab--not-padded
+      .card.card--narrow
+        .step-section-header__headline
+          = list[:title]
+        %ul.list--bulleted.list--padded
+          - list[:items].each do |item|
+            %li
+              %strong
+                = item[:name]
+              %div
+                = item[:body]
+              .text--help
+                = item[:addr1]
+              .text--help
+                = item[:addr2]
+              %div
+                - phone = item[:phone]
+                = link_to "Call #{phone}", "tel:#{phone.remove(/[^\d]/)}",
+                  class: 'text--small'
+              %div
+                - url = item[:url]
+                = link_to url, "http://#{url}", class: 'text--small'
+
+= render 'shared/footer'

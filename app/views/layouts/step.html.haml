@@ -2,7 +2,8 @@
 
 - content_for :step_header do
   .step-header
-    = link_to previous_path(rel: 'back'), class: 'step-header__back-link' do
+    - back_path = content_for(:back_path) || previous_path(rel: 'back')
+    = link_to back_path, class: 'step-header__back-link' do
       %i.button__icon.icon-arrow_back
 
     %h4.step-header__title
