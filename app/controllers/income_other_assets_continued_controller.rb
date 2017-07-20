@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeOtherAssetsContinuedController < SimpleStepController
+class IncomeOtherAssetsContinuedController < StepsController
   def edit
     financial_accounts = array_to_checkboxes(current_app.financial_accounts)
 

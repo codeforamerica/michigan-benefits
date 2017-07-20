@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SignAndSubmitController < StandardSimpleStepController
+class SignAndSubmitController < StandardStepsController
   def update
     @step = step_class.new(step_params)
 

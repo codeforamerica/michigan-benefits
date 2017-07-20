@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeAdditionalSources < SimpleStep
+class IncomeAdditionalSources < Step
   step_attributes \
     :unemployment,
     :ssi,

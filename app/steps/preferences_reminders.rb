@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PreferencesReminders < SimpleStep
+class PreferencesReminders < Step
   step_attributes \
     :sms_reminders,
     :email_reminders

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdSituations < SimpleStep
+class HouseholdSituations < Step
   step_attributes \
     :household_members,
     :everyone_a_citizen,

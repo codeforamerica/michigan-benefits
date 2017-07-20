@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeOtherAssetsContinued < SimpleStep
+class IncomeOtherAssetsContinued < Step
   step_attributes \
     :total_money,
     :checking_account,

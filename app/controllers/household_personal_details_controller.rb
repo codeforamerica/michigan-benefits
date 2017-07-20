@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdPersonalDetailsController < SimpleStepController
+class HouseholdPersonalDetailsController < StepsController
   def edit
     applicant_attributes = current_app.applicant.attributes.slice('sex', 'ssn')
 

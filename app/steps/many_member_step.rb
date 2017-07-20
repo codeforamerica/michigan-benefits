@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ManyMemberSimpleStep < SimpleStep
+class ManyMemberStep < Step
   def valid?
     household_members.each do |member|
       member.errors.clear

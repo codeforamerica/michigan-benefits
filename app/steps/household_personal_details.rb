@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdPersonalDetails < SimpleStep
+class HouseholdPersonalDetails < Step
   step_attributes \
     :sex,
     :marital_status,

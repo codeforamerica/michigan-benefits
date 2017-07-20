@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SignAndSubmit < SimpleStep
+class SignAndSubmit < Step
   step_attributes :signature
 
   validates :signature,

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExpensesAdditionalController < SimpleStepController
+class ExpensesAdditionalController < StepsController
   ATTRIBUTES = %w[
     monthly_care_expenses
     monthly_medical_expenses

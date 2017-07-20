@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class LegalAgreementController < SimpleStepController
+class LegalAgreementController < StepsController
 end

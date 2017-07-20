@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class HouseholdIntroduction < SimpleStep
+class HouseholdIntroduction < Step
 end

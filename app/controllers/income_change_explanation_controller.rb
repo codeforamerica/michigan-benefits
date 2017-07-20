@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeChangeExplanationController < StandardSimpleStepController
+class IncomeChangeExplanationController < StandardStepsController
   private
 
   def skip?

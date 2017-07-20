@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class StandardSimpleStepController < SimpleStepController
+class StandardStepsController < StepsController
   def edit
     @step = step_class.new(
       current_app.attributes.slice(*step_attrs)

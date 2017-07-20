@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdHealth < SimpleStep
+class HouseholdHealth < Step
   step_attributes \
     :any_medical_bill_help_last_3_months,
     :any_lost_insurance_last_3_months

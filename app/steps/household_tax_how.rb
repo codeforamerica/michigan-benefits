@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class HouseholdTaxHow < ManyMemberSimpleStep
+class HouseholdTaxHow < ManyMemberStep
   step_attributes :household_members, :filing_status
 end

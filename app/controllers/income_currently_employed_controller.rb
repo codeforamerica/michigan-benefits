@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeCurrentlyEmployedController < ManyMemberSimpleStepController
+class IncomeCurrentlyEmployedController < ManyMemberStepsController
   private
 
   def household_member_attrs

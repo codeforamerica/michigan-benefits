@@ -2,7 +2,7 @@
 
 module StepHelper
   def data_md5(*args)
-    SimpleStepHelper
+    StepsHelper
       .instance_method(:data_md5)
       .bind(self)
       .call(*args)

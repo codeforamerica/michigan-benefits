@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class IntroductionComplete < SimpleStep
+class IntroductionComplete < Step
   step_attributes :first_name
 end

@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class HouseholdIntroductionController < SimpleStepController
+class HouseholdIntroductionController < StepsController
 end

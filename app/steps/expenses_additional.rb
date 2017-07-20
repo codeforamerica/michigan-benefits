@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExpensesAdditional < SimpleStep
+class ExpensesAdditional < Step
   step_attributes \
     :monthly_care_expenses,
     :childcare,

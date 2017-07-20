@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeAdditionalController < StandardSimpleStepController
+class IncomeAdditionalController < StandardStepsController
   def edit
     @additional_income = current_app.additional_income.map do |key|
       "income_#{key}"

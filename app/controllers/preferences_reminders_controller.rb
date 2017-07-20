@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class PreferencesRemindersController < StandardSimpleStepController
+class PreferencesRemindersController < StandardStepsController
 end

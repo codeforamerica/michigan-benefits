@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeAdditionalSourcesController < SimpleStepController
+class IncomeAdditionalSourcesController < StepsController
   def edit
     @step = step_class.new(
       array_to_checkboxes(current_app.additional_income)

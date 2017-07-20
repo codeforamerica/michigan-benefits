@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeFluctuationController < ManyMemberSimpleStepController
+class IncomeFluctuationController < ManyMemberStepsController
   private
 
   def skip?

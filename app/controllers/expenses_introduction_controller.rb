@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class ExpensesIntroductionController < SimpleStepController
+class ExpensesIntroductionController < StepsController
 end

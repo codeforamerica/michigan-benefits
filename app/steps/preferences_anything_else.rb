@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class PreferencesAnythingElse < SimpleStep
+class PreferencesAnythingElse < Step
   step_attributes :anything_else
 end

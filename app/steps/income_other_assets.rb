@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeOtherAssets < SimpleStep
+class IncomeOtherAssets < Step
   step_attributes \
     :has_accounts,
     :has_home,

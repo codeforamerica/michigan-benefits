@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExpensesAdditionalSources < SimpleStep
+class ExpensesAdditionalSources < Step
   step_attributes \
     :dependent_care,
     :medical,

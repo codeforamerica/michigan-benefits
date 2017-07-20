@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdSituationsController < ManyMemberSimpleStepController
+class HouseholdSituationsController < ManyMemberStepsController
   private
 
   def household_member_attrs

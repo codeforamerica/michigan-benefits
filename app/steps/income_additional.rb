@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeAdditional < SimpleStep
+class IncomeAdditional < Step
   step_attributes \
     :income_child_support,
     :income_unemployment,

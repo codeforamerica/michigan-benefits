@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IntroductionContactInformation < SimpleStep
+class IntroductionContactInformation < Step
   step_attributes :phone_number,
     :accepts_text_messages,
     :email,

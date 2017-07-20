@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PreferencesRemindersConfirmationController < StandardSimpleStepController
+class PreferencesRemindersConfirmationController < StandardStepsController
   private
 
   def skip?

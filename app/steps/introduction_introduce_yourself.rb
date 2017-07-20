@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IntroductionIntroduceYourself < SimpleStep
+class IntroductionIntroduceYourself < Step
   step_attributes :first_name, :last_name
 
   validates :first_name,

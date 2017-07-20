@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IntroductionHomeAddress < SimpleStep
+class IntroductionHomeAddress < Step
   step_attributes :home_address,
     :home_city,
     :home_zip,

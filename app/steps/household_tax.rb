@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdTax < SimpleStep
+class HouseholdTax < Step
   step_attributes :household_tax
 
   validates \

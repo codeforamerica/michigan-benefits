@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class ExpensesIntroduction < SimpleStep
+class ExpensesIntroduction < Step
 end

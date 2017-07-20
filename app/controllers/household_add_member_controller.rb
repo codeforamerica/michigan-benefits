@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdAddMemberController < SimpleStepController
+class HouseholdAddMemberController < StepsController
   helper_method :member_id
 
   def edit

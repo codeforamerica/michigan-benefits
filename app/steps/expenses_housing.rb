@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExpensesHousing < SimpleStep
+class ExpensesHousing < Step
   step_attributes \
     :rent_expense,
     :property_tax_expense,

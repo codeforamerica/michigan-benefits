@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PreferencesForInterview < SimpleStep
+class PreferencesForInterview < Step
   step_attributes :preference_for_interview
 
   validates :preference_for_interview,

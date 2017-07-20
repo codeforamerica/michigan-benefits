@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdAddMember < SimpleStep
+class HouseholdAddMember < Step
   step_attributes \
     :first_name,
     :last_name,

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IntroductionHomeAddressController < StandardSimpleStepController
+class IntroductionHomeAddressController < StandardStepsController
   private
 
   def skip?

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeCurrentlyEmployed < ManyMemberSimpleStep
+class IncomeCurrentlyEmployed < ManyMemberStep
   step_attributes :household_members
 
   def validate_household_member(member)

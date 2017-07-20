@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class IncomeOtherAssetsController < StandardSimpleStepController
+class IncomeOtherAssetsController < StandardStepsController
 end

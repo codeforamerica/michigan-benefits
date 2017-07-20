@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ManyMemberSimpleStepController < SimpleStepController
+class ManyMemberStepsController < StepsController
   def edit
     step
   end
