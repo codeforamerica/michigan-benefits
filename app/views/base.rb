@@ -2,8 +2,6 @@
 
 module Views
   class Base < Fortitude::Widget
-    include Views::Widgets::Helpers
-    include Views::Steps::Helpers
     include Rails.application.routes.url_helpers
 
     doctype :html5
