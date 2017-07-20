@@ -1,0 +1,26 @@
+!!!
+%html{ lang: 'en' }
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }
+    %meta{ charset: 'utf-8' }
+    %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }
+    %meta{ content: Rails.application.config.project_description, name: 'description' }
+
+    %title
+      = content_for?(:title) ? capture { yield(:title) } : Rails.application.config.site_name
+
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+
+  %body{ class: "template--#{content_for(:template_name)}" }
+    .page-wrapper
+      - if content_for?(:step_header)
+        = capture { content_for(:step_header) }
+
+      = yield
+
+      - if content_for?(:footer)
+        = capture { content_for(:footer) }
+
+    = capture { content_for(:javascript) }
