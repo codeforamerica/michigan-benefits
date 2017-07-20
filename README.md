@@ -24,7 +24,7 @@ using the Citizen Rails template project as a base for your own project.**
 ### Getting Started
 
 * After cloning this repo, run: `bin/setup`
-* Run `citizen doctor` repeatedly until all the failures are fixed.
+* Run `bundle exec citizen doctor` repeatedly until all the failures are fixed.
 
 
 ### citizen-scripts
@@ -37,8 +37,8 @@ Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen
 ### Day-to-day
 
 * Run the server: `heroku local` and [http://localhost:3000](http://localhost:3000)
-* Run tests: `citizen test`
-* Pull, run tests, push: `citizen pushit`
+* Run tests: `bundle exec citizen test`
+* Pull, run tests, push: `bundle exec citizen pushit`
 
 ### Deploying
 
