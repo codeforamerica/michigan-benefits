@@ -8,7 +8,6 @@ gem 'awesome_print'
 gem 'aws-sdk'
 gem 'bourbon', '~> 4.2.0' # to keep in sync with getcalfresh
 gem 'coffee-rails'
-gem 'fortitude'
 gem 'haml', '~> 5.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
@@ -23,7 +22,10 @@ gem 'responders'
 gem 'sass-rails', '~> 5.0'
 gem 'sorcery'
 gem 'twilio-ruby'
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
 gem 'uglifier', '>= 1.3.0'
 
 # from gcf
