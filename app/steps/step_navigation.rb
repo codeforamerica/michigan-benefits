@@ -84,20 +84,11 @@ class StepNavigation
   end
 
   def next
-    if index
-      steps.at(index + 1)
-    else
-      steps.at(parent.index)
-    end
+    step_at(1)
   end
 
   def previous
-    if index
-      new_index = index - 1
-      new_index >= 0 ? steps.at(new_index) : nil
-    else
-      steps.at(parent.index)
-    end
+    step_at(-1)
   end
 
   def progress
@@ -110,5 +101,18 @@ class StepNavigation
 
   def parent
     self.class.new(SUBSTEPS[@step])
+  end
+
+  private
+
+  def step_at(increment)
+    if index
+      new_index = index + increment
+      new_index = nil if new_index.negative? || new_index >= steps.length
+    else
+      new_index = parent.index
+    end
+
+    steps.at(new_index) if new_index
   end
 end
