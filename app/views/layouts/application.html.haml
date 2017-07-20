@@ -7,20 +7,23 @@
     %meta{ content: Rails.application.config.project_description, name: 'description' }
 
     %title
-      = content_for?(:title) ? capture { yield(:title) } : Rails.application.config.site_name
+      - if content_for?(:title)
+        = content_for(:title)
+      - else
+        = Rails.application.config.site_name
 
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
 
-  %body{ class: "template--#{content_for(:template_name)}" }
+  :ruby
+    body_classes = []
+    if content_for?(:template_name)
+      body_classes << "template--#{content_for(:template_name)}"
+    end
+
+  %body{ class: body_classes }
     .page-wrapper
-      - if content_for?(:step_header)
-        = capture { content_for(:step_header) }
-
-      = yield
-
-      - if content_for?(:footer)
-        = capture { content_for(:footer) }
+      = content_for?(:content) ? content_for(:content) : yield
 
     = capture { content_for(:javascript) }

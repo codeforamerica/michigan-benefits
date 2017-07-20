@@ -1,6 +1,6 @@
-- content_for :template_name, 'step'
+- content_for :content do
+  - content_for :template_name, 'step'
 
-- content_for :step_header do
   .step-header
     - back_path = content_for(:back_path) || previous_path(rel: 'back')
     = link_to back_path, class: 'step-header__back-link' do
@@ -11,7 +11,8 @@
 
   = render 'shared/debug'
 
-- content_for :footer do
+  = yield
+
   = render 'shared/footer'
 
 = render template: 'layouts/application'
