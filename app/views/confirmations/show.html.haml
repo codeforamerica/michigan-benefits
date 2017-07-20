@@ -1,0 +1,85 @@
+- content_for :template_name, 'step'
+- content_for :header_title, 'Confirmation'
+
+.form-card{ style: 'padding-top: 4em' }
+  .slab.step-section-header.slab--white
+    .step-section-header__icon.illustration.illustration--success
+    %h4.step-section-header__headline
+      Congratulations
+    %h3.step-section-header__subhead
+      Your application has been successfully submitted.
+
+    %p.text--help
+      = "Submitted to MDHHS on #{Date.today}."
+
+    .h6
+      You applied for
+
+    %label.program-selector.program-selector__unbordered
+      .program-selector__icon.illustration.illustration--icn_health
+      %h4.program-selector__title
+        Healthcare Coverage
+
+    %label.program-selector.program-selector__unbordered
+      .program-selector__icon.illustration.illustration--icn_food
+      %h4.program-selector__title
+        Food Assistance
+
+  .slab.slab--not-padded
+    .card.card--narrow
+      %h4.text--centered
+        What happens next?
+
+      %div{ style: 'text-align: center' }
+        %div{ style: 'margin-top: 4rem' }
+          .illustration.illustration--compact.illustration--interview
+          %h4
+            Do an interview
+          .text--help
+            to go over your situation
+          .h6
+            In about 1 week
+
+        %div{ style: 'margin-top: 4rem' }
+          .illustration.illustration--compact.illustration--submit-docs
+          %h4
+            Submit documents
+          .text--help
+            to verify your eligibility
+          .h6
+            Within 30 days
+
+  .slab.slab--not-padded
+    .card.card--narrow
+      %h4.step-section-header__headline
+        What to expect:
+
+      %ul.list--bulleted.list--padded
+        %li
+          %strong
+            Your local office will call you in the next week for your phone interview.
+          %span
+            The call may come from a blocked number.
+        %li
+          %strong
+            The interview will take about 30 minutes.
+          %span
+            A worker will ask you about your household, income, expenses, and other
+            eligibility requirements.
+        %li
+          %strong
+            Your county will provide you with a list of documents
+          %span
+            that you will need to submit within 30 days from today to verify your
+            eligibility. You can submit documents any time at michigan.gov/docs
+        %li
+          %strong
+            We’ll occassionally follow up with you
+          %span
+            by text message and email to help you through the rest of the 30-day process.
+
+  .slab
+    = link_to 'Find community services nearby', resource_path,
+      class: 'button button--cta button--full-width text--centered'
+
+= render 'shared/footer'
