@@ -8,7 +8,7 @@
           Ok, let us know which people these situations apply to.
 
     .form-card__content
-      - unless @step.everyone_a_citizen
+      - unless current_app.everyone_a_citizen
         = render 'shared/question',
           f: f,
           type: :household_checkboxes,
@@ -16,7 +16,7 @@
           title: 'Who is a citizen?',
           household_members: @step.household_members
 
-      - if @step.anyone_disabled
+      - if current_app.anyone_disabled
         = render 'shared/question',
           f: f,
           type: :household_checkboxes,
@@ -24,7 +24,7 @@
           title: 'Who has a disability?',
           household_members: @step.household_members
 
-      - if @step.any_new_moms
+      - if current_app.any_new_moms
         = render 'shared/question',
           f: f,
           type: :household_checkboxes,
@@ -32,7 +32,7 @@
           title: 'Who is pregnant or has been pregnant recently?',
           household_members: @step.household_members
 
-      - if @step.anyone_in_college
+      - if current_app.anyone_in_college
         = render 'shared/question',
           f: f,
           type: :household_checkboxes,
@@ -40,7 +40,7 @@
           title: 'Who is enrolled in college?',
           household_members: @step.household_members
 
-      - if @step.anyone_living_elsewhere
+      - if current_app.anyone_living_elsewhere
         = render 'shared/question',
           f: f,
           type: :household_checkboxes,
