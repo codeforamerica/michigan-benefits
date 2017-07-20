@@ -1,7 +1,7 @@
 - content_for :header_title, 'Preferences'
 
 .form-card
-  = form_for @step, as: :step, url: preferences_reminders_path, method: :put do |f|
+  = form_for @step, as: :step, url: current_path, method: :put do |f|
     %header.form-card__header
       .step-section-header
         - icon 'section-4'

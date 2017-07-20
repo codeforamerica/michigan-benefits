@@ -1,7 +1,7 @@
 - content_for :header_title, 'Money & Income'
 
 .form-card
-  = form_for @step, as: :step, url: income_change_path, method: :put do |f|
+  = form_for @step, as: :step, url: current_path, method: :put do |f|
     %header.form-card__header
       .step-section-header
         .step-section-header__subhead

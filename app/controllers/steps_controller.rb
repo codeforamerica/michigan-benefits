@@ -5,7 +5,7 @@ class StepsController < ApplicationController
 
   before_action :maybe_skip, only: :edit
 
-  helper_method :previous_path, :next_path, :current_app
+  helper_method :previous_path, :current_path, :next_path, :current_app
 
   def self.to_param
     controller_path.dasherize
@@ -48,12 +48,12 @@ class StepsController < ApplicationController
   end
 
   def maybe_skip
-    if skip?
-      if going_backwards?
-        redirect_to previous_path(rel: 'back')
-      else
-        redirect_to next_path
-      end
+    return unless skip?
+
+    if going_backwards?
+      redirect_to previous_path(rel: 'back')
+    else
+      redirect_to next_path
     end
   end
 
@@ -78,8 +78,12 @@ class StepsController < ApplicationController
     previous ? step_path(previous, params) : root_path
   end
 
-  def next_path
-    step_path(step_navigation.next)
+  def current_path(params = nil)
+    step_path(self.class, params)
+  end
+
+  def next_path(params = nil)
+    step_path(step_navigation.next, params)
   end
 
   def step_navigation

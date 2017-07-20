@@ -64,11 +64,11 @@ class StepNavigation
     end
 
     def steps
-      ALL.values.flatten
+      @steps ||= ALL.values.flatten.freeze
     end
 
     def steps_and_substeps
-      steps.concat(SUBSTEPS.keys).uniq
+      @steps_and_substeps ||= (steps + SUBSTEPS.keys).uniq.freeze
     end
   end
 

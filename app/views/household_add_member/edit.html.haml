@@ -1,7 +1,7 @@
 - content_for :header_title, 'Your Household'
 
 .form-card
-  = form_for @step, as: :step, url: household_add_member_path(member_id: member_id),
+  = form_for @step, as: :step, url: current_path(member_id: member_id),
     method: :put do |f|
     %header.form-card__header
       .step-section-header

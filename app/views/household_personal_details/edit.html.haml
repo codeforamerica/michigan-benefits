@@ -1,7 +1,7 @@
 - content_for :header_title, 'Your Household'
 
 .form-card
-  = form_for @step, as: :step, url: household_personal_details_path, method: :put do |f|
+  = form_for @step, as: :step, url: current_path, method: :put do |f|
     %header.form-card__header
       .step-section-header
         .step-section-header__subhead
