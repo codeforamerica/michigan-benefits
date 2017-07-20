@@ -25,7 +25,4 @@ Rails.application.routes.draw do
 
   get '/form', to: 'forms#show'
   get '/styleguide', to: 'styleguides#index'
-
-  # SSL/Let's Encrypt
-  get '/.well-known/acme-challenge/:id' => 'acme_challenges#show'
 end
