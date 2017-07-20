@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-html2fortitude --class-name Foo --superclass Views::Base --new-style-hashes --do-end -

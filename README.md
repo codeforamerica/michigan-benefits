@@ -87,13 +87,6 @@ Set an environment variable called `BASIC_AUTH` in the format `<username>:<passw
 Basic auth will be enabled if that environment variable exists.
 
 
-### Fortitude
-
-We use [Fortitude](https://github.com/ageweke/fortitude) for views. You'll love it.
-
-Use `bin/fortify` to convert HTML to Fortitude.
-
-
 
 ### X-ray
 
