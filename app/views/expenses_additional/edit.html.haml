@@ -87,7 +87,7 @@
             title: section[:expense][:title],
             method: section[:expense][:method],
             type: :money_field,
-            form_classes: %w[no-bottom-space]
+            no_bottom_space: true
 
           :ruby
             checkboxes = section[:kinds][:checkboxes].map do |method, title|
@@ -98,7 +98,7 @@
               }
             end
 
-            checkboxes[0...-1].each { |h| h[:form_classes] = %w[no-bottom-space] }
+            checkboxes[0...-1].each { |h| h[:no_bottom_space] = true }
 
           %p.form-question
             = section[:kinds][:title]
