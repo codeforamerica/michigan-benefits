@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe HouseholdSituationsController, :member, type: :controller do
   let!(:current_app) do
-    App.create!(user: @member, household_members: [household_member])
+    App.create!(user: member, household_members: [household_member])
   end
 
   let!(:household_member) do

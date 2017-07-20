@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
   let!(:current_app) do
-    App.create!(attributes.merge(user: @member))
+    App.create!(attributes.merge(user: member))
   end
 
   let(:attributes) do

@@ -97,14 +97,9 @@ RSpec.configure do |config|
     config.include ::Rails::Controller::Testing::Integration, type: type
   end
 
-  config.before :each, :admin do
-    @admin = create :admin
-    login_user @admin
-  end
-
-  config.before :each, :member do
-    @member = create :member
-    login_user @member
+  config.before :each, :member do |example|
+    example.example_group.let(:member) { create(:member) }
+    login_user member
   end
 
   config.before :each, :guest do

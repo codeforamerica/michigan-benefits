@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe IncomeChangeExplanationController, :member, type: :controller do
   let!(:current_app) do
-    App.create!(attributes.merge(user: @member, income_change: true))
+    App.create!(attributes.merge(user: member, income_change: true))
   end
 
   let(:attributes) do

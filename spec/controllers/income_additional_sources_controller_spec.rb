@@ -9,7 +9,7 @@ RSpec.describe IncomeAdditionalSourcesController, :member, type: :controller do
 
   let!(:current_app) do
     App.create!(
-      user: @member,
+      user: member,
       additional_income: additional_income
     )
   end

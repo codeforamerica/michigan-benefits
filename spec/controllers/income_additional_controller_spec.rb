@@ -26,7 +26,7 @@ RSpec.describe IncomeAdditionalController, :member, type: :controller do
 
   let!(:current_app) do
     App.create!(
-      expected.merge(user: @member, additional_income: additional_income)
+      expected.merge(user: member, additional_income: additional_income)
     )
   end
 

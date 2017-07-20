@@ -8,7 +8,7 @@ RSpec.describe PreferencesRemindersController, :member, type: :controller do
   end
 
   let!(:current_app) do
-    App.create!(params.merge(user: @member))
+    App.create!(params.merge(user: member))
   end
 
   let(:step) { assigns(:step) }

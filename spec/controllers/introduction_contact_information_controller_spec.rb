@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe IntroductionContactInformationController, :member, type: :controller do
   let!(:current_app) do
     App.create!(
-      user: @member,
+      user: member,
       phone_number: '1234567890',
       accepts_text_messages: true,
       mailing_street: '123 Fake St',

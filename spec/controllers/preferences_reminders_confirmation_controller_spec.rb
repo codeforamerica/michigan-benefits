@@ -10,7 +10,7 @@ RSpec.describe PreferencesRemindersConfirmationController, :member, type: :contr
   end
 
   let!(:current_app) do
-    App.create!(params.merge(user: @member, email_reminders: true))
+    App.create!(params.merge(user: member, email_reminders: true))
   end
 
   let(:step) { assigns(:step) }

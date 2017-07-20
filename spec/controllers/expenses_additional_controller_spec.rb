@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ExpensesAdditionalController, :member, type: :controller do
   let!(:current_app) do
-    App.create!(attributes.merge(user: @member, dependent_care: true))
+    App.create!(attributes.merge(user: member, dependent_care: true))
   end
 
   let(:money_attributes) do

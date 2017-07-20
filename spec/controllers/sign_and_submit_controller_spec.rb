@@ -6,7 +6,7 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
   let!(:current_app) do
     App.create!(
       attributes.merge(
-        user: @member,
+        user: member,
         accepts_text_messages: true,
         phone_number: '4158675309'
       )

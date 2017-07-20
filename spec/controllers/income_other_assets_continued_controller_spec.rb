@@ -9,7 +9,7 @@ RSpec.describe IncomeOtherAssetsContinuedController, :member, type: :controller 
 
   let!(:current_app) do
     App.create!(
-      user: @member,
+      user: member,
       total_money: 321,
       financial_accounts: financial_accounts,
       has_accounts: true

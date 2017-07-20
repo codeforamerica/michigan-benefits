@@ -13,7 +13,7 @@ RSpec.describe IntroductionHomeAddressController, :member, type: :controller do
   end
 
   let!(:current_app) do
-    App.create!(user: @member, **params)
+    App.create!(user: member, **params)
   end
 
   let(:step) { assigns(:step) }

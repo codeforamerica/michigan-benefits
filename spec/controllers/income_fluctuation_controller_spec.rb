@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe IncomeFluctuationController, :member, type: :controller do
   let!(:current_app) do
     App.create!(
-      user: @member,
+      user: member,
       household_tax: true,
       household_members: [household_member]
     )

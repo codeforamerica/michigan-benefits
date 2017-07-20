@@ -12,7 +12,7 @@ RSpec.describe HouseholdPersonalDetailsController, :member, type: :controller do
   end
 
   let!(:current_app) do
-    App.create!(user: @member, marital_status: params[:marital_status])
+    App.create!(user: member, marital_status: params[:marital_status])
   end
 
   let(:step) { assigns(:step) }

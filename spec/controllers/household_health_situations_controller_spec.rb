@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe HouseholdHealthSituationsController, :member, type: :controller do
   let!(:current_app) do
     App.create!(
-      user: @member,
+      user: member,
       household_members: [household_member],
       any_medical_bill_help_last_3_months: true,
       any_lost_insurance_last_3_months: true
