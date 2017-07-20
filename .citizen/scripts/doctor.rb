@@ -1,3 +1,5 @@
+# https://github.com/citizencode/citizen-scripts/blob/master/lib/citizen_scripts/doctor.rb
+
 class Doctor < CitizenScripts::Doctor
   def run_checks
     # Use built-in default checks, if still desired
