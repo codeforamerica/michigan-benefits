@@ -15,7 +15,10 @@ class AcmeChallengesController < ApplicationController
 
     raise 'Challenge response not set' if response.blank?
     raise 'Challenge request not set' if expected_request.blank?
-    raise 'Challenge request does not match expected request' unless expected_request == params[:id]
+
+    unless expected_request == params[:id]
+      raise 'Challenge request does not match expected request'
+    end
 
     render plain: response
   end

@@ -19,7 +19,7 @@ class Document < ApplicationRecord
   before_post_process :skip_processing_for_non_images
 
   def image?
-    !!file_content_type&.match(/^image/)
+    file_content_type&.match(/^image/).present?
   end
 
   def skip_processing_for_non_images

@@ -9,13 +9,12 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
+  validates :password, length: { minimum: 8 }, if: lambda {
+    new_record? || changes[:crypted_password]
+  }
 
   def full_name
-    if app.applicant.first_name.present? || app.applicant.last_name.present?
-      [app.applicant.first_name, app.applicant.last_name].join(' ')
-    else
-      'Guest'
-    end
+    fields = app.applicant.attributes.values_at('first_name', 'last_name')
+    fields.any?(&:present?) ? fields.join(' ') : 'Guest'
   end
 end

@@ -7,7 +7,8 @@ Metrics/LineLength:
 
 AllCops:
   Exclude:
-    - db/schema.rb
+    - 'db/schema.rb'
+    - 'app/views/**/*.rb'
 
 Rails:
   Enabled: true
@@ -29,4 +30,12 @@ Layout/AlignParameters:
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
-    - "spec/**/*"
+    - 'spec/**/*.rb'
+
+Rails/Output:
+  Exclude:
+    - 'app/views/**/*.rb'
+
+Style/Documentation:
+  Exclude:
+    - '**/*'

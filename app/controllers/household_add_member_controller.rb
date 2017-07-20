@@ -16,9 +16,11 @@ class HouseholdAddMemberController < StepsController
 
   def member
     household_members = current_app.household_members
-    member_id.present? ?
-      household_members.find_by(id: member_id) :
+    if member_id.present?
+      household_members.find_by(id: member_id)
+    else
       household_members.build
+    end
   end
 
   def member_id

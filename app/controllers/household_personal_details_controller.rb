@@ -15,14 +15,19 @@ class HouseholdPersonalDetailsController < StepsController
     @step = step_class.new(step_params)
 
     if @step.valid?
-      current_app.transaction do
-        current_app.update! marital_status: @step.marital_status
-        current_app.applicant.update! sex: @step.sex, ssn: @step.ssn
-      end
-
+      update_app_and_applicant
       redirect_to(next_path)
     else
       render :edit
+    end
+  end
+
+  private
+
+  def update_app_and_applicant
+    current_app.transaction do
+      current_app.update!(marital_status: @step.marital_status)
+      current_app.applicant.update!(sex: @step.sex, ssn: @step.ssn)
     end
   end
 end

@@ -4,11 +4,13 @@ require 'rails_helper'
 
 RSpec.describe SignAndSubmitController, :member, type: :controller do
   let!(:current_app) do
-    App.create!(attributes.merge(
-      user: @member,
-      accepts_text_messages: true,
-      phone_number: "4158675309"
-    ))
+    App.create!(
+      attributes.merge(
+        user: @member,
+        accepts_text_messages: true,
+        phone_number: '4158675309'
+      )
+    )
   end
 
   let(:attributes) do
@@ -31,9 +33,13 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
 
   describe '#update' do
     around do |example|
-      with_modified_env FORM_RECIPIENT: 'test@example.com',
+      env = {
+        FORM_RECIPIENT: 'test@example.com',
         TWILIO_PHONE_NUMBER: '8005551212',
-        TWILIO_RECIPIENT_WHITELIST: '4158675309' do
+        TWILIO_RECIPIENT_WHITELIST: '4158675309'
+      }
+
+      with_modified_env(env) do
         example.run
       end
     end
@@ -63,8 +69,8 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
 
     it 'sends an sms' do
       put :update, params: params
-      expect(FakeTwilioClient.messages.last.body).
-        to include "Your application for Healthcare Coverage & Food Assistance was submitted!"
+      expect(FakeTwilioClient.messages.last.body)
+        .to include 'Your application for Healthcare Coverage & Food Assistance was submitted!'
     end
 
     it 'redirects' do

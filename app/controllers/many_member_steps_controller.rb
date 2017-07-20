@@ -6,13 +6,7 @@ class ManyMemberStepsController < StepsController
   end
 
   def update
-    step.household_members.each do |household_member|
-      attrs = params.dig(:step, :household_members, household_member.to_param)
-
-      if attrs.present?
-        household_member.assign_attributes(attrs.permit(household_member_attrs))
-      end
-    end
+    assign_household_member_attributes
 
     if step.valid?
       ActiveRecord::Base.transaction { step.household_members.each(&:save!) }
@@ -26,6 +20,16 @@ class ManyMemberStepsController < StepsController
 
   def household_member_attrs
     raise NotImplementedError
+  end
+
+  def assign_household_member_attributes
+    step.household_members.each do |household_member|
+      attrs = params.dig(:step, :household_members, household_member.to_param)
+
+      if attrs.present?
+        household_member.assign_attributes(attrs.permit(household_member_attrs))
+      end
+    end
   end
 
   def step

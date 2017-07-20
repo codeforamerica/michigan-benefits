@@ -8,7 +8,8 @@ class HouseholdMoreInfo < Step
     :anyone_in_college,
     :anyone_living_elsewhere
 
-  validates \
+  validates(
     *attribute_names,
     presence: { message: 'Make sure to answer this question' }
+  )
 end
