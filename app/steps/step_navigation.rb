@@ -91,10 +91,6 @@ class StepNavigation
     step_at(-1)
   end
 
-  def progress
-    index ? "#{index + 1}/#{steps.size}" : ''
-  end
-
   def index
     steps.index(@step)
   end

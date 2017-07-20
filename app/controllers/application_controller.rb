@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   respond_to :html
 
+  helper_method :previous_path, :current_path, :next_path, :current_app
+
   def basic_auth
     basic_auth_name, basic_auth_password = ENV.fetch('BASIC_AUTH', '').split(':')
 
@@ -37,6 +39,12 @@ class ApplicationController < ActionController::Base
       redirect_to new_sessions_path
     end
   end
+
+  def previous_path(*); end
+
+  def current_path(*); end
+
+  def next_path(*); end
 
   def current_app
     @current_app ||= App.find_or_create_by!(user: current_user)

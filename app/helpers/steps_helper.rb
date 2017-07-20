@@ -33,4 +33,10 @@ module StepsHelper
   def inconsistent_members(household_members)
     household_members.with_inconsistent_income.map(&:name).to_sentence
   end
+
+  def progress
+    step_navigation = StepNavigation.new(controller)
+    index = step_navigation.index
+    "#{index ? index + 1 : ''}/#{StepNavigation.steps.size}"
+  end
 end

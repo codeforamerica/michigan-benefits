@@ -1,6 +1,6 @@
-- if Rails.env.development?
+- if current_user && Rails.env.development?
   .debug
-    = StepNavigation.new(controller).progress
+    = progress
     |
     = controller.class.name
     | app
