@@ -15,11 +15,15 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
 
   resources :steps, only: %i[show index] do
-    StepNavigation.steps_and_substeps.each do |controller_class|
-      path = "/#{controller_class.to_param}"
-      controller_path = controller_class.controller_path
-      get path, action: :edit, controller: controller_path, on: :collection
-      put path, action: :update, controller: controller_path, on: :collection
+    collection do
+      StepNavigation.steps_and_substeps.each do |controller_class|
+        { get: :edit, put: :update }.each do |method, action|
+          match "/#{controller_class.to_param}",
+            action: action,
+            controller: controller_class.controller_path,
+            via: method
+        end
+      end
     end
   end
 
