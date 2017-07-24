@@ -37,9 +37,9 @@ RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controll
             last_name: "smith",
           },
         }
-      end.to change {
-        current_app.applicant.reload.attributes.slice("first_name", "last_name")
-      }
+      end.to(
+        change { current_app.applicant.reload.attributes.slice("first_name", "last_name") },
+      )
     end
 
     it "redirects to the next step if the step is valid" do

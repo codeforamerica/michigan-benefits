@@ -24,15 +24,13 @@ RSpec.describe PreferencesAnythingElseController, :member, type: :controller do
 
   describe "#update" do
     let(:valid_params) do
-      {
-        anything_else: "yes",
-      }
+      { anything_else: "yes" }
     end
 
     it "updates the app" do
       expect do
         put :update, params: { step: valid_params }
-      end.to change { current_app.reload.anything_else }
+      end.to(change { current_app.reload.anything_else })
     end
 
     it "redirects to the next step" do

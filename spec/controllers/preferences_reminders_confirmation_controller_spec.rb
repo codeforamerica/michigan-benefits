@@ -40,7 +40,7 @@ RSpec.describe PreferencesRemindersConfirmationController, :member, type: :contr
       it "updates the app" do
         expect do
           put :update, params: { step: valid_params }
-        end.to change { current_app.reload.email }
+        end.to(change { current_app.reload.email })
       end
 
       it "redirects to the next step" do

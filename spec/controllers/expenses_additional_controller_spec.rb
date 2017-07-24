@@ -53,9 +53,9 @@ RSpec.describe ExpensesAdditionalController, :member, type: :controller do
     it "updates the app" do
       expect do
         put :update, params: { step: params }
-      end.to change {
-        current_app.reload.attributes.slice(*attributes.keys)
-      }
+      end.to(
+        change { current_app.reload.attributes.slice(*attributes.keys) },
+      )
     end
 
     it "redirects to the next step" do

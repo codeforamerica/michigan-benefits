@@ -31,9 +31,11 @@ RSpec.describe PreferencesRemindersController, :member, type: :controller do
     it "updates the app" do
       expect do
         put :update, params: { step: valid_params }
-      end.to change {
-        current_app.reload.attributes.slice(*PreferencesReminders.attribute_names)
-      }
+      end.to(
+        change do
+          current_app.reload.attributes.slice(*PreferencesReminders.attribute_names)
+        end,
+      )
     end
 
     it "redirects to the next step" do
