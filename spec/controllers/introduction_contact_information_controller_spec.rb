@@ -79,7 +79,7 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
 
         expect do
           put :update, params: { step: valid_params }
-        end.to change { current_app.reload.welcome_sms_sent }
+        end.to(change { current_app.reload.welcome_sms_sent })
       end
 
       it "does not send an SMS otherwise" do
@@ -87,7 +87,7 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
 
         expect do
           put :update, params: { step: valid_params }
-        end.not_to change { current_app.reload.welcome_sms_sent }
+        end.not_to(change { current_app.reload.welcome_sms_sent })
       end
 
       it "redirects to the next step" do

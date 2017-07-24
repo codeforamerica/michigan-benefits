@@ -25,15 +25,13 @@ RSpec.describe PreferencesForInterviewController, :member, type: :controller do
   describe "#update" do
     context "when valid" do
       let(:valid_params) do
-        {
-          preference_for_interview: "in_person_interview",
-        }
+        { preference_for_interview: "in_person_interview" }
       end
 
       it "updates the app" do
         expect do
           put :update, params: { step: valid_params }
-        end.to change { current_app.reload.preference_for_interview }
+        end.to(change { current_app.reload.preference_for_interview })
       end
 
       it "redirects to the next step" do

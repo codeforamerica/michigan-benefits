@@ -34,9 +34,9 @@ RSpec.describe ExpensesAdditionalSourcesController, :member, type: :controller d
       it "updates attributes" do
         expect do
           put :update, params: params
-        end.to change {
-          current_app.reload.attributes.slice(*attributes.keys)
-        }
+        end.to(
+          change { current_app.reload.attributes.slice(*attributes.keys) },
+        )
       end
 
       it "redirects" do
