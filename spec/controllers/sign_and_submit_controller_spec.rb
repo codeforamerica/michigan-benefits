@@ -34,7 +34,6 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
   describe '#update' do
     around do |example|
       env = {
-        FORM_RECIPIENT: 'test@example.com',
         TWILIO_PHONE_NUMBER: '8005551212',
         TWILIO_RECIPIENT_WHITELIST: '4158675309'
       }
@@ -58,13 +57,6 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
       end.to change {
         current_app.reload.attributes.slice(*attributes.keys)
       }.from('signature' => 'Hans Solo').to('signature' => 'Chiu Baka')
-    end
-
-    it 'emails the form' do
-      put :update, params: params
-      mail = ActionMailer::Base.deliveries.last
-      expect(mail.attachments.size).to eq(1)
-      expect(mail.attachments.first.filename).to eq('application.pdf')
     end
 
     it 'sends an sms' do
