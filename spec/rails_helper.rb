@@ -17,7 +17,6 @@ headless_capybara = true
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/accessible'
-require 'capybara-screenshot/rspec'
 
 if headless_capybara
   require 'capybara/poltergeist'
