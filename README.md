@@ -25,14 +25,14 @@ using the Citizen Rails template project as a base for your own project.**
 
 * After cloning this repo, run: `bin/setup`
 * Run `bundle exec citizen doctor` repeatedly until all the failures are fixed.
-
+* Read through the [CONTRIBUTING.md](CONTRIBUTING.md) file to learn how this
+  team operates.
 
 ### citizen-scripts
 
 The Gemfile includes `citizen-scripts` which is a collection of useful dev utils. It includes a command
 called `citizen`. Running `citizen` with no arguments will show usage information. Depending on your
 Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen`.
-
 
 ### Day-to-day
 
