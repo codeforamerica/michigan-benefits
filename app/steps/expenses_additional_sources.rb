@@ -11,5 +11,5 @@ class ExpensesAdditionalSources < Step
     :medical,
     :court_ordered,
     :tax_deductible,
-    presence: { message: 'Make sure to answer this question' }
+    presence: { message: "Make sure to answer this question" }
 end

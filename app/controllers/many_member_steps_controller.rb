@@ -34,10 +34,10 @@ class ManyMemberStepsController < StepsController
 
   def step
     @step ||= step_class.new(
-      current_app
-        .attributes
-        .slice(*step_attrs)
-        .merge(household_members: current_app.household_members)
+      current_app.
+        attributes.
+        slice(*step_attrs).
+        merge(household_members: current_app.household_members),
     )
   end
 end

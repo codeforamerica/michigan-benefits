@@ -13,7 +13,7 @@ class App < ApplicationRecord
   ].freeze
 
   def applicant
-    household_members.find_or_create_by!(relationship: 'self')
+    household_members.find_or_create_by!(relationship: "self")
   end
 
   def non_applicant_members
@@ -25,6 +25,6 @@ class App < ApplicationRecord
   end
 
   def mailing_address
-    [mailing_street, mailing_city, mailing_zip].join(', ')
+    [mailing_street, mailing_city, mailing_zip].join(", ")
   end
 end

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def allowed
     {
       new: :guest,
-      create: :guest
+      create: :guest,
     }
   end
 
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user = User.new(
       name: SecureRandom.uuid,
       password: SecureRandom.uuid,
-      email: "#{SecureRandom.uuid}-auto@example.com"
+      email: "#{SecureRandom.uuid}-auto@example.com",
     )
     @user.save && auto_login(@user)
     respond_with @user, location: step_path(StepNavigation.first)
@@ -27,8 +27,8 @@ class UsersController < ApplicationController
   private
 
   def check_signups_enabled
-    return unless ENV['SIGNUPS_DISABLED'] == 'true'
-    flash[:alert] = 'Sorry, sign-ups are temporarily disabled'
+    return unless ENV["SIGNUPS_DISABLED"] == "true"
+    flash[:alert] = "Sorry, sign-ups are temporarily disabled"
     redirect_to root_path
   end
 

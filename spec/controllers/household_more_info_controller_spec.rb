@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
   let!(:current_app) do
@@ -13,7 +13,7 @@ RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
       anyone_disabled: true,
       any_new_moms: true,
       anyone_in_college: true,
-      anyone_living_elsewhere: true
+      anyone_living_elsewhere: true,
     }.with_indifferent_access
   end
 
@@ -21,8 +21,8 @@ RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
     assigns(:step)
   end
 
-  describe '#edit' do
-    it 'assigns the attributes to the step' do
+  describe "#edit" do
+    it "assigns the attributes to the step" do
       get :edit
 
       attributes.each do |key, value|
@@ -31,14 +31,14 @@ RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
     end
   end
 
-  describe '#update' do
-    it 'updates the app and redirects when valid' do
+  describe "#update" do
+    it "updates the app and redirects when valid" do
       params = {
         everyone_a_citizen: false,
         anyone_disabled: false,
         any_new_moms: false,
         anyone_in_college: false,
-        anyone_living_elsewhere: false
+        anyone_living_elsewhere: false,
       }.with_indifferent_access
 
       put :update, params: { step: params }
@@ -47,13 +47,13 @@ RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
       expect(response).to redirect_to(step_path(HouseholdSituationsController))
     end
 
-    it 'sets the step and renders :edit otherwise' do
+    it "sets the step and renders :edit otherwise" do
       params = {
         everyone_a_citizen: nil,
         anyone_disabled: nil,
         any_new_moms: nil,
         anyone_in_college: nil,
-        anyone_living_elsewhere: nil
+        anyone_living_elsewhere: nil,
       }
 
       put :update, params: { step: params }

@@ -8,5 +8,5 @@ class HouseholdPersonalDetails < Step
 
   validates :sex,
     :marital_status,
-    presence: { message: 'Make sure to answer this question.' }
+    presence: { message: "Make sure to answer this question." }
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ExpensesHousingController, :member, type: :controller do
   let!(:current_app) do
@@ -21,25 +21,25 @@ RSpec.describe ExpensesHousingController, :member, type: :controller do
     App.columns_hash[k].type == :integer
   end
 
-  describe '#edit' do
-    it 'assigns the attributes to the step' do
+  describe "#edit" do
+    it "assigns the attributes to the step" do
       get :edit
 
       expect(attributes.keys.map { |attr| [attr, step.send(attr)] }.to_h).to eq attributes
     end
   end
 
-  describe '#update' do
-    context 'with valid params' do
+  describe "#update" do
+    context "with valid params" do
       let(:params) do
         {
           step: ExpensesHousing.attribute_names.map do |k|
             [k, integer_type?(k) ? 321 : false]
-          end.to_h
+          end.to_h,
         }
       end
 
-      it 'updates attributes' do
+      it "updates attributes" do
         expect do
           put :update, params: params
         end.to change {
@@ -47,7 +47,7 @@ RSpec.describe ExpensesHousingController, :member, type: :controller do
         }
       end
 
-      it 'redirects' do
+      it "redirects" do
         put :update, params: params
         expect(response).to redirect_to step_path(ExpensesAdditionalSourcesController)
       end

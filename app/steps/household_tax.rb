@@ -5,5 +5,5 @@ class HouseholdTax < Step
 
   validates \
     :household_tax,
-    presence: { message: 'Make sure to answer this question' }
+    presence: { message: "Make sure to answer this question" }
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe IncomeAdditionalController, :member, type: :controller do
   let(:additional_income) do
@@ -26,14 +26,14 @@ RSpec.describe IncomeAdditionalController, :member, type: :controller do
 
   let!(:current_app) do
     App.create!(
-      expected.merge(user: member, additional_income: additional_income)
+      expected.merge(user: member, additional_income: additional_income),
     )
   end
 
   let(:step) { assigns(:step) }
 
-  describe '#edit' do
-    it 'assigns the fields to the step' do
+  describe "#edit" do
+    it "assigns the fields to the step" do
       get :edit
 
       actual = prefixed_additional_income.map { |k| [k, step.send(k)] }.to_h
@@ -41,19 +41,19 @@ RSpec.describe IncomeAdditionalController, :member, type: :controller do
       expect(actual).to eq(expected)
     end
 
-    it 'is skipped if there is no additional income' do
+    it "is skipped if there is no additional income" do
       current_app.update!(additional_income: [])
       get :edit
       expect(response).to be_redirect
     end
   end
 
-  describe '#update' do
+  describe "#update" do
     let(:params) do
       prefixed_additional_income.map { |k| [k, 123] }.to_h
     end
 
-    it 'updates the app' do
+    it "updates the app" do
       expect do
         put :update, params: { step: params }
       end.to change {
@@ -61,7 +61,7 @@ RSpec.describe IncomeAdditionalController, :member, type: :controller do
       }.to(params)
     end
 
-    it 'redirects to the next step' do
+    it "redirects to the next step" do
       put :update, params: { step: params }
 
       expect(response).to redirect_to(step_path(IncomeOtherAssetsController))

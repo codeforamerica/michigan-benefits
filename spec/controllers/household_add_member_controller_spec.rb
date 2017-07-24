@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe HouseholdAddMemberController, :member, type: :controller do
   let!(:current_app) do
@@ -9,13 +9,13 @@ RSpec.describe HouseholdAddMemberController, :member, type: :controller do
 
   let(:member_attributes) do
     {
-      first_name: 'alice',
-      last_name: 'smith',
-      sex: 'male',
-      relationship: 'roommate',
-      ssn: '123-45-6789',
+      first_name: "alice",
+      last_name: "smith",
+      sex: "male",
+      relationship: "roommate",
+      ssn: "123-45-6789",
       in_home: true,
-      buy_food_with: true
+      buy_food_with: true,
     }.with_indifferent_access
   end
 
@@ -23,8 +23,8 @@ RSpec.describe HouseholdAddMemberController, :member, type: :controller do
     assigns(:step)
   end
 
-  describe '#edit' do
-    it 'assigns existing member attrs if there is an existing member' do
+  describe "#edit" do
+    it "assigns existing member attrs if there is an existing member" do
       member = current_app.household_members.create!(member_attributes)
 
       get :edit, params: { member_id: member.id }
@@ -34,7 +34,7 @@ RSpec.describe HouseholdAddMemberController, :member, type: :controller do
       end
     end
 
-    it 'assigns nothing otherwise' do
+    it "assigns nothing otherwise" do
       get :edit
 
       member_attributes.keys.each do |key|
@@ -43,8 +43,8 @@ RSpec.describe HouseholdAddMemberController, :member, type: :controller do
     end
   end
 
-  describe '#update' do
-    it 'creates a member' do
+  describe "#update" do
+    it "creates a member" do
       expect do
         put :update, params: { step: member_attributes }
       end.to change {
@@ -52,7 +52,7 @@ RSpec.describe HouseholdAddMemberController, :member, type: :controller do
       }.by(1)
 
       expect(
-        current_app.household_members.last.attributes
+        current_app.household_members.last.attributes,
       ).to include(member_attributes)
     end
   end

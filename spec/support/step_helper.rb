@@ -2,10 +2,10 @@
 
 module StepHelper
   def data_md5(*args)
-    StepsHelper
-      .instance_method(:data_md5)
-      .bind(self)
-      .call(*args)
+    StepsHelper.
+      instance_method(:data_md5).
+      bind(self).
+      call(*args)
   end
 
   def check_step(subhead, *questions, verify: true, validations: true)
@@ -13,19 +13,19 @@ module StepHelper
       expect_page(subhead)
 
       if validations
-        log 'Checking validation errors' do
+        log "Checking validation errors" do
           submit
           expect_validation_errors(questions)
         end
       end
 
-      log 'Answering questions' do
+      log "Answering questions" do
         enter_questions(questions)
         submit
       end
 
       if verify
-        log 'Verifying that answers were saved' do
+        log "Verifying that answers were saved" do
           back
           verify_questions(questions)
           submit
@@ -39,7 +39,7 @@ module StepHelper
       expect_page(subhead)
 
       if validations
-        log 'Checking validation errors' do
+        log "Checking validation errors" do
           submit
           within_members(members_and_questions) do |questions|
             expect_validation_errors(questions)
@@ -47,7 +47,7 @@ module StepHelper
         end
       end
 
-      log 'Answering questions' do
+      log "Answering questions" do
         within_members(members_and_questions) do |questions|
           enter_questions(questions)
         end
@@ -55,7 +55,7 @@ module StepHelper
       end
 
       if verify
-        log 'Verifying that answers were saved' do
+        log "Verifying that answers were saved" do
           back
           within_members(members_and_questions) do |questions|
             verify_questions(questions)
@@ -87,9 +87,9 @@ module StepHelper
   end
 
   def expect_page(subhead)
-    log 'Checking page title' do
+    log "Checking page title" do
       expect(page).to have_selector \
-        '.step-section-header__subhead',
+        ".step-section-header__subhead",
         text: subhead
     end
   end
@@ -134,23 +134,23 @@ module StepHelper
   def enter(question, answer)
     log "#{question} => #{answer}" do
       within_question(question) do |group|
-        type = group['data-field-type']
+        type = group["data-field-type"]
 
         case type
-        when 'date'
+        when "date"
           date = Date.today - 40.years
           date_parts = [date.month, date.day, date.year]
 
-          all('select').each_with_index do |date_select, i|
+          all("select").each_with_index do |date_select, i|
             select date_parts[i], from: date_select[:name]
           end
-        when 'text', 'incrementer', 'text_area', 'money'
+        when "text", "incrementer", "text_area", "money"
           fill_in question, with: answer
-        when 'yes_no', 'radios'
+        when "yes_no", "radios"
           choose answer
-        when 'select'
+        when "select"
           select answer
-        when 'checkbox', 'household_checkboxes'
+        when "checkbox", "household_checkboxes"
           if answer.is_a?(Array)
             answer.each do |checkbox|
               check checkbox
@@ -170,24 +170,24 @@ module StepHelper
   def verify(question, expected_answer)
     log "#{question} => #{expected_answer}" do
       within_question(question) do |group|
-        type = group['data-field-type']
+        type = group["data-field-type"]
 
         case type
-        when 'text_area'
-          expect(find('textarea').value).to eq expected_answer
-        when 'text', 'incrementer', 'money'
-          expect(find('input').value).to eq expected_answer
-        when 'yes_no', 'radios'
-          expect(find('label', exact_text: expected_answer).find('input').checked?).to eq true
-        when 'select'
+        when "text_area"
+          expect(find("textarea").value).to eq expected_answer
+        when "text", "incrementer", "money"
+          expect(find("input").value).to eq expected_answer
+        when "yes_no", "radios"
+          expect(find("label", exact_text: expected_answer).find("input").checked?).to eq true
+        when "select"
           expect(page).to have_select(question, selected: expected_answer)
-        when 'checkbox'
+        when "checkbox"
           if expected_answer.is_a?(Array)
             expected_answer.each do |checkbox|
-              expect(find('label', text: checkbox).find('input')).to be_checked
+              expect(find("label", text: checkbox).find("input")).to be_checked
             end
           else
-            expect(find('input').checked?).to eq(expected_answer)
+            expect(find("input").checked?).to eq(expected_answer)
           end
         end
       end
@@ -195,19 +195,19 @@ module StepHelper
   end
 
   def submit
-    log 'Continuing' do
+    log "Continuing" do
       first('button[type="submit"], .button--next').click
     end
   end
 
   def back
-    log 'Going back' do
-      first('.step-header__back-link').trigger('click')
+    log "Going back" do
+      first(".step-header__back-link").trigger("click")
     end
   end
 
   def log(message)
-    if ENV['VERBOSE_TESTS']
+    if ENV["VERBOSE_TESTS"]
       @log_depth ||= 0
       puts ">> #{' ' * @log_depth}#{message}"
       @log_depth += 2

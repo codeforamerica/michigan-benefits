@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   delegate :variable_size_secure_compare, to: ActiveSupport::SecurityUtils
 
   def basic_auth
-    basic_auth_name, basic_auth_password = ENV.fetch('BASIC_AUTH', '').split(':')
+    basic_auth_name, basic_auth_password = ENV.fetch("BASIC_AUTH", "").split(":")
 
     if basic_auth_name.present? && basic_auth_password.present?
       site_name = Rails.application.config.site_name

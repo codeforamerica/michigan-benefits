@@ -3,7 +3,7 @@
 class Document < ApplicationRecord
   belongs_to :app, inverse_of: :documents
 
-  has_attached_file :file, styles: { thumb: '100x100#' }
+  has_attached_file :file, styles: { thumb: "100x100#" }
 
   validates_attachment :file,
     content_type: {
@@ -12,7 +12,7 @@ class Document < ApplicationRecord
         image/jpeg
         image/jpg
         image/png
-      ]
+      ],
     },
     size: { in: 0..10.megabytes }
 

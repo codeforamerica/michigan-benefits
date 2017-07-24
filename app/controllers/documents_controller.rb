@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class DocumentsController < ApplicationController
-  layout 'step'
+  layout "step"
 
   def allowed
     {
       index: :member,
       new: :member,
       create: :member,
-      destroy: :member
+      destroy: :member,
     }
   end
 
@@ -37,7 +37,7 @@ class DocumentsController < ApplicationController
   private
 
   def redirect_path
-    documents_path(anchor: 'attachments')
+    documents_path(anchor: "attachments")
   end
 
   def document_params

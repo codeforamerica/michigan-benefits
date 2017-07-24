@@ -31,7 +31,7 @@ class HouseholdMember < ApplicationRecord
   end
 
   def full_name
-    [first_name, last_name].join(' ')
+    [first_name, last_name].join(" ")
   end
 
   def name(for_header: false)
@@ -43,18 +43,18 @@ class HouseholdMember < ApplicationRecord
   end
 
   def applicant?
-    relationship == 'self'
+    relationship == "self"
   end
 
   def employed?
-    employment_status == 'employed'
+    employment_status == "employed"
   end
 
   def self_employed?
-    employment_status == 'self_employed'
+    employment_status == "self_employed"
   end
 
   def unemployed?
-    employment_status == 'not_employed'
+    employment_status == "not_employed"
   end
 end

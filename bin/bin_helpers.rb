@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'pathname'
-require 'fileutils'
+require "pathname"
+require "fileutils"
 include FileUtils
 
 # path to your application root.
-APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+APP_ROOT = Pathname.new File.expand_path("../../", __FILE__)
 
 COLOR_CODES = {
   black: 30,
@@ -24,11 +24,11 @@ COLOR_CODES = {
   purple: 35,
   red: 31,
   white: 97,
-  yellow: 33
+  yellow: 33,
 }.freeze
 
 def system!(*args)
-  puts colorize(light_cyan: args.join(' '))
+  puts colorize(light_cyan: args.join(" "))
   system(*args) || abort(colorize(light_red: "\n== Command #{args} failed =="))
 end
 

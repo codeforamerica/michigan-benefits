@@ -2,10 +2,10 @@
 
 class HouseholdPersonalDetailsController < StepsController
   def edit
-    applicant_attributes = current_app.applicant.attributes.slice('sex', 'ssn')
+    applicant_attributes = current_app.applicant.attributes.slice("sex", "ssn")
 
     attributes = {
-      marital_status: current_app.marital_status
+      marital_status: current_app.marital_status,
     }.merge(applicant_attributes)
 
     @step = step_class.new(attributes)

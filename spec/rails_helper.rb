@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV['RAILS_ENV'] ||= 'test'
-require 'spec_helper'
-require File.expand_path('../../config/environment', __FILE__)
-require 'rspec/rails'
+ENV["RAILS_ENV"] ||= "test"
+require "spec_helper"
+require File.expand_path("../../config/environment", __FILE__)
+require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 
-require_relative 'support/mom'
-require_relative 'support/match_html'
-require_relative 'support/generic_helper'
-require_relative 'support/feature_helper'
-require_relative 'support/step_helper'
+require_relative "support/mom"
+require_relative "support/match_html"
+require_relative "support/generic_helper"
+require_relative "support/feature_helper"
+require_relative "support/step_helper"
 
 headless_capybara = true
-require 'capybara/rails'
-require 'capybara/rspec'
-require 'capybara/accessible'
+require "capybara/rails"
+require "capybara/rspec"
+require "capybara/accessible"
 
 if headless_capybara
-  require 'capybara/poltergeist'
+  require "capybara/poltergeist"
   Capybara.javascript_driver = :accessible_poltergeist
 else
   Capybara.register_driver :chrome do |app|
