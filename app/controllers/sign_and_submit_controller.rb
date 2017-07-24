@@ -6,7 +6,6 @@ class SignAndSubmitController < StandardStepsController
 
     if @step.valid?
       current_app.update!(step_params)
-      send_submission_email
       send_submission_sms
       redirect_to(next_path)
     else
@@ -15,10 +14,6 @@ class SignAndSubmitController < StandardStepsController
   end
 
   private
-
-  def send_submission_email
-    FormMailer.submission(form: current_app.form).deliver_now
-  end
 
   def send_submission_sms
     Sms.new(current_app).deliver_submission_message

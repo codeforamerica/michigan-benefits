@@ -3,14 +3,10 @@
 require 'rails_helper'
 
 describe 'applying', js: true do
-  before do
-    allow(FormMailer).to receive_message_chain(:submission, :deliver_now)
-  end
-
   around do |example|
-    with_modified_env FORM_RECIPIENT: 'test@example.com',
-                      TWILIO_PHONE_NUMBER: '8005551212',
-                      TWILIO_RECIPIENT_WHITELIST: '4158675309' do
+    with_modified_env(
+      TWILIO_PHONE_NUMBER: '8005551212',
+      TWILIO_RECIPIENT_WHITELIST: '4158675309') do
       example.run
     end
   end
