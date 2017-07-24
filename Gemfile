@@ -33,6 +33,8 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'capybara-accessible'
+  gem 'simplecov'
+  gem 'codeclimate-test-reporter'
   gem 'climate_control'
   gem 'haml-lint', require: false
   gem 'poltergeist'
