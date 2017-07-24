@@ -5,7 +5,7 @@ in between.
 
 ## Workflow
 
-The most common workflow is:
+Our workflow looks like this:
 
 * A change is initiated and discussed via a
   [Trello](https://trello.com/b/aBqTrqaJ/michiganbridgesorg) card.
