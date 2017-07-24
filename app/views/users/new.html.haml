@@ -38,27 +38,6 @@
             subtitle: 'Food Stamps, FAP or SNAP',
             description: 'Provides benefits to buy or grow food.'
           },
-          {
-            icon: 'cash',
-            title: 'Cash Assistance',
-            subtitle: 'FIP, RCA, and SDA',
-            description: <<~TEXT
-              Temporary cash assistance for eligible pregnant women, low-income families
-              with young children, refugees, and adults with disabilities.
-            TEXT
-          },
-          {
-            icon: 'childcare',
-            title: 'Child Development + Care',
-            subtitle: 'CDC',
-            description: 'Helps pay for childcare.'
-          },
-          {
-            icon: 'ser',
-            title: 'State Emergency Relief',
-            subtitle: 'SER',
-            description: 'Provides help or assistance for emergency situations.'
-          }
         ]
 
       - programs.each do |options|
@@ -80,34 +59,6 @@
       %button.button.button--cta.button--fully-width{ type: 'submit' }
         Apply now
         %i.button__icon.icon-arrow_forward
-
-.slab.already-started
-  .card--narrow
-    %h3.h3--strong
-      Already started your application?
-
-    - current_upload_path = current_user ? documents_path : '#'
-
-    = link_to current_upload_path, class: 'button upload' do
-      Submit verification documents
-
-    %p.text--help.text--padded
-      Upload photos of documents requested by MDHHS staff
-
-    = link_to '#', class: 'button contact' do
-      Contact your local office
-
-    %p.text--help.text--padded
-      For missed interview and other issues
-
-    - current_resume_path = current_user ? step_path(StepNavigation.first) : '#'
-
-    = link_to current_resume_path, class: 'button resume' do
-      Resume your application
-      %i.button__icon.icon-arrow_forward
-
-    %p.text--help.text--padded
-      If you need to finish an application you started previously
 
 .slab.slab--mdhhs
   %h1
