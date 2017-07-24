@@ -36,6 +36,7 @@ group :development, :test do
   gem "climate_control"
   gem "codeclimate-test-reporter"
   gem "haml-lint", require: false
+  gem "listen"
   gem "poltergeist"
   gem "pry-rails"
   gem "rspec-rails"
