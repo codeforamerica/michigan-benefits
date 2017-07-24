@@ -5,7 +5,7 @@ class IncomeOtherAssetsContinuedController < StepsController
     financial_accounts = array_to_checkboxes(current_app.financial_accounts)
 
     @step = step_class.new(
-      financial_accounts.merge(total_money: current_app.total_money)
+      financial_accounts.merge(total_money: current_app.total_money),
     )
   end
 
@@ -14,7 +14,7 @@ class IncomeOtherAssetsContinuedController < StepsController
 
     current_app.update!(
       total_money: step_params[:total_money],
-      financial_accounts: financial_accounts
+      financial_accounts: financial_accounts,
     )
 
     redirect_to next_path

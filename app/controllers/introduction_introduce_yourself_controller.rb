@@ -3,7 +3,7 @@
 class IntroductionIntroduceYourselfController < StepsController
   def edit
     @step = step_class.new(
-      current_app.applicant.attributes.slice(*step_attrs)
+      current_app.applicant.attributes.slice(*step_attrs),
     )
   end
 

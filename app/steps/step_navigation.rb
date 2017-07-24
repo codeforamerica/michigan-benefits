@@ -2,13 +2,13 @@
 
 class StepNavigation
   ALL = {
-    'Introduction' => [
+    "Introduction" => [
       IntroductionIntroduceYourselfController,
       IntroductionContactInformationController,
       IntroductionHomeAddressController,
-      IntroductionCompleteController
+      IntroductionCompleteController,
     ],
-    'Your Household' => [
+    "Your Household" => [
       HouseholdIntroductionController,
       HouseholdPersonalDetailsController,
       HouseholdMembersOverviewController,
@@ -17,9 +17,9 @@ class StepNavigation
       HouseholdHealthController,
       HouseholdHealthSituationsController,
       HouseholdTaxController,
-      HouseholdTaxHowController
+      HouseholdTaxHowController,
     ],
-    'Money & Income' => [
+    "Money & Income" => [
       IncomeIntroductionController,
       IncomeChangeController,
       IncomeChangeExplanationController,
@@ -29,31 +29,31 @@ class StepNavigation
       IncomeAdditionalSourcesController,
       IncomeAdditionalController,
       IncomeOtherAssetsController,
-      IncomeOtherAssetsContinuedController
+      IncomeOtherAssetsContinuedController,
     ],
-    'Expenses' => [
+    "Expenses" => [
       ExpensesIntroductionController,
       ExpensesHousingController,
       ExpensesAdditionalSourcesController,
-      ExpensesAdditionalController
+      ExpensesAdditionalController,
     ],
-    'Preferences' => [
+    "Preferences" => [
       PreferencesRemindersController,
       PreferencesRemindersConfirmationController,
       PreferencesForInterviewController,
-      PreferencesAnythingElseController
+      PreferencesAnythingElseController,
     ],
-    'Legal' => [
+    "Legal" => [
       LegalAgreementController,
-      SignAndSubmitController
+      SignAndSubmitController,
     ],
-    'Submit Documents' => [
-      MaybeSubmitDocumentsController
-    ]
+    "Submit Documents" => [
+      MaybeSubmitDocumentsController,
+    ],
   }.freeze
 
   SUBSTEPS = {
-    HouseholdAddMemberController => HouseholdMembersOverviewController
+    HouseholdAddMemberController => HouseholdMembersOverviewController,
   }.freeze
 
   class << self

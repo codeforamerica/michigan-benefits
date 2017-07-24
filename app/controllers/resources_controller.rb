@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class ResourcesController < ApplicationController
-  layout 'step'
+  layout "step"
 
   def allowed
     {
-      show: :guest
+      show: :guest,
     }
   end
 

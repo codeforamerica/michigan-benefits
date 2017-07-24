@@ -4,8 +4,8 @@ class IntroductionIntroduceYourself < Step
   step_attributes :first_name, :last_name
 
   validates :first_name,
-    presence: { message: 'Make sure to provide a first name' }
+    presence: { message: "Make sure to provide a first name" }
 
   validates :last_name,
-    presence: { message: 'Make sure to provide a last name' }
+    presence: { message: "Make sure to provide a last name" }
 end

@@ -16,7 +16,7 @@ class FakeTwilioClient
 
   def create(args)
     self.class.messages << Message.new(args[:from], args[:to], args[:body])
-    if Rails.env == 'development'
+    if Rails.env == "development"
       puts "\n\nSMS message that would have been sent:\n"
       puts "TO: #{args[:to]}"
       puts "FROM: #{args[:from]}"

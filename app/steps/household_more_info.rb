@@ -10,6 +10,6 @@ class HouseholdMoreInfo < Step
 
   validates(
     *attribute_names,
-    presence: { message: 'Make sure to answer this question' }
+    presence: { message: "Make sure to answer this question" },
   )
 end

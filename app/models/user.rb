@@ -14,7 +14,7 @@ class User < ApplicationRecord
   }
 
   def full_name
-    fields = app.applicant.attributes.values_at('first_name', 'last_name')
-    fields.any?(&:present?) ? fields.join(' ') : 'Guest'
+    fields = app.applicant.attributes.values_at("first_name", "last_name")
+    fields.any?(&:present?) ? fields.join(" ") : "Guest"
   end
 end

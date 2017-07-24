@@ -4,9 +4,9 @@ class IncomePerMemberController < ManyMemberStepsController
   private
 
   def skip?
-    current_app
-      .household_members
-      .none? { |member| member.employed? || member.self_employed? }
+    current_app.
+      household_members.
+      none? { |member| member.employed? || member.self_employed? }
   end
 
   def household_member_attrs

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ExpensesAdditionalSourcesController, :member, type: :controller do
   let!(:current_app) do
@@ -15,23 +15,23 @@ RSpec.describe ExpensesAdditionalSourcesController, :member, type: :controller d
     assigns(:step)
   end
 
-  describe '#edit' do
-    it 'assigns the attributes to the step' do
+  describe "#edit" do
+    it "assigns the attributes to the step" do
       get :edit
 
       expect(attributes.keys.map { |attr| [attr, step.send(attr)] }.to_h).to eq attributes
     end
   end
 
-  describe '#update' do
-    context 'with valid params' do
+  describe "#update" do
+    context "with valid params" do
       let(:params) do
         {
-          step: ExpensesAdditionalSources.attribute_names.map { |k| [k, true] }.to_h
+          step: ExpensesAdditionalSources.attribute_names.map { |k| [k, true] }.to_h,
         }
       end
 
-      it 'updates attributes' do
+      it "updates attributes" do
         expect do
           put :update, params: params
         end.to change {
@@ -39,14 +39,14 @@ RSpec.describe ExpensesAdditionalSourcesController, :member, type: :controller d
         }
       end
 
-      it 'redirects' do
+      it "redirects" do
         put :update, params: params
         expect(response).to redirect_to step_path(ExpensesAdditionalController)
       end
     end
 
-    context 'with invalid params' do
-      it 're-renders' do
+    context "with invalid params" do
+      it "re-renders" do
         put :update, params: { step: {} }
         expect(response).to render_template :edit
         expect(assigns(:step)).to be_an_instance_of(ExpensesAdditionalSources)

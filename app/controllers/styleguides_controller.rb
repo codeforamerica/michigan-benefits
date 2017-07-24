@@ -5,7 +5,7 @@ class StyleguidesController < ApplicationController
 
   def allowed
     {
-      index: :guest
+      index: :guest,
     }
   end
 

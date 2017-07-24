@@ -10,5 +10,5 @@ class IncomeOtherAssets < Step
     :has_accounts,
     :has_home,
     :has_vehicle,
-    presence: { message: 'Make sure to answer this question' }
+    presence: { message: "Make sure to answer this question" }
 end

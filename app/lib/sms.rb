@@ -27,33 +27,33 @@ class Sms
       Twilio::REST::Client.new.messages.create(
         to: @app.phone_number,
         from: twilio_phone_number,
-        body: body
+        body: body,
       )
     end
   end
 
   def twilio_phone_number
-    ENV['TWILIO_PHONE_NUMBER']
+    ENV["TWILIO_PHONE_NUMBER"]
   end
 
   def deliverable?
-    return undeliverable('TWILIO_PHONE_NUMBER not present') if twilio_phone_number.blank?
-    return undeliverable('app does not accept text messages') unless @app.accepts_text_messages
-    return undeliverable('app does not have a phone number') if @app.phone_number.blank?
+    return undeliverable("TWILIO_PHONE_NUMBER not present") if twilio_phone_number.blank?
+    return undeliverable("app does not accept text messages") unless @app.accepts_text_messages
+    return undeliverable("app does not have a phone number") if @app.phone_number.blank?
 
     if whitelist?
-      return undeliverable('whitelist does not include phone number') unless whitelist.include?(@app.phone_number)
+      return undeliverable("whitelist does not include phone number") unless whitelist.include?(@app.phone_number)
     end
 
     true
   end
 
   def whitelist?
-    ENV.key? 'TWILIO_RECIPIENT_WHITELIST'
+    ENV.key? "TWILIO_RECIPIENT_WHITELIST"
   end
 
   def whitelist
-    ENV['TWILIO_RECIPIENT_WHITELIST'].split
+    ENV["TWILIO_RECIPIENT_WHITELIST"].split
   end
 
   def undeliverable(message)

@@ -26,8 +26,8 @@
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: 'bin/rspec -f doc' do
-  require 'guard/rspec/dsl'
+guard :rspec, cmd: "bin/rspec -f doc" do
+  require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
   # Feel free to open issues for suggestions and improvements
@@ -51,7 +51,7 @@ guard :rspec, cmd: 'bin/rspec -f doc' do
     [
       rspec.spec.call("routing/#{m[1]}_routing"),
       rspec.spec.call("controllers/#{m[1]}_controller"),
-      rspec.spec.call("acceptance/#{m[1]}")
+      rspec.spec.call("acceptance/#{m[1]}"),
     ]
   end
 
@@ -67,6 +67,6 @@ guard :rspec, cmd: 'bin/rspec -f doc' do
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
-    Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance'
+    Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 end

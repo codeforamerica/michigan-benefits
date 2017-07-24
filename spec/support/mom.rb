@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Mom
-  def user(name = "user-#{sequence}", email: "#{name.to_s.underscore.dasherize.parameterize}@example.com", password: 'password', admin: false)
+  def user(name = "user-#{sequence}", email: "#{name.to_s.underscore.dasherize.parameterize}@example.com", password: "password", admin: false)
     User.new(name: name, email: email, password: password, admin: admin)
   end
 

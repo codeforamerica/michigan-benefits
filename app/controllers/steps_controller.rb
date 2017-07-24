@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StepsController < ApplicationController
-  layout 'step'
+  layout "step"
 
   before_action :maybe_skip, only: :edit
 
@@ -17,7 +17,7 @@ class StepsController < ApplicationController
     {
       index: :member,
       edit: :member,
-      update: :member
+      update: :member,
     }
   end
 
@@ -40,14 +40,14 @@ class StepsController < ApplicationController
   end
 
   def checkboxes_to_array(checkboxes)
-    checkboxes.select { |k| step_params[k].in?(['1', 1, true]) }.map(&:to_s)
+    checkboxes.select { |k| step_params[k].in?(["1", 1, true]) }.map(&:to_s)
   end
 
   def maybe_skip
     return unless skip?
 
     if going_backwards?
-      redirect_to previous_path(rel: 'back')
+      redirect_to previous_path(rel: "back")
     else
       redirect_to next_path
     end
@@ -58,7 +58,7 @@ class StepsController < ApplicationController
   end
 
   def going_backwards?
-    params['rel'] == 'back'
+    params["rel"] == "back"
   end
 
   def step_params

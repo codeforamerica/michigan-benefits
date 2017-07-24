@@ -3,7 +3,7 @@
 class FilePreviewsController < ApplicationController
   def allowed
     {
-      show: :guest
+      show: :guest,
     }
   end
 

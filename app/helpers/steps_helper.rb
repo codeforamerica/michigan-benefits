@@ -7,7 +7,7 @@ module StepsHelper
 
   def questions(f, questions)
     questions.each do |question|
-      haml_concat render 'shared/question', f: f, **question
+      haml_concat render "shared/question", f: f, **question
     end
   end
 
@@ -19,15 +19,15 @@ module StepsHelper
   def fields_for_each_member(f, household_members)
     household_members.each do |member|
       haml_concat(
-        f.fields_for('household_members[]', member, hidden_field_id: true) do |ff|
+        f.fields_for("household_members[]", member, hidden_field_id: true) do |ff|
           yield ff, member
-        end
+        end,
       )
     end
   end
 
   def data_md5(str)
-    Digest::MD5.hexdigest(str ? str.squish : '')
+    Digest::MD5.hexdigest(str ? str.squish : "")
   end
 
   def inconsistent_members(household_members)

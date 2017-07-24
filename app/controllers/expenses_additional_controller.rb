@@ -31,25 +31,25 @@ class ExpensesAdditionalController < StepsController
     tax_deductible_expenses: %w[
       student_loan_interest
       other_tax_deductible
-    ]
+    ],
   }.freeze
 
   def edit
     set_sections
 
     @step = step_class.new(
-      current_app
-        .attributes
-        .slice(*ATTRIBUTES)
-        .merge(array_to_checkboxes(ARRAY_ATTRIBUTES.keys.flat_map { |k| current_app[k] }))
+      current_app.
+        attributes.
+        slice(*ATTRIBUTES).
+        merge(array_to_checkboxes(ARRAY_ATTRIBUTES.keys.flat_map { |k| current_app[k] })),
     )
   end
 
   def update
     current_app.update!(
-      step_params
-        .slice(*ATTRIBUTES)
-        .merge(ARRAY_ATTRIBUTES.map { |k, c| [k, checkboxes_to_array(c)] }.to_h)
+      step_params.
+        slice(*ATTRIBUTES).
+        merge(ARRAY_ATTRIBUTES.map { |k, c| [k, checkboxes_to_array(c)] }.to_h),
     )
 
     redirect_to next_path
@@ -62,10 +62,10 @@ class ExpensesAdditionalController < StepsController
   end
 
   def sections
-    @sections ||= current_app
-      .attributes
-      .slice('dependent_care', 'medical', 'court_ordered', 'tax_deductible')
-      .symbolize_keys
+    @sections ||= current_app.
+      attributes.
+      slice("dependent_care", "medical", "court_ordered", "tax_deductible").
+      symbolize_keys
   end
 
   alias set_sections sections
