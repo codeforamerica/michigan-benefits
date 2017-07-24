@@ -37,6 +37,7 @@ group :development, :test do
   gem 'haml-lint', require: false
   gem 'poltergeist'
   gem 'pry-rails'
+  gem 'rspec_junit_formatter'
   gem 'rspec-rails'
   gem 'rubocop-rspec', require: false
 end
