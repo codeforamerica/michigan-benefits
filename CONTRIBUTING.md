@@ -3,6 +3,11 @@
 This document outlines how this team ships features, bug fixes, and everything
 in between.
 
+**NOTE**: This document outlines the process for members of the Code for
+America development team and other partners. While this project is open source,
+we are not currently seeking external contributions. If you would like to learn
+more about this project, shoot us an email at <alanw@codeforamerica.org>.
+
 ## Workflow
 
 Our workflow looks like this:
