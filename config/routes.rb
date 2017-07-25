@@ -27,6 +27,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/form", to: "forms#show"
   get "/styleguide", to: "styleguides#index"
 end
