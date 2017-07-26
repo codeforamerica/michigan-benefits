@@ -46,7 +46,7 @@ RSpec.describe Dhs1171Pdf do
   end
 
   def generated_pdf
-    @_generated_pdf ||= "tmp/dhs1171_out.pdf"
+    @_generated_pdf ||= "tmp/dhs1171_test_output.pdf"
   end
 
   def pdftk
