@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe IntroductionContactInformationController, :member, type: :controller do
   let!(:current_app) do
-    MbSnapApp.create!(
+    SnapApplication.create!(
       user: member,
       street_address: "123 Fake St",
       city: "Springfield",

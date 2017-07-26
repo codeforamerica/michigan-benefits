@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controller do
-  let!(:current_app) { MbSnapApp.create!(user: member) }
+  let!(:current_app) { SnapApplication.create!(user: member) }
   let(:birthday) { DateTime.parse("2/2/1945") }
 
   describe "#edit" do

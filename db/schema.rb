@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20170725232650) do
     t.index ["app_id"], name: "index_household_members_on_app_id"
   end
 
-  create_table "mb_snap_apps", force: :cascade do |t|
+  create_table "snap_applications", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 20170725232650) do
     t.string "signature"
     t.datetime "signed_at"
     t.bigint "user_id"
-    t.index ["user_id"], name: "index_mb_snap_apps_on_user_id"
+    t.index ["user_id"], name: "index_snap_applications_on_user_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

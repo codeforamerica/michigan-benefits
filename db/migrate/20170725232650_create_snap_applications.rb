@@ -1,6 +1,6 @@
-class CreateMbSnapApps < ActiveRecord::Migration[5.1]
+class CreateSnapApplications < ActiveRecord::Migration[5.1]
   def change
-    create_table :mb_snap_apps do |t|
+    create_table :snap_applications do |t|
       t.timestamps null: false
       t.string :name
       t.date :birthday

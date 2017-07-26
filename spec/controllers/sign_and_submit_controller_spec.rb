@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe SignAndSubmitController, :member, type: :controller do
   let!(:current_app) do
-    MbSnapApp.create!(attributes.merge(user: member))
+    SnapApplication.create!(attributes.merge(user: member))
   end
 
   let(:attributes) do
