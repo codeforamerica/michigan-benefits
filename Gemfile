@@ -46,4 +46,5 @@ end
 
 group :development do
   gem "citizen-scripts", git: "https://github.com/citizencode/citizen-scripts"
+  gem "overcommit"
 end

@@ -40,4 +40,13 @@ chdir APP_ROOT do
   step "Restarting application server" do
     system! "bin/rails restart"
   end
+
+  step "Installing git commit hooks (uninstall via `overcommit --uninstall)" do
+    if cli_installed?("overcommit")
+      puts "Already installed"
+    else
+      puts "Installing overcommit..."
+      system!("overcommit --install")
+    end
+  end
 end
