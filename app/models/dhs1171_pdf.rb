@@ -20,9 +20,9 @@ class Dhs1171Pdf
     @client_data = client_data
   end
 
-  def save(new_pdf)
+  def save(new_pdf_file_name)
     check_for_invalid_fields
-    PdfForms.new.fill_form(SOURCE_PDF, new_pdf, client_data)
+    PdfForms.new.fill_form(SOURCE_PDF, new_pdf_file_name, client_data)
   end
 
   private
