@@ -42,3 +42,7 @@ def colorize(colors_and_strings)
     "\e[#{COLOR_CODES[color]}m#{string}\e[0m"
   end.join
 end
+
+def cli_installed?(command_name)
+  system("#{command_name} > /dev/null 2>&1")
+end
