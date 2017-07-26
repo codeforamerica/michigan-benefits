@@ -16,13 +16,13 @@ RSpec.describe PreferencesRemindersConfirmationController, :member, type: :contr
   let(:step) { assigns(:step) }
 
   describe "#edit" do
-    it "assigns the fields to the step" do
+    pending "assigns the fields to the step" do
       get :edit
 
       expect(step.email).to eq("bob@example.com")
     end
 
-    it "skips when no reminders are wanted" do
+    pending "skips when no reminders are wanted" do
       current_app.update!(email_reminders: false)
       get :edit
       expect(response).to redirect_to(step_path(PreferencesForInterviewController))
@@ -37,13 +37,13 @@ RSpec.describe PreferencesRemindersConfirmationController, :member, type: :contr
         }
       end
 
-      it "updates the app" do
+      pending "updates the app" do
         expect do
           put :update, params: { step: valid_params }
         end.to(change { current_app.reload.email })
       end
 
-      it "redirects to the next step" do
+      pending "redirects to the next step" do
         put :update, params: { step: valid_params }
 
         expect(response).to redirect_to(step_path(PreferencesForInterviewController))
@@ -51,12 +51,12 @@ RSpec.describe PreferencesRemindersConfirmationController, :member, type: :contr
     end
 
     describe "when not valid" do
-      it "renders :edit" do
+      pending "renders :edit" do
         put :update, params: {}
         expect(response).to render_template(:edit)
       end
 
-      it "sets the step" do
+      pending "sets the step" do
         put :update, params: {}
         expect(step).to be_an_instance_of(described_class.step_class)
       end

@@ -16,7 +16,7 @@ RSpec.describe PreferencesForInterviewController, :member, type: :controller do
   let(:step) { assigns(:step) }
 
   describe "#edit" do
-    it "assigns the fields to the step" do
+    pending "assigns the fields to the step" do
       get :edit
       expect(step.preference_for_interview).to eq("telephone_interview")
     end
@@ -28,13 +28,13 @@ RSpec.describe PreferencesForInterviewController, :member, type: :controller do
         { preference_for_interview: "in_person_interview" }
       end
 
-      it "updates the app" do
+      pending "updates the app" do
         expect do
           put :update, params: { step: valid_params }
         end.to(change { current_app.reload.preference_for_interview })
       end
 
-      it "redirects to the next step" do
+      pending "redirects to the next step" do
         put :update, params: { step: valid_params }
 
         expect(response).to redirect_to(step_path(PreferencesAnythingElseController))
@@ -42,12 +42,12 @@ RSpec.describe PreferencesForInterviewController, :member, type: :controller do
     end
 
     context "when not valid" do
-      it "renders :edit" do
+      pending "renders :edit" do
         put :update, params: {}
         expect(response).to render_template(:edit)
       end
 
-      it "sets the step" do
+      pending "sets the step" do
         put :update, params: {}
         expect(step).to be_an_instance_of(described_class.step_class)
       end

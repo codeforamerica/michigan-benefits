@@ -24,13 +24,13 @@ RSpec.describe IncomeChangeExplanationController, :member, type: :controller do
       }
     end
 
-    it "assigns the attributes to the step" do
+    pending "assigns the attributes to the step" do
       get :edit
 
       expect(attributes.keys.map { |attr| [attr, step.send(attr)] }.to_h).to eq attributes
     end
 
-    it "skips if there was no income change" do
+    pending "skips if there was no income change" do
       current_app.update!(skip_attributes)
 
       get :edit
@@ -48,7 +48,7 @@ RSpec.describe IncomeChangeExplanationController, :member, type: :controller do
       }
     end
 
-    it "updates attributes" do
+    pending "updates attributes" do
       expect do
         put :update, params: params
       end.to change {
@@ -56,7 +56,7 @@ RSpec.describe IncomeChangeExplanationController, :member, type: :controller do
       }.from("income_change_explanation" => "1").to("income_change_explanation" => "2")
     end
 
-    it "redirects" do
+    pending "redirects" do
       put :update, params: params
       expect(response).to redirect_to step_path(IncomeCurrentlyEmployedController)
     end

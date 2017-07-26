@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
 class IntroductionIntroduceYourself < Step
-  step_attributes :first_name, :last_name
+  include MultiparameterAttributeAssignment
 
-  validates :first_name,
-    presence: { message: "Make sure to provide a first name" }
+  step_attributes :name, :birthday
 
-  validates :last_name,
-    presence: { message: "Make sure to provide a last name" }
+  validates :name,
+    presence: { message: "Make sure to provide a full name" }
+
+  validates :birthday,
+    presence: { message: "Make sure to provide a birthday" }
+
+  # https://github.com/rails/rails/pull/8189#issuecomment-10329403
+  def class_for_attribute(attr)
+    return Date if attr == "birthday"
+  end
 end

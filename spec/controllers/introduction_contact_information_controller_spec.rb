@@ -4,16 +4,13 @@ require "rails_helper"
 
 RSpec.describe IntroductionContactInformationController, :member, type: :controller do
   let!(:current_app) do
-    App.create!(
+    SnapApplication.create!(
       user: member,
-      phone_number: "1234567890",
-      accepts_text_messages: true,
-      mailing_street: "123 Fake St",
-      mailing_city: "Springfield",
-      mailing_zip: "12345",
-      mailing_address_same_as_home_address: true,
-      email: "email@example.com",
-      welcome_sms_sent: true,
+      street_address: "123 Fake St",
+      city: "Springfield",
+      county: "Genesee",
+      zip: "12345",
+      state: "MI",
     )
   end
 
@@ -27,13 +24,11 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
 
     it "assigns the fields to the step" do
       get :edit
-      expect(step.phone_number).to eq("1234567890")
-      expect(step.accepts_text_messages).to be
-      expect(step.mailing_street).to eq("123 Fake St")
-      expect(step.mailing_city).to eq("Springfield")
-      expect(step.mailing_zip).to eq("12345")
-      expect(step.mailing_address_same_as_home_address).to be
-      expect(step.email).to eq("email@example.com")
+      expect(step.street_address).to eq("123 Fake St")
+      expect(step.city).to eq("Springfield")
+      expect(step.county).to eq("Genesee")
+      expect(step.zip).to eq("12345")
+      expect(step.state).to eq("MI")
     end
   end
 
@@ -41,25 +36,12 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
     context "when valid" do
       let(:valid_params) do
         {
-          phone_number: "0987654321",
-          accepts_text_messages: false,
-          mailing_street: "321 Real St",
-          mailing_city: "Shelbyville",
-          mailing_zip: "54321",
-          mailing_address_same_as_home_address: false,
-          email: "snailmail@example.com",
+          street_address: "321 Real St",
+          city: "Shelbyville",
+          zip: "54321",
+          county: "Genesee",
+          state: "MI",
         }
-      end
-
-      let(:sms) do
-        instance_double("Sms")
-      end
-
-      before do
-        allow(class_double("Sms").as_stubbed_const).
-          to receive(:new).
-          with(an_instance_of(App)).
-          and_return(sms)
       end
 
       it "updates the app" do
@@ -72,33 +54,15 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
         end
       end
 
-      it "sends an SMS and updates the flag if one has not been sent" do
-        expect(sms).to receive(:deliver_welcome_message).with(no_args)
-
-        current_app.update!(welcome_sms_sent: false)
-
-        expect do
-          put :update, params: { step: valid_params }
-        end.to(change { current_app.reload.welcome_sms_sent })
-      end
-
-      it "does not send an SMS otherwise" do
-        expect(sms).not_to receive(:deliver_welcome_message)
-
-        expect do
-          put :update, params: { step: valid_params }
-        end.not_to(change { current_app.reload.welcome_sms_sent })
-      end
-
       it "redirects to the next step" do
         put :update, params: { step: valid_params }
 
-        expect(response).to redirect_to("/steps/introduction-home-address")
+        expect(response).to redirect_to("/steps/sign-and-submit")
       end
     end
 
     it "renders edit if the step is invalid" do
-      put :update, params: { step: { phone_number: "1111111111" } }
+      put :update, params: { step: { zip: "1111111111" } }
 
       expect(assigns(:step)).to be_an_instance_of(IntroductionContactInformation)
       expect(response).to render_template(:edit)

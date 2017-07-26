@@ -3,7 +3,7 @@
 class IntroductionIntroduceYourselfController < StepsController
   def edit
     @step = step_class.new(
-      current_app.applicant.attributes.slice(*step_attrs),
+      current_app.attributes.slice(*step_attrs),
     )
   end
 
@@ -11,7 +11,7 @@ class IntroductionIntroduceYourselfController < StepsController
     @step = step_class.new(step_params)
 
     if @step.valid?
-      current_app.applicant.update!(step_params)
+      current_app.update!(step_params)
       redirect_to(next_path)
     else
       render :edit

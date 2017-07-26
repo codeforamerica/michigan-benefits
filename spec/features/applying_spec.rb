@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe "applying", js: true do
+feature "applying", js: true do
   around do |example|
     with_modified_env(
       TWILIO_PHONE_NUMBER: "8005551212",
@@ -12,8 +12,8 @@ describe "applying", js: true do
     end
   end
 
-  specify do
-    visit root_path
+  skip do
+    visit new_user_path
     click_on "Apply now"
 
     check_step "To start, please introduce yourself.",
