@@ -14,25 +14,25 @@ class Dhs1171Pdf
     "zip",
   ].freeze
 
-  def initialize(client_info)
+  def initialize(client_data)
     @source_pdf = "DHS_1171.pdf"
-    @client_info = client_info
+    @client_data = client_data
   end
 
   def save(new_pdf)
     check_for_invalid_fields
-    PdfForms.new.fill_form(source_pdf, new_pdf, client_info)
+    PdfForms.new.fill_form(source_pdf, new_pdf, client_data)
   end
 
   private
 
-  attr_reader :client_info, :source_pdf
+  attr_reader :client_data, :source_pdf
 
   def check_for_invalid_fields
     raise "Invalid fields passed in: #{invalid_client_fields}" if invalid_client_fields.any?
   end
 
   def invalid_client_fields
-    client_info.keys.map(&:to_s) - FIELDS
+    client_data.keys.map(&:to_s) - FIELDS
   end
 end
