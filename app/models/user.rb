@@ -6,6 +6,7 @@ class User < ApplicationRecord
   before_save { email.try(:downcase!) }
 
   has_one :app
+  has_one :snap_application
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
