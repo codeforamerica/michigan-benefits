@@ -30,7 +30,9 @@ class Dhs1171Pdf
   attr_reader :client_data, :source_pdf
 
   def check_for_invalid_fields
-    raise "Invalid fields passed in: #{invalid_client_fields}" if invalid_client_fields.any?
+    if invalid_client_fields.any?
+      raise "Invalid fields passed in: #{invalid_client_fields}"
+    end
   end
 
   def invalid_client_fields
