@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controller do
+RSpec.describe PersonalDetailController, :member, type: :controller do
   let!(:current_app) { SnapApplication.create!(user: member) }
   let(:birthday) { DateTime.parse("2/2/1945") }
 
@@ -11,7 +11,7 @@ RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controll
 
     it "assigns the correct step" do
       get :edit
-      expect(assigns(:step)).to be_an_instance_of IntroductionIntroduceYourself
+      expect(assigns(:step)).to be_an_instance_of PersonalDetail
     end
 
     it "assigns the name to the step" do
@@ -51,13 +51,13 @@ RSpec.describe IntroductionIntroduceYourselfController, :member, type: :controll
         },
       }
 
-      expect(response).to redirect_to("/steps/introduction-contact-information")
+      expect(response).to redirect_to("/steps/address")
     end
 
     it "renders edit if the step is invalid" do
       put :update, params: { step: { name: nil } }
 
-      expect(assigns(:step)).to be_an_instance_of(IntroductionIntroduceYourself)
+      expect(assigns(:step)).to be_an_instance_of(PersonalDetail)
       expect(response).to render_template(:edit)
     end
   end

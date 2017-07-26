@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IntroductionContactInformation < Step
+class Address < Step
   step_attributes(
     :street_address,
     :city,
@@ -22,6 +22,5 @@ class IntroductionContactInformation < Step
     presence: { message: "Make sure to provide a state" }
 
   validates :zip,
-    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" },
-    allow_blank: true
+    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" }
 end

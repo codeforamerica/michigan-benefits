@@ -2,11 +2,9 @@
 
 class StepNavigation
   ALL = {
-    "Introduction" => [
-      IntroductionIntroduceYourselfController,
-      IntroductionContactInformationController,
-    ],
-    "Legal" => [
+    "Minimal Snap Application" => [
+      PersonalDetailController,
+      AddressController,
       SignAndSubmitController,
     ],
   }.freeze

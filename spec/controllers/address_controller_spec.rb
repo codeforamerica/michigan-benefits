@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe IntroductionContactInformationController, :member, type: :controller do
+RSpec.describe AddressController, :member, type: :controller do
   let!(:current_app) do
     SnapApplication.create!(
       user: member,
@@ -19,7 +19,7 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
   describe "#edit" do
     it "assigns the correct step" do
       get :edit
-      expect(step).to be_an_instance_of IntroductionContactInformation
+      expect(step).to be_an_instance_of Address
     end
 
     it "assigns the fields to the step" do
@@ -64,7 +64,7 @@ RSpec.describe IntroductionContactInformationController, :member, type: :control
     it "renders edit if the step is invalid" do
       put :update, params: { step: { zip: "1111111111" } }
 
-      expect(assigns(:step)).to be_an_instance_of(IntroductionContactInformation)
+      expect(assigns(:step)).to be_an_instance_of(Address)
       expect(response).to render_template(:edit)
     end
   end
