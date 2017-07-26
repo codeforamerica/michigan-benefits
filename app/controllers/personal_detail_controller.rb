@@ -2,9 +2,7 @@
 
 class PersonalDetailController < StepsController
   def edit
-    @step = step_class.new(
-      current_app.attributes.slice(*step_attrs),
-    )
+    @step = step_class.new(current_app.attributes.slice(*step_attrs))
   end
 
   def update

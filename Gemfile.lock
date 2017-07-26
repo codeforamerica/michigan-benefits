@@ -83,6 +83,11 @@ GEM
     docile (1.1.5)
     erubi (1.6.1)
     execjs (2.7.0)
+    factory_girl (4.8.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
     faker (1.8.0)
       i18n (~> 0.5)
     faraday (0.12.1)
@@ -293,6 +298,7 @@ DEPENDENCIES
   climate_control
   codeclimate-test-reporter
   database_cleaner
+  factory_girl_rails
   faker
   haml (~> 5.0)
   haml-lint
