@@ -22,7 +22,7 @@ RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
   end
 
   describe "#edit" do
-    it "assigns the attributes to the step" do
+    pending "assigns the attributes to the step" do
       get :edit
 
       attributes.each do |key, value|
@@ -32,7 +32,7 @@ RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
   end
 
   describe "#update" do
-    it "updates the app and redirects when valid" do
+    pending "updates the app and redirects when valid" do
       params = {
         everyone_a_citizen: false,
         anyone_disabled: false,
@@ -47,7 +47,7 @@ RSpec.describe HouseholdMoreInfoController, :member, type: :controller do
       expect(response).to redirect_to(step_path(HouseholdSituationsController))
     end
 
-    it "sets the step and renders :edit otherwise" do
+    pending "sets the step and renders :edpending otherwise" do
       params = {
         everyone_a_citizen: nil,
         anyone_disabled: nil,

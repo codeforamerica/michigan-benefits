@@ -1,7 +1,7 @@
 - content_for :header_title, 'Introduction'
 
 .form-card
-  = form_for @step, as: :step, url: current_path,
+  = form_for @step, as: :step, builder: MbFormBuilder, url: current_path,
     method: :put do |f|
     %header.form-card__header
       .step-section-header
@@ -10,22 +10,7 @@
         .step-section-header__subhead To start, please introduce yourself.
 
     .form-card__content
-      :ruby
-        qs = [
-          {
-            title: 'What is your first name?',
-            type: :text_field,
-            method: :first_name,
-            placeholder: 'First name'
-          },
-          {
-            title: 'What is your last name?',
-            type: :text_field,
-            method: :last_name,
-            placeholder: 'Last name'
-          }
-        ]
-
-      - questions f, qs
+      = f.mb_input_field :name, "What is your full name?", options: { placeholder: "Jane Doe" }
+      = f.mb_date_select :birthday, "What is your birthday?", { options: { start_year: 1900, end_year: Time.now.year, default: Date.new(1990,1,15), order: [:month, :day, :year] } }
 
     = render partial: 'shared/next_step'

@@ -12,49 +12,20 @@
 
 #apply-for-programs.slab.slab--white
   .card--narrow
-    %h3.h3--strong 
-      Choose the programs you want to apply for today.
-
-    %p.text--help.text--padded
-      You can choose more than one
+    = render 'shared/flashes'
 
     = form_for @user do
-      :ruby
-        programs = [
-          {
-            icon: 'health',
-            checked: true,
-            title: 'Healthcare Coverage',
-            subtitle: 'Medicaid, CHIP, and marketplace health insurance',
-            description: <<~TEXT
-              Free or low-cost health coverage that helps pay for medical bills, doctors
-              visits and prescriptions.
-            TEXT
-          },
-          {
-            icon: 'food',
-            checked: true,
-            title: 'Food Assistance',
-            subtitle: 'Food Stamps, FAP or SNAP',
-            description: 'Provides benefits to buy or grow food.'
-          },
-        ]
+      %label.program-selector
+        .program-selector__checkbox
+        - icon_class = "illustration--icn_food"
+        .program-selector__icon.illustration{ class: icon_class }
 
-      - programs.each do |options|
-        %label.program-selector
-          .program-selector__checkbox
-            %input.program-selector__checkbox-input{ type: 'checkbox',
-              name: "apply-#{options[:icon]}", checked: options[:checked] || false }
-
-          - icon_class = "illustration--icn_#{options[:icon]}"
-          .program-selector__icon.illustration{ class: icon_class }
-
-          %h4.program-selector__title
-            = options[:title]
-          .program-selector__subtitle.text--smell
-            = options[:subtitle]
-          .text--help
-            = options[:description]
+        %h4.program-selector__title
+          Food Assistance
+        .program-selector__subtitle.text--smell
+          Food Stamps, FAP or SNAP
+        .text--help
+          Provides benefits to buy or grow food.
 
       %button.button.button--cta.button--fully-width{ type: 'submit' }
         Apply now
@@ -65,7 +36,6 @@
     .illustration--mdhhs
 
   %p.text--light
-    The Michigan Department of Health and Human Services offers temporary assistance
-    programs that support families when times are tough.
+    The Michigan Department of Health and Human Services offers temporary assistance programs that support families when times are tough.
 
 = render 'shared/footer'

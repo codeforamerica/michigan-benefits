@@ -1,0 +1,17 @@
+<% if notice %>
+<div class="flash-container" id="dismiss-notice">
+  <div class="flash">
+    <p class="flash__message"><%= notice %></p>
+    <a href="#dismiss-notice" class="flash__dismiss"><span class="icon icon-close"></span></a>
+  </div>
+</div>
+<% end %>
+
+<% if alert %>
+<div class="flash-container" id="dismiss-notice">
+  <div class="flash flash--error">
+    <p class="flash__message"><%= alert %></p>
+    <a href="#dismiss-notice" class="flash__dismiss"><span class="icon icon-close"></span></a>
+  </div>
+</div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406224506) do
+ActiveRecord::Schema.define(version: 20170725232650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,22 @@ ActiveRecord::Schema.define(version: 20170406224506) do
     t.integer "expected_income_this_year"
     t.integer "expected_income_next_year"
     t.index ["app_id"], name: "index_household_members_on_app_id"
+  end
+
+  create_table "mb_snap_apps", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.date "birthday"
+    t.string "street_address"
+    t.string "city"
+    t.string "county"
+    t.string "state"
+    t.string "zip"
+    t.string "signature"
+    t.datetime "signed_at"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_mb_snap_apps_on_user_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

@@ -32,7 +32,6 @@ end
 
 group :development, :test do
   gem "capybara"
-  gem "capybara-accessible"
   gem "climate_control"
   gem "codeclimate-test-reporter"
   gem "haml-lint", require: false

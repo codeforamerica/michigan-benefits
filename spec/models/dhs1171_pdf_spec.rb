@@ -10,11 +10,11 @@ RSpec.describe Dhs1171Pdf do
         birth_year: "1950",
         city: "Flint",
         county: "Genesee",
-        full_name: "Jessie Tester",
-        signature: "Jessie Tester",
+        full_name: "Alan Tester",
+        signature: "Alan Tester",
         signature_date: "July 25, 2017",
         state: "MI",
-        street_address: "123 Main St",
+        street_address: "123 Hello St",
         zip: "12345",
       }
 

@@ -56,6 +56,6 @@ class ApplicationController < ActionController::Base
   def next_path(*); end
 
   def current_app
-    @current_app ||= App.find_or_create_by!(user: current_user)
+    @current_app ||= MbSnapApp.find_or_create_by!(user: current_user)
   end
 end
