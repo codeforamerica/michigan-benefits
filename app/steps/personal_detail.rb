@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IntroductionIntroduceYourself < Step
+class PersonalDetail < Step
   include MultiparameterAttributeAssignment
 
   step_attributes :name, :birthday

@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
-class IntroductionContactInformationController < StandardStepsController
+class PersonalDetailController < StepsController
+  def edit
+    @step = step_class.new(
+      current_app.attributes.slice(*step_attrs),
+    )
+  end
+
   def update
     @step = step_class.new(step_params)
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IntroductionContactInformation < Step
+class Address < Step
   step_attributes(
     :street_address,
     :city,
