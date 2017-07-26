@@ -12,11 +12,11 @@ module MultiparameterAttributeAssignment
 
     attributes = sanitize_for_mass_assignment(new_attributes.stringify_keys)
 
-    attributes.each do |k, v|
-      if k.include?("(")
-        multi_parameter_attributes << [k, v]
+    attributes.each do |key, value|
+      if key.include?("(")
+        multi_parameter_attributes << [key, value]
       else
-        send("#{k}=", v)
+        send("#{key}=", value)
       end
     end
 
