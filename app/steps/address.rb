@@ -22,6 +22,5 @@ class Address < Step
     presence: { message: "Make sure to provide a state" }
 
   validates :zip,
-    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" },
-    allow_blank: true
+    length: { is: 5, message: "Make sure your ZIP code is 5 digits long" }
 end
