@@ -14,14 +14,15 @@ class Dhs1171Pdf
     "zip",
   ].freeze
 
+  SOURCE_PDF = "DHS_1171.pdf".freeze
+
   def initialize(client_data)
-    @source_pdf = "DHS_1171.pdf"
     @client_data = client_data
   end
 
   def save(new_pdf)
     check_for_invalid_fields
-    PdfForms.new.fill_form(source_pdf, new_pdf, client_data)
+    PdfForms.new.fill_form(SOURCE_PDF, new_pdf, client_data)
   end
 
   private
