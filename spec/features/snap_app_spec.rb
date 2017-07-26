@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "SNAP appl" do
+feature "SNAP application" do
   scenario "successfully submits application" do
     visit root_path
     click_on "Apply now"
