@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :skip_email_application, only: [:create]
+
   resources :steps, only: %i[show index] do
     collection do
       StepNavigation.steps_and_substeps.each do |controller_class|
