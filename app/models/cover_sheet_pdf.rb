@@ -1,2 +1,0 @@
-class CoverSheetPdf
-end

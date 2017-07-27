@@ -18,21 +18,21 @@ RSpec.describe Dhs1171Pdf do
         zip: "12345",
       }
 
-      Dhs1171Pdf.new(client_data).save(generated_pdf)
+      Dhs1171Pdf.new(client_data: client_data, filename: new_pdf_filename).save
 
-      result = filled_in_values(file: generated_pdf)
+      result = filled_in_values(file: new_pdf_filename)
       client_data.each do |field, entered_data|
         expect(result[field.to_s]).to eq entered_data
       end
 
-      File.delete(generated_pdf) if File.exist?(generated_pdf)
+      File.delete(new_pdf_filename) if File.exist?(new_pdf_filename)
     end
 
     it "errors if keys are passed in for non-existent fields" do
       client_data = { blah: "hello" }
 
       expect do
-        Dhs1171Pdf.new(client_data).save(generated_pdf)
+        Dhs1171Pdf.new(client_data: client_data, filename: new_pdf_filename).save
       end.to raise_error("Invalid fields passed in: [\"blah\"]")
     end
   end
@@ -45,8 +45,8 @@ RSpec.describe Dhs1171Pdf do
     end
   end
 
-  def generated_pdf
-    @_generated_pdf ||= "tmp/dhs1171_test_output.pdf"
+  def new_pdf_filename
+    @_new_pdf_filename ||= "tmp/dhs1171_test_output.pdf"
   end
 
   def pdftk

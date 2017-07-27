@@ -16,18 +16,19 @@ class Dhs1171Pdf
 
   SOURCE_PDF = "DHS_1171.pdf".freeze
 
-  def initialize(client_data)
+  def initialize(client_data:, filename: "test_pdf.pdf")
     @client_data = client_data
+    @filename = filename
   end
 
-  def save(new_pdf_file_name)
+  def save
     check_for_invalid_fields
-    PdfForms.new.fill_form(SOURCE_PDF, new_pdf_file_name, client_data)
+    PdfForms.new.fill_form(SOURCE_PDF, filename, client_data)
   end
 
   private
 
-  attr_reader :client_data, :source_pdf
+  attr_reader :client_data, :filename
 
   def check_for_invalid_fields
     if invalid_client_fields.any?
