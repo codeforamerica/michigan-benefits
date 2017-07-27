@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe SignAndSubmitController, type: :controller do
+RSpec.describe SignAndSubmitController do
   before do
     session[:snap_application_id] = current_app.id
   end
