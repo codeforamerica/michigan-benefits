@@ -4,19 +4,18 @@ require "rails_helper"
 
 RSpec.describe AddressController, type: :controller do
   let(:step) { assigns(:step) }
+  before do
+    session[:snap_application_id] = current_app.id
+  end
 
   describe "#edit" do
     it "assigns the correct step" do
-      session[:snap_application_id] = current_app.id
-
       get :edit
 
       expect(step).to be_an_instance_of Address
     end
 
     it "assigns the fields to the step" do
-      session[:snap_application_id] = current_app.id
-
       get :edit
 
       expect(step.street_address).to eq("123 Fake St")
@@ -40,8 +39,6 @@ RSpec.describe AddressController, type: :controller do
       end
 
       it "updates the app" do
-        session[:snap_application_id] = current_app.id
-
         put :update, params: { step: valid_params }
 
         current_app.reload
@@ -52,8 +49,6 @@ RSpec.describe AddressController, type: :controller do
       end
 
       it "redirects to the next step" do
-        session[:snap_application_id] = current_app.id
-
         put :update, params: { step: valid_params }
 
         expect(response).to redirect_to("/steps/sign-and-submit")
@@ -61,8 +56,6 @@ RSpec.describe AddressController, type: :controller do
     end
 
     it "renders edit if the step is invalid" do
-      session[:snap_application_id] = current_app.id
-
       put :update, params: { step: { zip: "1111111111" } }
 
       expect(assigns(:step)).to be_an_instance_of(Address)
