@@ -6,15 +6,8 @@
 
 /.bundle
 .env
-.envrc
 
 /log/*
-/tmp/*
 !/log/.keep
-!/tmp/.keep
+/tmp
 /coverage
-
-.byebug_history
-
-.idea
-.ruby-gemset
