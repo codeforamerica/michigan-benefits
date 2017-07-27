@@ -14,12 +14,14 @@ class Dhs1171Pdf
     "zip",
   ].freeze
 
-  SOURCE_PDF = "DHS_1171.pdf".freeze
-  COVERSHEET_PDF = "lib/pdfs/michigan_snap_fax_cover_letter.pdf".freeze
+  PDF_DIRECTORY = "lib/pdfs".freeze
+  SOURCE_PDF = "#{PDF_DIRECTORY}/DHS_1171.pdf".freeze
+  COVERSHEET_PDF = "#{PDF_DIRECTORY}/michigan_snap_fax_cover_letter.pdf".freeze
 
-  def initialize(client_data:, filename: "test_pdf.pdf")
+  def initialize(client_data:, output_filename: "test_output.pdf")
     @client_data = client_data
-    @filename = filename
+    @working_filename = "tmp/working_#{output_filename}"
+    @output_filename = "tmp/#{output_filename}"
   end
 
   def save
@@ -30,7 +32,7 @@ class Dhs1171Pdf
 
   private
 
-  attr_reader :client_data, :filename
+  attr_reader :client_data, :output_filename, :working_filename
 
   def check_for_invalid_fields
     if invalid_client_fields.any?
@@ -43,12 +45,12 @@ class Dhs1171Pdf
   end
 
   def fill_in_template_form
-    PdfForms.new.fill_form(SOURCE_PDF, filename, client_data)
+    PdfForms.new.fill_form(SOURCE_PDF, working_filename, client_data)
   end
 
   def add_cover_sheet_to_completed_form
     system(
-      "pdftk #{COVERSHEET_PDF} #{filename} cat output #{filename}_with_cover",
+      "pdftk #{COVERSHEET_PDF} #{working_filename} cat output #{output_filename}",
     )
   end
 end

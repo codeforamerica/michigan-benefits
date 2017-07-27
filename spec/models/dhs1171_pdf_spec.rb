@@ -22,7 +22,7 @@ RSpec.describe Dhs1171Pdf do
         zip: "12345",
       }
 
-      Dhs1171Pdf.new(client_data: client_data, filename: new_pdf_filename).save
+      Dhs1171Pdf.new(client_data: client_data, output_filename: new_pdf_filename).save
 
       result = filled_in_values(file: new_pdf_filename)
       client_data.each do |field, entered_data|
@@ -36,7 +36,7 @@ RSpec.describe Dhs1171Pdf do
       client_data = { blah: "hello" }
 
       expect do
-        Dhs1171Pdf.new(client_data: client_data, filename: new_pdf_filename).save
+        Dhs1171Pdf.new(client_data: client_data, output_filename: new_pdf_filename).save
       end.to raise_error("Invalid fields passed in: [\"blah\"]")
     end
 
@@ -44,8 +44,8 @@ RSpec.describe Dhs1171Pdf do
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
       client_data = { city: "hello" }
 
-      Dhs1171Pdf.new(client_data: client_data, filename: new_pdf_filename).save
-      new_pdf = PDF::Reader.new("#{new_pdf_filename}_with_cover")
+      Dhs1171Pdf.new(client_data: client_data, output_filename: new_pdf_filename).save
+      new_pdf = PDF::Reader.new("tmp/#{new_pdf_filename}")
 
       expect(new_pdf.page_count).to eq(original_length + 1)
     end
@@ -60,7 +60,7 @@ RSpec.describe Dhs1171Pdf do
   end
 
   def new_pdf_filename
-    @_new_pdf_filename ||= "tmp/dhs1171_test_output.pdf"
+    @_new_pdf_filename ||= "dhs1171_test_output.pdf"
   end
 
   def pdftk
