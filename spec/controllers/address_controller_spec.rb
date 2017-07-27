@@ -2,28 +2,22 @@
 
 require "rails_helper"
 
-RSpec.describe AddressController, :member, type: :controller do
-  let!(:current_app) do
-    SnapApplication.create!(
-      user: member,
-      street_address: "123 Fake St",
-      city: "Springfield",
-      county: "Genesee",
-      zip: "12345",
-      state: "MI",
-    )
-  end
-
+RSpec.describe AddressController, type: :controller do
   let(:step) { assigns(:step) }
+  before do
+    session[:snap_application_id] = current_app.id
+  end
 
   describe "#edit" do
     it "assigns the correct step" do
       get :edit
+
       expect(step).to be_an_instance_of Address
     end
 
     it "assigns the fields to the step" do
       get :edit
+
       expect(step.street_address).to eq("123 Fake St")
       expect(step.city).to eq("Springfield")
       expect(step.county).to eq("Genesee")
@@ -67,5 +61,15 @@ RSpec.describe AddressController, :member, type: :controller do
       expect(assigns(:step)).to be_an_instance_of(Address)
       expect(response).to render_template(:edit)
     end
+  end
+
+  def current_app
+    @_current_app ||= SnapApplication.create!(
+      street_address: "123 Fake St",
+      city: "Springfield",
+      county: "Genesee",
+      zip: "12345",
+      state: "MI",
+    )
   end
 end

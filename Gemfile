@@ -16,7 +16,6 @@ gem "puma", "~> 3.0"
 gem "rails", "~> 5.1"
 gem "responders"
 gem "sass-rails", "~> 5.0"
-gem "sorcery"
 gem "twilio-ruby"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

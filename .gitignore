@@ -9,5 +9,5 @@
 
 /log/*
 !/log/.keep
-/tmp
+/tmp/*
 /coverage

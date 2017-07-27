@@ -7,7 +7,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 
-require_relative "support/mom"
 require_relative "support/match_html"
 require_relative "support/generic_helper"
 require_relative "support/feature_helper"
@@ -69,21 +68,10 @@ RSpec.configure do |config|
   config.include FeatureHelper, type: :feature
   config.include GenericHelper
   config.include StepHelper
-  config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
-  config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
 
   %i[controller view request].each do |type|
     config.include ::Rails::Controller::Testing::TestProcess, type: type
     config.include ::Rails::Controller::Testing::TemplateAssertions, type: type
     config.include ::Rails::Controller::Testing::Integration, type: type
-  end
-
-  config.before :each, :member do |example|
-    example.example_group.let(:member) { create(:member) }
-    login_user member
-  end
-
-  config.before :each, :guest do
-    logout_user
   end
 end

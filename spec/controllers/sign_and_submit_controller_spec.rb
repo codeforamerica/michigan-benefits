@@ -2,17 +2,9 @@
 
 require "rails_helper"
 
-RSpec.describe SignAndSubmitController, :member, type: :controller do
-  let!(:current_app) do
-    FactoryGirl.create(:snap_application, user: member)
-  end
-
-  let(:attributes) do
-    { signature: current_app.signature }.with_indifferent_access
-  end
-
-  let(:step) do
-    assigns(:step)
+RSpec.describe SignAndSubmitController do
+  before do
+    session[:snap_application_id] = current_app.id
   end
 
   describe "#edit" do
@@ -24,19 +16,19 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
   end
 
   describe "#update" do
-    let(:params) do
-      { step: { signature: "Chiu Baka" } }
-    end
-
     it "updates attributes" do
+      params = { step: { signature: "Chiu Baka" } }
+
       expect do
         put :update, params: params
       end.to change {
-        current_app.reload.attributes.slice(*attributes.keys)
-      }.from("signature" => "Mr. RJD2").to("signature" => "Chiu Baka")
+        current_app.reload.signature
+      }.from("Hans Solo").to("Chiu Baka")
     end
 
     it "redirects" do
+      params = { step: { signature: "Chiu Baka" } }
+
       put :update, params: params
 
       expect(response).to redirect_to root_path(anchor: "fold")
@@ -44,7 +36,6 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
 
     it "creates a PDF with the data" do
       app = current_app
-
       data = {
         applying_for_food_assistance: "Yes",
         full_name: app.name,
@@ -56,7 +47,7 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
         county: app.county,
         state: app.state,
         zip: app.zip,
-        signature: app.signature,
+        signature: "Mr. RJD2",
         signature_date: app.signed_at,
       }
 
@@ -67,5 +58,17 @@ RSpec.describe SignAndSubmitController, :member, type: :controller do
 
       expect(pdf_double).to have_received(:save)
     end
+  end
+
+  def step
+    @_step ||= assigns(:step)
+  end
+
+  def current_app
+    @_current_app ||= FactoryGirl.create(:snap_application, attributes)
+  end
+
+  def attributes
+    { signature: "Hans Solo" }
   end
 end

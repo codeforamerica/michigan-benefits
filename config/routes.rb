@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root "users#new"
+  root "pages#index"
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]
@@ -12,7 +12,6 @@ Rails.application.routes.draw do
       get :clear, to: "sessions#destroy"
     end
   end
-  resources :users, only: %i[new create]
 
   resources :steps, only: %i[show index] do
     collection do
