@@ -1,17 +1,26 @@
 class Dhs1171Pdf
-  SOURCE_PDF = "DHS_1171.pdf".freeze
+  PDF_DIRECTORY = "lib/pdfs".freeze
+  SOURCE_PDF = "#{PDF_DIRECTORY}/DHS_1171.pdf".freeze
+  COVERSHEET_PDF = "#{PDF_DIRECTORY}/michigan_snap_fax_cover_letter.pdf".freeze
 
-  def initialize(snap_application)
+  def initialize(snap_application:, output_filename: "test_output.pdf")
     @snap_application = snap_application
+    @completed_filename = "tmp/completed#{output_filename}"
+    @output_filename = "tmp/#{output_filename}"
   end
 
-  def save(new_pdf_file_name)
-    PdfForms.new.fill_form(SOURCE_PDF, new_pdf_file_name, client_data)
+  def save
+    fill_in_template_form
+    add_cover_sheet_to_completed_form
   end
 
   private
 
-  attr_reader :snap_application, :source_pdf
+  attr_reader :snap_application, :output_filename, :completed_filename
+
+  def fill_in_template_form
+    PdfForms.new.fill_form(SOURCE_PDF, completed_filename, client_data)
+  end
 
   def client_data
     {
@@ -28,5 +37,11 @@ class Dhs1171Pdf
       signature: snap_application.signature,
       signature_date: snap_application.signed_at,
     }
+  end
+
+  def add_cover_sheet_to_completed_form
+    system(
+      "pdftk #{COVERSHEET_PDF} #{completed_filename} cat output #{output_filename}",
+    )
   end
 end

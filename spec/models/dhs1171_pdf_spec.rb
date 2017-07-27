@@ -19,14 +19,30 @@ RSpec.describe Dhs1171Pdf do
         signature_date: snap_application.signed_at.to_s,
       }
 
-      Dhs1171Pdf.new(snap_application).save(generated_pdf)
+      Dhs1171Pdf.new(
+        snap_application: snap_application,
+        output_filename: new_pdf_filename,
+      ).save
 
-      result = filled_in_values(file: generated_pdf)
+      result = filled_in_values(file: "tmp/#{new_pdf_filename}")
       client_data.each do |field, entered_data|
         expect(result[field.to_s]).to eq entered_data
       end
 
-      File.delete(generated_pdf) if File.exist?(generated_pdf)
+      File.delete(new_pdf_filename) if File.exist?(new_pdf_filename)
+    end
+
+    it "prepends a cover sheet" do
+      snap_application = FactoryGirl.create(:snap_application)
+      original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
+
+      Dhs1171Pdf.new(
+        snap_application: snap_application,
+        output_filename: new_pdf_filename,
+      ).save
+      new_pdf = PDF::Reader.new("tmp/#{new_pdf_filename}")
+
+      expect(new_pdf.page_count).to eq(original_length + 1)
     end
   end
 
@@ -38,8 +54,8 @@ RSpec.describe Dhs1171Pdf do
     end
   end
 
-  def generated_pdf
-    @_generated_pdf ||= "tmp/dhs1171_test_output.pdf"
+  def new_pdf_filename
+    @_new_pdf_filename ||= "dhs1171_test_output.pdf"
   end
 
   def pdftk

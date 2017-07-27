@@ -19,13 +19,16 @@ class SendApplicationController < StandardStepsController
 
   def send_email
     ApplicationMailer.snap_application_notification(
-      file_name: new_file_name,
+      file_name: "tmp/#{new_file_name}",
       recipient_email: current_snap_application.email,
     ).deliver
   end
 
   def create_dhs1171_pdf
-    Dhs1171Pdf.new(current_snap_application).save(new_file_name)
+    Dhs1171Pdf.new(
+      snap_application: current_snap_application,
+      output_filename: new_file_name,
+    ).save
   end
 
   def new_file_name
