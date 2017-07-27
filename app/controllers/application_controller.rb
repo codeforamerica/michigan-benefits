@@ -27,8 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_snap_application
-    id = current_snap_application_id
-    SnapApplication.find_by(id: id)
+    SnapApplication.find_by(id: current_snap_application_id)
   end
 
   def current_snap_application_id
