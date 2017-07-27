@@ -11,3 +11,5 @@
 !/log/.keep
 /tmp/*
 /coverage
+
+test_pdf.pdf

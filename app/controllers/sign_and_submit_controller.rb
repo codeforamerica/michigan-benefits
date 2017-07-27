@@ -31,6 +31,6 @@ class SignAndSubmitController < StandardStepsController
       signature_date: current_snap_application.signed_at,
     }
 
-    Dhs1171Pdf.new(data).save("test_pdf.pdf")
+    Dhs1171Pdf.new(client_data: data).save
   end
 end

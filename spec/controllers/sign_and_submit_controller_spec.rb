@@ -52,7 +52,7 @@ RSpec.describe SignAndSubmitController do
       }
 
       pdf_double = double(save: true)
-      allow(Dhs1171Pdf).to receive(:new).with(data).and_return(pdf_double)
+      allow(Dhs1171Pdf).to receive(:new).with(client_data: data).and_return(pdf_double)
 
       put :update, params: { step: { signature: "Mr. RJD2" } }
 

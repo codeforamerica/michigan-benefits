@@ -2,6 +2,10 @@ require "rails_helper"
 
 RSpec.describe Dhs1171Pdf do
   describe "#save" do
+    after do
+      # File.delete(new_pdf_filename) if File.exist?(new_pdf_filename)
+    end
+
     it "saves the client info" do
       client_data = {
         applying_for_food_assistance: "Yes",
@@ -18,22 +22,32 @@ RSpec.describe Dhs1171Pdf do
         zip: "12345",
       }
 
-      Dhs1171Pdf.new(client_data).save(generated_pdf)
+      Dhs1171Pdf.new(client_data: client_data, output_filename: new_pdf_filename).save
 
-      result = filled_in_values(file: generated_pdf)
+      result = filled_in_values(file: new_pdf_filename)
       client_data.each do |field, entered_data|
         expect(result[field.to_s]).to eq entered_data
       end
 
-      File.delete(generated_pdf) if File.exist?(generated_pdf)
+      File.delete(new_pdf_filename) if File.exist?(new_pdf_filename)
     end
 
     it "errors if keys are passed in for non-existent fields" do
       client_data = { blah: "hello" }
 
       expect do
-        Dhs1171Pdf.new(client_data).save(generated_pdf)
+        Dhs1171Pdf.new(client_data: client_data, output_filename: new_pdf_filename).save
       end.to raise_error("Invalid fields passed in: [\"blah\"]")
+    end
+
+    it "prepends a cover sheet" do
+      original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
+      client_data = { city: "hello" }
+
+      Dhs1171Pdf.new(client_data: client_data, output_filename: new_pdf_filename).save
+      new_pdf = PDF::Reader.new("tmp/#{new_pdf_filename}")
+
+      expect(new_pdf.page_count).to eq(original_length + 1)
     end
   end
 
@@ -45,8 +59,8 @@ RSpec.describe Dhs1171Pdf do
     end
   end
 
-  def generated_pdf
-    @_generated_pdf ||= "tmp/dhs1171_test_output.pdf"
+  def new_pdf_filename
+    @_new_pdf_filename ||= "dhs1171_test_output.pdf"
   end
 
   def pdftk
