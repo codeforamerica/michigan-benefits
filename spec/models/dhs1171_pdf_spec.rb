@@ -2,6 +2,10 @@ require "rails_helper"
 
 RSpec.describe Dhs1171Pdf do
   describe "#save" do
+    after do
+      # File.delete(new_pdf_filename) if File.exist?(new_pdf_filename)
+    end
+
     it "saves the client info" do
       client_data = {
         applying_for_food_assistance: "Yes",
@@ -34,6 +38,16 @@ RSpec.describe Dhs1171Pdf do
       expect do
         Dhs1171Pdf.new(client_data: client_data, filename: new_pdf_filename).save
       end.to raise_error("Invalid fields passed in: [\"blah\"]")
+    end
+
+    it "prepends a cover sheet" do
+      original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
+      client_data = { city: "hello" }
+
+      Dhs1171Pdf.new(client_data: client_data, filename: new_pdf_filename).save
+      new_pdf = PDF::Reader.new(new_pdf_filename)
+
+      expect(new_pdf.page_count).to eq(original_length + 1)
     end
   end
 
