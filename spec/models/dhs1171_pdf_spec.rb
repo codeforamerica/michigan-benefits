@@ -3,22 +3,23 @@ require "rails_helper"
 RSpec.describe Dhs1171Pdf do
   describe "#save" do
     it "saves the client info" do
+      snap_application = FactoryGirl.create(:snap_application)
       client_data = {
         applying_for_food_assistance: "Yes",
-        birth_day: "11",
-        birth_month: "7",
-        birth_year: "1950",
-        city: "Flint",
-        county: "Genesee",
-        full_name: "Alan Tester",
-        signature: "Alan Tester",
-        signature_date: "July 25, 2017",
-        state: "MI",
-        street_address: "123 Hello St",
-        zip: "12345",
+        full_name: snap_application.name,
+        birth_day: snap_application.birthday.strftime("%d"),
+        birth_month: snap_application.birthday.strftime("%m"),
+        birth_year: snap_application.birthday.strftime("%Y"),
+        street_address: snap_application.street_address,
+        city: snap_application.city,
+        county: snap_application.county,
+        state: snap_application.state,
+        zip: snap_application.zip,
+        signature: snap_application.signature,
+        signature_date: snap_application.signed_at.to_s,
       }
 
-      Dhs1171Pdf.new(client_data).save(generated_pdf)
+      Dhs1171Pdf.new(snap_application).save(generated_pdf)
 
       result = filled_in_values(file: generated_pdf)
       client_data.each do |field, entered_data|
@@ -26,14 +27,6 @@ RSpec.describe Dhs1171Pdf do
       end
 
       File.delete(generated_pdf) if File.exist?(generated_pdf)
-    end
-
-    it "errors if keys are passed in for non-existent fields" do
-      client_data = { blah: "hello" }
-
-      expect do
-        Dhs1171Pdf.new(client_data).save(generated_pdf)
-      end.to raise_error("Invalid fields passed in: [\"blah\"]")
     end
   end
 

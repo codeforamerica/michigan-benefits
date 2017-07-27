@@ -25,22 +25,7 @@ class SendApplicationController < StandardStepsController
   end
 
   def create_dhs1171_pdf
-    data = {
-      applying_for_food_assistance: "Yes",
-      full_name: current_snap_application.name,
-      birth_day: current_snap_application.birthday.strftime("%d"),
-      birth_month: current_snap_application.birthday.strftime("%m"),
-      birth_year: current_snap_application.birthday.strftime("%Y"),
-      street_address: current_snap_application.street_address,
-      city: current_snap_application.city,
-      county: current_snap_application.county,
-      state: current_snap_application.state,
-      zip: current_snap_application.zip,
-      signature: current_snap_application.signature,
-      signature_date: current_snap_application.signed_at,
-    }
-
-    Dhs1171Pdf.new(data).save(new_file_name)
+    Dhs1171Pdf.new(current_snap_application).save(new_file_name)
   end
 
   def new_file_name
