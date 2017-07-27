@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PersonalDetailController, type: :controller do
+RSpec.describe PersonalDetailController do
   let(:birthday) { DateTime.parse("2/2/1945") }
 
   describe "#edit" do
