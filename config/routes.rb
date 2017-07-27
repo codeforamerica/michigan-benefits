@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :skip_email_application, only: [:create]
+  resource :skip_send_application, only: [:create]
 
   resources :steps, only: %i[show index] do
     collection do
