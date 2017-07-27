@@ -18,10 +18,24 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.perform_caching = false
+  # config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.perform_caching = false
   config.active_support.deprecation = :log
   config.active_record.migration_error = :page_load
   config.assets.debug = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # Customize default host
+  config.action_mailer.default_url_options = {
+    host: ENV["HOSTNAME_FOR_URLS"],
+    protocol: "http",
+  }
+
+  config.action_mailer.smtp_settings = {
+    port: ENV["MAILGUN_SMTP_PORT"],
+    address: ENV["MAILGUN_SMTP_SERVER"],
+    user_name: ENV["MAILGUN_SMTP_LOGIN"],
+    password: ENV["MAILGUN_SMTP_PASSWORD"],
+    authentication: :plain,
+  }
+  config.action_mailer.delivery_method = :smtp
 end

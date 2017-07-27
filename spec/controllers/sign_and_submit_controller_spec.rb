@@ -33,31 +33,6 @@ RSpec.describe SignAndSubmitController do
 
       expect(response).to redirect_to("/steps/send-application")
     end
-
-    it "creates a PDF with the data" do
-      app = current_app
-      data = {
-        applying_for_food_assistance: "Yes",
-        full_name: app.name,
-        birth_day: app.birthday.strftime("%d"),
-        birth_month: app.birthday.strftime("%m"),
-        birth_year: app.birthday.strftime("%Y"),
-        street_address: app.street_address,
-        city: app.city,
-        county: app.county,
-        state: app.state,
-        zip: app.zip,
-        signature: "Mr. RJD2",
-        signature_date: app.signed_at,
-      }
-
-      pdf_double = double(save: true)
-      allow(Dhs1171Pdf).to receive(:new).with(data).and_return(pdf_double)
-
-      put :update, params: { step: { signature: "Mr. RJD2" } }
-
-      expect(pdf_double).to have_received(:save)
-    end
   end
 
   def step
