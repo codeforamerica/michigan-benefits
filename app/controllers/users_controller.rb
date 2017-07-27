@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :check_signups_enabled
-
   def allowed
     {
       new: :guest,
@@ -25,12 +23,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def check_signups_enabled
-    return unless ENV["SIGNUPS_DISABLED"] == "true"
-    flash[:alert] = "Sorry, sign-ups are temporarily disabled"
-    redirect_to root_path
-  end
 
   def user_params
     params.require(:user).permit %i[name email password]

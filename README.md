@@ -13,7 +13,6 @@
 
 * pdftk - see [https://elements.heroku.com/buildpacks/fxtentacle/heroku-pdftk-buildpack](https://elements.heroku.com/buildpacks/fxtentacle/heroku-pdftk-buildpack)
 
-
 ## Developing
 
 This project is built on top of [Citizen Rails](https://github.com/citizencode/citizen-rails).
@@ -42,16 +41,15 @@ Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen
 
 ### Deploying
 
-* [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits) is currently set up to 
+* [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits) is currently set up to
   deploy green builds to **staging**.
 * Use `citizen promote` to promote from staging to **production**. If you want to promote
-  from the Heroku web page or CLI, be sure to run migrations afterwards. 
+  from the Heroku web page or CLI, be sure to run migrations afterwards.
 
 ### Debugging
 
-* Call `byebug` anywhere in the code to stop execution and get a debugger console.
+* Call `binding.pry` anywhere in the code to stop execution and get a debugger console.
 * Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
-* (Of course, [RubyMine](https://www.jetbrains.com/ruby/) includes a great [visual debugger](https://www.jetbrains.com/ruby/features/ruby_debugger.html)).
 
 ### CircleCI green builds deploy to Heroku staging servers
 
@@ -86,16 +84,6 @@ end
 Set an environment variable called `BASIC_AUTH` in the format `<username>:<password>` (e.g., `chewie:r0000ar`).
 Basic auth will be enabled if that environment variable exists.
 
-
-
-### X-ray
-
-In your browser, press `command-shift-X` to see which controller, layout, and views rendered the page. Click on something
-in the view to have it open in your editor. (Use the gear icon in the lower right corner to configure your editor.)
-[Read more](https://github.com/brentd/xray-rails).
-
-
-
 ### Mom
 
 [Mom](spec/support/mom.rb) is a simple way to create objects for tests. Instead of some convoluted DSL for building
@@ -107,22 +95,7 @@ objects, just use plain Ruby.
 * You are not limited to just creating models; since it's plain Ruby, you can do anything
   (e.g., `create :team_with_members_and_locations, "Great team", member_names: %w[Alice Billy Cindy], locations: %w[SF NYC]`)
 
-
 ### Spec Helpers
-
-* Use `step` to break up a long feature spec:
-
-```ruby
-step "log in" do
-  fill_in "Email", with: "alice@example.com"
-  fill_in "Password", with: "password"
-  click_button "Subnit"
-end
-```
-
-* Use `wut` (or `save_and_open_preview`) to open a browser window at a particluar point in your test. If your local
-  server is running, it will show the page with full styling (thanks to the `FilePreviewsController` which is only
-  routable in the development and test environments).
 
 * Use `with_modified_env` to modify an env variable for one test:
 
@@ -130,7 +103,7 @@ end
 with_modified_env INVITATION_CODE: "inv-code", INVITATIONS_ENABLED: "true" do
   post :create, user: { name: "Alice", invitation_code: "wrong-code" }
   expect(flash[:alert]).to equal "Invalid invitation code"
-end  
+end
 ```
 
 * Use `match_html` to test that two HTML strings match, excluding whitespace, order of attributes, etc.:
