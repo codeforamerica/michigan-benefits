@@ -7,8 +7,7 @@ class SignAndSubmitController < StandardStepsController
     if @step.valid?
       current_snap_application.update(step_params)
       create_dhs1171_pdf
-      flash[:notice] = "Your application has been successfully submitted."
-      redirect_to root_path(anchor: "fold")
+      redirect_to next_path
     else
       render :edit
     end

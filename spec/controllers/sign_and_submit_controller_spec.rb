@@ -31,7 +31,7 @@ RSpec.describe SignAndSubmitController do
 
       put :update, params: params
 
-      expect(response).to redirect_to root_path(anchor: "fold")
+      expect(response).to redirect_to("/steps/send-application")
     end
 
     it "creates a PDF with the data" do
