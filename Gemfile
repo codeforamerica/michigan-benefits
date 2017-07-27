@@ -34,6 +34,7 @@ group :development, :test do
   gem "capybara"
   gem "climate_control"
   gem "codeclimate-test-reporter"
+  gem "factory_girl_rails"
   gem "haml-lint", require: false
   gem "listen"
   gem "poltergeist"
