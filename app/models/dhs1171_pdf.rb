@@ -15,6 +15,7 @@ class Dhs1171Pdf
   ].freeze
 
   SOURCE_PDF = "DHS_1171.pdf".freeze
+  COVERSHEET_PDF = "lib/pdfs/michigan_snap_fax_cover_letter.pdf".freeze
 
   def initialize(client_data:, filename: "test_pdf.pdf")
     @client_data = client_data
@@ -23,7 +24,8 @@ class Dhs1171Pdf
 
   def save
     check_for_invalid_fields
-    PdfForms.new.fill_form(SOURCE_PDF, filename, client_data)
+    fill_in_template_form
+    add_cover_sheet_to_completed_form
   end
 
   private
@@ -38,5 +40,15 @@ class Dhs1171Pdf
 
   def invalid_client_fields
     client_data.keys.map(&:to_s) - FIELDS
+  end
+
+  def fill_in_template_form
+    PdfForms.new.fill_form(SOURCE_PDF, filename, client_data)
+  end
+
+  def add_cover_sheet_to_completed_form
+    system(
+      "pdftk #{COVERSHEET_PDF} #{filename} cat output #{filename}_with_cover",
+    )
   end
 end

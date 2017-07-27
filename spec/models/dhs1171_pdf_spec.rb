@@ -45,7 +45,7 @@ RSpec.describe Dhs1171Pdf do
       client_data = { city: "hello" }
 
       Dhs1171Pdf.new(client_data: client_data, filename: new_pdf_filename).save
-      new_pdf = PDF::Reader.new(new_pdf_filename)
+      new_pdf = PDF::Reader.new("#{new_pdf_filename}_with_cover")
 
       expect(new_pdf.page_count).to eq(original_length + 1)
     end
