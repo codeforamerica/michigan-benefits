@@ -1,9 +1,9 @@
-- if current_user && Rails.env.development?
+- if Rails.env.development?
   .debug
     = progress
     |
     = controller.class.name
     | app
-    = current_user.snap_application.id
+    = current_or_new_snap_application.id
     |
     = link_to 'Nav', steps_path

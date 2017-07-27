@@ -2,14 +2,20 @@
 
 class PersonalDetailController < StepsController
   def edit
-    @step = step_class.new(current_app.attributes.slice(*step_attrs))
+    current_app = current_or_new_snap_application
+
+    @step = step_class.new(
+      current_app.attributes.slice(*step_attrs),
+    )
   end
 
   def update
     @step = step_class.new(step_params)
 
     if @step.valid?
-      current_app.update!(step_params)
+      app = current_or_new_snap_application
+      app.update!(step_params)
+      set_current_snap_application(app)
       redirect_to(next_path)
     else
       render :edit

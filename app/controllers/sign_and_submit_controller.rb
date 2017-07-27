@@ -5,7 +5,7 @@ class SignAndSubmitController < StandardStepsController
     @step = step_class.new(step_params)
 
     if @step.valid?
-      current_app.update(step_params)
+      current_snap_application.update(step_params)
       create_dhs1171_pdf
       flash[:notice] = "Your application has been successfully submitted."
       redirect_to root_path(anchor: "fold")
@@ -19,17 +19,17 @@ class SignAndSubmitController < StandardStepsController
   def create_dhs1171_pdf
     data = {
       applying_for_food_assistance: "Yes",
-      full_name: current_app.name,
-      birth_day: current_app.birthday.strftime("%d"),
-      birth_month: current_app.birthday.strftime("%m"),
-      birth_year: current_app.birthday.strftime("%Y"),
-      street_address: current_app.street_address,
-      city: current_app.city,
-      county: current_app.county,
-      state: current_app.state,
-      zip: current_app.zip,
-      signature: current_app.signature,
-      signature_date: current_app.signed_at,
+      full_name: current_snap_application.name,
+      birth_day: current_snap_application.birthday.strftime("%d"),
+      birth_month: current_snap_application.birthday.strftime("%m"),
+      birth_year: current_snap_application.birthday.strftime("%Y"),
+      street_address: current_snap_application.street_address,
+      city: current_snap_application.city,
+      county: current_snap_application.county,
+      state: current_snap_application.state,
+      zip: current_snap_application.zip,
+      signature: current_snap_application.signature,
+      signature_date: current_snap_application.signed_at,
     }
 
     Dhs1171Pdf.new(data).save("test_pdf.pdf")

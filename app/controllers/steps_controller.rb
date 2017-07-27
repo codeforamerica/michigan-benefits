@@ -13,14 +13,6 @@ class StepsController < ApplicationController
     controller_path.classify.constantize
   end
 
-  def allowed
-    {
-      index: :member,
-      edit: :member,
-      update: :member,
-    }
-  end
-
   def index; end
 
   def edit

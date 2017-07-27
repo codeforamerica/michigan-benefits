@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :snap_application do
-    user
     name "RJD2"
     birthday 50.years.ago
     street_address "123 Main St."

@@ -2,28 +2,23 @@
 
 require "rails_helper"
 
-RSpec.describe AddressController, :member, type: :controller do
-  let!(:current_app) do
-    SnapApplication.create!(
-      user: member,
-      street_address: "123 Fake St",
-      city: "Springfield",
-      county: "Genesee",
-      zip: "12345",
-      state: "MI",
-    )
-  end
-
+RSpec.describe AddressController, type: :controller do
   let(:step) { assigns(:step) }
 
   describe "#edit" do
     it "assigns the correct step" do
+      session[:snap_application_id] = current_app.id
+
       get :edit
+
       expect(step).to be_an_instance_of Address
     end
 
     it "assigns the fields to the step" do
+      session[:snap_application_id] = current_app.id
+
       get :edit
+
       expect(step.street_address).to eq("123 Fake St")
       expect(step.city).to eq("Springfield")
       expect(step.county).to eq("Genesee")
@@ -45,6 +40,8 @@ RSpec.describe AddressController, :member, type: :controller do
       end
 
       it "updates the app" do
+        session[:snap_application_id] = current_app.id
+
         put :update, params: { step: valid_params }
 
         current_app.reload
@@ -55,6 +52,8 @@ RSpec.describe AddressController, :member, type: :controller do
       end
 
       it "redirects to the next step" do
+        session[:snap_application_id] = current_app.id
+
         put :update, params: { step: valid_params }
 
         expect(response).to redirect_to("/steps/sign-and-submit")
@@ -62,10 +61,22 @@ RSpec.describe AddressController, :member, type: :controller do
     end
 
     it "renders edit if the step is invalid" do
+      session[:snap_application_id] = current_app.id
+
       put :update, params: { step: { zip: "1111111111" } }
 
       expect(assigns(:step)).to be_an_instance_of(Address)
       expect(response).to render_template(:edit)
     end
+  end
+
+  def current_app
+    @_current_app ||= SnapApplication.create!(
+      street_address: "123 Fake St",
+      city: "Springfield",
+      county: "Genesee",
+      zip: "12345",
+      state: "MI",
+    )
   end
 end

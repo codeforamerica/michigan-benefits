@@ -14,22 +14,21 @@
   .card--narrow
     = render 'shared/flashes'
 
-    = form_for @user do
-      %label.program-selector
-        .program-selector__checkbox
+    %label.program-selector
+      .program-selector__checkbox
         - icon_class = "illustration--icn_food"
-        .program-selector__icon.illustration{ class: icon_class }
+      .program-selector__icon.illustration{ class: icon_class }
 
         %h4.program-selector__title
           Food Assistance
-        .program-selector__subtitle.text--smell
-          Food Stamps, FAP or SNAP
-        .text--help
-          Provides benefits to buy or grow food.
+      .program-selector__subtitle.text--smell
+        Food Stamps, FAP or SNAP
+      .text--help
+        Provides benefits to buy or grow food.
 
-      %button.button.button--cta.button--fully-width{ type: 'submit' }
-        Apply now
-        %i.button__icon.icon-arrow_forward
+    = link_to step_path(StepNavigation.first), class: "button button--cta button--fully-width" do
+      Apply now
+      %i.button__icon.icon-arrow_forward
 
 .slab.slab--mdhhs
   %h1

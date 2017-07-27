@@ -61,40 +61,6 @@ Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen
 
 ## What's Included
 
-### Simple User Authorization
-
-There are 3 user levels: **admin**, **member**, and **guest**. **Admins** are users whose `admin` flag is set.
-**Members** are users who aren't admins. **Guests** are non-logged-in visitors.
-
-By default, only admins are authorized to call a controller action. To let other user levels
-in, override the `allowed` method in your controller to return a hash of actions and user levels:
-
-```ruby
-def allowed
-  {
-    index: :admin, # only admins
-    show: :member, # admins and members
-    new: :guest, # admins, members, and non-logged-in visitors (everyone)
-  }
-end
-```
-
-### Basic Auth
-
-Set an environment variable called `BASIC_AUTH` in the format `<username>:<password>` (e.g., `chewie:r0000ar`).
-Basic auth will be enabled if that environment variable exists.
-
-### Mom
-
-[Mom](spec/support/mom.rb) is a simple way to create objects for tests. Instead of some convoluted DSL for building
-objects, just use plain Ruby.
-
-* Call `build` (e.g., `build :user`) to instantiate a new, unsaved object
-* Call `create` (e.g., `create :user`) to instantiate and save a new object
-* Define methods (e.g. `def user...end`) for each class you want to easily create objects for
-* You are not limited to just creating models; since it's plain Ruby, you can do anything
-  (e.g., `create :team_with_members_and_locations, "Great team", member_names: %w[Alice Billy Cindy], locations: %w[SF NYC]`)
-
 ### Spec Helpers
 
 * Use `with_modified_env` to modify an env variable for one test:

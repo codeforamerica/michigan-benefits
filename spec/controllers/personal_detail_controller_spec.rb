@@ -2,24 +2,32 @@
 
 require "rails_helper"
 
-RSpec.describe PersonalDetailController, :member, type: :controller do
-  let!(:current_app) { SnapApplication.create!(user: member) }
+RSpec.describe PersonalDetailController, type: :controller do
   let(:birthday) { DateTime.parse("2/2/1945") }
 
   describe "#edit" do
-    before { current_app.update(name: "bob", birthday: birthday) }
-
     it "assigns the correct step" do
+      current_app = SnapApplication.create
+      session[:snap_application_id] = current_app.id
+
       get :edit
+
       expect(assigns(:step)).to be_an_instance_of PersonalDetail
     end
 
     it "assigns the name to the step" do
+      current_app = SnapApplication.create(name: "bob")
+      session[:snap_application_id] = current_app.id
+
       get :edit
+
       expect(assigns(:step).name).to eq("bob")
     end
 
     it "assigns the birthday to the step" do
+      current_app = SnapApplication.create(birthday: birthday)
+      session[:snap_application_id] = current_app.id
+
       get :edit
       expect(assigns(:step).birthday).to eq(birthday)
     end
@@ -27,6 +35,9 @@ RSpec.describe PersonalDetailController, :member, type: :controller do
 
   describe "#update" do
     it "updates the applicant if the step is valid" do
+      current_app = SnapApplication.create(name: "Joe", birthday: birthday)
+      session[:snap_application_id] = current_app.id
+
       expect do
         put :update, params: {
           step: {
