@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe EmailApplicationController do
+RSpec.describe SendApplicationController do
   before do
     session[:snap_application_id] = current_app.id
   end
@@ -42,7 +42,7 @@ RSpec.describe EmailApplicationController do
 
         put :update, params: params
 
-        expect(assigns(:step)).to be_an_instance_of(EmailApplication)
+        expect(assigns(:step)).to be_an_instance_of(SendApplication)
         expect(response).to render_template(:edit)
       end
     end

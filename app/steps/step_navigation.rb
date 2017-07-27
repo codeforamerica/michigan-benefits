@@ -6,7 +6,7 @@ class StepNavigation
       PersonalDetailController,
       AddressController,
       SignAndSubmitController,
-      EmailApplicationController,
+      SendApplicationController,
     ],
   }.freeze
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmailApplicationController < StandardStepsController
+class SendApplicationController < StandardStepsController
   def update
     @step = step_class.new(step_params)
 
