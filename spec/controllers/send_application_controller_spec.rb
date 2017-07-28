@@ -24,17 +24,6 @@ RSpec.describe SendApplicationController do
       expect(response).to redirect_to(root_path(anchor: "fold"))
     end
 
-    it "creates a PDF with the data" do
-      pdf_double = double(delay: true)
-      job_double = double(save: true)
-      allow(pdf_double).to receive(:delay).and_return(job_double)
-      allow(Dhs1171Pdf).to receive(:new).with(current_app).and_return(pdf_double)
-
-      put :update, params: { step: { email: "new_email@example.com" } }
-
-      expect(pdf_double).to have_received(:delay)
-    end
-
     context "email entered" do
       it "updates attributes" do
         params = { step: { email: "new_email@example.com" } }
