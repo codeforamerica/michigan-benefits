@@ -6,6 +6,7 @@ ruby "2.4.1"
 
 gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
+gem "delayed_job_active_record"
 gem "haml", "~> 5.0"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh

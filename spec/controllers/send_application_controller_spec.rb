@@ -24,16 +24,6 @@ RSpec.describe SendApplicationController do
       expect(response).to redirect_to(root_path(anchor: "fold"))
     end
 
-    it "creates a PDF with the data" do
-      expected_length_with_coversheet =
-        PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count + 1
-
-      put :update, params: { step: { email: "new_email@example.com" } }
-      new_pdf_reader = PDF::Reader.new("tmp/test_pdf.pdf")
-
-      expect(new_pdf_reader.page_count).to eq(expected_length_with_coversheet)
-    end
-
     context "email entered" do
       it "updates attributes" do
         params = { step: { email: "new_email@example.com" } }

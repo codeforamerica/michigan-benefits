@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :snap_application do
+    email "test@example.com"
     name "RJD2"
     birthday 50.years.ago
     street_address "123 Main St."

@@ -12,6 +12,7 @@ module MichiganPrototype
     # Project configuration
     config.site_name = "Michigan Assistance Programs"
     config.project_description = ""
+    config.active_job.queue_adapter = :delayed_job
 
     config.autoload_paths << Rails.root.join("app/steps")
     config.autoload_paths << Rails.root.join("app/questions")
