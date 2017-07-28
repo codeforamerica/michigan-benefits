@@ -17,6 +17,6 @@ class SendApplicationController < StandardStepsController
   private
 
   def create_and_send_pdf
-    SendApplicationJob.perform_later(current_snap_application)
+    SendApplicationJob.perform_later(snap_application: current_snap_application)
   end
 end

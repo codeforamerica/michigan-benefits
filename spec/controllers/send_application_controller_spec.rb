@@ -34,6 +34,15 @@ RSpec.describe SendApplicationController do
           current_app.reload.email
         }.from("test@example.com").to("new_email@example.com")
       end
+
+      it "creates a SendApplicationJob" do
+        allow(SendApplicationJob).to receive(:perform_later).with(snap_application: current_app)
+        params = { step: { email: "new_email@example.com" } }
+
+        put :update, params: params
+
+        expect(SendApplicationJob).to have_received(:perform_later).with(snap_application: current_app)
+      end
     end
 
     context "email not entered" do
