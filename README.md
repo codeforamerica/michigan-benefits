@@ -1,5 +1,9 @@
 # Michigan Benefits
 
+[![CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits.svg?style=svg)](https://circleci.com/gh/codeforamerica/michigan-benefits)
+[![Code Climate](https://codeclimate.com/github/codeforamerica/michigan-benefits/badges/gpa.svg)](https://codeclimate.com/github/codeforamerica/michigan-benefits)
+[![Test Coverage](https://codeclimate.com/github/codeforamerica/michigan-benefits/badges/coverage.svg)](https://codeclimate.com/github/codeforamerica/michigan-benefits/coverage)
+
 * [GitHub](https://github.com/codeforamerica/michigan-benefits)
 * [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/1982139)
 * [InVision](https://projects.invisionapp.com/d/main#/projects/prototypes/10425326)
