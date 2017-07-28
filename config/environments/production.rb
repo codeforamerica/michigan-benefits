@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require Rails.root.join("config/smtp")
+
 Rails.application.configure do
   config.cache_classes = true
   config.eager_load = true
@@ -18,14 +20,7 @@ Rails.application.configure do
     protocol: "http",
   }
 
-  config.action_mailer.smtp_settings = {
-    port: ENV["MAILGUN_SMTP_PORT"],
-    address: ENV["MAILGUN_SMTP_SERVER"],
-    user_name: ENV["MAILGUN_SMTP_LOGIN"],
-    password: ENV["MAILGUN_SMTP_PASSWORD"],
-    domain: ENV["DOMAIN"],
-    authentication: :plain,
-  }
+  config.action_mailer.smtp_settings = SMTP_SETTINGS
   config.action_mailer.delivery_method = :smtp
 
   config.i18n.fallbacks = true
