@@ -1,41 +1,32 @@
 class Dhs1171Pdf
-  FIELDS = [
-    "applying_for_food_assistance",
-    "birth_day",
-    "birth_month",
-    "birth_year",
-    "city",
-    "county",
-    "full_name",
-    "signature",
-    "signature_date",
-    "state",
-    "street_address",
-    "zip",
-  ].freeze
-
   SOURCE_PDF = "DHS_1171.pdf".freeze
 
-  def initialize(client_data)
-    @client_data = client_data
+  def initialize(snap_application)
+    @snap_application = snap_application
   end
 
   def save(new_pdf_file_name)
-    check_for_invalid_fields
     PdfForms.new.fill_form(SOURCE_PDF, new_pdf_file_name, client_data)
   end
 
   private
 
-  attr_reader :client_data, :source_pdf
+  attr_reader :snap_application, :source_pdf
 
-  def check_for_invalid_fields
-    if invalid_client_fields.any?
-      raise "Invalid fields passed in: #{invalid_client_fields}"
-    end
-  end
-
-  def invalid_client_fields
-    client_data.keys.map(&:to_s) - FIELDS
+  def client_data
+    {
+      applying_for_food_assistance: "Yes",
+      full_name: snap_application.name,
+      birth_day: snap_application.birthday.strftime("%d"),
+      birth_month: snap_application.birthday.strftime("%m"),
+      birth_year: snap_application.birthday.strftime("%Y"),
+      street_address: snap_application.street_address,
+      city: snap_application.city,
+      county: snap_application.county,
+      state: snap_application.state,
+      zip: snap_application.zip,
+      signature: snap_application.signature,
+      signature_date: snap_application.signed_at,
+    }
   end
 end

@@ -11,18 +11,22 @@ Rails.application.configure do
   config.log_level = :debug
   config.log_tags = [:request_id]
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV["HOST"] }
-  config.action_mailer.asset_host = config.action_controller.asset_host
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.net",
-    port: "587",
-    authentication: :plain,
-    user_name: ENV["SENDGRID_USERNAME"],
-    password: ENV["SENDGRID_PASSWORD"],
-    domain: "heroku.com",
-    enable_starttls_auto: true,
+
+  # Customize default host
+  config.action_mailer.default_url_options = {
+    host: ENV["HOSTNAME_FOR_URLS"],
+    protocol: "http",
   }
+
+  config.action_mailer.smtp_settings = {
+    port: ENV["MAILGUN_SMTP_PORT"],
+    address: ENV["MAILGUN_SMTP_SERVER"],
+    user_name: ENV["MAILGUN_SMTP_LOGIN"],
+    password: ENV["MAILGUN_SMTP_PASSWORD"],
+    domain: ENV["DOMAIN"],
+    authentication: :plain,
+  }
+  config.action_mailer.delivery_method = :smtp
 
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
