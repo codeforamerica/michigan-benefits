@@ -3,23 +3,29 @@ class Dhs1171Pdf
   SOURCE_PDF = "#{PDF_DIRECTORY}/DHS_1171.pdf".freeze
   COVERSHEET_PDF = "#{PDF_DIRECTORY}/michigan_snap_fax_cover_letter.pdf".freeze
 
-  def initialize(snap_application:, output_filename: "test_output.pdf")
+  def initialize(snap_application:)
     @snap_application = snap_application
-    @completed_filename = "tmp/completed#{output_filename}"
-    @output_filename = "tmp/#{output_filename}"
   end
 
-  def save
-    fill_in_template_form
-    add_cover_sheet_to_completed_form
+  def completed_file
+    complete_template_pdf_with_client_data
+    prepend_cover_sheet_to_completed_form
+    complete_form_with_cover
+  ensure
+    filled_in_form.close
+    filled_in_form.unlink
   end
 
   private
 
-  attr_reader :snap_application, :output_filename, :completed_filename
+  attr_reader :snap_application
 
-  def fill_in_template_form
-    PdfForms.new.fill_form(SOURCE_PDF, completed_filename, client_data)
+  def complete_template_pdf_with_client_data
+    PdfForms.new.fill_form(SOURCE_PDF, filled_in_form.path, client_data)
+  end
+
+  def filled_in_form
+    @_filled_in_form ||= Tempfile.new(["snap_app", ".pdf"], "tmp/")
   end
 
   def client_data
@@ -39,9 +45,12 @@ class Dhs1171Pdf
     }
   end
 
-  def add_cover_sheet_to_completed_form
-    system(
-      "pdftk #{COVERSHEET_PDF} #{completed_filename} cat output #{output_filename}",
-    )
+  def prepend_cover_sheet_to_completed_form
+    system("pdftk #{COVERSHEET_PDF} #{filled_in_form.path} cat output #{complete_form_with_cover.path}")
+  end
+
+  def complete_form_with_cover
+    @_complete_form_with_cover ||=
+      Tempfile.new(["snap_app_with_cover", ".pdf"], "tmp/")
   end
 end

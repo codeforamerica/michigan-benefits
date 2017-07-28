@@ -19,30 +19,30 @@ RSpec.describe Dhs1171Pdf do
         signature_date: snap_application.signed_at.to_s,
       }
 
-      Dhs1171Pdf.new(
-        snap_application: snap_application,
-        output_filename: new_pdf_filename,
-      ).save
+      file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
 
-      result = filled_in_values(file: "tmp/#{new_pdf_filename}")
+      result = filled_in_values(file: file.path)
       client_data.each do |field, entered_data|
         expect(result[field.to_s]).to eq entered_data
       end
-
-      File.delete(new_pdf_filename) if File.exist?(new_pdf_filename)
     end
 
     it "prepends a cover sheet" do
       snap_application = FactoryGirl.create(:snap_application)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
 
-      Dhs1171Pdf.new(
-        snap_application: snap_application,
-        output_filename: new_pdf_filename,
-      ).save
-      new_pdf = PDF::Reader.new("tmp/#{new_pdf_filename}")
+      file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+      new_pdf = PDF::Reader.new(file.path)
 
       expect(new_pdf.page_count).to eq(original_length + 1)
+    end
+
+    it "returns the tempfile" do
+      snap_application = FactoryGirl.create(:snap_application)
+
+      file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+
+      expect(file).to be_a_kind_of(Tempfile)
     end
   end
 
@@ -52,10 +52,6 @@ RSpec.describe Dhs1171Pdf do
     filled_in_fields.each_with_object({}) do |field, hash|
       hash[field.name] = field.value
     end
-  end
-
-  def new_pdf_filename
-    @_new_pdf_filename ||= "dhs1171_test_output.pdf"
   end
 
   def pdftk

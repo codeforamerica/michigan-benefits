@@ -11,3 +11,4 @@
 !/log/.keep
 /tmp/*
 /coverage
+.rspec

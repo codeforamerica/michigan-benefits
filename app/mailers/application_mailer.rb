@@ -5,7 +5,7 @@ class ApplicationMailer < ActionMailer::Base
   layout "mailer"
 
   def snap_application_notification(file_name:, recipient_email:)
-    attachments["snap_application.pdf"] = File.read("#{Rails.root}/#{file_name}")
+    attachments["snap_application.pdf"] = File.read(file_name)
     mail to: recipient_email, subject: "Your SNAP application"
   end
 end

@@ -20,6 +20,7 @@ RSpec.configure do |config|
   end
 
   config.example_status_persistence_file_path = "tmp/examples.txt"
+  config.order = :random
 
   config.filter_gems_from_backtrace \
     "actionpack",
