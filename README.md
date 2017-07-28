@@ -5,11 +5,13 @@
 [![Test Coverage](https://codeclimate.com/github/codeforamerica/michigan-benefits/badges/coverage.svg)](https://codeclimate.com/github/codeforamerica/michigan-benefits/coverage)
 
 * [GitHub](https://github.com/codeforamerica/michigan-benefits)
-* [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/1982139)
+* [Trello](https://trello.com/b/aBqTrqaJ/the-digital-assister)
+* [Trello - product](://trello.com/b/aBqTrqaJ/the-digital-assister)
 * [InVision](https://projects.invisionapp.com/d/main#/projects/prototypes/10425326)
 * [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits)
 * [Staging](https://michigan-benefits-staging.herokuapp.com)
-* [Production](https://michigan-benefits-prod.herokuapp.com)
+* [Production](https://michigan-benefits-production.herokuapp.com)
+* [Prototype demo](https://michigan-benefits-prod.herokuapp.com/)
 
 ## Deploying
 
@@ -19,35 +21,22 @@
 
 ## Developing
 
-This project is built on top of [Citizen Rails](https://github.com/citizencode/citizen-rails).
-
-**See [README-citizen-rails-template.md](README-citizen-rails-template.md) for instructions on
-using the Citizen Rails template project as a base for your own project.**
-
 ### Getting Started
 
 * After cloning this repo, run: `bin/setup`
-* Run `bundle exec citizen doctor` repeatedly until all the failures are fixed.
 * Read through the [CONTRIBUTING.md](CONTRIBUTING.md) file to learn how this
   team operates.
-
-### citizen-scripts
-
-The Gemfile includes `citizen-scripts` which is a collection of useful dev utils. It includes a command
-called `citizen`. Running `citizen` with no arguments will show usage information. Depending on your
-Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen`.
 
 ### Day-to-day
 
 * Run the server: `heroku local` and [http://localhost:3000](http://localhost:3000)
-* Run tests: `bundle exec citizen test`
-* Pull, run tests, push: `bundle exec citizen pushit`
+* Run tests and Rubocop: `rake`
 
 ### Deploying
 
 * [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits) is currently set up to
   deploy green builds to **staging**.
-* Use `citizen promote` to promote from staging to **production**. If you want to promote
+* Use heroku pipelines to promote from staging to **production**. If you want to promote
   from the Heroku web page or CLI, be sure to run migrations afterwards.
 
 ### Debugging
@@ -59,7 +48,7 @@ Ruby setup, you might need to run `bundle exec citizen` instead of just `citizen
 
 1. Get your Heroku API Key for a user from (https://dashboard.heroku.com/account)
 1. Paste API Key in the CircleCI account settings page (https://circleci.com/account/heroku)
-1. Set your user as the deploy user CircleCI per project settings page (https://circleci.com/gh/citizencode/skoshi/edit#heroku)
+1. Set your user as the deploy user CircleCI per project settings page (https://circleci.com/gh/codeforamerica/michigan-benefits/edit#heroku)
 1. Ensure that your <github username>@circleci.com and generated ssh key show up on heroku (https://dashboard.heroku.com/account)
 1. Click rebuild if necessary
 

@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/citizencode/citizen-scripts
-  revision: 00e46da153c6d27f8e57f270fa44ef5920307606
-  specs:
-    citizen-scripts (1.1.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -294,7 +288,6 @@ DEPENDENCIES
   aws-sdk
   bourbon (~> 4.2.0)
   capybara
-  citizen-scripts!
   climate_control
   codeclimate-test-reporter
   database_cleaner
