@@ -11,7 +11,7 @@ class StandardStepsController < StepsController
     @step = step_class.new(step_params)
 
     if @step.valid?
-      current_app.update!(step_params)
+      current_snap_application.update!(step_params)
       redirect_to(next_path)
     else
       render :edit
