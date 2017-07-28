@@ -3,8 +3,6 @@
 class StepsController < ApplicationController
   layout "step"
 
-  before_action :maybe_skip, only: :edit
-
   def self.to_param
     controller_path.dasherize
   end
@@ -13,41 +11,9 @@ class StepsController < ApplicationController
     controller_path.classify.constantize
   end
 
-  def index; end
-
-  def edit
-    @step = step_class.new
-  end
-
-  def update
-    redirect_to next_path
-  end
-
   private
 
   delegate :step_class, to: :class
-
-  def array_to_checkboxes(array)
-    array.map { |k| [k, true] }.to_h
-  end
-
-  def checkboxes_to_array(checkboxes)
-    checkboxes.select { |k| step_params[k].in?(["1", 1, true]) }.map(&:to_s)
-  end
-
-  def maybe_skip
-    return unless skip?
-
-    if going_backwards?
-      redirect_to previous_path(rel: "back")
-    else
-      redirect_to next_path
-    end
-  end
-
-  def skip?
-    false
-  end
 
   def going_backwards?
     params["rel"] == "back"
