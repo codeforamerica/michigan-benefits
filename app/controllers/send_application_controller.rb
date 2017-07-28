@@ -21,7 +21,7 @@ class SendApplicationController < StandardStepsController
     ApplicationMailer.snap_application_notification(
       file_name: "tmp/#{new_file_name}",
       recipient_email: current_snap_application.email,
-    ).deliver
+    ).deliver_later
   end
 
   def create_dhs1171_pdf

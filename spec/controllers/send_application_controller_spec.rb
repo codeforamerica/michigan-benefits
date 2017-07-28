@@ -25,13 +25,14 @@ RSpec.describe SendApplicationController do
     end
 
     it "creates a PDF with the data" do
-      expected_length_with_coversheet =
-        PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count + 1
+      pdf_double = double(delay: true)
+      job_double = double(save: true)
+      allow(pdf_double).to receive(:delay).and_return(job_double)
+      allow(Dhs1171Pdf).to receive(:new).with(current_app).and_return(pdf_double)
 
       put :update, params: { step: { email: "new_email@example.com" } }
-      new_pdf_reader = PDF::Reader.new("tmp/test_pdf.pdf")
 
-      expect(new_pdf_reader.page_count).to eq(expected_length_with_coversheet)
+      expect(pdf_double).to have_received(:delay)
     end
 
     context "email entered" do
