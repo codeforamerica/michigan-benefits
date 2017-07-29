@@ -1,16 +1,15 @@
 - content_for :header_title, 'Personal detail'
 
 .form-card
-  = form_for @step, as: :step, builder: MbFormBuilder, url: current_path,
-    method: :put do |f|
-    %header.form-card__header
-      .step-section-header
-        - icon :hello
-        .step-section-header__headline We're here to help.
-        .step-section-header__subhead To start, please introduce yourself.
+  %header.form-card__header
+    .step-section-header
+      - icon :hello
+      .step-section-header__headline We're here to help.
+      .step-section-header__subhead To start, please introduce yourself.
 
-    .form-card__content
+  .form-card__content
+    = form_for @step, as: :step, builder: MbFormBuilder, url: current_path,
+      method: :put do |f|
       = f.mb_input_field :name, "What is your full name?", options: { placeholder: "Jane Doe" }
       = f.mb_date_select :birthday, "What is your birthday?", { options: { start_year: 1900, end_year: Time.now.year, default: Date.new(1990,1,15), order: [:month, :day, :year] } }
-
-    = render partial: 'shared/next_step'
+      = render partial: 'shared/next_step'

@@ -1,47 +1,16 @@
 - content_for :header_title, 'Address'
 
 .form-card
-  = form_for @step, as: :step, url: current_path,
-    method: :put do |f|
-    %header.form-card__header
-      .step-section-header
-        .step-section-header__subhead Tell us the best ways to reach you.
+  %header.form-card__header
+    .step-section-header
+      .step-section-header__subhead Tell us the best ways to reach you.
 
-    .form-card__content
-      :ruby
-        qs = [
-          {
-            title: 'Address',
-            type: :text_field,
-            method: :street_address,
-            placeholder: '123 Main St.'
-          },
-          {
-            title: 'City',
-            type: :text_field,
-            method: :city,
-            placeholder: 'Flint'
-          },
-          {
-            title: 'County',
-            type: :text_field,
-            method: :county,
-            placeholder: 'Genesee'
-          },
-          {
-            title: 'State',
-            type: :text_field,
-            method: :state,
-            placeholder: 'MI'
-          },
-          {
-            title: 'ZIP code',
-            type: :text_field,
-            method: :zip,
-            placeholder: '12345'
-          },
-        ]
-
-      - questions f, qs
-
-    = render 'shared/next_step'
+  .form-card__content
+    = form_for @step, as: :step, builder: MbFormBuilder, url: current_path,
+      method: :put do |f|
+      = f.mb_input_field :street_address, "Address", options:  { placeholder: "123 Main St." }
+      = f.mb_input_field :city, "City", options:  { placeholder: "Flint" }
+      = f.mb_input_field :county, "County", options:  { placeholder: "Genesee" }
+      = f.mb_input_field :state, "State", options:  { placeholder: "MI" }
+      = f.mb_input_field :zip, "ZIP code", options:  { placeholder: "12345" }
+      = render 'shared/next_step'
