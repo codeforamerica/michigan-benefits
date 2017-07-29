@@ -13,13 +13,9 @@
         Enter your email address below to receive an email with a copy of your
         application.
 
-    = render "shared/question",
-        f: f,
-        title: "Your email address",
-        type: :text_field,
-        method: :email,
-        placeholder: "test@example.com"
-
+      = form_for @step, as: :step, builder: MbFormBuilder, url: current_path,
+        method: :put do |f|
+        = f.mb_input_field :email, "Your email address", type: "email", options: { placeholder: "test@example.com" }
 
     %footer.form-card__footer
       %button.button.button--next.button--cta.button--full-width{ type: 'submit' }
