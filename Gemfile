@@ -38,6 +38,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "haml-lint", require: false
   gem "listen"
+  gem "mailcatcher", "~> 0.2"
   gem "poltergeist"
   gem "pry-rails"
   gem "rspec-rails"
