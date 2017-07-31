@@ -27,6 +27,19 @@
 * Read through the [CONTRIBUTING.md](CONTRIBUTING.md) file to learn how this
   team operates.
 
+### Onboarding Checklist
+
+Ask the team for access to the following services to begin contributing:
+
+* GitHub
+* Slack
+* Twilio
+* Mailgun
+* Trello (2 boards)
+* Heroku
+* Get calendar invites to: daily standup, weekly planning, weekly retro
+
+
 ### Day-to-day
 
 * Run the server: `heroku local` and [http://localhost:3000](http://localhost:3000)
