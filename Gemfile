@@ -7,6 +7,7 @@ ruby "2.4.1"
 gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "delayed_job_active_record"
+gem "faraday"
 gem "haml", "~> 5.0"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
@@ -17,6 +18,9 @@ gem "puma", "~> 3.0"
 gem "rails", "~> 5.1"
 gem "responders"
 gem "sass-rails", "~> 5.0"
+gem "sfax",
+  git: "https://github.com/codeforamerica/sfax",
+  ref: "da88847faaf5ab51255e4d7e47d76493d05113b1"
 gem "twilio-ruby"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
