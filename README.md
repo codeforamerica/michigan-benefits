@@ -42,7 +42,10 @@ Ask the team for access to the following services to begin contributing:
 
 ### Day-to-day
 
-* Run the server: `heroku local` and [http://localhost:3000](http://localhost:3000)
+* Run the server(s): `foreman start`
+* Visit [your local server](http://localhost:3000)
+* To preview any emails that were sent while testing locally, visit
+  the [running mailcatcher instance](http://localhost:1080/)
 * Run tests and Rubocop: `rake`
 
 ### Deploying
@@ -56,6 +59,8 @@ Ask the team for access to the following services to begin contributing:
 
 * Call `binding.pry` anywhere in the code to stop execution and get a debugger console.
 * Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
+* To get a good look at and debug any emails that were sent from your running
+  development environment visit your local [mailcatcher server](http://localhost:1080/).
 
 ### CircleCI green builds deploy to Heroku staging servers
 
