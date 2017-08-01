@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="<%= Rails.application.config.project_description %>" name="description"/>
+    <title>
+      <% if content_for?(:title) %>
+        <%= content_for(:title) %>
+      <% else %>
+        <%= Rails.application.config.site_name %>
+      <% end %>
+    </title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag :application, media: :all %>
+    <%= javascript_include_tag :application %>
+  </head>
+  <body class="<%= template_name_css_class %>">
+    <div class="page-wrapper">
+      <%= content_for?(:content) ? content_for(:content) : yield %>
+    </div>
+    <%= capture { content_for(:javascript) } %>
+  </body>
+</html>

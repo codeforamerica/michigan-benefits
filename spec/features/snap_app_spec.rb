@@ -69,4 +69,19 @@ feature "SNAP application" do
 
     expect(find_field("City").value).to eq "Flint"
   end
+
+  scenario "saves user data across steps" do
+    visit root_path
+    click_on "Apply now"
+
+    fill_in "What is your full name?", with: "Jessie Tester"
+    select "January", from: "step_birthday_2i"
+    select "1", from: "step_birthday_3i"
+    select "1969", from: "step_birthday_1i"
+    click_on "Continue"
+
+    find(:css, ".step-header__back-link").click
+
+    expect(find("#step_name").value).to eq "Jessie Tester"
+  end
 end

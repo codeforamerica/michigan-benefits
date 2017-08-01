@@ -20,4 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  javascript:
+    exit_app_confirmation:
+      Leaving the application process will clear your data from this computer.
+      Are you sure you would like to exit?

@@ -23,7 +23,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_or_new_snap_application
-    current_snap_application || SnapApplication.create
+    @_current_or_new_snap_application ||=
+      current_snap_application || SnapApplication.create
   end
 
   def current_snap_application

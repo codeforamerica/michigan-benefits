@@ -1,0 +1,21 @@
+;(function (w, d) {
+  exitHandler = function () {
+    var links = d.querySelectorAll('A');
+
+    for(var i=0; i<links.length; i++){
+      if(links[i].href.indexOf('steps') < 0){
+        links[i].addEventListener('click', function(event){
+          if (!w.confirm('<%= I18n.t("javascript.exit_app_confirmation")%>')) {
+            event.preventDefault()
+          }
+        });
+      }
+    }
+  }
+
+  if (d.readyState === 'complete' || d.readyState !== 'loading') {
+    exitHandler();
+  } else {
+    d.addEventListener('DOMContentLoaded', exitHandler);
+  }
+}(window, document))
