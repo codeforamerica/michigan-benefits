@@ -48,3 +48,8 @@ build on Circle CI.
   without an explicit PR / code review process.
 * During the team's weekly retro meetings, feedback about the workflow is noted
   and related changes are incorporated into this document.
+
+## Conventions
+
+* **Secrets** - api keys and secrets should be placed in `config/secrets.yml` and
+  referenced via Rails' secrets api. Eg: `Rails.application.secrets.an_api_key`.

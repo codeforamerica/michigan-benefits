@@ -21,11 +21,9 @@ class Fax
     sfax.send_fax(number, file)
   end
 
-  protected
+  private
 
   attr_reader :file, :number
-
-  private
 
   def sfax
     SFax::Faxer.new(
