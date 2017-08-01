@@ -37,6 +37,7 @@ Ask the team for access to the following services to begin contributing:
 * Mailgun
 * Trello (2 boards)
 * Heroku
+* Password Manager
 * Get calendar invites to: daily standup, weekly planning, weekly retro
 
 
