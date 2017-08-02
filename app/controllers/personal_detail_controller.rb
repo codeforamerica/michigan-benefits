@@ -5,7 +5,9 @@ class PersonalDetailController < StepsController
     current_app = current_or_new_snap_application
 
     @step = step_class.new(
-      current_app.attributes.slice(*step_attrs),
+      HashWithIndifferentAccess.
+        new(current_app.attributes).
+        slice(*step_attrs),
     )
   end
 

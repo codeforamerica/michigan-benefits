@@ -1,0 +1,46 @@
+<% content_for :header_title, "Documents" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">Upload photos of necessary documents.</div>
+    </div>
+  </header>
+  <div class="form-card__content">
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put,
+      html: { data: { 'documents-form' => 'true' } } do |f| %>
+
+      <div class="form-card__documents" id="form-card__documents">
+        <%= render partial: 'document',
+          collection: current_snap_application.documents,
+          as: :document,
+          locals: { f: f } %>
+      </div>
+
+      <div class="form-card__target" id="document-drop">
+        <i class="icon-file_upload"></i>
+        Click Or Drag &amp; Drop to Upload Photos/Documents
+      </div>
+
+      <%= render 'shared/next_step' %>
+    <% end %>
+  </div>
+</div>
+
+<script src="https://js.shubox.io/v1/4711fd96-9be2-46d5-8fb9-6eef6fd24a4b.js"></script>
+
+<script>
+new Shubox("#document-drop", {
+  previewsContainer: '#form-card__documents',
+  success: function(f){
+    f.previewElement.querySelector('img').src = f.s3url;
+    $('.form-card__content form').append(
+      '<input type="hidden" name="step[documents][]" value="'+f.s3url+'">'
+    );
+  }
+})
+</script>

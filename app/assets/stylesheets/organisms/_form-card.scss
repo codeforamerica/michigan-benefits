@@ -25,23 +25,23 @@
 }
 
 .form-card__header {
-    @include full-bleed();
-    border-bottom: 1px solid $color-tan;
-    margin-top: 1em;
-    margin-bottom: 2em;
-    padding-bottom: 2.5em;
+  @include full-bleed();
+  border-bottom: 1px solid $color-tan;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  padding-bottom: 2.5em;
 
 }
 
 .form-card__title {
-    font-size: $font-size-h3;
-    line-height: $line-height-normal;
-    margin-top: 0;
+  font-size: $font-size-h3;
+  line-height: $line-height-normal;
+  margin-top: 0;
+  margin-bottom: 0;
+  + .text--help, + .text--small {
+    margin-top: .5em;
     margin-bottom: 0;
-    + .text--help, + .text--small {
-      margin-top: .5em;
-      margin-bottom: 0;
-    }
+  }
 }
 
 .form-card__content {
@@ -118,5 +118,84 @@
         right: auto;
       }
     }
+  }
+}
+
+.form-card__target {
+  text-align: center;
+  border: solid 5px transparent;
+  font-weight: bold;
+  color: $color-grey;
+  padding: 3rem;
+  margin-bottom: 3rem;
+  min-height: 5rem;
+  cursor: pointer;
+
+  &.dz-drag-hover {
+    border: dashed 5px $color-light-grey;
+  }
+
+  i.icon-file_upload {
+
+  }
+}
+
+.form-card__documents {
+  &:empty { display: none; }
+
+  .dz-preview {
+    position: relative;
+
+    .dz-details {
+      @extend .text-input;
+      color: $color-light-grey;
+      border-bottom: none;
+
+      .dz-size, img {
+        display: none;
+      }
+    }
+
+    .dz-progress {
+      display: block;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+
+    .dz-upload {
+      height: 2px;
+      background: $color-light-grey;
+      display: block;
+      clear: both;
+      border-radius: 1px;
+    }
+
+    .dz-upload[style="width: 100%;"] {
+      background: $color-dark-grey;
+    }
+
+    .dz-success-mark,
+    .dz-error-mark {
+      display: none;
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+    }
+
+    .dz-success-mark { color: $color-sky; }
+    .dz-error-mark { color: $color-red; }
+  }
+
+  .dz-complete.dz-success,
+  .dz-complete.dz-error {
+    .dz-details {
+      color: $color-darkest-grey;
+    }
+  }
+
+  .dz-complete.dz-success .dz-success-mark,
+  .dz-complete.dz-error .dz-error-mark {
+    display: block;
   }
 }

@@ -31,6 +31,7 @@ gem "uglifier", ">= 1.3.0"
 group :test do
   gem "database_cleaner"
   gem "faker"
+  gem "launchy"
   gem "pdf-reader"
   gem "rails-controller-testing"
 end

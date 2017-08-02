@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "SNAP application" do
-  scenario "successfully submits application" do
+  scenario "successfully submits application", :js do
     visit root_path
     click_on "Apply now"
 
@@ -17,6 +17,10 @@ feature "SNAP application" do
     fill_in "County", with: "Genesee"
     fill_in "State", with: "MI"
     fill_in "ZIP code", with: "12345"
+    click_on "Continue"
+
+    add_document_photo "https://example.com/images/drivers_license.jpg"
+    add_document_photo "https://example.com/images/proof_of_income.jpg"
     click_on "Continue"
 
     fill_in "Your signature", with: "Jessie Tester"
@@ -30,7 +34,7 @@ feature "SNAP application" do
     )
   end
 
-  scenario "does not fill in email address" do
+  scenario "does not fill in email address", :js do
     visit root_path
     click_on "Apply now"
 
@@ -46,6 +50,10 @@ feature "SNAP application" do
     fill_in "County", with: "Genesee"
     fill_in "State", with: "MI"
     fill_in "ZIP code", with: "12345"
+    click_on "Continue"
+
+    add_document_photo "https://example.com/images/drivers_license.jpg"
+    add_document_photo "https://example.com/images/proof_of_income.jpg"
     click_on "Continue"
 
     fill_in "Your signature", with: "Jessie Tester"
@@ -70,7 +78,7 @@ feature "SNAP application" do
     expect(find_field("City").value).to eq "Flint"
   end
 
-  scenario "saves user data across steps" do
+  scenario "saves user data across steps", :js do
     visit root_path
     click_on "Apply now"
 

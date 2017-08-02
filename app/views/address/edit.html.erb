@@ -1,0 +1,19 @@
+<% content_for :header_title, "Address" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">Tell us the best ways to reach you.</div>
+    </div>
+  </header>
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_input_field :street_address, "Address", options:  { placeholder: "123 Main St." } %>
+      <%= f.mb_input_field :city, "City", options:  { placeholder: "Flint" } %>
+      <%= f.mb_input_field :county, "County", options:  { placeholder: "Genesee" } %>
+      <%= f.mb_input_field :state, "State", options:  { placeholder: "MI" } %>
+      <%= f.mb_input_field :zip, "ZIP code", options:  { placeholder: "12345" } %>
+      <%= render 'shared/next_step' %>
+    <% end %>
+  </div>
+</div>

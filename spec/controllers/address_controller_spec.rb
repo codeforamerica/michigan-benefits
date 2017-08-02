@@ -51,7 +51,7 @@ RSpec.describe AddressController, type: :controller do
       it "redirects to the next step" do
         put :update, params: { step: valid_params }
 
-        expect(response).to redirect_to("/steps/sign-and-submit")
+        expect(response).to redirect_to("/steps/documents")
       end
     end
 

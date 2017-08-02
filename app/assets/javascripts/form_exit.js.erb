@@ -1,9 +1,14 @@
 ;(function (w, d) {
   exitHandler = function () {
     var links = d.querySelectorAll('A');
+    var outsideOfSteps = window.location.href.indexOf('/steps/') < 0;
+    if(outsideOfSteps) return;
 
     for(var i=0; i<links.length; i++){
-      if(links[i].href.indexOf('steps') < 0){
+      var stepsLink = links[i].href.indexOf('steps') >= 0
+      var skipLink = links[i].href.indexOf('skip_') >= 0
+
+      if(!stepsLink && !skipLink){
         links[i].addEventListener('click', function(event){
           if (!w.confirm('<%= I18n.t("javascript.exit_app_confirmation")%>')) {
             event.preventDefault()
