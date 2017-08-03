@@ -28,17 +28,15 @@ RSpec.describe AddressController, type: :controller do
 
   describe "#update" do
     context "when valid" do
-      let(:valid_params) do
-        {
+      it "updates the app" do
+        valid_params = {
           street_address: "321 Real St",
           city: "Shelbyville",
           zip: "54321",
           county: "Genesee",
           state: "MI",
         }
-      end
 
-      it "updates the app" do
         put :update, params: { step: valid_params }
 
         current_app.reload
@@ -48,7 +46,31 @@ RSpec.describe AddressController, type: :controller do
         end
       end
 
+      it "always sets the county to 'Genesee'" do
+        valid_params = {
+          street_address: "321 Main St",
+          city: "Plymouth",
+          zip: "48170",
+          county: nil,
+          state: "MI",
+        }
+
+        put :update, params: { step: valid_params }
+
+        current_app.reload
+
+        expect(current_app["county"]).to eq("Genesee")
+      end
+
       it "redirects to the next step" do
+        valid_params = {
+          street_address: "321 Real St",
+          city: "Shelbyville",
+          zip: "54321",
+          county: "Genesee",
+          state: "MI",
+        }
+
         put :update, params: { step: valid_params }
 
         expect(response).to redirect_to("/steps/documents")
