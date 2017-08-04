@@ -1,4 +1,7 @@
 <% content_for :header_title, "Documents" %>
+<% content_for :header_javascript do %>
+  <%= javascript_include_tag "https://js.shubox.io/v1/#{Rails.application.secrets.shubox_js_id}.js", defer: true %>
+<% end %>
 
 <div class="form-card">
   <header class="form-card__header">
@@ -17,13 +20,16 @@
       <div class="form-card__documents" id="form-card__documents">
         <%= render partial: 'document',
           collection: current_snap_application.documents,
-          as: :document,
-          locals: { f: f } %>
+          as: :url %>
+
+        <script id="form-card__documents__handlebars_template" type="text/x-handlebars-template">
+          <%= render "document", url: nil %>
+        </script>
       </div>
 
       <div class="form-card__target" id="document-drop">
         <i class="icon-file_upload"></i>
-        Click Or Drag &amp; Drop to Upload Photos/Documents
+        Click, Tap, Or Drag &amp; Drop to Upload Photos/Documents
       </div>
 
       <%= render 'shared/next_step' %>
@@ -31,16 +37,8 @@
   </div>
 </div>
 
-<script src="https://js.shubox.io/v1/<%= Rails.application.secrets.shubox_js_id %>.js"></script>
-
-<script>
-new Shubox("#document-drop", {
-  previewsContainer: '#form-card__documents',
-  success: function(f){
-    f.previewElement.querySelector('img').src = f.s3url;
-    $('.form-card__content form').append(
-      '<input type="hidden" name="step[documents][]" value="'+f.s3url+'">'
-    );
-  }
-})
-</script>
+<% unless Rails.env.test? -%>
+  <script>
+    window.onload = function() { uploadSetup("<%= j render "uploading" %>") }
+  </script>
+<% end -%>

@@ -15,6 +15,7 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag :application, media: :all %>
     <%= javascript_include_tag :application %>
+    <%= content_for(:header_javascript) if content_for?(:header_javascript) %>
   </head>
   <body class="<%= template_name_css_class %>">
     <div class="page-wrapper">
