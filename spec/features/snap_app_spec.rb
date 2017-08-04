@@ -14,7 +14,6 @@ feature "SNAP application" do
 
     fill_in "Address", with: "123 Main St"
     fill_in "City", with: "Flint"
-    fill_in "County", with: "Genesee"
     fill_in "State", with: "MI"
     fill_in "ZIP code", with: "12345"
     click_on "Continue"
@@ -47,7 +46,6 @@ feature "SNAP application" do
 
     fill_in "Address", with: "123 Main St"
     fill_in "City", with: "Flint"
-    fill_in "County", with: "Genesee"
     fill_in "State", with: "MI"
     fill_in "ZIP code", with: "12345"
     click_on "Continue"
