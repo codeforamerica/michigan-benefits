@@ -1,0 +1,47 @@
+<% content_for :template_name, 'homepage' %>
+<div class="slab--hero-<%= rand(1..3) %> slab slab--hero">
+  <div class="illustration--michigan-gov"></div>
+  <h1>
+    Get the support your family needs
+  </h1>
+  <p>
+    Apply for Michigan Assistance Programs in 15 minutes
+  </p>
+  <%= link_to '#fold', id: 'fold' do %>
+    <div class="icon-below-the-fold"></div>
+  <% end %>
+</div>
+<div class="slab slab--white" id="apply-for-programs">
+  <div class="card--narrow">
+    <%= render 'shared/flashes' %>
+    <label class="program-selector">
+      <div class="program-selector__checkbox">
+        <% icon_class = "illustration--icn_food" %>
+      </div>
+      <div class="<%= icon_class %> program-selector__icon illustration">
+        <h4 class="program-selector__title">
+          Food Assistance
+        </h4>
+      </div>
+      <div class="program-selector__subtitle text--smell">
+        Food Stamps, FAP or SNAP
+      </div>
+      <div class="text--help">
+        Provides benefits to buy or grow food.
+      </div>
+    </label>
+    <%= link_to step_path(StepNavigation.first), class: "button button--cta button--fully-width" do %>
+      Apply now
+      <i class="button__icon icon-arrow_forward"></i>
+    <% end %>
+  </div>
+</div>
+<div class="slab slab--mdhhs">
+  <h1>
+    <div class="illustration--mdhhs"></div>
+  </h1>
+  <p class="text--light">
+    The Michigan Department of Health and Human Services offers temporary assistance programs that support families when times are tough.
+  </p>
+</div>
+<%= render 'shared/footer' %>
