@@ -10,7 +10,7 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_input_field :street_address, "Address", options:  { placeholder: "123 Main St." } %>
       <%= f.mb_input_field :city, "City", options:  { placeholder: "Flint" } %>
-      <%= f.mb_input_field :county, "County (currently serving Genesee County)", options:  { value: "Genesee", disabled: true } %>
+      <%= f.mb_input_field :county, "County (currently serving Genesee County)", options:  { value: "Genesee", readonly: "readonly" } %>
       <%= f.mb_input_field :state, "State", options:  { placeholder: "MI" } %>
       <%= f.mb_input_field :zip, "ZIP code", options:  { placeholder: "12345" } %>
       <%= render 'shared/next_step' %>
