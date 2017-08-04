@@ -1,0 +1,21 @@
+<% content_for :header_title, 'Sign and submit' %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">
+        Enter your full legal name here to sign this application.
+      </div>
+    </div>
+  </header>
+  <div class="form-card__content">
+    <p>
+      By entering your name you agree that you want to apply for
+      FAB, that you have been honest on this application.
+    </p>
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_input_field :signature, "Your signature", options: { placeholder: "Your full legal name" } %>
+      <%= render 'shared/next_step', button_label: "Sign and submit" %>
+    <% end %>
+  </div>
+</div>

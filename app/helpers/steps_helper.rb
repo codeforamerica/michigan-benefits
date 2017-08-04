@@ -2,7 +2,7 @@
 
 module StepsHelper
   def icon(name)
-    haml_tag "div.step-section-header__icon.illustration.illustration--#{name}"
+    content_tag :div, class: "step-section-header__icon.illustration.illustration--#{name}"
   end
 
   def data_md5(str)

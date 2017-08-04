@@ -8,7 +8,6 @@ gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "delayed_job_active_record"
 gem "faraday"
-gem "haml", "~> 5.0"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
 gem "paperclip", "~> 5.0.0"
@@ -42,7 +41,6 @@ group :development, :test do
   gem "climate_control"
   gem "codeclimate-test-reporter"
   gem "factory_girl_rails"
-  gem "haml-lint", require: false
   gem "listen"
   gem "mailcatcher", "~> 0.2"
   gem "poltergeist"
