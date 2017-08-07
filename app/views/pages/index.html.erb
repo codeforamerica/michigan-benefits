@@ -11,6 +11,7 @@
     <div class="icon-below-the-fold"></div>
   <% end %>
 </div>
+
 <div class="slab slab--white" id="apply-for-programs">
   <div class="card--narrow">
     <%= render 'shared/flashes' %>
@@ -24,6 +25,7 @@
         </h4>
       </div>
       <div class="program-selector__subtitle text--smell">
+        MichiganBenefits.org is a non-profit offering online and in-person assistance to Michigan residents enrolling in the Food Assistance Program (food stamps). Most qualified households get more than $200 a month.
         Food Stamps, FAP or SNAP
       </div>
       <div class="text--help">
@@ -36,6 +38,28 @@
     <% end %>
   </div>
 </div>
+
+<section class="slab slab--white" id="scroller-target">
+  <div class="grid">
+    <div class="grid__item width-seven-twelfths">
+      <p>
+        MichiganBenefits.org is a non-profit offering online and in-person
+        assistance to Michigan residents enrolling in the Food Assistance Program
+        (food stamps). Most qualified households get more than $200 a month.
+      </p>
+
+      <p>
+      To visit the official online application for food assistance, please visit <%= link_to 'MI Bridges', 'https://www.michigan.gov/mibridges' %>.
+      </p>
+    </div>
+
+    <div class="grid__item width-one-fourth shift-one-sixth trust-badge">
+      <a href="http://www.michigan.gov/mdhhs/" class="illustration illustration--mi_mdhhs">MDHHS</a>
+      <p class="text--small">A registered Community Partner and digital application assister.</p>
+    </div>
+  </div>
+</section>
+
 <div class="slab slab--mdhhs">
   <h1>
     <div class="illustration--mdhhs"></div>
