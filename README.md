@@ -83,6 +83,7 @@ Ask the team for access to the following services to begin contributing:
 * The file formats currently allowed as "Documents" consist of:
   * .doc
   * .docx
+  * .gif
   * .jpg
   * .pdf
   * .png
