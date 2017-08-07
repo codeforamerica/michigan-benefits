@@ -6,6 +6,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1em;
+  display: block;
 
   &--compact {
     margin-bottom: 0;
@@ -23,6 +24,13 @@
     margin-left: 0;
     width: 160px;
     height: 60px;
+  }
+
+  &--mi_mdhhs {
+    @include retina-bg(mi_mdhhs, 100% auto);
+    margin-left: 0;
+    width: 160px;
+    height: 42px;
   }
 
   &--cfa {

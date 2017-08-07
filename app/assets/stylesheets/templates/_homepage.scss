@@ -1,4 +1,25 @@
 .template--homepage {
+  .trust-badge {
+    border-top: 2px solid $color-tan;
+    padding-top: 2em;
+    margin-top: 2em;
+    position: relative;
+    @include media($tablet-up) {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -3em;
+        width: 2px;
+        background-color: $color-tan;
+      }
+    }
+  }
+
   #fold {
     text-decoration: none;
     display: block;
