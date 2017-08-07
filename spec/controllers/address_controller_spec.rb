@@ -20,9 +20,7 @@ RSpec.describe AddressController, type: :controller do
 
       expect(step.street_address).to eq("123 Fake St")
       expect(step.city).to eq("Springfield")
-      expect(step.county).to eq("Genesee")
       expect(step.zip).to eq("12345")
-      expect(step.state).to eq("MI")
     end
   end
 
@@ -33,8 +31,6 @@ RSpec.describe AddressController, type: :controller do
           street_address: "321 Real St",
           city: "Shelbyville",
           zip: "54321",
-          county: "Genesee",
-          state: "MI",
         }
 
         put :update, params: { step: valid_params }
@@ -46,13 +42,11 @@ RSpec.describe AddressController, type: :controller do
         end
       end
 
-      it "always sets the county to 'Genesee'" do
+      it "always sets the county to 'Genesee' and state to 'MI'" do
         valid_params = {
           street_address: "321 Main St",
           city: "Plymouth",
           zip: "48170",
-          county: nil,
-          state: "MI",
         }
 
         put :update, params: { step: valid_params }
@@ -60,6 +54,7 @@ RSpec.describe AddressController, type: :controller do
         current_app.reload
 
         expect(current_app["county"]).to eq("Genesee")
+        expect(current_app["state"]).to eq("MI")
       end
 
       it "redirects to the next step" do
@@ -67,8 +62,6 @@ RSpec.describe AddressController, type: :controller do
           street_address: "321 Real St",
           city: "Shelbyville",
           zip: "54321",
-          county: "Genesee",
-          state: "MI",
         }
 
         put :update, params: { step: valid_params }
@@ -89,9 +82,7 @@ RSpec.describe AddressController, type: :controller do
     @_current_app ||= SnapApplication.create!(
       street_address: "123 Fake St",
       city: "Springfield",
-      county: "Genesee",
       zip: "12345",
-      state: "MI",
     )
   end
 end
