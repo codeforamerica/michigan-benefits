@@ -7,6 +7,6 @@ task(:rubocop) do
   RuboCop::RakeTask.new
 end
 
-task default: %w(spec rubocop)
+task default: %w(spec rubocop bundler:audit)
 
 Rails.application.load_tasks

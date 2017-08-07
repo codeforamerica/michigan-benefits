@@ -64,6 +64,9 @@ GEM
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.3)
+    bundler-audit (0.5.0)
+      bundler (~> 1.2)
+      thor (~> 0.18)
     capybara (2.14.4)
       addressable
       mime-types (>= 1.16)
@@ -322,6 +325,7 @@ DEPENDENCIES
   awesome_print
   aws-sdk
   bourbon (~> 4.2.0)
+  bundler-audit
   capybara
   climate_control
   codeclimate-test-reporter

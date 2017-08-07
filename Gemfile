@@ -37,6 +37,7 @@ end
 
 group :development, :test do
   gem "awesome_print", require: false
+  gem "bundler-audit"
   gem "capybara"
   gem "climate_control"
   gem "codeclimate-test-reporter"
