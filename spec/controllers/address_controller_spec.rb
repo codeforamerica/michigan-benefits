@@ -4,9 +4,7 @@ require "rails_helper"
 
 RSpec.describe AddressController, type: :controller do
   let(:step) { assigns(:step) }
-  before do
-    session[:snap_application_id] = current_app.id
-  end
+  before { session[:snap_application_id] = current_app.id }
 
   describe "#edit" do
     it "assigns the correct step" do
@@ -79,7 +77,8 @@ RSpec.describe AddressController, type: :controller do
   end
 
   def current_app
-    @_current_app ||= SnapApplication.create!(
+    @_current_app ||= FactoryGirl.create(
+      :snap_application,
       street_address: "123 Fake St",
       city: "Springfield",
       zip: "12345",

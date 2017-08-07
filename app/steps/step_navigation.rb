@@ -4,6 +4,7 @@ class StepNavigation
   ALL = {
     "Minimal Snap Application" => [
       PersonalDetailController,
+      ContactInformationController,
       AddressController,
       DocumentsController,
       SignAndSubmitController,
