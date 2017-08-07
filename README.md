@@ -73,6 +73,25 @@ Ask the team for access to the following services to begin contributing:
 
 ## What's Included
 
+### Document / Photo Uploading Details
+
+* The file uploading service is called [Shubox]. The [dashboard] can be
+  accessed with account info found in 1password. Ping [@jayroh] for any
+  questions or issues related to Shubox.
+* The file limit is currently set to 3MB. That can be bumped up if we notice
+  that people are often taking photos or attaching documents larger than that.
+* The file formats currently allowed as "Documents" consist of:
+  * .doc
+  * .docx
+  * .gif
+  * .jpg
+  * .pdf
+  * .png
+
+[Shubox]: https://shubox.io
+[dashboard]: https://dashboard.shubox.io
+[@jayroh]: https://github.com/jayroh
+
 ### Spec Helpers
 
 * Use `with_modified_env` to modify an env variable for one test:
