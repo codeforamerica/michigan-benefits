@@ -6,10 +6,9 @@
     </h3>
     <% steps.each do |step| %>
       <div>
-        <%= link_to step.to_param.titleize, %>
+        <%= link_to step.to_param.titleize,
           step_path(step),
-          class: 'button button--small button--full-width'
-        <% end %>
+          class: 'button button--small button--full-width' %>
       </div>
     <% end %>
   <% end %>
