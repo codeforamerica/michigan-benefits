@@ -9,7 +9,11 @@ feature "SNAP application" do
     select "January", from: "step_birthday_2i"
     select "1", from: "step_birthday_3i"
     select "1969", from: "step_birthday_1i"
+    click_on "Continue"
 
+    fill_in "What is the best phone number to reach you?", with: "12345678990"
+    subscribe_to_sms_updates
+    fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
     fill_in "Address", with: "123 Main St"
@@ -40,7 +44,11 @@ feature "SNAP application" do
     select "January", from: "step_birthday_2i"
     select "1", from: "step_birthday_3i"
     select "1969", from: "step_birthday_1i"
+    click_on "Continue"
 
+    fill_in "What is the best phone number to reach you?", with: "12345678990"
+    subscribe_to_sms_updates
+    fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
     fill_in "Address", with: "123 Main St"
@@ -68,10 +76,11 @@ feature "SNAP application" do
 
     fill_in "What is your full name?", with: "Jessie Tester"
     click_on "Continue"
-    fill_in "City", with: "Flint"
+
+    fill_in "What is the best phone number to reach you?", with: "1234567890"
     click_on "Continue"
 
-    expect(find_field("City").value).to eq "Flint"
+    expect(find_field("What is the best phone number to reach you?").value).to eq "1234567890"
   end
 
   scenario "saves user data across steps", :js do
@@ -87,5 +96,9 @@ feature "SNAP application" do
     find(:css, ".step-header__back-link").click
 
     expect(find("#step_name").value).to eq "Jessie Tester"
+  end
+
+  def subscribe_to_sms_updates
+    choose "Yes"
   end
 end

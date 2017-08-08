@@ -23,6 +23,16 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
+  def mb_radio_set(method, label_text, collection, notes: [], layout: "block", variant: "", classes: [])
+    <<-HTML.html_safe
+      <fieldset class="form-group#{error_state(object, method)}#{(' ' + classes.join(' ')).strip}">
+        #{label_contents(label_text, notes)}
+        #{radio_buttons(method, collection, layout, variant)}
+        #{errors_for(object, method)}
+      </fieldset>
+    HTML
+  end
+
   private
 
   def label_contents(label_text, notes)
@@ -67,5 +77,28 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def error_state(object, method)
     errors = object.errors[method]
     " form-group--error" if errors.any?
+  end
+
+  def radio_buttons(method, collection, layout, variant)
+    variant_class = " #{variant}" if variant.present?
+    radio_html = <<-HTML
+      <radiogroup class="input-group--#{layout}#{variant_class}">
+    HTML
+    collection.map do |item|
+      item = { value: item, label: item } unless item.is_a?(Hash)
+
+      input_html = item.fetch(:input_html, {})
+
+      radio_html << <<-HTML.html_safe
+        <label class="radio-button">
+          #{radio_button(method, item[:value], input_html)}
+          #{item[:label]}
+        </label>
+      HTML
+    end
+    radio_html << <<-HTML
+      </radiogroup>
+    HTML
+    radio_html
   end
 end

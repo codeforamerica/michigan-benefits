@@ -2,10 +2,10 @@
 
 class Address < Step
   step_attributes(
-    :street_address,
     :city,
     :county,
     :state,
+    :street_address,
     :zip,
   )
 

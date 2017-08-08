@@ -62,7 +62,7 @@ RSpec.describe PersonalDetailController do
         },
       }
 
-      expect(response).to redirect_to("/steps/address")
+      expect(response).to redirect_to("/steps/contact-information")
     end
 
     it "renders edit if the step is invalid" do

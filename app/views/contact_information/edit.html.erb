@@ -1,0 +1,22 @@
+<% content_for :header_title, "Contact Information" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">Tell us the best way to reach you via phone or email.</div>
+    </div>
+  </header>
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_input_field :phone_number, "What is the best phone number to reach you?", options:  { placeholder: "Phone #" } %>
+      <%= f.mb_radio_set :sms_subscribed,
+          'May we send text messages to that phone number help you through the enrollment process?',
+          [{ value: true, label: "Yes" }, { value: false, label: "No" }],
+          layout: "inline" %>
+
+      <%= f.mb_input_field :email, "What is your email address?", notes: ["If you don’t have one or you don’t want to receive emails from us you can leave this blank."] %>
+
+      <%= render 'shared/next_step' %>
+    <% end %>
+  </div>
+</div>
