@@ -7,6 +7,7 @@ class StepNavigation
       ContactInformationController,
       AddressController,
       DocumentsController,
+      LegalAgreementController,
       SignAndSubmitController,
       SendApplicationController,
     ],
