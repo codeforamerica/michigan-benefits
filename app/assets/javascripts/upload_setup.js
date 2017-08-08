@@ -3,6 +3,7 @@
 var uploadSetup = function (previewTemplate) {
   new Shubox('#document-drop', {
     previewsContainer: '.form-card__documents',
+    clickable: '#click-to-upload',
     previewTemplate: previewTemplate,
     acceptedFiles: '.pdf,.jpg,.png,.gif,.doc,.docx',
     maxFilesize: 3, // MB
@@ -22,6 +23,7 @@ var uploadSetup = function (previewTemplate) {
   })
 
   $(document).on('click', '.link--delete', function (e) {
+    e.preventDefault()
     $(e.target).closest('.doc-preview').remove()
   })
 }

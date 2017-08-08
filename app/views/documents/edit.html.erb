@@ -3,13 +3,24 @@
   <%= javascript_include_tag "https://js.shubox.io/v1/#{Rails.application.secrets.shubox_js_id}.js", defer: true %>
 <% end %>
 
-<div class="form-card">
+<div class="form-card" id="document-drop">
   <header class="form-card__header">
     <div class="step-section-header">
-      <div class="step-section-header__subhead">Upload photos of necessary documents.</div>
+      <div class="step-section-header__subhead">
+        Lastly, we suggest including some documents if you can right now.
+      </div>
     </div>
   </header>
   <div class="form-card__content">
+    <p>
+      You can do this later but this will help speed up the process.
+    </p>
+    <p>
+      Clicking the "Add documents button" that follows will allow you to upload
+      photos of your documents taken with your phone. You may also drag and drop
+      photos or documents onto this area of the page to upload them.
+    </p>
+
     <%= form_for @step,
       as: :step,
       builder: MbFormBuilder,
@@ -27,13 +38,23 @@
         </script>
       </div>
 
-      <div class="form-card__target" id="document-drop">
-        <i class="icon-file_upload"></i>
-        Click, Tap, Or Drag &amp; Drop to Upload Photos/Documents
+      <div class="form-card__documents__ctas">
+        <button type="button" class="button button--next button--cta button--full-width" id="click-to-upload">
+          <i class="icon-file_upload"></i>
+          Add documents
+        </button>
+
+        <%= link_to send_application_steps_path, class: "button" do %>
+          I'll do this later
+        <% end %>
       </div>
 
       <%= render 'shared/next_step' %>
     <% end %>
+
+    <div class="form-card__documents__faqs">
+      <%= render 'shared/commonly_requested_documents' %>
+    </div>
   </div>
 </div>
 
