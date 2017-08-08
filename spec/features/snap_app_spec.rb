@@ -25,6 +25,8 @@ feature "SNAP application" do
     add_document_photo "https://example.com/images/proof_of_income.jpg"
     click_on "Continue"
 
+    consent_to_terms
+
     fill_in "Your signature", with: "Jessie Tester"
     click_on "Sign and submit"
 
@@ -59,6 +61,8 @@ feature "SNAP application" do
     add_document_photo "https://example.com/images/drivers_license.jpg"
     add_document_photo "https://example.com/images/proof_of_income.jpg"
     click_on "Continue"
+
+    consent_to_terms
 
     fill_in "Your signature", with: "Jessie Tester"
     click_on "Sign and submit"
@@ -100,5 +104,10 @@ feature "SNAP application" do
 
   def subscribe_to_sms_updates
     choose "Yes"
+  end
+
+  def consent_to_terms
+    choose "I agree"
+    click_on "Continue"
   end
 end
