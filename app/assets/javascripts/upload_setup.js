@@ -1,4 +1,3 @@
-/*eslint no-unused-vars: ["error", { "vars": "local" }]*/
 /*global uploadSetup */
 
 var uploadSetup = function (previewTemplate) {
