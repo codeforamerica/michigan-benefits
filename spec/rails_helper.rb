@@ -9,6 +9,7 @@ require "rspec/rails"
 
 require_relative "support/match_html"
 require_relative "support/generic_helper"
+require_relative "support/factory_girl"
 require_relative "support/feature_helper"
 require_relative "support/step_helper"
 

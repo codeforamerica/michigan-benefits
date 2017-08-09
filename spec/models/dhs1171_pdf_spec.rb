@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Dhs1171Pdf do
   describe "#save" do
     it "saves the client info" do
-      snap_application = FactoryGirl.create(:snap_application)
+      snap_application = create(:snap_application)
       client_data = {
         applying_for_food_assistance: "Yes",
         full_name: snap_application.name,
@@ -28,7 +28,7 @@ RSpec.describe Dhs1171Pdf do
     end
 
     it "prepends a cover sheet" do
-      snap_application = FactoryGirl.create(:snap_application)
+      snap_application = create(:snap_application)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
@@ -38,7 +38,7 @@ RSpec.describe Dhs1171Pdf do
     end
 
     it "returns the tempfile" do
-      snap_application = FactoryGirl.create(:snap_application)
+      snap_application = create(:snap_application)
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
 
