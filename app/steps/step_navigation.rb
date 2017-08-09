@@ -11,6 +11,7 @@ class StepNavigation
       SignAndSubmitController,
       DocumentsController,
       SendApplicationController,
+      SuccessController,
     ],
   }.freeze
 

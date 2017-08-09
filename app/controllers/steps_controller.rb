@@ -11,6 +11,8 @@ class StepsController < ApplicationController
 
   def self.step_class
     controller_path.classify.constantize
+  rescue NameError
+    NullStep
   end
 
   private

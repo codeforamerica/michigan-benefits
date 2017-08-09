@@ -7,8 +7,7 @@ class SendApplicationController < StandardStepsController
     if @step.valid?
       current_snap_application.update(step_params)
       create_and_send_pdf
-      flash[:notice] = "You will receive an email with your filled out application attached in a few minutes."
-      redirect_to root_path(anchor: "fold")
+      redirect_to(next_path)
     else
       render :edit
     end

@@ -1,0 +1,60 @@
+<% content_for :back_path, nil %>
+
+<div class="form-card">
+  <div class="form-card__header form-card__header--confirmation">
+    <div class="emoji emoji--med emoji--checkmark with-padding-small"></div>
+    <h1 class="form-card__title">
+      Your Michigan Benefits application has been successfully submitted!
+    </h1>
+  </div>
+
+  <div class="form-card__content">
+    <h3 class="with-padding-med">What to expect next:</h3>
+
+    <div class="media-box with-padding-small">
+      <div class="media-box__media">
+        <div class="emoji emoji--med emoji--phone"></div>
+      </div>
+      <div class="media-box__content">
+        <p>
+          <b>You will receive an email with your filled out application
+          attached</b> in a few minutes.
+        </p>
+      </div>
+    </div>
+
+    <div class="media-box with-padding-small">
+      <div class="media-box__media">
+        <div class="emoji emoji--med emoji--clipboard"></div>
+      </div>
+      <div class="media-box__content">
+        <p>
+        <b>The interview will take about 30 minutes.</b> A worker will ask you
+        about your household, income, expenses, and other eligibility
+        requirements.
+        </p>
+      </div>
+    </div>
+
+    <div class="media-box with-padding-med">
+      <div class="media-box__media">
+        <div class="emoji emoji--med emoji--page-facing-up"></div>
+      </div>
+      <div class="media-box__content">
+        <p>
+        <b>Your county will provide you with a list of documents</b> that you
+        will need to submit within 30 days from today to verify your
+        eligibility. You can submit documents any time at <%= link_to 'the
+        documents step', documents_steps_path %>.
+        </p>
+      </div>
+    </div>
+
+    <p class="text--small">
+    If you need more help with food,
+    <a class="link--subtle" href="http://www.foodpantries.org/st/michigan">
+      find your local food bank or food pantry
+    </a>.
+    </p>
+  </div>
+</div>
