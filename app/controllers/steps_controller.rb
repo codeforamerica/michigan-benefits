@@ -17,10 +17,6 @@ class StepsController < ApplicationController
 
   delegate :step_class, to: :class
 
-  def going_backwards?
-    params["rel"] == "back"
-  end
-
   def step_params
     params.fetch(:step, {}).permit(*step_attrs)
   end
@@ -29,13 +25,31 @@ class StepsController < ApplicationController
     step_class.attribute_names
   end
 
+  def current_path(params = nil)
+    step_path(self.class, params)
+  end
+
+  def maybe_skip
+    if skip?
+      if going_backwards?
+        redirect_to previous_path(rel: "back")
+      else
+        redirect_to next_path
+      end
+    end
+  end
+
+  def skip?
+    false
+  end
+
   def previous_path(params = nil)
     previous_step = step_navigation.previous
     previous_step ? step_path(previous_step, params) : root_path
   end
 
-  def current_path(params = nil)
-    step_path(self.class, params)
+  def going_backwards?
+    params["rel"] == "back"
   end
 
   def next_path(params = nil)
@@ -45,15 +59,5 @@ class StepsController < ApplicationController
 
   def step_navigation
     @step_navigation ||= StepNavigation.new(self)
-  end
-
-  def maybe_skip
-    if skip?
-      redirect_to next_path
-    end
-  end
-
-  def skip?
-    false
   end
 end

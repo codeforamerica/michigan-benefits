@@ -102,9 +102,36 @@ feature "SNAP application" do
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "12345"
     select_unstable_address
+
     click_on "Continue"
 
     expect(current_path).to eq "/steps/legal-agreement"
+  end
+
+  scenario "goes back after skipping residential address step" do
+    visit root_path
+    click_on "Apply now"
+
+    fill_in "What is your full name?", with: "Jessie Tester"
+    select "January", from: "step_birthday_2i"
+    select "1", from: "step_birthday_3i"
+    select "1969", from: "step_birthday_1i"
+    click_on "Continue"
+
+    fill_in "What is the best phone number to reach you?", with: "12345678990"
+    subscribe_to_sms_updates
+    fill_in "What is your email address?", with: "test@example.com"
+    click_on "Continue"
+
+    fill_in "Address", with: "123 Main St"
+    fill_in "City", with: "Flint"
+    fill_in "ZIP code", with: "12345"
+    select_address_same_as_home_address
+    click_on "Continue"
+
+    find(".step-header__back-link").click
+
+    expect(current_path).to eq "/steps/mailing-address"
   end
 
   scenario "does not fill in all required fields" do
