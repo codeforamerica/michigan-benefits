@@ -24,7 +24,7 @@ class ResidentialAddressController < StandardStepsController
   end
 
   def residential_address
-    current_snap_application.addresses.where.not(mailing: true).first || current_snap_application.addresses.create(mailing: false)
+    current_snap_application.addresses.where.not(mailing: true).first || current_snap_application.addresses.new(mailing: false)
   end
 
   def step_params
