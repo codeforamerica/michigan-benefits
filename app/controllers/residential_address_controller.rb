@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class ResidentialAddressController < StandardStepsController
-  def edit
-    @step = step_class.new(snap_application_attributes.slice(*step_attrs))
-  end
-
   def update
     @step = step_class.new(step_params)
 
