@@ -7,9 +7,9 @@ class StepNavigation
       ContactInformationController,
       MailingAddressController,
       ResidentialAddressController,
-      DocumentsController,
       LegalAgreementController,
       SignAndSubmitController,
+      DocumentsController,
       SendApplicationController,
     ],
   }.freeze
