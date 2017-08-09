@@ -69,7 +69,7 @@ RSpec.describe ResidentialAddressController, type: :controller do
 
         put :update, params: { step: valid_params }
 
-        expect(response).to redirect_to("/steps/documents")
+        expect(response).to redirect_to("/steps/legal-agreement")
       end
     end
 

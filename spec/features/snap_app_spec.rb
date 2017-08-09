@@ -22,14 +22,14 @@ feature "SNAP application" do
     select_address_same_as_home_address
     click_on "Continue"
 
-    add_document_photo "https://example.com/images/drivers_license.jpg"
-    add_document_photo "https://example.com/images/proof_of_income.jpg"
-    click_on "Continue"
-
     consent_to_terms
 
     fill_in "Your signature", with: "Jessie Tester"
     click_on "Sign and submit"
+
+    add_document_photo "https://example.com/images/drivers_license.jpg"
+    add_document_photo "https://example.com/images/proof_of_income.jpg"
+    click_on "Continue"
 
     fill_in "Your email address", with: "test@example.com"
     click_on "Submit"
@@ -60,14 +60,14 @@ feature "SNAP application" do
     select_address_same_as_home_address
     click_on "Continue"
 
-    add_document_photo "https://example.com/images/drivers_license.jpg"
-    add_document_photo "https://example.com/images/proof_of_income.jpg"
-    click_on "Continue"
-
     consent_to_terms
 
     fill_in "Your signature", with: "Jessie Tester"
     click_on "Sign and submit"
+
+    add_document_photo "https://example.com/images/drivers_license.jpg"
+    add_document_photo "https://example.com/images/proof_of_income.jpg"
+    click_on "Continue"
 
     click_on "Skip this step"
 
@@ -104,7 +104,7 @@ feature "SNAP application" do
     select_unstable_address
     click_on "Continue"
 
-    expect(current_path).to eq "/steps/documents"
+    expect(current_path).to eq "/steps/legal-agreement"
   end
 
   scenario "does not fill in all required fields" do
