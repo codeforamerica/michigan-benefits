@@ -25,7 +25,7 @@ RSpec.describe SendApplicationController do
 
       put :update, params: params
 
-      expect(response).to redirect_to(root_path(anchor: "fold"))
+      expect(response).to redirect_to(success_steps_path)
     end
 
     context "email entered" do
