@@ -33,6 +33,31 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
+  def mb_checkbox_set(collection, label_text: nil, notes: [])
+    checkbox_html = <<-HTML.html_safe
+      <fieldset class="input-group">
+    HTML
+
+    checkbox_html << collection.map do |item|
+      method = item[:method]
+      label = item[:label]
+      mb_checkbox(method, label)
+    end.join.html_safe
+
+    checkbox_html << <<-HTML.html_safe
+      </fieldset>
+    HTML
+
+    if label_text || notes
+      label_html = <<-HTML.html_safe
+        #{label_contents(label_text, notes)}
+      HTML
+      checkbox_html = label_html + checkbox_html
+    end
+
+    checkbox_html
+  end
+
   private
 
   def label_contents(label_text, notes)
@@ -100,5 +125,20 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       </radiogroup>
     HTML
     radio_html
+  end
+
+  def mb_checkbox(method, label_text)
+    <<-HTML.html_safe
+      <label class="checkbox">
+    #{check_box_with_label(label_text, method)}
+      </label>
+    #{errors_for(object, method)}
+    HTML
+  end
+
+  def check_box_with_label(label_text, method)
+    <<-HTML.html_safe
+    #{check_box(method)} #{label_text}
+    HTML
   end
 end

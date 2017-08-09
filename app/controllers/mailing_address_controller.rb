@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddressController < StandardStepsController
+class MailingAddressController < StandardStepsController
   private
 
   def step_params

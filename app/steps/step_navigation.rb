@@ -5,7 +5,8 @@ class StepNavigation
     "Minimal Snap Application" => [
       PersonalDetailController,
       ContactInformationController,
-      AddressController,
+      MailingAddressController,
+      ResidentialAddressController,
       DocumentsController,
       LegalAgreementController,
       SignAndSubmitController,

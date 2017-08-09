@@ -3,6 +3,8 @@
 class StepsController < ApplicationController
   layout "step"
 
+  before_action :maybe_skip, only: :edit
+
   def self.to_param
     controller_path.dasherize
   end
@@ -43,5 +45,15 @@ class StepsController < ApplicationController
 
   def step_navigation
     @step_navigation ||= StepNavigation.new(self)
+  end
+
+  def maybe_skip
+    if skip?
+      redirect_to next_path
+    end
+  end
+
+  def skip?
+    false
   end
 end
