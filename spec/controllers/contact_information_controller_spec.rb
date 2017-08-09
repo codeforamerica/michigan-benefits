@@ -47,7 +47,7 @@ RSpec.describe ContactInformationController, type: :controller do
 
         put :update, params: { step: valid_params }
 
-        expect(response).to redirect_to("/steps/address")
+        expect(response).to redirect_to("/steps/mailing-address")
       end
     end
 

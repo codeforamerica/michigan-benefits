@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807235447) do
+ActiveRecord::Schema.define(version: 20170809000628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "street_address", null: false
+    t.string "city", null: false
+    t.string "county", null: false
+    t.string "state", null: false
+    t.string "zip", null: false
+    t.boolean "mailing", default: true, null: false
+    t.bigint "snap_application_id"
+    t.index ["snap_application_id"], name: "index_addresses_on_snap_application_id"
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -47,5 +60,8 @@ ActiveRecord::Schema.define(version: 20170807235447) do
     t.string "phone_number"
     t.boolean "sms_subscribed"
     t.boolean "consent_to_terms"
+    t.boolean "mailing_address_same_as_residential_address"
+    t.boolean "unstable_housing", default: false
   end
+
 end

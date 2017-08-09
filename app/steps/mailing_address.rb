@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-class Address < Step
+class MailingAddress < Step
   step_attributes(
     :city,
     :county,
+    :mailing_address_same_as_residential_address,
     :state,
     :street_address,
     :zip,
@@ -23,4 +24,7 @@ class Address < Step
 
   validates :state,
     inclusion: { in: %w(MI), message: "Make sure the county is MI" }
+
+  validates :mailing_address_same_as_residential_address,
+    inclusion: { in: %w(true false), message: "Make sure to answer this question" }
 end

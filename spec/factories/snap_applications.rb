@@ -10,5 +10,6 @@ FactoryGirl.define do
     zip "48501"
     signature "Mr. RJD2"
     signed_at Date.current
+    mailing_address_same_as_residential_address false
   end
 end
