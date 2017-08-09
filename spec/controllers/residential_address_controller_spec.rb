@@ -82,7 +82,7 @@ RSpec.describe ResidentialAddressController, type: :controller do
   end
 
   def current_app
-    @_current_app ||= FactoryGirl.create(:snap_application, addresses: [address])
+    @_current_app ||= create(:snap_application, addresses: [address])
   end
 
   def current_app_residential_address
@@ -90,7 +90,7 @@ RSpec.describe ResidentialAddressController, type: :controller do
   end
 
   def address
-    FactoryGirl.create(
+    create(
       :address,
       street_address: "I live here",
       city: "Hometown",

@@ -47,6 +47,6 @@ RSpec.describe LegalAgreementController do
   end
 
   def current_app
-    @_current_app ||= FactoryGirl.create(:snap_application, attributes)
+    @_current_app ||= create(:snap_application, attributes)
   end
 end

@@ -60,7 +60,7 @@ RSpec.describe ContactInformationController, type: :controller do
   end
 
   def current_app
-    @_current_app ||= FactoryGirl.create(
+    @_current_app ||= create(
       :snap_application,
       phone_number: "11122233333",
       email: "test@example.com",

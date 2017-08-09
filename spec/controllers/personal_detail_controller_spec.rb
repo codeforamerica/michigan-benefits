@@ -7,7 +7,7 @@ RSpec.describe PersonalDetailController do
 
   describe "#edit" do
     it "assigns the correct step" do
-      current_app = FactoryGirl.create(:snap_application)
+      current_app = create(:snap_application)
       session[:snap_application_id] = current_app.id
 
       get :edit
@@ -16,7 +16,7 @@ RSpec.describe PersonalDetailController do
     end
 
     it "assigns the name to the step" do
-      current_app = FactoryGirl.create(:snap_application, name: "bob")
+      current_app = create(:snap_application, name: "bob")
       session[:snap_application_id] = current_app.id
 
       get :edit
@@ -25,7 +25,7 @@ RSpec.describe PersonalDetailController do
     end
 
     it "assigns the birthday to the step" do
-      current_app = FactoryGirl.create(:snap_application, birthday: birthday)
+      current_app = create(:snap_application, birthday: birthday)
       session[:snap_application_id] = current_app.id
 
       get :edit
@@ -35,7 +35,7 @@ RSpec.describe PersonalDetailController do
 
   describe "#update" do
     it "updates the applicant if the step is valid" do
-      current_app = FactoryGirl.create(:snap_application, name: "Joe", birthday: birthday)
+      current_app = create(:snap_application, name: "Joe", birthday: birthday)
       session[:snap_application_id] = current_app.id
 
       expect do
