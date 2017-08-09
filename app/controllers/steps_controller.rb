@@ -30,12 +30,10 @@ class StepsController < ApplicationController
   end
 
   def maybe_skip
-    if skip?
-      if going_backwards?
-        redirect_to previous_path(rel: "back")
-      else
-        redirect_to next_path
-      end
+    if skip? && going_backwards?
+      redirect_to previous_path(rel: "back")
+    elsif skip?
+      redirect_to next_path
     end
   end
 
