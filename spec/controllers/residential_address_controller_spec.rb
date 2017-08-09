@@ -45,6 +45,7 @@ RSpec.describe ResidentialAddressController, type: :controller do
       end
 
       it "always sets the county to 'Genesee' and state to 'MI'" do
+        current_app_residential_address.update(state: "MA", county: "example")
         valid_params = {
           street_address: "321 Main St",
           city: "Plymouth",
@@ -53,10 +54,10 @@ RSpec.describe ResidentialAddressController, type: :controller do
 
         put :update, params: { step: valid_params }
 
-        current_app.reload
+        current_app_residential_address.reload
 
-        expect(current_app["county"]).to eq("Genesee")
-        expect(current_app["state"]).to eq("MI")
+        expect(current_app_residential_address["county"]).to eq("Genesee")
+        expect(current_app_residential_address["state"]).to eq("MI")
       end
 
       it "redirects to the next step" do
