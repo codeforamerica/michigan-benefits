@@ -10,7 +10,6 @@ class StepNavigation
       LegalAgreementController,
       SignAndSubmitController,
       DocumentsController,
-      SendApplicationController,
       SuccessController,
     ],
   }.freeze

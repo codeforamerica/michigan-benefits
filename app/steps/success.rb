@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SendApplication < Step
+class Success < Step
   step_attributes :email
 
   validates :email,
