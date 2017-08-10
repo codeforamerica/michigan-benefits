@@ -162,6 +162,7 @@
   }
 }
 
+.form-card__expect_next,
 .form-card__documents__faqs {
   @include full-bleed();
   @include clearfix();

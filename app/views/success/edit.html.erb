@@ -1,28 +1,37 @@
 <% content_for :back_path, nil %>
 
 <div class="form-card">
-  <div class="form-card__header form-card__header--confirmation">
-    <div class="emoji emoji--med emoji--checkmark with-padding-small"></div>
-    <h1 class="form-card__title">
-      Your Michigan Benefits application has been successfully submitted!
-    </h1>
-  </div>
-
-  <div class="form-card__content">
-    <h3 class="with-padding-med">What to expect next:</h3>
-
-    <div class="media-box with-padding-small">
-      <div class="media-box__media">
-        <div class="emoji emoji--med emoji--phone"></div>
+  <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+    <header class="form-card__header">
+      <div class="step-section-header">
+        <div class="step-section-header__subhead">
+          Your Michigan Benefits application is ready to be submitted!
+        </div>
       </div>
-      <div class="media-box__content">
-        <p>
-          <b>You will receive an email with your filled out application
-          attached</b> in a few minutes.
-        </p>
-      </div>
+    </header>
+    <div class="form-card__content">
+      <h2>
+        Want a copy of your application?
+      </h2>
+      <p>
+        Enter your email address below to receive an email with a copy of your
+        application.
+      </p>
+      <%= f.mb_input_field :email, "Your email address", type: "email", options: { placeholder: "test@example.com" } %>
     </div>
+    <footer class="form-card__footer">
+      <button class="button button--next button--cta button--full-width" type="submit">
+        Submit
+        <i class="button__icon icon-arrow_forward"></i>
+      </button>
+      <%= link_to skip_send_application_path, method: :post, class: "button" do %>
+        Skip this step
+      <% end %>
+    </footer>
+  <% end %>
 
+  <div class="form-card__content form-card__expect_next">
+    <h3 class="with-padding-med">What to expect next:</h3>
     <div class="media-box with-padding-small">
       <div class="media-box__media">
         <div class="emoji emoji--med emoji--clipboard"></div>
