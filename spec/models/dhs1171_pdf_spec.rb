@@ -3,18 +3,19 @@ require "rails_helper"
 RSpec.describe Dhs1171Pdf do
   describe "#save" do
     it "saves the client info" do
-      snap_application = create(:snap_application)
+      mailing_address = create(:mailing_address)
+      snap_application = create(:snap_application, addresses: [mailing_address])
       client_data = {
         applying_for_food_assistance: "Yes",
         full_name: snap_application.name,
         birth_day: snap_application.birthday.strftime("%d"),
         birth_month: snap_application.birthday.strftime("%m"),
         birth_year: snap_application.birthday.strftime("%Y"),
-        street_address: snap_application.street_address,
-        city: snap_application.city,
-        county: snap_application.county,
-        state: snap_application.state,
-        zip: snap_application.zip,
+        street_address: mailing_address.street_address,
+        city: mailing_address.city,
+        county: mailing_address.county,
+        state: mailing_address.state,
+        zip: mailing_address.zip,
         signature: snap_application.signature,
         signature_date: snap_application.signed_at.to_s,
       }

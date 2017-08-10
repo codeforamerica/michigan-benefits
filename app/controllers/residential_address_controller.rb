@@ -1,38 +1,22 @@
 # frozen_string_literal: true
 
-class ResidentialAddressController < StandardStepsController
-  def update
-    @step = step_class.new(step_params)
-
-    if @step.valid?
-      current_snap_application.update!(unstable_housing: unstable_housing?)
-      residential_address.update!(step_params.except(:unstable_housing))
-      redirect_to(next_path)
-    else
-      render :edit
-    end
-  end
-
+class ResidentialAddressController < AddressController
   private
 
-  def snap_application_attributes
-    HashWithIndifferentAccess.new(residential_address_attributes)
-  end
-
-  def residential_address_attributes
-    residential_address.attributes.merge(unstable_housing: current_snap_application.unstable_housing)
-  end
-
-  def residential_address
+  def address
     current_snap_application.addresses.where.not(mailing: true).first || current_snap_application.addresses.new(mailing: false)
   end
 
-  def step_params
-    super.merge(state: "MI", county: "Genesee")
+  def snap_application_update_params
+    { snap_application_param => unstable_housing? }
+  end
+
+  def snap_application_param
+    :unstable_housing
   end
 
   def unstable_housing?
-    step_params[:unstable_housing] == "1"
+    step_params[snap_application_param] == "1"
   end
 
   def skip?
