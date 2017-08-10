@@ -1,4 +1,4 @@
-<% if Rails.application.secrets.debug.present? %>
+<% if debug? %>
   <div class="debug">
     <%= controller.class.name %>
     | app <%= current_or_new_snap_application.id %>
