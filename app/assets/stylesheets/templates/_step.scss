@@ -6,15 +6,4 @@
     content: "";
     display: block;
   }
-
-  .form-card {
-    max-width: 72rem;
-
-    @include media($tablet-up) {
-      margin: {
-        left: auto;
-        right: auto;
-      }
-    }
-  }
 }

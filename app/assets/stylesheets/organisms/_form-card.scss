@@ -1,16 +1,9 @@
 .form-card {
   @extend .card;
+  @extend .max-container;
 
-  margin-left: -$site-margins/2;
-  margin-right: -$site-margins/2;
   border: 0;
   border-bottom: 1px solid $color-tan;
-
-  @include media($tablet-up) {
-    border: 2px solid $color-tan;
-    margin-left: 0;
-    margin-right: 0;
-  }
 }
 
 .form-card--compact {
