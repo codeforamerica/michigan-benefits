@@ -3,9 +3,13 @@
 require "rails_helper"
 
 RSpec.describe SignAndSubmitController do
-  before do
-    session[:snap_application_id] = current_app.id
-  end
+  let(:step) { assigns(:step) }
+  let(:invalid_params) { { step: { signature: "" } } }
+  let(:step_class) { SignAndSubmit }
+
+  before { session[:snap_application_id] = current_app.id }
+
+  include_examples "step controller"
 
   describe "#edit" do
     it "assigns the attributes to the step" do
@@ -33,10 +37,6 @@ RSpec.describe SignAndSubmitController do
 
       expect(response).to redirect_to("/steps/documents")
     end
-  end
-
-  def step
-    @_step ||= assigns(:step)
   end
 
   def current_app

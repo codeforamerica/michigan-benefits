@@ -4,15 +4,14 @@ require "rails_helper"
 
 RSpec.describe MailingAddressController, type: :controller do
   let(:step) { assigns(:step) }
+  let(:invalid_params) { { step: { zip: "11111111111" } } }
+  let(:step_class) { MailingAddress }
+
   before { session[:snap_application_id] = current_app.id }
 
+  include_examples "step controller"
+
   describe "#edit" do
-    it "assigns the correct step" do
-      get :edit
-
-      expect(step).to be_an_instance_of MailingAddress
-    end
-
     it "assigns the fields to the step" do
       get :edit
 
@@ -76,13 +75,6 @@ RSpec.describe MailingAddressController, type: :controller do
         expect(response).to redirect_to("/steps/residential-address")
       end
     end
-
-    it "renders edit if the step is invalid" do
-      put :update, params: { step: { zip: "1111111111" } }
-
-      expect(assigns(:step)).to be_an_instance_of(MailingAddress)
-      expect(response).to render_template(:edit)
-    end
   end
 
   def current_app_mailing_address
@@ -90,7 +82,7 @@ RSpec.describe MailingAddressController, type: :controller do
   end
 
   def current_app
-    @_current_app ||= FactoryGirl.create(:snap_application, addresses: [address])
+    @_current_app ||= create(:snap_application, addresses: [address])
   end
 
   def address

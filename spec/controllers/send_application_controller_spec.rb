@@ -3,9 +3,13 @@
 require "rails_helper"
 
 RSpec.describe SendApplicationController do
-  before do
-    session[:snap_application_id] = current_app.id
-  end
+  let(:step) { assigns(:step) }
+  let(:invalid_params) { { step: { email: "" } } }
+  let(:step_class) { SendApplication }
+
+  before { session[:snap_application_id] = current_app.id }
+
+  include_examples "step controller"
 
   describe "#edit" do
     it "assigns the attributes to the step" do
@@ -44,21 +48,6 @@ RSpec.describe SendApplicationController do
         expect(SendApplicationJob).to have_received(:perform_later).with(snap_application: current_app)
       end
     end
-
-    context "email not entered" do
-      it "renders the edit template" do
-        params = { step: { email: "" } }
-
-        put :update, params: params
-
-        expect(assigns(:step)).to be_an_instance_of(SendApplication)
-        expect(response).to render_template(:edit)
-      end
-    end
-  end
-
-  def step
-    @_step ||= assigns(:step)
   end
 
   def attributes

@@ -3,73 +3,57 @@
 require "rails_helper"
 
 RSpec.describe PersonalDetailController do
-  let(:birthday) { DateTime.parse("2/2/1945") }
+  let(:step) { assigns(:step) }
+  let(:invalid_params) { { step: { name: nil } } }
+  let(:step_class) { PersonalDetail }
+
+  before { session[:snap_application_id] = current_app.id }
+
+  include_examples "step controller"
 
   describe "#edit" do
-    it "assigns the correct step" do
-      current_app = create(:snap_application)
-      session[:snap_application_id] = current_app.id
-
+    it "assigns the name and birthday to the step" do
       get :edit
 
-      expect(assigns(:step)).to be_an_instance_of PersonalDetail
-    end
-
-    it "assigns the name to the step" do
-      current_app = create(:snap_application, name: "bob")
-      session[:snap_application_id] = current_app.id
-
-      get :edit
-
-      expect(assigns(:step).name).to eq("bob")
-    end
-
-    it "assigns the birthday to the step" do
-      current_app = create(:snap_application, birthday: birthday)
-      session[:snap_application_id] = current_app.id
-
-      get :edit
-      expect(assigns(:step).birthday).to eq(birthday)
+      expect(step.name).to eq("bob")
+      expect(step.birthday).to eq(birthday)
     end
   end
 
   describe "#update" do
-    it "updates the applicant if the step is valid" do
-      current_app = create(:snap_application, name: "Joe", birthday: birthday)
-      session[:snap_application_id] = current_app.id
+    context "valid params" do
+      it "updates the application" do
+        expect do
+          put :update, params: valid_params
+        end.to(
+          change { current_app.reload.attributes.slice("name", "birthday") },
+        )
+      end
 
-      expect do
-        put :update, params: {
-          step: {
-            name: "bob",
-            "birthday(3i)" => "31",
-            "birthday(2i)" => "1",
-            "birthday(1i)" => "1950",
-          },
-        }
-      end.to(
-        change { current_app.reload.attributes.slice("name", "birthday") },
-      )
+      it "redirects to the next step" do
+        put :update, params: valid_params
+
+        expect(response).to redirect_to("/steps/contact-information")
+      end
     end
+  end
 
-    it "redirects to the next step if the step is valid" do
-      put :update, params: {
-        step: {
-          name: "bob",
-          "birthday(3i)" => "31",
-          "birthday(2i)" => "1",
-          "birthday(1i)" => "1950",
-        },
-      }
+  def current_app
+    @_current_app ||= create(:snap_application, birthday: birthday, name: "bob")
+  end
 
-      expect(response).to redirect_to("/steps/contact-information")
-    end
+  def valid_params
+    {
+      step: {
+        name: "RJD2",
+        "birthday(3i)" => "31",
+        "birthday(2i)" => "1",
+        "birthday(1i)" => "1950",
+      },
+    }
+  end
 
-    it "renders edit if the step is invalid" do
-      put :update, params: { step: { name: nil } }
-
-      expect(assigns(:step)).to be_an_instance_of(PersonalDetail)
-      expect(response).to render_template(:edit)
-    end
+  def birthday
+    DateTime.parse("2/2/1945")
   end
 end

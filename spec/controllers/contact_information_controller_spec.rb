@@ -4,15 +4,14 @@ require "rails_helper"
 
 RSpec.describe ContactInformationController, type: :controller do
   let(:step) { assigns(:step) }
+  let(:invalid_params) { { step: { phone_number: "" } } }
+  let(:step_class) { ContactInformation }
+
   before { session[:snap_application_id] = current_app.id }
 
+  include_examples "step controller"
+
   describe "#edit" do
-    it "assigns the correct step" do
-      get :edit
-
-      expect(step).to be_an_instance_of ContactInformation
-    end
-
     it "assigns the fields to the step" do
       get :edit
 
@@ -23,22 +22,6 @@ RSpec.describe ContactInformationController, type: :controller do
 
   describe "#update" do
     context "when valid" do
-      it "updates the app" do
-        valid_params = {
-          phone_number: "11122233333",
-          sms_subscribed: true,
-          email: "test@example.com",
-        }
-
-        put :update, params: { step: valid_params }
-
-        current_app.reload
-
-        valid_params.each do |key, value|
-          expect(current_app[key]).to eq(value)
-        end
-      end
-
       it "redirects to the next step" do
         valid_params = {
           phone_number: "1112223333",
@@ -49,13 +32,6 @@ RSpec.describe ContactInformationController, type: :controller do
 
         expect(response).to redirect_to("/steps/mailing-address")
       end
-    end
-
-    it "renders edit if the step is invalid" do
-      put :update, params: { step: { phone_number: "" } }
-
-      expect(assigns(:step)).to be_an_instance_of(ContactInformation)
-      expect(response).to render_template(:edit)
     end
   end
 

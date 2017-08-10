@@ -3,9 +3,13 @@
 require "rails_helper"
 
 RSpec.describe LegalAgreementController do
-  before do
-    session[:snap_application_id] = current_app.id
-  end
+  let(:step) { assigns(:step) }
+  let(:invalid_params) { { step: { consent_to_terms: "false" } } }
+  let(:step_class) { LegalAgreement }
+
+  before { session[:snap_application_id] = current_app.id }
+
+  include_examples "step controller"
 
   describe "#edit" do
     it "assigns the attributes to the step" do
@@ -25,28 +29,13 @@ RSpec.describe LegalAgreementController do
         expect(response).to redirect_to("/steps/sign-and-submit")
       end
     end
-
-    context "consent to terms is false" do
-      it "is invalid" do
-        params = { consent_to_terms: "false" }
-
-        put :update, params: { step: params }
-
-        expect(assigns(:step)).to be_an_instance_of(LegalAgreement)
-        expect(response).to render_template(:edit)
-      end
-    end
-  end
-
-  def attributes
-    { consent_to_terms: true }
-  end
-
-  def step
-    @_step ||= assigns(:step)
   end
 
   def current_app
     @_current_app ||= create(:snap_application, attributes)
+  end
+
+  def attributes
+    { consent_to_terms: true }
   end
 end
