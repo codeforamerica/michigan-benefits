@@ -55,3 +55,14 @@
   display: block;
   background-color: yellow;
 }
+
+.max-container {
+  max-width: 72rem;
+
+  @include media($tablet-up) {
+    margin: {
+      left: auto;
+      right: auto;
+    }
+  }
+}

@@ -6,4 +6,8 @@ module ApplicationHelper
 
     "template--#{content_for(:template_name)}"
   end
+
+  def debug?
+    ENV["DEBUG"] == "true"
+  end
 end
