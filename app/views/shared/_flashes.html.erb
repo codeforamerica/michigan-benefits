@@ -1,17 +1,10 @@
-<% if notice %>
-<div class="flash-container" id="dismiss-notice">
-  <div class="flash">
-    <p class="flash__message"><%= notice %></p>
-    <a href="#dismiss-notice" class="flash__dismiss"><span class="icon icon-close"></span></a>
+<% if flash.any? -%>
+  <div class="flash-container max-container" id="dismiss-notice">
+    <% flash.each do |key, value| %>
+      <div class="flash flash--<%= key %>">
+        <p class="flash__message"><%= value %></p>
+        <a href="#dismiss-notice" class="flash__dismiss"><span class="icon icon-close icon-<%= key %>"></span></a>
+      </div>
+    <% end %>
   </div>
-</div>
-<% end %>
-
-<% if alert %>
-<div class="flash-container" id="dismiss-notice">
-  <div class="flash flash--error">
-    <p class="flash__message"><%= alert %></p>
-    <a href="#dismiss-notice" class="flash__dismiss"><span class="icon icon-close"></span></a>
-  </div>
-</div>
-<% end %>
+<% end -%>
