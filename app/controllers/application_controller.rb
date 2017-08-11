@@ -8,7 +8,13 @@ class ApplicationController < ActionController::Base
 
   respond_to :html
 
-  helper_method :previous_path, :current_path, :next_path, :current_snap_application, :current_or_new_snap_application
+  helper_method \
+    :current_or_new_snap_application,
+    :current_path,
+    :current_snap_application,
+    :next_path,
+    :previous_path,
+    :skip_path
 
   delegate :variable_size_secure_compare, to: ActiveSupport::SecurityUtils
 

@@ -57,6 +57,11 @@ class StepsController < ApplicationController
     step_path(next_step, params) if next_step
   end
 
+  def skip_path(params = nil)
+    skip_step = step_navigation.skip
+    step_path(skip_step, params) if skip_step
+  end
+
   def step_navigation
     @step_navigation ||= StepNavigation.new(self)
   end

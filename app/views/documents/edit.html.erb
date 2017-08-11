@@ -7,18 +7,22 @@
   <header class="form-card__header">
     <div class="step-section-header">
       <div class="step-section-header__subhead">
-        Lastly, we suggest including some documents if you can right now.
+        Submit Documents
       </div>
     </div>
   </header>
   <div class="form-card__content">
     <p>
-      You can do this later but this will help speed up the process.
+      If you can, we suggest submitting documents like a copy of your ID, proof
+      of income, or proof of residency. You can also do this later if now is
+      not a good time.
     </p>
     <p>
-      Clicking the "Add documents button" that follows will allow you to upload
-      photos of your documents taken with your phone. You may also drag and drop
-      photos or documents onto this area of the page to upload them.
+      Clicking the "Upload documents button" below, or dragging and dropping
+      photos or documents onto this area of the page, will upload them.
+    </p>
+    <p>
+      Clicking "Continue" will attach these documents to your application.
     </p>
 
     <%= form_for @step,
@@ -41,7 +45,7 @@
       <div class="form-card__documents__ctas">
         <button type="button" class="button button--next button--cta button--full-width" id="click-to-upload">
           <i class="icon-file_upload"></i>
-          Add documents
+          Upload documents
         </button>
 
         <%= link_to next_path, class: "button" do %>
@@ -49,12 +53,8 @@
         <% end %>
       </div>
 
-      <%= render 'shared/next_step' %>
+      <%= render 'shared/next_step', disabled: true %>
     <% end %>
-
-    <div class="form-card__documents__faqs">
-      <%= render 'shared/commonly_requested_documents' %>
-    </div>
   </div>
 </div>
 

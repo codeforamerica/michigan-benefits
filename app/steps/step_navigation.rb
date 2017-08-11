@@ -10,6 +10,7 @@ class StepNavigation
       PersonalDetailController,
       LegalAgreementController,
       SignAndSubmitController,
+      DocumentGuideController,
       DocumentsController,
       SuccessController,
     ],
@@ -46,6 +47,10 @@ class StepNavigation
 
   def next
     step_at(1)
+  end
+
+  def skip
+    step_at(2)
   end
 
   def previous

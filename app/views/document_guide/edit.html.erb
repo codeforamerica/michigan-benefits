@@ -1,0 +1,42 @@
+<% content_for :header_title, "Document Guide" %>
+
+<div class="form-card" id="document-drop">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">
+        Lastly, we suggest including some documents if you can right now.
+      </div>
+    </div>
+  </header>
+  <div class="form-card__content">
+    <p>
+      You can do this later but this will help speed up the process.
+    </p>
+    <p>
+      The following page will allow you to both upload photos of your documents
+      with your phone, as well as submit files you already have on your
+      computer or mobile phone/tablet.
+    </p>
+
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <div class="form-card__documents__ctas">
+        <%= link_to next_path, class: "button button--next button--cta" do %>
+          Submit documents here
+        <% end %>
+
+        <%= link_to skip_path, class: "button" do %>
+          I'll do this later
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="form-card__documents__faqs">
+      <%= render 'shared/commonly_requested_documents' %>
+    </div>
+  </div>
+</div>
