@@ -33,7 +33,7 @@ feature "SNAP application" do
     click_on "Sign and submit"
 
     upload_documents
-    click_on "Continue"
+    click_on "Done uploading documents"
 
     fill_in "Your email address", with: "test@example.com"
     click_on "Submit"
@@ -74,7 +74,7 @@ feature "SNAP application" do
     click_on "Sign and submit"
 
     upload_documents
-    click_on "Continue"
+    click_on "Done uploading documents"
 
     click_on "Skip this step"
 
@@ -193,6 +193,5 @@ feature "SNAP application" do
     click_on "Submit documents here"
     add_document_photo "https://example.com/images/drivers_license.jpg"
     add_document_photo "https://example.com/images/proof_of_income.jpg"
-    enable_continue
   end
 end

@@ -18,11 +18,8 @@
       not a good time.
     </p>
     <p>
-      Clicking the "Upload documents button" below, or dragging and dropping
+      Clicking the "Upload documents" button below, or dragging and dropping
       photos or documents onto this area of the page, will upload them.
-    </p>
-    <p>
-      Clicking "Continue" will attach these documents to your application.
     </p>
 
     <%= form_for @step,
@@ -48,12 +45,10 @@
           Upload documents
         </button>
 
-        <%= link_to next_path, class: "button" do %>
-          I'll do this later
-        <% end %>
+        <button class="button button--next button--cta button--full-width" type="submit">
+          Done uploading documents
+        </button>
       </div>
-
-      <%= render 'shared/next_step', disabled: true %>
     <% end %>
   </div>
 </div>
