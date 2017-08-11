@@ -31,7 +31,7 @@ class Dhs1171Pdf
   def client_data
     {
       applying_for_food_assistance: "Yes",
-      full_name: snap_application.name,
+      full_name: snap_application.full_name,
       birth_day: snap_application.birthday.strftime("%d"),
       birth_month: snap_application.birthday.strftime("%m"),
       birth_year: snap_application.birthday.strftime("%Y"),

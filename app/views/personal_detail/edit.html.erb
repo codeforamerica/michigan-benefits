@@ -1,14 +1,16 @@
 <% content_for :header_title, 'Personal details' %>
+
 <div class="form-card">
   <header class="form-card__header">
     <div class="step-section-header">
       <div class="step-section-header__subhead">Tell us more about yourself.</div>
     </div>
   </header>
+
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_radio_set :sex,
-        'What is your sex?',
+          'What is your sex?',
           [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
           notes: [" As it appears on your driver’s license"],
           layout: "inline" %>

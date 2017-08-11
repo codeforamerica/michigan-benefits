@@ -7,6 +7,7 @@ class StepNavigation
       ContactInformationController,
       MailingAddressController,
       ResidentialAddressController,
+      IntroductionCompleteController,
       PersonalDetailController,
       LegalAgreementController,
       SignAndSubmitController,

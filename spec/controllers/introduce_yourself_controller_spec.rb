@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe IntroduceYourselfController do
   let(:step) { assigns(:step) }
-  let(:invalid_params) { { step: { name: nil } } }
+  let(:invalid_params) { { step: { first_name: nil } } }
   let(:step_class) { IntroduceYourself }
 
   before { session[:snap_application_id] = current_app.id }
@@ -15,7 +15,8 @@ RSpec.describe IntroduceYourselfController do
     it "assigns the name and birthday to the step" do
       get :edit
 
-      expect(step.name).to eq("bob")
+      expect(step.first_name).to eq("bob")
+      expect(step.last_name).to eq("booboo")
       expect(step.birthday).to eq(birthday)
     end
   end
@@ -26,7 +27,7 @@ RSpec.describe IntroduceYourselfController do
         expect do
           put :update, params: valid_params
         end.to(
-          change { current_app.reload.attributes.slice("name", "birthday") },
+          change { current_app.reload.attributes.slice("first_name", "last_name", "birthday") },
         )
       end
 
@@ -39,13 +40,22 @@ RSpec.describe IntroduceYourselfController do
   end
 
   def current_app
-    @_current_app ||= create(:snap_application, birthday: birthday, name: "bob")
+    @_current_app ||= create(
+      :snap_application,
+      birthday: birthday,
+      members: [member],
+    )
+  end
+
+  def member
+    create(:member, first_name: "bob", last_name: "booboo")
   end
 
   def valid_params
     {
       step: {
-        name: "RJD2",
+        first_name: "RJ",
+        last_name: "D2",
         "birthday(3i)" => "31",
         "birthday(2i)" => "1",
         "birthday(1i)" => "1950",

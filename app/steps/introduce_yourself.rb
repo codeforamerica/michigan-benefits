@@ -3,10 +3,17 @@
 class IntroduceYourself < Step
   include MultiparameterAttributeAssignment
 
-  step_attributes :name, :birthday
+  step_attributes(
+    :birthday,
+    :first_name,
+    :last_name,
+  )
 
-  validates :name,
-    presence: { message: "Make sure to provide a full name" }
+  validates :first_name,
+    presence: { message: "Make sure to provide a first name" }
+
+  validates :last_name,
+    presence: { message: "Make sure to provide a last name" }
 
   validates :birthday,
     presence: { message: "Make sure to provide a birthday" }
