@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811005112) do
+ActiveRecord::Schema.define(version: 20170811162824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,10 +46,11 @@ ActiveRecord::Schema.define(version: 20170811005112) do
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "social_security_number"
     t.string "marital_status", null: false
     t.string "sex", null: false
     t.bigint "snap_application_id"
+    t.string "encrypted_ssn"
+    t.string "encrypted_ssn_iv"
     t.index ["snap_application_id"], name: "index_members_on_snap_application_id"
   end
 

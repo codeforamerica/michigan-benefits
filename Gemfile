@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby "2.4.1"
 
+gem "attr_encrypted"
 gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "delayed_job_active_record"
