@@ -1,16 +1,6 @@
 # frozen_string_literal: true
 
-class IntroduceYourselfController < StepsController
-  def edit
-    current_app = current_or_new_snap_application
-
-    @step = step_class.new(
-      HashWithIndifferentAccess.
-        new(current_app.attributes).
-        slice(*step_attrs),
-    )
-  end
-
+class IntroduceYourselfController < StandardStepsController
   def update
     @step = step_class.new(step_params)
 
@@ -22,5 +12,15 @@ class IntroduceYourselfController < StepsController
     else
       render :edit
     end
+  end
+
+  private
+
+  def existing_attributes
+    HashWithIndifferentAccess.new(current_or_new_snap_application.attributes)
+  end
+
+  def current_or_new_snap_application
+    current_snap_application || SnapApplication.new
   end
 end

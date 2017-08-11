@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   respond_to :html
 
   helper_method \
-    :current_or_new_snap_application,
     :current_path,
     :current_snap_application,
     :next_path,
@@ -26,11 +25,6 @@ class ApplicationController < ActionController::Base
 
   def set_current_snap_application(application)
     session[:snap_application_id] = application.try(:id)
-  end
-
-  def current_or_new_snap_application
-    @_current_or_new_snap_application ||=
-      current_snap_application || SnapApplication.create
   end
 
   def current_snap_application

@@ -13,7 +13,7 @@ class AddressController < StandardStepsController
 
   private
 
-  def snap_application_attributes
+  def existing_attributes
     HashWithIndifferentAccess.new(address_attributes)
   end
 

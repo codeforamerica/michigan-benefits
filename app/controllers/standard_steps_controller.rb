@@ -2,7 +2,7 @@
 
 class StandardStepsController < StepsController
   def edit
-    @step = step_class.new(snap_application_attributes.slice(*step_attrs))
+    @step = step_class.new(existing_attributes.slice(*step_attrs))
   end
 
   def update
@@ -18,7 +18,7 @@ class StandardStepsController < StepsController
 
   private
 
-  def snap_application_attributes
+  def existing_attributes
     HashWithIndifferentAccess.new(current_snap_application.attributes)
   end
 end
