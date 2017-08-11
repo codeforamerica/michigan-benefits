@@ -22,6 +22,11 @@ feature "SNAP application" do
     select_address_same_as_home_address
     click_on "Continue"
 
+    choose("Female")
+    select "Divorced", from: "What is your marital status?"
+    fill_in "What is your social security number?", with: "123 12 1234"
+    click_on "Continue"
+
     consent_to_terms
 
     fill_in "Your signature", with: "Jessie Tester"
@@ -58,6 +63,10 @@ feature "SNAP application" do
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "12345"
     select_address_same_as_home_address
+    click_on "Continue"
+
+    choose("Female")
+    select "Divorced", from: "What is your marital status?"
     click_on "Continue"
 
     consent_to_terms
@@ -102,10 +111,9 @@ feature "SNAP application" do
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "12345"
     select_unstable_address
-
     click_on "Continue"
 
-    expect(current_path).to eq "/steps/legal-agreement"
+    expect(current_path).to eq "/steps/personal-detail"
   end
 
   scenario "goes back after skipping residential address step" do

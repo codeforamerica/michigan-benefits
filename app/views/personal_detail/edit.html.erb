@@ -1,17 +1,27 @@
-<% content_for :header_title, 'Introduction' %>
+<% content_for :header_title, 'Personal details' %>
 <div class="form-card">
   <header class="form-card__header">
     <div class="step-section-header">
-      <% icon :hello %>
-      <div class="step-section-header__headline">We're here to help.</div>
-      <div class="step-section-header__subhead">To start, please introduce yourself.</div>
+      <div class="step-section-header__subhead">Tell us more about yourself.</div>
     </div>
   </header>
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_input_field :name, "What is your full name?", options: { placeholder: "Jane Doe" } %>
-      <%= f.mb_date_select :birthday, "What is your birthday?", { options: { start_year: 1900, end_year: Time.now.year, default: Date.new(1990,1,15), order: [:month, :day, :year] } } %>
-      <%= render partial: 'shared/next_step' %>
+      <%= f.mb_radio_set :sex,
+        'What is your sex?',
+          [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
+          notes: [" As it appears on your driver’s license"],
+          layout: "inline" %>
+        <%= f.mb_select :marital_status,
+        'What is your marital status?',
+        ['Married', 'Never married', 'Divorced', 'Widowed', 'Separated'],
+        include_blank: "Choose one" %>
+      <%= f.mb_input_field :social_security_number,
+      'What is your social security number?',
+      notes: ["If you don't have one or don't want to answer now it's okay to skip this"],
+      append_html: "<p class='text--secure'><i class='illustration illustration--safety'></i>Social security numbers help ensure you receive the correct benefits. MDHSS maintains strict security guidelines to protect the identities of our residents.</p>" %>
+
+    <%= render partial: 'shared/next_step' %>
     <% end %>
   </div>
 </div>

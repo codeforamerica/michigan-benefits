@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
 class PersonalDetail < Step
-  include MultiparameterAttributeAssignment
+  step_attributes(
+    :sex,
+    :marital_status,
+    :social_security_number,
+  )
 
-  step_attributes :name, :birthday
+  validates :sex, inclusion: {
+    in: %w(male female),
+    message: "Make sure to answer this question",
+  }
 
-  validates :name,
-    presence: { message: "Make sure to provide a full name" }
-
-  validates :birthday,
-    presence: { message: "Make sure to provide a birthday" }
-
-  # https://github.com/rails/rails/pull/8189#issuecomment-10329403
-  def class_for_attribute(attr)
-    return Date if attr == "birthday"
-  end
+  validates :marital_status, inclusion: {
+    in: ["Married", "Never married", "Divorced", "Widowed", "Separated"],
+    message: "Make sure to answer this question",
+  }
 end
