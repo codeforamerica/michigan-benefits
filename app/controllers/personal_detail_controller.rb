@@ -15,7 +15,11 @@ class PersonalDetailController < StandardStepsController
   private
 
   def snap_application_attributes
-    HashWithIndifferentAccess.new(member.attributes)
+    HashWithIndifferentAccess.new(member_attributes)
+  end
+
+  def member_attributes
+    { sex: member.sex, marital_status: member.marital_status, ssn: member.ssn }
   end
 
   def member
