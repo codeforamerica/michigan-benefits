@@ -1,10 +1,11 @@
 class MbFormBuilder < ActionView::Helpers::FormBuilder
-  def mb_input_field(method, label_text, type: "text", notes: [], options: {}, classes: [], prefix: nil, autofocus: nil)
+  def mb_input_field(method, label_text, type: "text", notes: [], options: {}, classes: [], prefix: nil, autofocus: nil, append_html: "")
     classes = classes.append(%w[text-input])
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
         #{label_and_field(method, label_text, text_field(method, { autofocus: autofocus, type: type, class: classes.join(' '), autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off', spellcheck: 'false' }.merge(options)), notes: notes, prefix: prefix)}
         #{errors_for(object, method)}
+        #{append_html}
       </fieldset>
     HTML
   end
@@ -56,6 +57,18 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     end
 
     checkbox_html
+  end
+
+  def mb_select(method, label_text, collection, options = {}, &block)
+    <<-HTML.html_safe
+      <fieldset class="form-group#{error_state(object, method)}">
+        #{label(method, label_contents(label_text, options[:notes]))}
+        <div class="select">
+          #{select(method, collection, options, { class: 'select__element' }, &block)}
+        </div>
+        #{errors_for(object, method)}
+      </fieldset>
+    HTML
   end
 
   private

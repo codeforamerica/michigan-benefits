@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PersonalDetailController do
   let(:step) { assigns(:step) }
-  let(:invalid_params) { { step: { name: nil } } }
+  let(:invalid_params) { { step: { sex: "", marital_status: "" } } }
   let(:step_class) { PersonalDetail }
 
   before { session[:snap_application_id] = current_app.id }
@@ -12,48 +12,46 @@ RSpec.describe PersonalDetailController do
   include_examples "step controller"
 
   describe "#edit" do
-    it "assigns the name and birthday to the step" do
+    it "assigns the fields to the step" do
       get :edit
 
-      expect(step.name).to eq("bob")
-      expect(step.birthday).to eq(birthday)
+      expect(step.sex).to eq("male")
+      expect(step.marital_status).to eq("Married")
+      expect(step.social_security_number).to eq("12345")
     end
   end
 
   describe "#update" do
-    context "valid params" do
-      it "updates the application" do
-        expect do
-          put :update, params: valid_params
-        end.to(
-          change { current_app.reload.attributes.slice("name", "birthday") },
-        )
-      end
+    context "when valid" do
+      it "updates the app" do
+        valid_params = {
+          sex: "female",
+          marital_status: "Divorced",
+          social_security_number: "54321",
+        }
 
-      it "redirects to the next step" do
-        put :update, params: valid_params
+        put :update, params: { step: valid_params }
 
-        expect(response).to redirect_to("/steps/contact-information")
+        current_app_member.reload
+
+        valid_params.each do |key, value|
+          expect(current_app_member[key]).to eq(value)
+        end
+
+        expect(response).to redirect_to("/steps/legal-agreement")
       end
     end
   end
 
   def current_app
-    @_current_app ||= create(:snap_application, birthday: birthday, name: "bob")
+    @_current_app ||= create(:snap_application, members: [member])
   end
 
-  def valid_params
-    {
-      step: {
-        name: "RJD2",
-        "birthday(3i)" => "31",
-        "birthday(2i)" => "1",
-        "birthday(1i)" => "1950",
-      },
-    }
+  def current_app_member
+    @_current_app_member ||= current_app.members.first
   end
 
-  def birthday
-    DateTime.parse("2/2/1945")
+  def member
+    create(:member, sex: "male", marital_status: "Married", social_security_number: "12345")
   end
 end

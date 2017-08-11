@@ -86,7 +86,7 @@ RSpec.describe MailingAddressController, type: :controller do
   end
 
   def address
-    FactoryGirl.create(
+    create(
       :address,
       street_address: "123 Fake St",
       city: "Springfield",

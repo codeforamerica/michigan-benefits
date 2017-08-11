@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809224211) do
+ActiveRecord::Schema.define(version: 20170811005112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(version: 20170809224211) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "social_security_number"
+    t.string "marital_status", null: false
+    t.string "sex", null: false
+    t.bigint "snap_application_id"
+    t.index ["snap_application_id"], name: "index_members_on_snap_application_id"
   end
 
   create_table "snap_applications", force: :cascade do |t|
