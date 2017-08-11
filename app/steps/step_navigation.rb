@@ -2,22 +2,31 @@
 
 class StepNavigation
   ALL = {
-    "Minimal Snap Application" => [
+    "Introduction" => [
       IntroduceYourselfController,
       ContactInformationController,
       MailingAddressController,
       ResidentialAddressController,
       IntroductionCompleteController,
+    ],
+    "Your Household" => [
       PersonalDetailController,
+      HouseholdMembersOverviewController,
+    ],
+    "Legal" => [
       LegalAgreementController,
       SignAndSubmitController,
+    ],
+    "Submit Documents" => [
       DocumentGuideController,
       DocumentsController,
       SuccessController,
     ],
   }.freeze
 
-  SUBSTEPS = {}.freeze
+  SUBSTEPS = {
+    HouseholdAddMemberController => HouseholdMembersOverviewController,
+  }.freeze
 
   class << self
     delegate :first, to: :steps

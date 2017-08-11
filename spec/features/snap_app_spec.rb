@@ -28,6 +28,20 @@ feature "SNAP application" do
     fill_in "What is your social security number?", with: "123 12 1234"
     click_on "Continue"
 
+    on_page "Your Household" do
+      click_on "Add a member"
+    end
+
+    on_page "Your Household" do
+      fill_in "What is their first name?", with: "Joey"
+      fill_in "What is their last name?", with: "Tester"
+      choose("Male")
+      select "Child", from: "What is their relationship to you?"
+      click_on "Continue"
+    end
+
+    click_on "Continue"
+
     consent_to_terms
 
     fill_in "Your signature", with: "Jessie Tester"
@@ -70,6 +84,10 @@ feature "SNAP application" do
     choose("Female")
     select "Divorced", from: "What is your marital status?"
     click_on "Continue"
+
+    on_page("Your Household") do
+      click_on "Continue"
+    end
 
     consent_to_terms
 
@@ -167,6 +185,10 @@ feature "SNAP application" do
   def fill_in_name_and_birthday
     fill_in "What is your first name?", with: "Jessie"
     fill_in "What is your last name?", with: "Tester"
+    fill_in_birthday
+  end
+
+  def fill_in_birthday
     select "January", from: "step_birthday_2i"
     select "1", from: "step_birthday_3i"
     select "1969", from: "step_birthday_1i"
