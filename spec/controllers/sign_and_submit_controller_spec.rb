@@ -35,7 +35,7 @@ RSpec.describe SignAndSubmitController do
 
       put :update, params: params
 
-      expect(response).to redirect_to("/steps/documents")
+      expect(response).to redirect_to("/steps/document-guide")
     end
   end
 

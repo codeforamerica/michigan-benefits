@@ -27,8 +27,7 @@ feature "SNAP application" do
     fill_in "Your signature", with: "Jessie Tester"
     click_on "Sign and submit"
 
-    add_document_photo "https://example.com/images/drivers_license.jpg"
-    add_document_photo "https://example.com/images/proof_of_income.jpg"
+    upload_documents
     click_on "Continue"
 
     fill_in "Your email address", with: "test@example.com"
@@ -65,8 +64,7 @@ feature "SNAP application" do
     fill_in "Your signature", with: "Jessie Tester"
     click_on "Sign and submit"
 
-    add_document_photo "https://example.com/images/drivers_license.jpg"
-    add_document_photo "https://example.com/images/proof_of_income.jpg"
+    upload_documents
     click_on "Continue"
 
     click_on "Skip this step"
@@ -181,5 +179,12 @@ feature "SNAP application" do
   def consent_to_terms
     choose "I agree"
     click_on "Continue"
+  end
+
+  def upload_documents
+    click_on "Submit documents here"
+    add_document_photo "https://example.com/images/drivers_license.jpg"
+    add_document_photo "https://example.com/images/proof_of_income.jpg"
+    enable_continue
   end
 end

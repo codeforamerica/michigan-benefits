@@ -11,6 +11,12 @@ var uploadSetup = function (previewTemplate) {
       window.alert(msg)
     },
     success: function (f) {
+      $('.button--next').removeAttr('disabled')
+
+      var button = $('#click-to-upload')
+      var buttonHtml = button.html()
+      button.html(buttonHtml.replace('Upload documents', 'Upload more documents'))
+
       var source = $('#form-card__documents__handlebars_template').html()
       var template = window.Handlebars.compile(source)
       var context = {
