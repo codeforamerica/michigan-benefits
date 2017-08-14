@@ -1,0 +1,28 @@
+.list--complex {
+  margin-bottom: 1em;
+}
+
+.list--complex > li {
+  border-bottom: 1px solid $color-light-grey;
+  padding-bottom: .5em;
+  margin-bottom: 1.5em;
+}
+
+.list--complex .toolbar__item {
+  color: $color-dark-grey;
+  font-size: $font-size-small;
+  margin-right: 0;
+  &:not(:last-of-type) {
+    &:after {
+      display: inline-block;
+      content: "/";
+      padding-left: .5em;
+      margin-right: .5em;
+    }
+  }
+
+}
+
+.list--complex h3  {
+  margin-bottom: 0;
+}

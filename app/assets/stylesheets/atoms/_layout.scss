@@ -1,0 +1,78 @@
+.slab {
+  @include full-bleed();
+  position: relative;
+  padding: {
+    top: 2em;
+    bottom: 2em;
+  }
+  border-bottom: 1px solid $color-tan;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.slab--white {
+  background-color: #FFFFFF;
+}
+
+.slab--gradient {
+  background-color: rgba($color-teal, .05);
+  @include linear-gradient(to right, rgba($color-magenta, .015) 0%, rgba($color-teal, .04) 65%);
+}
+
+.slab--padded {
+    padding: {
+        top: 3em;
+        bottom: 3em;
+    }
+}
+
+.slab--not-padded {
+  padding: {
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.slab--bleed {
+  overflow: hidden;
+}
+
+.card {
+    box-shadow: 0px 3px 8px rgba(0,0,0,.15);
+    border-radius: $border-radius;
+    padding: 1.5em $site-margins/2;
+    background-color: #FFFFFF;
+    margin-bottom: 2em;
+    > *:last-child {
+        margin-bottom: 0;
+    }
+
+    @include media($tablet-up) {
+      padding: 1.5em 2em;
+    }
+}
+
+.notice {
+  background-color: rgba($color-teal, .05);
+  padding: $site-margins/2;
+  margin-bottom: 1em;
+}
+
+.tile {
+  border: 1px solid $color-light-grey;
+  padding: 1.5em 1em;
+}
+
+.textwell {
+  text-align: left;
+  margin-bottom: 1em;
+
+  @include media($tablet-up) {
+    border: 2px solid $color-light-grey;
+    padding: 2em;
+    max-height: 30rem;
+    overflow: auto;
+  }
+}

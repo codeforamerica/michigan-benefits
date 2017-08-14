@@ -1,0 +1,66 @@
+.tooltipped {
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+
+  @include media($tablet-up) {
+    position: relative;
+  }
+
+  &:after {
+    content: '?';
+    position: relative;
+    top: -.2em;
+    display: inline-block;
+    margin-left: .2em;
+    margin-right: .2em;
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.2em;
+    font-size: .6em;
+    text-align: center;
+    color: $color-teal;
+    border: 1px solid #000;
+    border-radius: 50%;
+  }
+  &:hover {
+    .tooltipped__tip {
+      display: block;
+    }
+  }
+}
+
+.tooltipped__tip {
+  display: none;
+  position: fixed;
+  bottom: .5em;
+  z-index: 10;
+  left: .5em;
+  right: .5em;
+  color: #fff;
+  width: auto;
+  padding: .7em .5em;
+  background-color: $color-darkest-grey;
+  white-space: normal;
+  font-size: $font-size-small;
+  line-height: $line-height-normal;
+  font-weight: 500;
+  text-align: center;
+  border-radius: $border-radius;
+
+  @include media($tablet-up) {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -$tooltip-width/2;
+    width: $tooltip-width;
+    margin-bottom: 2em;
+    &:before {
+      @include triangle(bottom, $color: $color-darkest-grey, $size: 10px);
+      position: absolute;
+      left: 50%;
+      margin-left: -15px;
+      bottom: -10px;
+    }
+  }
+}

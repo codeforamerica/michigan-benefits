@@ -1,0 +1,17 @@
+.template--question {
+  .form-card {
+    margin-top: -.5em;
+    max-width: 72rem;
+    margin-bottom: -.5em;
+
+
+    @include media($tablet-up) {
+      margin-top: 0;
+      margin-bottom: 1em;
+      margin: {
+        left: auto;
+        right: auto;
+      }
+    }
+  }
+}

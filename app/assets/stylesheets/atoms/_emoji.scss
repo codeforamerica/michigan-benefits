@@ -1,0 +1,159 @@
+.emoji {
+  display: inline-block;
+  text-indent: -9999px;
+  height: 1em;
+  width: 1em;
+  content: '';
+  background-size: 100% auto;
+  position: relative;
+  background-repeat: no-repeat;
+}
+
+.emoji--inline {
+  top: .2em;
+
+}
+
+.emoji--huge {
+  width: 6em;
+  height: 6em;
+}
+
+.emoji--big {
+  width: 3em;
+  height: 3em;
+}
+
+.emoji--med {
+  width: 2.4em;
+  height: 2.4em;
+}
+
+.emoji--small {
+  width: 1.8em;
+  height: 1.8em;
+}
+
+.emoji--grinning-face {
+  background-image: image-url('emojis/1f600.png');
+}
+
+.emoji--neutral-face {
+  background-image: image-url('emojis/1f610.png');
+}
+
+.emoji--frowning-face {
+  background-image: image-url('emojis/1f641.png');
+}
+
+.emoji--thumbs-up {
+  background-image: image-url('emojis/1f44d.png');
+}
+
+.emoji--checkmark {
+  background-image: image-url('emojis/2705.png');
+}
+
+.emoji--clipboard {
+  background-image: image-url('emojis/1f4cb.png');
+}
+
+.emoji--page-facing-up {
+  background-image: image-url('emojis/1f4c4.png');
+}
+
+.emoji--blush {
+  background-image: image-url('emojis/1f60a.png');
+}
+
+.emoji--pencil {
+  background-image: image-url('emojis/270f.png');
+}
+
+.emoji--ok {
+  background-image: image-url('emojis/1f44c.png');
+}
+
+.emoji--eggs {
+  background-image: image-url('emojis/1f373.png');
+}
+
+.emoji--credit-card {
+  background-image: image-url('emojis/1f4b3.png');
+}
+
+.emoji--avocado {
+  background-image: image-url('emojis/1f951.png');
+}
+
+.emoji--phone {
+  background-image: image-url('emojis/260e.png');
+}
+
+.emoji--mail {
+  background-image: image-url('emojis/1f4eb.png');
+}
+
+.emoji--bust {
+  background-image: image-url('emojis/1f464.png');
+}
+
+.emoji--money {
+  background-image: image-url('emojis/1f4b5.png');
+}
+
+.emoji--house {
+  background-image: image-url('emojis/1f3e0.png');
+}
+
+.emoji--dollar-sign {
+  background-image: image-url('emojis/1f4b2.png');
+}
+
+.emoji--memo {
+  background-image: image-url('emojis/1f4dd.png');
+}
+
+.emoji--lock {
+  background-image: image-url('emojis/1f512.png');
+}
+
+.emoji--to-mobile {
+  background-image: image-url('emojis/1f4f2.png');
+}
+
+.emoji--carrot {
+  background-image: image-url('emojis/1f955.png');
+}
+
+.emoji--backpack {
+  background-image: image-url('emojis/1f392.png');
+}
+
+.emoji--money-bag {
+  background-image: image-url('emojis/1f4b0.png');
+}
+
+.emoji--confused-face {
+  background-image: image-url('emojis/1f914.png');
+}
+
+.emoji--fist {
+  background-image: image-url('emojis/270a.png')
+}
+
+.emoji--stew {
+  background-image: image-url('emojis/1f958.png')
+}
+
+.emoji--rice-bowl {
+  background-image: image-url('emojis/1f35a.png')
+}
+
+.emoji--salad {
+  background-image: image-url('emojis/1f957.png')
+}
+
+.emoji--finger-down {
+  background-image: image-url('emojis/1f447.png')
+}

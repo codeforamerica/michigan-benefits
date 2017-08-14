@@ -1,0 +1,29 @@
+.reveal__link {
+  text-decoration: none;
+  &:after {
+    position: relative;
+    top: .1em;
+    font-family: $font-icon;
+    content: '\e316';
+  }
+}
+
+.reveal__content {
+  border: 1px solid $color-light-grey;
+  border-radius: $border-radius;
+  padding: 1em;
+}
+
+.reveal {
+  margin-bottom: 1em;
+  &.is-hidden {
+    .reveal__link {
+      &:after {
+        content: '\e313';
+      }
+    }
+    .reveal__content {
+      display: none;
+    }
+  }
+}
