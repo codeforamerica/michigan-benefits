@@ -1,8 +1,8 @@
 // Fonts
 $font-system:         -apple-system, BlinkMacSystemFont,
-                        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-                        "Fira Sans", "Droid Sans", "Helvetica Neue",
-                        sans-serif;
+"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+"Fira Sans", "Droid Sans", "Helvetica Neue",
+sans-serif;
 
 $font-icon:           'icomoon';
 
@@ -21,24 +21,30 @@ $line-height-display: 1.3em;
 
 
 // Colors
-$color-background:    #FAFAF9;
-$color-teal:          #019C86;
-$color-magenta:       #A6005E;
-$color-tan:           #DFD7CC;
-$color-darkest-grey:  #30302F;
-$color-dark-grey:     #666666;
-$color-grey:          #AAAAAA;
-$color-light-grey:    #EAEAE9;
-$color-green:         #009933;
-$color-yellow:        #FFC61E;
-$color-orange:        #D48C00;
-$color-red:           #D40000;
+$color-background:    #fafaf9;
+$color-dark-grey:     #666;
+$color-darkest-grey:  #30302f;
+$color-green:         #093;
+$color-grey:          #aaa;
+$color-light-grey:    #eaeae9;
+$color-magenta:       #a6005e;
+$color-orange:        #d48c00;
+$color-red:           #d40000;
+$color-sky:           #07a9d4;
+$color-tan:           #dfd7cc;
+$color-teal:          #019c86;
+$color-white:         #fff;
+$color-yellow:        #ffc61e;
+$color-bright-yellow: #ff0;
+$color-light-sky:     lighten($color-sky, 50%);
+$color-dark-sky:      shade($color-sky, 15%);
 
 
 // Breakpoints
 $mobile-up:           481px;
 $tablet-up:           601px;
 $site-max-up:         961px;
+
 
 // Magic Numbers
 $site-margins:        40px;
@@ -63,10 +69,9 @@ $width-image-large:   10em;
 
 
 // Form Widths
-$width-form-med:      12em;
-$width-form-long:      20em;
-$width-form-short:     6em;
-
+$width-form-med:        12em;
+$width-form-long:       20em;
+$width-form-short:      6em;
 $width-form-casenumber: 8em;
 $width-form-phone:      8em;
 $width-form-name:       12em;
@@ -75,6 +80,26 @@ $width-form-ssn:        7em;
 $width-form-searchbar:  30em;
 
 
+// Form Colors
+$form-color-border: $color-light-grey;
+$form-color-border-focus:  $color-dark-sky;
+
+
+// Border Colors
+$border-color: $color-light-grey;
+
+// Button Colors
+$button-color: $color-light-grey;
+$button-border-color: $color-grey;
+$button-cta-color: $color-sky;
+$button-cta-border-color: $color-dark-sky;
+
+
 // Animations
 $animation-fast:      .1s ease-out;
 $animation-med:      .2s ease-out;
+
+
+// Michigan Benefits
+$step-header-height:  54px;
+$max-width: 72rem;

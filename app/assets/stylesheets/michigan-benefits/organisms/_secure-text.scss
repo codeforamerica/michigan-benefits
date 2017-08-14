@@ -1,0 +1,16 @@
+.text--secure {
+  color: $color-sky;
+  background-color: $color-light-sky;
+  padding: 1em 1em 1em 3em;
+  position: relative;
+  font-size: $font-size-small;
+  line-height: $line-height-normal;
+  margin-top: 2em;
+
+  i {
+    position: absolute;
+    left: 0.7em;
+    top: 0.8em;
+    font-size: $font-size-normal * 1.2;
+  }
+}

@@ -27,12 +27,12 @@ label {
   margin-bottom: 1em;
   padding: .5em 0;
   border: 0;
-  border-bottom: 2px solid $color-dark-grey;
+  border-bottom: 2px solid $form-color-border;
   border-radius: 0;
   background-color: transparent;
   outline: none;
   &:focus {
-    border-color: $color-teal;
+    border-color: $form-color-border-focus;
   }
   @include placeholder() {
     color: $color-grey;
@@ -65,6 +65,8 @@ label {
     height: 22px;
     width: 22px;
     border-radius: 50%;
+
+    &:focus,
     &:checked {
       &:before {
         content: '';
@@ -77,8 +79,15 @@ label {
         height: 12px;
         width: 12px;
         border-radius: 50%;
-        background-color: $color-teal;
       }
+    }
+
+    &:focus:before {
+      background-color: $color-grey;
+    }
+
+    &:checked:before {
+      background-color: $form-color-border-focus;
     }
   }
   &:hover {
@@ -172,7 +181,7 @@ label {
     font-family: $font-icon;
     content: '\e313';
     background-color: $color-light-grey;
-    color: $color-teal;
+    color: $form-color-border-focus;
     border: 2px solid $color-light-grey;
     width: 2em;
     text-align: center;
@@ -198,7 +207,7 @@ label {
   @include appearance(none);
   position: relative;
   z-index: 1;
-  border: 2px solid $color-light-grey;
+  border: 2px solid $form-color-border;
   border-radius: $border-radius;
   padding: .5em 2.7em .5em .7em;
   font-family: $font-system;
@@ -208,7 +217,7 @@ label {
   background-color: transparent;
 
   &:focus {
-    border-color: $color-teal;
+    border-color: $form-color-border-focus;
   }
 }
 

@@ -21,6 +21,7 @@ body {
   overflow: hidden;
   padding-left: $site-margins/2;
   padding-right: $site-margins/2;
+
   @include media($tablet-up) {
     padding-left: $site-margins;
     padding-right: $site-margins;

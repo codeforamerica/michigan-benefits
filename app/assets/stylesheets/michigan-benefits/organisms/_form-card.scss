@@ -1,0 +1,10 @@
+%max-container {
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-card {
+  @extend %max-container;
+  margin-bottom: 2em;
+}

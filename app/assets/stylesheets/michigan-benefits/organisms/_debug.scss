@@ -1,0 +1,9 @@
+.debug {
+  @extend %max-container;
+
+  background-color: $color-bright-yellow;
+  display: block;
+  font-family: monospace;
+  font-size: 12px;
+  text-align: center;
+}

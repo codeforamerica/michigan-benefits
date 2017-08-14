@@ -1,0 +1,42 @@
+.step-header {
+  align-items: center;
+  background-color: $color-sky;
+  border-bottom: 2px solid $color-dark-sky;
+  color: $color-white;
+  display: flex;
+  font-size: $font-size-small;
+  height: $step-header-height;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+
+  @include media($tablet-up) {
+    + .form-card {
+      margin-top: $site-margins / 2;
+    }
+  }
+
+  &__back-link {
+    color: inherit;
+    height: 40px;
+    margin-left: 0;
+    padding: 6px 10px;
+    position: relative;
+    text-decoration: none;
+    top: 2px;
+    width: 40px;
+
+    &:active,
+    &:visited {
+      color: inherit;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-small;
+    margin: 0;
+    margin-left: 10px;
+  }
+}

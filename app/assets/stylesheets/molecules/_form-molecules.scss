@@ -1,35 +1,35 @@
 .input-group--block {
   .radio-button, .checkbox {
-      display: block;
-      width: 100%;
-      max-width: $width-form-long;
+    display: block;
+    width: 100%;
+    max-width: $width-form-long;
   }
 }
 
 .input-group--inline {
   display: block;
   @include clearfix();
-    .radio-button, .checkbox {
-        display: inline-block;
-        margin-right: .3em;
-    }
-    .select {
-        display: inline-block;
-        margin-right: .5em;
-    }
-    margin-bottom: .5em;
+  .radio-button, .checkbox {
+    display: inline-block;
+    margin-right: .3em;
+  }
+  .select {
+    display: inline-block;
+    margin-right: .5em;
+  }
+  margin-bottom: .5em;
 }
 
 .input-group--two-up {
-    @include clearfix();
-    .radio-button, .checkbox {
-        display: block;
-        float: left;
-        width: 100%;
-        max-width: $width-form-med;
-        margin-right: .5em;
-    }
-    margin-bottom: .5em;
+  @include clearfix();
+  .radio-button, .checkbox {
+    display: block;
+    float: left;
+    width: 100%;
+    max-width: $width-form-med;
+    margin-right: .5em;
+  }
+  margin-bottom: .5em;
 }
 
 .input-group--image {
@@ -43,46 +43,46 @@
 }
 
 .text-input-group {
-    display: table;
-    margin-bottom: 1em;
-    font-size: $font-size-h3;
-    line-height: 1em;
-    border-collapse: separate;
-    width: 100%;
-    .text-input-group__prefix {
-        display: table-cell;
-        width: 1%;
-        font-weight: 500;
-        border-bottom: 2px solid $color-dark-grey;
-        padding: 0 .3em .5em 0;
-        vertical-align: middle;
-    }
-    .text-input {
-        display: table-cell;
-        margin-bottom: 0;
-        vertical-align: middle;
-    }
-    .text-input-group__postfix {
-        display: table-cell;
-        width: 1%;
-        font-weight: 500;
-        border-bottom: 2px solid $color-dark-grey;
-        padding: 0 0 .5em .3em;
-        vertical-align: middle;
-    }
+  display: table;
+  margin-bottom: 1em;
+  font-size: $font-size-h3;
+  line-height: 1em;
+  border-collapse: separate;
+  width: 100%;
+  .text-input-group__prefix {
+    display: table-cell;
+    width: 1%;
+    font-weight: 500;
+    border-bottom: 2px solid $color-dark-grey;
+    padding: 0 .3em .5em 0;
+    vertical-align: middle;
+  }
+  .text-input {
+    display: table-cell;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  .text-input-group__postfix {
+    display: table-cell;
+    width: 1%;
+    font-weight: 500;
+    border-bottom: 2px solid $color-dark-grey;
+    padding: 0 0 .5em .3em;
+    vertical-align: middle;
+  }
 }
 
 .form-group {
-    margin-bottom: 3em;
-    position: relative;
-    .form-question + .text--help, .form-question + .text--small {
-        margin-top: -1em;
-        margin-bottom: 1em;
-    }
+  margin-bottom: 3em;
+  position: relative;
+  .form-question + .text--help, .form-question + .text--small {
+    margin-top: -1em;
+    margin-bottom: 1em;
+  }
 
-    &:last-of-type {
-      margin-bottom: 0;
-    }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .form-group--error {
@@ -127,10 +127,10 @@
   .select__element {
     width: 100%;
     font-size: $font-size-normal;
-    border: 2px solid $color-tan;
+    border: 2px solid $form-color-border;
 
     &:focus {
-      border-color: $color-teal;
+      border-color: $form-color-border-focus;
     }
 
     @include media($tablet-up) {
@@ -159,52 +159,52 @@
 }
 
 .question-with-follow-up__follow-up {
-    display: none;
-    @include full-bleed();
-    position: relative;
-    background-color: $color-background;
-    border-top: 2px solid $color-tan;
-    border-bottom: 2px solid $color-tan;
-    padding: {
-        top: 2em;
-        bottom: 2em;
-        left: $site-margins;
-    }
+  display: none;
+  @include full-bleed();
+  position: relative;
+  background-color: $color-background;
+  border-top: 2px solid $form-color-border;
+  border-bottom: 2px solid $form-color-border;
+  padding: {
+    top: 2em;
+    bottom: 2em;
+    left: $site-margins;
+  }
 
+  @include media($tablet-up) {
+    border-left: 2px solid $form-color-border;
+    border-right: 2px solid $form-color-border;
+    padding-left: $site-margins*2;
+  }
+
+  .form-group:last-of-type {
+    margin-bottom: 0;
+  }
+
+
+  &:before {
+    @include triangle(top, $color: $form-color-border, $size: 12px);
+    content: '';
+    display: block;
+    position: absolute;
+    top: -19px;
+    left: $site-margins/2+20;
     @include media($tablet-up) {
-        border-left: 2px solid $color-tan;
-        border-right: 2px solid $color-tan;
-        padding-left: $site-margins*2;
+      left: $site-margins+20;
     }
+  }
 
-    .form-group:last-of-type {
-      margin-bottom: 0;
+  &:after {
+    @include triangle(top, $color: $color-background, $size: 10px);
+    content: '';
+    display: block;
+    position: absolute;
+    top: -15px;
+    left: $site-margins/2+22;
+    @include media($tablet-up) {
+      left: $site-margins+22;
     }
-
-
-    &:before {
-        @include triangle(top, $color: $color-tan, $size: 12px);
-        content: '';
-        display: block;
-        position: absolute;
-        top: -19px;
-        left: $site-margins/2+20;
-        @include media($tablet-up) {
-            left: $site-margins+20;
-        }
-    }
-
-    &:after {
-        @include triangle(top, $color: $color-background, $size: 10px);
-        content: '';
-        display: block;
-        position: absolute;
-        top: -15px;
-        left: $site-margins/2+22;
-        @include media($tablet-up) {
-            left: $site-margins+22;
-        }
-    }
+  }
 }
 
 .feedback-survey__form {
