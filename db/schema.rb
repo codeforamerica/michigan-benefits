@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814185733) do
+ActiveRecord::Schema.define(version: 20170814220048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,11 @@ ActiveRecord::Schema.define(version: 20170814185733) do
     t.boolean "consent_to_terms"
     t.boolean "mailing_address_same_as_residential_address"
     t.boolean "unstable_housing", default: false
+    t.boolean "everyone_a_citizen"
+    t.boolean "anyone_disabled"
+    t.boolean "anyone_new_mom"
+    t.boolean "anyone_in_college"
+    t.boolean "anyone_living_elsewhere"
   end
 
 end

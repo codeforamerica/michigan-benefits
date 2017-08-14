@@ -23,7 +23,7 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
-    choose("Female")
+    select_radio(question: "What is your sex?", answer: "Female")
     select "Divorced", from: "What is your marital status?"
     fill_in "What is your social security number?", with: "123 12 1234"
     click_on "Continue"
@@ -35,12 +35,19 @@ feature "SNAP application" do
     on_page "Your Household" do
       fill_in "What is their first name?", with: "Joey"
       fill_in "What is their last name?", with: "Tester"
-      choose("Male")
+      select_radio(question: "What is their sex?", answer: "Male")
       select "Child", from: "What is their relationship to you?"
       click_on "Continue"
     end
 
-    click_on "Continue"
+    on_page("Your Household") do
+      click_on "Continue"
+    end
+
+    on_page("Your Household") do
+      answer_household_more_info_questions
+      click_on "Continue"
+    end
 
     consent_to_terms
 
@@ -81,11 +88,16 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
-    choose("Female")
+    select_radio(question: "What is your sex?", answer: "Female")
     select "Divorced", from: "What is your marital status?"
     click_on "Continue"
 
     on_page("Your Household") do
+      click_on "Continue"
+    end
+
+    on_page("Your Household") do
+      answer_household_more_info_questions
       click_on "Continue"
     end
 
@@ -195,23 +207,56 @@ feature "SNAP application" do
   end
 
   def subscribe_to_sms_updates
-    choose "Yes"
+    select_radio(
+      question: "May we send text messages to that phone number help you " + \
+        "through the enrollment process?",
+      answer: "Yes",
+    )
   end
 
   def select_address_same_as_home_address
-    choose "Yes"
+    select_radio(
+      question: "Is this address the same as your home address?",
+      answer: "Yes",
+    )
   end
 
   def select_address_not_same_as_home_address
-    choose "No"
+    select_radio(
+      question: "Is this address the same as your home address?",
+      answer: "No",
+    )
   end
 
   def select_unstable_address
     check "Check this box if you do not have a stable address"
   end
 
+  def answer_household_more_info_questions
+    select_radio(
+      question: "Is each person a US citizen/national?",
+      answer: "Yes",
+    )
+    select_radio(
+      question: "Does anyone have a disability?",
+      answer: "No",
+    )
+    select_radio(
+      question: "Is anyone pregnant or has been pregnant recently?",
+      answer: "No",
+    )
+    select_radio(
+      question: "Is anyone enrolled in college or vocational school?",
+      answer: "No",
+    )
+    select_radio(
+      question: "Is anyone temporarily living outside the home?",
+      answer: "No",
+    )
+  end
+
   def consent_to_terms
-    choose "I agree"
+    choose("I agree")
     click_on "Continue"
   end
 

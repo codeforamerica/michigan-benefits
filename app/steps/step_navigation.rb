@@ -12,6 +12,7 @@ class StepNavigation
     "Your Household" => [
       PersonalDetailController,
       HouseholdMembersOverviewController,
+      HouseholdMoreInfoController,
     ],
     "Legal" => [
       LegalAgreementController,
