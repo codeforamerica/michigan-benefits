@@ -34,7 +34,8 @@ class IntroduceYourselfController < StandardStepsController
   end
 
   def member
-    current_or_new_snap_application.members.first || current_or_new_snap_application.members.new
+    current_or_new_snap_application.members.first ||
+      current_or_new_snap_application.members.new
   end
 
   def current_or_new_snap_application

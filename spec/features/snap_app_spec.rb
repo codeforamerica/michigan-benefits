@@ -40,7 +40,8 @@ feature "SNAP application" do
     click_on "Submit"
 
     expect(page).to have_text(
-      "You will receive an email with your filled out application attached in a few minutes.",
+      "You will receive an email with your filled out application attached in
+        a few minutes.",
     )
   end
 
@@ -146,7 +147,9 @@ feature "SNAP application" do
     fill_in "What is the best phone number to reach you?", with: "1234567890"
     click_on "Continue"
 
-    expect(find_field("What is the best phone number to reach you?").value).to eq "1234567890"
+    expect(
+      find_field("What is the best phone number to reach you?").value,
+    ).to eq "1234567890"
   end
 
   scenario "saves user data across steps", :js do

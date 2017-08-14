@@ -25,6 +25,11 @@ class MailingAddress < Step
   validates :state,
     inclusion: { in: %w(MI), message: "Make sure the county is MI" }
 
-  validates :mailing_address_same_as_residential_address,
-    inclusion: { in: %w(true false), message: "Make sure to answer this question" }
+  validates(
+    :mailing_address_same_as_residential_address,
+    inclusion: {
+      in: %w(true false),
+      message: "Make sure to answer this question",
+    },
+  )
 end

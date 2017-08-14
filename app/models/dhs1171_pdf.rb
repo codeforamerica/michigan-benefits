@@ -46,7 +46,11 @@ class Dhs1171Pdf
   end
 
   def prepend_cover_sheet_to_completed_form
-    system("pdftk #{COVERSHEET_PDF} #{filled_in_form.path} cat output #{complete_form_with_cover.path}")
+    system(
+      <<~eos
+        pdftk #{COVERSHEET_PDF} #{filled_in_form.path} cat output #{complete_form_with_cover.path}
+      eos
+    )
   end
 
   def complete_form_with_cover

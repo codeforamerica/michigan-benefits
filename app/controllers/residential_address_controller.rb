@@ -4,7 +4,8 @@ class ResidentialAddressController < AddressController
   private
 
   def address
-    current_snap_application.addresses.where.not(mailing: true).first || current_snap_application.addresses.new(mailing: false)
+    current_snap_application.addresses.where.not(mailing: true).first ||
+      current_snap_application.addresses.new(mailing: false)
   end
 
   def snap_application_update_params
