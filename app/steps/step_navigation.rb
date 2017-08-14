@@ -14,6 +14,10 @@ class StepNavigation
       HouseholdMembersOverviewController,
       HouseholdMoreInfoController,
     ],
+    "Money & Income" => [
+      IncomeChangeController,
+      IncomeChangeExplanationController,
+    ],
     "Legal" => [
       LegalAgreementController,
       SignAndSubmitController,
