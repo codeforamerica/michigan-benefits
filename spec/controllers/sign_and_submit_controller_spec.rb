@@ -15,7 +15,9 @@ RSpec.describe SignAndSubmitController do
     it "assigns the attributes to the step" do
       get :edit
 
-      expect(attributes.keys.map { |attr| [attr, step.send(attr)] }.to_h).to eq attributes
+      expect(attributes.keys.map { |attr| [attr, step.send(attr)] }.to_h).to eq(
+        attributes,
+      )
     end
   end
 

@@ -34,7 +34,8 @@ RSpec.describe MailingAddressController, type: :controller do
           mailing_address_same_as_residential_address: "true",
         }
 
-        put :update, params: { step: valid_params.merge(mailing_same_as_residential) }
+        put :update,
+          params: { step: valid_params.merge(mailing_same_as_residential) }
 
         current_app.reload
 
@@ -42,7 +43,9 @@ RSpec.describe MailingAddressController, type: :controller do
           expect(current_app_mailing_address[key]).to eq(value)
         end
 
-        expect(current_app.mailing_address_same_as_residential_address).to be true
+        expect(current_app.mailing_address_same_as_residential_address).to be(
+          true,
+        )
       end
 
       it "always sets the county to 'Genesee' and state to 'MI'" do

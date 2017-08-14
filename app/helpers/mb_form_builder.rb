@@ -1,5 +1,15 @@
 class MbFormBuilder < ActionView::Helpers::FormBuilder
-  def mb_input_field(method, label_text, type: "text", notes: [], options: {}, classes: [], prefix: nil, autofocus: nil, append_html: "")
+  def mb_input_field(
+    method,
+    label_text,
+    type: "text",
+    notes: [],
+    options: {},
+    classes: [],
+    prefix: nil,
+    autofocus: nil,
+    append_html: ""
+  )
     classes = classes.append(%w[text-input])
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
@@ -24,7 +34,15 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
-  def mb_radio_set(method, label_text, collection, notes: [], layout: "block", variant: "", classes: [])
+  def mb_radio_set(
+    method,
+    label_text,
+    collection,
+    notes: [],
+    layout: "block",
+    variant: "",
+    classes: []
+  )
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}#{(' ' + classes.join(' ')).strip}">
         #{label_contents(label_text, notes)}

@@ -3,7 +3,7 @@
 require "simplecov"
 require "pry"
 
-# Run code coverage and save to CircleCI's artifacts directory if we're on CircleCI
+# Run code coverage and save to CI's artifacts directory if we're on CircleCI
 if ENV["CI"]
   SimpleCov.coverage_dir(File.join(ENV["CIRCLE_ARTIFACTS"], "coverage"))
 end
@@ -37,7 +37,9 @@ RSpec.configure do |config|
 
   if ENV["CI"]
     config.before(:example, :focus) do |example|
-      raise "#{example.description} was committed with `:focus` and should not have been"
+      raise(
+        "#{example.description} was committed with `:focus`",
+      )
     end
   end
 end

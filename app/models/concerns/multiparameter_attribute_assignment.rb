@@ -20,7 +20,9 @@ module MultiparameterAttributeAssignment
       end
     end
 
-    assign_multiparameter_attributes(multi_parameter_attributes) unless multi_parameter_attributes.empty?
+    unless multi_parameter_attributes.empty?
+      assign_multiparameter_attributes(multi_parameter_attributes)
+    end
   end
 
   alias attributes= assign_attributes
@@ -50,16 +52,33 @@ module MultiparameterAttributeAssignment
 
     callstack.each do |name, values_with_empty_parameters|
       begin
-        raise unknown_attribute_error_class, "unknown attribute: #{name}" unless respond_to?("#{name}=")
-        send("#{name}=", MultiparameterAttribute.new(self, name, values_with_empty_parameters).read_value)
+        unless respond_to?("#{name}=")
+          raise unknown_attribute_error_class, "unknown attribute: #{name}"
+        end
+        send(
+          "#{name}=",
+          MultiparameterAttribute.new(
+            self,
+            name,
+            values_with_empty_parameters,
+          ).read_value,
+        )
       rescue => ex
-        errors << attribute_assignment_error_class.new("error on assignment #{values_with_empty_parameters.values.inspect} to #{name} (#{ex.message})", ex, name)
+        values = values_with_empty_parameters.values.inspect
+        errors << attribute_assignment_error_class.new(
+          "error on assignment #{values} to #{name} (#{ex.message})",
+          ex,
+          name,
+        )
       end
     end
 
     unless errors.empty?
-      error_descriptions = errors.map(&:message).join(",")
-      raise multiparameter_assignment_errors_class.new(errors), "#{errors.size} error(s) on assignment of multiparameter attributes [#{error_descriptions}]"
+      messages = errors.map(&:message).join(",")
+      raise(
+        multiparameter_assignment_errors_class.new(errors),
+        "#{errors.size} error(s): [#{messages}]",
+      )
     end
   end
 
@@ -70,8 +89,13 @@ module MultiparameterAttributeAssignment
       attribute_name = multiparameter_name.split("(").first
       attributes[attribute_name] ||= {}
 
-      parameter_value = value.empty? ? nil : type_cast_attribute_value(multiparameter_name, value)
-      attributes[attribute_name][find_parameter_position(multiparameter_name)] ||= parameter_value
+      parameter_value = if value.empty?
+                          nil
+                        else
+                          type_cast_attribute_value(multiparameter_name, value)
+                        end
+      parameter_position = find_parameter_position(multiparameter_name)
+      attributes[attribute_name][parameter_position] ||= parameter_value
     end
 
     attributes
@@ -143,7 +167,9 @@ class MultiparameterAttribute
     begin
       Date.new(*set_values)
     rescue ArgumentError # if Date.new raises an exception on an invalid date
-      instantiate_time_object(set_values).to_date # we instantiate Time object and convert it back to a date thus using Time"s logic in handling invalid dates
+      # we instantiate Time object and convert it back to a date thus using
+      # Time's logic in handling invalid dates
+      instantiate_time_object(set_values).to_date
     end
   end
 
@@ -161,9 +187,17 @@ class MultiparameterAttribute
   end
 
   def validate_required_parameters!(positions)
-    if missing_parameter = positions.detect { |position| !values.key?(position) }
-      raise ArgumentError.new("Missing Parameter - #{name}(#{missing_parameter})")
+    missing_parameter = missing_parameter(positions)
+
+    if missing_parameter
+      raise ArgumentError.new(
+        "Missing Parameter - #{name}(#{missing_parameter})",
+      )
     end
+  end
+
+  def missing_parameter(positions)
+    positions.detect { |position| !values.key?(position) }
   end
 
   def extract_max_param(upper_cap = 100)

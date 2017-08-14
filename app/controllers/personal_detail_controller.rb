@@ -23,6 +23,7 @@ class PersonalDetailController < StandardStepsController
   end
 
   def member
-    current_snap_application.members.first || current_snap_application.members.new
+    current_snap_application.members.first ||
+      current_snap_application.members.new
   end
 end

@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]
-  resource :file_preview, only: %i[show] if Rails.env.test? || Rails.env.development?
+
+  if Rails.env.test? || Rails.env.development?
+    resource :file_preview, only: %i[show]
+  end
+
   resource :resource, only: %i[show]
   resource :sessions, only: %i[new destroy] do
     collection do
