@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811210655) do
+ActiveRecord::Schema.define(version: 20170814185733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,10 @@ ActiveRecord::Schema.define(version: 20170811210655) do
     t.string "encrypted_ssn_iv"
     t.string "first_name"
     t.string "last_name"
+    t.datetime "birthday"
+    t.boolean "buy_food_with"
+    t.string "relationship"
+    t.boolean "requesting_food_assistance", default: true
     t.index ["snap_application_id"], name: "index_members_on_snap_application_id"
   end
 

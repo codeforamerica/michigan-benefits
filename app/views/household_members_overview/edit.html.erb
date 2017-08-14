@@ -1,0 +1,46 @@
+<% content_for :header_title, 'Your Household' %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">
+        How many people are in your household?
+      </div>
+      <p class="text--help step-section-header__subhead-help">
+        This includes everyone who lives in your home (including you) and anyone
+        you list on your federal tax returns.
+      </p>
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <div class="slab slab--not-padded">
+      <div class="card card--narrow">
+        <div>
+          <div class="button buttonish button--full-width">
+            <i class="button__icon--left icon-check--color"></i>
+            <%= "#{@step.first_name.titleize} (that's you!)" %>
+          </div>
+        </div>
+
+        <% @step.non_applicant_members.each do |member| %>
+          <div>
+            <% path = step_path(HouseholdAddMemberController, member_id: member.to_param) %>
+            <%= link_to(path, class: 'button button--full-width') do %>
+              <i class="button__icon--left icon-check--color"></i>
+              <%= member.first_name.titleize %>
+            <% end %>
+          </div>
+        <% end %>
+        <%= link_to(
+          step_path(HouseholdAddMemberController),
+          class: 'button button-full-width button-bold') do %>
+          <i class="button__icon--left icon-add"></i>
+          Add a member
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'shared/next_step_link' %>
+</div>

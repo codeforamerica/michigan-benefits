@@ -27,7 +27,13 @@ RSpec.describe IntroduceYourselfController do
         expect do
           put :update, params: valid_params
         end.to(
-          change { current_app.reload.attributes.slice("first_name", "last_name", "birthday") },
+          change do
+            current_app.reload.attributes.slice(
+              "first_name",
+              "last_name",
+              "birthday",
+            )
+          end,
         )
       end
 

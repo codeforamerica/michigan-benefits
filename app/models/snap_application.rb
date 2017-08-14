@@ -13,4 +13,8 @@ class SnapApplication < ApplicationRecord
   def primary_member
     members.order(:id).first || NullMember.new
   end
+
+  def non_applicant_members
+    members - [primary_member]
+  end
 end
