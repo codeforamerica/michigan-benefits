@@ -1,15 +1,17 @@
 <% content_for :header_title, 'Introduction' %>
+
 <div class="form-card">
   <header class="form-card__header">
     <div class="step-section-header">
-      <% icon :hello %>
+      <div class="step-section-header__icon illustration illustration--hello"></div>
       <div class="step-section-header__headline">We're here to help.</div>
       <div class="step-section-header__subhead">To start, please introduce yourself.</div>
     </div>
   </header>
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_input_field :name, "What is your full name?", options: { placeholder: "Jane Doe" } %>
+      <%= f.mb_input_field :first_name, "What is your first name?" %>
+      <%= f.mb_input_field :last_name, "What is your last name?" %>
       <%= f.mb_date_select :birthday, "What is your birthday?", { options: { start_year: 1900, end_year: Time.now.year, default: Date.new(1990,1,15), order: [:month, :day, :year] } } %>
       <%= render partial: 'shared/next_step' %>
     <% end %>

@@ -1,0 +1,24 @@
+<% content_for :header_title, 'Introduction complete' %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__icon illustration illustration--celebrate"></div>
+      <div class="step-section-header__headline">
+        Thank you <%= @step.first_name %>!
+      </div>
+      <div class="step-section-header__subhead">
+        It should take about 10 more minutes to complete a full application.
+      </div>
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <h4>What happens next?</h4>
+    <p>
+      Next, we'll ask you some questions to help us determine your eligibility for
+      food assistance as quickly as possible.
+    </p>
+  </div>
+  <%= render partial: 'shared/next_step_link' %>
+</div>

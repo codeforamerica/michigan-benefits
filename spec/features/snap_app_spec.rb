@@ -5,10 +5,7 @@ feature "SNAP application" do
     visit root_path
     click_on "Apply now"
 
-    fill_in "What is your full name?", with: "Jessie Tester"
-    select "January", from: "step_birthday_2i"
-    select "1", from: "step_birthday_3i"
-    select "1969", from: "step_birthday_1i"
+    fill_in_name_and_birthday
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "12345678990"
@@ -21,6 +18,10 @@ feature "SNAP application" do
     fill_in "ZIP code", with: "12345"
     select_address_same_as_home_address
     click_on "Continue"
+
+    on_page "Introduction complete" do
+      click_on "Continue"
+    end
 
     choose("Female")
     select "Divorced", from: "What is your marital status?"
@@ -47,10 +48,7 @@ feature "SNAP application" do
     visit root_path
     click_on "Apply now"
 
-    fill_in "What is your full name?", with: "Jessie Tester"
-    select "January", from: "step_birthday_2i"
-    select "1", from: "step_birthday_3i"
-    select "1969", from: "step_birthday_1i"
+    fill_in_name_and_birthday
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "12345678990"
@@ -63,6 +61,10 @@ feature "SNAP application" do
     fill_in "ZIP code", with: "12345"
     select_address_same_as_home_address
     click_on "Continue"
+
+    on_page "Introduction complete" do
+      click_on "Continue"
+    end
 
     choose("Female")
     select "Divorced", from: "What is your marital status?"
@@ -87,10 +89,7 @@ feature "SNAP application" do
     visit root_path
     click_on "Apply now"
 
-    fill_in "What is your full name?", with: "Jessie Tester"
-    select "January", from: "step_birthday_2i"
-    select "1", from: "step_birthday_3i"
-    select "1969", from: "step_birthday_1i"
+    fill_in_name_and_birthday
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "12345678990"
@@ -111,17 +110,14 @@ feature "SNAP application" do
     select_unstable_address
     click_on "Continue"
 
-    expect(current_path).to eq "/steps/personal-detail"
+    expect(current_path).to eq "/steps/introduction-complete"
   end
 
   scenario "goes back after skipping residential address step" do
     visit root_path
     click_on "Apply now"
 
-    fill_in "What is your full name?", with: "Jessie Tester"
-    select "January", from: "step_birthday_2i"
-    select "1", from: "step_birthday_3i"
-    select "1969", from: "step_birthday_1i"
+    fill_in_name_and_birthday
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "12345678990"
@@ -144,7 +140,7 @@ feature "SNAP application" do
     visit root_path
     click_on "Apply now"
 
-    fill_in "What is your full name?", with: "Jessie Tester"
+    fill_in_name_and_birthday
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "1234567890"
@@ -157,15 +153,20 @@ feature "SNAP application" do
     visit root_path
     click_on "Apply now"
 
-    fill_in "What is your full name?", with: "Jessie Tester"
-    select "January", from: "step_birthday_2i"
-    select "1", from: "step_birthday_3i"
-    select "1969", from: "step_birthday_1i"
+    fill_in_name_and_birthday
     click_on "Continue"
 
     find(:css, ".step-header__back-link").click
 
-    expect(find("#step_name").value).to eq "Jessie Tester"
+    expect(find("#step_first_name").value).to eq "Jessie"
+  end
+
+  def fill_in_name_and_birthday
+    fill_in "What is your first name?", with: "Jessie"
+    fill_in "What is your last name?", with: "Tester"
+    select "January", from: "step_birthday_2i"
+    select "1", from: "step_birthday_3i"
+    select "1969", from: "step_birthday_1i"
   end
 
   def subscribe_to_sms_updates

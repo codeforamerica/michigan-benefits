@@ -6,8 +6,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="<%= Rails.application.config.project_description %>" name="description"/>
     <title>
-      <% if content_for?(:title) %>
-        <%= content_for(:title) %>
+      <% if content_for?(:header_title) %>
+        <%= content_for(:header_title) %>
       <% else %>
         <%= Rails.application.config.site_name %>
       <% end %>
