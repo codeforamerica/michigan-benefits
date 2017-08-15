@@ -8,7 +8,8 @@ module StepsHelper
     )
   end
 
-  def data_md5(str)
-    Digest::MD5.hexdigest(str ? str.squish : "")
+  def header_name(household_member)
+    name = household_member.first_name.titleize
+    household_member.primary_member? ? "#{name} (that’s you!)" : name
   end
 end
