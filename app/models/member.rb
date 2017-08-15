@@ -14,4 +14,12 @@ class Member < ApplicationRecord
   def primary_member?
     snap_application.primary_member.id == id
   end
+
+  def employed?
+    employment_status == "employed"
+  end
+
+  def self_employed?
+    employment_status == "self_employed"
+  end
 end

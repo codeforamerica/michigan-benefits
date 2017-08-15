@@ -1,0 +1,38 @@
+<% content_for :header_title, 'Money & Income' %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">
+        Tell us more about your household's employment
+      </div>
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <% @step.members.each do |member| %>
+        <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+          <div class="household-member-group" data-member-name="<%= member.full_name %>">
+            <h4 class="step-section-header__headline"><%= member.full_name %></h4>
+            <% if member.employed? %>
+              <%= ff.mb_input_field :employed_employer_name, "Employer name" %>
+              <%= ff.mb_input_field :employed_hours_per_week, "Usual hours per week" %>
+              <%= ff.mb_input_field :employed_pay_quantity,
+                "Pay (before tax)",
+                notes: ["This includes money withheld from paychecks"] %>
+              <%= ff.mb_select :employed_pay_interval,
+                "per",
+                ["Hour", "Day", "Week", "2 weeks", "Month", "Year"], layout: "inline" %>
+              <% else # self employed %>
+                <%= ff.mb_input_field :self_employed_profession, "Type of work" %>
+                <%= ff.mb_input_field :self_employed_monthly_income, "Monthly pay (before tax)" %>
+                <%= ff.mb_input_field :self_employed_monthly_expenses, "Monthly expenses" %>
+              <% end %>
+          </div>
+        <% end %>
+      <% end %>
+      <%= render 'shared/next_step' %>
+    <% end %>
+  </div>
+</div>
