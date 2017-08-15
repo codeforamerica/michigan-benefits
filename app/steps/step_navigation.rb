@@ -17,6 +17,7 @@ class StepNavigation
     "Money & Income" => [
       IncomeChangeController,
       IncomeChangeExplanationController,
+      IncomeEmploymentStatusController,
     ],
     "Legal" => [
       LegalAgreementController,

@@ -59,6 +59,22 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
+    on_page "Money & Income" do
+      member_name = "Jessie (that’s you!)"
+
+      within(".household-member-group[data-md5='#{data_md5(member_name)}']") do
+        choose("Self Employed")
+      end
+
+      name_two = "Joey"
+
+      within(".household-member-group[data-md5='#{data_md5(name_two)}']") do
+        choose("Not Employed")
+      end
+
+      click_on "Continue"
+    end
+
     consent_to_terms
 
     fill_in "Your signature", with: "Jessie Tester"
@@ -113,6 +129,16 @@ feature "SNAP application" do
 
     on_page "Money & Income" do
       choose "No"
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
+      member_name = "Jessie (that’s you!)"
+
+      within(".household-member-group[data-md5='#{data_md5(member_name)}']") do
+        choose("Self Employed")
+      end
+
       click_on "Continue"
     end
 

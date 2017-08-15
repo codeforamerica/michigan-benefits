@@ -1,4 +1,6 @@
 class Member < ApplicationRecord
+  belongs_to :snap_application
+
   attribute :ssn
   attr_encrypted(
     :ssn,
@@ -7,5 +9,9 @@ class Member < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def primary_member?
+    snap_application.primary_member.id == id
   end
 end
