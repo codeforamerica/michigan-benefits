@@ -1,0 +1,22 @@
+<% content_for :header_title, 'Money & Income' %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">
+        Has your household had a change in income in the past 30 days?
+      </div>
+      <p class="text--help step-section-header__subhead-help">
+        This includes change of jobs, job loss, change in hours or wages, strikes,
+        etc.
+      </p>
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_radio_set :income_change,
+        '',
+        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }] %>
+      <%= render 'shared/next_step' %>
+    <% end %>

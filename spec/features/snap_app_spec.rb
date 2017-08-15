@@ -49,6 +49,16 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
+    on_page "Money & Income" do
+      choose "Yes"
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
+      fill_in "step[income_change_explanation]", with: "EXPLAINING!!!"
+      click_on "Continue"
+    end
+
     consent_to_terms
 
     fill_in "Your signature", with: "Jessie Tester"
@@ -98,6 +108,11 @@ feature "SNAP application" do
 
     on_page("Your Household") do
       answer_household_more_info_questions
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
+      choose "No"
       click_on "Continue"
     end
 
