@@ -9,7 +9,11 @@ RSpec.describe IncomeEmploymentStatusController do
   end
   let(:invalid_params) do
     {
-      step: { members: { member.id => { employment_status: "" } } },
+      step: {
+        members: {
+          member.id => { employment_status: "" },
+        },
+      },
     }
   end
 
