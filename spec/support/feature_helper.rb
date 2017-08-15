@@ -11,6 +11,12 @@ module FeatureHelper
     )
   end
 
+  def select_radio(question:, answer:)
+    within(find(:fieldset, text: question)) do
+      choose answer
+    end
+  end
+
   def on_page(page_title)
     expect(page.title).to eq page_title
     yield
