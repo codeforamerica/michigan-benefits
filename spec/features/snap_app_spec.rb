@@ -256,9 +256,9 @@ feature "SNAP application" do
       question: "Does anyone have a disability?",
       answer: "No",
     )
-    select_radio(
+    js_select_radio(
       question: "Is anyone pregnant or has been pregnant recently?",
-      answer: "No",
+      answer_id: "step_anyone_new_mom_false",
     )
     select_radio(
       question: "Is anyone enrolled in college or vocational school?",

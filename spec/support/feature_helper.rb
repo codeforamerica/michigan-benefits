@@ -17,6 +17,12 @@ module FeatureHelper
     end
   end
 
+  def js_select_radio(question:, answer_id:)
+    within(find(:fieldset, text: question)) do
+      find("##{answer_id}").trigger("click")
+    end
+  end
+
   def on_page(page_title)
     expect(page.title).to eq page_title
     yield
