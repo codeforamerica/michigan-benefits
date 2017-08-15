@@ -60,15 +60,11 @@ feature "SNAP application" do
     end
 
     on_page "Money & Income" do
-      member_name = "Jessie (that’s you!)"
-
-      within(".household-member-group[data-md5='#{data_md5(member_name)}']") do
+      within(".household-member-group[data-member-name='Jessie Tester']") do
         choose("Self Employed")
       end
 
-      name_two = "Joey"
-
-      within(".household-member-group[data-md5='#{data_md5(name_two)}']") do
+      within(".household-member-group[data-member-name='Joey Tester']") do
         choose("Not Employed")
       end
 
@@ -133,7 +129,7 @@ feature "SNAP application" do
     end
 
     on_page "Money & Income" do
-      within(".household-member-group[data-member_name='Jessie Tester']") do
+      within(".household-member-group[data-member-name='Jessie Tester']") do
         choose("Self Employed")
       end
 
