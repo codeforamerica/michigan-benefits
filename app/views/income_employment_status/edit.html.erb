@@ -18,7 +18,7 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <% @step.members.each do |member| %>
         <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
-          <div class="household-member-group" data-md5="<%= data_md5(header_name(member))%>">
+          <div class="household-member-group" data-member_name="<%= member.full_name %>">
             <h4 class="step-section-header__headline"><%= header_name(member) %></h4>
             <%= ff.mb_radio_set :employment_status,
               "",

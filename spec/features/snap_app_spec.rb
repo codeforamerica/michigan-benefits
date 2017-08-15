@@ -133,9 +133,7 @@ feature "SNAP application" do
     end
 
     on_page "Money & Income" do
-      member_name = "Jessie (that’s you!)"
-
-      within(".household-member-group[data-md5='#{data_md5(member_name)}']") do
+      within(".household-member-group[data-member_name='Jessie Tester']") do
         choose("Self Employed")
       end
 
