@@ -22,6 +22,8 @@ class StepNavigation
       IncomeChangeExplanationController,
       IncomeEmploymentStatusController,
       IncomeDetailsPerMemberController,
+      IncomeAdditionalSourcesController,
+      IncomeAdditionalController,
     ],
     "Expenses" => [
       ExpensesIntroductionController,

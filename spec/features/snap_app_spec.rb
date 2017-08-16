@@ -104,6 +104,20 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
+    on_page "Money & Income" do
+      check "Pension"
+      check "Social Security"
+
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
+      fill_in "Pension", with: "100"
+      fill_in "Social Security", with: "5"
+
+      click_on "Continue"
+    end
+
     on_page "Expenses" do
       click_on "Continue"
     end
@@ -179,6 +193,10 @@ feature "SNAP application" do
         employment_status: "Not Employed",
       )
 
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
       click_on "Continue"
     end
 
