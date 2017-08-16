@@ -1,0 +1,59 @@
+<% content_for :header_title, "Expenses" %>
+
+<div class="form-card">
+    <header class="form-card__header">
+      <div class="step-section-header">
+        <div class="step-section-header__subhead">
+          Tell us more about your expenses.
+        </div>
+
+        <p class="text--help step-section-header__subhead-help">
+          These expenses help inform how significant your benefits may be.
+          Please include all expenses you can.
+        </p>
+      </div>
+    </header>
+
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <div class="form-card__content">
+        <%= f.mb_radio_set :dependent_care,
+          "Does your household have dependent care expenses?",
+          [{ label: "Yes", value: true }, { label: "No", value: false }],
+          notes: <<~NOTE
+            This includes child care (including day care and after school
+            programs), elderly care, and adult disabled care.
+          NOTE
+        %>
+
+        <%= f.mb_radio_set :medical,
+          "Does your household have medical expenses?",
+          [{ label: "Yes", value: true }, { label: "No", value: false }],
+          notes: <<~NOTE
+            This includes health insurance, co-pays, prescriptions, dental,
+            hospital bills, etc.
+          NOTE
+        %>
+
+        <%= f.mb_radio_set :court_ordered,
+          "Does your household have court-ordered expenses?",
+          [{ label: "Yes", value: true }, { label: "No", value: false }],
+          notes: "This includes child support, alimony, etc." %>
+
+        <%= f.mb_radio_set :tax_deductible,
+          "Does your household have tax deductible expenses?",
+          [{ label: "Yes", value: true }, { label: "No", value: false }],
+          notes: <<~NOTE
+            This includes student loan interest and any other expense that
+            can be deducted on your tax return.
+          NOTE
+        %>
+    </div>
+
+    <%= render "shared/next_step" %>
+  <% end %>
+</div>

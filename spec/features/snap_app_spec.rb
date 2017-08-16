@@ -118,9 +118,7 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
-    on_page "Expenses" do
-      click_on "Continue"
-    end
+    submit_expenses
 
     consent_to_terms
 
@@ -200,9 +198,7 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
-    on_page "Expenses" do
-      click_on "Continue"
-    end
+    submit_expenses
 
     consent_to_terms
 
@@ -336,7 +332,7 @@ feature "SNAP application" do
   end
 
   def consent_to_terms
-    choose("I agree")
+    choose "I agree"
     click_on "Continue"
   end
 
@@ -349,6 +345,48 @@ feature "SNAP application" do
   def select_employment(full_name:, employment_status:)
     within(".household-member-group[data-member-name='#{full_name}']") do
       choose(employment_status)
+    end
+  end
+
+  def submit_expenses
+    on_page "Expenses" do
+      click_on "Continue"
+    end
+
+    on_page "Expenses" do
+      fill_in "step[rent_expense]", with: "600"
+      fill_in "step[property_tax_expense]", with: "100"
+      fill_in "step[insurance_expense]", with: "100"
+
+      check "Heat"
+      check "Cooling"
+
+      click_on "Continue"
+    end
+
+    on_page "Expenses" do
+      choose "step_dependent_care_true"
+      choose "step_medical_false"
+      choose "step_court_ordered_true"
+      choose "step_tax_deductible_false"
+
+      click_on "Continue"
+    end
+
+    on_page "Expenses" do
+      fill_in "step[monthly_care_expenses]", with: "200"
+      check "Childcare"
+
+      fill_in "step[monthly_medical_expenses]", with: "200"
+      check "Co-pays"
+
+      fill_in "step[monthly_court_ordered_expenses]", with: "10"
+      check "Alimony"
+
+      fill_in "step[monthly_tax_deductible_expenses]", with: "100"
+      check "Student loan interest"
+
+      click_on "Continue"
     end
   end
 end

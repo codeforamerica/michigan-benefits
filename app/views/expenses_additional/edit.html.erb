@@ -1,0 +1,77 @@
+<% content_for :header_title, "Expenses" %>
+
+<div class="form-card">
+    <header class="form-card__header">
+      <div class="step-section-header">
+        <div class="step-section-header__subhead">
+          Tell us more about the other expenses you listed.
+        </div>
+      </div>
+    </header>
+
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <div class="form-card__content">
+        <h4 class="step-section-header__headline">
+          Care expenses
+        </h4>
+
+        <%= f.mb_input_field :monthly_care_expenses,
+          "In total, how much do you pay in care expenses each month?" %>
+
+        <%= f.mb_checkbox_set [
+          { method: :childcare, label: "Childcare" },
+          { method: :elderly_care, label: "Elderly Care" },
+          { method: :disabled_adult_care, label: "Disabled adult care" },
+          ], label_text: "What kind of care expenses do you have?" %>
+
+        <h4 class="step-section-header__headline">
+          Medical Expenses
+        </h4>
+
+        <%= f.mb_input_field :monthly_medical_expenses,
+          "In total, how much do you pay in medical expenses each month?" %>
+
+        <%= f.mb_checkbox_set [
+          { method: :health_insurance, label: "Health insurance" },
+          { method: :co_pays, label: "Co-pays" },
+          { method: :prescriptions, label: "Prescriptions" },
+          { method: :dental, label: "Dental" },
+          { method: :in_home_care, label: "In-home care" },
+          { method: :transportation, label: "Transportation" },
+          { method: :hospital_bills, label: "Hospital bills" },
+          { method: :other, label: "Other" },
+          ], label_text: "What kind of medical expenses do you have?" %>
+
+        <h4 class="step-section-header__headline">
+          Court-ordered expenses
+        </h4>
+
+        <%= f.mb_input_field :monthly_court_ordered_expenses,
+          "In total, how much do you pay in court-ordered expenses each month?" %>
+
+        <%= f.mb_checkbox_set [
+          { method: :child_support, label: "Child support" },
+          { method: :alimony, label: "Alimony" },
+          ], label_text: "What kind of court-ordered expenses do you have?" %>
+
+        <h4 class="step-section-header__headline">
+          Tax-deductible expenses
+        </h4>
+
+        <%= f.mb_input_field :monthly_tax_deductible_expenses,
+          "In total, how much do you pay in tax-deductible expenses each month?" %>
+
+        <%= f.mb_checkbox_set [
+          { method: :student_loan_interest, label: "Student loan interest" },
+          { method: :other_tax_deductible, label: "Other" },
+          ], label_text: "What kind of tax-deductible expenses do you have?" %>
+      </div>
+
+      <%= render "shared/next_step" %>
+    <% end %>
+</div>

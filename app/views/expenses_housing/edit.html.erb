@@ -1,0 +1,52 @@
+<% content_for :header_title, "Expenses" %>
+
+<div class="form-card">
+    <header class="form-card__header">
+      <div class="step-section-header">
+        <div class="step-section-header__subhead">
+          Tell us about your housing expenses.
+        </div>
+
+        <p class="text--help step-section-header__subhead-help">
+          Housing expenses help determine the amount of Food Assistance you may
+          be eligible for.
+        </p>
+      </div>
+    </header>
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <div class="form-card__content">
+        <%= f.mb_input_field :rent_expense,
+        "How much does your household pay in rent or mortgage each month?" %>
+
+        <%= f.mb_input_field :property_tax_expense,
+        "How much do you pay in property tax each month?" %>
+
+        <%= f.mb_input_field :insurance_expense,
+        "How much do you pay in insurance each month?" %>
+
+        <p class="text--help">
+          <strong>What utilities do you pay?</strong><br/>
+
+          Only check utilities that are not included in your mortgage/rent
+          payments.
+        </p>
+
+        <%= f.mb_checkbox_set([
+           { method: :utility_heat,        label: "Heat" },
+           { method: :utility_cooling,     label: "Cooling" },
+           { method: :utility_electrity,   label: "Electricity" },
+           { method: :utility_water_sewer, label: "Water/Sewer" },
+           { method: :utility_trash,       label: "Trash" },
+           { method: :utility_phone,       label: "Phone" },
+           { method: :utility_other,       label: "Other" }
+         ]) %>
+      </div>
+
+      <%= render "shared/next_step" %>
+    <% end %>
+</div>
