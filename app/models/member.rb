@@ -22,4 +22,8 @@ class Member < ApplicationRecord
   def self_employed?
     employment_status == "self_employed"
   end
+
+  def not_employed?
+    employment_status == "not_employed"
+  end
 end

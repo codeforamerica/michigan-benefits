@@ -4,9 +4,7 @@ class IncomeDetailsPerMemberController < ManyMemberStepsController
   private
 
   def skip?
-    current_snap_application.
-      members.
-      none? { |member| member.employed? || member.self_employed? }
+    current_snap_application.members.all?(&:not_employed?)
   end
 
   def member_attrs
