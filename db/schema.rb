@@ -93,6 +93,28 @@ ActiveRecord::Schema.define(version: 20170816190450) do
     t.boolean "anyone_living_elsewhere"
     t.boolean "income_change"
     t.text "income_change_explanation"
+    t.integer "rent_expense"
+    t.integer "property_tax_expense"
+    t.integer "insurance_expense"
+    t.boolean "utility_heat"
+    t.boolean "utility_cooling"
+    t.boolean "utility_electrity"
+    t.boolean "utility_water_sewer"
+    t.boolean "utility_trash"
+    t.boolean "utility_phone"
+    t.boolean "utility_other"
+    t.boolean "dependent_care"
+    t.boolean "medical"
+    t.boolean "court_ordered"
+    t.boolean "tax_deductible"
+    t.integer "monthly_care_expenses"
+    t.integer "monthly_medical_expenses"
+    t.integer "monthly_court_ordered_expenses"
+    t.integer "monthly_tax_deductible_expenses"
+    t.string "care_expenses", default: [], array: true
+    t.string "medical_expenses", default: [], array: true
+    t.string "court_ordered_expenses", default: [], array: true
+    t.string "tax_deductible_expenses", default: [], array: true
     t.text "additional_income", default: [], array: true
     t.string "income_child_support"
     t.string "income_foster_care"
