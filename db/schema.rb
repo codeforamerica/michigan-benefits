@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815181607) do
+ActiveRecord::Schema.define(version: 20170816000025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(version: 20170815181607) do
     t.string "relationship"
     t.boolean "requesting_food_assistance", default: true
     t.string "employment_status"
+    t.string "employed_employer_name"
+    t.string "employed_hours_per_week"
+    t.string "employed_pay_quantity"
+    t.string "employed_pay_interval"
+    t.string "self_employed_profession"
+    t.string "self_employed_monthly_income"
+    t.string "self_employed_monthly_expenses"
     t.index ["snap_application_id"], name: "index_members_on_snap_application_id"
   end
 

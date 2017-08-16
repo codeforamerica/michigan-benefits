@@ -46,5 +46,4 @@ RSpec.configure do |config|
 
   config.include FeatureHelper, type: :feature
   config.include GenericHelper
-  config.include StepHelper
 end

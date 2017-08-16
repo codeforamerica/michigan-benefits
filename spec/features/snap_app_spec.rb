@@ -60,13 +60,26 @@ feature "SNAP application" do
     end
 
     on_page "Money & Income" do
-      within(".household-member-group[data-member-name='Jessie Tester']") do
-        choose("Self Employed")
-      end
+      select_employment(
+        full_name: "Jessie Tester",
+        employment_status: "Self Employed",
+      )
+      select_employment(
+        full_name: "Joey Tester",
+        employment_status: "Employed",
+      )
+      click_on "Continue"
+    end
 
-      within(".household-member-group[data-member-name='Joey Tester']") do
-        choose("Not Employed")
-      end
+    on_page "Money & Income" do
+      fill_in "Employer name", with: "Company ABC Inc."
+      fill_in "Usual hours per week", with: 25
+      fill_in "Pay (before tax)", with: 100
+      select "Day", from: "per"
+
+      fill_in "Type of work", with: "Chef"
+      fill_in "Monthly pay (before tax)", with: 300
+      fill_in "Monthly expenses", with: 100
 
       click_on "Continue"
     end
@@ -129,9 +142,10 @@ feature "SNAP application" do
     end
 
     on_page "Money & Income" do
-      within(".household-member-group[data-member-name='Jessie Tester']") do
-        choose("Self Employed")
-      end
+      select_employment(
+        full_name: "Jessie Tester",
+        employment_status: "Not Employed",
+      )
 
       click_on "Continue"
     end
@@ -299,5 +313,11 @@ feature "SNAP application" do
     click_on "Submit documents here"
     add_document_photo "https://example.com/images/drivers_license.jpg"
     add_document_photo "https://example.com/images/proof_of_income.jpg"
+  end
+
+  def select_employment(full_name:, employment_status:)
+    within(".household-member-group[data-member-name='#{full_name}']") do
+      choose(employment_status)
+    end
   end
 end

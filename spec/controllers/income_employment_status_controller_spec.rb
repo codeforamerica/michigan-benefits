@@ -19,6 +19,8 @@ RSpec.describe IncomeEmploymentStatusController do
 
   let(:step_class) { IncomeEmploymentStatus }
 
+  before { session[:snap_application_id] = current_app.id }
+
   include_examples "step controller"
 
   describe "#update" do

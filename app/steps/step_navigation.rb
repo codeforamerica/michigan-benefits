@@ -18,6 +18,7 @@ class StepNavigation
       IncomeChangeController,
       IncomeChangeExplanationController,
       IncomeEmploymentStatusController,
+      IncomeDetailsPerMemberController,
     ],
     "Legal" => [
       LegalAgreementController,
