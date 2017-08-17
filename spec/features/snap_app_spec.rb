@@ -23,6 +23,10 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
+    on_page "Introduction" do
+      click_on "Continue"
+    end
+
     select_radio(question: "What is your sex?", answer: "Female")
     select "Divorced", from: "What is your marital status?"
     fill_in "What is your social security number?", with: "123 12 1234"
@@ -62,6 +66,10 @@ feature "SNAP application" do
     end
 
     on_page "Money & Income" do
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
       choose "Yes"
       click_on "Continue"
     end
@@ -93,6 +101,10 @@ feature "SNAP application" do
       fill_in "Monthly pay (before tax)", with: 300
       fill_in "Monthly expenses", with: 100
 
+      click_on "Continue"
+    end
+
+    on_page "Expenses" do
       click_on "Continue"
     end
 
@@ -135,6 +147,10 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
+    on_page "Introduction" do
+      click_on "Continue"
+    end
+
     select_radio(question: "What is your sex?", answer: "Female")
     select "Divorced", from: "What is your marital status?"
     click_on "Continue"
@@ -149,6 +165,10 @@ feature "SNAP application" do
     end
 
     on_page "Money & Income" do
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
       choose "No"
       click_on "Continue"
     end
@@ -159,6 +179,10 @@ feature "SNAP application" do
         employment_status: "Not Employed",
       )
 
+      click_on "Continue"
+    end
+
+    on_page "Expenses" do
       click_on "Continue"
     end
 

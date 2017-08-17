@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IntroductionCompleteController < StepsController
+class IncomeIntroductionController < StepsController
   def update
     redirect_to(next_path)
   end
