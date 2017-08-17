@@ -10,15 +10,20 @@ class StepNavigation
       IntroductionCompleteController,
     ],
     "Your Household" => [
+      HouseholdIntroductionController,
       PersonalDetailController,
       HouseholdMembersOverviewController,
       HouseholdMoreInfoController,
     ],
     "Money & Income" => [
+      IncomeIntroductionController,
       IncomeChangeController,
       IncomeChangeExplanationController,
       IncomeEmploymentStatusController,
       IncomeDetailsPerMemberController,
+    ],
+    "Expenses" => [
+      ExpensesIntroductionController,
     ],
     "Legal" => [
       LegalAgreementController,
