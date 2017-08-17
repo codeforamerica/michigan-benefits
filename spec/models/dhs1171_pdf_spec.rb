@@ -13,13 +13,10 @@ RSpec.describe Dhs1171Pdf do
       )
       client_data = {
         applying_for_food_assistance: "Yes",
-        primary_member_full_name: member.full_name,
         birth_day: member.birthday.strftime("%d"),
         birth_month: member.birthday.strftime("%m"),
         birth_year: member.birthday.strftime("%Y"),
         phone_number: snap_application.phone_number,
-        primary_member_sex_male: "",
-        primary_member_sex_female: "Yes",
         mailing_address_street_address:
         snap_application.mailing_address.street_address,
         mailing_address_city: snap_application.mailing_address.city,
@@ -48,13 +45,17 @@ RSpec.describe Dhs1171Pdf do
         primary_member_new_mom_no: "Yes",
         primary_member_in_college_yes: nil,
         primary_member_in_college_no: "Yes",
+        primary_member_relationship: "",
+        primary_member_sex_male: nil,
+        primary_member_sex_female: "Yes",
+        primary_member_full_name: member.full_name,
       }
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
 
       result = filled_in_values(file: file.path)
       client_data.each do |field, entered_data|
-        expect(result[field.to_s]).to eq entered_data.to_s
+        expect(result[field.to_s].to_s).to eq entered_data.to_s
       end
     end
 
