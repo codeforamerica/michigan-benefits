@@ -6,6 +6,10 @@ class SnapApplication < ApplicationRecord
     addresses.where(mailing: true).first || NullAddress.new
   end
 
+  def residential_address
+    addresses.where.not(mailing: true).first || NullAddress.new
+  end
+
   def full_name
     primary_member.full_name
   end

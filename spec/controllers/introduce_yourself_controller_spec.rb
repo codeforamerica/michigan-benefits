@@ -28,7 +28,7 @@ RSpec.describe IntroduceYourselfController do
           put :update, params: valid_params
         end.to(
           change do
-            current_app.reload.attributes.slice(
+            current_app.primary_member.reload.attributes.slice(
               "first_name",
               "last_name",
               "birthday",
@@ -46,15 +46,11 @@ RSpec.describe IntroduceYourselfController do
   end
 
   def current_app
-    @_current_app ||= create(
-      :snap_application,
-      birthday: birthday,
-      members: [member],
-    )
+    @_current_app ||= create(:snap_application, members: [member])
   end
 
   def member
-    create(:member, first_name: "bob", last_name: "booboo")
+    create(:member, first_name: "bob", last_name: "booboo", birthday: birthday)
   end
 
   def valid_params
