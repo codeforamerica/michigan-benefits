@@ -14,7 +14,10 @@
       <% @step.members.each do |member| %>
         <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
           <div class="household-member-group" data-member-name="<%= member.full_name %>">
-            <h4 class="step-section-header__headline"><%= member.full_name %></h4>
+            <h2 class="step-section-header__headline"><%= member.full_name %></h2>
+            <p class="text--help step-section-header__subhead-help">
+            <%= member.employment_status.titleize %>
+            </p>
             <% if member.employed? %>
               <%= ff.mb_input_field :employed_employer_name, "Employer name" %>
               <%= ff.mb_input_field :employed_hours_per_week, "Usual hours per week" %>

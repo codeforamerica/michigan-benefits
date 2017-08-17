@@ -1,0 +1,31 @@
+# frozen_string_literal: true
+
+class IncomeAdditionalSourcesController < StepsController
+  def edit
+    @step = step_class.new(
+      array_to_checkboxes(current_snap_application.additional_income),
+    )
+  end
+
+  def update
+    current_snap_application.update!(
+      additional_income: checkboxes_to_array(step_params),
+    )
+
+    redirect_to next_path
+  end
+
+  private
+
+  def step_class
+    IncomeAdditionalSources
+  end
+
+  def array_to_checkboxes(array)
+    array.map { |key| [key, true] }.to_h
+  end
+
+  def checkboxes_to_array(checkboxes)
+    checkboxes.select { |_, value| value == "1" }.keys
+  end
+end

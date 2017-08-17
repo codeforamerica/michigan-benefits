@@ -1,0 +1,22 @@
+<% content_for :header_title, 'Money & Income' %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">
+        Tell us more about your additional income.
+      </div>
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+
+      <% @income_fields.each do |method, label| %>
+        <%= f.mb_input_field method, label, notes: ["Monthly amount"] %>
+      <% end %>
+
+      <%= render 'shared/next_step' %>
+    <% end %>
+  </div>
+</div>
