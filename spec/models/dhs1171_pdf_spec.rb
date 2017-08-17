@@ -59,8 +59,7 @@ RSpec.describe Dhs1171Pdf do
     end
 
     it "prepends a cover sheet" do
-      member = create(:member)
-      snap_application = create(:snap_application, members: [member])
+      snap_application = create(:snap_application, :with_member)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
@@ -70,8 +69,7 @@ RSpec.describe Dhs1171Pdf do
     end
 
     it "returns the tempfile" do
-      member = create(:member)
-      snap_application = create(:snap_application, members: [member])
+      snap_application = create(:snap_application, :with_member)
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
 
