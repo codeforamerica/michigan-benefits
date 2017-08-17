@@ -46,6 +46,18 @@ feature "SNAP application" do
 
     on_page("Your Household") do
       answer_household_more_info_questions
+      select_radio(
+        question: "Is anyone enrolled in college or vocational school?",
+        answer: "Yes",
+      )
+      click_on "Continue"
+    end
+
+    on_page("Your Household") do
+      within(find(:fieldset, text: "Who is enrolled in college?")) do
+        check "Joey"
+      end
+
       click_on "Continue"
     end
 
@@ -279,29 +291,6 @@ feature "SNAP application" do
 
   def select_unstable_address
     check "Check this box if you do not have a stable address"
-  end
-
-  def answer_household_more_info_questions
-    select_radio(
-      question: "Is each person a US citizen/national?",
-      answer: "Yes",
-    )
-    select_radio(
-      question: "Does anyone have a disability?",
-      answer: "No",
-    )
-    js_select_radio(
-      question: "Is anyone pregnant or has been pregnant recently?",
-      answer_id: "step_anyone_new_mom_false",
-    )
-    select_radio(
-      question: "Is anyone enrolled in college or vocational school?",
-      answer: "No",
-    )
-    select_radio(
-      question: "Is anyone temporarily living outside the home?",
-      answer: "No",
-    )
   end
 
   def consent_to_terms

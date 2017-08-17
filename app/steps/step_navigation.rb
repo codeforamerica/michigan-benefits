@@ -13,6 +13,7 @@ class StepNavigation
       PersonalDetailController,
       HouseholdMembersOverviewController,
       HouseholdMoreInfoController,
+      HouseholdMoreInfoPerMemberController,
     ],
     "Money & Income" => [
       IncomeChangeController,

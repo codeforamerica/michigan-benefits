@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816000025) do
+ActiveRecord::Schema.define(version: 20170816190450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,11 @@ ActiveRecord::Schema.define(version: 20170816000025) do
     t.string "self_employed_profession"
     t.string "self_employed_monthly_income"
     t.string "self_employed_monthly_expenses"
+    t.boolean "citizen"
+    t.boolean "disabled"
+    t.boolean "new_mom"
+    t.boolean "in_college"
+    t.boolean "living_elsewhere"
     t.index ["snap_application_id"], name: "index_members_on_snap_application_id"
   end
 
@@ -88,6 +93,15 @@ ActiveRecord::Schema.define(version: 20170816000025) do
     t.boolean "anyone_living_elsewhere"
     t.boolean "income_change"
     t.text "income_change_explanation"
+    t.text "additional_income", default: [], array: true
+    t.string "income_child_support"
+    t.string "income_foster_care"
+    t.string "income_other"
+    t.string "income_pension"
+    t.string "income_social_security"
+    t.string "income_ssi_or_disability"
+    t.string "income_unemployment_insurance"
+    t.string "income_workers_compensation"
   end
 
 end
