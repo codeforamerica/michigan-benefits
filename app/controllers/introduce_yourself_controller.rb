@@ -6,7 +6,7 @@ class IntroduceYourselfController < StandardStepsController
 
     if @step.valid?
       app = current_or_new_snap_application
-      app.update!(snap_application_update_params)
+      app.save!
       set_current_snap_application(app)
       member.update!(member_update_params)
       redirect_to(next_path)
@@ -18,19 +18,11 @@ class IntroduceYourselfController < StandardStepsController
   private
 
   def existing_attributes
-    HashWithIndifferentAccess.new(
-      member.attributes.merge(
-        birthday: current_or_new_snap_application.birthday,
-      ),
-    )
-  end
-
-  def snap_application_update_params
-    { birthday: params[:birthday] }
+    HashWithIndifferentAccess.new(member.attributes)
   end
 
   def member_update_params
-    step_params.except("birthday(1i)", "birthday(2i)", "birthday(3i)")
+    step_params
   end
 
   def member

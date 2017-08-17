@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe SendApplicationJob do
   describe "#perform" do
     it "creates a PDF with the snap application data" do
-      snap_application = create(:snap_application)
+      snap_application = create(:snap_application, :with_member)
       tempfile = Tempfile.new("send_application_job_spec")
       pdf_double = double(completed_file: tempfile)
       allow(Dhs1171Pdf).to receive(:new).
@@ -21,7 +21,7 @@ RSpec.describe SendApplicationJob do
     end
 
     it "sends an email" do
-      snap_application = create(:snap_application)
+      snap_application = create(:snap_application, :with_member)
 
       expect do
         SendApplicationJob.new.perform(snap_application: snap_application)
