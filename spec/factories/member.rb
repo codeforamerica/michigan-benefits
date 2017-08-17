@@ -4,5 +4,7 @@ FactoryGirl.define do
     last_name "Pad"
     sex "female"
     marital_status "Widowed"
+    ssn "123 12 1234"
+    birthday { 27.years.ago }
   end
 end

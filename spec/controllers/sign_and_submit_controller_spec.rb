@@ -30,6 +30,8 @@ RSpec.describe SignAndSubmitController do
       end.to change {
         current_app.reload.signature
       }.from("Hans Solo").to("Chiu Baka")
+
+      expect(current_app.signed_at).not_to be nil
     end
 
     it "redirects" do
