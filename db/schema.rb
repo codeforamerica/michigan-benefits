@@ -92,6 +92,15 @@ ActiveRecord::Schema.define(version: 20170817195951) do
     t.boolean "anyone_living_elsewhere"
     t.boolean "income_change"
     t.text "income_change_explanation"
+    t.text "additional_income", default: [], array: true
+    t.string "income_child_support"
+    t.string "income_foster_care"
+    t.string "income_other"
+    t.string "income_pension"
+    t.string "income_social_security"
+    t.string "income_ssi_or_disability"
+    t.string "income_unemployment_insurance"
+    t.string "income_workers_compensation"
     t.integer "rent_expense"
     t.integer "property_tax_expense"
     t.integer "insurance_expense"
@@ -114,15 +123,6 @@ ActiveRecord::Schema.define(version: 20170817195951) do
     t.string "medical_expenses", default: [], array: true
     t.string "court_ordered_expenses", default: [], array: true
     t.string "tax_deductible_expenses", default: [], array: true
-    t.text "additional_income", default: [], array: true
-    t.string "income_child_support"
-    t.string "income_foster_care"
-    t.string "income_other"
-    t.string "income_pension"
-    t.string "income_social_security"
-    t.string "income_ssi_or_disability"
-    t.string "income_unemployment_insurance"
-    t.string "income_workers_compensation"
   end
 
 end

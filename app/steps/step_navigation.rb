@@ -27,9 +27,6 @@ class StepNavigation
     ],
     "Expenses" => [
       ExpensesIntroductionController,
-    ],
-    "Expenses" => [
-      ExpensesIntroductionController,
       ExpensesHousingController,
       ExpensesAdditionalSourcesController,
       ExpensesAdditionalController,
