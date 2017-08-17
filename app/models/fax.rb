@@ -8,22 +8,26 @@ class Fax
     :sfax_username,
     to: :"Rails.application.secrets"
 
-  def self.send_fax(number:, file:)
-    new(number, file).send_fax
+  def self.send_fax(number:, file:, recipient:)
+    new(number, file, recipient).send_fax
   end
 
-  def initialize(number, file)
+  def initialize(number, file, recipient)
     @number = number
     @file = file
+    @recipient = recipient
   end
 
   def send_fax
-    sfax.send_fax(number, file)
+    sfax.send_fax(number, file, recipient)
   end
 
   private
 
-  attr_reader :file, :number
+  attr_reader \
+    :file,
+    :number,
+    :recipient
 
   def sfax
     SFax::Faxer.new(

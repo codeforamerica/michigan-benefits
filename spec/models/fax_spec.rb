@@ -8,7 +8,11 @@ RSpec.describe Fax do
       fake_faxer = double(send_fax: true)
       allow(SFax::Faxer).to receive(:new).and_return(fake_faxer)
 
-      Fax.send_fax(number: "+18005550000", file: "file.pdf")
+      Fax.send_fax(
+        number: "+18005550000",
+        file: "file.pdf",
+        recipient: "Michigan Benefits",
+      )
 
       expect(SFax::Faxer).to have_received(:new).with(
         Rails.application.secrets.sfax_username,
@@ -22,10 +26,14 @@ RSpec.describe Fax do
       fake_faxer = double(send_fax: true)
       allow(SFax::Faxer).to receive(:new).and_return(fake_faxer)
 
-      Fax.send_fax(number: "+18005550000", file: "file.pdf")
+      Fax.send_fax(
+        number: "+18005550000",
+        file: "file.pdf",
+        recipient: "Michigan Benefits",
+      )
 
       expect(fake_faxer).to have_received(:send_fax).
-        with("+18005550000", "file.pdf")
+        with("+18005550000", "file.pdf", "Michigan Benefits")
     end
   end
 end
