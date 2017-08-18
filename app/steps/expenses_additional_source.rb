@@ -5,13 +5,11 @@ class ExpensesAdditionalSource < Step
     :court_ordered,
     :dependent_care,
     :medical,
-    :tax_deductible,
   )
 
   validates :court_ordered,
     :dependent_care,
     :medical,
-    :tax_deductible,
     inclusion: {
       in: [true, false],
       message: "Make sure to answer this question",

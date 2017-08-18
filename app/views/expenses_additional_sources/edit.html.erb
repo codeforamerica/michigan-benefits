@@ -43,15 +43,6 @@
           "Does your household have court-ordered expenses?",
           [{ label: "Yes", value: true }, { label: "No", value: false }],
           notes: "This includes child support, alimony, etc." %>
-
-        <%= f.mb_radio_set :tax_deductible,
-          "Does your household have tax deductible expenses?",
-          [{ label: "Yes", value: true }, { label: "No", value: false }],
-          notes: <<~NOTE
-            This includes student loan interest and any other expense that
-            can be deducted on your tax return.
-          NOTE
-        %>
     </div>
 
     <%= render "shared/next_step" %>

@@ -137,6 +137,12 @@ accounts?",
       click_on "Continue"
     end
 
+    on_page "Expenses" do
+      click_on "Continue"
+    end
+
+    submit_housing_expenses
+    submit_expense_sources(answer: "yes")
     submit_expenses
 
     consent_to_terms
@@ -225,7 +231,15 @@ accounts?",
       click_on "Continue"
     end
 
-    submit_expenses
+    on_page "Expenses" do
+      click_on "Continue"
+    end
+
+    on_page "Expenses" do
+      click_on "Continue"
+    end
+
+    submit_expense_sources(answer: "no")
 
     consent_to_terms
 
@@ -387,11 +401,7 @@ accounts?",
     end
   end
 
-  def submit_expenses
-    on_page "Expenses" do
-      click_on "Continue"
-    end
-
+  def submit_housing_expenses
     on_page "Expenses" do
       fill_in "step[rent_expense]", with: "600"
       fill_in "step[property_tax_expense]", with: "100"
@@ -402,16 +412,27 @@ accounts?",
 
       click_on "Continue"
     end
+  end
 
+  def submit_expense_sources(answer:)
     on_page "Expenses" do
-      choose "step_dependent_care_true"
-      choose "step_medical_false"
-      choose "step_court_ordered_true"
-      choose "step_tax_deductible_false"
-
+      send(
+        "choose_#{answer}",
+        "Does your household have dependent care expenses?",
+      )
+      send(
+        "choose_#{answer}",
+        "Does your household have medical expenses?",
+      )
+      send(
+        "choose_#{answer}",
+        "Does your household have court-ordered expenses?",
+      )
       click_on "Continue"
     end
+  end
 
+  def submit_expenses
     on_page "Expenses" do
       fill_in "step[monthly_care_expenses]", with: "200"
       check "Childcare"
@@ -421,9 +442,6 @@ accounts?",
 
       fill_in "step[monthly_court_ordered_expenses]", with: "10"
       check "Alimony"
-
-      fill_in "step[monthly_tax_deductible_expenses]", with: "100"
-      check "Student loan interest"
 
       click_on "Continue"
     end

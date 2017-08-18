@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818175444) do
+ActiveRecord::Schema.define(version: 20170818220929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,15 +114,12 @@ ActiveRecord::Schema.define(version: 20170818175444) do
     t.boolean "dependent_care"
     t.boolean "medical"
     t.boolean "court_ordered"
-    t.boolean "tax_deductible"
     t.integer "monthly_care_expenses"
     t.integer "monthly_medical_expenses"
     t.integer "monthly_court_ordered_expenses"
-    t.integer "monthly_tax_deductible_expenses"
     t.string "care_expenses", default: [], array: true
     t.string "medical_expenses", default: [], array: true
     t.string "court_ordered_expenses", default: [], array: true
-    t.string "tax_deductible_expenses", default: [], array: true
     t.boolean "money_or_accounts_income"
     t.boolean "real_estate_income"
     t.boolean "vehicle_income"

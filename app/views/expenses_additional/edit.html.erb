@@ -20,56 +20,50 @@
           Care expenses
         </h4>
 
-        <%= f.mb_input_field :monthly_care_expenses,
-          "In total, how much do you pay in care expenses each month?" %>
+        <% if current_snap_application.dependent_care? %>
+          <%= f.mb_input_field :monthly_care_expenses,
+            "In total, how much do you pay in care expenses each month?" %>
 
-        <%= f.mb_checkbox_set [
-          { method: :childcare, label: "Childcare" },
-          { method: :elderly_care, label: "Elderly Care" },
-          { method: :disabled_adult_care, label: "Disabled adult care" },
-          ], label_text: "What kind of care expenses do you have?" %>
+          <%= f.mb_checkbox_set [
+            { method: :childcare, label: "Childcare" },
+            { method: :elderly_care, label: "Elderly Care" },
+            { method: :disabled_adult_care, label: "Disabled adult care" },
+            ], label_text: "What kind of care expenses do you have?" %>
+        <% end %>
 
-        <h4 class="step-section-header__headline">
-          Medical Expenses
-        </h4>
+        <% if current_snap_application.medical? %>
+          <h4 class="step-section-header__headline">
+            Medical Expenses
+          </h4>
 
-        <%= f.mb_input_field :monthly_medical_expenses,
-          "In total, how much do you pay in medical expenses each month?" %>
+          <%= f.mb_input_field :monthly_medical_expenses,
+            "In total, how much do you pay in medical expenses each month?" %>
 
-        <%= f.mb_checkbox_set [
-          { method: :health_insurance, label: "Health insurance" },
-          { method: :co_pays, label: "Co-pays" },
-          { method: :prescriptions, label: "Prescriptions" },
-          { method: :dental, label: "Dental" },
-          { method: :in_home_care, label: "In-home care" },
-          { method: :transportation, label: "Transportation" },
-          { method: :hospital_bills, label: "Hospital bills" },
-          { method: :other, label: "Other" },
+          <%= f.mb_checkbox_set [
+            { method: :health_insurance, label: "Health insurance" },
+            { method: :co_pays, label: "Co-pays" },
+            { method: :prescriptions, label: "Prescriptions" },
+            { method: :dental, label: "Dental" },
+            { method: :in_home_care, label: "In-home care" },
+            { method: :transportation, label: "Transportation" },
+            { method: :hospital_bills, label: "Hospital bills" },
+            { method: :other, label: "Other" },
           ], label_text: "What kind of medical expenses do you have?" %>
+        <% end %>
 
-        <h4 class="step-section-header__headline">
-          Court-ordered expenses
-        </h4>
+        <% if current_snap_application.court_ordered? %>
+          <h4 class="step-section-header__headline">
+            Court-ordered expenses
+          </h4>
 
-        <%= f.mb_input_field :monthly_court_ordered_expenses,
-          "In total, how much do you pay in court-ordered expenses each month?" %>
+          <%= f.mb_input_field :monthly_court_ordered_expenses,
+            "In total, how much do you pay in court-ordered expenses each month?" %>
 
-        <%= f.mb_checkbox_set [
-          { method: :child_support, label: "Child support" },
-          { method: :alimony, label: "Alimony" },
-          ], label_text: "What kind of court-ordered expenses do you have?" %>
-
-        <h4 class="step-section-header__headline">
-          Tax-deductible expenses
-        </h4>
-
-        <%= f.mb_input_field :monthly_tax_deductible_expenses,
-          "In total, how much do you pay in tax-deductible expenses each month?" %>
-
-        <%= f.mb_checkbox_set [
-          { method: :student_loan_interest, label: "Student loan interest" },
-          { method: :other_tax_deductible, label: "Other" },
-          ], label_text: "What kind of tax-deductible expenses do you have?" %>
+          <%= f.mb_checkbox_set [
+            { method: :child_support, label: "Child support" },
+            { method: :alimony, label: "Alimony" },
+            ], label_text: "What kind of court-ordered expenses do you have?" %>
+        <% end %>
       </div>
 
       <%= render "shared/next_step" %>
