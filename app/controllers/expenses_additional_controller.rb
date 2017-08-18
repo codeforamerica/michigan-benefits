@@ -62,23 +62,6 @@ class ExpensesAdditionalController < StepsController
 
   private
 
-  def existing_attributes
-    HashWithIndifferentAccess.new(application_attributes)
-  end
-
-  def application_attributes
-    app = current_snap_application
-
-    {
-      monthly_care_expenses: app.monthly_care_expenses,
-      monthly_medical_expenses: app.monthly_medical_expenses,
-      monthly_court_ordered_expenses: app.monthly_court_ordered_expenses,
-      care_expenses: app.care_expenses,
-      medical_expenses: app.medical_expenses,
-      court_ordered_expenses: app.court_ordered_expenses,
-    }
-  end
-
   def attribute_array
     ARRAY_ATTRIBUTES.keys.flat_map do |key|
       current_snap_application[key]
