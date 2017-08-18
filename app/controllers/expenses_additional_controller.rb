@@ -99,14 +99,6 @@ class ExpensesAdditionalController < StepsController
     end.to_h
   end
 
-  def array_to_checkboxes(array)
-    array.map { |k| [k, true] }.to_h
-  end
-
-  def checkboxes_to_array(checkboxes)
-    checkboxes.select { |k| step_params[k].in?(["1", 1, true]) }.map(&:to_s)
-  end
-
   def skip?
     @_skip ||= previous_page_all_false?
   end

@@ -65,4 +65,12 @@ class StepsController < ApplicationController
   def step_navigation
     @step_navigation ||= StepNavigation.new(self)
   end
+
+  def array_to_checkboxes(array)
+    array.map { |key| [key, true] }.to_h
+  end
+
+  def checkboxes_to_array(checkboxes)
+    checkboxes.select { |k| step_params[k].in?(["1", 1, true]) }.map(&:to_s)
+  end
 end

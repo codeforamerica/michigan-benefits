@@ -118,6 +118,25 @@ feature "SNAP application" do
       click_on "Continue"
     end
 
+    on_page "Money & Income" do
+      choose_yes("Does your household have any money or accounts?")
+      choose_yes("Does your household own any property or real estate?")
+      choose_yes("Does your household own any vehicles?")
+
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
+      fill_in(
+        "In total, how much money does your household have in cash and \
+accounts?",
+        with: 100,
+      )
+      check "Other"
+
+      click_on "Continue"
+    end
+
     submit_expenses
 
     consent_to_terms
@@ -195,6 +214,14 @@ feature "SNAP application" do
     end
 
     on_page "Money & Income" do
+      click_on "Continue"
+    end
+
+    on_page "Money & Income" do
+      choose_no("Does your household have any money or accounts?")
+      choose_no("Does your household own any property or real estate?")
+      choose_no("Does your household own any vehicles?")
+
       click_on "Continue"
     end
 
@@ -345,6 +372,18 @@ feature "SNAP application" do
   def select_employment(full_name:, employment_status:)
     within(".household-member-group[data-member-name='#{full_name}']") do
       choose(employment_status)
+    end
+  end
+
+  def choose_yes(text)
+    within(find(:fieldset, text: text)) do
+      choose "Yes"
+    end
+  end
+
+  def choose_no(text)
+    within(find(:fieldset, text: text)) do
+      choose "No"
     end
   end
 
