@@ -5,14 +5,12 @@ class ExpensesAdditionalController < StepsController
     court_ordered
     dependent_care
     medical
-    tax_deductible
   ].freeze
 
   ATTRIBUTES = %w[
     monthly_care_expenses
     monthly_medical_expenses
     monthly_court_ordered_expenses
-    monthly_tax_deductible_expenses
   ].freeze
 
   ARRAY_ATTRIBUTES = {
@@ -34,10 +32,6 @@ class ExpensesAdditionalController < StepsController
     court_ordered_expenses: %w[
       child_support
       alimony
-    ],
-    tax_deductible_expenses: %w[
-      student_loan_interest
-      other_tax_deductible
     ],
   }.freeze
 
@@ -67,25 +61,6 @@ class ExpensesAdditionalController < StepsController
   end
 
   private
-
-  def existing_attributes
-    HashWithIndifferentAccess.new(application_attributes)
-  end
-
-  def application_attributes
-    app = current_snap_application
-
-    {
-      monthly_care_expenses: app.monthly_care_expenses,
-      monthly_medical_expenses: app.monthly_medical_expenses,
-      monthly_court_ordered_expenses: app.monthly_court_ordered_expenses,
-      monthly_tax_deductible_expenses: app.monthly_tax_deductible_expenses,
-      care_expenses: app.care_expenses,
-      medical_expenses: app.medical_expenses,
-      court_ordered_expenses: app.court_ordered_expenses,
-      tax_deductible_expenses: app.tax_deductible_expenses,
-    }
-  end
 
   def attribute_array
     ARRAY_ATTRIBUTES.keys.flat_map do |key|

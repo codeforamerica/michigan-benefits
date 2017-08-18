@@ -15,7 +15,6 @@ RSpec.describe ExpensesAdditionalController, type: :controller do
           monthly_care_expenses: 123,
           monthly_medical_expenses: 234,
           monthly_court_ordered_expenses: 345,
-          monthly_tax_deductible_expenses: 456,
         )
         session[:snap_application_id] = current_app.id
 
@@ -24,7 +23,6 @@ RSpec.describe ExpensesAdditionalController, type: :controller do
         expect(step.monthly_care_expenses).to eq(123)
         expect(step.monthly_medical_expenses).to eq(234)
         expect(step.monthly_court_ordered_expenses).to eq(345)
-        expect(step.monthly_tax_deductible_expenses).to eq(456)
       end
     end
 

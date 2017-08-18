@@ -18,12 +18,9 @@ class ExpensesAdditional < Step
     :monthly_care_expenses,
     :monthly_court_ordered_expenses,
     :monthly_medical_expenses,
-    :monthly_tax_deductible_expenses,
     :other,
-    :other_tax_deductible,
     :prescriptions,
     :student_loan_interest,
-    :tax_deductible_expenses,
     :transportation,
   )
 end
