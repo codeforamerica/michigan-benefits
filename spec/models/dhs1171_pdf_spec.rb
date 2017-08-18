@@ -59,6 +59,25 @@ RSpec.describe Dhs1171Pdf do
       end
     end
 
+    context "multiple household members" do
+      it "returns attributes for each member" do
+        first_member = create(:member)
+        second_member = create(:member)
+        snap_application =
+          create(:snap_application, members: [first_member, second_member])
+
+        file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+        result = filled_in_values(file: file.path)
+
+        expect(result["primary_member_full_name"]).to eq(
+          first_member.full_name,
+        )
+        expect(result["second_member_full_name"]).to eq(
+          second_member.full_name,
+        )
+      end
+    end
+
     it "prepends a cover sheet" do
       snap_application = create(:snap_application, :with_member)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count

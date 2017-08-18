@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Dhs1171PdfMemberAttributes do
+RSpec.describe SnapApplicationMemberAttributes do
   describe "#to_h" do
     it "returns the member attributes as a hash" do
       member = create(
@@ -19,7 +19,7 @@ RSpec.describe Dhs1171PdfMemberAttributes do
       )
       position = "primary"
 
-      result = Dhs1171PdfMemberAttributes.new(
+      result = SnapApplicationMemberAttributes.new(
         member: member,
         position: position,
       ).to_h
