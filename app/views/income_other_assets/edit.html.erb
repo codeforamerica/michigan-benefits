@@ -1,0 +1,32 @@
+<% content_for :header_title, 'Money & Income' %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">
+        Tell us about the assets and money you have on hand.
+      </div>
+      <p class="text--help step-section-header__subhead-help">
+        If you don't know the answer to a question, that's okay.
+      </p>
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_radio_set :money_or_accounts_income,
+        "Does your household have any money or accounts?",
+        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        notes: ["This includes Checking/Savings accounts, 401Ks, Trusts, Stocks, etc. You will be asked to verify by providing bank and account statements."] %>
+      <%= f.mb_radio_set :real_estate_income,
+        "Does your household own any property or real estate?",
+        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        notes: ["You should include your primary home. But don't worry - it won't be counted against you."] %>
+      <%= f.mb_radio_set :vehicle_income,
+        "Does your household own any vehicles?",
+        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        notes: ["Don't worry - your first vehicle will not be counted against you."] %>
+      <%= render 'shared/next_step' %>
+    <% end %>
+  </div>
+</div>

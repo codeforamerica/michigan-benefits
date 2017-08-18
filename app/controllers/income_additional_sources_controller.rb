@@ -21,10 +21,6 @@ class IncomeAdditionalSourcesController < StepsController
     IncomeAdditionalSources
   end
 
-  def array_to_checkboxes(array)
-    array.map { |key| [key, true] }.to_h
-  end
-
   def checkboxes_to_array(checkboxes)
     checkboxes.select { |_, value| value == "1" }.keys
   end
