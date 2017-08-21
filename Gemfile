@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby "2.4.1"
 
+gem "administrate"
 gem "attr_encrypted"
 gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh

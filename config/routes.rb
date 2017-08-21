@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :snap_applications
+
+    root to: "snap_applications#index"
+  end
+
   root "pages#index"
 
   resource :confirmations, only: %i[show]
