@@ -18,6 +18,7 @@ RSpec.describe MailingAddressController, type: :controller do
       expect(step.street_address).to eq("123 Fake St")
       expect(step.city).to eq("Springfield")
       expect(step.zip).to eq("12345")
+      expect(step.mailing_address_same_as_residential_address).to eq(true)
     end
   end
 
@@ -31,7 +32,7 @@ RSpec.describe MailingAddressController, type: :controller do
         }
 
         mailing_same_as_residential = {
-          mailing_address_same_as_residential_address: "true",
+          mailing_address_same_as_residential_address: "false",
         }
 
         put :update,
@@ -44,7 +45,7 @@ RSpec.describe MailingAddressController, type: :controller do
         end
 
         expect(current_app.mailing_address_same_as_residential_address).to be(
-          true,
+          false,
         )
       end
 
@@ -85,7 +86,11 @@ RSpec.describe MailingAddressController, type: :controller do
   end
 
   def current_app
-    @_current_app ||= create(:snap_application, addresses: [address])
+    @_current_app ||= create(
+      :snap_application,
+      mailing_address_same_as_residential_address: true,
+      addresses: [address],
+    )
   end
 
   def address

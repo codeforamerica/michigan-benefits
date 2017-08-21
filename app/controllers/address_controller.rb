@@ -14,11 +14,12 @@ class AddressController < StandardStepsController
   private
 
   def existing_attributes
-    HashWithIndifferentAccess.new(address_attributes)
+    attributes = address.attributes.merge(current_snap_application.attributes)
+    HashWithIndifferentAccess.new(attributes)
   end
 
   def address_attributes
-    address.attributes.merge(snap_application_update_params)
+    address.attributes.merge(current_snap_application.attributes)
   end
 
   def step_params
