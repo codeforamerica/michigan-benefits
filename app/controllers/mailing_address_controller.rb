@@ -9,14 +9,14 @@ class MailingAddressController < AddressController
   end
 
   def snap_application_update_params
-    { snap_application_param => mailing_address_same_as_residential_address? }
+    { snap_application_param => mailing_address_same_as_residential_address }
+  end
+
+  def mailing_address_same_as_residential_address
+    step_params[snap_application_param]
   end
 
   def snap_application_param
     :mailing_address_same_as_residential_address
-  end
-
-  def mailing_address_same_as_residential_address?
-    step_params[snap_application_param] == "true"
   end
 end
