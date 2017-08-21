@@ -17,6 +17,10 @@ class IntroduceYourselfController < StandardStepsController
 
   private
 
+  def ensure_application_present
+    _application_not_created = true
+  end
+
   def existing_attributes
     HashWithIndifferentAccess.new(member.attributes)
   end
