@@ -4,8 +4,15 @@ require "rails_helper"
 
 RSpec.describe ResidentialAddressController, type: :controller do
   let(:step) { assigns(:step) }
-  let(:invalid_params) { { step: { zip: "11111111111" } } }
   let(:step_class) { ResidentialAddress }
+  let(:invalid_params) do
+    {
+      step: {
+        zip: "11111111111",
+        unstable_housing: "0",
+      },
+    }
+  end
 
   before { session[:snap_application_id] = current_app.id }
 
