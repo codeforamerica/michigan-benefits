@@ -78,6 +78,28 @@ RSpec.describe Dhs1171Pdf do
       end
     end
 
+    context "employed and self employed household members" do
+      it "returns attributes for each member" do
+        employed_member = create(:member, employment_status: "employed")
+        self_employed_member =
+          create(:member, employment_status: "self_employed")
+        snap_application = create(
+          :snap_application,
+          members: [self_employed_member, employed_member],
+        )
+
+        file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+        result = filled_in_values(file: file.path)
+
+        expect(result["first_employed_full_name"]).to eq(
+          employed_member.full_name,
+        )
+        expect(result["first_self_employed_full_name"]).to eq(
+          self_employed_member.full_name,
+        )
+      end
+    end
+
     it "prepends a cover sheet" do
       snap_application = create(:snap_application, :with_member)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
