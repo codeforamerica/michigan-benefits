@@ -1,4 +1,4 @@
-class Dhs1171PdfMemberAttributes
+class SnapApplicationMemberAttributes
   def initialize(member:, position:)
     @member = member
     @position = position
