@@ -19,6 +19,16 @@ RSpec.describe IntroduceYourselfController do
       expect(step.last_name).to eq("booboo")
       expect(step.birthday).to eq(birthday)
     end
+
+    context "application has not yet been created" do
+      it "does not redirect to the homepage" do
+        session[:snap_application_id] = nil
+
+        get :edit
+
+        expect(response).to render_template(:edit)
+      end
+    end
   end
 
   describe "#update" do

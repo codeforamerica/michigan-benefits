@@ -21,6 +21,6 @@ class ResidentialAddressController < AddressController
   end
 
   def skip?
-    current_snap_application.mailing_address_same_as_residential_address?
+    current_snap_application&.mailing_address_same_as_residential_address?
   end
 end

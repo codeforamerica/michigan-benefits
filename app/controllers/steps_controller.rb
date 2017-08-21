@@ -4,6 +4,7 @@ class StepsController < ApplicationController
   layout "step"
 
   before_action :maybe_skip, only: :edit
+  before_action :ensure_application_present, only: :edit
 
   def self.to_param
     controller_path.dasherize
@@ -18,6 +19,12 @@ class StepsController < ApplicationController
   private
 
   delegate :step_class, to: :class
+
+  def ensure_application_present
+    if current_snap_application.blank?
+      redirect_to root_path
+    end
+  end
 
   def step_params
     params.fetch(:step, {}).permit(*step_attrs)
