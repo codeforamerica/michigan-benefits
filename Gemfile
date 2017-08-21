@@ -14,7 +14,7 @@ gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
 gem "pdf-forms"
 gem "pg", "~> 0.18"
-gem "puma", "~> 3.0"
+gem "puma"
 gem "rails", "~> 5.1"
 gem "responders"
 gem "sass-rails", "~> 5.0"
