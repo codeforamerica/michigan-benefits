@@ -71,7 +71,8 @@ class SnapApplicationAttributes
       members.
       where.
       not(buy_food_with: true).
-      map(&:full_name).
+      select('first_name || " " || last_name AS full_name').
+      pluck(:first_name, :last_name).
       to_sentence
   end
 end
