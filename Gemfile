@@ -12,7 +12,6 @@ gem "delayed_job_active_record"
 gem "faraday"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
-gem "paperclip", "~> 5.0.0"
 gem "pdf-forms"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
