@@ -43,7 +43,7 @@ RSpec.describe SnapApplicationAttributes do
         financial_accounts_life_insurance: false,
         financial_accounts_other: false,
         financial_accounts_mutual_funds_or_stocks: false,
-        financial_accounts_for_oh_one_k_or_iras: true,
+        financial_accounts_four_oh_one_k_or_iras: true,
         vehicle_income_yes: nil,
         vehicle_income_no: "Yes",
         self_employed_household_members_yes: nil,

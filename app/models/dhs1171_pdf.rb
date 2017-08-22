@@ -40,25 +40,30 @@ class Dhs1171Pdf
   end
 
   def member_attributes
-    first_six_members.map do |attrs|
-      if attrs[:member].present?
-        SnapApplicationMemberAttributes.new(attrs).to_h
-      end
-    end.compact.reduce({}, :merge)
+    map_attributes(
+      records: first_six_members,
+      klass: SnapApplicationMemberAttributes,
+    )
   end
 
   def employed_member_attributes
-    first_two_employed_members.map do |attrs|
-      if attrs[:member].present?
-        EmployedMemberAttributes.new(attrs).to_h
-      end
-    end.compact.reduce({}, :merge)
+    map_attributes(
+      records: first_two_employed_members,
+      klass: EmployedMemberAttributes,
+    )
   end
 
   def self_employed_member_attributes
-    first_two_self_employed_members.map do |attrs|
-      if attrs[:member].present?
-        SelfEmployedMemberAttributes.new(attrs).to_h
+    map_attributes(
+      records: first_two_self_employed_members,
+      klass: SelfEmployedMemberAttributes,
+    )
+  end
+
+  def map_attributes(records:, klass:)
+    records.map do |record|
+      if record[:member].present?
+        klass.new(record).to_h
       end
     end.compact.reduce({}, :merge)
   end

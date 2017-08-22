@@ -32,7 +32,10 @@ RSpec.describe Member do
           employed_hours_per_week: 10,
         )
 
-        expect(member.monthly_income).to eq 433.0
+        weekly_pay_times_average_weeks_per_month = 433.0
+        expect(member.monthly_income).to eq(
+          weekly_pay_times_average_weeks_per_month,
+        )
       end
     end
   end

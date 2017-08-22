@@ -37,7 +37,7 @@ class SnapApplicationAttributes
       financial_accounts_other: financial_accounts(:other),
       financial_accounts_mutual_funds_or_stocks:
         financial_accounts(:mutual_funds, :stocks),
-      financial_accounts_for_oh_one_k_or_iras:
+      financial_accounts_four_oh_one_k_or_iras:
         financial_accounts(:four_oh_one_k, :iras),
       vehicle_income_yes:
         boolean_to_checkbox(snap_application.vehicle_income?),
