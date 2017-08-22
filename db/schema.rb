@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170821164112) do
+ActiveRecord::Schema.define(version: 20170821212353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,11 +59,11 @@ ActiveRecord::Schema.define(version: 20170821164112) do
     t.boolean "requesting_food_assistance", default: true
     t.string "employment_status"
     t.string "employed_employer_name"
-    t.string "employed_hours_per_week"
-    t.string "employed_pay_quantity"
+    t.integer "employed_hours_per_week"
+    t.float "employed_pay_quantity"
     t.string "employed_pay_interval"
     t.string "self_employed_profession"
-    t.string "self_employed_monthly_income"
+    t.float "self_employed_monthly_income"
     t.string "self_employed_monthly_expenses"
     t.boolean "citizen"
     t.boolean "disabled"
@@ -93,14 +93,14 @@ ActiveRecord::Schema.define(version: 20170821164112) do
     t.boolean "income_change"
     t.text "income_change_explanation"
     t.text "additional_income", default: [], array: true
-    t.string "income_child_support"
-    t.string "income_foster_care"
-    t.string "income_other"
-    t.string "income_pension"
-    t.string "income_social_security"
-    t.string "income_ssi_or_disability"
-    t.string "income_unemployment_insurance"
-    t.string "income_workers_compensation"
+    t.float "income_child_support"
+    t.float "income_foster_care"
+    t.float "income_other"
+    t.float "income_pension"
+    t.float "income_social_security"
+    t.float "income_ssi_or_disability"
+    t.float "income_unemployment_insurance"
+    t.float "income_workers_compensation"
     t.integer "rent_expense"
     t.integer "property_tax_expense"
     t.integer "insurance_expense"
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20170821164112) do
     t.boolean "real_estate_income"
     t.boolean "vehicle_income"
     t.string "financial_accounts", default: [], array: true
-    t.integer "total_money"
+    t.float "total_money"
   end
 
 end

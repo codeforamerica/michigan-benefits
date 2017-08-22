@@ -16,10 +16,6 @@
       url: current_path,
       method: :put do |f| %>
 
-      <h4 class="step-section-header__headline">
-        Care expenses
-      </h4>
-
       <%= f.mb_input_field :total_money,
         "In total, how much money does your household have in cash and accounts?" %>
 
@@ -29,7 +25,7 @@
         { method: :four_oh_one_k, label: '401k' },
         { method: :life_insurance, label: 'Life insurance' },
         { method: :iras, label: 'IRAs' },
-        { method: :mutual_funds,label: 'Mutual funds' },
+        { method: :mutual_funds, label: 'Mutual funds' },
         { method: :stocks, label: 'Stocks' },
         { method: :trusts, label: 'Trusts' },
         { method: :other, label: 'Other' },

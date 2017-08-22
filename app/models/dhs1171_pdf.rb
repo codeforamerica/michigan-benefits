@@ -29,7 +29,10 @@ class Dhs1171Pdf
   end
 
   def client_data
-    snap_application_attributes.merge(member_attributes)
+    snap_application_attributes.
+      merge(member_attributes).
+      merge(employed_member_attributes).
+      merge(self_employed_member_attributes)
   end
 
   def snap_application_attributes
@@ -37,9 +40,30 @@ class Dhs1171Pdf
   end
 
   def member_attributes
-    first_six_members.map do |attrs|
-      if attrs[:member].present?
-        SnapApplicationMemberAttributes.new(attrs).to_h
+    map_attributes(
+      records: first_six_members,
+      klass: SnapApplicationMemberAttributes,
+    )
+  end
+
+  def employed_member_attributes
+    map_attributes(
+      records: first_two_employed_members,
+      klass: EmployedMemberAttributes,
+    )
+  end
+
+  def self_employed_member_attributes
+    map_attributes(
+      records: first_two_self_employed_members,
+      klass: SelfEmployedMemberAttributes,
+    )
+  end
+
+  def map_attributes(records:, klass:)
+    records.map do |record|
+      if record[:member].present?
+        klass.new(record).to_h
       end
     end.compact.reduce({}, :merge)
   end
@@ -66,6 +90,30 @@ class Dhs1171Pdf
       { member: application_members[4], position: "fifth" },
       { member: application_members[5], position: "sixth" },
     ]
+  end
+
+  def first_two_employed_members
+    [
+      { member: employed_members[0], position: "first" },
+      { member: employed_members[1], position: "second" },
+    ]
+  end
+
+  def first_two_self_employed_members
+    [
+      { member: self_employed_members[0], position: "first" },
+      { member: self_employed_members[1], position: "second" },
+    ]
+  end
+
+  def employed_members
+    @_employed_members ||=
+      application_members.where(employment_status: "employed")
+  end
+
+  def self_employed_members
+    @_self_employed_members ||=
+      application_members.where(employment_status: "self_employed")
   end
 
   def application_members
