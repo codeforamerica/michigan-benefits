@@ -20,13 +20,13 @@
       method: :put do |f| %>
 
       <div class="form-card__content">
-        <%= f.mb_input_field :rent_expense,
+        <%= f.mb_money_field :rent_expense,
         "How much does your household pay in rent or mortgage each month?" %>
 
-        <%= f.mb_input_field :property_tax_expense,
+        <%= f.mb_money_field :property_tax_expense,
         "How much do you pay in property tax each month?" %>
 
-        <%= f.mb_input_field :insurance_expense,
+        <%= f.mb_money_field :insurance_expense,
         "How much do you pay in insurance each month?" %>
 
         <p class="text--help">
