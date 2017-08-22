@@ -1,49 +1,72 @@
-class CreateAccountPage
+class CreateAccountPage < Page
   # https://www.mibridges.michigan.gov/access/accessController
 
   def fill_in_required_fields
-    fill_in_first_name
-    fill_in_last_name
-    fill_in_user_id
-    fill_in_password
-    confirm_password
+    fill_in "First Name", with: primary_member.first_name
+    sleep 1
+    fill_in "Last Name", with: primary_member.last_name
+    sleep 1
+    fill_in "User ID", with: user_id
+    sleep 1
+    fill_in "Password", with: password
+    sleep 1
+    fill_in "Please re-type your Password", with: password
+    sleep 1
     select_secret_question_1
-    answer_secret_question_1
+    sleep 1
+    fill_in "Answer to Secret Question1", with: answer_secret_question_1
+    sleep 1
     select_secret_question_2
-    answer_secret_question_2
+    sleep 1
+    fill_in "Answer to Secret Question2", with: answer_secret_question_2
+    sleep 1
     accept_user_agreement
+    sleep 1
   end
 
   def user_id
-    # generate and memoize random string
+    # 5 to 20 letters and/or numbers.
+    @_user_id ||= SecureRandom.hex(10)
   end
 
   def password
     # 8-16 digits, only numbers and letters
-    # generate and memoize random string
+    @_password ||= SecureRandom.hex(8)
   end
 
-  def submit; end
+  def submit
+    click_on "Next"
+  end
 
   private
 
-  def fill_in_first_name; end
+  def primary_member
+    @_primary_member ||= snap_application.primary_member
+  end
 
-  def fill_in_last_name; end
+  def select_secret_question_1
+    select(
+      "What was the FIRST NAME of your best friend when growing up?",
+      from: "Secret Question1",
+    )
+  end
 
-  def fill_in_user_id; end
+  def answer_secret_question_1
+    SecureRandom.hex
+  end
 
-  def fill_in_password; end
+  def select_secret_question_2
+    select(
+      "Who is your favorite president?",
+      from: "Secret Question2",
+    )
+  end
 
-  def confirm_password; end
+  def answer_secret_question_2
+    SecureRandom.hex
+  end
 
-  def select_secret_question_1; end
-
-  def answer_secret_question_1; end
-
-  def select_secret_question_2; end
-
-  def answer_secret_question_2; end
-
-  def accept_user_agreement; end
+  def accept_user_agreement
+    page.execute_script("$('.ace').trigger('click')")
+  end
 end

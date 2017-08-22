@@ -9,6 +9,7 @@ gem "attr_encrypted"
 gem "auto_strip_attributes"
 gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
+gem "capybara"
 gem "delayed_job_active_record"
 gem "faraday"
 gem "jquery-rails"
@@ -20,6 +21,7 @@ gem "puma"
 gem "rails", "~> 5.1"
 gem "responders"
 gem "sass-rails", "~> 5.0"
+gem "selenium-webdriver"
 gem "sfax",
   git: "https://github.com/codeforamerica/sfax",
   ref: "da88847faaf5ab51255e4d7e47d76493d05113b1"
@@ -40,7 +42,6 @@ end
 group :development, :test do
   gem "awesome_print", require: false
   gem "bundler-audit"
-  gem "capybara"
   gem "climate_control"
   gem "codeclimate-test-reporter"
   gem "factory_girl_rails"
@@ -50,7 +51,6 @@ group :development, :test do
   gem "rspec-rails"
   gem "rspec_junit_formatter"
   gem "rubocop-rspec", require: false
-  gem "selenium-webdriver"
   gem "simplecov"
 end
 
