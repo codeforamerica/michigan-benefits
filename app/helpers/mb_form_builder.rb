@@ -31,6 +31,35 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
+  def mb_money_field(
+    method,
+    label_text,
+    type: "text",
+    notes: [],
+    options: {},
+    classes: [],
+    prefix: nil,
+    autofocus: nil,
+    append_html: ""
+  )
+    money_field_options = {
+      placeholder: "$",
+      data: { money: true },
+    }.merge(options)
+
+    mb_input_field(
+      method,
+      label_text,
+      type: type,
+      notes: notes,
+      options: money_field_options,
+      classes: classes,
+      prefix: prefix,
+      autofocus: autofocus,
+      append_html: append_html,
+    )
+  end
+
   def mb_textarea(
     method,
     label_text,

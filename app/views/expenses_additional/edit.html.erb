@@ -21,7 +21,7 @@
         </h4>
 
         <% if current_snap_application.dependent_care? %>
-          <%= f.mb_input_field :monthly_care_expenses,
+          <%= f.mb_money_field :monthly_care_expenses,
             "In total, how much do you pay in care expenses each month?" %>
 
           <%= f.mb_checkbox_set [
@@ -36,7 +36,7 @@
             Medical Expenses
           </h4>
 
-          <%= f.mb_input_field :monthly_medical_expenses,
+          <%= f.mb_money_field :monthly_medical_expenses,
             "In total, how much do you pay in medical expenses each month?" %>
 
           <%= f.mb_checkbox_set [
@@ -56,7 +56,7 @@
             Court-ordered expenses
           </h4>
 
-          <%= f.mb_input_field :monthly_court_ordered_expenses,
+          <%= f.mb_money_field :monthly_court_ordered_expenses,
             "In total, how much do you pay in court-ordered expenses each month?" %>
 
           <%= f.mb_checkbox_set [

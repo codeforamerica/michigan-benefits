@@ -16,7 +16,11 @@
       url: current_path,
       method: :put do |f| %>
 
-      <%= f.mb_input_field :total_money,
+      <h4 class="step-section-header__headline">
+        Care expenses
+      </h4>
+
+      <%= f.mb_money_field :total_money,
         "In total, how much money does your household have in cash and accounts?" %>
 
       <%= f.mb_checkbox_set [
