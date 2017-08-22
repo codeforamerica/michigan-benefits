@@ -1,16 +1,15 @@
-class LogInPage
+class LogInPage < Page
   def initialize(user_id:, password:)
     @user_id = user_id
     @password = password
-  end
-
-  def visit
-    visit url
+    Capybara.default_driver = :chrome
   end
 
   def fill_in_required_fields
-    fill_in_user_id
-    fill_in_password
+    fill_in "User ID", with: user_id
+    sleep 1
+    fill_in "Password", with: password
+    sleep 1
   end
 
   def submit
@@ -19,9 +18,5 @@ class LogInPage
 
   private
 
-  attr_reader :user, :password
-
-  def url
-    "https://www.mibridges.michigan.gov/access/jsp/access/myAccess/ASLogin.jsp"
-  end
+  attr_reader :user_id, :password
 end
