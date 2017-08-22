@@ -12,3 +12,4 @@
 /tmp/*
 /coverage
 .rspec
+mkmf.log

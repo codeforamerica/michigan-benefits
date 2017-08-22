@@ -53,7 +53,7 @@ module FeatureHelper
 
   def js_select_radio(question:, answer_id:)
     within(find(:fieldset, text: question)) do
-      find("##{answer_id}").trigger("click")
+      page.execute_script("$('##{answer_id}').trigger('click')")
     end
   end
 

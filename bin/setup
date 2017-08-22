@@ -20,6 +20,14 @@ chdir APP_ROOT do
     end
   end
 
+  step "Installing ChromeDriver - a separate executable that WebDriver uses to control Chrome" do
+    if cli_installed?("chromedriver")
+      puts "chromedriver already installed."
+    else
+      system!("brew install chromedriver")
+    end
+  end
+
   step "Copying sample files" do
     [".env"].each do |file|
       unless File.exist?(file)
