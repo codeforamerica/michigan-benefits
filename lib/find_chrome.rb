@@ -17,14 +17,16 @@ class FindChrome
   ].compact.freeze
 
   def self.binary
-    found = CHROME_PATHS.select { |path| File.executable? path }
-    return found.first if found.any?
-    raise "Chrome not found on system"
+    search(CHROME_PATHS, for_binary_named: "Chrome")
   end
 
   def self.driver
-    found = CHROMEDRIVER_PATHS.select { |path| File.executable? path }
+    search(CHROMEDRIVER_PATHS, for_binary_named: "Chromedriver")
+  end
+
+  def self.search(paths, for_binary_named:)
+    found = paths.select { |path| File.executable? path }
     return found.first if found.any?
-    raise "Chromedriver not found on system"
+    raise "#{for_binary_named} not found on system"
   end
 end
