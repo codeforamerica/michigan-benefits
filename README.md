@@ -13,6 +13,41 @@
 * [Production](https://michigan-benefits-production.herokuapp.com)
 * [Prototype demo](https://michigan-benefits-prod.herokuapp.com/)
 
+## Driving Against MI Bridges
+
+The only requirements to run the driver code are:
+
+1. A sufficiently complete `SnapApplication`
+2. Chrome and Chromedriver are installed (the latest versions). `./bin/setup`
+   should get this set up for you automatically.
+
+To run the driver code you could drop into a rails console and (where
+`<id>` is the id of a snap application record) run:
+
+```ruby
+snap_application = SnapApplication.find(<id>)
+MiBridges::Driver.new(snap_application: snap_application).run
+```
+
+There are three extra environment variables you can set to modify the behavior
+of the script.
+
+1. If you would like it to run in a FULL chrome browser instead of the headless
+   version, set `WEB_DRIVER` to `chrome`.
+2. If you'd like it to run a little slower, perhaps for demo purposes or to
+   look more "human", you may set `DRIVER_SPEED` to `slow` or `medium`.
+3. If you would like to display a log of some of the things happening as it
+   "drives" set `DEBUG_DRIVE` to `true`
+
+Example:
+
+```sh
+DRIVER_SPEED=slow \
+  WEB_DRIVER=chrome \
+  DEBUG_DRIVE=true \
+  ./bin/rails runner "MiBridges::Driver.new(snap_application: SnapApplication.find(ID)).run"
+```
+
 ## Deploying
 
 ### Requirements

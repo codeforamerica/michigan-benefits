@@ -1,0 +1,90 @@
+# frozen_string_literal: true
+
+module MiBridges
+  class Driver
+    class CreateAccountPage < BasePage
+      def setup; end
+
+      def fill_in_required_fields
+        if driver_application.blank?
+          create_driver_application
+        end
+
+        fill_in "First Name", with: primary_member.first_name
+        fill_in "Last Name", with: primary_member.last_name
+
+        fill_in "User ID", with: driver_application.user_id
+        fill_in "Password", with: driver_application.password
+        fill_in "Please re-type your Password",
+          with: driver_application.password
+
+        select_secret_question_1
+        fill_in "Answer to Secret Question1",
+          with: driver_application.secret_question_1_answer
+
+        select_secret_question_2
+        fill_in "Answer to Secret Question2",
+          with: driver_application.secret_question_2_answer
+
+        accept_user_agreement
+      end
+
+      def continue
+        click_on "Next"
+      end
+
+      private
+
+      def driver_application
+        snap_application.driver_application
+      end
+
+      def create_driver_application
+        snap_application.driver_applications.create(
+          user_id: generate_user_id,
+          password: generate_password,
+          secret_question_1_answer: generate_secret_question_1_answer,
+          secret_question_2_answer: generate_secret_question_2_answer,
+        )
+      end
+
+      def generate_user_id
+        SecureRandom.hex(10)
+      end
+
+      def generate_password
+        SecureRandom.hex(8)
+      end
+
+      def generate_secret_question_1_answer
+        SecureRandom.hex
+      end
+
+      def generate_secret_question_2_answer
+        SecureRandom.hex
+      end
+
+      def primary_member
+        @_primary_member ||= snap_application.primary_member
+      end
+
+      def select_secret_question_1
+        select(
+          "What was the FIRST NAME of your best friend when growing up?",
+          from: "Secret Question1",
+        )
+      end
+
+      def select_secret_question_2
+        select(
+          "Who is your favorite president?",
+          from: "Secret Question2",
+        )
+      end
+
+      def accept_user_agreement
+        page.execute_script("$('.ace').trigger('click')")
+      end
+    end
+  end
+end

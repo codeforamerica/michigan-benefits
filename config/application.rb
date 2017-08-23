@@ -16,5 +16,6 @@ module MichiganBenefits
 
     config.autoload_paths << Rails.root.join("app/steps")
     config.filter_parameters += [:ssn]
+    config.autoload_paths << Rails.root.join("lib")
   end
 end
