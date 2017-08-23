@@ -73,6 +73,16 @@ Ask the team for access to the following services to begin contributing:
 
 ## What's Included
 
+### Step Skipping
+
+This application is a long questionaire.
+You will probably want to work on parts of it
+without completing the whole application.
+
+After booting the server and filling out the first step,
+go to `http://localhost:3000/steps`
+to jump around.
+
 ### Document / Photo Uploading Details
 
 * The file uploading service is called [Shubox]. The [dashboard] can be

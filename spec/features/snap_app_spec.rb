@@ -145,6 +145,11 @@ accounts?",
     submit_expense_sources(answer: "yes")
     submit_expenses
 
+    on_page "Interview Preferences" do
+      choose "Telephone Interview"
+      click_on "Continue"
+    end
+
     consent_to_terms
 
     fill_in "Your signature", with: "Jessie Tester"
@@ -240,6 +245,11 @@ accounts?",
     end
 
     submit_expense_sources(answer: "no")
+
+    on_page "Interview Preferences" do
+      choose "Telephone Interview"
+      click_on "Continue"
+    end
 
     consent_to_terms
 

@@ -33,6 +33,9 @@ class StepNavigation
       ExpensesAdditionalSourcesController,
       ExpensesAdditionalController,
     ],
+    "Preferences" => [
+      PreferencesInterviewController,
+    ],
     "Legal" => [
       LegalAgreementController,
       SignAndSubmitController,
