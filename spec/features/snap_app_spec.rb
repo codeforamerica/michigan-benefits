@@ -29,7 +29,7 @@ feature "SNAP application" do
 
     select_radio(question: "What is your sex?", answer: "Female")
     select "Divorced", from: "What is your marital status?"
-    fill_in "What is your social security number?", with: "123 12 1234"
+    fill_in "What is your social security number?", with: "123121234"
     click_on "Continue"
 
     on_page "Your Household" do
