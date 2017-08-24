@@ -29,6 +29,7 @@ RSpec.describe EmployedMemberAttributes do
         second_employed_pay_interval_hourly: "Yes",
         second_employed_pay_interval_yearly: nil,
         second_employed_pay_interval_other: nil,
+        second_employed_pay_interval_other_detail: nil,
       )
     end
   end

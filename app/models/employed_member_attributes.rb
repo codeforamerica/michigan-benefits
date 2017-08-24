@@ -18,6 +18,8 @@ class EmployedMemberAttributes
         boolean_to_checkbox(member.employed_pay_interval == "Year"),
       "#{position}_employed_pay_interval_other" =>
         boolean_to_checkbox(other_pay_interval?),
+      "#{position}_employed_pay_interval_other_detail" =>
+        other_pay_interval_detail,
     }.symbolize_keys
   end
 
@@ -28,6 +30,12 @@ class EmployedMemberAttributes
   def other_pay_interval?
     member.employed_pay_interval != "Hour" &&
       member.employed_pay_interval != "Year"
+  end
+
+  def other_pay_interval_detail
+    if other_pay_interval?
+      member.employed_pay_interval
+    end
   end
 
   def boolean_to_checkbox(statement)

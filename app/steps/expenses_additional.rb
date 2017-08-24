@@ -10,7 +10,6 @@ class ExpensesAdditional < Step
     :court_ordered_expenses,
     :dental,
     :disabled_adult_care,
-    :elderly_care,
     :health_insurance,
     :hospital_bills,
     :in_home_care,

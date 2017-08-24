@@ -32,7 +32,8 @@ class Dhs1171Pdf
     snap_application_attributes.
       merge(member_attributes).
       merge(employed_member_attributes).
-      merge(self_employed_member_attributes)
+      merge(self_employed_member_attributes).
+      merge(additional_income_attributes)
   end
 
   def snap_application_attributes
@@ -58,6 +59,18 @@ class Dhs1171Pdf
       records: first_two_self_employed_members,
       klass: SelfEmployedMemberAttributes,
     )
+  end
+
+  def additional_income_attributes
+    if additional_income_source.length <= 3
+      first_three_additional_income_sources.map do |attrs|
+        if attrs[:source].present?
+          AdditionalIncomeSource.new(attrs).to_h
+        end
+      end.compact.reduce({}, :merge)
+    else
+      { more_than_three_additional_income_sources: "See appended page" }
+    end
   end
 
   def map_attributes(records:, klass:)
@@ -106,6 +119,26 @@ class Dhs1171Pdf
     ]
   end
 
+  def first_three_additional_income_sources
+    [
+      {
+        source: additional_income_source[0],
+        position: "first",
+        snap_application: snap_application,
+      },
+      {
+        source: additional_income_source[1],
+        position: "second",
+        snap_application: snap_application,
+      },
+      {
+        source: additional_income_source[2],
+        position: "third",
+        snap_application: snap_application,
+      },
+    ]
+  end
+
   def employed_members
     @_employed_members ||=
       application_members.where(employment_status: "employed")
@@ -114,6 +147,10 @@ class Dhs1171Pdf
   def self_employed_members
     @_self_employed_members ||=
       application_members.where(employment_status: "self_employed")
+  end
+
+  def additional_income_source
+    @_additional_income_source ||= snap_application.additional_income
   end
 
   def application_members

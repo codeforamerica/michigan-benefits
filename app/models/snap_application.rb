@@ -4,6 +4,13 @@ class SnapApplication < ApplicationRecord
 
   def monthly_gross_income
     [
+      monthly_additional_income,
+      members.map(&:monthly_income),
+    ].flatten.compact.reduce(:+)
+  end
+
+  def monthly_additional_income
+    [
       income_child_support,
       income_foster_care,
       income_other,
@@ -12,7 +19,6 @@ class SnapApplication < ApplicationRecord
       income_ssi_or_disability,
       income_unemployment_insurance,
       income_workers_compensation,
-      members.map(&:monthly_income),
     ].flatten.compact.reduce(:+)
   end
 
