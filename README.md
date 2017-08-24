@@ -23,7 +23,9 @@
 
 ### Getting Started
 
-* After cloning this repo, run: `bin/setup`
+* After cloning this repo, either...
+  * run `docker-compose up` to use Docker
+  * run `bin/setup` to run locally
 * Read through the [CONTRIBUTING.md](CONTRIBUTING.md) file to learn how this
   team operates.
 
@@ -43,11 +45,15 @@ Ask the team for access to the following services to begin contributing:
 
 ### Day-to-day
 
-* Run the server(s): `foreman start`
+* Run the server(s):
+  * Docker: `docker-compose up`
+  * locally: `foreman start`
 * Visit [your local server](http://localhost:3000)
 * To preview any emails that were sent while testing locally, visit
   the [running mailcatcher instance](http://localhost:1080/)
-* Run tests and Rubocop: `rake`
+* Run tests and Rubocop:
+  * Docker: `docker-compose exec web rake`
+  * locally: `rake`
 
 ### Deploying
 
