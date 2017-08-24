@@ -181,6 +181,7 @@ GEM
       ruby-rc4
       ttfunk
     pg (0.21.0)
+    phantomjs (2.1.1.0)
     poltergeist (1.15.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -348,6 +349,7 @@ DEPENDENCIES
   pdf-forms
   pdf-reader
   pg (~> 0.18)
+  phantomjs
   poltergeist
   pry-rails
   puma (~> 3.0)
@@ -368,4 +370,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.3
+   1.15.4

@@ -33,6 +33,7 @@ group :test do
   gem "faker"
   gem "launchy"
   gem "pdf-reader"
+  gem "phantomjs", require: "phantomjs/poltergeist"
   gem "rails-controller-testing"
 end
 
