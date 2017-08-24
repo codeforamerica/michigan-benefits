@@ -202,6 +202,11 @@ GEM
       ruby-rc4
       ttfunk
     pg (0.21.0)
+    phantomjs (2.1.1.0)
+    poltergeist (1.15.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -374,6 +379,8 @@ DEPENDENCIES
   pdf-forms
   pdf-reader
   pg (~> 0.18)
+  phantomjs
+  poltergeist
   pry-rails
   puma
   rails (~> 5.1)
