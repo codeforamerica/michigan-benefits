@@ -75,6 +75,7 @@ RUN set -ex \
 ENV BUNDLER_VERSION 1.15.4
 
 RUN gem install bundler --version "$BUNDLER_VERSION"
+RUN gem install foreman
 
 # install things globally, for great justice
 # and don't create ".bundle" in all our apps

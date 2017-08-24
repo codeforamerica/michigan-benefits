@@ -6,16 +6,16 @@ services:
       POSTGRES_PASSWORD: postgres
   web:
     build: .
-    # Have to delete this pidfile, because it doesn't get cleaned up properly
-    # when the container shut down
-    command: bash -c "rm -rf /app/tmp/pids/server.pid && bundle exec rails db:setup && bundle exec rails s -p 3000 -b0 -b 0.0.0.0"
+    command: sh -c "rm -rf /app/tmp/pids/server.pid && bundle exec rails db:setup && foreman start"
     environment:
+      PORT: 3000
       DATABASE_HOST: db
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
     volumes:
       - .:/app
     ports:
+      - "1080:1080"
       - "3000:3000"
     depends_on:
       - db
