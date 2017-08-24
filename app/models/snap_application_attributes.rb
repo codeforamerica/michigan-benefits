@@ -21,7 +21,6 @@ class SnapApplicationAttributes
       members_buy_food_with_yes:
         bool_to_checkbox(all_members_buy_food_with?),
       members_not_buy_food_with: members_not_buy_food_with,
-      phone_number: snap_application.phone_number,
       homeless: bool_to_checkbox(snap_application.unstable_housing?),
       residential_address_city: snap_application.residential_address.city,
       residential_address_county: snap_application.residential_address.county,
@@ -127,7 +126,7 @@ class SnapApplicationAttributes
       utility_trash: bool_to_checkbox(snap_application.utility_trash?),
       utility_phone: bool_to_checkbox(snap_application.utility_phone?),
       utility_other: bool_to_checkbox(snap_application.utility_other?),
-    }
+    }.merge(phone_attributes).symbolize_keys
   end
 
   private
@@ -150,6 +149,18 @@ class SnapApplicationAttributes
     else
       snap_application.residential_address.street_address
     end
+  end
+
+  def phone_attributes
+    return {} if snap_application.phone_number.nil?
+    ten_digit_phone.each_with_index.reduce({}) do |memo, (phone_digit, index)|
+      memo["phone_number_#{index}"] = phone_digit
+      memo
+    end
+  end
+
+  def ten_digit_phone
+    snap_application.phone_number.split("").last(10)
   end
 
   def monthly_rent_taxes_and_insurance

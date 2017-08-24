@@ -24,7 +24,7 @@ RSpec.describe ContactInformationController, type: :controller do
     context "when valid" do
       it "redirects to the next step" do
         valid_params = {
-          phone_number: "1112223333",
+          phone_number: "222-222-2222",
           sms_subscribed: "false",
         }
 

@@ -174,7 +174,7 @@ accounts?",
     fill_in_name_and_birthday
     click_on "Continue"
 
-    fill_in "What is the best phone number to reach you?", with: "12345678990"
+    fill_in "What is the best phone number to reach you?", with: "222-222-2222"
     subscribe_to_sms_updates
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
@@ -329,7 +329,7 @@ accounts?",
 
     expect(
       find_field("What is the best phone number to reach you?").value,
-    ).to eq "1234567890"
+    ).to eq "+1234567890"
   end
 
   scenario "saves user data across steps", :js do
