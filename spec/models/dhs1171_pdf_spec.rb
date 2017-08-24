@@ -33,7 +33,6 @@ RSpec.describe Dhs1171Pdf do
         signature: snap_application.signature,
         signature_date: snap_application.signed_at,
         primary_member_birthday: member.birthday.strftime("%m/%d/%Y"),
-        primary_member_ssn: member.ssn,
         primary_member_marital_status_married: nil,
         primary_member_marital_status_never_married: nil,
         primary_member_marital_status_divorced: nil,

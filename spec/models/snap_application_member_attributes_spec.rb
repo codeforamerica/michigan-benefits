@@ -10,7 +10,7 @@ RSpec.describe SnapApplicationMemberAttributes do
         sex: "female",
         birthday: DateTime.parse("20/10/1910"),
         relationship: nil,
-        ssn: "222-22-2222",
+        ssn: "123456789",
         marital_status: "Divorced",
         citizen: false,
         new_mom: true,
@@ -42,7 +42,15 @@ RSpec.describe SnapApplicationMemberAttributes do
         primary_member_requesting_food_assistance: "Yes",
         primary_member_sex_female: "Yes",
         primary_member_sex_male: nil,
-        primary_member_ssn: "222-22-2222",
+        primary_member_ssn_0: "1",
+        primary_member_ssn_1: "2",
+        primary_member_ssn_2: "3",
+        primary_member_ssn_3: "4",
+        primary_member_ssn_4: "5",
+        primary_member_ssn_5: "6",
+        primary_member_ssn_6: "7",
+        primary_member_ssn_7: "8",
+        primary_member_ssn_8: "9",
       )
     end
   end
