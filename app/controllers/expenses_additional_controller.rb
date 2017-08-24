@@ -16,7 +16,6 @@ class ExpensesAdditionalController < StepsController
   ARRAY_ATTRIBUTES = {
     care_expenses: %w[
       childcare
-      elderly_care
       disabled_adult_care
     ],
     medical_expenses: %w[
