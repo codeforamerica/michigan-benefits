@@ -10,13 +10,31 @@ class StepNavigation
       IntroductionCompleteController,
     ],
     "Your Household" => [
+      HouseholdIntroductionController,
       PersonalDetailController,
       HouseholdMembersOverviewController,
       HouseholdMoreInfoController,
+      HouseholdMoreInfoPerMemberController,
     ],
     "Money & Income" => [
+      IncomeIntroductionController,
       IncomeChangeController,
       IncomeChangeExplanationController,
+      IncomeEmploymentStatusController,
+      IncomeDetailsPerMemberController,
+      IncomeAdditionalSourcesController,
+      IncomeAdditionalController,
+      IncomeOtherAssetsController,
+      IncomeOtherAssetsContinuedController,
+    ],
+    "Expenses" => [
+      ExpensesIntroductionController,
+      ExpensesHousingController,
+      ExpensesAdditionalSourcesController,
+      ExpensesAdditionalController,
+    ],
+    "Preferences" => [
+      PreferencesInterviewController,
     ],
     "Legal" => [
       LegalAgreementController,

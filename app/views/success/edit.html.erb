@@ -9,61 +9,60 @@
         </div>
       </div>
     </header>
-    <div class="form-card__content">
-      <h2>
-        Want a copy of your application?
-      </h2>
-      <p>
-        Enter your email address below to receive an email with a copy of your
-        application.
-      </p>
-      <%= f.mb_input_field :email, "Your email address", type: "email", options: { placeholder: "test@example.com" } %>
-    </div>
-    <footer class="form-card__footer">
-      <button class="button button--next button--cta button--full-width" type="submit">
-        Submit
-        <i class="button__icon icon-arrow_forward"></i>
-      </button>
-      <%= link_to skip_send_application_path, method: :post, class: "button" do %>
-        Skip this step
-      <% end %>
-    </footer>
-  <% end %>
 
-  <div class="form-card__content form-card__expect_next">
-    <h3 class="with-padding-med">What to expect next:</h3>
-    <div class="media-box with-padding-small">
-      <div class="media-box__media">
-        <div class="emoji emoji--med emoji--clipboard"></div>
+    <div class="form-card__content form-card__expect_next">
+      <h3 class="with-padding-med">What to expect next:</h3>
+      <div class="media-box with-padding-small">
+        <div class="media-box__media">
+          <div class="emoji emoji--med emoji--clipboard"></div>
+        </div>
+        <div class="media-box__content">
+          <p>
+          <b>The interview will take about 30 minutes.</b> A worker will ask you
+          about your household, income, expenses, and other eligibility
+          requirements.
+          </p>
+        </div>
       </div>
-      <div class="media-box__content">
-        <p>
-        <b>The interview will take about 30 minutes.</b> A worker will ask you
-        about your household, income, expenses, and other eligibility
-        requirements.
-        </p>
-      </div>
-    </div>
 
-    <div class="media-box with-padding-med">
-      <div class="media-box__media">
-        <div class="emoji emoji--med emoji--page-facing-up"></div>
-      </div>
-      <div class="media-box__content">
-        <p>
-        <b>Your county will provide you with a list of documents</b> that you
-        will need to submit within 30 days from today to verify your
-        eligibility. You can submit documents any time at <%= link_to 'the
+      <div class="media-box with-padding-med">
+        <div class="media-box__media">
+          <div class="emoji emoji--med emoji--page-facing-up"></div>
+        </div>
+        <div class="media-box__content">
+          <p>
+          <b>Your county will provide you with a list of documents</b> that you
+          will need to submit within 30 days from today to verify your
+          eligibility. You can submit documents any time at <%= link_to 'the
         documents step', documents_steps_path %>.
-        </p>
+          </p>
+        </div>
       </div>
-    </div>
 
-    <p class="text--small">
-    If you need more help with food,
-    <a class="link--subtle" href="http://www.foodpantries.org/st/michigan">
-      find your local food bank or food pantry
-    </a>.
-    </p>
-  </div>
+      <p class="text--small">
+      If you need more help with food,
+      <a class="link--subtle" href="http://www.foodpantries.org/st/michigan">
+        find your local food bank or food pantry
+      </a>.
+      </p>
+
+      <section class="slab">
+        <h3>Want a copy of your application?</h3>
+        <p>
+          Enter your email address below to receive an email with a copy of your
+          application.
+        </p>
+        <%= f.mb_input_field :email, "Your email address", type: "email", options: { placeholder: "test@example.com" } %>
+
+        <button class="button button--next button--cta button--full-width" type="submit">
+          Submit
+          <i class="button__icon icon-arrow_forward"></i>
+        </button>
+        <%= link_to skip_send_application_path, method: :post, class: "button" do %>
+          Skip this step
+        <% end %>
+      <% end %>
+
+      </section>
+    </div>
 </div>

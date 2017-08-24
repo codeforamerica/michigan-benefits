@@ -11,7 +11,7 @@
   <div class="form-card__content">
     <p>
       By entering your name you agree that you want to apply for
-      FAB, that you have been honest on this application.
+      FAP, that you have been honest on this application.
     </p>
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_input_field :signature, "Your signature", options: { placeholder: "Your full legal name" } %>

@@ -10,7 +10,7 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_input_field :street_address, "Address" %>
       <%= f.mb_input_field :city, "City" %>
-      <%= f.mb_input_field :zip, "ZIP code" %>
+      <%= f.mb_input_field :zip, "ZIP code", options: { maxlength: 5 } %>
       <%= f.mb_checkbox_set [{ label: 'Check this box if you do not have a stable address', method: :unstable_housing }],
         label_text: '' %>
       <%= render 'shared/next_step' %>

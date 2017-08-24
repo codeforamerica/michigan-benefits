@@ -9,7 +9,7 @@ RSpec.describe IntroductionCompleteController do
     it "redirects to next step" do
       put :update, params: {}
 
-      expect(response).to redirect_to("/steps/personal-detail")
+      expect(response).to redirect_to("/steps/household-introduction")
     end
   end
 

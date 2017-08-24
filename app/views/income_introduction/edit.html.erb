@@ -1,0 +1,36 @@
+<% content_for :header_title, 'Money & Income' %>
+
+<div class='form-card'>
+  <header class='form-card__header'>
+    <div class='step-section-header'>
+      <div class="step-section-header__icon illustration illustration--section-2"></div>
+      <div class='step-section-header__headline'>
+        You’re doing great!
+      </div>
+      <div class='step-section-header__subhead'>
+        Next, describe your financial situation for us.
+      </div>
+    </div>
+  </header>
+
+  <div class='form-card__content'>
+    <div class='slab slab--not-padded'>
+      <p>
+      In the next section, we will ask you for information about money you
+      receive and valuable things you may own.
+      </p>
+      <p class='text--small'>
+      <strong>
+        This information is key to determine the benefits you're household
+        is eligible for.
+      </strong>
+      </p>
+      <p class='text--help'>
+      If you aren't sure about exact numbers right now — that's okay.
+      Do your best and we will work with you to clarify later.
+      </p>
+
+    <%= render partial: 'shared/next_step_link' %>
+    </div>
+  </div>
+</div>

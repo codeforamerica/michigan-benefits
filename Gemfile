@@ -4,17 +4,18 @@ source "https://rubygems.org"
 
 ruby "2.4.1"
 
+gem "administrate"
 gem "attr_encrypted"
+gem "auto_strip_attributes"
 gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "delayed_job_active_record"
 gem "faraday"
 gem "jquery-rails"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
-gem "paperclip", "~> 5.0.0"
 gem "pdf-forms"
 gem "pg", "~> 0.18"
-gem "puma", "~> 3.0"
+gem "puma"
 gem "rails", "~> 5.1"
 gem "responders"
 gem "sass-rails", "~> 5.0"
@@ -30,7 +31,6 @@ gem "uglifier", ">= 1.3.0"
 
 group :test do
   gem "database_cleaner"
-  gem "faker"
   gem "launchy"
   gem "pdf-reader"
   gem "phantomjs", require: "phantomjs/poltergeist"
@@ -46,11 +46,11 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "listen"
   gem "mailcatcher", "~> 0.2"
-  gem "poltergeist"
   gem "pry-rails"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
   gem "rubocop-rspec", require: false
+  gem "selenium-webdriver"
   gem "simplecov"
 end
 

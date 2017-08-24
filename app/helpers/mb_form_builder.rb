@@ -11,13 +11,53 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     append_html: ""
   )
     classes = classes.append(%w[text-input])
+    text_field_options = {
+      autofocus: autofocus,
+      type: type,
+      class: classes.join(" "),
+      autocomplete: "off",
+      autocorrect: "off",
+      autocapitalize: "off",
+      spellcheck: "false",
+    }.merge(options)
+    text_field_html = text_field(method, text_field_options)
+
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{label_and_field(method, label_text, text_field(method, { autofocus: autofocus, type: type, class: classes.join(' '), autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off', spellcheck: 'false' }.merge(options)), notes: notes, prefix: prefix)}
+        #{label_and_field(method, label_text, text_field_html, notes: notes, prefix: prefix)}
         #{errors_for(object, method)}
         #{append_html}
       </fieldset>
     HTML
+  end
+
+  def mb_money_field(
+    method,
+    label_text,
+    type: "text",
+    notes: [],
+    options: {},
+    classes: [],
+    prefix: nil,
+    autofocus: nil,
+    append_html: ""
+  )
+    money_field_options = {
+      placeholder: "$",
+      data: { money: true },
+    }.merge(options)
+
+    mb_input_field(
+      method,
+      label_text,
+      type: type,
+      notes: notes,
+      options: money_field_options,
+      classes: classes,
+      prefix: prefix,
+      autofocus: autofocus,
+      append_html: append_html,
+    )
   end
 
   def mb_textarea(
@@ -123,6 +163,15 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
+  def mb_checkbox(method, label_text, options = {})
+    <<-HTML.html_safe
+      <label class="checkbox">
+    #{check_box_with_label(label_text, method, options)}
+      </label>
+    #{errors_for(object, method)}
+    HTML
+  end
+
   private
 
   def label_contents(label_text, notes)
@@ -192,18 +241,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     radio_html
   end
 
-  def mb_checkbox(method, label_text)
+  def check_box_with_label(label_text, method, options = {})
+    checked_value = options[:checked_value] || "1"
+    unchecked_value = options[:unchecked_value] || "0"
     <<-HTML.html_safe
-      <label class="checkbox">
-    #{check_box_with_label(label_text, method)}
-      </label>
-    #{errors_for(object, method)}
-    HTML
-  end
-
-  def check_box_with_label(label_text, method)
-    <<-HTML.html_safe
-    #{check_box(method)} #{label_text}
+      #{check_box(method, {}, checked_value, unchecked_value)} #{label_text}
     HTML
   end
 end

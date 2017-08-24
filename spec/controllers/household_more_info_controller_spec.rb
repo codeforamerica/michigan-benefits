@@ -9,7 +9,7 @@ RSpec.describe HouseholdMoreInfoController do
 
   before { session[:snap_application_id] = current_app.id }
 
-  include_examples "step controller"
+  include_examples "step controller", "param validation"
 
   def current_app
     @_current_app ||= create(:snap_application)

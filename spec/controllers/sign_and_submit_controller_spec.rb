@@ -9,7 +9,7 @@ RSpec.describe SignAndSubmitController do
 
   before { session[:snap_application_id] = current_app.id }
 
-  include_examples "step controller"
+  include_examples "step controller", "param validation"
 
   describe "#edit" do
     it "assigns the attributes to the step" do
@@ -30,6 +30,8 @@ RSpec.describe SignAndSubmitController do
       end.to change {
         current_app.reload.signature
       }.from("Hans Solo").to("Chiu Baka")
+
+      expect(current_app.signed_at).not_to be nil
     end
 
     it "redirects" do

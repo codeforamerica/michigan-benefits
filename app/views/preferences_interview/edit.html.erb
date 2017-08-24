@@ -1,0 +1,24 @@
+<% content_for :header_title, "Interview Preferences" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="step-section-header">
+      <div class="step-section-header__subhead">
+        The next step after you apply is a brief interview with your local MDHHS staff.
+      </div>
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_radio_set :interview_preference,
+        "What do you prefer?",
+        [
+          { value: :telephone, label: "Telephone Interview" },
+          { value: :in_person, label: "In-Person Interview" },
+        ]
+       %>
+
+    <%= render 'shared/next_step' %>
+  <% end %>
+</div>

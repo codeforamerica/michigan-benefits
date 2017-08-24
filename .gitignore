@@ -12,3 +12,5 @@
 /tmp/*
 /coverage
 .rspec
+mkmf.log
+Guardfile

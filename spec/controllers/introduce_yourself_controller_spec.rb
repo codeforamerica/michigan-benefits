@@ -9,7 +9,7 @@ RSpec.describe IntroduceYourselfController do
 
   before { session[:snap_application_id] = current_app.id }
 
-  include_examples "step controller"
+  include_examples "step controller", "param validation"
 
   describe "#edit" do
     it "assigns the name and birthday to the step" do
@@ -18,6 +18,16 @@ RSpec.describe IntroduceYourselfController do
       expect(step.first_name).to eq("bob")
       expect(step.last_name).to eq("booboo")
       expect(step.birthday).to eq(birthday)
+    end
+
+    context "application has not yet been created" do
+      it "does not redirect to the homepage" do
+        session[:snap_application_id] = nil
+
+        get :edit
+
+        expect(response).to render_template(:edit)
+      end
     end
   end
 
@@ -28,7 +38,7 @@ RSpec.describe IntroduceYourselfController do
           put :update, params: valid_params
         end.to(
           change do
-            current_app.reload.attributes.slice(
+            current_app.primary_member.reload.attributes.slice(
               "first_name",
               "last_name",
               "birthday",
@@ -46,15 +56,11 @@ RSpec.describe IntroduceYourselfController do
   end
 
   def current_app
-    @_current_app ||= create(
-      :snap_application,
-      birthday: birthday,
-      members: [member],
-    )
+    @_current_app ||= create(:snap_application, members: [member])
   end
 
   def member
-    create(:member, first_name: "bob", last_name: "booboo")
+    create(:member, first_name: "bob", last_name: "booboo", birthday: birthday)
   end
 
   def valid_params

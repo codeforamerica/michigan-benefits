@@ -1,0 +1,69 @@
+<% content_for :header_title, 'Introduction' %>
+
+<div class='form-card'>
+  <header class='form-card__header'>
+    <div class='step-section-header'>
+      <div class="step-section-header__icon illustration illustration--section-1"></div>
+      <div class='step-section-header__subhead'>
+        There are 4 sections you need to complete to submit a full application.
+      </div>
+    </div>
+  </header>
+
+  <div class='form-card__content'>
+    <div class='slab slab--not-padded'>
+      <h4 class='step-section-header__headline'>
+        What are they?
+      </h4>
+      <ul class='list--bulleted list--padded'>
+        <li>
+          <p>
+          <strong>Household</strong>
+          </p>
+          <p class='text--small'>
+          Information about yourself and each person in your household
+          </p>
+        </li>
+        <li>
+          <p>
+          <strong>Money &amp; Income</strong>
+          </p>
+          <p class='text--small'>
+          Information about money you receive and valuable things you may
+          own
+          </p>
+        </li>
+        <li>
+          <p>
+          <strong>Expenses</strong>
+          </p>
+          <p class='text--small'>
+          We will ask about your expenses for things like housing,
+          medicine, dependent care and more
+          </p>
+        </li>
+        <li>
+          <p>
+          <strong>Preferences</strong>
+          </p>
+          <p class='text--small'>
+          We will ask about the best ways to reach you and to proceed with
+          your application, plus any additional information that you might
+          want to share with us.
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div class='slab slab--not-padded'>
+      <h3 class='h3--strong'>
+        Next, describe your household for us.
+      </h3>
+      <p class='text--help'>
+      If you aren't sure about all the details right now — that's okay.
+      Do your best and we will work with you to clarify later.
+      </p>
+
+      <%= render partial: 'shared/next_step_link' %>
+    </div>
+  </div>
+</div>

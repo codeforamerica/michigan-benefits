@@ -9,15 +9,16 @@ RSpec.shared_examples "step controller" do
 
       expect(step).to be_an_instance_of step_class
     end
-  end
 
-  describe "#update" do
-    context "invalid params" do
-      it "renders edit" do
-        put :update, params: invalid_params
+    context "no application is currently under way" do
+      it "redirects to the homepage" do
+        if subject.class != IntroduceYourselfController
+          session[:snap_application_id] = nil
 
-        expect(step).to be_an_instance_of(step_class)
-        expect(response).to render_template(:edit)
+          get :edit
+
+          expect(response).to redirect_to(root_path)
+        end
       end
     end
   end

@@ -9,18 +9,18 @@ class ResidentialAddressController < AddressController
   end
 
   def snap_application_update_params
-    { snap_application_param => unstable_housing? }
+    { snap_application_param => unstable_housing }
+  end
+
+  def unstable_housing
+    step_params[snap_application_param]
   end
 
   def snap_application_param
     :unstable_housing
   end
 
-  def unstable_housing?
-    step_params[snap_application_param] == "1"
-  end
-
   def skip?
-    current_snap_application.mailing_address_same_as_residential_address?
+    current_snap_application&.mailing_address_same_as_residential_address?
   end
 end
