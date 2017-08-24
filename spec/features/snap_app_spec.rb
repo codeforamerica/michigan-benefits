@@ -145,8 +145,13 @@ accounts?",
     submit_expense_sources(answer: "yes")
     submit_expenses
 
-    on_page "Interview Preferences" do
+    on_page "General" do
       choose "Telephone Interview"
+      click_on "Continue"
+    end
+
+    on_page "General" do
+      fill_in "Anything else?", with: "This is helpful, thank you!"
       click_on "Continue"
     end
 
@@ -246,8 +251,12 @@ accounts?",
 
     submit_expense_sources(answer: "no")
 
-    on_page "Interview Preferences" do
+    on_page "General" do
       choose "Telephone Interview"
+      click_on "Continue"
+    end
+
+    on_page "General" do
       click_on "Continue"
     end
 

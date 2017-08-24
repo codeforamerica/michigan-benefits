@@ -2,6 +2,6 @@
 
 class AddAnythingElseToApp < ActiveRecord::Migration[5.0]
   def change
-    add_column :apps, :anything_else, :text
+    add_column :apps, :additional_information, :text
   end
 end

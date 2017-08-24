@@ -2,10 +2,10 @@
 
 require "rails_helper"
 
-RSpec.describe PreferencesInterviewController do
+RSpec.describe GeneralInterviewPreferenceController do
   let(:step) { assigns(:step) }
   let(:invalid_params) { { step: { interview_preference: "telepathy" } } }
-  let(:step_class) { PreferencesInterview }
+  let(:step_class) { GeneralInterviewPreference }
 
   before { session[:snap_application_id] = current_app.id }
 
@@ -28,7 +28,7 @@ RSpec.describe PreferencesInterviewController do
 
         put :update, params: { step: params }
 
-        expect(response).to redirect_to("/steps/legal-agreement")
+        expect(response).to redirect_to("/steps/general-anything-else")
         expect(current_app.interview_preference).to eq("telephone")
       end
     end

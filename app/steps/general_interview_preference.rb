@@ -1,4 +1,4 @@
-class PreferencesInterview < Step
+class GeneralInterviewPreference < Step
   step_attributes(
     :interview_preference,
   )
