@@ -64,6 +64,8 @@ GEM
     ast (2.3.0)
     attr_encrypted (3.0.3)
       encryptor (~> 3.0.0)
+    auto_strip_attributes (2.1.0)
+      activerecord (>= 3.0)
     autoprefixer-rails (7.1.2.6)
       execjs
     awesome_print (1.8.0)
@@ -351,6 +353,7 @@ PLATFORMS
 DEPENDENCIES
   administrate
   attr_encrypted
+  auto_strip_attributes
   awesome_print
   aws-sdk
   bourbon (~> 4.2.0)

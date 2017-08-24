@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative "./concerns/social_security_number.rb"
+
 class HouseholdAddMember < Step
   include MultiparameterAttributeAssignment
+  extend AutoStripAttributes
+  include SocialSecurityNumber
 
   step_attributes(
     :birthday,
