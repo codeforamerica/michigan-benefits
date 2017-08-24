@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+  web:
+    build: .
+    # Have to delete this pidfile, because it doesn't get cleaned up properly
+    # when the container shut down
+    command: bash -c "rm -rf /app/tmp/pids/server.pid && bundle exec rails db:setup && bundle exec rails s -p 3000 -b0 -b 0.0.0.0"
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
