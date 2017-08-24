@@ -5,6 +5,11 @@ RSpec.shared_examples "social security number" do
       expect(subject).to be_valid
     end
 
+    it "allows ssn to start with zero" do
+      subject.ssn = "012345678"
+      expect(subject).to be_valid
+    end
+
     it "allows ssns with no delimiters" do
       subject.ssn = "123121234"
       expect(subject).to be_valid
