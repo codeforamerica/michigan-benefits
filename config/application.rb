@@ -15,6 +15,6 @@ module MichiganBenefits
     config.active_job.queue_adapter = :delayed_job
 
     config.autoload_paths << Rails.root.join("app/steps")
-    config.autoload_paths << Rails.root.join("app/mi_bridges")
+    config.autoload_paths << Rails.root.join("lib")
   end
 end

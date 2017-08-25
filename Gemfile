@@ -21,10 +21,11 @@ gem "puma"
 gem "rails", "~> 5.1"
 gem "responders"
 gem "sass-rails", "~> 5.0"
-gem "selenium-webdriver"
+gem "selenium-webdriver", "3.4.3"
 gem "sfax",
   git: "https://github.com/codeforamerica/sfax",
   ref: "da88847faaf5ab51255e4d7e47d76493d05113b1"
+gem "token_phrase"
 gem "twilio-ruby"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -47,6 +48,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "listen"
   gem "mailcatcher", "~> 0.2"
+  gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails"
   gem "rspec_junit_formatter"

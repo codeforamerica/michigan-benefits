@@ -1,6 +1,11 @@
 class SnapApplication < ApplicationRecord
   has_many :addresses
   has_many :members
+  has_many :driver_applications
+
+  def driver_application
+    driver_applications.order("id DESC").limit(1).first
+  end
 
   def monthly_gross_income
     [
