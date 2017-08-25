@@ -65,7 +65,7 @@ class Dhs1171Pdf
     if additional_income_source.length <= 3
       first_three_additional_income_sources.map do |attrs|
         if attrs[:source].present?
-          AdditionalIncomeSource.new(attrs).to_h
+          AdditionalIncomeSourceAttributes.new(attrs).to_h
         end
       end.compact.reduce({}, :merge)
     else

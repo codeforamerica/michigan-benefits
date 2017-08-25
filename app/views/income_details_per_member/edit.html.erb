@@ -21,7 +21,7 @@
             <% if member.employed? %>
               <%= ff.mb_input_field :employed_employer_name, "Employer name" %>
               <%= ff.mb_input_field :employed_hours_per_week, "Usual hours per week" %>
-              <%= ff.mb_money_field :employed_pay_quantity,
+              <%= ff.mb_input_field :employed_pay_quantity,
                 "Pay (before tax)",
                 notes: ["This includes money withheld from paychecks"] %>
               <%= ff.mb_select :employed_pay_interval,
@@ -29,7 +29,7 @@
                 ["Hour", "Day", "Week", "2 weeks", "Month", "Year"], layout: "inline" %>
               <% else # self employed %>
                 <%= ff.mb_input_field :self_employed_profession, "Type of work" %>
-                <%= ff.mb_money_field :self_employed_monthly_income, "Monthly pay (before tax)" %>
+                <%= ff.mb_input_field :self_employed_monthly_income, "Monthly pay (before tax)" %>
                 <%= ff.mb_money_field :self_employed_monthly_expenses, "Monthly expenses" %>
               <% end %>
           </div>

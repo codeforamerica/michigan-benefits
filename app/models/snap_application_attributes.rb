@@ -207,21 +207,16 @@ class SnapApplicationAttributes
       members.
       where.
       not(buy_food_with: true).
-      select('first_name || " " || last_name AS full_name').
-      pluck(:first_name, :last_name).
+      pluck('concat(first_name, \' \', last_name) AS full_name').
       to_sentence
   end
 
   def financial_accounts(*types)
-    included = [false]
-
-    types.each do |type|
-      if snap_application.financial_accounts.include?(type.to_s)
-        included << true
-      end
+    included = types.select do |type|
+      snap_application.financial_accounts.include?(type.to_s)
     end
 
-    included.include?(true)
+    bool_to_checkbox(included.any?)
   end
 
   def self_employed_household_members
