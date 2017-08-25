@@ -13,7 +13,7 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
 
       <% @income_fields.each do |method, label| %>
-        <%= f.mb_input_field method, label, notes: ["Monthly amount"] %>
+        <%= f.mb_money_field method, label, notes: ["Monthly amount"] %>
       <% end %>
 
       <%= render 'shared/next_step' %>

@@ -13,5 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require handlebars
-//= require jquery.maskMoney
 //= require_tree .
