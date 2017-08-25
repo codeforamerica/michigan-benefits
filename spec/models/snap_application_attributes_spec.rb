@@ -12,7 +12,11 @@ RSpec.describe SnapApplicationAttributes do
         financial_accounts: [:four_oh_one_k],
         phone_number: "+12222222222",
         rent_expense: 100,
+        unstable_housing: true,
       )
+
+      member = snap_application.members.first
+      member.update(buy_food_with: false)
 
       data =
         SnapApplicationAttributes.new(snap_application: snap_application).to_h
@@ -30,7 +34,7 @@ RSpec.describe SnapApplicationAttributes do
         mailing_address_zip: "12345",
         members_buy_food_with_no: "Yes",
         members_buy_food_with_yes: nil,
-        members_not_buy_food_with: "",
+        members_not_buy_food_with: member.full_name,
         phone_number_0: "2",
         phone_number_1: "2",
         phone_number_2: "2",
@@ -44,7 +48,7 @@ RSpec.describe SnapApplicationAttributes do
         residential_address_city: nil,
         residential_address_county: nil,
         residential_address_state: nil,
-        residential_address_street_address: nil,
+        residential_address_street_address: "Homeless",
         residential_address_zip: "12345",
         signature: "Mr. RJD2",
         signature_date: snap_application.signed_at.to_s,
@@ -57,14 +61,13 @@ RSpec.describe SnapApplicationAttributes do
         mortgage_expense_yes: nil,
         total_money: snap_application.total_money,
         monthly_gross_income: snap_application.monthly_gross_income,
-        financial_accounts_checking_or_savings_account: false,
-        financial_accounts_life_insurance: false,
-        financial_accounts_other: false,
-        financial_accounts_mutual_funds_or_stocks: false,
-        financial_accounts_four_oh_one_k_or_iras: true,
-        financial_accounts_trusts: false,
-        first_member_with_disability_name: nil,
-        homeless: nil,
+        financial_accounts_checking_or_savings_account: nil,
+        financial_accounts_life_insurance: nil,
+        financial_accounts_other: nil,
+        financial_accounts_mutual_funds_or_stocks: nil,
+        financial_accounts_four_oh_one_k_or_iras: "Yes",
+        financial_accounts_trusts: nil,
+        homeless: "Yes",
         income_change_explanation: nil,
         income_change_no: "Yes",
         income_change_yes: nil,

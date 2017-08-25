@@ -207,8 +207,7 @@ class SnapApplicationAttributes
       members.
       where.
       not(buy_food_with: true).
-      select('first_name || " " || last_name AS full_name').
-      pluck(:first_name, :last_name).
+      pluck('concat(first_name, \' \', last_name) AS full_name').
       to_sentence
   end
 
@@ -221,7 +220,7 @@ class SnapApplicationAttributes
       end
     end
 
-    included.include?(true)
+    bool_to_checkbox(included.include?(true))
   end
 
   def self_employed_household_members

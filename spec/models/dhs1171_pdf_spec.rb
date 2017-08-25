@@ -99,6 +99,34 @@ RSpec.describe Dhs1171Pdf do
       end
     end
 
+    context "additional income sources" do
+      it "adds the additional income source fields" do
+        snap_application = create(
+          :snap_application,
+          :with_member,
+          additional_income: ["child_support", "foster_care"],
+          income_child_support: 100,
+          income_foster_care: 50,
+        )
+
+        file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+        result = filled_in_values(file: file.path)
+
+        expect(result["first_additional_income_type"]).to eq(
+          "Child Support",
+        )
+        expect(result["first_additional_income_amount"]).to eq(
+          "100.0",
+        )
+        expect(result["second_additional_income_type"]).to eq(
+          "Foster Care",
+        )
+        expect(result["second_additional_income_amount"]).to eq(
+          "50.0",
+        )
+      end
+    end
+
     it "prepends a cover sheet" do
       snap_application = create(:snap_application, :with_member)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
