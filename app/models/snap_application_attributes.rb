@@ -152,10 +152,13 @@ class SnapApplicationAttributes
   end
 
   def phone_attributes
-    return {} if snap_application.phone_number.nil?
-    ten_digit_phone.each_with_index.reduce({}) do |memo, (phone_digit, index)|
-      memo["phone_number_#{index}"] = phone_digit
-      memo
+    if snap_application.phone_number.nil?
+      {}
+    else
+      ten_digit_phone.each_with_index.reduce({}) do |memo, (phone_digit, index)|
+        memo["phone_number_#{index}"] = phone_digit
+        memo
+      end
     end
   end
 
