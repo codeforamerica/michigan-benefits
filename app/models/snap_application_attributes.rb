@@ -163,7 +163,7 @@ class SnapApplicationAttributes
   end
 
   def ten_digit_phone
-    snap_application.phone_number.split("").last(10)
+    snap_application.phone_number.split("")
   end
 
   def monthly_rent_taxes_and_insurance
