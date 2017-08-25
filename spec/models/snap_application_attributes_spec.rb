@@ -10,7 +10,7 @@ RSpec.describe SnapApplicationAttributes do
         :with_member,
         addresses: [mailing_address, residential_address],
         financial_accounts: [:four_oh_one_k],
-        phone_number: "+12222222222",
+        phone_number: "2222222222",
         rent_expense: 100,
         unstable_housing: true,
       )

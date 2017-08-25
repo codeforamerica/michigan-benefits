@@ -202,10 +202,6 @@ GEM
       ruby-rc4
       ttfunk
     pg (0.21.0)
-    phony (2.15.47)
-    phony_rails (0.14.6)
-      activesupport (>= 3.0)
-      phony (> 2.15)
     powerpack (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -378,7 +374,6 @@ DEPENDENCIES
   pdf-forms
   pdf-reader
   pg (~> 0.18)
-  phony_rails
   pry-rails
   puma
   rails (~> 5.1)
