@@ -34,25 +34,20 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_money_field(
     method,
     label_text,
-    type: "text",
+    type: :tel,
     notes: [],
     options: {},
-    classes: [],
-    prefix: nil,
+    classes: ["form-width--med"],
+    prefix: "$",
     autofocus: nil,
     append_html: ""
   )
-    money_field_options = {
-      placeholder: "$",
-      data: { money: true },
-    }.merge(options)
-
     mb_input_field(
       method,
       label_text,
       type: type,
       notes: notes,
-      options: money_field_options,
+      options: options,
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
