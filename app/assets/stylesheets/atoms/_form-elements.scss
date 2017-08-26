@@ -81,15 +81,8 @@ label {
         border-radius: 50%;
       }
     }
-
-    &:focus:before {
-      background-color: $color-grey;
-    }
-
-    &:checked:before {
-      background-color: $form-color-border-focus;
-    }
   }
+
   &:hover {
     background-color: $color-light-grey;
   }
@@ -131,11 +124,9 @@ label {
       &:before {
         font-family: $font-icon;
         font-size: .8em;
-        content: '\e5ca';
         top: -.5em;
         display: inline-block;
         position: relative;
-        color: $color-teal;
       }
     }
   }

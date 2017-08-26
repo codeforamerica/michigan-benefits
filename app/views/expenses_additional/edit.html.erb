@@ -2,10 +2,8 @@
 
 <div class="form-card">
     <header class="form-card__header">
-      <div class="step-section-header">
-        <div class="step-section-header__subhead">
-          Tell us more about the other expenses you listed.
-        </div>
+      <div class="form-card__title">
+        Tell us more about the other expenses you listed.
       </div>
     </header>
 
@@ -16,52 +14,58 @@
       method: :put do |f| %>
 
       <div class="form-card__content">
-        <h4 class="step-section-header__headline">
-          Care expenses
-        </h4>
-
         <% if current_snap_application.dependent_care? %>
-          <%= f.mb_money_field :monthly_care_expenses,
-            "In total, how much do you pay in care expenses each month?" %>
+          <p class="text--section-header">
+            Care expenses
+          </p>
 
-          <%= f.mb_checkbox_set [
-            { method: :childcare, label: "Childcare" },
-            { method: :disabled_adult_care, label: "Disabled adult care" },
+          <fieldset class="form-group">
+            <%= f.mb_money_field :monthly_care_expenses,
+              "In total, how much do you pay in care expenses each month?" %>
+
+            <%= f.mb_checkbox_set [
+              { method: :childcare, label: "Childcare" },
+              { method: :disabled_adult_care, label: "Disabled adult care" },
             ], label_text: "What kind of care expenses do you have?" %>
+        </fieldset>
         <% end %>
 
         <% if current_snap_application.medical? %>
-          <h4 class="step-section-header__headline">
+          <p class="text--section-header">
             Medical Expenses
-          </h4>
+          </p>
 
-          <%= f.mb_money_field :monthly_medical_expenses,
-            "In total, how much do you pay in medical expenses each month?" %>
+          <fieldset class="form-group">
+            <%= f.mb_money_field :monthly_medical_expenses,
+              "In total, how much do you pay in medical expenses each month?" %>
 
-          <%= f.mb_checkbox_set [
-            { method: :health_insurance, label: "Health insurance" },
-            { method: :co_pays, label: "Co-pays" },
-            { method: :prescriptions, label: "Prescriptions" },
-            { method: :dental, label: "Dental" },
-            { method: :in_home_care, label: "In-home care" },
-            { method: :transportation, label: "Transportation" },
-            { method: :hospital_bills, label: "Hospital bills" },
-            { method: :other, label: "Other" },
-          ], label_text: "What kind of medical expenses do you have?" %>
+            <%= f.mb_checkbox_set [
+              { method: :health_insurance, label: "Health insurance" },
+              { method: :co_pays, label: "Co-pays" },
+              { method: :prescriptions, label: "Prescriptions" },
+              { method: :dental, label: "Dental" },
+              { method: :in_home_care, label: "In-home care" },
+              { method: :transportation, label: "Transportation" },
+              { method: :hospital_bills, label: "Hospital bills" },
+              { method: :other, label: "Other" },
+            ], label_text: "What kind of medical expenses do you have?" %>
+          </fieldset>
         <% end %>
 
         <% if current_snap_application.court_ordered? %>
-          <h4 class="step-section-header__headline">
+          <p class="text--section-header">
             Court-ordered expenses
-          </h4>
+          </p>
 
-          <%= f.mb_money_field :monthly_court_ordered_expenses,
-            "In total, how much do you pay in court-ordered expenses each month?" %>
+          <fieldset class="form-group">
+            <%= f.mb_money_field :monthly_court_ordered_expenses,
+              "In total, how much do you pay in court-ordered expenses each month?" %>
 
-          <%= f.mb_checkbox_set [
-            { method: :child_support, label: "Child support" },
-            { method: :alimony, label: "Alimony" },
-            ], label_text: "What kind of court-ordered expenses do you have?" %>
+            <%= f.mb_checkbox_set [
+              { method: :child_support, label: "Child support" },
+              { method: :alimony, label: "Alimony" },
+              ], label_text: "What kind of court-ordered expenses do you have?" %>
+            </fieldset>
         <% end %>
       </div>
 

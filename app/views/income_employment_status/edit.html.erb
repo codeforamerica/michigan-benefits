@@ -2,28 +2,28 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="step-section-header">
-      <div class="step-section-header__subhead">
-        Who in your household is currently employed, or has been in the past
-        30 days?
-      </div>
-      <p class="text--help step-section-header__subhead-help">
-        Employment includes temporary or contract jobs. Self employment
-        includes odd jobs, home businesses, online businesses, etc.
-      </p>
+    <div class="form-card__title">
+      Who in your household is currently employed, or has been in the past
+      30 days?
     </div>
+    <p class="text--help text--centered">
+      Employment includes temporary or contract jobs. Self employment
+      includes odd jobs, home businesses, online businesses, etc.
+    </p>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <% @step.members.each do |member| %>
         <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
-          <div class="household-member-group" data-member-name="<%= member.full_name %>">
-            <h4 class="step-section-header__headline"><%= header_name(member) %></h4>
-            <%= ff.mb_radio_set :employment_status,
-              "",
-              [{ value: :employed, label: "Employed" }, { value: :self_employed, label: "Self Employed" }, { value: :not_employed, label: "Not Employed" }] %>
-          </div>
+          <fieldset class="form-group">
+            <div class="household-member-group" data-member-name="<%= member.full_name %>">
+              <h4><%= header_name(member) %></h4>
+              <%= ff.mb_radio_set :employment_status,
+                "",
+                [{ value: :employed, label: "Employed" }, { value: :self_employed, label: "Self Employed" }, { value: :not_employed, label: "Not Employed" }] %>
+            </div>
+          </fieldset>
         <% end %>
       <% end %>
       <%= render 'shared/next_step' %>

@@ -43,13 +43,13 @@ class Member < ApplicationRecord
 
   def employed_monthly_income
     return if employed_pay_quantity.nil?
-    if employed_pay_interval == "Hour"
+    if employed_pay_interval == "Hourly"
       employed_hours_per_week * employed_pay_quantity * AVERAGE_WEEKS_PER_MONTH
-    elsif employed_pay_interval == "Day"
+    elsif employed_pay_interval == "Daily"
       employed_pay_quantity * (WEEKS_PER_MONTH * 5)
-    elsif employed_pay_interval == "Week"
+    elsif employed_pay_interval == "Weekly"
       employed_pay_quantity * AVERAGE_WEEKS_PER_MONTH
-    elsif employed_pay_interval == "Month"
+    elsif employed_pay_interval == "Monthly"
       employed_pay_quantity
     else # "Year"
       employed_pay_quantity / MONTHS_PER_YEAR

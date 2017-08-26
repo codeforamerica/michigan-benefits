@@ -13,9 +13,9 @@ class EmployedMemberAttributes
       "#{position}_employed_hours_per_week" => member.employed_hours_per_week,
       "#{position}_employed_pay_quantity" => member.employed_pay_quantity,
       "#{position}_employed_pay_interval_hourly" =>
-        boolean_to_checkbox(member.employed_pay_interval == "Hour"),
+        boolean_to_checkbox(member.employed_pay_interval == "Hourly"),
       "#{position}_employed_pay_interval_yearly" =>
-        boolean_to_checkbox(member.employed_pay_interval == "Year"),
+        boolean_to_checkbox(member.employed_pay_interval == "Yearly"),
       "#{position}_employed_pay_interval_other" =>
         boolean_to_checkbox(other_pay_interval?),
       "#{position}_employed_pay_interval_other_detail" =>
@@ -28,8 +28,8 @@ class EmployedMemberAttributes
   attr_reader :member, :position
 
   def other_pay_interval?
-    member.employed_pay_interval != "Hour" &&
-      member.employed_pay_interval != "Year"
+    member.employed_pay_interval != "Hourly" &&
+      member.employed_pay_interval != "Yearly"
   end
 
   def other_pay_interval_detail

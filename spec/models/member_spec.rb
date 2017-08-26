@@ -28,7 +28,7 @@ RSpec.describe Member do
           :member,
           employment_status: "employed",
           employed_pay_quantity: 10,
-          employed_pay_interval: "Hour",
+          employed_pay_interval: "Hourly",
           employed_hours_per_week: 10,
         )
 

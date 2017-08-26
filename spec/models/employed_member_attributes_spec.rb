@@ -11,7 +11,7 @@ RSpec.describe EmployedMemberAttributes do
         employed_employer_name: "McTacoBacon R Us",
         employed_hours_per_week: 20,
         employed_pay_quantity: 100.50,
-        employed_pay_interval: "Week",
+        employed_pay_interval: "Weekly",
       )
 
       position = "second"
@@ -29,7 +29,7 @@ RSpec.describe EmployedMemberAttributes do
         second_employed_pay_interval_hourly: nil,
         second_employed_pay_interval_yearly: nil,
         second_employed_pay_interval_other: "Yes",
-        second_employed_pay_interval_other_detail: "Week",
+        second_employed_pay_interval_other_detail: "Weekly",
       )
     end
   end

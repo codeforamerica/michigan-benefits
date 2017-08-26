@@ -14,3 +14,52 @@
 //= require jquery_ujs
 //= require handlebars
 //= require_tree .
+
+var radioSelector = (function() {
+  var rs = {
+    init: function() {
+      $('.radio-button').each(function(index, button){
+        if($(this).find('input').is(':checked')) {
+          $(this).addClass('is-selected');
+        }
+
+        $(this).find('input').click(function(e) {
+          $(this).parent().siblings().removeClass('is-selected');
+          $(this).parent().addClass('is-selected');
+        })
+      })
+    }
+  }
+  return {
+    init: rs.init
+  }
+})();
+
+var checkboxSelector = (function() {
+  var cs = {
+    init: function() {
+      $('.checkbox').each(function(index, button){
+        if($(this).find('input').is(':checked')) {
+          $(this).addClass('is-selected');
+        }
+
+        $(this).find('input').click(function(e) {
+          if($(this).is(':checked')) {
+            $(this).parent().addClass('is-selected');
+          }
+          else {
+            $(this).parent().removeClass('is-selected');
+          }
+        })
+      })
+    }
+  }
+  return {
+    init: cs.init
+  }
+})();
+
+$(document).ready(function() {
+  radioSelector.init();
+  checkboxSelector.init();
+});

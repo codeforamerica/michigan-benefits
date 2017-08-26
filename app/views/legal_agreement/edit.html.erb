@@ -2,10 +2,8 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="step-section-header">
-      <div class="step-section-header__subhead">
+    <div class="form-card__title">
         Before you finish, read and agree to the legal terms.
-      </div>
     </div>
   </header>
 
@@ -19,7 +17,7 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
      <%= f.mb_radio_set :consent_to_terms,
           '',
-          [{ value: true, label: "I agree" }, { value: false, label: "I do not agree" }],
+          [{ value: true, label: "I agree" }],
           layout: "inline" %>
       <%= render 'shared/next_step' %>
     <% end %>

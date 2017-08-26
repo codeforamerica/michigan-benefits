@@ -8,3 +8,14 @@
   @extend %max-container;
   margin-bottom: 2em;
 }
+
+.form-card__title {
+  font-weight: 600;
+  text-align: center;
+}
+
+.pre-title {
+  font-weight: 600;
+  color: $color-sky;
+  text-align: center;
+}

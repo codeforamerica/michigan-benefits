@@ -2,12 +2,11 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="step-section-header">
-      <div class="step-section-header__icon illustration illustration--hello"></div>
-      <div class="step-section-header__headline">We're here to help.</div>
-      <div class="step-section-header__subhead">To start, please introduce yourself.</div>
-    </div>
+    <div class="illustration illustration--hello"></div>
+    <div class="pre-title">We're here to help.</div>
+    <div class="form-card__title">To start, please introduce yourself.</div>
   </header>
+
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_input_field :first_name, "What is your first name?" %>

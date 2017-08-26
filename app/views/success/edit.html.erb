@@ -3,10 +3,8 @@
 <div class="form-card">
   <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
     <header class="form-card__header">
-      <div class="step-section-header">
-        <div class="step-section-header__subhead">
-          Your Michigan Benefits application is ready to be submitted!
-        </div>
+      <div class="form-card__title">
+        Your Michigan Benefits application is ready to be submitted!
       </div>
     </header>
 
@@ -38,13 +36,6 @@
           </p>
         </div>
       </div>
-
-      <p class="text--small">
-      If you need more help with food,
-      <a class="link--subtle" href="http://www.foodpantries.org/st/michigan">
-        find your local food bank or food pantry
-      </a>.
-      </p>
 
       <section class="slab">
         <h3>Want a copy of your application?</h3>
