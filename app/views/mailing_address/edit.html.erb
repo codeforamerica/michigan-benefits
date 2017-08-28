@@ -2,10 +2,11 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="step-section-header">
-      <div class="step-section-header__subhead">Tell us where to send you postal mail.</div>
+    <div class="form-card__title">
+      Tell us where to send you postal mail.
     </div>
   </header>
+
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_input_field :street_address, "Address", options:  { placeholder: "123 Main St." } %>

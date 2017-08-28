@@ -2,19 +2,17 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="step-section-header">
-      <div class="step-section-header__subhead">
-        In your own words, tell us about the recent change in your household's
-        income.
-      </div>
-      <p class="text--help step-section-header__subhead-help">
-        This will help us understand how to interpret other financial information.
-      </p>
+    <div class="form-card__title">
+      In your own words, tell us about the recent change in your household's
+      income.
     </div>
+    <p class="text--help text--centered">
+      This will help us understand how to interpret other financial information.
+    </p>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_textarea :income_change_explanation, '' %>
+      <%= f.mb_textarea :income_change_explanation, '', options: { rows: 6 } %>
       <%= render 'shared/next_step' %>
     <% end %>

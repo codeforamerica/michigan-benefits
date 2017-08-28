@@ -95,7 +95,7 @@ feature "SNAP application" do
       fill_in "Employer name", with: "Company ABC Inc."
       fill_in "Usual hours per week", with: 25
       fill_in "Pay (before tax)", with: 100
-      select "Day", from: "per"
+      select "Daily", from: "How often are you paid that amount?"
 
       fill_in "Type of work", with: "Chef"
       fill_in "Monthly pay (before tax)", with: 300

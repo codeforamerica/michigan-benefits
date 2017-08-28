@@ -2,21 +2,22 @@
 
 <div class="form-card" id="document-drop">
   <header class="form-card__header">
-    <div class="step-section-header">
-      <div class="step-section-header__subhead">
-        Lastly, we suggest including some documents if you can right now.
-      </div>
+    <div class="form-card__title">
+      Lastly, we suggest including some documents if you can right now.
     </div>
   </header>
+
   <div class="form-card__content">
-    <p>
-      You can do this later but this will help speed up the process.
-    </p>
-    <p>
-      The following page will allow you to both upload photos of your documents
-      with your phone, as well as submit files you already have on your
-      computer or mobile phone/tablet.
-    </p>
+    <div class="text--centered">
+      <p>
+        You can do this later but this will help speed up the process.
+      </p>
+      <p>
+        The following page will allow you to both upload photos of your documents
+        with your phone, as well as submit files you already have on your
+        computer or mobile phone/tablet.
+      </p>
+    </div>
 
     <%= form_for @step,
       as: :step,
@@ -24,7 +25,7 @@
       url: current_path,
       method: :put do |f| %>
 
-      <div class="form-card__documents__ctas">
+      <div class="text--centered">
         <%= link_to next_path, class: "button button--next button--cta" do %>
           Submit documents here
         <% end %>
@@ -35,7 +36,7 @@
       </div>
     <% end %>
 
-    <div class="form-card__documents__faqs">
+    <div class='slab'>
       <%= render 'shared/commonly_requested_documents' %>
     </div>
   </div>
