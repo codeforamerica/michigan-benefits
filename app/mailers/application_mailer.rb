@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: "admin@#{ENV['EMAIL_DOMAIN']}"
+  default from: "hello@#{ENV['EMAIL_DOMAIN']}"
   layout "mailer"
 
   def snap_application_notification(file_name:, recipient_email:)
