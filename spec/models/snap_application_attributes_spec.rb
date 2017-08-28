@@ -68,6 +68,7 @@ RSpec.describe SnapApplicationAttributes do
         financial_accounts_four_oh_one_k_or_iras: "Yes",
         financial_accounts_trusts: nil,
         homeless: "Yes",
+        not_homeless: nil,
         income_change_explanation: nil,
         income_change_no: "Yes",
         income_change_yes: nil,

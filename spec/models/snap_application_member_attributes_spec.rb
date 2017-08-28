@@ -53,5 +53,22 @@ RSpec.describe SnapApplicationMemberAttributes do
         primary_member_ssn_8: "1",
       )
     end
+
+    context "nil SSN" do
+      it "does not error" do
+        member = create(
+          :member,
+          ssn: nil,
+        )
+        position = "anything"
+
+        expect do
+          SnapApplicationMemberAttributes.new(
+            member: member,
+            position: position,
+          ).to_h
+        end.not_to raise_error
+      end
+    end
   end
 end
