@@ -22,6 +22,7 @@ class SnapApplicationAttributes
         bool_to_checkbox(all_members_buy_food_with?),
       members_not_buy_food_with: members_not_buy_food_with,
       homeless: bool_to_checkbox(snap_application.unstable_housing?),
+      not_homeless: bool_to_checkbox(!snap_application.unstable_housing?),
       residential_address_city: snap_application.residential_address.city,
       residential_address_county: snap_application.residential_address.county,
       residential_address_state: snap_application.residential_address.state,
