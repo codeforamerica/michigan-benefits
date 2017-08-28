@@ -37,11 +37,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     type: :tel,
     notes: [],
     options: {},
-    classes: ["form-width--med"],
+    classes: [],
     prefix: "$",
-    autofocus: nil,
-    append_html: ""
+    autofocus: nil
   )
+
     mb_input_field(
       method,
       label_text,
@@ -51,7 +51,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
-      append_html: append_html,
     )
   end
 

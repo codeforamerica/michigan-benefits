@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825182343) do
+ActiveRecord::Schema.define(version: 20170825210619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 20170825182343) do
     t.string "employment_status"
     t.string "employed_employer_name"
     t.integer "employed_hours_per_week"
-    t.float "employed_pay_quantity"
+    t.integer "employed_pay_quantity"
     t.string "employed_pay_interval"
     t.string "self_employed_profession"
-    t.float "self_employed_monthly_income"
+    t.integer "self_employed_monthly_income"
     t.string "self_employed_monthly_expenses"
     t.boolean "citizen"
     t.boolean "disabled"
@@ -92,6 +92,15 @@ ActiveRecord::Schema.define(version: 20170825182343) do
     t.boolean "anyone_living_elsewhere"
     t.boolean "income_change"
     t.text "income_change_explanation"
+    t.text "additional_income", default: [], array: true
+    t.integer "income_child_support"
+    t.integer "income_foster_care"
+    t.integer "income_other"
+    t.integer "income_pension"
+    t.integer "income_social_security"
+    t.integer "income_ssi_or_disability"
+    t.integer "income_unemployment_insurance"
+    t.integer "income_workers_compensation"
     t.integer "rent_expense"
     t.integer "property_tax_expense"
     t.integer "insurance_expense"
@@ -111,20 +120,11 @@ ActiveRecord::Schema.define(version: 20170825182343) do
     t.string "care_expenses", default: [], array: true
     t.string "medical_expenses", default: [], array: true
     t.string "court_ordered_expenses", default: [], array: true
-    t.text "additional_income", default: [], array: true
-    t.float "income_child_support"
-    t.float "income_foster_care"
-    t.float "income_other"
-    t.float "income_pension"
-    t.float "income_social_security"
-    t.float "income_ssi_or_disability"
-    t.float "income_unemployment_insurance"
-    t.float "income_workers_compensation"
     t.boolean "money_or_accounts_income"
     t.boolean "real_estate_income"
     t.boolean "vehicle_income"
     t.string "financial_accounts", default: [], array: true
-    t.float "total_money"
+    t.integer "total_money"
     t.string "interview_preference"
     t.text "additional_information"
   end
