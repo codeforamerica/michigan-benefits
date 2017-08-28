@@ -3,24 +3,24 @@
     {
       "warning_type": "Command Injection",
       "warning_code": 14,
-      "fingerprint": "40a7ec46252e4832ff4cfa253e332fc2859820a7a4e9c48a7124fb2cbf48df3c",
+      "fingerprint": "9dbd16606d77f5894544b049241d32224b1363e2927c972701d97bb5e690c418",
       "check_name": "Execute",
       "message": "Possible command injection",
       "file": "app/models/dhs1171_pdf.rb",
-      "line": 49,
+      "line": 31,
       "link": "http://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"pdftk #{\"#{\"lib/pdfs\".freeze}/michigan_snap_fax_cover_letter.pdf\".freeze} #{filled_in_form.path} cat output #{complete_form_with_cover.path}\")",
+      "code": "system(((\"pdftk #{\"#{\"lib/pdfs\".freeze}/michigan_snap_fax_cover_letter.pdf\".freeze} #{filled_in_form.path} #{additional_pages}\" + \" cat output\") + \" #{complete_form_with_cover.path}\"))",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "Dhs1171Pdf",
         "method": "prepend_cover_sheet_to_completed_form"
       },
-      "user_input": "\"lib/pdfs\".freeze",
+      "user_input": "complete_form_with_cover.path",
       "confidence": "Medium",
       "note": ""
     }
   ],
-  "updated": "2017-07-28 15:35:34 -0700",
+  "updated": "2017-08-28 14:35:58 -0700",
   "brakeman_version": "3.7.0"
 }
