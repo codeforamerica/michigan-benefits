@@ -116,13 +116,13 @@ RSpec.describe Dhs1171Pdf do
           "Child Support",
         )
         expect(result["first_additional_income_amount"]).to eq(
-          "100.0",
+          "100",
         )
         expect(result["second_additional_income_type"]).to eq(
           "Foster Care",
         )
         expect(result["second_additional_income_amount"]).to eq(
-          "50.0",
+          "50",
         )
       end
     end
