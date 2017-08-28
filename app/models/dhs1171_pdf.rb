@@ -24,8 +24,29 @@ class Dhs1171Pdf
     PdfForms.new.fill_form(SOURCE_PDF, filled_in_form.path, client_data)
   end
 
+  def prepend_cover_sheet_to_completed_form
+    system(
+      "pdftk #{COVERSHEET_PDF} #{filled_in_form.path} #{additional_pages}" +
+      " cat output" +
+      " #{complete_form_with_cover.path}",
+    )
+  end
+
+  def complete_form_with_cover
+    @_complete_form_with_cover ||=
+      Tempfile.new(["snap_app_with_cover", ".pdf"], "tmp/")
+  end
+
   def filled_in_form
     @_filled_in_form ||= Tempfile.new(["snap_app", ".pdf"], "tmp/")
+  end
+
+  def additional_pages
+    if application_members.length > 6
+      SnapApplicationExtraMemberPdf.new(
+        members: additional_members,
+      ).completed_file
+    end
   end
 
   def client_data
@@ -81,17 +102,8 @@ class Dhs1171Pdf
     end.compact.reduce({}, :merge)
   end
 
-  def prepend_cover_sheet_to_completed_form
-    system(
-      <<~eos
-        pdftk #{COVERSHEET_PDF} #{filled_in_form.path} cat output #{complete_form_with_cover.path}
-      eos
-    )
-  end
-
-  def complete_form_with_cover
-    @_complete_form_with_cover ||=
-      Tempfile.new(["snap_app_with_cover", ".pdf"], "tmp/")
+  def additional_members
+    application_members[6..-1]
   end
 
   def first_six_members
