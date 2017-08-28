@@ -29,13 +29,11 @@ class SendApplicationJob < ApplicationJob
   end
 
   def fax_pdf
-    if fax_phone_number_exists?
-      Fax.send_fax(
-        number: fax_recipient_number,
-        file: complete_form_with_cover.path,
-        recipient: fax_recipient_name,
-      )
-    end
+    Fax.send_fax(
+      number: fax_number,
+      file: complete_form_with_cover.path,
+      recipient: fax_recipient_name,
+    )
   end
 
   def fax_recipient
@@ -46,11 +44,7 @@ class SendApplicationJob < ApplicationJob
     fax_recipient.name
   end
 
-  def fax_recipient_number
+  def fax_number
     fax_recipient.number
-  end
-
-  def fax_phone_number_exists?
-    !fax_recipient_number.empty?
   end
 end
