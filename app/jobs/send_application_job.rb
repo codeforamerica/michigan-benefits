@@ -41,7 +41,14 @@ class SendApplicationJob < ApplicationJob
   def fax_recipient
     FaxRecipient.new(residential_address: residential_address)
   end
-  delegate :number, :name, to: :fax_recipient, prefix: true
+
+  def fax_recipient_name
+    fax_recipient.name
+  end
+
+  def fax_recipient_number
+    fax_recipient.number
+  end
 
   def fax_phone_number_exists?
     !fax_recipient_number.empty?
