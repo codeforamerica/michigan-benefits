@@ -14,10 +14,9 @@ class FaxRecipient
   end
 
   def self.find_by(zip:)
-    covered_zip_codes.detect do |(name, zip_codes)|
-      return offices[name] if zip_codes.include?(zip)
-    end
-    offices[configuration["fallback_office"].to_s]
+    name = covered_zip_codes[zip] || configuration["fallback_office"]
+    Rails.logger.debug("Mapped zip #{zip} to office #{name}")
+    offices[name]
   end
 
   def self.covered_zip_codes
