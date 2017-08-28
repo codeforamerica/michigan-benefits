@@ -2,20 +2,24 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="step-section-header">
+    <div class="form-card__title">
       Is there anything else you'd like us to know about your situation?
+     </div>
 
-      <div class="step-section-header__subhead">
-        Feel free to give other details you think might be helpful for us to
-        know. Otherwise, you can skip this question.
-      </div>
-    </div>
+    <p class="text--help text--centered">
+      Feel free to give other details you think might be helpful for us to
+      know. Otherwise, you can skip this question.
+    </p>
   </header>
 
   <div class="form-card__content">
-    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
       <%= f.mb_textarea :additional_information, "Anything else?" %>
 
-    <%= render 'shared/next_step' %>
+    <%= render "shared/next_step" %>
   <% end %>
 </div>
