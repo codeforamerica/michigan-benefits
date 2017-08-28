@@ -1,19 +1,27 @@
 # APP_RELEASE_STAGE
-defaults:
-  fallback: :union # Which office to send the fax to in the event the submitted
-                   # zip code is not in our mapping
-  zip_codes:
+defaults: &defaults
+  # Which office to send the fax to in the event the submitted
+  # zip code is not in our mapping
+  fallback_office: "union"
+
+  # Because YML inheritance doesn't work well with nested hashes,
+  # We are relying on matching the list of offices per-environment with
+  # the list of zip codes a given office serves to reduce configuration duplication.
+  # This may be unnecessary?
+  covered_zip_codes:
     clio: [48415,48417,48420,48421,48433,48437,48457,48458,48460,48463,48464,48473,48504,48506,48531,48532,48746]
     union: [48411,48423,48429,48430,48436,48438,48439,48442,48449,48451,48501,48502,48503,48505,48507,48509,48519,48529]
-development: &defaults
+development:
+  <<: *defaults
   offices:
-    union: +16173963015
-    clio: +16173963015
-staging: &defaults
+    union:
+      fax_number: "+16173963015"
+    clio:
+      fax_number: "+16173963015"
+production:
+  <<: *defaults
   offices:
-    union: +16173963015
-    clio: +16173963015
-production: &defaults
-  offices:
-    union: +16173963015
-    clio: +16173963015
+    union:
+      fax_number: "+18107602021"
+    clio:
+      fax_number: "+18107602310"

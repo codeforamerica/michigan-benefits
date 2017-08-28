@@ -13,6 +13,7 @@ class SendApplicationJob < ApplicationJob
   private
 
   attr_reader :complete_form_with_cover, :snap_application
+  delegate :residential_address, to: :snap_application
 
   def create_pdf
     @complete_form_with_cover = Dhs1171Pdf.new(
@@ -30,22 +31,19 @@ class SendApplicationJob < ApplicationJob
   def fax_pdf
     if fax_phone_number_exists?
       Fax.send_fax(
-        number: fax_number,
+        number: fax_recipient_number,
         file: complete_form_with_cover.path,
         recipient: fax_recipient_name,
       )
     end
   end
 
-  def fax_number
-    ENV.fetch("FAX_NUMBER", "")
+  def fax_recipient
+    FaxRecipient.new(residential_address: residential_address)
   end
-
-  def fax_recipient_name
-    ENV.fetch("FAX_RECIPIENT", "Michigan Bridges")
-  end
+  delegate :number, :name, to: :fax_recipient, prefix: true
 
   def fax_phone_number_exists?
-    !fax_number.empty?
+    !fax_recipient_number.empty?
   end
 end
