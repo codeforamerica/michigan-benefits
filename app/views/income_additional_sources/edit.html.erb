@@ -12,7 +12,7 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_checkbox_set(
         [
-          { label: "Unemplyment Insurance", method: :unemployment_insurance },
+          { label: "Unemployment Insurance", method: :unemployment_insurance },
           { label: "SSI or Disability", method: :ssi_or_disability },
           { label: "Worker's Compensation", method: :workers_compensation },
           { label: "Pension", method: :pension },
