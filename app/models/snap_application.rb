@@ -2,6 +2,18 @@ class SnapApplication < ApplicationRecord
   has_many :addresses
   has_many :members
 
+  scope :signed, -> { where.not(signed_at: nil) }
+  scope :unfaxed, -> { where(faxed_at: nil) }
+  scope :updated_awhile_ago, -> { where("updated_at < ?", 30.minutes.ago) }
+
+  scope :faxable, -> { signed.unfaxed.updated_awhile_ago }
+
+  def self.enqueue_faxes
+    faxable.pluck(:id).each do |id|
+      FaxApplicationJob.perform_later(snap_application_id: id)
+    end
+  end
+
   def monthly_gross_income
     [
       monthly_additional_income,
@@ -41,5 +53,9 @@ class SnapApplication < ApplicationRecord
 
   def non_applicant_members
     members - [primary_member]
+  end
+
+  def faxed?
+    faxed_at.present?
   end
 end

@@ -1,10 +1,10 @@
-class SendApplicationJob < ApplicationJob
-  def perform(snap_application:)
-    @snap_application = snap_application
-
+class FaxApplicationJob < ApplicationJob
+  def perform(snap_application_id:)
+    @snap_application = SnapApplication.find(snap_application_id)
+    return if snap_application.faxed?
     create_pdf
-    send_pdf
     fax_pdf
+    snap_application.update(faxed_at: Time.zone.now)
   ensure
     complete_form_with_cover.try(:close)
     complete_form_with_cover.try(:unlink)
@@ -19,13 +19,6 @@ class SendApplicationJob < ApplicationJob
     @complete_form_with_cover = Dhs1171Pdf.new(
       snap_application: snap_application,
     ).completed_file
-  end
-
-  def send_pdf
-    ApplicationMailer.snap_application_notification(
-      file_name: complete_form_with_cover.path,
-      recipient_email: snap_application.email,
-    ).deliver
   end
 
   def fax_pdf
