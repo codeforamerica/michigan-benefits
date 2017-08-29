@@ -83,7 +83,7 @@
     }
   }
 
-  @include media(0) {
+  @include media(max-width $mobile-up) {
     .textwell__content {
       overflow: hidden;
       padding: 0;
