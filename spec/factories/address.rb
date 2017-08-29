@@ -5,6 +5,7 @@ FactoryGirl.define do
     zip "12345"
     county "Genesee"
     state "MI"
+    mailing false
 
     factory :mailing_address do
       mailing true

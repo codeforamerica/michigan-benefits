@@ -19,6 +19,7 @@ class Fax
   end
 
   def send_fax
+    return unless Feature.enabled?("FAX")
     sfax.send_fax(number, file, recipient)
   end
 

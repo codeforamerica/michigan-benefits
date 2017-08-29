@@ -27,6 +27,7 @@ class SnapApplication < ApplicationRecord
   end
 
   def residential_address
+    return mailing_address if mailing_address_same_as_residential_address?
     addresses.where.not(mailing: true).first || NullAddress.new
   end
 

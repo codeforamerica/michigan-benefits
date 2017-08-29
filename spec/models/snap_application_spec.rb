@@ -30,4 +30,36 @@ RSpec.describe SnapApplication do
       end
     end
   end
+
+  describe "#residential_address" do
+    context "when mailing_address_same_as_residential_address?" do
+      it "is the mailing address even when a residential_address is provided" do
+        app = create(:snap_application,
+                      mailing_address_same_as_residential_address: true)
+
+        create(:address, snap_application: app)
+        mailing_address = create(:mailing_address, snap_application: app)
+
+        expect(app.residential_address).to eq mailing_address
+      end
+    end
+
+    context "when not mailing_address_same_as_residential_address?" do
+      it "is a NullAddress when no residential_address is provided" do
+        app = create(:snap_application)
+
+        create(:mailing_address, snap_application: app)
+
+        expect(app.residential_address).to be_a NullAddress
+      end
+
+      it "is the residential address when it is provided" do
+        app = create(:snap_application)
+
+        create(:mailing_address, snap_application: app)
+        residential_address = create(:address, snap_application: app)
+        expect(app.residential_address).to eq residential_address
+      end
+    end
+  end
 end

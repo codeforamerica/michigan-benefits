@@ -1,0 +1,56 @@
+# APP_RELEASE_STAGE
+defaults: &defaults
+  # Which office to send the fax to in the event the submitted
+  # zip code is not in our mapping
+  fallback_office: "union"
+  covered_zip_codes:
+    "48415": "clio"
+    "48417": "clio"
+    "48420": "clio"
+    "48421": "clio"
+    "48433": "clio"
+    "48437": "clio"
+    "48457": "clio"
+    "48458": "clio"
+    "48460": "clio"
+    "48463": "clio"
+    "48464": "clio"
+    "48473": "clio"
+    "48504": "clio"
+    "48506": "clio"
+    "48531": "clio"
+    "48532": "clio"
+    "48746": "clio"
+    # Union Zip Codes
+    "48411": "union"
+    "48423": "union"
+    "48429": "union"
+    "48430": "union"
+    "48436": "union"
+    "48438": "union"
+    "48439": "union"
+    "48442": "union"
+    "48449": "union"
+    "48451": "union"
+    "48501": "union"
+    "48502": "union"
+    "48503": "union"
+    "48505": "union"
+    "48507": "union"
+    "48509": "union"
+    "48519": "union"
+    "48529": "union"
+development:
+  <<: *defaults
+  offices:
+    union:
+      fax_number: "+16173963015"
+    clio:
+      fax_number: "+16173963015"
+production:
+  <<: *defaults
+  offices:
+    union:
+      fax_number: "+18107602021"
+    clio:
+      fax_number: "+18107602310"
