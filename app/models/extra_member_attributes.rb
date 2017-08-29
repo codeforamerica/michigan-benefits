@@ -1,4 +1,4 @@
-class SnapApplicationExtraMemberAttributes
+class ExtraMemberAttributes
   def initialize(member:)
     @member = member
   end
