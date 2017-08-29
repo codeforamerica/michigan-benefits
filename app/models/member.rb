@@ -46,7 +46,7 @@ class Member < ApplicationRecord
     if employed_pay_interval == "Hourly"
       employed_hours_per_week * employed_pay_quantity * AVERAGE_WEEKS_PER_MONTH
     elsif employed_pay_interval == "Daily"
-      employed_pay_quantity * (WEEKS_PER_MONTH * 5)
+      employed_pay_quantity * (AVERAGE_WEEKS_PER_MONTH * 5)
     elsif employed_pay_interval == "Weekly"
       employed_pay_quantity * AVERAGE_WEEKS_PER_MONTH
     elsif employed_pay_interval == "Monthly"
