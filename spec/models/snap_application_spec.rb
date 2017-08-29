@@ -62,4 +62,52 @@ RSpec.describe SnapApplication do
       end
     end
   end
+
+  describe ".enqueue_faxes" do
+    it "schedules jobs for signed, unfaxed application updated awhile ago" do
+      signed_unfaxed_updated_awhile_ago = create(:snap_application,
+                                                 signed_at: 31.minutes.ago,
+                                                 faxed_at: nil,
+                                                 updated_at: 31.minutes.ago)
+
+      signed_unfaxed_updated_recently = create(:snap_application,
+                                               signed_at: 25.minutes.ago,
+                                               faxed_at: nil,
+                                               updated_at: 25.minutes.ago)
+
+      unsigned_unfaxed_updated_awhile_ago = create(:snap_application,
+                                                   signed_at: nil,
+                                                   faxed_at: nil,
+                                                   updated_at: 31.minutes.ago)
+
+      signed_faxed_updated_awhile_ago = create(:snap_application,
+                                               signed_at: 31.minutes.ago,
+                                               faxed_at: 1.minute.ago,
+                                               updated_at: 31.minutes.ago)
+
+      allow(FaxApplicationJob).to receive(:perform_later)
+
+      SnapApplication.enqueue_faxes
+
+      expect(FaxApplicationJob).to(
+        have_received(:perform_later).
+          with(snap_application_id: signed_unfaxed_updated_awhile_ago.id),
+      )
+
+      expect(FaxApplicationJob).not_to(
+        have_received(:perform_later).
+          with(snap_application_id: signed_faxed_updated_awhile_ago.id),
+      )
+
+      expect(FaxApplicationJob).not_to(
+        have_received(:perform_later).
+          with(snap_application_id: unsigned_unfaxed_updated_awhile_ago.id),
+      )
+
+      expect(FaxApplicationJob).not_to(
+        have_received(:perform_later).
+          with(snap_application_id: signed_unfaxed_updated_recently.id),
+      )
+    end
+  end
 end
