@@ -38,6 +38,9 @@ RSpec.describe FaxApplicationJob do
 
       job.perform(snap_application_id: snap_application.id)
 
+      snap_application.reload
+      expect(snap_application).to be_faxed
+
       expect(Fax).to have_received(:send_fax).
         with(number: "+15550001111", file: file_path, recipient: "John Doe")
     end
