@@ -54,6 +54,10 @@ group :development, :test do
   gem "simplecov"
 end
 
+group :production do
+  gem "sentry-raven"
+end
+
 group :development do
   gem "overcommit"
 end

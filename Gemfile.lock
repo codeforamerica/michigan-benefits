@@ -303,6 +303,8 @@ GEM
     selenium-webdriver (3.4.3)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    sentry-raven (2.6.3)
+      faraday (>= 0.7.6, < 1.0)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -389,6 +391,7 @@ DEPENDENCIES
   rubocop-rspec
   sass-rails (~> 5.0)
   selenium-webdriver
+  sentry-raven
   sfax!
   simplecov
   twilio-ruby
