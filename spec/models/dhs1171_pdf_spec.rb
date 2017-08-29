@@ -148,6 +148,28 @@ RSpec.describe Dhs1171Pdf do
       expect(new_pdf.page_count).to eq(original_length + 2)
     end
 
+    it "appends pages if there are more than 2 employed members" do
+      members = create_list(:member, 3, employment_status: "employed")
+      snap_application = create(:snap_application, members: members)
+      original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
+
+      file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+      new_pdf = PDF::Reader.new(file.path)
+
+      expect(new_pdf.page_count).to eq(original_length + 2)
+    end
+
+    it "appends pages if there are more than 2 self-employed members" do
+      members = create_list(:member, 3, employment_status: "self_employed")
+      snap_application = create(:snap_application, members: members)
+      original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
+
+      file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+      new_pdf = PDF::Reader.new(file.path)
+
+      expect(new_pdf.page_count).to eq(original_length + 2)
+    end
+
     it "returns the tempfile" do
       snap_application = create(:snap_application, :with_member)
 

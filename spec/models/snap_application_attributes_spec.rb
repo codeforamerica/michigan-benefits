@@ -53,6 +53,8 @@ RSpec.describe SnapApplicationAttributes do
         signature: "Mr. RJD2",
         signature_date: snap_application.signed_at.to_s,
         monthly_rent_taxes_and_insurance: 100,
+        more_than_six_members_no: "Yes",
+        more_than_six_members_yes: nil,
         more_than_two_employed_yes: nil,
         more_than_two_employed_no: "Yes",
         more_than_two_self_employed_yes: nil,

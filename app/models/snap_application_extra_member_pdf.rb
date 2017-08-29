@@ -3,8 +3,10 @@
 require "prawn"
 
 class SnapApplicationExtraMemberPdf
-  def initialize(members:)
+  def initialize(members:, attributes_class:, title:)
     @members = members
+    @attributes_class = attributes_class
+    @title = title
   end
 
   def completed_file
@@ -12,13 +14,13 @@ class SnapApplicationExtraMemberPdf
 
     pdf.bounding_box([40, pdf.cursor - 40], width: 500, height: 600) do
       pdf.font("Helvetica", size: 16) do
-        pdf.text("Section C Continued")
+        pdf.text(title)
       end
 
       pdf.move_down 10
 
       members.each do |member|
-        attributes = SnapApplicationExtraMemberAttributes.new(member: member)
+        attributes = attributes_class.new(member: member)
 
         pdf.font("Helvetica", size: 14) do
           pdf.text(attributes.title)
@@ -39,7 +41,7 @@ class SnapApplicationExtraMemberPdf
 
   private
 
-  attr_reader :members
+  attr_reader :members, :attributes_class, :title
 
   def file_path
     "tmp/#{filename}.pdf"

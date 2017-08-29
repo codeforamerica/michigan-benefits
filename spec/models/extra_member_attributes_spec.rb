@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe SnapApplicationExtraMemberAttributes do
+RSpec.describe ExtraMemberAttributes do
   describe "#title" do
     it "returns the member's full name" do
       member = double(full_name: "BooBoo")
 
-      title = SnapApplicationExtraMemberAttributes.new(member: member).title
+      title = ExtraMemberAttributes.new(member: member).title
 
       expect(title).to eq("Details for household member: BooBoo")
     end
@@ -24,7 +24,7 @@ RSpec.describe SnapApplicationExtraMemberAttributes do
         requesting_food_assistance: true,
       )
 
-      array = SnapApplicationExtraMemberAttributes.new(member: member).to_a
+      array = ExtraMemberAttributes.new(member: member).to_a
 
       expect(array).to eq(
         [
