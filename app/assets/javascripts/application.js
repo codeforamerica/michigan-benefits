@@ -14,6 +14,15 @@
 //= require jquery_ujs
 //= require handlebars
 //= require_tree .
+var textWell = (function() {
+  return {
+    init: function() {
+      $(document).on('click', '.textwell .textwell__expander', function() {
+        $(this).parent('.textwell').addClass('textwell--expanded')
+      })
+    }
+  }
+})();
 
 var radioSelector = (function() {
   var rs = {
@@ -62,4 +71,5 @@ var checkboxSelector = (function() {
 $(document).ready(function() {
   radioSelector.init();
   checkboxSelector.init();
+  textWell.init();
 });

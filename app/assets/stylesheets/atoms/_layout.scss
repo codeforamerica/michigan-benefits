@@ -66,13 +66,37 @@
 }
 
 .textwell {
-  text-align: left;
-  margin-bottom: 1em;
+  .textwell__content {
+    text-align: left;
+    margin-bottom: 1em;
+    max-height: 31rem;
+    overflow: auto;
+  }
 
   @include media($tablet-up) {
-    border: 2px solid $color-light-grey;
-    padding: 2em;
-    max-height: 30rem;
-    overflow: auto;
+    .textwell__content {
+      padding: 2em;
+      border: 2px solid $color-light-grey;
+    }
+    .textwell__expander {
+      display: none;
+    }
+  }
+
+  @include media(0) {
+    .textwell__content {
+      overflow: hidden;
+      padding: 0;
+    }
+  }
+
+  &.textwell--expanded {
+    .textwell__content {
+      max-height: initial;
+    }
+
+    .textwell__expander {
+      display: none;
+    }
   }
 }

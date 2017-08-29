@@ -9,9 +9,11 @@
 
   <div class="form-card__content">
     <div class="textwell">
-      <section class="legal">
+
+      <section class="legal textwell__content">
         <%= render "terms" %>
       </section>
+      <button class="textwell__expander button button--cta button--full-width">Show More</button>
     </div>
 
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
