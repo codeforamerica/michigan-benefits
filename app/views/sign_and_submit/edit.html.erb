@@ -13,7 +13,10 @@
       FAP, that you have been honest on this application.
     </p>
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_input_field :signature, "Your signature", options: { placeholder: "Your full legal name" } %>
+      <%= f.mb_input_field :signature,
+        "Your signature",
+        autofocus: true,
+        options: { placeholder: "Your full legal name" } %>
       <%= render 'shared/next_step', button_label: "Sign and submit" %>
     <% end %>
   </div>

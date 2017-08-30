@@ -12,7 +12,9 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path(member_id: member_id), method: :put do |f| %>
-      <%= f.mb_input_field :first_name, "What is their first name?" %>
+      <%= f.mb_input_field :first_name,
+        "What is their first name?",
+        autofocus: true %>
       <%= f.mb_input_field :last_name, "What is their last name?" %>
       <%= f.mb_radio_set :sex,
         'What is their sex?',

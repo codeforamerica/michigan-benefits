@@ -19,7 +19,8 @@
           url: current_path,
           method: :put do |f| %>
         <%= f.mb_money_field :rent_expense,
-        "How much does your household pay in rent or mortgage each month?" %>
+          "How much does your household pay in rent or mortgage each month?",
+          autofocus: true %>
 
         <%= f.mb_money_field :property_tax_expense,
         "How much do you pay in property tax each month?" %>
