@@ -3,9 +3,22 @@
 <div class="form-card">
   <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
     <header class="form-card__header">
+      <div class="illustration illustration--success"></div>
+      <div class="pre-title">Congratulations</div>
       <div class="form-card__title">
-        Your Michigan Benefits application is ready to be submitted!
+        Your application has been successfully submitted.
       </div>
+      <div class="text--help text--centered">
+        Submitted to MDHHS on <%= @step.submitted_date %>.
+      </div>
+
+      <div class="text--caps text--centered text--little-help nudge--med">
+        You applied for
+      </div>
+      <label class="program-selector program-selector__unbordered">
+        <div class="illustration illustration--icn_food"></div>
+        <h4 class="program-selector__title">Food Assistance</h4>
+      </label>
     </header>
 
     <div class="form-card__content form-card__expect_next">
