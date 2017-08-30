@@ -4,28 +4,18 @@ RSpec.describe EmailApplicationJob do
   describe "#perform" do
     it "creates a PDF with the snap application data" do
       snap_application = create(:snap_application, :with_member)
-      tempfile = Tempfile.new("send_application_job_spec")
-      pdf_double = double(completed_file: tempfile)
-      allow(Dhs1171Pdf).to receive(:new).
-        with(snap_application: snap_application).
-        and_return(pdf_double)
+      fake_mailer = double(deliver: nil)
+      allow(ApplicationMailer).to receive(:snap_application_notification).
+        and_return(fake_mailer)
 
-      EmailApplicationJob.new.perform(snap_application: snap_application)
+      EmailApplicationJob.new.perform(snap_application_id: snap_application.id)
 
-      expect(pdf_double).to have_received(:completed_file)
-      expect(Dhs1171Pdf).to have_received(:new).
-        with(snap_application: snap_application)
+      expect(ApplicationMailer).to(
+        have_received(:snap_application_notification).
+          with(hash_including(recipient_email: snap_application.email)),
+      )
 
-      tempfile.close
-      tempfile.unlink
-    end
-
-    it "sends an email" do
-      snap_application = create(:snap_application, :with_member)
-
-      expect do
-        EmailApplicationJob.new.perform(snap_application: snap_application)
-      end.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect(fake_mailer).to have_received(:deliver)
     end
   end
 end

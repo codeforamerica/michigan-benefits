@@ -44,14 +44,14 @@ RSpec.describe SuccessController do
       end
 
       it "creates a EmailApplicationJob" do
-        allow(EmailApplicationJob).to receive(:perform_later).
-          with(snap_application: current_app)
+        allow(EmailApplicationJob).to receive(:perform_later)
+
         params = { step: { email: "new_email@example.com" } }
 
         put :update, params: params
 
         expect(EmailApplicationJob).to have_received(:perform_later).
-          with(snap_application: current_app)
+          with(snap_application_id: current_app.id)
       end
     end
 
