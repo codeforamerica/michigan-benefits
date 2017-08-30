@@ -2,29 +2,22 @@ class FaxApplicationJob < ApplicationJob
   def perform(snap_application_id:)
     @snap_application = SnapApplication.find(snap_application_id)
     return if snap_application.faxed?
-    create_pdf
     fax_pdf
     snap_application.update(faxed_at: Time.zone.now)
   ensure
-    complete_form_with_cover.try(:close)
-    complete_form_with_cover.try(:unlink)
+    pdf.try(:close)
+    pdf.try(:unlink)
   end
 
   private
 
-  attr_reader :complete_form_with_cover, :snap_application
-  delegate :residential_address, to: :snap_application
-
-  def create_pdf
-    @complete_form_with_cover = Dhs1171Pdf.new(
-      snap_application: snap_application,
-    ).completed_file
-  end
+  attr_reader :snap_application
+  delegate :pdf, :residential_address, to: :snap_application
 
   def fax_pdf
     Fax.send_fax(
       number: fax_number,
-      file: complete_form_with_cover.path,
+      file: pdf.path,
       recipient: fax_recipient_name,
     )
   end

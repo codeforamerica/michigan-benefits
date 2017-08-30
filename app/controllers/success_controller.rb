@@ -22,7 +22,7 @@ class SuccessController < StandardStepsController
 
   def create_and_send_pdf
     EmailApplicationJob.
-      perform_later(snap_application: current_snap_application)
+      perform_later(snap_application_id: current_snap_application.id)
   end
 
   def flash_notice
