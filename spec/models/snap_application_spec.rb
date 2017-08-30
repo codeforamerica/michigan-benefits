@@ -1,6 +1,17 @@
 require "rails_helper"
 
 RSpec.describe SnapApplication do
+  describe "#pdf" do
+    it "delegates to the Dhs1171Pdf class" do
+      app = build(:snap_application)
+
+      fake_pdf_builder = double(completed_file: "I am fake. It's OK")
+      allow(Dhs1171Pdf).to receive(:new).with(snap_application: app).
+        and_return(fake_pdf_builder)
+
+      expect(app.pdf).to eql(fake_pdf_builder.completed_file)
+    end
+  end
   describe "#gross_income" do
     context "no members" do
       it "adds all sources of income" do
