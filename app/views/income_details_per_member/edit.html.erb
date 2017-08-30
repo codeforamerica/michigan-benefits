@@ -16,7 +16,9 @@
               <p class="text--section-header"><%= member.full_name %> (<%= member.employment_status.titleize %>)</p>
               <% if member.employed? %>
                 <%= ff.mb_input_field :employed_employer_name, "Employer name" %>
-                <%= ff.mb_input_field :employed_hours_per_week, "Usual hours per week" %>
+                <%= ff.mb_input_field :employed_hours_per_week,
+                  "Usual hours per week",
+                  type: :tel %>
                 <%= ff.mb_money_field :employed_pay_quantity,
                   "Pay (before tax)",
                   notes: ["This includes money withheld from paychecks"] %>
