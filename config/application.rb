@@ -15,5 +15,6 @@ module MichiganBenefits
     config.active_job.queue_adapter = :delayed_job
 
     config.autoload_paths << Rails.root.join("app/steps")
+    config.filter_parameters += [:ssn]
   end
 end
