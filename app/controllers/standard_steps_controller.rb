@@ -3,6 +3,8 @@
 class StandardStepsController < StepsController
   def edit
     @step = step_class.new(existing_attributes.slice(*step_attrs))
+
+    before_rendering_edit
   end
 
   def update
@@ -19,8 +21,11 @@ class StandardStepsController < StepsController
 
   private
 
-  # Allows inheriting controllers to add behavior after successful update
   def after_successful_update
+
+  end
+
+  def before_rendering_edit
 
   end
 
