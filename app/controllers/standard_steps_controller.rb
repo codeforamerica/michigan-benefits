@@ -21,13 +21,9 @@ class StandardStepsController < StepsController
 
   private
 
-  def after_successful_update
+  def after_successful_update; end
 
-  end
-
-  def before_rendering_edit
-
-  end
+  def before_rendering_edit; end
 
   def existing_attributes
     HashWithIndifferentAccess.new(current_snap_application.attributes)

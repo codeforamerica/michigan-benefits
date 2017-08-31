@@ -10,9 +10,10 @@ class SuccessController < StandardStepsController
   end
 
   private
+
   def before_rendering_edit
-    FaxApplicationJob
-      .perform_later(snap_application_id: current_snap_application.id)
+    FaxApplicationJob.
+      perform_later(snap_application_id: current_snap_application.id)
   end
 
   def after_successful_update
