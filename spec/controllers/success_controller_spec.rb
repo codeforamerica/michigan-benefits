@@ -13,6 +13,14 @@ RSpec.describe SuccessController do
 
       expect(step.email).to eq "test@example.com"
     end
+    it "faxes the snap application" do
+      allow(Export).to receive(:create_and_enqueue)
+
+      get :edit
+
+      expect(Export).to have_received(:create_and_enqueue).
+        with(snap_application: current_app, destination: :fax)
+    end
   end
 
   context "in order to not allow going back" do
@@ -43,15 +51,15 @@ RSpec.describe SuccessController do
         }.from("test@example.com").to("new_email@example.com")
       end
 
-      it "creates a EmailApplicationJob" do
-        allow(EmailApplicationJob).to receive(:perform_later)
+      it "Exports the snap application via email" do
+        allow(Export).to receive(:create_and_enqueue)
 
         params = { step: { email: "new_email@example.com" } }
 
         put :update, params: params
 
-        expect(EmailApplicationJob).to have_received(:perform_later).
-          with(snap_application_id: current_app.id)
+        expect(Export).to have_received(:create_and_enqueue).
+          with(snap_application: current_app, destination: :email)
       end
     end
 

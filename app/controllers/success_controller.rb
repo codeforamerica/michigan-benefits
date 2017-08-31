@@ -12,14 +12,14 @@ class SuccessController < StandardStepsController
   private
 
   def before_rendering_edit_hook
-    FaxApplicationJob.
-      perform_later(snap_application_id: current_snap_application.id)
+    Export.create_and_enqueue(destination: :fax,
+                              snap_application: current_snap_application)
   end
 
   def after_successful_update_hook
     flash[:notice] = flash_notice
-    EmailApplicationJob.
-      perform_later(snap_application_id: current_snap_application.id)
+    Export.create_and_enqueue(destination: :email,
+                              snap_application: current_snap_application)
   end
 
   def flash_notice

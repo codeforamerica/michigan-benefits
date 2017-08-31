@@ -1,0 +1,7 @@
+<div class="main-content__funnel__stage">
+  <h4><%= stage.count %> <%= stage.name %>
+      <%- if stage.previous_cohort.present? %>
+        (<%= number_to_percentage(stage.conversion_rate * 100, precision: 1) %>)
+      <%- end %>
+    </h4>
+</div>

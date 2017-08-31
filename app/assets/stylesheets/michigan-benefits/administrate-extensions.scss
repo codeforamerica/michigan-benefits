@@ -1,0 +1,16 @@
+// Extends administrate CSS per https://github.com/thoughtbot/administrate/pull/436/files
+
+.main-content__funnel {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+
+  padding: 1rem 2rem;
+  h3 {
+    flex: 1 1 100%;
+  }
+}
+
+.main-content__funnel__stage {
+  flex: 1 4 25%;
+}

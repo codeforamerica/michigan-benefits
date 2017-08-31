@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby "2.4.1"
 
+gem "activemodel_type_symbol"
 gem "administrate"
 gem "attr_encrypted"
 gem "auto_strip_attributes"
