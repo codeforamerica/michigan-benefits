@@ -2,9 +2,9 @@ class Dhs1171Pdf
   PDF_DIRECTORY = "lib/pdfs".freeze
   SOURCE_PDF = "#{PDF_DIRECTORY}/DHS_1171.pdf".freeze
   COVERSHEET_PDF = "#{PDF_DIRECTORY}/michigan_snap_fax_cover_letter.pdf".freeze
-  MAXIMUMUM_HOUSEHOLD_MEMBERS = 6
-  MAXIMUMUM_EMPLOYED_MEMBERS = 2
-  MAXIMUMUM_SELF_EMPLOYED_MEMBERS = 2
+  MAXIMUM_HOUSEHOLD_MEMBERS = 6
+  MAXIMUM_EMPLOYED_MEMBERS = 2
+  MAXIMUM_SELF_EMPLOYED_MEMBERS = 2
 
   def initialize(snap_application:)
     @snap_application = snap_application
@@ -50,7 +50,7 @@ class Dhs1171Pdf
   end
 
   def additional_household_member_pages
-    if application_members.length > MAXIMUMUM_HOUSEHOLD_MEMBERS
+    if application_members.length > MAXIMUM_HOUSEHOLD_MEMBERS
       SnapApplicationExtraMemberPdf.new(
         members: additional_members,
         attributes_class: ExtraMemberAttributes,
@@ -60,7 +60,7 @@ class Dhs1171Pdf
   end
 
   def additional_employed_pages
-    if employed_members.length > MAXIMUMUM_EMPLOYED_MEMBERS
+    if employed_members.length > MAXIMUM_EMPLOYED_MEMBERS
       SnapApplicationExtraMemberPdf.new(
         members: additional_employed_members,
         attributes_class: ExtraEmployedMemberAttributes,
@@ -70,7 +70,7 @@ class Dhs1171Pdf
   end
 
   def additional_self_employed_pages
-    if self_employed_members.length > MAXIMUMUM_SELF_EMPLOYED_MEMBERS
+    if self_employed_members.length > MAXIMUM_SELF_EMPLOYED_MEMBERS
       SnapApplicationExtraMemberPdf.new(
         members: additional_self_employed_members,
         attributes_class: ExtraSelfEmployedMemberAttributes,

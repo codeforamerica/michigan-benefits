@@ -212,42 +212,42 @@ class SnapApplicationAttributes
 
   def more_than_six_members_yes
     bool_to_checkbox(
-      snap_application.members.length > Dhs1171Pdf::MAXIMUMUM_HOUSEHOLD_MEMBERS,
+      snap_application.members.length > Dhs1171Pdf::MAXIMUM_HOUSEHOLD_MEMBERS,
     )
   end
 
   def more_than_six_members_no
     bool_to_checkbox(
       snap_application.members.length <=
-        Dhs1171Pdf::MAXIMUMUM_HOUSEHOLD_MEMBERS,
+        Dhs1171Pdf::MAXIMUM_HOUSEHOLD_MEMBERS,
     )
   end
 
   def more_than_two_self_employed_yes
     bool_to_checkbox(
       self_employed_household_members.length >
-        Dhs1171Pdf::MAXIMUMUM_SELF_EMPLOYED_MEMBERS,
+        Dhs1171Pdf::MAXIMUM_SELF_EMPLOYED_MEMBERS,
     )
   end
 
   def more_than_two_self_employed_no
     bool_to_checkbox(
       self_employed_household_members.length <=
-        Dhs1171Pdf::MAXIMUMUM_SELF_EMPLOYED_MEMBERS,
+        Dhs1171Pdf::MAXIMUM_SELF_EMPLOYED_MEMBERS,
     )
   end
 
   def more_than_two_employed_yes
     bool_to_checkbox(
       employed_household_members.length >
-        Dhs1171Pdf::MAXIMUMUM_EMPLOYED_MEMBERS,
+        Dhs1171Pdf::MAXIMUM_EMPLOYED_MEMBERS,
     )
   end
 
   def more_than_two_employed_no
     bool_to_checkbox(
       employed_household_members.length <=
-        Dhs1171Pdf::MAXIMUMUM_EMPLOYED_MEMBERS,
+        Dhs1171Pdf::MAXIMUM_EMPLOYED_MEMBERS,
     )
   end
 
