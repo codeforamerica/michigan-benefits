@@ -4,7 +4,7 @@ class StandardStepsController < StepsController
   def edit
     @step = step_class.new(existing_attributes.slice(*step_attrs))
 
-    before_rendering_edit
+    before_rendering_edit_hook
   end
 
   def update
@@ -12,7 +12,7 @@ class StandardStepsController < StepsController
 
     if @step.valid?
       current_snap_application.update!(step_params)
-      after_successful_update
+      after_successful_update_hook
       redirect_to(next_path)
     else
       render :edit
@@ -21,14 +21,11 @@ class StandardStepsController < StepsController
 
   private
 
-  # Hook for step controllers to add behavior after successful update. This is
-  # intentionally a no-op in the StandardStepsController.
-  def after_successful_update; end
+  # This is an intentional noop
+  def after_successful_update_hook; end
 
-  # Hook for step controllers to add behavior after the step is
-  # instantiated but before rendering the edit screen. This is
-  # intentionally a no-op in the StandardStepsController.
-  def before_rendering_edit; end
+  # This is an intentional noop
+  def before_rendering_edit_hook; end
 
   def existing_attributes
     HashWithIndifferentAccess.new(current_snap_application.attributes)

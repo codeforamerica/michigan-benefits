@@ -11,12 +11,12 @@ class SuccessController < StandardStepsController
 
   private
 
-  def before_rendering_edit
+  def before_rendering_edit_hook
     FaxApplicationJob.
       perform_later(snap_application_id: current_snap_application.id)
   end
 
-  def after_successful_update
+  def after_successful_update_hook
     flash[:notice] = flash_notice
     EmailApplicationJob.
       perform_later(snap_application_id: current_snap_application.id)
