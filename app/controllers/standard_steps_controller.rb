@@ -21,8 +21,13 @@ class StandardStepsController < StepsController
 
   private
 
+  # Hook for step controllers to add behavior after successful update. This is
+  # intentionally a no-op in the StandardStepsController.
   def after_successful_update; end
 
+  # Hook for step controllers to add behavior after the step is
+  # instantiated but before rendering the edit screen. This is
+  # intentionally a no-op in the StandardStepsController.
   def before_rendering_edit; end
 
   def existing_attributes
