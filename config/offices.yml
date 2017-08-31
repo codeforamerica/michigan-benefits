@@ -49,8 +49,9 @@ development:
       fax_number: "+16173963015"
 production:
   <<: *defaults
+  fallback_office: "clio"
   offices:
     union:
-      fax_number: "+18107602021"
+      fax_number: "+18107607372"
     clio:
       fax_number: "+18107602310"
