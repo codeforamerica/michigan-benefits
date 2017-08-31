@@ -10,6 +10,7 @@ class StandardStepsController < StepsController
 
     if @step.valid?
       current_snap_application.update!(step_params)
+      after_successful_update
       redirect_to(next_path)
     else
       render :edit
@@ -17,6 +18,11 @@ class StandardStepsController < StepsController
   end
 
   private
+
+  # Allows inheriting controllers to add behavior after successful update
+  def after_successful_update
+
+  end
 
   def existing_attributes
     HashWithIndifferentAccess.new(current_snap_application.attributes)

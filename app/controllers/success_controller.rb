@@ -1,26 +1,18 @@
 # frozen_string_literal: true
 
 class SuccessController < StandardStepsController
-  def update
-    @step = step_class.new(step_params)
-
-    if @step.valid?
-      current_snap_application.update(step_params)
-      create_and_send_pdf
-      flash[:notice] = flash_notice
-      redirect_to root_path(anchor: "fold")
-    else
-      render :edit
-    end
-  end
-
   def previous_path(*_args)
     nil
   end
 
+  def next_path
+    root_path(anchor: "fold")
+  end
+
   private
 
-  def create_and_send_pdf
+  def after_successful_update
+    flash[:notice] = flash_notice
     EmailApplicationJob.
       perform_later(snap_application_id: current_snap_application.id)
   end
