@@ -21,7 +21,8 @@
 
           <fieldset class="form-group">
             <%= f.mb_money_field :monthly_care_expenses,
-              "In total, how much do you pay in care expenses each month?" %>
+              "In total, how much do you pay in care expenses each month?",
+              autofocus: true %>
 
             <%= f.mb_checkbox_set [
               { method: :childcare, label: "Childcare" },

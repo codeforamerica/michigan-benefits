@@ -15,7 +15,8 @@
       method: :put do |f| %>
 
       <%= f.mb_money_field :total_money,
-        "In total, how much money does your household have in cash and accounts?" %>
+        "In total, how much money does your household have in cash and accounts?",
+        autofocus: true %>
 
       <%= f.mb_checkbox_set [
         { method: :checking_account, label: 'Checking account' },
