@@ -9,7 +9,7 @@
 * [Trello - product](://trello.com/b/aBqTrqaJ/the-digital-assister)
 * [InVision](https://projects.invisionapp.com/d/main#/projects/prototypes/10425326)
 * [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits)
-* [Staging](https://michigan-benefits-staging.herokuapp.com)
+* [Staging (staging.michiganbenefits.org, not the herokuapp url)](https://staging.michiganbenefits.org)
 * [Production](https://michigan-benefits-production.herokuapp.com)
 * [Prototype demo](https://michigan-benefits-prod.herokuapp.com/)
 
@@ -20,6 +20,20 @@
 * pdftk - see [https://elements.heroku.com/buildpacks/fxtentacle/heroku-pdftk-buildpack](https://elements.heroku.com/buildpacks/fxtentacle/heroku-pdftk-buildpack)
 
 ## Developing
+
+### Ruby on Rails
+
+This application is built using [Ruby on Rails].
+
+Your system will require [Ruby] to develop on the application.
+
+The required Ruby version is listed in the [.ruby-version](.ruby-version) file.
+
+If you do not have this binary, [use this guide to get set up on MacOS].
+
+[Ruby on Rails]: http://rubyonrails.org
+[Ruby]: https://www.ruby-lang.org/en/
+[use this guide to get set up on MacOS]: http://installfest.railsbridge.org/installfest/macintosh
 
 ### Getting Started
 
@@ -101,6 +115,16 @@ to jump around.
 [Shubox]: https://shubox.io
 [dashboard]: https://dashboard.shubox.io
 [@jayroh]: https://github.com/jayroh
+
+#### Document uploading on staging
+
+NOTE: Document upload via [Shubox] on staging requires using this URL:
+
+    http://staging.michiganbenefits.org
+
+and will not work on this URL:
+
+    https://michigan-benefits-staging.herokuapp.com
 
 ### Spec Helpers
 
