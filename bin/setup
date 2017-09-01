@@ -12,6 +12,14 @@ chdir APP_ROOT do
     system("bundle check") || system!("bundle install")
   end
 
+  step "Installing imagemagick, a image to pdf converter" do
+    if cli_installed?("convert")
+      puts "imagemagick already installed"
+    else
+      system!("brew install imagemagick")
+    end
+  end
+
   step "Installing pdftk, a PDF library (requires Homebrew)" do
     if cli_installed?("pdftk")
       puts "pdftk already installed."
