@@ -43,6 +43,21 @@ ActiveRecord::Schema.define(version: 20170829193351) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "driver_applications", force: :cascade do |t|
+    t.bigint "snap_application_id", null: false
+    t.string "encrypted_user_id", null: false
+    t.string "encrypted_user_id_iv", null: false
+    t.string "encrypted_password", null: false
+    t.string "encrypted_password_iv", null: false
+    t.string "encrypted_secret_question_1_answer", null: false
+    t.string "encrypted_secret_question_1_answer_iv", null: false
+    t.string "encrypted_secret_question_2_answer", null: false
+    t.string "encrypted_secret_question_2_answer_iv", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["snap_application_id"], name: "index_driver_applications_on_snap_application_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -130,4 +145,5 @@ ActiveRecord::Schema.define(version: 20170829193351) do
     t.datetime "faxed_at"
   end
 
+  add_foreign_key "driver_applications", "snap_applications"
 end
