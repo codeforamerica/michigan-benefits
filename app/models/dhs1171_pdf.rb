@@ -12,8 +12,7 @@ class Dhs1171Pdf
 
   def completed_file
     complete_template_pdf_with_client_data
-    prepend_cover_sheet_to_completed_form
-    complete_form_with_cover
+    assemble_pdf
   ensure
     filled_in_form.close
     filled_in_form.unlink
@@ -27,17 +26,10 @@ class Dhs1171Pdf
     PdfForms.new.fill_form(SOURCE_PDF, filled_in_form.path, client_data)
   end
 
-  def prepend_cover_sheet_to_completed_form
-    system(
-      "pdftk #{COVERSHEET_PDF} #{filled_in_form.path} #{additional_pages}" +
-      " cat output" +
-      " #{complete_form_with_cover.path}",
-    )
-  end
-
-  def complete_form_with_cover
-    @_complete_form_with_cover ||=
-      Tempfile.new(["snap_app_with_cover", ".pdf"], "tmp/")
+  def assemble_pdf
+    PdfBuilder.new(output_path: complete_form_with_cover.path,
+                   files: [COVERSHEET_PDF, filled_in_form, additional_pages,
+                           snap_application.downloads].flatten).pdf
   end
 
   def filled_in_form
