@@ -387,12 +387,8 @@ DEPENDENCIES
   pdf-forms
   pdf-reader
   pg (~> 0.18)
-<<<<<<< HEAD
   prawn
-=======
-  phony_rails
   pry-byebug
->>>>>>> Continue driving MI Bridges
   pry-rails
   puma
   rails (~> 5.1)
@@ -402,12 +398,8 @@ DEPENDENCIES
   rspec_junit_formatter
   rubocop-rspec
   sass-rails (~> 5.0)
-<<<<<<< HEAD
-  selenium-webdriver
-  sentry-raven
-=======
   selenium-webdriver (= 3.4.3)
->>>>>>> Continue driving MI Bridges
+  sentry-raven
   sfax!
   simplecov
   token_phrase
