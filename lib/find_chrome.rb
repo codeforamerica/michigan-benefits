@@ -12,6 +12,7 @@ class FindChrome
 
   CHROMEDRIVER_PATHS = [
     "/usr/local/bin/chromedriver",
+    "/usr/lib/chromium-browser/chromedriver",
     ENV["CHROMEDRIVER_PATH"],
     find_executable("chromedriver"),
   ].compact.freeze
