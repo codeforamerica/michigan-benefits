@@ -25,7 +25,9 @@ chdir APP_ROOT do
   end
 
   step "Installing ChromeDriver - a separate executable that WebDriver uses to control Chrome" do
-    if cli_installed?("chromedriver")
+    # use --version flag because running `chromedriver` will start
+    # chromedriver, which stops the script indefinitely if already installed.
+    if cli_installed?("chromedriver --version")
       puts "chromedriver already installed."
     else
       system!("brew install chromedriver")
