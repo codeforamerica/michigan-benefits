@@ -6,10 +6,6 @@ require "capybara/drivers/headless_chrome"
 
 module MiBridges
   class Driver
-    DEMO_SETUP = [
-      GoogleSearchPage,
-    ].freeze
-
     SIGN_UP_FLOW = [
       HomePage,
       CreateAccountPage,
@@ -41,7 +37,7 @@ module MiBridges
     def run
       setup
 
-      page_classes = DEMO_SETUP + SIGN_UP_FLOW + APPLY_FLOW
+      page_classes = SIGN_UP_FLOW + APPLY_FLOW
 
       page_classes.each do |klass|
         page = klass.new(@snap_application)
