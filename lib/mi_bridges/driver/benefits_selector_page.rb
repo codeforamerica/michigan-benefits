@@ -10,7 +10,9 @@ module MiBridges
         click_id(no_dont_contact_my_energy_provider_radio)
       end
 
-      def continue; end
+      def continue
+        click_on "Next"
+      end
 
       private
 
