@@ -5,13 +5,13 @@ describe VerificationDocument do
     context "files are png/jpg format" do
       it "returns a tempfile" do
         snap_application = create(:snap_application, :with_member)
-        document_url = "https://example.com/images/drivers_license.jpg"
+        document_url = "http://example.com/test.jpg"
+        raw_response_file = File.new("spec/fixtures/test_remote_image.jpg")
+        stub_request(:get, document_url).to_return(raw_response_file)
+
         document = VerificationDocument.new(
           url: document_url,
           snap_application: snap_application,
-        )
-        allow(document).to receive(:open).with(document_url).and_return(
-          File.open("spec/fixtures/test-pattern.png"),
         )
 
         expect(document.file).to be_a(Tempfile)
@@ -21,7 +21,9 @@ describe VerificationDocument do
     context "files are PDFs" do
       it "returns a tempfile" do
         snap_application = create(:snap_application, :with_member)
-        document_url = Rails.root.join("spec/fixtures/test_pdf.pdf")
+        document_url = "http://example.com/test.pdf"
+        raw_response_file = File.new("spec/fixtures/test_remote_pdf.pdf")
+        stub_request(:get, document_url).to_return(raw_response_file)
 
         document = VerificationDocument.new(
           url: document_url,

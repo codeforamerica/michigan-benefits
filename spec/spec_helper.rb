@@ -2,6 +2,7 @@
 
 require "simplecov"
 require "pry"
+require "webmock/rspec"
 
 # Run code coverage and save to CI's artifacts directory if we're on CircleCI
 if ENV["CI"]
@@ -9,6 +10,7 @@ if ENV["CI"]
 end
 
 SimpleCov.start "rails"
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
