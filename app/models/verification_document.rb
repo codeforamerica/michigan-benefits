@@ -31,7 +31,7 @@ class VerificationDocument
   end
 
   def local_file
-    @_local_fle ||= MiniMagick::Image.open(url)
+    @_local_file ||= MiniMagick::Image.open(url)
   end
 
   def add_header(pdf)
