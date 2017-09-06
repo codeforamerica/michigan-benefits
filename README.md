@@ -105,8 +105,6 @@ to jump around.
 * The file limit is currently set to 3MB. That can be bumped up if we notice
   that people are often taking photos or attaching documents larger than that.
 * The file formats currently allowed as "Documents" consist of:
-  * .doc
-  * .docx
   * .gif
   * .jpg
   * .pdf

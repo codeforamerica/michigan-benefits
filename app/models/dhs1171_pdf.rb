@@ -12,8 +12,7 @@ class Dhs1171Pdf
 
   def completed_file
     complete_template_pdf_with_client_data
-    prepend_cover_sheet_to_completed_form
-    complete_form_with_cover
+    assemble_pdf
   ensure
     filled_in_form.close
     filled_in_form.unlink
@@ -27,29 +26,30 @@ class Dhs1171Pdf
     PdfForms.new.fill_form(SOURCE_PDF, filled_in_form.path, client_data)
   end
 
-  def prepend_cover_sheet_to_completed_form
-    system(
-      "pdftk #{COVERSHEET_PDF} #{filled_in_form.path} #{additional_pages}" +
-      " cat output" +
-      " #{complete_form_with_cover.path}",
-    )
+  def assemble_pdf
+    PdfBuilder.new(
+      output_file: complete_form_with_cover_and_documents,
+      file_paths: [
+        COVERSHEET_PDF,
+        filled_in_form.path,
+        additional_household_member_pages_path,
+        additional_employed_pages_path,
+        additional_self_employed_pages_path,
+        verification_documents_paths,
+      ].reject(&:blank?).flatten,
+    ).pdf
   end
 
-  def complete_form_with_cover
-    @_complete_form_with_cover ||=
-      Tempfile.new(["snap_app_with_cover", ".pdf"], "tmp/")
+  def complete_form_with_cover_and_documents
+    @_complete_form_with_cover_and_documents ||=
+      Tempfile.new(["snap_app_with_cover_and_documents", ".pdf"], "tmp/")
   end
 
   def filled_in_form
     @_filled_in_form ||= Tempfile.new(["snap_app", ".pdf"], "tmp/")
   end
 
-  def additional_pages
-    "#{additional_household_member_pages} #{additional_employed_pages}" +
-      " #{additional_self_employed_pages}"
-  end
-
-  def additional_household_member_pages
+  def additional_household_member_pages_path
     if application_members.length > MAXIMUM_HOUSEHOLD_MEMBERS
       SnapApplicationExtraMemberPdf.new(
         members: additional_members,
@@ -59,7 +59,7 @@ class Dhs1171Pdf
     end
   end
 
-  def additional_employed_pages
+  def additional_employed_pages_path
     if employed_members.length > MAXIMUM_EMPLOYED_MEMBERS
       SnapApplicationExtraMemberPdf.new(
         members: additional_employed_members,
@@ -69,13 +69,22 @@ class Dhs1171Pdf
     end
   end
 
-  def additional_self_employed_pages
+  def additional_self_employed_pages_path
     if self_employed_members.length > MAXIMUM_SELF_EMPLOYED_MEMBERS
       SnapApplicationExtraMemberPdf.new(
         members: additional_self_employed_members,
         attributes_class: ExtraSelfEmployedMemberAttributes,
         title: "Section L Continued",
       ).completed_file
+    end
+  end
+
+  def verification_documents_paths
+    snap_application.documents.map do |document|
+      VerificationDocument.new(
+        url: document,
+        snap_application: snap_application,
+      ).file.path
     end
   end
 

@@ -5,7 +5,7 @@ var uploadSetup = function (previewTemplate) {
     previewsContainer: '.form-card__documents',
     clickable: '#click-to-upload',
     previewTemplate: previewTemplate,
-    acceptedFiles: '.pdf,.jpg,.jpeg,.png,.gif,.doc,.docx',
+    acceptedFiles: '.pdf,.jpg,.jpeg,.png,.gif',
     maxFilesize: 3, // MB
     error: function (_file, msg) {
       window.alert(msg)

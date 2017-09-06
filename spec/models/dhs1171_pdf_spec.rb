@@ -170,6 +170,26 @@ RSpec.describe Dhs1171Pdf do
       expect(new_pdf.page_count).to eq(original_length + 2)
     end
 
+    it "appends pages if there are verification documents" do
+      document_path = "http://example.com"
+      verification_document = double
+      allow(verification_document).to receive(:file).and_return(
+        File.open("spec/fixtures/test_pdf.pdf"),
+      )
+      snap_application =
+        create(:snap_application, :with_member, documents: [document_path])
+      allow(VerificationDocument).to receive(:new).with(
+        url: document_path,
+        snap_application: snap_application,
+      ).and_return(verification_document)
+      original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
+
+      file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+      new_pdf = PDF::Reader.new(file.path)
+
+      expect(new_pdf.page_count).to eq(original_length + 2)
+    end
+
     it "returns the tempfile" do
       snap_application = create(:snap_application, :with_member)
 
