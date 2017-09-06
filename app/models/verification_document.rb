@@ -7,14 +7,19 @@ class VerificationDocument
   def file
     pdf = Prawn::Document.new
     magick_object = create_magick_object
-    pdf.move_down 30
-    add_header(pdf)
-    rotate_image(magick_object)
 
-    pdf.image(magick_object.path, fit: [500, 600])
-    tempfile = Tempfile.new([SecureRandom.hex, ".pdf"])
-    pdf.render_file(tempfile.path)
-    tempfile
+    if magick_object.type == "PDF"
+      magick_object.tempfile
+    else
+      pdf.move_down 30
+      add_header(pdf)
+      rotate_image(magick_object)
+
+      pdf.image(magick_object.path, fit: [500, 600])
+      tempfile = Tempfile.new([SecureRandom.hex, ".pdf"])
+      pdf.render_file(tempfile.path)
+      tempfile
+    end
   end
 
   private
@@ -22,18 +27,11 @@ class VerificationDocument
   attr_reader :url, :snap_application
 
   def create_magick_object
-    file = local_file
-    magick_object = MiniMagick::Image.open(file.path)
-
-    if magick_object.type == "PDF"
-      magick_object.format("png")
-    end
-
-    magick_object
+    MiniMagick::Image.open(local_file.path)
   end
 
   def local_file
-    open(url)
+    @_local_fle ||= MiniMagick::Image.open(url)
   end
 
   def add_header(pdf)
