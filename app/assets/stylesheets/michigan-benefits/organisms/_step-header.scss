@@ -8,6 +8,7 @@
   height: $step-header-height;
   left: 0;
   position: fixed;
+  text-align: center;
   top: 0;
   width: 100%;
   z-index: 9999;
@@ -38,5 +39,9 @@
     font-size: $font-size-small;
     margin: 0;
     margin-left: 10px;
+  }
+
+  &__title--centered {
+    justify-content: center;
   }
 }

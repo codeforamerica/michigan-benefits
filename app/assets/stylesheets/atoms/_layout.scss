@@ -66,6 +66,8 @@
 }
 
 .textwell {
+  display: none;
+
   .textwell__content {
     text-align: left;
     margin-bottom: 1em;
@@ -74,6 +76,7 @@
   }
 
   @include media($tablet-up) {
+    display: block;
     .textwell__content {
       padding: 2em;
       border: 2px solid $color-light-grey;

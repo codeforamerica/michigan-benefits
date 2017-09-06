@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
 
   root "pages#index"
+  get "/terms" => "pages#terms"
+  get "/privacy" => "pages#privacy"
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]
