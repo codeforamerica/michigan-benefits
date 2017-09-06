@@ -13,6 +13,8 @@ gem "capybara"
 gem "delayed_job_active_record"
 gem "faraday"
 gem "jquery-rails"
+gem "mimemagic"
+gem "mini_magick"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
 gem "pdf-forms"
 gem "pg", "~> 0.18"

@@ -39,6 +39,10 @@ class Member < ApplicationRecord
     employment_status == "not_employed"
   end
 
+  def formatted_birthday
+    birthday.strftime("%m/%d/%Y")
+  end
+
   private
 
   def employed_monthly_income
