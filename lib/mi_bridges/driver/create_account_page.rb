@@ -83,7 +83,9 @@ module MiBridges
       end
 
       def accept_user_agreement
-        page.execute_script("$('.ace').trigger('click')")
+        check_selector =
+          "div[aria-labelledby=\"Step4UserAcceptanceAgreement\"] input"
+        page.execute_script("$('#{check_selector}').click()")
       end
     end
   end
