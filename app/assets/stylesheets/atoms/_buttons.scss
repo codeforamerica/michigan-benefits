@@ -41,6 +41,11 @@
   &:active {
     background-color: shade($button-cta-color, 15%);
   }
+
+  &[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+  }
 }
 
 .button--primary {
