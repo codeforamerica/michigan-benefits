@@ -16,13 +16,14 @@
 }
 
 .doc-preview__thumb {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 75px;
-  height: 75px;
+  background-size: cover;
   border: 1px solid $color-tan;
   border-radius: $border-radius;
+  height: 75px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 75px;
 }
 
 .document-upload {
