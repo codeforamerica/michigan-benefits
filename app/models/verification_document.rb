@@ -27,11 +27,16 @@ class VerificationDocument
   attr_reader :url, :snap_application
 
   def create_magick_object
+    Rails.logger.debug("Creating magick object from #{local_file.path}")
     MiniMagick::Image.open(local_file.path)
   end
 
   def local_file
-    @_local_file ||= MiniMagick::Image.open(url)
+    return @_local_file if @_local_file
+    Rails.logger.debug("Downloading #{url}")
+    @_local_file = MiniMagick::Image.open(url)
+    Rails.logger.debug("downloaded #{url} to #{@_local_file.path}")
+    @_local_file
   end
 
   def add_header(pdf)

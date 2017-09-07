@@ -5,6 +5,7 @@ class PdfBuilder
   end
 
   def pdf
+    Rails.logger.debug("Building a PDF out of #{paths_to_pdfs}")
     conjoin_files
     output_file
   end
