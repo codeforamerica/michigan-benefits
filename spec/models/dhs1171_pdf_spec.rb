@@ -13,9 +13,6 @@ RSpec.describe Dhs1171Pdf do
       )
       client_data = {
         applying_for_food_assistance: "Yes",
-        birth_day: member.birthday.strftime("%d"),
-        birth_month: member.birthday.strftime("%m"),
-        birth_year: member.birthday.strftime("%Y"),
         phone_number: snap_application.phone_number,
         mailing_address_street_address:
         snap_application.mailing_address.street_address,
@@ -31,7 +28,7 @@ RSpec.describe Dhs1171Pdf do
         residential_address_zip: snap_application.mailing_address.zip,
         email: snap_application.email,
         signature: snap_application.signature,
-        signature_date: snap_application.signed_at,
+        signature_date: snap_application.signed_at.to_s,
         primary_member_birthday: member.birthday.strftime("%m/%d/%Y"),
         primary_member_marital_status_married: nil,
         primary_member_marital_status_never_married: nil,
