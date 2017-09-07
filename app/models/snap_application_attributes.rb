@@ -6,9 +6,6 @@ class SnapApplicationAttributes
   def to_h
     {
       applying_for_food_assistance: "Yes",
-      birth_day: primary_member.birthday.strftime("%d"),
-      birth_month: primary_member.birthday.strftime("%m"),
-      birth_year: primary_member.birthday.strftime("%Y"),
       email: snap_application.email,
       mailing_address_city: snap_application.mailing_address.city,
       mailing_address_county: snap_application.mailing_address.county,

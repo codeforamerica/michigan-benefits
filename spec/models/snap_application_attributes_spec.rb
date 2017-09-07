@@ -23,9 +23,6 @@ RSpec.describe SnapApplicationAttributes do
 
       expect(data).to eq(
         applying_for_food_assistance: "Yes",
-        birth_day: "18",
-        birth_month: "08",
-        birth_year: "1990",
         email: "test@example.com",
         mailing_address_city: "Flint",
         mailing_address_county: "Genesee",
