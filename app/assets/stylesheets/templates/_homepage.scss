@@ -63,6 +63,20 @@
     }
   }
 
+  .logo-hero {
+    line-height: 1.2;
+
+    &:before {
+      @include size(20px);
+      background: image-url('logo_white');
+      background-repeat: no-repeat;
+      background-size: cover;
+      content: "";
+      float: left;
+      margin-right: $padding-small;
+    }
+  }
+
   .slab--hero {
     position: relative;
     background: rgba(shade($color-dark-grey, 80%), .3);
