@@ -73,4 +73,10 @@ class SnapApplication < ApplicationRecord
   def faxed?
     faxed_at.present?
   end
+
+  def signed_at_est
+    signed_at&.
+      in_time_zone("Eastern Time (US & Canada)")&.
+      strftime("%m/%d/%Y at %I:%M%p %Z")
+  end
 end

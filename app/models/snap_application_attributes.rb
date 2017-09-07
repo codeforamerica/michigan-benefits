@@ -28,7 +28,7 @@ class SnapApplicationAttributes
       residential_address_street_address: residential_or_homeless,
       residential_address_zip: snap_application.mailing_address.zip,
       signature: snap_application.signature,
-      signature_date: snap_application.signed_at,
+      signature_date: snap_application.signed_at_est,
       monthly_rent_taxes_and_insurance: monthly_rent_taxes_and_insurance,
       total_money: snap_application.total_money,
       monthly_gross_income: snap_application.monthly_gross_income,

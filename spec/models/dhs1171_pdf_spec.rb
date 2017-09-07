@@ -28,7 +28,7 @@ RSpec.describe Dhs1171Pdf do
         residential_address_zip: snap_application.mailing_address.zip,
         email: snap_application.email,
         signature: snap_application.signature,
-        signature_date: snap_application.signed_at.to_s,
+        signature_date: snap_application.signed_at_est,
         primary_member_birthday: member.birthday.strftime("%m/%d/%Y"),
         primary_member_marital_status_married: nil,
         primary_member_marital_status_never_married: nil,
