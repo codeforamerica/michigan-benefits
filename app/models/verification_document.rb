@@ -8,7 +8,7 @@ class VerificationDocument
     pdf = Prawn::Document.new
     magick_object = create_magick_object
 
-    if magick_object.type == "PDF"
+    if magick_object.type == "PDF" || magick_object.type == "PBM"
       magick_object.tempfile
     else
       pdf.move_down 30
