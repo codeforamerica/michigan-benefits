@@ -348,6 +348,7 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
+    timecop (0.9.1)
     token_phrase (1.0.6)
       backports
     ttfunk (1.5.1)
@@ -414,6 +415,7 @@ DEPENDENCIES
   sentry-raven
   sfax!
   simplecov
+  timecop
   token_phrase
   twilio-ruby
   tzinfo-data

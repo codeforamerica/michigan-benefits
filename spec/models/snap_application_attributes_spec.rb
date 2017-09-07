@@ -48,7 +48,7 @@ RSpec.describe SnapApplicationAttributes do
         residential_address_street_address: "Homeless",
         residential_address_zip: "12345",
         signature: "Mr. RJD2",
-        signature_date: snap_application.signed_at.to_s,
+        signature_date: snap_application.signed_at_est,
         monthly_rent_taxes_and_insurance: 100,
         more_than_six_members_no: "Yes",
         more_than_six_members_yes: nil,

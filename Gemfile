@@ -40,6 +40,7 @@ group :test do
   gem "launchy"
   gem "pdf-reader"
   gem "rails-controller-testing"
+  gem "timecop"
   gem "webmock"
 end
 

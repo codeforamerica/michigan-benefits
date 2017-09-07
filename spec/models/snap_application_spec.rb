@@ -121,4 +121,28 @@ RSpec.describe SnapApplication do
       )
     end
   end
+
+  describe "#signed_at_est" do
+    context "signed_at present" do
+      it "returns the UTC time in EST" do
+        # September 1, 2008 10:05:00 AM UTC
+        time = Time.utc(2008, 9, 1, 10, 5, 0)
+        snap_app = build(:snap_application, signed_at: time)
+
+        Timecop.freeze(time) do
+          expect(snap_app.signed_at_est).to eq(
+            "09/01/2008 at 06:05AM EDT",
+          )
+        end
+      end
+    end
+
+    context "signed_at not present" do
+      it "returns nil" do
+        snap_app = build(:snap_application, signed_at: nil)
+
+        expect(snap_app.signed_at_est).to eq(nil)
+      end
+    end
+  end
 end
