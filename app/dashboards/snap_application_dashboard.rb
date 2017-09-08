@@ -1,6 +1,65 @@
 require "administrate/base_dashboard"
 
 class SnapApplicationDashboard < Administrate::BaseDashboard
+  ATTRIBUTE_TYPES = {
+    id: Field::Number,
+    additional_income: Field::Text,
+    anyone_disabled: Field::Boolean,
+    anyone_in_college: Field::Boolean,
+    anyone_living_elsewhere: Field::Boolean,
+    anyone_new_mom: Field::Boolean,
+    care_expenses: Field::String,
+    consent_to_terms: Field::Boolean,
+    court_ordered: Field::Boolean,
+    court_ordered_expenses: Field::String,
+    created_at: Field::DateTime,
+    dependent_care: Field::Boolean,
+    documents: Field::String,
+    email: Field::String,
+    emailed_at: Field::DateTime,
+    everyone_a_citizen: Field::Boolean,
+    fax_metadata: Field::String,
+    faxed_at: Field::DateTime,
+    financial_accounts: Field::String,
+    income_change: Field::Boolean,
+    income_change_explanation: Field::Text,
+    income_child_support: Field::Text,
+    income_foster_care: Field::String,
+    income_other: Field::String,
+    income_pension: Field::String,
+    income_social_security: Field::String,
+    income_ssi_or_disability: Field::String,
+    income_unemployment_insurance: Field::String,
+    income_workers_compensation: Field::String,
+    insurance_expense: Field::String,
+    mailing_address_same_as_residential_address: Field::Boolean,
+    medical: Field::Boolean,
+    medical_expenses: Field::String,
+    money_or_accounts_income: Field::Boolean,
+    monthly_care_expenses: Field::String,
+    monthly_court_ordered_expenses: Field::String,
+    monthly_medical_expenses: Field::String,
+    phone_number: Field::String,
+    property_tax_expense: Field::Number,
+    real_estate_income: Field::Boolean,
+    rent_expense: Field::Number,
+    signature: Field::String,
+    signed_at: Field::DateTime,
+    sms_subscribed: Field::Boolean,
+    total_money: Field::Number,
+    unstable_housing: Field::Boolean,
+    updated_at: Field::DateTime,
+    utility_cooling: Field::Boolean,
+    utility_electrity: Field::Boolean,
+    utility_heat: Field::Boolean,
+    utility_other: Field::Boolean,
+    utility_phone: Field::Boolean,
+    utility_trash: Field::Boolean,
+    utility_water_sewer: Field::Boolean,
+    vehicle_income: Field::Boolean,
+    zip: Field::String,
+  }.freeze
+
   COLLECTION_ATTRIBUTES = %i[
     id
     signature
@@ -121,9 +180,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     financial_accounts
     total_money
   ].freeze
-
-  ATTRIBUTE_TYPES = (FORM_ATTRIBUTES + SHOW_PAGE_ATTRIBUTES +
-                     COLLECTION_ATTRIBUTES).uniq.freeze
 
   def display_resource(snap_application)
     "Snap Application ##{snap_application.id}"
