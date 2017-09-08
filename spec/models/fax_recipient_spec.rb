@@ -17,7 +17,7 @@ RSpec.describe FaxRecipient do
     end
 
     it "falls back to union when the address is outside of clio or union" do
-      residential_address = double(zip: "12345")
+      residential_address = double(zip: "98765")
       fax_recipient = described_class.new(residential_address:
                                             residential_address)
       expect(fax_recipient.number).to eql "+16173963015"

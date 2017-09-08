@@ -1,0 +1,65 @@
+#!/bin/bash
+set -e
+
+echo "Opening trello to check for tickets awaiting acceptance..."
+open "https://trello.com/b/aBqTrqaJ/the-digital-assister-michiganbenefitsorg"
+
+read -p "No tickets awaiting acceptance on staging? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo "Sweet, moving on!"
+else
+  echo "We're bailing out!"
+  exit 1
+fi
+
+echo "Diffing the code!"
+bin/release-diff
+read -p "Looks legit? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo "Sweet, moving on!"
+else
+  echo "We're bailing out!"
+  exit 1
+fi
+
+echo "Diffing buildpacks!"
+diff <(heroku buildpacks -r staging) <(heroku buildpacks -r production) && echo ""
+read -p "Do they match yet? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo "Sweet, moving on!"
+else
+  echo "We're bailing out!"
+  exit 1
+fi
+
+echo "Diffing configs!"
+diff <(heroku config -r staging) <(heroku config -r production) && echo ""
+read -p "No missing keys betwixt them? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  echo "Sweet, moving on!"
+else
+  echo "We're bailing out!"
+  exit 1;
+fi
+
+read -p "Ready to Deploy? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  heroku pipelines:promote -a michigan-benefits-staging
+  heroku run bin/rails one_offs:run_all -a michigan-benefits-production
+  heroku ps:restart -a michigan-benefits-production
+fi
+
+echo "Woooooo! It's in prod!"
+echo "Do some smoke testing! (use zip 12345 to send a fake fax)"
+read -p "Is everything beautiful? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  echo "ROCK ONNNNNNnnnnnnnnnn"
+else
+  echo "Oh nooooo, well... uhhh. Maybe rollback?"
+fi
