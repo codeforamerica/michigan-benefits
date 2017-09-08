@@ -4,6 +4,8 @@ defaults: &defaults
   # zip code is not in our mapping
   fallback_office: "union"
   covered_zip_codes:
+    "12345": "staging_sfax"
+    # Clio Zip Codes
     "48415": "clio"
     "48417": "clio"
     "48420": "clio"
@@ -43,6 +45,9 @@ defaults: &defaults
 development:
   <<: *defaults
   offices:
+    staging_sfax: # Technically this is to our sfax production fax; cuz you
+                  # can't fax urself
+      fax_number: "+18448487565"
     union:
       fax_number: "+16173963015"
     clio:
@@ -51,6 +56,8 @@ production:
   <<: *defaults
   fallback_office: "clio"
   offices:
+    staging_sfax:
+      fax_number: "+18888433549"
     union:
       fax_number: "+18107607372"
     clio:
