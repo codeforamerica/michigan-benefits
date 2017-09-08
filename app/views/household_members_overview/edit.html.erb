@@ -6,28 +6,26 @@
       How many people are in your household?
     </div>
     <p class="text--help text--centered">
-      This includes everyone who lives in your home (including you) and anyone
-      you list on your federal tax returns.
+      This includes everyone who lives in your home (including you), even if
+      they are not there all the time.
     </p>
   </header>
 
   <div class="form-card__content">
     <div class="slab slab--not-padded">
       <div class="card card--narrow">
-        <div>
-          <div class="button buttonish button--full-width">
-            <i class="button__icon--left icon-check--color"></i>
-            <%= "#{@step.first_name.titleize} (that's you!)" %>
-          </div>
-        </div>
+        <p>
+          <i class="button__icon--left icon-check icon-check--color"></i>
+          <%= "#{@step.first_name.titleize} (that's you!)" %>
+        </p>
 
         <% @step.non_applicant_members.each do |member| %>
           <div>
-            <% path = step_path(HouseholdAddMemberController, member_id: member.to_param) %>
-            <%= link_to(path, class: 'button button--full-width') do %>
-              <i class="button__icon--left icon-check--color"></i>
+            <p>
+              <% path = step_path(HouseholdAddMemberController, member_id: member.to_param) %>
+              <i class="button__icon--left icon-check icon-check--color"></i>
               <%= member.first_name.titleize %>
-            <% end %>
+            </p>
           </div>
         <% end %>
         <%= link_to(
