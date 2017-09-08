@@ -3,6 +3,8 @@
 require Rails.root.join("config/smtp")
 
 Rails.application.configure do
+  config.force_ssl = true
+
   config.cache_classes = true
   config.eager_load = true
   config.consider_all_requests_local       = false
@@ -34,14 +36,4 @@ Rails.application.configure do
   end
 
   config.active_record.dump_schema_after_migration = false
-
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_region: ENV["BUCKETEER_REGION"],
-    s3_credentials: {
-      bucket: ENV["BUCKETEER_BUCKET_NAME"],
-      access_key_id: ENV["BUCKETEER_AWS_ACCESS_KEY_ID"],
-      secret_access_key: ENV["BUCKETEER_AWS_SECRET_ACCESS_KEY"],
-    },
-  }
 end
