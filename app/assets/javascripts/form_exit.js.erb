@@ -5,10 +5,20 @@
     if(outsideOfSteps) return;
 
     for(var i=0; i<links.length; i++){
-      var stepsLink = links[i].href.indexOf('steps') >= 0
-      var skipLink = links[i].href.indexOf('skip_') >= 0
+      var isAnExternalLink = true
+      var whiteList = [
+        '/privacy',
+        '/steps',
+        '/terms',
+        'skip_'
+      ]
+      for(var j=0; j<whiteList.length; j++){
+        if(links[i].href.indexOf(whiteList[j]) >= 0){
+          isAnExternalLink = false
+        }
+      }
 
-      if(!stepsLink && !skipLink){
+      if(isAnExternalLink){
         links[i].addEventListener('click', function(event){
           if (!w.confirm('<%= I18n.t("javascript.exit_app_confirmation")%>')) {
             event.preventDefault()
