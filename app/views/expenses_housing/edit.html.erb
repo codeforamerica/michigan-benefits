@@ -23,10 +23,13 @@
           autofocus: true %>
 
         <%= f.mb_money_field :property_tax_expense,
-        "How much do you pay in property tax each month?" %>
+          "How much do you pay in property tax each month?",
+          notes: ["If you do not pay property tax, you can leave this blank."] %>
 
         <%= f.mb_money_field :insurance_expense,
-        "How much do you pay in insurance each month?" %>
+          "How much do you pay in home owners insurance each month?",
+          notes: ["If you do not pay homeowners insurance, you can leave this blank."] %>
+
 
 
 
