@@ -17,7 +17,7 @@ RSpec.shared_examples "step controller" do
 
           get :edit
 
-          expect(response).to redirect_to(root_path)
+          expect(response).to redirect_to(introduce_yourself_steps_path)
         end
       end
     end

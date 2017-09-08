@@ -4,7 +4,7 @@ class StepsController < ApplicationController
   layout "step"
 
   before_action :maybe_skip, only: :edit
-  before_action :ensure_application_present, only: :edit
+  before_action :ensure_application_present, only: %i(edit index)
 
   def self.to_param
     controller_path.dasherize
@@ -22,7 +22,7 @@ class StepsController < ApplicationController
 
   def ensure_application_present
     if current_snap_application.blank?
-      redirect_to root_path
+      redirect_to introduce_yourself_steps_path
     end
   end
 
