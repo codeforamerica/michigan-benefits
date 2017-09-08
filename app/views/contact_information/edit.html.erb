@@ -14,11 +14,6 @@
         type: :tel,
         autofocus: true,
         options: { maxlength: 10 } %>
-      <%= f.mb_radio_set :sms_subscribed,
-          'May we send text messages to that phone number help you through the enrollment process?',
-          [{ value: true, label: "Yes" }, { value: false, label: "No" }],
-          layout: "inline" %>
-
       <%= f.mb_input_field :email, "What is your email address?", notes: ["If you don’t have one or you don’t want to receive emails from us you can leave this blank."] %>
 
       <%= render 'shared/next_step' %>

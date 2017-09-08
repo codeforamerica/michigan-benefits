@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829193351) do
+ActiveRecord::Schema.define(version: 20170908174732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20170829193351) do
     t.string "interview_preference"
     t.text "additional_information"
     t.datetime "faxed_at"
+    t.boolean "email_subscribed"
   end
 
   add_foreign_key "driver_applications", "snap_applications"
