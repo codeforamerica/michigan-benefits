@@ -34,7 +34,7 @@ class StepNavigation
       ExpensesAdditionalController,
     ],
     "General" => [
-      GeneralInterviewPreferenceController,
+      ContactPreferenceController,
       GeneralAnythingElseController,
     ],
     "Legal" => [

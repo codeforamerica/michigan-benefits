@@ -9,7 +9,6 @@ feature "SNAP application" do
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "2223334444"
-    subscribe_to_sms_updates
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
@@ -145,8 +144,9 @@ accounts?",
     submit_expense_sources(answer: "yes")
     submit_expenses
 
-    on_page "General" do
-      choose "Telephone Interview"
+    on_page "Preferences" do
+      check "Text message me"
+      check "Email me"
       click_on "Continue"
     end
 
@@ -180,7 +180,6 @@ accounts?",
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "2222222222"
-    subscribe_to_sms_updates
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
@@ -251,8 +250,7 @@ accounts?",
 
     submit_expense_sources(answer: "no")
 
-    on_page "General" do
-      choose "Telephone Interview"
+    on_page "Preferences" do
       click_on "Continue"
     end
 
@@ -283,7 +281,6 @@ accounts?",
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "2223334444"
-    subscribe_to_sms_updates
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
@@ -311,7 +308,6 @@ accounts?",
     click_on "Continue"
 
     fill_in "What is the best phone number to reach you?", with: "2223334444"
-    subscribe_to_sms_updates
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
@@ -336,9 +332,12 @@ accounts?",
     fill_in "What is the best phone number to reach you?", with: "2223334444"
     click_on "Continue"
 
+    fill_in "Address", with: "123 Main St."
+    click_on "Continue"
+
     expect(
-      find_field("What is the best phone number to reach you?").value,
-    ).to eq "2223334444"
+      find_field("Address").value,
+    ).to eq "123 Main St."
   end
 
   scenario "saves user data across steps", :js do
@@ -363,14 +362,6 @@ accounts?",
     select "January", from: "step_birthday_2i"
     select "1", from: "step_birthday_3i"
     select "1969", from: "step_birthday_1i"
-  end
-
-  def subscribe_to_sms_updates
-    select_radio(
-      question: "May we send text messages to that phone number help you " + \
-        "through the enrollment process?",
-      answer: "Yes",
-    )
   end
 
   def select_address_same_as_home_address

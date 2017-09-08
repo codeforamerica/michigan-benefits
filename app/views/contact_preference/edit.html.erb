@@ -1,0 +1,35 @@
+<% content_for :header_title, "Preferences" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="illustration illustration--section-4"></div>
+    <div class="pre-title">Almost done!</div>
+    <div class="form-card__title">
+      Would you like to receive reminds to help you through the enrollment
+      process?
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+      <%= f.mb_checkbox_set([
+        { method: :sms_subscribed, label: "Text message me" },
+        { method: :email_subscribed, label: "Email me" },
+      ],
+      label_text: "You'll receive messages about key steps and ways to submit
+      required documents. Let us know how you prefer to receive them. Select as
+      many options as you like.") %>
+
+    <p class='text--secure'>
+    <i class='illustration illustration--safety'></i>
+    No matter what, you will receive all official notices and legal information
+    via post mail to the address you provided. These e-mail and text message
+    reminders provide extra help.
+    </p>
+    <%= render "shared/next_step" %>
+  <% end %>
+</div>

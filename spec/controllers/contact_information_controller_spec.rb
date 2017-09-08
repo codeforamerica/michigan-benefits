@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
-RSpec.describe ContactInformationController, type: :controller do
+RSpec.describe ContactInformationController do
   let(:step) { assigns(:step) }
   let(:invalid_params) { { step: { phone_number: "" } } }
   let(:step_class) { ContactInformation }
@@ -25,7 +23,6 @@ RSpec.describe ContactInformationController, type: :controller do
       it "redirects to the next step" do
         valid_params = {
           phone_number: "2222222222",
-          sms_subscribed: "false",
         }
 
         put :update, params: { step: valid_params }
