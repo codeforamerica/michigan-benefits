@@ -22,7 +22,6 @@
         <% @step.non_applicant_members.each do |member| %>
           <div>
             <p>
-              <% path = step_path(HouseholdAddMemberController, member_id: member.to_param) %>
               <i class="button__icon--left icon-check icon-check--color"></i>
               <%= member.first_name.titleize %>
             </p>
