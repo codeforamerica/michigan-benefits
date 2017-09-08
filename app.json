@@ -1,0 +1,80 @@
+{
+  "name": "michigan-benefits",
+  "description": "Providing SNAP better, stronger, and faster",
+  "scripts": {
+    "postdeploy": "bin/rails db:setup"
+  },
+  "env": {
+    "ADMIN_PASSWORD": {
+      "required": true
+    },
+    "ADMIN_USER": {
+      "required": true
+    },
+    "APP_RELEASE_STAGE": {
+      "required": true
+    },
+    "EMAIL_DOMAIN": {
+      "required": true
+    },
+    "FAX_ENABLED": {
+      "required": true
+    },
+    "FAX_RECIPIENT": {
+      "required": true
+    },
+    "GOOGLE_ANALYTICS_ID": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "LD_LIBRARY_PATH": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    },
+    "SECRET_KEY_FOR_DRIVER_APPLICATION": {
+      "generator": "secret"
+    },
+    "SECRET_KEY_FOR_SSN_ENCRYPTION": {
+      "generator": "secret"
+    },
+    "SHUBOX_JS_ID": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": { "quantity": 1, "size": "free" },
+    "worker": { "quantity": 1, "size": "free" }
+  },
+  "addons": [
+    "bucketeer",
+    "heroku-postgresql",
+    "scheduler"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/fxtentacle/heroku-pdftk-buildpack.git"
+    },
+    {
+      "url": "heroku/ruby"
+    },
+    {
+      "url": "https://github.com/ello/heroku-buildpack-imagemagick"
+    }
+  ]
+}
