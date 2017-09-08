@@ -122,8 +122,8 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     total_money
   ].freeze
 
-  ATTRIBUTE_TYPES = (FORM_ATTRIBUTES + SHOW_ATTRIBUTES + COLLECTION_ATTRIBUTES).
-    uniq.freeze
+  ATTRIBUTE_TYPES = (FORM_ATTRIBUTES + SHOW_PAGE_ATTRIBUTES +
+                     COLLECTION_ATTRIBUTES).uniq.freeze
 
   def display_resource(snap_application)
     "Snap Application ##{snap_application.id}"
