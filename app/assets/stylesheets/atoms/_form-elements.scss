@@ -198,7 +198,7 @@ label {
   @include appearance(none);
   position: relative;
   z-index: 1;
-  border: 2px solid $form-color-border;
+  border: 2px solid $color-light-grey;
   border-radius: $border-radius;
   padding: .5em 2.7em .5em .7em;
   font-family: $font-system;
