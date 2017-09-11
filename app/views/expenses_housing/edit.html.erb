@@ -1,51 +1,50 @@
 <% content_for :header_title, "Expenses" %>
 
 <div class="form-card">
-    <header class="form-card__header">
-      <div class="form-card__title">
-        Tell us about your housing expenses.
-      </div>
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Tell us about your housing expenses.
+    </div>
 
-      <p class="text--help text--centered">
-        Housing expenses help determine the amount of Food Assistance you may
-        be eligible for.
-      </p>
-    </header>
+    <p class="text--help text--centered">
+      Housing expenses help determine the amount of Food Assistance you may
+      be eligible for.
+    </p>
+  </header>
 
-      <div class="form-card__content">
-        <%= form_for @step,
-          as: :step,
-          builder: MbFormBuilder,
-          url: current_path,
-          method: :put do |f| %>
-        <%= f.mb_money_field :rent_expense,
-          "How much does your household pay in rent or mortgage each month?",
-          autofocus: true %>
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
 
-        <%= f.mb_money_field :property_tax_expense,
-          "How much do you pay in property tax each month?",
-          notes: ["If you do not pay property tax, you can leave this blank."] %>
+      <%= f.mb_money_field :rent_expense,
+        "How much does your household pay in rent or mortgage each month?",
+        autofocus: true %>
 
-        <%= f.mb_money_field :insurance_expense,
-          "How much do you pay in home owners insurance each month?",
-          notes: ["If you do not pay homeowners insurance, you can leave this blank."] %>
+      <%= f.mb_money_field :property_tax_expense,
+        "How much do you pay in property tax each month?",
+        notes: ["If you do not pay property tax, you can leave this blank."] %>
 
+      <%= f.mb_money_field :insurance_expense,
+        "How much do you pay in home owners insurance each month?",
+        notes: [
+          "If you do not pay homeowners insurance, you can leave this blank.",
+        ] %>
 
-
-
-      <%= f.mb_checkbox_set([
-        { method: :utility_heat,        label: "Heat" },
-        { method: :utility_cooling,     label: "Cooling" },
-        { method: :utility_electrity,   label: "Electricity" },
-        { method: :utility_water_sewer, label: "Water/Sewer" },
-        { method: :utility_trash,       label: "Trash" },
-        { method: :utility_phone,       label: "Phone" },
-        { method: :utility_other,       label: "Other" }
-      ],
-      label_text: "What utilities do you pay?",
-      notes: ["Only check utilities that are not included in your mortgage/rent payments."]) %>
-      </div>
+      <%= f.mb_checkbox_set(
+        [
+          { method: :utility_heat, label: "Heat" },
+          { method: :utility_cooling, label: "Cooling" },
+          { method: :utility_electrity,label: "Electricity" },
+          { method: :utility_water_sewer, label: "Water/Sewer" },
+          { method: :utility_trash, label: "Trash" },
+          { method: :utility_phone, label: "Phone" },
+          { method: :utility_other, label: "Other" }
+        ],
+        label_text: "What utilities do you pay?",
+        notes: [
+          "Only check utilities that are not included in your mortgage/rent payments."
+        ]) %>
 
       <%= render "shared/next_step" %>
     <% end %>
+  </div>
 </div>
