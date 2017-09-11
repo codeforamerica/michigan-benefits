@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170911184535) do
     t.bigint "snap_application_id"
     t.string "destination"
     t.string "metadata"
+    t.boolean "force", default: false
     t.string "status", default: "new"
     t.datetime "completed_at"
     t.datetime "created_at", null: false

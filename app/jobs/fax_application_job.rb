@@ -1,8 +1,8 @@
 class FaxApplicationJob < ApplicationJob
-  def perform(export_id:)
+  def perform(export_id:, force: false)
     export = Export.find(export_id)
     export.execute do |snap_application|
-      return if snap_application.faxed?
+      return if snap_application.faxed? && !force
 
       fax_recipient = FaxRecipient.new(residential_address:
                                        snap_application.residential_address)

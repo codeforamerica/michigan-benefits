@@ -4,6 +4,7 @@ class CreateExports < ActiveRecord::Migration[5.1]
       t.references :snap_application
       t.string :destination
       t.string :metadata
+      t.boolean :force, default: false
       t.string :status, default: "new"
       t.datetime :completed_at
       t.timestamps
