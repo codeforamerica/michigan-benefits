@@ -145,8 +145,14 @@ accounts?",
     submit_expenses
 
     on_page "Preferences" do
-      check "Text message me"
-      check "Email me"
+      choose_yes(
+        "Would you like text message reminders about key steps and documents" +
+        " required to help you through the enrollment process?",
+      )
+      click_on "Continue"
+    end
+
+    on_page "Preferences" do
       click_on "Continue"
     end
 
@@ -251,6 +257,10 @@ accounts?",
     submit_expense_sources(answer: "no")
 
     on_page "Preferences" do
+      choose_no(
+        "Would you like text message reminders about key steps and documents" +
+        " required to help you through the enrollment process?",
+      )
       click_on "Continue"
     end
 

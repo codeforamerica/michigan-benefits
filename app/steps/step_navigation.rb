@@ -35,6 +35,7 @@ class StepNavigation
     ],
     "General" => [
       ContactPreferenceController,
+      ContactConfirmPhoneNumberController,
       GeneralAnythingElseController,
     ],
     "Legal" => [
