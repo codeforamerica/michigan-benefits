@@ -12,11 +12,6 @@
       <p>
         You can do this later but this will help speed up the process.
       </p>
-      <p>
-        The following page will allow you to both upload photos of your documents
-        with your phone, as well as submit files you already have on your
-        computer or mobile phone/tablet.
-      </p>
     </div>
 
     <%= form_for @step,
@@ -35,6 +30,12 @@
         <% end %>
       </div>
     <% end %>
+
+    <p class='text--secure'>
+      <i class='illustration illustration--safety'></i>
+      Both MichiganBenefits.org and MDHHS maintain strict security guidelines
+      to protect the identities of Michigan residents.
+    </p>
 
     <div class='slab'>
       <%= render 'shared/commonly_requested_documents' %>
