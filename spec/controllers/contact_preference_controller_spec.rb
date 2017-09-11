@@ -14,32 +14,23 @@ RSpec.describe ContactPreferenceController do
       get :edit
 
       expect(step.sms_subscribed).to eq false
-      expect(step.email_subscribed).to eq true
     end
   end
 
   describe "#update" do
     context "when valid" do
       it "updates the current app and redirects to the next step" do
-        valid_params = {
-          sms_subscribed: "t",
-          email_subscribed: "f",
-        }
+        valid_params = { sms_subscribed: "true" }
 
         put :update, params: { step: valid_params }
 
         expect(current_app.reload.sms_subscribed).to eq true
-        expect(current_app.reload.email_subscribed).to eq false
-        expect(response).to redirect_to("/steps/general-anything-else")
+        expect(response).to redirect_to("/steps/contact-confirm-phone-number")
       end
     end
   end
 
   def current_app
-    @_current_app ||= create(
-      :snap_application,
-      sms_subscribed: false,
-      email_subscribed: true,
-    )
+    @_current_app ||= create(:snap_application, sms_subscribed: false)
   end
 end

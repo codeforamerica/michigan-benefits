@@ -1,0 +1,25 @@
+<% content_for :header_title, "Preferences" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="illustration illustration--confirmation-message"></div>
+    <div class="form-card__title">
+      Great! You'll receive a confirmation message soon.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+      <%= f.mb_input_field :phone_number,
+        "Best number for text messages",
+        type: :tel,
+        autofocus: true,
+        options: { maxlength: 10 } %>
+
+    <%= render "shared/next_step" %>
+  <% end %>
+</div>
