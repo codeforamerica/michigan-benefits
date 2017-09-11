@@ -6,10 +6,10 @@ var uploadSetup = function (previewTemplate) {
     clickable: '#click-to-upload',
     previewTemplate: previewTemplate,
     acceptedFiles: '.pdf,.jpg,.jpeg,.png,.gif',
-    maxFilesize: 3, // MB
+    maxFilesize: 8, // MB
     error: function (file, msg) {
-      window.alert(msg)
-      $(file.previewElement).remove()
+      var error = '<i class="icon-warning"></i> ' + msg
+      $(file.previewElement).find('.text--error').html(error).show()
     },
     success: function (file) {
       var button = $('#click-to-upload')
@@ -19,6 +19,7 @@ var uploadSetup = function (previewTemplate) {
 
       button.html(buttonHtml.replace('Upload documents', 'Upload more documents'))
       titleH4.html(titleText.replace('Uploading', 'Uploaded'))
+      $(file.previewElement).find('input[type="hidden"]').val(file.s3url)
     },
     addedfile: function () {
       $('[data-done-uploading]').attr('disabled', true)

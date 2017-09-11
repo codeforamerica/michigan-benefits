@@ -75,6 +75,10 @@
   }
 }
 
+.is-hidden {
+  display: none;
+}
+
 .is-mobile-hidden {
   display: none !important;
   @include media($mobile-up) {
