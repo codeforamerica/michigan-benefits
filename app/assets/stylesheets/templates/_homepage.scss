@@ -1,6 +1,13 @@
 .template--homepage {
   .page-wrapper {
     padding-top: 0;
+    padding-left: $padding-small * 2;
+    padding-right: $padding-small * 2;
+
+    @include media($site-max-up) {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   .trust-badge {
