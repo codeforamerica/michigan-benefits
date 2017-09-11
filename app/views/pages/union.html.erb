@@ -21,53 +21,5 @@ end %>
   </div>
 </div>
 
-<!-- <div class="slab slab--white" id="apply-for-programs">
-  <div class="card--narrow">
-    <%= render 'shared/flashes' %>
-    <label class="program-selector">
-      <div class="program-selector__checkbox">
-        <% icon_class = "illustration--icn_food" %>
-      </div>
-      <div class="<%= icon_class %> program-selector__icon illustration">
-        <h4 class="program-selector__title">
-          Food Assistance
-        </h4>
-      </div>
-      <div class="program-selector__subtitle text--smell">
-        Food Stamps, FAP or SNAP
-      </div>
-      <div class="text--help">
-        Provides benefits to buy or grow food.
-      </div>
-    </label>
-  </div>
-</div> -->
-
-<section class="slab" id="scroller-target">
-  <div class="grid">
-    <div class="grid__item width-seven-twelfths">
-      <p>
-        MichiganBenefits.org is an easy, safe and secure way to apply for
-        Michigan's Food Assistance Program. Information you provide will be
-        securely submitted as an official application with the Michigan
-        Department of Health and Human Services.
-
-        MichiganBenefits.org is a non-profit that offers online application
-        assistance to any Michigan resident. For additional assistance email our
-        team at <a href="mailto:hello@michiganbenefits.org">hello@michiganbenefits.org</a>.
-      </p>
-
-      <p>
-        To visit the official online application for food assistance, please visit
-        <%= link_to 'MI Bridges', 'https://www.michigan.gov/mibridges' %>.
-      </p>
-    </div>
-
-    <div class="grid__item width-one-fourth shift-one-sixth trust-badge">
-      <a href="http://www.michigan.gov/mdhhs/" class="illustration illustration--mi_mdhhs">MDHHS</a>
-      <p class="text--small">A registered Community Partner and digital application assister.</p>
-    </div>
-  </div>
-</section>
-
+<%= render 'pages/home_page_bottom_section' %>
 <%= render 'shared/footer' %>
