@@ -29,7 +29,7 @@ module Admin
     def pdf
       application = SnapApplication.find(params[:id])
       send_data(application.pdf.read,
-        filename: "snap-application-#{application.email}.pdf",
+        filename: "snap-application-#{application.signature}.pdf",
         type: "application/pdf",
         disposition: "inline")
     end
