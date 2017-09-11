@@ -1,4 +1,5 @@
 <% content_for :back_path, nil %>
+<% content_for :header_title, "Application Submitted" %>
 
 <div class="form-card">
   <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
