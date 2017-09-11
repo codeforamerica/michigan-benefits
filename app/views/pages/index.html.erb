@@ -1,6 +1,8 @@
 <% content_for :template_name, 'homepage' %>
 <% content_for :demo_banner { render 'shared/demo_banner' } %>
 
+<%= render 'shared/flashes' %>
+
 <div class="slab--hero-<%= rand(1..3) %> slab slab--hero">
   <div class="grid">
     <div class="logo-hero">MichiganBenefits.org</div>
