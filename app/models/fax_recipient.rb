@@ -1,9 +1,6 @@
 class FaxRecipient
-  attr_accessor :residential_address
-
-  def initialize(residential_address:, office_location: "")
-    @residential_address = residential_address
-    @office_location = office_location
+  def initialize(snap_application:)
+    @snap_application = snap_application
   end
 
   def number
@@ -51,5 +48,13 @@ class FaxRecipient
 
   private
 
-  attr_reader :office_location
+  attr_reader :snap_application
+
+  def residential_address
+    snap_application.residential_address
+  end
+
+  def office_location
+    snap_application.office_location
+  end
 end
