@@ -34,6 +34,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     property_tax_expense: Field::Number,
     insurance_expense: Field::Number,
     utility_heat: Field::Boolean,
+    sms_consented: Field::Boolean,
     utility_cooling: Field::Boolean,
     utility_electrity: Field::Boolean,
     utility_water_sewer: Field::Boolean,
@@ -58,6 +59,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
 
   COLLECTION_ATTRIBUTES = %i[
     id
+    sms_consented
     email
     phone_number
     created_at
@@ -72,7 +74,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     email
     documents
     phone_number
-    sms_subscribed
+    sms_consented
     consent_to_terms
     mailing_address_same_as_residential_address
     unstable_housing
@@ -124,7 +126,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     email
     documents
     phone_number
-    sms_subscribed
+    sms_consented
     consent_to_terms
     mailing_address_same_as_residential_address
     unstable_housing

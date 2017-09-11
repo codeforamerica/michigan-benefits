@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908174732) do
+ActiveRecord::Schema.define(version: 20170911184535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20170908174732) do
     t.string "email"
     t.string "documents", default: [], array: true
     t.string "phone_number"
-    t.boolean "sms_subscribed"
+    t.boolean "sms_consented"
     t.boolean "consent_to_terms"
     t.boolean "mailing_address_same_as_residential_address", default: true
     t.boolean "unstable_housing", default: false
@@ -140,10 +140,8 @@ ActiveRecord::Schema.define(version: 20170908174732) do
     t.boolean "vehicle_income"
     t.string "financial_accounts", default: [], array: true
     t.integer "total_money"
-    t.string "interview_preference"
     t.text "additional_information"
     t.datetime "faxed_at"
-    t.boolean "email_subscribed"
   end
 
   add_foreign_key "driver_applications", "snap_applications"
