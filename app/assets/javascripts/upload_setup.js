@@ -6,7 +6,7 @@ var uploadSetup = function (previewTemplate) {
     clickable: '#click-to-upload',
     previewTemplate: previewTemplate,
     acceptedFiles: '.pdf,.jpg,.jpeg,.png,.gif',
-    maxFilesize: 3, // MB
+    maxFilesize: 8, // MB
     error: function (file, msg) {
       window.alert(msg)
       $(file.previewElement).remove()
