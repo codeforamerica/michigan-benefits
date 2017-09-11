@@ -3,24 +3,24 @@ require "rails_helper"
 RSpec.describe Export do
   describe ".enqueue_faxes" do
     it "schedules jobs for signed, unfaxed application updated awhile ago" do
-      A_WHILE_AGO = 31.minutes.ago
-      RECENTLY = 25.minutes.ago
+      after_threshold = (Export::DELAY_THRESHOLD + 1).minutes.ago
+      before_threshold = (Export::DELAY_THRESHOLD - 1).minutes.ago
       signed_unfaxed_updated_awhile_ago = create(:snap_application,
-                                                 signed_at: A_WHILE_AGO,
-                                                 updated_at: A_WHILE_AGO)
+                                                 signed_at: after_threshold,
+                                                 updated_at: after_threshold)
 
       signed_unfaxed_updated_recently = create(:snap_application,
-                                               signed_at: RECENTLY,
-                                               updated_at: RECENTLY)
+                                               signed_at: before_threshold,
+                                               updated_at: before_threshold)
 
       unsigned_unfaxed_updated_awhile_ago = create(:snap_application,
                                                    signed_at: nil,
-                                                   updated_at: A_WHILE_AGO)
+                                                   updated_at: after_threshold)
 
       signed_faxed_updated_awhile_ago = create(:snap_application,
                                                :faxed_successfully,
-                                               signed_at: A_WHILE_AGO,
-                                               updated_at: A_WHILE_AGO)
+                                               signed_at: after_threshold,
+                                               updated_at: after_threshold)
 
       allow(FaxApplicationJob).to receive(:perform_later)
 

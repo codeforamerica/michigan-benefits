@@ -11,8 +11,8 @@ class SnapApplication < ApplicationRecord
 
   scope :signed, -> { where.not(signed_at: nil) }
   scope :unsigned, -> { where(signed_at: nil) }
-  scope :updated_awhile_ago, -> { where("updated_at < ?", 30.minutes.ago) }
-  scope :faxable, -> { signed.unfaxed.updated_awhile_ago }
+  scope :faxable, -> { signed.unfaxed }
+  scope :untouched_since, ->(threshold) { where("updated_at < ?", threshold) }
 
   scope :faxed, (lambda do
     where(id: Export.faxed.succeeded.application_ids)

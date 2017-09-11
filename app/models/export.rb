@@ -1,4 +1,5 @@
 class Export < ApplicationRecord
+  DELAY_THRESHOLD = 30
   class UnknownExportTypeError < StandardError; end
 
   belongs_to :snap_application
@@ -18,7 +19,8 @@ class Export < ApplicationRecord
   scope :latest, -> { first }
 
   def self.enqueue_faxes
-    SnapApplication.faxable.find_each do |snap_application|
+    SnapApplication.faxable.untouched_since(DELAY_THRESHOLD.minutes.ago).
+      find_each do |snap_application|
       create_and_enqueue(destination: :fax, snap_application: snap_application)
     end
   end
