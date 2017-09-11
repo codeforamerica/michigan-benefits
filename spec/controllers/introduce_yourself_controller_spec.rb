@@ -12,6 +12,14 @@ RSpec.describe IntroduceYourselfController do
   include_examples "step controller", "param validation"
 
   describe "#edit" do
+    context "office location in params" do
+      it "assigns office location" do
+        get :edit, params: { office_location: "clio" }
+
+        expect(step.office_location).to eq "clio"
+      end
+    end
+
     it "assigns the name and birthday to the step" do
       get :edit
 
@@ -32,25 +40,44 @@ RSpec.describe IntroduceYourselfController do
   end
 
   describe "#update" do
-    context "valid params" do
-      it "updates the application" do
-        expect do
+    context "no office location present" do
+      context "valid params" do
+        it "updates the application" do
+          expect do
+            put :update, params: valid_params
+          end.to(
+            change do
+              current_app.primary_member.reload.attributes.slice(
+                "first_name",
+                "last_name",
+                "birthday",
+              )
+            end,
+          )
+        end
+
+        it "redirects to the next step" do
           put :update, params: valid_params
-        end.to(
-          change do
-            current_app.primary_member.reload.attributes.slice(
-              "first_name",
-              "last_name",
-              "birthday",
-            )
-          end,
-        )
+
+          expect(response).to redirect_to("/steps/contact-information")
+        end
       end
+    end
 
-      it "redirects to the next step" do
-        put :update, params: valid_params
+    context "office location present" do
+      it "updates the office location for the snap application" do
+        params = { step: {
+          first_name: "RJ",
+          last_name: "D2",
+          "birthday(3i)" => "31",
+          "birthday(2i)" => "1",
+          "birthday(1i)" => "1950",
+          office_location: "union",
+        } }
 
-        expect(response).to redirect_to("/steps/contact-information")
+        put :update, params: params
+
+        expect(current_app.reload.office_location).to eq "union"
       end
     end
   end

@@ -1,12 +1,17 @@
 class FaxRecipient
   attr_accessor :residential_address
 
-  def initialize(residential_address:)
+  def initialize(residential_address:, office_location: "")
     @residential_address = residential_address
+    @office_location = office_location
   end
 
   def number
-    self.class.find_by(zip: residential_address.zip)["fax_number"]
+    if office_location.present?
+      self.class.offices[office_location]["fax_number"]
+    else
+      self.class.find_by(zip: residential_address.zip)["fax_number"]
+    end
   end
 
   def name
@@ -43,4 +48,8 @@ class FaxRecipient
   def self.release_stage
     ENV.fetch("APP_RELEASE_STAGE", "development")
   end
+
+  private
+
+  attr_reader :office_location
 end
