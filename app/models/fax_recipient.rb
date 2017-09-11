@@ -1,12 +1,14 @@
 class FaxRecipient
-  attr_accessor :residential_address
-
-  def initialize(residential_address:)
-    @residential_address = residential_address
+  def initialize(snap_application:)
+    @snap_application = snap_application
   end
 
   def number
-    self.class.find_by(zip: residential_address.zip)["fax_number"]
+    if office_location.present?
+      self.class.offices[office_location]["fax_number"]
+    else
+      self.class.find_by(zip: residential_address.zip)["fax_number"]
+    end
   end
 
   def name
@@ -42,5 +44,17 @@ class FaxRecipient
 
   def self.release_stage
     ENV.fetch("APP_RELEASE_STAGE", "development")
+  end
+
+  private
+
+  attr_reader :snap_application
+
+  def residential_address
+    snap_application.residential_address
+  end
+
+  def office_location
+    snap_application.office_location
   end
 end

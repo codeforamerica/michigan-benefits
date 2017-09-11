@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   end
 
   root "pages#index"
-  get "/terms" => "pages#terms"
+  get "/clio" => "pages#clio"
   get "/privacy" => "pages#privacy"
+  get "/terms" => "pages#terms"
+  get "/union" => "pages#union"
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]

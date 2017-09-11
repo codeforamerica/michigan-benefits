@@ -7,6 +7,7 @@ class IntroduceYourself < Step
     :birthday,
     :first_name,
     :last_name,
+    :office_location,
   )
 
   validates :first_name,
@@ -17,6 +18,15 @@ class IntroduceYourself < Step
 
   validates :birthday,
     presence: { message: "Make sure to provide a birthday" }
+
+  validates(
+    :office_location,
+    allow_blank: true,
+    inclusion: {
+      in: %w(clio union),
+      message: "Select a valid office location.",
+    },
+  )
 
   # https://github.com/rails/rails/pull/8189#issuecomment-10329403
   def class_for_attribute(attr)

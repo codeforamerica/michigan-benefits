@@ -1,8 +1,7 @@
 class FaxApplicationJob < ApplicationJob
   def perform(export:)
     export.execute do |snap_application|
-      fax_recipient = FaxRecipient.new(residential_address:
-                                       snap_application.residential_address)
+      fax_recipient = FaxRecipient.new(snap_application: snap_application)
       Fax.send_fax(
         number: fax_recipient.number,
         file: snap_application.pdf.path,

@@ -1,6 +1,6 @@
 <% content_for :template_name, 'homepage' %>
 <% content_for :banner do
-  render "shared/banner", banner_text: "Hello! Welcome to our beta website."
+  render "shared/banner", banner_text: "Welcome to MDHHS on Clio Road!"
 end %>
 
 <%= render 'shared/flashes' %>
@@ -14,8 +14,8 @@ end %>
     <p>
       Apply for food stamps (FAP) in 15 minutes
     </p>
-    <%= link_to step_path(StepNavigation.first), class: "button button--cta button--fully-width" do %>
-      Apply now
+    <%= link_to step_path(StepNavigation.first, office_location: "clio"), class: "button button--cta button--fully-width" do %>
+      Apply now from MDHHS at Clio Rd.
       <i class="button__icon icon-arrow_forward"></i>
     <% end %>
   </div>

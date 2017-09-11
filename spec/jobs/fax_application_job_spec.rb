@@ -10,8 +10,7 @@ RSpec.describe FaxApplicationJob do
       job = FaxApplicationJob.new
 
       allow(Fax).to receive(:send_fax)
-      recipient = FaxRecipient.new(residential_address:
-                                   snap_application.residential_address)
+      recipient = FaxRecipient.new(snap_application: snap_application)
 
       job.perform(export: export)
 
