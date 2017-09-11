@@ -22,7 +22,7 @@ RSpec.describe ContactConfirmPhoneNumberController do
   def current_app
     @_current_app ||= create(
       :snap_application,
-      sms_subscribed: true,
+      sms_consented: true,
       phone_number: "2223334444",
     )
   end

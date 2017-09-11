@@ -2,7 +2,6 @@
 
 class ContactPreference < Step
   step_attributes(
-    :email_subscribed,
-    :sms_subscribed,
+    :sms_consented,
   )
 end
