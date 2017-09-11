@@ -50,7 +50,7 @@ RSpec.describe FunnelStage do
           previous_cohort: [],
           name: "Signup",
         )
-        expect(funnel_stage.conversion_rate).to eq(1)
+        expect(funnel_stage.conversion_rate).to eq(1.0)
       end
     end
   end
