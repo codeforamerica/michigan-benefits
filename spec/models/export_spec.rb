@@ -37,7 +37,7 @@ RSpec.describe Export do
       expect(FaxApplicationJob).to have_received(:perform_later).once
       expect(FaxApplicationJob).to(
         have_received(:perform_later).
-          with(export_id: signed_unfaxed_updated_awhile_ago.exports.first.id),
+          with(export: signed_unfaxed_updated_awhile_ago.exports.first),
       )
     end
   end
@@ -52,14 +52,14 @@ RSpec.describe Export do
       export = build(:export, destination: :fax)
       export.enqueue
       expect(FaxApplicationJob).to have_received(:perform_later).
-        with(export_id: export.id)
+        with(export: export)
     end
 
     it "sends email" do
       export = build(:export, destination: :email)
       export.enqueue
       expect(EmailApplicationJob).to have_received(:perform_later).
-        with(export_id: export.id)
+        with(export: export)
     end
 
     it "transitions status" do

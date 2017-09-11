@@ -11,7 +11,7 @@ RSpec.describe EmailApplicationJob do
       allow(ApplicationMailer).to receive(:snap_application_notification).
         and_return(fake_mailer)
 
-      EmailApplicationJob.new.perform(export_id: export.id)
+      EmailApplicationJob.new.perform(export: export)
 
       expect(ApplicationMailer).to(
         have_received(:snap_application_notification).

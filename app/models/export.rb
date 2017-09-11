@@ -14,6 +14,7 @@ class Export < ApplicationRecord
   scope :faxed, -> { where(destination: :fax) }
   scope :emailed, -> { where(destination: :email) }
   scope :succeeded, -> { where(status: :succeeded) }
+  scope :for_destination, ->(destination) { where(destination: destination) }
   scope :completed, -> { where.not(completed_at: nil) }
   scope :application_ids, -> { pluck(:snap_application_id) }
   scope :latest, -> { first }
@@ -39,9 +40,9 @@ class Export < ApplicationRecord
       save!
       case destination
       when :fax
-        FaxApplicationJob.perform_later(export_id: id)
+        FaxApplicationJob.perform_later(export: self)
       when :email
-        EmailApplicationJob.perform_later(export_id: id)
+        EmailApplicationJob.perform_later(export: self)
       else
         raise UnknownExportTypeError, destination
       end
@@ -51,6 +52,16 @@ class Export < ApplicationRecord
 
   def execute
     raise ArgumentError, "#export requires a block" unless block_given?
+
+    if snap_application.exports.succeeded.
+        for_destination(destination).present? && !force
+
+      transition_to new_status: :failed
+      update(metadata: "Export failed because a previous export succeeded",
+             completed_at: Time.zone.now)
+      return
+    end
+
     transition_to new_status: :in_process
     update(metadata: yield(snap_application), completed_at: Time.zone.now)
     transition_to new_status: :succeeded

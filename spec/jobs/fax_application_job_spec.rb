@@ -13,7 +13,7 @@ RSpec.describe FaxApplicationJob do
       recipient = FaxRecipient.new(residential_address:
                                    snap_application.residential_address)
 
-      job.perform(export_id: export.id)
+      job.perform(export: export)
 
       snap_application.reload
 
@@ -34,7 +34,7 @@ RSpec.describe FaxApplicationJob do
 
       allow(Fax).to receive(:send_fax)
 
-      job.perform(export_id: export.id)
+      job.perform(export: export)
 
       expect(Fax).not_to have_received(:send_fax)
     end
