@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20170911184535) do
     t.index ["snap_application_id"], name: "index_driver_applications_on_snap_application_id"
   end
 
+  create_table "exports", force: :cascade do |t|
+    t.bigint "snap_application_id"
+    t.string "destination"
+    t.string "metadata"
+    t.boolean "force", default: false
+    t.string "status", default: "new"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["snap_application_id"], name: "index_exports_on_snap_application_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

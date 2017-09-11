@@ -3,26 +3,27 @@ require "administrate/base_dashboard"
 class SnapApplicationDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    signature: Field::String,
-    signed_at: Field::DateTime,
-    email: Field::String,
-    documents: Field::String,
-    phone_number: Field::String,
-    sms_subscribed: Field::Boolean,
-    consent_to_terms: Field::Boolean,
-    mailing_address_same_as_residential_address: Field::Boolean,
-    unstable_housing: Field::Boolean,
-    everyone_a_citizen: Field::Boolean,
+    additional_income: Field::Text,
     anyone_disabled: Field::Boolean,
-    anyone_new_mom: Field::Boolean,
     anyone_in_college: Field::Boolean,
     anyone_living_elsewhere: Field::Boolean,
+    anyone_new_mom: Field::Boolean,
+    care_expenses: Field::String,
+    consent_to_terms: Field::Boolean,
+    court_ordered: Field::Boolean,
+    court_ordered_expenses: Field::String,
+    created_at: Field::DateTime,
+    dependent_care: Field::Boolean,
+    documents: Field::String,
+    email: Field::String,
+    emailed_at: Field::DateTime,
+    everyone_a_citizen: Field::Boolean,
+    fax_metadata: Field::String,
+    faxed_at: Field::DateTime,
+    financial_accounts: Field::String,
     income_change: Field::Boolean,
     income_change_explanation: Field::Text,
-    additional_income: Field::Text,
-    income_child_support: Field::String,
+    income_child_support: Field::Text,
     income_foster_care: Field::String,
     income_other: Field::String,
     income_pension: Field::String,
@@ -30,39 +31,47 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     income_ssi_or_disability: Field::String,
     income_unemployment_insurance: Field::String,
     income_workers_compensation: Field::String,
-    rent_expense: Field::Number,
+    insurance_expense: Field::String,
+    mailing_address_same_as_residential_address: Field::Boolean,
+    medical: Field::Boolean,
+    medical_expenses: Field::String,
+    money_or_accounts_income: Field::Boolean,
+    monthly_care_expenses: Field::String,
+    monthly_court_ordered_expenses: Field::String,
+    monthly_medical_expenses: Field::String,
+    phone_number: Field::String,
     property_tax_expense: Field::Number,
-    insurance_expense: Field::Number,
-    utility_heat: Field::Boolean,
-    sms_consented: Field::Boolean,
+    real_estate_income: Field::Boolean,
+    rent_expense: Field::Number,
+    signature: Field::String,
+    signed_at: Field::DateTime,
+    sms_subscribed: Field::Boolean,
+    total_money: Field::Number,
+    unstable_housing: Field::Boolean,
+    updated_at: Field::DateTime,
     utility_cooling: Field::Boolean,
     utility_electrity: Field::Boolean,
-    utility_water_sewer: Field::Boolean,
-    utility_trash: Field::Boolean,
-    utility_phone: Field::Boolean,
+    utility_heat: Field::Boolean,
     utility_other: Field::Boolean,
-    dependent_care: Field::Boolean,
-    medical: Field::Boolean,
-    court_ordered: Field::Boolean,
-    monthly_care_expenses: Field::Number,
-    monthly_medical_expenses: Field::Number,
-    monthly_court_ordered_expenses: Field::Number,
-    care_expenses: Field::String,
-    medical_expenses: Field::String,
-    court_ordered_expenses: Field::String,
-    money_or_accounts_income: Field::Boolean,
-    real_estate_income: Field::Boolean,
+    utility_phone: Field::Boolean,
+    utility_trash: Field::Boolean,
+    utility_water_sewer: Field::Boolean,
     vehicle_income: Field::Boolean,
-    financial_accounts: Field::String,
-    total_money: Field::Number,
+    zip: Field::String,
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
     id
+    signature
     sms_consented
-    email
     phone_number
+    email
+    zip
+    signed_at
+    faxed_at
+    fax_metadata
     created_at
+    emailed_at
   ].freeze
 
   SHOW_PAGE_ATTRIBUTES = %i[

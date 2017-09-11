@@ -7,17 +7,28 @@ class SnapApplication < ApplicationRecord
     driver_applications.order("id DESC").limit(1).first
   end
 
+  has_many :exports
+
   scope :signed, -> { where.not(signed_at: nil) }
-  scope :unfaxed, -> { where(faxed_at: nil) }
-  scope :updated_awhile_ago, -> { where("updated_at < ?", 30.minutes.ago) }
+  scope :unsigned, -> { where(signed_at: nil) }
+  scope :faxable, -> { signed.unfaxed }
+  scope :untouched_since, ->(threshold) { where("updated_at < ?", threshold) }
 
-  scope :faxable, -> { signed.unfaxed.updated_awhile_ago }
+  scope :faxed, (lambda do
+    where(id: Export.faxed.succeeded.application_ids)
+  end)
 
-  def self.enqueue_faxes
-    faxable.pluck(:id).each do |id|
-      FaxApplicationJob.perform_later(snap_application_id: id)
-    end
-  end
+  scope :unfaxed, (lambda do
+    where.not(id: Export.faxed.succeeded.application_ids)
+  end)
+
+  scope :emailed, (lambda do
+    where(id: Export.emailed.succeeded.application_ids)
+  end)
+
+  scope :unemailed, (lambda do
+    where.not(id: Export.emailed.succeeded.application_ids)
+  end)
 
   def pdf
     @pdf ||= Dhs1171Pdf.new(
@@ -71,7 +82,27 @@ class SnapApplication < ApplicationRecord
   end
 
   def faxed?
-    faxed_at.present?
+    exports.faxed.succeeded.any?
+  end
+
+  def faxed_at
+    super || exports.faxed.succeeded.latest&.completed_at
+  end
+
+  def fax_metadata
+    [exports.faxed.latest&.status, exports.faxed.latest&.metadata].join(" ")
+  end
+
+  def signed?
+    signed_at.present?
+  end
+
+  def emailed?
+    emailed_at.present?
+  end
+
+  def emailed_at
+    exports.emailed.succeeded.first&.completed_at
   end
 
   def signed_at_est

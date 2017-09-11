@@ -17,5 +17,21 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+    #
+    def resend_fax
+      application = SnapApplication.find(params[:id])
+      Export.create_and_enqueue!(snap_application: application,
+                                 destination: :fax, force: true)
+      flash[:notice] = "Resent fax for #{application.signature}!"
+      redirect_to admin_root_path
+    end
+
+    def pdf
+      application = SnapApplication.find(params[:id])
+      send_data(application.pdf.read,
+        filename: "snap-application-#{application.signature}.pdf",
+        type: "application/pdf",
+        disposition: "inline")
+    end
   end
 end

@@ -74,54 +74,6 @@ RSpec.describe SnapApplication do
     end
   end
 
-  describe ".enqueue_faxes" do
-    it "schedules jobs for signed, unfaxed application updated awhile ago" do
-      signed_unfaxed_updated_awhile_ago = create(:snap_application,
-                                                 signed_at: 31.minutes.ago,
-                                                 faxed_at: nil,
-                                                 updated_at: 31.minutes.ago)
-
-      signed_unfaxed_updated_recently = create(:snap_application,
-                                               signed_at: 25.minutes.ago,
-                                               faxed_at: nil,
-                                               updated_at: 25.minutes.ago)
-
-      unsigned_unfaxed_updated_awhile_ago = create(:snap_application,
-                                                   signed_at: nil,
-                                                   faxed_at: nil,
-                                                   updated_at: 31.minutes.ago)
-
-      signed_faxed_updated_awhile_ago = create(:snap_application,
-                                               signed_at: 31.minutes.ago,
-                                               faxed_at: 1.minute.ago,
-                                               updated_at: 31.minutes.ago)
-
-      allow(FaxApplicationJob).to receive(:perform_later)
-
-      SnapApplication.enqueue_faxes
-
-      expect(FaxApplicationJob).to(
-        have_received(:perform_later).
-          with(snap_application_id: signed_unfaxed_updated_awhile_ago.id),
-      )
-
-      expect(FaxApplicationJob).not_to(
-        have_received(:perform_later).
-          with(snap_application_id: signed_faxed_updated_awhile_ago.id),
-      )
-
-      expect(FaxApplicationJob).not_to(
-        have_received(:perform_later).
-          with(snap_application_id: unsigned_unfaxed_updated_awhile_ago.id),
-      )
-
-      expect(FaxApplicationJob).not_to(
-        have_received(:perform_later).
-          with(snap_application_id: signed_unfaxed_updated_recently.id),
-      )
-    end
-  end
-
   describe "#signed_at_est" do
     context "signed_at present" do
       it "returns the UTC time in EST" do
@@ -142,6 +94,41 @@ RSpec.describe SnapApplication do
         snap_app = build(:snap_application, signed_at: nil)
 
         expect(snap_app.signed_at_est).to eq(nil)
+      end
+    end
+  end
+
+  describe "#faxed?" do
+    context "when no fax attempts have been made" do
+      it "returns false" do
+        snap_application = FactoryGirl.create(:snap_application)
+        expect(snap_application).to_not be_faxed
+      end
+    end
+
+    context "when a failed fax attempt has been made" do
+      it "returns false" do
+        snap_application = FactoryGirl.create(:snap_application,
+          exports: [FactoryGirl.create(:export, :faxed, :failed)])
+        expect(snap_application).to_not be_faxed
+      end
+    end
+
+    context "when a successful fax attempt has been made" do
+      it "returns true" do
+        snap_application = FactoryGirl.create(:snap_application,
+          exports: [FactoryGirl.create(:export, :faxed, :succeeded)])
+        expect(snap_application).to be_faxed
+      end
+    end
+
+    context "when several fax attempts have led to mixed results" do
+      it "returns true" do
+        snap_application = FactoryGirl.create(:snap_application,
+          exports: [FactoryGirl.create(:export, :faxed, :failed),
+                    FactoryGirl.create(:export, :faxed, :succeeded),
+                    FactoryGirl.create(:export, :faxed, :failed)])
+        expect(snap_application).to be_faxed
       end
     end
   end
