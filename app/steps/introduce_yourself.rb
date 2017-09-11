@@ -24,7 +24,7 @@ class IntroduceYourself < Step
     allow_blank: true,
     inclusion: {
       in: %w(clio union),
-      message: "Select a valid office locaton.",
+      message: "Select a valid office location.",
     },
   )
 
