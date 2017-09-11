@@ -442,7 +442,7 @@ accounts?",
       )
       send(
         "choose_#{answer}",
-        "Does your household have medical expenses?",
+        "Does your household have ongoing medical expenses?",
       )
       send(
         "choose_#{answer}",
