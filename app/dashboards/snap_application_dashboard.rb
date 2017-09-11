@@ -45,7 +45,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     rent_expense: Field::Number,
     signature: Field::String,
     signed_at: Field::DateTime,
-    sms_subscribed: Field::Boolean,
+    sms_consented: Field::Boolean,
     total_money: Field::Number,
     unstable_housing: Field::Boolean,
     updated_at: Field::DateTime,
