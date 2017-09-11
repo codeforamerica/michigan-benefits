@@ -8,8 +8,7 @@ namespace :one_offs do
   def migrate_faxed_at_to_exports
     applications = SnapApplication.where.not(faxed_at: nil)
     applications.find_each do |application|
-      recipient = FaxRecipient.new(residential_address:
-                                   application.residential_address)
+      recipient = FaxRecipient.new(snap_application: application)
 
       metadata = "Faxed to #{recipient.name} (#{recipient.number})"
 
