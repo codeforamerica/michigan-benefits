@@ -50,10 +50,11 @@ It renders the `_table` partial to display details about the resources.
 </header>
 
 <section class="main-content__funnel">
-  <%= render "funnel_stage", stage: FunnelStage.new(previous_cohort: [], cohort: resources, name: "Created") %>
-  <%= render "funnel_stage", stage: FunnelStage.new(previous_cohort: resources, cohort: resources.signed, name: "Signed") %>
-  <%= render "funnel_stage", stage: FunnelStage.new(previous_cohort: resources.signed, cohort: resources.faxed, name: "Faxed") %>
-  <%= render "funnel_stage", stage: FunnelStage.new(previous_cohort: resources.faxed, cohort: resources.emailed, name: "Emailed") %>
+  <%- all_resources = resources.unscoped %>
+  <%= render "funnel_stage", stage: FunnelStage.new(previous_cohort: [], cohort: all_resources, name: "Created") %>
+  <%= render "funnel_stage", stage: FunnelStage.new(previous_cohort: all_resources, cohort: all_resources.signed, name: "Signed") %>
+  <%= render "funnel_stage", stage: FunnelStage.new(previous_cohort: all_resources, cohort: all_resources.faxed, name: "Faxed") %>
+  <%= render "funnel_stage", stage: FunnelStage.new(previous_cohort: all_resources, cohort: all_resources.emailed, name: "Emailed") %>
 </section>
 
 <section class="main-content__body main-content__body--flush">
