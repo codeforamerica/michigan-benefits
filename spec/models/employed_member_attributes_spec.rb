@@ -25,6 +25,7 @@ RSpec.describe EmployedMemberAttributes do
         second_employed_full_name: "Foo Flace",
         second_employed_employer_name: "McTacoBacon R Us",
         second_employed_hours_per_week: 20,
+        second_employed_hours_interval: "Yes",
         second_employed_pay_quantity: 100,
         second_employed_pay_interval_hourly: nil,
         second_employed_pay_interval_yearly: nil,

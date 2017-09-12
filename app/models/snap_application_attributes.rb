@@ -86,6 +86,9 @@ class SnapApplicationAttributes
         bool_to_checkbox(!snap_application.court_ordered?),
       monthly_court_ordered_expenses:
         snap_application.monthly_court_ordered_expenses,
+      court_ordered_expenses_interval: bool_to_checkbox(
+        snap_application.monthly_court_ordered_expenses.present?,
+      ),
       medical_expenses_yes: bool_to_checkbox(snap_application.medical?),
       medical_expenses_no: bool_to_checkbox(!snap_application.medical?),
       medical_expenses_health_insurance: medical_expense?("health_insurance"),
@@ -100,10 +103,15 @@ class SnapApplicationAttributes
       care_expenses_childcare: care_expense?("childcare"),
       care_expenses_disabled: care_expense?("disabled_adult_care"),
       monthly_care_expenses: snap_application.monthly_care_expenses,
+      care_expenses_interval: bool_to_checkbox(
+        snap_application.monthly_care_expenses.present?,
+      ),
       rent_expense_yes: rent_expense_yes,
       rent_expense: rent_expense,
+      rent_expense_interval: bool_to_checkbox(rent_expense.present?),
       mortgage_expense_yes: mortgage_expense_yes,
       mortgage_expense: mortgage_expense,
+      mortgage_expense_interval: bool_to_checkbox(mortgage_expense.present?),
       property_tax_expense_yes:
         bool_to_checkbox(snap_application.property_tax_expense.present?),
       annual_property_tax_expense: annual_property_tax_expense,
