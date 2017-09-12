@@ -8,7 +8,7 @@ module MiBridges
       def setup; end
 
       def fill_in_required_fields
-        select primary_member.marital_status, from: "maritalStatus"
+        select primary_member.marital_status.titleize, from: "maritalStatus"
         fill_in "peopleInYourHome", with: snap_application.members.size
       end
 
