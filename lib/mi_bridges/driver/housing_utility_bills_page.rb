@@ -26,11 +26,11 @@ module MiBridges
       private
 
       def check_housing_bills
-        check_in_section "starHousingBills", for: first_name
+        check_in_section "starHousingBills", if: true, for: first_name
       end
 
       def check_utility_bills
-        check_in_section "starUtilityBills", for: first_name
+        check_in_section "starUtilityBills", if: true, for: first_name
       end
 
       def check_room_and_meals

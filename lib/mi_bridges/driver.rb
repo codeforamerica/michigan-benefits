@@ -44,6 +44,8 @@ module MiBridges
       OtherAssetsPage,
       OtherAssetsSummaryPage,
       HousingUtilityBillsPage,
+      HousingBillsPage,
+      UtilityBillsPage,
       HousingUtilityBillsSummaryPage,
       YourOtherBillsExpensesPage,
       YourOtherBillsExpensesSummaryPage,
