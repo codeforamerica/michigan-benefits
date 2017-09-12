@@ -1,14 +1,27 @@
 .main-footer {
   font-weight: 300;
-}
 
-.main-footer {
+  .text--small {
+    clear: both;
+  }
+
   .illustration--cfa, .illustration--civilla {
     float: left;
-    margin-top: 46px;
+    margin-top: 50px;
   }
 
   .illustration--civilla {
     margin-left: 2rem;
+  }
+}
+
+.footer--office-links {
+  .footer--office-links-header {
+    font-weight: 600;
+  }
+
+  a {
+    color: $color-grey;
+    display: block;
   }
 }

@@ -17,8 +17,7 @@ RSpec.describe Export do
                                                    signed_at: nil,
                                                    updated_at: after_threshold)
 
-      signed_faxed_updated_awhile_ago = create(:snap_application,
-                                               :faxed_successfully,
+      signed_faxed_updated_awhile_ago = create(:snap_application, :faxed,
                                                signed_at: after_threshold,
                                                updated_at: after_threshold)
 

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Office-specific landing pages" do
   scenario "clio road" do
     visit "/clio"
-    click_on "Apply now from MDHHS at Clio Rd."
+    click_on "Apply at this office"
 
     expect(current_path).to eq "/steps/introduce-yourself"
     expect(find("#step_office_location", visible: false).value).to eq("clio")
@@ -11,7 +11,7 @@ RSpec.feature "Office-specific landing pages" do
 
   scenario "union street" do
     visit "/union"
-    click_on "Apply now from MDHHS at Union St."
+    click_on "Apply at this office"
 
     expect(current_path).to eq "/steps/introduce-yourself"
     expect(find("#step_office_location", visible: false).value).to eq("union")

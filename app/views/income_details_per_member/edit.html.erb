@@ -27,8 +27,8 @@
                   ["Hourly", "Daily", "Weekly", "2 weeks", "Monthly", "Yearly"], layout: "inline" %>
                 <% else # self employed %>
                   <%= ff.mb_input_field :self_employed_profession, "Type of work" %>
-                  <%= ff.mb_money_field :self_employed_monthly_income, "Monthly pay (before tax)" %>
-                  <%= ff.mb_money_field :self_employed_monthly_expenses, "Monthly expenses" %>
+                  <%= ff.mb_money_field :self_employed_monthly_income, "Average monthly pay (before tax)" %>
+                  <%= ff.mb_money_field :self_employed_monthly_expenses, "Monthly business expenses" %>
                 <% end %>
             </div>
           <% end %>

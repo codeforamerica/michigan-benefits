@@ -100,13 +100,17 @@
       background: linear-gradient(242deg, rgba(#FFFFFF, 0) 0%, rgba(#000000, .5) 99%);
       padding: {
         top: 1em;
-        bottom: 1em;
+        bottom: 3em;
       }
     }
 
     h1 {
       max-width: 10em;
       margin-top: 15rem;
+    }
+
+    p {
+      clear: both;
     }
 
     &:before {
@@ -121,11 +125,25 @@
       background-size: cover;
       background-position: top center;
     }
+  }
 
-    p {
-      margin-bottom: 2em;
-      font-weight: 500;
+  .hero--header {
+    @include clearfix;
+    display: block;
+  }
+
+  .hero--subheader {
+    margin-bottom: 2em;
+    font-weight: 500;
+
+    @include media($tablet-up) {
+      @include span-columns(6);
+      clear: both;
     }
+  }
+
+  .hero--cta {
+    float: left;
   }
 
   @for $i from 1 through 3 {

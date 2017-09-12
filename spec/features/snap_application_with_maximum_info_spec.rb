@@ -105,8 +105,8 @@ feature "SNAP application with maximum info" do
       select "Daily", from: "How often are you paid that amount?"
 
       fill_in "Type of work", with: "Chef"
-      fill_in "Monthly pay (before tax)", with: 300
-      fill_in "Monthly expenses", with: 100
+      fill_in "Average monthly pay (before tax)", with: 300
+      fill_in "Monthly business expenses", with: 100
 
       click_on "Continue"
     end

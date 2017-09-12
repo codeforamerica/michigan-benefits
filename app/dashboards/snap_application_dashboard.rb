@@ -19,7 +19,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     emailed_at: Field::DateTime,
     everyone_a_citizen: Field::Boolean,
     fax_metadata: Field::String,
-    faxed_at: Field::DateTime,
+    faxed_successfully_at: Field::DateTime,
     financial_accounts: Field::String,
     income_change: Field::Boolean,
     income_change_explanation: Field::Text,
@@ -39,6 +39,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     monthly_care_expenses: Field::String,
     monthly_court_ordered_expenses: Field::String,
     monthly_medical_expenses: Field::String,
+    office_location: Field::String,
     phone_number: Field::String,
     property_tax_expense: Field::Number,
     real_estate_income: Field::Boolean,
@@ -67,8 +68,9 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     phone_number
     email
     zip
+    office_location
     signed_at
-    faxed_at
+    faxed_successfully_at
     fax_metadata
     created_at
     emailed_at

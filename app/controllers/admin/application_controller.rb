@@ -7,6 +7,7 @@
 module Admin
   class ApplicationController < Administrate::ApplicationController
     before_action :authenticate_admin
+    before_action :default_params
 
     def authenticate_admin
       authenticate_or_request_with_http_basic do |username, password|
@@ -15,10 +16,9 @@ module Admin
       end
     end
 
-    # Override this value to specify the number of elements to display at a time
-    # on index pages. Defaults to 20.
-    # def records_per_page
-    #   params[:per_page] || 20
-    # end
+    def default_params
+      params[:order] ||= "created_at"
+      params[:direction] ||= "desc"
+    end
   end
 end
