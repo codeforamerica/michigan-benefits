@@ -8,16 +8,24 @@ end %>
 <div class="slab--hero-<%= rand(1..3) %> slab slab--hero">
   <div class="grid">
     <div class="logo-hero">MichiganBenefits.org</div>
-    <h1>
-      Get the support your family needs
-    </h1>
-    <p>
-      Apply for food stamps (FAP) in 15 minutes
-    </p>
-    <%= link_to step_path(StepNavigation.first, office_location: "clio"), class: "button button--cta button--fully-width" do %>
-      Apply now from MDHHS at Clio Rd.
+    <div class="hero--header">
+      <h1>
+        Get the support your family needs
+      </h1>
+      <p class="hero--subheader">
+        Complete an application for food stamps (FAP) here, and get interviewed
+        at the Clio Rd office within 30 minutes.
+      </p>
+    </div>
+
+    <%= link_to step_path(StepNavigation.first, office_location: "clio"), class: "button button--cta button--fully-width hero--cta" do %>
+      Apply at this office
       <i class="button__icon icon-arrow_forward"></i>
     <% end %>
+    <p class="text--small">
+      Not at the Clio Road office? <%= link_to "Apply anywhere", root_path %>.
+    </p>
+
   </div>
 </div>
 
