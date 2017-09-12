@@ -4,49 +4,45 @@ set -e
 echo "Opening trello to check for tickets awaiting acceptance..."
 open "https://trello.com/b/aBqTrqaJ/the-digital-assister-michiganbenefitsorg"
 
-read -p "No tickets awaiting acceptance on staging? (y/N) " -n 1 -r
+read -p "Is the Acceptance column empty? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]];then
-  echo "Sweet, moving on!"
 else
-  echo "We're bailing out!"
+  echo "Please test and run acceptance for those cards first!"
   exit 1
 fi
 
-echo "Diffing the code!"
+echo "Diffing the code between staging and production..."
 bin/release-diff
-read -p "Looks legit? (y/N) " -n 1 -r
+read -p "Looks ok? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]];then
-  echo "Sweet, moving on!"
 else
-  echo "We're bailing out!"
+  echo "Have a closer look and you can do this again later!"
   exit 1
 fi
 
-echo "Diffing buildpacks!"
+echo "Checking for buildpack changes between staging and production."
 diff <(heroku buildpacks -r staging) <(heroku buildpacks -r production) && echo ""
-read -p "Do they match yet? (y/N) " -n 1 -r
+read -p "Are these the same (ignoring order)? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]];then
-  echo "Sweet, moving on!"
 else
-  echo "We're bailing out!"
+  echo "Make sure these are correct and get back at me."
   exit 1
 fi
 
-echo "Diffing configs!"
+echo "Diffing ENV variables between staging and production."
 diff <(heroku config -r staging) <(heroku config -r production) && echo ""
-read -p "No missing keys betwixt them? (y/N) " -n 1 -r
+read -p "Are these config variables the same (ignoring their value) (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  echo "Sweet, moving on!"
 else
   echo "We're bailing out!"
   exit 1;
 fi
 
-read -p "Ready to Deploy? (y/N) " -n 1 -r
+read -p "Ready to deploy to production? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   heroku pipelines:promote -a michigan-benefits-staging
@@ -54,12 +50,5 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   heroku ps:restart -a michigan-benefits-production
 fi
 
-echo "Woooooo! It's in prod!"
-echo "Do some smoke testing! (use zip 12345 to send a fake fax)"
-read -p "Is everything beautiful? (y/N) " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  echo "ROCK ONNNNNNnnnnnnnnnn"
-else
-  echo "Oh nooooo, well... uhhh. Maybe rollback?"
-fi
+echo "Success! Application deployed to Production!"
+echo "Please do some testing on production! (use zip 12345 to send a fake fax)"
