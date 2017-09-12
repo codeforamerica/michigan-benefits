@@ -25,8 +25,7 @@ RSpec.describe FaxApplicationJob do
 
     it "does not send a fax if application has already been sent" do
       snap_application = FactoryGirl.create(:snap_application,
-        :with_member,
-        :faxed_successfully)
+        :with_member, :faxed)
       export = Export.create(snap_application: snap_application,
                              destination: :fax)
       job = FaxApplicationJob.new

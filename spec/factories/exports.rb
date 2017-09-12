@@ -1,10 +1,15 @@
 FactoryGirl.define do
   factory :export do
-    destination :email
     snap_application
+
+    destination :email
 
     trait :faxed do
       destination :fax
+    end
+
+    trait :emailed do
+      destination :email
     end
 
     trait :succeeded do

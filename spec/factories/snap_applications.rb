@@ -11,9 +11,15 @@ FactoryGirl.define do
       end
     end
 
-    trait :faxed_successfully do
+    trait :faxed do
       after :create do |app|
         create(:export, :faxed, :succeeded, snap_application: app)
+      end
+    end
+
+    trait :emailed do
+      after :create do |app|
+        create(:export, :emailed, :succeeded, snap_application: app)
       end
     end
   end
