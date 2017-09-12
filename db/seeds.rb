@@ -32,7 +32,6 @@ minimal_application = SnapApplication.
     money_or_accounts_income: false,
     real_estate_income: false,
     vehicle_income: false,
-    interview_preference: "telephone",
   )
 
 Address.where(
@@ -108,7 +107,6 @@ complete_application = SnapApplication.
     vehicle_income: true,
     financial_accounts: ["checking_account", "four_oh_one_k"],
     total_money: 2000,
-    interview_preference: "telephone",
     additional_information: "N/A",
   )
 
