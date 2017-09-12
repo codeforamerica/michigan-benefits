@@ -33,7 +33,25 @@ module MiBridges
 
       def click_id(id)
         id = "##{id}" unless id.include?("#")
-        page.execute_script("$('#{id}').click()")
+        js_click_selector(id)
+      end
+
+      def js_click_selector(selector)
+        page.execute_script %($("#{selector}").click())
+      end
+
+      def check_in_section(section, options = {})
+        predicate = options.fetch(:if, false)
+        name = options.fetch(:for, "")
+
+        widget = "[aria-labelledby='#{section}']"
+        selector = if predicate
+                     "#{widget} label:contains('#{name}') input"
+                   else
+                     "#{widget} label:contains('No one') input"
+                   end
+
+        js_click_selector(selector)
       end
 
       def next

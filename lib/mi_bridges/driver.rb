@@ -28,6 +28,21 @@ module MiBridges
     APPLY_FLOW = [
       StartPage,
       BenefitsSelectorPage,
+      ProgramBenefitsPage,
+      PersonalInformationPage,
+      BasicInformationSummaryPage,
+      PeopleListedPage,
+      HouseholdMembersSummaryPage,
+      JobIncomeInformationPage,
+      JobIncomeSummaryPage,
+      MoneyOtherSourcesPage,
+      MoneyOtherSourcesSummaryPage,
+      HouseholdMemberQuestionsPage,
+      DisabilityOrBlindnessReviewPage,
+      LiquidAssetsPage,
+      LiquidAssetsSummaryPage,
+      OtherAssetsPage,
+      OtherAssetsSummaryPage,
     ].freeze
 
     def initialize(snap_application:)
