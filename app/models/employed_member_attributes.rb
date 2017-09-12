@@ -11,6 +11,8 @@ class EmployedMemberAttributes
       "#{position}_employed_full_name" => member.full_name,
       "#{position}_employed_employer_name" => member.employed_employer_name,
       "#{position}_employed_hours_per_week" => member.employed_hours_per_week,
+      "#{position}_employed_hours_interval" =>
+        boolean_to_checkbox(member.employed_hours_per_week.present?),
       "#{position}_employed_pay_quantity" => member.employed_pay_quantity,
       "#{position}_employed_pay_interval_hourly" =>
         boolean_to_checkbox(member.employed_pay_interval == "Hourly"),
