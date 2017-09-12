@@ -43,6 +43,10 @@ module MiBridges
       LiquidAssetsSummaryPage,
       OtherAssetsPage,
       OtherAssetsSummaryPage,
+      HousingUtilityBillsPage,
+      HousingUtilityBillsSummaryPage,
+      YourOtherBillsExpensesPage,
+      YourOtherBillsExpensesSummaryPage,
     ].freeze
 
     def initialize(snap_application:)
