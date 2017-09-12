@@ -17,7 +17,8 @@ class SuccessController < StandardStepsController
       snap_application: current_snap_application,
     )
 
-    ApplicationSubmittedSmsJob.perform_later(
+    Export.create_and_enqueue(
+      destination: :sms,
       snap_application: current_snap_application,
     )
   end

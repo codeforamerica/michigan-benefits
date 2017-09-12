@@ -5,7 +5,7 @@ class Export < ApplicationRecord
   belongs_to :snap_application
   validates :status, inclusion: { in: %i(new queued in_process succeeded failed
                                          unnecessary) }
-  validates :destination, inclusion: { in: %i(fax email) }
+  validates :destination, inclusion: { in: %i(fax email sms) }
 
   attribute :destination, :symbol
   attribute :status, :symbol
@@ -27,7 +27,12 @@ class Export < ApplicationRecord
   end
 
   def self.create_and_enqueue(params)
-    create(params).enqueue
+    unless params[:snap_application].
+        exports&.
+        for_destination(params[:destination])&.
+        any?
+      create(params).enqueue
+    end
   end
 
   def self.create_and_enqueue!(params)
@@ -43,6 +48,8 @@ class Export < ApplicationRecord
         FaxApplicationJob.perform_later(export: self)
       when :email
         EmailApplicationJob.perform_later(export: self)
+      when :sms
+        ApplicationSubmittedSmsJob.perform_later(export: self)
       else
         raise UnknownExportTypeError, destination
       end

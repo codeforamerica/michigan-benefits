@@ -107,6 +107,7 @@ RSpec.describe Export do
       export.execute { "I'm a noop" }
       expect(export.snap_application.pdf).to be_closed
     end
+
     it "yields the snap application to the block" do
       fake_job = double(call: "I did a thing?")
       export = build(:export)

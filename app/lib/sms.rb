@@ -4,11 +4,11 @@ class Sms
   end
 
   def deliver_application_submitted_message
-    deliver <<~TEXT
-      Your application for Food Assistance was submitted! The next step: an
-      interview w/ MDHHS staff. Expect a call soon. Reply to this msg any time
-      for more info.
-    TEXT
+    deliver(
+      "Your application for Food Assistance was submitted! The next step: an" +
+      " interview w/ MDHHS staff. Expect a call soon. Reply to this msg any" +
+      " time for more info.",
+    )
   end
 
   private

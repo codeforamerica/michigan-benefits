@@ -38,6 +38,24 @@ RSpec.describe SuccessController do
           Delayed::Worker.delay_jobs = true
         end
       end
+
+      context "multiple visits" do
+        it "only sends sms once" do
+          Delayed::Worker.delay_jobs = false
+          with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
+            current_app.update(
+              sms_consented: true,
+              phone_number: "8001112222",
+            )
+
+            get :edit
+            get :edit
+
+            expect(FakeTwilioClient.messages.count).to eq 1
+            Delayed::Worker.delay_jobs = true
+          end
+        end
+      end
     end
 
     context "no sms consent present" do
