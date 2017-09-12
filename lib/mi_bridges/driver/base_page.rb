@@ -44,14 +44,18 @@ module MiBridges
         predicate = options.fetch(:if, false)
         name = options.fetch(:for, "")
 
-        widget = "[aria-labelledby='#{section}']"
         selector = if predicate
-                     "#{widget} label:contains('#{name}') input"
+                     selector_for_radio(name)
                    else
-                     "#{widget} label:contains('No one') input"
+                     selector_for_radio("No one")
                    end
 
-        js_click_selector(selector)
+        widget = "[aria-labelledby='#{section}']"
+        js_click_selector("#{widget} #{selector}")
+      end
+
+      def selector_for_radio(name)
+        "label:contains('#{name}') input"
       end
 
       def next
