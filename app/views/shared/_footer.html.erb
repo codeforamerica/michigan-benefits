@@ -1,15 +1,20 @@
 <div class="main-footer">
-  <p class="text--small">
-    This site hosts a multi-benefit application and enrollment prototype, delivered by
-    Code for America and Civilla.
-  </p>
-  <p class="text--small">
-    This prototype has been designed to model how to create simpler, more user-centered
-    application experience in Michigan.
-  </p>
-  <p class="text--small">
-    This is a template that MDHHS can customize for its enrollment programs.
-  </p>
-  <div class="illustration illustration--cfa"></div>
-  <div class="illustration illustration--civilla"></div>
+  <div class="grid">
+    <div class="footer--office-links">
+      <p class="footer--office-links-header text--small">
+        MDHHS Offices
+      </p>
+      <%= link_to "Union Street Office", union_path, class: "text--small" %>
+      <%= link_to "Clio Road Office", clio_path, class: "text--small" %>
+    </div>
+
+    <div class="footer--partners">
+      <div class="illustration illustration--cfa"></div>
+      <div class="illustration illustration--civilla"></div>
+      <p class="text--small">
+        Michigan Benefits is a service delivered by
+        Code for America and Civilla on behalf of the people of Michigan.
+      </p>
+    </div>
+  </div>
 </div>
