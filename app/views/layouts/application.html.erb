@@ -20,7 +20,7 @@
   </head>
   <body class="<%= template_name_css_class %>">
     <div class="page-wrapper">
-      <%= content_for?(:banner) ? content_for(:demo_banner) : '' %>
+      <%= content_for?(:banner) ? content_for(:banner) : '' %>
       <%= content_for?(:content) ? content_for(:content) : yield %>
     </div>
     <%= capture { content_for(:javascript) } %>
