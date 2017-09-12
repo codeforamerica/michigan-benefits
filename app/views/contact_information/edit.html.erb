@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Tell us the best way to reach you via phone or email.
+      Tell us the best way to get in touch with you.
     </div>
   </header>
 
@@ -13,7 +13,8 @@
         "What is the best phone number to reach you?",
         type: :tel,
         autofocus: true,
-        options: { maxlength: 10 } %>
+        options: { maxlength: 10 },
+        notes: "No dashes or spaces (example: 5555555555)." %>
       <%= f.mb_input_field :email, "What is your email address?", notes: ["If you don’t have one or you don’t want to receive emails from us you can leave this blank."] %>
 
       <%= render 'shared/next_step' %>
