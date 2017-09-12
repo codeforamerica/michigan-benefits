@@ -49,6 +49,11 @@ module MiBridges
       HousingUtilityBillsSummaryPage,
       YourOtherBillsExpensesPage,
       YourOtherBillsExpensesSummaryPage,
+      SchoolDetailsPage,
+      DebuggerPage,
+      FinishPage,
+      DebuggerPage,
+      SubmitPage,
     ].freeze
 
     def initialize(snap_application:)
@@ -61,10 +66,15 @@ module MiBridges
       page_classes = SIGN_UP_FLOW + APPLY_FLOW
 
       page_classes.each do |klass|
-        page = klass.new(@snap_application)
-        page.setup
-        page.fill_in_required_fields
-        page.continue
+        begin
+          page = klass.new(@snap_application)
+          page.setup
+          page.fill_in_required_fields
+          page.continue
+        rescue StandardError => e
+          binding.pry if ENV["DEBUG_DRIVE"]
+          throw e
+        end
       end
 
       teardown
