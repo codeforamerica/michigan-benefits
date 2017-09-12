@@ -13,6 +13,7 @@ RSpec.describe SuccessController do
 
       expect(step.email).to eq "test@example.com"
     end
+
     it "faxes the snap application" do
       allow(Export).to receive(:create_and_enqueue)
 
@@ -20,6 +21,40 @@ RSpec.describe SuccessController do
 
       expect(Export).to have_received(:create_and_enqueue).
         with(snap_application: current_app, destination: :fax)
+    end
+
+    context "sms consent present" do
+      it "sends the submitted_message sms" do
+        Delayed::Worker.delay_jobs = false
+        with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
+          current_app.update(
+            sms_consented: true,
+            phone_number: "8001112222",
+          )
+
+          get :edit
+
+          expect(FakeTwilioClient.messages.count).to eq 1
+          Delayed::Worker.delay_jobs = true
+        end
+      end
+    end
+
+    context "no sms consent present" do
+      it "does not send an SMS" do
+        Delayed::Worker.delay_jobs = false
+        with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
+          current_app.update(
+            sms_consented: false,
+            phone_number: "8001112222",
+          )
+
+          get :edit
+
+          expect(FakeTwilioClient.messages.count).to eq 0
+          Delayed::Worker.delay_jobs = true
+        end
+      end
     end
   end
 
