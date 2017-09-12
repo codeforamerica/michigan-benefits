@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911213216) do
+ActiveRecord::Schema.define(version: 20170912170418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,7 +153,6 @@ ActiveRecord::Schema.define(version: 20170911213216) do
     t.string "financial_accounts", default: [], array: true
     t.integer "total_money"
     t.text "additional_information"
-    t.datetime "faxed_at"
     t.string "office_location"
   end
 
