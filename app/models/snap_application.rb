@@ -85,8 +85,8 @@ class SnapApplication < ApplicationRecord
     exports.faxed.succeeded.any?
   end
 
-  def faxed_at
-    super || exports.faxed.succeeded.latest&.completed_at
+  def faxed_successfully_at
+    exports.faxed.succeeded.latest&.completed_at
   end
 
   def fax_metadata

@@ -19,7 +19,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     emailed_at: Field::DateTime,
     everyone_a_citizen: Field::Boolean,
     fax_metadata: Field::String,
-    faxed_at: Field::DateTime,
+    faxed_successfully_at: Field::DateTime,
     financial_accounts: Field::String,
     income_change: Field::Boolean,
     income_change_explanation: Field::Text,
@@ -68,7 +68,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     email
     zip
     signed_at
-    faxed_at
+    faxed_successfully_at
     fax_metadata
     created_at
     emailed_at
