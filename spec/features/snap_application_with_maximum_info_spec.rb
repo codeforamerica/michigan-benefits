@@ -172,7 +172,7 @@ accounts?",
     consent_to_terms
 
     on_page "Sign and Submit" do
-      fill_in "Your signature", with: "Jessie Tester"
+      fill_in "Sign by typing your full legal name", with: "Jessie Tester"
       click_on "Sign and submit"
     end
 
@@ -227,7 +227,7 @@ accounts?",
       fill_in "step[insurance_expense]", with: "100"
 
       check "Heat"
-      check "Cooling"
+      check "Air Conditioning"
 
       click_on "Continue"
     end

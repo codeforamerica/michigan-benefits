@@ -14,7 +14,7 @@
     </p>
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_input_field :signature,
-        "Your signature",
+        "Sign by typing your full legal name",
         autofocus: true,
         options: { placeholder: "Your full legal name" } %>
       <%= render 'shared/next_step', button_label: "Sign and submit" %>

@@ -97,7 +97,7 @@ RSpec.feature "Submit application with minimal information" do
     end
 
     on_page "Sign and Submit" do
-      fill_in "Your signature", with: "Jessie Tester"
+      fill_in "Sign by typing your full legal name", with: "Jessie Tester"
       click_on "Sign and submit"
     end
 
