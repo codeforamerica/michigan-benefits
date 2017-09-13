@@ -27,6 +27,11 @@ module MiBridges
 
       def check_housing_bills
         check_in_section(
+          "starHousingBills",
+          condition: true,
+          for_label: first_name,
+        )
+        check_in_section(
           "starUtilityBills",
           condition: true,
           for_label: first_name,
