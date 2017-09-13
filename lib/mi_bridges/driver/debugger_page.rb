@@ -6,7 +6,9 @@ module MiBridges
       def fill_in_required_fields; end
 
       def continue
+        # rubocop:disable Debugger
         binding.pry if ENV["DEBUG_DRIVE"]
+        # rubocop:enable Debugger
       end
     end
   end

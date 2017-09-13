@@ -72,7 +72,9 @@ module MiBridges
           page.fill_in_required_fields
           page.continue
         rescue StandardError => e
+          # rubocop:disable Debugger
           binding.pry if ENV["DEBUG_DRIVE"]
+          # rubocop:enable Debugger
           throw e
         end
       end
