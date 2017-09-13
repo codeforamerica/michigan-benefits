@@ -29,6 +29,14 @@ chdir APP_ROOT do
     end
   end
 
+  step "Installing ghostscript, an interpreter for the PostScript language and for PDF" do
+    if cli_installed?("gs")
+      puts "ghostscript already installed."
+    else
+      system!("brew install ghostscript")
+    end
+  end
+
   step "Installing pdftk, a PDF library (requires Homebrew)" do
     if cli_installed?("pdftk")
       puts "pdftk already installed."
