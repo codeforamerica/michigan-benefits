@@ -18,7 +18,9 @@ This application was designed using an Atomic design system.
 # Day-to-Day
 
 ## Communication
+
 Design communication is done primarily via:
+
 * Slack
 * Invision
 * Trello
