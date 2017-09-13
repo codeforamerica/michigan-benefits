@@ -44,5 +44,5 @@ def colorize(colors_and_strings)
 end
 
 def cli_installed?(command_name)
-  system("#{command_name} > /dev/null 2>&1")
+  system "which #{command_name}"
 end
