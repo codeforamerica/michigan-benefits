@@ -1,4 +1,4 @@
-/*global uploadSetup */
+/*global $,uploadSetup,Shubox */
 
 var uploadSetup = function (previewTemplate) {
   new Shubox('#document-drop', {
@@ -14,18 +14,11 @@ var uploadSetup = function (previewTemplate) {
     success: function (file) {
       var button = $('#click-to-upload')
       var buttonHtml = button.html()
+      var titleH4 = $(file.previewElement).find('h4')
+      var titleText = titleH4.html()
+
       button.html(buttonHtml.replace('Upload documents', 'Upload more documents'))
-
-      var source = $('#form-card__documents__handlebars_template').html()
-      var template = window.Handlebars.compile(source)
-      var context = {
-        url: file.s3url,
-        filename: file.s3url.split('/').reverse()[0]
-      }
-
-      var html = template(context)
-      $(file.previewElement).remove()
-      $('#form-card__documents').append(html)
+      titleH4.html(titleText.replace('Uploading', 'Uploaded'))
     },
     addedfile: function () {
       $('[data-done-uploading]').attr('disabled', true)

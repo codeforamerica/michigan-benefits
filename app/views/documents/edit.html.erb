@@ -31,10 +31,6 @@
         <%= render partial: 'document',
           collection: current_snap_application.documents,
           as: :url %>
-
-        <script id="form-card__documents__handlebars_template" type="text/x-handlebars-template">
-          <%= render "document", url: nil %>
-        </script>
       </div>
 
       <div class="form-card__documents__ctas">
