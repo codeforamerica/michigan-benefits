@@ -5,8 +5,9 @@
   cursor: pointer;
   font-weight: 500;
   border: 1px solid $button-color;
+  border-color: shade($button-color, 15%)r;
   border-bottom: 2px solid shade($button-color, 15%);
-  background-color: #FFFFFF;
+  background-color: tint($button-color, 30%);
   padding: .5em 1em;
   border-radius: $border-radius;
   margin-bottom: .5em;
@@ -15,7 +16,7 @@
   color: #000000;
 
   &:hover {
-    background-color: tint($button-color, 20%);
+    background-color: $button-color;
     color: #000000;
   }
   &:active {

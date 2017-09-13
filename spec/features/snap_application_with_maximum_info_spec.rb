@@ -205,7 +205,7 @@ accounts?",
   end
 
   def upload_documents
-    click_on "Submit documents here"
+    click_on "Submit documents now"
     add_document_photo "https://example.com/images/drivers_license.jpg"
     add_document_photo "https://example.com/images/proof_of_income.jpg"
   end
