@@ -7,6 +7,7 @@ open "https://trello.com/b/aBqTrqaJ/the-digital-assister-michiganbenefitsorg"
 read -p "Is the Acceptance column empty? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo "Great!"
 else
   echo "Please test and run acceptance for those cards first!"
   exit 1
@@ -17,6 +18,7 @@ bin/release-diff
 read -p "Looks ok? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo "Great!"
 else
   echo "Have a closer look and you can do this again later!"
   exit 1
@@ -27,6 +29,7 @@ diff <(heroku buildpacks -r staging) <(heroku buildpacks -r production) && echo 
 read -p "Are these the same (ignoring order)? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo "Great!"
 else
   echo "Make sure these are correct and get back at me."
   exit 1
@@ -37,6 +40,7 @@ diff <(heroku config -r staging) <(heroku config -r production) && echo ""
 read -p "Are these config variables the same (ignoring their value) (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+  echo "Great!"
 else
   echo "We're bailing out!"
   exit 1;
