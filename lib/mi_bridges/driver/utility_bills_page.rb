@@ -57,6 +57,7 @@ module MiBridges
       def check_electricity
         check_in_section(
           section_name,
+          condition: utility_electrity?,
           for_label: "Electricity(non heat)",
         )
       end
