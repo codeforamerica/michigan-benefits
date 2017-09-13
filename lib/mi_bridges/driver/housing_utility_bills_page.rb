@@ -31,6 +31,9 @@ module MiBridges
           condition: true,
           for_label: first_name,
         )
+      end
+
+      def check_utility_bills
         check_in_section(
           "starUtilityBills",
           condition: true,
