@@ -50,9 +50,11 @@ module MiBridges
       YourOtherBillsExpensesPage,
       YourOtherBillsExpensesSummaryPage,
       SchoolDetailsPage,
-      DebuggerPage,
+      VeteranInformationPage,
+      OtherInformationPage,
+      OtherInformationSummaryPage,
+      AdditionalInformationPage,
       FinishPage,
-      DebuggerPage,
       SubmitPage,
     ].freeze
 
@@ -87,6 +89,7 @@ module MiBridges
     attr_reader :snap_application
 
     def setup
+      DriverApplication.destroy_all
       Capybara.default_driver = ENV.fetch("WEB_DRIVER", "chrome").to_sym
     end
 
