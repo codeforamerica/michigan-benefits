@@ -30,7 +30,7 @@ module MiBridges
         check_in_section(
           "starChildSpousalSupportPayments",
           condition: court_ordered?,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 
@@ -38,7 +38,7 @@ module MiBridges
         check_in_section(
           "starMedicalBills",
           condition: monthly_medical_expenses?,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 

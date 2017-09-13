@@ -40,9 +40,9 @@ module MiBridges
         page.execute_script %($("#{selector}").click())
       end
 
-      def check_in_section(section, condition: false, for_name: "")
+      def check_in_section(section, condition: false, for_label: "")
         selector = if condition
-                     selector_for_radio(for_name)
+                     selector_for_radio(for_label)
                    else
                      selector_for_radio("No one")
                    end

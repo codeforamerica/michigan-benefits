@@ -34,7 +34,7 @@ module MiBridges
         check_in_section(
           "starVehicles",
           condition: vehicle_income?,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 
@@ -42,7 +42,7 @@ module MiBridges
         check_in_section(
           "starRealEstate",
           condition: real_estate_income?,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 
@@ -54,7 +54,7 @@ module MiBridges
         check_in_section(
           "starLifeInsurance",
           condition: financial_accounts.include?("life_insurance"),
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 

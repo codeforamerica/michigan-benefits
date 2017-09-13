@@ -42,7 +42,7 @@ module MiBridges
         check_in_section(
           section_name,
           condition: utility_heat?,
-          for_name: "Heat(gas,electric, propane,wood,etc)",
+          for_label: "Heat(gas,electric, propane,wood,etc)",
         )
       end
 
@@ -50,7 +50,7 @@ module MiBridges
         check_in_section(
           section_name,
           condition: utility_cooling?,
-          for_name: "Cooling (including room air conditioner)",
+          for_label: "Cooling (including room air conditioner)",
         )
       end
 
@@ -58,7 +58,7 @@ module MiBridges
         check_in_section(
           section_name,
           condition: utility_electrity?,
-          for_name: "Electricity(non heat)",
+          for_label: "Electricity(non heat)",
         )
       end
 
@@ -66,7 +66,7 @@ module MiBridges
         check_in_section(
           section_name,
           condition: utility_water_sewer?,
-          for_name: "Water/Sewer",
+          for_label: "Water/Sewer",
         )
       end
 
@@ -74,7 +74,7 @@ module MiBridges
         check_in_section(
           section_name,
           condition: utility_trash?,
-          for_name: "Garbage/trash pick up",
+          for_label: "Garbage/trash pick up",
         )
       end
 
@@ -82,7 +82,7 @@ module MiBridges
         check_in_section(
           section_name,
           condition: utility_phone?,
-          for_name: "Telephone",
+          for_label: "Telephone",
         )
       end
 
@@ -90,7 +90,7 @@ module MiBridges
         check_in_section(
           section_name,
           condition: nothing_checked?,
-          for_name: "None",
+          for_label: "None",
         )
       end
 

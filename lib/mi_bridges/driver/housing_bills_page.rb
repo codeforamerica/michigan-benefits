@@ -23,7 +23,7 @@ module MiBridges
       private
 
       def check_housing_bills
-        check_in_section section_name, condition: true, for_name: "None"
+        check_in_section section_name, condition: true, for_label: "None"
       end
 
       def section_name

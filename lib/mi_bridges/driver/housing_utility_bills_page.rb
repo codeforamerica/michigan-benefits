@@ -27,17 +27,9 @@ module MiBridges
 
       def check_housing_bills
         check_in_section(
-          "starHousingBills",
-          condition: true,
-          for_name: first_name,
-        )
-      end
-
-      def check_utility_bills
-        check_in_section(
           "starUtilityBills",
           condition: true,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 
@@ -46,8 +38,16 @@ module MiBridges
       end
 
       def select_home_heating_payment
-        check_in_section "heatingResponseGroup", condition: true, for_name: "No"
-        check_in_section "meapReceivedGroup", condition: true, for_name: "No"
+        check_in_section(
+          "heatingResponseGroup",
+          condition: true,
+          for_label: "No",
+        )
+        check_in_section(
+          "meapReceivedGroup",
+          condition: true,
+          for_label: "No",
+        )
       end
     end
   end

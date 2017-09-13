@@ -35,7 +35,7 @@ module MiBridges
         check_in_section(
           "starOtherIncome",
           condition: income_other?,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 
@@ -43,7 +43,7 @@ module MiBridges
         check_in_section(
           "starSupplementalSecurityIncomeSSI",
           condition: income_ssi_or_disability?,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 

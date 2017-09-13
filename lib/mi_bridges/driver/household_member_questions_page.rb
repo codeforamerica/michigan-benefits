@@ -31,7 +31,7 @@ module MiBridges
         check_in_section(
           "starBlindnessorDisability",
           condition: anyone_disabled?,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 
@@ -51,7 +51,7 @@ module MiBridges
         check_in_section(
           "starSSIBenefit",
           condition: anyone_disabled?,
-          for_name: first_name,
+          for_label: first_name,
         )
       end
 
