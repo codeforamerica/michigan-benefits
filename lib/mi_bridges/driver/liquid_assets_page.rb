@@ -28,22 +28,26 @@ module MiBridges
       private
 
       def check_cash_on_hand
-        check_in_section "starCashonHand", if: total_money?, for: first_name
+        check_in_section(
+          "starCashonHand",
+          condition: total_money?,
+          for_name: first_name,
+        )
       end
 
       def check_savings_account
         check_in_section(
           "starSavingsAccount",
-          if: financial_accounts.include?("savings_account"),
-          for: first_name,
+          condition: financial_accounts.include?("savings_account"),
+          for_name: first_name,
         )
       end
 
       def check_checking_account
         check_in_section(
           "starCheckingAccount",
-          if: financial_accounts.include?("checking_account"),
-          for: first_name,
+          condition: financial_accounts.include?("checking_account"),
+          for_name: first_name,
         )
       end
 

@@ -30,8 +30,8 @@ module MiBridges
       def check_blindness_or_disability
         check_in_section(
           "starBlindnessorDisability",
-          if: anyone_disabled?,
-          for: first_name,
+          condition: anyone_disabled?,
+          for_name: first_name,
         )
       end
 
@@ -50,8 +50,8 @@ module MiBridges
       def check_ssi_benefit
         check_in_section(
           "starSSIBenefit",
-          if: anyone_disabled?,
-          for: first_name,
+          condition: anyone_disabled?,
+          for_name: first_name,
         )
       end
 

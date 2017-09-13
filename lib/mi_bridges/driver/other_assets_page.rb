@@ -33,16 +33,16 @@ module MiBridges
       def check_vehicles
         check_in_section(
           "starVehicles",
-          if: vehicle_income?,
-          for: first_name,
+          condition: vehicle_income?,
+          for_name: first_name,
         )
       end
 
       def check_real_estate
         check_in_section(
           "starRealEstate",
-          if: real_estate_income?,
-          for: first_name,
+          condition: real_estate_income?,
+          for_name: first_name,
         )
       end
 
@@ -53,8 +53,8 @@ module MiBridges
       def check_life_insurance
         check_in_section(
           "starLifeInsurance",
-          if: financial_accounts.include?("life_insurance"),
-          for: first_name,
+          condition: financial_accounts.include?("life_insurance"),
+          for_name: first_name,
         )
       end
 

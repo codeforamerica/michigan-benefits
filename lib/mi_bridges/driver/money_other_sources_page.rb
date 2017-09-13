@@ -34,16 +34,16 @@ module MiBridges
       def check_other_income
         check_in_section(
           "starOtherIncome",
-          if: income_other?,
-          for: first_name,
+          condition: income_other?,
+          for_name: first_name,
         )
       end
 
       def check_supplemental_security_income
         check_in_section(
           "starSupplementalSecurityIncomeSSI",
-          if: income_ssi_or_disability?,
-          for: first_name,
+          condition: income_ssi_or_disability?,
+          for_name: first_name,
         )
       end
 

@@ -28,16 +28,16 @@ module MiBridges
       def check_fulltime_employment_status
         check_in_section(
           "starCurrentorRecentJob",
-          if: employment_status == "employed",
-          for: first_name,
+          condition: employment_status == "employed",
+          for_name: first_name,
         )
       end
 
       def check_self_employment_status
         check_in_section(
           "starSelfEmployment",
-          if: employment_status == "self_employed",
-          for: first_name,
+          condition: employment_status == "self_employed",
+          for_name: first_name,
         )
       end
 

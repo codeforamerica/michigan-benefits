@@ -40,12 +40,9 @@ module MiBridges
         page.execute_script %($("#{selector}").click())
       end
 
-      def check_in_section(section, options = {})
-        predicate = options.fetch(:if, false)
-        name = options.fetch(:for, "")
-
-        selector = if predicate
-                     selector_for_radio(name)
+      def check_in_section(section, condition: false, for_name: "")
+        selector = if condition
+                     selector_for_radio(for_name)
                    else
                      selector_for_radio("No one")
                    end
