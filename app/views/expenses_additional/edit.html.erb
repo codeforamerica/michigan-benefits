@@ -22,12 +22,15 @@
           <fieldset class="form-group">
             <%= f.mb_money_field :monthly_care_expenses,
               "In total, how much do you pay in care expenses each month?",
-              autofocus: true %>
+              autofocus: true,
+              optional: true %>
 
             <%= f.mb_checkbox_set [
               { method: :childcare, label: "Childcare" },
               { method: :disabled_adult_care, label: "Disabled adult care" },
-            ], label_text: "What kind of care expenses do you have?" %>
+            ],
+            label_text: "What kind of care expenses do you have?",
+            optional: true %>
         </fieldset>
         <% end %>
 
@@ -38,7 +41,8 @@
 
           <fieldset class="form-group">
             <%= f.mb_money_field :monthly_medical_expenses,
-              "In total, how much do you pay in ongoing medical expenses each month?" %>
+              "In total, how much do you pay in ongoing medical expenses each month?",
+            optional: true %>
 
             <%= f.mb_checkbox_set [
               { method: :health_insurance, label: "Health insurance" },
@@ -49,7 +53,8 @@
               { method: :transportation, label: "Transportation" },
               { method: :hospital_bills, label: "Hospital bills" },
               { method: :other, label: "Other" },
-            ], label_text: "What kind of ongoing medical expenses do you have?" %>
+            ], label_text: "What kind of ongoing medical expenses do you have?",
+            optional: true %>
           </fieldset>
         <% end %>
 
@@ -60,12 +65,14 @@
 
           <fieldset class="form-group">
             <%= f.mb_money_field :monthly_court_ordered_expenses,
-              "In total, how much do you pay in court-ordered expenses each month?" %>
+              "In total, how much do you pay in court-ordered expenses each month",
+            optional: true %>
 
             <%= f.mb_checkbox_set [
               { method: :child_support, label: "Child support" },
               { method: :alimony, label: "Alimony" },
-              ], label_text: "What kind of court-ordered expenses do you have?" %>
+            ], label_text: "What kind of court-ordered expenses do you have?",
+            optional: true %>
             </fieldset>
         <% end %>
       </div>

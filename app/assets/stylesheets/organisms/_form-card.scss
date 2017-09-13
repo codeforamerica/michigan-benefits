@@ -68,6 +68,11 @@
   }
 }
 
+.form-card__optional {
+  @extend .text--help;
+  padding-left: $padding-small;
+}
+
 .form-card__content {
   > *:last-child {
     margin-bottom: 0;

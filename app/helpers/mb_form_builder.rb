@@ -8,7 +8,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: nil,
     autofocus: nil,
-    append_html: ""
+    append_html: "",
+    optional: false
   )
     classes = classes.append(%w[text-input])
     text_field_options = {
@@ -24,7 +25,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{label_and_field(method, label_text, text_field_html, notes: notes, prefix: prefix)}
+        #{label_and_field(method, label_text, text_field_html, notes: notes, prefix: prefix, optional: optional)}
         #{errors_for(object, method)}
         #{append_html}
       </fieldset>
@@ -39,7 +40,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     options: {},
     classes: [],
     prefix: "$",
-    autofocus: nil
+    autofocus: nil,
+    optional: false
   )
 
     mb_input_field(
@@ -51,6 +53,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
+      optional: optional,
     )
   end
 
@@ -120,7 +123,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
-  def mb_checkbox_set(collection, label_text: nil, notes: [])
+  def mb_checkbox_set(collection, label_text: nil, notes: [], optional: false)
     checkbox_html = <<-HTML.html_safe
       <fieldset class="input-group">
     HTML
@@ -137,7 +140,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     if label_text || notes
       label_html = <<-HTML.html_safe
-        #{label_contents(label_text, notes)}
+        #{label_contents(label_text, notes, optional)}
       HTML
       checkbox_html = label_html + checkbox_html
     end
@@ -145,10 +148,16 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     checkbox_html
   end
 
-  def mb_select(method, label_text, collection, options = {}, &block)
+  def mb_select(
+    method,
+    label_text,
+    collection,
+    options = {},
+    &block
+  )
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{label(method, label_contents(label_text, options[:notes]))}
+        #{label(method, label_contents(label_text, options[:notes], options[:optional]))}
         <div class="select">
           #{select(method, collection, options, { class: 'select__element' }, &block)}
         </div>
@@ -168,30 +177,44 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   private
 
-  def label_contents(label_text, notes)
+  def label_contents(label_text, notes, optional = false)
     notes = Array(notes)
+    if optional
+      optional_text = "<span class='form-card__optional'>(optional)</span>"
+    else
+      optional_text = ""
+    end
+
     label_text = <<-HTML
-      <p class="form-question">#{label_text}</p>
+      <p class="form-question">#{label_text + optional_text}</p>
     HTML
     notes.each do |note|
       label_text << <<-HTML
         <p class="text--help">#{note}</p>
       HTML
     end
+
     label_text.html_safe
   end
 
-  def label_and_field(method, label_text, field, notes: [], prefix: nil)
+  def label_and_field(
+    method,
+    label_text,
+    field,
+    notes: [],
+    prefix: nil,
+    optional: false
+  )
     if prefix
       <<-HTML
-        #{label(method, label_contents(label_text, notes))}
+        #{label(method, label_contents(label_text, notes, optional))}
         <div class="text-input-group">
           <div class="text-input-group__prefix">#{prefix}</div>
           #{field}
         </div>
       HTML
     else
-      label(method, label_contents(label_text, notes)) + field
+      label(method, label_contents(label_text, notes, optional)) + field
     end
   end
 

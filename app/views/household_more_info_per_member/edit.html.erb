@@ -11,7 +11,7 @@
 
       <% if !current_snap_application.everyone_a_citizen? %>
         <fieldset class="form-group">
-          <p class="form-question">Who is not a citizen?</p>
+          <p class="form-question">Who is not a citizen?<span class="form-card__optional">(optional)</span></p>
             <% @step.members.each do |member| %>
               <%= f.fields_for('members[]', member) do |ff| %>
                 <%= ff.mb_checkbox(
@@ -26,28 +26,28 @@
 
       <% if current_snap_application.anyone_disabled? %>
         <fieldset class="form-group">
-          <p class="form-question">Who has a disability?</p>
+          <p class="form-question">Who has a disability?<span class="form-card__optional">(optional)</span></p>
           <%= render 'member_checkboxes', f: f, step: @step, method: :disabled %>
         </fieldset>
       <% end %>
 
       <% if current_snap_application.anyone_new_mom? %>
         <fieldset class="form-group">
-          <p class="form-question">Who is pregnant or has been pregnant recently?</p>
+          <p class="form-question">Who is pregnant or has been pregnant recently?<span class="form-card__optional">(optional)</span></p>
           <%= render 'member_checkboxes', f: f, step: @step, method: :new_mom %>
         </fieldset>
       <% end %>
 
       <% if current_snap_application.anyone_in_college? %>
         <fieldset class="form-group">
-          <p class="form-question">Who is enrolled in college?</p>
+          <p class="form-question">Who is enrolled in college?<span class="form-card__optional">(optional)</span></p>
           <%= render 'member_checkboxes', f: f, step: @step, method: :in_college %>
         </fieldset>
       <% end %>
 
       <% if current_snap_application.anyone_living_elsewhere? %>
         <fieldset class="form-group">
-          <p class="form-question">Who is temporarily living outside the home?</p>
+          <p class="form-question">Who is temporarily living outside the home?<span class="form-card__optional">(optional)</span></p>
           <%= render 'member_checkboxes', f: f, step: @step, method: :living_elsewhere %>
         </fieldset>
       <% end %>
