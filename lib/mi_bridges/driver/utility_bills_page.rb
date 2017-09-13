@@ -41,56 +41,56 @@ module MiBridges
       def check_heat
         check_in_section(
           section_name,
-          if: utility_heat?,
-          for: "Heat(gas,electric, propane,wood,etc)",
+          condition: utility_heat?,
+          for_label: "Heat(gas,electric, propane,wood,etc)",
         )
       end
 
       def check_cooling
         check_in_section(
           section_name,
-          if: utility_cooling?,
-          for: "Cooling (including room air conditioner)",
+          condition: utility_cooling?,
+          for_label: "Cooling (including room air conditioner)",
         )
       end
 
       def check_electricity
         check_in_section(
           section_name,
-          if: utility_electrity?,
-          for: "Electricity(non heat)",
+          condition: utility_electrity?,
+          for_label: "Electricity(non heat)",
         )
       end
 
       def check_water_sewer
         check_in_section(
           section_name,
-          if: utility_water_sewer?,
-          for: "Water/Sewer",
+          condition: utility_water_sewer?,
+          for_label: "Water/Sewer",
         )
       end
 
       def check_trash
         check_in_section(
           section_name,
-          if: utility_trash?,
-          for: "Garbage/trash pick up",
+          condition: utility_trash?,
+          for_label: "Garbage/trash pick up",
         )
       end
 
       def check_phone
         check_in_section(
           section_name,
-          if: utility_phone?,
-          for: "Telephone",
+          condition: utility_phone?,
+          for_label: "Telephone",
         )
       end
 
       def check_none
         check_in_section(
           section_name,
-          if: nothing_checked?,
-          for: "None",
+          condition: nothing_checked?,
+          for_label: "None",
         )
       end
 

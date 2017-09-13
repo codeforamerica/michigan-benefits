@@ -29,16 +29,16 @@ module MiBridges
       def check_child_spousal_payments
         check_in_section(
           "starChildSpousalSupportPayments",
-          if: court_ordered?,
-          for: first_name,
+          condition: court_ordered?,
+          for_label: first_name,
         )
       end
 
       def check_medical_bills
         check_in_section(
           "starMedicalBills",
-          if: monthly_medical_expenses?,
-          for: first_name,
+          condition: monthly_medical_expenses?,
+          for_label: first_name,
         )
       end
 
