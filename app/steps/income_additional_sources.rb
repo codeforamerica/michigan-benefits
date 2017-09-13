@@ -2,6 +2,7 @@
 
 class IncomeAdditionalSources < Step
   step_attributes(
+    :alimony,
     :child_support,
     :foster_care,
     :other,

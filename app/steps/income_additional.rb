@@ -2,6 +2,7 @@
 
 class IncomeAdditional < Step
   step_attributes(
+    :income_alimony,
     :income_child_support,
     :income_foster_care,
     :income_other,
