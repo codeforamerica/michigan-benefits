@@ -4,7 +4,7 @@ FactoryGirl.define do
     last_name "Pad"
     sex "female"
     marital_status "Widowed"
-    ssn "123121234"
+    ssn "123 12 1234"
     birthday { DateTime.parse("August 18, 1990") }
   end
 end
