@@ -5,13 +5,14 @@ module MiBridges
     class BasePage
       include Capybara::DSL
 
-      def initialize(snap_application)
-        log("filling out page", self.class.to_s) if logging?
+      def initialize(snap_application, logger:)
+        @logger = logger
+        log("filling out page")
         @snap_application = snap_application
       end
 
       def fill_in(*args)
-        log("fill in", args) if logging?
+        log("fill in", args)
         super(*args)
       end
 
@@ -64,11 +65,9 @@ module MiBridges
       attr_reader :snap_application
 
       def log(description, *text)
-        puts "*** #{description.upcase}: #{text.join(', ')}"
-      end
-
-      def logging?
-        ENV.fetch("DEBUG_DRIVE", "false") == "true"
+        logger.tagged(page.class.to_s) do
+          logger.debug("#{description.upcase}: #{text.join(', ')}")
+        end
       end
     end
   end

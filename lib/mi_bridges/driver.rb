@@ -58,18 +58,20 @@ module MiBridges
       SubmitPage,
     ].freeze
 
-    def initialize(snap_application:)
+    def initialize(snap_application:, logger: nil)
       @snap_application = snap_application
+      self.logger = logger
     end
 
     def run
+      logger ||= build_logger
       setup
 
       page_classes = SIGN_UP_FLOW + APPLY_FLOW
 
       page_classes.each do |klass|
         begin
-          page = klass.new(@snap_application)
+          page = klass.new(@snap_application, logger: logger)
           page.setup
           page.fill_in_required_fields
           page.continue
@@ -86,9 +88,22 @@ module MiBridges
 
     private
 
-    attr_reader :snap_application
+    def logger=(logger)
+      return @logger = logger if logger.present?
+      logger = ActiveSupport::Logger.new(STDOUT)
+      logger.level = if ENV["DEBUG_DRIVE"] = "true"
+                       Logger::DEBUG
+                     else
+                       Logger::INFO
+                     end
+      logger.formatter = Rails.application.config.log_formatter
+      @logger = ActiveSupport::TaggedLogging.new(logger)
+    end
+
+    attr_reader :snap_application, :logger
 
     def setup
+      # Do we really want to destroy all the stored driver applications?
       DriverApplication.destroy_all
       Capybara.default_driver = ENV.fetch("WEB_DRIVER", "chrome").to_sym
     end
