@@ -14,7 +14,7 @@ else
 fi
 
 echo "Running the contract test for MI Bridges driving code..."
-RUN_DRIVING_TEST=true bin/rspec spec/features/mi_bridges_driving_spec.rb
+PRE_DEPLOY_TEST=true bin/rspec spec/features/mi_bridges_driving_spec.rb
 
 read -p "Did it pass? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
