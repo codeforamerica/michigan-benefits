@@ -29,6 +29,10 @@ chdir APP_ROOT do
     end
   end
 
+  step "Installing libmagic, a dependency for ruby-filemagic" do
+    system!("brew install libmagic")
+  end
+
   step "Installing ghostscript, an interpreter for the PostScript language and for PDF" do
     if cli_installed?("gs")
       puts "ghostscript already installed."

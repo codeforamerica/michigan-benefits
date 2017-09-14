@@ -23,6 +23,7 @@ gem "prawn"
 gem "puma"
 gem "rails", "~> 5.1"
 gem "responders"
+gem "ruby-filemagic"
 gem "sass-rails", "~> 5.0"
 gem "selenium-webdriver", "3.4.3"
 gem "sfax",
@@ -50,6 +51,7 @@ group :development, :test do
   gem "bundler-audit"
   gem "climate_control"
   gem "codeclimate-test-reporter"
+  gem "dotenv-rails" # useful for when running dev server w/o foreman
   gem "factory_girl_rails"
   gem "listen"
   gem "mailcatcher", "~> 0.2"

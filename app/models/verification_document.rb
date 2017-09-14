@@ -5,50 +5,26 @@ class VerificationDocument
   end
 
   def file
+    downloaded_document = RemoteDocument.new(url).download
+    return downloaded_document.tempfile if downloaded_document.pdf?
+
+    tempfile = Tempfile.new([SecureRandom.hex, ".pdf"])
     pdf = Prawn::Document.new
-    magick_object = create_magick_object
-
-    if magick_object.type == "PDF" || magick_object.type == "PBM"
-      magick_object.tempfile
-    else
-      pdf.move_down 30
-      add_header(pdf)
-      rotate_image(magick_object)
-
-      pdf.image(magick_object.path, fit: [500, 600])
-      tempfile = Tempfile.new([SecureRandom.hex, ".pdf"])
-      pdf.render_file(tempfile.path)
-      tempfile
-    end
+    pdf.move_down 30
+    add_header(pdf)
+    pdf.image(downloaded_document.tempfile.path, fit: [500, 600])
+    pdf.render_file(tempfile.path)
+    tempfile
   end
 
   private
 
   attr_reader :url, :snap_application
 
-  def create_magick_object
-    Rails.logger.debug("Creating magick object from #{local_file.path}")
-    MiniMagick::Image.open(local_file.path)
-  end
-
-  def local_file
-    return @_local_file if @_local_file
-    Rails.logger.debug("Downloading #{url}")
-    @_local_file = MiniMagick::Image.open(url)
-    Rails.logger.debug("downloaded #{url} to #{@_local_file.path}")
-    @_local_file
-  end
-
   def add_header(pdf)
     pdf.font("Helvetica", size: 12) do
       pdf.text header
       pdf.move_down 10
-    end
-  end
-
-  def rotate_image(magick_object)
-    if magick_object.width > magick_object.height
-      magick_object.rotate("-90")
     end
   end
 
