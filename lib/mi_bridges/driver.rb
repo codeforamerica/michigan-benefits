@@ -94,7 +94,7 @@ module MiBridges
     end
 
     def teardown
-      if Rails.env != "test"
+      if ENV["PRE_DEPLOY_TEST"] != "true"
         MiBridges::Driver::BasePage.new(snap_application).close
       end
     end
