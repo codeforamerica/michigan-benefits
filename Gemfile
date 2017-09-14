@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "2.4.1"
+ruby "2.4.2"
 
 gem "activemodel_type_symbol"
 gem "administrate"
