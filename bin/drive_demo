@@ -1,4 +1,5 @@
 #!/bin/bash
 
+export DRIVER_SPEED="slow"
 ./bin/rails runner "app = SnapApplication.find($1);
 app.driver_applications.destroy_all; MiBridges::Driver.new(snap_application: SnapApplication.find($1)).run"
