@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-git fetch --all
-
-staging_sha=$(git log --oneline staging/master | head -n 1 | cut -d " " -f1)
-prod_sha=$(git log --oneline production/master | head -n 1 | cut -d " " -f1)
-
+staging_sha=$(heroku releases -a michigan-benefits-staging | head -n 2 | tail -n 1 | cut -d " " -f 4)
+prod_sha=$(heroku releases -a michigan-benefits-production | head -n 2 | tail -n 1 | cut -d " " -f 4)
 open "https://github.com/codeforamerica/michigan-benefits/compare/$prod_sha...$staging_sha"
