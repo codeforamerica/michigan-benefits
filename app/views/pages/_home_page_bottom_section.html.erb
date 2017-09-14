@@ -14,6 +14,40 @@
   </div>
 </section>
 
+<section class="slab slab--padded text--centered">
+  <div class="grid">
+    <div class="grid__item width-one-third">
+      <div class="emoji emoji--big emoji--avocado"></div>
+      <h3>
+        Buy Groceries
+      </h3>
+      <p class="text--small">
+        Your EBT card is valid in most stores that sell food.
+      </p>
+    </div>
+
+    <div class="grid__item width-one-third">
+      <div class="emoji emoji--big emoji--broccoli"></div>
+      <h3>
+        Shop Farmers Markets
+      </h3>
+      <p class="text--small">
+        Buy local fruits and veggies at participating farmer’s markets with SNAP benefits.
+      </p>
+    </div>
+
+    <div class="grid__item width-one-third">
+      <div class="emoji emoji--big emoji--farmer"></div>
+      <h3>
+        Grow Your Own Food
+      </h3>
+      <p class="text--small">
+        Use benefits to purchase seeds and food-producing plants for your garden.
+      </p>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="slab slab--white slab--padded text--centered">
     <div class="grid">
@@ -41,10 +75,15 @@
         <p>
           Private and Secure
         </p>
-        <p class="text--help">
+        <p class="text--help with-padding-large">
           Your information is kept private and secure. MichiganBenefits
           maintains strict security guidelines to protect your privacy and indentity.
           For details, read the full <%= link_to "Privacy Policy", privacy_path, target: "_blank" %>.
+        </p>
+        <%= link_to step_path(StepNavigation.first, office_location: office_location), class: "button button--cta button--fully-width" do %>
+          Apply now
+          <i class="button__icon icon-arrow_forward"></i>
+        <% end %>
       </div>
     </div>
   </div>

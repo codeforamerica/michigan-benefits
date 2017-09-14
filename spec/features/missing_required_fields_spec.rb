@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Missing required fields" do
   scenario "Renders errors while preserving other inputs" do
     visit root_path
-    click_on "Apply now"
+    within(".slab--hero") { click_on "Apply now" }
 
     fill_in_name_and_birthday
     click_on "Continue"

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Submit application with minimal information" do
   scenario "completes successfully" do
     visit root_path
-    click_on "Apply now"
+    within(".slab--hero") { click_on "Apply now" }
 
     on_page "Introduction" do
       fill_in_name_and_birthday

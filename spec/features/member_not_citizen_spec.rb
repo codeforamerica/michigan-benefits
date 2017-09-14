@@ -3,7 +3,7 @@ require "rails_helper"
 feature "Citizenship questions" do
   scenario "Member not a citizen" do
     visit root_path
-    click_on "Apply now"
+    within(".slab--hero") { click_on "Apply now" }
 
     fill_in_name_and_birthday
     click_on "Continue"
