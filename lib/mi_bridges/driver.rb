@@ -94,7 +94,9 @@ module MiBridges
     end
 
     def teardown
-      MiBridges::Driver::BasePage.new(snap_application).close
+      if Rails.env != "test"
+        MiBridges::Driver::BasePage.new(snap_application).close
+      end
     end
 
     def first_driver_application_attempt?

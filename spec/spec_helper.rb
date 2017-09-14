@@ -35,6 +35,13 @@ RSpec.configure do |config|
     "responders"
 
   config.filter_run :focus
+
+  if ENV["RUN_DRIVING_TEST"] == "true"
+    config.filter_run :driving
+  else
+    config.filter_run_excluding :driving
+  end
+
   config.run_all_when_everything_filtered = true
 
   if ENV["CI"]

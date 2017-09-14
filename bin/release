@@ -13,6 +13,19 @@ else
   exit 1
 fi
 
+echo "Running the contract test for MI Bridges driving code..."
+RUN_DRIVING_TEST=true bin/rspec spec/features/mi_bridges_driving_spec.rb
+
+read -p "Did it pass? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo "Great!"
+else
+  echo "Please make sure the driving code is working before deploying to
+  production!"
+  exit 1
+fi
+
 echo "Diffing the code between staging and production..."
 bin/release-diff
 read -p "Looks ok? (y/N) " -n 1 -r
