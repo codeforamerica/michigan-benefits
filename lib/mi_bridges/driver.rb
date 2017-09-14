@@ -64,7 +64,6 @@ module MiBridges
     end
 
     def run
-      logger ||= build_logger
       setup
 
       page_classes = SIGN_UP_FLOW + APPLY_FLOW

@@ -62,10 +62,10 @@ module MiBridges
 
       private
 
-      attr_reader :snap_application
+      attr_reader :snap_application, :logger
 
       def log(description, *text)
-        logger.tagged(page.class.to_s) do
+        logger.tagged(self.class.to_s) do
           logger.debug("#{description.upcase}: #{text.join(', ')}")
         end
       end
