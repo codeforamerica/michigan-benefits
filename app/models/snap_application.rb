@@ -69,12 +69,12 @@ class SnapApplication < ApplicationRecord
     residential_address.zip
   end
 
-  def receiving_office
-    @receiving_office ||= FaxRecipient.new(snap_application: self)
-  end
-
   def receiving_office_name
     receiving_office.name
+  end
+
+  def receiving_office
+    @receiving_office ||= FaxRecipient.new(snap_application: self)
   end
 
   def full_name

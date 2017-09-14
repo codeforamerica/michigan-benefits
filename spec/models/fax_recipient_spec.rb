@@ -1,135 +1,77 @@
 require "rails_helper"
 
 RSpec.describe FaxRecipient do
-  describe "#number" do
-    context "address is in clio" do
-      it "uses the sandbox fax number" do
-        residential_address = double(zip: "48415")
-        snap_application = double(
-          residential_address: residential_address,
-          office_location: nil,
-        )
+  describe "#office" do
+    before { stub_const("ENV", "APP_RELEASE_STAGE" => "production") }
 
+    context "office location is present" do
+      it "priotizes to office location over residential address" do
         fax_recipient = described_class.new(
-          snap_application: snap_application,
+          snap_application: app(from_zip_covered_by: :clio,
+                                office_location: "union"),
         )
 
-        expect(fax_recipient.number).to eq sandbox_fax_number
+        expect(fax_recipient.office).to eq("name" => "Union",
+                                           "fax_number" => union_fax_number)
       end
     end
 
-    context "address is in union" do
-      it "uses the sandbox fax number" do
-        residential_address = double(zip: "48411")
-        snap_application = double(
-          residential_address: residential_address,
-          office_location: nil,
-        )
+    it "uses the real fax number when the address is in clio" do
+      fax_recipient = described_class.new(
+        snap_application: app(from_zip_covered_by: :clio),
+      )
 
-        fax_recipient = described_class.new(
-          snap_application: snap_application,
-        )
-
-        expect(fax_recipient.number).to eq sandbox_fax_number
-      end
+      expect(fax_recipient.office).to eq("name" => "Clio",
+                                         "fax_number" => clio_fax_number)
     end
 
-    context "address outside of clio or union" do
-      it "falls back to sandbox number" do
-        residential_address = double(zip: "98765")
-        snap_application = double(
-          residential_address: residential_address,
-          office_location: nil,
-        )
+    it "uses the real fax number when the address is in union" do
+      fax_recipient = described_class.new(
+        snap_application: app(from_zip_covered_by: :union),
+      )
 
-        fax_recipient = described_class.new(
-          snap_application: snap_application,
-        )
-
-        expect(fax_recipient.number).to eq sandbox_fax_number
-      end
+      expect(fax_recipient.office).to eq("name" => "Union",
+                                         "fax_number" => union_fax_number)
     end
 
-    context "when the app release stage is production" do
-      before { stub_const("ENV", "APP_RELEASE_STAGE" => "production") }
+    it "falls back to the clio office" do
+      fax_recipient = described_class.new(
+        snap_application: app(from_zip_covered_by: :nobody),
+      )
 
-      context "office location is present" do
-        it "defaults to office location over residential address" do
-          residential_address = double(zip: "12345")
-          office_location = "clio"
-          snap_application = double(
-            residential_address: residential_address,
-            office_location: office_location,
-          )
+      expect(fax_recipient.office).to eq("name" => "Clio",
+                                         "fax_number" => clio_fax_number)
+    end
 
-          fax_recipient = described_class.new(
-            snap_application: snap_application,
-          )
+    it "allows for testing via zip 12345" do
+      fax_recipient = described_class.new(
+        snap_application: app(from_zip_covered_by: :testing),
+      )
 
-          expect(fax_recipient.number).to eq clio_fax_number
-        end
-
-        it "defaults to office location over residential address" do
-          residential_address = double(zip: "12345")
-          office_location = "union"
-          snap_application = double(
-            residential_address: residential_address,
-            office_location: office_location,
-          )
-
-          fax_recipient = described_class.new(
-            snap_application: snap_application,
-          )
-
-          expect(fax_recipient.number).to eq union_fax_number
-        end
-      end
-
-      it "uses the appropriate fax number when the address is in clio" do
-        residential_address = double(zip: "48415")
-        snap_application = double(
-          residential_address: residential_address,
-          office_location: nil,
-        )
-
-        fax_recipient = described_class.new(
-          snap_application: snap_application,
-        )
-
-        expect(fax_recipient.number).to eq clio_fax_number
-      end
-
-      it "uses the appropriate fax number when the address is in union" do
-        residential_address = double(zip: "48411")
-        snap_application = double(
-          residential_address: residential_address,
-          office_location: nil,
-        )
-
-        fax_recipient = described_class.new(
-          snap_application: snap_application,
-        )
-
-        expect(fax_recipient.number).to eq union_fax_number
-      end
-
-      it "falls back to the clio office" do
-        residential_address = double(zip: "123456")
-
-        snap_application = double(
-          residential_address: residential_address,
-          office_location: nil,
-        )
-
-        fax_recipient = described_class.new(
-          snap_application: snap_application,
-        )
-
-        expect(fax_recipient.number).to eq clio_fax_number
-      end
+      expect(fax_recipient.office).to eq("name" => "Staging Sfax",
+                                         "fax_number" => staging_fax_number)
     end
   end
 
+  describe "#number" do
+    it "is whatever the office number is" do
+      fax_recipient = described_class.new(
+        snap_application: app(from_zip_covered_by: :testing),
+      )
+
+      expect(fax_recipient.number).to eq fax_recipient.office["fax_number"]
+    end
+  end
+
+  describe "#name" do
+    it "is whatever the office name is" do
+      fax_recipient = described_class.new(
+        snap_application: app(from_zip_covered_by: :testing),
+      )
+
+      expect(fax_recipient.name).to eq fax_recipient.office["name"]
+    end
+  end
   def sandbox_fax_number
     "+16173963015"
   end
@@ -140,5 +82,25 @@ RSpec.describe FaxRecipient do
 
   def union_fax_number
     "+18107607372"
+  end
+
+  def staging_fax_number
+    "+18888433549"
+  end
+
+  OFFICE_TO_ZIP_MAPPING = {
+    union: 48411,
+    clio: 48415,
+    nobody: 98765,
+    testing: 12345,
+  }.freeze
+
+  def app(from_zip_covered_by:, office_location: nil)
+    double(
+      residential_address: double(
+        zip: OFFICE_TO_ZIP_MAPPING[from_zip_covered_by],
+      ),
+      office_location: office_location,
+    )
   end
 end
