@@ -1,14 +1,15 @@
 class FaxApplicationJob < ApplicationJob
   def perform(export:)
     export.execute do |snap_application|
-      fax_recipient = FaxRecipient.new(snap_application: snap_application)
+      receiving_office = snap_application.receiving_office
+
       Fax.send_fax(
-        number: fax_recipient.number,
+        number: receiving_office.number,
         file: snap_application.pdf.path,
-        recipient: fax_recipient.name,
+        recipient: receiving_office.name,
       )
 
-      "Faxed to #{fax_recipient.name} (#{fax_recipient.number})"
+      "Faxed to #{receiving_office.name} (#{receiving_office.number})"
     end
   end
 end

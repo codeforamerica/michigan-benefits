@@ -65,6 +65,18 @@ class SnapApplication < ApplicationRecord
     addresses.where.not(mailing: true).first || NullAddress.new
   end
 
+  def zip
+    residential_address.zip
+  end
+
+  def receiving_office
+    @receiving_office ||= FaxRecipient.new(snap_application: self)
+  end
+
+  def receiving_office_name
+    receiving_office.name
+  end
+
   def full_name
     primary_member.full_name
   end

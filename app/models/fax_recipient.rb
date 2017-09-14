@@ -12,12 +12,23 @@ class FaxRecipient
   end
 
   def name
-    ENV.fetch("FAX_RECIPIENT", "Michigan Bridges")
+    office["name"].to_s.titleize
+  end
+
+  def office
+    if office_location.present?
+      office = self.class.offices[office_location]
+      office["name"] = office_location
+      office
+    else
+      self.class.find_by(zip: residential_address.zip)
+    end
   end
 
   def self.find_by(zip:)
     name = covered_zip_codes[zip] || configuration["fallback_office"]
     Rails.logger.debug("Mapped zip #{zip} to office #{name}")
+    offices[name]["name"] = name
     offices[name]
   end
 
