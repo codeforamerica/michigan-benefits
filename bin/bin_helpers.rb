@@ -43,6 +43,14 @@ def colorize(colors_and_strings)
   end.join
 end
 
+def brew_installed?(formulae)
+  system "brew ls --versions #{formulae}"
+end
+
 def cli_installed?(command_name)
   system "which #{command_name}"
+end
+
+def gem_installed?(gem)
+  system "gem list | grep ^#{gem}[[:space:]]"
 end

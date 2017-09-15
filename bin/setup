@@ -12,15 +12,6 @@ chdir APP_ROOT do
     system!("heroku git:remote -a michigan-benefits-production -r production")
   end
 
-  step "Installing dependencies" do
-    system!("gem install bundler --conservative")
-    system("bundle check") || system!("bundle install")
-  end
-
-  step "Installing foreman for controlling local servers" do
-    system!("gem install foreman")
-  end
-
   step "Installing Imagemagick, a image to PDF converter" do
     if cli_installed?("convert")
       puts "imagemagick already installed"
@@ -30,7 +21,11 @@ chdir APP_ROOT do
   end
 
   step "Installing libmagic, a dependency for ruby-filemagic" do
-    system!("brew install libmagic")
+    if brew_installed?("libmagic")
+      puts "libmagic already installed"
+    else
+      system!("brew install libmagic")
+    end
   end
 
   step "Installing ghostscript, an interpreter for the PostScript language and for PDF" do
@@ -56,6 +51,19 @@ chdir APP_ROOT do
       puts "chromedriver already installed."
     else
       system!("brew install chromedriver")
+    end
+  end
+
+  step "Installing bundler and gem dependencies" do
+    system!("gem install bundler --conservative")
+    system("bundle check") || system!("bundle install")
+  end
+
+  step "Installing foreman for controlling local servers" do
+    if gem_installed?("foreman")
+      puts "foreman already installed"
+    else
+      system!("gem install foreman")
     end
   end
 
