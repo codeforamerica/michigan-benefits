@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module FeatureHelper
   def choose_yes(text)
     within(find(:fieldset, text: text)) do

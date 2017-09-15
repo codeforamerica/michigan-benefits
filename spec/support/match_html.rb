@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec::Matchers.define :match_html do |expected|
   def clean_html(s)
     s = s.squish.gsub(/>(\s)+</, "><")

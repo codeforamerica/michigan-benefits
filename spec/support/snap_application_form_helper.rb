@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module SnapApplicationFormHelper
   def fill_in_name_and_birthday
     fill_in "What is your first name?", with: "Jessie"
