@@ -2,7 +2,7 @@
 defaults: &defaults
   # Which office to send the fax to in the event the submitted
   # zip code is not in our mapping
-  fallback_office: "union"
+  fallback_office: "clio"
   covered_zip_codes:
     "12345": "staging_sfax"
     # Clio Zip Codes
@@ -54,7 +54,6 @@ development:
       fax_number: "+16173963015"
 production:
   <<: *defaults
-  fallback_office: "clio"
   offices:
     staging_sfax:
       fax_number: "+18888433549"

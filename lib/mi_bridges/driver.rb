@@ -102,13 +102,13 @@ module MiBridges
     attr_reader :snap_application, :logger
 
     def setup
-      # Do we really want to destroy all the stored driver applications?
-      DriverApplication.destroy_all
       Capybara.default_driver = ENV.fetch("WEB_DRIVER", "chrome").to_sym
     end
 
     def teardown
-      MiBridges::Driver::BasePage.new(snap_application).close
+      if ENV["PRE_DEPLOY_TEST"] != "true"
+        MiBridges::Driver::BasePage.new(snap_application).close
+      end
     end
 
     def first_driver_application_attempt?

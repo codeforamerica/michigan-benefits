@@ -228,13 +228,8 @@ should get this set up for you automatically.
 
 ### How to Drive Applications
 
-To run the driver code, use `rails console` and (where
-`<id>` is the id of a snap application record) run:
-
-```ruby
-snap_application = SnapApplication.find(<id>)
-MiBridges::Driver.new(snap_application: snap_application).run
-```
+To run the driver code, use `bin/drive <id>` (where
+`<id>` is the id of a snap application record):
 
 There are three extra environment variables you can set to modify the behavior
 of the script.
@@ -249,6 +244,6 @@ Example:
 
 ```sh
 DRIVER_SPEED=slow \
-             WEB_DRIVER=chrome \
-             DEBUG_DRIVE=true \
-             ./bin/rails runner "MiBridges::Driver.new(snap_application: SnapApplication.find(ID)).run"
+  WEB_DRIVER=chrome \
+  DEBUG_DRIVE=true \
+  bin/drive 1234

@@ -2,7 +2,7 @@
   "name": "michigan-benefits",
   "description": "Providing SNAP better, stronger, and faster",
   "scripts": {
-    "postdeploy": "bin/rails db:setup"
+    "postdeploy": "bin/rails db:migrate db:seed"
   },
   "env": {
     "ADMIN_PASSWORD": {

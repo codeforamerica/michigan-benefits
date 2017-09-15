@@ -13,6 +13,9 @@ else
   exit 1
 fi
 
+echo "Running the contract test for MI Bridges driving code..."
+PRE_DEPLOY_TEST=true bin/rspec spec/features/mi_bridges_driving_spec.rb
+
 echo "Diffing the code between staging and production..."
 bin/release-diff
 read -p "Looks ok? (y/N) " -n 1 -r
