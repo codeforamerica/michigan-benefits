@@ -3,6 +3,10 @@
 module MiBridges
   class Driver
     class CreateAccountPage < BasePage
+      MAXIMUM_SECRET_QUESTION_ANSWER_CHAR_COUNT = 20
+      MAXIMUM_USER_ID_CHAR_COUNT = 20
+      MAXIMUM_PASSWORD_CHAR_COUNT = 16
+
       def setup; end
 
       def fill_in_required_fields
@@ -49,19 +53,19 @@ module MiBridges
       end
 
       def generate_user_id
-        SecureRandom.hex(10)
+        SecureRandom.hex(MAXIMUM_USER_ID_CHAR_COUNT / 2)
       end
 
       def generate_password
-        SecureRandom.hex(8)
+        SecureRandom.hex(MAXIMUM_PASSWORD_CHAR_COUNT / 2)
       end
 
       def generate_secret_question_1_answer
-        SecureRandom.hex
+        SecureRandom.hex(MAXIMUM_SECRET_QUESTION_ANSWER_CHAR_COUNT / 2)
       end
 
       def generate_secret_question_2_answer
-        SecureRandom.hex
+        SecureRandom.hex(MAXIMUM_SECRET_QUESTION_ANSWER_CHAR_COUNT / 2)
       end
 
       def primary_member
