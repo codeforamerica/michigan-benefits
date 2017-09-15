@@ -32,6 +32,7 @@ class IncomeAdditionalController < StandardStepsController
       income_social_security: "Social Security",
       income_child_support: "Child Support",
       income_foster_care: "Foster Care or Adoption Subsidies",
+      income_alimony: "Alimony",
       income_other: "Other Income",
     }.stringify_keys.slice(*additional_income)
   end

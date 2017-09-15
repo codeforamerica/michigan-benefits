@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912170418) do
+ActiveRecord::Schema.define(version: 20170913213927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20170912170418) do
     t.integer "total_money"
     t.text "additional_information"
     t.string "office_location"
+    t.integer "income_alimony"
   end
 
   add_foreign_key "driver_applications", "snap_applications"
