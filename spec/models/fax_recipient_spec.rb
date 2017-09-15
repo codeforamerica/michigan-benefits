@@ -72,9 +72,6 @@ RSpec.describe FaxRecipient do
       expect(fax_recipient.name).to eq fax_recipient.office["name"]
     end
   end
-  def sandbox_fax_number
-    "+16173963015"
-  end
 
   def clio_fax_number
     "+18107602310"
