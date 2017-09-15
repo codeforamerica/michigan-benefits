@@ -27,6 +27,14 @@
   }
 }
 
+.button--next {
+  width: 100%;
+
+  @include media($tablet-up) {
+    width: auto;
+  }
+}
+
 .button--cta {
   color: #FFFFFF;
   background-color: $button-cta-color;
