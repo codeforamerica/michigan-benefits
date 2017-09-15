@@ -4,19 +4,23 @@ class FaxRecipient
   end
 
   def number
-    if office_location.present?
-      self.class.offices[office_location]["fax_number"]
-    else
-      self.class.find_by(zip: residential_address.zip)["fax_number"]
-    end
+    office["fax_number"]
   end
 
   def name
-    ENV.fetch("FAX_RECIPIENT", "Michigan Bridges")
+    office["name"]
+  end
+
+  def office
+    if office_location.present?
+      self.class.offices[office_location]
+    else
+      self.class.find_by(zip: residential_address.zip)
+    end
   end
 
   def self.find_by(zip:)
-    name = covered_zip_codes[zip] || configuration["fallback_office"]
+    name = covered_zip_codes[zip.to_s] || configuration["fallback_office"]
     Rails.logger.debug("Mapped zip #{zip} to office #{name}")
     offices[name]
   end
@@ -34,8 +38,20 @@ class FaxRecipient
   end
 
   def self.full_configuration
-    @full_configuration ||= YAML.safe_load(configuration_file, [Symbol], [],
+    return @full_configuration if @full_configuration.present?
+    @full_configuration = YAML.safe_load(configuration_file, [Symbol], [],
                                            true)
+    add_names_to_offices(@full_configuration)
+    @full_configuration
+  end
+
+  def self.add_names_to_offices(configuration)
+    configuration.keys.each do |stage|
+      next unless configuration[stage].key?("offices")
+      configuration[stage]["offices"].keys.each do |office|
+        configuration[stage]["offices"][office]["name"] = office.to_s.titleize
+      end
+    end
   end
 
   def self.configuration_file

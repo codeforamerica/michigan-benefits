@@ -39,7 +39,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     monthly_care_expenses: Field::String,
     monthly_court_ordered_expenses: Field::String,
     monthly_medical_expenses: Field::String,
-    office_location: Field::String,
+    receiving_office_name: Field::String,
     phone_number: Field::String,
     property_tax_expense: Field::Number,
     real_estate_income: Field::Boolean,
@@ -68,7 +68,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     phone_number
     email
     zip
-    office_location
+    receiving_office_name
     signed_at
     faxed_successfully_at
     fax_metadata
