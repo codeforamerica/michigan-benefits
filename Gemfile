@@ -57,6 +57,7 @@ group :development, :test do
   gem "bundler-audit"
   gem "climate_control"
   gem "codeclimate-test-reporter"
+  gem "coffee-rails"
   gem "dotenv-rails" # useful for when running dev server w/o foreman
   gem "factory_girl_rails"
   gem "listen"
@@ -66,6 +67,7 @@ group :development, :test do
   gem "rspec_junit_formatter"
   gem "rubocop-rspec", require: false
   gem "simplecov"
+  gem "teaspoon-jasmine"
 end
 
 group :production do
