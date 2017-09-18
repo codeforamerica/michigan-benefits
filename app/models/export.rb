@@ -15,15 +15,20 @@ class Export < ApplicationRecord
   scope :completed, -> { where.not(completed_at: nil) }
   scope :application_ids, -> { pluck(:snap_application_id) }
   scope :latest, -> { first }
+  scope :without, ->(export) { where.not(id: export.id) }
+  scope :successful_or_in_flight, -> {
+    where(status: %i(new queued in_process
+                     succeeded))
+  }
 
   def execute
     raise ArgumentError, "#export requires a block" unless block_given?
 
-    if snap_application.exports.succeeded.
-        for_destination(destination).present? && !force
+    if snap_application.exports.for_destination(destination).
+        successful_or_in_flight.without(self).present? && !force
 
-      transition_to new_status: :failed
-      update(metadata: "Didn't run since a previous export succeeded",
+      transition_to new_status: :unnecessary
+      update(metadata: "Another export for this destination and app occurred",
              completed_at: Time.zone.now)
       return
     end

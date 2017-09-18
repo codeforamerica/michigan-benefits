@@ -34,18 +34,6 @@ RSpec.describe Export do
       expect(export.metadata).to eq "success!!!"
     end
 
-    it "transitions to failure and doesnt yield the block if a previous " \
-      "export of its kind succeeded" do
-      successful_export = create(:export, :succeeded)
-      export = build(:export,
-                     snap_application: successful_export.snap_application)
-
-      fake_job = double(call: "I did a thing?")
-      export.execute { fake_job.call }
-      expect(export.status).to eq :failed
-      expect(fake_job).not_to have_received(:call)
-    end
-
     it "transitions to failure and stores stacktrace and re-raises if the " \
       "block throws" do
       export = build(:export)
@@ -62,6 +50,28 @@ RSpec.describe Export do
     it "doesn't care if destination is a symbol" do
       export = build(:export, destination: :email)
       expect(export).to be_valid
+    end
+
+    it "doesn't run when another export for the given destination is in " \
+      "process or has succeeded" do
+      previous = create(:export, destination: :email)
+      export = build(:export, destination: :email,
+                              snap_application: previous.snap_application)
+      export.execute { "It's unnecessary!" }
+
+      expect(export.status).to eq :unnecessary
+    end
+
+    it "does run if another export for the given destination is in process " \
+      "or succeeded when forced" do
+
+      previous = create(:export, destination: :email)
+      export = build(:export, destination: :email, force: true,
+                              snap_application: previous.snap_application)
+
+      export.execute { "It's working!" }
+
+      expect(export.status).to eq :succeeded
     end
   end
 end

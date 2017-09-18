@@ -12,8 +12,16 @@ class Enqueuer
     enqueue(Export.create(params))
   end
 
+  def self.create_and_enqueue_export(params)
+    new.create_and_enqueue_export(params)
+  end
+
   def create_and_enqueue_export!(params)
     enqueue(Export.create!(params))
+  end
+
+  def self.create_and_enqueue_export!(params)
+    new.create_and_enqueue_export!(params)
   end
 
   def enqueue(export)
