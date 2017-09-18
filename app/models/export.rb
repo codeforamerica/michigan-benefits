@@ -28,7 +28,10 @@ class Export < ApplicationRecord
         successful_or_in_flight.without(self).present? && !force
 
       transition_to new_status: :unnecessary
-      update(metadata: "Another export for this destination and app occurred",
+      update(metadata: "There is already another successful or in progress " \
+                       "export for application #{snap_application_id} via " \
+                       "#{destination}. If you really want to re-export " \
+                       "use the force flag",
              completed_at: Time.zone.now)
       return
     end

@@ -3,7 +3,7 @@ class SubmitApplicationViaMiBridgesJob < ApplicationJob
     export.execute do |snap_application, logger|
       MiBridges::Driver.new(logger: logger,
                             snap_application: snap_application).run
-      logger.info("Exported via MiBridges successfully")
+      logger.info("Exported via MI Bridges successfully")
     end
   end
 end

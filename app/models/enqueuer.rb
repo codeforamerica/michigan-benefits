@@ -1,12 +1,23 @@
 class Enqueuer
   DELAY_THRESHOLD = 30
+
+  def self.create_and_enqueue_export(params)
+    new.create_and_enqueue_export(params)
+  end
+
+  def self.create_and_enqueue_export!(params)
+    new.create_and_enqueue_export!(params)
+  end
+
   def enqueue_faxes
     SnapApplication.
       faxable.
       untouched_since(DELAY_THRESHOLD.minutes.ago).
       find_each do |snap_application|
-        create_and_enqueue_export(destination: :fax,
-                                  snap_application: snap_application)
+        create_and_enqueue_export(
+          destination: :fax,
+          snap_application: snap_application,
+        )
       end
   end
 
@@ -14,16 +25,8 @@ class Enqueuer
     enqueue(Export.create(params))
   end
 
-  def self.create_and_enqueue_export(params)
-    new.create_and_enqueue_export(params)
-  end
-
   def create_and_enqueue_export!(params)
     enqueue(Export.create!(params))
-  end
-
-  def self.create_and_enqueue_export!(params)
-    new.create_and_enqueue_export!(params)
   end
 
   def enqueue(export)
