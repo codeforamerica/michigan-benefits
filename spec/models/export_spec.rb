@@ -66,7 +66,8 @@ RSpec.describe Export do
       "or succeeded when forced" do
 
       previous = create(:export, destination: :email)
-      export = build(:export, destination: :email, force: true,
+      export = build(:export, destination: :email,
+                              force: true,
                               snap_application: previous.snap_application)
 
       export.execute { "It's working!" }

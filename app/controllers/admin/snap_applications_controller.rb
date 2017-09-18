@@ -20,7 +20,8 @@ module Admin
     def resend_fax
       application = SnapApplication.find(params[:id])
       Enqueuer.create_and_enqueue_export!(snap_application: application,
-                                          destination: :fax, force: true)
+                                          destination: :fax,
+                                          force: true)
       flash[:notice] = "Resent fax to #{application.office.number} " \
         " for #{application.signature}!"
       redirect_to admin_root_path
