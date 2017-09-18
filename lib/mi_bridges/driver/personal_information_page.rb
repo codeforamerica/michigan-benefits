@@ -9,7 +9,11 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup; end
+      def setup
+        check_page_title(
+          "Getting Started With Your Application",
+        )
+      end
 
       def fill_in_required_fields
         fill_in_name

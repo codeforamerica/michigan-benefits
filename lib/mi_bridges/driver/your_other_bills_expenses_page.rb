@@ -12,7 +12,11 @@ module MiBridges
 
       delegate :first_name, to: :primary_member
 
-      def setup; end
+      def setup
+        check_page_title(
+          "Your Other Bills / Expenses",
+        )
+      end
 
       def fill_in_required_fields
         check_child_spousal_payments

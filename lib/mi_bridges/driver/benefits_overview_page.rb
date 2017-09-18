@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class BenefitsOverviewPage < BasePage
-      def setup; end
+      def setup
+        check_page_title("Benefits Program Overview")
+      end
 
       def fill_in_required_fields; end
 
