@@ -60,6 +60,7 @@ class RemoteDocument
     @_s3 ||= Aws::S3::Client.new(
       access_key_id: Rails.application.secrets.aws_key,
       secret_access_key: Rails.application.secrets.aws_secret,
+      region: Rails.application.secrets.aws_region,
     )
   end
 
