@@ -34,8 +34,8 @@ class Export < ApplicationRecord
     end
 
     transition_to new_status: :in_process
-    result = yield(snap_application, logger)
-    update(metadata: result + read_logger, completed_at: Time.zone.now)
+    yield(snap_application, logger)
+    update(metadata: read_logger, completed_at: Time.zone.now)
     transition_to new_status: :succeeded
   rescue => e
     metadata = "#{e.class} - #{e.message} #{e.backtrace.join("\n")}"
@@ -52,7 +52,7 @@ class Export < ApplicationRecord
   def logger
     return @_logger if @_logger.present?
 
-    logger = ActiveSupport::Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new(logger_output)
     logger.level = Logger::DEBUG
     logger.formatter = Rails.application.config.log_formatter
     @_logger = ActiveSupport::TaggedLogging.new(logger)

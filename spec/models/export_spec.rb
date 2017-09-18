@@ -28,10 +28,10 @@ RSpec.describe Export do
 
     it "transitions to success and stores results if the block doesnt throw" do
       export = build(:export)
-      export.execute { "success!!!" }
+      export.execute { |_snap_application, logger| logger.info("success!!!") }
 
       expect(export.status).to eq :succeeded
-      expect(export.metadata).to eq "success!!!"
+      expect(export.metadata).to include "success!!!"
     end
 
     it "transitions to failure and stores stacktrace and re-raises if the " \
@@ -72,6 +72,21 @@ RSpec.describe Export do
       export.execute { "It's working!" }
 
       expect(export.status).to eq :succeeded
+    end
+
+    it "stores all the log entries in the metadata" do
+      export = build(:export)
+      export.execute do |_snap_application, logger|
+        logger.debug("A debug line")
+        logger.info("An info line")
+        logger.warn("A warning line")
+        logger.error("An error line")
+      end
+
+      expect(export.metadata).to include "A debug line"
+      expect(export.metadata).to include "An info line"
+      expect(export.metadata).to include "A warning line"
+      expect(export.metadata).to include "An error line"
     end
   end
 end
