@@ -1,6 +1,6 @@
 class FaxApplicationJob < ApplicationJob
   def perform(export:)
-    export.execute do |snap_application|
+    export.execute do |snap_application, logger|
       receiving_office = snap_application.receiving_office
 
       Fax.send_fax(
@@ -9,7 +9,8 @@ class FaxApplicationJob < ApplicationJob
         recipient: receiving_office.name,
       )
 
-      "Faxed to #{receiving_office.name} (#{receiving_office.number})"
+      logger.info("Faxed to #{receiving_office.name} " \
+                  "(#{receiving_office.number})")
     end
   end
 end

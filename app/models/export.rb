@@ -1,11 +1,8 @@
 class Export < ApplicationRecord
-  DELAY_THRESHOLD = 30
-  class UnknownExportTypeError < StandardError; end
-
   belongs_to :snap_application
   validates :status, inclusion: { in: %i(new queued in_process succeeded failed
                                          unnecessary) }
-  validates :destination, inclusion: { in: %i(fax email sms) }
+  validates :destination, inclusion: { in: %i(fax email sms mi_bridges) }
 
   attribute :destination, :symbol
   attribute :status, :symbol
@@ -18,68 +15,59 @@ class Export < ApplicationRecord
   scope :completed, -> { where.not(completed_at: nil) }
   scope :application_ids, -> { pluck(:snap_application_id) }
   scope :latest, -> { first }
-
-  def self.enqueue_faxes
-    SnapApplication.faxable.untouched_since(DELAY_THRESHOLD.minutes.ago).
-      find_each do |snap_application|
-      create_and_enqueue(destination: :fax, snap_application: snap_application)
-    end
-  end
-
-  def self.create_and_enqueue(params)
-    unless params[:snap_application].
-        exports&.
-        for_destination(params[:destination])&.
-        any?
-      create(params).enqueue
-    end
-  end
-
-  def self.create_and_enqueue!(params)
-    create!(params).enqueue
-  end
-
-  # Queues up the export job for the given destination
-  def enqueue
-    transaction do
-      save!
-      case destination
-      when :fax
-        FaxApplicationJob.perform_later(export: self)
-      when :email
-        EmailApplicationJob.perform_later(export: self)
-      when :sms
-        ApplicationSubmittedSmsJob.perform_later(export: self)
-      else
-        raise UnknownExportTypeError, destination
-      end
-      transition_to(new_status: :queued)
-    end
-  end
+  scope :without, ->(export) { where.not(id: export.id) }
+  scope :successful_or_in_flight, -> {
+    where(status: %i(new queued in_process
+                     succeeded))
+  }
 
   def execute
     raise ArgumentError, "#export requires a block" unless block_given?
 
-    if snap_application.exports.succeeded.
-        for_destination(destination).present? && !force
+    if snap_application.exports.for_destination(destination).
+        successful_or_in_flight.without(self).present? && !force
 
-      transition_to new_status: :failed
-      update(metadata: "Export failed because a previous export succeeded",
+      transition_to new_status: :unnecessary
+      update(metadata: "There is already another successful or in progress " \
+                       "export for application #{snap_application_id} via " \
+                       "#{destination}. If you really want to re-export " \
+                       "use the force flag",
              completed_at: Time.zone.now)
       return
     end
 
     transition_to new_status: :in_process
-    update(metadata: yield(snap_application), completed_at: Time.zone.now)
+    yield(snap_application, logger)
+    update(metadata: read_logger, completed_at: Time.zone.now)
     transition_to new_status: :succeeded
   rescue => e
-    update(metadata: "#{e.class} - #{e.message} #{e.backtrace.join("\n")}",
+    metadata = "#{read_logger}\n#{'*' * 20}\n#{'*' * 20}\n"
+    metadata += "#{e.class} - #{e.message} #{e.backtrace.join("\n")}"
+    update(metadata: metadata,
            completed_at: Time.zone.now)
     transition_to new_status: :failed
     raise e
   ensure
     snap_application.pdf.try(:close)
     snap_application.pdf.try(:unlink)
+  end
+
+  def logger
+    return @_logger if @_logger.present?
+
+    @_logger = LoggerFactory.create(
+      level: Logger::DEBUG,
+      output: logger_output,
+    )
+  end
+
+  def logger_output
+    @_logger_output ||= StringIO.new
+  end
+
+  def read_logger
+    logger_output.rewind
+    logger_output.read
   end
 
   def transition_to(new_status:)

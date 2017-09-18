@@ -58,8 +58,9 @@ module MiBridges
       SubmitPage,
     ].freeze
 
-    def initialize(snap_application:)
+    def initialize(snap_application:, logger: nil)
       @snap_application = snap_application
+      self.logger = logger
     end
 
     def run
@@ -69,7 +70,7 @@ module MiBridges
 
       page_classes.each do |klass|
         begin
-          page = klass.new(@snap_application)
+          page = klass.new(@snap_application, logger: logger)
           page.setup
           page.fill_in_required_fields
           page.continue
@@ -86,7 +87,17 @@ module MiBridges
 
     private
 
-    attr_reader :snap_application
+    def logger=(logger)
+      return @logger = logger if logger.present?
+      level = if ENV["DEBUG_DRIVE"] = "true"
+                Logger::DEBUG
+              else
+                Logger::INFO
+              end
+      @logger = LoggerFactory.create(level: level, output: STDOUT)
+    end
+
+    attr_reader :snap_application, :logger
 
     def setup
       Capybara.default_driver = ENV.fetch("WEB_DRIVER", "chrome").to_sym
@@ -94,7 +105,7 @@ module MiBridges
 
     def teardown
       if ENV["PRE_DEPLOY_TEST"] != "true"
-        MiBridges::Driver::BasePage.new(snap_application).close
+        MiBridges::Driver::BasePage.new(snap_application, logger: logger).close
       end
     end
 
