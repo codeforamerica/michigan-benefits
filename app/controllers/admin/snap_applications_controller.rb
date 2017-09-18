@@ -22,8 +22,10 @@ module Admin
       Enqueuer.create_and_enqueue_export!(snap_application: application,
                                           destination: :fax,
                                           force: true)
-      flash[:notice] = "Resent fax to #{application.office.number} " \
-        " for #{application.signature}!"
+
+      confirmation = "Resent fax to #{application.receiving_office.number}" \
+                     " for #{application.signature}!"
+      flash[:notice] = confirmation
       redirect_to admin_root_path
     end
 
