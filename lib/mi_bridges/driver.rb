@@ -107,7 +107,7 @@ module MiBridges
 
     def teardown
       if ENV["PRE_DEPLOY_TEST"] != "true"
-        MiBridges::Driver::BasePage.new(snap_application).close
+        MiBridges::Driver::BasePage.new(snap_application, logger: logger).close
       end
     end
 
