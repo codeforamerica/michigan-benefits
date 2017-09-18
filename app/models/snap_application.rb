@@ -37,7 +37,7 @@ class SnapApplication < ApplicationRecord
   end
 
   def close_pdf
-    if @pdf.exists?
+    if @pdf.present? && @pdf.respond_to?(:close)
       @pdf.close
       @pdf.unlink
     end
