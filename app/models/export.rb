@@ -1,15 +1,32 @@
 class Export < ApplicationRecord
+  VALID_STATUS = %i(
+    new
+    queued
+    in_process
+    succeeded
+    failed
+    unnecessary
+  ).freeze
+
+  VALID_DESTINATIONS = %i(
+    client_email
+    office_email
+    fax
+    sms
+    mi_bridges
+  ).freeze
+
   belongs_to :snap_application
-  validates :status, inclusion: { in: %i(new queued in_process succeeded failed
-                                         unnecessary) }
-  validates :destination, inclusion: { in: %i(fax email sms mi_bridges) }
+  validates :status, inclusion: { in: VALID_STATUS }
+  validates :destination, inclusion: { in: VALID_DESTINATIONS }
 
   attribute :destination, :symbol
   attribute :status, :symbol
 
   default_scope { order(updated_at: :desc) }
   scope :faxed, -> { where(destination: :fax) }
-  scope :emailed, -> { where(destination: :email) }
+  scope :emailed_client, -> { where(destination: :client_email) }
+  scope :emailed_office, -> { where(destination: :office_email) }
   scope :succeeded, -> { where(status: :succeeded) }
   scope :for_destination, ->(destination) { where(destination: destination) }
   scope :completed, -> { where.not(completed_at: nil) }

@@ -22,12 +22,16 @@ class SnapApplication < ApplicationRecord
     where.not(id: Export.faxed.succeeded.application_ids)
   end)
 
-  scope :emailed, (lambda do
-    where(id: Export.emailed.succeeded.application_ids)
+  scope :emailed_office, (lambda do
+    where(id: Export.emailed_office.succeeded.application_ids)
   end)
 
-  scope :unemailed, (lambda do
-    where.not(id: Export.emailed.succeeded.application_ids)
+  scope :emailed_client, (lambda do
+    where(id: Export.emailed_client.succeeded.application_ids)
+  end)
+
+  scope :unemailed_client, (lambda do
+    where.not(id: Export.emailed_client.succeeded.application_ids)
   end)
 
   def pdf
@@ -80,8 +84,12 @@ class SnapApplication < ApplicationRecord
     receiving_office.name
   end
 
+  def receiving_office_email
+    receiving_office.email
+  end
+
   def receiving_office
-    @receiving_office ||= FaxRecipient.new(snap_application: self)
+    @receiving_office ||= OfficeRecipient.new(snap_application: self)
   end
 
   def full_name

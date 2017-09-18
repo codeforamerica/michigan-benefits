@@ -35,8 +35,10 @@ class ExportFactory
       case export.destination
       when :fax
         FaxApplicationJob.perform_later(export: export)
-      when :email
-        EmailApplicationJob.perform_later(export: export)
+      when :client_email
+        ClientEmailApplicationJob.perform_later(export: export)
+      when :office_email
+        OfficeEmailApplicationJob.perform_later(export: export)
       when :sms
         ApplicationSubmittedSmsJob.perform_later(export: export)
       when :mi_bridges

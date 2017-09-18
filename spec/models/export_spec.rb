@@ -48,14 +48,14 @@ RSpec.describe Export do
     end
 
     it "doesn't care if destination is a symbol" do
-      export = build(:export, destination: :email)
+      export = build(:export, destination: :client_email)
       expect(export).to be_valid
     end
 
     it "doesn't run when another export for the given destination is in " \
       "process or has succeeded" do
-      previous = create(:export, destination: :email)
-      export = build(:export, destination: :email,
+      previous = create(:export, destination: :client_email)
+      export = build(:export, destination: :client_email,
                               snap_application: previous.snap_application)
       export.execute { "It's unnecessary!" }
 
@@ -65,8 +65,8 @@ RSpec.describe Export do
     it "does run if another export for the given destination is in process " \
       "or succeeded when forced" do
 
-      previous = create(:export, destination: :email)
-      export = build(:export, destination: :email,
+      previous = create(:export, destination: :client_email)
+      export = build(:export, destination: :client_email,
                               force: true,
                               snap_application: previous.snap_application)
 

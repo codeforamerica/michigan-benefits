@@ -44,7 +44,7 @@ RSpec.describe ExportFactory do
   describe "#enqueue" do
     before do
       allow(FaxApplicationJob).to receive(:perform_later)
-      allow(EmailApplicationJob).to receive(:perform_later)
+      allow(ClientEmailApplicationJob).to receive(:perform_later)
     end
 
     it "sends fax" do
@@ -55,11 +55,11 @@ RSpec.describe ExportFactory do
         with(export: export)
     end
 
-    it "sends email" do
+    it "sends email to client" do
       enqueuer = ExportFactory.new
-      export = build(:export, destination: :email)
+      export = build(:export, destination: :client_email)
       enqueuer.enqueue(export)
-      expect(EmailApplicationJob).to have_received(:perform_later).
+      expect(ClientEmailApplicationJob).to have_received(:perform_later).
         with(export: export)
     end
 
@@ -85,7 +85,7 @@ RSpec.describe ExportFactory do
       end.to raise_error(ActiveRecord::RecordInvalid)
       expect(export).not_to be_persisted
       expect(FaxApplicationJob).not_to have_received(:perform_later)
-      expect(EmailApplicationJob).not_to have_received(:perform_later)
+      expect(ClientEmailApplicationJob).not_to have_received(:perform_later)
     end
   end
 end

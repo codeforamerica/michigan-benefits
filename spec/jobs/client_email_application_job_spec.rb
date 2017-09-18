@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe EmailApplicationJob do
+RSpec.describe ClientEmailApplicationJob do
   describe "#perform" do
     it "creates a PDF with the snap application data" do
       snap_application = create(:snap_application, :with_member)
@@ -11,7 +11,7 @@ RSpec.describe EmailApplicationJob do
       allow(ApplicationMailer).to receive(:snap_application_notification).
         and_return(fake_mailer)
 
-      EmailApplicationJob.new.perform(export: export)
+      ClientEmailApplicationJob.new.perform(export: export)
 
       expect(ApplicationMailer).to(
         have_received(:snap_application_notification).

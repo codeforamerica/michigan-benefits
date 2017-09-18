@@ -8,4 +8,9 @@ class ApplicationMailer < ActionMailer::Base
     attachments["snap_application.pdf"] = File.read(file_name)
     mail to: recipient_email, subject: "Your SNAP application"
   end
+
+  def office_application_notification(file_name:, recipient_email:)
+    attachments["snap_application.pdf"] = File.read(file_name)
+    mail to: recipient_email, subject: "Newly submitted SNAP application"
+  end
 end

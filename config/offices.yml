@@ -45,19 +45,25 @@ defaults: &defaults
 development:
   <<: *defaults
   offices:
-    staging_sfax: # Technically this is to our sfax production fax; cuz you
-                  # can't fax urself
+    staging_sfax: # Technically this is to our sfax production fax;
+                  # because you can't fax yourself
       fax_number: "+18448487565"
+      email: "staging@example.com"
     union:
       fax_number: "+16173963015"
+      email: "union@example.com"
     clio:
       fax_number: "+16173963015"
+      email: "clio@example.com"
 production:
   <<: *defaults
   offices:
     staging_sfax:
       fax_number: "+18888433549"
+      email: "gcfengineering+heroku@codeforamerica.org"
     union:
       fax_number: "+18107607372"
+      email: "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov"
     clio:
       fax_number: "+18107602310"
+      email: "MDHHS-Genesee-Clio-App@michigan.gov"

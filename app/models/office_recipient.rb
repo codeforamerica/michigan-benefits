@@ -1,4 +1,4 @@
-class FaxRecipient
+class OfficeRecipient
   def initialize(snap_application:)
     @snap_application = snap_application
   end
@@ -9,6 +9,10 @@ class FaxRecipient
 
   def name
     office["name"]
+  end
+
+  def email
+    office["email"]
   end
 
   def office

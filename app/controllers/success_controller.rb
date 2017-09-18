@@ -21,12 +21,17 @@ class SuccessController < StandardStepsController
       destination: :sms,
       snap_application: current_snap_application,
     )
+
+    ExportFactory.create(
+      destination: :office_email,
+      snap_application: current_snap_application,
+    )
   end
 
   def after_successful_update_hook
     flash[:notice] = flash_notice
     ExportFactory.create(
-      destination: :email,
+      destination: :client_email,
       snap_application: current_snap_application,
     )
   end

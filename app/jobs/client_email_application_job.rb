@@ -1,4 +1,4 @@
-class EmailApplicationJob < ApplicationJob
+class ClientEmailApplicationJob < ApplicationJob
   def perform(export:)
     export.execute do |snap_application, logger|
       ApplicationMailer.snap_application_notification(

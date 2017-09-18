@@ -59,6 +59,7 @@ RSpec.describe SuccessController do
     context "no sms consent present" do
       it "does not send an SMS" do
         Delayed::Worker.delay_jobs = false
+
         with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
           current_app.update(
             sms_consented: false,
@@ -110,7 +111,7 @@ RSpec.describe SuccessController do
         put :update, params: params
 
         expect(ExportFactory).to have_received(:create).
-          with(snap_application: current_app, destination: :email)
+          with(snap_application: current_app, destination: :client_email)
       end
     end
 
