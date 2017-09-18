@@ -36,6 +36,8 @@ class Enqueuer
         EmailApplicationJob.perform_later(export: export)
       when :sms
         ApplicationSubmittedSmsJob.perform_later(export: export)
+      when :mi_bridges
+        SubmitApplicationViaMiBridgesJob.perform_later(export: export)
       else
         raise UnknownExportTypeError, export.destination
       end

@@ -2,7 +2,7 @@ class Export < ApplicationRecord
   belongs_to :snap_application
   validates :status, inclusion: { in: %i(new queued in_process succeeded failed
                                          unnecessary) }
-  validates :destination, inclusion: { in: %i(fax email sms) }
+  validates :destination, inclusion: { in: %i(fax email sms mi_bridges) }
 
   attribute :destination, :symbol
   attribute :status, :symbol
@@ -38,8 +38,8 @@ class Export < ApplicationRecord
     update(metadata: read_logger, completed_at: Time.zone.now)
     transition_to new_status: :succeeded
   rescue => e
-    metadata = "#{e.class} - #{e.message} #{e.backtrace.join("\n")}"
-    metadata += "\r\r\r#{read_logger}"
+    metadata = "#{read_logger}\n#{'*' * 20}\n#{'*' * 20}\n"
+    metadata += "#{e.class} - #{e.message} #{e.backtrace.join("\n")}"
     update(metadata: metadata,
            completed_at: Time.zone.now)
     transition_to new_status: :failed
