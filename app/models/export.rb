@@ -55,10 +55,10 @@ class Export < ApplicationRecord
   def logger
     return @_logger if @_logger.present?
 
-    logger = ActiveSupport::Logger.new(logger_output)
-    logger.level = Logger::DEBUG
-    logger.formatter = Rails.application.config.log_formatter
-    @_logger = ActiveSupport::TaggedLogging.new(logger)
+    @_logger = LoggerFactory.create(
+      level: Logger::DEBUG,
+      output: logger_output,
+    )
   end
 
   def logger_output

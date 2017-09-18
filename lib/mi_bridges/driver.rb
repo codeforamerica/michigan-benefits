@@ -89,14 +89,12 @@ module MiBridges
 
     def logger=(logger)
       return @logger = logger if logger.present?
-      logger = ActiveSupport::Logger.new(STDOUT)
-      logger.level = if ENV["DEBUG_DRIVE"] = "true"
-                       Logger::DEBUG
-                     else
-                       Logger::INFO
-                     end
-      logger.formatter = Rails.application.config.log_formatter
-      @logger = ActiveSupport::TaggedLogging.new(logger)
+      level = if ENV["DEBUG_DRIVE"] = "true"
+                Logger::DEBUG
+              else
+                Logger::INFO
+              end
+      @logger = LoggerFactory.create(level: level, output: STDOUT)
     end
 
     attr_reader :snap_application, :logger
