@@ -1,7 +1,4 @@
 class Export < ApplicationRecord
-  DELAY_THRESHOLD = 30
-  class UnknownExportTypeError < StandardError; end
-
   belongs_to :snap_application
   validates :status, inclusion: { in: %i(new queued in_process succeeded failed
                                          unnecessary) }
@@ -18,18 +15,6 @@ class Export < ApplicationRecord
   scope :completed, -> { where.not(completed_at: nil) }
   scope :application_ids, -> { pluck(:snap_application_id) }
   scope :latest, -> { first }
-
-  def self.create_and_enqueue(params)
-    Enqueuer.new.create_and_enqueue_export(params)
-  end
-
-  def self.create_and_enqueue!(params)
-    Enqueuer.new.create_and_enqueue_export!(params)
-  end
-
-  def self.enqueue_faxes
-    Enqueuer.new.enqueue_faxes
-  end
 
   def execute
     raise ArgumentError, "#export requires a block" unless block_given?
