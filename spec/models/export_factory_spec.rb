@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Enqueuer do
+RSpec.describe ExportFactory do
   describe "#enqueue_faxes" do
     it "schedules jobs for signed, unfaxed application updated awhile ago" do
-      after_threshold = (Enqueuer::DELAY_THRESHOLD + 1).minutes.ago
-      before_threshold = (Enqueuer::DELAY_THRESHOLD - 1).minutes.ago
+      after_threshold = (ExportFactory::DELAY_THRESHOLD + 1).minutes.ago
+      before_threshold = (ExportFactory::DELAY_THRESHOLD - 1).minutes.ago
       signed_unfaxed_updated_awhile_ago = create(:snap_application,
                                                  signed_at: after_threshold,
                                                  updated_at: after_threshold)
@@ -23,7 +23,7 @@ RSpec.describe Enqueuer do
 
       allow(FaxApplicationJob).to receive(:perform_later)
 
-      Enqueuer.new.enqueue_faxes
+      ExportFactory.export_unfaxed_snap_applications
 
       expect(signed_faxed_updated_awhile_ago.exports.length).to eql 1
       expect(unsigned_unfaxed_updated_awhile_ago.exports).to be_empty
@@ -48,7 +48,7 @@ RSpec.describe Enqueuer do
     end
 
     it "sends fax" do
-      enqueuer = Enqueuer.new
+      enqueuer = ExportFactory.new
       export = build(:export, destination: :fax)
       enqueuer.enqueue(export)
       expect(FaxApplicationJob).to have_received(:perform_later).
@@ -56,7 +56,7 @@ RSpec.describe Enqueuer do
     end
 
     it "sends email" do
-      enqueuer = Enqueuer.new
+      enqueuer = ExportFactory.new
       export = build(:export, destination: :email)
       enqueuer.enqueue(export)
       expect(EmailApplicationJob).to have_received(:perform_later).
@@ -64,21 +64,21 @@ RSpec.describe Enqueuer do
     end
 
     it "transitions status" do
-      enqueuer = Enqueuer.new
+      enqueuer = ExportFactory.new
       export = build(:export)
       enqueuer.enqueue(export)
       expect(export.status).to eq :queued
     end
 
     it "persists the export if it hasn't been persisted yet" do
-      enqueuer = Enqueuer.new
+      enqueuer = ExportFactory.new
       export = build(:export)
       enqueuer.enqueue(export)
       expect(export).to be_persisted
     end
 
     it "raises an exception if the export isn't valid" do
-      enqueuer = Enqueuer.new
+      enqueuer = ExportFactory.new
       export = build(:export, destination: nil)
       expect do
         enqueuer.enqueue(export)

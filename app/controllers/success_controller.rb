@@ -12,12 +12,12 @@ class SuccessController < StandardStepsController
   private
 
   def before_rendering_edit_hook
-    Enqueuer.create_and_enqueue_export(
+    ExportFactory.create(
       destination: :fax,
       snap_application: current_snap_application,
     )
 
-    Enqueuer.create_and_enqueue_export(
+    ExportFactory.create(
       destination: :sms,
       snap_application: current_snap_application,
     )
@@ -25,7 +25,7 @@ class SuccessController < StandardStepsController
 
   def after_successful_update_hook
     flash[:notice] = flash_notice
-    Enqueuer.create_and_enqueue_export(
+    ExportFactory.create(
       destination: :email,
       snap_application: current_snap_application,
     )

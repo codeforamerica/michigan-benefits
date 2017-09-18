@@ -15,11 +15,11 @@ RSpec.describe SuccessController do
     end
 
     it "faxes the snap application" do
-      allow(Enqueuer).to receive(:create_and_enqueue_export)
+      allow(ExportFactory).to receive(:create)
 
       get :edit
 
-      expect(Enqueuer).to have_received(:create_and_enqueue_export).
+      expect(ExportFactory).to have_received(:create).
         with(snap_application: current_app, destination: :fax)
     end
 
@@ -105,13 +105,13 @@ RSpec.describe SuccessController do
       end
 
       it "Enqueues an export of the snap application via email" do
-        allow(Enqueuer).to receive(:create_and_enqueue_export)
+        allow(ExportFactory).to receive(:create)
 
         params = { step: { email: "new_email@example.com" } }
 
         put :update, params: params
 
-        expect(Enqueuer).to have_received(:create_and_enqueue_export).
+        expect(ExportFactory).to have_received(:create).
           with(snap_application: current_app, destination: :email)
       end
     end
