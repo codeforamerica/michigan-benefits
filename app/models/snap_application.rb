@@ -36,6 +36,13 @@ class SnapApplication < ApplicationRecord
     ).completed_file
   end
 
+  def close_pdf
+    if @pdf.present? && @pdf.respond_to?(:close)
+      @pdf.close
+      @pdf.unlink
+    end
+  end
+
   def monthly_gross_income
     [
       monthly_additional_income,

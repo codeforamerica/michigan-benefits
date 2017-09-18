@@ -41,15 +41,22 @@ class Export < ApplicationRecord
     update(metadata: read_logger, completed_at: Time.zone.now)
     transition_to new_status: :succeeded
   rescue => e
+    fail_with_exception(e)
+    raise e
+  ensure
+    begin
+      snap_application.close_pdf
+    rescue => e
+      fail_with_exception(e)
+    end
+  end
+
+  def fail_with_exception(e)
     metadata = "#{read_logger}\n#{'*' * 20}\n#{'*' * 20}\n"
     metadata += "#{e.class} - #{e.message} #{e.backtrace.join("\n")}"
     update(metadata: metadata,
            completed_at: Time.zone.now)
     transition_to new_status: :failed
-    raise e
-  ensure
-    snap_application.pdf.try(:close)
-    snap_application.pdf.try(:unlink)
   end
 
   def logger

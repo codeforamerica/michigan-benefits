@@ -15,7 +15,7 @@ RSpec.describe Export do
 
     it "frees up the snap applications PDF" do
       export = build(:export)
-      export.execute { "I'm a noop" }
+      export.execute { export.snap_application.pdf }
       expect(export.snap_application.pdf).to be_closed
     end
 
@@ -88,6 +88,19 @@ RSpec.describe Export do
       expect(export.metadata).to include "An info line"
       expect(export.metadata).to include "A warning line"
       expect(export.metadata).to include "An error line"
+    end
+
+    it "fails exports that happen in the ensure block" do
+      export = build(:export)
+      allow(export.snap_application).to receive(:close_pdf) { raise "Oh nooo" }
+
+      export.execute do |_snap_application, logger|
+        logger.info("I succeeded!")
+      end
+
+      expect(export.status).to eq :failed
+      expect(export.metadata).to include "I succeeded!"
+      expect(export.metadata).to include "Oh nooo"
     end
   end
 end
