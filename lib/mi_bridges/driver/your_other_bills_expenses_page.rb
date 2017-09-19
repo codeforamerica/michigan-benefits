@@ -10,8 +10,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      delegate :first_name, to: :primary_member
-
       def setup
         check_page_title(
           "Your Other Bills / Expenses",
@@ -34,7 +32,7 @@ module MiBridges
         check_in_section(
           "starChildSpousalSupportPayments",
           condition: court_ordered?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -42,7 +40,7 @@ module MiBridges
         check_in_section(
           "starMedicalBills",
           condition: monthly_medical_expenses?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 

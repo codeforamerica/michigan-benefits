@@ -8,8 +8,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      delegate :first_name, to: :primary_member
-
       def setup; end
 
       def fill_in_required_fields
@@ -27,7 +25,7 @@ module MiBridges
       end
 
       def section_name
-        "star#{first_name.capitalize}sHousingBills"
+        "star#{first_name_section(primary_member).capitalize}sHousingBills"
       end
     end
   end

@@ -11,8 +11,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      delegate :first_name, to: :primary_member
-
       def setup
         check_page_title(
           "Other Assets",
@@ -38,7 +36,7 @@ module MiBridges
         check_in_section(
           "starVehicles",
           condition: vehicle_income?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -46,7 +44,7 @@ module MiBridges
         check_in_section(
           "starRealEstate",
           condition: real_estate_income?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -58,7 +56,7 @@ module MiBridges
         check_in_section(
           "starLifeInsurance",
           condition: financial_accounts.include?("life_insurance"),
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 

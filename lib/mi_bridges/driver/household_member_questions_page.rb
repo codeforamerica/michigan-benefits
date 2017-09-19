@@ -9,8 +9,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      delegate :first_name, to: :primary_member
-
       def setup
         check_page_title(
           "Household Member Questions",
@@ -35,7 +33,7 @@ module MiBridges
         check_in_section(
           "starBlindnessorDisability",
           condition: anyone_disabled?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -55,7 +53,7 @@ module MiBridges
         check_in_section(
           "starSSIBenefit",
           condition: anyone_disabled?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
