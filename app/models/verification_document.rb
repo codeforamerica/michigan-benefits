@@ -6,6 +6,7 @@ class VerificationDocument
 
   def file
     downloaded_document = RemoteDocument.new(url).download
+    return if downloaded_document.nil?
     return downloaded_document.tempfile if downloaded_document.pdf?
 
     tempfile = Tempfile.new([SecureRandom.hex, ".pdf"])
