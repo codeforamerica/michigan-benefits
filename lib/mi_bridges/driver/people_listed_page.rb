@@ -5,7 +5,11 @@ module MiBridges
     class PeopleListedPage < BasePage
       delegate :primary_member, to: :snap_application
 
-      def setup; end
+      def setup
+        check_page_title(
+          "People Listed On Your Application",
+        )
+      end
 
       def fill_in_required_fields
         select primary_member.marital_status.titleize, from: "maritalStatus"

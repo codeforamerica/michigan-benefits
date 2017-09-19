@@ -7,7 +7,9 @@ module MiBridges
       MAXIMUM_USER_ID_CHAR_COUNT = 20
       MAXIMUM_PASSWORD_CHAR_COUNT = 16
 
-      def setup; end
+      def setup
+        check_page_title("Setting Up Your Account")
+      end
 
       def fill_in_required_fields
         if driver_application.blank?

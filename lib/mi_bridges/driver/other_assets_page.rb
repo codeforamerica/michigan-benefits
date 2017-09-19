@@ -13,7 +13,11 @@ module MiBridges
 
       delegate :first_name, to: :primary_member
 
-      def setup; end
+      def setup
+        check_page_title(
+          "Other Assets",
+        )
+      end
 
       def fill_in_required_fields
         check_vehicles

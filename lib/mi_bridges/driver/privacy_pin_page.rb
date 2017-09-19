@@ -3,7 +3,11 @@
 module MiBridges
   class Driver
     class PrivacyPinPage < BasePage
-      def setup; end
+      def setup
+        check_page_title(
+          "Privacy PIN",
+        )
+      end
 
       def fill_in_required_fields
         click_id(this_is_a_private_computer_id)

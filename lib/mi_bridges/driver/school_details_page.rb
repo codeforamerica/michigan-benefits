@@ -1,6 +1,12 @@
 module MiBridges
   class Driver
     class SchoolDetailsPage < ClickNextPage
+      def setup
+        check_page_title(
+          "School Enrollment",
+        )
+      end
+
       def fill_in_required_fields
         choose_enrollment_time_for(snap_application.primary_member)
         choose_highest_grade_completion_for(snap_application.primary_member)

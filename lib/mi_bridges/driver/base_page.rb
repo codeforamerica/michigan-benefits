@@ -64,6 +64,11 @@ module MiBridges
 
       attr_reader :snap_application, :logger
 
+      def check_page_title(title)
+        id = title.gsub(/[^0-9A-Za-z]/, "")
+        page.find(:css, "##{id}")
+      end
+
       def log(description, *text)
         logger.tagged(self.class.to_s) do
           logger.debug("#{description.upcase}: #{text.join(', ')}")

@@ -11,7 +11,11 @@ module MiBridges
 
       delegate :first_name, to: :primary_member
 
-      def setup; end
+      def setup
+        check_page_title(
+          "Household Member Questions",
+        )
+      end
 
       def fill_in_required_fields
         check_blindness_or_disability
