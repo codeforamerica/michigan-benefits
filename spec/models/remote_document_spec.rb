@@ -10,6 +10,7 @@ describe RemoteDocument do
 
         downloaded = RemoteDocument.new(document_url).download
 
+        expect(downloaded).not_to eq nil
         expect(file_type(downloaded.tempfile.path)).to eq "image/jpeg"
       end
 
@@ -24,6 +25,7 @@ describe RemoteDocument do
         downloaded = RemoteDocument.new(document_url).download
         imagemagick_file = MiniMagick::Image.open(downloaded.tempfile.path)
 
+        expect(downloaded).not_to eq nil
         expect(imagemagick_file.width < imagemagick_file.height).to eq true
       end
     end
@@ -43,6 +45,7 @@ describe RemoteDocument do
 
         downloaded = remote_document.download
 
+        expect(downloaded).not_to eq nil
         expect(s3_fake).to have_received(:get_object).with(
           {
             bucket: bucket,
@@ -50,6 +53,23 @@ describe RemoteDocument do
           },
           target: downloaded.tempfile.path,
         )
+      end
+    end
+
+    context "downloading a non-existent S3 object" do
+      it "returns nil" do
+        s3_fake = double(:s3)
+        allow(s3_fake).to receive(:get_object).
+          and_raise(Aws::S3::Errors::NoSuchKey.new("req", "resp"))
+
+        document_url = "https://bucket.s3.amazonaws.com/s3_object_path"
+        remote_document = RemoteDocument.new(document_url)
+        allow(remote_document).to receive(:s3).and_return(s3_fake)
+
+        stub_request(:get, document_url).
+          to_raise(OpenURI::HTTPError.new("Error", nil))
+
+        expect(remote_document.download).to eq nil
       end
     end
   end

@@ -44,6 +44,20 @@ describe VerificationDocument do
       end
     end
 
+    context "file does not successfully download" do
+      it "returns nil" do
+        remote_document = double("remote_document", download: nil)
+        allow(RemoteDocument).to receive(:new).and_return(remote_document)
+
+        document = VerificationDocument.new(
+          url: "doc url",
+          snap_application: "snap application",
+        )
+
+        expect(document.file).to eq nil
+      end
+    end
+
     def temp_image_file
       Tempfile.new(["image", ".jpg"]).tap do |f|
         f.write(File.read("spec/fixtures/image.jpg"))

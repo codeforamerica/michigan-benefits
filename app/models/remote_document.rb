@@ -11,9 +11,8 @@ class RemoteDocument
   def download
     open(url) { |url_file| tempfile.write(url_file.read) }
     self
-  rescue OpenURI::HTTPError => _e
-    s3_download
-    self
+  rescue OpenURI::HTTPError
+    return self if s3_download
   ensure
     rotate if landscape_image?
   end
@@ -54,6 +53,9 @@ class RemoteDocument
       },
       target: tempfile.path,
     )
+    true
+  rescue Aws::S3::Errors::NoSuchKey
+    false
   end
 
   def s3
