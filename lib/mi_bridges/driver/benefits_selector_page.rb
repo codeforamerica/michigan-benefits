@@ -3,11 +3,9 @@
 module MiBridges
   class Driver
     class BenefitsSelectorPage < BasePage
-      def setup
-        check_page_title(
-          "Which Benefits Would You Like to Apply For? (All Programs)",
-        )
-      end
+      TITLE = "Which Benefits Would You Like to Apply For? (All Programs)"
+
+      def setup; end
 
       def fill_in_required_fields
         click_id(food_assistance_checkbox)

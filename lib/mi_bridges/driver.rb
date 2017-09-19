@@ -6,6 +6,8 @@ require "capybara/drivers/headless_chrome"
 
 module MiBridges
   class Driver
+    include Capybara::DSL
+
     SIGN_UP_FLOW = [
       HomePage,
       CreateAccountPage,
@@ -14,15 +16,6 @@ module MiBridges
       PrivacyPinPage,
       BenefitsOverviewPage,
       FraudPenaltyAffidavitPage,
-    ].freeze
-
-    LOGIN_FLOW = [
-      HomeLogInPage,
-      MultiFactorAuthPage,
-      SecurityQuestionsPage,
-      PrivacyPinPage,
-      ContinueApplicationPage,
-      GoBackToApplicationPage,
     ].freeze
 
     APPLY_FLOW = [
@@ -58,6 +51,15 @@ module MiBridges
       SubmitPage,
     ].freeze
 
+    LOGIN_FLOW = [
+      HomeLogInPage,
+      MultiFactorAuthPage,
+      SecurityQuestionsPage,
+      PrivacyPinPage,
+      ContinueApplicationPage,
+      GoBackToApplicationPage,
+    ].freeze
+
     def initialize(snap_application:, logger: nil)
       @snap_application = snap_application
       self.logger = logger
@@ -66,23 +68,31 @@ module MiBridges
     def run
       setup
 
-      page_classes = SIGN_UP_FLOW + APPLY_FLOW
-
-      page_classes.each do |klass|
+      SIGN_UP_FLOW.each do |klass|
         begin
           page = klass.new(@snap_application, logger: logger)
           page.setup
           page.fill_in_required_fields
           page.continue
         rescue StandardError => e
-          # rubocop:disable Debugger
-          binding.pry if ENV["DEBUG_DRIVE"]
-          # rubocop:enable Debugger
-          throw e
+          debug(e)
         end
       end
 
+      complete_flow_steps
       teardown
+    end
+
+    def complete_flow_steps
+      while page_title != SubmitPage::TITLE
+        klass = find_page_klass
+        page = klass.new(@snap_application, logger: logger)
+        page.setup
+        page.fill_in_required_fields
+        page.continue
+      end
+    rescue StandardError => e
+      debug(e)
     end
 
     private
@@ -97,10 +107,27 @@ module MiBridges
       @logger = LoggerFactory.create(level: level, output: STDOUT)
     end
 
+    def debug(e)
+      # rubocop:disable Debugger
+      binding.pry if ENV["DEBUG_DRIVE"]
+      # rubocop:enable Debugger
+      throw e
+    end
+
     attr_reader :snap_application, :logger
 
     def setup
       Capybara.default_driver = ENV.fetch("WEB_DRIVER", "chrome").to_sym
+    end
+
+    def find_page_klass
+      APPLY_FLOW.detect do |page|
+        page::TITLE == page_title
+      end
+    end
+
+    def page_title
+      page.find("h1").text
     end
 
     def teardown

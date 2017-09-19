@@ -3,11 +3,9 @@
 module MiBridges
   class Driver
     class StartPage < BasePage
-      def setup
-        check_page_title(
-          "Help With Filing MI Bridges Application",
-        )
-      end
+      TITLE = "Help With Filing MI Bridges Application"
+
+      def setup; end
 
       def fill_in_required_fields
         click_id(a_staff_person_or_volunteer_at_an_agency)

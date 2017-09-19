@@ -3,8 +3,10 @@
 module MiBridges
   class Driver
     class CreateAccountConfirmationPage < BasePage
+      TITLE = "Congratulations"
+
       def setup
-        check_page_title("Congratulations")
+        check_page_title(TITLE)
       end
 
       def fill_in_required_fields; end

@@ -3,17 +3,15 @@
 module MiBridges
   class Driver
     class PersonalInformationPage < BasePage
+      TITLE = "Getting Started With Your Application"
+
       delegate(
         :primary_member,
         :residential_address,
         to: :snap_application,
       )
 
-      def setup
-        check_page_title(
-          "Getting Started With Your Application",
-        )
-      end
+      def setup; end
 
       def fill_in_required_fields
         fill_in_name

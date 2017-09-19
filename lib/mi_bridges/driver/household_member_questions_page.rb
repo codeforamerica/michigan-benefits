@@ -3,17 +3,15 @@
 module MiBridges
   class Driver
     class HouseholdMemberQuestionsPage < BasePage
+      TITLE = "Household Member Questions"
+
       delegate(
         :anyone_disabled?,
         :primary_member,
         to: :snap_application,
       )
 
-      def setup
-        check_page_title(
-          "Household Member Questions",
-        )
-      end
+      def setup; end
 
       def fill_in_required_fields
         check_blindness_or_disability

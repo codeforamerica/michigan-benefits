@@ -1,11 +1,7 @@
 module MiBridges
   class Driver
     class VeteranInformationPage < ClickNextPage
-      def setup
-        check_page_title(
-          "Veteran Information",
-        )
-      end
+      TITLE = "Veteran Information".freeze
     end
   end
 end

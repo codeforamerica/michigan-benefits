@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class YourOtherBillsExpensesPage < BasePage
+      TITLE = "Your Other Bills / Expenses"
+
       delegate(
         :court_ordered?,
         :monthly_medical_expenses?,
@@ -10,11 +12,7 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup
-        check_page_title(
-          "Your Other Bills / Expenses",
-        )
-      end
+      def setup; end
 
       def fill_in_required_fields
         check_child_spousal_payments

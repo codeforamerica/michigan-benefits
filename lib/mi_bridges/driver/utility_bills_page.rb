@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class UtilityBillsPage < BasePage
+      TITLE = "Utility Bills"
+
       delegate(
         :primary_member,
         :utility_cooling?,
