@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  match "/delayed_job" => DelayedJobWeb, anchor: false, via: %i(get post)
+
   namespace :admin do
     resources :snap_applications do
       post "resend_fax", on: :member

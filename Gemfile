@@ -12,6 +12,7 @@ gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "capybara"
 gem "delayed_job_active_record"
+gem "delayed_job_web"
 gem "faraday"
 gem "jquery-rails"
 gem "mimemagic"

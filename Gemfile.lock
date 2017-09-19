@@ -114,6 +114,10 @@ GEM
     delayed_job_active_record (4.1.2)
       activerecord (>= 3.0, < 5.2)
       delayed_job (>= 3.0, < 5)
+    delayed_job_web (1.4)
+      activerecord (> 3.0.0)
+      delayed_job (> 2.0.3)
+      sinatra (>= 1.4.4)
     diff-lcs (1.3)
     docile (1.1.5)
     dotenv (2.2.1)
@@ -395,6 +399,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   database_cleaner
   delayed_job_active_record
+  delayed_job_web
   dotenv-rails
   factory_girl_rails
   faraday
