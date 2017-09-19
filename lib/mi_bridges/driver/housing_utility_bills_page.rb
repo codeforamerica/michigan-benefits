@@ -8,8 +8,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      delegate :first_name, to: :primary_member
-
       def setup
         check_page_title(
           "Housing and Utility Bills",
@@ -33,7 +31,7 @@ module MiBridges
         check_in_section(
           "starHousingBills",
           condition: true,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -41,7 +39,7 @@ module MiBridges
         check_in_section(
           "starUtilityBills",
           condition: true,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 

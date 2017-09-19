@@ -10,8 +10,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      delegate :first_name, to: :primary_member
-
       def setup
         check_page_title(
           "Liquid Assets",
@@ -35,7 +33,7 @@ module MiBridges
         check_in_section(
           "starCashonHand",
           condition: total_money?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -43,7 +41,7 @@ module MiBridges
         check_in_section(
           "starSavingsAccount",
           condition: financial_accounts.include?("savings_account"),
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -51,7 +49,7 @@ module MiBridges
         check_in_section(
           "starCheckingAccount",
           condition: financial_accounts.include?("checking_account"),
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 

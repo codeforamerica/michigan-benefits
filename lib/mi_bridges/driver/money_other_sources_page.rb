@@ -10,8 +10,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      delegate :first_name, to: :primary_member
-
       def setup
         check_page_title(
           "Money From Other Sources",
@@ -39,7 +37,7 @@ module MiBridges
         check_in_section(
           "starOtherIncome",
           condition: income_other?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -47,7 +45,7 @@ module MiBridges
         check_in_section(
           "starSupplementalSecurityIncomeSSI",
           condition: income_ssi_or_disability?,
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 

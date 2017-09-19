@@ -7,7 +7,6 @@ module MiBridges
 
       delegate(
         :employment_status,
-        :first_name,
         to: :primary_member,
       )
 
@@ -33,7 +32,7 @@ module MiBridges
         check_in_section(
           "starCurrentorRecentJob",
           condition: employment_status == "employed",
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 
@@ -41,7 +40,7 @@ module MiBridges
         check_in_section(
           "starSelfEmployment",
           condition: employment_status == "self_employed",
-          for_label: first_name,
+          for_label: primary_member.first_name_and_age,
         )
       end
 

@@ -69,6 +69,10 @@ module MiBridges
         page.find(:css, "##{id}")
       end
 
+      def first_name_section(member)
+        member.first_name_and_age.gsub(/[^0-9A-Za-z]/, "")
+      end
+
       def log(description, *text)
         logger.tagged(self.class.to_s) do
           logger.debug("#{description.upcase}: #{text.join(', ')}")

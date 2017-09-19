@@ -43,7 +43,18 @@ class Member < ApplicationRecord
     birthday.strftime("%m/%d/%Y")
   end
 
+  def first_name_and_age
+    "#{first_name} (age #{age})"
+  end
+
   private
+
+  def age
+    today = Date.today
+    age = today.year - birthday.year
+    before_birthday = today.strftime("%m%d") < birthday.strftime("%m%d")
+    age - (before_birthday ? 1 : 0)
+  end
 
   def employed_monthly_income
     return if employed_pay_quantity.nil?

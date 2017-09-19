@@ -38,5 +38,20 @@ RSpec.describe Member do
         )
       end
     end
+
+    describe "#first_name_and_age" do
+      it "returns first name and age" do
+        time = Time.utc(2008, 9, 1, 10, 5, 0)
+        Timecop.freeze(time) do
+          member = build(
+            :member,
+            first_name: "Lala",
+            birthday: DateTime.parse("June 20, 1990"),
+          )
+
+          expect(member.first_name_and_age).to eq "Lala (age 18)"
+        end
+      end
+    end
   end
 end
