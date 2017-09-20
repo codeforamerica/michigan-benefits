@@ -23,10 +23,13 @@ module MiBridges
       BenefitsSelectorPage,
       ProgramBenefitsPage,
       PersonalInformationPage,
+      MailingAddressPage,
       BasicInformationSummaryPage,
       PeopleListedPage,
+      PregnancyInformationPage,
       HouseholdMembersSummaryPage,
       JobIncomeInformationPage,
+      MoreAboutSelfEmploymentPage,
       JobIncomeSummaryPage,
       MoneyOtherSourcesPage,
       MoneyOtherSourcesSummaryPage,
@@ -124,7 +127,8 @@ module MiBridges
 
     def find_page_klass
       APPLY_FLOW.detect do |page|
-        page::TITLE == page_title
+        page_title == page::TITLE ||
+          page_title.match?(page::TITLE)
       end
     end
 

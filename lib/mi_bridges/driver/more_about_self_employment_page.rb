@@ -1,0 +1,45 @@
+# frozen_string_literal: true
+
+module MiBridges
+  class Driver
+    class MoreAboutSelfEmploymentPage < BasePage
+      TITLE = /More About .*'s Self-Employment/
+
+      delegate :members, to: :snap_application
+
+      def setup; end
+
+      def fill_in_required_fields
+        members.each do |member|
+          fill_in_all_programs_for(member)
+          fill_in_fap_program_benefits_for(member)
+        end
+      end
+
+      def continue
+        click_on "Next"
+      end
+
+      private
+
+      def fill_in_all_programs_for(member)
+        name = member.first_name_and_age
+        question_type = "What type of self-employment does #{name} have?"
+        select "Other", from: question_type
+        question_other = "If self-employment type is Other, "\
+          "what type of work does #{name} do?"
+        fill_in question_other, with: member.self_employed_profession
+      end
+
+      def fill_in_fap_program_benefits_for(member)
+        name = member.first_name_and_age
+        question_income = "What is the gross monthly income amount "\
+          "from #{name}'s self-employment before any expenses?"
+        fill_in question_income, with: member.self_employed_monthly_income
+        question_expenses = "How much are #{name}'s business "\
+          "expenses each month?"
+        fill_in question_expenses, with: member.self_employed_monthly_expenses
+      end
+    end
+  end
+end
