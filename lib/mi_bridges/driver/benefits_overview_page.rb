@@ -2,15 +2,11 @@
 
 module MiBridges
   class Driver
-    class BenefitsOverviewPage < BasePage
+    class BenefitsOverviewPage < ClickNextPage
+      TITLE = "Benefits Program Overview"
+
       def setup
-        check_page_title("Benefits Program Overview")
-      end
-
-      def fill_in_required_fields; end
-
-      def continue
-        click_on "Next"
+        check_page_title(TITLE)
       end
     end
   end

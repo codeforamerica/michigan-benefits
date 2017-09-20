@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class OtherAssetsPage < BasePage
+      TITLE = "Other Assets"
+
       delegate(
         :financial_accounts,
         :primary_member,
@@ -11,11 +13,7 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup
-        check_page_title(
-          "Other Assets",
-        )
-      end
+      def setup; end
 
       def fill_in_required_fields
         check_vehicles

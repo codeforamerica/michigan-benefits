@@ -3,18 +3,12 @@
 module MiBridges
   class Driver
     class JobIncomeInformationPage < BasePage
+      TITLE = "Job Income Information"
+
       delegate :primary_member, to: :snap_application
+      delegate :employment_status, to: :primary_member
 
-      delegate(
-        :employment_status,
-        to: :primary_member,
-      )
-
-      def setup
-        check_page_title(
-          "Job Income Information",
-        )
-      end
+      def setup; end
 
       def fill_in_required_fields
         check_fulltime_employment_status

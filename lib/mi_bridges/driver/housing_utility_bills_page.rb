@@ -3,16 +3,11 @@
 module MiBridges
   class Driver
     class HousingUtilityBillsPage < BasePage
-      delegate(
-        :primary_member,
-        to: :snap_application,
-      )
+      TITLE = "Housing and Utility Bills"
 
-      def setup
-        check_page_title(
-          "Housing and Utility Bills",
-        )
-      end
+      delegate :primary_member, to: :snap_application
+
+      def setup; end
 
       def fill_in_required_fields
         check_housing_bills

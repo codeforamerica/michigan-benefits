@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class MoneyOtherSourcesPage < BasePage
+      TITLE = "Money From Other Sources"
+
       delegate(
         :income_other?,
         :income_ssi_or_disability?,
@@ -10,11 +12,7 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup
-        check_page_title(
-          "Money From Other Sources",
-        )
-      end
+      def setup; end
 
       def fill_in_required_fields
         check_retirement_survivors_disability_insurance

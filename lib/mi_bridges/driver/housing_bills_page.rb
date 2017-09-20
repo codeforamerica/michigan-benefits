@@ -3,10 +3,9 @@
 module MiBridges
   class Driver
     class HousingBillsPage < BasePage
-      delegate(
-        :primary_member,
-        to: :snap_application,
-      )
+      TITLE = "Housing Bills"
+
+      delegate :primary_member, to: :snap_application
 
       def setup; end
 

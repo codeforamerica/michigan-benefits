@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class LiquidAssetsPage < BasePage
+      TITLE = "Liquid Assets"
+
       delegate(
         :financial_accounts,
         :primary_member,
@@ -10,11 +12,7 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup
-        check_page_title(
-          "Liquid Assets",
-        )
-      end
+      def setup; end
 
       def fill_in_required_fields
         check_cash_on_hand

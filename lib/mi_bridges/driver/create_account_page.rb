@@ -6,9 +6,10 @@ module MiBridges
       MAXIMUM_SECRET_QUESTION_ANSWER_CHAR_COUNT = 20
       MAXIMUM_USER_ID_CHAR_COUNT = 20
       MAXIMUM_PASSWORD_CHAR_COUNT = 16
+      TITLE = "Setting Up Your Account"
 
       def setup
-        check_page_title("Setting Up Your Account")
+        check_page_title(TITLE)
       end
 
       def fill_in_required_fields

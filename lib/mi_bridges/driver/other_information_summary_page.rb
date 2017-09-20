@@ -1,11 +1,7 @@
 module MiBridges
   class Driver
     class OtherInformationSummaryPage < ClickNextPage
-      def setup
-        check_page_title(
-          "Other Information Summary",
-        )
-      end
+      TITLE = "Other Information Summary".freeze
     end
   end
 end

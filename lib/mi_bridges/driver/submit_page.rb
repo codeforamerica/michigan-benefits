@@ -2,11 +2,7 @@
 module MiBridges
   class Driver
     class SubmitPage < DebuggerPage
-      def setup
-        check_page_title(
-          "Before You Submit the Application",
-        )
-      end
+      TITLE = "Before You Submit the Application".freeze
     end
   end
 end
