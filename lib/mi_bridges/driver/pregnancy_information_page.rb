@@ -11,7 +11,7 @@ module MiBridges
 
       def fill_in_required_fields
         if no_one_pregnant?
-          click_no_one
+          check_no_one_in_section "starPregnancyAllPrograms"
         else
           members.each do |member|
             check_in_section(
@@ -28,10 +28,6 @@ module MiBridges
       end
 
       private
-
-      def click_no_one
-        check_in_section "starPregnancyAllPrograms"
-      end
 
       def no_one_pregnant?
         members.none?(&:new_mom?)

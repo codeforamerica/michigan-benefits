@@ -52,6 +52,10 @@ module MiBridges
         js_click_selector("#{widget} #{selector}")
       end
 
+      def check_no_one_in_section(section)
+        check_in_section(section)
+      end
+
       def selector_for_radio(name)
         "label:contains('#{name}') input"
       end
