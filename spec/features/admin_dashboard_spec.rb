@@ -4,6 +4,7 @@ RSpec.feature "Submit application with minimal information" do
   before do
     page.driver.browser.current_session.basic_authorize("admin", "password")
   end
+
   scenario "The stats are accurate", javascript: true do
     10.times { create(:snap_application, signed_at: nil) }
     1.times { create(:snap_application, :emailed_client, signed_at: nil) }
