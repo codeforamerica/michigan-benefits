@@ -38,3 +38,5 @@ exclude_paths:
 - spec/
 - vendor/
 - bin/
+- app/dashboards/
+- app/controllers/admin/
