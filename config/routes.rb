@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post "resend_fax", on: :member
       get "pdf", on: :member
     end
+    resources :members
 
     root to: "snap_applications#index"
   end
