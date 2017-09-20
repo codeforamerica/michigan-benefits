@@ -9,7 +9,10 @@ if ENV["CI"]
   SimpleCov.coverage_dir(File.join(ENV["CIRCLE_ARTIFACTS"], "coverage"))
 end
 
-SimpleCov.start "rails"
+SimpleCov.start("rails") do
+  add_filter "/lib/mi_bridges/"
+end
+
 WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
