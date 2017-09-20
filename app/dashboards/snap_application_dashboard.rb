@@ -59,6 +59,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     utility_water_sewer: Field::Boolean,
     vehicle_income: Field::Boolean,
     zip: Field::String,
+    members: Field::HasMany,
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
@@ -78,6 +79,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
 
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    members
     created_at
     updated_at
     signature

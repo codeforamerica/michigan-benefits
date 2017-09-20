@@ -71,13 +71,18 @@ to display a collection of resources in an HTML table.
           </td>
         <% end %>
 
-        <td><%= button_to("Refax", resend_fax_admin_snap_application_path(resource),
-                            class: "button",
-                            method: :post,
-                            data: {
-                              confirm: "This will resend the fax for additional processing. Are you sure?"
-                            }) %>
+        <td>
+          <% if resource.is_a? SnapApplication  -%>
+            <%= button_to(
+                 "Refax",
+                 resend_fax_admin_snap_application_path(resource),
+                 class: "button",
+                 method: :post,
+                 data: { confirm: "This will resend the fax for additional processing. Are you sure?" }
+            ) %>
+          <% end -%>
         </td>
+
         <td><%= link_to("Download", pdf_admin_snap_application_path(resource)) %></td>
 
         <% if valid_action? :edit, collection_presenter.resource_name %>
