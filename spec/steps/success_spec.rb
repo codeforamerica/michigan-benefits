@@ -14,7 +14,7 @@ RSpec.describe PersonalDetail do
       it "returns nil" do
         step = Success.new(signed_at: nil)
 
-        expect(step.submitted_date).to eq nil
+        expect(step.submitted_date).to be_nil
       end
     end
   end

@@ -10,7 +10,7 @@ describe RemoteDocument do
 
         downloaded = RemoteDocument.new(document_url).download
 
-        expect(downloaded).not_to eq nil
+        expect(downloaded).not_to be_nil
         expect(file_type(downloaded.tempfile.path)).to eq "image/jpeg"
       end
 
@@ -25,7 +25,7 @@ describe RemoteDocument do
         downloaded = RemoteDocument.new(document_url).download
         imagemagick_file = MiniMagick::Image.open(downloaded.tempfile.path)
 
-        expect(downloaded).not_to eq nil
+        expect(downloaded).not_to be_nil
         expect(imagemagick_file.width < imagemagick_file.height).to eq true
       end
     end
@@ -45,7 +45,7 @@ describe RemoteDocument do
 
         downloaded = remote_document.download
 
-        expect(downloaded).not_to eq nil
+        expect(downloaded).not_to be_nil
         expect(s3_fake).to have_received(:get_object).with(
           {
             bucket: bucket,
@@ -69,7 +69,7 @@ describe RemoteDocument do
         stub_request(:get, document_url).
           to_raise(OpenURI::HTTPError.new("Error", nil))
 
-        expect(remote_document.download).to eq nil
+        expect(remote_document.download).to be_nil
       end
     end
   end
