@@ -54,7 +54,7 @@ describe VerificationDocument do
           snap_application: "snap application",
         )
 
-        expect(document.file).to eq nil
+        expect(document.file).to be_nil
       end
     end
 

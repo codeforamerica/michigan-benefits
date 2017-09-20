@@ -77,7 +77,7 @@ RSpec.describe SuccessController do
   context "in order to not allow going back" do
     describe "#previous_path" do
       it "returns nil" do
-        expect(subject.previous_path).to eq nil
+        expect(subject.previous_path).to be_nil
       end
     end
   end
