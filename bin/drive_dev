@@ -1,6 +1,11 @@
 #!/bin/bash
 
-
-export DEBUG_DRIVE="true"
-./bin/rails runner "app = SnapApplication.find($1);
-app.driver_applications.destroy_all; MiBridges::Driver.new(snap_application: SnapApplication.find($1)).run"
+if [ -z "$1" ];then
+  echo "ERROR"
+  echo "You did not pass a SnapApplication ID as an argument."
+  echo "(For example './bin/drive_dev 207')"
+else
+  export DEBUG_DRIVE="true"
+  ./bin/rails runner "app = SnapApplication.find($1);
+  app.driver_applications.destroy_all; MiBridges::Driver.new(snap_application: SnapApplication.find($1)).run"
+fi
