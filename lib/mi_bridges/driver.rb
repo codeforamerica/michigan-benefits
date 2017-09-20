@@ -67,7 +67,14 @@ module MiBridges
 
     def run
       setup
+      sign_up_for_account
+      complete_application
+      teardown
+    end
 
+    private
+
+    def sign_up_for_account
       SIGN_UP_FLOW.each do |klass|
         begin
           page = klass.new(@snap_application, logger: logger)
@@ -78,12 +85,9 @@ module MiBridges
           debug(e)
         end
       end
-
-      complete_flow_steps
-      teardown
     end
 
-    def complete_flow_steps
+    def complete_application
       while page_title != SubmitPage::TITLE
         klass = find_page_klass
         page = klass.new(@snap_application, logger: logger)
@@ -94,8 +98,6 @@ module MiBridges
     rescue StandardError => e
       debug(e)
     end
-
-    private
 
     def logger=(logger)
       return @logger = logger if logger.present?
