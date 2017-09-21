@@ -43,8 +43,8 @@ class Member < ApplicationRecord
     birthday.strftime("%m/%d/%Y")
   end
 
-  def first_name_and_age
-    "#{first_name} (age #{age})"
+  def mi_bridges_formatted_name
+    "#{first_name.first(10)} (#{age})"
   end
 
   private

@@ -74,7 +74,7 @@ module MiBridges
       end
 
       def first_name_section(member)
-        member.first_name_and_age.gsub(/[^0-9A-Za-z]/, "")
+        member.mi_bridges_formatted_name.gsub(/[^0-9A-Za-z]/, "")
       end
 
       def log(description, *text)

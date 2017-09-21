@@ -34,7 +34,7 @@ module MiBridges
         check_in_section(
           "starVehicles",
           condition: vehicle_income?,
-          for_label: primary_member.first_name_and_age,
+          for_label: primary_member.mi_bridges_formatted_name,
         )
       end
 
@@ -42,7 +42,7 @@ module MiBridges
         check_in_section(
           "starRealEstate",
           condition: real_estate_income?,
-          for_label: primary_member.first_name_and_age,
+          for_label: primary_member.mi_bridges_formatted_name,
         )
       end
 
@@ -54,7 +54,7 @@ module MiBridges
         check_in_section(
           "starLifeInsurance",
           condition: financial_accounts.include?("life_insurance"),
-          for_label: primary_member.first_name_and_age,
+          for_label: primary_member.mi_bridges_formatted_name,
         )
       end
 

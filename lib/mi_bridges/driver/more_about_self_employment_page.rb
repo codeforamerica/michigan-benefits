@@ -23,7 +23,7 @@ module MiBridges
       private
 
       def fill_in_all_programs_for(member)
-        name = member.first_name_and_age
+        name = member.mi_bridges_formatted_name
         question_type = "What type of self-employment does #{name} have?"
         select "Other", from: question_type
         question_other = "If self-employment type is Other, "\
@@ -32,7 +32,7 @@ module MiBridges
       end
 
       def fill_in_fap_program_benefits_for(member)
-        name = member.first_name_and_age
+        name = member.mi_bridges_formatted_name
         question_income = "What is the gross monthly income amount "\
           "from #{name}'s self-employment before any expenses?"
         fill_in question_income, with: member.self_employed_monthly_income

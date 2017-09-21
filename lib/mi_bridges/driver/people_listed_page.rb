@@ -17,7 +17,7 @@ module MiBridges
         select member.marital_status.titleize, from: "maritalStatus"
 
         if for_next_household_member?
-          fill_in "firstName", with: member.first_name_and_age
+          fill_in "firstName", with: member.mi_bridges_formatted_name
           fill_in "lastName", with: member.last_name
           click_id "gender_#{member.sex.first.upcase}"
           fill_in_birthday_fields(member.birthday)
@@ -47,7 +47,7 @@ module MiBridges
       end
 
       def escape_parens_in_name(member)
-        Regexp.escape(member.first_name_and_age)
+        Regexp.escape(member.mi_bridges_formatted_name)
       end
 
       def select_yes_person_lives_at_same_address

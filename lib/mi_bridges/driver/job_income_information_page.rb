@@ -26,7 +26,7 @@ module MiBridges
         check_in_section(
           "starCurrentorRecentJob",
           condition: employment_status == "employed",
-          for_label: primary_member.first_name_and_age,
+          for_label: primary_member.mi_bridges_formatted_name,
         )
       end
 
@@ -34,7 +34,7 @@ module MiBridges
         check_in_section(
           "starSelfEmployment",
           condition: employment_status == "self_employed",
-          for_label: primary_member.first_name_and_age,
+          for_label: primary_member.mi_bridges_formatted_name,
         )
       end
 
