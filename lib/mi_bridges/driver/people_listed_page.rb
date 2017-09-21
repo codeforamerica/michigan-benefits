@@ -5,17 +5,69 @@ module MiBridges
     class PeopleListedPage < BasePage
       TITLE = "People Listed On Your Application"
 
-      delegate :primary_member, to: :snap_application
-
-      def setup; end
+      def setup
+        @member = if for_next_household_member?
+                    find_not_yet_added_member
+                  else
+                    snap_application.primary_member
+                  end
+      end
 
       def fill_in_required_fields
-        select primary_member.marital_status.titleize, from: "maritalStatus"
-        fill_in "peopleInYourHome", with: snap_application.members.size
+        select member.marital_status.titleize, from: "maritalStatus"
+
+        if for_next_household_member?
+          fill_in "firstName", with: member.first_name_and_age
+          fill_in "lastName", with: member.last_name
+          click_id "gender_#{member.sex.first.upcase}"
+          fill_in_birthday_fields
+          select_yes_person_lives_at_same_address
+        else
+          fill_in "peopleInYourHome", with: snap_application.members.size
+        end
       end
 
       def continue
         click_on "Next"
+      end
+
+      private
+
+      attr_reader :member
+
+      def for_next_household_member?
+        has_content? "Please tell us about the next person in your home."
+      end
+
+      def find_not_yet_added_member
+        snap_application.members.detect do |member|
+          member_first_name = Regexp.new(
+            Regexp.escape(member.first_name_and_age),
+          )
+          !page.has_content?(member_first_name)
+        end
+      end
+
+      def fill_in_birthday_fields
+        month = padded(member.birthday.month)
+        day = padded(member.birthday.day)
+        year = member.birthday.year
+
+        fill_in "monthgroupDateOfBirth", with: month
+        fill_in "dategroupDateOfBirth", with: day
+        fill_in "yeargroupDateOfBirth", with: year
+
+        fill_in "monthconfirmGroupDateOfBirth", with: month
+        fill_in "dateconfirmGroupDateOfBirth", with: day
+        fill_in "yearconfirmGroupDateOfBirth", with: year
+      end
+
+      def padded(int)
+        sprintf("%02d", int)
+      end
+
+      def select_yes_person_lives_at_same_address
+        click_id("liveInSameAddress_Y")
       end
     end
   end
