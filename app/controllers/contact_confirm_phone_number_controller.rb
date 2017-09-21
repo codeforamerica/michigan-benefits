@@ -4,6 +4,6 @@ class ContactConfirmPhoneNumberController < StandardStepsController
   private
 
   def skip?
-    current_snap_application && !current_snap_application.sms_consented?
+    !current_snap_application&.sms_consented?
   end
 end

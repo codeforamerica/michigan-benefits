@@ -179,11 +179,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   def label_contents(label_text, notes, optional = false)
     notes = Array(notes)
-    if optional
-      optional_text = "<span class='form-card__optional'>(optional)</span>"
-    else
-      optional_text = ""
-    end
+    optional_text = if optional
+                      "<span class='form-card__optional'>(optional)</span>"
+                    else
+                      ""
+                    end
 
     label_text = <<-HTML
       <p class="form-question">#{label_text + optional_text}</p>

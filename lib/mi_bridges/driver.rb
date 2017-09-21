@@ -103,13 +103,19 @@ module MiBridges
     end
 
     def logger=(logger)
-      return @logger = logger if logger.present?
-      level = if ENV["DEBUG_DRIVE"] = "true"
-                Logger::DEBUG
-              else
-                Logger::INFO
-              end
-      @logger = LoggerFactory.create(level: level, output: STDOUT)
+      @logger = if logger.present?
+                  logger
+                else
+                  LoggerFactory.create(level: level, output: STDOUT)
+                end
+    end
+
+    def level
+      if ENV["DEBUG_DRIVE"] = "true"
+        Logger::DEBUG
+      else
+        Logger::INFO
+      end
     end
 
     def debug(e)
