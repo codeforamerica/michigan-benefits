@@ -45,6 +45,7 @@ module MiBridges
       PersonalInformationPage,
       PregnancyInformationPage,
       ProgramBenefitsPage,
+      RelationshipInformationPage,
       SchoolDetailsPage,
       StartPage,
       SubmitPage,
