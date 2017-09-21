@@ -31,7 +31,7 @@ module MiBridges
       private
 
       def fill_in_name
-        fill_in "First Name", with: primary_member.first_name_and_age
+        fill_in "First Name", with: primary_member.mi_bridges_formatted_name
         fill_in "Last Name", with: primary_member.last_name
       end
 

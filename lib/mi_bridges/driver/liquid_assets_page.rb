@@ -31,7 +31,7 @@ module MiBridges
         check_in_section(
           "starCashonHand",
           condition: total_money?,
-          for_label: primary_member.first_name_and_age,
+          for_label: primary_member.mi_bridges_formatted_name,
         )
       end
 
@@ -39,7 +39,7 @@ module MiBridges
         check_in_section(
           "starSavingsAccount",
           condition: financial_accounts.include?("savings_account"),
-          for_label: primary_member.first_name_and_age,
+          for_label: primary_member.mi_bridges_formatted_name,
         )
       end
 
@@ -47,7 +47,7 @@ module MiBridges
         check_in_section(
           "starCheckingAccount",
           condition: financial_accounts.include?("checking_account"),
-          for_label: primary_member.first_name_and_age,
+          for_label: primary_member.mi_bridges_formatted_name,
         )
       end
 
