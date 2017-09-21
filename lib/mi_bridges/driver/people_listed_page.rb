@@ -20,7 +20,7 @@ module MiBridges
           fill_in "firstName", with: member.first_name_and_age
           fill_in "lastName", with: member.last_name
           click_id "gender_#{member.sex.first.upcase}"
-          fill_in_birthday_fields(member)
+          fill_in_birthday_fields(member.birthday)
           select_yes_person_lives_at_same_address
         else
           fill_in "peopleInYourHome", with: snap_application.members.size

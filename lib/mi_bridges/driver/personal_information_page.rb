@@ -16,7 +16,7 @@ module MiBridges
       def fill_in_required_fields
         fill_in_name
         click_on_gender
-        fill_in_birthday_fields(primary_member)
+        fill_in_birthday_fields(primary_member.birthday)
         select_county
         fill_in_address
         click_same_address_answer

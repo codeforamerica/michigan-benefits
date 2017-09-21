@@ -83,10 +83,10 @@ module MiBridges
         end
       end
 
-      def fill_in_birthday_fields(member)
-        month = padded(member.birthday.month)
-        day = padded(member.birthday.day)
-        year = member.birthday.year
+      def fill_in_birthday_fields(birthday)
+        month = padded(birthday.month)
+        day = padded(birthday.day)
+        year = birthday.year
 
         fill_in "monthgroupDateOfBirth", with: month
         fill_in "dategroupDateOfBirth", with: day
