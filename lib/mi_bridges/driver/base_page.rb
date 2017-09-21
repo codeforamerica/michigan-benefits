@@ -82,6 +82,24 @@ module MiBridges
           logger.debug("#{description.upcase}: #{text.join(', ')}")
         end
       end
+
+      def fill_in_birthday_fields(birthday)
+        month = padded(birthday.month)
+        day = padded(birthday.day)
+        year = birthday.year
+
+        fill_in "monthgroupDateOfBirth", with: month
+        fill_in "dategroupDateOfBirth", with: day
+        fill_in "yeargroupDateOfBirth", with: year
+
+        fill_in "monthconfirmGroupDateOfBirth", with: month
+        fill_in "dateconfirmGroupDateOfBirth", with: day
+        fill_in "yearconfirmGroupDateOfBirth", with: year
+      end
+
+      def padded(int)
+        sprintf("%02d", int)
+      end
     end
   end
 end
