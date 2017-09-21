@@ -16,7 +16,7 @@ module MiBridges
       def fill_in_required_fields
         fill_in_name
         click_on_gender
-        fill_in_birthday_fields
+        fill_in_birthday_fields(primary_member)
         select_county
         fill_in_address
         click_same_address_answer
@@ -37,20 +37,6 @@ module MiBridges
 
       def click_on_gender
         click_id "gender_#{primary_member.sex.first.upcase}"
-      end
-
-      def fill_in_birthday_fields
-        month = padded(primary_member.birthday.month)
-        day = padded(primary_member.birthday.day)
-        year = primary_member.birthday.year
-
-        fill_in "monthgroupDateOfBirth", with: month
-        fill_in "dategroupDateOfBirth", with: day
-        fill_in "yeargroupDateOfBirth", with: year
-
-        fill_in "monthconfirmGroupDateOfBirth", with: month
-        fill_in "dateconfirmGroupDateOfBirth", with: day
-        fill_in "yearconfirmGroupDateOfBirth", with: year
       end
 
       def select_county
@@ -85,10 +71,6 @@ module MiBridges
         fill_in "phone3homePhone", with: phone_number[6..9]
 
         select "Home Phone", from: "bestWayToGetInTouch"
-      end
-
-      def padded(int)
-        sprintf("%02d", int)
       end
 
       def invalid_physical_address?

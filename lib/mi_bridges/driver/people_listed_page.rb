@@ -20,7 +20,7 @@ module MiBridges
           fill_in "firstName", with: member.first_name_and_age
           fill_in "lastName", with: member.last_name
           click_id "gender_#{member.sex.first.upcase}"
-          fill_in_birthday_fields
+          fill_in_birthday_fields(member)
           select_yes_person_lives_at_same_address
         else
           fill_in "peopleInYourHome", with: snap_application.members.size
@@ -46,24 +46,6 @@ module MiBridges
           )
           !page.has_content?(member_first_name)
         end
-      end
-
-      def fill_in_birthday_fields
-        month = padded(member.birthday.month)
-        day = padded(member.birthday.day)
-        year = member.birthday.year
-
-        fill_in "monthgroupDateOfBirth", with: month
-        fill_in "dategroupDateOfBirth", with: day
-        fill_in "yeargroupDateOfBirth", with: year
-
-        fill_in "monthconfirmGroupDateOfBirth", with: month
-        fill_in "dateconfirmGroupDateOfBirth", with: day
-        fill_in "yearconfirmGroupDateOfBirth", with: year
-      end
-
-      def padded(int)
-        sprintf("%02d", int)
       end
 
       def select_yes_person_lives_at_same_address
