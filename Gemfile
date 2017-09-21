@@ -8,7 +8,7 @@ gem "activemodel_type_symbol"
 gem "administrate"
 gem "attr_encrypted"
 gem "auto_strip_attributes"
-gem "aws-sdk"
+gem "aws-sdk", "~> 2.10"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "capybara"
 gem "delayed_job_active_record"
