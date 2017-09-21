@@ -37,9 +37,9 @@ class SuccessController < StandardStepsController
   end
 
   def flash_notice
-    <<~eos
+    <<~NOTICE
       You will receive an email with your filled out application attached in a
       few minutes.
-    eos
+    NOTICE
   end
 end

@@ -63,7 +63,7 @@ module MultiparameterAttributeAssignment
             values_with_empty_parameters,
           ).read_value,
         )
-      rescue => ex
+      rescue StandardError => ex
         values = values_with_empty_parameters.values.inspect
         errors << attribute_assignment_error_class.new(
           "error on assignment #{values} to #{name} (#{ex.message})",

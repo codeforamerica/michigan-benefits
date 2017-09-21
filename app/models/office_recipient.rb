@@ -50,9 +50,9 @@ class OfficeRecipient
   end
 
   def self.add_names_to_offices(configuration)
-    configuration.keys.each do |stage|
+    configuration.each_key do |stage|
       next unless configuration[stage].key?("offices")
-      configuration[stage]["offices"].keys.each do |office|
+      configuration[stage]["offices"].each_key do |office|
         configuration[stage]["offices"][office]["name"] = office.to_s.titleize
       end
     end

@@ -3,8 +3,8 @@
 class StepsController < ApplicationController
   layout "step"
 
-  before_action :maybe_skip, only: :edit
   before_action :ensure_application_present, only: %i(edit index)
+  before_action :maybe_skip, only: :edit
 
   def self.to_param
     controller_path.dasherize

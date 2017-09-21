@@ -57,13 +57,13 @@ class Export < ApplicationRecord
     yield(snap_application, logger)
     update(metadata: read_logger, completed_at: Time.zone.now)
     transition_to new_status: :succeeded
-  rescue => e
+  rescue StandardError => e
     fail_with_exception(e)
     raise e
   ensure
     begin
       snap_application.close_pdf
-    rescue => e
+    rescue StandardError => e
       fail_with_exception(e)
     end
   end
