@@ -41,11 +41,13 @@ module MiBridges
 
       def find_not_yet_added_member
         snap_application.members.detect do |member|
-          member_first_name = Regexp.new(
-            Regexp.escape(member.first_name_and_age),
-          )
+          member_first_name = Regexp.new(escape_parens_in_name(member))
           !page.has_content?(member_first_name)
         end
+      end
+
+      def escape_parens_in_name(member)
+        Regexp.escape(member.first_name_and_age)
       end
 
       def select_yes_person_lives_at_same_address
