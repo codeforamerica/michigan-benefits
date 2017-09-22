@@ -172,5 +172,24 @@ Member.where(
   self_employed_monthly_expenses: "400",
 )
 
+Member.where(
+  snap_application: complete_application,
+  first_name: "Random",
+  last_name: "Roommate",
+).first_or_create(
+  marital_status: "Never married",
+  sex: "female",
+  encrypted_ssn: "VhzEa7Hee+IXOdIBwjhPL0vB/OTqR4fe1TIi\n",
+  encrypted_ssn_iv: "F7Gz/ujIHfhZuhoY\n",
+  birthday: 50.years.ago,
+  buy_food_with: true,
+  relationship: "Roommate",
+  requesting_food_assistance: true,
+  employment_status: "self_employed",
+  self_employed_profession: "Marketing",
+  self_employed_monthly_income: 800,
+  self_employed_monthly_expenses: "400",
+)
+
 puts "More complete application created (or found) " \
   "with id: #{complete_application.id}"
