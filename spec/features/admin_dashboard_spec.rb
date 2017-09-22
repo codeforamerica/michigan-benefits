@@ -23,15 +23,16 @@ RSpec.feature "Submit application with minimal information" do
     application = create(:snap_application, :faxed, signed_at: 5.days.ago)
     visit admin_root_path
 
-    click_link_or_button "Refax"
+    click_link_or_button "Resend email to office"
 
-    confirmation = "Resent fax to #{application.receiving_office.number}" \
+    confirmation = "Resent email to #{application.receiving_office.email}" \
                    " for #{application.signature}!"
 
     expect(page).to have_content(confirmation)
 
     faxes = application.exports.for_destination(:fax)
-    expect(faxes.count).to eq 2
-    expect(faxes.latest.status).to eq :queued
+    emails = application.exports.for_destination(:office_email)
+    expect(faxes.count).to eq 1
+    expect(emails.count).to eq 1
   end
 end

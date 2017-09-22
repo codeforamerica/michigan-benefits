@@ -12,13 +12,13 @@ RSpec.describe SuccessController do
       expect(step.email).to eq "test@example.com"
     end
 
-    it "faxes the snap application" do
+    it "emails the snap application to the office" do
       allow(ExportFactory).to receive(:create)
 
       get :edit
 
       expect(ExportFactory).to have_received(:create).
-        with(snap_application: current_app, destination: :fax)
+        with(snap_application: current_app, destination: :office_email)
     end
 
     context "sms consent present" do

@@ -13,11 +13,6 @@ class SuccessController < StandardStepsController
 
   def before_rendering_edit_hook
     ExportFactory.create(
-      destination: :fax,
-      snap_application: current_snap_application,
-    )
-
-    ExportFactory.create(
       destination: :sms,
       snap_application: current_snap_application,
     )

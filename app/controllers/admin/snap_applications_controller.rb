@@ -17,16 +17,16 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
-    def resend_fax
+    def resend_email
       application = SnapApplication.find(params[:id])
 
       ExportFactory.create!(
         snap_application: application,
-        destination: :fax,
+        destination: :office_email,
         force: true,
       )
 
-      confirmation = "Resent fax to #{application.receiving_office.number}" \
+      confirmation = "Resent email to #{application.receiving_office.email}" \
                      " for #{application.signature}!"
       flash[:notice] = confirmation
       redirect_to admin_root_path
