@@ -56,7 +56,7 @@ module MiBridges
             "Child" => "is the Mother of",
             "Parent" => "is the Daughter of",
             "Sibling" => "is the Sister of",
-            "Spouse" => "is the Wife of",
+            "Spouse" => "is the Spouse of",
           }
         end
 
