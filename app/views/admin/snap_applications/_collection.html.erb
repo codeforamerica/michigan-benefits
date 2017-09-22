@@ -74,11 +74,11 @@ to display a collection of resources in an HTML table.
         <td>
           <% if resource.is_a? SnapApplication  -%>
             <%= button_to(
-                 "Refax",
-                 resend_fax_admin_snap_application_path(resource),
+                 "Resend email to office",
+                 resend_email_admin_snap_application_path(resource),
                  class: "button",
                  method: :post,
-                 data: { confirm: "This will resend the fax for additional processing. Are you sure?" }
+                 data: { confirm: "This will resend the office email for additional processing. Are you sure?" }
             ) %>
           <% end -%>
         </td>
