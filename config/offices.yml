@@ -55,6 +55,19 @@ development:
     clio:
       fax_number: "+16173963015"
       email: "clio@example.com"
+staging:
+  <<: *defaults
+  offices:
+    staging_sfax: # Technically this is to our sfax production fax;
+                  # because you can't fax yourself
+      fax_number: "+18448487565"
+      email: "hello@michiganbenefits.org"
+    union:
+      fax_number: "+16173963015"
+      email: "union@example.com"
+    clio:
+      fax_number: "+16173963015"
+      email: "clio@example.com"
 production:
   <<: *defaults
   offices:
