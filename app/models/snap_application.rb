@@ -1,17 +1,12 @@
 class SnapApplication < ApplicationRecord
-  has_many :addresses
-  has_many :members
-  has_many :driver_applications
+  has_many :addresses, dependent: :destroy
+  has_many :driver_applications, dependent: :destroy
+  has_many :exports, dependent: :destroy
+  has_many :members, dependent: :destroy
 
-  def driver_application
-    driver_applications.order("id DESC").limit(1).first
-  end
-
-  has_many :exports
-
+  scope :faxable, -> { signed.unfaxed }
   scope :signed, -> { where.not(signed_at: nil) }
   scope :unsigned, -> { where(signed_at: nil) }
-  scope :faxable, -> { signed.unfaxed }
   scope :untouched_since, ->(threshold) { where("updated_at < ?", threshold) }
 
   scope :faxed, (lambda do
@@ -33,6 +28,10 @@ class SnapApplication < ApplicationRecord
   scope :unemailed_client, (lambda do
     where.not(id: Export.emailed_client.succeeded.application_ids)
   end)
+
+  def driver_application
+    driver_applications.order("id DESC").limit(1).first
+  end
 
   def pdf
     @pdf ||= Dhs1171Pdf.new(
