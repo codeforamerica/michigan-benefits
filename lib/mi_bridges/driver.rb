@@ -30,6 +30,7 @@ module MiBridges
       HousingUtilityBillsPage,
       HousingUtilityBillsSummaryPage,
       JobIncomeInformationPage,
+      JobIncomeMoreAboutPage,
       JobIncomeSummaryPage,
       LiquidAssetsPage,
       LiquidAssetsSummaryPage,
@@ -130,7 +131,7 @@ module MiBridges
       # rubocop:disable Debugger
       binding.pry if ENV["DEBUG_DRIVE"]
       # rubocop:enable Debugger
-      throw e
+      raise e
     end
 
     attr_reader :snap_application, :logger
@@ -140,9 +141,15 @@ module MiBridges
     end
 
     def find_page_klass
-      APPLY_FLOW.detect do |page|
+      klass = APPLY_FLOW.detect do |page|
         page_title == page::TITLE ||
           page_title.match?(page::TITLE)
+      end
+
+      if klass.nil?
+        fail MiBridges::Errors::PageNotFoundError.new(page_title)
+      else
+        klass
       end
     end
 
