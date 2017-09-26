@@ -2,7 +2,7 @@
 
 module MiBridges
   class Driver
-    class MoneyOtherSourcesSummaryPage < ClickNextPage
+    class OtherIncomeSummaryPage < ClickNextPage
       TITLE = "Other Income Summary"
     end
   end
