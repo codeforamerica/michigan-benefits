@@ -2,7 +2,7 @@
 
 module MiBridges
   class Driver
-    class CashOnHandPage < BasePage
+    class MoreAboutCashOnHandPage < BasePage
       TITLE = /More About (.*)'s Cash on Hand/
 
       def setup; end
