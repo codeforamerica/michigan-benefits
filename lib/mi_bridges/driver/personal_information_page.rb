@@ -44,6 +44,10 @@ module MiBridges
       end
 
       def fill_in_address
+        if snap_application.unstable_housing?
+          click_id "homeless"
+        end
+
         fill_in "Street Address",
           with: residential_address.street_address
         fill_in "City",

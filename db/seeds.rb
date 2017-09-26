@@ -34,16 +34,19 @@ minimal_application.update!(
   money_or_accounts_income: false,
   real_estate_income: false,
   vehicle_income: false,
+  unstable_housing: true,
+  mailing_address_same_as_residential_address: true,
 )
 
 Address.where(
   snap_application: minimal_application,
-  street_address: "123 Main St.",
+  street_address: "",
 ).first_or_create(
-  city: "Flint",
+  city: "",
+  zip: "",
   county: "Genesee",
   state: "MI",
-  zip: "48501",
+  mailing: false,
 )
 
 Member.where(
