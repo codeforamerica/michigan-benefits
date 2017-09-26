@@ -7,6 +7,7 @@ class Member < ApplicationRecord
     "Every Two Weeks",
     "Twice a Month",
     "Monthly",
+    "Yearly",
     "Other",
   ].freeze
 

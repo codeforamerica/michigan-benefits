@@ -34,7 +34,7 @@ module MiBridges
       private
 
       def hourly?
-        current_member.employed_pay_interval == "Hourly"
+        current_member.employed_pay_interval != "Yearly"
       end
 
       def fill_in_hourly
