@@ -10,9 +10,15 @@ module MiBridges
       def setup; end
 
       def fill_in_required_fields
-        fill_in "Name of Employer", with: current_member.employed_employer_name
-        select current_member.employed_pay_interval,
-          from: "How often does #{name} get paid? This is #{name}'s pay period"
+        fill_in(
+          "Name of Employer",
+          with: current_member.employed_employer_name,
+        )
+
+        select(
+          current_member.employed_pay_interval,
+          from: "How often does #{name} get paid? This is #{name}'s pay period",
+        )
 
         if hourly?
           fill_in_hourly
@@ -32,15 +38,22 @@ module MiBridges
       end
 
       def fill_in_hourly
-        fill_in "If #{name} gets paid by the hour, ",
-          with: current_member.employed_pay_quantity
-        fill_in "Please tell us how many hours #{name} works",
-          with: current_member.employed_hours_per_week
+        fill_in(
+          "If #{name} gets paid by the hour, ",
+          with: current_member.employed_pay_quantity,
+        )
+
+        fill_in(
+          "Please tell us how many hours #{name} works",
+          with: current_member.employed_hours_per_week,
+        )
       end
 
       def fill_in_salary
-        fill_in "If #{name} earns a salary instead",
-          with: current_member.employed_pay_quantity
+        fill_in(
+          "If #{name} earns a salary instead",
+          with: current_member.employed_pay_quantity,
+        )
       end
 
       def current_member
