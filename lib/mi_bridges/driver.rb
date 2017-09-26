@@ -43,6 +43,7 @@ module MiBridges
       MailingAddressPage,
       MoneyOtherSourcesPage,
       MoreAboutCashOnHandPage,
+      MoreAboutCheckingAccountPage,
       MoreAboutDisabilityBenefitsPage,
       MoreAboutOtherIncomePage,
       MoreAboutPensionOrRetirementPage,
