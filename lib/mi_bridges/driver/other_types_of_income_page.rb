@@ -5,6 +5,12 @@ module MiBridges
     class OtherTypesOfIncomePage < BasePage
       TITLE = "Other Types of Income"
 
+      delegate(
+        :additional_income,
+        :primary_member,
+        to: :snap_application,
+      )
+
       def setup; end
 
       def fill_in_required_fields
