@@ -12,8 +12,7 @@ module MiBridges
       def fill_in_required_fields
         fill_in "Name of Employer", with: current_member.employed_employer_name
         select current_member.employed_pay_interval,
-          from: "How often does Complete (40) get paid? "\
-                "This is Complete (40)'s pay period"
+          from: "How often does #{name} get paid? This is #{name}'s pay period"
 
         if hourly?
           fill_in_hourly
@@ -28,28 +27,33 @@ module MiBridges
 
       private
 
-      def current_member
-        title = find("h1").text
-        name = title.scan(/More About (.*)'s Job/).flatten.first
-        members.select do |member|
-          member.mi_bridges_formatted_name == name
-        end.first
-      end
-
       def hourly?
         current_member.employed_pay_interval == "Hourly"
       end
 
       def fill_in_hourly
-        fill_in "If Complete (40) gets paid by the hour, ",
+        fill_in "If #{name} gets paid by the hour, ",
           with: current_member.employed_pay_quantity
-        fill_in "Please tell us how many hours Complete (40) works each week",
+        fill_in "Please tell us how many hours #{name} works",
           with: current_member.employed_hours_per_week
       end
 
       def fill_in_salary
-        fill_in "If Complete (40) earns a salary instead",
+        fill_in "If #{name} earns a salary instead",
           with: current_member.employed_pay_quantity
+      end
+
+      def current_member
+        members.select do |member|
+          member.mi_bridges_formatted_name == name
+        end.first
+      end
+
+      def name
+        @_name ||= begin
+                     title = find("h1").text
+                     title.scan(/More About (.*)'s Job/).flatten.first
+                   end
       end
     end
   end
