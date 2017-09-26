@@ -4,10 +4,12 @@ module MiBridges
   class Driver
     class StartPage < BasePage
       TITLE = "Help With Filing MI Bridges Application"
+      CIVILLA_COMMUNITY_PARTNER_ID = 3949
 
       def setup; end
 
       def fill_in_required_fields
+        fill_in "agencyNumber", with: CIVILLA_COMMUNITY_PARTNER_ID
         click_id(a_staff_person_or_volunteer_at_an_agency)
       end
 
