@@ -28,7 +28,7 @@ module MiBridges
       private
 
       def check_retirement_survivors_disability_insurance
-        check_in_section "starRetirementSurvivorsDisabilityInsuranceRSDI"
+        check_no_one_in_section "starRetirementSurvivorsDisabilityInsuranceRSDI"
       end
 
       def check_other_income
@@ -48,7 +48,7 @@ module MiBridges
       end
 
       def check_room_and_meals
-        check_in_section "starRoomandMeals"
+        check_no_one_in_section "starRoomandMeals"
       end
     end
   end
