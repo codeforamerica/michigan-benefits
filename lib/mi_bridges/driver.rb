@@ -32,6 +32,7 @@ module MiBridges
       JobIncomeInformationPage,
       JobIncomeMoreAboutPage,
       JobIncomeSummaryPage,
+      CashOnHandPage,
       LiquidAssetsPage,
       LiquidAssetsSummaryPage,
       MailingAddressPage,
