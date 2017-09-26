@@ -3,7 +3,7 @@
 module MiBridges
   class Driver
     class MoreAboutOtherIncomePage < BasePage
-      TITLE = /More About .*'s Other Income/
+      TITLE = /More About (.*)'s Other Income/
 
       def setup; end
 

@@ -3,7 +3,7 @@
 module MiBridges
   class Driver
     class MoreAboutUnemploymentBenefitsPage < BasePage
-      TITLE = /More About .*'s Unemployment Benefits/
+      TITLE = /More About (.*)'s Unemployment Benefits/
 
       def setup; end
 

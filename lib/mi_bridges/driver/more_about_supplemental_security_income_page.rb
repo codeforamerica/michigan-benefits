@@ -3,7 +3,7 @@
 module MiBridges
   class Driver
     class MoreAboutSupplementalSecurityIncomePage < BasePage
-      TITLE = /More About .*'s Supplemental Security Income \(SSI\)/
+      TITLE = /More About (.*)'s Supplemental Security Income \(SSI\)/
 
       def setup; end
 

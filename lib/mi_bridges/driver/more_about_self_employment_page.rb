@@ -3,7 +3,7 @@
 module MiBridges
   class Driver
     class MoreAboutSelfEmploymentPage < BasePage
-      TITLE = /More About .*'s Self-Employment/
+      TITLE = /More About (.*)'s Self-Employment/
 
       delegate :members, to: :snap_application
 
