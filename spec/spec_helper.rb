@@ -10,7 +10,8 @@ if ENV["CI"]
 end
 
 SimpleCov.start("rails") do
-  add_filter "/lib/mi_bridges/"
+  # To exclude files from coverage analysis:
+  # add_filter "/app/path/to/directory/"
 end
 
 WebMock.disable_net_connect!(allow_localhost: true)
