@@ -1,7 +1,20 @@
 class Member < ApplicationRecord
   AVERAGE_WEEKS_PER_MONTH = 4.33
   MONTHS_PER_YEAR = 12
+  PAYMENT_INTERVALS = [
+    "Hourly",
+    "Weekly",
+    "Every Two Weeks",
+    "Twice a Month",
+    "Monthly",
+    "Other",
+  ].freeze
+
   belongs_to :snap_application
+
+  validates :employed_pay_interval,
+    inclusion: { in: PAYMENT_INTERVALS },
+    allow_nil: true
 
   attribute :ssn
   attr_encrypted(
@@ -60,8 +73,8 @@ class Member < ApplicationRecord
     return if employed_pay_quantity.nil?
     if employed_pay_interval == "Hourly"
       employed_hours_per_week * employed_pay_quantity * AVERAGE_WEEKS_PER_MONTH
-    elsif employed_pay_interval == "Daily"
-      employed_pay_quantity * (AVERAGE_WEEKS_PER_MONTH * 5)
+    elsif ["Every Two Weeks", "Twice a Month"].include? employed_pay_interval
+      employed_pay_quantity * (AVERAGE_WEEKS_PER_MONTH / 2)
     elsif employed_pay_interval == "Weekly"
       employed_pay_quantity * AVERAGE_WEEKS_PER_MONTH
     elsif employed_pay_interval == "Monthly"
