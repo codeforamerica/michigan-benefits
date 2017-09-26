@@ -28,7 +28,7 @@
                   optional: true %>
                 <%= ff.mb_select :employed_pay_interval,
                   "How often are you paid that amount?",
-                  ["Hourly", "Daily", "Weekly", "2 weeks", "Monthly", "Yearly"],
+                  Member::PAYMENT_INTERVALS,
                   { layout: "inline", optional: true } %>
                 <% else # self employed %>
                   <%= ff.mb_input_field :self_employed_profession,
