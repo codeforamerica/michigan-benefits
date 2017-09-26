@@ -56,7 +56,6 @@ class SnapApplication < ApplicationRecord
   def monthly_additional_income
     [
       income_child_support,
-      income_foster_care,
       income_other,
       income_pension,
       income_social_security,

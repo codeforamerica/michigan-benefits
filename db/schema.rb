@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912170418) do
+ActiveRecord::Schema.define(version: 20170926234635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(version: 20170912170418) do
     t.text "income_change_explanation"
     t.text "additional_income", default: [], array: true
     t.integer "income_child_support"
-    t.integer "income_foster_care"
     t.integer "income_other"
     t.integer "income_pension"
     t.integer "income_social_security"

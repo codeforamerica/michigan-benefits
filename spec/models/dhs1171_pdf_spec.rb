@@ -101,9 +101,9 @@ RSpec.describe Dhs1171Pdf do
         snap_application = create(
           :snap_application,
           :with_member,
-          additional_income: ["child_support", "foster_care"],
+          additional_income: ["child_support", "pension"],
           income_child_support: 100,
-          income_foster_care: 50,
+          income_pension: 50,
         )
 
         file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
@@ -116,7 +116,7 @@ RSpec.describe Dhs1171Pdf do
           "100",
         )
         expect(result["second_additional_income_type"]).to eq(
-          "Foster Care",
+          "Pension",
         )
         expect(result["second_additional_income_amount"]).to eq(
           "50",

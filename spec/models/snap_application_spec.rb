@@ -18,7 +18,6 @@ RSpec.describe SnapApplication do
         app = build(
           :snap_application,
           income_child_support: nil,
-          income_foster_care: nil,
           income_other: nil,
           income_pension: nil,
           income_social_security: nil,
