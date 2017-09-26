@@ -29,6 +29,11 @@ class HouseholdAddMember < Step
     message: "Make sure to answer this question",
   }
 
+  validates :relationship, inclusion: {
+    in: %w(Spouse Parent Child Sibling Roommate Other),
+    allow_blank: true,
+  }
+
   # https://github.com/rails/rails/pull/8189#issuecomment-10329403
   def class_for_attribute(attr)
     return Date if attr == "birthday"

@@ -23,7 +23,7 @@
         layout: "inline" %>
       <%= f.mb_select :relationship,
         'What is their relationship to you?',
-        ['Spouse', 'Parent', 'Child', 'Sibling', 'Roommate'],
+        ['Spouse', 'Parent', 'Child', 'Sibling', 'Roommate', 'Other'],
         include_blank: "Choose one" %>
       <%= f.mb_date_select :birthday, "What is their birthday?", { options: { start_year: 1900, end_year: Time.now.year, default: Date.new(1990,1,15), order: [:month, :day, :year] } } %>
       <%= f.mb_input_field :ssn,
