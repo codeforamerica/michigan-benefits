@@ -5,7 +5,7 @@ module MiBridges
     class BasePage
       include Capybara::DSL
 
-      def initialize(snap_application, logger:)
+      def initialize(snap_application, logger: nil)
         @logger = logger
         log("filling out page")
         @snap_application = snap_application
@@ -78,8 +78,10 @@ module MiBridges
       end
 
       def log(description, *text)
-        logger.tagged(self.class.to_s) do
-          logger.debug("#{description.upcase}: #{text.join(', ')}")
+        if logger.present?
+          logger.tagged(self.class.to_s) do
+            logger.debug("#{description.upcase}: #{text.join(', ')}")
+          end
         end
       end
 
