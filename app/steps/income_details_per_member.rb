@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
-class IncomeDetailsPerMember < Step
-  step_attributes :members
+class IncomeDetailsPerMember < ManyMembersStep
+  private
 
-  def working_members
-    members.where(employment_status: ["employed", "self_employed"])
+  def validate_household_member(member)
+    if member.employment_status == "employed" &&
+        member.employed_employer_name.blank?
+      member.errors.add(
+        "employed_employer_name",
+        "Make sure to answer this question",
+      )
+    end
   end
 end

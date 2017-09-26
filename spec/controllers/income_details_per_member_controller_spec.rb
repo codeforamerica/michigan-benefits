@@ -11,14 +11,35 @@ RSpec.describe IncomeDetailsPerMemberController do
         params = {
           step: {
             members: {
-              member.id => { self_employed_profession: "Baseball hat" },
+              member.id => {
+                employed_employer_name: "Baseball hat",
+              },
             },
           },
         }
 
         put :update, params: params
 
-        expect(member.reload.self_employed_profession).to eq "Baseball hat"
+        expect(response).to redirect_to "/steps/income-additional-sources"
+        expect(member.reload.employed_employer_name).to eq "Baseball hat"
+      end
+    end
+
+    context "when invalid" do
+      it "does not update the member attributes" do
+        params = {
+          step: {
+            members: {
+              member.id => {
+                employed_employer_name: "",
+              },
+            },
+          },
+        }
+
+        put :update, params: params
+
+        expect(response).to render_template(:edit)
       end
     end
   end
