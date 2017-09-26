@@ -3,7 +3,7 @@
 module MiBridges
   class Driver
     class JobIncomeMoreAboutPage < BasePage
-      TITLE = /More About .*'s Job/
+      TITLE = /More About (.*)'s Job/
 
       delegate :members, to: :snap_application
 
@@ -65,7 +65,7 @@ module MiBridges
       def name
         @_name ||= begin
                      title = find("h1").text
-                     title.scan(/More About (.*)'s Job/).flatten.first
+                     title.scan(TITLE).flatten.first
                    end
       end
     end
