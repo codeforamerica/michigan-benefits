@@ -2,7 +2,7 @@
 
 module MiBridges
   class Driver
-    class JobIncomeMoreAboutPage < BasePage
+    class MoreAboutJobIncomePage < BasePage
       TITLE = /More About (.*)'s Job/
 
       delegate :members, to: :snap_application
