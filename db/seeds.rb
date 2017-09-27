@@ -38,10 +38,12 @@ minimal_application.update!(
   mailing_address_same_as_residential_address: true,
 )
 
-Address.where(
+minimal_mailing = Address.find_or_initialize_by(
   snap_application: minimal_application,
   street_address: "",
-).first_or_create(
+)
+
+minimal_mailing.update!(
   city: "",
   zip: "",
   county: "Genesee",
@@ -49,11 +51,13 @@ Address.where(
   mailing: false,
 )
 
-Member.where(
+minimal_primary = Member.find_or_initialize_by(
   snap_application: minimal_application,
   first_name: "Test",
   last_name: "Client",
-).first_or_create(
+)
+
+minimal_primary.update!(
   marital_status: "Never married",
   sex: "male",
   encrypted_ssn: "D0zKx2AZL9zkT9acqR9a5NDbxmL9c3cNgQ==\n",
@@ -127,10 +131,12 @@ complete_application.update!(
   additional_information: "N/A",
 )
 
-Address.where(
+complete_mailing = Address.find_or_initialize_by(
   snap_application: complete_application,
   street_address: "1 Fuller Ave.",
-).first_or_create(
+)
+
+complete_mailing.update!(
   city: "Flint",
   county: "Genesee",
   state: "MI",
@@ -138,10 +144,12 @@ Address.where(
   mailing: true,
 )
 
-Address.where(
+complete_residential = Address.find_or_initialize_by(
   snap_application: complete_application,
   street_address: "100 Home St.",
-).first_or_create(
+)
+
+complete_residential.update!(
   city: "Flint",
   county: "Genesee",
   state: "MI",
@@ -149,11 +157,13 @@ Address.where(
   mailing: false,
 )
 
-Member.where(
+complete_primary = Member.find_or_initialize_by(
   snap_application: complete_application,
   first_name: "Complete",
   last_name: "Testapp",
-).first_or_create(
+)
+
+complete_primary.update!(
   marital_status: "Married",
   sex: "male",
   snap_application_id: 2,
@@ -170,11 +180,13 @@ Member.where(
   employed_pay_interval: "Weekly",
 )
 
-Member.where(
+complete_second_member = Member.find_or_initialize_by(
   snap_application: complete_application,
   first_name: "Jane",
   last_name: "Doe",
-).first_or_create(
+)
+
+complete_second_member.update!(
   marital_status: "Married",
   sex: "female",
   encrypted_ssn: "VmZuoPhyIRTXCu2gGOqTmgz54wgfNEemYg==\n",
@@ -189,16 +201,18 @@ Member.where(
   self_employed_monthly_expenses: "400",
 )
 
-Member.where(
+complete_third_member = Member.find_or_initialize_by(
   snap_application: complete_application,
   first_name: "Random",
   last_name: "Roommate",
-).first_or_create(
+)
+
+complete_third_member.update!(
   marital_status: "Never married",
   sex: "female",
   encrypted_ssn: "VhzEa7Hee+IXOdIBwjhPL0vB/OTqR4fe1TIi\n",
   encrypted_ssn_iv: "F7Gz/ujIHfhZuhoY\n",
-  birthday: 50.years.ago,
+  birthday: 16.years.ago,
   buy_food_with: true,
   relationship: "Roommate",
   requesting_food_assistance: true,
