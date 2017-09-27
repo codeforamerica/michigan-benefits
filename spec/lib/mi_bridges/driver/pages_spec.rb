@@ -42,5 +42,16 @@ RSpec.describe "Driver pages" do
         "MiBridges::Driver::HomePage",
       )
     end
+
+    it "ignores the limit on pages that are instantiated many times" do
+      snap_application = double
+      limit = MiBridges::Driver::BasePage::INSTANTIATION_LIMIT + 1
+
+      expect do
+        limit.times do
+          MiBridges::Driver::PersonalInformationPage.new(snap_application)
+        end
+      end.not_to raise_error
+    end
   end
 end
