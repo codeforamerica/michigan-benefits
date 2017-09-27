@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class BasePage
+      INSTANTIATION_LIMIT = 5
+
       include Capybara::DSL
 
       @@run_counts = {}
@@ -13,7 +15,7 @@ module MiBridges
         @snap_application = snap_application
 
         @@run_counts[self.class.to_s] ||= 0
-        if @@run_counts[self.class.to_s] >= 5
+        if @@run_counts[self.class.to_s] >= INSTANTIATION_LIMIT
           raise MiBridges::Errors::TooManyAttempts.new(self.class.to_s)
         else
           @@run_counts[self.class.to_s] += 1
