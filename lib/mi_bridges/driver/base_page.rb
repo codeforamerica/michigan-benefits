@@ -83,7 +83,7 @@ module MiBridges
       end
 
       def skip_instance_limitation?
-        self.class.methods(false).include? :skip_instance_limitation
+        self.class.instance_methods(false).include?(:skip_instance_limitation)
       end
 
       def check_instance_limitation
