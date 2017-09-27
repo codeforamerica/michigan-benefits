@@ -42,12 +42,8 @@ RSpec.describe ExportFactory do
   end
 
   describe "#enqueue" do
-    before do
-      allow(FaxApplicationJob).to receive(:perform_later)
-      allow(ClientEmailApplicationJob).to receive(:perform_later)
-    end
-
     it "sends fax" do
+      allow(FaxApplicationJob).to receive(:perform_later)
       enqueuer = ExportFactory.new
       export = build(:export, destination: :fax)
       enqueuer.enqueue(export)
@@ -56,10 +52,20 @@ RSpec.describe ExportFactory do
     end
 
     it "sends email to client" do
+      allow(ClientEmailApplicationJob).to receive(:perform_later)
       enqueuer = ExportFactory.new
       export = build(:export, destination: :client_email)
       enqueuer.enqueue(export)
       expect(ClientEmailApplicationJob).to have_received(:perform_later).
+        with(export: export)
+    end
+
+    it "exports to MI Bridges" do
+      allow(SubmitApplicationViaMiBridgesJob).to receive(:perform_later)
+      enqueuer = ExportFactory.new
+      export = build(:export, destination: :mi_bridges)
+      enqueuer.enqueue(export)
+      expect(SubmitApplicationViaMiBridgesJob).to have_received(:perform_later).
         with(export: export)
     end
 
@@ -78,14 +84,22 @@ RSpec.describe ExportFactory do
     end
 
     it "raises an exception if the export isn't valid" do
+      allow(FaxApplicationJob).to receive(:perform_later)
+      allow(ClientEmailApplicationJob).to receive(:perform_later)
+      allow(SubmitApplicationViaMiBridgesJob).to receive(:perform_later)
       enqueuer = ExportFactory.new
+
       export = build(:export, destination: nil)
+
       expect do
         enqueuer.enqueue(export)
       end.to raise_error(ActiveRecord::RecordInvalid)
+
       expect(export).not_to be_persisted
       expect(FaxApplicationJob).not_to have_received(:perform_later)
       expect(ClientEmailApplicationJob).not_to have_received(:perform_later)
+      expect(SubmitApplicationViaMiBridgesJob).
+        not_to have_received(:perform_later)
     end
   end
 end
