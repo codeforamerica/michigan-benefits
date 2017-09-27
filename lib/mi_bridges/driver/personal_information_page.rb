@@ -11,6 +11,8 @@ module MiBridges
         to: :snap_application,
       )
 
+      def self.skip_instance_limitation; end
+
       def setup; end
 
       def fill_in_required_fields

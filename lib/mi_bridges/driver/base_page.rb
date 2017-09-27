@@ -13,13 +13,8 @@ module MiBridges
         @logger = logger
         log("filling out page")
         @snap_application = snap_application
-
-        @@run_counts[self.class.to_s] ||= 0
-        if @@run_counts[self.class.to_s] >= INSTANTIATION_LIMIT
-          raise MiBridges::Errors::TooManyAttempts.new(self.class.to_s)
-        else
-          @@run_counts[self.class.to_s] += 1
-        end
+        return if skip_instance_limitation?
+        check_instance_limitation
       end
 
       def fill_in(*args)
@@ -79,6 +74,27 @@ module MiBridges
 
       attr_reader :snap_application, :logger
 
+      def log(description, *text)
+        if logger.present?
+          logger.tagged(self.class.to_s) do
+            logger.debug("#{description.upcase}: #{text.join(', ')}")
+          end
+        end
+      end
+
+      def skip_instance_limitation?
+        self.class.methods(false).include? :skip_instance_limitation
+      end
+
+      def check_instance_limitation
+        @@run_counts[self.class.to_s] ||= 0
+        if @@run_counts[self.class.to_s] >= INSTANTIATION_LIMIT
+          raise MiBridges::Errors::TooManyAttempts.new(self.class.to_s)
+        else
+          @@run_counts[self.class.to_s] += 1
+        end
+      end
+
       def check_page_title(title)
         id = title.gsub(/[^0-9A-Za-z]/, "")
         page.find(:css, "##{id}")
@@ -86,14 +102,6 @@ module MiBridges
 
       def first_name_section(member)
         member.mi_bridges_formatted_name.gsub(/[^0-9A-Za-z]/, "")
-      end
-
-      def log(description, *text)
-        if logger.present?
-          logger.tagged(self.class.to_s) do
-            logger.debug("#{description.upcase}: #{text.join(', ')}")
-          end
-        end
       end
 
       def fill_in_birthday_fields(birthday)
