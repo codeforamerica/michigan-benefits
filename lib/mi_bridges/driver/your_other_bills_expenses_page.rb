@@ -16,6 +16,7 @@ module MiBridges
 
       def fill_in_required_fields
         check_child_spousal_payments
+        check_dependent_care_bills
         check_medical_bills
         check_medicare
       end
@@ -34,6 +35,10 @@ module MiBridges
         )
       end
 
+      def check_dependent_care_bills
+        check_no_one_in_section "starDependentCareBills"
+      end
+
       def check_medical_bills
         check_in_section(
           "starMedicalBills",
@@ -43,7 +48,7 @@ module MiBridges
       end
 
       def check_medicare
-        check_in_section "starMedicarePartAorPartB"
+        check_no_one_in_section "starMedicarePartAorPartB"
       end
     end
   end
