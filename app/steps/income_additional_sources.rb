@@ -3,7 +3,6 @@
 class IncomeAdditionalSources < Step
   step_attributes(
     :child_support,
-    :foster_care,
     :other,
     :pension,
     :social_security,

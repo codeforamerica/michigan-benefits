@@ -24,7 +24,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     income_change: Field::Boolean,
     income_change_explanation: Field::Text,
     income_child_support: Field::Text,
-    income_foster_care: Field::String,
     income_other: Field::String,
     income_pension: Field::String,
     income_social_security: Field::String,
@@ -100,7 +99,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     income_change_explanation
     additional_income
     income_child_support
-    income_foster_care
     income_other
     income_pension
     income_social_security
@@ -152,7 +150,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     income_change_explanation
     additional_income
     income_child_support
-    income_foster_care
     income_other
     income_pension
     income_social_security
