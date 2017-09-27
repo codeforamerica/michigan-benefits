@@ -35,11 +35,19 @@ RSpec.describe "Driver pages" do
       snap_application = double
       limit = MiBridges::Driver::BasePage::INSTANTIATION_LIMIT + 1
 
+      module MiBridges
+        class Driver
+          class InstanceCheckPage < BasePage; end
+        end
+      end
+
       expect do
-        limit.times { MiBridges::Driver::HomePage.new(snap_application) }
+        limit.times do
+          MiBridges::Driver::InstanceCheckPage.new(snap_application)
+        end
       end.to raise_error(
         MiBridges::Errors::TooManyAttempts,
-        "MiBridges::Driver::HomePage",
+        "MiBridges::Driver::InstanceCheckPage",
       )
     end
 
@@ -47,9 +55,17 @@ RSpec.describe "Driver pages" do
       snap_application = double
       limit = MiBridges::Driver::BasePage::INSTANTIATION_LIMIT + 1
 
+      module MiBridges
+        class Driver
+          class SkipInstanceCheckPage < BasePage
+            def skip_instance_limitation; end
+          end
+        end
+      end
+
       expect do
         limit.times do
-          MiBridges::Driver::PersonalInformationPage.new(snap_application)
+          MiBridges::Driver::SkipInstanceCheckPage.new(snap_application)
         end
       end.not_to raise_error
     end
