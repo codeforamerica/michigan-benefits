@@ -19,9 +19,14 @@ module MiBridges
     ].freeze
 
     APPLY_FLOW = [
+      AbsentParentDetailsPage,
+      AbsentParentDetailsSummaryPage,
+      AbsentParentInformationPage,
+      AbsentParentSummaryPage,
       AdditionalInformationPage,
       BasicInformationSummaryPage,
       BenefitsSelectorPage,
+      ConceptionPage,
       DisabilityOrBlindnessReviewPage,
       FinishPage,
       HouseholdMemberQuestionsPage,
@@ -29,6 +34,7 @@ module MiBridges
       HousingBillsPage,
       HousingUtilityBillsPage,
       HousingUtilityBillsSummaryPage,
+      InformationAboutTheChildPage,
       JobIncomeInformationPage,
       JobIncomeMoreAboutPage,
       JobIncomeSummaryPage,
