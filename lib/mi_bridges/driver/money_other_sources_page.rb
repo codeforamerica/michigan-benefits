@@ -7,6 +7,7 @@ module MiBridges
 
       delegate(
         :income_other?,
+        :income_child_support?,
         :income_ssi_or_disability?,
         :primary_member,
         to: :snap_application,
@@ -16,6 +17,7 @@ module MiBridges
 
       def fill_in_required_fields
         check_retirement_survivors_disability_insurance
+        check_child_support_income
         check_other_income
         check_supplemental_security_income
         check_room_and_meals
@@ -37,6 +39,10 @@ module MiBridges
           condition: income_other?,
           for_label: primary_member.mi_bridges_formatted_name,
         )
+      end
+
+      def check_child_support_income
+        check_no_one_in_section "starChildSupport"
       end
 
       def check_supplemental_security_income
