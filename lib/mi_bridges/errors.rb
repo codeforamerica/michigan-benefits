@@ -1,13 +1,15 @@
 module MiBridges
-  class Error < StandardError; end
+  class Error < StandardError
+    attr_reader :message
+
+    def initialize(message)
+      @message = message
+    end
+  end
 
   module Errors
-    class PageNotFoundError < MiBridges::Error
-      attr_reader :message
+    class PageNotFoundError < MiBridges::Error; end
 
-      def initialize(message)
-        @message = message
-      end
-    end
+    class TooManyAttempts < MiBridges::Error; end
   end
 end
