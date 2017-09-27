@@ -5,10 +5,19 @@ module MiBridges
     class BasePage
       include Capybara::DSL
 
+      @@run_counts = {}
+
       def initialize(snap_application, logger: nil)
         @logger = logger
         log("filling out page")
         @snap_application = snap_application
+
+        @@run_counts[self.class.to_s] ||= 0
+        if @@run_counts[self.class.to_s] >= 5
+          raise MiBridges::Errors::TooManyAttempts.new(self.class.to_s)
+        else
+          @@run_counts[self.class.to_s] += 1
+        end
       end
 
       def fill_in(*args)

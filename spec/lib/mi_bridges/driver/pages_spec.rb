@@ -17,4 +17,28 @@ RSpec.describe "Driver pages" do
       end
     end
   end
+
+  context "when instantiating a page too many times" do
+    it "raises an exception" do
+      snap_application = double
+
+      expect do
+        6.times { MiBridges::Driver::BasePage.new(snap_application) }
+      end.to raise_error(
+        MiBridges::Errors::TooManyAttempts,
+        "MiBridges::Driver::BasePage",
+      )
+    end
+
+    it "passes the name of the child class name to the error" do
+      snap_application = double
+
+      expect do
+        6.times { MiBridges::Driver::HomePage.new(snap_application) }
+      end.to raise_error(
+        MiBridges::Errors::TooManyAttempts,
+        "MiBridges::Driver::HomePage",
+      )
+    end
+  end
 end
