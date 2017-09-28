@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class DriverApplication < ApplicationRecord
   ENCRYPTION_KEY = Rails.application.secrets.secret_key_for_driver_application
 
   belongs_to :snap_application
+  validates :snap_application, presence: true
 
   attribute %i[
     password
