@@ -121,7 +121,7 @@ complete_application.update!(
   monthly_care_expenses: 400,
   monthly_medical_expenses: 200,
   monthly_court_ordered_expenses: nil,
-  care_expenses: ["childcare"],
+  care_expenses: SnapApplication::CARE_EXPENSES,
   medical_expenses: SnapApplication::MEDICAL_EXPENSES,
   money_or_accounts_income: true,
   real_estate_income: true,

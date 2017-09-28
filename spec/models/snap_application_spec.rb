@@ -1,6 +1,43 @@
 require "rails_helper"
 
 RSpec.describe SnapApplication do
+  describe "validations" do
+    [
+      [:care_expenses, SnapApplication::CARE_EXPENSES],
+      [:medical_expenses, SnapApplication::MEDICAL_EXPENSES],
+      [:court_ordered_expenses, SnapApplication::COURT_ORDERED_EXPENSES],
+    ].each do |field, approved_values|
+      context field.to_s do
+        it "is valid with all allowed values" do
+          app = build(
+            :snap_application,
+            field => approved_values,
+          )
+
+          expect(app).to be_valid
+        end
+
+        it "is valid with only one allowed value" do
+          app = build(
+            :snap_application,
+            field => [approved_values.first],
+          )
+
+          expect(app).to be_valid
+        end
+
+        it "is invalid with an arbitrary value" do
+          app = build(
+            :snap_application,
+            field => ["random_word"],
+          )
+
+          expect(app).not_to be_valid
+        end
+      end
+    end
+  end
+
   describe "#pdf" do
     it "delegates to the Dhs1171Pdf class" do
       app = build(:snap_application)
@@ -12,6 +49,7 @@ RSpec.describe SnapApplication do
       expect(app.pdf).to eql(fake_pdf_builder.completed_file)
     end
   end
+
   describe "#gross_income" do
     context "no members" do
       it "adds all sources of income" do

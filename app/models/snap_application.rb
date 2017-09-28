@@ -20,6 +20,10 @@ class SnapApplication < ApplicationRecord
     alimony
   ].freeze
 
+  validate :care_expenses_values
+  validate :medical_expenses_values
+  validate :court_ordered_expenses_values
+
   has_many :addresses, dependent: :destroy
   has_many :driver_applications, dependent: :destroy
   has_many :exports, dependent: :destroy
@@ -155,5 +159,37 @@ class SnapApplication < ApplicationRecord
     signed_at&.
       in_time_zone("Eastern Time (US & Canada)")&.
       strftime("%m/%d/%Y at %I:%M%p %Z")
+  end
+
+  private
+
+  def care_expenses_values
+    care_expenses.each do |value|
+      if !CARE_EXPENSES.include?(value)
+        errors.add(:care_expenses, "'#{value}' is an invalid care expense")
+      end
+    end
+  end
+
+  def medical_expenses_values
+    medical_expenses.each do |value|
+      if !MEDICAL_EXPENSES.include?(value)
+        errors.add(
+          :medical_expenses,
+          "'#{value}' is an invalid medical expense",
+        )
+      end
+    end
+  end
+
+  def court_ordered_expenses_values
+    court_ordered_expenses.each do |value|
+      if !COURT_ORDERED_EXPENSES.include?(value)
+        errors.add(
+          :court_ordered_expenses,
+          "'#{value}' is an invalid court-ordered expense",
+        )
+      end
+    end
   end
 end
