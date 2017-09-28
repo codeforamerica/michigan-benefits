@@ -1,4 +1,25 @@
 class SnapApplication < ApplicationRecord
+  CARE_EXPENSES = %w[
+    childcare
+    disabled_adult_care
+  ].freeze
+
+  MEDICAL_EXPENSES = %w[
+    health_insurance
+    co_pays
+    prescriptions
+    dental
+    in_home_care
+    transportation
+    hospital_bills
+    other
+  ].freeze
+
+  COURT_ORDERED_EXPENSES = %w[
+    child_support
+    alimony
+  ].freeze
+
   has_many :addresses, dependent: :destroy
   has_many :driver_applications, dependent: :destroy
   has_many :exports, dependent: :destroy

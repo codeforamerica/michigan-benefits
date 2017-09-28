@@ -35,14 +35,6 @@ module MiBridges
         )
       end
 
-      def check_co_pays
-        check_in_section(
-          "#{first_name_section(primary_member)}sMedicalBills",
-          condition: medical_expenses.include?("co_pays"),
-          for_label: "",
-        )
-      end
-
       def check_prescriptions
         check_in_section(
           "#{first_name_section(primary_member)}sMedicalBills",

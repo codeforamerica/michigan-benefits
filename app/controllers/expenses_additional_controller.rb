@@ -14,24 +14,9 @@ class ExpensesAdditionalController < StepsController
   ].freeze
 
   ARRAY_ATTRIBUTES = {
-    care_expenses: %w[
-      childcare
-      disabled_adult_care
-    ],
-    medical_expenses: %w[
-      health_insurance
-      co_pays
-      prescriptions
-      dental
-      in_home_care
-      transportation
-      hospital_bills
-      other
-    ],
-    court_ordered_expenses: %w[
-      child_support
-      alimony
-    ],
+    care_expenses: SnapApplication::CARE_EXPENSES,
+    medical_expenses: SnapApplication::MEDICAL_EXPENSES,
+    court_ordered_expenses: SnapApplication::COURT_ORDERED_EXPENSES,
   }.freeze
 
   def edit
