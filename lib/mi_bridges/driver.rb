@@ -139,10 +139,13 @@ module MiBridges
     end
 
     def debug(e)
-      # rubocop:disable Debugger
-      binding.pry if ENV["DEBUG_DRIVE"]
-      # rubocop:enable Debugger
-      raise e
+      if ENV["DEBUG_DRIVE"]
+        # rubocop:disable Debugger
+        binding.pry
+        # rubocop:enable Debugger
+      else
+        raise e
+      end
     end
 
     attr_reader :snap_application, :logger

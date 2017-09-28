@@ -15,6 +15,7 @@ module MiBridges
 
       def fill_in_required_fields
         select member.marital_status.titleize, from: "maritalStatus"
+        select_fap_program_enrollment
 
         if for_next_household_member?
           fill_in "firstName", with: member.mi_bridges_formatted_name
@@ -48,6 +49,12 @@ module MiBridges
 
       def escape_parens_in_name(member)
         Regexp.escape(member.mi_bridges_formatted_name)
+      end
+
+      def select_fap_program_enrollment
+        if member.requesting_food_assistance?
+          click_id("requestFoodShare")
+        end
       end
 
       def select_yes_person_lives_at_same_address
