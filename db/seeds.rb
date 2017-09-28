@@ -40,15 +40,15 @@ minimal_application.update!(
 
 minimal_mailing = Address.find_or_initialize_by(
   snap_application: minimal_application,
-  street_address: "",
 )
 
 minimal_mailing.update!(
-  city: "",
-  zip: "",
+  street_address: "123 Main St.",
+  city: "Flint",
+  zip: "12345",
   county: "Genesee",
   state: "MI",
-  mailing: false,
+  mailing: true,
 )
 
 minimal_primary = Member.find_or_initialize_by(
