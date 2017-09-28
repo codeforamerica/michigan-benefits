@@ -58,7 +58,7 @@ RSpec.describe "Driver pages" do
       module MiBridges
         class Driver
           class SkipInstanceCheckPage < BasePage
-            def skip_instance_limitation; end
+            def skip_infinite_loop_check; end
           end
         end
       end

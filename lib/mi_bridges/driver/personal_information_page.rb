@@ -11,7 +11,7 @@ module MiBridges
         to: :snap_application,
       )
 
-      def skip_instance_limitation; end
+      def skip_infinite_loop_check; end
 
       def setup; end
 

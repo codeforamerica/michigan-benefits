@@ -5,6 +5,8 @@ module MiBridges
     class RelationshipInformationPage < BasePage
       TITLE = "Relationship Information"
 
+      def skip_infinite_loop_check; end
+
       def setup
         @first_member = find_first_member
         @second_members = find_second_members
