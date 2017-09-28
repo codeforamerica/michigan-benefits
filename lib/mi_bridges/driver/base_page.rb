@@ -13,8 +13,8 @@ module MiBridges
         @logger = logger
         log("filling out page")
         @snap_application = snap_application
-        return if skip_instance_limitation?
-        check_instance_limitation
+        return if skip_infinite_loop_check?
+        check_for_infinite_looping
       end
 
       def fill_in(*args)
@@ -82,11 +82,11 @@ module MiBridges
         end
       end
 
-      def skip_instance_limitation?
-        self.class.instance_methods(false).include?(:skip_instance_limitation)
+      def skip_infinite_loop_check?
+        self.class.instance_methods(false).include?(:skip_infinite_loop_check)
       end
 
-      def check_instance_limitation
+      def check_for_infinite_looping
         @@run_counts[self.class.to_s] ||= 0
         if @@run_counts[self.class.to_s] >= INSTANTIATION_LIMIT
           raise MiBridges::Errors::TooManyAttempts.new(self.class.to_s)
