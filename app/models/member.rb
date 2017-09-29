@@ -1,6 +1,4 @@
 class Member < ApplicationRecord
-  AVERAGE_WEEKS_PER_MONTH = 4.33
-  MONTHS_PER_YEAR = 12
   PAYMENT_INTERVALS = [
     "Hourly",
     "Weekly",
@@ -71,17 +69,10 @@ class Member < ApplicationRecord
   end
 
   def employed_monthly_income
-    return if employed_pay_quantity.nil?
-    if employed_pay_interval == "Hourly"
-      employed_hours_per_week * employed_pay_quantity * AVERAGE_WEEKS_PER_MONTH
-    elsif ["Every Two Weeks", "Twice a Month"].include? employed_pay_interval
-      employed_pay_quantity * (AVERAGE_WEEKS_PER_MONTH / 2)
-    elsif employed_pay_interval == "Weekly"
-      employed_pay_quantity * AVERAGE_WEEKS_PER_MONTH
-    elsif employed_pay_interval == "Monthly"
-      employed_pay_quantity
-    else # "Year"
-      employed_pay_quantity / MONTHS_PER_YEAR
-    end
+    MonthlyIncomeCalculator.new(
+      pay_interval: employed_pay_interval,
+      pay_quantity: employed_pay_quantity,
+      hours_per_week: employed_hours_per_week,
+    ).run
   end
 end
