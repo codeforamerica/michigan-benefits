@@ -13,11 +13,11 @@ Rails.application.routes.draw do
     root to: "snap_applications#index"
   end
 
-  root "pages#index"
-  get "/clio" => "pages#clio"
-  get "/privacy" => "pages#privacy"
-  get "/terms" => "pages#terms"
-  get "/union" => "pages#union"
+  root "static_pages#index"
+  get "/clio" => "static_pages#clio"
+  get "/privacy" => "static_pages#privacy"
+  get "/terms" => "static_pages#terms"
+  get "/union" => "static_pages#union"
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]
