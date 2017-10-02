@@ -80,7 +80,7 @@ module MiBridges
       YourOtherBillsExpensesSummaryPage,
     ].freeze
 
-    LOGIN_FLOW = [
+    SIGN_IN_FLOW = [
       HomeLogInPage,
       MultiFactorAuthPage,
       SecurityQuestionsPage,
@@ -101,10 +101,30 @@ module MiBridges
       teardown
     end
 
+    def re_run
+      setup
+      sign_in
+      complete_application
+      teardown
+    end
+
     private
 
     def sign_up_for_account
       SIGN_UP_FLOW.each do |klass|
+        begin
+          page = klass.new(@snap_application, logger: logger)
+          page.setup
+          page.fill_in_required_fields
+          page.continue
+        rescue StandardError => e
+          debug(e)
+        end
+      end
+    end
+
+    def sign_in
+      SIGN_IN_FLOW.each do |klass|
         begin
           page = klass.new(@snap_application, logger: logger)
           page.setup

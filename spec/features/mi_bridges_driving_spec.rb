@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "MI Bridges Driving" do
   # to run this in a non-headless way, remove the `:js` flag below
-  scenario "successfully drives a SNAP Application", :js, :driving do
+  scenario "successfully drives, re-drives a SNAP Application", :js, :driving do
     WebMock.disable!
 
     address = create(:mailing_address)
@@ -15,6 +15,12 @@ RSpec.feature "MI Bridges Driving" do
     )
 
     MiBridges::Driver.new(snap_application: snap_application).run
+    expect(page).to have_content("Before You Submit the Application")
+
+    browser = Capybara.current_session.driver.browser
+    browser.manage.delete_all_cookies
+
+    MiBridges::Driver.new(snap_application: snap_application).re_run
     expect(page).to have_content("Before You Submit the Application")
 
     WebMock.enable!
