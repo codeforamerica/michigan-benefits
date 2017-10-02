@@ -80,11 +80,10 @@ RSpec.describe SnapApplication do
   end
 
   describe "#residential_address" do
-    context "when mailing_address_same_as_residential_address?" do
-      it "is the mailing address even when a residential_address is provided" do
+    context "mailing_address_same_as_residential_address is true" do
+      it "returns mailing address" do
         app = create(:snap_application,
                       mailing_address_same_as_residential_address: true)
-
         create(:address, snap_application: app)
         mailing_address = create(:mailing_address, snap_application: app)
 
@@ -92,21 +91,36 @@ RSpec.describe SnapApplication do
       end
     end
 
-    context "when not mailing_address_same_as_residential_address?" do
-      it "is a NullAddress when no residential_address is provided" do
-        app = create(:snap_application)
+    context "mailing_address_same_as_residential_address is false" do
+      context "residential address not present" do
+        it "returns NullAddress" do
+          app = create(:snap_application)
+          create(:mailing_address, snap_application: app)
 
-        create(:mailing_address, snap_application: app)
-
-        expect(app.residential_address).to be_a NullAddress
+          expect(app.residential_address).to be_a NullAddress
+        end
       end
 
-      it "is the residential address when it is provided" do
-        app = create(:snap_application)
+      context "residential address present" do
+        context "housing is stable" do
+          it "returns residential address" do
+            app = create(:snap_application)
+            create(:mailing_address, snap_application: app)
+            residential_address = create(:address, snap_application: app)
 
-        create(:mailing_address, snap_application: app)
-        residential_address = create(:address, snap_application: app)
-        expect(app.residential_address).to eq residential_address
+            expect(app.residential_address).to eq residential_address
+          end
+        end
+
+        context "housing is not stable" do
+          it "returns NullAddress" do
+            app = create(:snap_application, unstable_housing: true)
+            create(:mailing_address, snap_application: app)
+            _residential_address = create(:address, snap_application: app)
+
+            expect(app.residential_address.class).to eq NullAddress
+          end
+        end
       end
     end
   end

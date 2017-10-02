@@ -35,7 +35,7 @@ minimal_application.update!(
   real_estate_income: false,
   vehicle_income: false,
   unstable_housing: true,
-  mailing_address_same_as_residential_address: true,
+  mailing_address_same_as_residential_address: false,
 )
 
 minimal_mailing = Address.find_or_initialize_by(

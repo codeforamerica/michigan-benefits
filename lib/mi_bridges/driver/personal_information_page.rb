@@ -7,6 +7,7 @@ module MiBridges
 
       delegate(
         :primary_member,
+        :mailing_address,
         :residential_address,
         to: :snap_application,
       )
@@ -42,20 +43,24 @@ module MiBridges
       end
 
       def select_county
-        select residential_address.county, from: "whatCounty"
+        select county, from: "whatCounty"
+      end
+
+      def county
+        residential_address.county || mailing_address.county
       end
 
       def fill_in_address
         if snap_application.unstable_housing?
           click_id "homeless"
+        else
+          fill_in "Street Address",
+            with: residential_address.street_address
+          fill_in "City",
+            with: residential_address.city
+          fill_in "Zip Code",
+            with: residential_address.zip
         end
-
-        fill_in "Street Address",
-          with: residential_address.street_address
-        fill_in "City",
-          with: residential_address.city
-        fill_in "Zip Code",
-          with: residential_address.zip
       end
 
       def click_same_address_answer
