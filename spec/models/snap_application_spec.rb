@@ -118,7 +118,7 @@ RSpec.describe SnapApplication do
             create(:mailing_address, snap_application: app)
             _residential_address = create(:address, snap_application: app)
 
-            expect(app.residential_address).to eq NullAddress
+            expect(app.residential_address.class).to eq NullAddress
           end
         end
       end
