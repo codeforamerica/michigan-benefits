@@ -1,0 +1,19 @@
+#!/bin/bash
+
+read -p "What is the ID of the SNAP Application you want to re-drive? " -r
+SNAP_APPLICATION_ID=$REPLY
+echo
+
+read -p "What is the name of the Heroku remote you'd like to access?
+(staging/production) " -r
+echo
+
+echo "Backing up $REPLY database, just in case..."
+heroku pg:backups:capture --remote $REPLY
+
+DB_URL="$(heroku config:get DATABASE_URL -r $REPLY)"
+export DATABASE_URL=$DB_URL
+
+export DEBUG_DRIVE="true"
+./bin/rails runner "app = SnapApplication.find($SNAP_APPLICATION_ID);
+ MiBridges::Driver.new(snap_application: app).re_run"
