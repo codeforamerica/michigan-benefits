@@ -18,6 +18,15 @@ module MiBridges
       FraudPenaltyAffidavitPage,
     ].freeze
 
+    SIGN_IN_FLOW = [
+      HomeLogInPage,
+      MultiFactorAuthPage,
+      SecurityQuestionsPage,
+      PrivacyPinPage,
+      ContinueApplicationPage,
+      GoBackToApplicationPage,
+    ].freeze
+
     APPLY_FLOW = [
       AbsentParentDetailsPage,
       AbsentParentDetailsSummaryPage,
@@ -80,15 +89,6 @@ module MiBridges
       YourOtherBillsExpensesSummaryPage,
     ].freeze
 
-    SIGN_IN_FLOW = [
-      HomeLogInPage,
-      MultiFactorAuthPage,
-      SecurityQuestionsPage,
-      PrivacyPinPage,
-      ContinueApplicationPage,
-      GoBackToApplicationPage,
-    ].freeze
-
     def initialize(snap_application:, logger: nil)
       @snap_application = snap_application
       self.logger = logger
@@ -111,20 +111,15 @@ module MiBridges
     private
 
     def sign_up_for_account
-      SIGN_UP_FLOW.each do |klass|
-        begin
-          page = klass.new(@snap_application, logger: logger)
-          page.setup
-          page.fill_in_required_fields
-          page.continue
-        rescue StandardError => e
-          debug(e)
-        end
-      end
+      run_flow(SIGN_UP_FLOW)
     end
 
     def sign_in
-      SIGN_IN_FLOW.each do |klass|
+      run_flow(SIGN_IN_FLOW)
+    end
+
+    def run_flow(flow)
+      flow.each do |klass|
         begin
           page = klass.new(@snap_application, logger: logger)
           page.setup
