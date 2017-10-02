@@ -15,4 +15,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
   config.active_support.deprecation = :stderr
   config.assets.debug = true
+
+  config.action_mailer.default_url_options = {
+    host: "example.com",
+  }
 end

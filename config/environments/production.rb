@@ -19,7 +19,7 @@ Rails.application.configure do
   # Customize default host
   config.action_mailer.default_url_options = {
     host: ENV["HOSTNAME_FOR_URLS"],
-    protocol: "http",
+    protocol: "https",
   }
 
   config.action_mailer.smtp_settings = SMTP_SETTINGS

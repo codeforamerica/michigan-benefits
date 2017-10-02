@@ -59,8 +59,8 @@ RSpec.describe OfficeRecipient do
       )
 
       expect(fax_recipient.office).to eq(
-        "email" => "gcfengineering+heroku@codeforamerica.org",
-        "name" => "Staging Sfax",
+        "email" => "hello@michiganbenefits.org",
+        "name" => "Test Office",
         "fax_number" => staging_fax_number,
       )
     end

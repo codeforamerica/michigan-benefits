@@ -4,7 +4,7 @@ defaults: &defaults
   # zip code is not in our mapping
   fallback_office: "clio"
   covered_zip_codes:
-    "12345": "staging_sfax"
+    "12345": "test_office"
     # Clio Zip Codes
     "48415": "clio"
     "48417": "clio"
@@ -45,9 +45,8 @@ defaults: &defaults
 development:
   <<: *defaults
   offices:
-    staging_sfax: # Technically this is to our sfax production fax;
-                  # because you can't fax yourself
-      fax_number: "+18448487565"
+    test_office:
+      fax_number: "+16173963015"
       email: "staging@example.com"
     union:
       fax_number: "+16173963015"
@@ -58,9 +57,8 @@ development:
 staging:
   <<: *defaults
   offices:
-    staging_sfax: # Technically this is to our sfax production fax;
-                  # because you can't fax yourself
-      fax_number: "+18448487565"
+    test_office:
+      fax_number: "+18448487565" # sends to sfax production
       email: "hello@michiganbenefits.org"
     union:
       fax_number: "+16173963015"
@@ -71,9 +69,9 @@ staging:
 production:
   <<: *defaults
   offices:
-    staging_sfax:
-      fax_number: "+18888433549"
-      email: "gcfengineering+heroku@codeforamerica.org"
+    test_office:
+      fax_number: "+18888433549" # sends to sfax staging
+      email: "hello@michiganbenefits.org"
     union:
       fax_number: "+18107607372"
       email: "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov"
