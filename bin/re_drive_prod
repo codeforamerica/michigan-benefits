@@ -1,11 +1,10 @@
 #!/bin/bash
 
-read -p "What is the ID of the SNAP Application you want to re-drive? " -r
+read -p "What is the ID of the SNAP Application you want to re-drive? "
 SNAP_APPLICATION_ID=$REPLY
 echo
 
-read -p "What is the name of the Heroku remote you'd like to access?
-(staging/production) " -r
+read -p "What is the name of the Heroku remote you'd like to access? (staging/production) "
 echo
 
 echo "Backing up $REPLY database, just in case..."
