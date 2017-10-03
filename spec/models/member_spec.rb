@@ -23,7 +23,7 @@ RSpec.describe Member do
     end
 
     context "employed" do
-      it "returns monthly income" do
+      it "calls MonthlyIncomeCalculator to find monthly income" do
         member = build(
           :member,
           employment_status: "employed",
