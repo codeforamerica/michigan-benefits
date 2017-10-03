@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926234635) do
+ActiveRecord::Schema.define(version: 20171002204734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 20170926234635) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["snap_application_id"], name: "index_driver_applications_on_snap_application_id"
+  end
+
+  create_table "driver_errors", force: :cascade do |t|
+    t.bigint "driver_application_id", null: false
+    t.string "error_class", null: false
+    t.string "error_message", null: false
+    t.string "page_class", null: false
+    t.text "page_html", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driver_application_id"], name: "index_driver_errors_on_driver_application_id"
   end
 
   create_table "exports", force: :cascade do |t|
@@ -156,4 +167,5 @@ ActiveRecord::Schema.define(version: 20170926234635) do
   end
 
   add_foreign_key "driver_applications", "snap_applications"
+  add_foreign_key "driver_errors", "driver_applications"
 end

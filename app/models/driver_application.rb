@@ -5,6 +5,7 @@ class DriverApplication < ApplicationRecord
 
   belongs_to :snap_application
   validates :snap_application, presence: true
+  has_many :driver_errors, dependent: :destroy
 
   attribute %i[
     password

@@ -125,8 +125,6 @@ module MiBridges
       end
 
       run_flow([SubmitPage])
-    rescue StandardError => e
-      debug(e)
     end
 
     def run_flow(flow)
@@ -137,6 +135,7 @@ module MiBridges
           page.fill_in_required_fields
           page.continue
         rescue StandardError => e
+          save_error(e, page)
           debug(e)
         end
       end
@@ -156,6 +155,18 @@ module MiBridges
       else
         Logger::INFO
       end
+    end
+
+    def save_error(e, page)
+      @snap_application.
+        driver_application.
+        driver_errors.
+        create(
+          error_class: e.class.to_s,
+          error_message: e.message,
+          page_class: page.class.to_s,
+          page_html: page.html,
+        )
     end
 
     def debug(e)
