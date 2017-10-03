@@ -118,6 +118,17 @@ module MiBridges
       run_flow(SIGN_IN_FLOW)
     end
 
+    def complete_application
+      while page_title != SubmitPage::TITLE
+        klass = find_page_klass
+        run_flow([klass])
+      end
+
+      run_flow([SubmitPage])
+    rescue StandardError => e
+      debug(e)
+    end
+
     def run_flow(flow)
       flow.each do |klass|
         begin
@@ -129,18 +140,6 @@ module MiBridges
           debug(e)
         end
       end
-    end
-
-    def complete_application
-      while page_title != SubmitPage::TITLE
-        klass = find_page_klass
-        page = klass.new(@snap_application, logger: logger)
-        page.setup
-        page.fill_in_required_fields
-        page.continue
-      end
-    rescue StandardError => e
-      debug(e)
     end
 
     def logger=(logger)
