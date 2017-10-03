@@ -5,12 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV["DATABASE_URL"] || 'michigan_prototype_development' %>
-
+  database: michigan_prototype_development
 test:
   <<: *default
   database: michigan_prototype_test
 
 production:
   adapter: postgresql
-  url: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV["DATABASE_URL"] %>

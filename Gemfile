@@ -22,6 +22,7 @@ gem "neat", "~> 1.8" # to keep in sync with getcalfresh
 gem "pdf-forms"
 gem "pg", "~> 0.18"
 gem "prawn"
+gem "pry-rails"
 gem "puma"
 gem "rails", "~> 5.1"
 gem "responders"
@@ -59,7 +60,6 @@ group :development, :test do
   gem "listen"
   gem "mailcatcher", "~> 0.2"
   gem "pry-byebug"
-  gem "pry-rails"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
   gem "rubocop-rspec", require: false
