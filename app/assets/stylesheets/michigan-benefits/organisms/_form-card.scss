@@ -31,3 +31,14 @@
   color: $color-sky;
   text-align: center;
 }
+
+.form-card__select {
+  margin-top: $padding-med;
+}
+
+.form-card__confirmation {
+  margin-bottom: $padding-med;
+  p {
+    margin-bottom: 0;
+  }
+}
