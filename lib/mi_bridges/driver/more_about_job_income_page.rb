@@ -65,7 +65,7 @@ module MiBridges
       end
 
       def current_member
-        @current_member ||= members.select do |member|
+        @_current_member ||= members.select do |member|
           member.mi_bridges_formatted_name == name
         end.first
       end
