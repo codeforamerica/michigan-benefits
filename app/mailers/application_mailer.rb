@@ -34,7 +34,7 @@ class ApplicationMailer < ActionMailer::Base
     if office_location.present?
       "A new 1171 from someone in the lobby has been submitted!"
     else
-      "A new 1171 from the Digital Assister has been submitted!"
+      "A new 1171 from someone online has been submitted!"
     end
   end
 

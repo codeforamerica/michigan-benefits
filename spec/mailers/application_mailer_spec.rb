@@ -36,7 +36,7 @@ RSpec.describe ApplicationMailer do
           expect(email.from).to eq(["hello@example.com"])
           expect(email.to).to eq(["user@example.com"])
           expect(email.subject).to eq(
-            "A new 1171 from the Digital Assister has been submitted!",
+            "A new 1171 from someone online has been submitted!",
           )
           expect(email.body.encoded).not_to include(
             "by a client in your office lobby",
