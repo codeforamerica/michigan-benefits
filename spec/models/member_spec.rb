@@ -23,7 +23,7 @@ RSpec.describe Member do
     end
 
     context "employed" do
-      it "returns monthly income" do
+      it "calls MonthlyIncomeCalculator to find monthly income" do
         member = build(
           :member,
           employment_status: "employed",
@@ -31,11 +31,16 @@ RSpec.describe Member do
           employed_pay_interval: "Hourly",
           employed_hours_per_week: 10,
         )
+        calc_double = double(run: true)
+        allow(MonthlyIncomeCalculator).to receive(:new).with(
+          pay_interval: "Hourly",
+          pay_quantity: 10,
+          hours_per_week: 10,
+        ).and_return(calc_double)
 
-        weekly_pay_times_average_weeks_per_month = 433.0
-        expect(member.monthly_income).to eq(
-          weekly_pay_times_average_weeks_per_month,
-        )
+        member.monthly_income
+
+        expect(calc_double).to have_received(:run)
       end
     end
 
