@@ -21,25 +21,26 @@ RSpec.describe SuccessController do
         with(snap_application: current_app, destination: :office_email)
     end
 
+    it "drives the app once" do
+      run_background_jobs_immediately do
+        run_double = double(run: true)
+        allow(MiBridges::Driver).to receive(:new).
+          with(snap_application: current_app).
+          and_return(run_double)
+
+        get :edit
+
+        _drive_app = create(:driver_application, snap_application: current_app)
+        get :edit
+
+        expect(MiBridges::Driver).to have_received(:new).
+          with(snap_application: current_app).once
+      end
+    end
+
     context "sms consent present" do
       it "sends the submitted_message sms" do
-        Delayed::Worker.delay_jobs = false
-        with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
-          current_app.update(
-            sms_consented: true,
-            phone_number: "8001112222",
-          )
-
-          get :edit
-
-          expect(FakeTwilioClient.messages.count).to eq 1
-          Delayed::Worker.delay_jobs = true
-        end
-      end
-
-      context "multiple visits" do
-        it "only sends sms once" do
-          Delayed::Worker.delay_jobs = false
+        run_background_jobs_immediately do
           with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
             current_app.update(
               sms_consented: true,
@@ -47,10 +48,26 @@ RSpec.describe SuccessController do
             )
 
             get :edit
-            get :edit
 
             expect(FakeTwilioClient.messages.count).to eq 1
-            Delayed::Worker.delay_jobs = true
+          end
+        end
+      end
+
+      context "multiple visits" do
+        it "only sends sms once" do
+          run_background_jobs_immediately do
+            with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
+              current_app.update(
+                sms_consented: true,
+                phone_number: "8001112222",
+              )
+
+              get :edit
+              get :edit
+
+              expect(FakeTwilioClient.messages.count).to eq 1
+            end
           end
         end
       end
@@ -58,18 +75,17 @@ RSpec.describe SuccessController do
 
     context "no sms consent present" do
       it "does not send an SMS" do
-        Delayed::Worker.delay_jobs = false
+        run_background_jobs_immediately do
+          with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
+            current_app.update(
+              sms_consented: false,
+              phone_number: "8001112222",
+            )
 
-        with_modified_env TWILIO_PHONE_NUMBER: "8005551212" do
-          current_app.update(
-            sms_consented: false,
-            phone_number: "8001112222",
-          )
+            get :edit
 
-          get :edit
-
-          expect(FakeTwilioClient.messages.count).to eq 0
-          Delayed::Worker.delay_jobs = true
+            expect(FakeTwilioClient.messages.count).to eq 0
+          end
         end
       end
     end

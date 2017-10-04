@@ -21,6 +21,10 @@ class SuccessController < StandardStepsController
       destination: :office_email,
       snap_application: current_snap_application,
     )
+
+    DriveApplicationJob.perform_later(
+      snap_application: current_snap_application,
+    )
   end
 
   def after_successful_update_hook

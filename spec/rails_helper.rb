@@ -41,6 +41,7 @@ RSpec.configure do |config|
   config.include FeatureHelper, type: :feature
   config.include SnapApplicationFormHelper, type: :feature
   config.include GenericHelper
+  config.include BackgroundJobs
 end
 
 Shoulda::Matchers.configure do |config|
