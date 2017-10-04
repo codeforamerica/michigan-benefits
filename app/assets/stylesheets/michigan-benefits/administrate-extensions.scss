@@ -2,12 +2,29 @@
 
 @import "highlightjs";
 
-.main-content__funnel {
-  display: flex;
-  flex: 1 1 100%;
-  flex-wrap: wrap;
+.main-content__snap-application-legend {
+  padding: 1rem;
+  border-bottom: 1px solid #dfe0e1;
 
+  span {
+    display: inline-block;
+    padding: .5rem 1rem;
+    margin-left: .5rem;
+  }
+
+  span.drive_none {
+    outline: solid 1px lighten(gray, 40%);
+  }
+}
+
+
+.main-content__funnel {
+  border-bottom: 1px solid #dfe0e1;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
   padding: 1rem 2rem;
+
   h3 {
     flex: 1 1 100%;
   }
@@ -17,18 +34,18 @@
   flex: 1 5 20%;
 }
 
-tr.drive_success {
+.drive_success {
   background-color: #dff0d8;
 }
 
-tr.drive_in_flight {
+.drive_in_flight {
   background-color: #d9edf7;
 }
 
-tr.drive_errors {
+.drive_errors {
   background-color: #f2dede;
 }
 
-tr.drive_none {
+.drive_none {
   background-color: transparent;
 }

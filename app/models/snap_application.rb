@@ -56,9 +56,9 @@ class SnapApplication < ApplicationRecord
   end)
 
   def drive_status
-    if driver_applications.any? && driver_errors.empty?
-      :drive_in_flight
-    elsif driver_applications.any? && driver_errors.any?
+    if driver_applications.any? && driver_application.driver_errors.empty?
+      :drive_success
+    elsif driver_applications.any? && driver_application.driver_errors.any?
       :drive_errors
     else
       :drive_none

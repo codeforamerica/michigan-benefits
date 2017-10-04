@@ -185,7 +185,7 @@ RSpec.describe SnapApplication do
   end
 
   describe "#drive_status" do
-    context "when there are drive attempts and no errors" do
+    context "when there are no drive attempts or errors" do
       it "returns :drive_none" do
         snap_application = create(:snap_application)
 
@@ -194,15 +194,15 @@ RSpec.describe SnapApplication do
     end
 
     context "when there are drive attempts and no errors" do
-      it "returns :drive_in_flight" do
+      it "returns :drive_success" do
         driven_application = create(:driver_application)
         snap_application = driven_application.snap_application
 
-        expect(snap_application.drive_status).to eq :drive_in_flight
+        expect(snap_application.drive_status).to eq :drive_success
       end
     end
 
-    context "when there are drive attempts and no errors" do
+    context "when there are drive attempts and some errors" do
       it "returns :drive_errors" do
         driver_error = create(:driver_error)
         driven_application = driver_error.driver_application
