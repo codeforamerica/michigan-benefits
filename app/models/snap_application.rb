@@ -26,6 +26,7 @@ class SnapApplication < ApplicationRecord
 
   has_many :addresses, dependent: :destroy
   has_many :driver_applications, dependent: :destroy
+  has_many :driver_errors, through: :driver_applications
   has_many :exports, dependent: :destroy
   has_many :members, dependent: :destroy
 
@@ -53,6 +54,16 @@ class SnapApplication < ApplicationRecord
   scope :unemailed_client, (lambda do
     where.not(id: Export.emailed_client.succeeded.application_ids)
   end)
+
+  def drive_status
+    if driver_applications.any? && driver_errors.empty?
+      :drive_in_flight
+    elsif driver_applications.any? && driver_errors.any?
+      :drive_errors
+    else
+      :drive_none
+    end
+  end
 
   def driver_application
     driver_applications.order("id DESC").limit(1).first

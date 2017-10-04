@@ -1,0 +1,3 @@
+// = require highlightjsmin
+
+hljs.initHighlightingOnLoad()

@@ -55,7 +55,7 @@ to display a collection of resources in an HTML table.
 
   <tbody>
     <% resources.each do |resource| %>
-      <tr class="js-table-row"
+      <tr class="js-table-row <%= resource.drive_status if resource.respond_to? :drive_status %>"
           tabindex="0"
           <% if valid_action? :show, collection_presenter.resource_name %>
             <%= %(role=link data-url=#{polymorphic_path([namespace, resource])}) %>
@@ -83,7 +83,9 @@ to display a collection of resources in an HTML table.
           <% end -%>
         </td>
 
-        <td><%= link_to("Download", pdf_admin_snap_application_path(resource)) %></td>
+        <% if resource.is_a? SnapApplication -%>
+          <td><%= link_to("Download", pdf_admin_snap_application_path(resource)) %></td>
+        <% end -%>
 
         <% if valid_action? :edit, collection_presenter.resource_name %>
           <td><%= link_to(

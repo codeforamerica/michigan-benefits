@@ -59,26 +59,26 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     vehicle_income: Field::Boolean,
     zip: Field::String,
     members: Field::HasMany,
+    driver_errors: Field::HasMany,
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
     id
-    signature
     sms_consented
     phone_number
     email
     zip
     receiving_office_name
-    signed_at
     faxed_successfully_at
     fax_metadata
-    created_at
+    signed_at
     emailed_at
   ].freeze
 
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     members
+    driver_errors
     created_at
     updated_at
     signature

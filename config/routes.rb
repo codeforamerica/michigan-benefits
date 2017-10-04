@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get "pdf", on: :member
     end
     resources :members
+    resources :driver_errors, only: %i[index show]
 
     root to: "snap_applications#index"
   end

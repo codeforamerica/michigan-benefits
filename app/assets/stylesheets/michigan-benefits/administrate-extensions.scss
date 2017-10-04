@@ -1,5 +1,7 @@
 // Extends administrate CSS per https://github.com/thoughtbot/administrate/pull/436/files
 
+@import "highlightjs";
+
 .main-content__funnel {
   display: flex;
   flex: 1 1 100%;
@@ -13,4 +15,20 @@
 
 .main-content__funnel__stage {
   flex: 1 5 20%;
+}
+
+tr.drive_success {
+  background-color: #dff0d8;
+}
+
+tr.drive_in_flight {
+  background-color: #d9edf7;
+}
+
+tr.drive_errors {
+  background-color: #f2dede;
+}
+
+tr.drive_none {
+  background-color: transparent;
 }
