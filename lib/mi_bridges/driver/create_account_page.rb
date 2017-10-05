@@ -50,6 +50,7 @@ module MiBridges
           password: generate_password,
           secret_question_1_answer: generate_secret_question_1_answer,
           secret_question_2_answer: generate_secret_question_2_answer,
+          driven_at: DateTime.current,
         )
       end
 

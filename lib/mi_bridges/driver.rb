@@ -170,6 +170,7 @@ module MiBridges
           error_message: e.message,
           page_class: page.class.to_s,
           page_html: page.html,
+          driven_at: latest_drive_attempt.driven_at,
         )
     end
 
