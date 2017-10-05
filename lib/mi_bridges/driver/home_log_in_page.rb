@@ -6,6 +6,7 @@ module MiBridges
       delegate :latest_drive_attempt, to: :snap_application
 
       def setup
+        latest_drive_attempt.update(driven_at: DateTime.current)
         visit "https://www.mibridges.michigan.gov/access/"
       end
 
