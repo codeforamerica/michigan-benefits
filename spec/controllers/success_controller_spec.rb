@@ -3,6 +3,10 @@ require "rails_helper"
 RSpec.describe SuccessController do
   before do
     session[:snap_application_id] = current_app.id
+    run_double = double(run: true)
+    allow(MiBridges::Driver).to receive(:new).
+      with(snap_application: current_app).
+      and_return(run_double)
   end
 
   describe "#edit" do
