@@ -212,4 +212,14 @@ RSpec.describe SnapApplication do
       end
     end
   end
+
+  describe "#latest_drive_attempt" do
+    it "returns the most recent associated drive attempt" do
+      app = create(:snap_application)
+      _oldest = create(:driver_application, snap_application: app)
+      latest = create(:driver_application, snap_application: app)
+
+      expect(app.latest_drive_attempt).to eq latest
+    end
+  end
 end

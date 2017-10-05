@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class LogInPage < BasePage
+      delegate :latest_drive_attempt, to: :snap_application
+
       def setup; end
 
       def fill_in_required_fields
@@ -17,15 +19,11 @@ module MiBridges
       private
 
       def user_id
-        driver_application.user_id
+        latest_drive_attempt.user_id
       end
 
       def password
-        driver_application.password
-      end
-
-      def driver_application
-        snap_application.driver_application
+        latest_drive_attempt.password
       end
     end
   end

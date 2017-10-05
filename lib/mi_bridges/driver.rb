@@ -8,6 +8,8 @@ module MiBridges
   class Driver
     include Capybara::DSL
 
+    delegate :latest_drive_attempt, to: :snap_application
+
     SIGN_UP_FLOW = [
       HomePage,
       CreateAccountPage,
@@ -158,8 +160,7 @@ module MiBridges
     end
 
     def save_error(e, page)
-      @snap_application.
-        driver_application.
+      latest_drive_attempt.
         driver_errors.
         create(
           error_class: e.class.to_s,
@@ -206,10 +207,6 @@ module MiBridges
       if ENV["PRE_DEPLOY_TEST"] != "true"
         MiBridges::Driver::BasePage.new(snap_application, logger: logger).close
       end
-    end
-
-    def first_driver_application_attempt?
-      snap_application.driver_application.blank?
     end
   end
 end

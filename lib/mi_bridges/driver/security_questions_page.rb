@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class SecurityQuestionsPage < BasePage
+      delegate :latest_drive_attempt, to: :snap_application
+
       def setup; end
 
       def fill_in_required_fields
@@ -17,15 +19,11 @@ module MiBridges
       private
 
       def answer_1
-        current_application.secret_question_1_answer
+        latest_drive_attempt.secret_question_1_answer
       end
 
       def answer_2
-        current_application.secret_question_2_answer
-      end
-
-      def current_application
-        snap_application.driver_application
+        latest_drive_attempt.secret_question_2_answer
       end
     end
   end

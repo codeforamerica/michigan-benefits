@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class HomeLogInPage < BasePage
+      delegate :latest_drive_attempt, to: :snap_application
+
       def setup
         visit "https://www.mibridges.michigan.gov/access/"
       end
@@ -19,15 +21,11 @@ module MiBridges
       private
 
       def user_id
-        current_application.user_id
+        latest_drive_attempt.user_id
       end
 
       def password
-        current_application.password
-      end
-
-      def current_application
-        snap_application.driver_application
+        latest_drive_attempt.password
       end
     end
   end

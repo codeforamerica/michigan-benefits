@@ -8,30 +8,32 @@ module MiBridges
       MAXIMUM_PASSWORD_CHAR_COUNT = 16
       TITLE = "Setting Up Your Account"
 
+      delegate :latest_drive_attempt, to: :snap_application
+
       def setup
         check_page_title(TITLE)
       end
 
       def fill_in_required_fields
-        if driver_application.blank?
+        if latest_drive_attempt.blank?
           create_driver_application
         end
 
         fill_in "First Name", with: primary_member.first_name
         fill_in "Last Name", with: primary_member.last_name
 
-        fill_in "User ID", with: driver_application.user_id
-        fill_in "Password", with: driver_application.password
+        fill_in "User ID", with: latest_drive_attempt.user_id
+        fill_in "Password", with: latest_drive_attempt.password
         fill_in "Please re-type your Password",
-          with: driver_application.password
+          with: latest_drive_attempt.password
 
         select_secret_question_1
         fill_in "Answer to Secret Question1",
-          with: driver_application.secret_question_1_answer
+          with: latest_drive_attempt.secret_question_1_answer
 
         select_secret_question_2
         fill_in "Answer to Secret Question2",
-          with: driver_application.secret_question_2_answer
+          with: latest_drive_attempt.secret_question_2_answer
 
         accept_user_agreement
       end
@@ -41,10 +43,6 @@ module MiBridges
       end
 
       private
-
-      def driver_application
-        snap_application.driver_application
-      end
 
       def create_driver_application
         snap_application.driver_applications.create(

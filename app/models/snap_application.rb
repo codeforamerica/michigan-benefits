@@ -56,17 +56,20 @@ class SnapApplication < ApplicationRecord
   end)
 
   def drive_status
-    if driver_applications.any? && driver_application.driver_errors.empty?
+    if driver_applications.any? && latest_drive_attempt.driver_errors.empty?
       :drive_success
-    elsif driver_applications.any? && driver_application.driver_errors.any?
+    elsif driver_applications.any? && latest_drive_attempt.driver_errors.any?
       :drive_errors
     else
       :drive_none
     end
   end
 
-  def driver_application
-    driver_applications.order("id DESC").limit(1).first
+  def latest_drive_attempt
+    @_latest_drive_attempt ||= driver_applications.
+      order("id DESC").
+      limit(1).
+      first
   end
 
   def pdf
