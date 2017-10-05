@@ -85,6 +85,7 @@ module MiBridges
       UtilityBillsPage,
       VehiclesPage,
       VeteranInformationPage,
+      ViewTrackAndPrintYourApplicationPage,
       YourOtherBillsExpensesPage,
       YourOtherBillsExpensesSummaryPage,
     ].freeze
