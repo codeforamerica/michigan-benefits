@@ -160,6 +160,8 @@ module MiBridges
     end
 
     def save_error(e, page)
+      return if latest_drive_attempt.nil?
+
       latest_drive_attempt.
         driver_errors.
         create(
