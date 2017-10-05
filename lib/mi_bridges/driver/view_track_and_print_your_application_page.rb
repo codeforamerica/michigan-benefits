@@ -3,6 +3,8 @@
 module MiBridges
   class Driver
     class ViewTrackAndPrintYourApplicationPage < ClickNextPage
+      TITLE = "View, Track And Print Your Application"
+
       def setup
         snap_application.driver_application.update(
           tracking_number: find_tracking_number,
