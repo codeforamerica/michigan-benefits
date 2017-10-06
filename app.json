@@ -55,6 +55,9 @@
     },
     "SHUBOX_JS_ID": {
       "required": true
+    },
+    "WEB_DRIVER": {
+      "required": true
     }
   },
   "formation": {
