@@ -12,7 +12,7 @@ Capybara.register_driver :headless_chrome do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
     profile: profile,
     chromeOptions: {
-      args: %w[headless disable-gpu],
+      args: %w[headless disable-gpu no-sandbox],
       binary: FindChrome.binary,
     },
   )
