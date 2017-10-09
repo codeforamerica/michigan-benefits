@@ -48,10 +48,10 @@
       "generator": "secret"
     },
     "SECRET_KEY_FOR_DRIVER_APPLICATION": {
-      "generator": "secret"
+      "required": true
     },
     "SECRET_KEY_FOR_SSN_ENCRYPTION": {
-      "generator": "secret"
+      "required": true
     },
     "SHUBOX_JS_ID": {
       "required": true
