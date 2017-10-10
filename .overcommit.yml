@@ -13,6 +13,8 @@ PreCommit:
 
   HardTabs:
     enabled: true
+    exclude:
+      - 'spec/fixtures/*'
 
   MasterHooksMatch:
     enabled: true
@@ -26,9 +28,13 @@ PreCommit:
       - '**/*.rb'
       - '**/Gemfile'
       - template-dir/hooks/overcommit-hook
+    exclude:
+      - 'spec/fixtures/*'
 
   TrailingWhitespace:
     enabled: true
+    exclude:
+      - 'spec/fixtures/*'
 
   YamlSyntax:
     enabled: true
