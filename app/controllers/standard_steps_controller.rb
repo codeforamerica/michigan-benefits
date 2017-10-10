@@ -28,6 +28,6 @@ class StandardStepsController < StepsController
   def before_rendering_edit_hook; end
 
   def existing_attributes
-    HashWithIndifferentAccess.new(current_snap_application.attributes)
+    HashWithIndifferentAccess.new(current_snap_application&.attributes)
   end
 end
