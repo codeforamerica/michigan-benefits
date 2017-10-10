@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   resource :skip_send_application, only: [:create]
 
   # Medicaid
-  resources :steps, only: %i[show index] do
+  resources :steps, only: %i[index] do
     collection do
       Medicaid::StepNavigation.steps_and_substeps.each do |controller_class|
         { get: :edit, put: :update }.each do |method, action|
