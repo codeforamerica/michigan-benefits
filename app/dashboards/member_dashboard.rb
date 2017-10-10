@@ -43,8 +43,8 @@ class MemberDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     first_name
     last_name
-    snap_application
     created_at
+    snap_application
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

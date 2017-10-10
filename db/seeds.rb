@@ -222,5 +222,37 @@ complete_third_member.update!(
   self_employed_monthly_expenses: "400",
 )
 
+complete_application.
+  exports.
+  where(destination: :fax).
+  first_or_initialize(
+    metadata: "Faxed to Michigan Benefits (+15551112345)",
+    force: false,
+    status: :succeeded,
+    completed_at: Time.current,
+  ).save
+
+complete_application.
+  exports.
+  where(destination: :client_email).
+  first_or_initialize(
+    metadata: "I, [2017-10-10T14:29:39.397443 #4]  INFO -- : [ActiveJob] "\
+      "[ClientEmailApplicationJob] [1c8d2c86-34f3-48ea-96be-88cf2fee9786] "\
+      "Emailed to #{complete_application.email}\n",
+    force: false,
+    status: :succeeded,
+    completed_at: Time.current,
+  ).save
+
+complete_application.
+  exports.
+  where(destination: :office_email).
+  first_or_initialize(
+    metadata: "",
+    force: false,
+    status: :succeeded,
+    completed_at: Time.current,
+  ).save
+
 puts "More complete application created (or found) " \
   "with id: #{complete_application.id}"

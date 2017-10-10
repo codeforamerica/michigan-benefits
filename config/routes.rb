@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post "resend_email", on: :member
       get "pdf", on: :member
     end
+    resources :exports, only: %i[index show]
     resources :members
     resources :driver_errors, only: %i[index show]
 

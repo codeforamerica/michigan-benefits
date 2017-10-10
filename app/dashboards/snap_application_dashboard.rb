@@ -60,6 +60,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     zip: Field::String,
     members: Field::HasMany,
     driver_errors: Field::HasMany,
+    exports: Field::HasMany,
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
@@ -78,6 +79,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     members
+    exports
     driver_errors
     created_at
     updated_at
