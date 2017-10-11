@@ -10,4 +10,8 @@ class StaticPagesController < ApplicationController
   def clio
     session[:snap_application_id] = nil
   end
+
+  def dual_index
+    session[:snap_application_id] = nil
+  end
 end

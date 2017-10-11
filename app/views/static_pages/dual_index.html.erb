@@ -1,0 +1,28 @@
+<% content_for :template_name, "homepage" %>
+<% content_for :banner do
+  render "shared/banner", banner_text: "Hello! Welcome to our beta website."
+end %>
+
+<%= render 'shared/flashes' %>
+
+<div class="slab--hero-<%= rand(1..3) %> slab slab--hero slab--hero-centered">
+  <div class="grid">
+    <div class="logo-hero">MichiganBenefits.org</div>
+    <h1>
+      Get the support your family needs
+    </h1>
+    <p>
+      Apply for benefits in 15 minutes
+    </p>
+    <%= link_to step_path(StepNavigation.first), class: "button button--cta button--fully-width" do %>
+      Apply for FAP
+    <% end %>
+
+    <%= link_to (), class: "button button--cta button--fully-width" do %>
+      Apply for Medicaid
+    <% end %>
+  </div>
+</div>
+
+<%= render "home_page_bottom_section_dual", office_location: "" %>
+<%= render "shared/footer" %>

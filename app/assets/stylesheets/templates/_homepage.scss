@@ -72,6 +72,7 @@
 
   .logo-hero {
     line-height: 1.2;
+    text-align: left;
 
     &:before {
       @include size(20px);
@@ -85,11 +86,10 @@
   }
 
   .slab--hero {
-    position: relative;
+    color: #FFFFFF;
     background: rgba(shade($color-dark-grey, 80%), .3);
     min-height: 530px;
-
-    color: #FFFFFF;
+    position: relative;
 
     padding: {
       top: $site-margins / 2;
@@ -124,6 +124,14 @@
       bottom: 0;
       background-size: cover;
       background-position: top center;
+    }
+  }
+
+  .slab--hero-centered {
+    text-align: center;
+
+    h1 {
+      max-width: 100%;
     }
   }
 
