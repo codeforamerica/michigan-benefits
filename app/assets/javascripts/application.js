@@ -10,31 +10,32 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require handlebars
-//= require_tree .
-var textWell = (function() {
+// = require jquery
+// = require jquery_ujs
+// = require handlebars
+// = require_tree .
+
+var textWell = (function () {
   return {
-    init: function() {
-      $(document).on('click', '.textwell .textwell__expander', function() {
+    init: function () {
+      $(document).on('click', '.textwell .textwell__expander', function () {
         $(this).parent('.textwell').addClass('textwell--expanded')
       })
     }
   }
-})();
+})()
 
-var radioSelector = (function() {
+var radioSelector = (function () {
   var rs = {
-    init: function() {
-      $('.radio-button').each(function(index, button){
-        if($(this).find('input').is(':checked')) {
-          $(this).addClass('is-selected');
+    init: function () {
+      $('.radio-button').each(function (index, button) {
+        if ($(this).find('input').is(':checked')) {
+          $(this).addClass('is-selected')
         }
 
-        $(this).find('input').click(function(e) {
-          $(this).parent().siblings().removeClass('is-selected');
-          $(this).parent().addClass('is-selected');
+        $(this).find('input').click(function (e) {
+          $(this).parent().siblings().removeClass('is-selected')
+          $(this).parent().addClass('is-selected')
         })
       })
     }
@@ -42,22 +43,21 @@ var radioSelector = (function() {
   return {
     init: rs.init
   }
-})();
+})()
 
-var checkboxSelector = (function() {
+var checkboxSelector = (function () {
   var cs = {
-    init: function() {
-      $('.checkbox').each(function(index, button){
-        if($(this).find('input').is(':checked')) {
-          $(this).addClass('is-selected');
+    init: function () {
+      $('.checkbox').each(function (index, button) {
+        if ($(this).find('input').is(':checked')) {
+          $(this).addClass('is-selected')
         }
 
-        $(this).find('input').click(function(e) {
-          if($(this).is(':checked')) {
-            $(this).parent().addClass('is-selected');
-          }
-          else {
-            $(this).parent().removeClass('is-selected');
+        $(this).find('input').click(function (e) {
+          if ($(this).is(':checked')) {
+            $(this).parent().addClass('is-selected')
+          }else {
+            $(this).parent().removeClass('is-selected')
           }
         })
       })
@@ -66,10 +66,28 @@ var checkboxSelector = (function() {
   return {
     init: cs.init
   }
-})();
+})()
 
-$(document).ready(function() {
-  radioSelector.init();
-  checkboxSelector.init();
-  textWell.init();
-});
+var yesNoButtons = (function () {
+  var yn = {
+    init: function () {
+      $('[data-no]').on('click', function () {
+        $('input.boolean-answer').val('0')
+      })
+
+      $('[data-yes]').on('click', function () {
+        $('input.boolean-answer').val('1')
+      })
+    }
+  }
+  return {
+    init: yn.init
+  }
+})()
+
+$(document).ready(function () {
+  radioSelector.init()
+  checkboxSelector.init()
+  textWell.init()
+  yesNoButtons.init()
+})

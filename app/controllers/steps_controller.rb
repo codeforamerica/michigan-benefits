@@ -35,7 +35,7 @@ class StepsController < ApplicationController
   end
 
   def current_path(params = nil)
-    step_path(self.class, params)
+    step_path(self.class, params).gsub("%2F", "/")
   end
 
   def maybe_skip
