@@ -13,22 +13,36 @@ module Medicaid
         Medicaid::IntroCitizenController,
         # multi-member Medicaid::IntroCaretakerController,
         # multi-member Medicaid::IntroCaretakerMemberController,
+      ],
+      "Insurance" => [
         Medicaid::InsuranceCurrentController,
         Medicaid::InsuranceCurrentTypeController,
         Medicaid::InsuranceMedicalExpensesController,
+      ],
+      "Health" => [
         Medicaid::HealthDisabilityController,
         Medicaid::HealthPregnancyController,
+      ],
+      "Taxes" => [
         Medicaid::TaxFilingController,
+      ],
+      "Income" => [
         Medicaid::IncomeJobController,
         Medicaid::IncomeJobNumberController,
         Medicaid::IncomeSelfEmploymentController,
         Medicaid::IncomeOtherIncomeController,
         Medicaid::IncomeOtherIncomeTypeController,
+      ],
+      "Expenses" => [
         Medicaid::ExpensesStudentLoanController,
         Medicaid::ExpensesAlimonyController,
+      ],
+      "Income and Expense Amounts" => [
         Medicaid::AmountsOverviewController,
         Medicaid::AmountsIncomeController,
         Medicaid::AmountsExpensesController,
+      ],
+      "Contact" => [
         Medicaid::ContactController,
         Medicaid::ContactHomeAddressController,
         Medicaid::ContactOtherAddressController,
@@ -39,6 +53,8 @@ module Medicaid
         Medicaid::ContactEmailController,
         Medicaid::ContactSsDobController,
         Medicaid::ContactSocialSecurityController,
+      ],
+      "Success" => [
         Medicaid::ConfirmationController,
       ],
     }.freeze
