@@ -14,6 +14,7 @@ gem "capybara"
 gem "delayed_job_active_record"
 gem "delayed_job_web"
 gem "faraday"
+gem "good_migrations"
 gem "high_voltage"
 gem "jquery-rails"
 gem "mimemagic"
@@ -32,6 +33,7 @@ gem "selenium-webdriver", "3.4.3"
 gem "sfax",
   git: "https://github.com/codeforamerica/sfax",
   ref: "da88847faaf5ab51255e4d7e47d76493d05113b1"
+gem "strong_migrations"
 gem "token_phrase"
 gem "twilio-ruby"
 
