@@ -11,7 +11,7 @@ class StandardStepsController < StepsController
     @step = step_class.new(step_params)
 
     if @step.valid?
-      current_snap_application.update!(step_params)
+      current_application.update!(step_params)
       after_successful_update_hook
       redirect_to(next_path)
     else
@@ -28,6 +28,6 @@ class StandardStepsController < StepsController
   def before_rendering_edit_hook; end
 
   def existing_attributes
-    HashWithIndifferentAccess.new(current_snap_application&.attributes)
+    HashWithIndifferentAccess.new(current_application&.attributes)
   end
 end

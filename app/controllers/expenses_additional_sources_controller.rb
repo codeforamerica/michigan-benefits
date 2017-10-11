@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ExpensesAdditionalSourcesController < StandardStepsController
+  include SnapFlow
+
   private
 
   def step_params

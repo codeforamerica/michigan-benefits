@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   respond_to :html
 
   helper_method \
+    :current_application,
     :current_path,
-    :current_snap_application,
     :next_path,
     :previous_path,
     :skip_path
@@ -21,16 +21,4 @@ class ApplicationController < ActionController::Base
   def current_path(*); end
 
   def next_path(*); end
-
-  def set_current_snap_application(application)
-    session[:snap_application_id] = application.try(:id)
-  end
-
-  def current_snap_application
-    SnapApplication.find_by(id: current_snap_application_id)
-  end
-
-  def current_snap_application_id
-    session[:snap_application_id]
-  end
 end

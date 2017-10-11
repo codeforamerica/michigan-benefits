@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 class IncomeAdditionalSourcesController < StepsController
+  include SnapFlow
+
   def edit
     @step = step_class.new(
-      array_to_checkboxes(current_snap_application.additional_income),
+      array_to_checkboxes(current_application.additional_income),
     )
   end
 
   def update
-    current_snap_application.update!(
+    current_application.update!(
       additional_income: checkboxes_to_array(step_params),
     )
 

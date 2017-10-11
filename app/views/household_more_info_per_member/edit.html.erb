@@ -9,7 +9,7 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
 
-      <% if !current_snap_application.everyone_a_citizen? %>
+      <% if !current_application.everyone_a_citizen? %>
         <fieldset class="form-group">
           <p class="form-question">Who is not a citizen?<span class="form-card__optional">(optional)</span></p>
             <% @step.members.each do |member| %>
@@ -24,28 +24,28 @@
         </fieldset>
       <% end %>
 
-      <% if current_snap_application.anyone_disabled? %>
+      <% if current_application.anyone_disabled? %>
         <fieldset class="form-group">
           <p class="form-question">Who has a disability?<span class="form-card__optional">(optional)</span></p>
           <%= render 'member_checkboxes', f: f, step: @step, method: :disabled %>
         </fieldset>
       <% end %>
 
-      <% if current_snap_application.anyone_new_mom? %>
+      <% if current_application.anyone_new_mom? %>
         <fieldset class="form-group">
           <p class="form-question">Who is pregnant or has been pregnant recently?<span class="form-card__optional">(optional)</span></p>
           <%= render 'member_checkboxes', f: f, step: @step, method: :new_mom %>
         </fieldset>
       <% end %>
 
-      <% if current_snap_application.anyone_in_college? %>
+      <% if current_application.anyone_in_college? %>
         <fieldset class="form-group">
           <p class="form-question">Who is enrolled in college?<span class="form-card__optional">(optional)</span></p>
           <%= render 'member_checkboxes', f: f, step: @step, method: :in_college %>
         </fieldset>
       <% end %>
 
-      <% if current_snap_application.anyone_living_elsewhere? %>
+      <% if current_application.anyone_living_elsewhere? %>
         <fieldset class="form-group">
           <p class="form-question">Who is temporarily living outside the home?<span class="form-card__optional">(optional)</span></p>
           <%= render 'member_checkboxes', f: f, step: @step, method: :living_elsewhere %>

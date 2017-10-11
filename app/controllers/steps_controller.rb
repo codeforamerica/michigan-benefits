@@ -20,12 +20,6 @@ class StepsController < ApplicationController
 
   delegate :step_class, to: :class
 
-  def ensure_application_present
-    if current_snap_application.blank?
-      redirect_to introduce_yourself_steps_path
-    end
-  end
-
   def step_params
     params.fetch(:step, {}).permit(*step_attrs)
   end

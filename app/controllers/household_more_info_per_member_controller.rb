@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HouseholdMoreInfoPerMemberController < ManyMemberStepsController
+  include SnapFlow
+
   private
 
   def member_attrs
@@ -12,10 +14,10 @@ class HouseholdMoreInfoPerMemberController < ManyMemberStepsController
   end
 
   def no_additional_info_needed?
-    current_snap_application.everyone_a_citizen? &&
-      !current_snap_application.anyone_disabled? &&
-      !current_snap_application.anyone_new_mom? &&
-      !current_snap_application.anyone_in_college? &&
-      !current_snap_application.anyone_living_elsewhere?
+    current_application.everyone_a_citizen? &&
+      !current_application.anyone_disabled? &&
+      !current_application.anyone_new_mom? &&
+      !current_application.anyone_in_college? &&
+      !current_application.anyone_living_elsewhere?
   end
 end

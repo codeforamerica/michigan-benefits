@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class ResidentialAddressController < AddressController
+  include SnapFlow
+
   private
 
   def address
-    current_snap_application.addresses.where.not(mailing: true).first ||
-      current_snap_application.addresses.new(mailing: false)
+    current_application.addresses.where.not(mailing: true).first ||
+      current_application.addresses.new(mailing: false)
   end
 
   def snap_application_update_params
@@ -21,6 +23,6 @@ class ResidentialAddressController < AddressController
   end
 
   def skip?
-    current_snap_application&.mailing_address_same_as_residential_address?
+    current_application&.mailing_address_same_as_residential_address?
   end
 end

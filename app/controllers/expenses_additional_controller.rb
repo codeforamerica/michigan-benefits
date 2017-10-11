@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ExpensesAdditionalController < StepsController
+  include SnapFlow
+
   PREVIOUS_SECTION_ATTRIBUTES = %w[
     court_ordered
     dependent_care
@@ -23,7 +25,7 @@ class ExpensesAdditionalController < StepsController
     set_sections
 
     @step = step_class.new(
-      current_snap_application.
+      current_application.
         attributes.
         slice(*ATTRIBUTES).
         merge(array_to_checkboxes(attribute_array)),
@@ -37,7 +39,7 @@ class ExpensesAdditionalController < StepsController
     @step = step_class.new(update_params)
 
     if @step.valid?
-      current_snap_application.update!(update_params)
+      current_application.update!(update_params)
       redirect_to next_path
     else
       render :edit
@@ -48,7 +50,7 @@ class ExpensesAdditionalController < StepsController
 
   def attribute_array
     ARRAY_ATTRIBUTES.keys.flat_map do |key|
-      current_snap_application[key]
+      current_application[key]
     end
   end
 
@@ -67,7 +69,7 @@ class ExpensesAdditionalController < StepsController
   end
 
   def previous_section
-    @previous_section ||= current_snap_application.
+    @previous_section ||= current_application.
       attributes.
       slice(*PREVIOUS_SECTION_ATTRIBUTES).
       symbolize_keys
