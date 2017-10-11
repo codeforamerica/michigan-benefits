@@ -37,7 +37,7 @@ module Medicaid
         Medicaid::ExpensesStudentLoanController,
         Medicaid::ExpensesAlimonyController,
       ],
-      "Income and Expense Amounts" => [
+      "Income & Expense Amounts" => [
         Medicaid::AmountsOverviewController,
         Medicaid::AmountsIncomeController,
         Medicaid::AmountsExpensesController,
