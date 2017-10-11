@@ -18,4 +18,8 @@ module SnapFlow
   def set_current_application(application)
     session[:snap_application_id] = application.try(:id)
   end
+
+  def step_navigation
+    @step_navigation ||= StepNavigation.new(self)
+  end
 end

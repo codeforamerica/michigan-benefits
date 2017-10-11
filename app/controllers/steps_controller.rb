@@ -29,7 +29,7 @@ class StepsController < ApplicationController
   end
 
   def current_path(params = nil)
-    step_path(self.class, params).gsub("%2F", "/")
+    decoded_step_path(params: params)
   end
 
   def maybe_skip
@@ -46,25 +46,25 @@ class StepsController < ApplicationController
 
   def previous_path(params = nil)
     previous_step = step_navigation.previous
-    previous_step ? step_path(previous_step, params) : root_path
+    if previous_step
+      decoded_step_path(step: previous_step, params: params)
+    else
+      root_path
+    end
   end
 
   def going_backwards?
     params["rel"] == "back"
   end
 
-  def next_path(params = nil)
+  def next_path(params = {})
     next_step = step_navigation.next
-    step_path(next_step, params) if next_step
+    decoded_step_path(step: next_step, params: params) if next_step
   end
 
   def skip_path(params = nil)
     skip_step = step_navigation.skip
-    step_path(skip_step, params) if skip_step
-  end
-
-  def step_navigation
-    @step_navigation ||= StepNavigation.new(self)
+    decoded_step_path(step: skip_step, params: params) if skip_step
   end
 
   def array_to_checkboxes(array)
@@ -73,5 +73,9 @@ class StepsController < ApplicationController
 
   def checkboxes_to_array(checkboxes)
     checkboxes.select { |k| step_params[k].in?(["1", 1, true]) }.map(&:to_s)
+  end
+
+  def decoded_step_path(step: self.class, params: nil)
+    step_path(step, params).gsub("%2F", "/")
   end
 end

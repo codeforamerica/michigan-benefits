@@ -2,5 +2,6 @@
 
 module Medicaid
   class ContactOtherAddressController < StandardStepsController
+    include MedicaidFlow
   end
 end

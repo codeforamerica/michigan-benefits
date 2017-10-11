@@ -2,5 +2,6 @@
 
 module Medicaid
   class ExpensesAlimonyController < StandardStepsController
+    include MedicaidFlow
   end
 end

@@ -2,5 +2,6 @@
 
 module Medicaid
   class IntroCaretakerMemberController < StandardStepsController
+    include MedicaidFlow
   end
 end

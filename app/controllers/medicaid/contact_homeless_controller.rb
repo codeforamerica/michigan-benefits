@@ -2,5 +2,6 @@
 
 module Medicaid
   class ContactHomelessController < StandardStepsController
+    include MedicaidFlow
   end
 end

@@ -2,5 +2,6 @@
 
 module Medicaid
   class ExpensesStudentLoanController < StandardStepsController
+    include MedicaidFlow
   end
 end

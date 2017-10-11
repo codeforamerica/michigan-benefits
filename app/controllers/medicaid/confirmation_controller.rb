@@ -2,5 +2,6 @@
 
 module Medicaid
   class ConfirmationController < StandardStepsController
+    include MedicaidFlow
   end
 end

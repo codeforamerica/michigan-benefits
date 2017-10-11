@@ -2,5 +2,6 @@
 
 module Medicaid
   class InsuranceCurrentController < StandardStepsController
+    include MedicaidFlow
   end
 end

@@ -2,5 +2,6 @@
 
 module Medicaid
   class AmountsOverviewController < StandardStepsController
+    include MedicaidFlow
   end
 end

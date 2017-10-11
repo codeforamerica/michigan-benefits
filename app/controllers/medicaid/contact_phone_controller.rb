@@ -2,5 +2,6 @@
 
 module Medicaid
   class ContactPhoneController < StandardStepsController
+    include MedicaidFlow
   end
 end

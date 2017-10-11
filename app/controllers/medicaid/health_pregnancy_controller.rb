@@ -2,5 +2,6 @@
 
 module Medicaid
   class HealthPregnancyController < StandardStepsController
+    include MedicaidFlow
   end
 end
