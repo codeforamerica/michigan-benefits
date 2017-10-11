@@ -2,5 +2,16 @@
 
 module Medicaid
   class IntroLocationHelpController < StandardStepsController
+    include MedicaidFlow
+
+    private
+
+    def skip?
+      michigan_resident?
+    end
+
+    def michigan_resident?
+      current_medicaid_application&.michigan_resident?
+    end
   end
 end

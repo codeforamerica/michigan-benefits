@@ -2,6 +2,8 @@
 
 module Medicaid
   class IntroLocationController < StandardStepsController
+    include MedicaidFlow
+
     private
 
     def ensure_application_present
