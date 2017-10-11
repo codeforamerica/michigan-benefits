@@ -2,5 +2,6 @@
 
 module Medicaid
   class IncomeJob < Step
+    step_attributes(:employed)
   end
 end

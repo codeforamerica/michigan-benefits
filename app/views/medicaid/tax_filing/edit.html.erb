@@ -9,24 +9,18 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Do you plan on filing a federal tax return next year?</div>
+    <div class="form-card__title">
+      Do you plan on filing a federal tax return next year?
+    </div>
+
     <p class="text--help text--centered">
       Some households don't file based on their income.
     </p>
   </header>
 
-  <div class="form-card__content">
-    <!-- Replace with partial -->
-    <footer class="form-card__buttons">
-      <a href="/pages/medicaid/income_job" class="button button--nav button--full-width">
-        No
-      </a>
-
-      <a href="/pages/medicaid/income_job" class="button button--nav button--cta button--full-width">
-        Yes
-      </a>
-    </footer>
-  </div>
+  <%= render 'shared/yes_no_form',
+    step: @step,
+    field: :filing_federal_taxes_next_year %>
 </div>
 
 <!-- Single-member content: https://trello.com/c/RgMQyNhk/72-do-you-plan-on-filing-a-federal-tax-return-next-year -->

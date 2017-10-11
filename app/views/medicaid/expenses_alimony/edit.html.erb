@@ -9,21 +9,14 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Do you pay child support, alimony or arrears?</div>
+    <div class="form-card__title">
+      Do you pay child support, alimony or arrears?
+    </div>
   </header>
 
-  <div class="form-card__content">
-    <!-- Replace with partial -->
-    <footer class="form-card__buttons">
-      <a href="/pages/medicaid/amounts_overview" class="button button--nav button--full-width">
-        No
-      </a>
-
-      <a href="/pages/medicaid/amounts_overview" class="button button--nav button--cta button--full-width">
-        Yes
-      </a>
-    </footer>
-  </div>
+  <%= render 'shared/yes_no_form',
+    step: @step,
+    field: :pay_child_support_alimony_arrears %>
 </div>
 
 <!-- Single-member copy: https://trello.com/c/VoxppHxk/47-do-you-pay-child-support-alimony-or-arrears -->

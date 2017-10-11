@@ -2,5 +2,6 @@
 
 module Medicaid
   class IntroCollege < Step
+    step_attributes(:college_student)
   end
 end

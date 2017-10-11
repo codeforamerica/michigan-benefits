@@ -2,5 +2,6 @@
 
 module Medicaid
   class HealthPregnancy < Step
+    step_attributes(:new_mom)
   end
 end

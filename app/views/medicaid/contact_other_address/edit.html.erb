@@ -9,22 +9,12 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Is there somewhere we can reliably send you mail?</div>
+    <div class="form-card__title">
+      Is there somewhere we can reliably send you mail?
+    </div>
   </header>
 
-  <div class="form-card__content">
-
-    <!-- Replace with partial -->
-    <footer class="form-card__buttons">
-      <a href="/pages/medicaid/contact_homeless" class="button button--nav button--full-width">
-        No
-      </a>
-
-      <a href="/pages/medicaid/contact_current_address" class="button button--nav button--cta button--full-width">
-        Yes
-      </a>
-    </footer>
-  </div>
+  <%= render 'shared/yes_no_form', step: @step, field: :reliable_mail_address %>
 </div>
 
 <!-- https://trello.com/c/QwrCdRgF/29-do-you-receive-mail-at-your-residential-address -->

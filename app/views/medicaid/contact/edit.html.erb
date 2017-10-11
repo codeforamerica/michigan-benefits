@@ -9,22 +9,14 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Do you receive mail at your residential address?</div>
+    <div class="form-card__title">
+      Do you receive mail at your residential address?
+    </div>
   </header>
 
-  <div class="form-card__content">
-
-    <!-- Replace with partial -->
-    <footer class="form-card__buttons">
-      <a href="/pages/medicaid/contact_other_address" class="button button--nav button--full-width">
-        No
-      </a>
-
-      <a href="/pages/medicaid/contact_home_address" class="button button--nav button--cta button--full-width">
-        Yes
-      </a>
-    </footer>
-  </div>
+  <%= render 'shared/yes_no_form',
+    step: @step,
+   field: :mail_sent_to_residential %>
 </div>
 
 <!-- https://trello.com/c/QwrCdRgF/29-do-you-receive-mail-at-your-residential-address -->

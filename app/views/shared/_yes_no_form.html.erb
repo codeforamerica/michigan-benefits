@@ -1,0 +1,23 @@
+<%= form_for step,
+  as: :step,
+  builder: MbFormBuilder,
+  url: current_path,
+  method: :put do |f| %>
+
+  <div class="form-card__content">
+    <footer class="form-card__buttons">
+      <%= f.hidden_field(field, class: 'boolean-answer') %>
+
+      <button
+        type="submit"
+        class="button button--nav button--full-width"
+        data-no> No </button>
+
+      <button
+        type="submit"
+        class="button button--nav button--cta button--full-width"
+        data-yes> Yes </button>
+    </footer>
+  </div>
+
+<% end %>

@@ -20,17 +20,5 @@
     </p>
   </header>
 
-  <%= form_for @step,
-    as: :step,
-    builder: MbFormBuilder,
-    url: current_path,
-    method: :put do |f| %>
-
-    <div class="form-card__content">
-      <footer class="form-card__buttons">
-        <%= f.mb_boolean_buttons :michigan_resident %>
-      </footer>
-    </div>
-
-  <% end %>
+  <%= render 'shared/yes_no_form', step: @step, field: :michigan_resident %>
 </div>

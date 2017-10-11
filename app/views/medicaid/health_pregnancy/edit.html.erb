@@ -15,18 +15,9 @@
     </p>
   </header>
 
-  <div class="form-card__content">
-    <!-- Replace with partial -->
-    <footer class="form-card__buttons">
-      <a href="/pages/medicaid/tax_filing" class="button button--nav button--full-width">
-        No
-      </a>
-
-      <a href="/pages/medicaid/tax_filing" class="button button--nav button--cta button--full-width">
-        Yes
-      </a>
-    </footer>
-  </div>
+  <%= render 'shared/yes_no_form',
+    step: @step,
+    field: :new_mom %>
 </div>
 
 <!-- Single-member content: https://trello.com/c/SnW4pvXU/44-have-you-been-pregnant-recently -->

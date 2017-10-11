@@ -1,20 +1,4 @@
 class MbFormBuilder < ActionView::Helpers::FormBuilder
-  def mb_boolean_buttons(method)
-    <<-HTML.html_safe
-        #{hidden_field(method, class: 'boolean-answer')}
-
-        <button
-          type="submit"
-          class="button button--nav button--full-width"
-          data-no> No </button>
-
-        <button
-          type="submit"
-          class="button button--nav button--cta button--full-width"
-          data-yes> Yes </button>
-    HTML
-  end
-
   def mb_input_field(
     method,
     label_text,

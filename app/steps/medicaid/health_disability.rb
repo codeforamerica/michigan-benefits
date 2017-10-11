@@ -2,5 +2,6 @@
 
 module Medicaid
   class HealthDisability < Step
+    step_attributes(:disabled)
   end
 end

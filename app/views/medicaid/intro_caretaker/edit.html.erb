@@ -9,19 +9,12 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Is anyone a caretaker or parent of other people in the household?</div>
+    <div class="form-card__title">
+      Is anyone a caretaker or parent of other people in the household?
+    </div>
   </header>
 
-  <!-- Replace with partial -->
-  <footer class="form-card__buttons">
-    <a href="#" class="button button--nav button--full-width">
-      No
-    </a>
-
-    <a href="/pages/medicaid/intro_caretaker_member" class="button button--nav button--cta button--full-width">
-      Yes
-    </a>
-  </footer>
+  <%= render 'shared/yes_no_form', step: @step, field: :caretaker_or_parent %>
 </div>
 
 <!-- Single-member content: https://trello.com/c/bNj8pyx5/54-what-type-of-health-insurance-plan-are-you-currently-enrolled-in -->

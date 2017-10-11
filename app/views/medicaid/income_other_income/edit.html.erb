@@ -15,18 +15,7 @@
     </p>
   </header>
 
-  <div class="form-card__content">
-    <!-- Replace with partial -->
-    <footer class="form-card__buttons">
-      <a href="/pages/medicaid/expenses_student_loan" class="button button--nav button--full-width">
-        No
-      </a>
-
-      <a href="/pages/medicaid/income_other_income_type" class="button button--nav button--cta button--full-width">
-        Yes
-      </a>
-    </footer>
-  </div>
+  <%= render 'shared/yes_no_form', step: @step, field: :income_not_from_job %>
 </div>
 
 <!-- https://trello.com/c/tXO2ckrd/50-do-you-get-income-thats-not-from-a-job -->

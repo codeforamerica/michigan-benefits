@@ -12,18 +12,7 @@
     <div class="form-card__title">Are you currently a college student?</div>
   </header>
 
-  <div class="form-card__content">
-    <!-- Replace with partial -->
-    <footer class="form-card__buttons">
-      <a href="/pages/medicaid/intro_citizen" class="button button--nav button--full-width">
-        No
-      </a>
-
-      <a href="/pages/medicaid/intro_citizen" class="button button--nav button--cta button--full-width">
-        Yes
-      </a>
-    </footer>
-  </div>
+  <%= render 'shared/yes_no_form', step: @step, field: :college_student %>
 </div>
 
 <!-- Single-member content: https://trello.com/c/NYa5qEAJ/45-are-you-currently-a-college-student -->
