@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ManyMemberStepsController < StepsController
+  include SnapFlow
+
   def edit
     step
   end
@@ -30,10 +32,10 @@ class ManyMemberStepsController < StepsController
 
   def step
     @step ||= step_class.new(
-      current_snap_application.
+      current_application.
         attributes.
         slice(*step_attrs).
-        merge(members: current_snap_application.members),
+        merge(members: current_application.members),
     )
   end
 

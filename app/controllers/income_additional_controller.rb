@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 class IncomeAdditionalController < StandardStepsController
+  include SnapFlow
+
   def edit
-    @additional_income = current_snap_application.additional_income.map do |key|
+    @additional_income = current_application.additional_income.map do |key|
       "income_#{key}"
     end
 
     @income_fields = income_fields(@additional_income)
 
     @step = step_class.new(
-      @additional_income.map { |k| [k, current_snap_application[k]] }.to_h,
+      @additional_income.map { |k| [k, current_application[k]] }.to_h,
     )
   end
 
@@ -20,7 +22,7 @@ class IncomeAdditionalController < StandardStepsController
   end
 
   def no_additional_income_sources?
-    current_snap_application.additional_income.empty?
+    current_application.additional_income.empty?
   end
 
   def income_fields(additional_income)

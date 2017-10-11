@@ -14,7 +14,7 @@
       method: :put do |f| %>
 
       <div class="form-card__content">
-        <% if current_snap_application.dependent_care? %>
+        <% if current_application.dependent_care? %>
           <p class="text--section-header">
             Care expenses
           </p>
@@ -34,7 +34,7 @@
         </fieldset>
         <% end %>
 
-        <% if current_snap_application.medical? %>
+        <% if current_application.medical? %>
           <p class="text--section-header">
             Medical Expenses
           </p>
@@ -58,7 +58,7 @@
           </fieldset>
         <% end %>
 
-        <% if current_snap_application.court_ordered? %>
+        <% if current_application.court_ordered? %>
           <p class="text--section-header">
             Court-ordered expenses
           </p>

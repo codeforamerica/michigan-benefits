@@ -1,12 +1,14 @@
 class IncomeOtherAssetsContinuedController < StandardStepsController
+  include SnapFlow
+
   def edit
     financial_accounts = array_to_checkboxes(
-      current_snap_application.financial_accounts,
+      current_application.financial_accounts,
     )
 
     @step = step_class.new(
       financial_accounts.merge(
-        total_money: current_snap_application.total_money,
+        total_money: current_application.total_money,
       ),
     )
   end
@@ -16,7 +18,7 @@ class IncomeOtherAssetsContinuedController < StandardStepsController
       step_params.except(:total_money).keys,
     )
 
-    current_snap_application.update!(
+    current_application.update!(
       total_money: step_params[:total_money],
       financial_accounts: financial_accounts,
     )
@@ -27,6 +29,6 @@ class IncomeOtherAssetsContinuedController < StandardStepsController
   private
 
   def skip?
-    !current_snap_application.money_or_accounts_income?
+    !current_application.money_or_accounts_income?
   end
 end

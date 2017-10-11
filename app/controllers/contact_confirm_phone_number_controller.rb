@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class ContactConfirmPhoneNumberController < StandardStepsController
+  include SnapFlow
+
   private
 
   def skip?
-    !current_snap_application&.sms_consented?
+    !current_application&.sms_consented?
   end
 end

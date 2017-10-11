@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PersonalDetailController < StandardStepsController
+  include SnapFlow
+
   def update
     @step = step_class.new(step_params)
 
@@ -23,7 +25,7 @@ class PersonalDetailController < StandardStepsController
   end
 
   def member
-    current_snap_application.members.first ||
-      current_snap_application.members.new
+    current_application.members.first ||
+      current_application.members.new
   end
 end

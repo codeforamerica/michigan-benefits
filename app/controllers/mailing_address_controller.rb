@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class MailingAddressController < AddressController
+  include SnapFlow
+
   private
 
   def address
-    current_snap_application.addresses.where(mailing: true).first ||
-      current_snap_application.addresses.new(mailing: true)
+    current_application.addresses.where(mailing: true).first ||
+      current_application.addresses.new(mailing: true)
   end
 
   def snap_application_update_params

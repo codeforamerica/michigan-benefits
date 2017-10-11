@@ -1,7 +1,7 @@
 <% if debug? %>
   <div class="debug">
     <%= controller.class.name %>
-    | app <%= current_snap_application.try(:id) || '' %>
+    | app <%= current_application.try(:id) || '' %>
     | <%= link_to 'Nav', steps_path %>
   </div>
 <% end %>

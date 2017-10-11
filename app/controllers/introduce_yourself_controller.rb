@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class IntroduceYourselfController < StandardStepsController
+  include SnapFlow
+
   def update
     @step = step_class.new(step_params)
 
     if @step.valid?
       app = current_or_new_snap_application
       app.update!(office_location: step_params[:office_location])
-      set_current_snap_application(app)
+      set_current_application(app)
       member.update!(member_update_params)
       redirect_to(next_path)
     else
@@ -36,7 +38,7 @@ class IntroduceYourselfController < StandardStepsController
   end
 
   def current_or_new_snap_application
-    current_snap_application || SnapApplication.new
+    current_application || SnapApplication.new
   end
 
   def office_location_params

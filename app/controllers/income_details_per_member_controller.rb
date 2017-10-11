@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class IncomeDetailsPerMemberController < ManyMemberStepsController
+  include SnapFlow
+
   private
 
   def skip?
-    current_snap_application.members.all?(&:not_employed?)
+    current_application.members.all?(&:not_employed?)
   end
 
   def member_attrs

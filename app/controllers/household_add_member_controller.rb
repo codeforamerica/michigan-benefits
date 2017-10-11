@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HouseholdAddMemberController < StandardStepsController
+  include SnapFlow
+
   helper_method :member_id
 
   def update
@@ -38,7 +40,7 @@ class HouseholdAddMemberController < StandardStepsController
   end
 
   def find_or_initialize_member
-    household_members = current_snap_application.members
+    household_members = current_application.members
 
     if member_id.present?
       household_members.find_by(id: member_id)
