@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class ContactHomeHomelessController < StandardStepsController
+  class ContactHomelessController < StandardStepsController
   end
 end
