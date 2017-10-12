@@ -1,20 +1,17 @@
 class StaticPagesController < ApplicationController
-  def index
-    session[:snap_application_id] = nil
-    session[:medicaid_application_id] = nil
-  end
+  before_action :clear_session
 
-  def union
-    session[:snap_application_id] = nil
-    session[:medicaid_application_id] = nil
-  end
+  def index; end
 
-  def clio
-    session[:snap_application_id] = nil
-    session[:medicaid_application_id] = nil
-  end
+  def union; end
 
-  def dual_index
+  def clio; end
+
+  def dual_index; end
+
+  private
+
+  def clear_session
     session[:snap_application_id] = nil
     session[:medicaid_application_id] = nil
   end
