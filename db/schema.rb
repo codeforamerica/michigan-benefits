@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011140150) do
+ActiveRecord::Schema.define(version: 20171011224143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,11 @@ ActiveRecord::Schema.define(version: 20171011140150) do
 
   create_table "medicaid_applications", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.boolean "employed"
+    t.boolean "income_not_from_job"
+    t.boolean "insured"
     t.boolean "michigan_resident", null: false
+    t.boolean "submit_ssn"
     t.datetime "updated_at", null: false
   end
 
