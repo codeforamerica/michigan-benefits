@@ -6,8 +6,8 @@ module Medicaid
 
     private
 
-    def ensure_application_present
-      true
+    def step_class
+      Medicaid::AmountsExpenses
     end
   end
 end

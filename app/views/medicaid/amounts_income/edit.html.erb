@@ -9,27 +9,15 @@
     </p>
   </header>
 
-  <div>
-    <label class="form-question" for="example_text">Your Current Job</label>
-    <input type="text" class="text-input" placeholder="$">
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_money_field :employed_monthly_income,
+        "Your Current Job (average monthly income)" %>
+      <%= f.mb_money_field :self_employed_monthly_income,
+        "Your Self-Employment (average monthly income)" %>
+      <%= f.mb_money_field :unemployment_income,
+        "Your Unemployment (average monthly income)" %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
-
-  <div>
-    <label class="form-question" for="example_text">Your Self-Employment</label>
-    <input type="text" class="text-input" placeholder="$">
-  </div>
-
-  <div>
-    <label class="form-question" for="example_text">Your Unemployment</label>
-    <input type="text" class="text-input" placeholder="$">
-  </div>
-
-  <!-- Replace with partial -->
-  <footer class="form-card__button_right">
-    <a href="/pages/medicaid/amounts_expenses" class="button button--nav button--nav-center button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>
-
-<!-- https://trello.com/c/Q79fWjze/74-tell-us-the-specific-income-received-from-members-current-job-employment-other-income-all-asked-on-same-page -->
