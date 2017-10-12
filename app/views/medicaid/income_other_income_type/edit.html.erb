@@ -11,41 +11,23 @@
   <header class="form-card__header">
     <div class="form-card__title">What type of income do you receive that’s not from a job?</div>
     <p class="text--help text--centered">
-      Check all that apply.
+    Check all that apply.
     </p>
   </header>
 
   <div class="form-card__content">
-    <label class="checkbox">
-       <input type="checkbox">
-       Unemployment
-     </label>
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_checkbox_set(
+        [
+          { method: :income_unemployment, label: "Unemployment" },
+          { method: :income_pension, label: "Pension" },
+          { method: :income_social_security, label: "Social Security" },
+          { method: :income_retirement, label: "Retirement" },
+          { method: :income_alimony, label: "Alimony" },
+        ],
+        label_text: "" ) %>
 
-    <label class="checkbox">
-        <input type="checkbox">
-        Pension
-    </label>
-
-    <label class="checkbox">
-         <input type="checkbox">
-         Social Security
-    </label>
-
-    <label class="checkbox">
-         <input type="checkbox">
-         Retirement
-    </label>
-
-    <label class="checkbox">
-         <input type="checkbox">
-         Alimony
-    </label>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
-  <footer class="form-card__button_right">
-    <a href="/pages/medicaid/expenses_student_loan" class="button button--nav button--nav-center button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>
-
-<!-- https://trello.com/c/6DDOZMsz/101-tell-us-what-kind-of-income-you-receive -->

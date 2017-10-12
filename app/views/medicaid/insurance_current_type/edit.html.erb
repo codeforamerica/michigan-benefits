@@ -13,33 +13,17 @@
   </header>
 
   <div>
-    <label for="example_radio" class="radio-button">
-      <input type="radio" name="example_radio" id="example_radio">
-      Medicaid
-    </label>
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_radio_set :insurance_type,
+        '',
+        [
+          { value: "Medicaid", label: "Medicaid" },
+          { value: "CHIP/MIChild", label: "CHIP/MIChild" },
+          { value: "VA health care programs", label: "VA health care programs" },
+          { value: "Employer or individual plan", label: "Policy through an employer or individual plan" },
+        ] %>
 
-    <label for="example_radio" class="radio-button">
-      <input type="radio" name="example_radio" id="example_radio">
-      CHIP/MIChild
-    </label>
-
-    <label for="example_radio" class="radio-button">
-      <input type="radio" name="example_radio" id="example_radio">
-      VA health care programs
-    </label>
-
-    <label for="example_radio" class="radio-button">
-      <input type="radio" name="example_radio" id="example_radio">
-      Policy through an employer or individual plan
-    </label>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
-
-  <!-- Replace with partial -->
-  <footer class="form-card__button_right">
-    <a href="/pages/medicaid/insurance_medical_expenses" class="button button--nav button--nav-center button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>
-
-<!-- Single-member content: https://trello.com/c/bNj8pyx5/54-what-type-of-health-insurance-plan-are-you-currently-enrolled-in -->
