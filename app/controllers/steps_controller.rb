@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class StepsController < ApplicationController
+  include SnapFlow
+
   layout "step"
 
   before_action :ensure_application_present, only: %i(edit index)
