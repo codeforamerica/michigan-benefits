@@ -9,18 +9,6 @@ class ExportFactory
     new.create!(params)
   end
 
-  def self.export_unfaxed_snap_applications
-    SnapApplication.
-      faxable.
-      untouched_since(DELAY_THRESHOLD.minutes.ago).
-      find_each do |snap_application|
-        create(
-          destination: :fax,
-          snap_application: snap_application,
-        )
-      end
-  end
-
   def create(params)
     enqueue(Export.create(params))
   end

@@ -30,7 +30,6 @@ class SnapApplication < ApplicationRecord
   has_many :exports, dependent: :destroy
   has_many :members, dependent: :destroy
 
-  scope :faxable, -> { signed.unfaxed }
   scope :signed, -> { where.not(signed_at: nil) }
   scope :unsigned, -> { where(signed_at: nil) }
   scope :untouched_since, ->(threshold) { where("updated_at < ?", threshold) }

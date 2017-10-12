@@ -1,46 +1,6 @@
 require "rails_helper"
 
 RSpec.describe ExportFactory do
-  describe "#enqueue_faxes" do
-    it "schedules jobs for signed, unfaxed application updated awhile ago" do
-      after_threshold = (ExportFactory::DELAY_THRESHOLD + 1).minutes.ago
-      before_threshold = (ExportFactory::DELAY_THRESHOLD - 1).minutes.ago
-      signed_unfaxed_updated_awhile_ago = create(:snap_application,
-                                                 signed_at: after_threshold,
-                                                 updated_at: after_threshold)
-
-      signed_unfaxed_updated_recently = create(:snap_application,
-                                               signed_at: before_threshold,
-                                               updated_at: before_threshold)
-
-      unsigned_unfaxed_updated_awhile_ago = create(:snap_application,
-                                                   signed_at: nil,
-                                                   updated_at: after_threshold)
-
-      signed_faxed_updated_awhile_ago = create(:snap_application, :faxed,
-                                               signed_at: after_threshold,
-                                               updated_at: after_threshold)
-
-      allow(FaxApplicationJob).to receive(:perform_later)
-
-      ExportFactory.export_unfaxed_snap_applications
-
-      expect(signed_faxed_updated_awhile_ago.exports.length).to eql 1
-      expect(unsigned_unfaxed_updated_awhile_ago.exports).to be_empty
-      expect(signed_unfaxed_updated_recently.exports).to be_empty
-
-      expected_export_group = signed_unfaxed_updated_awhile_ago.exports
-      expect(expected_export_group).not_to be_empty
-      expect(expected_export_group.first.status).to eq :queued
-
-      expect(FaxApplicationJob).to have_received(:perform_later).once
-      expect(FaxApplicationJob).to(
-        have_received(:perform_later).
-          with(export: signed_unfaxed_updated_awhile_ago.exports.first),
-      )
-    end
-  end
-
   describe "#enqueue" do
     it "sends fax" do
       allow(FaxApplicationJob).to receive(:perform_later)
