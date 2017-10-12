@@ -1,3 +1,7 @@
 .button--nav {
   @include padding(null 5em);
 }
+
+.button--nav-center {
+  margin: 0 auto;
+}
