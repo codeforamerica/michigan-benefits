@@ -2,6 +2,6 @@
 
 module Medicaid
   class InsuranceCurrent < Step
-    step_attributes(:self_employed)
+    step_attributes(:insured)
   end
 end
