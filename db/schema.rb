@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012163307) do
+ActiveRecord::Schema.define(version: 20171012174458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,11 +86,14 @@ ActiveRecord::Schema.define(version: 20171012163307) do
 
   create_table "medicaid_applications", force: :cascade do |t|
     t.boolean "caretaker_or_parent"
+    t.integer "child_support_alimony_arrears_expenses"
     t.boolean "citizen"
+    t.integer "college_loan_interest_expenses"
     t.boolean "college_student"
     t.datetime "created_at", null: false
     t.boolean "disabled"
     t.boolean "employed"
+    t.integer "employed_monthly_income"
     t.boolean "filing_federal_taxes_next_year"
     t.string "first_name"
     t.string "gender"
@@ -113,7 +116,9 @@ ActiveRecord::Schema.define(version: 20171012163307) do
     t.boolean "pay_student_loan_interest"
     t.boolean "reliable_mail_address"
     t.boolean "self_employed"
+    t.integer "self_employed_monthly_income"
     t.boolean "submit_ssn"
+    t.integer "unemployment_income"
     t.datetime "updated_at", null: false
   end
 

@@ -5,21 +5,13 @@
     <div class="form-card__title">Tell us your specific expenses.</div>
   </header>
 
-  <div>
-    <label class="form-question" for="example_text">Child Support, Alimony, or Arrears</label>
-    <input type="text" class="text-input" placeholder="$">
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_money_field :child_support_alimony_arrears_expenses,
+        "Child Support, Alimony, or Arrears" %>
+      <%= f.mb_money_field :college_loan_interest_expenses,
+        "College Loan Interest" %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
-
-  <div>
-    <label class="form-question" for="example_text">College Loan Interest</label>
-    <input type="text" class="text-input" placeholder="$">
-  </div>
-
-  <footer class="form-card__button_right">
-    <a href="/pages/medicaid/contact" class="button button--nav button--nav-center button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>
-
-<!-- https://trello.com/c/6ASiKRiI/65-tell-us-the-specific-expenses-associated-with-members-student-loan-interest-child-support-alimony-arrears-all-asked-on-same-page -->
