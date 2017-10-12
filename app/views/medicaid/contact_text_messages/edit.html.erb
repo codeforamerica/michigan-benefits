@@ -6,21 +6,20 @@
   </header>
 
   <div class="form-card__content">
-    <label class="form-question" for="example_text">Phone number (optional)</label>
-    <input type="text" class="text-input">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_input_field :sms_phone_number,
+        "Phone number",
+        type: :tel,
+        autofocus: true,
+        options: { maxlength: 10 },
+        notes: "No dashes or spaces (example: 5555555555).",
+      optional: true %>
 
-    <label class="checkbox">
-      <input type="checkbox" checked>
-      I'd like to receive SMS reminders at key moments in the enrollment process.
-    </label>
+      <%= f.mb_checkbox_set [
+        { method: :sms_consented, label: "I'd like to receive SMS reminders at key moments in the enrollment process." }
+      ],
+          label_text: "" %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
-
-  <!-- Replace with partial -->
-  <footer class="form-card__button_right">
-    <a href="/pages/medicaid/contact_email" class="button button--nav  button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>
-
-<!-- https://trello.com/c/5uGTRKKX/37-what-is-the-best-number-for-you-to-receive-text-messages -->

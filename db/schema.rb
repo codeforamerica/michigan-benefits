@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012182543) do
+ActiveRecord::Schema.define(version: 20171012210202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20171012182543) do
   end
 
   create_table "medicaid_applications", force: :cascade do |t|
+    t.datetime "birthday"
     t.boolean "caretaker_or_parent"
     t.integer "child_support_alimony_arrears_expenses"
     t.boolean "citizen"
@@ -92,8 +93,11 @@ ActiveRecord::Schema.define(version: 20171012182543) do
     t.boolean "college_student"
     t.datetime "created_at", null: false
     t.boolean "disabled"
+    t.string "email"
     t.boolean "employed"
     t.integer "employed_monthly_income"
+    t.string "encrypted_ssn"
+    t.string "encrypted_ssn_iv"
     t.boolean "filing_federal_taxes_next_year"
     t.string "first_name"
     t.string "gender"
@@ -117,12 +121,15 @@ ActiveRecord::Schema.define(version: 20171012182543) do
     t.string "number_of_jobs"
     t.boolean "pay_child_support_alimony_arrears"
     t.boolean "pay_student_loan_interest"
+    t.string "phone_number"
     t.boolean "reliable_mail_address"
     t.string "residential_city"
     t.string "residential_street_address"
     t.string "residential_zip"
     t.boolean "self_employed"
     t.integer "self_employed_monthly_income"
+    t.boolean "sms_consented", default: true
+    t.string "sms_phone_number"
     t.boolean "submit_ssn"
     t.integer "unemployment_income"
     t.datetime "updated_at", null: false
