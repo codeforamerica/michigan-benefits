@@ -7,10 +7,16 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_money_field :child_support_alimony_arrears_expenses,
-        "Child Support, Alimony, or Arrears" %>
-      <%= f.mb_money_field :college_loan_interest_expenses,
-        "College Loan Interest" %>
+      <% if current_application.pay_child_support_alimony_arrears? %>
+        <%= f.mb_money_field :child_support_alimony_arrears_expenses,
+          "Child Support, Alimony, or Arrears" %>
+      <% end %>
+
+      <% if current_application.pay_student_loan_interest? %>
+        <%= f.mb_money_field :college_loan_interest_expenses,
+          "College Loan Interest" %>
+      <% end %>
+
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>

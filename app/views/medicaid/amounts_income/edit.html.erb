@@ -11,12 +11,21 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_money_field :employed_monthly_income,
-        "Your Current Job (average monthly income)" %>
-      <%= f.mb_money_field :self_employed_monthly_income,
-        "Your Self-Employment (average monthly income)" %>
-      <%= f.mb_money_field :unemployment_income,
-        "Your Unemployment (average monthly income)" %>
+      <% if current_application.employed? %>
+        <%= f.mb_money_field :employed_monthly_income,
+          "Your Current Job (average monthly income)" %>
+      <% end %>
+
+      <% if current_application.self_employed? %>
+        <%= f.mb_money_field :self_employed_monthly_income,
+          "Your Self-Employment (average monthly income)" %>
+      <% end %>
+
+      <% if current_application.income_unemployment? %>
+        <%= f.mb_money_field :unemployment_income,
+          "Your Unemployment (average monthly income)" %>
+      <% end %>
+
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>
