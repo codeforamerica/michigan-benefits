@@ -2,14 +2,14 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">What is your residential address?</div>
+    <div class="form-card__title">What is your mailing address?</div>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_input_field :residential_street_address, "Street address", autofocus: true %>
-      <%= f.mb_input_field :residential_city, "City" %>
-      <%= f.mb_input_field :residential_zip, "ZIP code", type: :tel, options: { maxlength: 5 } %>
+      <%= f.mb_input_field :mailing_street_address, "Street address", autofocus: true %>
+      <%= f.mb_input_field :mailing_city, "City" %>
+      <%= f.mb_input_field :mailing_zip, "ZIP code", type: :tel, options: { maxlength: 5 } %>
 
       <%= render "medicaid/next_step" %>
     <% end %>

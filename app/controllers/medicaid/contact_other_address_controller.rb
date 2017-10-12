@@ -3,5 +3,15 @@
 module Medicaid
   class ContactOtherAddressController < StandardStepsController
     include MedicaidFlow
+
+    private
+
+    def skip?
+      mail_sent_to_residential?
+    end
+
+    def mail_sent_to_residential?
+      current_application&.mail_sent_to_residential?
+    end
   end
 end
