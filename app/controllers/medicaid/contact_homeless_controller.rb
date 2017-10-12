@@ -7,8 +7,7 @@ module Medicaid
     private
 
     def skip?
-      mail_sent_to_residential? ||
-        reliable_mail_address?
+      mail_sent_to_residential? || reliable_mail_address?
     end
 
     def mail_sent_to_residential?
