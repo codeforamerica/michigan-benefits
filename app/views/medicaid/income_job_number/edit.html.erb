@@ -12,30 +12,16 @@
     <div class="form-card__title">Tell us how many jobs you currently have.</div>
   </header>
 
-  <div class="form-card__content">
-    <div>
-      <label for="example_radio" class="radio-button">
-        <input type="radio" name="example_radio" id="example_radio">
-        1 job
-      </label>
-
-      <label for="example_radio" class="radio-button">
-        <input type="radio" name="example_radio" id="example_radio">
-        2 jobs
-      </label>
-
-      <label for="example_radio" class="radio-button">
-        <input type="radio" name="example_radio" id="example_radio">
-        3 or more jobs
-      </label>
-    </div>
-    <!-- Replace with partial -->
-    <footer class="form-card__button_right">
-      <a href="/pages/medicaid/income_self_employment" class="button button--nav button--nav-center button--cta button--full-width">
-        Next
-      </a>
-    </footer>
+  <div>
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_radio_set :number_of_jobs,
+        '',
+        [
+          { value: "1 job", label: "1 job" },
+          { value: "2 jobs", label: "2 jobs" },
+          { value: "3 or more jobs", label: "3 or more jobs" },
+        ] %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
 </div>
-
-<!-- Single-member copy: https://trello.com/c/XUtAnqtN/48-do-you-currently-have-a-job -->
