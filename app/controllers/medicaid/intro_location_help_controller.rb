@@ -11,7 +11,7 @@ module Medicaid
     end
 
     def michigan_resident?
-      current_medicaid_application&.michigan_resident?
+      current_application&.michigan_resident?
     end
   end
 end

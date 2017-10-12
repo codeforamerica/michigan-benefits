@@ -2,5 +2,6 @@
 
 module Medicaid
   class IncomeOtherIncomeController < StandardStepsController
+    include MedicaidFlow
   end
 end

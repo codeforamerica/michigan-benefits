@@ -14,4 +14,8 @@ module MedicaidFlow
   def current_medicaid_application_id
     session[:medicaid_application_id]
   end
+
+  def step_navigation
+    @step_navigation ||= Medicaid::StepNavigation.new(self)
+  end
 end

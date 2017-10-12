@@ -2,5 +2,6 @@
 
 module Medicaid
   class IntroHouseholdController < StandardStepsController
+    include MedicaidFlow
   end
 end

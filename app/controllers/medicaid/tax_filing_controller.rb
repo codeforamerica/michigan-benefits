@@ -2,5 +2,6 @@
 
 module Medicaid
   class TaxFilingController < StandardStepsController
+    include MedicaidFlow
   end
 end

@@ -2,5 +2,6 @@
 
 module Medicaid
   class ContactSsDobController < StandardStepsController
+    include MedicaidFlow
   end
 end

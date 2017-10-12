@@ -2,5 +2,6 @@
 
 module Medicaid
   class IntroCollegeController < StandardStepsController
+    include MedicaidFlow
   end
 end

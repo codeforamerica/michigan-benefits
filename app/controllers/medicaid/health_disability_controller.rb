@@ -2,5 +2,6 @@
 
 module Medicaid
   class HealthDisabilityController < StandardStepsController
+    include MedicaidFlow
   end
 end
