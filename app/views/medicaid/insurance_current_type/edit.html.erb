@@ -5,7 +5,7 @@
     <div class="form-card__title">What type of insurance plan are you currently enrolled in?</div>
   </header>
 
-  <div>
+  <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_radio_set :insurance_type,
         '',
