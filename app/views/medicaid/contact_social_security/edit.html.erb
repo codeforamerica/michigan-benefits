@@ -6,144 +6,16 @@
   </header>
 
   <div class="form-card__content">
-    <label class="form-question">Social Security</label>
-    <input type="text" class="text-input">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_input_field :ssn,
+        "Social Security Number",
+        type: :tel,
+        options: { maxlength: 9 },
+        notes: ["If you don’t know it you can skip this"],
+        append_html: "<p class='text--secure'><i class='illustration illustration--safety'></i>Social security numbers help ensure you receive the correct benefits. MDHHS maintains strict security guidelines to protect the identities of our residents.</p>" %>
 
-    <div class="form-card__select">
-      <label class="form-question" for="example_text">Birthday</label>
-      <div class="select">
-        <select class="select__element" name="example_select" id="example_select">
-          <option selected disabled>Month</option>
-          <option>January</option>
-          <option>February</option>
-          <option>March</option>
-          <option>April</option>
-          <option>May</option>
-          <option>June</option>
-          <option>July</option>
-          <option>August</option>
-          <option>September</option>
-          <option>October</option>
-          <option>November</option>
-          <option>December</option>
-        </select>
-      </div>
-
-      <div class="select">
-        <select class="select__element" name="example_select" id="example_select">
-          <option selected disabled>Day</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-          <option>10</option>
-          <option>11</option>
-          <option>12</option>
-          <option>13</option>
-          <option>14</option>
-          <option>15</option>
-          <option>16</option>
-          <option>17</option>
-          <option>18</option>
-          <option>19</option>
-          <option>20</option>
-          <option>21</option>
-          <option>22</option>
-          <option>23</option>
-          <option>24</option>
-          <option>25</option>
-          <option>26</option>
-          <option>27</option>
-          <option>28</option>
-          <option>29</option>
-          <option>>30</option>
-          <option>31</option>
-        </select>
-      </div>
-
-      <div class="select">
-        <select class="select__element" name="example_select" id="example_select">
-          <option selected disabled>Year</option>
-          <option>1940</option>
-          <option>1941</option>
-          <option>1942</option>
-          <option>1943</option>
-          <option>1944</option>
-          <option>1945</option>
-          <option>1946</option>
-          <option>1947</option>
-          <option>1948</option>
-          <option>1949</option>
-          <option>1950</option>
-          <option>1951</option>
-          <option>1952</option>
-          <option>1953</option>
-          <option>1954</option>
-          <option>1955</option>
-          <option>1956</option>
-          <option>1957</option>
-          <option>1958</option>
-          <option>1959</option>
-          <option>1960</option>
-          <option>1961</option>
-          <option>1962</option>
-          <option>1963</option>
-          <option>1964</option>
-          <option>1965</option>
-          <option>1966</option>
-          <option>1967</option>
-          <option>1968</option>
-          <option>1969</option>
-          <option>1970</option>
-          <option>1971</option>
-          <option>1972</option>
-          <option>1973</option>
-          <option>1974</option>
-          <option>1975</option>
-          <option>1976</option>
-          <option>1977</option>
-          <option>1978</option>
-          <option>1979</option>
-          <option>1980</option>
-          <option>1981</option>
-          <option>1982</option>
-          <option>1983</option>
-          <option>1984</option>
-          <option>1985</option>
-          <option>1986</option>
-          <option>1987</option>
-          <option>1988</option>
-          <option>1989</option>
-          <option>1990</option>
-          <option>1991</option>
-          <option>1992</option>
-          <option>1993</option>
-          <option>1994</option>
-          <option>1995</option>
-          <option>1996</option>
-          <option>1997</option>
-          <option>1998</option>
-          <option>1999</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-card__content">
-      <p class='text--secure'><i class='illustration illustration--safety'></i>Social security numbers help ensure you receive the correct benefits. MDHHS maintains strict security guidelines to protect the identities of our residents.</p>
-    </div>
+      <%= f.mb_date_select :birthday, "What is your birthday?", { options: { start_year: 1900, end_year: Time.now.year, default: Date.new(1990,1,15), order: [:month, :day, :year] } } %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
-
-    <!-- Replace with partial -->
-  <footer class="form-card__button_right">
-    <a href="/pages/medicaid/confirmation" class="button button--nav  button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>
-
-<!-- https://trello.com/c/ZsO0MYVV/107-tell-us-your-household-social-security-numbers-and-dates-of-birth -->

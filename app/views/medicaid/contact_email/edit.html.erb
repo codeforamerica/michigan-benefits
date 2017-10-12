@@ -2,20 +2,13 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">What is the best email address at which to contact you? (Optional)</div>
+    <div class="form-card__title">What is the best email address at which to contact you?</div>
   </header>
 
   <div class="form-card__content">
-    <label class="form-question" for="example_text">Email address</label>
-    <input type="text" class="text-input">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_input_field :email, "Email address", notes: ["If you don’t have one or you don’t want to receive emails from us you can leave this blank."], optional: true %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
-
-  <!-- Replace with partial -->
-  <footer class="form-card__button_right">
-    <a href="/pages/medicaid/contact_ss_dob" class="button button--nav  button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>
-
-<!-- https://trello.com/c/fgGgIi7T/31-what-is-the-best-email-address-at-which-to-contact-you-optional -->

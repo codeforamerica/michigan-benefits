@@ -2,5 +2,6 @@
 
 module Medicaid
   class ContactEmail < Step
+    step_attributes(:email)
   end
 end
