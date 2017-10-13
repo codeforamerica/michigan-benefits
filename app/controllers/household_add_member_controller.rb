@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class HouseholdAddMemberController < StandardStepsController
-  include SnapFlow
-
+class HouseholdAddMemberController < SnapStepsController
   helper_method :member_id
 
   def update

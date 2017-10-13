@@ -1,5 +1,4 @@
 # frozen_string_literal: true
 
-class DocumentGuideController < StandardStepsController
-  include SnapFlow
+class DocumentGuideController < SnapStepsController
 end

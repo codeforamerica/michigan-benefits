@@ -1,5 +1,4 @@
 # frozen_string_literal: true
 
-class LegalAgreementController < StandardStepsController
-  include SnapFlow
+class LegalAgreementController < SnapStepsController
 end

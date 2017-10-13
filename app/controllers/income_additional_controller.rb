@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeAdditionalController < StandardStepsController
-  include SnapFlow
-
+class IncomeAdditionalController < SnapStepsController
   def edit
     @additional_income = current_application.additional_income.map do |key|
       "income_#{key}"

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class SuccessController < StandardStepsController
-  include SnapFlow
-
+class SuccessController < SnapStepsController
   def previous_path(*_args)
     nil
   end

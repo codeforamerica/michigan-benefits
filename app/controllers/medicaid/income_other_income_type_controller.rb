@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class IncomeOtherIncomeTypeController < StandardStepsController
-    include MedicaidFlow
-
+  class IncomeOtherIncomeTypeController < MedicaidStepsController
     private
 
     def skip?

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class IntroCitizenController < StandardStepsController
-    include MedicaidFlow
+  class IntroCitizenController < MedicaidStepsController
   end
 end

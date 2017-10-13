@@ -1,6 +1,4 @@
-class AddressController < StandardStepsController
-  include SnapFlow
-
+class AddressController < SnapStepsController
   def update
     @step = step_class.new(step_params)
 

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class HealthPregnancyController < StandardStepsController
-    include MedicaidFlow
+  class HealthPregnancyController < MedicaidStepsController
   end
 end

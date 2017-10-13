@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class ManyMemberStepsController < StepsController
-  include SnapFlow
-
+class ManyMemberStepsController < SnapStepsController
   def edit
     step
   end

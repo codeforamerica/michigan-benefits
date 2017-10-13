@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class ContactSsDobController < StandardStepsController
-    include MedicaidFlow
+  class ContactSsDobController < MedicaidStepsController
   end
 end

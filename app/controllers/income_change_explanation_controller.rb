@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class IncomeChangeExplanationController < StandardStepsController
-  include SnapFlow
-
+class IncomeChangeExplanationController < SnapStepsController
   private
 
   def skip?

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class ConfirmationController < StandardStepsController
-    include MedicaidFlow
+  class ConfirmationController < MedicaidStepsController
   end
 end

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class PersonalDetailController < StandardStepsController
-  include SnapFlow
-
+class PersonalDetailController < SnapStepsController
   def update
     @step = step_class.new(step_params)
 

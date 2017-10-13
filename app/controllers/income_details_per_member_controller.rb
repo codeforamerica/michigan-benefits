@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class IncomeDetailsPerMemberController < ManyMemberStepsController
-  include SnapFlow
-
   private
 
   def skip?

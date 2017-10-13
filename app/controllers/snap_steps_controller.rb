@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SnapFlow
+class SnapStepsController < StepsController
   def ensure_application_present
     if current_application.blank?
       redirect_to introduce_yourself_steps_path

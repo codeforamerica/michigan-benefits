@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class IntroLocationController < StandardStepsController
-    include MedicaidFlow
-
+  class IntroLocationController < MedicaidStepsController
     def update
       @step = step_class.new(step_params)
 

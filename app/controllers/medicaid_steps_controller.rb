@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MedicaidFlow
+class MedicaidStepsController < StepsController
   def ensure_application_present
     if current_application.blank?
       redirect_to medicaid_intro_location_steps_path
