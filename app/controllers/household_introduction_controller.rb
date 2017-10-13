@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class HouseholdIntroductionController < StepsController
-  include SnapFlow
+class HouseholdIntroductionController < SnapStepsController
+  def edit; end
 
   def update
     redirect_to(next_path)

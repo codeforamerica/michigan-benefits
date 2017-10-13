@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class ContactSocialSecurityController < StandardStepsController
-    include MedicaidFlow
-
+  class ContactSocialSecurityController < MedicaidStepsController
     private
 
     def skip?

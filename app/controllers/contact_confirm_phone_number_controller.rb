@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class ContactConfirmPhoneNumberController < StandardStepsController
-  include SnapFlow
-
+class ContactConfirmPhoneNumberController < SnapStepsController
   private
 
   def skip?

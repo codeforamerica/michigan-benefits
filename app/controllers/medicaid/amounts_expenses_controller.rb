@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class AmountsExpensesController < StandardStepsController
-    include MedicaidFlow
-
+  class AmountsExpensesController < MedicaidStepsController
     private
 
     def step_class

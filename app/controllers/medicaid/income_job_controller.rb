@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class IncomeJobController < StandardStepsController
-    include MedicaidFlow
+  class IncomeJobController < MedicaidStepsController
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class IncomeIntroductionController < StepsController
-  include SnapFlow
+class IncomeIntroductionController < SnapStepsController
+  def edit; end
 
   def update
     redirect_to(next_path)

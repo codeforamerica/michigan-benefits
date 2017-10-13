@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class MailingAddressController < AddressController
-  include SnapFlow
-
   private
 
   def address

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
 
-class ContactInformationController < StandardStepsController
-  include SnapFlow
+class ContactInformationController < SnapStepsController
 end

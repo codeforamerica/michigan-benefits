@@ -1,5 +1,4 @@
 # frozen_string_literal: true
 
-class HouseholdMoreInfoController < StandardStepsController
-  include SnapFlow
+class HouseholdMoreInfoController < SnapStepsController
 end

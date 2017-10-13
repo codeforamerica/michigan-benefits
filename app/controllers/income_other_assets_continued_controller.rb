@@ -1,6 +1,6 @@
-class IncomeOtherAssetsContinuedController < StandardStepsController
-  include SnapFlow
+# frozen_string_literal: true
 
+class IncomeOtherAssetsContinuedController < SnapStepsController
   def edit
     financial_accounts = array_to_checkboxes(
       current_application.financial_accounts,

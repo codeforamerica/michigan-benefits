@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ResidentialAddressController < AddressController
-  include SnapFlow
-
   private
 
   def address

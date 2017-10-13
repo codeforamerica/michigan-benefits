@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class SignAndSubmitController < StandardStepsController
-  include SnapFlow
-
+class SignAndSubmitController < SnapStepsController
   private
 
   def step_params

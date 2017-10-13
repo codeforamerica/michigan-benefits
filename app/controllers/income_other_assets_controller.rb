@@ -1,6 +1,4 @@
-class IncomeOtherAssetsController < StandardStepsController
-  include SnapFlow
-
+class IncomeOtherAssetsController < SnapStepsController
   def self.step_class
     IncomeOtherAssets
   end

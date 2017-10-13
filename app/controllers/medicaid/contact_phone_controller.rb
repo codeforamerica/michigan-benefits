@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class ContactPhoneController < StandardStepsController
-    include MedicaidFlow
+  class ContactPhoneController < MedicaidStepsController
   end
 end

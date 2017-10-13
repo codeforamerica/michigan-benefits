@@ -1,12 +1,28 @@
 # frozen_string_literal: true
 
 class StepsController < ApplicationController
-  include SnapFlow
-
   layout "step"
 
   before_action :ensure_application_present, only: %i(edit index)
   before_action :maybe_skip, only: :edit
+
+  def edit
+    @step = step_class.new(existing_attributes.slice(*step_attrs))
+
+    before_rendering_edit_hook
+  end
+
+  def update
+    @step = step_class.new(step_params)
+
+    if @step.valid?
+      current_application.update!(step_params)
+      after_successful_update_hook
+      redirect_to(next_path)
+    else
+      render :edit
+    end
+  end
 
   def self.to_param
     controller_path.dasherize
@@ -21,6 +37,16 @@ class StepsController < ApplicationController
   private
 
   delegate :step_class, to: :class
+
+  # This is an intentional noop
+  def after_successful_update_hook; end
+
+  # This is an intentional noop
+  def before_rendering_edit_hook; end
+
+  def existing_attributes
+    HashWithIndifferentAccess.new(current_application&.attributes)
+  end
 
   def step_params
     params.fetch(:step, {}).permit(*step_attrs)
