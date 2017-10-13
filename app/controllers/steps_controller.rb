@@ -34,6 +34,11 @@ class StepsController < ApplicationController
     NullStep
   end
 
+  def next_path(params = {})
+    next_step = step_navigation.next
+    decoded_step_path(step: next_step, params: params) if next_step
+  end
+
   private
 
   delegate :step_class, to: :class
@@ -83,11 +88,6 @@ class StepsController < ApplicationController
 
   def going_backwards?
     params["rel"] == "back"
-  end
-
-  def next_path(params = {})
-    next_step = step_navigation.next
-    decoded_step_path(step: next_step, params: params) if next_step
   end
 
   def skip_path(params = nil)
