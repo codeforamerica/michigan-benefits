@@ -54,6 +54,10 @@ class SnapApplication < ApplicationRecord
     where.not(id: Export.emailed_client.succeeded.application_ids)
   end)
 
+  def exportable?
+    signature.present?
+  end
+
   def drive_status
     if driver_applications.any? && latest_drive_attempt.driver_errors.empty?
       :drive_success

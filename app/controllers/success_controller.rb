@@ -12,6 +12,8 @@ class SuccessController < SnapStepsController
   private
 
   def before_rendering_edit_hook
+    return if !current_application.exportable?
+
     ExportFactory.create(
       destination: :sms,
       snap_application: current_application,
