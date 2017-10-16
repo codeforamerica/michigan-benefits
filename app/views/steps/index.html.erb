@@ -1,9 +1,10 @@
 <% content_for :header_title, 'Navigation' %>
 <div class="slab">
-  <% StepNavigation.sections.each do |section, steps| %>
+  <% current_application.class.step_navigation.sections.each do |section, steps| %>
     <h3>
       <%= section %>
     </h3>
+
     <% steps.each do |step| %>
       <div>
         <%= link_to step.to_param.titleize,

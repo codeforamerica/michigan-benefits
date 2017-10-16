@@ -54,6 +54,10 @@ class SnapApplication < ApplicationRecord
     where.not(id: Export.emailed_client.succeeded.application_ids)
   end)
 
+  def self.step_navigation
+    StepNavigation
+  end
+
   def exportable?
     signature.present?
   end

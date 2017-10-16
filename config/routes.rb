@@ -38,10 +38,9 @@ Rails.application.routes.draw do
 
   resource :skip_send_application, only: [:create]
 
-  # Medicaid
-  resources :steps, only: %i[index] do
+  resources :steps, only: %i[index show] do
     collection do
-      Medicaid::StepNavigation.steps_and_substeps.each do |controller_class|
+      StepNavigation.steps_and_substeps.each do |controller_class|
         { get: :edit, put: :update }.each do |method, action|
           match "/#{controller_class.to_param}",
             action: action,
@@ -49,13 +48,8 @@ Rails.application.routes.draw do
             via: method
         end
       end
-    end
-  end
 
-  # FAP
-  resources :steps, only: %i[show index] do
-    collection do
-      StepNavigation.steps_and_substeps.each do |controller_class|
+      Medicaid::StepNavigation.steps_and_substeps.each do |controller_class|
         { get: :edit, put: :update }.each do |method, action|
           match "/#{controller_class.to_param}",
             action: action,
