@@ -5,7 +5,7 @@ describe TenDigitPhoneNumberValidator do
   subject { described_class.new(attributes: [:phone_number]) }
 
   specify do
-    assert_invalid(nil)
+    assert_valid(nil)
   end
 
   specify do
