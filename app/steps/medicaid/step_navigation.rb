@@ -7,8 +7,7 @@ module Medicaid
         Medicaid::IntroLocationController,
         Medicaid::IntroLocationHelpController,
         Medicaid::IntroNameController,
-        # multi-member Medicaid::IntroHouseholdController,
-        # multi-member Medicaid::IntroHouseholdMemberController,
+        Medicaid::IntroHouseholdController,
         Medicaid::IntroCollegeController,
         Medicaid::IntroCitizenController,
         # multi-member Medicaid::IntroCaretakerController,
@@ -60,7 +59,10 @@ module Medicaid
       ],
     }.freeze
 
-    SUBSTEPS = {}.freeze
+    SUBSTEPS = {
+      Medicaid::IntroHouseholdMemberController =>
+        Medicaid::IntroHouseholdController,
+    }.freeze
 
     class << self
       delegate :first, to: :steps
