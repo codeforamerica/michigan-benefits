@@ -9,8 +9,13 @@ module Medicaid
     end
 
     def skip?
-      no_child_support_alimony_arrears? &&
+      no_self_employment? &&
+        no_child_support_alimony_arrears? &&
         no_student_loan_interest?
+    end
+
+    def no_self_employment?
+      !current_application&.self_employed?
     end
 
     def no_child_support_alimony_arrears?

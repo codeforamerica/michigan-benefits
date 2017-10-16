@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012210202) do
+ActiveRecord::Schema.define(version: 20171016213538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20171012210202) do
     t.string "residential_zip"
     t.boolean "self_employed"
     t.integer "self_employed_monthly_income"
+    t.integer "self_employment_expenses"
     t.boolean "sms_consented", default: true
     t.string "sms_phone_number"
     t.boolean "submit_ssn"
