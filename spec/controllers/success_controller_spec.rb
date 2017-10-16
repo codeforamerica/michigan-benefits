@@ -42,6 +42,21 @@ RSpec.describe SuccessController do
       end
     end
 
+    context "application is not exportable" do
+      it "does not run the export factory, or application driver" do
+        run_background_jobs_immediately do
+          allow(ExportFactory).to receive(:create)
+          allow(DriveApplicationJob).to receive(:perform_later)
+          current_app.update(signature: nil)
+
+          get :edit
+
+          expect(ExportFactory).not_to have_received(:create)
+          expect(DriveApplicationJob).not_to have_received(:perform_later)
+        end
+      end
+    end
+
     context "sms consent present" do
       it "sends the submitted_message sms" do
         run_background_jobs_immediately do
