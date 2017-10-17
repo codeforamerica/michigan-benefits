@@ -1,0 +1,48 @@
+<% content_for :header_title, "Success" %>
+
+<% content_for :header_javascript do %>
+  <%= javascript_include_tag "https://js.shubox.io/v1/#{Rails.application.secrets.shubox_js_id}.js", defer: true %>
+<% end %>
+
+<%= form_for @step,
+  as: :step,
+  builder: MbFormBuilder,
+  url: current_path,
+  method: :put,
+  html: { data: { 'documents-form' => 'true' } } do |f| %>
+
+  <div class="form-card" id="document-drop">
+    <header class="form-card__header">
+      <div class="form-card__title">
+        Upload your paperwork
+      </div>
+      <p class="text--help text--centered">
+        Click the "Upload paperwork” button below, or drag and drop photos or
+        documents onto this area of the page to upload them.
+      </p>
+    </header>
+
+    <div class="form-card__documents" id="form-card__documents">
+      <%= render partial: 'shared/document',
+        collection: current_application.documents,
+        as: :url %>
+    </div>
+
+    <footer class="form-card__buttons">
+      <button type="button" class="button button--next button--cta button--full-width" id="click-to-upload">
+        <i class="icon-file_upload"></i>
+        Upload paperwork
+      </button>
+
+      <button class="button button--next button--cta button--full-width" type="submit" data-done-uploading>
+        Done uploading paperwork
+      </button>
+    </footer>
+  </div>
+<% end %>
+
+<% unless Rails.env.test? -%>
+  <script>
+    window.onload = function() { uploadSetup("<%= j render "shared/uploading" %>") }
+  </script>
+<% end -%>

@@ -56,6 +56,7 @@ module Medicaid
       ],
       "Success" => [
         Medicaid::ConfirmationController,
+        Medicaid::DocumentsController,
       ],
     }.freeze
 

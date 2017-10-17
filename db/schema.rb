@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20171017191829) do
     t.boolean "college_student"
     t.datetime "created_at", null: false
     t.boolean "disabled"
+    t.string "documents", default: [], array: true
     t.string "email"
     t.boolean "employed"
     t.integer "employed_monthly_income"
@@ -131,6 +132,7 @@ ActiveRecord::Schema.define(version: 20171017191829) do
     t.boolean "submit_ssn"
     t.integer "unemployment_income"
     t.datetime "updated_at", null: false
+    t.boolean "upload_documents"
   end
 
   create_table "members", force: :cascade do |t|

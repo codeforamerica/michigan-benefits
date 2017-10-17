@@ -28,7 +28,7 @@
       html: { data: { 'documents-form' => 'true' } } do |f| %>
 
       <div class="form-card__documents" id="form-card__documents">
-        <%= render partial: 'document',
+        <%= render partial: 'shared/document',
           collection: current_application.documents,
           as: :url %>
       </div>
@@ -49,6 +49,6 @@
 
 <% unless Rails.env.test? -%>
   <script>
-    window.onload = function() { uploadSetup("<%= j render "uploading" %>") }
+    window.onload = function() { uploadSetup("<%= j render "shared/uploading" %>") }
   </script>
 <% end -%>

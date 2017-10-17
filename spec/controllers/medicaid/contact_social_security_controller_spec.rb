@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::ContactSocialSecurityController do
+  describe "#next_path" do
+    it "is the document intro page path" do
+      expect(subject.next_path).to eq "/steps/medicaid/confirmation"
+    end
+  end
+
   describe "#edit" do
     context "client will not submitssn" do
       it "redirects to next step" do
@@ -9,9 +15,7 @@ RSpec.describe Medicaid::ContactSocialSecurityController do
 
         get :edit
 
-        expect(response).to redirect_to(
-          "/steps/medicaid/confirmation",
-        )
+        expect(response).to redirect_to(subject.next_path)
       end
     end
 

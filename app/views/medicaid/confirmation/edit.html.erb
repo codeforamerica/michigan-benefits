@@ -5,16 +5,19 @@
   <header class="form-card__header">
     <div class="illustration illustration--success"></div>
     <div class="form-card__title">Thanks for submitting an application!</div>
+
     <p class="text--help text--centered">
-      Here is a summary of the information that you are submitting. To follow up
-      with your application, you can call 1-800-642-3195.
+      The next is to submit any paperwork you have on hand. You can do this
+      later, but this will help speed up the process. We suggest you submit as
+      much as you can now.<br>
+      <br>
+
+      Would you like to submit paperwork now?
     </p>
   </header>
 
   <div class="form-card__confirmation">
   </div>
 
-  <footer class="form-card__buttons">
-    <%= link_to "Back to Home", dual_index_path, class: "button button--full-width button--cta button--nav button--nav-center" %>
-  </footer>
+  <%= render 'shared/yes_no_form', step: @step, field: :upload_documents %>
 </div>
