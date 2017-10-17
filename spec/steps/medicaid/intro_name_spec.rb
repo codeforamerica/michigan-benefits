@@ -6,7 +6,7 @@ RSpec.describe Medicaid::IntroName do
       step = Medicaid::IntroName.new(
         first_name: nil,
         last_name: "Boo",
-        gender: "male",
+        sex: "male",
       )
 
       expect(step).to be_invalid
@@ -16,17 +16,17 @@ RSpec.describe Medicaid::IntroName do
       step = Medicaid::IntroName.new(
         first_name: "Boo",
         last_name: nil,
-        gender: "male",
+        sex: "male",
       )
 
       expect(step).to be_invalid
     end
 
-    it "validates presence of gender" do
+    it "validates presence of sex" do
       step = Medicaid::IntroName.new(
         first_name: "Lala",
         last_name: "Boo",
-        gender: nil,
+        sex: nil,
       )
 
       expect(step).to be_invalid

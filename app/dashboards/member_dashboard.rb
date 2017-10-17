@@ -9,7 +9,7 @@ class MemberDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    snap_application: Field::BelongsTo,
+    snap_application: Field::Polymorphic,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     marital_status: Field::String,

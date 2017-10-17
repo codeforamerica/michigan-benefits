@@ -14,3 +14,4 @@
 .rspec
 mkmf.log
 Guardfile
+.idea

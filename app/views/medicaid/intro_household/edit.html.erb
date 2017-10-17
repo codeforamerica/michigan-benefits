@@ -18,11 +18,21 @@
           <i class="button__icon--left icon-check icon-check--color"></i>
           <%= "#{@step.first_name} #{@step.last_name}" %>  (That's you!)
         </p>
+        <% @step.non_applicant_members.each do |member| %>
+            <div>
+              <p>
+                <i class="button__icon--left icon-check icon-check--color"></i>
+                <%= "#{member.first_name.titleize} #{member.last_name.titleize}" %>
+              </p>
+            </div>
+        <% end %>
 
-        <a href="/pages/medicaid/intro_household_member" class="button button-full-width button-bold">
+        <%= link_to(
+          decoded_step_path(step: Medicaid::IntroHouseholdMemberController),
+          class: 'button button-full-width button-bold') do %>
           <i class="button__icon--left icon-add"></i>
           Add a member
-        </a>
+        <% end %>
 
       </div>
     </div>

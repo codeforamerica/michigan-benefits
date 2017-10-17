@@ -7,7 +7,7 @@ FactoryGirl.define do
 
     trait :with_member do
       after :create do |app|
-        create(:member, snap_application: app)
+        create(:member, benefit_application: app)
       end
     end
 

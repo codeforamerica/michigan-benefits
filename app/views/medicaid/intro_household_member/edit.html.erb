@@ -6,27 +6,18 @@
   </header>
 
   <div class="form-card__content">
-    <label class="form-question" for="example_text">What is their first name?</label>
-    <input type="text" class="text-input" name="example_text">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_input_field :first_name,
+        "What is their first name?",
+        autofocus: true %>
+      <%= f.mb_input_field :last_name, "What is their last name?" %>
+      <%= f.mb_radio_set :sex,
+        'What is their gender?',
+        [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
+        notes: ["As it appears on official government documents"],
+        layout: "inline" %>
 
-    <label class="form-question" for="example_text">What is their last name?</label>
-    <input type="text" class="text-input"  name="example_text">
-
-    <label class="form-question" for="example_text">What is their gender? (As it appears on official government documents)</label>
-    <label for="example_radio" class="radio-button">
-      <input type="radio" name="example_radio" id="example_radio">
-      Female
-    </label>
-
-    <label for="example_radio" class="radio-button">
-      <input type="radio" name="example_radio" id="example_radio">
-      Male
-    </label>
+      <%= render "medicaid/next_step" %>
+    <% end %>
   </div>
-
-  <footer class="form-card__button_right">
-    <a href="/pages/medicaid/intro_household" class="button button--nav  button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>

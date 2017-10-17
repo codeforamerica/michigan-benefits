@@ -28,7 +28,7 @@ class SnapApplication < ApplicationRecord
   has_many :driver_applications, dependent: :destroy
   has_many :driver_errors, through: :driver_applications
   has_many :exports, dependent: :destroy
-  has_many :members, dependent: :destroy
+  has_many :members, as: :benefit_application, dependent: :destroy
 
   scope :signed, -> { where.not(signed_at: nil) }
   scope :unsigned, -> { where(signed_at: nil) }
