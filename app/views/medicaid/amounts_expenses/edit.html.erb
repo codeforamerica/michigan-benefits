@@ -9,12 +9,19 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <% if current_application.pay_child_support_alimony_arrears? %>
         <%= f.mb_money_field :child_support_alimony_arrears_expenses,
-          "Child Support, Alimony, or Arrears" %>
+          "Child Support, Alimony, or Arrears (average monthly expense)" %>
       <% end %>
 
       <% if current_application.pay_student_loan_interest? %>
         <%= f.mb_money_field :college_loan_interest_expenses,
-          "College Loan Interest" %>
+          "College Loan Interest (average monthly expense)" %>
+      <% end %>
+
+      <% if current_application.self_employed? %>
+        <%= f.hidden_field :self_employed %>
+        <%= f.mb_money_field :self_employment_expenses,
+          "Self Employment (average monthly expense)",
+          notes: ["If you have no self-employment expenses, please indicate that by entering 0"] %>
       <% end %>
 
       <%= render "medicaid/next_step" %>
