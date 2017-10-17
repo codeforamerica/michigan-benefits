@@ -16,7 +16,7 @@
       <div class="card card--narrow">
         <p>
           <i class="button__icon--left icon-check icon-check--color"></i>
-          Harriett Fletcher (That's you!)
+          <%= "#{@step.first_name} #{@step.last_name}" %>  (That's you!)
         </p>
 
         <a href="/pages/medicaid/intro_household_member" class="button button-full-width button-bold">
@@ -28,9 +28,8 @@
     </div>
   </div>
 
-  <!-- Replace with partial -->
   <footer class="form-card__button_right">
-    <a href="/pages/medicaid/intro_college" class="button button--nav  button--cta button--full-width">
+    <a href="/steps/medicaid/intro-college" class="button button--nav  button--cta button--full-width">
       Next
     </a>
   </footer>
