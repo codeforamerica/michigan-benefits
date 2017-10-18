@@ -52,7 +52,7 @@ minimal_mailing.update!(
 )
 
 minimal_primary = Member.find_or_initialize_by(
-  snap_application: minimal_application,
+  benefit_application: minimal_application,
   first_name: "Test",
   last_name: "Client",
 )
@@ -158,7 +158,7 @@ complete_residential.update!(
 )
 
 complete_primary = Member.find_or_initialize_by(
-  snap_application: complete_application,
+  benefit_application: complete_application,
   first_name: "Complete",
   last_name: "Testapp",
 )
@@ -166,7 +166,7 @@ complete_primary = Member.find_or_initialize_by(
 complete_primary.update!(
   marital_status: "Married",
   sex: "male",
-  snap_application_id: 2,
+  benefit_application_id: 2,
   encrypted_ssn: "lWqpXtZV/j8XV8+Ci/0H6ZFYt5MXwp+TJA==\n",
   encrypted_ssn_iv: "Y9G6b8hj2mmDi4Uv\n",
   birthday: 40.years.ago,
@@ -181,7 +181,7 @@ complete_primary.update!(
 )
 
 complete_second_member = Member.find_or_initialize_by(
-  snap_application: complete_application,
+  benefit_application: complete_application,
   first_name: "Jane",
   last_name: "Doe",
 )
@@ -202,7 +202,7 @@ complete_second_member.update!(
 )
 
 complete_third_member = Member.find_or_initialize_by(
-  snap_application: complete_application,
+  benefit_application: complete_application,
   first_name: "Random",
   last_name: "Roommate",
 )
@@ -256,3 +256,26 @@ complete_application.
 
 puts "More complete application created (or found) " \
   "with id: #{complete_application.id}"
+
+puts "Creating a minimal medicaid application..."
+
+medicaid_application = MedicaidApplication.find_or_initialize_by(
+  email: "medicaid.application@example.com",
+)
+
+medicaid_application.update!(
+  michigan_resident: true,
+)
+
+medicaid_primary = Member.find_or_initialize_by(
+  benefit_application: medicaid_application,
+  first_name: "Medicaid",
+  last_name: "TestPerson",
+)
+
+medicaid_primary.update!(
+  sex: "female",
+)
+
+puts "Minimal medicaid application created (or found) " \
+  "with id: #{medicaid_application.id}"

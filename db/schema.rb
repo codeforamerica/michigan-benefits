@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016213538) do
+ActiveRecord::Schema.define(version: 20171017191829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,8 +99,6 @@ ActiveRecord::Schema.define(version: 20171016213538) do
     t.string "encrypted_ssn"
     t.string "encrypted_ssn_iv"
     t.boolean "filing_federal_taxes_next_year"
-    t.string "first_name"
-    t.string "gender"
     t.boolean "homeless"
     t.boolean "income_alimony"
     t.boolean "income_not_from_job"
@@ -110,7 +108,6 @@ ActiveRecord::Schema.define(version: 20171016213538) do
     t.boolean "income_unemployment"
     t.string "insurance_type"
     t.boolean "insured"
-    t.string "last_name"
     t.boolean "mail_sent_to_residential"
     t.string "mailing_city"
     t.string "mailing_street_address"
@@ -137,6 +134,8 @@ ActiveRecord::Schema.define(version: 20171016213538) do
   end
 
   create_table "members", force: :cascade do |t|
+    t.bigint "benefit_application_id", null: false
+    t.string "benefit_application_type", null: false
     t.datetime "birthday"
     t.boolean "buy_food_with", default: true
     t.boolean "citizen"
@@ -161,9 +160,7 @@ ActiveRecord::Schema.define(version: 20171016213538) do
     t.integer "self_employed_monthly_income"
     t.string "self_employed_profession"
     t.string "sex"
-    t.bigint "snap_application_id"
     t.datetime "updated_at", null: false
-    t.index ["snap_application_id"], name: "index_members_on_snap_application_id"
   end
 
   create_table "snap_applications", force: :cascade do |t|

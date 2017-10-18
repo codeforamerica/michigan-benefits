@@ -31,7 +31,7 @@ module MiBridges
         end
 
         def mi_bridges_relationship
-          if first_member == first_member.snap_application.primary_member
+          if first_member == first_member.benefit_application.primary_member
             map_member_relationship_to_mi_bridges
           else
             "is Related to another way to"

@@ -9,7 +9,7 @@ class Member < ApplicationRecord
     "Other",
   ].freeze
 
-  belongs_to :snap_application
+  belongs_to :benefit_application, polymorphic: true
 
   validates :employed_pay_interval,
     inclusion: { in: PAYMENT_INTERVALS },
@@ -26,7 +26,7 @@ class Member < ApplicationRecord
   end
 
   def primary_member?
-    snap_application.primary_member.id == id
+    benefit_application.primary_member.id == id
   end
 
   def monthly_income

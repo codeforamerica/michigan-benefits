@@ -5,7 +5,7 @@ module Medicaid
     step_attributes(
       :first_name,
       :last_name,
-      :gender,
+      :sex,
     )
 
     validates :first_name,
@@ -14,7 +14,7 @@ module Medicaid
     validates :last_name,
       presence: { message: "Make sure to provide a last name" }
 
-    validates :gender, inclusion: {
+    validates :sex, inclusion: {
       in: %w(male female),
       message: "Make sure to answer this question",
     }
