@@ -27,4 +27,6 @@ module FeatureHelper
     expect(page.title.strip).to eq page_title
     yield
   end
+
+  alias on_pages on_page
 end
