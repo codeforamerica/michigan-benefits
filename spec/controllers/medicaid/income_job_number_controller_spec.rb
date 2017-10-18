@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IncomeJobNumberController do
-  let(:step) { assigns(:step) }
-
   describe "#next_path" do
     it "is the self employment page path" do
       expect(subject.next_path).to eq(
@@ -22,6 +20,7 @@ RSpec.describe Medicaid::IncomeJobNumberController do
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
+        step = assigns(:step)
 
         expect(response).to render_template(:edit)
         expect(step.new_number_of_jobs).to eq(4)
