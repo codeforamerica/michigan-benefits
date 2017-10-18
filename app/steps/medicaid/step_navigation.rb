@@ -28,6 +28,7 @@ module Medicaid
       "Income" => [
         Medicaid::IncomeJobController,
         Medicaid::IncomeJobNumberController,
+        Medicaid::IncomeJobNumberContinuedController,
         Medicaid::IncomeSelfEmploymentController,
         Medicaid::IncomeOtherIncomeController,
         Medicaid::IncomeOtherIncomeTypeController,
