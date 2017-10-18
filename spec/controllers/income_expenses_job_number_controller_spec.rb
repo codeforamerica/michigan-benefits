@@ -10,7 +10,7 @@ RSpec.describe Medicaid::IncomeJobNumberController do
         get :edit
 
         expect(response).to redirect_to(
-          "/steps/medicaid/income-self-employment",
+          "/steps/medicaid/income-job-number-continued",
         )
       end
     end
