@@ -21,15 +21,14 @@ module Medicaid
 
     def member_attributes
       {
-          first_name: member.first_name,
-          last_name: member.last_name,
-          sex: member.sex,
+        first_name: member.first_name,
+        last_name: member.last_name,
+        sex: member.sex,
       }
     end
 
     def member
       @member ||= current_application.members.build
     end
-
   end
 end

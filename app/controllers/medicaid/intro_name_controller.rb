@@ -23,13 +23,13 @@ module Medicaid
       {
         first_name: member.first_name,
         last_name: member.last_name,
-        sex: member.sex
+        sex: member.sex,
       }
     end
 
     def member
       current_application.members.first ||
-          current_application.members.new
+        current_application.members.new
     end
   end
 end

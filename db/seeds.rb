@@ -260,21 +260,21 @@ puts "More complete application created (or found) " \
 puts "Creating a minimal medicaid application..."
 
 medicaid_application = MedicaidApplication.find_or_initialize_by(
-    email: "medicaid.application@example.com",
+  email: "medicaid.application@example.com",
 )
 
 medicaid_application.update!(
-    michigan_resident: true,
+  michigan_resident: true,
 )
 
 medicaid_primary = Member.find_or_initialize_by(
-    benefit_application: medicaid_application,
-    first_name: "Medicaid",
-    last_name: "TestPerson",
+  benefit_application: medicaid_application,
+  first_name: "Medicaid",
+  last_name: "TestPerson",
 )
 
 medicaid_primary.update!(
-    sex: "female",
+  sex: "female",
 )
 
 puts "Minimal medicaid application created (or found) " \
