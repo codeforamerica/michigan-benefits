@@ -11,7 +11,7 @@ RSpec.describe Medicaid::IncomeOtherIncomeTypeController do
         get :edit
 
         expect(response).to redirect_to(
-          "/steps/medicaid/expenses-student-loan",
+          "/steps/medicaid/expenses-alimony",
         )
       end
     end
