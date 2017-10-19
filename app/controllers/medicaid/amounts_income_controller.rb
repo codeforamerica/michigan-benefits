@@ -18,7 +18,7 @@ module Medicaid
 
     def employed_monthly_income_attributes
       {}.tap do |income_hash|
-        current_application.number_of_jobs.times do |count|
+        current_application.number_of_jobs&.times do |count|
           income_hash["employed_monthly_income_#{count}"] =
             current_application.employed_monthly_income[count]
         end
