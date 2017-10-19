@@ -13,7 +13,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
         medicaid_application =
           create(
             :medicaid_application,
-            new_number_of_jobs: 4,
+            number_of_jobs: 4,
           )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -28,7 +28,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
         medicaid_application =
           create(
             :medicaid_application,
-            new_number_of_jobs: 3,
+            number_of_jobs: 3,
           )
         session[:medicaid_application_id] = medicaid_application.id
 

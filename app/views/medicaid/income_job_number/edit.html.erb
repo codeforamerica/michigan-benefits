@@ -8,7 +8,7 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
 
-      <%= f.mb_radio_set :new_number_of_jobs,
+      <%= f.mb_radio_set :number_of_jobs,
         '',
         [
           { value: "1", label: "1 job" },

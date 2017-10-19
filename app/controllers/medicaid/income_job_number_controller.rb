@@ -9,14 +9,14 @@ module Medicaid
     end
 
     def number_of_job_attributes
-      { new_number_of_jobs: number_of_jobs }
+      { number_of_jobs: number_of_jobs }
     end
 
     def number_of_jobs
-      if current_application.new_number_of_jobs&. > 4
+      if current_application.number_of_jobs&. > 4
         4
       else
-        current_application.new_number_of_jobs
+        current_application.number_of_jobs
       end
     end
 

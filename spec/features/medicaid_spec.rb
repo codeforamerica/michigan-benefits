@@ -61,7 +61,7 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content("Tell us how many jobs you currently have.")
-      choose "1 job"
+      choose "3 jobs"
       click_on "Next"
 
       expect(page).to have_content("Are you self-employed?")
@@ -90,8 +90,19 @@ RSpec.feature "Medicaid app" do
     on_pages "Income & Expense Amounts" do
       click_on "Next"
 
-      fill_in "Your Current Job", with: 100
+      fill_in "Your Current Job (#1)", with: 100
+      fill_in "Your Current Job (#2)", with: 50
+      fill_in "Your Current Job (#3)", with: 25
       fill_in "Your Unemployment", with: 100
+      click_on "Next"
+    end
+
+    find(".icon-arrow_back").click
+
+    on_pages "Income & Expense Amounts" do
+      expect(find("#step_employed_monthly_income_0").value).to eq "100"
+      expect(find("#step_employed_monthly_income_1").value).to eq "50"
+      expect(find("#step_employed_monthly_income_2").value).to eq "25"
       click_on "Next"
     end
 

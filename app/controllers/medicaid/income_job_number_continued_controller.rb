@@ -5,7 +5,7 @@ module Medicaid
     private
 
     def skip?
-      current_application.new_number_of_jobs < 4
+      current_application.number_of_jobs < 4
     end
   end
 end
