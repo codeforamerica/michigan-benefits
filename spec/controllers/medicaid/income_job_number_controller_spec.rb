@@ -15,7 +15,7 @@ RSpec.describe Medicaid::IncomeJobNumberController do
         medicaid_application = create(
           :medicaid_application,
           employed: true,
-          new_number_of_jobs: 5,
+          number_of_jobs: 5,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -23,7 +23,7 @@ RSpec.describe Medicaid::IncomeJobNumberController do
         step = assigns(:step)
 
         expect(response).to render_template(:edit)
-        expect(step.new_number_of_jobs).to eq(4)
+        expect(step.number_of_jobs).to eq(4)
       end
     end
 

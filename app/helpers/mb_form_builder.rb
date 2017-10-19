@@ -25,7 +25,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{label_and_field(method, label_text, text_field_html, notes: notes, prefix: prefix, optional: optional)}
+        #{label_and_field(method, label_text, text_field_html, notes: notes, prefix: prefix, optional: optional, options: options)}
         #{errors_for(object, method)}
         #{append_html}
       </fieldset>
@@ -203,18 +203,29 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     field,
     notes: [],
     prefix: nil,
-    optional: false
+    optional: false,
+    options: {}
   )
+    if options[:id]
+      for_options = options.merge(for: options[:id])
+      for_options.delete(:id)
+    end
+
+    formatted_label = label(
+      method,
+      label_contents(label_text, notes, optional),
+      (for_options || options),
+    )
     if prefix
       <<-HTML
-        #{label(method, label_contents(label_text, notes, optional))}
+        #{formatted_label}
         <div class="text-input-group">
           <div class="text-input-group__prefix">#{prefix}</div>
           #{field}
         </div>
       HTML
     else
-      label(method, label_contents(label_text, notes, optional)) + field
+      formatted_label + field
     end
   end
 

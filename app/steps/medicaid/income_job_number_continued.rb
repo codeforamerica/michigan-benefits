@@ -2,6 +2,6 @@
 
 module Medicaid
   class IncomeJobNumberContinued < Step
-    step_attributes(:new_number_of_jobs)
+    step_attributes(:number_of_jobs)
   end
 end

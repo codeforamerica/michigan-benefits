@@ -34,4 +34,25 @@ RSpec.describe Medicaid::AmountsIncomeController do
       end
     end
   end
+
+  describe "#update" do
+    context "client has multiple jobs" do
+      it "saves the income for each job" do
+        medicaid_application = create(
+          :medicaid_application,
+          employed: true,
+          number_of_jobs: 2,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
+
+        post :update, params: { step: { employed_monthly_income: ["111", "222"] } }
+
+        medicaid_application.reload
+
+        expect(medicaid_application.employed_monthly_income).to eq(
+          ["111", "222"],
+        )
+      end
+    end
+  end
 end
