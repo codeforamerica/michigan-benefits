@@ -48,7 +48,9 @@ RSpec.feature "Medicaid app" do
     end
 
     on_page "Introduction" do
-      expect(page).to have_content("Are you currently a US Citizen?")
+      expect(page).to have_content(
+        "Is everyone in your household currently a US citizen",
+      )
       click_on "Yes"
     end
 

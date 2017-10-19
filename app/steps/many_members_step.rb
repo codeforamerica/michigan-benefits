@@ -11,4 +11,10 @@ class ManyMembersStep < Step
 
     members.map(&:errors).all?(&:blank?)
   end
+
+  private
+
+  def validate_household_member(_member)
+    raise NotImplementedError
+  end
 end

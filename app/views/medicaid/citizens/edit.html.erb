@@ -1,0 +1,28 @@
+<% content_for :header_title, "Introduction" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Tell us who in your household is not currently a US citizen.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <fieldset class="form-group">
+        <% @step.members.each do |member| %>
+          <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+            <%= ff.mb_checkbox :citizen, member.full_name %>
+          <% end %>
+        <% end %>
+      </fieldset>
+
+      <%= render 'medicaid/next_step' %>
+    <% end %>
+  </div>
+</div>

@@ -24,7 +24,9 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content("Are you currently a college student?")
       click_on "Yes"
 
-      expect(page).to have_content("Are you currently a US Citizen?")
+      expect(page).to have_content(
+        "Is everyone in your household currently a US citizen",
+      )
       click_on "Yes"
     end
 
