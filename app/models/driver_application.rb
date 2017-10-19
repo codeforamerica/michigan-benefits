@@ -7,12 +7,10 @@ class DriverApplication < ApplicationRecord
   validates :snap_application, presence: true
   has_many :driver_errors, dependent: :destroy
 
-  attribute %i[
-    password
-    secret_question_1_answer
-    secret_question_2_answer
-    user_id
-  ]
+  attribute :password
+  attribute :secret_question_1_answer
+  attribute :secret_question_2_answer
+  attribute :user_id
 
   attr_encrypted(:user_id, key: ENCRYPTION_KEY)
   attr_encrypted(:password, key: ENCRYPTION_KEY)
