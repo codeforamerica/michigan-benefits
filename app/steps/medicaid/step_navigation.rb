@@ -14,6 +14,7 @@ module Medicaid
         # multi-member Medicaid::IntroCaretakerMemberController,
       ],
       "Insurance" => [
+        Medicaid::InsuranceNeededController,
         Medicaid::InsuranceCurrentController,
         Medicaid::InsuranceCurrentTypeController,
         Medicaid::InsuranceMedicalExpensesController,

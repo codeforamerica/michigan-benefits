@@ -57,6 +57,17 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     )
   end
 
+  def mb_form_errors(method)
+    errors = object.errors[method]
+    if errors.any?
+      <<-HTML.html_safe
+        <fieldset class="form-group#{error_state(object, method)}">
+          #{errors_for(object, method)}
+        </fieldset>
+      HTML
+    end
+  end
+
   def mb_textarea(
     method,
     label_text,

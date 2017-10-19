@@ -1,0 +1,31 @@
+<% content_for :header_title, "Health Coverage Needs" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Who in your household needs healthcare coverage?
+    </div>
+    <p class="text--help text--centered">
+      Even if they have insurance, there might be a better program with better
+      coverage or a lower cost.
+    </p>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_form_errors :requesting_health_insurance %>
+      <fieldset class="form-group">
+        <% @step.members.each do |member| %>
+          <%= f.fields_for("members[]", member) do |ff| %>
+            <%= ff.mb_checkbox(
+              :requesting_health_insurance,
+              member.full_name,
+              { checked_value: "1", unchecked_value: "0" },
+            ) %>
+          <% end %>
+        <% end %>
+      </fieldset>
+     <%= render "medicaid/next_step" %>
+    <% end %>
+  </div>
+</div>
