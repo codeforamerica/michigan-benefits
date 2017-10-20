@@ -9,6 +9,7 @@ module Medicaid
         Medicaid::IntroNameController,
         Medicaid::IntroHouseholdController,
         Medicaid::IntroCollegeController,
+        Medicaid::IntroCollegeMemberController,
         Medicaid::IntroCitizenController,
         # multi-member Medicaid::IntroCaretakerController,
         # multi-member Medicaid::IntroCaretakerMemberController,

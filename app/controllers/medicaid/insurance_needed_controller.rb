@@ -8,10 +8,6 @@ module Medicaid
       single_member_household?
     end
 
-    def single_member_household?
-      current_application.members.count == 1
-    end
-
     def member_attrs
       %i[requesting_health_insurance]
     end
