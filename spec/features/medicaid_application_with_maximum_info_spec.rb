@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Medicaid app" do
-  scenario "with a single member", :js do
+  scenario "with maximum info", :js do
     visit medicaid_root_path
 
     within(".slab--hero") do
@@ -22,7 +22,7 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
 
       expect(page).to have_content("Are you currently a college student?")
-      click_on "No"
+      click_on "Yes"
 
       expect(page).to have_content("Are you currently a US Citizen?")
       click_on "Yes"
@@ -32,7 +32,13 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Are you currently enrolled in a health insurance plan?",
       )
-      click_on "No"
+      click_on "Yes"
+
+      expect(page).to have_content(
+        "What type of insurance plan are you currently enrolled in?",
+      )
+      choose "Other"
+      click_on "Next"
 
       expect(page).to have_content(
         "Do you need help paying for medical expenses from the last 3 months?",
@@ -42,10 +48,10 @@ RSpec.feature "Medicaid app" do
 
     on_pages "Quick Health Questions" do
       expect(page).to have_content("Do you have a disability?")
-      click_on "No"
+      click_on "Yes"
 
       expect(page).to have_content("Have you been pregnant recently?")
-      click_on "No"
+      click_on "Yes"
     end
 
     on_pages "Quick Tax Question" do
@@ -65,7 +71,7 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
 
       expect(page).to have_content("Are you self-employed?")
-      click_on "No"
+      click_on "Yes"
 
       expect(page).to have_content("Do you get income that's not from a job?")
       click_on "Yes"
@@ -81,10 +87,10 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Do you pay child support, alimony or arrears?",
       )
-      click_on "No"
+      click_on "Yes"
 
       expect(page).to have_content("Do you pay student loan interest?")
-      click_on "No"
+      click_on "Yes"
     end
 
     on_pages "Income & Expense Amounts" do
@@ -93,16 +99,21 @@ RSpec.feature "Medicaid app" do
       fill_in "Your Current Job (#1)", with: 100
       fill_in "Your Current Job (#2)", with: 50
       fill_in "Your Current Job (#3)", with: 25
+      fill_in "Your Self-Employment", with: 100
       fill_in "Your Unemployment", with: 100
       click_on "Next"
-    end
 
-    find(".icon-arrow_back").click
+      find(".icon-arrow_back").click
 
-    on_pages "Income & Expense Amounts" do
       expect(find("#step_employed_monthly_income_0").value).to eq "100"
       expect(find("#step_employed_monthly_income_1").value).to eq "50"
       expect(find("#step_employed_monthly_income_2").value).to eq "25"
+      click_on "Next"
+
+      expect(page).to have_content("College Loan Interest")
+      fill_in "Child Support, Alimony, or Arrears", with: 100
+      fill_in "College Loan Interest", with: 50
+      fill_in "Self Employment", with: 50
       click_on "Next"
     end
 
@@ -143,77 +154,5 @@ RSpec.feature "Medicaid app" do
     end
 
     expect(page).to have_content("Get the support your family needs")
-  end
-
-  scenario "with multiple members", :js do
-    visit medicaid_root_path
-
-    within(".slab--hero") do
-      click_on "Apply for Medicaid"
-    end
-
-    on_page "Introduction" do
-      click_on "Yes"
-    end
-
-    on_page "Introduction" do
-      fill_in "What is your first name?", with: "Jessie"
-      fill_in "What is your last name?", with: "Tester"
-      select_radio(question: "What is your gender?", answer: "Female")
-      click_on "Next"
-    end
-
-    on_page "Introduction" do
-      click_on "Add a member"
-    end
-
-    on_page "Introduction" do
-      fill_in "What is their first name?", with: "Christa"
-      fill_in "What is their last name?", with: "Tester"
-      select_radio(question: "What is their gender?", answer: "Female")
-      click_on "Next"
-    end
-
-    expect(page).to have_content("Jessie Tester")
-    expect(page).to have_content("Christa Tester")
-    click_on "Next"
-
-    on_page "Introduction" do
-      expect(page).to have_content("Is anyone currently a college student?")
-      click_on "Yes"
-    end
-
-    on_page "Introduction" do
-      expect(page).to have_content(
-        "Tell us who is currently a college student.",
-      )
-      check "Jessie Tester"
-      click_on "Next"
-    end
-
-    on_page "Introduction" do
-      expect(page).to have_content("Are you currently a US Citizen?")
-      click_on "Yes"
-    end
-
-    on_page "Health Coverage Needs" do
-      expect(page).to have_content(
-        "Who in your household needs healthcare coverage?",
-      )
-      uncheck "Jessie Tester"
-      uncheck "Christa Tester"
-      click_on "Next"
-    end
-
-    on_page "Health Coverage Needs" do
-      expect(page).to have_content("Make sure you select at least one person")
-      check "Jessie Tester"
-      check "Christa Tester"
-      click_on "Next"
-    end
-
-    expect(page).to have_content(
-      "Are you currently enrolled in a health insurance plan?",
-    )
   end
 end

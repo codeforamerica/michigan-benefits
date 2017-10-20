@@ -13,6 +13,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
         medicaid_application =
           create(
             :medicaid_application,
+            employed: true,
             number_of_jobs: 4,
           )
         session[:medicaid_application_id] = medicaid_application.id
@@ -25,11 +26,26 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
 
     context "client has fewer than 4 jobs" do
       it "redirects to the next page" do
-        medicaid_application =
-          create(
-            :medicaid_application,
-            number_of_jobs: 3,
-          )
+        medicaid_application = create(
+          :medicaid_application,
+          employed: true,
+          number_of_jobs: 3,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
+
+        get :edit
+
+        expect(response).to redirect_to(subject.next_path)
+      end
+    end
+
+    context "client does not have a job" do
+      it "skips the step" do
+        medicaid_application = create(
+          :medicaid_application,
+          employed: false,
+          number_of_jobs: nil,
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
