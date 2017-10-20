@@ -24,3 +24,10 @@ en:
     exit_app_confirmation:
       Leaving the application process will clear your data from this computer.
       Are you sure you would like to exit?
+  medicaid:
+    intro_college:
+      edit:
+        title:
+          one: Are you currently a college student?
+          other: Is anyone currently a college student?
+

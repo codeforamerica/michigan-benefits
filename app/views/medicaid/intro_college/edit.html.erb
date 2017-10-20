@@ -2,11 +2,14 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Are you currently a college student?</div>
+    <div class="form-card__title">
+      <%= t("medicaid.intro_college.edit.title",
+            count: current_application.members.count) %>
+    </div>
     <p class="text--help text--centered">
       Students may be eligible for different health care coverage options than other adults.
     </p>
   </header>
 
-  <%= render 'shared/yes_no_form', step: @step, field: :college_student %>
+  <%= render 'shared/yes_no_form', step: @step, field: :anyone_in_college %>
 </div>

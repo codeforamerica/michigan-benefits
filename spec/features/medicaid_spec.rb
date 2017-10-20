@@ -179,8 +179,16 @@ RSpec.feature "Medicaid app" do
     click_on "Next"
 
     on_page "Introduction" do
-      expect(page).to have_content("Are you currently a college student?")
-      click_on "No"
+      expect(page).to have_content("Is anyone currently a college student?")
+      click_on "Yes"
+    end
+
+    on_page "Introduction" do
+      expect(page).to have_content(
+        "Tell us who is currently a college student.",
+      )
+      check "Jessie Tester"
+      click_on "Next"
     end
 
     on_page "Introduction" do
@@ -190,8 +198,7 @@ RSpec.feature "Medicaid app" do
 
     on_page "Health Coverage Needs" do
       expect(page).to have_content(
-        "Who in your household needs healthcare coverage?
-",
+        "Who in your household needs healthcare coverage?",
       )
       uncheck "Jessie Tester"
       uncheck "Christa Tester"
