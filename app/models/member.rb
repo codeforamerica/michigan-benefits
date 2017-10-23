@@ -57,6 +57,14 @@ class Member < ApplicationRecord
     employment_status == "not_employed"
   end
 
+  def female?
+    sex == "female"
+  end
+
+  def male?
+    sex == "male"
+  end
+
   def formatted_birthday
     birthday.strftime("%m/%d/%Y")
   end

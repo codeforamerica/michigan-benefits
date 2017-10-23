@@ -46,10 +46,13 @@ RSpec.describe Medicaid::AmountsIncomeController do
           anyone_employed: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
-
-        post :update, params: {
-          step: { employed_monthly_income: ["111", "222"] },
+        payload = {
+          step: {
+            employed_monthly_income: ["111", "222"],
+          },
         }
+
+        post :update, params: payload
 
         medicaid_application.reload
 

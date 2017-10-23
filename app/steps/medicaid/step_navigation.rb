@@ -24,6 +24,7 @@ module Medicaid
       "Health" => [
         Medicaid::HealthDisabilityController,
         Medicaid::HealthPregnancyController,
+        Medicaid::HealthRecentPregnancyController,
         Medicaid::HealthFlintWaterCrisisController,
         Medicaid::HealthFlintWaterCrisisConfirmationController,
       ],

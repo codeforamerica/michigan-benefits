@@ -1,6 +1,26 @@
 require "rails_helper"
 
 RSpec.describe Member do
+  describe "#female?" do
+    it "is true if the sex is female" do
+      expect(build(:member, sex: "female")).to be_female
+    end
+
+    it "is false if the sex is male" do
+      expect(build(:member, sex: "male")).not_to be_female
+    end
+  end
+
+  describe "#male?" do
+    it "is true if the sex is male" do
+      expect(build(:member, sex: "male")).to be_male
+    end
+
+    it "is false if the sex is female" do
+      expect(build(:member, sex: "female")).not_to be_male
+    end
+  end
+
   describe "#monthly_income" do
     context "unemployed" do
       it "returns 0" do

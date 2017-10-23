@@ -20,6 +20,11 @@ en:
           one: Have you been affected by the Flint Water Crisis?
           other: Have you or someone in your household been affected by the
             Flint Water Crisis?
+    health_pregnancy:
+      edit:
+        title:
+          one: Have you been pregnant recently?
+          other: Has anyone been pregnant recently?
     income_job:
       edit:
         title:

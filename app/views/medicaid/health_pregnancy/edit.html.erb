@@ -2,7 +2,10 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Have you been pregnant recently?</div>
+    <div class="form-card__title">
+      <%= t("medicaid.health_pregnancy.edit.title",
+            count: current_application.members.count) %>
+    </div>
     <p class="text--help text--centered">
       Currently pregnant or pregnant in the past three months.
     </p>

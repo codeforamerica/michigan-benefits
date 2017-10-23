@@ -32,9 +32,9 @@ module Medicaid
     def step
       @step ||= step_class.new(
         current_application.
-        attributes.
-        slice(*step_attrs).
-        merge(members: current_application.members),
+          attributes.
+          slice(*step_attrs).
+          merge(members: current_application.members),
       )
     end
 

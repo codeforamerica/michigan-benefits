@@ -2,6 +2,13 @@
 
 module Medicaid
   class HealthPregnancy < Step
-    step_attributes(:new_mom)
+    step_attributes(
+      :new_mom,
+      :members,
+    )
+
+    def female_members
+      members.select(&:female?)
+    end
   end
 end
