@@ -89,7 +89,6 @@ RSpec.feature "Medicaid app" do
 
       expect(page).to have_content(
         "Have you or someone in your household been affected by the Flint" +
-
         " Water Crisis?",
       )
       click_on "Yes"
