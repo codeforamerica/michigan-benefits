@@ -4,7 +4,9 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
   describe "#edit" do
     context "client is insured" do
       it "does not redirect" do
-        medicaid_application = create(:medicaid_application, insured: true)
+        medicaid_application = create(:medicaid_application,
+                                      anyone_is_insured: true,
+                                      members: [create(:member)])
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -15,7 +17,9 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
 
     context "client is not insured" do
       it "redirects to next step" do
-        medicaid_application = create(:medicaid_application, insured: false)
+        medicaid_application = create(:medicaid_application,
+                                      anyone_is_insured: false,
+                                      members: [create(:member)])
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit

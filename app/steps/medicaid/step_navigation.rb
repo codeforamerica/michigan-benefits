@@ -18,6 +18,7 @@ module Medicaid
       "Insurance" => [
         Medicaid::InsuranceNeededController,
         Medicaid::InsuranceCurrentController,
+        Medicaid::InsuranceCurrentMemberController,
         Medicaid::InsuranceCurrentTypeController,
         Medicaid::InsuranceMedicalExpensesController,
       ],

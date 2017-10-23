@@ -279,3 +279,42 @@ medicaid_primary.update!(
 
 puts "Minimal medicaid application created (or found) " \
   "with id: #{medicaid_application.id}"
+
+puts "Creating a more complete medicaid application..."
+
+complete_medicaid_application = MedicaidApplication.find_or_initialize_by(
+  email: "medicaid.application2@example.com",
+)
+complete_medicaid_application.update!(
+  michigan_resident: true,
+  anyone_is_insured: true,
+)
+
+complete_medicaid_primary = Member.find_or_initialize_by(
+  benefit_application: medicaid_application,
+  first_name: "CompleteMedicaid",
+  last_name: "TestPerson",
+  sex: "female",
+)
+
+complete_medicaid_primary.update!(
+  is_insured: true,
+  insurance_type: "VA health care programs",
+)
+
+complete_medicaid_secondary = Member.find_or_initialize_by(
+  benefit_application: medicaid_application,
+  first_name: "CompleteMedicaid2",
+  last_name: "TestPerson",
+  sex: "male",
+)
+
+complete_medicaid_application.update!(
+  members: [
+    complete_medicaid_primary,
+    complete_medicaid_secondary,
+  ],
+)
+
+puts "A more complete medicaid application created (or found) " \
+  "with id: #{complete_medicaid_application.id}"

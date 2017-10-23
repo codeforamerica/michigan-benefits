@@ -2,21 +2,28 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">What type of insurance plan are you currently enrolled in?</div>
+    <div class="form-card__title">
+      <%= t("medicaid.insurance_current_type.edit.title",
+            count: current_application.members.count) %>
+    </div>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_radio_set :insurance_type,
-        '',
-        [
-          { value: "Medicaid", label: "Medicaid" },
-          { value: "CHIP/MIChild", label: "CHIP/MIChild" },
-          { value: "VA health care programs", label: "VA health care programs" },
-          { value: "Employer or individual plan", label: "Policy through an employer or individual plan" },
-          { value: "Other", label: "Other" },
-        ] %>
-
+        <% @step.members.each do |member| %>
+            <%= f.fields_for("members[]", member) do |ff| %>
+              <%= ff.mb_form_errors :insurance_type %>
+              <%= ff.mb_radio_set :insurance_type,
+                member.full_name,
+                [
+                  { value: "Medicaid", label: "Medicaid" },
+                  { value: "CHIP/MIChild", label: "CHIP/MIChild" },
+                  { value: "VA health care programs", label: "VA health care programs" },
+                  { value: "Employer or individual plan", label: "Policy through an employer or individual plan" },
+                  { value: "Other", label: "Other" },
+                ] %>
+            <% end %>
+        <% end %>
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>

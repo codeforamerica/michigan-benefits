@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class InsuranceCurrentType < Step
+  class InsuranceCurrentMember < Step
     step_attributes(
-      :insurance_type,
+      :is_insured,
       :members,
     )
 
     def valid?
-      if members.select(&:insurance_type).any?
+      if members.select(&:is_insured).any?
         true
       else
         errors.add(
-          :insurance_type,
-          "Please select a plan",
+          :is_insured,
+          "Please select a member",
         )
         false
       end

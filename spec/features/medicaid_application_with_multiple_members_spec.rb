@@ -80,16 +80,34 @@ RSpec.feature "Medicaid app" do
 
     on_pages "Health Coverage Needs" do
       expect(page).to have_content(
-        "Are you currently enrolled in a health insurance plan?",
+        "Is anyone currently enrolled in a health insurance plan?",
       )
       click_on "Yes"
+    end
 
+    on_page "Health Coverage Needs" do
       expect(page).to have_content(
-        "What type of insurance plan are you currently enrolled in?",
+        "Tell us who is currently enrolled in a health insurance plan.",
       )
-      choose "Other"
+      check "Jessie Tester"
       click_on "Next"
+    end
 
+    on_page "Health Coverage Needs" do
+      expect(page).to have_content(
+        "Tell us what insurance plan each person is enrolled in.",
+      )
+      select_radio(question: "Jessie Tester", answer: "Medicaid")
+      click_on "Next"
+    end
+
+    on_page "Health Coverage Needs" do
+      expect(page).to have_content(
+        "Do you need help paying for medical expenses from the last 3 months?",
+      )
+    end
+
+    on_pages "Health Coverage Needs" do
       expect(page).to have_content(
         "Do you need help paying for medical expenses from the last 3 months?",
       )

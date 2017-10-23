@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class InsuranceCurrentTypeController < MedicaidStepsController
+  class InsuranceCurrentTypeController < Medicaid::ManyMemberStepsController
     private
 
     def skip?
@@ -9,7 +9,11 @@ module Medicaid
     end
 
     def not_insured?
-      !current_application&.insured?
+      current_application.nobody_insured?
+    end
+
+    def member_attrs
+      %i[insurance_type]
     end
   end
 end
