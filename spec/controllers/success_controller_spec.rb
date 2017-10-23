@@ -120,7 +120,7 @@ RSpec.describe SuccessController do
 
   describe "#update" do
     context "no office location" do
-      it "redirects" do
+      it "redirects to the home page" do
         params = { step: attributes }
 
         put :update, params: params
