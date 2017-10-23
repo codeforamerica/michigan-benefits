@@ -1,0 +1,19 @@
+<% content_for :header_title, "Quick Health Questions" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      <%= t("medicaid.health_flint_water_crisis.edit.title",
+            count: current_application.members.count) %>
+    </div>
+    <p class="text--help text--centered">
+      If you consumed water at a location that was serviced by the the Flint Water
+      System between April 2014 and now, you may qualify for additional health
+      coverage.
+    </p>
+  </header>
+
+  <%= render "shared/yes_no_form",
+    step: @step,
+    field: :flint_water_crisis %>
+</div>

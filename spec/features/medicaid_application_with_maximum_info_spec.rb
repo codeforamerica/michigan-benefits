@@ -52,6 +52,14 @@ RSpec.feature "Medicaid app" do
 
       expect(page).to have_content("Have you been pregnant recently?")
       click_on "Yes"
+
+      expect(page).to have_content(
+        "Have you been affected by the Flint Water Crisis?",
+      )
+      click_on "Yes"
+
+      expect(page).to have_content("We've noted this on your application.")
+      click_on "Next"
     end
 
     on_pages "Quick Tax Question" do
