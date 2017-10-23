@@ -3,7 +3,9 @@ require "rails_helper"
 RSpec.describe Medicaid::HealthPregnancyController, type: :controller do
   describe "#next_path" do
     it "is the  path" do
-      expect(subject.next_path).to eq "/steps/medicaid/tax-filing"
+      expect(subject.next_path).to eq(
+        "/steps/medicaid/health-flint-water-crisis",
+      )
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020000142) do
+ActiveRecord::Schema.define(version: 20171023164005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20171020000142) do
     t.string "encrypted_ssn"
     t.string "encrypted_ssn_iv"
     t.boolean "filing_federal_taxes_next_year"
+    t.boolean "flint_water_crisis"
     t.boolean "homeless"
     t.boolean "income_alimony"
     t.boolean "income_not_from_job"

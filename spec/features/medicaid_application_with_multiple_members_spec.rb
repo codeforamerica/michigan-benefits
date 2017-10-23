@@ -68,8 +68,33 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
     end
 
-    expect(page).to have_content(
-      "Are you currently enrolled in a health insurance plan?",
-    )
+    on_pages "Health Coverage Needs" do
+      expect(page).to have_content(
+        "Are you currently enrolled in a health insurance plan?",
+      )
+      click_on "No"
+
+      expect(page).to have_content(
+        "Do you need help paying for medical expenses from the last 3 months?",
+      )
+      click_on "No"
+    end
+
+    on_pages "Quick Health Questions" do
+      expect(page).to have_content("Do you have a disability?")
+      click_on "No"
+
+      expect(page).to have_content("Have you been pregnant recently?")
+      click_on "No"
+
+      expect(page).to have_content(
+        "Have you or someone in your household been affected by the Flint" +
+
+        " Water Crisis?",
+      )
+      click_on "Yes"
+
+      expect(page).to have_content("We've noted this on your application.")
+    end
   end
 end
