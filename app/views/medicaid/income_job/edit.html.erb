@@ -2,7 +2,10 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Are you currently employed?</div>
+    <div class="form-card__title">
+      <%= t("medicaid.income_job.edit.title",
+        count: current_application.members.count) %>
+    </div>
     <p class="text--help text--centered">
       This includes full time, part time, and contract jobs. We'll ask you
       about the specific amounts you earn later

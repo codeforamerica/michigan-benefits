@@ -28,5 +28,11 @@ module FeatureHelper
     yield
   end
 
+  def select_job_number(full_name:, job_number:)
+    within(".household-member-group[data-member-name='#{full_name}']") do
+      select(job_number)
+    end
+  end
+
   alias on_pages on_page
 end

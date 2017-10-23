@@ -17,7 +17,11 @@ RSpec.describe Medicaid::IncomeJobNumberController do
 
     context "client is employed" do
       it "renders edit" do
-        medicaid_application = create(:medicaid_application, employed: true)
+        medicaid_application = create(
+          :medicaid_application,
+          :with_member,
+          employed: true,
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit

@@ -94,6 +94,30 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content("We've noted this on your application.")
+      click_on "Next"
+    end
+
+    on_pages "Quick Tax Question" do
+      expect(page).to have_content(
+        "Do you plan on filing a federal tax return next year?",
+      )
+
+      click_on "Yes"
+    end
+
+    on_pages "Current Income" do
+      expect(page).to have_content(
+        "Does anyone in your household currently have a job?",
+      )
+      click_on "Yes"
+
+      expect(page).to have_content(
+        "Tell us who in your household has one or more jobs.",
+      )
+      select_job_number(full_name: "Christa Tester", job_number: "2 jobs")
+      click_on "Next"
+
+      expect(page).to have_content("Are you self-employed?")
     end
   end
 end

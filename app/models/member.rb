@@ -9,10 +9,16 @@ class Member < ApplicationRecord
     "Other",
   ].freeze
 
+  EMPLOYMENT_STATUSES = ["employed", "self_employed", "not_employed"].freeze
+
   belongs_to :benefit_application, polymorphic: true
 
   validates :employed_pay_interval,
     inclusion: { in: PAYMENT_INTERVALS },
+    allow_nil: true
+
+  validates :employment_status,
+    inclusion: { in: EMPLOYMENT_STATUSES },
     allow_nil: true
 
   attribute :ssn

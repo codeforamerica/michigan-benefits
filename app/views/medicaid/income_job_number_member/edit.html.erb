@@ -1,0 +1,25 @@
+<% content_for :header_title, "Current Income" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Tell us who in your household has one or more jobs.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <% @step.members.each do |member| %>
+        <fieldset class="form-group">
+          <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+            <%= render "header", member: member %>
+            <%= ff.mb_select :employed_number_of_jobs,
+              "",
+              (1..10).map { |number| [pluralize(number, "job"), number] },
+              include_blank: "0 jobs" %>
+          <% end %>
+        </fieldset>
+      <% end %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
+</div>

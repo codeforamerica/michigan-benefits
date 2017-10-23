@@ -71,7 +71,7 @@ RSpec.feature "Medicaid app" do
     end
 
     on_pages "Current Income" do
-      expect(page).to have_content("Are you currently employed?")
+      expect(page).to have_content("Do you currently have a job?")
       click_on "Yes"
 
       expect(page).to have_content("Tell us how many jobs you currently have.")

@@ -21,7 +21,11 @@ module Medicaid
     end
 
     def skip?
-      not_employed?
+      multi_member_household? || not_employed?
+    end
+
+    def multi_member_household?
+      current_application.members.count != 1
     end
 
     def not_employed?

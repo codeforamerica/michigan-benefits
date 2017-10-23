@@ -10,50 +10,70 @@ RSpec.describe Medicaid::IncomeJobNumberController do
   end
 
   describe "#edit" do
-    context "client has 4 or more jobs" do
-      it "sets the job number to 4" do
-        medicaid_application = create(
-          :medicaid_application,
-          employed: true,
-          number_of_jobs: 5,
-        )
-        session[:medicaid_application_id] = medicaid_application.id
-
-        get :edit
-        step = assigns(:step)
-
-        expect(response).to render_template(:edit)
-        expect(step.number_of_jobs).to eq(4)
-      end
-    end
-
-    context "client is employed" do
-      it "renders edit " do
+    context "medicaid app has multiple members" do
+      it "redirects to the next step" do
         medicaid_application =
           create(
             :medicaid_application,
             employed: true,
+            members: create_list(:member, 2),
           )
-        session[:medicaid_application_id] = medicaid_application.id
 
-        get :edit
-
-        expect(response).to render_template(:edit)
-      end
-    end
-
-    context "client is unemployed" do
-      it "redirects to the next page" do
-        medicaid_application =
-          create(
-            :medicaid_application,
-            employed: false,
-          )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
 
         expect(response).to redirect_to(subject.next_path)
+      end
+    end
+
+    context "medicaid app has a single member" do
+      context "client has 4 or more jobs" do
+        it "sets the job number to 4" do
+          medicaid_application = create(
+            :medicaid_application,
+            :with_member,
+            employed: true,
+            number_of_jobs: 5,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+          step = assigns(:step)
+
+          expect(response).to render_template(:edit)
+          expect(step.number_of_jobs).to eq(4)
+        end
+      end
+
+      context "client is employed" do
+        it "renders edit " do
+          medicaid_application = create(
+            :medicaid_application,
+            :with_member,
+            employed: true,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+
+          expect(response).to render_template(:edit)
+        end
+      end
+
+      context "client is unemployed" do
+        it "redirects to the next page" do
+          medicaid_application = create(
+            :medicaid_application,
+            :with_member,
+            employed: false,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+
+          expect(response).to redirect_to(subject.next_path)
+        end
       end
     end
   end
