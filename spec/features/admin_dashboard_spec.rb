@@ -36,8 +36,8 @@ RSpec.feature "Submit application with minimal information" do
     expect(emails.count).to eq 1
   end
 
-  scenario "application detail timestamps are converted to Eastern timezone", javascript: true do
-    date = DateTime.new(2017,4,5,1,30)
+  scenario "dashboard timestamps are converted to EST", javascript: true do
+    date = DateTime.new(2017, 4, 5, 1, 30)
 
     application = create(:snap_application,
            created_at: date,
