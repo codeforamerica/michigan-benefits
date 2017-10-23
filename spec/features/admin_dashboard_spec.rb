@@ -35,4 +35,26 @@ RSpec.feature "Submit application with minimal information" do
     expect(faxes.count).to eq 1
     expect(emails.count).to eq 1
   end
+
+  scenario "dashboard timestamps are converted to EST", javascript: true do
+    date = DateTime.new(2017, 4, 5, 1, 30)
+
+    application = create(:snap_application,
+           created_at: date,
+           updated_at: date + 1.hour,
+           email: "person@example.com",
+           signed_at: date + 2.hours)
+
+    visit admin_root_path
+
+    expect(page).to have_content("2017-04-04") # Signed at date
+
+    click_link_or_button "person@example.com"
+
+    expect(page).to have_content("Snap Application ##{application.id}")
+
+    expect(page).to have_content("Created At 04/04/2017 at 09:30PM EDT")
+    expect(page).to have_content("Updated At 04/04/2017 at 10:30PM EDT")
+    expect(page).to have_content("Signed At 04/04/2017 at 11:30PM EDT")
+  end
 end
