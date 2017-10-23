@@ -37,7 +37,7 @@ RSpec.feature "Submit application with minimal information" do
   end
 
   scenario "application detail timestamps are converted to Eastern timezone", javascript: true do
-    date = DateTime.new(2017,4,5,6,30)
+    date = DateTime.new(2017,4,5,1,30)
 
     application = create(:snap_application,
            created_at: date,
@@ -46,12 +46,15 @@ RSpec.feature "Submit application with minimal information" do
            signed_at: date + 2.hours)
 
     visit admin_root_path
+
+    expect(page).to have_content("2017-04-04") # Signed at date
+
     click_link_or_button "person@example.com"
 
     expect(page).to have_content("Snap Application ##{application.id}")
 
-    expect(page).to have_content("Created At 04/05/2017 at 02:30AM EDT")
-    expect(page).to have_content("Updated At 04/05/2017 at 03:30AM EDT")
-    expect(page).to have_content("Signed At 04/05/2017 at 04:30AM EDT")
+    expect(page).to have_content("Created At 04/04/2017 at 09:30PM EDT")
+    expect(page).to have_content("Updated At 04/04/2017 at 10:30PM EDT")
+    expect(page).to have_content("Signed At 04/04/2017 at 11:30PM EDT")
   end
 end
