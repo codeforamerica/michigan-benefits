@@ -2,6 +2,6 @@
 
 module Medicaid
   class IntroCitizen < Step
-    step_attributes(:citizen)
+    step_attributes(:everyone_a_citizen)
   end
 end

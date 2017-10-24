@@ -13,7 +13,7 @@ RSpec.describe Medicaid::CitizensController, type: :controller do
         medicaid_application =
           create(
             :medicaid_application,
-            citizen: true,
+            everyone_a_citizen: true,
           )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -23,18 +23,51 @@ RSpec.describe Medicaid::CitizensController, type: :controller do
       end
     end
 
-    context "someone in the home is not a use citizen" do
-      it "renders :edit" do
-        medicaid_application =
-          create(
+    context "someone in the home is not a US citizen" do
+      context "multiple members in the household" do
+        it "renders :edit" do
+          medicaid_application = create(
             :medicaid_application,
-            citizen: false,
+            everyone_a_citizen: false,
           )
-        session[:medicaid_application_id] = medicaid_application.id
+          create_list(:member, 2, benefit_application: medicaid_application)
+          session[:medicaid_application_id] = medicaid_application.id
 
-        get :edit
+          get :edit
 
-        expect(response).to render_template(:edit)
+          expect(response).to render_template(:edit)
+        end
+      end
+
+      context "single member household" do
+        it "skips this page" do
+          medicaid_application = create(
+            :medicaid_application,
+            everyone_a_citizen: false,
+          )
+          create(:member, benefit_application: medicaid_application)
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+
+          expect(response).to redirect_to(subject.next_path)
+        end
+
+        it "updates the primary member" do
+          medicaid_application = create(
+            :medicaid_application,
+            everyone_a_citizen: false,
+          )
+          primary_member = create(
+            :member,
+            benefit_application: medicaid_application,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+
+          expect(primary_member.reload.citizen).to eq false
+        end
       end
     end
   end

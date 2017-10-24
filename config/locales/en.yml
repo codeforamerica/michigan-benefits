@@ -9,6 +9,11 @@ en:
         title:
           one: Are you currently a college student?
           other: Is anyone currently a college student?
+    intro_citizen:
+      edit:
+        title:
+          one: Are you currently a US citizen?
+          other: Is everyone in your household currently a US citizen?
     health_flint_water_crisis:
       edit:
         title:

@@ -3,7 +3,8 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Is everyone in your household currently a US citizen?
+      <%= t("medicaid.intro_citizen.edit.title",
+         count: current_application.members.count) %>
     </div>
     <p class="text--help text--centered">
       You don't always have to be a citizen to receive benefits. If you are not
@@ -12,5 +13,5 @@
     </p>
   </header>
 
-  <%= render 'shared/yes_no_form', step: @step, field: :citizen %>
+  <%= render 'shared/yes_no_form', step: @step, field: :everyone_a_citizen %>
 </div>
