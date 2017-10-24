@@ -18,19 +18,23 @@ module Medicaid
 
     def employed_monthly_income_attributes
       {}.tap do |income_hash|
-        current_application.number_of_jobs&.times do |count|
+        employed_number_of_jobs&.times do |count|
           income_hash["employed_monthly_income_#{count}"] =
             current_application.employed_monthly_income[count]
         end
       end
     end
 
-    def skip?
-      not_employed? && not_self_employed? && not_receiving_unemployment?
+    def employed_number_of_jobs
+      current_application.primary_member.employed_number_of_jobs
     end
 
-    def not_employed?
-      !current_application&.employed?
+    def skip?
+      nobody_employed? && not_self_employed? && not_receiving_unemployment?
+    end
+
+    def nobody_employed?
+      !current_application&.anyone_employed?
     end
 
     def not_self_employed?

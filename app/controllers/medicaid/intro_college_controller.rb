@@ -6,8 +6,8 @@ module Medicaid
       @step = step_class.new(step_params)
 
       if @step.valid?
-        if current_application.members&.count == 1
-          current_application.primary_member.update!(in_college: true)
+        if single_member_household?
+          current_application.primary_member.update!(member_attrs)
         end
 
         current_application.update!(step_params)
@@ -15,6 +15,12 @@ module Medicaid
       else
         render :edit
       end
+    end
+
+    private
+
+    def member_attrs
+      { in_college: step_params[:anyone_in_college] }
     end
   end
 end

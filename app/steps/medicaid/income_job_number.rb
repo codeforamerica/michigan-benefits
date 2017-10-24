@@ -2,9 +2,9 @@
 
 module Medicaid
   class IncomeJobNumber < Step
-    step_attributes(:number_of_jobs)
+    step_attributes(:employed_number_of_jobs)
 
-    validates :number_of_jobs,
+    validates :employed_number_of_jobs,
       presence: { message: "Make sure to answer this question" }
   end
 end

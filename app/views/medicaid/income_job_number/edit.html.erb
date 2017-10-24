@@ -2,14 +2,20 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Tell us how many jobs you currently have.</div>
+    <div class="form-card__title">
+      Tell us how many jobs you currently have.
+    </div>
   </header>
 
   <div class="form-card__content">
-    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
 
-      <%= f.mb_radio_set :number_of_jobs,
-        '',
+      <%= f.mb_radio_set :employed_number_of_jobs,
+        "",
         [
           { value: "1", label: "1 job" },
           { value: "2", label: "2 jobs" },
