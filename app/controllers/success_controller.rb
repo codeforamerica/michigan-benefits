@@ -6,7 +6,7 @@ class SuccessController < SnapStepsController
   end
 
   def next_path
-    root_path(anchor: "fold")
+    after_submit_path
   end
 
   private

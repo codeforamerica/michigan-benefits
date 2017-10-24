@@ -22,4 +22,12 @@ class SnapStepsController < StepsController
   def step_navigation
     @step_navigation ||= StepNavigation.new(self)
   end
+
+  def after_submit_path
+    if current_application.office_location.present?
+      public_send("#{current_application.office_location}_path", anchor: "fold")
+    else
+      root_path(anchor: "fold")
+    end
+  end
 end

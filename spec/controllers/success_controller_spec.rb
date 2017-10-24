@@ -119,12 +119,25 @@ RSpec.describe SuccessController do
   end
 
   describe "#update" do
-    it "redirects" do
-      params = { step: attributes }
+    context "no office location" do
+      it "redirects to the home page" do
+        params = { step: attributes }
 
-      put :update, params: params
+        put :update, params: params
 
-      expect(response).to redirect_to(root_path(anchor: "fold"))
+        expect(response).to redirect_to(root_path(anchor: "fold"))
+      end
+    end
+
+    context "office location present" do
+      it "redirects to the office specific landing page" do
+        current_app.update(office_location: "union")
+        params = { step: attributes }
+
+        put :update, params: params
+
+        expect(response).to redirect_to(union_path(anchor: "fold"))
+      end
     end
 
     context "email entered" do
