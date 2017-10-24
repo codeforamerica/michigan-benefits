@@ -5,7 +5,9 @@ module Medicaid
     private
 
     def skip?
-      not_employed? || current_application.number_of_jobs < 4
+      multi_member_household? ||
+        not_employed? ||
+        current_application.number_of_jobs < 4
     end
 
     def not_employed?

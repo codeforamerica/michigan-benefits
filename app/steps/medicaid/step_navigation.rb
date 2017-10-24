@@ -33,6 +33,7 @@ module Medicaid
         Medicaid::IncomeJobController,
         Medicaid::IncomeJobNumberController,
         Medicaid::IncomeJobNumberContinuedController,
+        Medicaid::IncomeJobNumberMemberController,
         Medicaid::IncomeSelfEmploymentController,
         Medicaid::IncomeOtherIncomeController,
         Medicaid::IncomeOtherIncomeTypeController,

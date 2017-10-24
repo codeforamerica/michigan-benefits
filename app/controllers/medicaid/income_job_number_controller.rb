@@ -21,7 +21,7 @@ module Medicaid
     end
 
     def skip?
-      not_employed?
+      multi_member_household? || not_employed?
     end
 
     def not_employed?

@@ -15,4 +15,8 @@ en:
           one: Have you been affected by the Flint Water Crisis?
           other: Have you or someone in your household been affected by the
             Flint Water Crisis?
-
+    income_job:
+      edit:
+        title:
+          one: Do you currently have a job?
+          other: Does anyone in your household currently have a job?
