@@ -5,11 +5,11 @@ module Medicaid
     private
 
     def skip?
-      not_employed? || single_member_household?
+      nobody_employed? || single_member_household?
     end
 
-    def not_employed?
-      !current_application.employed?
+    def nobody_employed?
+      !current_application.anyone_employed?
     end
 
     def member_attrs

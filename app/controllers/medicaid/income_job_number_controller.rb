@@ -2,30 +2,41 @@
 
 module Medicaid
   class IncomeJobNumberController < MedicaidStepsController
-    private
+    def update
+      @step = step_class.new(step_params)
 
-    def existing_attributes
-      HashWithIndifferentAccess.new(number_of_job_attributes)
-    end
-
-    def number_of_job_attributes
-      { number_of_jobs: number_of_jobs }
-    end
-
-    def number_of_jobs
-      if current_application.number_of_jobs&. > 4
-        4
+      if @step.valid?
+        current_application.primary_member.update!(number_of_job_attributes)
+        redirect_to(next_path)
       else
-        current_application.number_of_jobs
+        render :edit
       end
     end
 
+    private
+
     def skip?
-      multi_member_household? || not_employed?
+      multi_member_household? || nobody_employed?
     end
 
-    def not_employed?
-      !current_application&.employed?
+    def existing_attributes
+      HashWithIndifferentAccess.new(employed_number_of_jobs: number_of_jobs)
+    end
+
+    def number_of_jobs
+      if current_application.primary_member.employed_number_of_jobs&. > 4
+        4
+      else
+        current_application.primary_member.employed_number_of_jobs
+      end
+    end
+
+    def number_of_job_attributes
+      { employed_number_of_jobs: step_params[:employed_number_of_jobs] }
+    end
+
+    def nobody_employed?
+      !current_application&.anyone_employed?
     end
   end
 end

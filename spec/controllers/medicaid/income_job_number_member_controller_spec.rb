@@ -15,7 +15,7 @@ RSpec.describe Medicaid::IncomeJobNumberMemberController do
         it "renders edit" do
           medicaid_application = create(
             :medicaid_application,
-            employed: true,
+            anyone_employed: true,
             members: create_list(:member, 2),
           )
 
@@ -31,7 +31,7 @@ RSpec.describe Medicaid::IncomeJobNumberMemberController do
         it "redirects to the next page" do
           medicaid_application = create(
             :medicaid_application,
-            employed: false,
+            anyone_employed: false,
             members: create_list(:member, 2),
           )
 

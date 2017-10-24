@@ -11,8 +11,8 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <% if current_application.employed? %>
-        <% current_application.number_of_jobs.times do |count| %>
+      <% if current_application.anyone_employed? %>
+        <% current_application.primary_member.employed_number_of_jobs.times do |count| %>
           <%= f.mb_money_field "employed_monthly_income_#{count}",
             "Your Current Job (##{count + 1})",
             options: {

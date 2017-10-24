@@ -6,7 +6,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
       it "redirects to next step" do
         medicaid_application = create(
           :medicaid_application,
-          employed: false,
+          anyone_employed: false,
           self_employed: false,
           unemployment_income: false,
         )
@@ -22,7 +22,8 @@ RSpec.describe Medicaid::AmountsIncomeController do
       it "renders edit" do
         medicaid_application = create(
           :medicaid_application,
-          employed: false,
+          :with_member,
+          anyone_employed: false,
           self_employed: true,
           unemployment_income: false,
         )
@@ -38,17 +39,16 @@ RSpec.describe Medicaid::AmountsIncomeController do
   describe "#update" do
     context "client has multiple jobs" do
       it "saves the income for each job" do
+        member = create(:member, employed_number_of_jobs: 2)
         medicaid_application = create(
           :medicaid_application,
-          employed: true,
-          number_of_jobs: 2,
+          members: [member],
+          anyone_employed: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
-        post :update, {
-          params: {
-            step: { employed_monthly_income: ["111", "222"] },
-          },
+        post :update, params: {
+          step: { employed_monthly_income: ["111", "222"] },
         }
 
         medicaid_application.reload
