@@ -41,9 +41,5 @@ module Medicaid
     def member_attrs
       raise NotImplementedError
     end
-
-    def single_member_household?
-      current_application.members.count == 1
-    end
   end
 end

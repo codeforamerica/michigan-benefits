@@ -24,10 +24,6 @@ module Medicaid
       multi_member_household? || not_employed?
     end
 
-    def multi_member_household?
-      current_application.members.count != 1
-    end
-
     def not_employed?
       !current_application&.employed?
     end
