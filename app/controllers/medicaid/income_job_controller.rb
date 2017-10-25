@@ -11,13 +11,7 @@ module Medicaid
     end
 
     def member_attrs
-      { employment_status: employed_params }
-    end
-
-    def employed_params
-      if step_params[:anyone_employed] == "true"
-        "employed"
-      end
+      { employed: step_params[:anyone_employed] }
     end
   end
 end

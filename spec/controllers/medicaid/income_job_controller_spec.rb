@@ -23,7 +23,9 @@ RSpec.describe Medicaid::IncomeJobController do
 
           put :update, params: { step: { anyone_employed: true } }
 
-          expect(member.reload.employment_status).to eq "employed"
+          member.reload
+
+          expect(member).to be_employed
         end
       end
 
@@ -39,7 +41,9 @@ RSpec.describe Medicaid::IncomeJobController do
 
           put :update, params: { step: { anyone_employed: false } }
 
-          expect(member.reload.employment_status).to eq nil
+          member.reload
+
+          expect(member).to_not be_employed
         end
       end
     end
@@ -56,7 +60,9 @@ RSpec.describe Medicaid::IncomeJobController do
 
         put :update, params: { step: { anyone_employed: true } }
 
-        expect(member.reload.employment_status).to eq nil
+        member.reload
+
+        expect(member).to_not be_employed
       end
     end
   end

@@ -12,7 +12,7 @@
       <% @step.members.each do |member| %>
         <fieldset class="form-group">
           <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
-            <% if member.employed? %>
+            <% if member.employment_status == "employed" %>
               <%= render "header", member: member %>
               <%= ff.mb_input_field :employed_employer_name,
                   "Employer name" %>
