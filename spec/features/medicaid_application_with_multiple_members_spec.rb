@@ -30,8 +30,20 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
     end
 
+    on_page "Introduction" do
+      click_on "Add a member"
+    end
+
+    on_page "Introduction" do
+      fill_in "What is their first name?", with: "Joel"
+      fill_in "What is their last name?", with: "Tester"
+      select_radio(question: "What is their gender?", answer: "Male")
+      click_on "Next"
+    end
+
     expect(page).to have_content("Jessie Tester")
     expect(page).to have_content("Christa Tester")
+    expect(page).to have_content("Joel Tester")
     click_on "Next"
 
     on_page "Introduction" do
@@ -68,6 +80,7 @@ RSpec.feature "Medicaid app" do
       )
       uncheck "Jessie Tester"
       uncheck "Christa Tester"
+      uncheck "Joel Tester"
       click_on "Next"
     end
 
@@ -75,6 +88,7 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content("Make sure you select at least one person")
       check "Jessie Tester"
       check "Christa Tester"
+      uncheck "Joel Tester"
       click_on "Next"
     end
 
@@ -89,6 +103,12 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Tell us who is currently enrolled in a health insurance plan.",
       )
+      expect(page).to have_content("Jessie Tester")
+      expect(page).to have_content("Christa Tester")
+      expect(page).to have_content(
+        "You've already indicated that Joel Tester is not in need of" \
+        " additional health coverage.",
+      )
       click_on "Next"
     end
 
@@ -102,7 +122,9 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Tell us what insurance plan each person is enrolled in.",
       )
+      expect(page).not_to have_content("Joel Tester")
       expect(page).not_to have_content("Christa Tester")
+      expect(page).to have_content("Jessie Tester")
       click_on "Next"
     end
 

@@ -7,8 +7,16 @@ module Medicaid
       :members,
     )
 
+    def members_needing_insurance
+      members.select(&:requesting_health_insurance)
+    end
+
+    def members_not_needing_insurance
+      members.reject(&:requesting_health_insurance)
+    end
+
     def valid?
-      if members.select(&:is_insured).any?
+      if members_needing_insurance.select(&:is_insured).any?
         true
       else
         errors.add(

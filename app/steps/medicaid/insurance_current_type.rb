@@ -7,12 +7,12 @@ module Medicaid
       :members,
     )
 
-    def insured_members
-      members.select(&:is_insured)
+    def insured_members_requesting_insurance
+      members.select(&:requesting_health_insurance).select(&:is_insured)
     end
 
     def valid?
-      if insured_members.all? { |m| m.insurance_type.present? }
+      if requesting_members_valid?
         true
       else
         errors.add(
@@ -25,8 +25,14 @@ module Medicaid
 
     private
 
+    def requesting_members_valid?
+      insured_members_requesting_insurance.all? do |m|
+        m.insurance_type.present?
+      end
+    end
+
     def error_message
-      if members.select(&:is_insured).count == 1
+      if insured_members_requesting_insurance.count == 1
         "Please select a plan"
       else
         "Please select a plan for each person"

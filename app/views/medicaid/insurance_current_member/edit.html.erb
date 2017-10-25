@@ -5,13 +5,20 @@
     <div class="form-card__title">
       Tell us who is currently enrolled in a health insurance plan.
     </div>
+    <% if @step.members_not_needing_insurance.present? %>
+      <p class="text--help text--centered">
+        You've already indicated that <%=@step.members_not_needing_insurance.map(&:full_name).to_sentence %>
+        <%= @step.members_not_needing_insurance.count == 1 ? "is" : "are" %>
+        not in need of additional health coverage.
+      </p>
+    <% end %>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
         <%= f.mb_form_errors :is_insured %>
         <fieldset class="form-group">
-          <% @step.members.each do |member| %>
+          <% @step.members_needing_insurance.each do |member| %>
               <%= f.fields_for("members[]", member) do |ff| %>
                   <%= ff.mb_checkbox(
                           :is_insured,

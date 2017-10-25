@@ -39,27 +39,62 @@ RSpec.describe Medicaid::InsuranceCurrentType do
     end
   end
 
-  describe "#insured_members" do
-    context "with insured members" do
-      it "returns all insured" do
-        insured_member = create(:member, is_insured: true)
-        uninsured_member = create(:member, is_insured: false)
+  describe "#insured_members_needing_insurance" do
+    context "with insured members needing insurance" do
+      it "returns only insured members needing insurance" do
+        insured_member = create(:member,
+                                is_insured: true,
+                                requesting_health_insurance: true)
+
+        abstaining_member = create(:member,
+                                   is_insured: true,
+                                   requesting_health_insurance: false)
+
+        uninsured_member = create(:member,
+                                  is_insured: false,
+                                  requesting_health_insurance: true)
+
+        step = Medicaid::InsuranceCurrentType.new(
+          members: [
+            insured_member,
+            abstaining_member,
+            uninsured_member,
+          ],
+        )
+
+        expect(step.insured_members_requesting_insurance).to eq(
+          [insured_member],
+        )
+      end
+    end
+
+    context "with insured members not needing insurance" do
+      it "returns an empty array" do
+        insured_member = create(:member,
+                                is_insured: true,
+                                requesting_health_insurance: false)
+
+        uninsured_member = create(:member,
+                                  is_insured: false,
+                                  requesting_health_insurance: true)
 
         step = Medicaid::InsuranceCurrentType.new(
           members: [insured_member, uninsured_member],
         )
 
-        expect(step.insured_members).to eq([insured_member])
+        expect(step.insured_members_requesting_insurance).to eq([])
       end
     end
 
     context "without insured members" do
       it "returns an empty array" do
         step = Medicaid::InsuranceCurrentType.new(
-          members: create_list(:member, 2, is_insured: false),
+          members: create_list(:member, 2,
+                               is_insured: false,
+                               requesting_health_insurance: true),
         )
 
-        expect(step.insured_members).to eq([])
+        expect(step.insured_members_requesting_insurance).to eq([])
       end
     end
   end
