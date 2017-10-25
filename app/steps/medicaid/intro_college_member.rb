@@ -11,10 +11,7 @@ module Medicaid
       if members.select(&:in_college?).any?
         true
       else
-        errors.add(
-          :in_college,
-            "Make sure you select at least one person",
-        )
+        errors.add(:in_college, "Make sure you select at least one person")
         false
       end
     end

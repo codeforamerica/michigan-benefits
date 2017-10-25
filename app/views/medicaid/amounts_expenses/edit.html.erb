@@ -17,8 +17,7 @@
           "College Loan Interest (average monthly expense)" %>
       <% end %>
 
-      <% if current_application.self_employed? %>
-        <%= f.hidden_field :self_employed %>
+      <% if current_application.anyone_self_employed? %>
         <%= f.mb_money_field :self_employment_expenses,
           "Self Employment (average monthly expense)",
           notes: ["If you have no self-employment expenses, please indicate that by entering 0"] %>

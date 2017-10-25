@@ -7,7 +7,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
         medicaid_application = create(
           :medicaid_application,
           anyone_employed: false,
-          self_employed: false,
+          anyone_self_employed: false,
           unemployment_income: false,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -24,7 +24,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
           :medicaid_application,
           :with_member,
           anyone_employed: false,
-          self_employed: true,
+          anyone_self_employed: true,
           unemployment_income: false,
         )
         session[:medicaid_application_id] = medicaid_application.id

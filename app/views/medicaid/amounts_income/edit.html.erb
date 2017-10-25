@@ -22,7 +22,7 @@
         <% end %>
       <% end %>
 
-      <% if current_application.self_employed? %>
+      <% if current_application.anyone_self_employed? %>
         <%= f.mb_money_field :self_employed_monthly_income,
           "Your Self-Employment (average monthly income)" %>
       <% end %>

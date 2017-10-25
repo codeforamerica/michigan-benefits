@@ -10,13 +10,12 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
   describe "#edit" do
     context "client not self employed with no student loans or child support" do
       it "redirects to next step" do
-        medicaid_application =
-          create(
-            :medicaid_application,
-            pay_student_loan_interest: false,
-            pay_child_support_alimony_arrears: false,
-            self_employed: false,
-          )
+        medicaid_application = create(
+          :medicaid_application,
+          pay_student_loan_interest: false,
+          pay_child_support_alimony_arrears: false,
+          anyone_self_employed: false,
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -27,12 +26,11 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
 
     context "client with a student loan" do
       it "renders edit" do
-        medicaid_application =
-          create(
-            :medicaid_application,
-            pay_student_loan_interest: true,
-            pay_child_support_alimony_arrears: false,
-          )
+        medicaid_application = create(
+          :medicaid_application,
+          pay_student_loan_interest: true,
+          pay_child_support_alimony_arrears: false,
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -43,12 +41,11 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
 
     context "client with child support costs" do
       it "renders edit" do
-        medicaid_application =
-          create(
-            :medicaid_application,
-            pay_student_loan_interest: false,
-            pay_child_support_alimony_arrears: true,
-          )
+        medicaid_application = create(
+          :medicaid_application,
+          pay_student_loan_interest: false,
+          pay_child_support_alimony_arrears: true,
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -59,13 +56,12 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
 
     context "client is self employed" do
       it "renders edit" do
-        medicaid_application =
-          create(
-            :medicaid_application,
-            pay_student_loan_interest: false,
-            pay_child_support_alimony_arrears: false,
-            self_employed: true,
-          )
+        medicaid_application = create(
+          :medicaid_application,
+          pay_student_loan_interest: false,
+          pay_child_support_alimony_arrears: false,
+          anyone_self_employed: true,
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit

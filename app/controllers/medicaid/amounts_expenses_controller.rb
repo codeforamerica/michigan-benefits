@@ -15,7 +15,7 @@ module Medicaid
     end
 
     def no_self_employment?
-      !current_application&.self_employed?
+      !current_application&.anyone_self_employed?
     end
 
     def no_child_support_alimony_arrears?

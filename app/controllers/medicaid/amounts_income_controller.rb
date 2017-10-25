@@ -38,7 +38,7 @@ module Medicaid
     end
 
     def not_self_employed?
-      !current_application&.self_employed?
+      !current_application&.anyone_self_employed?
     end
 
     def not_receiving_unemployment?
