@@ -137,7 +137,16 @@ RSpec.feature "Medicaid app" do
       select_job_number(full_name: "Christa Tester", job_number: "2 jobs")
       click_on "Next"
 
-      expect(page).to have_content("Are you self-employed?")
+      expect(page).to have_content("Is anyone in the household self-employed?")
+      click_on "Yes"
+
+      expect(page).to have_content(
+        "Tell us who in the household self-employed.",
+      )
+      check "Jessie Tester"
+      click_on "Next"
+
+      expect(page).to have_content("Do you get income that's not from a job?")
     end
   end
 end

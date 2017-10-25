@@ -49,7 +49,7 @@ class Member < ApplicationRecord
   end
 
   def monthly_income
-    if self_employed?
+    if employment_status == "self_employed"
       self_employed_monthly_income
     elsif employed?
       employed_monthly_income
@@ -60,10 +60,6 @@ class Member < ApplicationRecord
 
   def employed?
     employment_status == "employed"
-  end
-
-  def self_employed?
-    employment_status == "self_employed"
   end
 
   def not_employed?

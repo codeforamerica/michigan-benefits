@@ -2,6 +2,6 @@
 
 module Medicaid
   class IncomeSelfEmployment < Step
-    step_attributes(:self_employed)
+    step_attributes(:anyone_self_employed)
   end
 end

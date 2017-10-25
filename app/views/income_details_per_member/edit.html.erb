@@ -28,7 +28,7 @@
                   "How often are you paid that amount?",
                   Member::PAYMENT_INTERVALS,
                   { layout: "inline", optional: true } %>
-              <% elsif member.self_employed? %>
+              <% elsif member.employment_status == "self_employed" %>
                 <%= render "header", member: member %>
                 <%= ff.mb_input_field :self_employed_profession,
                     "Type of work",

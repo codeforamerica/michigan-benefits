@@ -30,3 +30,8 @@ en:
         title:
           one: Do you currently have a job?
           other: Does anyone in your household currently have a job?
+    income_self_employment:
+      edit:
+        title:
+          one: Are you self-employed?
+          other: Is anyone in the household self-employed?

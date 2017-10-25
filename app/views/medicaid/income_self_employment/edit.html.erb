@@ -2,12 +2,15 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Are you self-employed?</div>
+    <div class="form-card__title">
+      <%= t("medicaid.income_self_employment.edit.title",
+        count: current_application.members.count) %>
+    </div>
     <p class="text--help text--centered">
       You're self employed if you own your own business or perform odd jobs.
       We'll ask you about the specific amounts you earn later.
     </p>
   </header>
 
-  <%= render "shared/yes_no_form", step: @step, field: :self_employed %>
+  <%= render "shared/yes_no_form", step: @step, field: :anyone_self_employed %>
 </div>
