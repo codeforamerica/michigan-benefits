@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class HouseholdMemberQuestionsPage < BasePage
-      TITLE = "Household Member Questions"
+      def self.title
+        "Household Member Questions"
+      end
 
       delegate(
         :anyone_disabled?,

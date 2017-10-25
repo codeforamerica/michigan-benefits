@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class RealPropertiesPage < BasePage
-      TITLE = "Real Properties"
+      def self.title
+        "Real Properties"
+      end
 
       def setup; end
 

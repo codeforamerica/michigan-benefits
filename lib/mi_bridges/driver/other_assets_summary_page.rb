@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class OtherAssetsSummaryPage < ClickNextPage
-      TITLE = "Other Assets Summary"
+      def self.title
+        "Other Assets Summary"
+      end
     end
   end
 end

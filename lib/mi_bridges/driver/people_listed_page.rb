@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class PeopleListedPage < BasePage
-      TITLE = "People Listed On Your Application"
+      def self.title
+        "People Listed On Your Application"
+      end
 
       def setup
         @member = if for_next_household_member?

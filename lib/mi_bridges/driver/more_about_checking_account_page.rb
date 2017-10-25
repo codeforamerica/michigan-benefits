@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class MoreAboutCheckingAccountPage < BasePage
-      TITLE = /More About (.*)'s Checking Account/
+      def self.title
+        /More About (.*)'s Checking Account/
+      end
 
       def setup; end
 

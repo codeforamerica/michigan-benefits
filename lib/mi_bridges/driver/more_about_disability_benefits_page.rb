@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class MoreAboutDisabilityBenefitsPage < BasePage
-      TITLE = /More About (.*)'s Disability Benefits/
+      def self.title
+        /More About (.*)'s Disability Benefits/
+      end
 
       def setup; end
 

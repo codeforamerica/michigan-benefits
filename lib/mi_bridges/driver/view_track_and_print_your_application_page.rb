@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class ViewTrackAndPrintYourApplicationPage < ClickNextPage
-      TITLE = "View, Track And Print Your Application"
+      def self.title
+        "View, Track And Print Your Application"
+      end
 
       def setup
         snap_application.driver_application.update(

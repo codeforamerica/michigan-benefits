@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class MoreAboutRealPropertyPage < ClickNextPage
-      TITLE = /More About (.*)'s Other Real Property/
+      def self.title
+        /More About (.*)'s Other Real Property/
+      end
     end
   end
 end

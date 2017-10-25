@@ -1,7 +1,9 @@
 module MiBridges
   class Driver
     class OtherInformationSummaryPage < ClickNextPage
-      TITLE = "Other Information Summary".freeze
+      def self.title
+        "Other Information Summary"
+      end
     end
   end
 end

@@ -1,7 +1,9 @@
 module MiBridges
   class Driver
     class AbsentParentDetailsPage < BasePage
-      TITLE = "Absent Parent Details".freeze
+      def self.title
+        "Absent Parent Details"
+      end
 
       def setup; end
 

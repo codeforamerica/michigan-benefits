@@ -1,7 +1,9 @@
 module MiBridges
   class Driver
     class FinishPage < ClickNextPage
-      TITLE = "Getting Expedited Food Assistance Program Benefits".freeze
+      def self.title
+        "Getting Expedited Food Assistance Program Benefits"
+      end
     end
   end
 end

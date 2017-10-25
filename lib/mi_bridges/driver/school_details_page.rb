@@ -1,7 +1,9 @@
 module MiBridges
   class Driver
     class SchoolDetailsPage < ClickNextPage
-      TITLE = "School Enrollment".freeze
+      def self.title
+        "School Enrollment"
+      end
 
       def fill_in_required_fields
         choose_enrollment_time_for(snap_application.primary_member)

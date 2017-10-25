@@ -1,7 +1,9 @@
 module MiBridges
   class Driver
     class AbsentParentSummaryPage < ClickNextPage
-      TITLE = "Absent Parent Summary".freeze
+      def self.title
+        "Absent Parent Summary"
+      end
     end
   end
 end

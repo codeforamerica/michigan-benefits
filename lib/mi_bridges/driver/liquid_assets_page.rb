@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class LiquidAssetsPage < BasePage
-      TITLE = "Liquid Assets"
+      def self.title
+        "Liquid Assets"
+      end
 
       delegate(
         :financial_accounts,

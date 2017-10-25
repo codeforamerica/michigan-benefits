@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class DisabilityOrBlindnessReviewPage < ClickNextPage
-      TITLE = "Review Your Answers: Disability or Blindness"
+      def self.title
+        "Review Your Answers: Disability or Blindness"
+      end
     end
   end
 end

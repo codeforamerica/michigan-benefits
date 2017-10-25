@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class JobIncomeInformationPage < BasePage
-      TITLE = "Job Income Information"
+      def self.title
+        "Job Income Information"
+      end
 
       delegate :primary_member, to: :snap_application
       delegate :employment_status, to: :primary_member

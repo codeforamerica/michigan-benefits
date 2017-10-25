@@ -1,7 +1,9 @@
 module MiBridges
   class Driver
     class AdditionalInformationPage < ClickNextPage
-      TITLE = "Additional Information".freeze
+      def self.title
+        "Additional Information"
+      end
 
       def fill_in_required_fields
         fill_in(

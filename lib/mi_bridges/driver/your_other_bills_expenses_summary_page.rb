@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class YourOtherBillsExpensesSummaryPage < ClickNextPage
-      TITLE = "Other Bills / Expenses Summary"
+      def self.title
+        "Other Bills / Expenses Summary"
+      end
     end
   end
 end

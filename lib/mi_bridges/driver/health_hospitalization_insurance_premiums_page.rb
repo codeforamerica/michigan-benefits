@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class HealthHospitalizationInsurancePremiumsPage < ClickNextPage
-      TITLE = /(.*)'s Health\/hospitalization insurance premiums/
+      def self.title
+        /(.*)'s Health\/hospitalization insurance premiums/
+      end
     end
   end
 end

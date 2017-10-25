@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class MailingAddressPage < BasePage
-      TITLE = "Mailing Address"
+      def self.title
+        "Mailing Address"
+      end
 
       delegate :mailing_address, to: :snap_application
       delegate(

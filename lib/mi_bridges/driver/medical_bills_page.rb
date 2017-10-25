@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class MedicalBillsPage < BasePage
-      TITLE = "Medical Bills"
+      def self.title
+        "Medical Bills"
+      end
 
       delegate(
         :medical_expenses,

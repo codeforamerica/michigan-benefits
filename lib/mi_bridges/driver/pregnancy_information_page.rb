@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class PregnancyInformationPage < BasePage
-      TITLE = "Pregnancy Information"
+      def self.title
+        "Pregnancy Information"
+      end
 
       delegate :members, to: :snap_application
 

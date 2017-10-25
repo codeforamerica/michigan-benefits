@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class MoreAboutPensionOrRetirementPage < BasePage
-      TITLE = /More About (.*)'s Pension or Retirement/
+      def self.title
+        /More About (.*)'s Pension or Retirement/
+      end
 
       def setup; end
 
