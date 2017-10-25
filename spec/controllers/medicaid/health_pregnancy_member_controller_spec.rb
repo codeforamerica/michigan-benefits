@@ -41,24 +41,6 @@ RSpec.describe Medicaid::HealthPregnancyMemberController, type: :controller do
 
         expect(response).to redirect_to(subject.next_path)
       end
-
-      it "updates the single female member `new_mom` column" do
-        medicaid_application = create(
-          :medicaid_application,
-          anyone_new_mom: true,
-        )
-        member = create(
-          :member,
-          sex: "female",
-          new_mom: nil,
-          benefit_application: medicaid_application,
-        )
-        session[:medicaid_application_id] = medicaid_application.id
-
-        get :edit
-
-        expect(member.reload.new_mom).to eq true
-      end
     end
 
     context "there are no female members" do

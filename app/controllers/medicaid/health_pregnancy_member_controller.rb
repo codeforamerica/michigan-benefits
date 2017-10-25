@@ -5,9 +5,7 @@ module Medicaid
     private
 
     def skip?
-      no_pregnancies? ||
-        only_males? ||
-        (single_female_member_is_pregnant? && update_primary_female_member)
+      no_pregnancies? || only_males? || single_female_member_is_pregnant?
     end
 
     def step_class
@@ -36,12 +34,6 @@ module Medicaid
 
     def application_has_a_new_mom?
       current_application.anyone_new_mom?
-    end
-
-    def update_primary_female_member
-      current_application.primary_member.update(new_mom: true)
-
-      true
     end
   end
 end
