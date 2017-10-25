@@ -10,7 +10,7 @@ module Medicaid
 
     def all_males?
       current_application.members.all? do |member|
-        member.sex == "Male"
+        member.sex == "male"
       end
     end
   end

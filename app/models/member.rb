@@ -9,7 +9,16 @@ class Member < ApplicationRecord
     "Other",
   ].freeze
 
-  EMPLOYMENT_STATUSES = ["employed", "self_employed", "not_employed"].freeze
+  EMPLOYMENT_STATUSES = %w[
+    employed
+    self_employed
+    not_employed
+  ].freeze
+
+  SEXES = %w[
+    male
+    female
+  ].freeze
 
   belongs_to :benefit_application, polymorphic: true
 
@@ -19,6 +28,10 @@ class Member < ApplicationRecord
 
   validates :employment_status,
     inclusion: { in: EMPLOYMENT_STATUSES },
+    allow_nil: true
+
+  validates :sex,
+    inclusion: { in: SEXES },
     allow_nil: true
 
   attribute :ssn

@@ -13,7 +13,7 @@ RSpec.describe Medicaid::HealthPregnancyController, type: :controller do
         medicaid_application = create(:medicaid_application)
         create(
           :member,
-          sex: "Male",
+          sex: "male",
           benefit_application: medicaid_application,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -29,7 +29,7 @@ RSpec.describe Medicaid::HealthPregnancyController, type: :controller do
         medicaid_application = create(:medicaid_application)
         create(
           :member,
-          sex: "Female",
+          sex: "female",
           benefit_application: medicaid_application,
         )
         session[:medicaid_application_id] = medicaid_application.id
