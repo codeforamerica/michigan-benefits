@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025184755) do
+ActiveRecord::Schema.define(version: 20171025225850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20171025184755) do
     t.boolean "anyone_employed"
     t.boolean "anyone_in_college"
     t.boolean "anyone_new_mom"
+    t.boolean "anyone_other_income", default: false
     t.boolean "anyone_self_employed", default: false
     t.datetime "birthday"
     t.boolean "caretaker_or_parent"
@@ -105,7 +106,6 @@ ActiveRecord::Schema.define(version: 20171025184755) do
     t.boolean "flint_water_crisis"
     t.boolean "homeless"
     t.boolean "income_alimony"
-    t.boolean "income_not_from_job"
     t.boolean "income_pension"
     t.boolean "income_retirement"
     t.boolean "income_social_security"

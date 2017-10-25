@@ -30,6 +30,11 @@ en:
         title:
           one: Do you currently have a job?
           other: Does anyone in your household currently have a job?
+    income_other_income:
+      edit:
+        title:
+          one: Do you get income that’s not from a job?
+          other: Does anyone in the household get income that’s not from a job?
     income_self_employment:
       edit:
         title:
