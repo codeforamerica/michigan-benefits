@@ -2,22 +2,13 @@
 
 module Medicaid
   class IntroCollegeController < MedicaidStepsController
-    def update
-      @step = step_class.new(step_params)
+    private
 
-      if @step.valid?
-        if single_member_household?
-          current_application.primary_member.update!(member_attrs)
-        end
-
-        current_application.update!(step_params)
-        redirect_to(next_path)
-      else
-        render :edit
+    def after_successful_update_hook
+      if single_member_household?
+        current_application.primary_member.update!(member_attrs)
       end
     end
-
-    private
 
     def member_attrs
       { in_college: step_params[:anyone_in_college] }
