@@ -38,7 +38,7 @@ $color-yellow:        #ffc61e;
 $color-bright-yellow: #ff0;
 $color-light-sky:     lighten($color-sky, 50%);
 $color-dark-sky:      shade($color-sky, 15%);
-
+$color-darkest-sky:      shade($color-sky, 30%);
 
 // Breakpoints
 $mobile-up:           481px;
