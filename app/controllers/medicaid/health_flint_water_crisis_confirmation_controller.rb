@@ -2,6 +2,10 @@
 
 module Medicaid
   class HealthFlintWaterCrisisConfirmationController < MedicaidStepsController
+    def step_class
+      NullStep
+    end
+
     private
 
     def skip?

@@ -30,4 +30,23 @@ RSpec.describe StepsController do
       expect(response).to render_template(:index)
     end
   end
+
+  describe ".step_class" do
+    context "when step exists" do
+      it "returns the correct step class" do
+        expect(StepsController.step_class).to eq Step
+      end
+    end
+
+    context "when step does not exist" do
+      it "fails with a descriptive error message" do
+        class SomeRandomController < StepsController; end
+
+        expect { SomeRandomController.step_class }.to raise_error(
+          MiBridges::Errors::StepNotFoundError,
+          "Step not found: SomeRandom",
+        )
+      end
+    end
+  end
 end
