@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class HealthRecentPregnancyController < Medicaid::ManyMemberStepsController
+  class HealthPregnancyMemberController < Medicaid::ManyMemberStepsController
     private
 
     def skip?

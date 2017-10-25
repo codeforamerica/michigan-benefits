@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Medicaid::HealthRecentPregnancyController, type: :controller do
+RSpec.describe Medicaid::HealthPregnancyMemberController, type: :controller do
   describe "#next_path" do
     it "is the  path" do
       expect(subject.next_path).to eq(
