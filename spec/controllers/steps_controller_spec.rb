@@ -44,7 +44,7 @@ RSpec.describe StepsController do
 
         expect { SomeRandomController.step_class }.to raise_error(
           MiBridges::Errors::StepNotFoundError,
-          "Step not found: SomeRandom",
+          /Step not found: SomeRandom/,
         )
       end
     end

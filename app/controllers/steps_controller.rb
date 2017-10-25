@@ -44,7 +44,9 @@ class StepsController < ApplicationController
     controller_path.classify.constantize
   rescue NameError
     raise MiBridges::Errors::StepNotFoundError,
-      "Step not found: #{controller_path.classify}"
+      "Step not found: #{controller_path.classify}. "\
+      "Create the step or override `<controller>#step_class` "\
+      "so that it returns `NullStep`"
   end
 
   def next_path(params = {})
