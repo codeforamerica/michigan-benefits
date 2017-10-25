@@ -12,7 +12,10 @@ RSpec.describe Medicaid::HealthRecentPregnancyController, type: :controller do
   describe "#edit" do
     context "no one is/was pregnant" do
       it "redirects to the next page" do
-        medicaid_application = create(:medicaid_application, new_mom: false)
+        medicaid_application = create(
+          :medicaid_application,
+          anyone_new_mom: false,
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -25,7 +28,7 @@ RSpec.describe Medicaid::HealthRecentPregnancyController, type: :controller do
       it "redirects to the next page" do
         medicaid_application = create(
           :medicaid_application,
-          new_mom: true,
+          anyone_new_mom: true,
         )
         create(
           :member,
@@ -42,7 +45,7 @@ RSpec.describe Medicaid::HealthRecentPregnancyController, type: :controller do
       it "updates the single female member `new_mom` column" do
         medicaid_application = create(
           :medicaid_application,
-          new_mom: true,
+          anyone_new_mom: true,
         )
         member = create(
           :member,
@@ -76,7 +79,10 @@ RSpec.describe Medicaid::HealthRecentPregnancyController, type: :controller do
 
     context "members include females" do
       it "renders :edit" do
-        medicaid_application = create(:medicaid_application, new_mom: true)
+        medicaid_application = create(
+          :medicaid_application,
+          anyone_new_mom: true,
+        )
         create_list(
           :member,
           2,

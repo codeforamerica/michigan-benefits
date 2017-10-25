@@ -19,7 +19,7 @@ module Medicaid
     end
 
     def no_pregnancies?
-      !current_application.new_mom?
+      !current_application.anyone_new_mom?
     end
 
     def only_males?
@@ -35,7 +35,7 @@ module Medicaid
     end
 
     def application_has_a_new_mom?
-      current_application.new_mom?
+      current_application.anyone_new_mom?
     end
 
     def update_primary_female_member
