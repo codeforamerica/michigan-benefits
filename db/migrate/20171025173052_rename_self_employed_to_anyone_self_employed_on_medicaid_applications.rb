@@ -2,7 +2,6 @@ class RenameSelfEmployedToAnyoneSelfEmployedOnMedicaidApplications < ActiveRecor
   def up
     add_column :medicaid_applications, :anyone_self_employed, :boolean
     change_column_default :medicaid_applications, :anyone_self_employed, false
-    commit_db_transaction
 
     safety_assured do
       execute "UPDATE medicaid_applications SET anyone_self_employed=self_employed"
