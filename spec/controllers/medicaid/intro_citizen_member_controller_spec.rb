@@ -40,7 +40,20 @@ RSpec.describe Medicaid::IntroCitizenMemberController, type: :controller do
       end
 
       context "single member household" do
-        it "skips this page" do
+        it "skips this page if they are a citizen" do
+          medicaid_application = create(
+            :medicaid_application,
+            everyone_a_citizen: true,
+          )
+          create(:member, benefit_application: medicaid_application)
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+
+          expect(response).to redirect_to(subject.next_path)
+        end
+
+        it "skips this page if they are not a citizen" do
           medicaid_application = create(
             :medicaid_application,
             everyone_a_citizen: false,
@@ -51,22 +64,6 @@ RSpec.describe Medicaid::IntroCitizenMemberController, type: :controller do
           get :edit
 
           expect(response).to redirect_to(subject.next_path)
-        end
-
-        it "updates the primary member" do
-          medicaid_application = create(
-            :medicaid_application,
-            everyone_a_citizen: false,
-          )
-          primary_member = create(
-            :member,
-            benefit_application: medicaid_application,
-          )
-          session[:medicaid_application_id] = medicaid_application.id
-
-          get :edit
-
-          expect(primary_member.reload.citizen).to eq false
         end
       end
     end
