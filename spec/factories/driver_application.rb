@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :driver_application do
     user_id "JohnDoe"
     password "password"

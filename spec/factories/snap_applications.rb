@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :snap_application do
     email "test@example.com"
     signature "Mr. RJD2"

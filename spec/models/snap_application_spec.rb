@@ -168,33 +168,33 @@ RSpec.describe SnapApplication do
   describe "#faxed?" do
     context "when no fax attempts have been made" do
       it "returns false" do
-        snap_application = FactoryGirl.create(:snap_application)
+        snap_application = create(:snap_application)
         expect(snap_application).to_not be_faxed
       end
     end
 
     context "when a failed fax attempt has been made" do
       it "returns false" do
-        snap_application = FactoryGirl.create(:snap_application,
-          exports: [FactoryGirl.create(:export, :faxed, :failed)])
+        snap_application = create(:snap_application,
+          exports: [create(:export, :faxed, :failed)])
         expect(snap_application).to_not be_faxed
       end
     end
 
     context "when a successful fax attempt has been made" do
       it "returns true" do
-        snap_application = FactoryGirl.create(:snap_application,
-          exports: [FactoryGirl.create(:export, :faxed, :succeeded)])
+        snap_application = create(:snap_application,
+          exports: [create(:export, :faxed, :succeeded)])
         expect(snap_application).to be_faxed
       end
     end
 
     context "when several fax attempts have led to mixed results" do
       it "returns true" do
-        snap_application = FactoryGirl.create(:snap_application,
-          exports: [FactoryGirl.create(:export, :faxed, :failed),
-                    FactoryGirl.create(:export, :faxed, :succeeded),
-                    FactoryGirl.create(:export, :faxed, :failed)])
+        snap_application = create(:snap_application,
+          exports: [create(:export, :faxed, :failed),
+                    create(:export, :faxed, :succeeded),
+                    create(:export, :faxed, :failed)])
         expect(snap_application).to be_faxed
       end
     end
