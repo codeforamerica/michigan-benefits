@@ -36,12 +36,27 @@
   }
 
   &__title {
+    @include margin(0 0 0 10px);
+    flex: 1;
     font-size: $font-size-small;
-    margin: 0;
-    margin-left: 10px;
+    text-align: left;
   }
 
   &__title--centered {
     justify-content: center;
+  }
+
+  &__benefit-label {
+    @include margin(0 $padding-med 0 0);
+    display: none;
+    font-size: $font-size-smallest;
+
+    @include media($mobile-up) {
+      display: flex;
+    }
+
+    @include media($tablet-up) {
+      font-size: $font-size-small;
+    }
   }
 }
