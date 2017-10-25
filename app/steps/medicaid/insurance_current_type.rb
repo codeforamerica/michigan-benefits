@@ -7,15 +7,29 @@ module Medicaid
       :members,
     )
 
+    def insured_members
+      members.select(&:is_insured)
+    end
+
     def valid?
-      if members.select(&:insurance_type).any?
+      if insured_members.all? { |m| m.insurance_type.present? }
         true
       else
         errors.add(
           :insurance_type,
-          "Please select a plan",
+          error_message,
         )
         false
+      end
+    end
+
+    private
+
+    def error_message
+      if members.select(&:is_insured).count == 1
+        "Please select a plan"
+      else
+        "Please select a plan for each person"
       end
     end
   end

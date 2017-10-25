@@ -34,5 +34,11 @@ module FeatureHelper
     end
   end
 
+  def click_back
+    within(".step-header") do
+      find(".icon-arrow_back").click
+    end
+  end
+
   alias on_pages on_page
 end

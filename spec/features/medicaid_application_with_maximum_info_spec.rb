@@ -111,7 +111,7 @@ RSpec.feature "Medicaid app" do
       fill_in "Your Unemployment", with: 100
       click_on "Next"
 
-      find(".icon-arrow_back").click
+      click_back
 
       expect(find("#step_employed_monthly_income_0").value).to eq "100"
       expect(find("#step_employed_monthly_income_1").value).to eq "50"
