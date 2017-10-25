@@ -14,6 +14,7 @@
       url: current_path,
       method: :put do |f| %>
 
+      <%= f.mb_form_errors :citizen %>
       <fieldset class="form-group">
         <% @step.members.each do |member| %>
           <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>

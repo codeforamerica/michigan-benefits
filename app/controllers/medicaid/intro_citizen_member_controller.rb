@@ -8,10 +8,6 @@ module Medicaid
       everyone_a_citizen? || single_member_household?
     end
 
-    def step_class
-      Medicaid::Citizen
-    end
-
     def member_attrs
       %i[citizen]
     end
