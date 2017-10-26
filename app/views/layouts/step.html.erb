@@ -11,7 +11,7 @@
       <%= content_for :header_title %>
     </h4>
     <h4 class="step-header__benefit-label">
-      Food Assistance Application
+      <%= current_application&.application_title %>
     </h4>
   </div>
   <%= render 'shared/debug' %>
