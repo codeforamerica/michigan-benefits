@@ -58,7 +58,7 @@ RSpec.feature "Medicaid app" do
       )
       click_on "Yes"
 
-      expect(page).to have_content("We've noted this on your application.")
+      expect(page).to have_content("We’ve noted this on your application.")
       click_on "Next"
     end
 
@@ -148,7 +148,7 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
 
       expect(page).to have_content(
-        "Provide your Social Security Number and Date of Birth if you're ready",
+        "Provide your Social Security Number and Date of Birth if you’re ready",
       )
       click_on "Yes"
 

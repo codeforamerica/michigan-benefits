@@ -6,7 +6,7 @@
       Tell us about the assets and money you have on hand.
     </div>
     <p class="text--help text--centered">
-      If you don't know the answer to a question, that's okay.
+      If you don’t know the answer to a question, that’s okay.
     </p>
   </header>
 
@@ -19,11 +19,11 @@
       <%= f.mb_radio_set :real_estate_income,
         "Does your household own any property or real estate?",
         [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
-        notes: ["You should include your primary home. But don't worry - it won't be counted against you."] %>
+        notes: ["You should include your primary home. But don’t worry - it won’t be counted against you."] %>
       <%= f.mb_radio_set :vehicle_income,
         "Does your household own any vehicles?",
         [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
-        notes: ["Don't worry - your first vehicle will not be counted against you."] %>
+        notes: ["Don’t worry - your first vehicle will not be counted against you."] %>
       <%= render 'shared/next_step' %>
     <% end %>
   </div>

@@ -121,7 +121,7 @@ RSpec.feature "Medicaid app" do
       )
       click_on "Yes"
 
-      expect(page).to have_content("We've noted this on your application.")
+      expect(page).to have_content("We’ve noted this on your application.")
       click_on "Next"
     end
 
