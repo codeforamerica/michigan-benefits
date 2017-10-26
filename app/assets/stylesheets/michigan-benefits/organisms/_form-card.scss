@@ -6,7 +6,8 @@
 
 .form-card {
   @extend %max-container;
-  margin-bottom: 2em;
+  @include clearfix;
+  margin-bottom: $padding-small;
 }
 
 .form-card__title {
