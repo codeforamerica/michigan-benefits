@@ -23,7 +23,7 @@ en:
     health_pregnancy:
       edit:
         title:
-          one: Have you been pregnant recently?
+          one: "%{start_of_question} been pregnant recently?"
           other: Has anyone been pregnant recently?
     income_job:
       edit:

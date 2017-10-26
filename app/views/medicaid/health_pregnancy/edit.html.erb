@@ -4,7 +4,8 @@
   <header class="form-card__header">
     <div class="form-card__title">
       <%= t("medicaid.health_pregnancy.edit.title",
-            count: current_application.members.count) %>
+         count: @step.female_members.count,
+         start_of_question: @step.single_female_start_of_question) %>
     </div>
     <p class="text--help text--centered">
       Currently pregnant or pregnant in the past three months.
