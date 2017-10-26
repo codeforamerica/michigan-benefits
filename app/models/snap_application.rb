@@ -58,6 +58,10 @@ class SnapApplication < ApplicationRecord
     StepNavigation
   end
 
+  def application_title
+    "Food Assistance Application"
+  end
+
   def exportable?
     signature.present?
   end

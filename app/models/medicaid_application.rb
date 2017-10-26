@@ -13,6 +13,10 @@ class MedicaidApplication < ApplicationRecord
     Medicaid::StepNavigation
   end
 
+  def application_title
+    "Medicaid Application"
+  end
+
   def primary_member
     members.order(:id).first || NullMember.new
   end
