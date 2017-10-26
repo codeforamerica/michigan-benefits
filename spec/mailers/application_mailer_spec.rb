@@ -39,7 +39,7 @@ RSpec.describe ApplicationMailer do
             "A new 1171 from someone online has been submitted!",
           )
           expect(email.body.encoded).not_to include(
-            "by a client in your office lobby",
+            "client in your office lobby",
           )
         end
       end
@@ -67,7 +67,7 @@ RSpec.describe ApplicationMailer do
             "Union",
           )
           expect(email.body.encoded).to include(
-            "by a client in your office lobby",
+            "client in your office lobby",
           )
         end
       end
