@@ -40,6 +40,12 @@
     height: 41px;
   }
 
+  &--check {
+    @include retina-bg(check_icon, 80px 80px);
+    width: 80px;
+    height: 80px;
+  }
+
   &--civilla {
     @include retina-bg(civilla, 86px 31px);
     margin-left: 0;
