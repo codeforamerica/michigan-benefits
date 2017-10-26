@@ -97,8 +97,16 @@ RSpec.feature "Medicaid app" do
     end
 
     on_pages "Quick Health Questions" do
-      expect(page).to have_content("Do you have a disability?")
+      expect(page).to have_content(
+        "Does anyone in your household have a disability?",
+      )
       click_on "Yes"
+
+      expect(page).to have_content(
+        "Who has a disability?",
+      )
+      check "Jessie Tester"
+      click_on "Next"
 
       expect(page).to have_content("Has anyone been pregnant recently?")
       click_on "Yes"

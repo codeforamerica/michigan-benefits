@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025225850) do
+ActiveRecord::Schema.define(version: 20171026150119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20171025225850) do
   end
 
   create_table "medicaid_applications", force: :cascade do |t|
+    t.boolean "anyone_disabled"
     t.boolean "anyone_employed"
     t.boolean "anyone_in_college"
     t.boolean "anyone_new_mom"
@@ -95,7 +96,6 @@ ActiveRecord::Schema.define(version: 20171025225850) do
     t.integer "child_support_alimony_arrears_expenses"
     t.integer "college_loan_interest_expenses"
     t.datetime "created_at", null: false
-    t.boolean "disabled"
     t.string "documents", default: [], array: true
     t.string "email"
     t.string "employed_monthly_income", default: [], array: true
