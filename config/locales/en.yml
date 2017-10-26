@@ -40,3 +40,8 @@ en:
         title:
           one: Are you self-employed?
           other: Is anyone in the household self-employed?
+    health_disability:
+      edit:
+        title:
+          one: Do you have a disability?
+          other: Does anyone in your household have a disability?
