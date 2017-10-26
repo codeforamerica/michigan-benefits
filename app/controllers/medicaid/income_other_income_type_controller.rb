@@ -5,11 +5,11 @@ module Medicaid
     private
 
     def skip?
-      no_income_not_from_job?
+      nobody_with_other_income?
     end
 
-    def no_income_not_from_job?
-      !current_application&.income_not_from_job?
+    def nobody_with_other_income?
+      !current_application&.anyone_other_income?
     end
   end
 end

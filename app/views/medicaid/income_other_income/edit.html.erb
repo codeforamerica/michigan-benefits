@@ -2,11 +2,14 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Do you get income that's not from a job?</div>
+    <div class="form-card__title">
+      <%= t("medicaid.income_other_income.edit.title",
+        count: current_application.members.count) %>
+    </div>
     <p class="text--help text--centered">
       If so, we'll ask you about the specific amounts you earn later
     </p>
   </header>
 
-  <%= render "shared/yes_no_form", step: @step, field: :income_not_from_job %>
+  <%= render "shared/yes_no_form", step: @step, field: :anyone_other_income %>
 </div>

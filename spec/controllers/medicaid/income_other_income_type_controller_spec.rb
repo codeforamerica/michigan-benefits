@@ -5,7 +5,7 @@ RSpec.describe Medicaid::IncomeOtherIncomeTypeController do
     context "client does not have non-job income" do
       it "redirects to next step" do
         medicaid_application =
-          create(:medicaid_application, income_not_from_job: false)
+          create(:medicaid_application, anyone_other_income: false)
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -19,7 +19,7 @@ RSpec.describe Medicaid::IncomeOtherIncomeTypeController do
     context "client has non-job income" do
       it "renders edit" do
         medicaid_application =
-          create(:medicaid_application, income_not_from_job: true)
+          create(:medicaid_application, anyone_other_income: true)
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
