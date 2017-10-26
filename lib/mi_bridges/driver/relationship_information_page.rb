@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class RelationshipInformationPage < BasePage
-      TITLE = "Relationship Information"
+      def self.title
+        "Relationship Information"
+      end
 
       def skip_infinite_loop_check; end
 

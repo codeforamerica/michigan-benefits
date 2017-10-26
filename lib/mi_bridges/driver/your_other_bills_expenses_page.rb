@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class YourOtherBillsExpensesPage < BasePage
-      TITLE = "Your Other Bills / Expenses"
+      def self.title
+        "Your Other Bills / Expenses"
+      end
 
       delegate(
         :court_ordered?,

@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class ProgramBenefitsPage < ClickNextPage
-      TITLE = "More About Benefits"
+      def self.title
+        "More About Benefits"
+      end
     end
   end
 end

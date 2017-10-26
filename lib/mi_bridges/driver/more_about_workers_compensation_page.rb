@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class MoreAboutWorkersCompensationPage < BasePage
-      TITLE = /More About (.*)'s Workers Compensation/
+      def self.title
+        /More About (.*)'s Workers Compensation/
+      end
 
       def setup; end
 

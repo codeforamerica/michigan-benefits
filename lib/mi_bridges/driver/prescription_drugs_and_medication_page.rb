@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class PrescriptionDrugsAndMedicationPage < ClickNextPage
-      TITLE = /(.*)'s Prescription drugs and over-the-counter medication/
+      def self.title
+        /(.*)'s Prescription drugs and over-the-counter medication/
+      end
     end
   end
 end

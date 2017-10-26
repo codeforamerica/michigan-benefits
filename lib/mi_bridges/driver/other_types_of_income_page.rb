@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class OtherTypesOfIncomePage < BasePage
-      TITLE = "Other Types of Income"
+      def self.title
+        "Other Types of Income"
+      end
 
       delegate(
         :additional_income,

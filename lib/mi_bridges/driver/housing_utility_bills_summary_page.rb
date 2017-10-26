@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class HousingUtilityBillsSummaryPage < ClickNextPage
-      TITLE = "Housing and Utility Bills Summary"
+      def self.title
+        "Housing and Utility Bills Summary"
+      end
     end
   end
 end

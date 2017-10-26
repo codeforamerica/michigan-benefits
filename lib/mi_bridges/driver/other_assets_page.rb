@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class OtherAssetsPage < BasePage
-      TITLE = "Other Assets"
+      def self.title
+        "Other Assets"
+      end
 
       delegate(
         :financial_accounts,

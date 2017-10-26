@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class BenefitsSelectorPage < BasePage
-      TITLE = "Which Benefits Would You Like to Apply For? (All Programs)"
+      def self.title
+        "Which Benefits Would You Like to Apply For? (All Programs)"
+      end
 
       def setup; end
 

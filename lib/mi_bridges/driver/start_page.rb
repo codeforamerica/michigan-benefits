@@ -3,8 +3,11 @@
 module MiBridges
   class Driver
     class StartPage < BasePage
-      TITLE = "Help With Filing MI Bridges Application"
       CIVILLA_COMMUNITY_PARTNER_ID = 3949
+
+      def self.title
+        "Help With Filing MI Bridges Application"
+      end
 
       def setup; end
 

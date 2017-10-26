@@ -1,7 +1,9 @@
 module MiBridges
   class Driver
     class InformationAboutTheChildPage < BasePage
-      TITLE = "Information About the Child".freeze
+      def self.title
+        "Information About the Child"
+      end
 
       def setup; end
 

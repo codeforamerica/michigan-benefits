@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class UtilityBillsPage < BasePage
-      TITLE = "Utility Bills"
+      def self.title
+        "Utility Bills"
+      end
 
       delegate(
         :primary_member,

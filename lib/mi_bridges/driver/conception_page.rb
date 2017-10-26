@@ -1,7 +1,9 @@
 module MiBridges
   class Driver
     class ConceptionPage < ClickNextPage
-      TITLE = "Conception".freeze
+      def self.title
+        "Conception"
+      end
     end
   end
 end

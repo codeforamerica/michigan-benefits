@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class OtherIncomeSummaryPage < ClickNextPage
-      TITLE = "Other Income Summary"
+      def self.title
+        "Other Income Summary"
+      end
     end
   end
 end

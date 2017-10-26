@@ -122,7 +122,7 @@ module MiBridges
     end
 
     def complete_application
-      while page_title != SubmitPage::TITLE
+      while page_title != SubmitPage.title
         klass = find_page_klass
         run_flow([klass])
       end
@@ -192,8 +192,8 @@ module MiBridges
 
     def find_page_klass
       klass = APPLY_FLOW.detect do |page|
-        page_title == page::TITLE ||
-          page_title.match?(page::TITLE)
+        page_title == page.title ||
+          page_title.match?(page.title)
       end
 
       if klass.nil?

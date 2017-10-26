@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class VehiclesPage < BasePage
-      TITLE = "Vehicles"
+      def self.title
+        "Vehicles"
+      end
 
       def setup; end
 

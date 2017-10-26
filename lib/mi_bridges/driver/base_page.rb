@@ -95,11 +95,6 @@ module MiBridges
         end
       end
 
-      def check_page_title(title)
-        id = title.gsub(/[^0-9A-Za-z]/, "")
-        page.find(:css, "##{id}")
-      end
-
       def first_name_section(member)
         member.mi_bridges_formatted_name.gsub(/[^0-9A-Za-z]/, "")
       end

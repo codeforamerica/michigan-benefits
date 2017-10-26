@@ -3,10 +3,8 @@
 module MiBridges
   class Driver
     class FraudPenaltyAffidavitPage < ClickNextPage
-      TITLE = "Fraud Penalty Affidavit"
-
-      def setup
-        check_page_title(TITLE)
+      def self.title
+        "Fraud Penalty Affidavit"
       end
     end
   end

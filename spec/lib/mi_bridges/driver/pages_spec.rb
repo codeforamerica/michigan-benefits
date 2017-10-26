@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe "Driver pages" do
   MiBridges::Driver::APPLY_FLOW.each do |page|
-    it "has a TITLE constant" do
-      expect(page::TITLE).to be
+    it "has a title class method" do
+      expect(page.title).to be
     end
 
     describe "methods" do

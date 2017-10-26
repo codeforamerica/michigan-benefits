@@ -6,13 +6,14 @@ module MiBridges
       MAXIMUM_SECRET_QUESTION_ANSWER_CHAR_COUNT = 20
       MAXIMUM_USER_ID_CHAR_COUNT = 20
       MAXIMUM_PASSWORD_CHAR_COUNT = 16
-      TITLE = "Setting Up Your Account"
+
+      def self.title
+        "Setting Up Your Account"
+      end
 
       delegate :latest_drive_attempt, to: :snap_application
 
-      def setup
-        check_page_title(TITLE)
-      end
+      def setup; end
 
       def fill_in_required_fields
         if latest_drive_attempt.blank?

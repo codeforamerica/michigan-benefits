@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class MoreAboutOtherIncomePage < BasePage
-      TITLE = /More About (.*)'s Other Income/
+      def self.title
+        /More About (.*)'s Other Income/
+      end
 
       def setup; end
 

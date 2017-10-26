@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class PersonalInformationPage < BasePage
-      TITLE = "Getting Started With Your Application"
+      def self.title
+        "Getting Started With Your Application"
+      end
 
       delegate(
         :primary_member,

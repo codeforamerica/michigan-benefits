@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class PrivacyPinPage < BasePage
-      TITLE = "Privacy PIN"
+      def self.title
+        "Privacy PIN"
+      end
 
       def setup; end
 

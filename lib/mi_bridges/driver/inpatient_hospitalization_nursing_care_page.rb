@@ -3,7 +3,9 @@
 module MiBridges
   class Driver
     class InpatientHospitalizationNursingCarePage < ClickNextPage
-      TITLE = /(.*)'s Inpatient Hospitalization\/Nursing Care/
+      def self.title
+        /(.*)'s Inpatient Hospitalization\/Nursing Care/
+      end
     end
   end
 end
