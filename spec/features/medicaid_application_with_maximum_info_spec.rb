@@ -81,7 +81,7 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content("Are you self-employed?")
       click_on "Yes"
 
-      expect(page).to have_content("Do you get income that's not from a job?")
+      expect(page).to have_content("Do you get income that’s not from a job?")
       click_on "Yes"
 
       expect(page).to have_content(
