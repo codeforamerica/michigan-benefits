@@ -9,5 +9,4 @@ class AddEmployedAsBooleanToMedicaid < ActiveRecord::Migration[5.1]
       remove_column :members, :employed
     end
   end
-
 end

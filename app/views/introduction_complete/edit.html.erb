@@ -14,9 +14,14 @@
   <div class="form-card__content">
     <h4>What happens next?</h4>
     <p>
-      Next, we'll ask you some questions to help us determine your eligibility for
-      food assistance as quickly as possible.
+      Next, we'll ask you some eligibility questions and then submit your
+      application to MDHHS on <%= current_application.receiving_office_name.capitalize %>.
     </p>
+
+    <p>
+      To change office location, click <%= link_to "here", step_path(IntroductionChangeOfficeLocationController) %>.
+    </p>
+
   </div>
   <%= render partial: 'shared/next_step_link' %>
 </div>
