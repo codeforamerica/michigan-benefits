@@ -7,12 +7,8 @@
       <div class="illustration illustration--success"></div>
       <div class="pre-title">Congratulations</div>
       <div class="form-card__title">
-        Your application has been successfully submitted.
+        Your application has been successfully submitted to MDHHS on <%= full_office_name(current_application) %>.
       </div>
-      <div class="text--help text--centered">
-        Submitted to MDHHS on <%= @step.submitted_date %>.
-      </div>
-
       <div class="text--caps text--centered text--little-help nudge--med">
         You applied for
       </div>
@@ -37,7 +33,7 @@
         </div>
       </div>
 
-      <div class="media-box with-padding-med">
+      <div class="media-box with-padding-small">
         <div class="media-box__media">
           <div class="emoji emoji--med emoji--page-facing-up"></div>
         </div>
@@ -51,6 +47,20 @@
         </div>
       </div>
 
+      <div class="media-box with-padding-med">
+        <div class="media-box__media">
+          <div class="emoji emoji--med emoji--modern-phone"></div>
+        </div>
+        <div class="media-box__content">
+          <div class="media-box__content">
+            <p>
+              <b>If you have questions about your application</b>
+              contact the <%= full_office_name(current_application)  %>
+              office at <%= number_to_phone(current_application.receiving_office_phone_number) %>.
+            </p>
+          </div>
+        </div>
+      </div>
       <section class="slab">
         <h3>Want a copy of your application?</h3>
         <p>

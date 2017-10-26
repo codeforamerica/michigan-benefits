@@ -20,7 +20,7 @@ RSpec.feature "Submit snap application" do
     click_on "Continue"
 
     within(".form-card__content") do
-      expect(page).to have_content("Union")
+      expect(page).to have_content("Union Street")
     end
 
     on_page "Introduction Complete" do
@@ -37,8 +37,17 @@ RSpec.feature "Submit snap application" do
 
     on_page "Introduction Complete" do
       within(".form-card__content") do
-        expect(page).to have_content("Clio")
+        expect(page).to have_content("Clio Road")
       end
+    end
+
+    visit "/steps/success"
+
+    on_page "Application Submitted" do
+      expect(page).to have_content(
+        "Your application has been successfully " +
+          "submitted to MDHHS on Clio Road.",
+      )
     end
   end
 end

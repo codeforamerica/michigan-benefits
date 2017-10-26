@@ -133,6 +133,10 @@ class SnapApplication < ApplicationRecord
     receiving_office.email
   end
 
+  def receiving_office_phone_number
+    receiving_office.phone_number
+  end
+
   def receiving_office
     @receiving_office ||= OfficeRecipient.new(snap_application: self)
   end

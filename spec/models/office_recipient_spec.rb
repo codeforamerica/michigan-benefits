@@ -13,6 +13,7 @@ RSpec.describe OfficeRecipient do
           "email" => "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov",
           "name" => "Union",
           "fax_number" => union_fax_number,
+          "phone_number" => union_phone_number,
         )
       end
     end
@@ -26,6 +27,7 @@ RSpec.describe OfficeRecipient do
         "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
         "name" => "Clio",
         "fax_number" => clio_fax_number,
+        "phone_number" => clio_phone_number,
       )
     end
 
@@ -38,6 +40,7 @@ RSpec.describe OfficeRecipient do
         "email" => "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov",
         "name" => "Union",
         "fax_number" => union_fax_number,
+        "phone_number" => union_phone_number,
       )
     end
 
@@ -50,6 +53,7 @@ RSpec.describe OfficeRecipient do
         "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
         "name" => "Clio",
         "fax_number" => clio_fax_number,
+        "phone_number" => clio_phone_number,
       )
     end
 
@@ -62,17 +66,18 @@ RSpec.describe OfficeRecipient do
         "email" => "hello@michiganbenefits.org",
         "name" => "Test Office",
         "fax_number" => staging_fax_number,
+        "phone_number" => test_office_phone_number,
       )
     end
   end
 
-  describe "#number" do
-    it "is whatever the office number is" do
+  describe "#fax_number" do
+    it "is whatever the office fax number is" do
       fax_recipient = described_class.new(
         snap_application: app(from_zip_covered_by: :testing),
       )
 
-      expect(fax_recipient.number).to eq fax_recipient.office["fax_number"]
+      expect(fax_recipient.fax_number).to eq fax_recipient.office["fax_number"]
     end
   end
 
@@ -96,6 +101,18 @@ RSpec.describe OfficeRecipient do
 
   def staging_fax_number
     "+18888433549"
+  end
+
+  def clio_phone_number
+    "8107877101"
+  end
+
+  def union_phone_number
+    "8107607300"
+  end
+
+  def test_office_phone_number
+    "5555555555"
   end
 
   OFFICE_TO_ZIP_MAPPING = {
