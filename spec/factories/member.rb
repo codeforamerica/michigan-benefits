@@ -7,5 +7,13 @@ FactoryBot.define do
     ssn "123 12 1234"
     birthday { DateTime.parse("August 18, 1990") }
     benefit_application { create(:snap_application) }
+
+    trait :female do
+      sex "female"
+    end
+
+    trait :male do
+      sex "male"
+    end
   end
 end

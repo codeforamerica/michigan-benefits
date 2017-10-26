@@ -21,6 +21,10 @@ class StepsController < ApplicationController
   def edit
     @step = step_class.new(existing_attributes.slice(*step_attrs))
 
+    if step_class.attribute_names&.include?(:members)
+      @step.members = current_application&.members
+    end
+
     before_rendering_edit_hook
   end
 
