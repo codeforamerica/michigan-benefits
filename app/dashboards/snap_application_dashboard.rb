@@ -1,44 +1,44 @@
 require "administrate/base_dashboard"
 
 class SnapApplicationDashboard < Administrate::BaseDashboard
+  # rubocop:disable LineLength
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    additional_income: Field::Text,
+    additional_income: Field::Text.with_options(searchable: false),
     anyone_disabled: Field::Boolean,
     anyone_in_college: Field::Boolean,
     anyone_living_elsewhere: Field::Boolean,
     anyone_new_mom: Field::Boolean,
-    care_expenses: Field::String,
+    care_expenses: Field::String.with_options(searchable: false),
     consent_to_terms: Field::Boolean,
     court_ordered: Field::Boolean,
-    court_ordered_expenses: Field::String,
+    court_ordered_expenses: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     dependent_care: Field::Boolean,
-    documents: Field::String,
+    documents: Field::String.with_options(searchable: false),
     email: Field::String,
     emailed_at: Field::DateTime,
     everyone_a_citizen: Field::Boolean,
-    fax_metadata: Field::String,
+    fax_metadata: Field::String.with_options(searchable: false),
     faxed_successfully_at: Field::DateTime,
-    financial_accounts: Field::String,
+    financial_accounts: Field::String.with_options(searchable: false),
     income_change: Field::Boolean,
-    income_change_explanation: Field::Text,
-    income_child_support: Field::Text,
-    income_other: Field::String,
-    income_pension: Field::String,
-    income_social_security: Field::String,
-    income_ssi_or_disability: Field::String,
-    income_unemployment_insurance: Field::String,
-    income_workers_compensation: Field::String,
-    insurance_expense: Field::String,
+    income_change_explanation: Field::Text.with_options(searchable: false),
+    income_child_support: Field::Text.with_options(searchable: false),
+    income_other: Field::String.with_options(searchable: false),
+    income_pension: Field::String.with_options(searchable: false),
+    income_social_security: Field::String.with_options(searchable: false),
+    income_ssi_or_disability: Field::String.with_options(searchable: false),
+    income_unemployment_insurance: Field::String.with_options(searchable: false),
+    income_workers_compensation: Field::String.with_options(searchable: false),
+    insurance_expense: Field::String.with_options(searchable: false),
     mailing_address_same_as_residential_address: Field::Boolean,
     medical: Field::Boolean,
-    medical_expenses: Field::String,
+    medical_expenses: Field::String.with_options(searchable: false),
     money_or_accounts_income: Field::Boolean,
-    monthly_care_expenses: Field::String,
-    monthly_court_ordered_expenses: Field::String,
-    monthly_medical_expenses: Field::String,
-    receiving_office_name: Field::String,
+    monthly_care_expenses: Field::String.with_options(searchable: false),
+    monthly_court_ordered_expenses: Field::String.with_options(searchable: false),
+    monthly_medical_expenses: Field::String.with_options(searchable: false),
     phone_number: Field::String,
     property_tax_expense: Field::Number,
     real_estate_income: Field::Boolean,
@@ -57,19 +57,17 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     utility_trash: Field::Boolean,
     utility_water_sewer: Field::Boolean,
     vehicle_income: Field::Boolean,
-    zip: Field::String,
     members: Field::HasMany,
     driver_errors: Field::HasMany,
     exports: Field::HasMany,
   }.freeze
+  # rubocop:enable LineLength
 
   COLLECTION_ATTRIBUTES = %i[
     id
     sms_consented
     phone_number
     email
-    zip
-    receiving_office_name
     faxed_successfully_at
     fax_metadata
     signed_at
