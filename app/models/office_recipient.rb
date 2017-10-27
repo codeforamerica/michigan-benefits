@@ -3,8 +3,12 @@ class OfficeRecipient
     @snap_application = snap_application
   end
 
-  def number
+  def fax_number
     office["fax_number"]
+  end
+
+  def phone_number
+    office["phone_number"]
   end
 
   def name

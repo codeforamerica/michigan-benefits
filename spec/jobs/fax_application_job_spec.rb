@@ -18,8 +18,12 @@ RSpec.describe FaxApplicationJob do
       expect(snap_application).to be_faxed
 
       expect(Fax).to have_received(:send_fax).
-        with(hash_including(number: snap_application.receiving_office.number,
-                            recipient: snap_application.receiving_office.name))
+        with(
+          hash_including(
+            number: snap_application.receiving_office.fax_number,
+            recipient: snap_application.receiving_office.name,
+          ),
+        )
     end
 
     it "does not send a fax if application has already been sent" do
