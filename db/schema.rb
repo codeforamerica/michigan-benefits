@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20171026150119) do
     t.boolean "anyone_disabled"
     t.boolean "anyone_employed"
     t.boolean "anyone_in_college"
+    t.boolean "anyone_insured", default: false
     t.boolean "anyone_new_mom"
     t.boolean "anyone_other_income", default: false
     t.boolean "anyone_self_employed", default: false
@@ -110,8 +111,6 @@ ActiveRecord::Schema.define(version: 20171026150119) do
     t.boolean "income_retirement"
     t.boolean "income_social_security"
     t.boolean "income_unemployment"
-    t.string "insurance_type"
-    t.boolean "insured"
     t.boolean "mail_sent_to_residential"
     t.string "mailing_city"
     t.string "mailing_street_address"
@@ -155,6 +154,8 @@ ActiveRecord::Schema.define(version: 20171026150119) do
     t.string "encrypted_ssn_iv"
     t.string "first_name"
     t.boolean "in_college"
+    t.string "insurance_type"
+    t.boolean "insured", default: false
     t.string "last_name"
     t.boolean "living_elsewhere"
     t.string "marital_status"

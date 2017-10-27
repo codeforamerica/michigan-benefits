@@ -20,10 +20,22 @@ class Member < ApplicationRecord
     female
   ].freeze
 
+  INSURANCE_TYPES = [
+    "Medicaid",
+    "CHIP/MIChild",
+    "VA health care programs",
+    "Employer or individual plan",
+    "Other",
+  ].freeze
+
   belongs_to :benefit_application, polymorphic: true
 
   validates :employed_pay_interval,
     inclusion: { in: PAYMENT_INTERVALS },
+    allow_nil: true
+
+  validates :insurance_type,
+    inclusion: { in: INSURANCE_TYPES },
     allow_nil: true
 
   validates :employment_status,

@@ -2,6 +2,6 @@
 
 module Medicaid
   class InsuranceCurrent < Step
-    step_attributes(:insured)
+    step_attributes(:anyone_insured)
   end
 end

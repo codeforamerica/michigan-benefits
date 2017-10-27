@@ -3,13 +3,14 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Are you currently enrolled in a health insurance plan?
+      <%= t("medicaid.insurance_current.edit.title",
+            count: current_application.members.count) %>
     </div>
     <p class="text--help text--centered">
-      You may be eligible for dual enrollment, which can help cover additional
-      medical expenses.
+      <%= t("medicaid.insurance_current.edit.helper_text",
+            count: current_application.members.count) %>
     </p>
   </header>
 
-  <%= render 'shared/yes_no_form', step: @step, field: :insured %>
+  <%= render 'shared/yes_no_form', step: @step, field: :anyone_insured %>
 </div>

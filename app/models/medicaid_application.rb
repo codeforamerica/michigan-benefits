@@ -17,6 +17,10 @@ class MedicaidApplication < ApplicationRecord
     "Medicaid Application"
   end
 
+  def nobody_insured?
+    !anyone_insured?
+  end
+
   def primary_member
     members.order(:id).first || NullMember.new
   end

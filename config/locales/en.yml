@@ -45,3 +45,21 @@ en:
         title:
           one: Do you have a disability?
           other: Does anyone in your household have a disability?
+    insurance_current:
+      edit:
+        title:
+          one: Are you currently enrolled in a health insurance plan?
+          other: Is anyone currently enrolled in a health insurance plan?
+        helper_text:
+          one: You may be eligible for dual enrollment, which can help cover additional medical expenses.
+          other: They may be eligible for dual enrollment, which can help cover additional medical expenses.
+    insurance_current_member:
+      edit:
+        helper_text:
+          one: You've already indicated that %{names} is not in need of additional health coverage.
+          other: You've already indicated that %{names} are not in need of additional health coverage.
+    insurance_current_type:
+      edit:
+        title:
+          one: What type of insurance plan are you currently enrolled in?
+          other: Tell us what insurance plan each person is enrolled in.
