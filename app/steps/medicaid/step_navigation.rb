@@ -45,6 +45,7 @@ module Medicaid
       ],
       "Expenses" => [
         Medicaid::ExpensesAlimonyController,
+        Medicaid::ExpensesAlimonyMemberController,
         Medicaid::ExpensesStudentLoanController,
       ],
       "Income & Expense Amounts" => [

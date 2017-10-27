@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026150119) do
+ActiveRecord::Schema.define(version: 20171027185101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20171026150119) do
     t.boolean "anyone_insured", default: false
     t.boolean "anyone_new_mom"
     t.boolean "anyone_other_income", default: false
+    t.boolean "anyone_pay_child_support_alimony_arrears"
     t.boolean "anyone_self_employed", default: false
     t.datetime "birthday"
     t.boolean "caretaker_or_parent"
@@ -117,7 +118,6 @@ ActiveRecord::Schema.define(version: 20171026150119) do
     t.string "mailing_zip"
     t.boolean "michigan_resident", null: false
     t.boolean "need_medical_expense_help_3_months"
-    t.boolean "pay_child_support_alimony_arrears"
     t.boolean "pay_student_loan_interest"
     t.string "phone_number"
     t.boolean "reliable_mail_address"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 20171026150119) do
     t.boolean "living_elsewhere"
     t.string "marital_status"
     t.boolean "new_mom"
+    t.boolean "pay_child_support_alimony_arrears"
     t.string "relationship"
     t.boolean "requesting_food_assistance", default: true
     t.boolean "requesting_health_insurance", default: true

@@ -7,7 +7,7 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <% if current_application.pay_child_support_alimony_arrears? %>
+      <% if current_application.anyone_pay_child_support_alimony_arrears? %>
         <%= f.mb_money_field :child_support_alimony_arrears_expenses,
           "Child Support, Alimony, or Arrears (average monthly expense)" %>
       <% end %>

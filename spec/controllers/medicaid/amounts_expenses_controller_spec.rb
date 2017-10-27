@@ -13,7 +13,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
         medicaid_application = create(
           :medicaid_application,
           pay_student_loan_interest: false,
-          pay_child_support_alimony_arrears: false,
+          anyone_pay_child_support_alimony_arrears: false,
           anyone_self_employed: false,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -29,7 +29,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
         medicaid_application = create(
           :medicaid_application,
           pay_student_loan_interest: true,
-          pay_child_support_alimony_arrears: false,
+          anyone_pay_child_support_alimony_arrears: false,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -44,7 +44,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
         medicaid_application = create(
           :medicaid_application,
           pay_student_loan_interest: false,
-          pay_child_support_alimony_arrears: true,
+          anyone_pay_child_support_alimony_arrears: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -59,7 +59,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
         medicaid_application = create(
           :medicaid_application,
           pay_student_loan_interest: false,
-          pay_child_support_alimony_arrears: false,
+          anyone_pay_child_support_alimony_arrears: false,
           anyone_self_employed: true,
         )
         session[:medicaid_application_id] = medicaid_application.id

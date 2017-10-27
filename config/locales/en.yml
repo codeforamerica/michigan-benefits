@@ -63,3 +63,10 @@ en:
         title:
           one: What type of insurance plan are you currently enrolled in?
           other: Tell us what insurance plan each person is enrolled in.
+    expenses_alimony:
+      edit:
+        title:
+          one: Do you pay child support, alimony, or arrears?
+          other:
+            Does anyone in your household pay child
+            support, alimony, or arrears?

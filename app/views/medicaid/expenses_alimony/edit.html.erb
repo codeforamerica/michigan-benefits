@@ -3,11 +3,11 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Do you pay child support, alimony or arrears?
+      <%= t "medicaid.expenses_alimony.edit.title", count: @step.members.count %>
     </div>
   </header>
 
   <%= render 'shared/yes_no_form',
     step: @step,
-    field: :pay_child_support_alimony_arrears %>
+    field: :anyone_pay_child_support_alimony_arrears %>
 </div>

@@ -205,6 +205,20 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Does anyone in the household get income that’s not from a job?",
       )
+      click_on "No"
+    end
+
+    on_pages "Current Expenses" do
+      expect(page).to have_content(
+        "Does anyone in your household pay child support, alimony, or arrears?",
+      )
+      click_on "Yes"
+
+      expect(page).to have_content(
+        "Tell us who pays child support, alimony, or arrears.",
+      )
+      check "Jessie Tester"
+      click_on "Next"
     end
   end
 end

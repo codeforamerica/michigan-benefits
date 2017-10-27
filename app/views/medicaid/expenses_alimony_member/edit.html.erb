@@ -1,0 +1,31 @@
+<% content_for :header_title, "Current Expenses" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Tell us who pays child support, alimony, or arrears.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <%= f.mb_form_errors :child_support_alimony_arrears %>
+
+      <fieldset class="form-group">
+        <% @step.members.each do |member| %>
+          <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+          <%= ff.mb_checkbox(:pay_child_support_alimony_arrears,
+                             member.full_name) %>
+          <% end %>
+        <% end %>
+      </fieldset>
+
+      <%= render 'medicaid/next_step' %>
+    <% end %>
+  </div>
+</div>

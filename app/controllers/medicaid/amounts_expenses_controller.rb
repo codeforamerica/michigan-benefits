@@ -19,7 +19,7 @@ module Medicaid
     end
 
     def no_child_support_alimony_arrears?
-      !current_application&.pay_child_support_alimony_arrears?
+      !current_application&.anyone_pay_child_support_alimony_arrears?
     end
 
     def no_student_loan_interest?

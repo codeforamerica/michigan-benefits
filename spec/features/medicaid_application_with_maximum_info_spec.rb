@@ -93,7 +93,7 @@ RSpec.feature "Medicaid app" do
 
     on_pages "Current Expenses" do
       expect(page).to have_content(
-        "Do you pay child support, alimony or arrears?",
+        "Do you pay child support, alimony, or arrears?",
       )
       click_on "Yes"
 
