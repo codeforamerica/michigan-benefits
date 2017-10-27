@@ -38,9 +38,6 @@ class SuccessController < SnapStepsController
   end
 
   def flash_notice
-    <<~NOTICE
-      You will receive an email with your filled out application attached in a
-      few minutes.
-    NOTICE
+    "Your application has been sent to your email inbox."
   end
 end
