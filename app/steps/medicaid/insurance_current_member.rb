@@ -3,7 +3,7 @@
 module Medicaid
   class InsuranceCurrentMember < Step
     step_attributes(
-      :is_insured,
+      :insured,
       :members,
     )
 
@@ -16,11 +16,11 @@ module Medicaid
     end
 
     def valid?
-      if members_needing_insurance.select(&:is_insured).any?
+      if members_needing_insurance.select(&:insured).any?
         true
       else
         errors.add(
-          :is_insured,
+          :insured,
           "Please select a member",
         )
         false

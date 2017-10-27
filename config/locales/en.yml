@@ -53,9 +53,13 @@ en:
         helper_text:
           one: You may be eligible for dual enrollment, which can help cover additional medical expenses.
           other: They may be eligible for dual enrollment, which can help cover additional medical expenses.
+    insurance_current_member:
+      edit:
+        helper_text:
+          one: You've already indicated that %{names} is not in need of additional health coverage.
+          other: You've already indicated that %{names} are not in need of additional health coverage.
     insurance_current_type:
       edit:
         title:
           one: What type of insurance plan are you currently enrolled in?
           other: Tell us what insurance plan each person is enrolled in.
-

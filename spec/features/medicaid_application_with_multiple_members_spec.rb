@@ -110,9 +110,7 @@ RSpec.feature "Medicaid app" do
         " additional health coverage.",
       )
       click_on "Next"
-    end
 
-    on_page "Health Coverage Needs" do
       expect(page).to have_content("Please select a member")
       check "Jessie Tester"
       click_on "Next"
@@ -126,9 +124,7 @@ RSpec.feature "Medicaid app" do
       expect(page).not_to have_content("Christa Tester")
       expect(page).to have_content("Jessie Tester")
       click_on "Next"
-    end
 
-    on_page "Health Coverage Needs" do
       expect(page).to have_content("Please select a plan")
       click_back
     end
@@ -150,7 +146,7 @@ RSpec.feature "Medicaid app" do
     end
 
     on_page "Health Coverage Needs" do
-      expect(page).to have_content("Please select a plan for each person")
+      expect(page).to have_content("Please select a plan")
       select_radio(question: "Jessie Tester", answer: "Medicaid")
       select_radio(question: "Christa Tester", answer: "Other")
       click_on "Next"

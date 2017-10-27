@@ -5,15 +5,26 @@ RSpec.describe Medicaid::InsuranceCurrentType do
     context "each insured household member has an insurance type" do
       it "is valid" do
         member = create(:member,
-                        is_insured: true,
-                        insurance_type: "Medicaid")
+                        insured: true,
+                        insurance_type: "Medicaid",
+                        requesting_health_insurance: true)
 
         member_without_insurance = create(:member,
-                                          is_insured: false,
+                                          insured: false,
+                                          insurance_type: nil,
+                                          requesting_health_insurance: true)
+
+        member_not_requesting_insurance = create(:member,
+                                          requesting_health_insurance: false,
+                                          insured: true,
                                           insurance_type: nil)
 
         step = Medicaid::InsuranceCurrentType.new(
-          members: [member, member_without_insurance],
+          members: [
+            member,
+            member_without_insurance,
+            member_not_requesting_insurance,
+          ],
         )
 
         expect(step).to be_valid
@@ -23,12 +34,14 @@ RSpec.describe Medicaid::InsuranceCurrentType do
     context "an insured household member is missing an insurance type" do
       it "is invalid" do
         member = create(:member,
-                        is_insured: true,
-                        insurance_type: "Medicaid")
+                        insured: true,
+                        insurance_type: "Medicaid",
+                        requesting_health_insurance: true)
 
         insured_member_without_type = create(:member,
-                                             is_insured: true,
-                                             insurance_type: nil)
+                                             insured: true,
+                                             insurance_type: nil,
+                                             requesting_health_insurance: true)
 
         step = Medicaid::InsuranceCurrentType.new(
           members: [member, insured_member_without_type],
@@ -43,15 +56,15 @@ RSpec.describe Medicaid::InsuranceCurrentType do
     context "with insured members needing insurance" do
       it "returns only insured members needing insurance" do
         insured_member = create(:member,
-                                is_insured: true,
+                                insured: true,
                                 requesting_health_insurance: true)
 
         abstaining_member = create(:member,
-                                   is_insured: true,
+                                   insured: true,
                                    requesting_health_insurance: false)
 
         uninsured_member = create(:member,
-                                  is_insured: false,
+                                  insured: false,
                                   requesting_health_insurance: true)
 
         step = Medicaid::InsuranceCurrentType.new(
@@ -71,11 +84,11 @@ RSpec.describe Medicaid::InsuranceCurrentType do
     context "with insured members not needing insurance" do
       it "returns an empty array" do
         insured_member = create(:member,
-                                is_insured: true,
+                                insured: true,
                                 requesting_health_insurance: false)
 
         uninsured_member = create(:member,
-                                  is_insured: false,
+                                  insured: false,
                                   requesting_health_insurance: true)
 
         step = Medicaid::InsuranceCurrentType.new(
@@ -90,7 +103,7 @@ RSpec.describe Medicaid::InsuranceCurrentType do
       it "returns an empty array" do
         step = Medicaid::InsuranceCurrentType.new(
           members: create_list(:member, 2,
-                               is_insured: false,
+                               insured: false,
                                requesting_health_insurance: true),
         )
 

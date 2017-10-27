@@ -13,11 +13,11 @@ RSpec.describe Medicaid::InsuranceCurrentController do
           )
           session[:medicaid_application_id] = medicaid_application.id
 
-          put :update, params: { step: { anyone_is_insured: true } }
+          put :update, params: { step: { anyone_insured: true } }
 
           member.reload
 
-          expect(member.is_insured?).to eq(true)
+          expect(member).to be_insured
         end
       end
 
@@ -31,11 +31,11 @@ RSpec.describe Medicaid::InsuranceCurrentController do
           )
           session[:medicaid_application_id] = medicaid_application.id
 
-          put :update, params: { step: { anyone_is_insured: false } }
+          put :update, params: { step: { anyone_insured: false } }
 
           member.reload
 
-          expect(member.is_insured?).to eq(false)
+          expect(member).to_not be_insured
         end
       end
     end

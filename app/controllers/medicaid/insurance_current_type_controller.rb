@@ -5,10 +5,6 @@ module Medicaid
     private
 
     def skip?
-      not_insured?
-    end
-
-    def not_insured?
       current_application.nobody_insured?
     end
 

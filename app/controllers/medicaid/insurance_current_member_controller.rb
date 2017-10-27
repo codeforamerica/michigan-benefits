@@ -9,7 +9,7 @@ module Medicaid
     end
 
     def member_attrs
-      %i[is_insured]
+      %i[insured]
     end
   end
 end

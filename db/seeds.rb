@@ -287,7 +287,7 @@ complete_medicaid_application = MedicaidApplication.find_or_initialize_by(
 )
 complete_medicaid_application.update!(
   michigan_resident: true,
-  anyone_is_insured: true,
+  anyone_insured: true,
 )
 
 complete_medicaid_primary = Member.find_or_initialize_by(
@@ -298,7 +298,7 @@ complete_medicaid_primary = Member.find_or_initialize_by(
 )
 
 complete_medicaid_primary.update!(
-  is_insured: true,
+  insured: true,
   insurance_type: "VA health care programs",
 )
 

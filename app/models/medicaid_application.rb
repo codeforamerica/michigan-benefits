@@ -18,7 +18,7 @@ class MedicaidApplication < ApplicationRecord
   end
 
   def nobody_insured?
-    !anyone_is_insured?
+    !anyone_insured?
   end
 
   def primary_member

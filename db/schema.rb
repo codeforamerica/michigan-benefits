@@ -88,10 +88,10 @@ ActiveRecord::Schema.define(version: 20171026150119) do
     t.boolean "anyone_disabled"
     t.boolean "anyone_employed"
     t.boolean "anyone_in_college"
+    t.boolean "anyone_insured", default: false
     t.boolean "anyone_new_mom"
     t.boolean "anyone_other_income", default: false
     t.boolean "anyone_self_employed", default: false
-    t.boolean "anyone_is_insured"
     t.datetime "birthday"
     t.boolean "caretaker_or_parent"
     t.integer "child_support_alimony_arrears_expenses"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20171026150119) do
     t.string "first_name"
     t.boolean "in_college"
     t.string "insurance_type"
-    t.boolean "is_insured"
+    t.boolean "insured", default: false
     t.string "last_name"
     t.boolean "living_elsewhere"
     t.string "marital_status"

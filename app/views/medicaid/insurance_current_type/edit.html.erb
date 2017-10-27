@@ -10,7 +10,6 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-        <%= f.mb_form_errors :insurance_type %>
         <% @step.insured_members_requesting_insurance.each do |member| %>
             <%= f.fields_for("members[]", member) do |ff| %>
               <%= ff.mb_radio_set :insurance_type,
