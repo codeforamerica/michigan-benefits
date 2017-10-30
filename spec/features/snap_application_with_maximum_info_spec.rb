@@ -187,8 +187,7 @@ accounts?",
     end
 
     expect(page).to have_text(
-      "You will receive an email with your filled out application attached in
-        a few minutes.",
+      "Your application has been sent to your email inbox",
     )
   end
 
