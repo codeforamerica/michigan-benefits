@@ -26,11 +26,22 @@
   }
 }
 
-.security-message {
-  @extend %max-container;
-  color: $color-grey;
-  font-size: $font-size-smallest;
+.footer--meta-data {
   margin-bottom: $padding-small;
+  text-align: center;
+
+  @include media($tablet-up) {
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+}
+
+.footer--security-message {
+  color: $color-grey;
+  display: inline-block;
+  font-size: $font-size-smallest;
 
   &:before {
     content: "\e899";
@@ -38,4 +49,13 @@
     font-family: $font-icon;
     margin-right: .5em;
    }
+}
+
+.footer--benefit-label {
+  color: $color-grey;
+  font-size: $font-size-smallest;
+
+  @include media($tablet-up) {
+    float: right;
+  }
 }
