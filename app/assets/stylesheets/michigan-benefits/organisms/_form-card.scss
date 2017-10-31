@@ -52,3 +52,37 @@
     margin-bottom: 0;
   }
 }
+
+.form-card--meta-data {
+  margin-bottom: $padding-small;
+  text-align: center;
+
+  @include media($tablet-up) {
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+}
+
+.form-card--security-message {
+  color: $color-grey;
+  display: inline-block;
+  font-size: $font-size-smallest;
+
+  &:before {
+    content: "\e899";
+    display: inline-block;
+    font-family: $font-icon;
+    margin-right: .5em;
+   }
+}
+
+.form-card--benefit-label {
+  color: $color-grey;
+  font-size: $font-size-smallest;
+
+  @include media($tablet-up) {
+    float: right;
+  }
+}
