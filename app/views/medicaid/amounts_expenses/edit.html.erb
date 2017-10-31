@@ -12,7 +12,7 @@
           "Child Support, Alimony, or Arrears (average monthly expense)" %>
       <% end %>
 
-      <% if current_application.pay_student_loan_interest? %>
+      <% if current_application.anyone_pay_student_loan_interest? %>
         <%= f.mb_money_field :college_loan_interest_expenses,
           "College Loan Interest (average monthly expense)" %>
       <% end %>
