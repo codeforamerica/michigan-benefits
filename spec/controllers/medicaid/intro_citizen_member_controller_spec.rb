@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Medicaid::IntroCitizenMemberController, type: :controller do
   describe "#next_path" do
     it "is the citizen selector page path" do
-      expect(subject.next_path).to eq "/steps/medicaid/insurance-needed"
+      expect(subject.next_path).to eq "/steps/medicaid/intro-caretaker"
     end
   end
 
