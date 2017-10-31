@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027185101) do
+ActiveRecord::Schema.define(version: 20171027185102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 20171027185101) do
     t.boolean "living_elsewhere"
     t.string "marital_status"
     t.boolean "new_mom"
+    t.boolean "other_income", default: false
     t.boolean "pay_child_support_alimony_arrears"
     t.string "relationship"
     t.boolean "requesting_food_assistance", default: true

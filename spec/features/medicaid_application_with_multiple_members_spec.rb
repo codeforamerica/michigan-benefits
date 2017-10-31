@@ -205,7 +205,19 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Does anyone in the household get income that’s not from a job?",
       )
-      click_on "No"
+      click_on "Yes"
+
+      expect(page).to have_content(
+        "Tell us who gets income that’s not from a job.",
+      )
+      check "Jessie Tester"
+      click_on "Next"
+
+      expect(page).to have_content(
+        "What type of income do you receive that’s not from a job?",
+      )
+      check "Unemployment"
+      click_on "Next"
     end
 
     on_pages "Current Expenses" do
