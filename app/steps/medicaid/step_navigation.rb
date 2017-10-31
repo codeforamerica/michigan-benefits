@@ -12,8 +12,8 @@ module Medicaid
         Medicaid::IntroCollegeMemberController,
         Medicaid::IntroCitizenController,
         Medicaid::IntroCitizenMemberController,
-        # multi-member Medicaid::IntroCaretakerController,
-        # multi-member Medicaid::IntroCaretakerMemberController,
+        Medicaid::IntroCaretakerController,
+        Medicaid::IntroCaretakerMemberController,
       ],
       "Insurance" => [
         Medicaid::InsuranceNeededController,

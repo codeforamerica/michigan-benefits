@@ -21,6 +21,10 @@ class MedicaidApplication < ApplicationRecord
     !anyone_insured?
   end
 
+  def nobody_caretaker_or_parent?
+    !anyone_caretaker_or_parent?
+  end
+
   def primary_member
     members.order(:id).first || NullMember.new
   end

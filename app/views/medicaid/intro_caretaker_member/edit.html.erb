@@ -6,28 +6,22 @@
   </header>
 
   <div class="form-card__content">
-    <label class="checkbox">
-      <input type="checkbox">
-       Member 1
-     </label>
+    <%= form_for @step,
+                 as: :step,
+                 builder: MbFormBuilder,
+                 url: current_path,
+                 method: :put do |f| %>
 
-    <label class="checkbox">
-      <input type="checkbox">
-        Member 2
-    </label>
+        <%= f.mb_form_errors :caretaker_or_parent %>
+        <fieldset class="form-group">
+          <% @step.members.each do |member| %>
+              <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+                  <%= ff.mb_checkbox :caretaker_or_parent, member.full_name %>
+              <% end %>
+          <% end %>
+        </fieldset>
 
-    <label class="checkbox">
-      <input type="checkbox">
-        Member 3
-    </label>
+        <%= render 'medicaid/next_step' %>
+    <% end %>
   </div>
-
-  <!-- Replace with partial -->
-  <footer class="form-card__button_right">
-    <a href="" class="button button--nav  button--cta button--full-width">
-      Next
-    </a>
-  </footer>
 </div>
-
-<!-- Single-member content: https://trello.com/c/kOVJBHAe/78-tell-us-who-is-a-caretaker-or-parent-of-others-in-the-household -->

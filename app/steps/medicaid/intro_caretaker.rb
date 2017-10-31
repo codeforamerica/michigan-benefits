@@ -2,6 +2,6 @@
 
 module Medicaid
   class IntroCaretaker < Step
-    step_attributes(:caretaker_or_parent)
+    step_attributes(:anyone_caretaker_or_parent)
   end
 end

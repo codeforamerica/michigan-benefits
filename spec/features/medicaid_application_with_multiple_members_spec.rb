@@ -74,6 +74,22 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
     end
 
+    on_page "Introduction" do
+      expect(page).to have_content(
+        "Is anyone a caretaker or parent of other people in the household?",
+      )
+      click_on "Yes"
+    end
+
+    on_page "Introduction" do
+      expect(page).to have_content(
+        "Tell us who is a caretaker or parent of others in the household.",
+      )
+      check "Joel Tester"
+      check "Jessie Tester"
+      click_on "Next"
+    end
+
     on_page "Health Coverage Needs" do
       expect(page).to have_content(
         "Who in your household needs healthcare coverage?",
