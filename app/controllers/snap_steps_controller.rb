@@ -11,6 +11,10 @@ class SnapStepsController < StepsController
     SnapApplication.find_by(id: current_application_id)
   end
 
+  def application_title
+    "Food Assistance Application"
+  end
+
   def current_application_id
     session[:snap_application_id]
   end
