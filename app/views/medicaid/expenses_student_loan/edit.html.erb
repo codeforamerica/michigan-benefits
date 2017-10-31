@@ -2,10 +2,13 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Do you pay student loan interest?</div>
+    <div class="form-card__title">
+      <%= t "medicaid.expenses_student_loan.edit.title",
+        count: @step.members.count %>
+    </div>
   </header>
 
   <%= render 'shared/yes_no_form',
     step: @step,
-    field: :pay_student_loan_interest %>
+    field: :anyone_pay_student_loan_interest %>
 </div>

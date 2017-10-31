@@ -23,7 +23,7 @@ module Medicaid
     end
 
     def no_student_loan_interest?
-      !current_application&.pay_student_loan_interest?
+      !current_application&.anyone_pay_student_loan_interest?
     end
   end
 end

@@ -70,3 +70,8 @@ en:
           other:
             Does anyone in your household pay child
             support, alimony, or arrears?
+    expenses_student_loan:
+      edit:
+        title:
+          one: Do you pay student loan interest?
+          other: Does anyone in your household pay student loan interest?

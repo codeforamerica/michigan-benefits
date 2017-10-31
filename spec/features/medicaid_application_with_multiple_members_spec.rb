@@ -247,6 +247,23 @@ RSpec.feature "Medicaid app" do
       )
       check "Jessie Tester"
       click_on "Next"
+
+      expect(page).to have_content(
+        "Does anyone in your household pay student loan interest?",
+      )
+      click_on "Yes"
+
+      expect(page).to have_content(
+        "Tell us who pays student loan interest.",
+      )
+      check "Jessie Tester"
+      click_on "Next"
+    end
+
+    on_page "Income & Expense Amounts" do
+      expect(page).to have_content(
+        "Okay, thanks! Now describe your income and expenses.",
+      )
     end
   end
 end

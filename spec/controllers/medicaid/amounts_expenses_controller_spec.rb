@@ -12,7 +12,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
       it "redirects to next step" do
         medicaid_application = create(
           :medicaid_application,
-          pay_student_loan_interest: false,
+          anyone_pay_student_loan_interest: false,
           anyone_pay_child_support_alimony_arrears: false,
           anyone_self_employed: false,
         )
@@ -28,7 +28,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
       it "renders edit" do
         medicaid_application = create(
           :medicaid_application,
-          pay_student_loan_interest: true,
+          anyone_pay_student_loan_interest: true,
           anyone_pay_child_support_alimony_arrears: false,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -43,7 +43,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
       it "renders edit" do
         medicaid_application = create(
           :medicaid_application,
-          pay_student_loan_interest: false,
+          anyone_pay_student_loan_interest: false,
           anyone_pay_child_support_alimony_arrears: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -58,7 +58,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
       it "renders edit" do
         medicaid_application = create(
           :medicaid_application,
-          pay_student_loan_interest: false,
+          anyone_pay_student_loan_interest: false,
           anyone_pay_child_support_alimony_arrears: false,
           anyone_self_employed: true,
         )

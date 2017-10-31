@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20171101005455) do
     t.boolean "anyone_new_mom"
     t.boolean "anyone_other_income", default: false
     t.boolean "anyone_pay_child_support_alimony_arrears"
+    t.boolean "anyone_pay_student_loan_interest"
     t.boolean "anyone_self_employed", default: false
     t.datetime "birthday"
     t.integer "child_support_alimony_arrears_expenses"
@@ -121,7 +122,6 @@ ActiveRecord::Schema.define(version: 20171101005455) do
     t.string "mailing_zip"
     t.boolean "michigan_resident", null: false
     t.boolean "need_medical_expense_help_3_months"
-    t.boolean "pay_student_loan_interest"
     t.string "phone_number"
     t.boolean "reliable_mail_address"
     t.string "residential_city"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 20171101005455) do
     t.boolean "new_mom"
     t.boolean "other_income", default: false
     t.boolean "pay_child_support_alimony_arrears"
+    t.boolean "pay_student_loan_interest"
     t.string "relationship"
     t.boolean "requesting_food_assistance", default: true
     t.boolean "requesting_health_insurance", default: true
