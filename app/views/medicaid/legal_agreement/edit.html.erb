@@ -1,0 +1,34 @@
+<% content_for :header_title, 'Rights and Responsibilities' %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Before you finish, read and agree to the legal terms.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <div class="textwell">
+      <section class="legal textwell__content">
+        <%= render "shared/terms" %>
+      </section>
+      <button class="textwell__expander button button--cta button--full-width">Show More</button>
+    </div>
+
+    <p class="legal-agreement">
+      MichiganBenefits.org is a non-profit dedicated to providing safe,
+      secure access to benefits delivered by the Michigan Department of Health
+      and Human Services. By continuing, you agree to the MichiganBenefits.org
+      <a href="/privacy" target="_blank">Privacy Policy</a>
+      <span class="legal-agreement--terms">, as well as the <a href="/terms" target="_blank">MDHHS Rights and Responsibilities</a></span>
+
+    </p>
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+     <%= f.mb_radio_set :consent_to_terms,
+          '',
+          [{ value: true, label: "I agree" }],
+          layout: "inline" %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
+  </div>
+</div>
