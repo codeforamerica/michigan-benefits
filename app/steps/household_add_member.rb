@@ -13,7 +13,7 @@ class HouseholdAddMember < Step
     :relationship,
     :requesting_food_assistance,
     :sex,
-    :ssn,
+    :last_four_ssn,
   )
 
   validates :first_name,

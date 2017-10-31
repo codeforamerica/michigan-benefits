@@ -26,10 +26,10 @@
         ['Spouse', 'Parent', 'Child', 'Sibling', 'Roommate', 'Other'],
         include_blank: "Choose one" %>
       <%= f.mb_date_select :birthday, "What is their birthday?", { options: { start_year: 1900, end_year: Time.now.year, default: Date.new(1990,1,15), order: [:month, :day, :year] } } %>
-      <%= f.mb_input_field :ssn,
-        'What is their social security number?',
+      <%= f.mb_input_field :last_four_ssn,
+        'What are the last 4 digits of their Social Security Number?',
         type: :tel,
-        options: { maxlength: 9 },
+        options: { maxlength: 4 },
         notes: ["If they don’t have one or you don’t know it you can skip this"],
         append_html: "<p class='text--secure'><i class='illustration illustration--safety'></i>Social security numbers help ensure you receive the correct benefits. MDHHS maintains strict security guidelines to protect the identities of our residents.</p>" %>
       <%= f.mb_radio_set :requesting_food_assistance,

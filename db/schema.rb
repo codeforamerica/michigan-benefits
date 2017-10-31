@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 20171101005455) do
     t.string "documents", default: [], array: true
     t.string "email"
     t.string "employed_monthly_income", default: [], array: true
+    t.string "encrypted_last_four_ssn"
+    t.string "encrypted_last_four_ssn_iv"
     t.string "encrypted_ssn"
     t.string "encrypted_ssn_iv"
     t.boolean "everyone_a_citizen"
@@ -154,6 +156,8 @@ ActiveRecord::Schema.define(version: 20171101005455) do
     t.string "employed_pay_interval"
     t.integer "employed_pay_quantity"
     t.string "employment_status"
+    t.string "encrypted_last_four_ssn"
+    t.string "encrypted_last_four_ssn_iv"
     t.string "encrypted_ssn"
     t.string "encrypted_ssn_iv"
     t.string "first_name"

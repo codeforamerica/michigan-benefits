@@ -19,7 +19,11 @@ class PersonalDetailController < SnapStepsController
   end
 
   def member_attributes
-    { sex: member.sex, marital_status: member.marital_status, ssn: member.ssn }
+    {
+      sex: member.sex,
+      marital_status: member.marital_status,
+      last_four_ssn: member.last_four_ssn,
+    }
   end
 
   def member

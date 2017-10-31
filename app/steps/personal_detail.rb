@@ -7,7 +7,7 @@ class PersonalDetail < Step
   step_attributes(
     :sex,
     :marital_status,
-    :ssn,
+    :last_four_ssn,
   )
 
   validates :sex, inclusion: {

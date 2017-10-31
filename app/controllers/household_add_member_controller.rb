@@ -29,7 +29,7 @@ class HouseholdAddMemberController < SnapStepsController
       relationship: member.relationship,
       requesting_food_assistance: member.requesting_food_assistance,
       sex: member.sex,
-      ssn: member.ssn,
+      last_four_ssn: member.last_four_ssn,
     }
   end
 

@@ -152,7 +152,7 @@ RSpec.feature "Medicaid app" do
       )
       click_on "Yes"
 
-      fill_in "Social Security Number", with: "000992222"
+      fill_in "Social Security Number (last 4 digits)", with: "0099"
       fill_in_birthday
       click_on "Next"
     end
