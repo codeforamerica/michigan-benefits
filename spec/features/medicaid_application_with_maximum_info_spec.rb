@@ -157,6 +157,14 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
     end
 
+    on_page "Rights and Responsibilities" do
+      expect(page).to have_content(
+        "Before you finish, read and agree to the legal terms.",
+      )
+      choose "I agree"
+      click_on "Next"
+    end
+
     on_page "Confirmation" do
       click_on "No"
     end

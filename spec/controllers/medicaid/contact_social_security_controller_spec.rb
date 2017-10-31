@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Medicaid::ContactSocialSecurityController do
   describe "#next_path" do
     it "is the document intro page path" do
-      expect(subject.next_path).to eq "/steps/medicaid/confirmation"
+      expect(subject.next_path).to eq "/steps/medicaid/legal-agreement"
     end
   end
 

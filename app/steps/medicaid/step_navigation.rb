@@ -67,6 +67,9 @@ module Medicaid
         Medicaid::ContactSsDobController,
         Medicaid::ContactSocialSecurityController,
       ],
+      "Legal" => [
+        Medicaid::LegalAgreementController,
+      ],
       "Success" => [
         Medicaid::ConfirmationController,
         Medicaid::DocumentsController,
