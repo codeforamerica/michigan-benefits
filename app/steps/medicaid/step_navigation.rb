@@ -41,6 +41,7 @@ module Medicaid
         Medicaid::IncomeSelfEmploymentController,
         Medicaid::IncomeSelfEmploymentMemberController,
         Medicaid::IncomeOtherIncomeController,
+        Medicaid::IncomeOtherIncomeMemberController,
         Medicaid::IncomeOtherIncomeTypeController,
       ],
       "Expenses" => [
