@@ -4,25 +4,28 @@
   <header class="form-card__header">
     <div class="form-card__title">
       <%= t("medicaid.insurance_current_type.edit.title",
-            count: current_application.members.count) %>
+            name: current_member.full_name) %>
     </div>
   </header>
 
   <div class="form-card__content">
-    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-        <% @step.insured_members_requesting_insurance.each do |member| %>
-            <%= f.fields_for("members[]", member) do |ff| %>
-              <%= ff.mb_radio_set :insurance_type,
-                member.full_name,
-                [
-                  { value: "Medicaid", label: "Medicaid" },
-                  { value: "CHIP/MIChild", label: "CHIP/MIChild" },
-                  { value: "VA health care programs", label: "VA health care programs" },
-                  { value: "Employer or individual plan", label: "Policy through an employer or individual plan" },
-                  { value: "Other", label: "Other" },
-                ] %>
-            <% end %>
-        <% end %>
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <%= f.hidden_field(:member_id, value: current_member.id) %>
+
+      <%= f.mb_radio_set :insurance_type, "Insurance plans",
+        [
+          { value: "Medicaid", label: "Medicaid" },
+          { value: "CHIP/MIChild", label: "CHIP/MIChild" },
+          { value: "VA health care programs", label: "VA health care programs" },
+          { value: "Employer or individual plan", label: "Policy through an employer or individual plan" },
+          { value: "Other", label: "Other" },
+        ] %>
+
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>

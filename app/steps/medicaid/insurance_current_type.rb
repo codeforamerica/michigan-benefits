@@ -1,31 +1,33 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class InsuranceCurrentType < ManyMembersStep
+  class InsuranceCurrentType < Step
     step_attributes(
       :insurance_type,
-      :members,
+      :member_id,
     )
 
-    def insured_members_requesting_insurance
-      members_requesting_health_insurance.select(&:insured)
+    def valid?
+      if member_has_insurance? && no_insurance_type_provided?
+        errors.add(:insurance_type, "Please select a plan")
+        false
+      else
+        true
+      end
     end
 
     private
 
-    def members_requesting_health_insurance
-      members.select(&:requesting_health_insurance)
+    def member_has_insurance?
+      member.requesting_health_insurance? && member.insured?
     end
 
-    def validate_household_member(member)
-      if member.requesting_health_insurance? && member.insured?
-        unless member.insurance_type.present?
-          member.errors.add(
-            :insurance_type,
-            "Please select a plan",
-          )
-        end
-      end
+    def no_insurance_type_provided?
+      insurance_type.blank?
+    end
+
+    def member
+      @_member ||= Member.find(member_id)
     end
   end
 end

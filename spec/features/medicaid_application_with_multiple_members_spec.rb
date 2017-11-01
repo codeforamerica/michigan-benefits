@@ -134,16 +134,9 @@ RSpec.feature "Medicaid app" do
 
     on_page "Health Coverage Needs" do
       expect(page).to have_content(
-        "Tell us what insurance plan each person is enrolled in.",
+        "What type of insurance plan is Jessie Tester currently enrolled in",
       )
-      expect(page).not_to have_content("Joel Tester")
-      expect(page).not_to have_content("Christa Tester")
-      expect(page).to have_content("Jessie Tester")
-      click_on "Next"
-
-      expect(page).to have_content("Please select a plan")
-
-      select_radio(question: "Jessie Tester", answer: "Medicaid")
+      select_radio(question: "Insurance plans", answer: "Medicaid")
       click_on "Next"
     end
 

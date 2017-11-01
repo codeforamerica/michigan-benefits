@@ -60,6 +60,13 @@ class Member < ApplicationRecord
     key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
 
+  def self.first_insurance_holder
+    where(insured: true).
+      order(created_at: :asc).
+      limit(1).
+      first
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

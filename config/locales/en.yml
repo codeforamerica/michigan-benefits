@@ -60,9 +60,7 @@ en:
           other: You've already indicated that %{names} are not in need of additional health coverage.
     insurance_current_type:
       edit:
-        title:
-          one: What type of insurance plan are you currently enrolled in?
-          other: Tell us what insurance plan each person is enrolled in.
+        title: "What type of insurance plan is %{name} currently enrolled in?"
     expenses_alimony:
       edit:
         title:

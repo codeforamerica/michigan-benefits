@@ -35,7 +35,7 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content(
-        "What type of insurance plan are you currently enrolled in?",
+        "What type of insurance plan is Jessie Tester currently enrolled in?",
       )
       choose "Other"
       click_on "Next"
