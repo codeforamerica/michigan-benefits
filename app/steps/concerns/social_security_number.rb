@@ -1,16 +1,16 @@
 module SocialSecurityNumber
   extend ActiveSupport::Concern
 
-  SSN_REGEX = /\A\d{9}\z/
+  SSN_REGEX = /\A\d{4}\z/
 
   included do
-    auto_strip_attributes :ssn
+    auto_strip_attributes :last_four_ssn
 
-    validates :ssn,
+    validates :last_four_ssn,
       allow_blank: true,
       format: {
         with: SSN_REGEX,
-        message: "Make sure your SSN has 9 digits",
+        message: "Make sure to provide the last 4 digits",
       }
 
     # Overriding @record[key]=val, that's only found in ActiveRecord, so we can

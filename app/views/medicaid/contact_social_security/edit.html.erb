@@ -7,10 +7,10 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_input_field :ssn,
-        "Social Security Number",
+      <%= f.mb_input_field :last_four_ssn,
+        "Social Security Number (last 4 digits)",
         type: :tel,
-        options: { maxlength: 9 },
+        options: { maxlength: 4 },
         notes: ["If you don’t know it you can skip this"],
         append_html: "<p class='text--secure'><i class='illustration illustration--safety'></i>Social security numbers help ensure you receive the correct benefits. MDHHS maintains strict security guidelines to protect the identities of our residents.</p>" %>
 

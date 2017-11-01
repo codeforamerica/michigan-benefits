@@ -5,5 +5,5 @@ RSpec.describe PersonalDetail do
     PersonalDetail.new(marital_status: "Widowed", sex: "male")
   end
 
-  include_examples "social security number"
+  it_should_behave_like "social security number"
 end

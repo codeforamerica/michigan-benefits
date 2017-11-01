@@ -7,7 +7,7 @@ module Medicaid
     include SocialSecurityNumber
 
     step_attributes(
-      :ssn,
+      :last_four_ssn,
       :birthday,
     )
 
