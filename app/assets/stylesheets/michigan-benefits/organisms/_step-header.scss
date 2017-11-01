@@ -24,14 +24,28 @@
     height: 40px;
     margin-left: 0;
     padding: 6px 10px;
-    position: relative;
+    position: absolute;
     text-decoration: none;
-    top: 2px;
-    width: 40px;
+    top: 7px;
+    width: 100px;
 
     &:active,
     &:visited {
       color: inherit;
+    }
+
+    span {
+      display: none;
+
+      @include media($tablet-up) {
+        display: inline-block;
+      }
+    }
+
+    i {
+      float: left;
+      line-height: 1.5;
+      margin-right: 10px;
     }
   }
 
@@ -44,19 +58,6 @@
 
   &__title--centered {
     justify-content: center;
-  }
-
-  &__benefit-label {
-    @include margin(0 $padding-med 0 0);
-    display: none;
-    font-size: $font-size-smallest;
-
-    @include media($mobile-up) {
-      display: flex;
-    }
-
-    @include media($tablet-up) {
-      font-size: $font-size-small;
-    }
+    text-align: center;
   }
 }

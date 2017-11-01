@@ -6,6 +6,7 @@ RSpec.feature "Submit application with minimal information" do
     within(".slab--hero") { click_on "Apply now" }
 
     on_page "Introduction" do
+      expect(page).to have_content("Food Assistance Application")
       fill_in_name_and_birthday
       click_on "Continue"
     end

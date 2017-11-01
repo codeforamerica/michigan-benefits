@@ -13,10 +13,6 @@ class MedicaidApplication < ApplicationRecord
     Medicaid::StepNavigation
   end
 
-  def application_title
-    "Medicaid Application"
-  end
-
   def nobody_insured?
     !anyone_insured?
   end

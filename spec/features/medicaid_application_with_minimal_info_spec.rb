@@ -9,6 +9,8 @@ RSpec.feature "Medicaid app" do
     end
 
     on_pages "Introduction" do
+      expect(page).to have_content("Medicaid Application")
+
       click_on "Yes"
 
       fill_in "What is your first name?", with: "Jessie"

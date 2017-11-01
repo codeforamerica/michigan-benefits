@@ -7,6 +7,7 @@ class StepsController < ApplicationController
   before_action :maybe_skip, only: :edit
 
   helper_method :decoded_step_path
+  helper_method :application_title
 
   def ensure_application_present
     return if current_application
@@ -60,6 +61,9 @@ class StepsController < ApplicationController
 
   # This is an intentional noop
   def step_navigation; end
+
+  # This is an intentional noop
+  def application_title; end
 
   def snap_application
     SnapApplication.find_by(id: session[:snap_application_id])

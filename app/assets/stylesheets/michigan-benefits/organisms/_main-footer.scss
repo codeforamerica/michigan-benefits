@@ -25,17 +25,3 @@
     display: block;
   }
 }
-
-.security-message {
-  @extend %max-container;
-  color: $color-grey;
-  font-size: $font-size-smallest;
-  margin-bottom: $padding-small;
-
-  &:before {
-    content: "\e899";
-    display: inline-block;
-    font-family: $font-icon;
-    margin-right: .5em;
-   }
-}

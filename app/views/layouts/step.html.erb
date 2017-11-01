@@ -4,18 +4,22 @@
     <% back_path = content_for(:back_path) || previous_path(rel: 'back') %>
     <% if back_path.present? %>
       <%= link_to back_path, class: 'step-header__back-link' do %>
+        <span>Back</span>
         <i class="button__icon icon-arrow_back"></i>
       <% end %>
     <% end %>
-    <h4 class="step-header__title">
+    <h4 class="step-header__title step-header__title--centered">
       <%= content_for :header_title %>
-    </h4>
-    <h4 class="step-header__benefit-label">
-      <%= current_application&.application_title %>
     </h4>
   </div>
   <%= render 'shared/debug' %>
   <%= yield %>
+  <div class="form-card--meta-data">
+    <div class="form-card--benefit-label">
+      <%= application_title %>
+    </div>
+    <div class="form-card--security-message">Your information is always kept safe and secure</div>
+  </div>
   <%= render 'shared/footer' %>
 <% end %>
 
