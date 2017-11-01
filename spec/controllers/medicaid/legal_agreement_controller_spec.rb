@@ -10,7 +10,7 @@ RSpec.describe Medicaid::LegalAgreementController do
 
         put :update, params: { step: params }
 
-        expect(response).to redirect_to("/steps/medicaid/confirmation")
+        expect(response).to redirect_to("/steps/medicaid/sign-and-submit")
       end
     end
 

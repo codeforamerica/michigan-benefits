@@ -1,0 +1,23 @@
+<% content_for :header_title, "Sign and Submit" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Enter your full legal name here to sign this application.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <p>
+      By entering your name you agree that you want to apply for
+      Medicaid, that you have been honest on this application.
+    </p>
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.mb_input_field :signature,
+        "Sign by typing your full legal name",
+        autofocus: true,
+        options: { placeholder: "Your full legal name" } %>
+      <%= render "medicaid/next_step", button_label: "Sign and submit" %>
+    <% end %>
+  </div>
+</div>
