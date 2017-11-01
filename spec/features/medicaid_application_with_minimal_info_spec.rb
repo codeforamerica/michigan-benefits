@@ -146,6 +146,11 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
     end
 
+    on_page "Sign and Submit" do
+      fill_in "Sign by typing your full legal name", with: "Jessie Tester"
+      click_on "Sign and submit"
+    end
+
     on_page "Confirmation" do
       click_on "No"
     end

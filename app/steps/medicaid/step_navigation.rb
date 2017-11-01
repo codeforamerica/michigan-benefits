@@ -69,6 +69,7 @@ module Medicaid
       ],
       "Legal" => [
         Medicaid::LegalAgreementController,
+        Medicaid::SignAndSubmitController,
       ],
       "Success" => [
         Medicaid::ConfirmationController,
