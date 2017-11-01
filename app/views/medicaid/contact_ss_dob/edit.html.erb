@@ -3,7 +3,8 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Provide your Social Security Number and Date of Birth if you’re ready
+      <%= t("medicaid.contact_ss_dob.edit.title",
+            count: current_application.members.count) %>
     </div>
     <p class="text--help text--centered">
       This information isn’t required at this time. But if you submit it now,

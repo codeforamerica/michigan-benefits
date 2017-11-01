@@ -32,10 +32,4 @@ feature "Citizenship questions" do
     fill_in "What is your last name?", with: "Citizen"
     fill_in_birthday
   end
-
-  def fill_in_birthday
-    select "January", from: "step_birthday_2i"
-    select "1", from: "step_birthday_3i"
-    select "1969", from: "step_birthday_1i"
-  end
 end

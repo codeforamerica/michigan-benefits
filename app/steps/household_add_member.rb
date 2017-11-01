@@ -3,7 +3,7 @@
 class HouseholdAddMember < Step
   include MultiparameterAttributeAssignment
   extend AutoStripAttributes
-  include SocialSecurityNumber
+  include StepSocialSecurityNumber
 
   step_attributes(
     :birthday,

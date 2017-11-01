@@ -1,4 +1,6 @@
 class Member < ApplicationRecord
+  include SocialSecurityNumber
+
   PAYMENT_INTERVALS = [
     "Hourly",
     "Weekly",
@@ -49,13 +51,13 @@ class Member < ApplicationRecord
   attribute :ssn
   attr_encrypted(
     :ssn,
-      key: Rails.application.secrets.secret_key_for_ssn_encryption,
+    key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
 
   attribute :last_four_ssn
   attr_encrypted(
     :last_four_ssn,
-      key: Rails.application.secrets.secret_key_for_ssn_encryption,
+    key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
 
   def full_name

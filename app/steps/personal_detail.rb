@@ -2,7 +2,7 @@
 
 class PersonalDetail < Step
   extend AutoStripAttributes
-  include SocialSecurityNumber
+  include StepSocialSecurityNumber
 
   step_attributes(
     :sex,
