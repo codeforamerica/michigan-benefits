@@ -14,5 +14,15 @@ FactoryBot.define do
     trait :male do
       sex "male"
     end
+
+    trait :insured do
+      insured true
+      requesting_health_insurance true
+    end
+
+    trait :not_insured do
+      insured false
+      requesting_health_insurance false
+    end
   end
 end

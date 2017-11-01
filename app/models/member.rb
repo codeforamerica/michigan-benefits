@@ -60,11 +60,14 @@ class Member < ApplicationRecord
     key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
 
-  def self.first_insurance_holder
+  def self.insured
     where(insured: true).
-      order(created_at: :asc).
-      limit(1).
-      first
+      where(requesting_health_insurance: true).
+      order(created_at: :asc)
+  end
+
+  def self.after(member)
+    where("created_at > ?", member.created_at)
   end
 
   def full_name

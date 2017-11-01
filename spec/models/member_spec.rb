@@ -1,6 +1,29 @@
 require "rails_helper"
 
 RSpec.describe Member do
+  describe "scopes" do
+    describe ".first_insurance_holder" do
+      it "returns the first member that is insured" do
+        create(:member, insured: false, requesting_health_insurance: true)
+        create(:member, insured: true, requesting_health_insurance: false)
+        joel = create(:member, insured: true, requesting_health_insurance: true)
+
+        expect(Member.insured).to eq [joel]
+      end
+    end
+
+    describe ".after" do
+      it "returns the next member _after_ the provided member" do
+        joel = create(:member)
+        jessie = create(:member)
+        christa = create(:member)
+
+        expect(Member.after(joel)).to eq [jessie, christa]
+        expect(Member.after(jessie)).to eq [christa]
+      end
+    end
+  end
+
   describe "#female?" do
     it "is true if the sex is female" do
       expect(build(:member, sex: "female")).to be_female

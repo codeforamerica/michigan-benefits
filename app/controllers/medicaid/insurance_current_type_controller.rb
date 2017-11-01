@@ -38,7 +38,9 @@ module Medicaid
     def first_insurance_holder
       current_application.
         members.
-        first_insurance_holder
+        insured.
+        limit(1).
+        first
     end
 
     def next_member
@@ -46,9 +48,8 @@ module Medicaid
 
       current_application.
         members.
-        where(insured: true).
-        where("created_at > ?", current_member.created_at).
-        order(created_at: :asc).
+        insured.
+        after(current_member).
         limit(1).
         first
     end

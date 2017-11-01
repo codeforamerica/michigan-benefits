@@ -6,12 +6,12 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
       medicaid_application = create(:medicaid_application, anyone_insured: true)
       _primary_member = create(
         :member,
-        insured: false,
+        :not_insured,
         benefit_application: medicaid_application,
       )
       insured_member = create(
         :member,
-        insured: true,
+        :insured,
         benefit_application: medicaid_application,
       )
 
@@ -24,6 +24,7 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
       medicaid_application = create(:medicaid_application, anyone_insured: true)
       _joel = create(:member, benefit_application: medicaid_application)
       jessie = create(:member, benefit_application: medicaid_application)
+
       session[:medicaid_application_id] = medicaid_application.id
 
       get :edit, params: { member: jessie.id }
@@ -35,6 +36,7 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
       medicaid_application = create(:medicaid_application, anyone_insured: true)
       _joel = create(:member, benefit_application: medicaid_application)
       jessie = create(:member, benefit_application: medicaid_application)
+
       session[:medicaid_application_id] = medicaid_application.id
 
       put :update, params: {
