@@ -14,6 +14,7 @@ RSpec.describe Medicaid::SignAndSubmitController do
       medicaid_application = create(
         :medicaid_application,
         signature: "Hans Solo",
+        signed_at: nil,
       )
       session[:medicaid_application_id] = medicaid_application.id
 
