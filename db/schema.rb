@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101005455) do
+ActiveRecord::Schema.define(version: 20171102154724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,8 +105,6 @@ ActiveRecord::Schema.define(version: 20171101005455) do
     t.string "employed_monthly_income", default: [], array: true
     t.string "encrypted_last_four_ssn"
     t.string "encrypted_last_four_ssn_iv"
-    t.string "encrypted_ssn"
-    t.string "encrypted_ssn_iv"
     t.boolean "everyone_a_citizen"
     t.boolean "filing_federal_taxes_next_year"
     t.boolean "flint_water_crisis"
@@ -158,8 +156,6 @@ ActiveRecord::Schema.define(version: 20171101005455) do
     t.string "employment_status"
     t.string "encrypted_last_four_ssn"
     t.string "encrypted_last_four_ssn_iv"
-    t.string "encrypted_ssn"
-    t.string "encrypted_ssn_iv"
     t.string "first_name"
     t.boolean "in_college"
     t.string "insurance_type"

@@ -32,7 +32,7 @@ RSpec.describe ExtraMemberAttributes do
           "2. Date of birth: 06/20/1900",
           "3. Relationship: SELF",
           "4. Sex: #{member.sex}",
-          "5. Social security number: #{member.ssn}",
+          "5. Social security number (last 4): #{member.last_four_ssn}",
           "6. Marital status: Taken",
           "7. US Citizen: Yes",
           "8. Pregnant now/last 2 months: No",
