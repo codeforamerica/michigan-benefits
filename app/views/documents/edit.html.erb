@@ -25,7 +25,7 @@
       builder: MbFormBuilder,
       url: current_path,
       method: :put,
-      html: { data: { 'documents-form' => 'true' } } do |f| %>
+      html: { data: { 'uploadables-form' => 'true' } } do |f| %>
 
       <div class="form-card__uploadables" id="form-card__uploadables">
         <%= render partial: 'shared/uploadable',

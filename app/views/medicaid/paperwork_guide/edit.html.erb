@@ -1,0 +1,47 @@
+<% content_for :header_title, "Success" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Lastly, we suggest including some paperwork if you can right now.
+    </div>
+
+    <p class="text--help text--centered">
+      You can do this later but this will help speed up the process.
+    </p>
+  </header>
+
+  <%= form_for @step,
+    as: :step,
+    builder: MbFormBuilder,
+    url: current_path,
+    method: :put do |f| %>
+
+    <div class="form-card__content">
+      <footer class="text--centered">
+        <%= f.hidden_field(:upload_paperwork, class: 'boolean-answer') %>
+
+        <button
+          type="submit"
+          class="button button--next button--cta"
+          data-yes> Submit paperwork now </button>
+
+        <button
+          type="submit"
+          class="button"
+          data-no> I'll do this later </button>
+      </footer>
+    </div>
+  <% end %>
+
+  <p class='text--secure'>
+    <i class='illustration illustration--safety'></i>
+    Both MichiganBenefits.org and MDHHS maintain strict security guidelines
+    to protect the identities of Michigan residents.
+  </p>
+
+  <div class='slab'>
+    <%= render "shared/commonly_requested_uploadables",
+      uploadable_name: "paperwork" %>
+  </div>
+</div>
