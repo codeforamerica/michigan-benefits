@@ -8,7 +8,7 @@ module Medicaid
     )
 
     def insured_members_requesting_insurance
-      members.select(&:requesting_health_insurance).select(&:insured)
+      members.requesting_health_insurance.select(&:insured)
     end
 
     private

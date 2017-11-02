@@ -48,6 +48,10 @@ class Member < ApplicationRecord
     inclusion: { in: SEXES },
     allow_nil: true
 
+  scope :requesting_health_insurance, -> do
+    where(requesting_health_insurance: true)
+  end
+
   attribute :ssn
   attr_encrypted(
     :ssn,

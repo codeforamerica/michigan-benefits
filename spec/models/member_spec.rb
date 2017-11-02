@@ -1,6 +1,18 @@
 require "rails_helper"
 
 RSpec.describe Member do
+  describe ".requesting_health_insurance" do
+    it "returns members who are requesting health insurance" do
+      requesters = create_list(:member, 2, requesting_health_insurance: true)
+      _non_requesters =
+        create_list(:member, 2, requesting_health_insurance: false)
+
+      members = Member.requesting_health_insurance
+
+      expect(members).to match_array(requesters)
+    end
+  end
+
   describe "#female?" do
     it "is true if the sex is female" do
       expect(build(:member, sex: "female")).to be_female

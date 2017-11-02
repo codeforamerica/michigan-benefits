@@ -19,7 +19,7 @@
           <%= ff.mb_date_select :birthday, "What is your birthday?", { options: { start_year: 1900, end_year: Time.now.year, default: Date.new(1990,1,15), order: [:month, :day, :year] } } %>
         <% end %>
       <% else %>
-        <% @step.members.select{|m| m.requesting_health_insurance? }.each do |member| %>
+        <% @step.members.requesting_health_insurance.each do |member| %>
           <fieldset class="form-group">
             <%= f.fields_for('members[]', member) do |ff| %>
               <div class="household-member-group" data-member-name="<%= member.full_name %>">
