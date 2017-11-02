@@ -157,7 +157,7 @@ accounts?",
 
     on_page "Contact Preferences" do
       choose_yes(
-        "Would you like text message reminders about key steps and paperwork" +
+        "Would you like text message reminders about key steps and documents" +
         " required to help you through the enrollment process?",
       )
       click_on "Continue"
@@ -179,9 +179,9 @@ accounts?",
       click_on "Sign and submit"
     end
 
-    on_page "Paperwork" do
-      upload_paperwork
-      click_on "Done uploading paperwork"
+    on_page "Documents" do
+      upload_documents
+      click_on "Done uploading documents"
     end
 
     on_page "Application Submitted" do
@@ -206,17 +206,17 @@ accounts?",
     expect(find("#step_first_name").value).to eq "Jessie"
   end
 
-  def upload_paperwork
-    click_on "Submit paperwork now"
+  def upload_documents
+    click_on "Submit documents now"
     add_document_photo "https://example.com/images/drivers_license.jpg"
     add_document_photo "https://example.com/images/proof_of_income.jpg"
   end
 
   def add_document_photo(url)
-    input = %(<input type="hidden" name="step[paperwork][]" value="#{url}">)
+    input = %(<input type="hidden" name="step[documents][]" value="#{url}">)
     page.execute_script(
       <<~JAVASCRIPT
-        document.querySelector('[data-paperwork-form]').
+        document.querySelector('[data-documents-form]').
           insertAdjacentHTML('beforeend', '#{input}')
       JAVASCRIPT
     )

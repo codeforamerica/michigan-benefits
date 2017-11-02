@@ -1,8 +1,8 @@
 /*global $,uploadSetup,Shubox */
 
 var uploadSetup = function (previewTemplate) {
-  new Shubox('#document-drop', {
-    previewsContainer: '.form-card__documents',
+  new Shubox('#uploadables-drop', {
+    previewsContainer: '.form-card__uploadables',
     clickable: '#click-to-upload',
     previewTemplate: previewTemplate,
     acceptedFiles: '.pdf,.jpg,.jpeg,.png,.gif',
@@ -17,8 +17,10 @@ var uploadSetup = function (previewTemplate) {
       var titleH4 = $(file.previewElement).find('h4')
       var titleText = titleH4.html()
 
-      button.html(buttonHtml.replace('Upload documents', 'Upload more documents'))
-      titleH4.html(titleText.replace('Uploading', 'Uploaded'))
+      if (buttonHtml.indexOf('Upload more') < 0) {
+        button.html(buttonHtml.replace('Upload ', 'Upload more '))
+      }
+      titleH4.html(titleText.replace('Uploading ', 'Uploaded '))
       $(file.previewElement).find('input[type="hidden"]').val(file.s3url)
     },
     addedfile: function () {
@@ -31,6 +33,6 @@ var uploadSetup = function (previewTemplate) {
 
   $(document).on('click', '.link--delete', function (e) {
     e.preventDefault()
-    $(e.target).closest('.doc-preview').remove()
+    $(e.target).closest('.uploadable-preview').remove()
   })
 }

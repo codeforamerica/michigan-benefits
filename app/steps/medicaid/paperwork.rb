@@ -3,7 +3,7 @@
 module Medicaid
   class Paperwork < Step
     step_attributes(
-      documents: [],
+      paperwork: [],
     )
   end
 end
