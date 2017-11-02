@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.feature "Submit application with minimal information" do
   before do
-    page.driver.browser.current_session.basic_authorize("admin", "password")
+    user = create(:admin_user)
+    login_as(user)
   end
 
   scenario "The stats are accurate", javascript: true do

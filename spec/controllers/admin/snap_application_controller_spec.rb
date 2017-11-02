@@ -2,21 +2,18 @@ require "rails_helper"
 
 RSpec.describe Admin::SnapApplicationsController do
   describe "#index" do
-    it "returns error with no proper authentication" do
-      get :index
+    context "not authenticated" do
+      it "redirects to auth page" do
+        get :index
 
-      expect(response.status).to eq 401
+        expect(response.status).to eq 302
+      end
     end
 
-    context "performing a search" do
+    context "authenticated" do
       it "returns successfully" do
-        create(:snap_application, signature: "Joel Tester")
-
-        request.env["HTTP_AUTHORIZATION"] =
-          ActionController::HttpAuthentication::Basic.encode_credentials(
-            "admin",
-            "password",
-          )
+        admin_user = create(:admin_user)
+        sign_in(admin_user)
 
         get :index, params: { search: "Joel" }
 
