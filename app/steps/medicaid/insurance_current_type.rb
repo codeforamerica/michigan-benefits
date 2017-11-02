@@ -1,5 +1,5 @@
 module Medicaid
-  class InsuranceCurrentType < Step
+  class InsuranceCurrentType < MemberStep
     step_attributes(
       :insurance_type,
       :member_id,
@@ -22,10 +22,6 @@ module Medicaid
 
     def no_insurance_type_provided?
       insurance_type.blank?
-    end
-
-    def member
-      @_member ||= Member.find(member_id)
     end
   end
 end
