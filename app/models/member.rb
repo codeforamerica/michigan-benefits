@@ -60,6 +60,10 @@ class Member < ApplicationRecord
       order(created_at: :asc)
   end
 
+  def self.other_income
+    where(other_income: true).order(created_at: :asc)
+  end
+
   def self.after(member)
     where("created_at > ?", member.created_at)
   end
