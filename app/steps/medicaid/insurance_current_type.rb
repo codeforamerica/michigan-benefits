@@ -8,10 +8,14 @@ module Medicaid
     )
 
     def insured_members_requesting_insurance
-      members.requesting_health_insurance.select(&:insured)
+      members_requesting_health_insurance.select(&:insured)
     end
 
     private
+
+    def members_requesting_health_insurance
+      members.select(&:requesting_health_insurance)
+    end
 
     def validate_household_member(member)
       if member.requesting_health_insurance? && member.insured?

@@ -8,5 +8,9 @@ module Medicaid
       member.valid?
       member.errors[:last_four_ssn].blank?
     end
+
+    def members_requesting_health_insurance
+      members.select(&:requesting_health_insurance)
+    end
   end
 end
