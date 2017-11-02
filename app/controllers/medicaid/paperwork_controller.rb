@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class DocumentsController < MedicaidStepsController
+  class PaperworkController < MedicaidStepsController
     def next_path
       medicaid_root_path(anchor: "fold")
     end
@@ -9,11 +9,11 @@ module Medicaid
     private
 
     def skip?
-      not_uploading_documents?
+      not_uploading_paperwork?
     end
 
-    def not_uploading_documents?
-      !current_application&.upload_documents?
+    def not_uploading_paperwork?
+      !current_application&.upload_paperwork?
     end
   end
 end
