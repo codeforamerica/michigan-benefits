@@ -39,5 +39,9 @@ module Medicaid
     def skip?
       current_application.nobody_insured?
     end
+
+    def member_attrs
+      %i[insurance_type]
+    end
   end
 end
