@@ -9,6 +9,7 @@ require "capybara/rspec"
 require "selenium/webdriver"
 require "capybara/drivers/chrome"
 require "capybara/drivers/headless_chrome"
+require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 Capybara.javascript_driver = :headless_chrome # or `:chrome` for full browser
@@ -41,6 +42,8 @@ RSpec.configure do |config|
   config.include FeatureHelper, type: :feature
   config.include SnapApplicationFormHelper, type: :feature
   config.include MedicaidApplicationFormHelper, type: :feature
+  config.include Warden::Test::Helpers, type: :feature
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include GenericHelper
   config.include BackgroundJobs
 end

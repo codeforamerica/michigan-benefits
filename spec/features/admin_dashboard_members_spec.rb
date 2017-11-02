@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.feature "Admins can view members" do
   before do
-    page.driver.browser.current_session.basic_authorize("admin", "password")
+    user = create(:admin_user)
+    login_as(user)
   end
 
   scenario "Members is linked from the navigation" do
