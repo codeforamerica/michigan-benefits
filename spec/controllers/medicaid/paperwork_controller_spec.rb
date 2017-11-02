@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Medicaid::DocumentsController, type: :controller do
+RSpec.describe Medicaid::PaperworkController, type: :controller do
   describe "#next_path" do
     it "is the success page path" do
       expect(subject.next_path).to eq "/dual-index#fold"
@@ -12,7 +12,7 @@ RSpec.describe Medicaid::DocumentsController, type: :controller do
       it "redirects to next step" do
         medicaid_application = create(
           :medicaid_application,
-          upload_documents: false,
+          upload_paperwork: false,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -26,7 +26,7 @@ RSpec.describe Medicaid::DocumentsController, type: :controller do
       it "renders the edit page" do
         medicaid_application = create(
           :medicaid_application,
-          upload_documents: true,
+          upload_paperwork: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
