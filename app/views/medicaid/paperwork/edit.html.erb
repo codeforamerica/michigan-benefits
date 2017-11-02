@@ -11,20 +11,20 @@
   method: :put,
   html: { data: { 'documents-form' => 'true' } } do |f| %>
 
-  <div class="form-card" id="document-drop">
+  <div class="form-card" id="uploadables-drop">
     <header class="form-card__header">
       <div class="form-card__title">
         Upload your paperwork
       </div>
       <p class="text--help text--centered">
         Click the "Upload paperwork” button below, or drag and drop photos or
-        documents onto this area of the page to upload them.
+        paperwork onto this area of the page to upload them.
       </p>
     </header>
 
-    <div class="form-card__documents" id="form-card__documents">
-      <%= render partial: 'shared/document',
-        collection: current_application.documents,
+    <div class="form-card__uploadables" id="form-card__uploadables">
+      <%= render partial: 'shared/uploadable',
+        collection: current_application.paperwork,
         as: :url %>
     </div>
 
@@ -43,6 +43,8 @@
 
 <% unless Rails.env.test? -%>
   <script>
-    window.onload = function() { uploadSetup("<%= j render "shared/uploading" %>") }
+    window.onload = function() {
+      uploadSetup("<%= j render "shared/uploadable_uploading", attribute_name: "paperwork" %>")
+    }
   </script>
 <% end -%>
