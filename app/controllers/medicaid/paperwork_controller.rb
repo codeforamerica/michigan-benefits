@@ -2,10 +2,6 @@
 
 module Medicaid
   class PaperworkController < MedicaidStepsController
-    def next_path
-      medicaid_root_path(anchor: "fold")
-    end
-
     private
 
     def skip?
