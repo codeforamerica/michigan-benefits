@@ -40,6 +40,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include FeatureHelper, type: :feature
   config.include SnapApplicationFormHelper, type: :feature
+  config.include MedicaidApplicationFormHelper, type: :feature
   config.include GenericHelper
   config.include BackgroundJobs
 end

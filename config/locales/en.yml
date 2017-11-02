@@ -75,3 +75,8 @@ en:
         title:
           one: Do you pay student loan interest?
           other: Does anyone in your household pay student loan interest?
+    contact_ss_dob:
+      edit:
+        title:
+          one: Provide your Social Security Number and Date of Birth if you’re ready
+          other: Provide the Social Security Numbers and Dates of Birth for your household members if you're ready

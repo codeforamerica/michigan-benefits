@@ -8,7 +8,7 @@ module Medicaid
     )
 
     def valid?
-      if members.select(&:requesting_health_insurance?).any?
+      if members_requesting_health_insurance.any?
         true
       else
         errors.add(
@@ -17,6 +17,12 @@ module Medicaid
         )
         false
       end
+    end
+
+    private
+
+    def members_requesting_health_insurance
+      members.select(&:requesting_health_insurance)
     end
   end
 end

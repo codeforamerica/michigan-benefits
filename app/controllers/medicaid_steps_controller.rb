@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MedicaidStepsController < StepsController
+  helper_method :single_member_household?
+
   def ensure_application_present
     if current_application.blank?
       redirect_to medicaid_intro_location_steps_path

@@ -261,9 +261,82 @@ RSpec.feature "Medicaid app" do
     end
 
     on_page "Income & Expense Amounts" do
+      expect(page).to have_content("You're almost done!")
+      click_on "Next"
+    end
+
+    on_page "Income & Expense Amounts" do
+      expect(page).to have_content("Tell us the specific income received")
+      fill_in "Your Self-Employment (average monthly income)", with: "100"
+      fill_in "Your Unemployment (average monthly income)", with: "100"
+      click_on "Next"
+    end
+
+    on_page "Income & Expense Amounts" do
+      expect(page).to have_content("Tell us your specific expenses")
+      fill_in "Child Support, Alimony, or Arrears (average monthly expense)",
+              with: "100"
+      fill_in "Self Employment (average monthly expense)", with: "100"
+      click_on "Next"
+    end
+
+    on_page "Contact Information & Followup" do
       expect(page).to have_content(
-        "Okay, thanks! Now describe your income and expenses.",
+        "Do you receive mail at your current residential address?",
       )
+      click_on "No"
+    end
+
+    on_page "Contact Information & Followup" do
+      expect(page).to have_content(
+        "Is there somewhere we can reliably send you mail?",
+      )
+      click_on "No"
+    end
+
+    on_page "Contact Information & Followup" do
+      expect(page).to have_content(
+        "Are you currently homeless?",
+      )
+      click_on "Yes"
+    end
+
+    on_page "Contact Information & Followup" do
+      expect(page).to have_content(
+        "What is the best number for you to receive phone calls?",
+      )
+      fill_in "Phone number", with: "5555555555"
+      click_on "Next"
+    end
+
+    on_page "Contact Information & Followup" do
+      expect(page).to have_content(
+        "What is the best number for you to receive text messages?",
+      )
+      click_on "Next"
+    end
+
+    on_page "Contact Information & Followup" do
+      expect(page).to have_content(
+        "What is the best email address at which to contact you?",
+      )
+      click_on "Next"
+    end
+
+    on_page "Contact Information & Followup" do
+      expect(page).to have_content(
+        "Provide the Social Security Numbers and Dates of Birth "\
+        "for your household members if you're ready",
+      )
+      click_on "Yes"
+    end
+
+    on_page "Contact Information & Followup" do
+      expect(page).to have_content(
+        "Tell us your Social Security Number and Date of Birth",
+      )
+      enter_dob_and_ssn(full_name: "Jessie Tester", last_four_ssn: "1234")
+      enter_dob_and_ssn(full_name: "Christa Tester", last_four_ssn: "0111")
     end
   end
 end

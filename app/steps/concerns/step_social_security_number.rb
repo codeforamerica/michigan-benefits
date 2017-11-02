@@ -1,4 +1,4 @@
-module SocialSecurityNumber
+module StepSocialSecurityNumber
   extend ActiveSupport::Concern
 
   SSN_REGEX = /\A\d{4}\z/

@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class ContactSocialSecurity < Step
-    include MultiparameterAttributeAssignment
-    extend AutoStripAttributes
-    include SocialSecurityNumber
+  class ContactSocialSecurity < ManyMembersStep
+    step_attributes(:members)
 
-    step_attributes(
-      :last_four_ssn,
-      :birthday,
-    )
+    def validate_household_member(member)
+      member.valid?
+      member.errors[:last_four_ssn].blank?
+    end
 
-    # https://github.com/rails/rails/pull/8189#issuecomment-10329403
-    def class_for_attribute(attr)
-      return Date if attr == "birthday"
+    def members_requesting_health_insurance
+      members.select(&:requesting_health_insurance)
     end
   end
 end
