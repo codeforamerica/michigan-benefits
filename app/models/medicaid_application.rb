@@ -3,12 +3,6 @@
 class MedicaidApplication < ApplicationRecord
   has_many :members, as: :benefit_application, dependent: :destroy
 
-  attribute :ssn
-  attr_encrypted(
-    :ssn,
-    key: Rails.application.secrets.secret_key_for_ssn_encryption,
-  )
-
   attribute :last_four_ssn
   attr_encrypted(
     :last_four_ssn,
