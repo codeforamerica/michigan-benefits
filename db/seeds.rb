@@ -286,6 +286,7 @@ complete_medicaid_application = MedicaidApplication.find_or_initialize_by(
 complete_medicaid_application.update!(
   michigan_resident: true,
   anyone_insured: true,
+  unemployment_income: 100,
 )
 
 complete_medicaid_primary = Member.find_or_initialize_by(
