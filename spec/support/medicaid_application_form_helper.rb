@@ -1,6 +1,6 @@
 module MedicaidApplicationFormHelper
-  def enter_dob_and_ssn(full_name:, last_four_ssn:)
-    within(".household-member-group[data-member-name='#{full_name}']") do
+  def enter_dob_and_ssn(display_name:, last_four_ssn:)
+    within(".household-member-group[data-member-name='#{display_name}']") do
       select("January")
       select("1")
       select("1969")

@@ -6,7 +6,7 @@ class SnapApplicationMemberAttributes
 
   def to_h
     {
-      "#{position}_member_full_name" => member.full_name,
+      "#{position}_member_full_name" => member.display_name,
       "#{position}_member_sex_male" => bool_to_checkbox(member.sex == "male"),
       "#{position}_member_sex_female" =>
         bool_to_checkbox(member.sex == "female"),

@@ -68,8 +68,8 @@ class Member < ApplicationRecord
     where("created_at > ?", member.created_at)
   end
 
-  def full_name
-    "#{first_name} #{last_name}"
+  def display_name
+    "#{first_name} #{last_name}".titleize
   end
 
   def primary_member?

@@ -6,7 +6,7 @@ class EmployedMemberAttributes
 
   def to_h
     {
-      "#{position}_employed_full_name" => member.full_name,
+      "#{position}_employed_full_name" => member.display_name,
       "#{position}_employed_employer_name" => member.employed_employer_name,
       "#{position}_employed_hours_per_week" => member.employed_hours_per_week,
       "#{position}_employed_hours_interval" =>

@@ -91,11 +91,11 @@ feature "SNAP application with maximum info" do
 
     on_page "Money & Income" do
       select_employment(
-        full_name: "Jessie Tester",
+        display_name: "Jessie Tester",
         employment_status: "Self Employed",
       )
       select_employment(
-        full_name: "Joey Tester",
+        display_name: "Joey Tester",
         employment_status: "Employed",
       )
       click_on "Continue"

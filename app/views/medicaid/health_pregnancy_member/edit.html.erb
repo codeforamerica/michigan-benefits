@@ -23,7 +23,7 @@
           <%= f.fields_for("members[]", member) do |ff| %>
             <%= ff.mb_checkbox(
               :new_mom,
-              member.full_name,
+              member.display_name,
               { checked_value: "1", unchecked_value: "0" },
             ) %>
           <% end %>

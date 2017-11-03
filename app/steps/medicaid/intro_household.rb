@@ -1,8 +1,7 @@
 module Medicaid
   class IntroHousehold < Step
     step_attributes(
-      :first_name,
-      :last_name,
+      :primary_member,
       :non_applicant_members,
     )
   end

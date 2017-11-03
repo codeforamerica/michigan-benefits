@@ -107,6 +107,6 @@ class MemberDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how members are displayed
   # across all pages of the admin dashboard.
   def display_resource(member)
-    "#{member.first_name} #{member.last_name}"
+    member.display_name
   end
 end

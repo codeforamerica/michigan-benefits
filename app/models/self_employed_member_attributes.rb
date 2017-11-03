@@ -6,7 +6,7 @@ class SelfEmployedMemberAttributes
 
   def to_h
     {
-      "#{position}_self_employed_full_name" => member.full_name,
+      "#{position}_self_employed_full_name" => member.display_name,
       "#{position}_self_employed_profession" => member.self_employed_profession,
       "#{position}_self_employed_monthly_income" =>
         member.self_employed_monthly_income,

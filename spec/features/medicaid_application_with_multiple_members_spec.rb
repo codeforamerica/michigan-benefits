@@ -199,7 +199,7 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Tell us who in your household has one or more jobs.",
       )
-      select_job_number(full_name: "Christa Tester", job_number: "2 jobs")
+      select_job_number(display_name: "Christa Tester", job_number: "2 jobs")
       click_on "Next"
 
       expect(page).to have_content("Is anyone in the household self-employed?")
@@ -336,8 +336,8 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Tell us your Social Security Number and Date of Birth",
       )
-      enter_dob_and_ssn(full_name: "Jessie Tester", last_four_ssn: "1234")
-      enter_dob_and_ssn(full_name: "Christa Tester", last_four_ssn: "0111")
+      enter_dob_and_ssn(display_name: "Jessie Tester", last_four_ssn: "1234")
+      enter_dob_and_ssn(display_name: "Christa Tester", last_four_ssn: "0111")
     end
   end
 end

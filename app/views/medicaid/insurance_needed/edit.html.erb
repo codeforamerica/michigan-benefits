@@ -19,7 +19,7 @@
           <%= f.fields_for("members[]", member) do |ff| %>
             <%= ff.mb_checkbox(
               :requesting_health_insurance,
-              member.full_name,
+              member.display_name,
               { checked_value: "1", unchecked_value: "0" },
             ) %>
           <% end %>

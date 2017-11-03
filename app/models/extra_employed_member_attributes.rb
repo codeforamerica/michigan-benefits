@@ -4,7 +4,7 @@ class ExtraEmployedMemberAttributes
   end
 
   def title
-    "Employment details for household member: #{member.full_name}"
+    "Employment details for household member: #{member.display_name}"
   end
 
   def to_a

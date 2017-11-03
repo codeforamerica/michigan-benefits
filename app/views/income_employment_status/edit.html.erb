@@ -17,7 +17,7 @@
       <% @step.members.each do |member| %>
         <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
           <fieldset class="form-group">
-            <div class="household-member-group" data-member-name="<%= member.full_name %>">
+            <div class="household-member-group" data-member-name="<%= member.display_name %>">
               <h4><%= header_name(member) %></h4>
               <%= ff.mb_radio_set :employment_status,
                 "",

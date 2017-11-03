@@ -31,7 +31,7 @@ RSpec.describe SnapApplicationAttributes do
         mailing_address_zip: "12345",
         members_buy_food_with_no: "Yes",
         members_buy_food_with_yes: nil,
-        members_not_buy_food_with: member.full_name,
+        members_not_buy_food_with: member.display_name,
         phone_number_0: "2",
         phone_number_1: "2",
         phone_number_2: "2",
