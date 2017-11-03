@@ -178,5 +178,11 @@ RSpec.feature "Medicaid app" do
       )
       click_on "I'll do this later"
     end
+
+    on_pages "Application Submitted" do
+      expect(page).to have_content(
+        "Your application has been successfully submitted",
+      )
+    end
   end
 end
