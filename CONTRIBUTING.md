@@ -114,6 +114,28 @@ that people are often taking photos or attaching documents larger than that.
 [dashboard]: https://dashboard.shubox.io
 [@jayroh]: https://github.com/jayroh
 
+### Admin dashboard
+
+Our admin dashboard is built with [administrate].
+
+In order to access the admin dashboard in any environment, you'll need an
+`AdminUser` account.
+
+To add new users on staging and production, those with Heroku access can create
+accounts via Heroku console. Example:
+
+```
+heroku run rails c -r staging
+AdminUser.create!(email: "jessie@example.com", password: SecureRandom.base64)
+```
+
+If you are creating an account for someone else, you can instruct them to visit
+`/admin_users/password/new` (eg:
+https://staging.michiganbenefits.org/admin_users/password/new) and enter their
+email address. Submitting the form on that page triggers a password reset email.
+
+[administrate]: https://github.com/thoughtbot/administrate
+
 ### Deploying
 
 See [DEPLOYING.md](DEPLOYING.md)
