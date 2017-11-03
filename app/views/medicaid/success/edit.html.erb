@@ -1,12 +1,50 @@
 <% content_for :back_path, nil %>
-<% content_for :header_title, "Success" %>
+<% content_for :header_title, "Application Submitted" %>
 
 <div class="form-card">
-  <header class="form-card__header">
-    <div class="illustration illustration--success"></div>
-    <div class="form-card__title">Thanks for submitting an application!</div>
-  </header>
+    <header class="form-card__header">
+      <div class="illustration illustration--success"></div>
+      <div class="pre-title">Congratulations</div>
+      <div class="form-card__title">
+        Your application has been successfully submitted to MDHHS.
+      </div>
+      <div class="text--caps text--centered text--little-help nudge--med">
+        You applied for
+      </div>
+      <label class="program-selector program-selector__unbordered">
+        <h4 class="program-selector__title">Medicaid</h4>
+      </label>
+    </header>
 
-  <div class="form-card__confirmation">
-  </div>
+    <div class="form-card__content form-card__expect_next">
+      <h3 class="with-padding-med">What to expect next:</h3>
+      <div class="media-box with-padding-small">
+        <div class="media-box__media">
+          <div class="emoji emoji--med emoji--clipboard"></div>
+        </div>
+        <div class="media-box__content">
+          <p>
+          Your county will provide you with a list of paperwork you may need to
+          submit to verify your eligibility. Commonly requested items are
+          identification, paystubs, and health insurance cards if you have
+          another plan currently.
+          </p>
+        </div>
+      </div>
+
+      <div class="media-box with-padding-med">
+        <div class="media-box__media">
+          <div class="emoji emoji--med emoji--modern-phone"></div>
+        </div>
+        <div class="media-box__content">
+          <div class="media-box__content">
+            <p>
+            <b>If you have questions about your application</b>
+            contact the <%= full_office_name(current_application)  %>
+          office at <%= number_to_phone(current_application.receiving_office_phone_number) %>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

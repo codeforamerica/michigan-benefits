@@ -1,6 +1,6 @@
 class OfficeRecipient
-  def initialize(snap_application:)
-    @snap_application = snap_application
+  def initialize(benefit_application:)
+    @benefit_application = benefit_application
   end
 
   def fax_number
@@ -23,7 +23,7 @@ class OfficeRecipient
     if office_location.present?
       self.class.offices[office_location]
     else
-      self.class.find_by(zip: residential_address.zip)
+      self.class.find_by(zip: residential_address_zip)
     end
   end
 
@@ -72,13 +72,21 @@ class OfficeRecipient
 
   private
 
-  attr_reader :snap_application
+  attr_reader :benefit_application
+
+  def residential_address_zip
+    if benefit_application.respond_to?(:residential_zip)
+      benefit_application.residential_zip
+    else
+      residential_address.zip
+    end
+  end
 
   def residential_address
-    snap_application.residential_address
+    benefit_application.residential_address
   end
 
   def office_location
-    snap_application.office_location
+    benefit_application.office_location
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102231333) do
+ActiveRecord::Schema.define(version: 20171102231334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 20171102231333) do
     t.string "mailing_zip"
     t.boolean "michigan_resident", null: false
     t.boolean "need_medical_expense_help_3_months"
+    t.string "office_location"
     t.string "paperwork", array: true
     t.string "phone_number"
     t.boolean "reliable_mail_address"

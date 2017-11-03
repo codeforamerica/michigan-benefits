@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MedicaidApplication < ApplicationRecord
+  include Submittable
+
   has_many :members, as: :benefit_application, dependent: :destroy
 
   attribute :last_four_ssn

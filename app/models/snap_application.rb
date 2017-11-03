@@ -1,4 +1,6 @@
 class SnapApplication < ApplicationRecord
+  include Submittable
+
   CARE_EXPENSES = %w[
     childcare
     disabled_adult_care
@@ -123,22 +125,6 @@ class SnapApplication < ApplicationRecord
 
   def zip
     residential_address.zip
-  end
-
-  def receiving_office_name
-    receiving_office.name
-  end
-
-  def receiving_office_email
-    receiving_office.email
-  end
-
-  def receiving_office_phone_number
-    receiving_office.phone_number
-  end
-
-  def receiving_office
-    @receiving_office ||= OfficeRecipient.new(snap_application: self)
   end
 
   def full_name
