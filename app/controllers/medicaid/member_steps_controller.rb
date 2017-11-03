@@ -36,5 +36,15 @@ module Medicaid
 
       current_application.members.find(params[:member])
     end
+
+    def next_member
+      return if current_member.nil?
+
+      current_application.
+        members.
+        after(current_member).
+        limit(1).
+        first
+    end
   end
 end

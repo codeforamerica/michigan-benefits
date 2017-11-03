@@ -80,6 +80,16 @@ class Member < ApplicationRecord
     "#{first_name} #{last_name}".titleize
   end
 
+  def self.receiving_income
+    where(
+      <<~SQL
+        members.employed = true OR
+          members.self_employed = true OR
+          'unemployment' = ANY (members.other_income_types)
+      SQL
+    )
+  end
+
   def primary_member?
     benefit_application.primary_member.id == id
   end
@@ -96,6 +106,10 @@ class Member < ApplicationRecord
 
   def not_employed?
     employment_status == "not_employed"
+  end
+
+  def receives_unemployment_income?
+    other_income_types.include? "unemployment"
   end
 
   def female?

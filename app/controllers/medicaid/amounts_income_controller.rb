@@ -1,26 +1,42 @@
 module Medicaid
-  class AmountsIncomeController < MedicaidStepsController
+  class AmountsIncomeController < Medicaid::MemberStepsController
+    def current_member
+      @_current_member ||= super || first_member_with_income
+    end
+
+    def update
+      @step = step_class.new(
+        step_params.merge(member_id: current_member.id),
+      )
+
+      if @step.valid?
+        current_member.update!(step_params)
+        after_successful_update_hook
+        redirect_to(next_path)
+      else
+        render :edit
+      end
+    end
+
     private
 
-    def existing_attributes
-      HashWithIndifferentAccess.new(income_attributes)
+    def first_member_with_income
+      current_application.
+        members.
+        receiving_income.
+        limit(1).
+        first
     end
 
-    def income_attributes
-      {
-        unemployment_income: current_application.unemployment_income,
-        self_employed_monthly_income:
-        current_application.self_employed_monthly_income,
-      }.merge(employed_monthly_income_attributes)
-    end
+    def next_member
+      return if current_member.nil?
 
-    def employed_monthly_income_attributes
-      {}.tap do |income_hash|
-        employed_number_of_jobs&.times do |count|
-          income_hash["employed_monthly_income_#{count}"] =
-            current_application.employed_monthly_income[count]
-        end
-      end
+      current_application.
+        members.
+        receiving_income.
+        after(current_member).
+        limit(1).
+        first
     end
 
     def employed_number_of_jobs
@@ -28,19 +44,43 @@ module Medicaid
     end
 
     def skip?
-      nobody_employed? && not_self_employed? && not_receiving_unemployment?
+      no_one_with_income? || member_has_no_income?
     end
 
-    def nobody_employed?
+    def no_one_with_income?
+      no_one_employed? &&
+        no_one_self_employed? &&
+        no_one_with_other_income?
+    end
+
+    def member_has_no_income?
+      member_not_employed? &&
+        member_not_self_employed? &&
+        member_not_receiving_unemployment?
+    end
+
+    def no_one_employed?
       !current_application&.anyone_employed?
     end
 
-    def not_self_employed?
+    def no_one_self_employed?
       !current_application&.anyone_self_employed?
     end
 
-    def not_receiving_unemployment?
-      !current_application&.income_unemployment?
+    def no_one_with_other_income?
+      !current_application&.anyone_other_income?
+    end
+
+    def member_not_employed?
+      !current_member&.employed?
+    end
+
+    def member_not_self_employed?
+      !current_member&.self_employed?
+    end
+
+    def member_not_receiving_unemployment?
+      !current_member&.unemployment_income?
     end
   end
 end

@@ -9,7 +9,8 @@ module Medicaid
 
       if step.valid?
         ActiveRecord::Base.transaction { step.members.each(&:save!) }
-        redirect_to next_path
+        after_successful_update_hook
+        redirect_to(next_path)
       else
         render :edit
       end
