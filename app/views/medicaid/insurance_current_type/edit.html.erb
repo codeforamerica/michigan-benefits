@@ -17,7 +17,7 @@
 
       <%= f.hidden_field(:member_id, value: current_member.id) %>
 
-      <%= f.mb_radio_set :insurance_type, "Insurance plans",
+      <%= f.mb_radio_set :insurance_type, "",
         [
           { value: "Medicaid", label: "Medicaid" },
           { value: "CHIP/MIChild", label: "CHIP/MIChild" },

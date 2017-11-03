@@ -136,7 +136,7 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "What type of insurance plan is Jessie Tester currently enrolled in",
       )
-      select_radio(question: "Insurance plans", answer: "Medicaid")
+      choose("Medicaid")
       click_on "Next"
     end
 
