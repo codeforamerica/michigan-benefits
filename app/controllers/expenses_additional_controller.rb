@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ExpensesAdditionalController < SnapStepsController
   PREVIOUS_SECTION_ATTRIBUTES = %w[
     court_ordered

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MedicaidApplication < ApplicationRecord
   has_many :members, as: :benefit_application, dependent: :destroy
 

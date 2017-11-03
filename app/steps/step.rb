@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Step
   include ActiveModel::Model
   include ActiveModel::AttributeAssignment

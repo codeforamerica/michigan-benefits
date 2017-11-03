@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MedicaidStepsController < StepsController
   helper_method :single_member_household?
 

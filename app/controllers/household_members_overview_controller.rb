@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class HouseholdMembersOverviewController < SnapStepsController
   def edit
     @step = step_class.new(

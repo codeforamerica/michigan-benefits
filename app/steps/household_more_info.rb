@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class HouseholdMoreInfo < Step
   step_attributes(
     :everyone_a_citizen,

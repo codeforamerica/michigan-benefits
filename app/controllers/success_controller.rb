@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SuccessController < SnapStepsController
   def previous_path(*_args)
     nil

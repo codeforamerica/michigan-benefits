@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IncomeAdditionalController < SnapStepsController
   def edit
     @additional_income = current_application.additional_income.map do |key|

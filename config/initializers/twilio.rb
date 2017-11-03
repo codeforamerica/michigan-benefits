@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 if Rails.env.development? || Rails.env.test?
   require File.expand_path("#{Rails.root}/spec/support/fake_twilio_client")
   silence_warnings do

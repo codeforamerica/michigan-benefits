@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RenameNewMomInMedicaidApplication < ActiveRecord::Migration[5.1]
   def up
     add_column :medicaid_applications, :anyone_new_mom, :boolean

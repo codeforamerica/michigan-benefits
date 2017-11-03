@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class HourlyIncomeCalculator
   AVERAGE_WEEKS_PER_MONTH = 4.33
   def initialize(pay_quantity: nil, pay_interval: nil, hours_per_week: nil)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "find_chrome"
 
 Capybara.register_driver :headless_chrome do |app|

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ManyMemberStepsController < SnapStepsController
   def edit
     step

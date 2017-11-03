@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "capybara/rails"
 require "capybara/drivers/chrome"
 require "capybara/drivers/headless_chrome"

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IncomeChange < Step
   step_attributes(
     :income_change,

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Fax
   delegate \
     :sfax_api_key,

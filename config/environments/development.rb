@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require Rails.root.join("config/smtp")
 
 Rails.application.configure do

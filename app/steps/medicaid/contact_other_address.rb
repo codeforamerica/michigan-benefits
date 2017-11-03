@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Medicaid
   class ContactOtherAddress < Step
     step_attributes(

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ExpensesHousing < Step
   step_attributes(
     :insurance_expense,

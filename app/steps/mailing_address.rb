@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MailingAddress < Step
   step_attributes(
     :city,

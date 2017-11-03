@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class HouseholdAddMember < Step
   include MultiparameterAttributeAssignment
   extend AutoStripAttributes

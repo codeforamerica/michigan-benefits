@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SkipSendApplicationsController < SnapStepsController
   def create
     flash[:notice] = "Your application has been submitted."

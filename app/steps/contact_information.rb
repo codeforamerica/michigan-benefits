@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ContactInformation < Step
   step_attributes(
     :email,

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Success < Step
   step_attributes :email, :signed_at
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ExpensesAdditionalSource < Step
   step_attributes(
     :court_ordered,

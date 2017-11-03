@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SnapApplicationMemberAttributes
   def initialize(member:, position:)
     @member = member

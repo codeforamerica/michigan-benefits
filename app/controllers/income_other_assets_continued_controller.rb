@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IncomeOtherAssetsContinuedController < SnapStepsController
   def edit
     financial_accounts = array_to_checkboxes(

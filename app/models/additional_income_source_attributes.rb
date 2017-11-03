@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AdditionalIncomeSourceAttributes
   def initialize(source:, position:, snap_application:)
     @source = source

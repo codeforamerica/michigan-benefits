@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Medicaid
   class IncomeJobNumber < Step
     step_attributes(:employed_number_of_jobs)

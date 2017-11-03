@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
   devise_for :admin_users
   match "/delayed_job" => DelayedJobWeb, anchor: false, via: %i(get post)

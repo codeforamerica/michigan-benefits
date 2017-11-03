@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class HouseholdAddMemberController < SnapStepsController
   helper_method :member_id
 

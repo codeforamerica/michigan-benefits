@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Medicaid
   class IncomeOtherIncomeTypeController < Medicaid::MemberStepsController
     def edit

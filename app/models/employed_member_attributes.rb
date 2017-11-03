@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EmployedMemberAttributes
   def initialize(member:, position:)
     @member = member

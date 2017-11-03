@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 puts "Creating minimal snap application..."
 
 minimal_application = SnapApplication.find_or_initialize_by(

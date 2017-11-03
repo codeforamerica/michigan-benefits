@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Medicaid
   class HealthDisabilityMember < ManyMembersStep
     step_attributes(:members)

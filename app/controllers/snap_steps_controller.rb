@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SnapStepsController < StepsController
   def ensure_application_present
     if current_application.blank?

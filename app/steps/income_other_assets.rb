@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IncomeOtherAssets < Step
   step_attributes(
     :money_or_accounts_income,

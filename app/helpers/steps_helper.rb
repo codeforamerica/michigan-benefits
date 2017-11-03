@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module StepsHelper
   def header_name(household_member)
     name = household_member.first_name.titleize

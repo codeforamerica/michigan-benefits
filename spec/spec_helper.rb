@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "simplecov"
 require "pry"
 require "webmock/rspec"

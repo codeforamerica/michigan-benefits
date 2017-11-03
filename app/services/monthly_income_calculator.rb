@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MonthlyIncomeCalculator
   AVERAGE_WEEKS_PER_MONTH = 4.33
   MONTHS_PER_YEAR = 12

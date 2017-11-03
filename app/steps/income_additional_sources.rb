@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IncomeAdditionalSources < Step
   step_attributes(
     :child_support,
