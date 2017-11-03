@@ -1,8 +1,12 @@
-<% content_for :header_title, "Income &amp; Expense Amounts" %>
+<% content_for :header_title, "Income &amp; Expense Amounts".html_safe %>
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Tell us the specific income received.</div>
+    <div class="form-card__title">
+      <%= t("medicaid.amounts_income.edit.title",
+            count: current_application.members.count,
+            name: current_member.full_name) %>
+    </div>
     <p class="text--help text--centered">
       Please provide the amount before taxes, not take home pay.
       If you don’t know the exact number, that’s okay. These questions aren’t
@@ -17,27 +21,26 @@
       url: current_path,
       method: :put do |f| %>
 
+      <%= f.hidden_field :member_id, value: current_member.id %>
+
+      <%= f.mb_form_errors :incomes_missing %>
+
       <% if current_member.employed? %>
-        <%= f.mb_money_field :employed_monthly_income, "Your Current Job" %>
+        <%= f.mb_money_field(
+         :employed_monthly_income,
+         "Job {index}",
+         options: { count: current_member.employed_number_of_jobs }
+       ) %>
       <% end %>
 
-      <% if current_application.anyone_self_employed? %>
-        <p class="text--section-header">
-          Self-Employment
-        </p>
+      <% if current_member.self_employed? %>
         <%= f.mb_money_field :self_employed_monthly_income,
-          "Monthly income (before taxes)" %>
+          "Self-Employment (average monthly income)" %>
       <% end %>
 
-      <% if current_application.
-          primary_member.
-          other_income_types.
-          include?("unemployment") %>
-        <p class="text--section-header">
-          Other Income
-        </p>
+      <% if current_member.receives_unemployment_income? %>
         <%= f.mb_money_field :unemployment_income,
-          "Monthly unemployment income (before taxes)" %>
+          "Unemployment (average monthly income)" %>
       <% end %>
 
       <%= render "medicaid/next_step" %>

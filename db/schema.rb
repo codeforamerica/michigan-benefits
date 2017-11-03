@@ -152,7 +152,6 @@ ActiveRecord::Schema.define(version: 20171108010437) do
     t.string "sms_phone_number"
     t.boolean "stable_housing"
     t.boolean "submit_ssn"
-    t.integer "unemployment_income"
     t.datetime "updated_at", null: false
     t.boolean "upload_paperwork"
   end
@@ -199,6 +198,7 @@ ActiveRecord::Schema.define(version: 20171108010437) do
     t.integer "self_employed_monthly_income"
     t.string "self_employed_profession"
     t.string "sex"
+    t.integer "unemployment_income"
     t.datetime "updated_at", null: false
   end
 

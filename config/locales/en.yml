@@ -86,5 +86,14 @@ en:
     contact_ss_dob:
       edit:
         title:
-          one: Provide your Social Security Number and Date of Birth if you’re ready
-          other: Provide the Social Security Numbers and Dates of Birth for your household members if you're ready
+          one:
+            Provide your Social Security Number and Date of Birth if
+            you’re ready
+          other:
+            Provide the Social Security Numbers and Dates of Birth for your
+            household members if you’re ready
+    amounts_income:
+      edit:
+        title:
+          one: Tell us the specific income received.
+          other: "Tell us %{name}’s specific income received."

@@ -282,16 +282,27 @@ RSpec.feature "Medicaid app" do
     end
 
     on_page "Income & Expense Amounts" do
-      expect(page).to have_content("Tell us the specific income received")
-      fill_in "step_self_employed_monthly_income", with: "100"
-      fill_in "step_unemployment_income", with: "100"
+      expect(page).to have_content(
+        "Tell us Jessie Tester’s specific income received",
+      )
+      fill_in "Self-Employment (average monthly income)", with: "100"
+      fill_in "Unemployment (average monthly income)", with: "100"
       click_on "Next"
     end
 
     on_page "Income & Expense Amounts" do
+      expect(page).to have_content(
+        "Tell us Christa Tester’s specific income received",
+      )
+      fill_in "step_employed_monthly_income_0", with: 100
+      fill_in "step_employed_monthly_income_1", with: 100
+      click_on "Next"
+
       expect(page).to have_content("Tell us your specific expenses")
-      fill_in "Child Support, Alimony, or Arrears (average monthly expense)",
-              with: "100"
+      fill_in(
+        "Child Support, Alimony, or Arrears (average monthly expense)",
+        with: "100",
+      )
       fill_in "Self Employment (average monthly expense)", with: "100"
       click_on "Next"
     end
@@ -335,7 +346,7 @@ RSpec.feature "Medicaid app" do
     on_page "Contact Information & Followup" do
       expect(page).to have_content(
         "Provide the Social Security Numbers and Dates of Birth "\
-        "for your household members if you're ready",
+        "for your household members if you’re ready",
       )
       click_on "Yes"
     end

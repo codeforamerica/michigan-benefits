@@ -2,13 +2,13 @@ require "rails_helper"
 
 RSpec.describe Medicaid::AmountsIncomeController do
   describe "#edit" do
-    context "client is has no income" do
+    context "no one in the house has any income" do
       it "redirects to next step" do
         medicaid_application = create(
           :medicaid_application,
           anyone_employed: false,
           anyone_self_employed: false,
-          unemployment_income: false,
+          anyone_other_income: false,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -18,20 +18,41 @@ RSpec.describe Medicaid::AmountsIncomeController do
       end
     end
 
-    context "client has income" do
-      it "renders edit" do
-        medicaid_application = create(
-          :medicaid_application,
-          :with_member,
-          anyone_employed: false,
-          anyone_self_employed: true,
-          unemployment_income: false,
-        )
-        session[:medicaid_application_id] = medicaid_application.id
+    context "a single member in the household" do
+      context "current member does not have income" do
+        it "redirects to next step" do
+          member = create(:member, employed: false)
+          medicaid_application = create(
+            :medicaid_application,
+            members: [member],
+            anyone_employed: true,
+            anyone_self_employed: false,
+            anyone_other_income: false,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
 
-        get :edit
+          get :edit
 
-        expect(response).to render_template(:edit)
+          expect(response).to redirect_to("/steps/medicaid/amounts-expenses")
+        end
+      end
+
+      context "household, and a client, has income" do
+        it "renders edit" do
+          member = create(:member, employed: true, employed_number_of_jobs: 2)
+          medicaid_application = create(
+            :medicaid_application,
+            members: [member],
+            anyone_employed: true,
+            anyone_self_employed: false,
+            anyone_other_income: false,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+
+          expect(response).to render_template(:edit)
+        end
       end
     end
   end
@@ -39,7 +60,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
   describe "#update" do
     context "client has multiple jobs" do
       it "saves the income for each job" do
-        member = create(:member, employed_number_of_jobs: 2)
+        member = create(:member, employed: true, employed_number_of_jobs: 2)
         medicaid_application = create(
           :medicaid_application,
           members: [member],
@@ -54,11 +75,9 @@ RSpec.describe Medicaid::AmountsIncomeController do
 
         post :update, params: payload
 
-        medicaid_application.reload
+        member.reload
 
-        expect(medicaid_application.employed_monthly_income).to eq(
-          ["111", "222"],
-        )
+        expect(member[:employed_monthly_income]).to eq(["111", "222"])
       end
     end
   end
