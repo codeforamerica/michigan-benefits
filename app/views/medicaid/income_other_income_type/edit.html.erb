@@ -2,7 +2,11 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">What type of income do you receive that’s not from a job?</div>
+    <div class="form-card__title">
+      <%= t("medicaid.income_other_income_type.edit.title",
+            count: current_application.members.count,
+            name: current_member.full_name) %>
+  </div>
     <p class="text--help text--centered">
       Check all that apply.
     </p>
@@ -10,13 +14,15 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.hidden_field :member_id, value: current_member.id %>
       <%= f.mb_checkbox_set(
         [
-          { method: :income_unemployment, label: "Unemployment" },
-          { method: :income_pension, label: "Pension" },
-          { method: :income_social_security, label: "Social Security" },
-          { method: :income_retirement, label: "Retirement" },
-          { method: :income_alimony, label: "Alimony" },
+          { method: :unemployment, label: "Unemployment" },
+          { method: :pension, label: "Pension" },
+          { method: :social_security, label: "Social Security" },
+          { method: :retirement, label: "Retirement" },
+          { method: :alimony, label: "Alimony" },
+          { method: :other, label: "Other" },
         ],
         label_text: "" ) %>
 

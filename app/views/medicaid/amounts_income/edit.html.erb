@@ -28,7 +28,10 @@
           "Your Self-Employment (average monthly income)" %>
       <% end %>
 
-      <% if current_application.income_unemployment? %>
+      <% if current_application.
+          primary_member.
+          other_income_types.
+          include?("unemployment") %>
         <%= f.mb_money_field :unemployment_income,
           "Your Unemployment (average monthly income)" %>
       <% end %>
