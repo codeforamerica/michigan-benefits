@@ -4,10 +4,27 @@ RSpec.describe OfficeRecipient do
   describe "#office" do
     before { stub_const("ENV", "APP_RELEASE_STAGE" => "production") }
 
+    context "medicaid app" do
+      it "finds the office without raising an error" do
+        application = double(
+          residential_zip: OFFICE_TO_ZIP_MAPPING[:clio],
+          office_location: nil,
+        )
+        fax_recipient = described_class.new(benefit_application: application)
+
+        expect(fax_recipient.office).to eq(
+          "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
+          "name" => "Clio",
+          "fax_number" => clio_fax_number,
+          "phone_number" => clio_phone_number,
+        )
+      end
+    end
+
     context "office location is present" do
       it "priotizes to office location over residential address" do
         application = app(from_zip_covered_by: :clio, office_location: "union")
-        fax_recipient = described_class.new(snap_application: application)
+        fax_recipient = described_class.new(benefit_application: application)
 
         expect(fax_recipient.office).to eq(
           "email" => "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov",
@@ -20,7 +37,7 @@ RSpec.describe OfficeRecipient do
 
     it "uses the real fax number when the address is in clio" do
       fax_recipient = described_class.new(
-        snap_application: app(from_zip_covered_by: :clio),
+        benefit_application: app(from_zip_covered_by: :clio),
       )
 
       expect(fax_recipient.office).to eq(
@@ -33,7 +50,7 @@ RSpec.describe OfficeRecipient do
 
     it "uses the real fax number when the address is in union" do
       fax_recipient = described_class.new(
-        snap_application: app(from_zip_covered_by: :union),
+        benefit_application: app(from_zip_covered_by: :union),
       )
 
       expect(fax_recipient.office).to eq(
@@ -46,7 +63,7 @@ RSpec.describe OfficeRecipient do
 
     it "falls back to the clio office" do
       fax_recipient = described_class.new(
-        snap_application: app(from_zip_covered_by: :nobody),
+        benefit_application: app(from_zip_covered_by: :nobody),
       )
 
       expect(fax_recipient.office).to eq(
@@ -59,7 +76,7 @@ RSpec.describe OfficeRecipient do
 
     it "allows for testing via zip 12345" do
       fax_recipient = described_class.new(
-        snap_application: app(from_zip_covered_by: :testing),
+        benefit_application: app(from_zip_covered_by: :testing),
       )
 
       expect(fax_recipient.office).to eq(
@@ -74,7 +91,7 @@ RSpec.describe OfficeRecipient do
   describe "#fax_number" do
     it "is whatever the office fax number is" do
       fax_recipient = described_class.new(
-        snap_application: app(from_zip_covered_by: :testing),
+        benefit_application: app(from_zip_covered_by: :testing),
       )
 
       expect(fax_recipient.fax_number).to eq fax_recipient.office["fax_number"]
@@ -84,7 +101,7 @@ RSpec.describe OfficeRecipient do
   describe "#name" do
     it "is whatever the office name is" do
       fax_recipient = described_class.new(
-        snap_application: app(from_zip_covered_by: :testing),
+        benefit_application: app(from_zip_covered_by: :testing),
       )
 
       expect(fax_recipient.name).to eq fax_recipient.office["name"]
