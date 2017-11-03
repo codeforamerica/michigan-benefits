@@ -1,50 +1,26 @@
-.doc-preview-container {
+.uploadable-preview-container {
   padding-bottom: 1em;
 }
 
-.doc-preview {
+.uploadable-preview {
   @include clearfix();
   position: relative;
   margin-bottom: 1em;
   border-bottom: 1px solid $color-tan;
 }
 
-.doc-preview__info {
+.uploadable-preview__info {
   display: block;
   margin-right: 150px;
   min-height: 75px;
-
-  .dz-filename {
-    display: inline;
-  }
 }
 
-.doc-preview__thumb {
+.uploadable-preview__thumb {
   background-size: cover;
-  border: 1px solid $color-tan;
   border-radius: $border-radius;
   height: 75px;
   position: absolute;
   right: 0;
   top: 0;
   width: 75px;
-}
-
-.document-upload {
-  .form {
-    &__documentuploader {
-      border-width: 1px;
-      border-color: $color-tan;
-      border-style: solid;
-      margin-bottom: 0.5em;
-      padding: 1em;
-      text-align: center;
-      width: 100%;
-      line-height: normal;
-
-      &:hover {
-        background-color: $color-light-grey;
-      }
-    }
-  }
 }

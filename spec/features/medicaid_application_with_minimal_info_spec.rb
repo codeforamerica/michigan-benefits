@@ -151,10 +151,11 @@ RSpec.feature "Medicaid app" do
       click_on "Sign and submit"
     end
 
-    on_page "Confirmation" do
-      click_on "No"
+    on_pages "Success" do
+      expect(page).to have_content(
+        "Lastly, we suggest including some paperwork if you can right now.",
+      )
+      click_on "I'll do this later"
     end
-
-    expect(page).to have_content("Get the support your family needs")
   end
 end

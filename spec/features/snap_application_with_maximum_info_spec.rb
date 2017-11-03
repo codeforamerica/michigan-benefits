@@ -216,7 +216,7 @@ accounts?",
     input = %(<input type="hidden" name="step[documents][]" value="#{url}">)
     page.execute_script(
       <<~JAVASCRIPT
-        document.querySelector('[data-documents-form]').
+        document.querySelector('[data-uploadables-form]').
           insertAdjacentHTML('beforeend', '#{input}')
       JAVASCRIPT
     )

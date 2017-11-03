@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Medicaid
-  class Document < Step
+  class Paperwork < Step
     step_attributes(
-      documents: [],
+      paperwork: [],
     )
   end
 end

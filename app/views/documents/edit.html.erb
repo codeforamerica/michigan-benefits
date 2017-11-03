@@ -3,7 +3,7 @@
   <%= javascript_include_tag "https://js.shubox.io/v1/#{Rails.application.secrets.shubox_js_id}.js", defer: true %>
 <% end %>
 
-<div class="form-card" id="document-drop">
+<div class="form-card" id="uploadables-drop">
   <header class="form-card__header">
     <div class="form-card__title">
       Submit Documents
@@ -25,15 +25,15 @@
       builder: MbFormBuilder,
       url: current_path,
       method: :put,
-      html: { data: { 'documents-form' => 'true' } } do |f| %>
+      html: { data: { 'uploadables-form' => 'true' } } do |f| %>
 
-      <div class="form-card__documents" id="form-card__documents">
-        <%= render partial: 'shared/document',
+      <div class="form-card__uploadables" id="form-card__uploadables">
+        <%= render partial: 'shared/uploadable',
           collection: current_application.documents,
           as: :url %>
       </div>
 
-      <div class="form-card__documents__ctas">
+      <div class="form-card__uploadables__ctas">
         <button type="button" class="button button--next button--cta button--full-width" id="click-to-upload">
           <i class="icon-file_upload"></i>
           Upload documents
@@ -49,6 +49,8 @@
 
 <% unless Rails.env.test? -%>
   <script>
-    window.onload = function() { uploadSetup("<%= j render "shared/uploading" %>") }
+    window.onload = function() {
+      uploadSetup("<%= j render "shared/uploadable_uploading", attribute_name: "documents" %>")
+    }
   </script>
 <% end -%>

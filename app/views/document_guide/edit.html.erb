@@ -1,6 +1,6 @@
 <% content_for :header_title, "Documents" %>
 
-<div class="form-card" id="document-drop">
+<div class="form-card" id="uploadables-drop">
   <header class="form-card__header">
     <div class="form-card__title">
       Lastly, we suggest including some documents if you can right now.
@@ -38,7 +38,8 @@
     </p>
 
     <div class='slab'>
-      <%= render 'shared/commonly_requested_documents' %>
+      <%= render 'shared/commonly_requested_uploadables',
+        uploadable_name: "documents" %>
     </div>
   </div>
 </div>

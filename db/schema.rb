@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(version: 20171102182715) do
     t.integer "college_loan_interest_expenses"
     t.boolean "consent_to_terms"
     t.datetime "created_at", null: false
-    t.string "documents", default: [], array: true
     t.string "email"
     t.string "employed_monthly_income", default: [], array: true
     t.string "encrypted_last_four_ssn"
@@ -137,6 +136,7 @@ ActiveRecord::Schema.define(version: 20171102182715) do
     t.string "mailing_zip"
     t.boolean "michigan_resident", null: false
     t.boolean "need_medical_expense_help_3_months"
+    t.string "paperwork", array: true
     t.string "phone_number"
     t.boolean "reliable_mail_address"
     t.string "residential_city"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 20171102182715) do
     t.boolean "submit_ssn"
     t.integer "unemployment_income"
     t.datetime "updated_at", null: false
-    t.boolean "upload_documents"
+    t.boolean "upload_paperwork"
   end
 
   create_table "members", force: :cascade do |t|
