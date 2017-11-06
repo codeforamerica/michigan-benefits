@@ -12,6 +12,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     optional: false
   )
     classes = classes.append(%w[text-input])
+
     text_field_options = {
       autofocus: autofocus,
       type: type,
@@ -21,11 +22,25 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       autocapitalize: "off",
       spellcheck: "false",
     }.merge(options)
+
+    if object.hash_key_attribute?(method)
+      text_field_options[:name] = "#{object_name}[#{method}][]"
+    end
+
     text_field_html = text_field(method, text_field_options)
+    label_and_field_html = label_and_field(
+      method,
+      label_text,
+      text_field_html,
+      notes: notes,
+      prefix: prefix,
+      optional: optional,
+      options: options,
+    )
 
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{label_and_field(method, label_text, text_field_html, notes: notes, prefix: prefix, optional: optional, options: options)}
+        #{label_and_field_html}
         #{errors_for(object, method)}
         #{append_html}
       </fieldset>

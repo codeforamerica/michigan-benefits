@@ -8,14 +8,16 @@ class Step
   def self.step_attributes(*attribute_names)
     self.attribute_names = attribute_names
 
-    attributes_or_keys = attribute_names.map do |attr|
-      if attr.class == Symbol
-        attr
-      else
-        attr.keys
-      end
-    end
+    attribute_strings = Step::Attributes.
+      new(attribute_names).
+      to_s
 
-    attr_accessor(*attributes_or_keys.flatten.map(&:to_s))
+    attr_accessor(*attribute_strings)
+  end
+
+  def hash_key_attribute?(attribute)
+    Step::Attributes.
+      new(self.class.attribute_names).
+      hash_key?(attribute)
   end
 end

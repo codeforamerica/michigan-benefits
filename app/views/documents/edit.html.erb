@@ -30,6 +30,7 @@
       <div class="form-card__uploadables" id="form-card__uploadables">
         <%= render partial: 'shared/uploadable',
           collection: current_application.documents,
+          locals: { attribute_name: "documents" },
           as: :url %>
       </div>
 

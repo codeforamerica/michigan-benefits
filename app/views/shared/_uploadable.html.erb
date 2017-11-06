@@ -1,9 +1,7 @@
 <div class="uploadable-preview">
   <div class="uploadable-preview__info">
     <h4><%= File.basename(url) %></h4>
-    <%= hidden_field_tag attribute_name,
-      url,
-      name: "step[#{attribute_name}][]" %>
+    <%= hidden_field_tag attribute_name, url %>
     <p class="text--help"><%= link_to 'Delete', '#', class: "link--subtle link--delete" %></p>
   </div>
 </div>
