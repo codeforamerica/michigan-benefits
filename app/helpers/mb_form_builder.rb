@@ -23,7 +23,9 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       spellcheck: "false",
     }.merge(options)
 
-    if object.hash_key_attribute?(method)
+    if object.respond_to?(:hash_key_attribute?) &&
+        object.hash_key_attribute?(method)
+
       text_field_options[:name] = "#{object_name}[#{method}][]"
     end
 
