@@ -104,11 +104,11 @@ RSpec.feature "Medicaid app" do
     on_pages "Income & Expense Amounts" do
       click_on "Next"
 
-      fill_in "Your Current Job (#1)", with: 100
-      fill_in "Your Current Job (#2)", with: 50
-      fill_in "Your Current Job (#3)", with: 25
-      fill_in "Your Self-Employment", with: 100
-      fill_in "Your Unemployment", with: 100
+      fill_in "step_employed_monthly_income_0", with: 100
+      fill_in "step_employed_monthly_income_1", with: 50
+      fill_in "step_employed_monthly_income_2", with: 25
+      fill_in "step_self_employed_monthly_income", with: 100
+      fill_in "step_unemployment_income", with: 100
       click_on "Next"
 
       click_back

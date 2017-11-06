@@ -268,8 +268,8 @@ RSpec.feature "Medicaid app" do
 
     on_page "Income & Expense Amounts" do
       expect(page).to have_content("Tell us the specific income received")
-      fill_in "Your Self-Employment (average monthly income)", with: "100"
-      fill_in "Your Unemployment (average monthly income)", with: "100"
+      fill_in "step_self_employed_monthly_income", with: "100"
+      fill_in "step_unemployment_income", with: "100"
       click_on "Next"
     end
 
