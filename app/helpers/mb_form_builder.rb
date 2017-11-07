@@ -23,30 +23,51 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       spellcheck: "false",
     }.merge(options)
 
-    if object.respond_to?(:hash_key_attribute?) &&
-        object.hash_key_attribute?(method)
+    field_values(text_field_options, method).map.with_index do |value, i|
+      if array_of_values?(method)
+        text_field_options[:name] = "#{object_name}[#{method}][]"
+        text_field_options[:id] = "#{object_name}_#{method}_#{i}"
+        options[:id] = "#{object_name}_#{method}_#{i}"
+      end
 
-      text_field_options[:name] = "#{object_name}[#{method}][]"
-    end
+      text_field_options[:value] = value
 
-    text_field_html = text_field(method, text_field_options)
-    label_and_field_html = label_and_field(
-      method,
-      label_text,
-      text_field_html,
-      notes: notes,
-      prefix: prefix,
-      optional: optional,
-      options: options,
-    )
+      text_field_html = text_field(method, text_field_options)
 
-    <<-HTML.html_safe
-      <fieldset class="form-group#{error_state(object, method)}">
+      label_and_field_html = label_and_field(
+        method,
+        label_text&.gsub("{index}", (i + 1).to_s),
+        text_field_html,
+        notes: notes,
+        prefix: prefix,
+        optional: optional,
+        options: options,
+      )
+
+      <<~HTML
+        <fieldset class="form-group#{error_state(object, method)}">
         #{label_and_field_html}
         #{errors_for(object, method)}
         #{append_html}
-      </fieldset>
-    HTML
+        </fieldset>
+      HTML
+    end.join.html_safe
+  end
+
+  def field_values(options, method)
+    current_value = object.send(method)
+    return Array.wrap(current_value) if current_value.present?
+
+    if options[:count] && current_value.blank?
+      Array.new(options[:count], "")
+    else
+      [""]
+    end
+  end
+
+  def array_of_values?(attribute)
+    object.respond_to?(:hash_key_attribute?) &&
+      object.hash_key_attribute?(attribute)
   end
 
   def mb_money_field(

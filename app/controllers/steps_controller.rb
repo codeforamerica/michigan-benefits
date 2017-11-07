@@ -18,9 +18,10 @@ class StepsController < ApplicationController
   end
 
   def edit
-    @step = step_class.new(existing_attributes.slice(*step_attrs))
+    attribute_keys = Step::Attributes.new(step_attrs).to_sym
+    @step = step_class.new(existing_attributes.slice(*attribute_keys))
 
-    if step_class.attribute_names&.include?(:members)
+    if attribute_keys.include?(:members)
       @step.members = current_application&.members
     end
 
