@@ -58,8 +58,6 @@ module Medicaid
         Medicaid::ContactHomeAddressController,
         Medicaid::ContactOtherAddressController,
         Medicaid::ContactMailingAddressController,
-        Medicaid::ContactHomelessController,
-        Medicaid::ContactResidentialNoMailAddressController,
         Medicaid::ContactPhoneController,
         Medicaid::ContactTextMessagesController,
         Medicaid::ContactEmailController,

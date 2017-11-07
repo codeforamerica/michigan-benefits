@@ -1,5 +1,5 @@
 module Medicaid
   class Contact < Step
-    step_attributes(:mail_sent_to_residential)
+    step_attributes(:stable_housing)
   end
 end
