@@ -3,11 +3,11 @@ module Medicaid
     private
 
     def skip?
-      no_mail_sent_to_residential_address?
+      unstable_housing?
     end
 
-    def no_mail_sent_to_residential_address?
-      !current_application&.mail_sent_to_residential?
+    def unstable_housing?
+      !current_application&.stable_housing?
     end
   end
 end

@@ -283,23 +283,16 @@ RSpec.feature "Medicaid app" do
 
     on_page "Contact Information & Followup" do
       expect(page).to have_content(
-        "Do you receive mail at your current residential address?",
+        "Do you have stable housing right now?",
       )
       click_on "No"
     end
 
     on_page "Contact Information & Followup" do
       expect(page).to have_content(
-        "Is there somewhere we can reliably send you mail?",
+        "Is there a reliable place to send you mail?",
       )
       click_on "No"
-    end
-
-    on_page "Contact Information & Followup" do
-      expect(page).to have_content(
-        "Are you currently homeless?",
-      )
-      click_on "Yes"
     end
 
     on_page "Contact Information & Followup" do

@@ -8,11 +8,11 @@ RSpec.describe Medicaid::ContactOtherAddressController, type: :controller do
   end
 
   describe "#edit" do
-    context "mail is sent to residential address" do
+    context "stable housing" do
       it "redirects to next page" do
         medicaid_application = create(
           :medicaid_application,
-          mail_sent_to_residential: true,
+          stable_housing: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -22,11 +22,11 @@ RSpec.describe Medicaid::ContactOtherAddressController, type: :controller do
       end
     end
 
-    context "mail not sent to residential address" do
+    context "unstable housing" do
       it "renders the edit page" do
         medicaid_application = create(
           :medicaid_application,
-          mail_sent_to_residential: false,
+          stable_housing: false,
         )
         session[:medicaid_application_id] = medicaid_application.id
 

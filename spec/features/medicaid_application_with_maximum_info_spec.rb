@@ -127,10 +127,11 @@ RSpec.feature "Medicaid app" do
 
     on_pages "Contact Information & Followup" do
       expect(page).to have_content(
-        "Do you receive mail at your current residential address?",
+        "Do you have stable housing right now?",
       )
       click_on "Yes"
 
+      expect(page).to have_content("What is your home address?")
       fill_in "Street address", with: "123 Some St."
       fill_in "City", with: "Flint"
       fill_in "ZIP code", with: "48501"
@@ -139,12 +140,16 @@ RSpec.feature "Medicaid app" do
 
       click_on "Next"
 
+      expect(page).to have_content("What is your mailing address?")
       fill_in "Street address", with: "123 Some St."
       fill_in "City", with: "Flint"
       fill_in "ZIP code", with: "48501"
 
       click_on "Next"
 
+      expect(page).to have_content(
+        "What is the best number for you to receive phone calls?",
+      )
       fill_in "Phone number", with: "8005550000"
       click_on "Next"
 
