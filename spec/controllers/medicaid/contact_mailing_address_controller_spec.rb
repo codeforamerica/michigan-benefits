@@ -31,7 +31,7 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
         medicaid_application = create(
           :medicaid_application,
           reliable_mail_address: false,
-          mailing_address_same_as_residential_address: true,
+          mailing_address_same_as_residential_address: nil,
         )
         session[:medicaid_application_id] = medicaid_application.id
 

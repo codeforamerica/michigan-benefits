@@ -284,7 +284,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     checked_value = options[:checked_value] || "1"
     unchecked_value = options[:unchecked_value] || "0"
     <<-HTML.html_safe
-      #{check_box(method, {}, checked_value, unchecked_value)} #{label_text}
+      #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
     HTML
   end
 end
