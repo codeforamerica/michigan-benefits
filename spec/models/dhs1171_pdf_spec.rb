@@ -5,13 +5,13 @@ RSpec.describe Dhs1171Pdf do
     it "saves the client info" do
       mailing_address = create(:mailing_address)
       residential_address = create(:address)
-      member = create(:member)
+      member = create(:member, ssn: "012345678")
       snap_application = create(
         :snap_application,
         addresses: [mailing_address, residential_address],
         members: [member],
       )
-      client_data = {
+      expected_client_data = {
         applying_for_food_assistance: "Yes",
         phone_number: snap_application.phone_number,
         mailing_address_street_address:
@@ -45,32 +45,66 @@ RSpec.describe Dhs1171Pdf do
         primary_member_sex_male: nil,
         primary_member_sex_female: "Yes",
         primary_member_full_name: member.display_name,
+        primary_member_ssn_0: "0",
+        primary_member_ssn_1: "1",
+        primary_member_ssn_2: "2",
+        primary_member_ssn_3: "3",
+        primary_member_ssn_4: "4",
+        primary_member_ssn_5: "5",
+        primary_member_ssn_6: "6",
+        primary_member_ssn_7: "7",
+        primary_member_ssn_8: "8",
       }
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
 
       result = filled_in_values(file: file.path)
-      client_data.each do |field, entered_data|
+      expected_client_data.each do |field, entered_data|
         expect(result[field.to_s].to_s).to eq entered_data.to_s
       end
     end
 
     context "multiple household members" do
       it "returns attributes for each member" do
-        first_member = create(:member)
-        second_member = create(:member)
+        first_member = create(:member, ssn: "555555555")
+        second_member = create(:member, ssn: "444444444")
         snap_application =
           create(:snap_application, members: [first_member, second_member])
 
         file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
         result = filled_in_values(file: file.path)
 
-        expect(result["primary_member_full_name"]).to eq(
-          first_member.display_name,
-        )
-        expect(result["second_member_full_name"]).to eq(
-          second_member.display_name,
-        )
+        first_member_expected_data = {
+          primary_member_full_name: first_member.display_name,
+          primary_member_ssn_0: "5",
+          primary_member_ssn_1: "5",
+          primary_member_ssn_2: "5",
+          primary_member_ssn_3: "5",
+          primary_member_ssn_4: "5",
+          primary_member_ssn_5: "5",
+          primary_member_ssn_6: "5",
+          primary_member_ssn_7: "5",
+          primary_member_ssn_8: "5",
+        }
+
+        second_member_expected_data = {
+          second_member_full_name: second_member.display_name,
+          second_member_ssn_0: "4",
+          second_member_ssn_1: "4",
+          second_member_ssn_2: "4",
+          second_member_ssn_3: "4",
+          second_member_ssn_4: "4",
+          second_member_ssn_5: "4",
+          second_member_ssn_6: "4",
+          second_member_ssn_7: "4",
+          second_member_ssn_8: "4",
+        }
+        first_member_expected_data.each do |field, entered_data|
+          expect(result[field.to_s].to_s).to eq entered_data.to_s
+        end
+        second_member_expected_data.each do |field, entered_data|
+          expect(result[field.to_s].to_s).to eq entered_data.to_s
+        end
       end
     end
 

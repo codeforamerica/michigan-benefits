@@ -48,9 +48,9 @@ class Member < ApplicationRecord
     inclusion: { in: SEXES },
     allow_nil: true
 
-  attribute :last_four_ssn
+  attribute :ssn
   attr_encrypted(
-    :last_four_ssn,
+    :ssn,
     key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
 

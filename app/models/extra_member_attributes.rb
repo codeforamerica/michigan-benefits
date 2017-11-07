@@ -13,7 +13,7 @@ class ExtraMemberAttributes
       "2. Date of birth: #{formatted_birthday(member)}",
       "3. Relationship: #{relationship(member)}",
       "4. Sex: #{member.sex}",
-      "5. Social security number (last 4): #{member.last_four_ssn}",
+      "5. Social security number: #{member.ssn}",
       "6. Marital status: #{member.marital_status}",
       "7. US Citizen: #{boolean_to_string(member.citizen?)}",
       "8. Pregnant now/last 2 months: #{boolean_to_string(member.new_mom?)}",

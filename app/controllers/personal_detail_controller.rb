@@ -20,7 +20,7 @@ class PersonalDetailController < SnapStepsController
     {
       sex: member.sex,
       marital_status: member.marital_status,
-      last_four_ssn: member.last_four_ssn,
+      ssn: member.ssn,
     }
   end
 

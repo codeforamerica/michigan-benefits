@@ -10,7 +10,7 @@ RSpec.describe SnapApplicationMemberAttributes do
         sex: "female",
         birthday: DateTime.parse("20/10/1910"),
         relationship: nil,
-        last_four_ssn: "4321",
+        ssn: "987654321",
         marital_status: "Divorced",
         citizen: false,
         new_mom: true,
@@ -42,10 +42,15 @@ RSpec.describe SnapApplicationMemberAttributes do
         primary_member_requesting_food_assistance: "Yes",
         primary_member_sex_female: "Yes",
         primary_member_sex_male: nil,
-        primary_member_ssn_0: "4",
-        primary_member_ssn_1: "3",
-        primary_member_ssn_2: "2",
-        primary_member_ssn_3: "1",
+        primary_member_ssn_0: "9",
+        primary_member_ssn_1: "8",
+        primary_member_ssn_2: "7",
+        primary_member_ssn_3: "6",
+        primary_member_ssn_4: "5",
+        primary_member_ssn_5: "4",
+        primary_member_ssn_6: "3",
+        primary_member_ssn_7: "2",
+        primary_member_ssn_8: "1",
       )
     end
 
@@ -53,7 +58,7 @@ RSpec.describe SnapApplicationMemberAttributes do
       it "does not error" do
         member = create(
           :member,
-          last_four_ssn: nil,
+          ssn: nil,
         )
         position = "anything"
 

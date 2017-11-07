@@ -46,8 +46,8 @@ class SnapApplicationMemberAttributes
   end
 
   def ssn_attributes
-    if member.last_four_ssn.present?
-      ssn_list = member.last_four_ssn.split("")
+    if member.ssn.present?
+      ssn_list = member.ssn.split("")
       ssn_list.each_with_index.reduce({}) do |memo, (ssn_digit, index)|
         memo["#{position}_member_ssn_#{index}"] = ssn_digit
         memo

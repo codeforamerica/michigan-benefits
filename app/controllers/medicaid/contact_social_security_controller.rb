@@ -11,7 +11,7 @@ module Medicaid
     end
 
     def member_attrs
-      %i[last_four_ssn birthday]
+      %i[ssn birthday]
     end
   end
 end

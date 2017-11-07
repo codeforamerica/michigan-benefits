@@ -2,10 +2,10 @@ require "rails_helper"
 
 RSpec.describe Medicaid::ContactSocialSecurity do
   describe "Validations" do
-    context "each household member has a valid last 4 SSN" do
+    context "each household member has a valid SSN" do
       it "is valid" do
-        member = build(:member, last_four_ssn: "1234")
-        member_without_ssn = build(:member, last_four_ssn: nil)
+        member = build(:member, ssn: "123456789")
+        member_without_ssn = build(:member, ssn: nil)
 
         step = Medicaid::ContactSocialSecurity.new(
           members: [member, member_without_ssn],
@@ -15,10 +15,10 @@ RSpec.describe Medicaid::ContactSocialSecurity do
       end
     end
 
-    context "a household member has an invalid last 4 SSN" do
+    context "a household member has an invalid SSN" do
       it "is invalid" do
-        member = build(:member, last_four_ssn: "1234")
-        invalid_member = build(:member, last_four_ssn: "1234567")
+        member = build(:member, ssn: "123456789")
+        invalid_member = build(:member, ssn: "1234")
 
         step = Medicaid::ContactSocialSecurity.new(
           members: [member, invalid_member],

@@ -336,8 +336,8 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Tell us your Social Security Number and Date of Birth",
       )
-      enter_dob_and_ssn(display_name: "Jessie Tester", last_four_ssn: "1234")
-      enter_dob_and_ssn(display_name: "Christa Tester", last_four_ssn: "0111")
+      enter_dob_and_ssn(display_name: "Jessie Tester", ssn: "123456789")
+      enter_dob_and_ssn(display_name: "Christa Tester", ssn: "011100000")
     end
   end
 end

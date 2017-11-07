@@ -4,7 +4,7 @@ module Medicaid
 
     def validate_household_member(member)
       member.valid?
-      member.errors[:last_four_ssn].blank?
+      member.errors[:ssn].blank?
     end
 
     def members_requesting_health_insurance
