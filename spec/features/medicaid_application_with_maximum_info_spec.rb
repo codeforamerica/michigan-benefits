@@ -134,6 +134,15 @@ RSpec.feature "Medicaid app" do
       fill_in "Street address", with: "123 Some St."
       fill_in "City", with: "Flint"
       fill_in "ZIP code", with: "48501"
+
+      uncheck "This is the same as my mailing address"
+
+      click_on "Next"
+
+      fill_in "Street address", with: "123 Some St."
+      fill_in "City", with: "Flint"
+      fill_in "ZIP code", with: "48501"
+
       click_on "Next"
 
       fill_in "Phone number", with: "8005550000"
