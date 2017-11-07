@@ -39,16 +39,14 @@ Ask the team for access to the following services to begin contributing:
 
 * [GitHub](https://github.com/codeforamerica/michigan-benefits)
 * Slack
+* [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2123705)
 * Twilio
 * Mailgun
-* [Trello - Michigan Prototype](https://trello.com/b/aN8DB2pN/medicaid-application-arrives-via-online-search) 
-* [Trello - Design Backlog](https://trello.com/b/aBqTrqaJ/the-digital-assister-michiganbenefitsorg)
-* [Pivotal Tracker - Engineering Backlog](https://www.pivotaltracker.com/n/projects/2123705)
+* Trello - Benefits Partnership org
 * Heroku
 * Password Manager
 * [multi-benefits-product Google Calendar](codeforamerica.org_jkbrndbh2ubvh6frucq6dc2chk@group.calendar.google.com)
 * Get calendar invites to: daily standup, weekly planning, weekly retro
-
 
 ## Day-to-day Development
 
@@ -131,8 +129,11 @@ resources and workflow.
 * A change is initiated and discussed via a
   [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2123705) story.
 * All new Tracker stories are added to the top of the Icebox
-* During a weekly planning meeting, prioritized Tracker stories are moved over to the Backlog. Cards in this list should have enough detail to be
-  actionable. Top priority items are at the top of the list.
+* Before the weekly planning meeting, prioritized Tracker stories are written and moved over to the Backlog in order of priority. 
+ Cards in this list should have enough detail to be actionable. Top priority items are at the top of the list.
+* During the weekly planning meeting, stories are reviewed, clarified by product and design 
+ if necessary, and estimated by the engineering team.
+* Stories are estimated on a Fibonacci scale from 0 to 8 according to their perceived complexity.
 * During the team's weekly retro meetings, feedback about the workflow is noted
   and related changes are incorporated into this document.
 
@@ -140,10 +141,10 @@ resources and workflow.
 ### Bugs
 
 A problem is first noticed, e.g. Alert comes in, team member pings us "I haven't seen text messages coming in over the weekend. Something might be wrong."
-Person who noticed the problem, writes a ticket with a "Bug Triage" label and puts it at the top of the Up Next column.
+Person who noticed the problem, writes a bug and puts it at the top of the Icebox.
 
-An engineer taking the next ticket will triage the ticket. They investigate it, add some description of the problem. The purpose of this investigation is to
-figure out when it should be worked on.
+A product manager should then review the bug and place it in proper priority in the Backlog, adding any steps
+necessary to reproduce the bug.
 
 #### Apply the correct Tracker label
 
@@ -155,7 +156,7 @@ figure out when it should be worked on.
 
 ### Work In Progress
 
-* When someone starts working on a task, they click start on the Tracker story. This will assign the 
+* When someone starts working on a task, they click "Start" on the Tracker story. This will assign the 
   task to them, and make it clear that the task is in progress.
 * All code is written on a branch *other* than `master`. The team is not picky
   about branch naming.
@@ -171,9 +172,9 @@ development environment visit your local [mailcatcher server](http://localhost:1
 ### Code Review
 
 * A Pull Request (PR) is created on GitHub. All PRs should have [a good commit
-  message](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message). Optionally, include a 
+  message](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) and a 
   link to the Tracker story in the PR summary. When a PR completes a Tracker story, mark that story as 'Finished' 
-  in Pivotal Tracker.
+  in Pivotal Tracker. [Here's a handy trick to do it automatically](#Finished)
 * The PR Author can request reviews via GitHub's [request a pull request
   review](https://help.github.com/articles/requesting-a-pull-request-review/)
 feature. In general, the team prioritizes code reviews over other work.
