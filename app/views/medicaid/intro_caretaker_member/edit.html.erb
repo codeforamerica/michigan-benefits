@@ -16,7 +16,7 @@
         <fieldset class="form-group">
           <% @step.members.each do |member| %>
               <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
-                  <%= ff.mb_checkbox :caretaker_or_parent, member.full_name %>
+                  <%= ff.mb_checkbox :caretaker_or_parent, member.display_name %>
               <% end %>
           <% end %>
         </fieldset>

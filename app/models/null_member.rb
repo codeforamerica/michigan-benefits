@@ -1,5 +1,5 @@
 class NullMember
-  def full_name
+  def display_name
     ""
   end
 

@@ -22,8 +22,8 @@
         <% @step.members_requesting_health_insurance.each do |member| %>
           <fieldset class="form-group">
             <%= f.fields_for('members[]', member) do |ff| %>
-              <div class="household-member-group" data-member-name="<%= member.full_name %>">
-                <p class="text--section-header"><%= member.full_name %></p>
+              <div class="household-member-group" data-member-name="<%= member.display_name %>">
+                <p class="text--section-header"><%= member.display_name %></p>
                 <%= ff.mb_input_field :last_four_ssn,
                   "Social Security Number (last 4 digits)",
                   type: :tel,

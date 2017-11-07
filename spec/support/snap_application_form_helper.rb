@@ -52,8 +52,8 @@ module SnapApplicationFormHelper
     end
   end
 
-  def select_employment(full_name:, employment_status:)
-    within(".household-member-group[data-member-name='#{full_name}']") do
+  def select_employment(display_name:, employment_status:)
+    within(".household-member-group[data-member-name='#{display_name}']") do
       choose(employment_status)
     end
   end

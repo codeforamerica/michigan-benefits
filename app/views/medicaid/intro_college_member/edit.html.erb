@@ -14,10 +14,10 @@
           <% @step.members.each do |member| %>
               <%= f.fields_for("members[]", member) do |ff| %>
                   <%= ff.mb_checkbox(
-                          :in_college,
-                          member.full_name,
-                          { checked_value: "1", unchecked_value: "0" },
-                      ) %>
+                    :in_college,
+                    member.display_name,
+                    { checked_value: "1", unchecked_value: "0" },
+                  ) %>
               <% end %>
           <% end %>
         </fieldset>

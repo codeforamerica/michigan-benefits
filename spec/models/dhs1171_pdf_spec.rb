@@ -44,7 +44,7 @@ RSpec.describe Dhs1171Pdf do
         primary_member_relationship: "",
         primary_member_sex_male: nil,
         primary_member_sex_female: "Yes",
-        primary_member_full_name: member.full_name,
+        primary_member_full_name: member.display_name,
       }
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
@@ -66,10 +66,10 @@ RSpec.describe Dhs1171Pdf do
         result = filled_in_values(file: file.path)
 
         expect(result["primary_member_full_name"]).to eq(
-          first_member.full_name,
+          first_member.display_name,
         )
         expect(result["second_member_full_name"]).to eq(
-          second_member.full_name,
+          second_member.display_name,
         )
       end
     end
@@ -88,10 +88,10 @@ RSpec.describe Dhs1171Pdf do
         result = filled_in_values(file: file.path)
 
         expect(result["first_employed_full_name"]).to eq(
-          employed_member.full_name,
+          employed_member.display_name,
         )
         expect(result["first_self_employed_full_name"]).to eq(
-          self_employed_member.full_name,
+          self_employed_member.display_name,
         )
       end
     end

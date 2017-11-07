@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe NullMember do
-  describe "#full_name" do
+  describe "#display_name" do
     it "returns empty string" do
-      expect(NullMember.new.full_name).to eq ""
+      expect(NullMember.new.display_name).to eq ""
     end
   end
 

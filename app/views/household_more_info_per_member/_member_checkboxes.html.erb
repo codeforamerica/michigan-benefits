@@ -1,5 +1,5 @@
 <% step.members.each do |member| %>
   <%= f.fields_for('members[]', member) do |ff| %>
-    <%= ff.mb_checkbox(method, member.full_name) %>
+    <%= ff.mb_checkbox(method, member.display_name) %>
   <% end %>
 <% end %>

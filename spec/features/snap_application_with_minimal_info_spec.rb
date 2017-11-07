@@ -52,7 +52,7 @@ RSpec.feature "Submit application with minimal information" do
 
     on_page "Money & Income" do
       select_employment(
-        full_name: "Jessie Tester",
+        display_name: "Jessie Tester",
         employment_status: "Not Employed",
       )
 

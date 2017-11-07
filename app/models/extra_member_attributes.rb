@@ -4,12 +4,12 @@ class ExtraMemberAttributes
   end
 
   def title
-    "Details for household member: #{member.full_name}"
+    "Details for household member: #{member.display_name}"
   end
 
   def to_a
     [
-      "1. Name: #{member.full_name}",
+      "1. Name: #{member.display_name}",
       "2. Date of birth: #{formatted_birthday(member)}",
       "3. Relationship: #{relationship(member)}",
       "4. Sex: #{member.sex}",

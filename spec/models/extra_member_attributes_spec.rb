@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ExtraMemberAttributes do
   describe "#title" do
     it "returns the member's full name" do
-      member = double(full_name: "BooBoo")
+      member = double(display_name: "BooBoo")
 
       title = ExtraMemberAttributes.new(member: member).title
 
@@ -28,7 +28,7 @@ RSpec.describe ExtraMemberAttributes do
 
       expect(array).to eq(
         [
-          "1. Name: #{member.full_name}",
+          "1. Name: #{member.display_name}",
           "2. Date of birth: 06/20/1900",
           "3. Relationship: SELF",
           "4. Sex: #{member.sex}",

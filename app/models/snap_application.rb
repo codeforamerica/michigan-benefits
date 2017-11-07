@@ -127,8 +127,8 @@ class SnapApplication < ApplicationRecord
     residential_address.zip
   end
 
-  def full_name
-    primary_member.full_name
+  def display_name
+    primary_member.display_name
   end
 
   def birthday

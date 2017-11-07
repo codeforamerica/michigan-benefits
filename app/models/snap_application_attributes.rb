@@ -179,15 +179,15 @@ class SnapApplicationAttributes
   end
 
   def first_member_with_disability_name
-    disabled_members[0].try(:full_name)
+    disabled_members[0].try(:display_name)
   end
 
   def second_member_with_disability_name
-    disabled_members[1].try(:full_name)
+    disabled_members[1].try(:display_name)
   end
 
   def third_member_with_disability_name
-    disabled_members[2].try(:full_name)
+    disabled_members[2].try(:display_name)
   end
 
   def disabled_members
@@ -211,7 +211,7 @@ class SnapApplicationAttributes
       members.
       where.
       not(buy_food_with: true).
-      pluck('concat(first_name, \' \', last_name) AS full_name').
+      pluck('concat(first_name, \' \', last_name) AS display_name').
       to_sentence
   end
 

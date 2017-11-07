@@ -4,7 +4,8 @@ class ExtraSelfEmployedMemberAttributes
   end
 
   def title
-    "Self-Employment income details for household member: #{member.full_name}"
+    "Self-Employment income details for household member: " +
+      member.display_name
   end
 
   def to_a

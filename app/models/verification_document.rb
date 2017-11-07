@@ -30,7 +30,7 @@ class VerificationDocument
   end
 
   def header
-    output = "Name:                  #{snap_application.full_name}\n"
+    output = "Name:                  #{snap_application.display_name}\n"
     output += "Date of Birth:        #{snap_application.birthday}\n"
     output
   end
