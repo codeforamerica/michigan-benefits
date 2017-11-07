@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171107180444) do
+ActiveRecord::Schema.define(version: 20171107204738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20171107180444) do
     t.boolean "income_retirement"
     t.boolean "income_social_security"
     t.boolean "income_unemployment"
-    t.boolean "mailing_address_same_as_residential_address", default: true
+    t.boolean "mailing_address_same_as_residential_address"
     t.string "mailing_city"
     t.string "mailing_street_address"
     t.string "mailing_zip"
