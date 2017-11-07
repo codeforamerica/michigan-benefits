@@ -16,7 +16,7 @@ RSpec.describe HouseholdAddMemberController do
 
         expect(step.sex).to eq("male")
         expect(step.relationship).to eq("Child")
-        expect(step.last_four_ssn).to eq("1234")
+        expect(step.ssn).to eq("123456789")
       end
     end
   end
@@ -27,6 +27,6 @@ RSpec.describe HouseholdAddMemberController do
 
   def member
     @_member ||=
-      create(:member, sex: "male", relationship: "Child", last_four_ssn: "1234")
+      create(:member, sex: "male", relationship: "Child", ssn: "123456789")
   end
 end

@@ -58,8 +58,8 @@ minimal_primary = Member.find_or_initialize_by(
 minimal_primary.update!(
   marital_status: "Never married",
   sex: "male",
-  encrypted_last_four_ssn: "aohUJzeKx7bLqVQ1SfI4tl+OeIg=\n",
-  encrypted_last_four_ssn_iv: "Lyh6r4q4SVQLKyDr\n",
+  encrypted_ssn: "UdGpZ8L9KTaTjsjOtT9F3He/AtUaxIz2EQ==\n",
+  encrypted_ssn_iv: "Y6bSPA1stu3NXxn7\n",
   birthday: 30.years.ago,
   employment_status: "not_employed",
 )
@@ -165,8 +165,8 @@ complete_primary.update!(
   marital_status: "Married",
   sex: "male",
   benefit_application_id: 2,
-  encrypted_last_four_ssn: "qEPr+0T2Sp0d/DaMX1XRIrluMMc=\n",
-  encrypted_last_four_ssn_iv: "nuduAu27he23odPh\n",
+  encrypted_ssn: "ujHTFrdIDQe9yP0ridG6lbInC2B55epElw==\n",
+  encrypted_ssn_iv: "a7xXqiBGgWMLlZLU\n",
   birthday: 40.years.ago,
   buy_food_with: true,
   relationship: "Spouse",
@@ -187,8 +187,8 @@ complete_second_member = Member.find_or_initialize_by(
 complete_second_member.update!(
   marital_status: "Married",
   sex: "female",
-  encrypted_last_four_ssn: "TOmmjvy004iKOiqSS/JO+WwceKc=\n",
-  encrypted_last_four_ssn_iv: "1/t+2AgEwExyn9PQ\n",
+  encrypted_ssn: "TYSEI32VMGSr25smRwriVd7TYdHjgF+vXg==\n",
+  encrypted_ssn_iv: "eDQLj3SgLkha2LqC\n",
   birthday: 36.years.ago,
   buy_food_with: true,
   relationship: "Spouse",
@@ -208,8 +208,8 @@ complete_third_member = Member.find_or_initialize_by(
 complete_third_member.update!(
   marital_status: "Never married",
   sex: "female",
-  encrypted_last_four_ssn: "PCcX7D2hL2Y89GRZD8raRrDy32k=\n",
-  encrypted_last_four_ssn_iv: "l9aEXrkV65SRsWqw\n",
+  encrypted_ssn: "MojSW2g8R/3/qoYwBNJe+GOfbgtUUnCxFw==\n",
+  encrypted_ssn_iv: "MqnvVY9uetY43os2\n",
   birthday: 16.years.ago,
   buy_food_with: true,
   relationship: "Roommate",

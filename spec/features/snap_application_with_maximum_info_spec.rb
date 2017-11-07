@@ -35,8 +35,8 @@ feature "SNAP application with maximum info" do
     on_page "Personal Details" do
       select_radio(question: "What is your sex?", answer: "Female")
       select "Divorced", from: "What is your marital status?"
-      fill_in "What are the last 4 digits of your Social Security Number?",
-              with: "1231"
+      fill_in "What is your Social Security Number?",
+              with: "123456789"
       click_on "Continue"
     end
 
@@ -49,8 +49,8 @@ feature "SNAP application with maximum info" do
       fill_in "What is their last name?", with: "Tester"
       select_radio(question: "What is their sex?", answer: "Male")
       select "Child", from: "What is their relationship to you?"
-      fill_in "What are the last 4 digits of their Social Security Number?",
-              with: "5566"
+      fill_in "What is their Social Security Number?",
+              with: "111225566"
       click_on "Continue"
     end
 

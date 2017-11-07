@@ -15,7 +15,7 @@ RSpec.describe PersonalDetailController do
 
       expect(step.sex).to eq("male")
       expect(step.marital_status).to eq("Married")
-      expect(step.last_four_ssn).to eq("1234")
+      expect(step.ssn).to eq("123456789")
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.describe PersonalDetailController do
         valid_params = {
           sex: "female",
           marital_status: "Divorced",
-          last_four_ssn: "9876",
+          ssn: "987654321",
         }
 
         put :update, params: { step: valid_params }
@@ -53,6 +53,6 @@ RSpec.describe PersonalDetailController do
     create(:member,
            sex: "male",
            marital_status: "Married",
-           last_four_ssn: "1234")
+           ssn: "123456789")
   end
 end
