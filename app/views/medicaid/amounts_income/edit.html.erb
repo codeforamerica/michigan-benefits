@@ -14,8 +14,11 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <% if current_application.anyone_employed? %>
         <% current_application.primary_member.employed_number_of_jobs&.times do |count| %>
+          <p class="text--section-header">
+            Current Job (<%= "##{count + 1}" %>)
+          </p>
           <%= f.mb_money_field "employed_monthly_income_#{count}",
-            "Your Current Job (##{count + 1})",
+            "Monthly income (before taxes)",
             options: {
               name: "step[employed_monthly_income][]",
               id: "step_employed_monthly_income_#{count}",
@@ -24,16 +27,22 @@
       <% end %>
 
       <% if current_application.anyone_self_employed? %>
+        <p class="text--section-header">
+          Self-Employment
+        </p>
         <%= f.mb_money_field :self_employed_monthly_income,
-          "Your Self-Employment (average monthly income)" %>
+          "Monthly income (before taxes)" %>
       <% end %>
 
       <% if current_application.
           primary_member.
           other_income_types.
           include?("unemployment") %>
+        <p class="text--section-header">
+          Other Income
+        </p>
         <%= f.mb_money_field :unemployment_income,
-          "Your Unemployment (average monthly income)" %>
+          "Monthly unemployment income (before taxes)" %>
       <% end %>
 
       <%= render "medicaid/next_step" %>
