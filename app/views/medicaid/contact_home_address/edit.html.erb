@@ -11,6 +11,12 @@
       <%= f.mb_input_field :residential_city, "City" %>
       <%= f.mb_input_field :residential_zip, "ZIP code", type: :tel, options: { maxlength: 5 } %>
 
+      <%= f.mb_checkbox(
+        :mailing_address_same_as_residential_address,
+        "This is the same as my mailing address",
+        { checked_value: "1", unchecked_value: "0" },
+      ) %>
+
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>

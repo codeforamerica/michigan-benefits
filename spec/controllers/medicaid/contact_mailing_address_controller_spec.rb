@@ -23,11 +23,26 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
       end
     end
 
-    context "mail is sent to residential address" do
-      it "redirects to next page" do
+    context "client has reliable address" do
+      it "renders the edit page" do
         medicaid_application = create(
           :medicaid_application,
-          mail_sent_to_residential: true,
+          reliable_mail_address: true,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
+
+        get :edit
+
+        expect(response).to render_template(:edit)
+      end
+    end
+
+    context "mailing address is the same as residential address" do
+      it "redirects to the next page" do
+        medicaid_application = create(
+          :medicaid_application,
+          reliable_mail_address: nil,
+          mailing_address_same_as_residential_address: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -37,12 +52,12 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
       end
     end
 
-    context "mail not sent to residential, has no reliable address" do
+    context "mailing address is the same as residential address" do
       it "renders the edit page" do
         medicaid_application = create(
           :medicaid_application,
-          reliable_mail_address: true,
-          mail_sent_to_residential: false,
+          reliable_mail_address: nil,
+          mailing_address_same_as_residential_address: false,
         )
         session[:medicaid_application_id] = medicaid_application.id
 

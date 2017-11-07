@@ -4,6 +4,7 @@ module Medicaid
       :residential_street_address,
       :residential_city,
       :residential_zip,
+      :mailing_address_same_as_residential_address,
     )
 
     validates :residential_street_address,
