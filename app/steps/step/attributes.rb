@@ -21,6 +21,8 @@ class Step
     attr_reader :attribute_names
 
     def symbols_or_hash_keys
+      return [] if attribute_names.nil?
+
       attribute_names.map do |attr|
         if attr.class == Symbol
           attr
