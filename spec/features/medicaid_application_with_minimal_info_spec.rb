@@ -23,6 +23,9 @@ RSpec.feature "Medicaid app" do
       )
       click_on "Next"
 
+      expect(page).to have_content("Are you currently married?")
+      click_on "No"
+
       expect(page).to have_content("Are you currently a college student?")
       click_on "No"
 

@@ -4,6 +4,11 @@ en:
       Leaving the application process will clear your data from this computer.
       Are you sure you would like to exit?
   medicaid:
+    intro_marital_status:
+      edit:
+        title:
+          one: Are you currently married?
+          other: Is anyone in your household currently married?
     intro_college:
       edit:
         title:

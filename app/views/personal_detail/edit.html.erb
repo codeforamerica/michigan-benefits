@@ -16,7 +16,7 @@
           layout: "inline" %>
         <%= f.mb_select :marital_status,
         'What is your marital status?',
-        ['Married', 'Never married', 'Divorced', 'Widowed', 'Separated'],
+        Member::MARITAL_STATUSES,
         include_blank: "Choose one" %>
       <%= f.mb_input_field :ssn,
       "What is your Social Security Number?",
