@@ -9,7 +9,7 @@ module Medicaid
 
     delegate(
       :employed_number_of_jobs,
-      :other_income_types,
+      :receives_unemployment_income?,
       :self_employed?,
       to: :member,
     )
@@ -39,7 +39,7 @@ module Medicaid
     end
 
     def unemployment_income_is_not_provided?
-      other_income_types.include?("unemployment") && unemployment_income.blank?
+      receives_unemployment_income? && unemployment_income.blank?
     end
 
     def self_employment_income_not_provided?
