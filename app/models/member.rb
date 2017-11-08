@@ -90,6 +90,16 @@ class Member < ApplicationRecord
     )
   end
 
+  def not_receiving_income?
+    !receiving_income?
+  end
+
+  def receiving_income?
+    employed? ||
+      self_employed? ||
+      receives_unemployment_income?
+  end
+
   def primary_member?
     benefit_application.primary_member.id == id
   end

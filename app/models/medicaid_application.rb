@@ -17,6 +17,16 @@ class MedicaidApplication < ApplicationRecord
     !anyone_insured?
   end
 
+  def no_one_with_income?
+    !anyone_with_income?
+  end
+
+  def anyone_with_income?
+    anyone_employed? ||
+      anyone_self_employed? ||
+      anyone_other_income?
+  end
+
   def nobody_caretaker_or_parent?
     !anyone_caretaker_or_parent?
   end
