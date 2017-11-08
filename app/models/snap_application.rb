@@ -123,6 +123,10 @@ class SnapApplication < ApplicationRecord
     addresses.where.not(mailing: true).first || NullAddress.new
   end
 
+  def unstable_housing?
+    !stable_housing?
+  end
+
   def zip
     residential_address.zip
   end

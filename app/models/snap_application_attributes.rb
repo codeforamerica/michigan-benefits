@@ -20,8 +20,8 @@ class SnapApplicationAttributes
       members_not_buy_food_with: members_not_buy_food_with,
       more_than_six_members_yes: more_than_six_members_yes,
       more_than_six_members_no: more_than_six_members_no,
-      homeless: bool_to_checkbox(snap_application.unstable_housing?),
-      not_homeless: bool_to_checkbox(!snap_application.unstable_housing?),
+      homeless: bool_to_checkbox(!snap_application.stable_housing?),
+      not_homeless: bool_to_checkbox(snap_application.stable_housing?),
       residential_address_city: snap_application.residential_address.city,
       residential_address_county: snap_application.residential_address.county,
       residential_address_state: snap_application.residential_address.state,
@@ -148,10 +148,10 @@ class SnapApplicationAttributes
   end
 
   def residential_or_homeless
-    if snap_application.unstable_housing?
-      "Homeless"
-    else
+    if snap_application.stable_housing?
       snap_application.residential_address.street_address
+    else
+      "Homeless"
     end
   end
 

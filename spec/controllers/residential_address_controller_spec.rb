@@ -45,7 +45,7 @@ RSpec.describe ResidentialAddressController, type: :controller do
           expect(current_app_residential_address[key]).to eq(value)
         end
 
-        expect(current_app.reload.unstable_housing).to be true
+        expect(current_app.reload.stable_housing).to eq false
       end
 
       it "always sets the county to 'Genesee' and state to 'MI'" do

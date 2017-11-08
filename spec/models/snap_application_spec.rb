@@ -130,7 +130,7 @@ RSpec.describe SnapApplication do
 
         context "housing is not stable" do
           it "returns NullAddress" do
-            app = create(:snap_application, unstable_housing: true)
+            app = create(:snap_application, stable_housing: false)
             create(:mailing_address, snap_application: app)
             _residential_address = create(:address, snap_application: app)
 
