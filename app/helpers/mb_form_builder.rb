@@ -8,6 +8,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: nil,
     autofocus: nil,
+    prepend_html: "",
     append_html: "",
     optional: false
   )
@@ -34,9 +35,14 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
       text_field_html = text_field(method, text_field_options)
 
+      field_index = (i + 1).to_s
+      rendered_prepend_html = prepend_html&.gsub("{index}", field_index)
+      rendered_append_html = append_html&.gsub("{index}", field_index)
+      rendered_label_text = label_text&.gsub("{index}", field_index)
+
       label_and_field_html = label_and_field(
         method,
-        label_text&.gsub("{index}", (i + 1).to_s),
+        rendered_label_text,
         text_field_html,
         notes: notes,
         prefix: prefix,
@@ -46,9 +52,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
       <<~HTML
         <fieldset class="form-group#{error_state(object, method)}">
+        #{rendered_prepend_html}
         #{label_and_field_html}
         #{errors_for(object, method)}
-        #{append_html}
+        #{rendered_append_html}
         </fieldset>
       HTML
     end.join.html_safe
@@ -79,6 +86,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: "$",
     autofocus: nil,
+    prepend_html: "",
+    append_html: "",
     optional: false
   )
 
@@ -91,6 +100,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
+      prepend_html: prepend_html,
+      append_html: append_html,
       optional: optional,
     )
   end
