@@ -37,15 +37,16 @@ If you do not have this binary, [use this guide to get set up on MacOS].
 
 Ask the team for access to the following services to begin contributing:
 
-* GitHub
+* [GitHub](https://github.com/codeforamerica/michigan-benefits)
 * Slack
+* [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2123705)
 * Twilio
 * Mailgun
-* Trello (2 boards)
+* Trello - Benefits Partnership org
 * Heroku
 * Password Manager
+* [multi-benefits-product Google Calendar](codeforamerica.org_jkbrndbh2ubvh6frucq6dc2chk@group.calendar.google.com)
 * Get calendar invites to: daily standup, weekly planning, weekly retro
-
 
 ## Day-to-day Development
 
@@ -148,11 +149,13 @@ resources and workflow.
 ### Planning
 
 * A change is initiated and discussed via a
-  [Trello](https://trello.com/b/aBqTrqaJ/michiganbridgesorg) card.
-* All new Trello cards are added to the "Inbox" Trello list.
-* During a weekly planning meeting, prioritized Trello cards are added to the
-  "This week" Trello list. Cards in this list should have enough detail to be
-  actionable. Top priority items are at the top of the list.
+  [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2123705) story.
+* All new Tracker stories are added to the top of the Icebox
+* Before the weekly planning meeting, prioritized Tracker stories are written and moved over to the Backlog in order of priority. 
+ Cards in this list should have enough detail to be actionable. Top priority items are at the top of the list.
+* During the weekly planning meeting, stories are reviewed, clarified by product and design 
+ if necessary, and estimated by the engineering team.
+* Stories are estimated on a Fibonacci scale from 0 to 8 according to their perceived complexity.
 * During the team's weekly retro meetings, feedback about the workflow is noted
   and related changes are incorporated into this document.
 
@@ -160,23 +163,23 @@ resources and workflow.
 ### Bugs
 
 A problem is first noticed, e.g. Alert comes in, team member pings us "I haven't seen text messages coming in over the weekend. Something might be wrong."
-Person who noticed the problem, writes a ticket with a "Bug Triage" label and puts it at the top of the Up Next column.
+Person who noticed the problem, writes a bug and puts it at the top of the Icebox.
 
-An engineer taking the next ticket will triage the ticket. They investigate it, add some description of the problem. The purpose of this investigation is to
-figure out when it should be worked on.
+A product manager should then review the bug and place it in proper priority in the Backlog, adding any steps
+necessary to reproduce the bug.
 
-#### Apply the correct Trello label
+#### Apply the correct Tracker label
 
 | Label      | Severity | Action |
 | ------------- | -----------| ----- |
-| P1 | Sever bug. (e.g. the site is down, apps are at risk of not being delivered) | Should be fixed immediately |
-| P2 | Some negative impact on users | Should be placed on top of Ready column (PM may increase priority) |
-| P3 | No big impact, low priority | Place in backlog |
+| P1 | Severe bug. (e.g. the site is down, apps are at risk of not being delivered) | Should be fixed immediately |
+| P2 | Some negative impact on users | Should be placed on top of Backlog (PM may increase priority) |
+| P3 | No big impact, low priority | Place in Icebox for prioritization |
 
-### Work In Process
+### Work In Progress
 
-* When someone starts working on a task, they move the Trello card into "In
-  Progress" and assign themselves so that others know they are working on it.
+* When someone starts working on a task, they click "Start" on the Tracker story. This will assign the 
+  task to them, and make it clear that the task is in progress.
 * All code is written on a branch *other* than `master`. The team is not picky
   about branch naming.
 
@@ -191,9 +194,9 @@ development environment visit your local [mailcatcher server](http://localhost:1
 ### Code Review
 
 * A Pull Request (PR) is created on GitHub. All PRs should have [a good commit
-  message](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message).
-[The PR is attached to the related Trello
-card](https://blog.trello.com/github-and-trello-integrate-your-commits).
+  message](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) and a 
+  link to the Tracker story in the PR summary. When a PR completes a Tracker story, mark that story as 'Finished' 
+  in Pivotal Tracker. [Here's a handy trick to do it automatically](#Finished)
 * The PR Author can request reviews via GitHub's [request a pull request
   review](https://help.github.com/articles/requesting-a-pull-request-review/)
 feature. In general, the team prioritizes code reviews over other work.
@@ -212,6 +215,8 @@ feature. In general, the team prioritizes code reviews over other work.
 * Merged code is automatically deployed to the [staging
   environment](https://michigan-benefits-staging.herokuapp.com/) after a green
 build on Circle CI.
+* Once code completing a Tracker story is deployed to staging, mark the story as 'Delivered'. This 
+  indicates that it is ready for acceptance.
 * When two people are pairing on something, code can be merged to `master`
   without an explicit PR / code review process.
 
@@ -221,9 +226,10 @@ build on Circle CI.
 * Ideally, the story author has put explicit acceptance steps into the card.
 * Assign yourself to the card, so others know you're testing.
 * Spin up staging and follow the acceptance tests.
-* If all looks well, move to the "Done" column.
-* If you have a question, ask it in the card and label the card "Blocked".
-* If not, comment as to why and bump back to "In Process".
+* If all looks well, click "Accept".
+* If you have a question, ask it in the card and leave in the Accept/Reject state.
+* If not, comment with specifics about what was incorrect and click "Reject". A developer will then pick up 
+the story, fix the issues, and redeliver.
 
 #### Testing Document Uploads on Staging
 
@@ -234,6 +240,34 @@ NOTE: Document upload via [Shubox] on staging requires using this URL:
 and will not work on this URL:
 
 [https://michigan-benefits-staging.herokuapp.com](https://michigan-benefits-staging.herokuapp.com)
+
+### Tracker flow and integrations
+
+Our Pivotal Tracker project is set up with the [Github integration](https://www.pivotaltracker.com/help/articles/githubs_service_hook_for_tracker/#formatting-your-commits), allowing developers to take 
+automate some setting of status on stories. The Github integration is configured to listen for Tracker stories 
+in commits pushed to any branch.
+
+#### Started/In Progress
+
+Regularly tag your commits with the Tracker story ID in Tracker ([#STORYID]). When pushed to a branch, 
+these will post as comments on the Tracker story and indicate that the story is in progress. Pushing a tagged commit 
+will automatically mark the story as "Started".
+
+#### Finished
+
+When a feature is complete and you're ready to open a PR, include the tag [Finishes #STORYID] in the commit message. When pushed, this will then mark 
+the Tracker story as finished.
+
+#### Delivered
+
+When the PR is merged into master and the feature is deployed to staging, manually mark the story as 
+"Delivered" in Tracker.
+
+#### Accepted/Rejected
+
+See [Acceptance Testing](#acceptance-testing)
+
+These tags can be applied to features, bugs, or chores.
 
 ## Driving Applications on MIBridges.org
 
