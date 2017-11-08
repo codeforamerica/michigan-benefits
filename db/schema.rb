@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171107204738) do
+ActiveRecord::Schema.define(version: 20171107214734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -242,8 +242,8 @@ ActiveRecord::Schema.define(version: 20171107204738) do
     t.string "signature"
     t.datetime "signed_at"
     t.boolean "sms_consented"
+    t.boolean "stable_housing", default: true
     t.integer "total_money"
-    t.boolean "unstable_housing", default: false
     t.datetime "updated_at", null: false
     t.boolean "utility_cooling"
     t.boolean "utility_electrity"

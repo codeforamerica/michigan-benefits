@@ -32,7 +32,7 @@ minimal_application.update!(
   money_or_accounts_income: false,
   real_estate_income: false,
   vehicle_income: false,
-  unstable_housing: true,
+  stable_housing: false,
   mailing_address_same_as_residential_address: false,
 )
 
@@ -83,7 +83,7 @@ complete_application.update!(
   sms_consented: true,
   consent_to_terms: true,
   mailing_address_same_as_residential_address: false,
-  unstable_housing: true,
+  stable_housing: false,
   everyone_a_citizen: true,
   anyone_disabled: false,
   anyone_new_mom: false,

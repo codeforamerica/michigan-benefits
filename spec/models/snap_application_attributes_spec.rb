@@ -12,7 +12,7 @@ RSpec.describe SnapApplicationAttributes do
         financial_accounts: [:four_oh_one_k],
         phone_number: "2222222222",
         rent_expense: 100,
-        unstable_housing: true,
+        stable_housing: false,
       )
 
       member = snap_application.members.first
