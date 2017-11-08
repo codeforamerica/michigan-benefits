@@ -30,6 +30,14 @@ class Member < ApplicationRecord
     "Other",
   ].freeze
 
+  MARITAL_STATUSES = [
+    "Married",
+    "Never married",
+    "Divorced",
+    "Widowed",
+    "Separated",
+  ].freeze
+
   belongs_to :benefit_application, polymorphic: true
 
   validates :employed_pay_interval,

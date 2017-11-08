@@ -1,0 +1,15 @@
+<% content_for :header_title, "Introduction" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      <%= t("medicaid.intro_marital_status.edit.title",
+            count: current_application.members.count) %>
+    </div>
+    <p class="text--help text--centered">
+
+    </p>
+  </header>
+
+  <%= render 'shared/yes_no_form', step: @step, field: :anyone_married %>
+</div>

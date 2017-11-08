@@ -47,6 +47,13 @@ RSpec.feature "Medicaid app" do
     click_on "Next"
 
     on_page "Introduction" do
+      expect(page).to have_content(
+        "Is anyone in your household currently married?",
+      )
+      click_on "No"
+    end
+
+    on_page "Introduction" do
       expect(page).to have_content("Is anyone currently a college student?")
       click_on "Yes"
     end
