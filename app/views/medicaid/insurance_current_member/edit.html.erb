@@ -16,7 +16,6 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-        <%= f.mb_form_errors :insured %>
         <fieldset class="form-group">
           <% @step.members_needing_insurance.each do |member| %>
               <%= f.fields_for("members[]", member) do |ff| %>
@@ -27,6 +26,7 @@
                 ) %>
               <% end %>
           <% end %>
+          <%= f.mb_form_errors :insured %>
         </fieldset>
         <%= render "medicaid/next_step" %>
     <% end %>

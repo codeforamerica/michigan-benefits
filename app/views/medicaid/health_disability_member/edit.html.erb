@@ -14,7 +14,6 @@
       url: current_path,
       method: :put do |f| %>
 
-      <%= f.mb_form_errors :disabled %>
 
       <fieldset class="form-group">
         <% @step.members.each do |member| %>
@@ -22,6 +21,7 @@
             <%= ff.mb_checkbox :disabled, member.display_name %>
           <% end %>
         <% end %>
+        <%= f.mb_form_errors :disabled %>
       </fieldset>
 
       <%= render 'medicaid/next_step' %>

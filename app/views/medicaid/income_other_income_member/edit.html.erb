@@ -13,7 +13,6 @@
       builder: MbFormBuilder,
       url: current_path,
       method: :put do |f| %>
-      <%= f.mb_form_errors :other_income %>
       <fieldset class="form-group">
         <% @step.members.each do |member| %>
           <%= f.fields_for("members[]", member) do |ff| %>
@@ -24,6 +23,7 @@
             ) %>
           <% end %>
         <% end %>
+        <%= f.mb_form_errors :other_income %>
       </fieldset>
       <%= render "medicaid/next_step" %>
     <% end %>

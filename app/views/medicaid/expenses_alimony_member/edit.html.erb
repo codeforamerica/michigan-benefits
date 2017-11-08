@@ -14,7 +14,6 @@
       url: current_path,
       method: :put do |f| %>
 
-      <%= f.mb_form_errors :child_support_alimony_arrears %>
 
       <fieldset class="form-group">
         <% @step.members.each do |member| %>
@@ -23,6 +22,7 @@
                              member.display_name) %>
           <% end %>
         <% end %>
+        <%= f.mb_form_errors :child_support_alimony_arrears %>
       </fieldset>
 
       <%= render 'medicaid/next_step' %>
