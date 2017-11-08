@@ -8,6 +8,10 @@ class Step
       symbols_or_hash_keys.flatten.map(&:to_s)
     end
 
+    def to_sym
+      symbols_or_hash_keys.flatten.map(&:to_sym)
+    end
+
     def hash_key?(attribute)
       hashes = attribute_names.select do |attr|
         attr.is_a? Hash
