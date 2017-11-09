@@ -7,7 +7,7 @@ module Medicaid
 
     def valid?
       if member_has_insurance? && no_insurance_type_provided?
-        errors.add(:insurance_type, "Please select a plan")
+        errors.add(:insurance_type, "Make sure you select a plan")
         false
       else
         true

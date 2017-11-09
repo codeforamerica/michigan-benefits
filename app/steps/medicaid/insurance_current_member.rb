@@ -19,7 +19,7 @@ module Medicaid
       else
         errors.add(
           :insured,
-          "Please select a member",
+          "Make sure you select a person",
         )
         false
       end

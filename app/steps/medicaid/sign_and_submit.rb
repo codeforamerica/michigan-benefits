@@ -6,6 +6,6 @@ module Medicaid
     )
 
     validates :signature,
-      presence: { message: "Make sure you enter your signature" }
+      presence: { message: "Make sure you enter your full legal name" }
   end
 end

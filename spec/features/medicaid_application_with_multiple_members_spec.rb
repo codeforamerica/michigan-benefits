@@ -142,7 +142,7 @@ RSpec.feature "Medicaid app" do
       )
       click_on "Next"
 
-      expect(page).to have_content("Please select a member")
+      expect(page).to have_content("Make sure you select a person")
       check "Jessie Tester"
       click_on "Next"
     end

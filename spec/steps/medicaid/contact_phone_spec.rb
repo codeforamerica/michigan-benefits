@@ -7,7 +7,7 @@ RSpec.describe Medicaid::ContactPhone do
 
       expect(step).to be_invalid
       expect(step.errors[:phone_number]).to eq(
-        ["Make sure to provide a phone number at which we can reach you"],
+        ["Make sure to provide a phone number where we can reach you"],
       )
     end
 
