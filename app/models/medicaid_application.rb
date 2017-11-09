@@ -2,6 +2,7 @@ class MedicaidApplication < ApplicationRecord
   include Submittable
 
   has_many :members, as: :benefit_application, dependent: :destroy
+  has_many :addresses, as: :benefit_application, dependent: :destroy
 
   attribute :ssn
   attr_encrypted(
@@ -37,5 +38,21 @@ class MedicaidApplication < ApplicationRecord
 
   def non_applicant_members
     members - [primary_member]
+  end
+
+  def residential_address
+    return NullAddress.new if unstable_housing?
+    return mailing_address if mailing_address_same_as_residential_address?
+    addresses.where.not(mailing: true).first || NullAddress.new
+  end
+
+  def mailing_address
+    addresses.where(mailing: true).first || NullAddress.new
+  end
+
+  private
+
+  def unstable_housing?
+    !stable_housing?
   end
 end

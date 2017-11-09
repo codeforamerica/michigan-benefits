@@ -22,7 +22,7 @@ RSpec.describe MailingAddressController, type: :controller do
 
   describe "#update" do
     context "when valid" do
-      it "updates the app" do
+      it "updates the app and provides default values for county and state" do
         valid_params = {
           street_address: "321 Real St",
           city: "Shelbyville",
@@ -39,29 +39,14 @@ RSpec.describe MailingAddressController, type: :controller do
         current_app.reload
 
         valid_params.each do |key, value|
-          expect(current_app_mailing_address[key]).to eq(value)
+          expect(current_app.mailing_address[key]).to eq(value)
         end
+        expect(current_app.mailing_address["county"]).to eq("Genesee")
+        expect(current_app.mailing_address["state"]).to eq("MI")
 
         expect(current_app.mailing_address_same_as_residential_address).to be(
           false,
         )
-      end
-
-      it "always sets the county to 'Genesee' and state to 'MI'" do
-        current_app_mailing_address.update(state: "CA", county: "test")
-        valid_params = {
-          street_address: "321 Main St",
-          city: "Plymouth",
-          zip: "48170",
-          mailing_address_same_as_residential_address: true,
-        }
-
-        put :update, params: { step: valid_params }
-
-        current_app_mailing_address.reload
-
-        expect(current_app_mailing_address["county"]).to eq("Genesee")
-        expect(current_app_mailing_address["state"]).to eq("MI")
       end
 
       it "redirects to the next step" do
@@ -79,10 +64,6 @@ RSpec.describe MailingAddressController, type: :controller do
     end
   end
 
-  def current_app_mailing_address
-    current_app.addresses.where(mailing: true).first
-  end
-
   def current_app
     @_current_app ||= create(
       :snap_application,
@@ -92,7 +73,7 @@ RSpec.describe MailingAddressController, type: :controller do
   end
 
   def address
-    create(
+    build(
       :address,
       street_address: "123 Fake St",
       city: "Springfield",

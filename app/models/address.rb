@@ -1,3 +1,3 @@
 class Address < ApplicationRecord
-  belongs_to :snap_application
+  belongs_to :benefit_application, polymorphic: true
 end
