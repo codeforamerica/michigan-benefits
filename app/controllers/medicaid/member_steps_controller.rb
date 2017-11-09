@@ -8,11 +8,11 @@ module Medicaid
       @_current_member ||= member_from_form || member_from_querystring
     end
 
-    private
-
     def next_path
       next_member_path || super
     end
+
+    private
 
     def next_member_path
       return if next_member.nil?

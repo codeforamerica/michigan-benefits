@@ -28,6 +28,10 @@ class MedicaidApplication < ApplicationRecord
       anyone_other_income?
   end
 
+  def nobody_married?
+    !anyone_married?
+  end
+
   def nobody_caretaker_or_parent?
     !anyone_caretaker_or_parent?
   end

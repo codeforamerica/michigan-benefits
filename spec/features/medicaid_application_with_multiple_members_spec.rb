@@ -58,6 +58,31 @@ RSpec.feature "Medicaid app" do
         "Who in the household is currently married?",
       )
       check "Jessie Tester"
+      check "Christa Tester"
+      check "Joel Tester"
+      click_on "Next"
+    end
+
+    on_page "Introduction" do
+      expect(page).to have_content(
+        "Tell us who Jessie Tester is currently married to",
+      )
+      choose "Christa Tester"
+      click_on "Next"
+    end
+
+    on_page "Introduction" do
+      expect(page).to have_content(
+        "Tell us who Christa Tester is currently married to",
+      )
+      click_on "Next"
+    end
+
+    on_page "Introduction" do
+      expect(page).to have_content(
+        "Tell us who Joel Tester is currently married to",
+      )
+      choose "Other - not listed"
       click_on "Next"
     end
 

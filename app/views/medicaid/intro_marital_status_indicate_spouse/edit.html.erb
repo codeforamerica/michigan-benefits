@@ -1,0 +1,30 @@
+<% content_for :header_title, "Introduction" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      <%= t("medicaid.intro_marital_status_indicate_spouse.edit.title",
+            name: current_member.display_name) %>
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <%= f.mb_form_errors :spouse %>
+      <%= f.hidden_field(:member_id, value: current_member.id) %>
+
+      <%= f.mb_radio_set :spouse_id, "",
+        spouse_options.map { |member|
+        { value: member.id, label: member.display_name }
+       } %>
+
+      <%= render "medicaid/next_step" %>
+    <% end %>
+  </div>
+</div>
+

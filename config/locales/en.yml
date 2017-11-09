@@ -9,6 +9,9 @@ en:
         title:
           one: Are you currently married?
           other: Is anyone in your household currently married?
+    intro_marital_status_indicate_spouse:
+      edit:
+        title: "Tell us who %{name} is currently married to"
     intro_college:
       edit:
         title:
