@@ -7,5 +7,8 @@ RSpec.describe Medicaid::HealthDisabilityMemberController, type: :controller do
     end
   end
 
-  it_should_behave_like "Medicaid multi-member controller", :anyone_disabled
+  it_should_behave_like(
+    "Medicaid multi-member controller",
+    :anyone_disabled,
+  )
 end
