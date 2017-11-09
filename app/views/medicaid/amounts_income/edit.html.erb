@@ -29,18 +29,24 @@
          :employed_monthly_income,
          "Monthly income (before taxes)",
          options: { count: current_member.employed_number_of_jobs },
-         prepend_html: "<p class=\"text--section-header\">Current Job ({index})</p>"
+         prepend_html: "<p class=\"text--section-header\">Current Job (\#{index})</p>"
        ) %>
       <% end %>
 
       <% if current_member.self_employed? %>
+        <p class="text--section-header">
+        Self-Employment
+        </p>
         <%= f.mb_money_field :self_employed_monthly_income,
-          "Self-Employment (average monthly income)" %>
+          "Monthly income (before taxes)" %>
       <% end %>
 
       <% if current_member.receives_unemployment_income? %>
+        <p class="text--section-header">
+        Other Income
+        </p>
         <%= f.mb_money_field :unemployment_income,
-          "Unemployment (average monthly income)" %>
+          "Monthly unemployment income (before taxes)" %>
       <% end %>
 
       <%= render "medicaid/next_step" %>
