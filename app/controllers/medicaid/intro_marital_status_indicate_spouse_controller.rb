@@ -3,18 +3,6 @@ module Medicaid
     Medicaid::MemberStepsController
     helper_method :spouse_options
 
-    def update
-      @step = step_class.new(step_params)
-
-      if @step.valid?
-        current_member.update(step_params)
-        update_spouse_of_other_member_if_present
-        redirect_to(next_path)
-      else
-        render :edit
-      end
-    end
-
     def current_member
       @_current_member ||= super || first_married_member
     end
@@ -26,6 +14,15 @@ module Medicaid
     end
 
     private
+
+    def after_successful_update_hook
+      current_member.update(step_params)
+      update_spouse_of_other_member_if_present
+    end
+
+    def application_params
+      {}
+    end
 
     def skip?
       single_member_household? ||

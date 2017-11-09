@@ -6,12 +6,11 @@ module Medicaid
       :spouse,
     )
 
-    def valid?
-      if spouse_id.present?
-        true
-      else
+    validate :spouse_present
+
+    def spouse_present
+      if spouse_id.blank?
         errors.add(:spouse, "Make sure you select a person")
-        false
       end
     end
 
