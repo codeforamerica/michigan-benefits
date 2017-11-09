@@ -100,8 +100,8 @@ RSpec.describe SnapApplication do
       it "returns mailing address" do
         app = create(:snap_application,
                       mailing_address_same_as_residential_address: true)
-        create(:address, snap_application: app)
-        mailing_address = create(:mailing_address, snap_application: app)
+        create(:address, benefit_application: app)
+        mailing_address = create(:mailing_address, benefit_application: app)
 
         expect(app.residential_address).to eq mailing_address
       end
@@ -111,7 +111,7 @@ RSpec.describe SnapApplication do
       context "residential address not present" do
         it "returns NullAddress" do
           app = create(:snap_application)
-          create(:mailing_address, snap_application: app)
+          create(:mailing_address, benefit_application: app)
 
           expect(app.residential_address).to be_a NullAddress
         end
@@ -121,8 +121,8 @@ RSpec.describe SnapApplication do
         context "housing is stable" do
           it "returns residential address" do
             app = create(:snap_application)
-            create(:mailing_address, snap_application: app)
-            residential_address = create(:address, snap_application: app)
+            create(:mailing_address, benefit_application: app)
+            residential_address = create(:address, benefit_application: app)
 
             expect(app.residential_address).to eq residential_address
           end
@@ -131,12 +131,32 @@ RSpec.describe SnapApplication do
         context "housing is not stable" do
           it "returns NullAddress" do
             app = create(:snap_application, stable_housing: false)
-            create(:mailing_address, snap_application: app)
-            _residential_address = create(:address, snap_application: app)
+            create(:mailing_address, benefit_application: app)
+            _residential_address = create(:address, benefit_application: app)
 
             expect(app.residential_address.class).to eq NullAddress
           end
         end
+      end
+    end
+  end
+
+  describe "#mailing_address" do
+    context "mailing address exists" do
+      it "returns mailing address" do
+        app = create(:snap_application)
+        mailing_address = create(:mailing_address, benefit_application: app)
+
+        expect(app.mailing_address).to eq(mailing_address)
+      end
+    end
+
+    context "mailing address does not exist" do
+      it "returns NullAddress" do
+        app = create(:snap_application)
+        create(:address, benefit_application: app)
+
+        expect(app.mailing_address.class).to eq(NullAddress)
       end
     end
   end

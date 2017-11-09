@@ -88,7 +88,7 @@ RSpec.describe ResidentialAddressController, type: :controller do
   end
 
   def address
-    create(
+    build(
       :address,
       street_address: "I live here",
       city: "Hometown",

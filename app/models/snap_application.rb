@@ -26,7 +26,7 @@ class SnapApplication < ApplicationRecord
   validate :medical_expenses_values
   validate :court_ordered_expenses_values
 
-  has_many :addresses, dependent: :destroy
+  has_many :addresses, as: :benefit_application, dependent: :destroy
   has_many :driver_applications, dependent: :destroy
   has_many :driver_errors, through: :driver_applications
   has_many :exports, dependent: :destroy

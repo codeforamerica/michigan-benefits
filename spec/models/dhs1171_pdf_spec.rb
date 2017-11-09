@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe Dhs1171Pdf do
   describe "#save" do
     it "saves the client info" do
-      mailing_address = create(:mailing_address)
-      residential_address = create(:address)
+      mailing_address = build(:mailing_address)
+      residential_address = build(:address)
       member = create(:member, ssn: "012345678")
       snap_application = create(
         :snap_application,

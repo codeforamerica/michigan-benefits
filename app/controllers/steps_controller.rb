@@ -32,12 +32,16 @@ class StepsController < ApplicationController
     @step = step_class.new(step_params)
 
     if @step.valid?
-      current_application.update!(step_params)
+      current_application.update!(application_params)
       after_successful_update_hook
       redirect_to(next_path)
     else
       render :edit
     end
+  end
+
+  def application_params
+    step_params
   end
 
   def self.to_param

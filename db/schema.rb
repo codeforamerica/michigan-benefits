@@ -10,22 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108010437) do
+ActiveRecord::Schema.define(version: 20171108012317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
+    t.bigint "benefit_application_id", null: false
+    t.string "benefit_application_type", null: false
     t.string "city", null: false
     t.string "county", null: false
     t.datetime "created_at", null: false
     t.boolean "mailing", default: true, null: false
-    t.bigint "snap_application_id"
     t.string "state", null: false
     t.string "street_address", null: false
     t.datetime "updated_at", null: false
     t.string "zip", null: false
-    t.index ["snap_application_id"], name: "index_addresses_on_snap_application_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -132,18 +132,12 @@ ActiveRecord::Schema.define(version: 20171108010437) do
     t.boolean "income_social_security"
     t.boolean "income_unemployment"
     t.boolean "mailing_address_same_as_residential_address"
-    t.string "mailing_city"
-    t.string "mailing_street_address"
-    t.string "mailing_zip"
     t.boolean "michigan_resident", null: false
     t.boolean "need_medical_expense_help_3_months"
     t.string "office_location"
     t.string "paperwork", array: true
     t.string "phone_number"
     t.boolean "reliable_mail_address"
-    t.string "residential_city"
-    t.string "residential_street_address"
-    t.string "residential_zip"
     t.integer "self_employed_monthly_income"
     t.integer "self_employment_expenses"
     t.string "signature"

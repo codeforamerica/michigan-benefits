@@ -4,21 +4,21 @@ RSpec.describe Medicaid::ContactMailingAddress do
   describe "Validations" do
     it "validates presence of address fields" do
       valid_address = Medicaid::ContactMailingAddress.new(
-        mailing_street_address: "123 Main St.",
-        mailing_city: "Flint",
-        mailing_zip: "12345",
+        street_address: "123 Main St.",
+        city: "Flint",
+        zip: "12345",
       )
 
       invalid_nil_address = Medicaid::ContactMailingAddress.new(
-        mailing_street_address: nil,
-        mailing_city: nil,
-        mailing_zip: nil,
+        street_address: nil,
+        city: nil,
+        zip: nil,
       )
 
       invalid_blank_address = Medicaid::ContactMailingAddress.new(
-        mailing_street_address: "",
-        mailing_city: "",
-        mailing_zip: "",
+        street_address: "",
+        city: "",
+        zip: "",
       )
 
       expect(valid_address).to be_valid

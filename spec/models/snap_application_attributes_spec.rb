@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe SnapApplicationAttributes do
   describe "#to_h" do
     it "returns a hash of attributes" do
-      mailing_address = create(:mailing_address)
-      residential_address = create(:address)
+      mailing_address = build(:mailing_address)
+      residential_address = build(:address)
       snap_application = create(
         :snap_application,
         :with_member,
