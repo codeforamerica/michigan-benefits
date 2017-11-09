@@ -61,22 +61,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     end.join.html_safe
   end
 
-  def field_values(options, method)
-    current_value = object.send(method)
-    return Array.wrap(current_value) if current_value.present?
-
-    if options[:count] && current_value.blank?
-      Array.new(options[:count], "")
-    else
-      [""]
-    end
-  end
-
-  def array_of_values?(attribute)
-    object.respond_to?(:hash_key_attribute?) &&
-      object.hash_key_attribute?(attribute)
-  end
-
   def mb_money_field(
     method,
     label_text,
@@ -151,7 +135,14 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
-  def mb_date_select(method, label_text, notes: [], options: {}, autofocus: nil)
+  def mb_date_select(
+    method,
+    label_text,
+    notes: [],
+    options: {},
+    autofocus: nil
+  )
+
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
         #{label(method, label_contents(label_text, notes))}
@@ -208,22 +199,27 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     checkbox_html
   end
 
-  def mb_select(
-    method,
-    label_text,
-    collection,
-    options = {},
-    &block
-  )
-    <<-HTML.html_safe
-      <fieldset class="form-group#{error_state(object, method)}">
-        #{label(method, label_contents(label_text, options[:notes], options[:optional]))}
-        <div class="select">
-          #{select(method, collection, options, { class: 'select__element' }, &block)}
-        </div>
-        #{errors_for(object, method)}
-      </fieldset>
-    HTML
+  def mb_select(method, label_text, collection, options = {}, &block)
+    field_values(options, method).map.with_index do |value, i|
+      html_options = { class: "select__element" }
+
+      if array_of_values?(method)
+        html_options[:name] = "#{object_name}[#{method}][]"
+        html_options[:id] = "#{object_name}_#{method}_#{i}"
+        options[:selected] = value
+      end
+
+      field_index = (i + 1).to_s
+      rendered_label_text = label_text&.gsub("{index}", field_index)
+
+      <<~HTML
+        <fieldset class="form-group#{error_state(object, method)}">
+          #{label(method, label_contents(rendered_label_text, options[:notes], options[:optional]))}
+          <div class="select">#{select(method, collection, options, html_options, &block)}</div>
+          #{errors_for(object, method)}
+        </fieldset>
+      HTML
+    end.join.html_safe
   end
 
   def mb_checkbox(method, label_text, options = {})
@@ -233,6 +229,22 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       </label>
     #{errors_for(object, method)}
     HTML
+  end
+
+  def field_values(options, method)
+    current_value = object.send(method)
+    return Array.wrap(current_value) if current_value.present?
+
+    if options[:count] && current_value.blank?
+      Array.new(options[:count], "")
+    else
+      [""]
+    end
+  end
+
+  def array_of_values?(attribute)
+    object.respond_to?(:hash_key_attribute?) &&
+      object.hash_key_attribute?(attribute)
   end
 
   private

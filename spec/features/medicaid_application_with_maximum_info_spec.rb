@@ -110,6 +110,15 @@ RSpec.feature "Medicaid app" do
       fill_in "step_employed_monthly_income_0", with: 100
       fill_in "step_employed_monthly_income_1", with: 50
       fill_in "step_employed_monthly_income_2", with: 25
+
+      fill_in "step_employed_monthly_employer_0", with: "Acme Co."
+      fill_in "step_employed_monthly_employer_1", with: "CfA"
+      fill_in "step_employed_monthly_employer_2", with: "Cylinder"
+
+      select "Monthly", from: "step_employed_payment_frequency_0"
+      select "Weekly", from: "step_employed_payment_frequency_1"
+      select "Hourly", from: "step_employed_payment_frequency_2"
+
       fill_in "step_self_employed_monthly_income", with: 100
       fill_in "step_unemployment_income", with: 100
       click_on "Next"
@@ -119,6 +128,15 @@ RSpec.feature "Medicaid app" do
       expect(find("#step_employed_monthly_income_0").value).to eq "100"
       expect(find("#step_employed_monthly_income_1").value).to eq "50"
       expect(find("#step_employed_monthly_income_2").value).to eq "25"
+
+      expect(find("#step_employed_monthly_employer_0").value).to eq "Acme Co."
+      expect(find("#step_employed_monthly_employer_1").value).to eq "CfA"
+      expect(find("#step_employed_monthly_employer_2").value).to eq "Cylinder"
+
+      expect(find("#step_employed_payment_frequency_0").value).to eq "Monthly"
+      expect(find("#step_employed_payment_frequency_1").value).to eq "Weekly"
+      expect(find("#step_employed_payment_frequency_2").value).to eq "Hourly"
+
       click_on "Next"
 
       expect(page).to have_content("Tell us your specific expenses.")

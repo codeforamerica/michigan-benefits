@@ -26,11 +26,30 @@
 
       <% if current_member.employed? %>
         <%= f.mb_money_field(
-         :employed_monthly_income,
-         "Monthly income (before taxes)",
-         options: { count: current_member.employed_number_of_jobs },
-         prepend_html: "<p class=\"text--section-header\">Current Job (\#{index})</p>"
-       ) %>
+          :employed_monthly_income,
+          "Monthly income (before taxes)",
+          options: { count: current_member.employed_number_of_jobs },
+          prepend_html:
+            "<p class=\"text--section-header\">Income - Job (\#{index})</p>"
+        ) %>
+
+        <%= f.mb_input_field(
+          :employed_monthly_employer,
+          "Employer name",
+          options: { count: current_member.employed_number_of_jobs },
+          prepend_html:
+          "<p class=\"text--section-header\">Employer Name - Job (\#{index})"
+        ) %>
+
+        <%= f.mb_select(
+          :employed_payment_frequency,
+          "How often are you paid that amount? - Job (\#{index})",
+          Member::PAYMENT_INTERVALS,
+          {
+            layout: "inline",
+            count: current_member.employed_number_of_jobs,
+          }
+        ) %>
       <% end %>
 
       <% if current_member.self_employed? %>

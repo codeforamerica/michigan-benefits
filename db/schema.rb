@@ -160,10 +160,12 @@ ActiveRecord::Schema.define(version: 20171109193950) do
     t.boolean "employed", default: false
     t.string "employed_employer_name"
     t.integer "employed_hours_per_week"
+    t.string "employed_monthly_employer", default: [], array: true
     t.string "employed_monthly_income", default: [], array: true
     t.integer "employed_number_of_jobs"
     t.string "employed_pay_interval"
     t.integer "employed_pay_quantity"
+    t.string "employed_payment_frequency", default: [], array: true
     t.string "employment_status"
     t.string "encrypted_last_four_ssn"
     t.string "encrypted_last_four_ssn_iv"

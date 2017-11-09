@@ -322,6 +322,13 @@ RSpec.feature "Medicaid app" do
       )
       fill_in "step_employed_monthly_income_0", with: 100
       fill_in "step_employed_monthly_income_1", with: 100
+
+      fill_in "step_employed_monthly_employer_0", with: "CfA"
+      fill_in "step_employed_monthly_employer_1", with: "Cylinder"
+
+      select "Monthly", from: "step_employed_payment_frequency_0"
+      select "Monthly", from: "step_employed_payment_frequency_1"
+
       click_on "Next"
 
       expect(page).to have_content("Tell us Jessie Tester’s specific expenses")

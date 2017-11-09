@@ -1,13 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::AmountsIncome do
-  context "has 2 jobs, 2 salaries" do
+  context "has 2 jobs" do
     it "validates that there is income for 2 jobs" do
       member = create(:member, employed_number_of_jobs: 2)
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
         employed_monthly_income: [1, 2],
+        employed_monthly_employer: ["Acme", "Co"],
+        employed_payment_frequency: ["Weekly", "Weekly"],
       )
 
       expect(step).to be_valid
@@ -21,9 +23,12 @@ RSpec.describe Medicaid::AmountsIncome do
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
         employed_monthly_income: [1],
+        employed_monthly_employer: ["Acme"],
+        employed_payment_frequency: ["Weekly"],
       )
 
       expect(step).not_to be_valid
+      expect(step.errors.messages[:incomes_missing].size).to eq 3
     end
   end
 
