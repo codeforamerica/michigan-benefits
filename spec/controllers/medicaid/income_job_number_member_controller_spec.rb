@@ -9,5 +9,8 @@ RSpec.describe Medicaid::IncomeJobNumberMemberController do
     end
   end
 
-  it_should_behave_like "Medicaid multi-member controller", :anyone_employed
+  it_should_behave_like(
+    "Medicaid multi-member controller",
+    :anyone_employed,
+  )
 end
