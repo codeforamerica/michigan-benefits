@@ -285,8 +285,8 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Tell us Jessie Tester’s specific income received",
       )
-      fill_in "Self-Employment (average monthly income)", with: "100"
-      fill_in "Unemployment (average monthly income)", with: "100"
+      fill_in "step_self_employed_monthly_income", with: 100
+      fill_in "step_unemployment_income", with: 100
       click_on "Next"
     end
 
