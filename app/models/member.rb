@@ -39,6 +39,7 @@ class Member < ApplicationRecord
   ].freeze
 
   belongs_to :benefit_application, polymorphic: true
+  has_one :spouse, class_name: "Member", foreign_key: "spouse_id"
 
   validates :employed_pay_interval,
     inclusion: { in: PAYMENT_INTERVALS },
@@ -66,6 +67,10 @@ class Member < ApplicationRecord
     where(insured: true).
       where(requesting_health_insurance: true).
       order(created_at: :asc)
+  end
+
+  def self.married
+    where(married: true).order(created_at: :asc)
   end
 
   def self.other_income

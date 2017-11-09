@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108012317) do
+ActiveRecord::Schema.define(version: 20171108220855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 20171108012317) do
     t.integer "self_employed_monthly_income"
     t.string "self_employed_profession"
     t.string "sex"
+    t.integer "spouse_id"
     t.integer "unemployment_income"
     t.datetime "updated_at", null: false
   end
