@@ -19,7 +19,7 @@
       <%= f.hidden_field(:member_id, value: current_member.id) %>
 
       <%= f.mb_radio_set :spouse_id, "",
-        spouse_options.map { |member|
+        current_member.spouse_options.map { |member|
         { value: member.id, label: member.display_name }
        } %>
 

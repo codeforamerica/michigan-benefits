@@ -1,16 +1,9 @@
 module Medicaid
   class IntroMaritalStatusIndicateSpouseController <
     Medicaid::MemberStepsController
-    helper_method :spouse_options
 
     def current_member
       @_current_member ||= super || first_married_member
-    end
-
-    def spouse_options
-      current_application.members -
-        [current_member] +
-        [OtherSpouse.new]
     end
 
     private

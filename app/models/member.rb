@@ -81,6 +81,12 @@ class Member < ApplicationRecord
     where("created_at > ?", member.created_at)
   end
 
+  def spouse_options
+    benefit_application.members.married -
+      [self] +
+      [OtherSpouse.new]
+  end
+
   def display_name
     "#{first_name} #{last_name}".titleize
   end
