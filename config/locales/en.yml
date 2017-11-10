@@ -100,3 +100,8 @@ en:
         title:
           one: Tell us the specific income received.
           other: "Tell us %{name}’s specific income received."
+    amounts_expenses:
+      edit:
+        title:
+          one: Tell us your specific expenses.
+          other: "Tell us %{name}’s specific expenses."

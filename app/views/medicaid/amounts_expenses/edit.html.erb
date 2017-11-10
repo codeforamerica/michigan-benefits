@@ -2,24 +2,38 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Tell us your specific expenses.</div>
+    <div class="form-card__title">
+      <%= t("medicaid.amounts_expenses.edit.title",
+            count: current_application.members.count,
+            name: current_member.display_name) %>
+    </div>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <% if current_application.anyone_pay_child_support_alimony_arrears? %>
+      <%= f.hidden_field :member_id, value: current_member.id %>
+      <% if current_member.pay_child_support_alimony_arrears? %>
+        <p class="text--section-header">
+          Child Support, Alimony, or Arrears
+        </p>
         <%= f.mb_money_field :child_support_alimony_arrears_expenses,
-          "Child Support, Alimony, or Arrears (average monthly expense)" %>
+          "Monthly expenses" %>
       <% end %>
 
-      <% if current_application.anyone_pay_student_loan_interest? %>
-        <%= f.mb_money_field :college_loan_interest_expenses,
-          "College Loan Interest (average monthly expense)" %>
+      <% if current_member.pay_student_loan_interest? %>
+        <p class="text--section-header">
+          College Loan Interest
+        </p>
+        <%= f.mb_money_field :student_loan_interest_expenses,
+          "Monthly expenses" %>
       <% end %>
 
-      <% if current_application.anyone_self_employed? %>
-        <%= f.mb_money_field :self_employment_expenses,
-          "Self Employment (average monthly expense)",
+      <% if current_member.self_employed? %>
+        <p class="text--section-header">
+        Self-Employment
+        </p>
+        <%= f.mb_money_field :self_employed_monthly_expenses,
+          "Average monthly expenses",
           notes: ["If you have no self-employment expenses, please indicate that by entering 0"] %>
       <% end %>
 
