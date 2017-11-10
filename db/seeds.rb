@@ -1,3 +1,9 @@
+puts "Creating admin user"
+
+admin_user = AdminUser.find_or_initialize_by(email: "admin@example.com")
+
+admin_user.update!(password: "password")
+
 puts "Creating minimal snap application..."
 
 minimal_application = SnapApplication.find_or_initialize_by(
@@ -37,7 +43,7 @@ minimal_application.update!(
 )
 
 minimal_mailing = Address.find_or_initialize_by(
-  snap_application: minimal_application,
+  benefit_application: minimal_application,
 )
 
 minimal_mailing.update!(
@@ -127,10 +133,11 @@ complete_application.update!(
   financial_accounts: ["checking_account", "four_oh_one_k"],
   total_money: 2000,
   additional_information: "N/A",
+  office_location: "union",
 )
 
 complete_mailing = Address.find_or_initialize_by(
-  snap_application: complete_application,
+  benefit_application: complete_application,
   street_address: "1 Fuller Ave.",
 )
 
@@ -143,7 +150,7 @@ complete_mailing.update!(
 )
 
 complete_residential = Address.find_or_initialize_by(
-  snap_application: complete_application,
+  benefit_application: complete_application,
   street_address: "100 Home St.",
 )
 
