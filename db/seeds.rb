@@ -1,3 +1,9 @@
+puts "Creating admin user"
+
+admin_user = AdminUser.find_or_initialize_by(email: "admin@example.com")
+
+admin_user.update!(password: "password")
+
 puts "Creating minimal snap application..."
 
 minimal_application = SnapApplication.find_or_initialize_by(
