@@ -58,7 +58,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     utility_trash: Field::Boolean,
     utility_water_sewer: Field::Boolean,
     vehicle_income: Field::Boolean,
-    members: Field::HasMany,
+    members: Field::HasMany.with_options(limit: 20),
     driver_errors: Field::HasMany,
     exports: Field::HasMany,
   }.freeze
