@@ -8,10 +8,16 @@ module Admin
   class ApplicationController < Administrate::ApplicationController
     before_action :authenticate_admin_user!
     before_action :default_params
+    around_action :add_tags_to_logs
 
     def default_params
       params[:order] ||= "created_at"
       params[:direction] ||= "desc"
+    end
+
+    def add_tags_to_logs
+      user_email = current_admin_user.email
+      Rails.logger.tagged(user_email) { yield }
     end
   end
 end
