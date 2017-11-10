@@ -119,4 +119,21 @@ RSpec.describe Member do
       end
     end
   end
+
+  describe "#spouse_options" do
+    it "returns all other married members in the application" do
+      primary_member = build(:member, married: true)
+      married_member = build(:member, married: true)
+      unmarried_member = build(:member, married: false)
+
+      create(
+        :medicaid_application,
+        members: [primary_member, married_member, unmarried_member],
+      )
+
+      expect(primary_member.spouse_options.size).to eq 2
+      expect(primary_member.spouse_options).to include married_member
+      expect(primary_member.spouse_options).not_to include unmarried_member
+    end
+  end
 end
