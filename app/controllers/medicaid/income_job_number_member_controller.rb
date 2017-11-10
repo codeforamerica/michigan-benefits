@@ -2,7 +2,9 @@ module Medicaid
   class IncomeJobNumberMemberController < Medicaid::ManyMemberStepsController
     private
 
-    def after_successful_update_hook
+    def update_application
+      super
+      
       current_application.members.each do |member|
         member.update(employed: member.employed_number_of_jobs&.positive?)
       end

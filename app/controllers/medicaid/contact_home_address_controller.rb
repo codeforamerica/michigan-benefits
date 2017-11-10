@@ -26,7 +26,8 @@ module Medicaid
       !current_application&.stable_housing?
     end
 
-    def after_successful_update_hook
+    def update_application
+      current_application.update!(application_params)
       address.update!(address_params)
     end
 

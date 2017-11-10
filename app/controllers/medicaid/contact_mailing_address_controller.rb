@@ -6,12 +6,8 @@ module Medicaid
       HashWithIndifferentAccess.new(address.attributes)
     end
 
-    def after_successful_update_hook
+    def update_application
       address.update!(step_params.merge(state: "MI", county: "Genesee"))
-    end
-
-    def application_params
-      {}
     end
 
     def skip?

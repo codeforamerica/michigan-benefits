@@ -8,13 +8,9 @@ module Medicaid
 
     private
 
-    def after_successful_update_hook
+    def update_application
       current_member.update(step_params)
       update_spouse_of_other_member_if_present
-    end
-
-    def application_params
-      {}
     end
 
     def skip?
