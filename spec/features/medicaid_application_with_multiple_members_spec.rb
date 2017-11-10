@@ -287,6 +287,7 @@ RSpec.feature "Medicaid app" do
         "Tell us who pays child support, alimony, or arrears.",
       )
       check "Jessie Tester"
+      check "Christa Tester"
       click_on "Next"
 
       expect(page).to have_content(
@@ -323,12 +324,20 @@ RSpec.feature "Medicaid app" do
       fill_in "step_employed_monthly_income_1", with: 100
       click_on "Next"
 
-      expect(page).to have_content("Tell us your specific expenses")
+      expect(page).to have_content("Tell us Jessie Tester’s specific expenses")
       fill_in(
-        "Child Support, Alimony, or Arrears (average monthly expense)",
+        "step_child_support_alimony_arrears_expenses",
         with: "100",
       )
-      fill_in "Self Employment (average monthly expense)", with: "100"
+      fill_in "step_self_employed_monthly_expenses", with: "100"
+      click_on "Next"
+
+      expect(page).to have_content("Tell us Christa Tester’s specific expenses")
+
+      fill_in(
+        "step_child_support_alimony_arrears_expenses",
+        with: "100",
+      )
       click_on "Next"
     end
 

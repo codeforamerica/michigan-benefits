@@ -121,10 +121,10 @@ RSpec.feature "Medicaid app" do
       expect(find("#step_employed_monthly_income_2").value).to eq "25"
       click_on "Next"
 
-      expect(page).to have_content("College Loan Interest")
-      fill_in "Child Support, Alimony, or Arrears", with: 100
-      fill_in "College Loan Interest", with: 50
-      fill_in "Self Employment", with: 50
+      expect(page).to have_content("Tell us your specific expenses.")
+      fill_in "step_child_support_alimony_arrears_expenses", with: 100
+      fill_in "step_student_loan_interest_expenses", with: 50
+      fill_in "step_self_employed_monthly_expenses", with: 50
       click_on "Next"
     end
 

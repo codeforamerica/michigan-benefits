@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108220855) do
+ActiveRecord::Schema.define(version: 20171109193950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,8 +114,6 @@ ActiveRecord::Schema.define(version: 20171108220855) do
     t.boolean "anyone_pay_student_loan_interest"
     t.boolean "anyone_self_employed", default: false
     t.datetime "birthday"
-    t.integer "child_support_alimony_arrears_expenses"
-    t.integer "college_loan_interest_expenses"
     t.boolean "consent_to_terms"
     t.datetime "created_at", null: false
     t.string "email"
@@ -139,7 +137,6 @@ ActiveRecord::Schema.define(version: 20171108220855) do
     t.string "phone_number"
     t.boolean "reliable_mail_address"
     t.integer "self_employed_monthly_income"
-    t.integer "self_employment_expenses"
     t.string "signature"
     t.datetime "signed_at"
     t.boolean "sms_consented", default: true
@@ -156,6 +153,7 @@ ActiveRecord::Schema.define(version: 20171108220855) do
     t.datetime "birthday"
     t.boolean "buy_food_with", default: true
     t.boolean "caretaker_or_parent", default: false
+    t.integer "child_support_alimony_arrears_expenses"
     t.boolean "citizen"
     t.datetime "created_at", null: false
     t.boolean "disabled"
@@ -193,6 +191,7 @@ ActiveRecord::Schema.define(version: 20171108220855) do
     t.string "self_employed_profession"
     t.string "sex"
     t.integer "spouse_id"
+    t.integer "student_loan_interest_expenses"
     t.integer "unemployment_income"
     t.datetime "updated_at", null: false
   end

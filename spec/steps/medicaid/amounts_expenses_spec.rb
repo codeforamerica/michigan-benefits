@@ -5,7 +5,7 @@ RSpec.describe Medicaid::AmountsExpenses do
     it "validates presence of self employment expenses" do
       step = Medicaid::AmountsExpenses.new(
         self_employed: "true",
-        self_employment_expenses: nil,
+        self_employed_monthly_expenses: nil,
       )
 
       expect(step).to be_invalid
@@ -16,7 +16,7 @@ RSpec.describe Medicaid::AmountsExpenses do
     it "does not validate presence of self employment expenses" do
       step = Medicaid::AmountsExpenses.new(
         self_employed: false,
-        self_employment_expenses: nil,
+        self_employed_monthly_expenses: nil,
       )
 
       expect(step).to be_valid

@@ -101,6 +101,16 @@ class Member < ApplicationRecord
     )
   end
 
+  def self.with_expenses
+    where(
+      <<~SQL
+        members.self_employed = true OR
+          members.pay_student_loan_interest = true OR
+          members.pay_child_support_alimony_arrears = true
+      SQL
+    )
+  end
+
   def not_receiving_income?
     !receiving_income?
   end
