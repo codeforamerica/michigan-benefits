@@ -16,7 +16,7 @@ RSpec.describe Medicaid::AmountsIncome do
     end
   end
 
-  context "has 2 jobs, 1 income" do
+  context "fills out only one job's info" do
     it "invalidates the object because 1 income amount is missing" do
       member = create(:member, employed_number_of_jobs: 2)
 
@@ -25,6 +25,22 @@ RSpec.describe Medicaid::AmountsIncome do
         employed_monthly_income: [1],
         employed_monthly_employer: ["Acme"],
         employed_payment_frequency: ["Weekly"],
+      )
+
+      expect(step).not_to be_valid
+      expect(step.errors.messages[:incomes_missing].size).to eq 3
+    end
+  end
+
+  context "empty strings" do
+    it "is invalid" do
+      member = create(:member, employed_number_of_jobs: 2)
+
+      step = Medicaid::AmountsIncome.new(
+        member_id: member.id,
+        employed_monthly_income: ["1", ""],
+        employed_monthly_employer: ["", ""],
+        employed_payment_frequency: ["", "Weekly"],
       )
 
       expect(step).not_to be_valid
