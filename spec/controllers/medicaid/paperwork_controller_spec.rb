@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe Medicaid::PaperworkController, type: :controller do
   describe "#next_path" do
-    it "is the success page path" do
-      expect(subject.next_path).to eq "/steps/medicaid/success"
+    it "is the legal agreement path" do
+      expect(subject.next_path).to eq "/steps/medicaid/legal-agreement"
     end
   end
 

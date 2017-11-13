@@ -398,6 +398,51 @@ RSpec.feature "Medicaid app" do
       )
       enter_dob_and_ssn(display_name: "Jessie Tester", ssn: "123456789")
       enter_dob_and_ssn(display_name: "Christa Tester", ssn: "011100000")
+
+      click_on "Next"
     end
+
+    on_pages "Paperwork" do
+      expect(page).to have_content(
+        "Upload some paperwork if you can right now.",
+      )
+      click_on "Submit paperwork now"
+      upload_paperwork
+      click_on "Done uploading paperwork"
+    end
+
+    on_page "Rights and Responsibilities" do
+      expect(page).to have_content(
+        "Before you finish, read and agree to the legal terms.",
+      )
+      choose "I agree"
+      click_on "Next"
+    end
+
+    on_page "Sign and Submit" do
+      fill_in "Sign by typing your full legal name", with: "Jessie Tester"
+      click_on "Sign and submit"
+    end
+
+    on_pages "Application Submitted" do
+      expect(page).to have_content(
+        "Your application has been successfully submitted",
+      )
+    end
+  end
+
+  def upload_paperwork
+    add_paperwork_photo "https://example.com/images/drivers_license.jpg"
+    add_paperwork_photo "https://example.com/images/proof_of_income.jpg"
+  end
+
+  def add_paperwork_photo(url)
+    input = %(<input type="hidden" name="step[paperwork][]" value="#{url}">)
+    page.execute_script(
+      <<~JAVASCRIPT
+        document.querySelector('[data-uploadables-form]').
+          insertAdjacentHTML('beforeend', '#{input}')
+      JAVASCRIPT
+    )
   end
 end

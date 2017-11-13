@@ -67,13 +67,15 @@ module Medicaid
         Medicaid::ContactSsDobController,
         Medicaid::ContactSocialSecurityController,
       ],
+      "Paperwork" => [
+        Medicaid::PaperworkGuideController,
+        Medicaid::PaperworkController,
+      ],
       "Legal" => [
         Medicaid::LegalAgreementController,
         Medicaid::SignAndSubmitController,
       ],
       "Success" => [
-        Medicaid::PaperworkGuideController,
-        Medicaid::PaperworkController,
         Medicaid::SuccessController,
       ],
     }.freeze
