@@ -68,6 +68,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     id
     sms_consented
     phone_number
+    office_location
     email
     faxed_successfully_at
     fax_metadata
@@ -87,7 +88,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     email
     documents
     phone_number
-    office_location
     sms_consented
     consent_to_terms
     mailing_address_same_as_residential_address
