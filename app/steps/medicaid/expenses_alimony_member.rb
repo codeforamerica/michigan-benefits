@@ -1,8 +1,10 @@
 module Medicaid
-  class ExpensesAlimonyMember < ManyMembersStep
+  class ExpensesAlimonyMember < Step
     step_attributes(:members)
 
-    def members_valid
+    validate :pay_child_support_alimony_arrears_selected
+
+    def pay_child_support_alimony_arrears_selected
       return true if members.select(&:pay_child_support_alimony_arrears).any?
       errors.add(
         :child_support_alimony_arrears,
