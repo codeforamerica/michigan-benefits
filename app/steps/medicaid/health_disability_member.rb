@@ -1,8 +1,10 @@
 module Medicaid
-  class HealthDisabilityMember < ManyMembersStep
+  class HealthDisabilityMember < Step
     step_attributes(:members)
 
-    def members_valid
+    validate :disabled_selected
+
+    def disabled_selected
       return true if members.select(&:disabled).any?
       errors.add(:disabled, "Make sure you select at least one person")
     end

@@ -4,7 +4,7 @@ module Medicaid
 
     def update_application
       super
-      
+
       current_application.members.each do |member|
         member.update(employed: member.employed_number_of_jobs&.positive?)
       end

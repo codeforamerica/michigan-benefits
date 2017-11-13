@@ -1,11 +1,13 @@
 module Medicaid
-  class ExpensesStudentLoanMember < ManyMembersStep
+  class ExpensesStudentLoanMember < Step
     step_attributes(
       :members,
       :pay_student_loan_interest,
     )
 
-    def members_valid
+    validate :pay_student_loan_interest_selected
+
+    def pay_student_loan_interest_selected
       return true if members.select(&:pay_student_loan_interest).any?
       errors.add(
         :student_loan_interest,

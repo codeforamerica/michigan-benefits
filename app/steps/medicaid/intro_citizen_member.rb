@@ -1,8 +1,10 @@
 module Medicaid
-  class IntroCitizenMember < ManyMembersStep
+  class IntroCitizenMember < Step
     step_attributes(:members)
 
-    def members_valid
+    validate :citizen_selected
+
+    def citizen_selected
       return true if members.select(&:citizen).any?
       errors.add(:citizen, "Make sure you select at least one person")
     end
