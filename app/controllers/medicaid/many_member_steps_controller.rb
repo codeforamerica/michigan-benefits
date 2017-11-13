@@ -8,8 +8,7 @@ module Medicaid
       assign_household_member_attributes
 
       if step.valid?
-        ActiveRecord::Base.transaction { step.members.each(&:save!) }
-        after_successful_update_hook
+        update_application
         redirect_to(next_path)
       else
         render :edit
@@ -17,6 +16,10 @@ module Medicaid
     end
 
     private
+
+    def update_application
+      ActiveRecord::Base.transaction { step.members.each(&:save!) }
+    end
 
     def assign_household_member_attributes
       step.members.each do |member|

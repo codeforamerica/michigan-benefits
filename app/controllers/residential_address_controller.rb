@@ -1,17 +1,14 @@
 class ResidentialAddressController < SnapStepsController
-  def update
-    @step = step_class.new(step_params)
+  private
 
-    if @step.valid?
-      current_application.update!(stable_housing: stable_housing)
-      address.update(step_params.except(:unstable_housing))
-      redirect_to(next_path)
-    else
-      render :edit
-    end
+  def update_application
+    current_application.update!(stable_housing: stable_housing)
+    address.update(address_params)
   end
 
-  private
+  def address_params
+    step_params.slice(:city, :county, :state, :street_address, :zip)
+  end
 
   def existing_attributes
     attributes = address.attributes.merge(current_application.attributes)

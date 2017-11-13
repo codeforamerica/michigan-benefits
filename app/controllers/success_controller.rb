@@ -27,7 +27,9 @@ class SuccessController < SnapStepsController
     )
   end
 
-  def after_successful_update_hook
+  def update_application
+    super
+
     flash[:notice] = flash_notice
     ExportFactory.create(
       destination: :client_email,

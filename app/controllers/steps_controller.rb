@@ -32,16 +32,15 @@ class StepsController < ApplicationController
     @step = step_class.new(step_params)
 
     if @step.valid?
-      current_application.update!(application_params)
-      after_successful_update_hook
+      update_application
       redirect_to(next_path)
     else
       render :edit
     end
   end
 
-  def application_params
-    step_params
+  def update_application
+    current_application.update!(step_params)
   end
 
   def self.to_param
@@ -79,9 +78,6 @@ class StepsController < ApplicationController
   private
 
   delegate :step_class, to: :class
-
-  # This is an intentional noop
-  def after_successful_update_hook; end
 
   # This is an intentional noop
   def before_rendering_edit_hook; end

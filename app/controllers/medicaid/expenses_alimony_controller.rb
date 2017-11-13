@@ -2,7 +2,9 @@ module Medicaid
   class ExpensesAlimonyController < MedicaidStepsController
     private
 
-    def after_successful_update_hook
+    def update_application
+      super
+
       if single_member_household?
         current_application.primary_member.update!(member_attrs)
       end
