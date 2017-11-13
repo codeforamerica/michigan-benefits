@@ -1,4 +1,5 @@
 require_relative "boot"
+require_relative "../lib/delayed_job_web_logger"
 require "rails/all"
 
 Bundler.require(*Rails.groups)
@@ -15,5 +16,6 @@ module MichiganBenefits
     config.autoload_paths << Rails.root.join("app/steps")
     config.filter_parameters += [:ssn]
     config.autoload_paths << Rails.root.join("lib")
+    config.middleware.insert_after Warden::Manager, DelayedJobWebLogger
   end
 end
