@@ -1,20 +1,23 @@
 Rails.application.routes.draw do
   devise_for :admin_users
-  match "/delayed_job" => DelayedJobWeb, anchor: false, via: %i(get post)
 
-  namespace :admin do
-    resources :snap_applications do
-      post "resend_email", on: :member
-      get "pdf", on: :member
-    end
-    resources :medicaid_applications do
-      get "pdf", on: :member
-    end
-    resources :exports, only: %i[index show]
-    resources :members
-    resources :driver_errors, only: %i[index show]
+  authenticate :admin_user do
+    match "/delayed_job" => DelayedJobWeb, anchor: false, via: %i(get post)
 
-    root to: "snap_applications#index"
+    namespace :admin do
+      resources :snap_applications do
+        post "resend_email", on: :member
+        get "pdf", on: :member
+      end
+      resources :medicaid_applications do
+        get "pdf", on: :member
+      end
+      resources :exports, only: %i[index show]
+      resources :members
+      resources :driver_errors, only: %i[index show]
+
+      root to: "snap_applications#index"
+    end
   end
 
   root "static_pages#index"
