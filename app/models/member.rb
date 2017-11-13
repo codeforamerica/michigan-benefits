@@ -22,14 +22,6 @@ class Member < ApplicationRecord
     female
   ].freeze
 
-  INSURANCE_TYPES = [
-    "Medicaid",
-    "CHIP/MIChild",
-    "VA health care programs",
-    "Employer or individual plan",
-    "Other",
-  ].freeze
-
   MARITAL_STATUSES = [
     "Married",
     "Never married",
@@ -46,7 +38,7 @@ class Member < ApplicationRecord
     allow_nil: true
 
   validates :insurance_type,
-    inclusion: { in: INSURANCE_TYPES },
+    inclusion: { in: Medicaid::InsuranceCurrentType::INSURANCE_TYPES.keys },
     allow_nil: true
 
   validates :employment_status,

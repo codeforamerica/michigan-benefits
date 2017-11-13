@@ -18,13 +18,9 @@
       <%= f.hidden_field(:member_id, value: current_member.id) %>
 
       <%= f.mb_radio_set :insurance_type, "",
-        [
-          { value: "Medicaid", label: "Medicaid" },
-          { value: "CHIP/MIChild", label: "CHIP/MIChild" },
-          { value: "VA health care programs", label: "VA health care programs" },
-          { value: "Employer or individual plan", label: "Policy through an employer or individual plan" },
-          { value: "Other", label: "Other" },
-        ] %>
+        @step.class::INSURANCE_TYPES.map { |value, label|
+        { value: value, label: label }
+      } %>
 
       <%= render "medicaid/next_step" %>
     <% end %>
