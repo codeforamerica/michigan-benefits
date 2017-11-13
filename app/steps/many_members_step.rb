@@ -1,13 +1,16 @@
 class ManyMembersStep < Step
   step_attributes :members
 
-  def valid?
+  validate :members_valid
+
+  def members_valid
     members.each do |member|
       member.errors.clear
       validate_household_member(member)
     end
 
-    members.map(&:errors).all?(&:blank?)
+    return true if members.map(&:errors).all?(&:blank?)
+    errors.add(:members)
   end
 
   private
