@@ -12,10 +12,10 @@ class Dhs1171Pdf
 
   def completed_file
     complete_template_pdf_with_client_data
-    assemble_pdf
+    assemble_complete_application
   ensure
-    filled_in_form.close
-    filled_in_form.unlink
+    filled_in_application.close
+    filled_in_application.unlink
   end
 
   private
@@ -23,15 +23,15 @@ class Dhs1171Pdf
   attr_reader :snap_application
 
   def complete_template_pdf_with_client_data
-    PdfForms.new.fill_form(SOURCE_PDF, filled_in_form.path, client_data)
+    PdfForms.new.fill_form(SOURCE_PDF, filled_in_application.path, client_data)
   end
 
-  def assemble_pdf
+  def assemble_complete_application
     PdfBuilder.new(
-      output_file: complete_form_with_cover_and_documents,
+      output_file: complete_application_with_cover_and_documents,
       file_paths: [
         COVERSHEET_PDF,
-        filled_in_form.path,
+        filled_in_application.path,
         additional_household_member_pages_path,
         additional_employed_pages_path,
         additional_self_employed_pages_path,
@@ -40,13 +40,13 @@ class Dhs1171Pdf
     ).pdf
   end
 
-  def complete_form_with_cover_and_documents
-    @_complete_form_with_cover_and_documents ||=
+  def complete_application_with_cover_and_documents
+    @_complete_application_with_cover_and_documents ||=
       Tempfile.new(["snap_app_with_cover_and_documents", ".pdf"], "tmp/")
   end
 
-  def filled_in_form
-    @_filled_in_form ||= Tempfile.new(["snap_app", ".pdf"], "tmp/")
+  def filled_in_application
+    @_filled_in_application ||= Tempfile.new(["snap_app", ".pdf"], "tmp/")
   end
 
   def additional_household_member_pages_path

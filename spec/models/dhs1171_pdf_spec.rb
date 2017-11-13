@@ -1,8 +1,11 @@
 require "rails_helper"
+require_relative "../support/pdf_helper"
 
 RSpec.describe Dhs1171Pdf do
-  describe "#save" do
-    it "saves the client info" do
+  include PdfHelper
+
+  describe "#completed_file" do
+    it "writes application info to file" do
       mailing_address = build(:mailing_address)
       residential_address = build(:address)
       member = create(:member, ssn: "012345678")
@@ -228,17 +231,5 @@ RSpec.describe Dhs1171Pdf do
 
       expect(file).to be_a_kind_of(Tempfile)
     end
-  end
-
-  def filled_in_values(file:)
-    filled_in_fields = pdftk.get_fields(file)
-
-    filled_in_fields.each_with_object({}) do |field, hash|
-      hash[field.name] = field.value
-    end
-  end
-
-  def pdftk
-    @_pdftk ||= PdfForms.new
   end
 end

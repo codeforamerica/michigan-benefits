@@ -54,6 +54,12 @@ class MedicaidApplication < ApplicationRecord
     addresses.where(mailing: true).first || NullAddress.new
   end
 
+  def pdf
+    @pdf ||= Dhs1426Pdf.new(
+      medicaid_application: self,
+    ).completed_file
+  end
+
   private
 
   def unstable_housing?
