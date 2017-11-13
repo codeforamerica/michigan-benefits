@@ -58,4 +58,14 @@ RSpec.feature "Submit application with minimal information" do
     expect(page).to have_content("Updated At 04/04/2017 at 10:30PM EDT")
     expect(page).to have_content("Signed At 04/04/2017 at 11:30PM EDT")
   end
+
+  scenario "logging out", javascript: true do
+    visit admin_root_path
+
+    click_link "Sign Out"
+
+    visit admin_root_path
+
+    expect(page).to have_content("Log in")
+  end
 end
