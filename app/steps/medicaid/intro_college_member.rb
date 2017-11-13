@@ -5,13 +5,11 @@ module Medicaid
       :members,
     )
 
-    def valid?
-      if members.select(&:in_college?).any?
-        true
-      else
-        errors.add(:in_college, "Make sure you select at least one person")
-        false
-      end
+    validate :in_college_selected
+
+    def in_college_selected
+      return true if members.select(&:in_college?).any?
+      errors.add(:in_college, "Make sure you select at least one person")
     end
   end
 end

@@ -5,16 +5,14 @@ module Medicaid
       :requesting_health_insurance,
     )
 
-    def valid?
-      if members_requesting_health_insurance.any?
-        true
-      else
-        errors.add(
-          :requesting_health_insurance,
-          "Make sure you select at least one person",
-        )
-        false
-      end
+    validate :members_requesting_health_insurance_selected
+
+    def members_requesting_health_insurance_selected
+      return true if members_requesting_health_insurance.any?
+      errors.add(
+        :requesting_health_insurance,
+        "Make sure you select at least one person",
+      )
     end
 
     private

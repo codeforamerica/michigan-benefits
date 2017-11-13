@@ -15,12 +15,11 @@ module Medicaid
       "Other" => "Other",
     }.freeze
 
-    def valid?
+    validate :insurance_plan_selected
+
+    def insurance_plan_selected
       if member_has_insurance? && no_insurance_type_provided?
         errors.add(:insurance_type, "Make sure you select a plan")
-        false
-      else
-        true
       end
     end
 

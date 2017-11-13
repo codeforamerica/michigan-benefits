@@ -11,15 +11,14 @@ module Medicaid
       :member_id,
     )
 
-    def valid?
+    validate :income_type_selected
+
+    def income_type_selected
       if member_has_other_income? && no_other_income_type_provided?
         errors.add(
           :other_income_types,
           "Please select at least one other income type",
         )
-        false
-      else
-        true
       end
     end
 

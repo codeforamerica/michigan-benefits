@@ -5,6 +5,8 @@ module Medicaid
       :members,
     )
 
+    validate :members_needing_insurance_selected
+
     def members_needing_insurance
       members.select(&:requesting_health_insurance)
     end
@@ -13,16 +15,12 @@ module Medicaid
       members.reject(&:requesting_health_insurance)
     end
 
-    def valid?
-      if members_needing_insurance.select(&:insured).any?
-        true
-      else
-        errors.add(
-          :insured,
-          "Make sure you select a person",
-        )
-        false
-      end
+    def members_needing_insurance_selected
+      return true if members_needing_insurance.select(&:insured).any?
+      errors.add(
+        :insured,
+        "Make sure you select a person",
+      )
     end
   end
 end

@@ -5,16 +5,12 @@ module Medicaid
       :pay_student_loan_interest,
     )
 
-    def valid?
-      if members.select(&:pay_student_loan_interest).any?
-        true
-      else
-        errors.add(
-          :student_loan_interest,
-          "Make sure you select at least one person",
-        )
-        false
-      end
+    def members_valid
+      return true if members.select(&:pay_student_loan_interest).any?
+      errors.add(
+        :student_loan_interest,
+        "Make sure you select at least one person",
+      )
     end
   end
 end
