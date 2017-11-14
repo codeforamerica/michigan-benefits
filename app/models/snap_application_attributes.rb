@@ -1,4 +1,6 @@
 class SnapApplicationAttributes
+  include PdfAttributes
+
   def initialize(snap_application:)
     @snap_application = snap_application
   end
@@ -137,37 +139,12 @@ class SnapApplicationAttributes
 
   attr_reader :snap_application
 
+  def benefit_application
+    snap_application
+  end
+
   def primary_member
     @_primary_member ||= snap_application.primary_member
-  end
-
-  def bool_to_checkbox(statement)
-    if statement == true
-      "Yes"
-    end
-  end
-
-  def residential_or_homeless
-    if snap_application.stable_housing?
-      snap_application.residential_address.street_address
-    else
-      "Homeless"
-    end
-  end
-
-  def phone_attributes
-    if snap_application.phone_number.nil?
-      {}
-    else
-      ten_digit_phone.each_with_index.reduce({}) do |memo, (phone_digit, index)|
-        memo["phone_number_#{index}"] = phone_digit
-        memo
-      end
-    end
-  end
-
-  def ten_digit_phone
-    snap_application.phone_number.split("")
   end
 
   def monthly_rent_taxes_and_insurance
