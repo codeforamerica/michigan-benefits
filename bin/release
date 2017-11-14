@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-echo "Opening trello to check for tickets awaiting acceptance..."
-open "https://trello.com/b/aBqTrqaJ/the-digital-assister-michiganbenefitsorg"
+echo "Opening tracker to check for tickets awaiting acceptance..."
+open "https://www.pivotaltracker.com/n/projects/2123705"
 
 read -p "Is the Acceptance column empty? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
@@ -12,9 +12,6 @@ else
   echo "Please test and run acceptance for those cards first!"
   exit 1
 fi
-
-echo "Running the contract test for MI Bridges driving code..."
-PRE_DEPLOY_TEST=true bin/rspec spec/features/mi_bridges_driving_spec.rb
 
 echo "Diffing the code between staging and production..."
 bin/release-diff
