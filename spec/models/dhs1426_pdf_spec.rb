@@ -12,11 +12,31 @@ RSpec.describe Dhs1426Pdf do
         last_name: "Tester",
       )
       medicaid_application = create(
-        :snap_application,
+        :medicaid_application,
         members: [member],
+        stable_housing: true,
       )
       expected_client_data = {
         primary_member_full_name: member.display_name,
+      }
+
+      expected_medicaid_data = {
+        signature: medicaid_application.signature,
+        mailing_address_street_address:
+        medicaid_application.mailing_address.street_address,
+        mailing_address_city: medicaid_application.mailing_address.city,
+        mailing_address_county: medicaid_application.mailing_address.county,
+        mailing_address_state: medicaid_application.mailing_address.state,
+        mailing_address_zip: medicaid_application.mailing_address.zip,
+        residential_address_street_address:
+        medicaid_application.residential_address.street_address,
+        residential_address_city: medicaid_application.residential_address.city,
+        residential_address_county:
+          medicaid_application.residential_address.county,
+        residential_address_state:
+          medicaid_application.residential_address.state,
+        residential_address_zip: medicaid_application.mailing_address.zip,
+        email: medicaid_application.email,
       }
 
       file = Dhs1426Pdf.new(
@@ -25,6 +45,10 @@ RSpec.describe Dhs1426Pdf do
 
       result = filled_in_values(file: file.path)
       expected_client_data.each do |field, expected_data|
+        expect(result[field.to_s].to_s).to eq expected_data.to_s
+      end
+
+      expected_medicaid_data.each do |field, expected_data|
         expect(result[field.to_s].to_s).to eq expected_data.to_s
       end
     end
