@@ -7,7 +7,7 @@ RSpec.describe MedicaidApplicationAttributes do
       residential_address = build(
         :address,
         street_address: "456 I Live Here Ave",
-        city: "Flint",
+        city: "Other",
         zip: "54321",
       )
       medicaid_application = create(
@@ -31,11 +31,11 @@ RSpec.describe MedicaidApplicationAttributes do
         mailing_address_state: "MI",
         mailing_address_street_address: "123 Main St.",
         mailing_address_zip: "12345",
-        residential_address_city: "Flint",
+        residential_address_city: "Other",
         residential_address_county: "Genesee",
         residential_address_state: "MI",
         residential_address_street_address: "456 I Live Here Ave",
-        residential_address_zip: "12345",
+        residential_address_zip: "54321",
         phone_number_0: "0",
         phone_number_1: "1",
         phone_number_2: "2",

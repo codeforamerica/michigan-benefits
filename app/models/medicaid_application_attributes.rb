@@ -1,4 +1,6 @@
 class MedicaidApplicationAttributes
+  include PdfAttributes
+
   def initialize(medicaid_application:)
     @medicaid_application = medicaid_application
   end
@@ -31,32 +33,7 @@ class MedicaidApplicationAttributes
 
   attr_reader :medicaid_application
 
-  def bool_to_checkbox(statement)
-    if statement == true
-      "Yes"
-    end
-  end
-
-  def residential_or_homeless
-    if medicaid_application.stable_housing?
-      medicaid_application.residential_address.street_address
-    else
-      "Homeless"
-    end
-  end
-
-  def phone_attributes
-    if medicaid_application.phone_number.nil?
-      {}
-    else
-      ten_digit_phone.each_with_index.reduce({}) do |memo, (phone_digit, index)|
-        memo["phone_number_#{index}"] = phone_digit
-        memo
-      end
-    end
-  end
-
-  def ten_digit_phone
-    medicaid_application.phone_number.split("")
+  def benefit_application
+    medicaid_application
   end
 end

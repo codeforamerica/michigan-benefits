@@ -15,6 +15,7 @@ RSpec.describe Dhs1426Pdf do
         :medicaid_application,
         members: [member],
         stable_housing: true,
+        phone_number: "0123456789",
       )
       expected_client_data = {
         primary_member_full_name: member.display_name,
@@ -39,6 +40,19 @@ RSpec.describe Dhs1426Pdf do
         email: medicaid_application.email,
       }
 
+      expected_phone_data = {
+        phone_number_0: "0",
+        phone_number_1: "1",
+        phone_number_2: "2",
+        phone_number_3: "3",
+        phone_number_4: "4",
+        phone_number_5: "5",
+        phone_number_6: "6",
+        phone_number_7: "7",
+        phone_number_8: "8",
+        phone_number_9: "9",
+      }
+
       file = Dhs1426Pdf.new(
         medicaid_application: medicaid_application,
       ).completed_file
@@ -49,6 +63,10 @@ RSpec.describe Dhs1426Pdf do
       end
 
       expected_medicaid_data.each do |field, expected_data|
+        expect(result[field.to_s].to_s).to eq expected_data.to_s
+      end
+
+      expected_phone_data.each do |field, expected_data|
         expect(result[field.to_s].to_s).to eq expected_data.to_s
       end
     end
