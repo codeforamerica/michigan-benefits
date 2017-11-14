@@ -14,6 +14,9 @@ gem "capybara"
 gem "delayed_job_active_record"
 gem "delayed_job_web"
 gem "devise"
+gem "devise-otp",
+  git: "https://github.com/pynixwang/devise-otp",
+  ref: "a181217a2d436de7ebb9a278bcb326bbddefa514"
 gem "faraday"
 gem "good_migrations"
 gem "high_voltage"

@@ -21,4 +21,9 @@ as defined by the routes in the `admin/` namespace
     method: :delete,
     class: "navigation__link navigation__link--sign-out",
   ) %>
+  <%= link_to(
+    "2FA Setup",
+    admin_user_otp_token_path,
+    class: "navigation__link navigation__link--sign-out",
+  ) %>
 </nav>

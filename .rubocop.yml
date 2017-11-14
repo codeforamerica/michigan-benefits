@@ -3,6 +3,7 @@ AllCops:
     - db/schema.rb
     - bin/stubs/*
     - bin/*
+    - config/initializers/*
 
 Naming/AccessorMethodName:
   Description: Check the naming of accessor methods for get_/set_.

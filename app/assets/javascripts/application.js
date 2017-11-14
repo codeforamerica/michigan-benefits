@@ -13,6 +13,7 @@
 // = require jquery
 // = require jquery_ujs
 // = require handlebars
+// = require devise-otp
 // = require_tree .
 
 var textWell = (function () {
