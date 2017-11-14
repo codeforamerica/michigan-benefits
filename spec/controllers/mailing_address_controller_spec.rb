@@ -74,11 +74,10 @@ RSpec.describe MailingAddressController, type: :controller do
 
   def address
     build(
-      :address,
+      :mailing_address,
       street_address: "123 Fake St",
       city: "Springfield",
       zip: "12345",
-      mailing: true,
     )
   end
 end

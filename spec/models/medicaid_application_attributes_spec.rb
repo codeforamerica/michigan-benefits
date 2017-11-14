@@ -5,7 +5,7 @@ RSpec.describe MedicaidApplicationAttributes do
     it "returns a hash of attributes" do
       mailing_address = build(:mailing_address)
       residential_address = build(
-        :address,
+        :residential_address,
         street_address: "456 I Live Here Ave",
         city: "Other",
         zip: "54321",

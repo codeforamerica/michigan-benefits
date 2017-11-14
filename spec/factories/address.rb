@@ -1,14 +1,19 @@
 FactoryBot.define do
-  factory :address do
+  factory :mailing_address, class: Address do
+    mailing true
     street_address "123 Main St."
     city "Flint"
     zip "12345"
     county "Genesee"
     state "MI"
-    mailing false
+  end
 
-    factory :mailing_address do
-      mailing true
-    end
+  factory :residential_address, class: Address do
+    mailing false
+    street_address "123 Main St."
+    city "Flint"
+    zip "12345"
+    county "Genesee"
+    state "MI"
   end
 end
