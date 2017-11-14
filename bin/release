@@ -1,15 +1,15 @@
 #!/bin/bash
 set -e
 
-echo "Opening tracker to check for tickets awaiting acceptance..."
+echo "Opening tracker to check for stories awaiting acceptance..."
 open "https://www.pivotaltracker.com/n/projects/2123705"
 
-read -p "Is the Acceptance column empty? (y/N) " -n 1 -r
+read -p "Are there no stories in the accept/reject state? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]];then
   echo "Great!"
 else
-  echo "Please test and run acceptance for those cards first!"
+  echo "Please test and run acceptance for those stories first!"
   exit 1
 fi
 
