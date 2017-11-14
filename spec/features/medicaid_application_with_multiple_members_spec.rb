@@ -230,6 +230,12 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
     end
 
+    on_page "Income & Expenses" do
+      expect(page).to have_content("Next, describe your income and expenses.")
+
+      click_on "Next"
+    end
+
     on_pages "Current Income" do
       expect(page).to have_content(
         "Does anyone in your household currently have a job?",

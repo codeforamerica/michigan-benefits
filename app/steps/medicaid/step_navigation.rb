@@ -35,6 +35,7 @@ module Medicaid
         Medicaid::TaxFilingController,
       ],
       "Income" => [
+        Medicaid::IncomeIntroductionController,
         Medicaid::IncomeJobController,
         Medicaid::IncomeJobNumberController,
         Medicaid::IncomeJobNumberContinuedController,
