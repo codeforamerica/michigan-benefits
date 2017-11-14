@@ -1,0 +1,24 @@
+<h2><%= t "title", { scope: "devise.otp.tokens" } %></h2>
+<p><%= t "explain", { scope: "devise.otp.tokens" } %></p>
+
+<%= form_for resource, as: resource_name, url: [resource_name, :otp_token], html: { method: :put } do |f| %>
+  <%= devise_error_messages! %>
+
+  <h3><%= t "enable_request", { scope: "devise.otp.tokens" } %></h3>
+
+  <p>
+    <%= f.label :otp_enabled, t("status", { scope: "devise.otp.tokens" }) %>
+    <br />
+    <%= f.check_box :otp_enabled %>
+  </p>
+
+  <p>
+    <%= f.submit I18n.t("submit", {:scope => "devise.otp.tokens"}) %>
+    <%= link_to "Back to Admin", admin_root_path %>
+  </p>
+<% end %>
+
+<%- if resource.otp_enabled? %>
+  <%= render partial: "token_secret" if resource.otp_enabled? %>
+  <%= render partial: "trusted_devices" if trusted_devices_enabled? %>
+<% end %>

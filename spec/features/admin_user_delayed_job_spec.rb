@@ -12,7 +12,7 @@ RSpec.feature "Admin user access Delayed Job web" do
   end
 
   context "admin signs in" do
-    scenario "ends up on Delayed Job Web page" do
+    scenario "sees successfull sign-in message" do
       create(:admin_user, email: "test@example.com", password: "password")
       visit "/delayed_job"
 
@@ -20,8 +20,7 @@ RSpec.feature "Admin user access Delayed Job web" do
       fill_in "Password", with: "password"
       click_on "Log in"
 
-      expect(page).to have_content "The list below shows an overview "\
-        "of the jobs in the delayed_job queue"
+      expect(page).to have_content("Signed in successfully")
     end
   end
 end

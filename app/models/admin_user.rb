@@ -5,5 +5,6 @@ class AdminUser < ApplicationRecord
     :rememberable,
     :trackable,
     :validatable,
+    :otp_authenticatable,
   )
 end

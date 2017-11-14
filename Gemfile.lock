@@ -5,6 +5,16 @@ GIT
   specs:
     sfax (0.1.0)
 
+GIT
+  remote: https://github.com/pynixwang/devise-otp
+  revision: a181217a2d436de7ebb9a278bcb326bbddefa514
+  ref: a181217a2d436de7ebb9a278bcb326bbddefa514
+  specs:
+    devise-otp (0.2.4)
+      devise (>= 3.1.0)
+      rails (>= 3.2.6)
+      rotp (>= 2.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -288,6 +298,7 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rotp (3.3.0)
     rspec-core (3.6.0)
       rspec-support (~> 3.6.0)
     rspec-expectations (3.6.0)
@@ -420,6 +431,7 @@ DEPENDENCIES
   delayed_job_active_record
   delayed_job_web
   devise
+  devise-otp!
   dotenv-rails
   factory_bot_rails
   faraday
@@ -465,4 +477,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.0.pre.3
+   1.16.0
