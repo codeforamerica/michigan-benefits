@@ -5,12 +5,6 @@
     "postdeploy": "bin/rails db:migrate db:seed"
   },
   "env": {
-    "ADMIN_PASSWORD": {
-      "required": true
-    },
-    "ADMIN_USER": {
-      "required": true
-    },
     "APP_RELEASE_STAGE": {
       "required": true
     },
