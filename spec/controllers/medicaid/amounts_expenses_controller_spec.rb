@@ -5,7 +5,7 @@ RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
     it "is the medicaid contact path" do
       medicaid_application = create(:medicaid_application)
       session[:medicaid_application_id] = medicaid_application.id
-      expect(subject.next_path).to eq "/steps/medicaid/contact"
+      expect(subject.next_path).to eq "/steps/medicaid/contact-introduction"
     end
   end
 

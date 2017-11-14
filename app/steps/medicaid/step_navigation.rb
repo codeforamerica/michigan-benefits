@@ -57,6 +57,7 @@ module Medicaid
         Medicaid::AmountsExpensesController,
       ],
       "Contact" => [
+        Medicaid::ContactIntroductionController,
         Medicaid::ContactController,
         Medicaid::ContactHomeAddressController,
         Medicaid::ContactOtherAddressController,
