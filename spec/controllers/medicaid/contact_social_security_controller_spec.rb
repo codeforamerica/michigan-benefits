@@ -3,7 +3,9 @@ require "rails_helper"
 RSpec.describe Medicaid::ContactSocialSecurityController do
   describe "#next_path" do
     it "is the paperwork guide page" do
-      expect(subject.next_path).to eq "/steps/medicaid/paperwork-guide"
+      expect(subject.next_path).to eq(
+        "/steps/medicaid/paperwork-and-legal-introduction",
+      )
     end
   end
 

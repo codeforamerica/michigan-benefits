@@ -70,6 +70,7 @@ module Medicaid
         Medicaid::ContactSocialSecurityController,
       ],
       "Paperwork" => [
+        Medicaid::PaperworkAndLegalIntroductionController,
         Medicaid::PaperworkGuideController,
         Medicaid::PaperworkController,
       ],
