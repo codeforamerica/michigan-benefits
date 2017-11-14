@@ -8,6 +8,8 @@ dependencies:
     - sudo dpkg -i google-chrome.deb
     - sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
     - rm google-chrome.deb
+  post:
+    - bundle exec bundle-audit update && bundle exec bundle-audit check
 
 test:
   override:
