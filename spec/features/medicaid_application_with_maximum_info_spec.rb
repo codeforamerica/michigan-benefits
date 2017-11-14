@@ -148,6 +148,11 @@ RSpec.feature "Medicaid app" do
 
     on_pages "Contact Information & Followup" do
       expect(page).to have_content(
+        "Now, let's get your contact and followup information.",
+      )
+      click_on "Next"
+
+      expect(page).to have_content(
         "Do you have stable housing right now?",
       )
       click_on "Yes"
