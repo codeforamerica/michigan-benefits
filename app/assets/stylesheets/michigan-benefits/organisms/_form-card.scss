@@ -65,10 +65,15 @@
   }
 }
 
-.form-card--security-message {
-  color: $color-grey;
-  display: inline-block;
+.form-card--security-message,
+.form-card--benefit-label {
+  color: $color-medium-grey;
   font-size: $font-size-smallest;
+}
+
+
+.form-card--security-message {
+  display: inline-block;
 
   &:before {
     content: "\e899";
@@ -79,8 +84,6 @@
 }
 
 .form-card--benefit-label {
-  color: $color-grey;
-  font-size: $font-size-smallest;
 
   @include media($tablet-up) {
     float: right;
