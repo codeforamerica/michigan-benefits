@@ -26,7 +26,7 @@ fi
 
 echo "Checking for buildpack changes between staging and production."
 diff <(heroku buildpacks -r staging) <(heroku buildpacks -r production) && echo ""
-read -p "Are these the same (ignoring order)? " -n 1 -r
+read -p "Are these the same (ignoring order)? (y/N)" -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]];then
   echo "Great!"
@@ -36,8 +36,11 @@ else
 fi
 
 echo "Diffing ENV variables between staging and production."
-diff <(heroku config -r staging) <(heroku config -r production) && echo ""
-read -p "Are these config variables the same (ignoring their value) (y/N) " -n 1 -r
+staging_env=$(heroku config -r staging --json | jq . -S | jq 'keys')
+production_env=$(heroku config -r production --json | jq . -S | jq 'keys')
+echo ${staging_env[@]} ${production_env[@]} | tr ' ' '\n' | sort | uniq -u
+echo "Any keys listed above exist on one env but not the other."
+read -p "Are you okay with these differences? (y/N)" -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   echo "Great!"
@@ -52,7 +55,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   heroku pipelines:promote -a michigan-benefits-staging
   heroku run bin/rails one_offs:run_all -a michigan-benefits-production
   heroku ps:restart -a michigan-benefits-production
+  echo "Success! Application deployed to Production!"
+  echo "Please do some testing on production! (use zip 12345 to send a fake fax)"
+else
+  echo "Okay, I won't deploy. Thank you for being thoughtful and careful!"
+  exit 1;
 fi
 
-echo "Success! Application deployed to Production!"
-echo "Please do some testing on production! (use zip 12345 to send a fake fax)"
