@@ -4,15 +4,14 @@ require "rails_helper"
 
 RSpec.describe Medicaid::AmountsOverviewController do
   describe "#skip?" do
-    before do
-      medicaid_application = create(:medicaid_application)
-      session[:medicaid_application_id] = medicaid_application.id
-    end
-
     context "receives an income, and has expenses" do
       it "does not skip" do
-        allow(subject).to receive(:no_income?).and_return(false)
-        allow(subject).to receive(:no_expenses?).and_return(false)
+        medicaid_application = create(
+          :medicaid_application,
+          anyone_employed: true,
+          anyone_pay_child_support_alimony_arrears: true,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
 
@@ -22,8 +21,14 @@ RSpec.describe Medicaid::AmountsOverviewController do
 
     context "receives an income, and has no expenses" do
       it "does not skip" do
-        allow(subject).to receive(:no_income?).and_return(false)
-        allow(subject).to receive(:no_expenses?).and_return(true)
+        medicaid_application = create(
+          :medicaid_application,
+          anyone_employed: true,
+          anyone_self_employed: false,
+          anyone_pay_child_support_alimony_arrears: false,
+          anyone_pay_student_loan_interest: false,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
 
@@ -33,8 +38,14 @@ RSpec.describe Medicaid::AmountsOverviewController do
 
     context "has expenses, and no income" do
       it "does not skip" do
-        allow(subject).to receive(:no_expenses?).and_return(false)
-        allow(subject).to receive(:no_income?).and_return(true)
+        medicaid_application = create(
+          :medicaid_application,
+          anyone_employed: false,
+          anyone_self_employed: false,
+          anyone_other_income: false,
+          anyone_pay_child_support_alimony_arrears: true,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
 
@@ -44,8 +55,15 @@ RSpec.describe Medicaid::AmountsOverviewController do
 
     context "no income, no expenses" do
       it "skips to the next page" do
-        allow(subject).to receive(:no_expenses?).and_return(true)
-        allow(subject).to receive(:no_income?).and_return(true)
+        medicaid_application = create(
+          :medicaid_application,
+          anyone_employed: false,
+          anyone_self_employed: false,
+          anyone_other_income: false,
+          anyone_pay_child_support_alimony_arrears: false,
+          anyone_pay_student_loan_interest: false,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
 
