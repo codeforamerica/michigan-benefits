@@ -1,0 +1,32 @@
+<% content_for :header_title, "Income & Expenses" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="illustration illustration--celebrate"></div>
+    <div class="pre-title">
+      You're half way there!
+    </div>
+    <div class="form-card__title">
+      Next, describe your income and expenses.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <ul class="list--bulleted">
+      <li>
+        In this section, we'll ask you about your income and expenses like jobs,
+        student loans, child support and more.
+      </li>
+      <li>
+        If you're not sure about exact numbers - that's okay. Do your best and
+        we'll work to clarify later.
+      </li>
+    </ul>
+  </div>
+
+  <footer class="form-card__button_right">
+    <%= link_to next_path, class: "button button--nav  button--cta button--full-width" do %>
+      Next
+    <% end %>
+  </footer>
+</div>
