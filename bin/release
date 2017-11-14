@@ -36,8 +36,8 @@ else
 fi
 
 echo "Diffing ENV variables between staging and production."
-staging_env=$(heroku config -r staging --json | jq . -S | jq 'keys')
-production_env=$(heroku config -r production --json | jq . -S | jq 'keys')
+staging_env=$(heroku config -r staging --json | jq -S 'keys')
+production_env=$(heroku config -r production --json | jq -S 'keys')
 echo ${staging_env[@]} ${production_env[@]} | tr ' ' '\n' | sort | uniq -u
 echo "Any keys listed above exist on one env but not the other."
 read -p "Are you okay with these differences? (y/N)" -n 1 -r
