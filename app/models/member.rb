@@ -107,12 +107,6 @@ class Member < ApplicationRecord
     !receiving_income?
   end
 
-  def receiving_income?
-    employed? ||
-      self_employed? ||
-      receives_unemployment_income?
-  end
-
   def primary_member?
     benefit_application.primary_member.id == id
   end
@@ -152,6 +146,12 @@ class Member < ApplicationRecord
   end
 
   private
+
+  def receiving_income?
+    employed? ||
+      self_employed? ||
+      receives_unemployment_income?
+  end
 
   def age
     today = Date.today

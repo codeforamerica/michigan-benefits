@@ -69,4 +69,50 @@ RSpec.describe MedicaidApplication do
       end
     end
   end
+
+  describe "#no_expenses?" do
+    it "returns false if anyone is self employed" do
+      app = create(
+        :medicaid_application,
+        anyone_self_employed: true,
+        anyone_pay_child_support_alimony_arrears: false,
+        anyone_pay_student_loan_interest: false,
+      )
+
+      expect(app.no_expenses?).to eq(false)
+    end
+
+    it "returns false if anyone pays child support" do
+      app = create(
+        :medicaid_application,
+        anyone_self_employed: false,
+        anyone_pay_child_support_alimony_arrears: true,
+        anyone_pay_student_loan_interest: false,
+      )
+
+      expect(app.no_expenses?).to eq(false)
+    end
+
+    it "returns false if anyone pays student loan interest" do
+      app = create(
+        :medicaid_application,
+        anyone_employed: false,
+        anyone_pay_child_support_alimony_arrears: false,
+        anyone_pay_student_loan_interest: true,
+      )
+
+      expect(app.no_expenses?).to eq(false)
+    end
+
+    it "returns true if no expenses" do
+      app = create(
+        :medicaid_application,
+        anyone_self_employed: false,
+        anyone_pay_child_support_alimony_arrears: false,
+        anyone_pay_student_loan_interest: false,
+      )
+
+      expect(app.no_expenses?).to eq(true)
+    end
+  end
 end

@@ -87,11 +87,6 @@ RSpec.feature "Medicaid app" do
 
       expect(page).to have_content("Do you pay student loan interest?")
       click_on "No"
-
-      expect(page).to have_content(
-        "Okay, thanks! Now describe your income and expenses.",
-      )
-      click_on "Next"
     end
 
     on_pages "Contact Information & Followup" do
