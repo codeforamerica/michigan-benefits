@@ -4,7 +4,7 @@ RSpec.describe SnapApplicationAttributes do
   describe "#to_h" do
     it "returns a hash of attributes" do
       mailing_address = build(:mailing_address)
-      residential_address = build(:address)
+      residential_address = build(:residential_address)
       snap_application = create(
         :snap_application,
         :with_member,

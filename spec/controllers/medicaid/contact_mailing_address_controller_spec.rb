@@ -86,15 +86,12 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
       end
 
       it "pre-populates the data properly if mailing address present" do
-        medicaid_application = create(
-          :medicaid_application,
-        )
+        medicaid_application = create(:medicaid_application)
         create(
-          :address,
-          street_address: "I live here",
+          :mailing_address,
+          street_address: "I receive mail here",
           city: "Hometown",
           zip: "54321",
-          mailing: true,
           benefit_application: medicaid_application,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -102,7 +99,7 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
         get :edit
         step = assigns(:step)
 
-        expect(step.street_address).to eq("I live here")
+        expect(step.street_address).to eq("I receive mail here")
         expect(step.city).to eq("Hometown")
         expect(step.zip).to eq("54321")
       end
@@ -158,7 +155,7 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
             :medicaid_application,
             stable_housing: true,
           )
-          create(:address,
+          create(:residential_address,
                  street_address: "456 Fake Street",
                  city: "Jackson",
                  zip: "55555",

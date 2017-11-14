@@ -27,11 +27,10 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
           stable_housing: true,
         )
         create(
-          :address,
+          :residential_address,
           street_address: "I live here",
           city: "Hometown",
           zip: "54321",
-          mailing: false,
           benefit_application: medicaid_application,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -148,7 +147,7 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
             :medicaid_application,
             stable_housing: true,
           )
-          create(:address,
+          create(:residential_address,
                  street_address: "456 Fake Street",
                  city: "Jackson",
                  zip: "55555",

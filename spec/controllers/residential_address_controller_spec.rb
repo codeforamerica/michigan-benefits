@@ -89,11 +89,10 @@ RSpec.describe ResidentialAddressController, type: :controller do
 
   def address
     build(
-      :address,
+      :residential_address,
       street_address: "I live here",
       city: "Hometown",
       zip: "54321",
-      mailing: false,
     )
   end
 end

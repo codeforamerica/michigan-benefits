@@ -7,7 +7,7 @@ RSpec.describe Dhs1171Pdf do
   describe "#completed_file" do
     it "writes application info to file" do
       mailing_address = build(:mailing_address)
-      residential_address = build(:address)
+      residential_address = build(:residential_address)
       member = create(:member, ssn: "012345678")
       snap_application = create(
         :snap_application,
