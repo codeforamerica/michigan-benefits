@@ -86,38 +86,6 @@ RSpec.describe Member do
         expect(calc_double).to have_received(:run)
       end
     end
-
-    describe "#mi_bridges_formatted_name" do
-      context "name is over 10 chars" do
-        it "cuts name off at 10 chars" do
-          time = Time.utc(2008, 9, 1, 10, 5, 0)
-          Timecop.freeze(time) do
-            member = build(
-              :member,
-              first_name: "JacquelineR",
-              birthday: DateTime.parse("June 20, 1990"),
-            )
-
-            expect(member.mi_bridges_formatted_name).to eq "Jacqueline (18)"
-          end
-        end
-      end
-
-      context "name is shorter than 10 chars" do
-        it "returns full first name and age" do
-          time = Time.utc(2008, 9, 1, 10, 5, 0)
-          Timecop.freeze(time) do
-            member = build(
-              :member,
-              first_name: "Lala",
-              birthday: DateTime.parse("June 20, 1990"),
-            )
-
-            expect(member.mi_bridges_formatted_name).to eq "Lala (18)"
-          end
-        end
-      end
-    end
   end
 
   describe "#spouse_options" do
@@ -134,6 +102,66 @@ RSpec.describe Member do
       expect(primary_member.spouse_options.size).to eq 2
       expect(primary_member.spouse_options).to include married_member
       expect(primary_member.spouse_options).not_to include unmarried_member
+    end
+  end
+
+  describe "#mi_bridges_formatted_name" do
+    context "name is over 10 chars" do
+      it "cuts name off at 10 chars" do
+        time = Time.utc(2008, 9, 1, 10, 5, 0)
+        Timecop.freeze(time) do
+          member = build(
+            :member,
+            first_name: "JacquelineR",
+            birthday: DateTime.parse("June 20, 1990"),
+          )
+
+          expect(member.mi_bridges_formatted_name).to eq "Jacqueline (18)"
+        end
+      end
+    end
+
+    context "name is shorter than 10 chars" do
+      it "returns full first name and age" do
+        time = Time.utc(2008, 9, 1, 10, 5, 0)
+        Timecop.freeze(time) do
+          member = build(
+            :member,
+            first_name: "Lala",
+            birthday: DateTime.parse("June 20, 1990"),
+          )
+
+          expect(member.mi_bridges_formatted_name).to eq "Lala (18)"
+        end
+      end
+    end
+  end
+
+  describe "#age" do
+    it "returns the age today is before this year's birthday" do
+      time = Time.utc(2008, 1, 1, 10, 5, 0)
+      Timecop.freeze(time) do
+        member = build(
+          :member,
+          first_name: "Lala",
+          birthday: DateTime.parse("June 20, 1990"),
+        )
+
+        expect(member.age).to eq 17
+      end
+    end
+
+    it "returns the age today is after this year's birthday" do
+      time = Time.utc(2008, 9, 1, 10, 5, 0)
+      Timecop.freeze(time) do
+        member = build(
+          :member,
+          first_name: "Lala",
+          birthday: DateTime.parse("June 20, 1990"),
+        )
+
+        expect(member.age).to eq 18
+      end
     end
   end
 end

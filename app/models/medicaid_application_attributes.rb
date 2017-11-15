@@ -26,6 +26,8 @@ class MedicaidApplicationAttributes
       not_receive_info_by_email:
         bool_to_checkbox(medicaid_application.email.blank?),
       preferred_language: nil,
+      :"flint_water_#{yes_no(medicaid_application.flint_water_crisis)}" => "Yes",
+      :"need_medical_expense_help_3_months_#{yes_no(medicaid_application.need_medical_expense_help_3_months)}" => "Yes",
     }.merge(phone_attributes).symbolize_keys
   end
 

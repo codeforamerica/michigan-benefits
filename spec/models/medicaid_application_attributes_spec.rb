@@ -17,7 +17,8 @@ RSpec.describe MedicaidApplicationAttributes do
         stable_housing: true,
         phone_number: "0123456789",
         email: "person@example.com",
-
+        flint_water_crisis: true,
+        need_medical_expense_help_3_months: true
       )
 
       data = MedicaidApplicationAttributes.new(
@@ -50,6 +51,8 @@ RSpec.describe MedicaidApplicationAttributes do
         email: "person@example.com",
         receive_info_by_email: "Yes",
         not_receive_info_by_email: nil,
+        flint_water_yes: "Yes",
+        need_medical_expense_help_3_months_yes: "Yes",
       )
     end
 

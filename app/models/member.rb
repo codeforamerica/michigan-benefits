@@ -145,19 +145,19 @@ class Member < ApplicationRecord
     "#{first_name.first(10)} (#{age})"
   end
 
+  def age
+    today = Date.today
+    age = today.year - birthday.year
+    before_birthday = today.strftime("%m%d") < birthday.strftime("%m%d")
+    age - (before_birthday ? 1 : 0)
+  end
+
   private
 
   def receiving_income?
     employed? ||
       self_employed? ||
       receives_unemployment_income?
-  end
-
-  def age
-    today = Date.today
-    age = today.year - birthday.year
-    before_birthday = today.strftime("%m%d") < birthday.strftime("%m%d")
-    age - (before_birthday ? 1 : 0)
   end
 
   def employed_monthly_income
