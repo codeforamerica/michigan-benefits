@@ -33,6 +33,7 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_spouse_name: "Candy Crush",
         primary_member_caretaker_yes: "Yes",
         primary_member_in_college_yes: "Yes",
+        primary_member_under_21_yes: nil,
         primary_member_under_21_no: "Yes",
         primary_member_ssn_0: "1",
         primary_member_ssn_1: "1",
