@@ -83,7 +83,8 @@ $width-form-searchbar:  30em;
 
 // Form Colors
 $form-color-border: $color-dark-grey;
-$form-color-border-focus:  $color-dark-sky;
+$form-color-border-focus:  $color-orange;
+$form-focus: 3px solid $form-color-border-focus;
 
 
 // Border Colors

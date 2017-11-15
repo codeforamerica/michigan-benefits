@@ -23,7 +23,7 @@
     background-color: shade($button-color, 15%);
   }
   &:focus {
-    outline: 2px solid tint($button-color, 50%);
+    outline: $form-focus;
   }
 }
 
@@ -41,7 +41,6 @@
   border-color: $button-cta-border-color;
   border-bottom-color: shade($button-cta-color, 15%);
 
-  &:focus,
   &:hover {
     background-color: tint($button-cta-color, 20%);
     color: #FFFFFF;

@@ -1,3 +1,7 @@
+:focus {
+  outline: 3px solid $form-color-border-focus;
+}
+
 fieldset {
   border: 0;
   padding: 0;
@@ -150,7 +154,7 @@ label {
   margin-bottom: .5em;
 
   &:focus {
-    border-color: $color-teal;
+    border-color: $form-color-border-focus;
   }
 }
 
