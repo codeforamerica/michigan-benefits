@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe Medicaid::TaxClaimedAsDependentController do
   describe "#next_path" do
-    it "is the income intro path" do
+    it "is the tax filing with household members path" do
       expect(subject.next_path).to eq(
-        "/steps/medicaid/income-introduction",
+        "/steps/medicaid/tax-filing-with-household-members",
       )
     end
   end
