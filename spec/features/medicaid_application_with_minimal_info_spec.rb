@@ -38,6 +38,11 @@ RSpec.feature "Medicaid app" do
 
     on_pages "Health Coverage Needs" do
       expect(page).to have_content(
+        "Next, describe your health coverage and status.",
+      )
+      click_on "Next"
+
+      expect(page).to have_content(
         "Are you currently enrolled in a health insurance plan?",
       )
       click_on "No"

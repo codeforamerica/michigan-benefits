@@ -1,0 +1,25 @@
+<% content_for :header_title, "Health Coverage Needs" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="illustration illustration--celebrate"></div>
+    <div class="pre-title">
+      Thank you, <%= current_application.primary_member.display_name %>!
+    </div>
+    <div class="form-card__title">
+      Next, describe your health coverage and status.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    In this section, we'll ask you around your health coverage needs and current
+    health status. This information is important in determining the type of
+    coverage you need.
+  </div>
+
+  <footer class="form-card__button_right">
+    <%= link_to next_path, class: "button button--nav  button--cta button--full-width" do %>
+      Next
+    <% end %>
+  </footer>
+</div>
