@@ -18,7 +18,7 @@ RSpec.describe MedicaidApplicationAttributes do
         phone_number: "0123456789",
         email: "person@example.com",
         flint_water_crisis: true,
-        need_medical_expense_help_3_months: true
+        need_medical_expense_help_3_months: true,
       )
 
       data = MedicaidApplicationAttributes.new(
