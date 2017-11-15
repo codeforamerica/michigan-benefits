@@ -1,0 +1,51 @@
+<% content_for :header_title, "Quick Tax Questions" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="illustration illustration--celebrate"></div>
+    <div class="form-card__title">
+      Great! Let's review your tax info:
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <% if members.filing_taxes_with_primary.any? -%>
+      Filing status: <%= current_application.tax_filing_status %>
+
+      <ul class="list--bulleted">
+        <%= render partial: "shared/member_list_item",
+          collection: members.filing_taxes_with_primary,
+          as: :member
+          %>
+      </ul>
+    <% end -%>
+
+    <% if members.dependents.any? -%>
+      Claimed as dependent
+
+      <ul class="list--bulleted">
+        <%= render partial: "shared/member_list_item",
+          collection: members.dependents,
+          as: :member
+          %>
+      </ul>
+    <% end -%>
+
+    <% if members.not_filing_taxes_with_primary.any? -%>
+      Claimed as dependent
+
+      <ul class="list--bulleted">
+        <%= render partial: "shared/member_list_item",
+          collection: members.not_filing_taxes_with_primary,
+          as: :member
+          %>
+      </ul>
+    <% end -%>
+  </div>
+
+  <footer class="form-card__button_right">
+    <%= link_to next_path, class: "button button--nav  button--cta button--full-width" do %>
+      Next
+    <% end %>
+  </footer>
+</div>

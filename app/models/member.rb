@@ -93,6 +93,18 @@ class Member < ApplicationRecord
     "#{first_name} #{last_name}".titleize
   end
 
+  def self.filing_taxes_with_primary
+    where "members.filing_taxes_with_primary_member = true"
+  end
+
+  def self.dependents
+    where "members.claimed_as_dependent = true"
+  end
+
+  def self.not_filing_taxes_with_primary
+    where("members.filing_taxes_with_primary_member <> true")
+  end
+
   def self.receiving_income
     where(
       <<~SQL
