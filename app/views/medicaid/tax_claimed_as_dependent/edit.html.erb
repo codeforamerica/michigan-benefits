@@ -3,14 +3,11 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Are you planning on filing taxes?
+      Are you claimed as a dependent on anyone else's taxes?
     </div>
-    <p class="text--help text--centered">
-      Some households don’t file based on their income.
-    </p>
   </header>
 
   <%= render 'shared/yes_no_form',
     step: @step,
-    field: :filing_federal_taxes_next_year %>
+    field: :claimed_as_dependent %>
 </div>

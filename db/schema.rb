@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109193950) do
+ActiveRecord::Schema.define(version: 20171115000034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20171109193950) do
     t.boolean "caretaker_or_parent", default: false
     t.integer "child_support_alimony_arrears_expenses"
     t.boolean "citizen"
+    t.boolean "claimed_as_dependent"
     t.datetime "created_at", null: false
     t.boolean "disabled"
     t.boolean "employed", default: false

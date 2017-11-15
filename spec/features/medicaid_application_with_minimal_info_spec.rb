@@ -60,9 +60,15 @@ RSpec.feature "Medicaid app" do
       click_on "No"
     end
 
-    on_pages "Quick Tax Question" do
+    on_pages "Quick Tax Questions" do
       expect(page).to have_content(
-        "Do you plan on filing a federal tax return next year?",
+        "Are you planning on filing taxes?",
+      )
+
+      click_on "No"
+
+      expect(page).to have_content(
+        "Are you claimed as a dependent on anyone else's taxes?",
       )
 
       click_on "No"
