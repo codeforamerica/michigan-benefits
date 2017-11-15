@@ -121,13 +121,13 @@ RSpec.feature "Medicaid app" do
     on_pages "Income & Expense Amounts" do
       click_on "Next"
 
-      fill_in "step_employed_monthly_income_0", with: 100
-      fill_in "step_employed_monthly_income_1", with: 50
-      fill_in "step_employed_monthly_income_2", with: 25
+      fill_in "step_employed_pay_quantities_0", with: 100
+      fill_in "step_employed_pay_quantities_1", with: 50
+      fill_in "step_employed_pay_quantities_2", with: 25
 
-      fill_in "step_employed_monthly_employer_0", with: "Acme Co."
-      fill_in "step_employed_monthly_employer_1", with: "CfA"
-      fill_in "step_employed_monthly_employer_2", with: "Cylinder"
+      fill_in "step_employed_employer_names_0", with: "Acme Co."
+      fill_in "step_employed_employer_names_1", with: "CfA"
+      fill_in "step_employed_employer_names_2", with: "Cylinder"
 
       select "Monthly", from: "step_employed_payment_frequency_0"
       select "Weekly", from: "step_employed_payment_frequency_1"
@@ -139,13 +139,13 @@ RSpec.feature "Medicaid app" do
 
       click_back
 
-      expect(find("#step_employed_monthly_income_0").value).to eq "100"
-      expect(find("#step_employed_monthly_income_1").value).to eq "50"
-      expect(find("#step_employed_monthly_income_2").value).to eq "25"
+      expect(find("#step_employed_pay_quantities_0").value).to eq "100"
+      expect(find("#step_employed_pay_quantities_1").value).to eq "50"
+      expect(find("#step_employed_pay_quantities_2").value).to eq "25"
 
-      expect(find("#step_employed_monthly_employer_0").value).to eq "Acme Co."
-      expect(find("#step_employed_monthly_employer_1").value).to eq "CfA"
-      expect(find("#step_employed_monthly_employer_2").value).to eq "Cylinder"
+      expect(find("#step_employed_employer_names_0").value).to eq "Acme Co."
+      expect(find("#step_employed_employer_names_1").value).to eq "CfA"
+      expect(find("#step_employed_employer_names_2").value).to eq "Cylinder"
 
       expect(find("#step_employed_payment_frequency_0").value).to eq "Monthly"
       expect(find("#step_employed_payment_frequency_1").value).to eq "Weekly"

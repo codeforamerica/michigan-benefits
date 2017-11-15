@@ -69,8 +69,8 @@ RSpec.describe Medicaid::AmountsIncomeController do
         session[:medicaid_application_id] = medicaid_application.id
         payload = {
           step: {
-            employed_monthly_income: ["111", "222"],
-            employed_monthly_employer: ["Co1", "Co2"],
+            employed_pay_quantities: ["111", "222"],
+            employed_employer_names: ["Co1", "Co2"],
             employed_payment_frequency: ["Monthly", "Monthly"],
           },
         }
@@ -79,8 +79,8 @@ RSpec.describe Medicaid::AmountsIncomeController do
 
         member.reload
 
-        expect(member[:employed_monthly_income]).to eq(%w(111 222))
-        expect(member.employed_monthly_employer).to eq(%w(Co1 Co2))
+        expect(member[:employed_pay_quantities]).to eq(%w(111 222))
+        expect(member.employed_employer_names).to eq(%w(Co1 Co2))
         expect(member.employed_payment_frequency).to eq(%w(Monthly Monthly))
       end
     end
