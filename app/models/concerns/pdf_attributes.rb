@@ -2,9 +2,13 @@ module PdfAttributes
   extend ActiveSupport::Concern
 
   def bool_to_checkbox(statement)
-    if statement == true
+    if statement
       "Yes"
     end
+  end
+
+  def yes_no(statement)
+    statement ? "yes" : "no"
   end
 
   def residential_or_homeless

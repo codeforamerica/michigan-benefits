@@ -26,12 +26,23 @@ class MedicaidApplicationAttributes
       not_receive_info_by_email:
         bool_to_checkbox(medicaid_application.email.blank?),
       preferred_language: nil,
+      flint_water_key => "Yes",
+      need_medical_expense_help_key => "Yes",
     }.merge(phone_attributes).symbolize_keys
   end
 
   private
 
   attr_reader :medicaid_application
+
+  def flint_water_key
+    "flint_water_#{yes_no(medicaid_application.flint_water_crisis)}"
+  end
+
+  def need_medical_expense_help_key
+    yes_no = yes_no(medicaid_application.need_medical_expense_help_3_months)
+    "need_medical_expense_help_3_months_#{yes_no}"
+  end
 
   def benefit_application
     medicaid_application

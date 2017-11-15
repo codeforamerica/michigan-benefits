@@ -54,16 +54,9 @@ class Dhs1426Pdf
   end
 
   def member_attributes
-    map_attributes(
-      records: first_two_members,
-      klass: MedicaidApplicationMemberAttributes,
-    )
-  end
-
-  def map_attributes(records:, klass:)
-    records.map do |record|
+    first_two_members.map do |record|
       if record[:member].present?
-        klass.new(record).to_h
+        MedicaidApplicationMemberAttributes.new(record).to_h
       end
     end.compact.reduce({}, :merge)
   end
