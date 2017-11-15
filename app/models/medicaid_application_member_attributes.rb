@@ -16,7 +16,8 @@ class MedicaidApplicationMemberAttributes
       :"#{position}_member_spouse_name" => member.spouse&.display_name,
       member_caretaker_key => "Yes",
       :"#{position}_member_in_college_#{yes_no(member.in_college)}" => "Yes",
-      :"#{position}_member_under_21_#{yes_no(under_21?)}" => "Yes",
+      :"#{position}_member_under_21_yes" => bool_to_checkbox(under_21?),
+      :"#{position}_member_under_21_no" => bool_to_checkbox(over_21_or_21?),
       :"#{position}_member_new_mom_#{yes_no(member.new_mom?)}" => "Yes",
       requesting_health_insurance_key => "Yes",
       :"#{position}_member_citizen_#{yes_no(member.citizen?)}" => "Yes",
@@ -45,6 +46,14 @@ class MedicaidApplicationMemberAttributes
   end
 
   def under_21?
-    member.age < 21
+    if member.birthday.present?
+      member.age < 21
+    end
+  end
+
+  def over_21_or_21?
+    if member.birthday.present?
+      member.age >= 21
+    end
   end
 end

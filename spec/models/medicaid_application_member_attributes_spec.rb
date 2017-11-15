@@ -48,5 +48,21 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_citizen_yes: "Yes",
       )
     end
+
+    context "nil birthday" do
+      it "returns nil for birthday and age-related questions" do
+        member = create(:member, birthday: nil)
+
+        result = MedicaidApplicationMemberAttributes.new(
+          member: member,
+          position: "primary",
+        ).to_h
+
+        expect(result).to include(
+          primary_member_birthday: nil,
+          primary_member_under_21_no: nil,
+        )
+      end
+    end
   end
 end
