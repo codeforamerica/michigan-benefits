@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
   before_action :clear_session
 
+  helper_method :step_path
+
   def index; end
 
   def union; end
@@ -8,6 +10,10 @@ class StaticPagesController < ApplicationController
   def clio; end
 
   def dual_index; end
+
+  def step_path(*args)
+    super.gsub("%2F", "/")
+  end
 
   private
 

@@ -8,33 +8,26 @@ RSpec.feature "Medicaid app" do
       click_on "Apply for Medicaid"
     end
 
-    on_page "Introduction" do
-      click_on "Yes"
-    end
+    on_pages "Introduction" do
+      expect(page).to have_content("Welcome to the Medicaid application")
+      click_on "Next"
 
-    on_page "Introduction" do
+      click_on "Yes"
+
       fill_in "What is your first name?", with: "Jessie"
       fill_in "What is your last name?", with: "Tester"
       select_radio(question: "What is your gender?", answer: "Female")
       click_on "Next"
-    end
 
-    on_page "Introduction" do
       click_on "Add a member"
-    end
 
-    on_page "Introduction" do
       fill_in "What is their first name?", with: "Christa"
       fill_in "What is their last name?", with: "Tester"
       select_radio(question: "What is their gender?", answer: "Female")
       click_on "Next"
-    end
 
-    on_page "Introduction" do
       click_on "Add a member"
-    end
 
-    on_page "Introduction" do
       fill_in "What is their first name?", with: "Joel"
       fill_in "What is their last name?", with: "Tester"
       select_radio(question: "What is their gender?", answer: "Male")
