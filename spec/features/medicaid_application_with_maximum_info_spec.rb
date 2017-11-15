@@ -205,6 +205,13 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
     end
 
+    on_page "Submit Paperwork & Sign" do
+      expect(page).to have_content(
+        "Lastly, we need to review your paperwork and get your signature.",
+      )
+      click_on "Next"
+    end
+
     on_pages "Paperwork" do
       expect(page).to have_content(
         "Upload some paperwork if you can right now.",
