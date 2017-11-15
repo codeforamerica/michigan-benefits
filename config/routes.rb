@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :exports, only: %i[index show]
       resources :members
       resources :driver_errors, only: %i[index show]
+      resources :addresses, only: %i[index show]
 
       root to: "snap_applications#index"
     end
