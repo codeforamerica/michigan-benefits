@@ -1,0 +1,16 @@
+<% content_for :header_title, "Quick Tax Questions" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Do you plan on filing taxes with any family members in your household?
+    </div>
+    <p class="text--help text--centered">
+      This includes anyone you would list as a joint filer or as a dependent.
+    </p>
+  </header>
+
+  <%= render 'shared/yes_no_form',
+    step: @step,
+    field: :filing_taxes_with_household_members %>
+</div>

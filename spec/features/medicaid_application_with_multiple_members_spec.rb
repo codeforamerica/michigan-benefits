@@ -228,6 +228,13 @@ RSpec.feature "Medicaid app" do
       )
 
       click_on "Yes"
+
+      expect(page).to have_content(
+        "Do you plan on filing taxes with any family members "\
+        "in your household?",
+      )
+
+      click_on "Yes"
     end
 
     on_page "Income & Expenses" do
