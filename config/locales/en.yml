@@ -105,3 +105,10 @@ en:
         title:
           one: Tell us your specific expenses.
           other: "Tell us %{name}’s specific expenses."
+    tax_introduction:
+      edit:
+        help_text:
+          one: "In the next section, we will ask you for information how you
+          typically file taxes."
+          other: "In the next section, we will ask you for information how you
+          and your household typically file taxes."

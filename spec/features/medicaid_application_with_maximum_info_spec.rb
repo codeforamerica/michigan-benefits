@@ -67,6 +67,11 @@ RSpec.feature "Medicaid app" do
 
     on_pages "Quick Tax Questions" do
       expect(page).to have_content(
+        "Now describe how you file your taxes.",
+      )
+      click_on "Next"
+
+      expect(page).to have_content(
         "Are you planning on filing taxes?",
       )
 

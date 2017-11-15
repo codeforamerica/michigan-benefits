@@ -4,7 +4,7 @@ RSpec.describe Medicaid::HealthFlintWaterCrisisConfirmationController do
   describe "#next_path" do
     it "is the insurance current path" do
       expect(subject.next_path).to eq(
-        "/steps/medicaid/tax-filing",
+        "/steps/medicaid/tax-introduction",
       )
     end
   end
