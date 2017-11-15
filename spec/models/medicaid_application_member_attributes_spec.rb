@@ -62,5 +62,24 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_second_employed_pay_quantity: "222",
       )
     end
+
+    context "nil birthday" do
+      it "it does not return keys for age-related questions" do
+        member = create(:member, birthday: nil)
+
+        result = MedicaidApplicationMemberAttributes.new(
+          member: member,
+          position: "primary",
+        ).to_h
+
+        expect(result.keys).not_to include(
+          %i[
+            primary_member_birthday
+            primary_member_under_21_no
+            primary_member_under_21_yes
+          ],
+        )
+      end
+    end
   end
 end
