@@ -235,6 +235,12 @@ RSpec.feature "Medicaid app" do
       )
 
       click_on "Yes"
+
+      expect(page).to have_content(
+        "Tell us which family members you file taxes with.",
+      )
+      check "Joel Tester"
+      click_on "Next"
     end
 
     on_page "Income & Expenses" do

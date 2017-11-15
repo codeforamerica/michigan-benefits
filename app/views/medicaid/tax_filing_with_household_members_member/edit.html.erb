@@ -1,0 +1,29 @@
+<% content_for :header_title, "Introduction" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Tell us which family members you file taxes with.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step,
+                 as: :step,
+                 builder: MbFormBuilder,
+                 url: current_path,
+                 method: :put do |f| %>
+
+        <fieldset class="form-group">
+          <% current_application.non_applicant_members.each do |member| %>
+              <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+                  <%= ff.mb_checkbox :filing_taxes_with_primary_member, member.display_name %>
+              <% end %>
+          <% end %>
+          <%= f.mb_form_errors :filing_taxes_with_primary_member %>
+        </fieldset>
+
+        <%= render 'medicaid/next_step' %>
+    <% end %>
+  </div>
+</div>
