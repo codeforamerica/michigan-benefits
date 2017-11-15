@@ -7,8 +7,8 @@ RSpec.describe Medicaid::AmountsIncome do
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
-        employed_monthly_income: [1, 2],
-        employed_monthly_employer: ["Acme", "Co"],
+        employed_pay_quantities: [1, 2],
+        employed_employer_names: ["Acme", "Co"],
         employed_payment_frequency: ["Weekly", "Weekly"],
       )
 
@@ -22,8 +22,8 @@ RSpec.describe Medicaid::AmountsIncome do
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
-        employed_monthly_income: [1],
-        employed_monthly_employer: ["Acme"],
+        employed_pay_quantities: [1],
+        employed_employer_names: ["Acme"],
         employed_payment_frequency: ["Weekly"],
       )
 
@@ -38,8 +38,8 @@ RSpec.describe Medicaid::AmountsIncome do
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
-        employed_monthly_income: ["1", ""],
-        employed_monthly_employer: ["", ""],
+        employed_pay_quantities: ["1", ""],
+        employed_employer_names: ["", ""],
         employed_payment_frequency: ["", "Weekly"],
       )
 

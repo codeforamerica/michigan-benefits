@@ -20,6 +20,11 @@ RSpec.describe Dhs1426Pdf do
         new_mom: true,
         requesting_health_insurance: true,
         citizen: true,
+        employed: true,
+        self_employed: true,
+        employed_employer_names: ["AA Accounting", "BB Burgers"],
+        employed_pay_quantities: ["11", "222"],
+        employed_payment_frequency: ["Hourly", "Weekly"],
       )
       secondary_member = create(
         :member,
@@ -33,6 +38,11 @@ RSpec.describe Dhs1426Pdf do
         new_mom: false,
         requesting_health_insurance: false,
         citizen: false,
+        employed: false,
+        self_employed: false,
+        employed_employer_names: [],
+        employed_pay_quantities: [],
+        employed_payment_frequency: [],
       )
       medicaid_application = create(
         :medicaid_application,
@@ -136,6 +146,48 @@ RSpec.describe Dhs1426Pdf do
         phone_number_9: "9",
       }
 
+      expected_primary_member_income_and_expenses = {
+        primary_member_employed: "Yes",
+        primary_member_not_employed: nil,
+        primary_member_self_employed: "Yes",
+        primary_member_first_employed_employer_name: "AA Accounting",
+        primary_member_first_employed_pay_interval_hourly: "Yes",
+        # primary_member_first_employed_hours_interval_weekly: nil,
+        # primary_member_first_employed_hours_interval_biweekly: nil,
+        # primary_member_first_employed_hours_interval_twice_monthly: nil,
+        # primary_member_first_employed_hours_interval_monthly: nil,
+        # primary_member_first_employed_pay_interval_yearly: nil,
+        primary_member_first_employed_pay_quantity: "11",
+        primary_member_second_employed_employer_name: "BB Burgers",
+        # primary_member_second_employed_pay_interval_hourly: nil,
+        # primary_member_second_employed_hours_interval_weekly: "Yes",
+        # primary_member_second_employed_hours_interval_biweekly: nil,
+        # primary_member_second_employed_hours_interval_twice_monthly: nil,
+        # primary_member_second_employed_hours_interval_monthly: nil,
+        # primary_member_second_employed_pay_interval_yearly: nil,
+        primary_member_second_employed_pay_quantity: "222",
+      }
+
+      expected_second_member_income_and_expenses = {
+        second_member_employed: nil,
+        second_member_not_employed: "Yes",
+        second_member_self_employed: nil,
+        # second_member_first_employed_employer_name: nil,
+        # second_member_first_employed_pay_interval_hourly: nil,
+        # second_member_first_employed_hours_interval_weekly: nil,
+        # second_member_first_employed_hours_interval_biweekly: nil,
+        # second_member_first_employed_hours_interval_twice_monthly: nil,
+        # second_member_first_employed_hours_interval_monthly: nil,
+        # second_member_first_employed_pay_interval_yearly: nil,
+        # second_member_second_employed_employer_name: nil,
+        # second_member_second_employed_pay_interval_hourly: nil,
+        # second_member_second_employed_hours_interval_weekly: nil,
+        # second_member_second_employed_hours_interval_biweekly: nil,
+        # second_member_second_employed_hours_interval_twice_monthly: nil,
+        # second_member_second_employed_hours_interval_monthly: nil,
+        # second_member_second_employed_pay_interval_yearly: nil,
+      }
+
       file = Dhs1426Pdf.new(
         medicaid_application: medicaid_application,
       ).completed_file
@@ -150,6 +202,14 @@ RSpec.describe Dhs1426Pdf do
       end
 
       expected_phone_data.each do |field, expected_data|
+        expect(result[field.to_s].to_s).to eq expected_data.to_s
+      end
+
+      expected_primary_member_income_and_expenses.each do |field, expected_data|
+        expect(result[field.to_s].to_s).to eq expected_data.to_s
+      end
+
+      expected_second_member_income_and_expenses.each do |field, expected_data|
         expect(result[field.to_s].to_s).to eq expected_data.to_s
       end
     end

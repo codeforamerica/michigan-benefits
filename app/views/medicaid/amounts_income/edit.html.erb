@@ -26,7 +26,7 @@
 
       <% if current_member.employed? %>
         <%= f.mb_money_field(
-          :employed_monthly_income,
+          :employed_pay_quantities,
           "Monthly income (before taxes)",
           options: { count: current_member.employed_number_of_jobs },
           prepend_html:
@@ -34,7 +34,7 @@
         ) %>
 
         <%= f.mb_input_field(
-          :employed_monthly_employer,
+          :employed_employer_names,
           "Employer name",
           options: { count: current_member.employed_number_of_jobs },
           prepend_html:

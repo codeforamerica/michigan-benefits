@@ -2,8 +2,8 @@ module Medicaid
   class AmountsIncome < MemberStep
     step_attributes(
       {
-        employed_monthly_income: [],
-        employed_monthly_employer: [],
+        employed_pay_quantities: [],
+        employed_employer_names: [],
         employed_payment_frequency: [],
       },
       :self_employed_monthly_income,
@@ -39,11 +39,11 @@ module Medicaid
     end
 
     def job_and_income_counts_match?
-      employed_number_of_jobs == employed_monthly_income&.count
+      employed_number_of_jobs == employed_pay_quantities&.count
     end
 
     def present_incomes?
-      employed_monthly_income&.all?(&:present?)
+      employed_pay_quantities&.all?(&:present?)
     end
 
     def employer_names
@@ -52,11 +52,11 @@ module Medicaid
     end
 
     def job_and_employer_counts_match?
-      employed_number_of_jobs == employed_monthly_employer&.count
+      employed_number_of_jobs == employed_employer_names&.count
     end
 
     def present_employer_names?
-      employed_monthly_employer&.all?(&:present?)
+      employed_employer_names&.all?(&:present?)
     end
 
     def payment_frequencies

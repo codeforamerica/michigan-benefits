@@ -344,11 +344,11 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Tell us Christa Tester’s specific income received",
       )
-      fill_in "step_employed_monthly_income_0", with: 100
-      fill_in "step_employed_monthly_income_1", with: 100
+      fill_in "step_employed_pay_quantities_0", with: 100
+      fill_in "step_employed_pay_quantities_1", with: 100
 
-      fill_in "step_employed_monthly_employer_0", with: "CfA"
-      fill_in "step_employed_monthly_employer_1", with: "Cylinder"
+      fill_in "step_employed_employer_names_0", with: "CfA"
+      fill_in "step_employed_employer_names_1", with: "Cylinder"
 
       select "Monthly", from: "step_employed_payment_frequency_0"
       select "Monthly", from: "step_employed_payment_frequency_1"
