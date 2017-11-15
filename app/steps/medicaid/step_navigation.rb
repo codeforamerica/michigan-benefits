@@ -35,6 +35,7 @@ module Medicaid
         Medicaid::TaxFilingController,
         Medicaid::TaxClaimedAsDependentController,
         Medicaid::TaxFilingWithHouseholdMembersController,
+        Medicaid::TaxFilingWithHouseholdMembersMemberController,
       ],
       "Income" => [
         Medicaid::IncomeIntroductionController,
