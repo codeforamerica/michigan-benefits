@@ -255,6 +255,10 @@ RSpec.feature "Medicaid app" do
 
       select "Joint"
       click_on "Next"
+
+      expect(page).to have_content("Great! Let's review your tax info:")
+      expect(page).to have_content("Joel Tester - Joint")
+      click_on "Next"
     end
 
     on_page "Income & Expenses" do

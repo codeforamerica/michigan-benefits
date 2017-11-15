@@ -1,0 +1,48 @@
+<% content_for :header_title, "Quick Tax Questions" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="illustration illustration--celebrate"></div>
+    <div class="form-card__title">
+      Great! Let's review your tax info:
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <% if members.filing_taxes.any? -%>
+      Filing taxes and status:
+
+      <ul class="list--bulleted">
+        <% members.filing_taxes.each do |member| %>
+          <li><%= member.display_name %> - <%= member.tax_relationship %></li>
+        <% end %>
+      </ul>
+    <% end -%>
+
+    <% if members.dependents.any? -%>
+      Claimed as dependent:
+
+      <ul class="list--bulleted">
+        <% members.dependents.each do |member| %>
+          <li><%= member.display_name %> - <%= member.tax_relationship %></li>
+        <% end %>
+      </ul>
+    <% end -%>
+
+    <% if members.no_tax_relationship.any? -%>
+      Members not included:
+
+      <ul class="list--bulleted">
+        <% members.no_tax_relationship.each do |member| %>
+          <li><%= member.display_name %></li>
+        <% end %>
+      </ul>
+    <% end -%>
+  </div>
+
+  <footer class="form-card__button_right">
+    <%= link_to next_path, class: "button button--nav  button--cta button--full-width" do %>
+      Next
+    <% end %>
+  </footer>
+</div>

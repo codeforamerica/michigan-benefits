@@ -4,7 +4,7 @@ RSpec.describe Medicaid::TaxFilingWithHouseholdMembersRelationshipController do
   describe "#next_path" do
     it "is the income introduction path" do
       expect(subject.next_path).to eq(
-        "/steps/medicaid/income-introduction",
+        "/steps/medicaid/tax-overview",
       )
     end
   end
@@ -101,9 +101,7 @@ RSpec.describe Medicaid::TaxFilingWithHouseholdMembersRelationshipController do
           get :edit
 
           expect(response).to render_template(:edit)
-          expect(assigns(:step).members).to eq([
-            household_member,
-          ])
+          expect(assigns(:step).members).to eq([household_member])
         end
 
         context "not filing federal taxes next year" do

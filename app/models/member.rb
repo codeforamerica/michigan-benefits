@@ -110,6 +110,18 @@ class Member < ApplicationRecord
     "#{first_name} #{last_name}".titleize
   end
 
+  def self.filing_taxes
+    where "members.tax_relationship in ('Single', 'Joint')"
+  end
+
+  def self.dependents
+    where "members.tax_relationship = 'Dependent'"
+  end
+
+  def self.no_tax_relationship
+    where("coalesce(members.tax_relationship, '') = ''")
+  end
+
   def self.receiving_income
     where(
       <<~SQL

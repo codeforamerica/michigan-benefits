@@ -2,6 +2,39 @@ require "rails_helper"
 
 RSpec.describe Member do
   describe "scopes" do
+    describe ".filing_taxes" do
+      it "returns members filing taxes as Single or Joint" do
+        _no_relationship = create(:member, tax_relationship: nil)
+        _dependent = create(:member, tax_relationship: "Dependent")
+        filing1 = create(:member, tax_relationship: "Single")
+        filing2 = create(:member, tax_relationship: "Joint")
+
+        expect(Member.filing_taxes).to eq [filing1, filing2]
+      end
+    end
+
+    describe ".dependents" do
+      it "returns members that are dependents of primary applicant" do
+        _no_relationship = create(:member, tax_relationship: nil)
+        dependent = create(:member, tax_relationship: "Dependent")
+        _filing1 = create(:member, tax_relationship: "Single")
+        _filing2 = create(:member, tax_relationship: "Joint")
+
+        expect(Member.dependents).to eq [dependent]
+      end
+    end
+
+    describe ".no_tax_relationship" do
+      it "returns members NOT filing taxes with primary applicant" do
+        no_relationship = create(:member, tax_relationship: nil)
+        _dependent = create(:member, tax_relationship: "Dependent")
+        _filing1 = create(:member, tax_relationship: "Single")
+        _filing2 = create(:member, tax_relationship: "Joint")
+
+        expect(Member.no_tax_relationship).to eq [no_relationship]
+      end
+    end
+
     describe ".first_insurance_holder" do
       it "returns the first member that is insured" do
         create(:member, insured: false, requesting_health_insurance: true)
