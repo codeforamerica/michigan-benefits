@@ -36,12 +36,12 @@ class MedicaidApplicationMemberAttributes
   attr_reader :member, :position
 
   def member_caretaker_key
-    "#{position}_member_caretaker_#{yes_no(member.caretaker_or_parent)}"
+    :"#{position}_member_caretaker_#{yes_no(member.caretaker_or_parent)}"
   end
 
   def requesting_health_insurance_key
     yes_no = yes_no(member.requesting_health_insurance?)
-    "#{position}_member_requesting_health_insurance_#{yes_no}"
+    :"#{position}_member_requesting_health_insurance_#{yes_no}"
   end
 
   def under_21?
