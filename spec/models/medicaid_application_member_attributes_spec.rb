@@ -33,7 +33,6 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_spouse_name: "Candy Crush",
         primary_member_caretaker_yes: "Yes",
         primary_member_in_college_yes: "Yes",
-        primary_member_under_21_yes: nil,
         primary_member_under_21_no: "Yes",
         primary_member_ssn_0: "1",
         primary_member_ssn_1: "1",
@@ -51,7 +50,7 @@ RSpec.describe MedicaidApplicationMemberAttributes do
     end
 
     context "nil birthday" do
-      it "returns nil for birthday and age-related questions" do
+      it "it does not return keys for age-related questions" do
         member = create(:member, birthday: nil)
 
         result = MedicaidApplicationMemberAttributes.new(
@@ -59,9 +58,12 @@ RSpec.describe MedicaidApplicationMemberAttributes do
           position: "primary",
         ).to_h
 
-        expect(result).to include(
-          primary_member_birthday: nil,
-          primary_member_under_21_no: nil,
+        expect(result.keys).not_to include(
+          %i[
+            primary_member_birthday
+            primary_member_under_21_no
+            primary_member_under_21_yes
+          ],
         )
       end
     end

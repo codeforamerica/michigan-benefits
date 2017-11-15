@@ -138,7 +138,7 @@ class Member < ApplicationRecord
   end
 
   def formatted_birthday
-    birthday&.strftime("%m/%d/%Y")
+    birthday.strftime("%m/%d/%Y")
   end
 
   def mi_bridges_formatted_name
