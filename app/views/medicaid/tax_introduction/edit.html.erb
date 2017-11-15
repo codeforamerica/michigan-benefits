@@ -1,0 +1,30 @@
+<% content_for :header_title, "Quick Tax Questions" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="illustration illustration--celebrate"></div>
+    <div class="pre-title">
+      Great work so far!
+    </div>
+    <div class="form-card__title">
+      Now describe how you file your taxes.
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <ul class="list--bulleted">
+      <li>
+        <%= t("medicaid.tax_introduction.edit.help_text", count: current_application.members.count) %>
+      </li>
+      <li>
+        This information is important in determining the benefits you’re eligible for.
+      </li>
+    </ul>
+  </div>
+
+  <footer class="form-card__button_right">
+    <%= link_to next_path, class: "button button--nav  button--cta button--full-width" do %>
+      Next
+    <% end %>
+  </footer>
+</div>

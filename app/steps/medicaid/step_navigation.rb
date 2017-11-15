@@ -32,6 +32,7 @@ module Medicaid
         Medicaid::HealthFlintWaterCrisisConfirmationController,
       ],
       "Taxes" => [
+        Medicaid::TaxIntroductionController,
         Medicaid::TaxFilingController,
         Medicaid::TaxClaimedAsDependentController,
         Medicaid::TaxFilingWithHouseholdMembersController,
