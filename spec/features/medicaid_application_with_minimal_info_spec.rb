@@ -9,7 +9,8 @@ RSpec.feature "Medicaid app" do
     end
 
     on_pages "Introduction" do
-      expect(page).to have_content("Medicaid Application")
+      expect(page).to have_content("Welcome to the Medicaid application")
+      click_on "Next"
 
       click_on "Yes"
 

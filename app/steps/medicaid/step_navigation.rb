@@ -2,6 +2,7 @@ module Medicaid
   class StepNavigation
     ALL = {
       "Introduction" => [
+        Medicaid::WelcomeController,
         Medicaid::IntroLocationController,
         Medicaid::IntroLocationHelpController,
         Medicaid::IntroNameController,
