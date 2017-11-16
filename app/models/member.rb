@@ -64,13 +64,11 @@ class Member < ApplicationRecord
     inclusion: { in: SEXES },
     allow_nil: true
 
-<<<<<<< HEAD
   validates :tax_relationship,
     inclusion: { in: TAX_RELATIONSHIPS },
     allow_nil: true
-=======
-  validate :correct_other_income_types
->>>>>>> 4ad03e85... Validate other_income_types
+
+  validate :other_income_types_inclusion
 
   attribute :ssn
   attr_encrypted(
@@ -78,8 +76,8 @@ class Member < ApplicationRecord
     key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
 
-  def correct_other_income_types
-    if !(other_income_types - OTHER_INCOME_TYPES).empty?
+  def other_income_types_inclusion
+    if (other_income_types - OTHER_INCOME_TYPES).any?
       errors.add(:other_income_types, "Not a valid income type")
     end
   end
