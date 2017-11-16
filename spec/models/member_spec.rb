@@ -164,4 +164,36 @@ RSpec.describe Member do
       end
     end
   end
+
+  describe "#other_income_types" do
+    it "accepts all valid choices" do
+      member = Member.new
+      member.other_income_types = [
+        "alimony",
+        "other",
+        "pension",
+        "retirement",
+        "social_security",
+        "unemployment",
+      ]
+      member.valid?
+      expect(member.errors).to_not include(:other_income_types)
+    end
+
+    it "accepts empty choices" do
+      member = Member.new
+      member.other_income_types = []
+      member.valid?
+      expect(member.errors).to_not include(:other_income_types)
+    end
+
+    it "rejects invalid choices" do
+      member = Member.new
+      member.other_income_types = [
+        "side_hustle",
+      ]
+      member.valid?
+      expect(member.errors).to include(:other_income_types)
+    end
+  end
 end
