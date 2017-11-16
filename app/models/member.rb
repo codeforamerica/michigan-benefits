@@ -30,6 +30,12 @@ class Member < ApplicationRecord
     "Separated",
   ].freeze
 
+  TAX_RELATIONSHIPS = %w[
+    Single
+    Joint
+    Dependent
+  ].freeze
+
   belongs_to :benefit_application, polymorphic: true
   has_one :spouse, class_name: "Member", foreign_key: "spouse_id"
 
@@ -47,6 +53,10 @@ class Member < ApplicationRecord
 
   validates :sex,
     inclusion: { in: SEXES },
+    allow_nil: true
+
+  validates :tax_relationship,
+    inclusion: { in: TAX_RELATIONSHIPS },
     allow_nil: true
 
   attribute :ssn

@@ -7,11 +7,7 @@ module Medicaid
     end
 
     def update_application
-      current_application.primary_member.update!(member_attrs)
-    end
-
-    def member_attrs
-      { claimed_as_dependent: step_params[:claimed_as_dependent] }
+      current_application.primary_member.update!(step_params)
     end
   end
 end

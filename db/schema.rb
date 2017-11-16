@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 20171115191926) do
     t.string "sex"
     t.integer "spouse_id"
     t.integer "student_loan_interest_expenses"
+    t.string "tax_relationship"
     t.integer "unemployment_income"
     t.datetime "updated_at", null: false
   end
