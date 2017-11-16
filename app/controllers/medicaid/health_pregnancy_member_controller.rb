@@ -6,10 +6,6 @@ module Medicaid
       no_pregnancies? || only_males? || single_female_member_is_pregnant?
     end
 
-    def step_class
-      Medicaid::HealthPregnancy
-    end
-
     def member_attrs
       %i[new_mom]
     end
