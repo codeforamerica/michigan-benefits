@@ -31,6 +31,11 @@ RSpec.describe MedicaidApplicationMemberAttributes do
           "social_security",
           "unemployment",
         ],
+        unemployment_income: 400,
+        pay_child_support_alimony_arrears: true,
+        child_support_alimony_arrears_expenses: 100,
+        pay_student_loan_interest: true,
+        student_loan_interest_expenses: 70,
       )
 
       result = MedicaidApplicationMemberAttributes.new(
@@ -76,6 +81,15 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_additional_income_retirement: "Yes",
         primary_member_additional_income_alimony: "Yes",
         primary_member_additional_income_other: "Yes",
+        primary_member_additional_income_unemployment_amount: 400,
+        primary_member_additional_income_unemployment_interval: "Monthly",
+        primary_member_deduction_alimony_yes: "Yes",
+        primary_member_deduction_student_loan_yes: "Yes",
+        primary_member_deduction_child_support_alimony_arrears_amount: 100,
+        primary_member_deduction_child_support_alimony_arrears_interval:
+          "Monthly",
+        primary_member_deduction_student_loan_interest_amount: 70,
+        primary_member_deduction_student_loan_interest_interval: "Monthly",
       )
     end
 

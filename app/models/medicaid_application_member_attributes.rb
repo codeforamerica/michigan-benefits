@@ -34,6 +34,12 @@ class MedicaidApplicationMemberAttributes
       :"#{pay_interval_key(1, "second")}" => "Yes",
       :"#{position}_member_additional_income_none" =>
         bool_to_checkbox(!member.other_income?),
+      :"#{position}_member_additional_income_unemployment_amount" =>
+        member.unemployment_income,
+      :"#{position}_member_deduction_student_loan_yes" =>
+        bool_to_checkbox(member.pay_student_loan_interest?),
+      :"#{position}_member_deduction_alimony_yes" =>
+        bool_to_checkbox(member.pay_child_support_alimony_arrears?),
     }
 
     if member.ssn.present?
@@ -55,6 +61,32 @@ class MedicaidApplicationMemberAttributes
           :"#{position}_member_additional_income_#{other_income_type}"
         member_attributes[pdf_income_type_key] = "Yes"
       end
+    end
+
+    if member.unemployment_income?
+      unemployment_income_interval_key =
+        :"#{position}_member_additional_income_unemployment_interval"
+      member_attributes[unemployment_income_interval_key] = "Monthly"
+    end
+
+    if member.pay_student_loan_interest?
+      student_loan_amount_key =
+        :"#{position}_member_deduction_student_loan_interest_amount"
+      member_attributes[student_loan_amount_key] =
+        member.student_loan_interest_expenses
+      student_loan_interval_key =
+        :"#{position}_member_deduction_student_loan_interest_interval"
+      member_attributes[student_loan_interval_key] = "Monthly"
+    end
+
+    if member.pay_child_support_alimony_arrears?
+      child_support_amount_key =
+        :"#{position}_member_deduction_child_support_alimony_arrears_amount"
+      member_attributes[child_support_amount_key] =
+        member.child_support_alimony_arrears_expenses
+      child_support_interval_key =
+        :"#{position}_member_deduction_child_support_alimony_arrears_interval"
+      member_attributes[child_support_interval_key] = "Monthly"
     end
 
     member_attributes
