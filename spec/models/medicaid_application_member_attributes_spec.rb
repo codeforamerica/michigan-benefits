@@ -22,6 +22,15 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         employed_employer_names: ["AA Accounting", "BB Burgers"],
         employed_pay_quantities: ["11", "222"],
         employed_payment_frequency: ["Hourly", "Weekly"],
+        other_income: true,
+        other_income_types: [
+          "alimony",
+          "other",
+          "pension",
+          "retirement",
+          "social_security",
+          "unemployment",
+        ],
       )
 
       result = MedicaidApplicationMemberAttributes.new(
@@ -60,6 +69,13 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_second_employed_employer_name: "BB Burgers",
         primary_member_second_employed_pay_interval_weekly: "Yes",
         primary_member_second_employed_pay_quantity: "222",
+        primary_member_additional_income_none: nil,
+        primary_member_additional_income_unemployment: "Yes",
+        primary_member_additional_income_pension: "Yes",
+        primary_member_additional_income_social_security: "Yes",
+        primary_member_additional_income_retirement: "Yes",
+        primary_member_additional_income_alimony: "Yes",
+        primary_member_additional_income_other: "Yes",
       )
     end
 

@@ -32,6 +32,8 @@ class MedicaidApplicationMemberAttributes
         member.employed_pay_quantities[1],
       :"#{pay_interval_key(0, "first")}" => "Yes",
       :"#{pay_interval_key(1, "second")}" => "Yes",
+      :"#{position}_member_additional_income_none" =>
+        bool_to_checkbox(!member.other_income?),
     }
 
     if member.ssn.present?
@@ -45,6 +47,14 @@ class MedicaidApplicationMemberAttributes
         member.formatted_birthday
       member_attributes[:"#{position}_member_under_21_#{yes_no(under_21?)}"] =
         "Yes"
+    end
+
+    if member.other_income?
+      member.other_income_types.each do |other_income_type|
+        pdf_income_type_key =
+          :"#{position}_member_additional_income_#{other_income_type}"
+        member_attributes[pdf_income_type_key] = "Yes"
+      end
     end
 
     member_attributes
@@ -78,6 +88,7 @@ class MedicaidApplicationMemberAttributes
       "Weekly" => "weekly",
       "Every Two Weeks" => "biweekly",
       "Twice a Month" => "twice_monthly",
+      "Monthly" => "monthly",
       "Yearly" => "yearly",
     }
 
