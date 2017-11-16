@@ -27,18 +27,41 @@ RSpec.describe SuccessController do
 
     it "drives the app once" do
       run_background_jobs_immediately do
-        run_double = double(run: true)
-        allow(MiBridges::Driver).to receive(:new).
-          with(snap_application: current_app).
-          and_return(run_double)
+        with_modified_env DRIVER_ENABLED: "true" do
+          run_double = double(run: true)
+          allow(MiBridges::Driver).to receive(:new).
+            with(snap_application: current_app).
+            and_return(run_double)
 
-        get :edit
+          get :edit
 
-        _drive_app = create(:driver_application, snap_application: current_app)
-        get :edit
+          _drive_app = create(
+            :driver_application,
+            snap_application: current_app,
+          )
+          get :edit
 
-        expect(MiBridges::Driver).to have_received(:new).
-          with(snap_application: current_app).once
+          expect(MiBridges::Driver).to have_received(:new).
+            with(snap_application: current_app).once
+        end
+      end
+    end
+
+    context "with DRIVER_ENABLED set to false" do
+      it "does not kick off the driver code" do
+        run_background_jobs_immediately do
+          with_modified_env DRIVER_ENABLED: "false" do
+            run_double = double(run: true)
+            allow(MiBridges::Driver).to receive(:new).
+              with(snap_application: current_app).
+              and_return(run_double)
+
+            get :edit
+
+            expect(MiBridges::Driver).not_to have_received(:new).
+              with(snap_application: current_app)
+          end
+        end
       end
     end
 
