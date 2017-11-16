@@ -36,6 +36,15 @@ class Member < ApplicationRecord
     Dependent
   ].freeze
 
+  OTHER_INCOME_TYPES = %w[
+    alimony
+    other
+    pension
+    retirement
+    social_security
+    unemployment
+  ].freeze
+
   belongs_to :benefit_application, polymorphic: true
   has_one :spouse, class_name: "Member", foreign_key: "spouse_id"
 
@@ -59,11 +68,19 @@ class Member < ApplicationRecord
     inclusion: { in: TAX_RELATIONSHIPS },
     allow_nil: true
 
+  validate :other_income_types_inclusion
+
   attribute :ssn
   attr_encrypted(
     :ssn,
     key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
+
+  def other_income_types_inclusion
+    if (other_income_types - OTHER_INCOME_TYPES).any?
+      errors.add(:other_income_types, "Not a valid income type")
+    end
+  end
 
   def self.insured
     where(insured: true).
