@@ -98,7 +98,7 @@ en:
     amounts_income:
       edit:
         title:
-          one: Tell us the specific income received.
+          one: Tell us your specific income received.
           other: "Tell us %{name}’s specific income received."
     amounts_expenses:
       edit:
