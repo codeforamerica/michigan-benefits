@@ -2,18 +2,6 @@ module Medicaid
   class TaxFilingWithHouseholdMembersRelationshipController <
     ManyMemberStepsController
 
-    def update
-      assign_household_member_attributes
-
-      if step.valid?
-        assign_primary_member_attributes
-        update_application
-        redirect_to(next_path)
-      else
-        render :edit
-      end
-    end
-
     private
 
     def step
@@ -34,12 +22,14 @@ module Medicaid
       end
     end
 
-    def assign_primary_member_attributes
-      primary_member = current_application.primary_member
-      primary_member.assign_attributes(
-        tax_relationship: primary_member_tax_relationship,
-      )
-      @step.members.push(primary_member)
+    def update_application
+      super
+
+      current_application.
+        primary_member.
+        update!(
+          tax_relationship: primary_member_tax_relationship,
+        )
     end
 
     def not_filing_federal_taxes_next_year
