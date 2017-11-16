@@ -239,6 +239,17 @@ RSpec.feature "Medicaid app" do
       )
       check "Joel Tester"
       click_on "Next"
+
+      expect(page).to have_content(
+        "Tell us your tax relationships with each person that "\
+        "you file taxes with.",
+      )
+
+      click_on "Next"
+      expect(page).to have_content("Make sure you select one option")
+
+      select "Joint"
+      click_on "Next"
     end
 
     on_page "Income & Expenses" do
