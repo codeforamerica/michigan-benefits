@@ -10,10 +10,10 @@ RSpec.feature "Admin viewing medicaid applications dashboard", type: :feature do
   end
 
   scenario "downloads the 1426 PDF application", javascript: true do
-    application = create(:medicaid_application,
-           members: [
-             create(:member, first_name: "Christa", last_name: "Tester"),
-           ])
+    application = create(
+      :medicaid_application,
+      members: [create(:member, first_name: "Christa", last_name: "Tester")],
+    )
 
     visit admin_root_path
 

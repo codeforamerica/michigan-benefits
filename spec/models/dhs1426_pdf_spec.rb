@@ -270,5 +270,34 @@ RSpec.describe Dhs1426Pdf do
 
       expect(file).to be_a_kind_of(Tempfile)
     end
+
+    it "appends pages if there are more than 2 household members" do
+      members = create_list(:member, 4)
+      medicaid_application = create(:medicaid_application, members: members)
+      original_length = PDF::Reader.new(Dhs1426Pdf::SOURCE_PDF).page_count
+
+      file = Dhs1426Pdf.new(medicaid_application: medicaid_application).
+        completed_file
+      new_pdf = PDF::Reader.new(file.path)
+
+      expect(new_pdf.page_count).to eq(original_length + 4)
+    end
+
+    it "prepends the additional member page fields with numbers" do
+      members = [
+        create(:member, first_name: "Primera"),
+        create(:member, first_name: "Segunda"),
+        create(:member, first_name: "Tercera"),
+        create(:member, first_name: "Cuarta"),
+      ]
+      medicaid_application = create(:medicaid_application, members: members)
+      file = Dhs1426Pdf.new(medicaid_application: medicaid_application).
+        completed_file
+      result = filled_in_values(file: file.path)
+      expect(result["primary_member_full_name"]).to include("Primera")
+      expect(result["second_member_full_name"]).to include("Segunda")
+      expect(result["1.second_member_full_name"]).to include("Tercera")
+      expect(result["2.second_member_full_name"]).to include("Cuarta")
+    end
   end
 end
