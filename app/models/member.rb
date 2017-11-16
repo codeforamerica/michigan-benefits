@@ -93,16 +93,16 @@ class Member < ApplicationRecord
     "#{first_name} #{last_name}".titleize
   end
 
-  def self.filing_taxes_with_primary
-    where "members.filing_taxes_with_primary_member = true"
+  def self.filing_taxes
+    where "members.tax_relationship in ('Single', 'Joint')"
   end
 
   def self.dependents
-    where "members.claimed_as_dependent = true"
+    where "members.tax_relationship = 'Dependent'"
   end
 
-  def self.not_filing_taxes_with_primary
-    where("members.filing_taxes_with_primary_member <> true")
+  def self.no_tax_relationship
+    where("coalesce(members.tax_relationship, '') = ''")
   end
 
   def self.receiving_income

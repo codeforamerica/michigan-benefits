@@ -14,14 +14,6 @@ class MedicaidApplication < ApplicationRecord
     Medicaid::StepNavigation
   end
 
-  def tax_filing_status
-    if filing_federal_taxes_next_year? && filing_taxes_with_household_members?
-      "Joint"
-    else
-      "Single"
-    end
-  end
-
   def nobody_insured?
     !anyone_insured?
   end

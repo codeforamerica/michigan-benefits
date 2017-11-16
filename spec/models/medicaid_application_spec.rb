@@ -1,32 +1,6 @@
 require "rails_helper"
 
 RSpec.describe MedicaidApplication do
-  describe "#tax_filing_status" do
-    context "filing taxes with household members" do
-      it "is 'Joint'" do
-        app = create(
-          :medicaid_application,
-          filing_federal_taxes_next_year: true,
-          filing_taxes_with_household_members: true,
-        )
-
-        expect(app.tax_filing_status).to eq "Joint"
-      end
-    end
-
-    context "not filing taxes with household members" do
-      it "is 'Single'" do
-        app = create(
-          :medicaid_application,
-          filing_federal_taxes_next_year: false,
-          filing_taxes_with_household_members: false,
-        )
-
-        expect(app.tax_filing_status).to eq "Single"
-      end
-    end
-  end
-
   describe "#residential_address" do
     context "residential address not present" do
       it "returns NullAddress" do

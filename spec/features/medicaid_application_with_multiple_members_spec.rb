@@ -252,8 +252,7 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
 
       expect(page).to have_content("Great! Let's review your tax info:")
-      expect(page).to have_content("Filing status: Joint")
-      expect(page).to have_content("Joel Tester")
+      expect(page).to have_content("Joel Tester - Joint")
       click_on "Next"
     end
 

@@ -2,30 +2,36 @@ require "rails_helper"
 
 RSpec.describe Member do
   describe "scopes" do
-    describe ".filing_taxes_with_primary" do
-      it "returns members filing taxes with primary applicant" do
-        create(:member, filing_taxes_with_primary_member: false)
-        filing = create(:member, filing_taxes_with_primary_member: true)
+    describe ".filing_taxes" do
+      it "returns members filing taxes as Single or Joint" do
+        _no_relationship = create(:member, tax_relationship: nil)
+        _dependent = create(:member, tax_relationship: "Dependent")
+        filing1 = create(:member, tax_relationship: "Single")
+        filing2 = create(:member, tax_relationship: "Joint")
 
-        expect(Member.filing_taxes_with_primary).to eq [filing]
-      end
-    end
-
-    describe ".not_filing_taxes_with_primary" do
-      it "returns members NOT filing taxes with primary applicant" do
-        create(:member, filing_taxes_with_primary_member: true)
-        not_filing = create(:member, filing_taxes_with_primary_member: false)
-
-        expect(Member.not_filing_taxes_with_primary).to eq [not_filing]
+        expect(Member.filing_taxes).to eq [filing1, filing2]
       end
     end
 
     describe ".dependents" do
       it "returns members that are dependents of primary applicant" do
-        create(:member, claimed_as_dependent: false)
-        dependent = create(:member, claimed_as_dependent: true)
+        _no_relationship = create(:member, tax_relationship: nil)
+        dependent = create(:member, tax_relationship: "Dependent")
+        _filing1 = create(:member, tax_relationship: "Single")
+        _filing2 = create(:member, tax_relationship: "Joint")
 
         expect(Member.dependents).to eq [dependent]
+      end
+    end
+
+    describe ".no_tax_relationship" do
+      it "returns members NOT filing taxes with primary applicant" do
+        no_relationship = create(:member, tax_relationship: nil)
+        _dependent = create(:member, tax_relationship: "Dependent")
+        _filing1 = create(:member, tax_relationship: "Single")
+        _filing2 = create(:member, tax_relationship: "Joint")
+
+        expect(Member.no_tax_relationship).to eq [no_relationship]
       end
     end
 

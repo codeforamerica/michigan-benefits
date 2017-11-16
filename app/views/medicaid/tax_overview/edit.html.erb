@@ -9,14 +9,13 @@
   </header>
 
   <div class="form-card__content">
-    <% if members.filing_taxes_with_primary.any? -%>
-      Filing status: <%= current_application.tax_filing_status %>
+    <% if members.filing_taxes.any? -%>
+      Filing taxes and status
 
       <ul class="list--bulleted">
-        <%= render partial: "shared/member_list_item",
-          collection: members.filing_taxes_with_primary,
-          as: :member
-          %>
+        <% members.filing_taxes.each do |member| %>
+          <li><%= member.display_name %> - <%= member.tax_relationship %></li>
+        <% end %>
       </ul>
     <% end -%>
 
@@ -24,21 +23,19 @@
       Claimed as dependent
 
       <ul class="list--bulleted">
-        <%= render partial: "shared/member_list_item",
-          collection: members.dependents,
-          as: :member
-          %>
+        <% members.dependents.each do |member| %>
+          <li><%= member.display_name %> - <%= member.tax_relationship %></li>
+        <% end %>
       </ul>
     <% end -%>
 
-    <% if members.not_filing_taxes_with_primary.any? -%>
-      Claimed as dependent
+    <% if members.no_tax_relationship.any? -%>
+      Members not included
 
       <ul class="list--bulleted">
-        <%= render partial: "shared/member_list_item",
-          collection: members.not_filing_taxes_with_primary,
-          as: :member
-          %>
+        <% members.no_tax_relationship.each do |member| %>
+          <li><%= member.display_name %></li>
+        <% end %>
       </ul>
     <% end -%>
   </div>
