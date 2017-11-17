@@ -2,8 +2,14 @@ require "rails_helper"
 
 RSpec.describe StepsController do
   context "when no applications have been started" do
-    it "redirects to the homepage" do
+    it "redirects to the homepage on a GET" do
       get :index
+
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "redirects to the homepage on a PUT" do
+      put :update, params: { id: "" }
 
       expect(response).to redirect_to(root_path)
     end
