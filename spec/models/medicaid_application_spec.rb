@@ -1,6 +1,23 @@
 require "rails_helper"
 
 RSpec.describe MedicaidApplication do
+  describe "#members" do
+    it "returns them created_at ascending order" do
+      old_member = create(:member, created_at: 1.year.ago)
+      new_member = create(:member, created_at: 1.day.ago)
+      medicaid_app = create(
+        :medicaid_application,
+        members: [old_member, new_member],
+      )
+
+      expect(medicaid_app.members).to eq([old_member, new_member])
+
+      old_member.touch
+
+      expect(medicaid_app.reload.members).to eq([old_member, new_member])
+    end
+  end
+
   describe "#residential_address" do
     context "residential address not present" do
       it "returns NullAddress" do

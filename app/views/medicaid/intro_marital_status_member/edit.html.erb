@@ -16,7 +16,7 @@
 
       <%= f.mb_form_errors :married %>
       <fieldset class="form-group">
-        <% @step.members.ordered.each do |member| %>
+        <% @step.members.each do |member| %>
           <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
             <%= ff.mb_checkbox :married, member.display_name %>
           <% end %>
