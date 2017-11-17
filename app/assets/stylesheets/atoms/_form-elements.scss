@@ -70,6 +70,10 @@ label {
     width: 22px;
     border-radius: 50%;
 
+    &:focus {
+      outline: 3px solid $form-color-border-focus;
+    }
+
     &:focus,
     &:checked {
       &:before {
@@ -132,6 +136,9 @@ label {
         display: inline-block;
         position: relative;
       }
+    }
+    &:focus {
+      outline: 3px solid $form-color-border-focus;
     }
   }
   &:hover {
