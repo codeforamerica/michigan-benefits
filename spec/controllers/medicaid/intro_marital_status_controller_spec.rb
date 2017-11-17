@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IntroMaritalStatusController do
+  include_examples "application required"
+
   describe "#update" do
     context "single member household" do
       context "anyone married" do

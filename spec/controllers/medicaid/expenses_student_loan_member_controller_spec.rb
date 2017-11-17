@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::ExpensesStudentLoanMemberController do
+  include_examples "application required"
+
   describe "#next_path" do
     it "is the amounts overview page path" do
       expect(subject.next_path).to eq "/steps/medicaid/amounts-overview"

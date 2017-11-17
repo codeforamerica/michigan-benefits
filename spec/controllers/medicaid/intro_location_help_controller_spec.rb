@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IntroLocationHelpController do
+  include_examples "application required"
+
   describe "#edit" do
     context "application has not yet been created" do
       it "redirects to intro location page" do

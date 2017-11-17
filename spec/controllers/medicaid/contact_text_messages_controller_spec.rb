@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::ContactTextMessagesController do
+  include_examples "application required"
+
   describe "#edit" do
     context "phone number present, sms phone number nil" do
       it "defaults sms phone number to phone number" do

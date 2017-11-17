@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IncomeOtherIncomeController do
+  include_examples "application required"
+
   describe "#next_path" do
     it "is the self income job number" do
       expect(subject.next_path).to eq(

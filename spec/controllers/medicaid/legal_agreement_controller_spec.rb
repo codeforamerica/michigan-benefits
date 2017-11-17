@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::LegalAgreementController do
+  include_examples "application required"
+
   describe "#update" do
     context "consent to terms is true" do
       it "is valid" do

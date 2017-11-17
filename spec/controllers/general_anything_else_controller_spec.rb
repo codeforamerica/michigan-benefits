@@ -4,7 +4,7 @@ RSpec.describe GeneralAnythingElseController do
   let(:step) { assigns(:step) }
   let(:step_class) { GeneralAnythingElse }
 
-  include_examples "step controller"
+  include_examples "step controller", "application required"
 
   describe "#edit" do
     it "assigns the attributes to the step" do

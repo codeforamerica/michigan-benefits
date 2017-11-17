@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IntroCaretakerController do
+  include_examples "application required"
+
   it "is the intro citizen path" do
     expect(subject.next_path).to eq(
       "/steps/medicaid/intro-caretaker-member",

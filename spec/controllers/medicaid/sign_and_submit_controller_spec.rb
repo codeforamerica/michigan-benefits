@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::SignAndSubmitController do
+  include_examples "application required"
+
   describe "#next_path" do
     it "is the success path" do
       expect(subject.next_path).to eq(
