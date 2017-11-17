@@ -15,7 +15,7 @@
       method: :put do |f| %>
 
       <fieldset class="form-group">
-        <% @step.members.each do |member| %>
+        <% @step.members.ordered.each do |member| %>
           <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
             <%= ff.mb_checkbox(:pay_student_loan_interest, member.display_name) %>
           <% end %>

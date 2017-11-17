@@ -14,7 +14,7 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <fieldset class="form-group">
-        <% @step.members.each do |member| %>
+        <% @step.members.ordered.each do |member| %>
           <%= f.fields_for("members[]", member) do |ff| %>
             <%= ff.mb_checkbox(
               :requesting_health_insurance,

@@ -12,7 +12,7 @@
       <% if !current_application.everyone_a_citizen? %>
         <fieldset class="form-group">
           <p class="form-question">Who is not a citizen?<span class="form-card__optional">(optional)</span></p>
-            <% @step.members.each do |member| %>
+            <% @step.members.ordered.each do |member| %>
               <%= f.fields_for('members[]', member) do |ff| %>
                 <%= ff.mb_checkbox(
                   :citizen,

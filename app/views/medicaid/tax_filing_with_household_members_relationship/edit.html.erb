@@ -12,7 +12,7 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
         <%= f.mb_form_errors :duplicate_joint_filers %>
         <fieldset class="form-group">
-        <% @step.members.each do |member| %>
+        <% @step.members.ordered.each do |member| %>
           <%= f.fields_for("members[]", member) do |ff| %>
             <%= ff.mb_select :tax_relationship,
               member.display_name,

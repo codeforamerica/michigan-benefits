@@ -82,6 +82,10 @@ class Member < ApplicationRecord
     end
   end
 
+  def self.ordered
+    order(created_at: :asc)
+  end
+
   def self.insured
     where(insured: true).
       where(requesting_health_insurance: true).
