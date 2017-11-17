@@ -10,7 +10,7 @@ RSpec.describe Medicaid::ContactSocialSecurityController do
   end
 
   describe "#edit" do
-    context "client will not submitssn" do
+    context "client will not submit ssn" do
       it "redirects to next step" do
         medicaid_application = create(:medicaid_application, submit_ssn: false)
         session[:medicaid_application_id] = medicaid_application.id
@@ -29,6 +29,23 @@ RSpec.describe Medicaid::ContactSocialSecurityController do
         get :edit
 
         expect(response).to render_template(:edit)
+      end
+
+      it "assigns members requesting health insurance to step" do
+        member_one = create(:member, requesting_health_insurance: true)
+        member_two = create(:member, requesting_health_insurance: true)
+        member_three = create(:member, requesting_health_insurance: false)
+
+        medicaid_application = create(
+          :medicaid_application,
+          submit_ssn: true,
+          members: [member_one, member_two, member_three],
+        )
+        session[:medicaid_application_id] = medicaid_application.id
+
+        get :edit
+
+        expect(assigns[:step].members).to eq [member_one, member_two]
       end
     end
   end

@@ -12,7 +12,7 @@
       url: current_path,
       method: :put do |f| %>
 
-      <% @step.members_requesting_health_insurance.each do |member| %>
+      <% @step.members.each do |member| %>
         <fieldset class="form-group">
           <%= f.fields_for('members[]', member) do |ff| %>
             <div class="household-member-group" data-member-name="<%= member.display_name %>">
