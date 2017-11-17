@@ -6,6 +6,13 @@ GIT
     sfax (0.1.0)
 
 GIT
+  remote: https://github.com/codeforamerica/tracker-git.git
+  revision: 8c26f626e27e3de606284b55ec14c466acbec60c
+  specs:
+    tracker-git (0.0.6)
+      pivotal-tracker (>= 0.5.10)
+
+GIT
   remote: https://github.com/pynixwang/devise-otp
   revision: a181217a2d436de7ebb9a278bcb326bbddefa514
   ref: a181217a2d436de7ebb9a278bcb326bbddefa514
@@ -408,8 +415,6 @@ GEM
     timecop (0.9.1)
     token_phrase (1.0.6)
       backports
-    tracker-git (0.0.5)
-      pivotal-tracker (>= 0.5.10)
     ttfunk (1.5.1)
     twilio-ruby (5.2.3)
       faraday (~> 0.9)
@@ -493,7 +498,7 @@ DEPENDENCIES
   strong_migrations
   timecop
   token_phrase
-  tracker-git
+  tracker-git!
   twilio-ruby
   tzinfo-data
   uglifier (>= 1.3.0)
