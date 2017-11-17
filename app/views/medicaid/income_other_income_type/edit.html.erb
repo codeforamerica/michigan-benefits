@@ -15,6 +15,9 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.hidden_field :member_id, value: current_member.id %>
+
+      <%= f.mb_form_errors :other_income_types %>
+
       <%= f.mb_checkbox_set(
         [
           { method: :unemployment, label: "Unemployment" },
