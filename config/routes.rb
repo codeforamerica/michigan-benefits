@@ -44,7 +44,7 @@ Rails.application.routes.draw do
 
   resource :skip_send_application, only: [:create]
 
-  resources :steps, only: %i[index show] do
+  resources :steps, only: %i[index show update] do
     collection do
       StepNavigation.steps_and_substeps.each do |controller_class|
         { get: :edit, put: :update }.each do |method, action|

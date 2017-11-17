@@ -1,7 +1,7 @@
 class StepsController < ApplicationController
   layout "step"
 
-  before_action :ensure_application_present, only: %i(edit index)
+  before_action :ensure_application_present, only: %i(edit index update)
   before_action :maybe_skip, only: :edit
 
   helper_method :decoded_step_path
