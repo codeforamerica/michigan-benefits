@@ -1,7 +1,13 @@
 class MedicaidApplication < ApplicationRecord
   include Submittable
 
-  has_many :members, as: :benefit_application, dependent: :destroy
+  has_many(
+    :members,
+    -> { order(created_at: :asc) },
+    as: :benefit_application,
+    dependent: :destroy,
+  )
+
   has_many :addresses, as: :benefit_application, dependent: :destroy
 
   attribute :ssn
