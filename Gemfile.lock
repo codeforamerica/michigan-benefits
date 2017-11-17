@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/codeforamerica/tracker-git.git
-  revision: 8c26f626e27e3de606284b55ec14c466acbec60c
+  revision: e0032fa47f49af2a5817cccd8af9b76c5572db59
   specs:
     tracker-git (0.0.6)
       pivotal-tracker (>= 0.5.10)
