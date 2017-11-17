@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Medicaid::IntroCaretakerMemberController do
   it "is the intro citizen path" do
     expect(subject.next_path).to eq(
-      "/steps/medicaid/insurance-needed",
+      "/steps/medicaid/health-introduction",
     )
   end
 

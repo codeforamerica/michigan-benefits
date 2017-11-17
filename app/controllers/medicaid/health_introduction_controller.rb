@@ -1,5 +1,5 @@
 module Medicaid
-  class TaxIntroductionController < MedicaidStepsController
+  class HealthIntroductionController < MedicaidStepsController
     def step_class
       NullStep
     end

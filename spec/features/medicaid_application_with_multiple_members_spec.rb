@@ -125,6 +125,11 @@ RSpec.feature "Medicaid app" do
 
     on_page "Health Coverage Needs" do
       expect(page).to have_content(
+        "Next, describe your health coverage and status.",
+      )
+
+      click_on "Next"
+      expect(page).to have_content(
         "Who in your household needs healthcare coverage?",
       )
       uncheck "Jessie Tester"
