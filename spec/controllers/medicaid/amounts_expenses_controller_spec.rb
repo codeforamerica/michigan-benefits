@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::AmountsExpensesController, type: :controller do
+  include_examples "application required"
+
   describe "#next_path" do
     it "is the medicaid contact path" do
       medicaid_application = create(:medicaid_application)

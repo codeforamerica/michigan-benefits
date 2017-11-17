@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IncomeJobNumberController do
+  include_examples "application required"
+
   describe "#next_path" do
     it "is the job number continued path" do
       expect(subject.next_path).to eq(

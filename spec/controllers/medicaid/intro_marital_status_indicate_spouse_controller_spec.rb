@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
+  include_examples "application required"
+
   describe "#current_member" do
     it "defaults for first married member" do
       medicaid_application = create(:medicaid_application, anyone_married: true)
