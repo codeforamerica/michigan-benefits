@@ -42,6 +42,29 @@ RSpec.describe Medicaid::HealthPregnancyController, type: :controller do
   end
 
   describe "#update" do
+    context "multi member household, one female membrer" do
+      context "someone is pregnant" do
+        it "updates the member" do
+          female_member = create(:member, sex: "female")
+          male_member = create(:member, sex: "male")
+
+          medicaid_application = create(
+            :medicaid_application,
+            members: [male_member, female_member],
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          put :update, params: { step: { anyone_new_mom: true } }
+
+          female_member.reload
+          male_member.reload
+
+          expect(female_member).to be_new_mom
+          expect(male_member).not_to be_new_mom
+        end
+      end
+    end
+
     context "single member household" do
       context "someone is pregnant" do
         it "updates the member" do
