@@ -22,4 +22,24 @@ RSpec.shared_examples "step controller" do
       end
     end
   end
+
+  describe "#update" do
+    context "when there is no application under way" do
+      it "redirects to the homepage on a PUT" do
+        session[:snap_application_id] = nil
+
+        put :update, params: {}
+
+        if request.path == "/steps/introduce-yourself"
+          expect(response).to render_template(:edit)
+
+        elsif request.path.include? "/medicaid"
+          expect(response).to redirect_to(root_path)
+
+        else
+          expect(response).to redirect_to("/steps/introduce-yourself")
+        end
+      end
+    end
+  end
 end

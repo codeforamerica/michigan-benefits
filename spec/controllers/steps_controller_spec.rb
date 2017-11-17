@@ -7,12 +7,6 @@ RSpec.describe StepsController do
 
       expect(response).to redirect_to(root_path)
     end
-
-    it "redirects to the homepage on a PUT" do
-      put :update, params: { id: "" }
-
-      expect(response).to redirect_to(root_path)
-    end
   end
 
   context "when a snap application has been started" do
