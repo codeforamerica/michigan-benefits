@@ -6,10 +6,6 @@ module Medicaid
 
     private
 
-    def current_or_new_medicaid_application
-      current_application || MedicaidApplication.new
-    end
-
     def ensure_application_present
       true
     end
