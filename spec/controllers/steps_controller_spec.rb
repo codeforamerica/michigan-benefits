@@ -1,14 +1,6 @@
 require "rails_helper"
 
 RSpec.describe StepsController do
-  context "when no applications have been started" do
-    it "redirects to the homepage on a GET" do
-      get :index
-
-      expect(response).to redirect_to(root_path)
-    end
-  end
-
   context "when a snap application has been started" do
     it "renders the index page" do
       current_app = create(:snap_application)
