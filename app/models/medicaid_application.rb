@@ -70,6 +70,10 @@ class MedicaidApplication < ApplicationRecord
     ).completed_file
   end
 
+  def members_count
+    members.count
+  end
+
   private
 
   def unstable_housing?

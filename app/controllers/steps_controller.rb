@@ -20,12 +20,6 @@ class StepsController < ApplicationController
   def edit
     attribute_keys = Step::Attributes.new(step_attrs).to_sym
     @step = step_class.new(existing_attributes.slice(*attribute_keys))
-
-    if attribute_keys.include?(:members)
-      @step.members = current_application&.members
-    end
-
-    before_rendering_edit_hook
   end
 
   def update
@@ -78,9 +72,6 @@ class StepsController < ApplicationController
   private
 
   delegate :step_class, to: :class
-
-  # This is an intentional noop
-  def before_rendering_edit_hook; end
 
   def existing_attributes
     HashWithIndifferentAccess.new(current_application&.attributes)

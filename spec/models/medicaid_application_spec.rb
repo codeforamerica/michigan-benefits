@@ -107,4 +107,15 @@ RSpec.describe MedicaidApplication do
       expect(app.no_expenses?).to eq(true)
     end
   end
+
+  describe "#members_count" do
+    it "returns the count of associated members" do
+      app = create(
+        :medicaid_application,
+        members: build_list(:member, 5),
+      )
+
+      expect(app.members_count).to eq 5
+    end
+  end
 end

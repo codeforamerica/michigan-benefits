@@ -38,6 +38,16 @@ RSpec.describe Medicaid::HealthPregnancyController, type: :controller do
 
         expect(response).to render_template(:edit)
       end
+
+      it "assigns members to step" do
+        member = build(:member, sex: "female")
+        medicaid_application = create(:medicaid_application, members: [member])
+        session[:medicaid_application_id] = medicaid_application.id
+
+        get :edit
+
+        expect(assigns[:step].members).to eq [member]
+      end
     end
   end
 

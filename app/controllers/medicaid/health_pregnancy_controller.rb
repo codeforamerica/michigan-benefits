@@ -1,5 +1,11 @@
 module Medicaid
   class HealthPregnancyController < MedicaidStepsController
+    def edit
+      super
+
+      @step.members = current_application.members
+    end
+
     private
 
     def update_application

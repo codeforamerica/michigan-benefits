@@ -7,9 +7,15 @@ class SuccessController < SnapStepsController
     after_submit_path
   end
 
+  def edit
+    super
+
+    export
+  end
+
   private
 
-  def before_rendering_edit_hook
+  def export
     return if !current_application.exportable?
 
     ExportFactory.create(
