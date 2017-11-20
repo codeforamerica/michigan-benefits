@@ -29,8 +29,8 @@ Install and start PostgreSQL.
 
 `brew services start postgresql`
 
-[Homebrew](https://brew.sh/)
-[Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+[Homebrew]: https://brew.sh/
+[Heroku CLI]: https://devcenter.heroku.com/articles/heroku-cli
 
 ### Ruby on Rails
 
