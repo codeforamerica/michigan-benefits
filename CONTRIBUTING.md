@@ -26,6 +26,7 @@ Install [Heroku CLI].
 Install and start PostgreSQL.
 
 `brew install postgresql`
+
 `brew services start postgresql`
 
 [Homebrew](https://brew.sh/)
