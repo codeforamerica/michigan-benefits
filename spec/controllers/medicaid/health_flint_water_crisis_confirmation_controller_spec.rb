@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::HealthFlintWaterCrisisConfirmationController do
-  include_examples "application required"
-
   describe "#next_path" do
     it "is the insurance current path" do
       expect(subject.next_path).to eq(

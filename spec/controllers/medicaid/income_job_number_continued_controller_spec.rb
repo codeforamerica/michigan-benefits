@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IncomeJobNumberContinuedController do
-  include_examples "application required"
-
   describe "#next_path" do
     it "is the self employment page path" do
       expect(subject.next_path).to eq "/steps/medicaid/income-job-number-member"

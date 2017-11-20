@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
-  include_examples "application required"
-
   describe "#next_path" do
     it "is the contact phone path" do
       expect(subject.next_path).

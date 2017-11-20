@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::HealthDisabilityMemberController, type: :controller do
-  include_examples "application required"
-
   describe "#next_path" do
     it "is the pregnancy question page path" do
       expect(subject.next_path).to eq "/steps/medicaid/health-pregnancy"

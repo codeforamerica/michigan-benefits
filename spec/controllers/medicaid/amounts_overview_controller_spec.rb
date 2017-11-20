@@ -3,8 +3,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::AmountsOverviewController do
-  include_examples "application required"
-
   describe "#skip?" do
     context "receives an income, and has expenses" do
       it "does not skip" do
