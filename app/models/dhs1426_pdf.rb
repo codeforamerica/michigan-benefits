@@ -1,6 +1,7 @@
 class Dhs1426Pdf
   PDF_DIRECTORY = "lib/pdfs".freeze
   SOURCE_PDF = "#{PDF_DIRECTORY}/DHS_1426.pdf".freeze
+  COVERSHEET_PDF = "#{PDF_DIRECTORY}/DHS_1426_cover_letter.pdf".freeze
   STEP_2_ADDITIONAL_MEMBER_PDF =
     "#{PDF_DIRECTORY}/DHS_1426_step_2_additional_member.pdf".freeze
   MAXIMUM_HOUSEHOLD_MEMBERS = 2
@@ -54,8 +55,10 @@ class Dhs1426Pdf
     PdfBuilder.new(
       output_file: complete_application,
       file_paths: [
+        COVERSHEET_PDF,
         filled_in_application.path,
         additional_member_pdf_paths,
+        verification_paperwork_paths,
       ].reject(&:blank?).flatten,
     ).pdf
   end
@@ -107,5 +110,18 @@ class Dhs1426Pdf
       { member: application_members[0], position: "primary" },
       { member: application_members[1], position: "second" },
     ]
+  end
+
+  def verification_paperwork_paths
+    verification_paperwork.map do |document|
+      VerificationDocument.new(
+        url: document,
+        benefit_application: medicaid_application,
+      ).file&.path
+    end.reject(&:nil?)
+  end
+
+  def verification_paperwork
+    medicaid_application.paperwork || []
   end
 end

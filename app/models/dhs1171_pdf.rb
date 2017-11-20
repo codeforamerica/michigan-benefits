@@ -1,7 +1,7 @@
 class Dhs1171Pdf
   PDF_DIRECTORY = "lib/pdfs".freeze
   SOURCE_PDF = "#{PDF_DIRECTORY}/DHS_1171.pdf".freeze
-  COVERSHEET_PDF = "#{PDF_DIRECTORY}/michigan_snap_fax_cover_letter.pdf".freeze
+  COVERSHEET_PDF = "#{PDF_DIRECTORY}/DHS_1171_cover_letter.pdf".freeze
   MAXIMUM_HOUSEHOLD_MEMBERS = 6
   MAXIMUM_EMPLOYED_MEMBERS = 2
   MAXIMUM_SELF_EMPLOYED_MEMBERS = 2
@@ -83,7 +83,7 @@ class Dhs1171Pdf
     snap_application.documents.map do |document|
       VerificationDocument.new(
         url: document,
-        snap_application: snap_application,
+        benefit_application: snap_application,
       ).file&.path
     end.reject(&:nil?)
   end

@@ -279,8 +279,14 @@ RSpec.describe Dhs1426Pdf do
       file = Dhs1426Pdf.new(medicaid_application: medicaid_application).
         completed_file
       new_pdf = PDF::Reader.new(file.path)
+      pages_per_member = 2
+      cover_sheet_pages = 1
 
-      expect(new_pdf.page_count).to eq(original_length + 4)
+      expect(new_pdf.page_count).to eq(
+        original_length +
+        cover_sheet_pages +
+        (2 * pages_per_member),
+      )
     end
 
     it "prepends the additional member page fields with numbers" do
@@ -298,6 +304,28 @@ RSpec.describe Dhs1426Pdf do
       expect(result["second_member_full_name"]).to include("Segunda")
       expect(result["1.second_member_full_name"]).to include("Tercera")
       expect(result["2.second_member_full_name"]).to include("Cuarta")
+    end
+
+    it "appends pages if there are verification documents" do
+      paperwork_path = "http://example.com"
+      verification_document = double
+      allow(verification_document).to receive(:file).and_return(
+        File.open("spec/fixtures/test_pdf.pdf"),
+      )
+      medicaid_application =
+        create(:medicaid_application, :with_member, paperwork: [paperwork_path])
+      allow(VerificationDocument).to receive(:new).with(
+        url: paperwork_path,
+        benefit_application: medicaid_application,
+      ).and_return(verification_document)
+      original_length = PDF::Reader.new(Dhs1426Pdf::SOURCE_PDF).page_count
+
+      file = Dhs1426Pdf.
+        new(medicaid_application: medicaid_application).
+        completed_file
+      new_pdf = PDF::Reader.new(file.path)
+
+      expect(new_pdf.page_count).to eq(original_length + 2)
     end
   end
 end
