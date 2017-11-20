@@ -15,6 +15,22 @@ please email <alanw@codeforamerica.org>.
 
 ## Getting Set Up
 
+### macOS
+
+Install [Homebrew].
+
+Install [Heroku CLI].
+
+`brew install heroku/brew/heroku`
+
+Install and start PostgreSQL.
+
+`brew install postgresql`
+`brew services start postgresql`
+
+[Homebrew](https://brew.sh/)
+[Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+
 ### Ruby on Rails
 
 This application is built using [Ruby on Rails].
@@ -151,9 +167,9 @@ resources and workflow.
 * A change is initiated and discussed via a
   [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2123705) story.
 * All new Tracker stories are added to the top of the Icebox
-* Before the weekly planning meeting, prioritized Tracker stories are written and moved over to the Backlog in order of priority. 
+* Before the weekly planning meeting, prioritized Tracker stories are written and moved over to the Backlog in order of priority.
  Cards in this list should have enough detail to be actionable. Top priority items are at the top of the list.
-* During the weekly planning meeting, stories are reviewed, clarified by product and design 
+* During the weekly planning meeting, stories are reviewed, clarified by product and design
  if necessary, and estimated by the engineering team.
 * Stories are estimated on a Fibonacci scale from 0 to 8 according to their perceived complexity.
 * During the team's weekly retro meetings, feedback about the workflow is noted
@@ -178,7 +194,7 @@ necessary to reproduce the bug.
 
 ### Work In Progress
 
-* When someone starts working on a task, they click "Start" on the Tracker story. This will assign the 
+* When someone starts working on a task, they click "Start" on the Tracker story. This will assign the
   task to them, and make it clear that the task is in progress.
 * All code is written on a branch *other* than `master`. The team is not picky
   about branch naming.
@@ -194,8 +210,8 @@ development environment visit your local [mailcatcher server](http://localhost:1
 ### Code Review
 
 * A Pull Request (PR) is created on GitHub. All PRs should have [a good commit
-  message](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) and a 
-  link to the Tracker story in the PR summary. When a PR completes a Tracker story, mark that story as 'Finished' 
+  message](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) and a
+  link to the Tracker story in the PR summary. When a PR completes a Tracker story, mark that story as 'Finished'
   in Pivotal Tracker. [Here's a handy trick to do it automatically](#Finished)
 * The PR Author can request reviews via GitHub's [request a pull request
   review](https://help.github.com/articles/requesting-a-pull-request-review/)
@@ -215,7 +231,7 @@ feature. In general, the team prioritizes code reviews over other work.
 * Merged code is automatically deployed to the [staging
   environment](https://michigan-benefits-staging.herokuapp.com/) after a green
 build on Circle CI.
-* Once code completing a Tracker story is deployed to staging, mark the story as 'Delivered'. This 
+* Once code completing a Tracker story is deployed to staging, mark the story as 'Delivered'. This
   indicates that it is ready for acceptance.
 * When two people are pairing on something, code can be merged to `master`
   without an explicit PR / code review process.
@@ -228,7 +244,7 @@ build on Circle CI.
 * Spin up staging and follow the acceptance tests.
 * If all looks well, click "Accept".
 * If you have a question, ask it in the card and leave in the Accept/Reject state.
-* If not, comment with specifics about what was incorrect and click "Reject". A developer will then pick up 
+* If not, comment with specifics about what was incorrect and click "Reject". A developer will then pick up
 the story, fix the issues, and redeliver.
 
 #### Testing Document Uploads on Staging
@@ -243,24 +259,24 @@ and will not work on this URL:
 
 ### Tracker flow and integrations
 
-Our Pivotal Tracker project is set up with the [Github integration](https://www.pivotaltracker.com/help/articles/githubs_service_hook_for_tracker/#formatting-your-commits), allowing developers to take 
-automate some setting of status on stories. The Github integration is configured to listen for Tracker stories 
+Our Pivotal Tracker project is set up with the [Github integration](https://www.pivotaltracker.com/help/articles/githubs_service_hook_for_tracker/#formatting-your-commits), allowing developers to take
+automate some setting of status on stories. The Github integration is configured to listen for Tracker stories
 in commits pushed to any branch.
 
 #### Started/In Progress
 
-Regularly tag your commits with the Tracker story ID in Tracker ([#STORYID]). When pushed to a branch, 
-these will post as comments on the Tracker story and indicate that the story is in progress. Pushing a tagged commit 
+Regularly tag your commits with the Tracker story ID in Tracker ([#STORYID]). When pushed to a branch,
+these will post as comments on the Tracker story and indicate that the story is in progress. Pushing a tagged commit
 will automatically mark the story as "Started".
 
 #### Finished
 
-When a feature is complete and you're ready to open a PR, include the tag [Finishes #STORYID] in the commit message. When pushed, this will then mark 
+When a feature is complete and you're ready to open a PR, include the tag [Finishes #STORYID] in the commit message. When pushed, this will then mark
 the Tracker story as finished.
 
 #### Delivered
 
-When the PR is merged into master and the feature is deployed to staging, manually mark the story as 
+When the PR is merged into master and the feature is deployed to staging, manually mark the story as
 "Delivered" in Tracker.
 
 #### Accepted/Rejected
