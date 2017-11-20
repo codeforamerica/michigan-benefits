@@ -7,11 +7,7 @@ RSpec.describe HouseholdAddMemberController do
 
   before { session[:snap_application_id] = current_app.id }
 
-  include_examples(
-    "step controller",
-    "param validation",
-    "application required",
-  )
+  include_examples "step controller", "param validation"
 
   describe "#edit" do
     context "existing member" do

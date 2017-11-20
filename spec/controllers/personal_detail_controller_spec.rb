@@ -7,11 +7,7 @@ RSpec.describe PersonalDetailController do
 
   before { session[:snap_application_id] = current_app.id }
 
-  include_examples(
-    "step controller",
-    "param validation",
-    "application required",
-  )
+  include_examples "step controller", "param validation"
 
   describe "#edit" do
     it "assigns the fields to the step" do

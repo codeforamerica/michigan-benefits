@@ -8,9 +8,9 @@ class StepsController < ApplicationController
   helper_method :application_title
 
   def ensure_application_present
-    return if current_application
-
-    redirect_to root_path
+    if current_application.blank?
+      redirect_to first_step_path
+    end
   end
 
   def current_application

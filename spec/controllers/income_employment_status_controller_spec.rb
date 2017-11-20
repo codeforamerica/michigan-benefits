@@ -19,11 +19,7 @@ RSpec.describe IncomeEmploymentStatusController do
 
   before { session[:snap_application_id] = current_app.id }
 
-  include_examples(
-    "step controller",
-    "param validation",
-    "application required",
-  )
+  include_examples "step controller", "param validation"
 
   describe "#update" do
     context "when valid" do

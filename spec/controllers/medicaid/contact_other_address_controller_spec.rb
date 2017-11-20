@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::ContactOtherAddressController, type: :controller do
-  include_examples "application required"
-
   describe "#next_path" do
     it "is the contact mailing address page path" do
       expect(subject.next_path).to eq "/steps/medicaid/contact-mailing-address"

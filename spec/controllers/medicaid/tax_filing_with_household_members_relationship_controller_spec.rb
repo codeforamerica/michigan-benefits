@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::TaxFilingWithHouseholdMembersRelationshipController do
-  include_examples "application required"
-
   describe "#next_path" do
     it "is the income introduction path" do
       expect(subject.next_path).to eq(

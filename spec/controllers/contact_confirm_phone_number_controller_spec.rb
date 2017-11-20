@@ -5,11 +5,7 @@ RSpec.describe ContactConfirmPhoneNumberController do
   let(:invalid_params) { { step: { phone_number: "" } } }
   let(:step_class) { ContactConfirmPhoneNumber }
 
-  include_examples(
-    "step controller",
-    "param validation",
-    "application required",
-  )
+  include_examples "step controller", "param validation"
 
   describe "#update" do
     it "updates the phone number" do

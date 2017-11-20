@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::AmountsIncomeController do
-  include_examples "application required"
-
   describe "#edit" do
     context "no one in the house has any income" do
       it "redirects to next step" do
