@@ -6,7 +6,7 @@ RSpec.describe Dhs1426Pdf do
 
   describe "#completed_file" do
     it "writes application data to file" do
-      primary_member = create(
+      primary_member = build(
         :member,
         first_name: "Christa",
         last_name: "Tester",
@@ -15,7 +15,6 @@ RSpec.describe Dhs1426Pdf do
         married: true,
         caretaker_or_parent: true,
         in_college: true,
-        spouse: create(:member, first_name: "Candy", last_name: "Crush"),
         ssn: "111223333",
         new_mom: true,
         requesting_health_insurance: true,
@@ -40,12 +39,13 @@ RSpec.describe Dhs1426Pdf do
         pay_student_loan_interest: true,
         student_loan_interest_expenses: 70,
       )
-      secondary_member = create(
+      secondary_member = build(
         :member,
         first_name: "Roger",
         last_name: "Rabbit",
         birthday: Date.new(1980, 1, 20),
         sex: "male",
+        spouse: primary_member,
         married: false,
         caretaker_or_parent: false,
         in_college: false,
@@ -75,7 +75,7 @@ RSpec.describe Dhs1426Pdf do
         primary_member_sex_female: "Yes",
         primary_member_married_yes: "Yes",
         primary_member_married_no: nil,
-        primary_member_spouse_name: "Candy Crush",
+        primary_member_spouse_name: nil,
         primary_member_caretaker_yes: "Yes",
         primary_member_caretaker_no: nil,
         primary_member_in_college_yes: "Yes",
@@ -102,7 +102,7 @@ RSpec.describe Dhs1426Pdf do
         second_member_sex_female: nil,
         second_member_married_yes: nil,
         second_member_married_no: "Yes",
-        second_member_spouse_name: nil,
+        second_member_spouse_name: "Christa Tester",
         second_member_caretaker_yes: nil,
         second_member_caretaker_no: "Yes",
         second_member_in_college_yes: nil,
@@ -272,7 +272,7 @@ RSpec.describe Dhs1426Pdf do
     end
 
     it "appends pages if there are more than 2 household members" do
-      members = create_list(:member, 4)
+      members = build_list(:member, 4)
       medicaid_application = create(:medicaid_application, members: members)
       original_length = PDF::Reader.new(Dhs1426Pdf::SOURCE_PDF).page_count
 
@@ -285,10 +285,10 @@ RSpec.describe Dhs1426Pdf do
 
     it "prepends the additional member page fields with numbers" do
       members = [
-        create(:member, first_name: "Primera"),
-        create(:member, first_name: "Segunda"),
-        create(:member, first_name: "Tercera"),
-        create(:member, first_name: "Cuarta"),
+        build(:member, first_name: "Primera"),
+        build(:member, first_name: "Segunda"),
+        build(:member, first_name: "Tercera"),
+        build(:member, first_name: "Cuarta"),
       ]
       medicaid_application = create(:medicaid_application, members: members)
       file = Dhs1426Pdf.new(medicaid_application: medicaid_application).

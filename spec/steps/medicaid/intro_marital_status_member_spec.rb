@@ -4,9 +4,9 @@ RSpec.describe Medicaid::IntroMaritalStatusMember do
   describe "Validations" do
     context "at least one household member is married" do
       it "is valid" do
-        member = create(:member, married: true)
+        member = build(:member, married: true)
         member_not_married =
-          create(:member, married: false)
+          build(:member, married: false)
 
         step = Medicaid::IntroMaritalStatusMember.new(
           members: [member, member_not_married],
@@ -18,7 +18,7 @@ RSpec.describe Medicaid::IntroMaritalStatusMember do
 
     context "no household member is married" do
       it "is invalid" do
-        members = create_list(:member, 2, married: false)
+        members = build_list(:member, 2, married: false)
 
         step = Medicaid::IntroMaritalStatusMember.new(members: members)
 

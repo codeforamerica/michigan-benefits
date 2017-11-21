@@ -21,7 +21,12 @@ describe "medicaid/income_other_income_type/edit.html.erb" do
 
   context "has not selected another income type" do
     it "shows an error message" do
-      member = create(:member, other_income: true)
+      member = create(
+        :member,
+        other_income: true,
+        benefit_application: build(:medicaid_application),
+      )
+
       step = Medicaid::IncomeOtherIncomeType.new(
         other_income_types: [],
         member_id: member.id,

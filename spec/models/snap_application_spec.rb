@@ -86,7 +86,7 @@ RSpec.describe SnapApplication do
 
     context "members present" do
       it "adds members' monthly income" do
-        member = create(:member)
+        member = build(:member)
         app = create(:snap_application, members: [member])
         allow(member).to receive(:monthly_income).and_return(100)
 

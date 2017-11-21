@@ -4,9 +4,9 @@ RSpec.describe Medicaid::IntroCollegeMember do
   describe "Validations" do
     context "at least one household member is a student" do
       it "is valid" do
-        member = create(:member, in_college: true)
+        member = build(:member, in_college: true)
         member_not_in_college =
-          create(:member, in_college: false)
+          build(:member, in_college: false)
 
         step = Medicaid::IntroCollegeMember.new(
           members: [member, member_not_in_college],
@@ -18,7 +18,7 @@ RSpec.describe Medicaid::IntroCollegeMember do
 
     context "no household member is a student" do
       it "is invalid" do
-        members = create_list(:member, 2, in_college: false)
+        members = build_list(:member, 2, in_college: false)
 
         step = Medicaid::IntroCollegeMember.new(members: members)
 

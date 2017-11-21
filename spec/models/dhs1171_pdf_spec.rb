@@ -8,7 +8,7 @@ RSpec.describe Dhs1171Pdf do
     it "writes application info to file" do
       mailing_address = build(:mailing_address)
       residential_address = build(:residential_address)
-      member = create(:member, ssn: "012345678")
+      member = build(:member, ssn: "012345678")
       snap_application = create(
         :snap_application,
         addresses: [mailing_address, residential_address],
@@ -69,8 +69,8 @@ RSpec.describe Dhs1171Pdf do
 
     context "multiple household members" do
       it "returns attributes for each member" do
-        first_member = create(:member, ssn: "555555555")
-        second_member = create(:member, ssn: "444444444")
+        first_member = build(:member, ssn: "555555555")
+        second_member = build(:member, ssn: "444444444")
         snap_application =
           create(:snap_application, members: [first_member, second_member])
 
@@ -113,9 +113,9 @@ RSpec.describe Dhs1171Pdf do
 
     context "employed and self employed household members" do
       it "returns attributes for each member" do
-        employed_member = create(:member, employment_status: "employed")
+        employed_member = build(:member, employment_status: "employed")
         self_employed_member =
-          create(:member, employment_status: "self_employed")
+          build(:member, employment_status: "self_employed")
         snap_application = create(
           :snap_application,
           members: [self_employed_member, employed_member],
@@ -172,7 +172,7 @@ RSpec.describe Dhs1171Pdf do
     end
 
     it "appends pages if there are more than 6 household members" do
-      members = create_list(:member, 8)
+      members = build_list(:member, 8)
       snap_application = create(:snap_application, members: members)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
 
@@ -183,7 +183,7 @@ RSpec.describe Dhs1171Pdf do
     end
 
     it "appends pages if there are more than 2 employed members" do
-      members = create_list(:member, 3, employment_status: "employed")
+      members = build_list(:member, 3, employment_status: "employed")
       snap_application = create(:snap_application, members: members)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
 
@@ -194,7 +194,7 @@ RSpec.describe Dhs1171Pdf do
     end
 
     it "appends pages if there are more than 2 self-employed members" do
-      members = create_list(:member, 3, employment_status: "self_employed")
+      members = build_list(:member, 3, employment_status: "self_employed")
       snap_application = create(:snap_application, members: members)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
 

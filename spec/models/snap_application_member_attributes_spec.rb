@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe SnapApplicationMemberAttributes do
   describe "#to_h" do
     it "returns the member attributes as a hash" do
-      member = create(
+      member = build(
         :member,
         first_name: "First",
         last_name: "Last",
@@ -56,7 +56,7 @@ RSpec.describe SnapApplicationMemberAttributes do
 
     context "nil SSN" do
       it "does not error" do
-        member = create(
+        member = build(
           :member,
           ssn: nil,
         )
