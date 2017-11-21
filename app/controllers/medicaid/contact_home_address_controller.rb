@@ -3,13 +3,7 @@ module Medicaid
     private
 
     def existing_attributes
-      attributes = super
-      residential_address = current_application.residential_address
-      attributes.merge!(
-        street_address: residential_address.street_address,
-        city: residential_address.city,
-        zip: residential_address.zip,
-      )
+      attributes = HashWithIndifferentAccess.new(address.attributes.merge(current_application.attributes))
 
       if attributes[:mailing_address_same_as_residential_address].nil?
         attributes[:mailing_address_same_as_residential_address] = true
@@ -27,27 +21,25 @@ module Medicaid
     end
 
     def update_application
-      current_application.update!(application_params)
-      address.update!(address_params)
+      current_application.update!(
+        same_address_key => step_params[same_address_key]
+      )
+      address.update!(step_params.except(same_address_key))
     end
 
-    def application_params
-      step_params.except(:street_address, :city, :zip)
-    end
 
-    def address_params
-      {
-        street_address: step_params[:street_address],
-        city: step_params[:city],
-        zip: step_params[:zip],
-        county: "Genesee",
-        state: "MI",
-      }
+    def step_params
+      super.merge(state: "MI", county: "Genesee")
     end
 
     def address
       current_application.addresses.where(mailing: false).first ||
         current_application.addresses.new(mailing: false)
+    end
+
+
+    def same_address_key
+      :mailing_address_same_as_residential_address
     end
   end
 end

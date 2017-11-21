@@ -2,6 +2,7 @@ module Medicaid
   class ContactHomeAddress < Step
     step_attributes(
       :street_address,
+      :street_address_2,
       :city,
       :zip,
       :mailing_address_same_as_residential_address,

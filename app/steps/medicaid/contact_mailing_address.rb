@@ -2,6 +2,7 @@ module Medicaid
   class ContactMailingAddress < Step
     step_attributes(
       :street_address,
+      :street_address_2,
       :city,
       :zip,
     )

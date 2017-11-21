@@ -29,6 +29,7 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
         create(
           :residential_address,
           street_address: "I live here",
+          street_address_2: 'Apt B',
           city: "Hometown",
           zip: "54321",
           benefit_application: medicaid_application,
@@ -39,6 +40,7 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
         step = assigns(:step)
 
         expect(step.street_address).to eq("I live here")
+        expect(step.street_address_2).to eq("Apt B")
         expect(step.city).to eq("Hometown")
         expect(step.zip).to eq("54321")
       end
@@ -121,6 +123,7 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
 
           params = {
             street_address: "321 Real St",
+            street_address_2: "Apt B",
             city: "Shelbyville",
             zip: "54321",
             mailing_address_same_as_residential_address: "false",
@@ -131,6 +134,7 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
           residential_address = medicaid_application.reload.residential_address
 
           expect(residential_address.street_address).to eq "321 Real St"
+          expect(residential_address.street_address_2).to eq "Apt B"
           expect(residential_address.city).to eq "Shelbyville"
           expect(residential_address.zip).to eq "54321"
           expect(residential_address.county).to eq("Genesee")
