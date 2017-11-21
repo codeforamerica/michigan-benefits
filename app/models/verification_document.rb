@@ -31,7 +31,15 @@ class VerificationDocument
 
   def header
     output = "Name:                  #{benefit_application.display_name}\n"
-    output += "Date of Birth:        #{benefit_application.birthday}\n"
+    output += "Date of Birth:        #{birthday}\n"
     output
+  end
+
+  def birthday
+    if benefit_application.primary_member.birthday.present?
+      benefit_application.primary_member.formatted_birthday
+    else
+      ""
+    end
   end
 end
