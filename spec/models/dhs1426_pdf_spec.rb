@@ -38,7 +38,10 @@ RSpec.describe Dhs1426Pdf do
         child_support_alimony_arrears_expenses: 100,
         pay_student_loan_interest: true,
         student_loan_interest_expenses: 70,
+        insured: true,
+        insurance_type: "Medicaid",
       )
+
       secondary_member = build(
         :member,
         first_name: "Roger",
@@ -59,7 +62,10 @@ RSpec.describe Dhs1426Pdf do
         employed_payment_frequency: [],
         other_income: false,
         other_income_types: [],
+        insured: true,
+        insurance_type: "Employer or individual plan",
       )
+
       medicaid_application = create(
         :medicaid_application,
         members: [primary_member, secondary_member],
@@ -67,7 +73,9 @@ RSpec.describe Dhs1426Pdf do
         phone_number: "0123456789",
         flint_water_crisis: true,
         need_medical_expense_help_3_months: true,
+        anyone_insured: true,
       )
+
       expected_client_data = {
         primary_member_full_name: "Christa Tester",
         primary_member_birthday: "10/18/2017",
@@ -147,6 +155,20 @@ RSpec.describe Dhs1426Pdf do
         flint_water_no: nil,
         need_medical_expense_help_3_months_yes: "Yes",
         need_medical_expense_help_3_months_no: nil,
+        anyone_insured_yes: "Yes",
+        anyone_insured_no: nil,
+        insured_medicaid_yes: "Yes",
+        insured_medicaid_member_names: "Christa",
+        insured_chip_yes: nil,
+        insured_chip_member_names: nil,
+        insured_medicare_yes: nil,
+        insured_medicare_member_names: nil,
+        help_paying_medicare_premiums_yes: nil,
+        insured_va_yes: nil,
+        insured_va_member_names: nil,
+        insured_employer_yes: "Yes",
+        insured_employer_member_names: "Roger",
+        insured_other_yes: nil,
       }
 
       expected_phone_data = {
@@ -240,24 +262,19 @@ RSpec.describe Dhs1426Pdf do
       ).completed_file
 
       result = filled_in_values(file: file.path)
-      expected_client_data.each do |field, expected_data|
-        expect(result[field.to_s].to_s).to eq expected_data.to_s
-      end
 
-      expected_medicaid_data.each do |field, expected_data|
-        expect(result[field.to_s].to_s).to eq expected_data.to_s
-      end
-
-      expected_phone_data.each do |field, expected_data|
-        expect(result[field.to_s].to_s).to eq expected_data.to_s
-      end
-
-      expected_primary_member_income_and_expenses.each do |field, expected_data|
-        expect(result[field.to_s].to_s).to eq expected_data.to_s
-      end
-
-      expected_second_member_income_and_expenses.each do |field, expected_data|
-        expect(result[field.to_s].to_s).to eq expected_data.to_s
+      [
+        expected_client_data,
+        expected_medicaid_data,
+        expected_phone_data,
+        expected_primary_member_income_and_expenses,
+        expected_second_member_income_and_expenses,
+      ].each do |expected_data_hash|
+        expected_data_hash.each do |field, expected_data|
+          failure_msg = "Expected '#{expected_data}' for #{field}, " +
+            "but got '#{result[field.to_s]}'"
+          expect(result[field.to_s].to_s).to eq(expected_data.to_s), failure_msg
+        end
       end
     end
 
