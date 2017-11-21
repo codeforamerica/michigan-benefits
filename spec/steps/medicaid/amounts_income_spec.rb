@@ -3,7 +3,11 @@ require "rails_helper"
 RSpec.describe Medicaid::AmountsIncome do
   context "has 2 jobs" do
     it "validates that there is income for 2 jobs" do
-      member = create(:member, employed_number_of_jobs: 2)
+      member = create(
+        :member,
+        employed_number_of_jobs: 2,
+        benefit_application: build(:medicaid_application),
+      )
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
@@ -18,7 +22,11 @@ RSpec.describe Medicaid::AmountsIncome do
 
   context "fills out only one job's info" do
     it "invalidates the object because 1 income amount is missing" do
-      member = create(:member, employed_number_of_jobs: 2)
+      member = create(
+        :member,
+        employed_number_of_jobs: 2,
+        benefit_application: build(:medicaid_application),
+      )
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
@@ -34,7 +42,11 @@ RSpec.describe Medicaid::AmountsIncome do
 
   context "empty strings" do
     it "is invalid" do
-      member = create(:member, employed_number_of_jobs: 2)
+      member = create(
+        :member,
+        employed_number_of_jobs: 2,
+        benefit_application: build(:medicaid_application),
+      )
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
@@ -50,7 +62,11 @@ RSpec.describe Medicaid::AmountsIncome do
 
   context "member receives unemployment" do
     it "is valid if the amount is provided" do
-      member = create(:member, other_income_types: %w(unemployment))
+      member = create(
+        :member,
+        other_income_types: %w(unemployment),
+        benefit_application: build(:medicaid_application),
+      )
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
@@ -61,7 +77,11 @@ RSpec.describe Medicaid::AmountsIncome do
     end
 
     it "is invalid if the amount is not provided" do
-      member = create(:member, other_income_types: %w(unemployment))
+      member = create(
+        :member,
+        other_income_types: %w(unemployment),
+        benefit_application: build(:medicaid_application),
+      )
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
@@ -74,7 +94,11 @@ RSpec.describe Medicaid::AmountsIncome do
 
   context "member is self-employed" do
     it "is valid if the amount is provided" do
-      member = create(:member, self_employed: true)
+      member = create(
+        :member,
+        self_employed: true,
+        benefit_application: build(:medicaid_application),
+      )
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,
@@ -85,7 +109,11 @@ RSpec.describe Medicaid::AmountsIncome do
     end
 
     it "is invalid if self-employment income is not provided" do
-      member = create(:member, self_employed: true)
+      member = create(
+        :member,
+        self_employed: true,
+        benefit_application: build(:medicaid_application),
+      )
 
       step = Medicaid::AmountsIncome.new(
         member_id: member.id,

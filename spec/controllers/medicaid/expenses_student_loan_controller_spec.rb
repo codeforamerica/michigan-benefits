@@ -13,7 +13,7 @@ RSpec.describe Medicaid::ExpensesStudentLoanController, type: :controller do
     context "single member household" do
       context "pays student loan interest" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,
@@ -35,7 +35,7 @@ RSpec.describe Medicaid::ExpensesStudentLoanController, type: :controller do
 
       context "does not pay student loan interest" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,

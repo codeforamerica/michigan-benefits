@@ -5,7 +5,7 @@ RSpec.describe Medicaid::IntroCollegeController do
     context "single member household" do
       context "anyone in college" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,
@@ -23,7 +23,7 @@ RSpec.describe Medicaid::IntroCollegeController do
 
       context "nobody in college" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,

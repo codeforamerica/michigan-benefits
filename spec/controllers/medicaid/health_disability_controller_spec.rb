@@ -11,7 +11,7 @@ RSpec.describe Medicaid::HealthDisabilityController, type: :controller do
     context "single member household" do
       context "is disabled" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,
@@ -29,7 +29,7 @@ RSpec.describe Medicaid::HealthDisabilityController, type: :controller do
 
       context "is not disabled" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,

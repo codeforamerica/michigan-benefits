@@ -12,7 +12,7 @@ RSpec.describe Medicaid::TaxClaimedAsDependentController do
   describe "#update" do
     context "claimed as dependent" do
       it "updates the primary member" do
-        member = create(:member)
+        member = build(:member)
 
         medicaid_application = create(
           :medicaid_application,
@@ -30,7 +30,7 @@ RSpec.describe Medicaid::TaxClaimedAsDependentController do
 
     context "not claimed as dependent" do
       it "updates the primary member" do
-        member = create(:member)
+        member = build(:member)
 
         medicaid_application = create(
           :medicaid_application,
@@ -52,7 +52,7 @@ RSpec.describe Medicaid::TaxClaimedAsDependentController do
       it "skips this page" do
         medicaid_application = create(
           :medicaid_application,
-          members: [create(:member)],
+          members: [build(:member)],
           filing_federal_taxes_next_year: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -67,7 +67,7 @@ RSpec.describe Medicaid::TaxClaimedAsDependentController do
       it "renders edit" do
         medicaid_application = create(
           :medicaid_application,
-          members: [create(:member)],
+          members: [build(:member)],
           filing_federal_taxes_next_year: false,
         )
         session[:medicaid_application_id] = medicaid_application.id

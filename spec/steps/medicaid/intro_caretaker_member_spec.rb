@@ -4,9 +4,9 @@ RSpec.describe Medicaid::IntroCaretakerMember do
   describe "Validations" do
     context "at least one household member is a caretaker or parent" do
       it "is valid" do
-        member = create(:member, caretaker_or_parent: true)
+        member = build(:member, caretaker_or_parent: true)
         member_not_caretaker_or_parent =
-          create(:member, caretaker_or_parent: false)
+          build(:member, caretaker_or_parent: false)
 
         step = Medicaid::IntroCaretakerMember.new(
           members: [member, member_not_caretaker_or_parent],
@@ -18,7 +18,7 @@ RSpec.describe Medicaid::IntroCaretakerMember do
 
     context "no household member is a caretaker or parent" do
       it "is invalid" do
-        members = create_list(:member, 2, caretaker_or_parent: false)
+        members = build_list(:member, 2, caretaker_or_parent: false)
 
         step = Medicaid::IntroCaretakerMember.new(members: members)
 

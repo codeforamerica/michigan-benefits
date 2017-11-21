@@ -14,7 +14,7 @@ RSpec.describe Medicaid::TaxFilingWithHouseholdMembersMemberController do
       it "skips this page" do
         medicaid_application = create(
           :medicaid_application,
-          members: [create(:member)],
+          members: [build(:member)],
           filing_federal_taxes_next_year: true,
         )
         session[:medicaid_application_id] = medicaid_application.id
@@ -30,7 +30,7 @@ RSpec.describe Medicaid::TaxFilingWithHouseholdMembersMemberController do
         it "skips this page" do
           medicaid_application = create(
             :medicaid_application,
-            members: create_list(:member, 2),
+            members: build_list(:member, 2),
             filing_federal_taxes_next_year: false,
           )
           session[:medicaid_application_id] = medicaid_application.id
@@ -46,7 +46,7 @@ RSpec.describe Medicaid::TaxFilingWithHouseholdMembersMemberController do
           it "renders edit" do
             medicaid_application = create(
               :medicaid_application,
-              members: create_list(:member, 2),
+              members: build_list(:member, 2),
               filing_federal_taxes_next_year: true,
               filing_taxes_with_household_members: true,
             )
@@ -62,7 +62,7 @@ RSpec.describe Medicaid::TaxFilingWithHouseholdMembersMemberController do
           it "skips this page" do
             medicaid_application = create(
               :medicaid_application,
-              members: create_list(:member, 2),
+              members: build_list(:member, 2),
               filing_federal_taxes_next_year: true,
               filing_taxes_with_household_members: false,
             )

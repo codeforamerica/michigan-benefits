@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe MedicaidApplicationMemberAttributes do
   describe "#to_h" do
     it "returns the member attributes as a hash" do
-      member = create(
+      member = build(
         :member,
         first_name: "First",
         last_name: "Last",
@@ -12,7 +12,7 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         married: true,
         caretaker_or_parent: true,
         in_college: true,
-        spouse: create(:member, first_name: "Candy", last_name: "Crush"),
+        spouse: build(:member, first_name: "Candy", last_name: "Crush"),
         ssn: "111223333",
         new_mom: true,
         requesting_health_insurance: true,
@@ -95,7 +95,7 @@ RSpec.describe MedicaidApplicationMemberAttributes do
 
     context "nil birthday" do
       it "it does not return keys for age-related questions" do
-        member = create(:member, birthday: nil)
+        member = build(:member, birthday: nil)
 
         result = MedicaidApplicationMemberAttributes.new(
           member: member,

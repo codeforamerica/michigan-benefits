@@ -7,7 +7,7 @@ RSpec.shared_examples_for "Medicaid multi-member controller" do |medicaid_attr|
         it "skips this page" do
           medicaid_application = create(
             :medicaid_application,
-            members: create_list(:member, 2),
+            members: build_list(:member, 2),
             medicaid_attr => false,
           )
           session[:medicaid_application_id] = medicaid_application.id
@@ -22,7 +22,7 @@ RSpec.shared_examples_for "Medicaid multi-member controller" do |medicaid_attr|
         it "renders :edit" do
           medicaid_application = create(
             :medicaid_application,
-            members: create_list(:member, 2),
+            members: build_list(:member, 2),
             medicaid_attr => true,
           )
           session[:medicaid_application_id] = medicaid_application.id
@@ -39,7 +39,7 @@ RSpec.shared_examples_for "Medicaid multi-member controller" do |medicaid_attr|
         it "skips this page" do
           medicaid_application = create(
             :medicaid_application,
-            members: [create(:member)],
+            members: [build(:member)],
             medicaid_attr => true,
           )
           session[:medicaid_application_id] = medicaid_application.id
@@ -54,7 +54,7 @@ RSpec.shared_examples_for "Medicaid multi-member controller" do |medicaid_attr|
         it "skips the page" do
           medicaid_application = create(
             :medicaid_application,
-            members: [create(:member)],
+            members: [build(:member)],
             medicaid_attr => false,
           )
           session[:medicaid_application_id] = medicaid_application.id

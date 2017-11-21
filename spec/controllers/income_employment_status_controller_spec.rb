@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe IncomeEmploymentStatusController do
   let(:step) { assigns(:step) }
   let(:member) do
-    create(:member, sex: "male", relationship: "Child")
+    build(:member, sex: "male", relationship: "Child")
   end
   let(:invalid_params) do
     {
@@ -42,6 +42,6 @@ RSpec.describe IncomeEmploymentStatusController do
   end
 
   def member
-    @_member ||= create(:member, employment_status: "employed")
+    @_member ||= build(:member, employment_status: "employed")
   end
 end

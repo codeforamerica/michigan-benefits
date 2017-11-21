@@ -4,7 +4,12 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouse do
   describe "Validations" do
     context "other member is selected" do
       it "is valid" do
-        member = create(:member, married: true)
+        benefit_application = build(:medicaid_application)
+        member = create(
+          :member,
+          married: true,
+          benefit_application: benefit_application,
+        )
 
         step = Medicaid::IntroMaritalStatusIndicateSpouse.new(
           member_id: member.id,
@@ -17,8 +22,17 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouse do
 
     context "member is selected" do
       it "is valid" do
-        member = create(:member, married: true)
-        spouse_member = create(:member, married: true)
+        benefit_application = build(:medicaid_application)
+        member = create(
+          :member,
+          married: true,
+          benefit_application: benefit_application,
+        )
+        spouse_member = create(
+          :member,
+          married: true,
+          benefit_application: benefit_application,
+        )
 
         step = Medicaid::IntroMaritalStatusIndicateSpouse.new(
           member_id: member.id,
@@ -31,7 +45,12 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouse do
 
     context "nobody is selected" do
       it "is invalid" do
-        member = create(:member, married: true)
+        benefit_application = build(:medicaid_application)
+        member = create(
+          :member,
+          married: true,
+          benefit_application: benefit_application,
+        )
 
         step = Medicaid::IntroMaritalStatusIndicateSpouse.new(
           member_id: member.id,
