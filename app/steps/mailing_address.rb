@@ -5,6 +5,7 @@ class MailingAddress < Step
     :mailing_address_same_as_residential_address,
     :state,
     :street_address,
+    :street_address_2,
     :zip,
   )
 

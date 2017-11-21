@@ -18,6 +18,7 @@ feature "SNAP application with maximum info" do
 
     on_page "Your Location" do
       fill_in "Address", with: "123 Main St"
+      fill_in "Address 2", with: "Apt B"
       fill_in "City", with: "Flint"
       fill_in "ZIP code", with: "12345"
       select_address_same_as_home_address
