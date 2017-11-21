@@ -18,11 +18,11 @@ class MedicaidStepsController < StepsController
   end
 
   def single_member_household?
-    current_application.members.count == 1
+    current_application.members_count == 1
   end
 
   def multi_member_household?
-    current_application.members.count > 1
+    current_application.members_count > 1
   end
 
   def step_navigation

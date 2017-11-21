@@ -194,13 +194,13 @@ class SnapApplicationAttributes
 
   def more_than_six_members_yes
     bool_to_checkbox(
-      snap_application.members.length > Dhs1171Pdf::MAXIMUM_HOUSEHOLD_MEMBERS,
+      snap_application.members_count > Dhs1171Pdf::MAXIMUM_HOUSEHOLD_MEMBERS,
     )
   end
 
   def more_than_six_members_no
     bool_to_checkbox(
-      snap_application.members.length <=
+      snap_application.members_count <=
         Dhs1171Pdf::MAXIMUM_HOUSEHOLD_MEMBERS,
     )
   end
