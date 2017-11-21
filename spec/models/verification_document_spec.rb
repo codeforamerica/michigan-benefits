@@ -16,7 +16,7 @@ describe VerificationDocument do
 
         document = VerificationDocument.new(
           url: document_url,
-          snap_application: snap_application,
+          benefit_application: snap_application,
         )
 
         expect(document.file).to be_a(Tempfile)
@@ -36,7 +36,7 @@ describe VerificationDocument do
 
         document = VerificationDocument.new(
           url: document_url,
-          snap_application: snap_application,
+          benefit_application: snap_application,
         )
 
         expect(document.file).to be_a(Tempfile)
@@ -51,7 +51,7 @@ describe VerificationDocument do
 
         document = VerificationDocument.new(
           url: "doc url",
-          snap_application: "snap application",
+          benefit_application: "snap application",
         )
 
         expect(document.file).to be_nil
