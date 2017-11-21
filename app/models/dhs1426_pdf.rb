@@ -117,7 +117,7 @@ class Dhs1426Pdf
       VerificationDocument.new(
         url: document,
         benefit_application: medicaid_application,
-      ).file&.path
+      ).file.path
     end.reject(&:nil?)
   end
 
