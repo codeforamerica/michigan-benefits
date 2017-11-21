@@ -85,7 +85,7 @@ RSpec.describe IntroduceYourselfController do
   end
 
   def member
-    create(:member, first_name: "bob", last_name: "booboo", birthday: birthday)
+    build(:member, first_name: "bob", last_name: "booboo", birthday: birthday)
   end
 
   def valid_params

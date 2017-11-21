@@ -29,7 +29,7 @@ RSpec.describe Medicaid::IntroCitizenMemberController, type: :controller do
             :medicaid_application,
             everyone_a_citizen: false,
           )
-          create_list(:member, 2, benefit_application: medicaid_application)
+          build_list(:member, 2, benefit_application: medicaid_application)
           session[:medicaid_application_id] = medicaid_application.id
 
           get :edit
@@ -41,7 +41,7 @@ RSpec.describe Medicaid::IntroCitizenMemberController, type: :controller do
       context "single member household" do
         context "member is a citizen" do
           it "skips this page" do
-            member = create(:member, citizen: true)
+            member = build(:member, citizen: true)
             medicaid_application = create(
               :medicaid_application,
               members: [member],
@@ -57,7 +57,7 @@ RSpec.describe Medicaid::IntroCitizenMemberController, type: :controller do
 
         context "not a citizen" do
           it "skips this page" do
-            member = create(:member, citizen: false)
+            member = build(:member, citizen: false)
             medicaid_application = create(
               :medicaid_application,
               members: [member],

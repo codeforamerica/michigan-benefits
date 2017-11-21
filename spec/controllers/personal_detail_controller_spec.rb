@@ -50,7 +50,7 @@ RSpec.describe PersonalDetailController do
   end
 
   def member
-    create(:member,
+    build(:member,
            sex: "male",
            marital_status: "Married",
            ssn: "123456789")

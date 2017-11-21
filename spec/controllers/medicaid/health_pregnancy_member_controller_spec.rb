@@ -52,12 +52,7 @@ RSpec.describe Medicaid::HealthPregnancyMemberController, type: :controller do
         medicaid_application = create(
           :medicaid_application,
           anyone_new_mom: true,
-        )
-        create_list(
-          :member,
-          2,
-          sex: "female",
-          benefit_application: medicaid_application,
+          members: build_list(:member, 2, sex: "female"),
         )
         session[:medicaid_application_id] = medicaid_application.id
 

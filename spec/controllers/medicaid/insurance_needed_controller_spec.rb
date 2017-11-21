@@ -14,8 +14,9 @@ RSpec.describe Medicaid::InsuranceNeededController do
       it "redirects to the next page" do
         medicaid_application = create(
           :medicaid_application,
-          members: [create(:member)],
+          members: [build(:member)],
         )
+
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -28,7 +29,7 @@ RSpec.describe Medicaid::InsuranceNeededController do
       it "renders edit" do
         medicaid_application = create(
           :medicaid_application,
-          members: create_list(:member, 2),
+          members: build_list(:member, 2),
         )
         session[:medicaid_application_id] = medicaid_application.id
 

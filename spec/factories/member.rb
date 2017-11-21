@@ -5,7 +5,6 @@ FactoryBot.define do
     sex "female"
     marital_status "Widowed"
     birthday { DateTime.parse("August 18, 1990") }
-    benefit_application { create(:snap_application) }
 
     trait :female do
       sex "female"

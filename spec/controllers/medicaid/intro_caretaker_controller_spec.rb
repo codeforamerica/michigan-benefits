@@ -12,7 +12,7 @@ RSpec.describe Medicaid::IntroCaretakerController do
       it "redirects to the next page" do
         medicaid_application = create(
           :medicaid_application,
-            members: [create(:member)],
+            members: [build(:member)],
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -26,7 +26,7 @@ RSpec.describe Medicaid::IntroCaretakerController do
       it "renders edit" do
         medicaid_application = create(
           :medicaid_application,
-            members: create_list(:member, 2),
+            members: build_list(:member, 2),
         )
         session[:medicaid_application_id] = medicaid_application.id
 

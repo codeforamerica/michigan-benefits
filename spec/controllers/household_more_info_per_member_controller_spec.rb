@@ -31,10 +31,10 @@ RSpec.describe HouseholdMoreInfoPerMemberController do
   end
 
   def member_one
-    @_member_one ||= create(:member, disabled: nil)
+    @_member_one ||= build(:member, disabled: nil)
   end
 
   def member_two
-    @_member_two ||= create(:member, in_college: false)
+    @_member_two ||= build(:member, in_college: false)
   end
 end

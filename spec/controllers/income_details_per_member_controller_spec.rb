@@ -49,6 +49,6 @@ RSpec.describe IncomeDetailsPerMemberController do
   end
 
   def member
-    @_member ||= create(:member, employment_status: "employed")
+    @_member ||= build(:member, employment_status: "employed")
   end
 end

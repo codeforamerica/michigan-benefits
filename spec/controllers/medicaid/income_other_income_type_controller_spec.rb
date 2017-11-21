@@ -70,7 +70,7 @@ RSpec.describe Medicaid::IncomeOtherIncomeTypeController do
         medicaid_application = create(
           :medicaid_application,
           anyone_other_income: false,
-          members: [create(:member, other_income: false)],
+          members: [build(:member, other_income: false)],
         )
         session[:medicaid_application_id] = medicaid_application.id
 
@@ -87,7 +87,7 @@ RSpec.describe Medicaid::IncomeOtherIncomeTypeController do
         medicaid_application = create(
           :medicaid_application,
           anyone_other_income: true,
-          members: [create(:member, other_income: true)],
+          members: [build(:member, other_income: true)],
         )
         session[:medicaid_application_id] = medicaid_application.id
 

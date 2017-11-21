@@ -27,6 +27,6 @@ RSpec.describe HouseholdAddMemberController do
 
   def member
     @_member ||=
-      create(:member, sex: "male", relationship: "Child", ssn: "123456789")
+      build(:member, sex: "male", relationship: "Child", ssn: "123456789")
   end
 end

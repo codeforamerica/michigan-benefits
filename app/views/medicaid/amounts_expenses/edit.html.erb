@@ -4,7 +4,7 @@
   <header class="form-card__header">
     <div class="form-card__title">
       <%= t("medicaid.amounts_expenses.edit.title",
-            count: @step.members_count,
+            count: current_application.members_count,
             name: current_member.display_name) %>
     </div>
   </header>
