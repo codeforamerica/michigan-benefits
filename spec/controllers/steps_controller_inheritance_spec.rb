@@ -29,6 +29,26 @@ RSpec.describe StepsController do
       routes.draw { get "edit" => "steps#edit" }
     end
 
+    context "when there is a snap application" do
+      it "renders the action as normal" do
+        session[:snap_application_id] = create(:snap_application).id
+
+        get "edit"
+
+        expect(assigns[:test]).to eq "in edit"
+      end
+    end
+
+    context "when there is a medicaid application" do
+      it "renders the action as normal" do
+        session[:medicaid_application_id] = create(:medicaid_application).id
+
+        get "edit"
+
+        expect(assigns[:test]).to eq "in edit"
+      end
+    end
+
     context "when there is no application under way" do
       it "redirects to the specified path" do
         session[:snap_application_id] = nil
@@ -36,16 +56,6 @@ RSpec.describe StepsController do
         get "edit"
 
         expect(response).to redirect_to(root_path)
-      end
-    end
-
-    context "when there is an application" do
-      it "renders the action as normal" do
-        session[:snap_application_id] = create(:snap_application).id
-
-        get "edit"
-
-        expect(assigns[:test]).to eq "in edit"
       end
     end
   end
@@ -55,6 +65,26 @@ RSpec.describe StepsController do
       routes.draw { get "update" => "steps#update" }
     end
 
+    context "when there is a snap application" do
+      it "renders the action as normal" do
+        session[:snap_application_id] = create(:snap_application).id
+
+        get "update"
+
+        expect(assigns[:test]).to eq "in update"
+      end
+    end
+
+    context "when there is a medicaid application" do
+      it "renders the action as normal" do
+        session[:medicaid_application_id] = create(:medicaid_application).id
+
+        get "update"
+
+        expect(assigns[:test]).to eq "in update"
+      end
+    end
+
     context "when there is no application under way" do
       it "redirects to the specified path" do
         session[:snap_application_id] = nil
@@ -62,16 +92,6 @@ RSpec.describe StepsController do
         get "update"
 
         expect(response).to redirect_to(root_path)
-      end
-    end
-
-    context "when there is an application" do
-      it "renders the action as normal" do
-        session[:snap_application_id] = create(:snap_application).id
-
-        get "update"
-
-        expect(assigns[:test]).to eq "in update"
       end
     end
   end
@@ -81,6 +101,26 @@ RSpec.describe StepsController do
       routes.draw { get "index" => "steps#index" }
     end
 
+    context "when there is a snap application" do
+      it "renders the action as normal" do
+        session[:snap_application_id] = create(:snap_application).id
+
+        get "index"
+
+        expect(assigns[:test]).to eq "in index"
+      end
+    end
+
+    context "when there is a medicaid application" do
+      it "renders the action as normal" do
+        session[:medicaid_application_id] = create(:medicaid_application).id
+
+        get "index"
+
+        expect(assigns[:test]).to eq "in index"
+      end
+    end
+
     context "when there is no application under way" do
       it "redirects to the specified path" do
         session[:snap_application_id] = nil
@@ -88,16 +128,6 @@ RSpec.describe StepsController do
         get "index"
 
         expect(response).to redirect_to(root_path)
-      end
-    end
-
-    context "when there is an application" do
-      it "renders the action as normal" do
-        session[:snap_application_id] = create(:snap_application).id
-
-        get "index"
-
-        expect(assigns[:test]).to eq "in index"
       end
     end
   end
