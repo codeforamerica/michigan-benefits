@@ -19,6 +19,7 @@ RSpec.describe MedicaidApplicationAttributes do
         email: "person@example.com",
         flint_water_crisis: true,
         need_medical_expense_help_3_months: true,
+        anyone_insured: true,
       )
 
       data = MedicaidApplicationAttributes.new(
@@ -53,6 +54,19 @@ RSpec.describe MedicaidApplicationAttributes do
         not_receive_info_by_email: nil,
         flint_water_yes: "Yes",
         need_medical_expense_help_3_months_yes: "Yes",
+        anyone_insured_yes: "Yes",
+        insured_chip_member_names: "",
+        insured_chip_yes: nil,
+        insured_employer_member_names: "",
+        insured_employer_yes: nil,
+        insured_medicaid_member_names: "",
+        insured_medicaid_yes: nil,
+        insured_medicare_member_names: "",
+        insured_medicare_yes: nil,
+        insured_other_member_names: "",
+        insured_other_yes: nil,
+        insured_va_member_names: "",
+        insured_va_yes: nil,
       )
     end
 
@@ -71,6 +85,16 @@ RSpec.describe MedicaidApplicationAttributes do
           residential_address_street_address: "Homeless",
         )
       end
+    end
+
+    describe "insurance types" do
+      it_should_behave_like "insurance type", "medicaid", "Medicaid"
+      it_should_behave_like "insurance type", "medicare", "Medicare"
+      it_should_behave_like "insurance type", "chip", "CHIP/MIChild"
+      it_should_behave_like "insurance type", "va", "VA health care programs"
+      it_should_behave_like "insurance type",
+        "employer", "Employer or individual plan"
+      it_should_behave_like "insurance type", "other", "Other"
     end
   end
 end
