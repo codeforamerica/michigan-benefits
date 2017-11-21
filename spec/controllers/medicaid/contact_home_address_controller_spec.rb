@@ -29,7 +29,7 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
         create(
           :residential_address,
           street_address: "I live here",
-          street_address_2: 'Apt B',
+          street_address_2: "Apt B",
           city: "Hometown",
           zip: "54321",
           benefit_application: medicaid_application,
