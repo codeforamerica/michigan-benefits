@@ -3,10 +3,8 @@
 @import 'neat';
 @import "normalize";
 
-
 /* Variables */
 @import 'atoms/variables';
-
 
 /* Atoms */
 @import 'atoms/grid';
@@ -54,7 +52,6 @@
 @import 'organisms/pagination';
 @import 'organisms/statistic-card';
 
-
 /* Templates */
 @import 'templates/about';
 @import 'templates/dashboard';
@@ -65,18 +62,17 @@
 @import 'templates/static-page';
 @import 'templates/styleguide';
 
-
 /* Michigan Benefits Overrides */
 @import 'michigan-benefits/atoms/base';
 @import 'michigan-benefits/atoms/icons';
 @import 'michigan-benefits/atoms/typography';
 @import 'michigan-benefits/atoms/buttons';
+@import 'michigan-benefits/atoms/form-elements';
 @import 'michigan-benefits/organisms/step-header';
 @import 'michigan-benefits/organisms/form-card';
 @import 'michigan-benefits/organisms/main-footer';
 @import 'michigan-benefits/organisms/debug';
 @import 'michigan-benefits/organisms/secure-text';
-
 
 /* Shame */
 @import 'ie-hacks';
