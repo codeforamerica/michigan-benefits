@@ -214,7 +214,7 @@ RSpec.describe Dhs1171Pdf do
         create(:snap_application, :with_member, documents: [document_path])
       allow(VerificationDocument).to receive(:new).with(
         url: document_path,
-        snap_application: snap_application,
+        benefit_application: snap_application,
       ).and_return(verification_document)
       original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
 
