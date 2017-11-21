@@ -4,6 +4,8 @@ module Medicaid
       :street_address,
       :street_address_2,
       :city,
+      :county,
+      :state,
       :zip,
       :mailing_address_same_as_residential_address,
     )
