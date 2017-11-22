@@ -2,7 +2,7 @@ module Medicaid
   class AmountsExpenses < Step
     step_attributes(
       :child_support_alimony_arrears_expenses,
-      :member_id,
+      :id,
       :self_employed,
       :self_employed_monthly_expenses,
       :student_loan_interest_expenses,

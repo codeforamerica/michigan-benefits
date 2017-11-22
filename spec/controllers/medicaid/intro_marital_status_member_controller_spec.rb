@@ -27,8 +27,8 @@ RSpec.describe Medicaid::IntroMaritalStatusMemberController do
             members: {
               member_one.id => { married: true },
               member_two.id => { married: false },
-            }
-          }
+            },
+          },
         }
 
         member_one.reload
@@ -41,7 +41,6 @@ RSpec.describe Medicaid::IntroMaritalStatusMemberController do
       end
     end
   end
-
 
   it_should_behave_like(
     "Medicaid multi-member controller",

@@ -25,10 +25,10 @@ module Medicaid
     end
 
     def member_from_form
-      return if params.dig(:step, :member_id).blank?
-
-      member_id = params[:step].delete(:member_id)
-      current_application.members.find(member_id)
+      @member_from_form ||= current_application.
+        members.
+        where(id: step_params[:id]).
+        first
     end
 
     def member_from_querystring

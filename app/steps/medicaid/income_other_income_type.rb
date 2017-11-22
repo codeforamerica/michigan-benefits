@@ -1,5 +1,5 @@
 module Medicaid
-  class IncomeOtherIncomeType < Step
+  class IncomeOtherIncomeType < MemberStep
     step_attributes(
       :alimony,
       :other,
@@ -8,7 +8,7 @@ module Medicaid
       :social_security,
       :unemployment,
       :other_income_types,
-      :member_id,
+      :id,
     )
 
     validate :income_type_selected
@@ -30,14 +30,6 @@ module Medicaid
 
     def no_other_income_type_provided?
       other_income_types.empty?
-    end
-
-    def existing_attributes
-      HashWithIndifferentAccess.new(current_member&.attributes)
-    end
-
-    def member
-      @_member ||= Member.find(member_id)
     end
   end
 end

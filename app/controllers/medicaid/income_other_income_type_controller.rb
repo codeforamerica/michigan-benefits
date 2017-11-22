@@ -3,13 +3,13 @@ module Medicaid
     def edit
       @step = step_class.new(
         array_to_checkboxes(current_member.other_income_types).
-        merge(member_id: current_member.id),
+        merge(id: current_member.id),
       )
     end
 
     def update
       @step = step_class.new(
-        update_params.merge(member_id: step_params[:member_id]),
+        update_params.merge(id: step_params[:id]),
       )
 
       if @step.valid?
@@ -27,7 +27,7 @@ module Medicaid
     private
 
     def update_params
-      { other_income_types: checkboxes_to_array(step_params) }
+      { other_income_types: checkboxes_to_array(step_params.except(:id)) }
     end
 
     def first_other_income_member

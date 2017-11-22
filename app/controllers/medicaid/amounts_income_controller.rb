@@ -1,23 +1,14 @@
 module Medicaid
   class AmountsIncomeController < Medicaid::MemberStepsController
+    private
+
     def current_member
       @_current_member ||= super || first_member_with_income
     end
 
-    def update
-      @step = step_class.new(
-        step_params.merge(member_id: current_member.id),
-      )
-
-      if @step.valid?
-        current_member.update!(step_params)
-        redirect_to(next_path)
-      else
-        render :edit
-      end
+    def update_application
+      current_member.update!(step_params)
     end
-
-    private
 
     def first_member_with_income
       current_application.

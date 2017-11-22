@@ -17,7 +17,9 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
 
       session[:medicaid_application_id] = medicaid_application.id
 
-      expect(subject.current_member).to eq insured_member
+      get :edit
+
+      expect(assigns[:step].id).to eq insured_member.id
     end
 
     it "finds member from querystring" do
@@ -29,7 +31,7 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
 
       get :edit, params: { member: jessie.id }
 
-      expect(subject.current_member).to eq jessie
+      expect(assigns[:step].id).to eq jessie.id
     end
 
     it "finds member from posted form" do
@@ -41,22 +43,27 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
 
       put :update, params: {
         step: {
-          member_id: jessie.id,
+          id: jessie.id,
           insurance_type: "Employer or individual plan",
         },
       }
 
-      expect(subject.current_member).to eq jessie
+      expect(assigns[:step].id).to eq jessie.id.to_s
     end
   end
 
   describe "#edit" do
     context "client is insured" do
       it "does not redirect" do
+        insured_member = build(
+          :member,
+          insured: true,
+          requesting_health_insurance: true,
+        )
         medicaid_application = create(
           :medicaid_application,
           anyone_insured: true,
-          members: [build(:member, insured: true, requesting_health_insurance: true)]
+          members: [insured_member],
         )
         session[:medicaid_application_id] = medicaid_application.id
 

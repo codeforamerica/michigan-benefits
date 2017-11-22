@@ -11,7 +11,7 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.hidden_field :member_id, value: current_member.id %>
+      <%= f.hidden_field :id %>
       <% if current_member.pay_child_support_alimony_arrears? %>
         <p class="text--section-header">
           Child Support, Alimony, or Arrears
