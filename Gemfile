@@ -71,7 +71,6 @@ group :development, :test do
   gem "rspec_junit_formatter"
   gem "rubocop-rspec", require: false
   gem "simplecov"
-  gem "tracker-git", git: "https://github.com/codeforamerica/tracker-git.git"
 end
 
 group :production do
