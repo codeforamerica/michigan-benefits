@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20171121231237) do
     t.boolean "mailing", default: true, null: false
     t.string "state", null: false
     t.string "street_address", null: false
+    t.string "street_address_2"
     t.datetime "updated_at", null: false
     t.string "zip", null: false
   end

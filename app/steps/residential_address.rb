@@ -4,6 +4,7 @@ class ResidentialAddress < Step
     :county,
     :state,
     :street_address,
+    :street_address_2,
     :unstable_housing,
     :zip,
   )

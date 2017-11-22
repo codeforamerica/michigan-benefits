@@ -19,14 +19,6 @@ module PdfAttributes
     date&.strftime("%m/%d/%Y")
   end
 
-  def residential_or_homeless
-    if benefit_application.stable_housing?
-      benefit_application.residential_address.street_address
-    else
-      "Homeless"
-    end
-  end
-
   def phone_attributes
     if benefit_application.phone_number.nil?
       {}

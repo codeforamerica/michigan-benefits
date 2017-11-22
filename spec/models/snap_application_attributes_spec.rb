@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe SnapApplicationAttributes do
   describe "#to_h" do
     it "returns a hash of attributes" do
-      mailing_address = build(:mailing_address)
+      mailing_address = build(:mailing_address, street_address_2: "Apt B")
       residential_address = build(:residential_address)
       snap_application = create(
         :snap_application,
@@ -27,7 +27,7 @@ RSpec.describe SnapApplicationAttributes do
         mailing_address_city: "Flint",
         mailing_address_county: "Genesee",
         mailing_address_state: "MI",
-        mailing_address_street_address: "123 Main St.",
+        mailing_address_street_address: "123 Main St., Apt B",
         mailing_address_zip: "12345",
         members_buy_food_with_no: "Yes",
         members_buy_food_with_yes: nil,

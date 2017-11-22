@@ -178,6 +178,7 @@ RSpec.feature "Medicaid app" do
 
       expect(page).to have_content("What is your home address?")
       fill_in "Street address", with: "123 Some St."
+      fill_in "Street address 2", with: "Apt B"
       fill_in "City", with: "Flint"
       fill_in "ZIP code", with: "48501"
 
@@ -187,6 +188,7 @@ RSpec.feature "Medicaid app" do
 
       expect(page).to have_content("What is your mailing address?")
       fill_in "Street address", with: "123 Some St."
+      fill_in "Street address 2", with: "Apt B"
       fill_in "City", with: "Flint"
       fill_in "ZIP code", with: "48501"
 
