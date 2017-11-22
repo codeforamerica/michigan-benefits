@@ -2,14 +2,14 @@ module Medicaid
   class IntroMaritalStatusIndicateSpouseController <
     Medicaid::MemberStepsController
 
-    def current_member
-      @_current_member ||= super || first_married_member
-    end
-
     private
 
+    def current_member
+      @_current_member ||= member_from_querystring || first_married_member
+    end
+
     def update_application
-      current_member.update(step_params)
+      member_from_form.update(step_params)
       update_spouse_of_other_member_if_present
     end
 
@@ -28,6 +28,10 @@ module Medicaid
     end
 
     def next_member
+      current_member = member_from_form ||
+        member_from_querystring ||
+        first_married_member
+
       return if current_member.nil?
 
       current_application.
@@ -41,8 +45,15 @@ module Medicaid
     def update_spouse_of_other_member_if_present
       spouse = Member.where(id: step_params[:spouse_id]).first
       if spouse.present?
-        spouse.update!(spouse_id: current_member.id)
+        spouse.update!(spouse_id: step_params[:id])
       end
+    end
+
+    def member_from_form
+      @member_from_form ||= current_application.
+        members.
+        where(id: step_params[:id]).
+        first
     end
   end
 end

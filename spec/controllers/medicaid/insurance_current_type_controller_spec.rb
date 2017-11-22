@@ -53,9 +53,11 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
   describe "#edit" do
     context "client is insured" do
       it "does not redirect" do
-        medicaid_application = create(:medicaid_application,
-                                      anyone_insured: true,
-                                      members: [build(:member)])
+        medicaid_application = create(
+          :medicaid_application,
+          anyone_insured: true,
+          members: [build(:member, insured: true, requesting_health_insurance: true)]
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -66,9 +68,11 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
 
     context "client is not insured" do
       it "redirects to next step" do
-        medicaid_application = create(:medicaid_application,
-                                      anyone_insured: false,
-                                      members: [build(:member)])
+        medicaid_application = create(
+          :medicaid_application,
+          anyone_insured: false,
+          members: [build(:member)],
+        )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit

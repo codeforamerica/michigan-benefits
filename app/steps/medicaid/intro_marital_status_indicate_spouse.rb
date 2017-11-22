@@ -1,7 +1,7 @@
 module Medicaid
   class IntroMaritalStatusIndicateSpouse < Step
     step_attributes(
-      :member_id,
+      :id,
       :spouse_id,
       :spouse,
     )

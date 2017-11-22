@@ -16,7 +16,7 @@
       method: :put do |f| %>
 
       <%= f.mb_form_errors :spouse %>
-      <%= f.hidden_field(:member_id, value: current_member.id) %>
+      <%= f.hidden_field(:id) %>
 
       <%= f.mb_radio_set :spouse_id, "",
         current_member.spouse_options.map { |member|
