@@ -176,10 +176,6 @@ class Member < ApplicationRecord
     sex == "male"
   end
 
-  def formatted_birthday
-    birthday.strftime("%m/%d/%Y")
-  end
-
   def mi_bridges_formatted_name
     "#{first_name.first(10)} (#{age})"
   end

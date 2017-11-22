@@ -50,7 +50,7 @@ class MedicaidApplicationMemberAttributes
 
     if member.birthday.present?
       member_attributes[:"#{position}_member_birthday"] =
-        member.formatted_birthday
+        MemberDecorator.new(member).formatted_birthday
       member_attributes[:"#{position}_member_under_21_#{yes_no(under_21?)}"] =
         "Yes"
     end

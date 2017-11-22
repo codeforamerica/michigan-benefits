@@ -36,10 +36,6 @@ class VerificationDocument
   end
 
   def birthday
-    if benefit_application.primary_member.birthday.present?
-      benefit_application.primary_member.formatted_birthday
-    else
-      ""
-    end
+    MemberDecorator.new(benefit_application.primary_member).formatted_birthday
   end
 end
