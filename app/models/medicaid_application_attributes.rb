@@ -19,6 +19,7 @@ class MedicaidApplicationAttributes
     [
       {
         signature: medicaid_application.signature,
+        signature_date: mmddyyyy_date(medicaid_application.signed_at),
         residential_address_county:
           medicaid_application.residential_address.county,
         residential_address_state:
@@ -37,7 +38,6 @@ class MedicaidApplicationAttributes
           bool_to_checkbox(medicaid_application.email.present?),
         not_receive_info_by_email:
           bool_to_checkbox(medicaid_application.email.blank?),
-        preferred_language: nil,
       },
       phone_attributes,
       insurance_attributes,
