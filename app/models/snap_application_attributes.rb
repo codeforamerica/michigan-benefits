@@ -12,8 +12,7 @@ class SnapApplicationAttributes
       mailing_address_city: snap_application.mailing_address.city,
       mailing_address_county: snap_application.mailing_address.county,
       mailing_address_state: snap_application.mailing_address.state,
-      mailing_address_street_address:
-        snap_application.mailing_address.street_address,
+      mailing_address_street_address: full_street_address(snap_application.mailing_address),
       mailing_address_zip: snap_application.mailing_address.zip,
       members_buy_food_with_no:
         bool_to_checkbox(any_members_not_buy_food_with?),
@@ -315,4 +314,5 @@ class SnapApplicationAttributes
     snap_application.insurance_expense.present? ||
       snap_application.property_tax_expense.present?
   end
+
 end

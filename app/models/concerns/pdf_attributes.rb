@@ -13,7 +13,7 @@ module PdfAttributes
 
   def residential_or_homeless
     if benefit_application.stable_housing?
-      benefit_application.residential_address.street_address
+      full_street_address(benefit_application.residential_address)
     else
       "Homeless"
     end
@@ -32,5 +32,9 @@ module PdfAttributes
 
   def ten_digit_phone
     benefit_application.phone_number.split("")
+  end
+
+  def full_street_address(address)
+    [address.street_address, address.street_address_2].reject(&:blank?).join(", ")
   end
 end
