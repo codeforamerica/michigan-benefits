@@ -6,11 +6,7 @@ class MemberDecorator
   delegate :birthday, to: :member
 
   def formatted_birthday
-    if birthday.present?
-      birthday.strftime("%m/%d/%Y")
-    else
-      ""
-    end
+    birthday.present? ? birthday.strftime("%m/%d/%Y") : ""
   end
 
   private
