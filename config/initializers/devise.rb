@@ -41,5 +41,6 @@ Devise.setup do |config|
 
   # The name of the token issuer, to be added to the provisioning
   # url. Display will vary based on token application. (defaults to the Rails application class)
-  # config.otp_issuer = 'my_application'
+  otp_env = Rails.env.production? ? "" : " - #{Rails.env}"
+  config.otp_issuer = "MichiganBenefits.org" + otp_env
 end
