@@ -67,8 +67,8 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
           medicaid_application = create(
             :medicaid_application,
             anyone_married: true,
+            members: build_list(:member, 2, married: true),
           )
-          build_list(:member, 2, benefit_application: medicaid_application)
           session[:medicaid_application_id] = medicaid_application.id
 
           get :edit
