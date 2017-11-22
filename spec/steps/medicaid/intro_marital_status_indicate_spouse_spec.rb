@@ -12,7 +12,7 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouse do
         )
 
         step = Medicaid::IntroMaritalStatusIndicateSpouse.new(
-          member_id: member.id,
+          id: member.id,
           spouse_id: 0,
         )
 
@@ -35,7 +35,7 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouse do
         )
 
         step = Medicaid::IntroMaritalStatusIndicateSpouse.new(
-          member_id: member.id,
+          id: member.id,
           spouse_id: spouse_member.id,
         )
 
@@ -53,7 +53,7 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouse do
         )
 
         step = Medicaid::IntroMaritalStatusIndicateSpouse.new(
-          member_id: member.id,
+          id: member.id,
           spouse_id: nil,
         )
 

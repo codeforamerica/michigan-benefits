@@ -1,37 +1,37 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
-  describe "#current_member" do
+  describe "assigned step" do
     it "defaults for first married member" do
-      medicaid_application = create(:medicaid_application, anyone_married: true)
-      _primary_member = create(
-        :member,
-        married: false,
-        benefit_application: medicaid_application,
-      )
-      married_member = create(
-        :member,
-        married: true,
-        benefit_application: medicaid_application,
+      primary_member = build(:member, married: false)
+      married_member = build(:member, married: true)
+      medicaid_application = create(
+        :medicaid_application,
+        anyone_married: true,
+        members: [primary_member, married_member],
       )
 
       session[:medicaid_application_id] = medicaid_application.id
 
       get :edit, params: {}
 
-      expect(subject.current_member).to eq married_member
+      expect(assigns[:step].id).to eq married_member.id
     end
 
     it "finds member from querystring" do
-      medicaid_application = create(:medicaid_application, anyone_married: true)
-      _joel = create(:member, benefit_application: medicaid_application)
-      jessie = create(:member, benefit_application: medicaid_application)
+      joel = build(:member)
+      jessie = build(:member)
+      medicaid_application = create(
+        :medicaid_application,
+        anyone_married: true,
+        members: [joel, jessie],
+      )
 
       session[:medicaid_application_id] = medicaid_application.id
 
       get :edit, params: { member: jessie.id }
 
-      expect(subject.current_member).to eq jessie
+      expect(assigns[:step].id).to eq jessie.id
     end
   end
 
@@ -138,7 +138,7 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
         put(
           :update,
           params: {
-            step: { member_id: first_member.id, spouse_id: second_member.id },
+            step: { id: first_member.id, spouse_id: second_member.id },
           },
         )
         first_member.reload
@@ -165,7 +165,7 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
         put(
           :update,
           params: {
-            step: { member_id: first_member.id, spouse_id: OtherSpouse.new.id },
+            step: { id: first_member.id, spouse_id: OtherSpouse.new.id },
           },
         )
         first_member.reload

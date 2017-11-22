@@ -21,7 +21,7 @@ module Medicaid
     end
 
     def existing_attributes
-      HashWithIndifferentAccess.new(current_member&.attributes)
+      HashWithIndifferentAccess.new(current_member.attributes)
     end
 
     def member_from_form
