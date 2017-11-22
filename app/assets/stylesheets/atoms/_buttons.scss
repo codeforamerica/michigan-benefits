@@ -27,11 +27,13 @@
   }
 }
 
-.button--next {
+.button--full-mobile {
   width: 100%;
+  text-align: center;
 
   @include media($tablet-up) {
     width: auto;
+    text-align: initial;
   }
 }
 
