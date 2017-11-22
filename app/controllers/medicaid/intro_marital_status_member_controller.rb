@@ -2,6 +2,11 @@ module Medicaid
   class IntroMaritalStatusMemberController < Medicaid::ManyMemberStepsController
     private
 
+    def update_application
+      step.members.each { |m| m.spouse_id = nil }
+      super
+    end
+
     def skip?
       single_member_household? || nobody_married?
     end

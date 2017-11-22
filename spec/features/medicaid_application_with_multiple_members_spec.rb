@@ -66,13 +66,6 @@ RSpec.feature "Medicaid app" do
 
     on_page "Introduction" do
       expect(page).to have_content(
-        "Tell us who Christa Tester is currently married to",
-      )
-      click_on "Next"
-    end
-
-    on_page "Introduction" do
-      expect(page).to have_content(
         "Tell us who Joel Tester is currently married to",
       )
       choose "Other - not listed"

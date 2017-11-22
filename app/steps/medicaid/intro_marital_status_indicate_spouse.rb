@@ -13,9 +13,5 @@ module Medicaid
         errors.add(:spouse, "Make sure you select a person")
       end
     end
-
-    def member
-      @_member ||= Member.find(member_id)
-    end
   end
 end
