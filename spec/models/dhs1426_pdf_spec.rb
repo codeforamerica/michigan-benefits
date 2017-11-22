@@ -70,6 +70,7 @@ RSpec.describe Dhs1426Pdf do
       mailing_address = build(
         :mailing_address,
         street_address: "123 Main St.",
+        street_address_2: "Apt B",
         city: "Pioneertown",
         county: "Candyland",
         state: "CA",
@@ -79,6 +80,7 @@ RSpec.describe Dhs1426Pdf do
       residential_address = build(
         :residential_address,
         street_address: "321 Yellow Brick St.",
+        street_address_2: "Apt C",
         city: "Bedrock",
         county: "Yolo",
         state: "AZ",
@@ -145,11 +147,13 @@ RSpec.describe Dhs1426Pdf do
         signature_date: "12/25/2007",
         mailing_address_street_address:
           "123 Main St.",
+        mailing_address_street_address_2: "Apt B",
         mailing_address_city: "Pioneertown",
         mailing_address_county: "Candyland",
         mailing_address_state: "CA",
         mailing_address_zip: "19191",
         residential_address_street_address: "321 Yellow Brick St.",
+        residential_address_street_address_2: "Apt C",
         residential_address_city: "Bedrock",
         residential_address_county: "Yolo",
         residential_address_state: "AZ",

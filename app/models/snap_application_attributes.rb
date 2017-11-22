@@ -315,4 +315,15 @@ class SnapApplicationAttributes
       snap_application.property_tax_expense.present?
   end
 
+  def residential_or_homeless
+    if benefit_application.stable_housing?
+      full_street_address(benefit_application.residential_address)
+    else
+      "Homeless"
+    end
+  end
+
+  def full_street_address(address)
+    [address.street_address, address.street_address_2].reject(&:blank?).join(", ")
+  end
 end

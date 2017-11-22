@@ -25,6 +25,8 @@ class MedicaidApplicationAttributes
         residential_address_state:
           medicaid_application.residential_address.state,
         residential_address_street_address: residential_or_homeless,
+        residential_address_street_address_2:
+          medicaid_application.residential_address.street_address_2,
         residential_address_zip: medicaid_application.residential_address.zip,
         residential_address_city: medicaid_application.residential_address.city,
         email: medicaid_application.email,
@@ -33,6 +35,8 @@ class MedicaidApplicationAttributes
         mailing_address_state: medicaid_application.mailing_address.state,
         mailing_address_street_address:
           medicaid_application.mailing_address.street_address,
+        mailing_address_street_address_2:
+          medicaid_application.mailing_address.street_address_2,
         mailing_address_zip: medicaid_application.mailing_address.zip,
         receive_info_by_email:
           bool_to_checkbox(medicaid_application.email.present?),
@@ -86,4 +90,13 @@ class MedicaidApplicationAttributes
   def benefit_application
     medicaid_application
   end
+
+  def residential_or_homeless
+    if benefit_application.stable_housing?
+      benefit_application.residential_address.street_address
+    else
+      "Homeless"
+    end
+  end
+
 end
