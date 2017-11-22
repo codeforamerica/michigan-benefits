@@ -21,12 +21,12 @@
       method: :put do |f| %>
 
       <div class="text--centered">
-        <%= link_to next_path, class: "button button--next button--cta" do %>
-          Submit documents now
+        <%= link_to skip_path, class: "button button--full-mobile" do %>
+          I'll do this later
         <% end %>
 
-        <%= link_to skip_path, class: "button" do %>
-          I'll do this later
+        <%= link_to next_path, class: "button button--full-mobile button--cta" do %>
+          Submit documents now
         <% end %>
       </div>
     <% end %>
