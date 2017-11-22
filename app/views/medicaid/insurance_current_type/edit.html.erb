@@ -15,7 +15,7 @@
       url: current_path,
       method: :put do |f| %>
 
-      <%= f.hidden_field(:member_id, value: current_member.id) %>
+      <%= f.hidden_field(:id) %>
 
       <%= f.mb_radio_set :insurance_type, "",
         @step.class::INSURANCE_TYPES.map { |value, label|

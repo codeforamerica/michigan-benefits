@@ -13,7 +13,7 @@ RSpec.describe Medicaid::InsuranceCurrentType do
         )
 
         step = Medicaid::InsuranceCurrentType.new(
-          member_id: member.id,
+          id: member.id,
           insurance_type: "Medicaid",
         )
 
@@ -32,7 +32,7 @@ RSpec.describe Medicaid::InsuranceCurrentType do
         )
 
         step = Medicaid::InsuranceCurrentType.new(
-          member_id: insured_member_without_type.id,
+          id: insured_member_without_type.id,
           insurance_type: nil,
         )
 

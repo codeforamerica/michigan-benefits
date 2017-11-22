@@ -12,7 +12,7 @@ RSpec.describe Medicaid::IncomeOtherIncomeType do
         )
 
         step = Medicaid::IncomeOtherIncomeType.new(
-          member_id: member.id,
+          id: member.id,
           other_income_types: ["Unemployment"],
         )
 
@@ -31,7 +31,7 @@ RSpec.describe Medicaid::IncomeOtherIncomeType do
         )
 
         step = Medicaid::IncomeOtherIncomeType.new(
-          member_id: member.id,
+          id: member.id,
           other_income_types: member.other_income_types,
         )
 

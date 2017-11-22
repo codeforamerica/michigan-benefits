@@ -54,7 +54,7 @@ RSpec.describe Medicaid::IncomeOtherIncomeTypeController do
 
       put :update, params: {
         step: {
-          member_id: jessie.id,
+          id: jessie.id,
           unemployment: "1",
         },
       }

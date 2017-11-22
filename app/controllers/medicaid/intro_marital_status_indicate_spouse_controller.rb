@@ -48,12 +48,5 @@ module Medicaid
         spouse.update!(spouse_id: step_params[:id])
       end
     end
-
-    def member_from_form
-      @member_from_form ||= current_application.
-        members.
-        where(id: step_params[:id]).
-        first
-    end
   end
 end

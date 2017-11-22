@@ -1,21 +1,14 @@
 module Medicaid
   class InsuranceCurrentTypeController < Medicaid::MemberStepsController
-    def update
-      @step = step_class.new(step_params)
+    private
 
-      if @step.valid?
-        current_member.update(step_params)
-        redirect_to(next_path)
-      else
-        render :edit
-      end
+    def update_application
+      current_member.update!(step_params)
     end
 
     def current_member
       @_current_member ||= super || first_insurance_holder
     end
-
-    private
 
     def first_insurance_holder
       current_application.

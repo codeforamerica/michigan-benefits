@@ -2,7 +2,7 @@ module Medicaid
   class InsuranceCurrentType < MemberStep
     step_attributes(
       :insurance_type,
-      :member_id,
+      :id,
     )
 
     INSURANCE_TYPES = {

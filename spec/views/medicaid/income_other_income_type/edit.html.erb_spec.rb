@@ -29,7 +29,7 @@ describe "medicaid/income_other_income_type/edit.html.erb" do
 
       step = Medicaid::IncomeOtherIncomeType.new(
         other_income_types: [],
-        member_id: member.id,
+        id: member.id,
       ).tap(&:valid?)
 
       assign(:step, step)
