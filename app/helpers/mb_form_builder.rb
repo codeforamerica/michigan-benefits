@@ -90,6 +90,34 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     )
   end
 
+  def mb_phone_number_field(
+    method,
+    label_text,
+    type: :tel,
+    notes: [],
+    options: {},
+    classes: [],
+    prefix: "+1",
+    autofocus: nil,
+    prepend_html: "",
+    append_html: "",
+    optional: false
+  )
+    mb_input_field(
+      method,
+      label_text,
+      type: type,
+      notes: notes,
+      options: options,
+      classes: classes,
+      prefix: prefix,
+      autofocus: autofocus,
+      prepend_html: prepend_html,
+      append_html: append_html,
+      optional: optional,
+    )
+  end
+
   def mb_form_errors(method)
     errors = object.errors[method]
     if errors.any?
