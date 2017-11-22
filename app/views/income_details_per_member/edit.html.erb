@@ -10,10 +10,9 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <% @step.members.each do |member| %>
-        <fieldset class="form-group">
-          <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
-            <% if member.employment_status == "employed" %>
-              <%= render "header", member: member %>
+        <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+          <% if member.employment_status == "employed" %>
+            <% render layout: 'household_member_group', locals: { member: member } do %>
               <%= ff.mb_input_field :employed_employer_name,
                   "Employer name" %>
               <%= ff.mb_input_field :employed_hours_per_week,
@@ -28,23 +27,24 @@
                   "How often are you paid that amount?",
                   Member::PAYMENT_INTERVALS,
                   { layout: "inline", optional: true } %>
-              <% elsif member.employment_status == "self_employed" %>
-                <%= render "header", member: member %>
-                <%= ff.mb_input_field :self_employed_profession,
-                    "Type of work",
-                    optional: true %>
-                <%= ff.mb_money_field :self_employed_monthly_income,
-                  "Average monthly pay (before tax)",
+            <% end %>
+          <% elsif member.employment_status == "self_employed" %>
+            <% render layout: 'household_member_group', locals: { member: member } do %>
+              <%= ff.mb_input_field :self_employed_profession,
+                  "Type of work",
                   optional: true %>
-                <%= ff.mb_money_field :self_employed_monthly_expenses,
-                  "Monthly business expenses",
-                  optional: true %>
-              <% end %>
-                </div>
-              <% end %>
-        </fieldset>
+              <%= ff.mb_money_field :self_employed_monthly_income,
+                "Average monthly pay (before tax)",
+                optional: true %>
+              <%= ff.mb_money_field :self_employed_monthly_expenses,
+                "Monthly business expenses",
+                optional: true %>
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
-      <%= render 'shared/next_step' %>
+
+    <%= render 'shared/next_step' %>
     <% end %>
   </div>
 </div>

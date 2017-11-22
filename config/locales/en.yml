@@ -94,6 +94,9 @@ en:
           other:
             Provide the Social Security Numbers and Dates of Birth for your
             household members if you’re ready
+    contact_social_security:
+      edit:
+        title: Tell us your Social Security Number and Date of Birth
     amounts_income:
       edit:
         title:
