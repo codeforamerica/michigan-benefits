@@ -3,12 +3,12 @@ require "rails_helper"
 RSpec.describe IncomeDetailsPerMember do
   describe "Validations" do
     it "validates employer name on employed members" do
-      working = create(
+      working = build(
         :member,
         employment_status: "employed",
         employed_employer_name: nil,
       )
-      self_employed = create(
+      self_employed = build(
         :member,
         employment_status: "self_employed",
         employed_employer_name: nil,

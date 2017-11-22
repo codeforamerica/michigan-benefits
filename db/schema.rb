@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120215451) do
+ActiveRecord::Schema.define(version: 20171121231237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(version: 20171120215451) do
     t.boolean "anyone_pay_child_support_alimony_arrears"
     t.boolean "anyone_pay_student_loan_interest"
     t.boolean "anyone_self_employed", default: false
-    t.datetime "birthday"
     t.boolean "consent_to_terms"
     t.datetime "created_at", null: false
     t.string "email"
@@ -144,6 +143,7 @@ ActiveRecord::Schema.define(version: 20171120215451) do
     t.boolean "income_social_security"
     t.boolean "income_unemployment"
     t.boolean "mailing_address_same_as_residential_address"
+    t.integer "members_count", default: 0
     t.boolean "michigan_resident", null: false
     t.boolean "need_medical_expense_help_3_months"
     t.string "office_location"
@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(version: 20171120215451) do
     t.boolean "mailing_address_same_as_residential_address", default: true
     t.boolean "medical"
     t.string "medical_expenses", default: [], array: true
+    t.integer "members_count", default: 0
     t.boolean "money_or_accounts_income"
     t.integer "monthly_care_expenses"
     t.integer "monthly_court_ordered_expenses"

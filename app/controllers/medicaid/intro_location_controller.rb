@@ -1,5 +1,7 @@
 module Medicaid
   class IntroLocationController < MedicaidStepsController
+    skip_before_action :ensure_application_present
+
     def update
       @step = step_class.new(step_params)
 
@@ -17,10 +19,6 @@ module Medicaid
 
     def current_or_new_medicaid_application
       current_application || MedicaidApplication.new
-    end
-
-    def ensure_application_present
-      true
     end
   end
 end

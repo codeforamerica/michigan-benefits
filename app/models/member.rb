@@ -45,7 +45,7 @@ class Member < ApplicationRecord
     unemployment
   ].freeze
 
-  belongs_to :benefit_application, polymorphic: true
+  belongs_to :benefit_application, polymorphic: true, counter_cache: true
   has_one :spouse, class_name: "Member", foreign_key: "spouse_id"
 
   validates :employed_pay_interval,
@@ -174,10 +174,6 @@ class Member < ApplicationRecord
 
   def male?
     sex == "male"
-  end
-
-  def formatted_birthday
-    birthday.strftime("%m/%d/%Y")
   end
 
   def mi_bridges_formatted_name

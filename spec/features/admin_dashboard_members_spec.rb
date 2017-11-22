@@ -15,8 +15,19 @@ RSpec.feature "Admins can view members" do
   end
 
   scenario "Members are listed" do
-    john = create(:member, first_name: "john", last_name: "doe")
-    joe  = create(:member, first_name: "joe", last_name: "schmoe")
+    benefit_application = build(:medicaid_application)
+    john = create(
+      :member,
+      first_name: "john",
+      last_name: "doe",
+      benefit_application: benefit_application,
+    )
+    joe = create(
+      :member,
+      first_name: "joe",
+      last_name: "schmoe",
+      benefit_application: benefit_application,
+    )
 
     visit admin_members_path
 

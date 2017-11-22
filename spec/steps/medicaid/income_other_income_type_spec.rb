@@ -4,7 +4,12 @@ RSpec.describe Medicaid::IncomeOtherIncomeType do
   describe "Validations" do
     context "the household member has other income" do
       it "is valid" do
-        member = create(:member, other_income: true)
+        benefit_application = build(:medicaid_application)
+        member = create(
+          :member,
+          other_income: true,
+          benefit_application: benefit_application,
+        )
 
         step = Medicaid::IncomeOtherIncomeType.new(
           member_id: member.id,
@@ -17,10 +22,12 @@ RSpec.describe Medicaid::IncomeOtherIncomeType do
 
     context "a member with other income is missing an other income type" do
       it "is invalid" do
+        benefit_application = build(:medicaid_application)
         member = create(
           :member,
           other_income: true,
           other_income_types: [],
+          benefit_application: benefit_application,
         )
 
         step = Medicaid::IncomeOtherIncomeType.new(

@@ -5,7 +5,7 @@ RSpec.describe Medicaid::InsuranceCurrentController do
     context "single member household" do
       context "anyone is insured" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,
@@ -23,7 +23,7 @@ RSpec.describe Medicaid::InsuranceCurrentController do
 
       context "nobody insured" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,

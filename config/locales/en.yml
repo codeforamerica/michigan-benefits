@@ -78,9 +78,7 @@ en:
       edit:
         title:
           one: Do you pay child support, alimony, or arrears?
-          other:
-            Does anyone in your household pay child
-            support, alimony, or arrears?
+          other: Does anyone in your household pay child support, alimony, or arrears?
     expenses_student_loan:
       edit:
         title:

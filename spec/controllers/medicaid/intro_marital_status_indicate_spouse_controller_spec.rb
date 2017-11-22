@@ -64,7 +64,7 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
       it "skips this page" do
         medicaid_application = create(
           :medicaid_application,
-          members: [create(:member)],
+          members: [build(:member)],
           anyone_married: true,
         )
 
@@ -83,7 +83,7 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
             :medicaid_application,
             anyone_married: true,
           )
-          create_list(:member, 2, benefit_application: medicaid_application)
+          build_list(:member, 2, benefit_application: medicaid_application)
           session[:medicaid_application_id] = medicaid_application.id
 
           get :edit
@@ -98,7 +98,7 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
             :medicaid_application,
             anyone_married: false,
           )
-          create_list(:member, 2, benefit_application: medicaid_application)
+          build_list(:member, 2, benefit_application: medicaid_application)
           session[:medicaid_application_id] = medicaid_application.id
 
           get :edit

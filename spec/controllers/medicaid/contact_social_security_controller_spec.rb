@@ -32,9 +32,9 @@ RSpec.describe Medicaid::ContactSocialSecurityController do
       end
 
       it "assigns members requesting health insurance to step" do
-        member_one = create(:member, requesting_health_insurance: true)
-        member_two = create(:member, requesting_health_insurance: true)
-        member_three = create(:member, requesting_health_insurance: false)
+        member_one = build(:member, requesting_health_insurance: true)
+        member_two = build(:member, requesting_health_insurance: true)
+        member_three = build(:member, requesting_health_insurance: false)
 
         medicaid_application = create(
           :medicaid_application,

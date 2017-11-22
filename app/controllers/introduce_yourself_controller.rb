@@ -1,4 +1,6 @@
 class IntroduceYourselfController < SnapStepsController
+  skip_before_action :ensure_application_present
+
   def update
     @step = step_class.new(step_params)
 
@@ -14,10 +16,6 @@ class IntroduceYourselfController < SnapStepsController
   end
 
   private
-
-  def ensure_application_present
-    true
-  end
 
   def existing_attributes
     HashWithIndifferentAccess.new(member.attributes).

@@ -1,7 +1,7 @@
 class VerificationDocument
-  def initialize(url:, snap_application:)
+  def initialize(url:, benefit_application:)
     @url = url
-    @snap_application = snap_application
+    @benefit_application = benefit_application
   end
 
   def file
@@ -20,7 +20,7 @@ class VerificationDocument
 
   private
 
-  attr_reader :url, :snap_application
+  attr_reader :url, :benefit_application
 
   def add_header(pdf)
     pdf.font("Helvetica", size: 12) do
@@ -30,8 +30,12 @@ class VerificationDocument
   end
 
   def header
-    output = "Name:                  #{snap_application.display_name}\n"
-    output += "Date of Birth:        #{snap_application.birthday}\n"
+    output = "Name:                  #{benefit_application.display_name}\n"
+    output += "Date of Birth:        #{birthday}\n"
     output
+  end
+
+  def birthday
+    MemberDecorator.new(benefit_application.primary_member).formatted_birthday
   end
 end

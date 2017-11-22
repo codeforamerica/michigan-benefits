@@ -27,7 +27,7 @@ class ExtraMemberAttributes
   attr_reader :member
 
   def formatted_birthday(member)
-    member.birthday.strftime("%m/%d/%Y")
+    MemberDecorator.new(member).formatted_birthday
   end
 
   def relationship(member)

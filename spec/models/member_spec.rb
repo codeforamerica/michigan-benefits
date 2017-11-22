@@ -4,10 +4,15 @@ RSpec.describe Member do
   describe "scopes" do
     describe ".filing_taxes" do
       it "returns members filing taxes as Single or Joint" do
-        _no_relationship = create(:member, tax_relationship: nil)
-        _dependent = create(:member, tax_relationship: "Dependent")
-        filing1 = create(:member, tax_relationship: "Single")
-        filing2 = create(:member, tax_relationship: "Joint")
+        no_relationship = build(:member, tax_relationship: nil)
+        dependent = build(:member, tax_relationship: "Dependent")
+        filing1 = build(:member, tax_relationship: "Single")
+        filing2 = build(:member, tax_relationship: "Joint")
+
+        create(
+          :snap_application,
+          members: [no_relationship, dependent, filing1, filing2],
+        )
 
         expect(Member.filing_taxes).to eq [filing1, filing2]
       end
@@ -15,10 +20,14 @@ RSpec.describe Member do
 
     describe ".dependents" do
       it "returns members that are dependents of primary applicant" do
-        _no_relationship = create(:member, tax_relationship: nil)
-        dependent = create(:member, tax_relationship: "Dependent")
-        _filing1 = create(:member, tax_relationship: "Single")
-        _filing2 = create(:member, tax_relationship: "Joint")
+        no_relationship = build(:member, tax_relationship: nil)
+        dependent = build(:member, tax_relationship: "Dependent")
+        filing1 = build(:member, tax_relationship: "Single")
+        filing2 = build(:member, tax_relationship: "Joint")
+        create(
+          :snap_application,
+          members: [no_relationship, dependent, filing1, filing2],
+        )
 
         expect(Member.dependents).to eq [dependent]
       end
@@ -26,10 +35,14 @@ RSpec.describe Member do
 
     describe ".no_tax_relationship" do
       it "returns members NOT filing taxes with primary applicant" do
-        no_relationship = create(:member, tax_relationship: nil)
-        _dependent = create(:member, tax_relationship: "Dependent")
-        _filing1 = create(:member, tax_relationship: "Single")
-        _filing2 = create(:member, tax_relationship: "Joint")
+        no_relationship = build(:member, tax_relationship: nil)
+        dependent = build(:member, tax_relationship: "Dependent")
+        filing1 = build(:member, tax_relationship: "Single")
+        filing2 = build(:member, tax_relationship: "Joint")
+        create(
+          :snap_application,
+          members: [no_relationship, dependent, filing1, filing2],
+        )
 
         expect(Member.no_tax_relationship).to eq [no_relationship]
       end
@@ -37,9 +50,12 @@ RSpec.describe Member do
 
     describe ".first_insurance_holder" do
       it "returns the first member that is insured" do
-        create(:member, insured: false, requesting_health_insurance: true)
-        create(:member, insured: true, requesting_health_insurance: false)
-        joel = create(:member, insured: true, requesting_health_insurance: true)
+        first =
+          build(:member, insured: false, requesting_health_insurance: true)
+        second =
+          build(:member, insured: true, requesting_health_insurance: false)
+        joel = build(:member, insured: true, requesting_health_insurance: true)
+        create(:snap_application, members: [first, second, joel])
 
         expect(Member.insured).to eq [joel]
       end
@@ -47,9 +63,10 @@ RSpec.describe Member do
 
     describe ".after" do
       it "returns the next member _after_ the provided member" do
-        joel = create(:member)
-        jessie = create(:member)
-        christa = create(:member)
+        joel = build(:member)
+        jessie = build(:member)
+        christa = build(:member)
+        create(:snap_application, members: [joel, jessie, christa])
 
         expect(Member.after(joel)).to eq [jessie, christa]
         expect(Member.after(jessie)).to eq [christa]

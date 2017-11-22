@@ -13,7 +13,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
         medicaid_application = create(
           :medicaid_application,
           anyone_employed: true,
-          members: create_list(:member, 2),
+          members: build_list(:member, 2),
         )
 
         session[:medicaid_application_id] = medicaid_application.id
@@ -27,7 +27,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
     context "medicaid app has a single member" do
       context "client is has 4+ jobs" do
         it "renders edit" do
-          member = create(:member, employed_number_of_jobs: 5)
+          member = build(:member, employed_number_of_jobs: 5)
           medicaid_application = create(
             :medicaid_application,
             members: [member],
@@ -44,7 +44,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
 
       context "client has fewer than 4 jobs" do
         it "redirects to the next page" do
-          member = create(:member, employed_number_of_jobs: 3)
+          member = build(:member, employed_number_of_jobs: 3)
           medicaid_application = create(
             :medicaid_application,
             members: [member],
@@ -77,7 +77,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
 
   describe "#update" do
     it "updates the job number count for the primary member" do
-      member = create(:member)
+      member = build(:member)
       medicaid_application = create(:medicaid_application, members: [member])
 
       session[:medicaid_application_id] = medicaid_application.id

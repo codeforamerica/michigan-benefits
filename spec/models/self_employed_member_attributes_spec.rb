@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe SelfEmployedMemberAttributes do
   describe "#to_h" do
     it "returns the correct attributes prepended with the position" do
-      member = create(
+      member = build(
         :member,
         employment_status: "self_employed",
         first_name: "Boo",

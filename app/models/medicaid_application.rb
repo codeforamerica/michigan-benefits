@@ -48,6 +48,10 @@ class MedicaidApplication < ApplicationRecord
     !anyone_caretaker_or_parent?
   end
 
+  def display_name
+    primary_member.display_name
+  end
+
   def primary_member
     members.order(:id).first || NullMember.new
   end
@@ -68,10 +72,6 @@ class MedicaidApplication < ApplicationRecord
     @pdf ||= Dhs1426Pdf.new(
       medicaid_application: self,
     ).completed_file
-  end
-
-  def members_count
-    members.count
   end
 
   private

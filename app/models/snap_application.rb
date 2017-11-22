@@ -135,10 +135,6 @@ class SnapApplication < ApplicationRecord
     primary_member.display_name
   end
 
-  def birthday
-    primary_member.formatted_birthday
-  end
-
   def primary_member
     members.order(:id).first || NullMember.new
   end

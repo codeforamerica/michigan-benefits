@@ -55,7 +55,7 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
       it "does not redirect" do
         medicaid_application = create(:medicaid_application,
                                       anyone_insured: true,
-                                      members: [create(:member)])
+                                      members: [build(:member)])
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -68,7 +68,7 @@ RSpec.describe Medicaid::InsuranceCurrentTypeController do
       it "redirects to next step" do
         medicaid_application = create(:medicaid_application,
                                       anyone_insured: false,
-                                      members: [create(:member)])
+                                      members: [build(:member)])
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit

@@ -16,7 +16,7 @@ describe VerificationDocument do
 
         document = VerificationDocument.new(
           url: document_url,
-          snap_application: snap_application,
+          benefit_application: snap_application,
         )
 
         expect(document.file).to be_a(Tempfile)
@@ -36,7 +36,7 @@ describe VerificationDocument do
 
         document = VerificationDocument.new(
           url: document_url,
-          snap_application: snap_application,
+          benefit_application: snap_application,
         )
 
         expect(document.file).to be_a(Tempfile)
@@ -51,10 +51,35 @@ describe VerificationDocument do
 
         document = VerificationDocument.new(
           url: "doc url",
-          snap_application: "snap application",
+          benefit_application: "snap application",
         )
 
         expect(document.file).to be_nil
+      end
+    end
+
+    context "primary member has a nil birthday" do
+      it "does not error" do
+        medicaid_application = create(
+          :medicaid_application,
+          members: [build(:member, birthday: nil)],
+        )
+        document_url = "http://example.com/test.jpg"
+        remote_document = double(
+          :remote_document,
+          tempfile: temp_image_file,
+          pdf?: false,
+        )
+        allow(remote_document).to receive(:download).and_return(remote_document)
+        allow(RemoteDocument).to receive(:new).and_return(remote_document)
+
+        document = VerificationDocument.new(
+          url: document_url,
+          benefit_application: medicaid_application,
+        )
+
+        expect(document.file).to be_a(Tempfile)
+        expect(pdf?(document.file.path)).to eq true
       end
     end
 

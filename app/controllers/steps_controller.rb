@@ -1,16 +1,16 @@
 class StepsController < ApplicationController
   layout "step"
 
-  before_action :ensure_application_present, only: %i(edit index)
+  before_action :ensure_application_present, only: %i(edit index update)
   before_action :maybe_skip, only: :edit
 
   helper_method :decoded_step_path
   helper_method :application_title
 
   def ensure_application_present
-    return if current_application
-
-    redirect_to root_path
+    if current_application.blank?
+      redirect_to first_step_path
+    end
   end
 
   def current_application

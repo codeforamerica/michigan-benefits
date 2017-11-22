@@ -11,6 +11,14 @@ module PdfAttributes
     statement ? "yes" : "no"
   end
 
+  def yes_no_checkbox_attribute(field_name, boolean_value)
+    { "#{field_name}_#{yes_no(boolean_value)}".to_sym => "Yes" }
+  end
+
+  def mmddyyyy_date(date)
+    date&.strftime("%m/%d/%Y")
+  end
+
   def residential_or_homeless
     if benefit_application.stable_housing?
       full_street_address(benefit_application.residential_address)

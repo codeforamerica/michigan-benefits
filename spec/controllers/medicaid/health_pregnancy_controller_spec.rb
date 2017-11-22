@@ -55,8 +55,8 @@ RSpec.describe Medicaid::HealthPregnancyController, type: :controller do
     context "multi member household, one female membrer" do
       context "someone is pregnant" do
         it "updates the member" do
-          female_member = create(:member, sex: "female")
-          male_member = create(:member, sex: "male")
+          female_member = build(:member, sex: "female")
+          male_member = build(:member, sex: "male")
 
           medicaid_application = create(
             :medicaid_application,
@@ -78,7 +78,7 @@ RSpec.describe Medicaid::HealthPregnancyController, type: :controller do
     context "single member household" do
       context "someone is pregnant" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,
@@ -96,7 +96,7 @@ RSpec.describe Medicaid::HealthPregnancyController, type: :controller do
 
       context "nobody pregnant" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,

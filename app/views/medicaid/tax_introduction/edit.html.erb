@@ -14,7 +14,8 @@
   <div class="form-card__content">
     <ul class="list--bulleted">
       <li>
-        <%= t("medicaid.tax_introduction.edit.help_text", count: current_application.members.count) %>
+        <%= t("medicaid.tax_introduction.edit.help_text",
+              count: current_application.members_count) %>
       </li>
       <li>
         This information is important in determining the benefits you’re eligible for.

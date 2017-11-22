@@ -11,7 +11,7 @@ RSpec.describe Medicaid::ExpensesAlimonyController, type: :controller do
     context "single member household" do
       context "anyone pays child support alimony or arrears" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application, members: [member]
@@ -33,7 +33,7 @@ RSpec.describe Medicaid::ExpensesAlimonyController, type: :controller do
 
       context "nobody pays child support alimony or arrears" do
         it "does not update the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application, members: [member]

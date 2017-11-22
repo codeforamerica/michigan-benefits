@@ -9,17 +9,5 @@ RSpec.shared_examples "step controller" do
 
       expect(step).to be_an_instance_of step_class
     end
-
-    context "no application is currently under way" do
-      it "redirects to the homepage" do
-        if subject.class != IntroduceYourselfController
-          session[:snap_application_id] = nil
-
-          get :edit
-
-          expect(response).to redirect_to(introduce_yourself_steps_path)
-        end
-      end
-    end
   end
 end

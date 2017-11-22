@@ -11,7 +11,7 @@ RSpec.describe Medicaid::IntroCitizenController, type: :controller do
     context "multi member househoold" do
       context "everyone a citizen" do
         it "updates the members" do
-          members = create_list(:member, 2)
+          members = build_list(:member, 2)
 
           medicaid_application = create(
             :medicaid_application,
@@ -33,7 +33,7 @@ RSpec.describe Medicaid::IntroCitizenController, type: :controller do
     context "single member household" do
       context "is a citizen" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,
@@ -51,7 +51,7 @@ RSpec.describe Medicaid::IntroCitizenController, type: :controller do
 
       context "is not a citizen" do
         it "updates the member" do
-          member = create(:member)
+          member = build(:member)
 
           medicaid_application = create(
             :medicaid_application,

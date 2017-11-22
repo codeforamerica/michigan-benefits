@@ -4,10 +4,10 @@ RSpec.describe Medicaid::InsuranceCurrentMember do
   describe "Validations" do
     context "at least one household member is insured" do
       it "is valid" do
-        member = create(:member,
+        member = build(:member,
                         requesting_health_insurance: true,
                         insured: true)
-        member_not_insured = create(:member,
+        member_not_insured = build(:member,
                                     requesting_health_insurance: true,
                                     insured: false)
 
@@ -21,7 +21,7 @@ RSpec.describe Medicaid::InsuranceCurrentMember do
 
     context "no household member is insured" do
       it "is invalid" do
-        members = create_list(:member, 2,
+        members = build_list(:member, 2,
                               requesting_health_insurance: true,
                               insured: false)
 

@@ -1,10 +1,4 @@
 class SnapStepsController < StepsController
-  def ensure_application_present
-    if current_application.blank?
-      redirect_to introduce_yourself_steps_path
-    end
-  end
-
   def current_application
     SnapApplication.find_by(id: current_application_id)
   end
@@ -31,5 +25,11 @@ class SnapStepsController < StepsController
     else
       root_path(anchor: "fold")
     end
+  end
+
+  private
+
+  def first_step_path
+    introduce_yourself_steps_path
   end
 end

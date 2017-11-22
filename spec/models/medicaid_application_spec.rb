@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe MedicaidApplication do
   describe "#members" do
     it "returns them created_at ascending order" do
-      old_member = create(:member, created_at: 1.year.ago)
-      new_member = create(:member, created_at: 1.day.ago)
+      old_member = build(:member, created_at: 1.year.ago)
+      new_member = build(:member, created_at: 1.day.ago)
       medicaid_app = create(
         :medicaid_application,
         members: [old_member, new_member],

@@ -21,7 +21,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
     context "a single member in the household" do
       context "current member does not have income" do
         it "redirects to next step" do
-          member = create(:member, employed: false)
+          member = build(:member, employed: false)
           medicaid_application = create(
             :medicaid_application,
             members: [member],
@@ -39,7 +39,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
 
       context "household, and a client, has income" do
         it "renders edit" do
-          member = create(:member, employed: true, employed_number_of_jobs: 2)
+          member = build(:member, employed: true, employed_number_of_jobs: 2)
           medicaid_application = create(
             :medicaid_application,
             members: [member],
@@ -60,7 +60,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
   describe "#update" do
     context "client has multiple jobs" do
       it "saves the income for each job" do
-        member = create(:member, employed: true, employed_number_of_jobs: 2)
+        member = build(:member, employed: true, employed_number_of_jobs: 2)
         medicaid_application = create(
           :medicaid_application,
           members: [member],
