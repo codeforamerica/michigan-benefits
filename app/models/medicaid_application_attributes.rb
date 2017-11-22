@@ -98,5 +98,4 @@ class MedicaidApplicationAttributes
       "Homeless"
     end
   end
-
 end

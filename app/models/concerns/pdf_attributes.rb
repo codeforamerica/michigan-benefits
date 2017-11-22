@@ -33,5 +33,4 @@ module PdfAttributes
   def ten_digit_phone
     benefit_application.phone_number.split("")
   end
-
 end
