@@ -17,6 +17,8 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
 
       session[:medicaid_application_id] = medicaid_application.id
 
+      get :edit, params: {}
+
       expect(subject.current_member).to eq married_member
     end
 
@@ -28,23 +30,6 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
       session[:medicaid_application_id] = medicaid_application.id
 
       get :edit, params: { member: jessie.id }
-
-      expect(subject.current_member).to eq jessie
-    end
-
-    it "finds member from posted form" do
-      medicaid_application = create(:medicaid_application, anyone_married: true)
-      _joel = create(:member, benefit_application: medicaid_application)
-      jessie = create(:member, benefit_application: medicaid_application)
-
-      session[:medicaid_application_id] = medicaid_application.id
-
-      put :update, params: {
-        step: {
-          member_id: jessie.id,
-          spouse_id: "0",
-        },
-      }
 
       expect(subject.current_member).to eq jessie
     end
@@ -102,6 +87,28 @@ RSpec.describe Medicaid::IntroMaritalStatusIndicateSpouseController do
           session[:medicaid_application_id] = medicaid_application.id
 
           get :edit
+
+          expect(response).to redirect_to(subject.next_path)
+        end
+      end
+
+      context "current member has spouse id" do
+        it "skips this page" do
+          member_one = build(
+            :member,
+            married: true,
+            spouse_id: 0,
+          )
+
+          medicaid_application = create(
+            :medicaid_application,
+            anyone_married: true,
+            members: [member_one, build(:member)],
+          )
+
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit, params: { member: member_one }
 
           expect(response).to redirect_to(subject.next_path)
         end

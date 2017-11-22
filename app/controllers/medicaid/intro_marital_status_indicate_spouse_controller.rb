@@ -15,7 +15,8 @@ module Medicaid
 
     def skip?
       single_member_household? ||
-        current_application.nobody_married?
+        current_application.nobody_married? ||
+        current_member.spouse_id.present?
     end
 
     def first_married_member
