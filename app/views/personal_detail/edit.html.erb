@@ -23,7 +23,7 @@
       type: :tel,
       options: { maxlength: 9 },
       notes: ["If you don’t have one or don’t want to answer now it’s okay to skip this"],
-      append_html: "<p class='text--secure'><i class='illustration illustration--safety'></i>Social security numbers help ensure you receive the correct benefits. MDHHS maintains strict security guidelines to protect the identities of our residents.</p>",
+      append_html: "<p class='text--secure'><i class='illustration illustration--safety'></i>#{t('ssn.description')}</p>",
       optional: true %>
 
     <%= render partial: 'shared/next_step' %>
