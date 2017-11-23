@@ -29,7 +29,7 @@ module Medicaid
     end
 
     def step_params
-      super.merge(state: "MI", county: "Genesee")
+      super.merge(state: "MI", county: CountyFinder.run())
     end
 
     def address
