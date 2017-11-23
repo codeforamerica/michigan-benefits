@@ -68,6 +68,7 @@ en:
           other: They may be eligible for dual enrollment, which can help cover additional medical expenses.
     insurance_current_member:
       edit:
+        title: Tell us who is currently enrolled in a health insurance plan.
         helper_text:
           one: You've already indicated that %{names} is not in need of additional health coverage.
           other: You've already indicated that %{names} are not in need of additional health coverage.
@@ -93,6 +94,9 @@ en:
           other:
             Provide the Social Security Numbers and Dates of Birth for your
             household members if you’re ready
+    contact_social_security:
+      edit:
+        title: Tell us your Social Security Number and Date of Birth
     amounts_income:
       edit:
         title:
@@ -103,6 +107,10 @@ en:
         title:
           one: Tell us your specific expenses.
           other: "Tell us %{name}’s specific expenses."
+    tax_filing_with_household_members_relationship:
+      edit:
+        title: Tell us your tax relationships with each person that you file
+          taxes with.
     tax_introduction:
       edit:
         help_text:

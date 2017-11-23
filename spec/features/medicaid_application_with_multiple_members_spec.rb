@@ -148,7 +148,7 @@ RSpec.feature "Medicaid app" do
 
     on_page "Health Coverage Needs" do
       expect(page).to have_content(
-        "Tell us who is currently enrolled in a health insurance plan.",
+        I18n.t("medicaid.insurance_current_member.edit.title"),
       )
       expect(page).to have_content("Jessie Tester")
       expect(page).to have_content("Christa Tester")
@@ -239,8 +239,9 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
 
       expect(page).to have_content(
-        "Tell us your tax relationships with each person that "\
-        "you file taxes with.",
+        I18n.t(
+          "medicaid.tax_filing_with_household_members_relationship.edit.title",
+        ),
       )
 
       click_on "Next"

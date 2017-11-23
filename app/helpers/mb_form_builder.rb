@@ -51,12 +51,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       )
 
       <<~HTML
-        <fieldset class="form-group#{error_state(object, method)}">
+        <div class="form-group#{error_state(object, method)}">
         #{rendered_prepend_html}
         #{label_and_field_html}
         #{errors_for(object, method)}
         #{rendered_append_html}
-        </fieldset>
+        </div>
       HTML
     end.join.html_safe
   end
@@ -94,9 +94,9 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     errors = object.errors[method]
     if errors.any?
       <<-HTML.html_safe
-        <fieldset class="form-group#{error_state(object, method)}">
+        <div class="form-group#{error_state(object, method)}">
           #{errors_for(object, method)}
-        </fieldset>
+        </div>
       HTML
     end
   end
@@ -112,7 +112,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   )
     classes = classes.append(%w[textarea])
     <<-HTML.html_safe
-      <fieldset class="form-group#{error_state(object, method)}">
+      <div class="form-group#{error_state(object, method)}">
       #{label_and_field(
         method,
         label_text,
@@ -131,7 +131,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         notes: notes,
       )}
       #{errors_for(object, method)}
-      </fieldset>
+      </div>
     HTML
   end
 
@@ -213,11 +213,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       rendered_label_text = label_text&.gsub("{index}", field_index)
 
       <<~HTML
-        <fieldset class="form-group#{error_state(object, method)}">
+        <div class="form-group#{error_state(object, method)}">
           #{label(method, label_contents(rendered_label_text, options[:notes], options[:optional]))}
           <div class="select">#{select(method, collection, options, html_options, &block)}</div>
           #{errors_for(object, method)}
-        </fieldset>
+        </div>
       HTML
     end.join.html_safe
   end

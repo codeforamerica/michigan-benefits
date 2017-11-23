@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Tell us who is currently enrolled in a health insurance plan.
+      <%= t("medicaid.insurance_current_member.edit.title") %>
     </div>
     <% if @step.members_not_needing_insurance.present? %>
       <p class="text--help text--centered">
@@ -17,6 +17,9 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
         <fieldset class="form-group">
+          <legend class="sr-only">
+            <%= t("medicaid.insurance_current_member.edit.title") %>
+          </legend>
           <% @step.members_needing_insurance.each do |member| %>
               <%= f.fields_for("members[]", member) do |ff| %>
                 <%= ff.mb_checkbox(

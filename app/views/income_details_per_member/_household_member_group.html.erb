@@ -1,0 +1,6 @@
+<fieldset class="form-group household-member-group" data-member-name="<%= member.display_name %>">
+  <legend class="text--section-header">
+    <%= member.display_name %> (<%= member.employment_status.titleize %>)
+  </legend>
+  <%= yield %>
+</fieldset>
