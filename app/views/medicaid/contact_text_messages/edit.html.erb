@@ -7,7 +7,7 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_input_field :sms_phone_number,
+      <%= f.mb_phone_number_field :sms_phone_number,
         "Phone number",
         type: :tel,
         autofocus: true,
