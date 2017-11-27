@@ -39,7 +39,7 @@ RSpec.describe Dhs1426Pdf do
         pay_student_loan_interest: true,
         student_loan_interest_expenses: 70,
         insured: true,
-        insurance_type: "Medicaid",
+        insurance_type: "Medicare",
       )
 
       secondary_member = build(
@@ -162,10 +162,11 @@ RSpec.describe Dhs1426Pdf do
         flint_water_yes: "Yes",
         need_medical_expense_help_3_months_yes: "Yes",
         anyone_insured_yes: "Yes",
-        insured_medicaid_yes: "Yes",
-        insured_medicaid_member_names: "Christa",
+        insured_medicare_yes: "Yes",
+        insured_medicare_member_names: "Christa",
         insured_employer_yes: "Yes",
         insured_employer_member_names: "Roger",
+        help_paying_medicare_premiums_yes: "Yes",
       }
 
       expected_phone_data = {
