@@ -74,6 +74,10 @@ class MedicaidApplicationAttributes
         anyone_has_insurance_type = members.any? ? "Yes" : nil
         names_with_insurance_type = members.map(&:first_name).join(", ")
 
+        if insurance_slug == :medicare
+          hash[:help_paying_medicare_premiums_yes] = anyone_has_insurance_type
+        end
+
         hash[:"insured_#{insurance_slug}_yes"] = anyone_has_insurance_type
         hash[:"insured_#{insurance_slug}_member_names"] =
           names_with_insurance_type

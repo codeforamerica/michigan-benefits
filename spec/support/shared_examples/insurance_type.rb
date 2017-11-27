@@ -3,20 +3,20 @@ require "rails_helper"
 RSpec.shared_examples_for "insurance type" do |insurance_slug, insurance_name|
   context "one household member with #{insurance_name}" do
     it "sets insured_#{insurance_slug}_yes to 'Yes' and lists their name" do
-      member_with_medicaid = build(
+      member_with_insurance = build(
         :member,
         first_name: "Christa",
         last_name: "Person",
         insurance_type: insurance_name,
       )
-      member_without_medicaid = build(
+      member_without_insurance = build(
         :member,
         first_name: "Ben",
         last_name: "Person",
       )
       medicaid_application = create(
         :medicaid_application,
-        members: [member_with_medicaid, member_without_medicaid],
+        members: [member_with_insurance, member_without_insurance],
       )
 
       expected_data = {

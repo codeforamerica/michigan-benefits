@@ -21,7 +21,29 @@ RSpec.describe MedicaidApplicationAttributes do
 
     describe "insurance types" do
       it_should_behave_like "insurance type", "medicaid", "Medicaid"
-      it_should_behave_like "insurance type", "medicare", "Medicare"
+
+      context "applicant is on medicare" do
+        it_should_behave_like "insurance type", "medicare", "Medicare"
+        it "should fill out yes for do you need help" do
+          member_with_medicare = build(
+            :member,
+            insurance_type: "Medicare",
+          )
+          medicaid_application = create(
+            :medicaid_application,
+            members: [member_with_medicare],
+          )
+
+          data = MedicaidApplicationAttributes.new(
+            medicaid_application: medicaid_application,
+          ).to_h
+
+          expect(data).to include(
+            help_paying_medicare_premiums_yes: "Yes",
+          )
+        end
+      end
+
       it_should_behave_like "insurance type", "chip", "CHIP/MIChild"
       it_should_behave_like "insurance type", "va", "VA health care programs"
       it_should_behave_like "insurance type",
