@@ -36,13 +36,13 @@ class StepNavigation
       ContactConfirmPhoneNumberController,
       GeneralAnythingElseController,
     ],
-    "Legal" => [
-      LegalAgreementController,
-      SignAndSubmitController,
-    ],
     "Submit Documents" => [
       DocumentGuideController,
       DocumentsController,
+    ],
+    "Legal" => [
+      LegalAgreementController,
+      SignAndSubmitController,
       SuccessController,
     ],
   }.freeze

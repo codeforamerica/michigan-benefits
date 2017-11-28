@@ -445,7 +445,7 @@ RSpec.feature "Medicaid app" do
       click_on "Next"
     end
 
-    on_pages "Paperwork" do
+    on_pages "Documents" do
       expect(page).to have_content(
         "Upload some paperwork if you can right now.",
       )
