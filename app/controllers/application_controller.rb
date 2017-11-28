@@ -19,4 +19,6 @@ class ApplicationController < ActionController::Base
   def current_path(*); end
 
   def next_path(*); end
+
+  def current_application; end
 end
