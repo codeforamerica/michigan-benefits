@@ -46,6 +46,17 @@ RSpec.configure do |config|
 
   config.run_all_when_everything_filtered = true
 
+  config.before(:each) do
+    stub_request(:get, /api.opencagedata.com/).
+      to_return(status: 200, body: {
+        results: [],
+        status: {
+          code: 200,
+          message: "OK",
+        },
+      }.to_json, headers: {})
+  end
+
   if ENV["CI"]
     config.before(:example, :focus) do |example|
       raise(

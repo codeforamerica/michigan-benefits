@@ -97,10 +97,13 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
 
   describe "#update" do
     context "when valid" do
-      it "redirects to the next step" do
-        medicaid_application = create(:medicaid_application)
-        session[:medicaid_application_id] = medicaid_application.id
+      let(:medicaid_application) { create(:medicaid_application) }
 
+      before(:each) do
+        session[:medicaid_application_id] = medicaid_application.id
+      end
+
+      it "redirects to the next step" do
         params = {
           street_address: "321 Real St",
           city: "Shelbyville",
@@ -114,13 +117,7 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
       end
 
       context "and no residential address currently exists" do
-        it "updates the app and provides default values for county and state" do
-          medicaid_application = create(
-            :medicaid_application,
-            stable_housing: true,
-          )
-          session[:medicaid_application_id] = medicaid_application.id
-
+        it "updates the app" do
           params = {
             street_address: "321 Real St",
             street_address_2: "Apt B",
@@ -137,8 +134,6 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
           expect(residential_address.street_address_2).to eq "Apt B"
           expect(residential_address.city).to eq "Shelbyville"
           expect(residential_address.zip).to eq "54321"
-          expect(residential_address.county).to eq("Genesee")
-          expect(residential_address.state).to eq("MI")
           expect(
             medicaid_application.mailing_address_same_as_residential_address,
           ).to eq false
@@ -147,16 +142,10 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
 
       context "and residential address currently exists" do
         it "updates the residential address" do
-          medicaid_application = create(
-            :medicaid_application,
-            stable_housing: true,
-          )
           create(:residential_address,
                  street_address: "456 Fake Street",
                  city: "Jackson",
                  zip: "55555",
-                 county: "Blah",
-                 state: "CA",
                  benefit_application: medicaid_application)
           session[:medicaid_application_id] = medicaid_application.id
 
@@ -174,12 +163,50 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
           expect(residential_address.street_address).to eq "321 Real St"
           expect(residential_address.city).to eq "Shelbyville"
           expect(residential_address.zip).to eq "54321"
-          expect(residential_address.county).to eq("Genesee")
-          expect(residential_address.state).to eq("MI")
           expect(
             medicaid_application.mailing_address_same_as_residential_address,
           ).to eq false
         end
+      end
+
+      it "sets the county based on address" do
+        params = {
+          street_address: "321 Real St",
+          street_address_2: "Apt 4",
+          city: "Shelbyville",
+          zip: "54321",
+        }
+
+        county_finder = instance_double(CountyFinder)
+        expect(CountyFinder).to receive(:new).with(
+          street_address: "321 Real St",
+          city: "Shelbyville",
+          zip: "54321",
+          state: "MI",
+        ).and_return(county_finder)
+        allow(county_finder).to receive(:run).and_return("Wayne")
+
+        put :update, params: { step: params }
+
+        residential_address = medicaid_application.reload.residential_address
+
+        expect(residential_address.county).to eq("Wayne")
+      end
+
+
+      it "sets the state to 'MI'" do
+        params = {
+          street_address: "321 Real St",
+          street_address_2: "Apt 4",
+          city: "Shelbyville",
+          zip: "54321",
+        }
+
+        put :update, params: { step: params }
+
+        residential_address = medicaid_application.reload.residential_address
+
+        expect(residential_address.state).to eq("MI")
       end
     end
   end

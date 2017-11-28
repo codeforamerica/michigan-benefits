@@ -7,7 +7,7 @@ class ResidentialAddressController < SnapStepsController
   end
 
   def address_params
-    step_params.slice(:city, :county, :state, :street_address, :zip)
+    step_params.slice(:city, :state, :street_address, :zip)
   end
 
   def existing_attributes
