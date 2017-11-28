@@ -1,8 +1,8 @@
-<% content_for :header_title, 'Your Household' %>
+<% content_for :header_title, "Your Household" %>
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Ok, let us know which people these situations apply to.
+      <%= t("snap.household_more_info_per_member.edit.title") %>
     </div>
   </header>
 
@@ -11,7 +11,14 @@
 
       <% if !current_application.everyone_a_citizen? %>
         <fieldset class="form-group">
-          <p class="form-question">Who is not a citizen?<span class="form-card__optional">(optional)</span></p>
+          <legend class="sr-only">
+            <%= t("snap.household_more_info_per_member.edit.prompt") %>
+          </legend>
+
+          <p class="form-question">
+          <%= t("snap.household_more_info_per_member.edit.prompt") %>
+          <span class="form-card__optional">(optional)</span>
+          </p>
             <% @step.members.each do |member| %>
               <%= f.fields_for('members[]', member) do |ff| %>
                 <%= ff.mb_checkbox(
