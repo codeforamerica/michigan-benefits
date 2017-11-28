@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127231016) do
+ActiveRecord::Schema.define(version: 20171128184448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,15 +103,16 @@ ActiveRecord::Schema.define(version: 20171127231016) do
   end
 
   create_table "exports", force: :cascade do |t|
+    t.bigint "benefit_application_id", null: false
+    t.string "benefit_application_type", null: false
     t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.string "destination"
     t.boolean "force", default: false
     t.string "metadata"
-    t.bigint "snap_application_id"
     t.string "status", default: "new"
     t.datetime "updated_at", null: false
-    t.index ["snap_application_id"], name: "index_exports_on_snap_application_id"
+    t.index ["benefit_application_type", "benefit_application_id"], name: "index_exports_on_benefit_app_type_and_benefit_app_id"
   end
 
   create_table "medicaid_applications", force: :cascade do |t|

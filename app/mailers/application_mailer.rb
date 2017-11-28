@@ -10,7 +10,7 @@ class ApplicationMailer < ActionMailer::Base
     )
   end
 
-  def office_application_notification(
+  def office_snap_application_notification(
     file_name:,
     recipient_email:,
     office_location: nil
@@ -26,6 +26,17 @@ class ApplicationMailer < ActionMailer::Base
     )
   end
 
+  def office_medicaid_application_notification(file_name:, recipient_email:)
+    attachments["medicaid_application.pdf"] = File.read(file_name)
+
+    mail(
+      from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
+      to: recipient_email,
+      subject: "A new 1426 from someone online has been submitted!",
+      template_name: "office_medicaid_application_notification",
+    )
+  end
+
   private
 
   def subject(office_location)
@@ -38,9 +49,9 @@ class ApplicationMailer < ActionMailer::Base
 
   def template_name(office_location)
     if office_location.present?
-      "in_office_application_notification"
+      "in_office_snap_application_notification"
     else
-      "office_application_notification"
+      "office_snap_application_notification"
     end
   end
 end

@@ -16,7 +16,7 @@ class Export < ApplicationRecord
     mi_bridges
   ).freeze
 
-  belongs_to :snap_application
+  belongs_to :benefit_application, polymorphic: true
   validates :status, inclusion: { in: VALID_STATUS }
   validates :destination, inclusion: { in: VALID_DESTINATIONS }
 
@@ -30,7 +30,7 @@ class Export < ApplicationRecord
   scope :succeeded, -> { where(status: :succeeded) }
   scope :for_destination, ->(destination) { where(destination: destination) }
   scope :completed, -> { where.not(completed_at: nil) }
-  scope :application_ids, -> { pluck(:snap_application_id) }
+  scope :application_ids, -> { pluck(:benefit_application_id) }
   scope :latest, -> { first }
   scope :without, ->(export) { where.not(id: export.id) }
   scope :successful_or_in_flight, -> {
@@ -41,12 +41,12 @@ class Export < ApplicationRecord
   def execute
     raise ArgumentError, "#export requires a block" unless block_given?
 
-    if snap_application.exports.for_destination(destination).
+    if benefit_application.exports.for_destination(destination).
         successful_or_in_flight.without(self).present? && !force
 
       transition_to new_status: :unnecessary
       update(metadata: "There is already another successful or in progress " \
-                       "export for application #{snap_application_id} via " \
+                       "export for application #{benefit_application_id} via " \
                        "#{destination}. If you really want to re-export " \
                        "use the force flag",
              completed_at: Time.zone.now)
@@ -54,7 +54,7 @@ class Export < ApplicationRecord
     end
 
     transition_to new_status: :in_process
-    yield(snap_application, logger)
+    yield(benefit_application, logger)
     update(metadata: read_logger, completed_at: Time.zone.now)
     transition_to new_status: :succeeded
   rescue StandardError => e
@@ -62,7 +62,7 @@ class Export < ApplicationRecord
     raise e
   ensure
     begin
-      snap_application.close_pdf
+      benefit_application.close_pdf
     rescue StandardError => e
       fail_with_exception(e)
     end
@@ -71,8 +71,7 @@ class Export < ApplicationRecord
   def fail_with_exception(e)
     metadata = "#{read_logger}\n#{'*' * 20}\n#{'*' * 20}\n"
     metadata += "#{e.class} - #{e.message} #{e.backtrace.join("\n")}"
-    update(metadata: metadata,
-           completed_at: Time.zone.now)
+    update(metadata: metadata, completed_at: Time.zone.now)
     transition_to new_status: :failed
   end
 

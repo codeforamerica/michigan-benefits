@@ -22,7 +22,7 @@ RSpec.describe SuccessController do
       get :edit
 
       expect(ExportFactory).to have_received(:create).
-        with(snap_application: current_app, destination: :office_email)
+        with(benefit_application: current_app, destination: :office_email)
     end
 
     it "drives the app once" do
@@ -182,7 +182,7 @@ RSpec.describe SuccessController do
         put :update, params: params
 
         expect(ExportFactory).to have_received(:create).
-          with(snap_application: current_app, destination: :client_email)
+          with(benefit_application: current_app, destination: :client_email)
       end
     end
 

@@ -13,19 +13,19 @@ FactoryBot.define do
 
     trait :faxed do
       after :create do |app|
-        create(:export, :faxed, :succeeded, snap_application: app)
+        create(:export, :faxed, :succeeded, benefit_application: app)
       end
     end
 
     trait :emailed_client do
       after :create do |app|
-        create(:export, :emailed_client, :succeeded, snap_application: app)
+        create(:export, :emailed_client, :succeeded, benefit_application: app)
       end
     end
 
     trait :emailed_office do
       after :create do |app|
-        create(:export, :emailed_office, :succeeded, snap_application: app)
+        create(:export, :emailed_office, :succeeded, benefit_application: app)
       end
     end
   end

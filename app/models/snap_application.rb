@@ -29,7 +29,6 @@ class SnapApplication < ApplicationRecord
   has_many :addresses, as: :benefit_application, dependent: :destroy
   has_many :driver_applications, dependent: :destroy
   has_many :driver_errors, through: :driver_applications
-  has_many :exports, dependent: :destroy
   has_many :members, as: :benefit_application, dependent: :destroy
 
   scope :signed, -> { where.not(signed_at: nil) }
@@ -60,10 +59,6 @@ class SnapApplication < ApplicationRecord
     StepNavigation
   end
 
-  def exportable?
-    signature.present?
-  end
-
   def drive_status
     if driver_applications.any? && latest_drive_attempt.driver_errors.empty?
       :drive_success
@@ -85,13 +80,6 @@ class SnapApplication < ApplicationRecord
     @pdf ||= Dhs1171Pdf.new(
       snap_application: self,
     ).completed_file
-  end
-
-  def close_pdf
-    if @pdf.present? && @pdf.respond_to?(:close)
-      @pdf.close
-      @pdf.unlink
-    end
   end
 
   def monthly_gross_income
