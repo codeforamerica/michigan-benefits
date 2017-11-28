@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe MedicaidApplicationMemberAttributes do
   describe "#to_h" do
     it "returns the member attributes as a hash" do
+      medicaid_application = create(:medicaid_application)
       member = build(
         :member,
         first_name: "First",
@@ -36,6 +37,7 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         child_support_alimony_arrears_expenses: 100,
         pay_student_loan_interest: true,
         student_loan_interest_expenses: 70,
+        benefit_application: medicaid_application,
       )
 
       result = MedicaidApplicationMemberAttributes.new(
@@ -52,6 +54,7 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_spouse_name: "Candy Crush",
         primary_member_caretaker_yes: "Yes",
         primary_member_in_college_yes: "Yes",
+        primary_member_joint_filing_member_name: nil,
         primary_member_under_21_no: "Yes",
         primary_member_ssn_0: "1",
         primary_member_ssn_1: "1",
@@ -62,9 +65,11 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_ssn_6: "3",
         primary_member_ssn_7: "3",
         primary_member_ssn_8: "3",
+        primary_member_tax_relationship_joint_no: "Yes",
         primary_member_new_mom_yes: "Yes",
         primary_member_requesting_health_insurance_yes: "Yes",
         primary_member_citizen_yes: "Yes",
+        primary_member_claimed_as_dependent_no: "Yes",
         primary_member_employed: "Yes",
         primary_member_not_employed: nil,
         primary_member_self_employed: "Yes",
@@ -95,7 +100,12 @@ RSpec.describe MedicaidApplicationMemberAttributes do
 
     context "nil birthday" do
       it "it does not return keys for age-related questions" do
-        member = build(:member, birthday: nil)
+        medicaid_application = create(:medicaid_application)
+        member = build(
+          :member,
+          benefit_application: medicaid_application,
+          birthday: nil,
+        )
 
         result = MedicaidApplicationMemberAttributes.new(
           member: member,
