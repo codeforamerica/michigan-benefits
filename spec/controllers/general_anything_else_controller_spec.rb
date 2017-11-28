@@ -24,7 +24,7 @@ RSpec.describe GeneralAnythingElseController do
       it "is valid" do
         put :update
 
-        expect(response).to redirect_to("/steps/legal-agreement")
+        expect(response).to redirect_to("/steps/document-guide")
         expect(current_app.additional_information).to eq(
           attributes.fetch(:additional_information),
         )
@@ -37,7 +37,7 @@ RSpec.describe GeneralAnythingElseController do
 
         put :update, params: { step: { additional_information: nil } }
 
-        expect(response).to redirect_to("/steps/legal-agreement")
+        expect(response).to redirect_to("/steps/document-guide")
         expect(current_app.additional_information).to be_nil
       end
     end
