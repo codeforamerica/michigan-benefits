@@ -22,31 +22,68 @@ RSpec.describe MailingAddressController, type: :controller do
 
   describe "#update" do
     context "when valid" do
-      it "updates the app and provides default values for county and state" do
-        valid_params = {
+      it "updates the app with posted params" do
+        params = {
           street_address: "321 Real St",
+          street_address_2: "Apt 4",
           city: "Shelbyville",
           zip: "54321",
-        }
-
-        mailing_same_as_residential = {
           mailing_address_same_as_residential_address: "false",
         }
 
-        put :update,
-          params: { step: valid_params.merge(mailing_same_as_residential) }
+        put :update, params: { step: params }
 
-        current_app.reload
+        mailing_address = current_app.reload.mailing_address
 
-        valid_params.each do |key, value|
-          expect(current_app.mailing_address[key]).to eq(value)
-        end
-        expect(current_app.mailing_address["county"]).to eq("Genesee")
-        expect(current_app.mailing_address["state"]).to eq("MI")
+        expect(mailing_address.street_address).to eq("321 Real St")
+        expect(mailing_address.street_address_2).to eq("Apt 4")
+        expect(mailing_address.city).to eq("Shelbyville")
+        expect(mailing_address.zip).to eq("54321")
 
         expect(current_app.mailing_address_same_as_residential_address).to be(
           false,
         )
+      end
+
+      it "sets the county based on address" do
+        params = {
+          street_address: "321 Real St",
+          street_address_2: "Apt 4",
+          city: "Shelbyville",
+          zip: "54321",
+          mailing_address_same_as_residential_address: "false",
+        }
+
+        county_finder = instance_double(CountyFinder)
+        expect(CountyFinder).to receive(:new).with(
+          street_address: "321 Real St",
+          city: "Shelbyville",
+          zip: "54321",
+          state: "MI",
+        ).and_return(county_finder)
+        allow(county_finder).to receive(:run).and_return("Wayne")
+
+        put :update, params: { step: params }
+
+        mailing_address = current_app.reload.mailing_address
+
+        expect(mailing_address.county).to eq("Wayne")
+      end
+
+      it "sets the state to 'MI'" do
+        params = {
+          street_address: "321 Real St",
+          street_address_2: "Apt 4",
+          city: "Shelbyville",
+          zip: "54321",
+          mailing_address_same_as_residential_address: "false",
+        }
+
+        put :update, params: { step: params }
+
+        mailing_address = current_app.reload.mailing_address
+
+        expect(mailing_address.state).to eq("MI")
       end
 
       it "redirects to the next step" do

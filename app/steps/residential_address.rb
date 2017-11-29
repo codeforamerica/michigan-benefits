@@ -1,8 +1,6 @@
 class ResidentialAddress < Step
   step_attributes(
     :city,
-    :county,
-    :state,
     :street_address,
     :street_address_2,
     :unstable_housing,
@@ -28,12 +26,6 @@ class ResidentialAddress < Step
         message: "Make sure your ZIP code is 5 digits long",
       }
   end
-
-  validates :county,
-    inclusion: { in: %w(Genesee), message: "Make sure the county is Genesee" }
-
-  validates :state,
-    inclusion: { in: %w(MI), message: "Make sure the state is MI" }
 
   private
 

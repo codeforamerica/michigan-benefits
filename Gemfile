@@ -18,6 +18,7 @@ gem "devise-otp",
   git: "https://github.com/pynixwang/devise-otp",
   ref: "a181217a2d436de7ebb9a278bcb326bbddefa514"
 gem "faraday"
+gem "geocoder"
 gem "good_migrations"
 gem "high_voltage"
 gem "jquery-rails"
