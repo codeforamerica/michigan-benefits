@@ -21,10 +21,6 @@ module Submittable
     @receiving_office ||= OfficeRecipient.new(benefit_application: self)
   end
 
-  def exportable?
-    signature.present?
-  end
-
   def close_pdf
     if @pdf.present? && @pdf.respond_to?(:close)
       @pdf.close

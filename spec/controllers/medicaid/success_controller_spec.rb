@@ -7,25 +7,12 @@ RSpec.describe Medicaid::SuccessController do
 
   describe "#edit" do
     it "emails the medicaid application to the office" do
-      allow(ExportFactory).to receive(:create)
+      allow(Medicaid::ExportFactory).to receive(:create)
 
       get :edit
 
-      expect(ExportFactory).to have_received(:create).
+      expect(Medicaid::ExportFactory).to have_received(:create).
         with(benefit_application: current_app, destination: :office_email)
-    end
-
-    context "application is not exportable" do
-      it "does not run the export factory, or application driver" do
-        run_background_jobs_immediately do
-          allow(ExportFactory).to receive(:create)
-          current_app.update(signature: nil)
-
-          get :edit
-
-          expect(ExportFactory).not_to have_received(:create)
-        end
-      end
     end
 
     context "in order to not allow going back" do
@@ -38,6 +25,6 @@ RSpec.describe Medicaid::SuccessController do
   end
 
   def current_app
-    @_current_app ||= create(:medicaid_application, signature: "Test sig")
+    @_current_app ||= create(:medicaid_application)
   end
 end

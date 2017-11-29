@@ -13,9 +13,7 @@ module Medicaid
     private
 
     def export
-      return if !current_application.exportable?
-
-      ExportFactory.create(
+      Medicaid::ExportFactory.create(
         destination: :office_email,
         benefit_application: current_application,
       )

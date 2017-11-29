@@ -1,24 +1,14 @@
 class OfficeEmailApplicationJob < ApplicationJob
   def perform(export:)
-    export.execute do |benefit_application, logger|
-      if benefit_application.class == SnapApplication
-        ApplicationMailer.office_snap_application_notification(
-          file_name: benefit_application.pdf.path,
-          recipient_email: benefit_application.receiving_office_email,
-          office_location: benefit_application.office_location,
-        ).deliver
+    export.execute do |snap_application, logger|
+      ApplicationMailer.office_snap_application_notification(
+        file_name: snap_application.pdf.path,
+        recipient_email: snap_application.receiving_office_email,
+        office_location: snap_application.office_location,
+      ).deliver
 
-        logger.info("Emailed to #{benefit_application.receiving_office_email} "\
-                    "for Snap Client #{benefit_application.id}")
-      else
-        ApplicationMailer.office_medicaid_application_notification(
-          file_name: benefit_application.pdf.path,
-          recipient_email: benefit_application.receiving_office_email,
-        ).deliver
-
-        logger.info("Emailed to #{benefit_application.receiving_office_email} "\
-                    "for Medicaid Client #{benefit_application.id}")
-      end
+      logger.info("Emailed to #{snap_application.receiving_office_email} "\
+                  "for Snap Client #{snap_application.id}")
     end
   end
 end

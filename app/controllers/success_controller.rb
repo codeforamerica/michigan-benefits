@@ -16,8 +16,6 @@ class SuccessController < SnapStepsController
   private
 
   def export
-    return if !current_application.exportable?
-
     ExportFactory.create(
       destination: :sms,
       benefit_application: current_application,
