@@ -31,25 +31,48 @@ RSpec.describe ResidentialAddressController, type: :controller do
       it "updates the app" do
         valid_params = {
           street_address: "321 Real St",
+          street_address_2: "Apt 4",
           city: "Shelbyville",
           zip: "54321",
+          unstable_housing: "1",
         }
 
-        unstable_housing = { unstable_housing: "1" }
+        put :update, params: { step: valid_params }
 
-        put :update, params: { step: valid_params.merge(unstable_housing) }
+        residential_address.reload
 
-        current_app_residential_address.reload
-
-        valid_params.each do |key, value|
-          expect(current_app_residential_address[key]).to eq(value)
-        end
-
+        expect(residential_address.street_address).to eq("321 Real St")
+        expect(residential_address.street_address_2).to eq("Apt 4")
+        expect(residential_address.city).to eq("Shelbyville")
+        expect(residential_address.zip).to eq("54321")
         expect(current_app.reload.stable_housing).to eq false
       end
 
-      it "always sets the county to 'Genesee' and state to 'MI'" do
-        current_app_residential_address.update(state: "MA", county: "example")
+      it "sets the county based on address" do
+        valid_params = {
+          street_address: "321 Main St",
+          city: "Plymouth",
+          zip: "48170",
+        }
+
+        county_finder = instance_double(CountyFinder)
+        expect(CountyFinder).to receive(:new).with(
+          street_address: "321 Main St",
+          city: "Plymouth",
+          zip: "48170",
+          state: "MI",
+        ).and_return(county_finder)
+        allow(county_finder).to receive(:run).and_return("Wayne")
+
+        put :update, params: { step: valid_params }
+
+        residential_address.reload
+
+        expect(residential_address.county).to eq("Wayne")
+      end
+
+      it "sets the state to 'MI'" do
+        residential_address.update(state: "MA")
         valid_params = {
           street_address: "321 Main St",
           city: "Plymouth",
@@ -58,10 +81,9 @@ RSpec.describe ResidentialAddressController, type: :controller do
 
         put :update, params: { step: valid_params }
 
-        current_app_residential_address.reload
+        residential_address.reload
 
-        expect(current_app_residential_address["county"]).to eq("Genesee")
-        expect(current_app_residential_address["state"]).to eq("MI")
+        expect(residential_address.state).to eq("MI")
       end
 
       it "redirects to the next step" do
@@ -83,8 +105,8 @@ RSpec.describe ResidentialAddressController, type: :controller do
     @_current_app ||= create(:snap_application, addresses: [address])
   end
 
-  def current_app_residential_address
-    current_app.addresses.where.not(mailing: true).first
+  def residential_address
+    current_app.addresses.where(mailing: false).first
   end
 
   def address

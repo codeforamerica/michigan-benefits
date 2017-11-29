@@ -5,7 +5,7 @@ RSpec.describe CountyFinder do
     expect(Geocoder).to receive(:search).with(
       "2405 West Vernor Highway Detroit MI 48216",
       countrycode: "us",
-    ).and_return([double('result', county: "Wayne County")])
+    ).and_return([double("result", county: "Wayne County")])
 
     expect(CountyFinder.new(
       street_address: "2405 West Vernor Highway",

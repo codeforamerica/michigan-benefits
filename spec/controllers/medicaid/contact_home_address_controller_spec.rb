@@ -193,7 +193,6 @@ RSpec.describe Medicaid::ContactHomeAddressController, type: :controller do
         expect(residential_address.county).to eq("Wayne")
       end
 
-
       it "sets the state to 'MI'" do
         params = {
           street_address: "321 Real St",

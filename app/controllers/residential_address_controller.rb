@@ -2,12 +2,18 @@ class ResidentialAddressController < SnapStepsController
   private
 
   def update_application
-    current_application.update!(stable_housing: stable_housing)
-    address.update(address_params)
+    current_application.update!(application_params)
+    address.update(address_params.merge(county: county))
   end
 
   def address_params
-    step_params.slice(:city, :state, :street_address, :zip)
+    step_params.
+      except(:unstable_housing).
+      merge(state: "MI")
+  end
+
+  def application_params
+    { stable_housing: stable_housing }
   end
 
   def existing_attributes
@@ -17,7 +23,7 @@ class ResidentialAddressController < SnapStepsController
   end
 
   def address
-    current_application.addresses.where.not(mailing: true).first ||
+    current_application.addresses.where(mailing: false).first ||
       current_application.addresses.new(mailing: false)
   end
 
@@ -25,8 +31,13 @@ class ResidentialAddressController < SnapStepsController
     !step_params[:unstable_housing]
   end
 
-  def step_params
-    super.merge(state: "MI", county: "Genesee")
+  def county
+    @county ||= CountyFinder.new(
+      street_address: address_params[:street_address],
+      city: address_params[:city],
+      zip: address_params[:zip],
+      state: address_params[:state],
+    ).run
   end
 
   def skip?

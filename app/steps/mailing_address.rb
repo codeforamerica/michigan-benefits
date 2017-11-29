@@ -2,7 +2,6 @@ class MailingAddress < Step
   step_attributes(
     :city,
     :mailing_address_same_as_residential_address,
-    :state,
     :street_address,
     :street_address_2,
     :zip,
@@ -16,9 +15,6 @@ class MailingAddress < Step
 
   validates :zip,
     length: { is: 5, message: "Make sure your ZIP code is 5 digits long" }
-
-  validates :state,
-    inclusion: { in: %w(MI), message: "Make sure the county is MI" }
 
   validates(
     :mailing_address_same_as_residential_address,

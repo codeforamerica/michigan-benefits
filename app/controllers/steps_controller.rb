@@ -33,10 +33,6 @@ class StepsController < ApplicationController
     end
   end
 
-  def update_application
-    current_application.update!(step_params)
-  end
-
   def self.to_param
     controller_path.dasherize
   end
@@ -73,9 +69,21 @@ class StepsController < ApplicationController
 
   delegate :step_class, to: :class
 
+  # Redefine me
+
+  def update_application
+    current_application.update!(step_params)
+  end
+
   def existing_attributes
     HashWithIndifferentAccess.new(current_application&.attributes)
   end
+
+  def skip?
+    false
+  end
+
+  # Probably don't redefine me
 
   def step_params
     params.fetch(:step, {}).permit(*step_attrs)
@@ -95,10 +103,6 @@ class StepsController < ApplicationController
     elsif skip?
       redirect_to next_path
     end
-  end
-
-  def skip?
-    false
   end
 
   def previous_path(params = nil)

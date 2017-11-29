@@ -7,8 +7,6 @@ RSpec.describe ResidentialAddress do
         street_address: nil,
         city: nil,
         zip: nil,
-        county: "Genesee",
-        state: "MI",
         unstable_housing: "1",
       )
 
@@ -22,8 +20,6 @@ RSpec.describe ResidentialAddress do
         street_address: "123 Main St.",
         city: "Flint",
         zip: "12345",
-        county: "Genesee",
-        state: "MI",
         unstable_housing: "0",
       )
 
@@ -31,8 +27,6 @@ RSpec.describe ResidentialAddress do
         street_address: nil,
         city: nil,
         zip: nil,
-        county: "Genesee",
-        state: "MI",
         unstable_housing: "0",
       )
 
@@ -40,8 +34,6 @@ RSpec.describe ResidentialAddress do
         street_address: "",
         city: "",
         zip: "",
-        county: "Genesee",
-        state: "MI",
         unstable_housing: "0",
       )
 
