@@ -69,13 +69,6 @@ RSpec.describe Dhs1426Pdf do
         tax_relationship: "Joint",
       )
 
-      third_member = build(
-        :member,
-        tax_relationship: "Dependent",
-        first_name: "Young",
-        last_name: "Person",
-      )
-
       mailing_address = build(
         :mailing_address,
         street_address: "123 Main St.",
@@ -98,7 +91,7 @@ RSpec.describe Dhs1426Pdf do
 
       medicaid_application = create(
         :medicaid_application,
-        members: [primary_member, secondary_member, third_member],
+        members: [primary_member, secondary_member],
         stable_housing: true,
         phone_number: "0123456789",
         flint_water_crisis: true,
@@ -180,8 +173,8 @@ RSpec.describe Dhs1426Pdf do
         insured_employer_member_names: "Roger",
         help_paying_medicare_premiums_yes: "Yes",
         filing_federal_taxes_next_year_yes: "Yes",
-        any_member_tax_relationship_dependent_yes: "Yes",
-        dependent_member_names: "Young",
+        any_member_tax_relationship_dependent_no: "Yes",
+        dependent_member_names: "",
       }
 
       expected_phone_data = {

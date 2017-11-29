@@ -121,5 +121,49 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         )
       end
     end
+
+    context "joint filing tax relationship" do
+      it "returns key indicating that the member is filing jointly" do
+        medicaid_application = create(:medicaid_application)
+        member = build(
+          :member,
+          benefit_application: medicaid_application,
+          tax_relationship: "Joint",
+        )
+
+        result = MedicaidApplicationMemberAttributes.new(
+          member: member,
+          position: "primary",
+        ).to_h
+
+        expect(result[:primary_member_tax_relationship_joint_yes]).to eq "Yes"
+      end
+
+      it "returns the other joint filing member first name" do
+        medicaid_application = create(:medicaid_application)
+        spouse = create(
+          :member,
+          first_name: "Spousey",
+          last_name: "Spouserson",
+          benefit_application: medicaid_application,
+          tax_relationship: "Joint",
+        )
+        member = create(
+          :member,
+          spouse: spouse,
+          benefit_application: medicaid_application,
+          tax_relationship: "Joint",
+        )
+
+        result = MedicaidApplicationMemberAttributes.new(
+          member: member,
+          position: "primary",
+        ).to_h
+
+        expect(result[:primary_member_joint_filing_member_name]).to eq(
+          "Spousey Spouserson",
+        )
+      end
+    end
   end
 end

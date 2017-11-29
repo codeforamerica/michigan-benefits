@@ -50,5 +50,38 @@ RSpec.describe MedicaidApplicationAttributes do
         "employer", "Employer or individual plan"
       it_should_behave_like "insurance type", "other", "Other"
     end
+
+    context "dependents present" do
+      it "returns first names of members with 'Dependent' tax relationship" do
+        dependent_member = build(
+          :member,
+          first_name: "Deepa",
+          tax_relationship: "Dependent",
+        )
+        joint_member = build(
+          :member,
+          first_name: "Johnt",
+          tax_relationship: "Joint",
+        )
+        second_dependent_member = build(
+          :member,
+          first_name: "Secci",
+          tax_relationship: "Dependent",
+        )
+        medicaid_application = create(
+          :medicaid_application,
+          members: [dependent_member, joint_member, second_dependent_member],
+        )
+
+        data = MedicaidApplicationAttributes.new(
+          medicaid_application: medicaid_application,
+        ).to_h
+
+        expect(data).to include(
+          dependent_member_names: "Deepa, Secci",
+          any_member_tax_relationship_dependent_yes: "Yes",
+        )
+      end
+    end
   end
 end
