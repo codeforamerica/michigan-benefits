@@ -23,6 +23,7 @@ Rails.application.configure do
   config.assets.debug = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  config.action_view.raise_on_missing_translations = true
   # Customize default host
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_caching = false
