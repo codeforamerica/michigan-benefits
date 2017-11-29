@@ -69,7 +69,7 @@ class MedicaidApplication < ApplicationRecord
   end
 
   def pdf
-    @pdf ||= Dhs1426Pdf.new(
+    @_pdf ||= Dhs1426Pdf.new(
       medicaid_application: self,
     ).completed_file
   end

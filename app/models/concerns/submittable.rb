@@ -22,9 +22,7 @@ module Submittable
   end
 
   def close_pdf
-    if @pdf.present? && @pdf.respond_to?(:close)
-      @pdf.close
-      @pdf.unlink
-    end
+    pdf.close
+    pdf.unlink
   end
 end

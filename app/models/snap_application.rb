@@ -77,7 +77,7 @@ class SnapApplication < ApplicationRecord
   end
 
   def pdf
-    @pdf ||= Dhs1171Pdf.new(
+    @_pdf ||= Dhs1171Pdf.new(
       snap_application: self,
     ).completed_file
   end
