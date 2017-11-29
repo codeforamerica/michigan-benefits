@@ -3,6 +3,16 @@ en:
     exit_app_confirmation:
       Leaving the application process will clear your data from this computer.
       Are you sure you would like to exit?
+  snap:
+    household_more_info_per_member:
+      edit:
+        title: Ok, let us know which people these situations apply to.
+        prompt: Who is not a citizen?
+    income_employment_status:
+      edit:
+        title: "Who in your household is currently employed, or has been in the
+        past 30 days?"
+        title_help: Employment includes temporary or contract jobs. Self employment includes odd jobs, home businesses, online businesses, etc.
   medicaid:
     intro_marital_status:
       edit:

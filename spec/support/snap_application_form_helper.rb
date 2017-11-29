@@ -53,7 +53,7 @@ module SnapApplicationFormHelper
   end
 
   def select_employment(display_name:, employment_status:)
-    within(".household-member-group[data-member-name='#{display_name}']") do
+    within_fieldset(display_name) do
       choose(employment_status)
     end
   end

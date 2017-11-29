@@ -190,41 +190,40 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     collection,
     notes: [],
     layout: "block",
-    variant: "",
-    classes: []
+    legend_class: ""
   )
     <<-HTML.html_safe
-      <fieldset class="form-group#{error_state(object, method)}#{(' ' + classes.join(' ')).strip}">
-        #{label_contents(label_text, notes)}
-        #{radio_buttons(method, collection, layout, variant)}
+      <fieldset class="form-group#{error_state(object, method)}">
+        #{fieldset_label_contents(label_text, notes, legend_class)}
+        #{radio_buttons(method, collection, layout)}
         #{errors_for(object, method)}
       </fieldset>
     HTML
   end
 
-  def mb_checkbox_set(collection, label_text: nil, notes: [], optional: false)
-    checkbox_html = <<-HTML.html_safe
-      <fieldset class="input-group">
-    HTML
-
-    checkbox_html << collection.map do |item|
-      method = item[:method]
-      label = item[:label]
-      mb_checkbox(method, label)
-    end.join.html_safe
-
-    checkbox_html << <<-HTML.html_safe
-      </fieldset>
-    HTML
-
-    if label_text || notes
-      label_html = <<-HTML.html_safe
-        #{label_contents(label_text, notes, optional)}
+  def mb_checkbox_set(
+    collection,
+    label_text: "",
+    notes: [],
+    optional: false,
+    legend_class: ""
+  )
+    checkbox_html = ""
+    collection.map do |item|
+      checkbox_html << <<-HTML.html_safe
+        <label class="checkbox">
+          #{check_box_with_label(item[:label], item[:method])}
+        </label>
+      #{errors_for(object, item[:method])}
       HTML
-      checkbox_html = label_html + checkbox_html
     end
 
-    checkbox_html
+    <<-HTML.html_safe
+      <fieldset class="input-group">
+        #{fieldset_label_contents(label_text, notes, legend_class, optional: optional)}
+        #{checkbox_html}
+      </fieldset>
+    HTML
   end
 
   def mb_select(method, label_text, collection, options = {}, &block)
@@ -253,7 +252,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_checkbox(method, label_text, options = {})
     <<-HTML.html_safe
       <label class="checkbox">
-    #{check_box_with_label(label_text, method, options)}
+        #{check_box_with_label(label_text, method, options)}
       </label>
     #{errors_for(object, method)}
     HTML
@@ -277,16 +276,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   private
 
-  def label_contents(label_text, notes, optional = false)
+  def fieldset_label_contents(label_text, notes, legend_class, optional: false)
     notes = Array(notes)
-    optional_text = if optional
-                      "<span class='form-card__optional'>(optional)</span>"
-                    else
-                      ""
-                    end
-
     label_text = <<-HTML
-      <p class="form-question">#{label_text + optional_text}</p>
+      <legend class="form-question #{legend_class}">#{label_text + optional_text(optional)}</legend>
     HTML
     notes.each do |note|
       label_text << <<-HTML
@@ -295,6 +288,29 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     end
 
     label_text.html_safe
+  end
+
+  def label_contents(label_text, notes, optional = false)
+    notes = Array(notes)
+
+    label_text = <<-HTML
+      <p class="form-question">#{label_text + optional_text(optional)}</p>
+    HTML
+    notes.each do |note|
+      label_text << <<-HTML
+        <p class="text--help">#{note}</p>
+      HTML
+    end
+
+    label_text.html_safe
+  end
+
+  def optional_text(optional)
+    if optional
+      "<span class='form-card__optional'>(optional)</span>"
+    else
+      ""
+    end
   end
 
   def label_and_field(
@@ -346,10 +362,9 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     " form-group--error" if errors.any?
   end
 
-  def radio_buttons(method, collection, layout, variant)
-    variant_class = " #{variant}" if variant.present?
+  def radio_buttons(method, collection, layout)
     radio_html = <<-HTML
-      <radiogroup class="input-group--#{layout}#{variant_class}">
+      <radiogroup class="input-group--#{layout}">
     HTML
     collection.map do |item|
       item = { value: item, label: item } unless item.is_a?(Hash)

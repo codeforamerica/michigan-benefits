@@ -17,7 +17,12 @@ feature "Citizenship questions" do
     )
     click_on "Continue"
 
-    within(find(:fieldset, text: "Who is not a citizen?")) do
+    within(
+      find(
+        :fieldset,
+        text: t("snap.household_more_info_per_member.edit.prompt"),
+      ),
+    ) do
       check "Naan Citizen"
     end
     click_on "Continue"
