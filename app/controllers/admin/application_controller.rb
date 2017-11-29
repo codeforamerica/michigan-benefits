@@ -19,5 +19,7 @@ module Admin
       user_email = current_admin_user.email
       Rails.logger.tagged(user_email) { yield }
     end
+
+    def current_application; end
   end
 end

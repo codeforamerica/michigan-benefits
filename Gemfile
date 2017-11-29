@@ -22,6 +22,7 @@ gem "geocoder"
 gem "good_migrations"
 gem "high_voltage"
 gem "jquery-rails"
+gem "lograge"
 gem "mimemagic"
 gem "mini_magick"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
