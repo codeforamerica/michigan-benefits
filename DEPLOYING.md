@@ -7,6 +7,7 @@
 ### Timing for Deploys
 
 * Staging: Deployed automatically on successful builds from `master`.
+* Pre-production: Deployed automatically on successful builds from `production`.
 * Production: Deployed after acceptance is empty. After standup is a great time to do this.
 
 ### Deploying to Staging
@@ -24,8 +25,11 @@ You can repeat the setup steps this way:
 
 ### Deploying to Production
 
+Our release process will promote the pre-production environment to production.
+
 Before production, we want to make sure that:
 
+* The `production` branch points to the desired commit hash that we want in production. This should only be done via a fast-forward merge from any more recent commit on `master`.
 * All tickets that are awaiting acceptance have been accepted
 * We've done a code review
 * All necessary configuration variables are set on production
