@@ -57,6 +57,15 @@ class MedicaidApplicationAttributes
         "anyone_insured",
         medicaid_application.anyone_insured,
       ),
+      yes_no_checkbox_attribute(
+        "filing_federal_taxes_next_year",
+        medicaid_application.filing_federal_taxes_next_year,
+      ),
+      yes_no_checkbox_attribute(
+        "any_member_tax_relationship_dependent",
+        dependents.any?,
+      ),
+      dependent_member_names: first_names(dependents),
     ]
   end
 
@@ -72,7 +81,7 @@ class MedicaidApplicationAttributes
       }.each do |insurance_slug, insurance_name|
         members = members_with_insurance_type(insurance_name)
         anyone_has_insurance_type = members.any? ? "Yes" : nil
-        names_with_insurance_type = members.map(&:first_name).join(", ")
+        names_with_insurance_type = first_names(members)
 
         if insurance_slug == :medicare
           hash[:help_paying_medicare_premiums_yes] = anyone_has_insurance_type
@@ -101,5 +110,13 @@ class MedicaidApplicationAttributes
     else
       "Homeless"
     end
+  end
+
+  def dependents
+    medicaid_application.members.where(tax_relationship: "Dependent")
+  end
+
+  def first_names(members)
+    members.map(&:first_name).join(", ")
   end
 end

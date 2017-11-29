@@ -40,6 +40,7 @@ RSpec.describe Dhs1426Pdf do
         student_loan_interest_expenses: 70,
         insured: true,
         insurance_type: "Medicare",
+        tax_relationship: "Joint",
       )
 
       secondary_member = build(
@@ -65,6 +66,7 @@ RSpec.describe Dhs1426Pdf do
         other_income_types: [],
         insured: true,
         insurance_type: "Employer or individual plan",
+        tax_relationship: "Joint",
       )
 
       mailing_address = build(
@@ -99,6 +101,7 @@ RSpec.describe Dhs1426Pdf do
         signed_at: Date.new(2007, 12, 25),
         addresses: [mailing_address, residential_address],
         email: "annie@thedog.com",
+        filing_federal_taxes_next_year: true,
       )
 
       expected_client_data = {
@@ -121,6 +124,8 @@ RSpec.describe Dhs1426Pdf do
         primary_member_new_mom_yes: "Yes",
         primary_member_requesting_health_insurance_yes: "Yes",
         primary_member_citizen_yes: "Yes",
+        primary_member_tax_relationship_joint_yes: "Yes",
+        primary_member_joint_filing_member_name: "Roger Rabbit",
         second_member_birthday: "01/20/1980",
         second_member_sex_male: "Yes",
         second_member_married_no: "Yes",
@@ -167,6 +172,9 @@ RSpec.describe Dhs1426Pdf do
         insured_employer_yes: "Yes",
         insured_employer_member_names: "Roger",
         help_paying_medicare_premiums_yes: "Yes",
+        filing_federal_taxes_next_year_yes: "Yes",
+        any_member_tax_relationship_dependent_no: "Yes",
+        dependent_member_names: "",
       }
 
       expected_phone_data = {
@@ -206,6 +214,7 @@ RSpec.describe Dhs1426Pdf do
           "Monthly",
         primary_member_deduction_student_loan_interest_amount: "70",
         primary_member_deduction_student_loan_interest_interval: "Monthly",
+        primary_member_claimed_as_dependent_no: "Yes",
       }
 
       expected_second_member_income_and_expenses = {
