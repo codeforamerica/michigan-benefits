@@ -52,7 +52,7 @@ fi
 read -p "Ready to deploy to production? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  heroku pipelines:promote -a michigan-benefits-staging
+  heroku pipelines:promote -a michigan-benefits-pre-prod
   heroku run bin/rails one_offs:run_all -a michigan-benefits-production
   heroku ps:restart -a michigan-benefits-production
   echo "Success! Application deployed to Production!"
