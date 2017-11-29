@@ -7,7 +7,7 @@ module Medicaid
     end
 
     def update_application
-      address.update!(step_params.merge(state: "MI", county: "Genesee"))
+      address.update!(address_params.merge(county: county))
     end
 
     def skip?
@@ -43,6 +43,19 @@ module Medicaid
     def address
       current_application.addresses.where(mailing: true).first ||
         current_application.addresses.new(mailing: true)
+    end
+
+    def address_params
+      step_params.merge(state: "MI")
+    end
+
+    def county
+      @county ||= CountyFinder.new(
+        street_address: address_params[:street_address],
+        city: address_params[:city],
+        zip: address_params[:zip],
+        state: address_params[:state],
+      ).run
     end
   end
 end
