@@ -124,7 +124,7 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
       end
 
       context "and no residential address currently exists" do
-        it "updates the app and provides default values for county and state" do
+        it "updates the app with params" do
           medicaid_application = create(
             :medicaid_application,
             stable_housing: true,
@@ -144,8 +144,6 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
           expect(mailing_address.street_address).to eq "321 Real St"
           expect(mailing_address.city).to eq "Shelbyville"
           expect(mailing_address.zip).to eq "54321"
-          expect(mailing_address.county).to eq("Genesee")
-          expect(mailing_address.state).to eq("MI")
         end
       end
 
@@ -180,9 +178,54 @@ RSpec.describe Medicaid::ContactMailingAddressController, type: :controller do
           expect(mailing_address.street_address).to eq "321 Real St"
           expect(mailing_address.city).to eq "Shelbyville"
           expect(mailing_address.zip).to eq "54321"
-          expect(mailing_address.county).to eq("Genesee")
-          expect(mailing_address.state).to eq("MI")
         end
+      end
+
+      it "sets the county based on address" do
+        medicaid_application = create(
+          :medicaid_application,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
+
+        params = {
+          street_address: "321 Real St",
+          city: "Shelbyville",
+          zip: "54321",
+        }
+
+        county_finder = instance_double(CountyFinder)
+        expect(CountyFinder).to receive(:new).with(
+          street_address: "321 Real St",
+          city: "Shelbyville",
+          zip: "54321",
+          state: "MI",
+        ).and_return(county_finder)
+        allow(county_finder).to receive(:run).and_return("Wayne")
+
+        put :update, params: { step: params }
+
+        mailing_address = medicaid_application.reload.mailing_address
+
+        expect(mailing_address.county).to eq("Wayne")
+      end
+
+      it "sets the state to 'MI'" do
+        medicaid_application = create(
+          :medicaid_application,
+        )
+        session[:medicaid_application_id] = medicaid_application.id
+
+        params = {
+          street_address: "321 Real St",
+          city: "Shelbyville",
+          zip: "54321",
+        }
+
+        put :update, params: { step: params }
+
+        medicaid_application.reload
+
+        expect(medicaid_application.mailing_address.state).to eq("MI")
       end
     end
   end

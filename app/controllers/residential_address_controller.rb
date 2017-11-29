@@ -13,7 +13,7 @@ class ResidentialAddressController < SnapStepsController
   end
 
   def application_params
-    { stable_housing: stable_housing }
+    { stable_housing: !unstable_housing }
   end
 
   def existing_attributes
@@ -27,8 +27,8 @@ class ResidentialAddressController < SnapStepsController
       current_application.addresses.new(mailing: false)
   end
 
-  def stable_housing
-    !step_params[:unstable_housing]
+  def unstable_housing
+    step_params[:unstable_housing] == "1"
   end
 
   def county

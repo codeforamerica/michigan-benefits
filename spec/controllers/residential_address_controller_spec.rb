@@ -48,6 +48,24 @@ RSpec.describe ResidentialAddressController, type: :controller do
         expect(current_app.reload.stable_housing).to eq false
       end
 
+      context "with stable housing" do
+        it "sets stable housing to true" do
+          valid_params = {
+            street_address: "321 Real St",
+            street_address_2: "Apt 4",
+            city: "Shelbyville",
+            zip: "54321",
+            unstable_housing: "0",
+          }
+
+          put :update, params: { step: valid_params }
+
+          residential_address.reload
+
+          expect(current_app.reload.stable_housing).to eq true
+        end
+      end
+
       it "sets the county based on address" do
         valid_params = {
           street_address: "321 Main St",
