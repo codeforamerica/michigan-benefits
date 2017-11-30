@@ -1,15 +1,17 @@
 #!/bin/bash
+
 set -e
 
 echo "Checking for buildpack changes between staging and production."
-diff <(heroku buildpacks -r staging) <(heroku buildpacks -r production) && echo ""
-read -p "Are these the same (ignoring order)? (y/N)" -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]];then
-  echo "Great!"
-else
-  echo "Make sure these are correct and get back at me."
+buildpack_diff=$(echo $(diff <( heroku buildpacks -r staging | tail -n +2 ) <( heroku buildpacks -r production | tail -n +2 )))
+
+if [[ $buildpack_diff ]]; then
+  echo $buildpack_diff
+  echo "Update buildpacks on Heroku so that they are consistent across envs and try again"
+  echo "We're bailing out!"
   exit 1
+else
+  echo "Great! Buildpacks are the same between envs!"
 fi
 
 echo "Comparing ENV variables between staging and production..."
@@ -19,23 +21,23 @@ production_env=$(heroku config -r production --json | jq -S 'keys')
 env_diff=$(echo ${staging_env[@]} ${production_env[@]} | tr ' ' '\n' | sort | uniq -u)
 
 if [[ $env_diff ]]; then
-    echo $env_diff
-    echo "Any keys listed above exist on one env but not the other."
-    read -p "Are you okay with these differences? (y/N)" -n 1 -r
-    echo    # (optional) move to a new line
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      echo "Great!"
-    else
-      echo "We're bailing out!"
-      exit 1;
-    fi
+  echo $env_diff
+  echo "Any keys listed above exist on one env but not the other."
+  read -p "Are you okay with these differences? (y/N)" -n 1 -r
+  echo # (optional) move to a new line
+  if [[ $REPLY =~ ^[Yy] $ ]]; then
+    echo "Great!"
+  else
+    echo "We're bailing out!"
+    exit 1;
+  fi
 else
-    echo "Great! ENV variables are the same between envs!"
+  echo "Great! ENV variables are the same between envs!"
 fi
 
 read -p "Ready to deploy to production? (y/N) " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+echo # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy] $ ]]; then
   heroku pipelines:promote -a michigan-benefits-staging
   echo "Success! Application deployed to Production!"
   echo "Please do some testing on production! (use zip 12345 to prevent actual submission)"
