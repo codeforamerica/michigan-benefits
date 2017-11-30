@@ -12,18 +12,25 @@ else
   exit 1
 fi
 
-echo "Diffing ENV variables between staging and production."
+echo "Comparing ENV variables between staging and production..."
 staging_env=$(heroku config -r staging --json | jq -S 'keys')
 production_env=$(heroku config -r production --json | jq -S 'keys')
-echo ${staging_env[@]} ${production_env[@]} | tr ' ' '\n' | sort | uniq -u
-echo "Any keys listed above exist on one env but not the other."
-read -p "Are you okay with these differences? (y/N)" -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  echo "Great!"
+
+env_diff=$(echo ${staging_env[@]} ${production_env[@]} | tr ' ' '\n' | sort | uniq -u)
+
+if [[ $env_diff ]]; then
+    echo $env_diff
+    echo "Any keys listed above exist on one env but not the other."
+    read -p "Are you okay with these differences? (y/N)" -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      echo "Great!"
+    else
+      echo "We're bailing out!"
+      exit 1;
+    fi
 else
-  echo "We're bailing out!"
-  exit 1;
+    echo "Great! ENV variables are the same between envs!"
 fi
 
 read -p "Ready to deploy to production? (y/N) " -n 1 -r
