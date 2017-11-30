@@ -16,12 +16,6 @@ RSpec.describe StepsController do
       @test = "in index"
       head :no_content
     end
-
-    private
-
-    def first_step_path
-      root_path
-    end
   end
 
   describe "#edit" do

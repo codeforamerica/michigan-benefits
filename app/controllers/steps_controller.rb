@@ -134,4 +134,8 @@ class StepsController < ApplicationController
   def decoded_step_path(step: self.class, params: nil)
     step_path(step, params).gsub("%2F", "/")
   end
+
+  def first_step_path
+    root_path
+  end
 end
