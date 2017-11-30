@@ -25,7 +25,7 @@ if [[ $env_diff ]]; then
   echo "Any keys listed above exist on one env but not the other."
   read -p "Are you okay with these differences? (y/N)" -n 1 -r
   echo # (optional) move to a new line
-  if [[ $REPLY =~ ^[Yy] $ ]]; then
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Great!"
   else
     echo "We're bailing out!"
@@ -37,7 +37,7 @@ fi
 
 read -p "Ready to deploy to production? (y/N) " -n 1 -r
 echo # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy] $ ]]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
   heroku pipelines:promote -a michigan-benefits-staging
   echo "Success! Application deployed to Production!"
   echo "Please do some testing on production! (use zip 12345 to prevent actual submission)"
