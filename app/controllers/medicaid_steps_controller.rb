@@ -32,6 +32,6 @@ class MedicaidStepsController < StepsController
   private
 
   def first_step_path
-    step_path(Medicaid::StepNavigation.first)
+    medicaid_intro_location_steps_path
   end
 end
