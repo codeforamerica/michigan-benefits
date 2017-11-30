@@ -12,28 +12,8 @@ chdir APP_ROOT do
     system!("heroku git:remote -a michigan-benefits-production -r production")
   end
 
-  step "Installing Imagemagick, a image to PDF converter" do
-    if cli_installed?("convert")
-      puts "imagemagick already installed"
-    else
-      system!("brew install imagemagick")
-    end
-  end
-
-  step "Installing libmagic, a dependency for ruby-filemagic" do
-    if brew_installed?("libmagic")
-      puts "libmagic already installed"
-    else
-      system!("brew install libmagic")
-    end
-  end
-
-  step "Installing ghostscript, an interpreter for the PostScript language and for PDF" do
-    if cli_installed?("gs")
-      puts "ghostscript already installed."
-    else
-      system!("brew install ghostscript")
-    end
+  step "Install dependencies from Brewfile" do
+    system!("brew bundle")
   end
 
   step "Installing pdftk, a PDF library (requires Homebrew)" do
@@ -43,27 +23,6 @@ chdir APP_ROOT do
       system!("brew install https://raw.githubusercontent.com/turforlag/homebrew-cervezas/master/pdftk.rb")
     end
   end
-
-  step "Installing ChromeDriver - a separate executable that WebDriver uses to control Chrome" do
-    # use --version flag because running `chromedriver` will start
-    # chromedriver, which stops the script indefinitely if already installed.
-    if cli_installed?("chromedriver")
-      puts "chromedriver already installed."
-    else
-      system!("brew install chromedriver")
-    end
-  end
-
-  step "Installing jq, a JSON CLI used by our release script" do
-    # use --version flag because running `chromedriver` will start
-    # chromedriver, which stops the script indefinitely if already installed.
-    if cli_installed?("jq")
-      puts "jq already installed."
-    else
-      system!("brew install jq")
-    end
-  end
-
 
   step "Installing bundler and gem dependencies" do
     system!("gem install bundler --conservative")
