@@ -20,11 +20,11 @@ RSpec.describe ApplicationMailer do
     end
   end
 
-  describe ".office_application_notification" do
+  describe ".office_snap_application_notification" do
     context "office_location not present" do
       it "sets the correct headers" do
         with_modified_env EMAIL_DOMAIN: "example.com" do
-          email = ApplicationMailer.office_application_notification(
+          email = ApplicationMailer.office_snap_application_notification(
             file_name: "#{Rails.root}/spec/fixtures/image.jpg",
             recipient_email: "user@example.com",
           )
@@ -48,7 +48,7 @@ RSpec.describe ApplicationMailer do
     context "office_location present" do
       it "sets the correct values" do
         with_modified_env EMAIL_DOMAIN: "example.com" do
-          email = ApplicationMailer.office_application_notification(
+          email = ApplicationMailer.office_snap_application_notification(
             file_name: "#{Rails.root}/spec/fixtures/image.jpg",
             recipient_email: "user@example.com",
             office_location: "union",

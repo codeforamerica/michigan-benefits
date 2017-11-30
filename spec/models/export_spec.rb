@@ -13,17 +13,17 @@ RSpec.describe Export do
       expect(export).to be_persisted
     end
 
-    it "frees up the snap applications PDF" do
+    it "frees up the benefit application's PDF" do
       export = build(:export)
-      export.execute { export.snap_application.pdf }
-      expect(export.snap_application.pdf).to be_closed
+      export.execute { export.benefit_application.pdf }
+      expect(export.benefit_application.pdf).to be_closed
     end
 
-    it "yields the snap application to the block" do
+    it "yields the benefit application to the block" do
       fake_job = double(call: "I did a thing?")
       export = build(:export)
       export.execute { |value| fake_job.call(value) }
-      expect(fake_job).to have_received(:call).with(export.snap_application)
+      expect(fake_job).to have_received(:call).with(export.benefit_application)
     end
 
     it "transitions to success and stores results if the block doesnt throw" do
@@ -55,8 +55,11 @@ RSpec.describe Export do
     it "doesn't run when another export for the given destination is in " \
       "process or has succeeded" do
       previous = create(:export, destination: :client_email)
-      export = build(:export, destination: :client_email,
-                              snap_application: previous.snap_application)
+      export = build(
+        :export,
+        destination: :client_email,
+        benefit_application: previous.benefit_application,
+      )
       export.execute { "It's unnecessary!" }
 
       expect(export.status).to eq :unnecessary
@@ -66,9 +69,12 @@ RSpec.describe Export do
       "or succeeded when forced" do
 
       previous = create(:export, destination: :client_email)
-      export = build(:export, destination: :client_email,
-                              force: true,
-                              snap_application: previous.snap_application)
+      export = build(
+        :export,
+        destination: :client_email,
+        force: true,
+        benefit_application: previous.benefit_application,
+      )
 
       export.execute { "It's working!" }
 
@@ -92,9 +98,11 @@ RSpec.describe Export do
 
     it "fails exports that happen in the ensure block" do
       export = build(:export)
-      allow(export.snap_application).to receive(:close_pdf) { raise "Oh nooo" }
+      allow(export.benefit_application).to receive(:close_pdf) do
+        raise "Oh nooo"
+      end
 
-      export.execute do |_snap_application, logger|
+      export.execute do |_benefit_application, logger|
         logger.info("I succeeded!")
       end
 

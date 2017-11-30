@@ -16,16 +16,14 @@ class SuccessController < SnapStepsController
   private
 
   def export
-    return if !current_application.exportable?
-
     ExportFactory.create(
       destination: :sms,
-      snap_application: current_application,
+      benefit_application: current_application,
     )
 
     ExportFactory.create(
       destination: :office_email,
-      snap_application: current_application,
+      benefit_application: current_application,
     )
 
     if web_driving_enabled?
@@ -43,7 +41,7 @@ class SuccessController < SnapStepsController
     flash[:notice] = flash_notice
     ExportFactory.create(
       destination: :client_email,
-      snap_application: current_application,
+      benefit_application: current_application,
     )
   end
 

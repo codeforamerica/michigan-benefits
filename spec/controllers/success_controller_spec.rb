@@ -22,7 +22,7 @@ RSpec.describe SuccessController do
       get :edit
 
       expect(ExportFactory).to have_received(:create).
-        with(snap_application: current_app, destination: :office_email)
+        with(benefit_application: current_app, destination: :office_email)
     end
 
     it "drives the app once" do
@@ -61,21 +61,6 @@ RSpec.describe SuccessController do
             expect(MiBridges::Driver).not_to have_received(:new).
               with(snap_application: current_app)
           end
-        end
-      end
-    end
-
-    context "application is not exportable" do
-      it "does not run the export factory, or application driver" do
-        run_background_jobs_immediately do
-          allow(ExportFactory).to receive(:create)
-          allow(DriveApplicationJob).to receive(:perform_later)
-          current_app.update(signature: nil)
-
-          get :edit
-
-          expect(ExportFactory).not_to have_received(:create)
-          expect(DriveApplicationJob).not_to have_received(:perform_later)
         end
       end
     end
@@ -182,7 +167,7 @@ RSpec.describe SuccessController do
         put :update, params: params
 
         expect(ExportFactory).to have_received(:create).
-          with(snap_application: current_app, destination: :client_email)
+          with(benefit_application: current_app, destination: :client_email)
       end
     end
 

@@ -21,7 +21,7 @@ module Admin
       application = SnapApplication.find(params[:id])
 
       ExportFactory.create!(
-        snap_application: application,
+        benefit_application: application,
         destination: :office_email,
         force: true,
       )

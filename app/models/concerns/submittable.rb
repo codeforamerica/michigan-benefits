@@ -1,6 +1,10 @@
 module Submittable
   extend ActiveSupport::Concern
 
+  included do
+    has_many :exports, as: :benefit_application, dependent: :destroy
+  end
+
   def receiving_office_name
     receiving_office.name
   end
@@ -15,5 +19,10 @@ module Submittable
 
   def receiving_office
     @receiving_office ||= OfficeRecipient.new(benefit_application: self)
+  end
+
+  def close_pdf
+    pdf.close
+    pdf.unlink
   end
 end

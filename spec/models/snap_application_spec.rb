@@ -38,22 +38,6 @@ RSpec.describe SnapApplication do
     end
   end
 
-  describe "#exportable?" do
-    it "is true if a signature exists" do
-      app = build(:snap_application, signature: "John Doe")
-
-      expect(app).to be_exportable
-    end
-
-    it "is false if signature does not exist" do
-      app1 = build(:snap_application, signature: "")
-      app2 = build(:snap_application, signature: nil)
-
-      expect(app1).not_to be_exportable
-      expect(app2).not_to be_exportable
-    end
-  end
-
   describe "#pdf" do
     it "delegates to the Dhs1171Pdf class" do
       app = build(:snap_application)

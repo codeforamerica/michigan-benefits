@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :export do
-    snap_application
+    benefit_application { create(:snap_application) }
 
     destination :client_email
 

@@ -4,8 +4,10 @@ RSpec.describe ClientEmailApplicationJob do
   describe "#perform" do
     it "creates a PDF with the snap application data" do
       snap_application = create(:snap_application, :with_member)
-      export = Export.create(snap_application: snap_application,
-                             destination: :fax)
+      export = Export.create(
+        benefit_application: snap_application,
+        destination: :fax,
+      )
 
       fake_mailer = double(deliver: nil)
       allow(ApplicationMailer).to receive(:snap_application_notification).
