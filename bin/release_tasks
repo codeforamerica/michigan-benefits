@@ -1,1 +1,2 @@
 bundle exec rake db:migrate
+bundle exec rake one_offs:run_all
