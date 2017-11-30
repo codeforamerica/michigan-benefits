@@ -1,29 +1,6 @@
 #!/bin/bash
 set -e
 
-echo "Opening tracker to check for stories awaiting acceptance..."
-open "https://www.pivotaltracker.com/n/projects/2123705"
-
-read -p "Are there no stories in the accept/reject state? (y/N) " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]];then
-  echo "Great!"
-else
-  echo "Please test and run acceptance for those stories first!"
-  exit 1
-fi
-
-echo "Diffing the code between staging and production..."
-bin/release-diff
-read -p "Looks ok? (y/N) " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]];then
-  echo "Great!"
-else
-  echo "Have a closer look and you can do this again later!"
-  exit 1
-fi
-
 echo "Checking for buildpack changes between staging and production."
 diff <(heroku buildpacks -r staging) <(heroku buildpacks -r production) && echo ""
 read -p "Are these the same (ignoring order)? (y/N)" -n 1 -r
@@ -52,13 +29,10 @@ fi
 read -p "Ready to deploy to production? (y/N) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  heroku pipelines:promote -a michigan-benefits-pre-prod
-  heroku run bin/rails one_offs:run_all -a michigan-benefits-production
-  heroku ps:restart -a michigan-benefits-production
+  heroku pipelines:promote -a michigan-benefits-staging
   echo "Success! Application deployed to Production!"
-  echo "Please do some testing on production! (use zip 12345 to send a fake fax)"
+  echo "Please do some testing on production! (use zip 12345 to prevent actual submission)"
 else
   echo "Okay, I won't deploy. Thank you for being thoughtful and careful!"
   exit 1;
 fi
-
