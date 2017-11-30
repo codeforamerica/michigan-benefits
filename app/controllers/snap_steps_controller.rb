@@ -30,6 +30,6 @@ class SnapStepsController < StepsController
   private
 
   def first_step_path
-    introduce_yourself_steps_path
+    step_path(StepNavigation.first)
   end
 end

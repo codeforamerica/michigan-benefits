@@ -23,6 +23,14 @@ RSpec.describe StepsController do
     end
   end
 
+  context "no current application" do
+    it "redirects to the root path" do
+      get :index
+
+      expect(response).to redirect_to(root_path)
+    end
+  end
+
   describe ".step_class" do
     context "when step exists" do
       it "returns the correct step class" do
