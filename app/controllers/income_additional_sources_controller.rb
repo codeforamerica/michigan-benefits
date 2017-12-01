@@ -5,15 +5,13 @@ class IncomeAdditionalSourcesController < SnapStepsController
     )
   end
 
-  def update
+  private
+
+  def update_application
     current_application.update!(
       additional_income: checkboxes_to_array(step_params),
     )
-
-    redirect_to next_path
   end
-
-  private
 
   def step_class
     IncomeAdditionalSources
