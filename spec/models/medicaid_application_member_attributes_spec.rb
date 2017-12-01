@@ -54,7 +54,6 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_spouse_name: "Candy Crush",
         primary_member_caretaker_yes: "Yes",
         primary_member_in_college_yes: "Yes",
-        primary_member_joint_filing_member_name: nil,
         primary_member_under_21_no: "Yes",
         primary_member_ssn_0: "1",
         primary_member_ssn_1: "1",
@@ -65,11 +64,9 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         primary_member_ssn_6: "3",
         primary_member_ssn_7: "3",
         primary_member_ssn_8: "3",
-        primary_member_tax_relationship_joint_no: "Yes",
         primary_member_new_mom_yes: "Yes",
         primary_member_requesting_health_insurance_yes: "Yes",
         primary_member_citizen_yes: "Yes",
-        primary_member_claimed_as_dependent_no: "Yes",
         primary_member_employed: "Yes",
         primary_member_not_employed: nil,
         primary_member_self_employed: "Yes",
@@ -118,50 +115,6 @@ RSpec.describe MedicaidApplicationMemberAttributes do
             primary_member_under_21_no
             primary_member_under_21_yes
           ],
-        )
-      end
-    end
-
-    context "joint filing tax relationship" do
-      it "returns key indicating that the member is filing jointly" do
-        medicaid_application = create(:medicaid_application)
-        member = build(
-          :member,
-          benefit_application: medicaid_application,
-          tax_relationship: "Joint",
-        )
-
-        result = MedicaidApplicationMemberAttributes.new(
-          member: member,
-          position: "primary",
-        ).to_h
-
-        expect(result[:primary_member_tax_relationship_joint_yes]).to eq "Yes"
-      end
-
-      it "returns the other joint filing member first name" do
-        medicaid_application = create(:medicaid_application)
-        spouse = create(
-          :member,
-          first_name: "Spousey",
-          last_name: "Spouserson",
-          benefit_application: medicaid_application,
-          tax_relationship: "Joint",
-        )
-        member = create(
-          :member,
-          spouse: spouse,
-          benefit_application: medicaid_application,
-          tax_relationship: "Joint",
-        )
-
-        result = MedicaidApplicationMemberAttributes.new(
-          member: member,
-          position: "primary",
-        ).to_h
-
-        expect(result[:primary_member_joint_filing_member_name]).to eq(
-          "Spousey Spouserson",
         )
       end
     end
