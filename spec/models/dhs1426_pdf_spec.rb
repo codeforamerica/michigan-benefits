@@ -222,6 +222,16 @@ RSpec.describe Dhs1426Pdf do
         second_member_additional_income_none: "Yes",
       }
 
+      expected_second_member_tax_fields = {
+        second_member_filing_federal_taxes_next_year_yes: "Yes",
+        second_member_tax_relationship_joint_yes: "Yes",
+        second_member_joint_filing_member_name: "Christa Tester",
+        second_member_claiming_dependent_yes: nil,
+        second_member_dependent_member_names: nil,
+        second_member_claimed_as_dependent_yes: nil,
+        second_member_claimed_as_dependent_by_names: nil,
+      }
+
       file = Dhs1426Pdf.new(
         medicaid_application: medicaid_application,
       ).completed_file
@@ -234,6 +244,7 @@ RSpec.describe Dhs1426Pdf do
         expected_phone_data,
         expected_primary_member_income_and_expenses,
         expected_second_member_income_and_expenses,
+        expected_second_member_tax_fields,
       ].each do |expected_data_hash|
         expected_data_hash.each do |field, expected_data|
           failure_msg = "Expected '#{expected_data}' for #{field}, " +
@@ -281,12 +292,17 @@ RSpec.describe Dhs1426Pdf do
 
     it "prepends the additional member page fields with numbers" do
       members = [
-        build(:member, first_name: "Primera"),
-        build(:member, first_name: "Segunda"),
-        build(:member, first_name: "Tercera"),
-        build(:member, first_name: "Cuarta"),
+        build(:member, first_name: "Primera", tax_relationship: "Joint"),
+        build(:member, first_name: "Segunda", tax_relationship: "Dependent"),
+        build(:member, first_name: "Tercera", tax_relationship: "Joint"),
+        build(:member, first_name: "Cuarta", tax_relationship: nil),
       ]
-      medicaid_application = create(:medicaid_application, members: members)
+      medicaid_application = create(
+        :medicaid_application,
+        filing_federal_taxes_next_year: true,
+        members: members,
+      )
+
       file = Dhs1426Pdf.new(medicaid_application: medicaid_application).
         completed_file
       result = filled_in_values(file: file.path)
@@ -294,6 +310,17 @@ RSpec.describe Dhs1426Pdf do
       expect(result["second_member_full_name"]).to include("Segunda")
       expect(result["1.second_member_full_name"]).to include("Tercera")
       expect(result["2.second_member_full_name"]).to include("Cuarta")
+
+      expect(result["primary_member_tax_relationship_joint_yes"]).to eq("Yes")
+      expect(result["second_member_tax_relationship_joint_yes"]).to eq("")
+      expect(result["second_member_claimed_as_dependent_yes"]).to eq("Yes")
+      expect(result["second_member_claimed_as_dependent_by_names"]).to eq(
+        "Primera, Tercera",
+      )
+      expect(result["1.second_member_tax_relationship_joint_yes"]).to eq("Yes")
+      expect(result["1.second_member_claiming_dependent_yes"]).to eq("Yes")
+      expect(result["2.second_member_tax_relationship_joint_yes"]).to eq(nil)
+      expect(result["2.second_member_claiming_dependent_yes"]).to eq(nil)
     end
 
     it "appends pages if there are verification documents" do

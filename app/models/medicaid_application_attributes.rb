@@ -111,12 +111,4 @@ class MedicaidApplicationAttributes
       "Homeless"
     end
   end
-
-  def dependents
-    medicaid_application.members.where(tax_relationship: "Dependent")
-  end
-
-  def first_names(members)
-    members.map(&:first_name).join(", ")
-  end
 end

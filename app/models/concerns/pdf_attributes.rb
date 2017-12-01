@@ -19,6 +19,14 @@ module PdfAttributes
     date&.strftime("%m/%d/%Y")
   end
 
+  def first_names(members)
+    members.pluck(:first_name).join(", ")
+  end
+
+  def dependents
+    @_dependents ||= benefit_application.members.dependents
+  end
+
   def phone_attributes
     if benefit_application.phone_number.nil?
       {}

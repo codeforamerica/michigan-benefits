@@ -31,14 +31,12 @@ class Dhs1426Pdf
     if application_members.length > MAXIMUM_HOUSEHOLD_MEMBERS
       additional_members.each_with_index do |record, index|
         member_data = MedicaidApplicationMemberAttributes.new(record).to_h
-
+        member_tax_data = MedicaidApplicationAdditionalMemberTaxAttributes.
+          new(member: record[:member]).to_h
+        data = member_data.merge(member_tax_data)
         output_path = additional_member_pdf_output(index).path
 
-        PdfForms.new.fill_form(
-          STEP_2_ADDITIONAL_MEMBER_PDF,
-          output_path,
-          member_data,
-        )
+        PdfForms.new.fill_form(STEP_2_ADDITIONAL_MEMBER_PDF, output_path, data)
 
         additional_member_pdf_paths << output_path
       end
@@ -94,11 +92,35 @@ class Dhs1426Pdf
   end
 
   def member_attributes
-    first_two_members.map do |record|
-      if record[:member].present?
-        MedicaidApplicationMemberAttributes.new(record).to_h
-      end
-    end.compact.reduce({}, :merge)
+    first_member_attributes.merge(second_member_attributes)
+  end
+
+  def first_member_attributes
+    MedicaidApplicationMemberAttributes.
+      new(member: application_members[0], position: "primary").to_h.merge(
+        primary_member_tax_attributes,
+      )
+  end
+
+  def primary_member_tax_attributes
+    MedicaidApplicationPrimaryMemberTaxAttributes.
+      new(member: primary_member).to_h
+  end
+
+  def second_member_attributes
+    if second_member.present?
+      MedicaidApplicationMemberAttributes.
+        new(member: second_member, position: "second").to_h.merge(
+          second_member_tax_attributes,
+        )
+    else
+      {}
+    end
+  end
+
+  def second_member_tax_attributes
+    MedicaidApplicationAdditionalMemberTaxAttributes.
+      new(member: second_member).to_h
   end
 
   def application_members
@@ -107,9 +129,17 @@ class Dhs1426Pdf
 
   def first_two_members
     [
-      { member: application_members[0], position: "primary" },
-      { member: application_members[1], position: "second" },
+      { member: primary_member, position: "primary" },
+      { member: second_member, position: "second" },
     ]
+  end
+
+  def primary_member
+    application_members[0]
+  end
+
+  def second_member
+    application_members[1]
   end
 
   def verification_paperwork_paths

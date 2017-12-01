@@ -40,10 +40,6 @@ class MedicaidApplicationMemberAttributes
         bool_to_checkbox(member.pay_student_loan_interest?),
       :"#{position}_member_deduction_alimony_yes" =>
         bool_to_checkbox(member.pay_child_support_alimony_arrears?),
-      joint_filer_key => "Yes",
-      :"#{position}_member_joint_filing_member_name" =>
-        other_joint_filing_member_name,
-      claimed_as_dependent_key => "Yes",
     }
 
     if member.ssn.present?
@@ -129,32 +125,5 @@ class MedicaidApplicationMemberAttributes
     }
 
     translated_intervals[interval]
-  end
-
-  def joint_filer_key
-    :"#{position}_member_tax_relationship_joint_#{yes_no(joint_filer?)}"
-  end
-
-  def joint_filer?
-    member.tax_relationship == "Joint"
-  end
-
-  def other_joint_filing_member_name
-    if other_joint_filing_member.present?
-      other_joint_filing_member.display_name
-    end
-  end
-
-  def other_joint_filing_member
-    other_household_members.where(tax_relationship: "Joint").first
-  end
-
-  def other_household_members
-    member.benefit_application.members.where.not(id: member.id)
-  end
-
-  def claimed_as_dependent_key
-    yes_or_no = yes_no(member.claimed_as_dependent?)
-    :"#{position}_member_claimed_as_dependent_#{yes_or_no}"
   end
 end
