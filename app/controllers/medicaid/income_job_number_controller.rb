@@ -1,14 +1,9 @@
 module Medicaid
   class IncomeJobNumberController < MedicaidStepsController
-    def update
-      @step = step_class.new(step_params)
-
-      if @step.valid?
-        current_application.primary_member.update!(number_of_job_attributes)
-        redirect_to(next_path)
-      else
-        render :edit
-      end
+    def update_application
+      current_application.primary_member.update!(
+        employed_number_of_jobs: step_params[:employed_number_of_jobs],
+      )
     end
 
     private
@@ -27,10 +22,6 @@ module Medicaid
       else
         current_application.primary_member.employed_number_of_jobs
       end
-    end
-
-    def number_of_job_attributes
-      { employed_number_of_jobs: step_params[:employed_number_of_jobs] }
     end
 
     def nobody_employed?
