@@ -18,9 +18,8 @@
               <div class="household-member-group" data-member-name="<%= member.display_name %>">
                 <p class="text--section-header"><%= member.display_name %></p>
                 <%= ff.mb_select :employed_number_of_jobs,
-                "",
-                (1..10).map { |number| [pluralize(number, "job"), number] },
-                include_blank: "0 jobs" %>
+                  "",
+                  (0..10).map { |number| [pluralize(number, "job"), number] } %>
               </div>
           <% end %>
         </fieldset>

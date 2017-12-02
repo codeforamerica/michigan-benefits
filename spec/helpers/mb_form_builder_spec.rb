@@ -56,6 +56,26 @@ RSpec.describe MbFormBuilder do
     end
   end
 
+  describe "#mb_input_field" do
+    it "renders a label that contains a p tag" do
+      class SampleStep < Step
+        step_attributes(:name)
+      end
+      sample = SampleStep.new
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_input_field(:name, "How is name?")
+      expect(output).to be_html_safe
+      expect(output).to match_html <<-HTML
+        <div class="form-group">
+          <label for="sample_name">
+            <p class="form-question">How is name?</p>
+          </label>
+          <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="" name="sample[name]" id="sample_name" />
+        </div>
+      HTML
+    end
+  end
+
   describe "#mb_phone_field" do
     it "renders a tel input with a '+1' prefix" do
       class SampleStep < Step
@@ -74,6 +94,46 @@ RSpec.describe MbFormBuilder do
           <div class="text-input-group">
             <div class="text-input-group__prefix">+1</div>
             <input type="tel" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="" name="sample[phone_number]" id="sample_phone_number" />
+          </div>
+        </div>
+      HTML
+    end
+  end
+
+  describe "#mb_select" do
+    it "can render a range of numeric options with an empty label" do
+      class SampleStep < Step
+        step_attributes(:how_many)
+      end
+
+      sample = SampleStep.new
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_select(
+        :how_many,
+        "",
+        (0..10).map { |number| [pluralize(number, "thing"), number] },
+      )
+      expect(output).to be_html_safe
+
+      expect(output).to match_html <<-HTML
+        <div class="form-group">
+          <label for="sample_how_many">
+            <p class="form-question"></p>
+          </label>
+          <div class="select">
+            <select class="select__element" name="sample[how_many]" id="sample_how_many">
+              <option value="0">0 things</option>
+              <option value="1">1 thing</option>
+              <option value="2">2 things</option>
+              <option value="3">3 things</option>
+              <option value="4">4 things</option>
+              <option value="5">5 things</option>
+              <option value="6">6 things</option>
+              <option value="7">7 things</option>
+              <option value="8">8 things</option>
+              <option value="9">9 things</option>
+              <option value="10">10 things</option>
+            </select>
           </div>
         </div>
       HTML
