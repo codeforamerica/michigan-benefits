@@ -2,7 +2,7 @@ require "administrate/base_dashboard"
 
 class ExportDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
-    snap_application: Field::BelongsTo,
+    benefit_application: Field::Polymorphic,
     id: Field::Number,
     destination: Field::String,
     metadata: Field::String,
@@ -17,12 +17,12 @@ class ExportDashboard < Administrate::BaseDashboard
     completed_at
     destination
     metadata
-    snap_application
+    benefit_application
   ].freeze
 
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    snap_application
+    benefit_application
     destination
     metadata
     force
