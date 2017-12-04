@@ -9,7 +9,7 @@ class MemberDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    snap_application: Field::Polymorphic,
+    benefit_application: Field::Polymorphic,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     marital_status: Field::String,
@@ -44,13 +44,13 @@ class MemberDashboard < Administrate::BaseDashboard
     first_name
     last_name
     created_at
-    snap_application
+    benefit_application
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    snap_application
+    benefit_application
     id
     created_at
     updated_at
