@@ -9,7 +9,8 @@ module Summarizer
 
     def daily_summary
       readable_date = @date.strftime("%a, %b %d")
-      "On #{readable_date}, we processed #{snap_applications.count} SNAP and #{medicaid_applications.count} Medicaid applications."
+      "On #{readable_date}, we processed #{snap_applications.count} SNAP \
+      and #{medicaid_applications.count} Medicaid applications."
     end
 
     attr_reader :snap_applications, :medicaid_applications

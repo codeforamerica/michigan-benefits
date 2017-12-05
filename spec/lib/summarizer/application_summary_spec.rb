@@ -13,7 +13,7 @@ RSpec.describe Summarizer::ApplicationSummary do
 
       text = Summarizer::ApplicationSummary.new(date).daily_summary
       expect(text).to eq(
-        "On Fri, Dec 01, we processed 2 SNAP and 1 Medicaid applications."
+        "On Fri, Dec 01, we processed 2 SNAP and 1 Medicaid applications.",
       )
     end
   end
