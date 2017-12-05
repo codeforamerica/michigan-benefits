@@ -195,7 +195,8 @@ module MiBridges
       end
 
       if klass.nil?
-        fail MiBridges::Errors::PageNotFoundError.new(page_title)
+        DebuggerPage
+        # fail MiBridges::Errors::PageNotFoundError.new(page_title)
       else
         klass
       end
