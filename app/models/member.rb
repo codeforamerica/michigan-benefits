@@ -107,7 +107,7 @@ class Member < ApplicationRecord
   end
 
   def display_name
-    "#{first_name} #{last_name}".titleize
+    "#{first_name.upcase_first} #{last_name.upcase_first}"
   end
 
   def self.filing_taxes

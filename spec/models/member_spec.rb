@@ -246,4 +246,11 @@ RSpec.describe Member do
       expect(member.errors).to include(:other_income_types)
     end
   end
+
+  describe "#display_name" do
+    it "combines first name and last name" do
+      member = Member.new(first_name: "anneFace", last_name: "mcDog")
+      expect(member.display_name).to eq("AnneFace McDog")
+    end
+  end
 end
