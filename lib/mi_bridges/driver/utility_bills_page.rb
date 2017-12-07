@@ -35,7 +35,7 @@ module MiBridges
       private
 
       def section_name
-        "star#{first_name_section(primary_member).capitalize}sUtilityBills"
+        "star#{first_name_section(primary_member)}sUtilityBills"
       end
 
       def check_heat
