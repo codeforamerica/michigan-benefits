@@ -1,0 +1,33 @@
+class UpdateMemberData
+  def run
+    update_members
+  end
+
+  private
+
+  def update_members
+    members.each do |member|
+      begin
+        member.first_name = member.first_name.strip
+        member.last_name = member.last_name.strip
+
+        if member.other_income_types.nil?
+          member.other_income_types = []
+        end
+
+        puts "Updating member # #{member.id}"
+        member.save!
+      rescue OpenSSL::Cipher::CipherError
+        member.encrypted_last_four_ssn = nil
+        member.encrypted_last_four_ssn_iv = nil
+        member.encrypted_ssn = nil
+        member.encrypted_ssn_iv = nil
+        member.save!
+      end
+    end
+  end
+
+  def members
+    Member.where(benefit_application_type: "SnapApplication")
+  end
+end
