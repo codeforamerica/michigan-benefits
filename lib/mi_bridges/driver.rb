@@ -97,8 +97,16 @@ module MiBridges
 
     def run
       setup
-      sign_up_for_account
-      complete_application
+      begin
+        sign_up_for_account
+        complete_application
+      rescue MiBridges::Errors::TooManyAttempts => e
+        save_error(e, @page)
+        raise e
+      rescue StandardError => e
+        save_error(e, @page)
+        debug(e)
+      end
       teardown
     end
 
@@ -130,15 +138,10 @@ module MiBridges
 
     def run_flow(flow)
       flow.each do |klass|
-        begin
-          page = klass.new(@snap_application, logger: logger)
-          page.setup
-          page.fill_in_required_fields
-          page.continue
-        rescue StandardError => e
-          save_error(e, page)
-          debug(e)
-        end
+        @page = klass.new(@snap_application, logger: logger)
+        @page.setup
+        @page.fill_in_required_fields
+        @page.continue
       end
     end
 
@@ -151,7 +154,7 @@ module MiBridges
     end
 
     def level
-      if ENV["DEBUG_DRIVE"] = "true"
+      if ENV["DEBUG_DRIVE"] == "true"
         Logger::DEBUG
       else
         Logger::INFO
@@ -195,14 +198,14 @@ module MiBridges
       end
 
       if klass.nil?
-        fail MiBridges::Errors::PageNotFoundError.new(page_title)
+        raise MiBridges::Errors::PageNotFoundError
       else
         klass
       end
     end
 
     def page_title
-      page.find("h1").text
+      @page.find("h1").text
     end
 
     def teardown

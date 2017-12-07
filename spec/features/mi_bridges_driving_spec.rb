@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.feature "MI Bridges Driving" do
   # to run this in a non-headless way, remove the `:js` flag below
-  scenario "successfully drives, then re-drives a SNAP App", :js, :driving do
+  scenario "successfully drives, then re-drives a SNAP App", :driving do
     WebMock.disable!
 
-    address = create(:mailing_address)
-    member = create(:member, sex: "male")
+    address = build(:mailing_address, county: "Genesee")
+    member = build(:member, sex: "male")
     snap_application = create(
       :snap_application,
       members: [member],

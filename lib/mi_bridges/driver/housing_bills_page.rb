@@ -24,7 +24,7 @@ module MiBridges
       end
 
       def section_name
-        "star#{first_name_section(primary_member).capitalize}sHousingBills"
+        "star#{first_name_section(primary_member)}sHousingBills"
       end
     end
   end
