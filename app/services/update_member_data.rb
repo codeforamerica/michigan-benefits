@@ -8,8 +8,8 @@ class UpdateMemberData
   def update_members
     members.each do |member|
       begin
-        member.first_name = member.first_name.strip
-        member.last_name = member.last_name.strip
+        member.first_name = member.first_name.strip if member.first_name
+        member.last_name = member.last_name.strip if member.last_name
 
         if member.other_income_types.nil?
           member.other_income_types = []
