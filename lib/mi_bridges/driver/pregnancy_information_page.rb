@@ -14,11 +14,13 @@ module MiBridges
           check_no_one_in_section "starPregnancyAllPrograms"
         else
           members.each do |member|
-            check_in_section(
-              "starPregnancyAllPrograms",
-              member.new_mom?,
-              first_name_section(member),
-            )
+            if member.new_mom?
+              check_in_section(
+                "starPregnancyAllPrograms",
+                condition: true,
+                for_label: member.mi_bridges_formatted_name,
+              )
+            end
           end
         end
       end
