@@ -14,7 +14,12 @@ module MiBridges
       end
 
       def fill_in_required_fields
-        select member.marital_status.titleize, from: "maritalStatus"
+        if member.marital_status.present?
+          select member.marital_status.titleize, from: "maritalStatus"
+        else
+          select "Never Married", from: "maritalStatus"
+        end
+
         select_fap_program_enrollment
 
         if for_next_household_member?

@@ -8,7 +8,7 @@ RSpec.describe Dhs1171Pdf do
     it "writes application info to file" do
       mailing_address = build(:mailing_address)
       residential_address = build(:residential_address)
-      member = build(:member, ssn: "012345678")
+      member = build(:member, ssn: "012345678", marital_status: "Widowed")
       snap_application = create(
         :snap_application,
         addresses: [mailing_address, residential_address],

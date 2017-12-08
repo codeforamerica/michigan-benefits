@@ -6,10 +6,11 @@ RSpec.feature "MI Bridges Driving" do
     WebMock.disable!
 
     address = build(:mailing_address, county: "Genesee")
-    member = build(:member, sex: "male")
+    member = build(:member, marital_status: "Married", sex: "male")
+    second_member = build(:member, first_name: "Jojo", sex: "female")
     snap_application = create(
       :snap_application,
-      members: [member],
+      members: [member, second_member],
       mailing_address_same_as_residential_address: true,
       addresses: [address],
     )

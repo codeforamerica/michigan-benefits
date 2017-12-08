@@ -2,6 +2,7 @@
 namespace :one_offs do
   desc "runs all one_offs, remove things from here after they are deployed"
   task run_all: :environment do
+    UpdateMemberData.new.run
     EmploymentsMigrator.new.run
   end
 end
