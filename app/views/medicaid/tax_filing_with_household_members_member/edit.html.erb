@@ -15,7 +15,7 @@
                  method: :put do |f| %>
 
         <fieldset class="form-group">
-          <% current_application.non_applicant_members.each do |member| %>
+          <% @step.members.each do |member| %>
               <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
                   <%= ff.mb_checkbox :filing_taxes_with_primary_member, member.display_name %>
               <% end %>

@@ -18,7 +18,7 @@
       method: :put do |f| %>
 
       <fieldset class="form-group">
-        <% @step.female_members.each do |member| %>
+        <% @step.members.each do |member| %>
           <%= f.fields_for("members[]", member) do |ff| %>
             <%= ff.mb_checkbox(
               :new_mom,

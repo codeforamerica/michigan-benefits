@@ -2,6 +2,10 @@ module Medicaid
   class HealthPregnancyMemberController < Medicaid::ManyMemberStepsController
     private
 
+    def members
+      current_application.members.select(&:female?)
+    end
+
     def skip?
       no_pregnancies? || only_males? || single_female_member_is_pregnant?
     end
@@ -15,7 +19,7 @@ module Medicaid
     end
 
     def only_males?
-      current_application.members.select(&:female?).empty?
+      members.empty?
     end
 
     def single_female_member_is_pregnant?
@@ -23,7 +27,7 @@ module Medicaid
     end
 
     def only_one_female?
-      current_application.members.select(&:female?).count == 1
+      members.count == 1
     end
 
     def application_has_a_new_mom?

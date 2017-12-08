@@ -44,9 +44,14 @@ RSpec.describe Medicaid::TaxFilingWithHouseholdMembersMemberController do
       context "is filing federal taxes next year" do
         context "is filing taxes with household members" do
           it "renders edit" do
+            primary_member = build(:member)
+            non_applicant_member = build(:member)
             medicaid_application = create(
               :medicaid_application,
-              members: build_list(:member, 2),
+              members: [
+                primary_member,
+                non_applicant_member,
+              ],
               filing_federal_taxes_next_year: true,
               filing_taxes_with_household_members: true,
             )
@@ -55,6 +60,7 @@ RSpec.describe Medicaid::TaxFilingWithHouseholdMembersMemberController do
             get :edit
 
             expect(response).to render_template(:edit)
+            expect(assigns[:step].members).to eq [non_applicant_member]
           end
         end
 

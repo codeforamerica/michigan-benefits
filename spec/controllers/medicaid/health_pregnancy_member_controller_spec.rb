@@ -49,16 +49,24 @@ RSpec.describe Medicaid::HealthPregnancyMemberController, type: :controller do
 
     context "members include females" do
       it "renders :edit" do
+        female_member1 = build(:member, sex: "female")
+        female_member2 = build(:member, sex: "female")
+        members = [
+          female_member1,
+          female_member2,
+          build(:member, sex: "male"),
+        ]
         medicaid_application = create(
           :medicaid_application,
           anyone_new_mom: true,
-          members: build_list(:member, 2, sex: "female"),
+          members: members,
         )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
 
         expect(response).to render_template(:edit)
+        expect(assigns[:step].members).to eq [female_member1, female_member2]
       end
     end
   end

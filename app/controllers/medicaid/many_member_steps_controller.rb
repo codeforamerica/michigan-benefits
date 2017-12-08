@@ -24,20 +24,16 @@ module Medicaid
     def assign_household_member_attributes
       step.members.each do |member|
         attrs = params.dig(:step, :members, member.to_param)
-
-        if attrs.present?
-          member.assign_attributes(attrs.permit(member_attrs))
-        end
+        member.assign_attributes(attrs.permit(member_attrs))
       end
     end
 
     def step
-      @step ||= step_class.new(
-        current_application.
-          attributes.
-          slice(*step_attrs).
-          merge(members: current_application.members),
-      )
+      @step ||= step_class.new(members: members)
+    end
+
+    def members
+      current_application.members
     end
 
     def member_attrs

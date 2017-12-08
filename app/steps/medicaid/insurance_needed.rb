@@ -1,9 +1,6 @@
 module Medicaid
   class InsuranceNeeded < Step
-    step_attributes(
-      :members,
-      :requesting_health_insurance,
-    )
+    step_attributes(:members)
 
     validate :members_requesting_health_insurance_selected
 
