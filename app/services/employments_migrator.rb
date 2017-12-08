@@ -2,7 +2,7 @@ class EmploymentsMigrator
   def run
     ActiveRecord::Base.transaction do
       members_with_jobs.each do |member|
-        last_employment_index = member.employed_number_of_jobs - 1
+        last_employment_index = member.employed_employer_names.count - 1
         employment_indices = (0..last_employment_index).to_a
         employments = employment_indices.map do |i|
           Employment.new(
@@ -20,8 +20,6 @@ class EmploymentsMigrator
   private
 
   def members_with_jobs
-    Member.
-      where.not(employed_number_of_jobs: nil).
-      where("employed_number_of_jobs > ?", 0)
+    Member.where.not(employed_employer_names: nil)
   end
 end
