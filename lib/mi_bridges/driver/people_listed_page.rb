@@ -21,6 +21,8 @@ module MiBridges
         end
 
         select_fap_program_enrollment
+        select_citizenship
+        fill_in_social_security_number
 
         if for_next_household_member?
           fill_in "firstName", with: member.mi_bridges_formatted_name
@@ -60,6 +62,36 @@ module MiBridges
         if member.requesting_food_assistance?
           click_id("requestFoodShare")
         end
+      end
+
+      def select_citizenship
+        if member.citizen?
+          click_citizenship_label(
+            for_label: "Yes",
+          )
+        elsif member.citizen == false
+          click_citizenship_label(
+            for_label: "No",
+          )
+        end
+      end
+
+      def click_citizenship_label(for_label: "")
+        selector = "label:contains('#{for_label}')"
+        widget = "[aria-labelledby='uSCitizenLbl']"
+        js_click_selector("#{widget} #{selector}")
+      end
+
+      def fill_in_social_security_number
+        return if member.ssn.blank?
+
+        ssn = member.ssn
+        fill_in "ssn1socialSecurity", with: ssn[0..2]
+        fill_in "ssn2socialSecurity", with: ssn[3..4]
+        fill_in "ssn3socialSecurity", with: ssn[5..8]
+        fill_in "ssn1confirmSocialSecurity", with: ssn[0..2]
+        fill_in "ssn2confirmSocialSecurity", with: ssn[3..4]
+        fill_in "ssn3confirmSocialSecurity", with: ssn[5..8]
       end
 
       def select_yes_person_lives_at_same_address

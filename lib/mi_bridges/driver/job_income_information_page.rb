@@ -39,8 +39,8 @@ module MiBridges
       end
 
       def check_fap_program_benefits
-        check_in_section "starInKindIncome"
-        check_in_section "starRefusaltoWork"
+        check_no_one_in_section "starInKindIncome"
+        check_no_one_in_section "starRefusaltoWork"
       end
     end
   end

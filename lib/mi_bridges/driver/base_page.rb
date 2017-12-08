@@ -57,7 +57,10 @@ module MiBridges
       end
 
       def check_no_one_in_section(section)
-        check_in_section(section)
+        selector = selector_for_radio("No one")
+
+        widget = "[aria-labelledby='#{section}']"
+        js_click_selector("#{widget} #{selector}")
       end
 
       def selector_for_radio(name)

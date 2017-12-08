@@ -24,6 +24,7 @@ module MiBridges
         fill_in_address
         click_same_address_answer
         fill_in_phone_number
+        fill_in_email
       end
 
       def continue
@@ -82,6 +83,10 @@ module MiBridges
         fill_in "phone3homePhone", with: phone_number[6..9]
 
         select "Home Phone", from: "bestWayToGetInTouch"
+      end
+
+      def fill_in_email
+        fill_in "Email Address", with: snap_application.email
       end
 
       def invalid_physical_address?
