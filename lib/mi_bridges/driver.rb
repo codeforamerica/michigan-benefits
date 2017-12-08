@@ -62,6 +62,7 @@ module MiBridges
       MoreAboutOtherIncomePage,
       MoreAboutPensionOrRetirementPage,
       MoreAboutRealPropertyPage,
+      MoreAboutSavingsAccountPage,
       MoreAboutSelfEmploymentPage,
       MoreAboutSupplementalSecurityIncomePage,
       MoreAboutUnemploymentBenefitsPage,
