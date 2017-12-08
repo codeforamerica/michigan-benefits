@@ -16,7 +16,7 @@ module MiBridges
         )
 
         select(
-          current_member.employed_pay_interval,
+          pay_interval,
           from: "How often does #{name} get paid? This is #{name}'s pay period",
         )
 
@@ -32,6 +32,14 @@ module MiBridges
       end
 
       private
+
+      def pay_interval
+        if current_member.employed_pay_interval == "Hourly"
+          "Other"
+        else
+          current_member.employed_pay_interval
+        end
+      end
 
       def not_salaried?
         current_member.employed_pay_interval != "Yearly"
