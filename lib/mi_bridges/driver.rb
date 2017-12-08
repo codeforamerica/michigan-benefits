@@ -56,6 +56,7 @@ module MiBridges
       MoneyOtherSourcesPage,
       MoreAboutCashOnHandPage,
       MoreAboutCheckingAccountPage,
+      MoreAboutChildSupportPaymentPage,
       MoreAboutDisabilityBenefitsPage,
       MoreAboutJobIncomePage,
       MoreAboutOtherIncomePage,
