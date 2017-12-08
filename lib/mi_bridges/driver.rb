@@ -62,7 +62,6 @@ module MiBridges
       MoreAboutJobIncomePage,
       MoreAboutOtherIncomePage,
       MoreAboutPensionOrRetirementPage,
-      # MoreAboutPregnancyPage,
       MoreAboutRealPropertyPage,
       MoreAboutSavingsAccountPage,
       MoreAboutSelfEmploymentPage,
