@@ -13,5 +13,9 @@ module Medicaid
         !current_application.filing_federal_taxes_next_year? ||
         !current_application.filing_taxes_with_household_members?
     end
+
+    def members
+      current_application.non_applicant_members
+    end
   end
 end

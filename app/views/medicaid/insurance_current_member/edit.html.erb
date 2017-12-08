@@ -5,11 +5,11 @@
     <div class="form-card__title">
       <%= t("medicaid.insurance_current_member.edit.title") %>
     </div>
-    <% if @step.members_not_needing_insurance.present? %>
+    <% if members_not_needing_insurance.present? %>
       <p class="text--help text--centered">
         <%= t("medicaid.insurance_current_member.edit.helper_text",
-              count: @step.members_not_needing_insurance.count,
-              names: @step.members_not_needing_insurance.map(&:display_name).to_sentence) %>
+              count: members_not_needing_insurance.count,
+              names: members_not_needing_insurance.map(&:display_name).to_sentence) %>
       </p>
     <% end %>
   </header>
@@ -20,7 +20,7 @@
           <legend class="sr-only">
             <%= t("medicaid.insurance_current_member.edit.title") %>
           </legend>
-          <% @step.members_needing_insurance.each do |member| %>
+          <% @step.members.each do |member| %>
               <%= f.fields_for("members[]", member) do |ff| %>
                 <%= ff.mb_checkbox(
                     :insured,

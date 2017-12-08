@@ -1,9 +1,6 @@
 module Medicaid
   class IntroMaritalStatusMember < Step
-    step_attributes(
-      :members,
-      :married,
-    )
+    step_attributes(:members)
 
     validate :married_selected
 

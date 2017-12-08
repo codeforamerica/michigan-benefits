@@ -1,9 +1,6 @@
 module Medicaid
   class IntroCollegeMember < Step
-    step_attributes(
-      :in_college,
-      :members,
-    )
+    step_attributes(:members)
 
     validate :in_college_selected
 
