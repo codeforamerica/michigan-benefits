@@ -17,6 +17,21 @@ RSpec.describe UpdateMemberData do
       expect(member.last_name).to eq "Hart Young"
     end
 
+    it "does not break for nil first names and last names" do
+      member = create(
+        :member,
+        first_name: nil,
+        last_name: nil,
+        benefit_application: create(:snap_application),
+      )
+
+      UpdateMemberData.new.run
+      member.reload
+
+      expect(member.first_name).to eq nil
+      expect(member.last_name).to eq nil
+    end
+
     it "sets nil other_income_types to be an empty array" do
       member = build(
         :member,
