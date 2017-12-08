@@ -6,7 +6,6 @@ RSpec.describe EmploymentsMigrator do
       it "copies data to the employments table" do
         member = build(
           :member,
-          employed_number_of_jobs: 3,
           employed_employer_names: %w(BART Muni SamTrans),
           employed_pay_quantities: %w(40 500 6000),
           employed_payment_frequency: %w(Hourly Weekly Monthly),
@@ -34,11 +33,11 @@ RSpec.describe EmploymentsMigrator do
       end
     end
 
-    context "member has nil number of jobs" do
+    context "member has nil employed_employer_names" do
       it "does not create employment records" do
         member = build(
           :member,
-          employed_number_of_jobs: nil,
+          employed_employer_names: nil,
         )
         create(:medicaid_application, members: [member])
         EmploymentsMigrator.new.run
@@ -46,11 +45,11 @@ RSpec.describe EmploymentsMigrator do
       end
     end
 
-    context "member has zero jobs" do
+    context "member has empty employed_employer_names" do
       it "does not create employment records" do
         member = build(
           :member,
-          employed_number_of_jobs: 0,
+          employed_employer_names: [],
         )
         create(:medicaid_application, members: [member])
         EmploymentsMigrator.new.run
@@ -62,7 +61,6 @@ RSpec.describe EmploymentsMigrator do
       it "does not create new records the second time" do
         member = build(
           :member,
-          employed_number_of_jobs: 3,
           employed_employer_names: %w(BART Muni SamTrans),
           employed_pay_quantities: %w(40 500 6000),
           employed_payment_frequency: %w(Hourly Weekly Monthly),
