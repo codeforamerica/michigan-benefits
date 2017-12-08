@@ -188,9 +188,13 @@ class Member < ApplicationRecord
     age - (before_birthday ? 1 : 0)
   end
 
-  def update_employments
-    (employed_number_of_jobs - employments.count).
-      times { employments.create! }
+  def modify_employments
+    employment_count_difference = employed_number_of_jobs - employments.count
+    if employment_count_difference.positive?
+      employment_count_difference.times { employments.create! }
+    elsif employment_count_difference.negative?
+      self.employments = employments.limit(employed_number_of_jobs)
+    end
   end
 
   private

@@ -2,7 +2,7 @@ module Medicaid
   class IncomeJobNumberContinuedController < MedicaidStepsController
     def update_application
       member.update!(step_params)
-      member.update_employments
+      member.modify_employments
     end
 
     private
