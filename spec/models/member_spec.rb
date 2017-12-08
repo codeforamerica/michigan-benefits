@@ -267,7 +267,7 @@ RSpec.describe Member do
     end
 
     it "creates records if number of jobs is greater than employments count" do
-      existing_employments = create_list(:employment, 2)
+      existing_employments = build_list(:employment, 2)
       member = build(
         :member,
         employed_number_of_jobs: 3,
