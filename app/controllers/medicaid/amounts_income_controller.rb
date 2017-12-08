@@ -3,8 +3,6 @@ module Medicaid
     def edit
       attribute_keys = Step::Attributes.new(step_attrs).to_sym
 
-      make_additional_jobs
-
       @step = step_class.new(
         existing_attributes.
           slice(*attribute_keys).
@@ -13,12 +11,6 @@ module Medicaid
     end
 
     private
-
-    def make_additional_jobs
-      (
-      current_member.employed_number_of_jobs - current_member.employments.count
-      ).times { current_member.employments.create! }
-    end
 
     def current_member
       @_current_member ||= super || first_member_with_income

@@ -253,4 +253,34 @@ RSpec.describe Member do
       expect(member.display_name).to eq("AnneFace McDog")
     end
   end
+
+  describe "#update_employments" do
+    it "creates employment from employed_number_of_jobs" do
+      member = build(:member, employed_number_of_jobs: 3)
+      create(
+        :medicaid_application,
+        members: [member],
+      )
+      member.update_employments
+
+      expect(member.employments.count).to eq 3
+    end
+
+    it "creates records if number of jobs is greater than employments count" do
+      existing_employments = create_list(:employment, 2)
+      member = build(
+        :member,
+        employed_number_of_jobs: 3,
+        employments: existing_employments,
+      )
+      create(
+        :medicaid_application,
+        members: [member],
+      )
+      member.update_employments
+
+      expect(member.employments.count).to eq 3
+      expect(member.employments[0..1]).to eq existing_employments
+    end
+  end
 end

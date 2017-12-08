@@ -188,6 +188,11 @@ class Member < ApplicationRecord
     age - (before_birthday ? 1 : 0)
   end
 
+  def update_employments
+    (employed_number_of_jobs - employments.count).
+      times { employments.create! }
+  end
+
   private
 
   def receiving_income?

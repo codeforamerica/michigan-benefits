@@ -1,12 +1,15 @@
 module Medicaid
   class IncomeJobNumberController < MedicaidStepsController
     def update_application
-      current_application.primary_member.update!(
-        employed_number_of_jobs: step_params[:employed_number_of_jobs],
-      )
+      member.update!(step_params)
+      member.update_employments
     end
 
     private
+
+    def member
+      current_application.primary_member
+    end
 
     def skip?
       multi_member_household? || nobody_employed?
@@ -17,15 +20,15 @@ module Medicaid
     end
 
     def number_of_jobs
-      if current_application.primary_member.employed_number_of_jobs&. > 4
+      if member.employed_number_of_jobs&. > 4
         4
       else
-        current_application.primary_member.employed_number_of_jobs
+        member.employed_number_of_jobs
       end
     end
 
     def nobody_employed?
-      !current_application&.anyone_employed?
+      !current_application.anyone_employed?
     end
   end
 end

@@ -75,31 +75,12 @@ RSpec.describe Medicaid::AmountsIncomeController do
           expect(response).to render_template(:edit)
         end
 
-        it "creates employment records and assigns them to step" do
-          member = build(:member, employed: true, employed_number_of_jobs: 2)
-          medicaid_application = create(
-            :medicaid_application,
-            members: [member],
-            anyone_employed: true,
-            anyone_self_employed: false,
-            anyone_other_income: false,
-          )
-          session[:medicaid_application_id] = medicaid_application.id
-
-          get :edit
-
-          expect(response).to render_template(:edit)
-
-          expect(member.reload.employments.count).to eq 2
-          expect(assigns[:step].employments.count).to eq 2
-        end
-
-        it "creates employment records if number of jobs has changed" do
-          existing_employments = create_list(:employment, 2)
+        it "assigns employments to step" do
+          existing_employments = build_list(:employment, 2)
           member = build(
             :member,
             employed: true,
-            employed_number_of_jobs: 3,
+            employed_number_of_jobs: 2,
             employments: existing_employments,
           )
           medicaid_application = create(
@@ -114,10 +95,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
           get :edit
 
           expect(response).to render_template(:edit)
-
-          expect(member.reload.employments.count).to eq 3
-          expect(member.employments[0..1]).to eq existing_employments
-          expect(assigns[:step].employments.count).to eq 3
+          expect(assigns[:step].employments).to eq existing_employments
         end
       end
     end
