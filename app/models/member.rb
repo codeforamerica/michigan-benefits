@@ -47,6 +47,7 @@ class Member < ApplicationRecord
 
   belongs_to :benefit_application, polymorphic: true, counter_cache: true
   has_one :spouse, class_name: "Member", foreign_key: "spouse_id"
+  has_many :employments, dependent: :destroy
 
   validates :employed_pay_interval,
     inclusion: { in: PAYMENT_INTERVALS },
@@ -185,6 +186,15 @@ class Member < ApplicationRecord
     age = today.year - birthday.year
     before_birthday = today.strftime("%m%d") < birthday.strftime("%m%d")
     age - (before_birthday ? 1 : 0)
+  end
+
+  def modify_employments
+    employment_count_difference = employed_number_of_jobs - employments.count
+    if employment_count_difference.positive?
+      employment_count_difference.times { employments.create! }
+    elsif employment_count_difference.negative?
+      self.employments = employments.limit(employed_number_of_jobs)
+    end
   end
 
   private

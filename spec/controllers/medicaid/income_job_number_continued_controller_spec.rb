@@ -76,7 +76,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
   end
 
   describe "#update" do
-    it "updates the job number count for the primary member" do
+    it "updates the job number count and employments" do
       member = build(:member)
       medicaid_application = create(:medicaid_application, members: [member])
 
@@ -85,6 +85,7 @@ RSpec.describe Medicaid::IncomeJobNumberContinuedController do
       put :update, params: { step: { employed_number_of_jobs: 9 } }
 
       expect(member.reload.employed_number_of_jobs).to eq 9
+      expect(member.employments.count).to eq 9
     end
   end
 end

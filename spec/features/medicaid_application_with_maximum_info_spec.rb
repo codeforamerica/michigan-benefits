@@ -126,36 +126,26 @@ RSpec.feature "Medicaid app" do
     on_pages "Income & Expense Amounts" do
       click_on "Next"
 
-      fill_in "step_employed_pay_quantities_0", with: 100
-      fill_in "step_employed_pay_quantities_1", with: 50
-      fill_in "step_employed_pay_quantities_2", with: 25
+      within(find("fieldset", text: "Job #1")) do
+        fill_in "Employer name", with: "CfA"
+        fill_in "Average amount / paycheck", with: 100
+        select "Weekly", from: "How often are you paid that amount?"
+      end
 
-      fill_in "step_employed_employer_names_0", with: "Acme Co."
-      fill_in "step_employed_employer_names_1", with: "CfA"
-      fill_in "step_employed_employer_names_2", with: "Cylinder"
+      within(find("fieldset", text: "Job #2")) do
+        fill_in "Employer name", with: "Cylinder"
+        fill_in "Average amount / paycheck", with: 25
+        select "Hourly", from: "How often are you paid that amount?"
+      end
 
-      select "Monthly", from: "step_employed_payment_frequency_0"
-      select "Weekly", from: "step_employed_payment_frequency_1"
-      select "Hourly", from: "step_employed_payment_frequency_2"
+      within(find("fieldset", text: "Job #3")) do
+        fill_in "Employer name", with: "Acme Co."
+        fill_in "Average amount / paycheck", with: 50
+        select "Monthly", from: "How often are you paid that amount?"
+      end
 
       fill_in "step_self_employed_monthly_income", with: 100
       fill_in "step_unemployment_income", with: 100
-      click_on "Next"
-
-      click_back
-
-      expect(find("#step_employed_pay_quantities_0").value).to eq "100"
-      expect(find("#step_employed_pay_quantities_1").value).to eq "50"
-      expect(find("#step_employed_pay_quantities_2").value).to eq "25"
-
-      expect(find("#step_employed_employer_names_0").value).to eq "Acme Co."
-      expect(find("#step_employed_employer_names_1").value).to eq "CfA"
-      expect(find("#step_employed_employer_names_2").value).to eq "Cylinder"
-
-      expect(find("#step_employed_payment_frequency_0").value).to eq "Monthly"
-      expect(find("#step_employed_payment_frequency_1").value).to eq "Weekly"
-      expect(find("#step_employed_payment_frequency_2").value).to eq "Hourly"
-
       click_on "Next"
 
       expect(page).to have_content("Tell us your specific expenses.")

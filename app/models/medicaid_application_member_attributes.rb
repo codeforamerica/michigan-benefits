@@ -22,16 +22,6 @@ class MedicaidApplicationMemberAttributes
       :"#{position}_member_not_employed" => bool_to_checkbox(!member.employed?),
       :"#{position}_member_self_employed" =>
         bool_to_checkbox(member.self_employed?),
-      :"#{position}_member_first_employed_employer_name" =>
-        member.employed_employer_names[0],
-      :"#{position}_member_second_employed_employer_name" =>
-        member.employed_employer_names[1],
-      :"#{position}_member_first_employed_pay_quantity" =>
-        member.employed_pay_quantities[0],
-      :"#{position}_member_second_employed_pay_quantity" =>
-        member.employed_pay_quantities[1],
-      :"#{pay_interval_key(0, "first")}" => "Yes",
-      :"#{pay_interval_key(1, "second")}" => "Yes",
       :"#{position}_member_additional_income_none" =>
         bool_to_checkbox(!member.other_income?),
       :"#{position}_member_additional_income_unemployment_amount" =>
@@ -54,6 +44,19 @@ class MedicaidApplicationMemberAttributes
       member_attributes[:"#{position}_member_under_21_#{yes_no(under_21?)}"] =
         "Yes"
     end
+
+    member_attributes.merge!(
+      employment_attributes(
+        employment: member.employments.first,
+        job_position: "first",
+      ),
+    )
+    member_attributes.merge!(
+      employment_attributes(
+        employment: member.employments.second,
+        job_position: "second",
+      ),
+    )
 
     if member.other_income?
       member.other_income_types.each do |other_income_type|
@@ -109,9 +112,18 @@ class MedicaidApplicationMemberAttributes
     member.age < 21
   end
 
-  def pay_interval_key(index, number)
-    interval = pay_interval(member.employed_payment_frequency[index])
-    "#{position}_member_#{number}_employed_pay_interval_#{interval}"
+  def employment_attributes(employment:, job_position:)
+    return {} if employment.nil?
+
+    interval = pay_interval(employment.payment_frequency)
+    {
+      :"#{position}_member_#{job_position}_employed_employer_name" =>
+        employment.employer_name,
+      :"#{position}_member_#{job_position}_employed_pay_quantity" =>
+        employment.pay_quantity,
+      :"#{position}_member_#{job_position}_employed_pay_interval_#{interval}" =>
+        "Yes",
+    }
   end
 
   def pay_interval(interval)

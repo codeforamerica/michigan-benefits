@@ -20,9 +20,20 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         citizen: true,
         employed: true,
         self_employed: true,
-        employed_employer_names: ["AA Accounting", "BB Burgers"],
-        employed_pay_quantities: ["11", "222"],
-        employed_payment_frequency: ["Hourly", "Weekly"],
+        employments: [
+          build(
+            :employment,
+            employer_name: "AA Accounting",
+            payment_frequency: "Hourly",
+            pay_quantity: "11",
+          ),
+          build(
+            :employment,
+            employer_name: "BB Burgers",
+            payment_frequency: "Weekly",
+            pay_quantity: "222",
+          ),
+        ],
         other_income: true,
         other_income_types: [
           "alimony",
@@ -110,11 +121,43 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         ).to_h
 
         expect(result.keys).not_to include(
-          %i[
-            primary_member_birthday
-            primary_member_under_21_no
-            primary_member_under_21_yes
-          ],
+          :primary_member_birthday,
+          :primary_member_under_21_no,
+          :primary_member_under_21_yes,
+        )
+      end
+    end
+
+    context "no employments" do
+      it "it does not add employment keys" do
+        member = build(
+          :member,
+          employments: [],
+        )
+        create(:medicaid_application, members: [member])
+
+        result = MedicaidApplicationMemberAttributes.new(
+          member: member,
+          position: "primary",
+        ).to_h
+
+        expect(result.keys).not_to include(
+          :primary_member_first_employed_employer_name,
+          :primary_member_first_employed_pay_quantity,
+          :primary_member_first_employed_pay_interval_hourly,
+          :primary_member_first_employed_pay_interval_weekly,
+          :primary_member_first_employed_pay_interval_biweekly,
+          :primary_member_first_employed_pay_interval_twice_monthly,
+          :primary_member_first_employed_pay_interval_monthly,
+          :primary_member_first_employed_pay_interval_yearly,
+          :primary_member_second_employed_employer_name,
+          :primary_member_second_employed_pay_quantity,
+          :primary_member_second_employed_pay_interval_hourly,
+          :primary_member_second_employed_pay_interval_weekly,
+          :primary_member_second_employed_pay_interval_biweekly,
+          :primary_member_second_employed_pay_interval_twice_monthly,
+          :primary_member_second_employed_pay_interval_monthly,
+          :primary_member_second_employed_pay_interval_yearly,
         )
       end
     end

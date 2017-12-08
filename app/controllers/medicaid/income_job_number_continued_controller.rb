@@ -1,17 +1,20 @@
 module Medicaid
   class IncomeJobNumberContinuedController < MedicaidStepsController
     def update_application
-      current_application.primary_member.update!(
-        employed_number_of_jobs: step_params[:employed_number_of_jobs],
-      )
+      member.update!(step_params)
+      member.modify_employments
     end
 
     private
 
+    def member
+      current_application.primary_member
+    end
+
     def skip?
       multi_member_household? ||
         nobody_employed? ||
-        current_application.primary_member.employed_number_of_jobs < 4
+        member.employed_number_of_jobs < 4
     end
 
     def nobody_employed?
@@ -20,8 +23,7 @@ module Medicaid
 
     def existing_attributes
       HashWithIndifferentAccess.new(
-        employed_number_of_jobs:
-          current_application.primary_member.employed_number_of_jobs,
+        employed_number_of_jobs: member.employed_number_of_jobs,
       )
     end
   end
