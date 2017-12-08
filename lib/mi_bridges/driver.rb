@@ -58,6 +58,7 @@ module MiBridges
       MoreAboutCheckingAccountPage,
       MoreAboutChildSupportPaymentPage,
       MoreAboutDisabilityBenefitsPage,
+      MoreAboutDisabilityOrBlindnessPage,
       MoreAboutJobIncomePage,
       MoreAboutOtherIncomePage,
       MoreAboutPensionOrRetirementPage,
