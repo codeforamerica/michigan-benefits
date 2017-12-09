@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202001534) do
+ActiveRecord::Schema.define(version: 20171208235805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20171202001534) do
   end
 
   create_table "driver_errors", force: :cascade do |t|
+    t.string "backtrace"
     t.datetime "created_at", null: false
     t.datetime "driven_at", null: false
     t.bigint "driver_application_id", null: false

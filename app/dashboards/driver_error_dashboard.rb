@@ -7,6 +7,7 @@ class DriverErrorDashboard < Administrate::BaseDashboard
     error_class: Field::String,
     error_message: Field::String,
     page_class: Field::String,
+    backtrace: Field::String,
     page_html: HtmlCodeField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -23,6 +24,7 @@ class DriverErrorDashboard < Administrate::BaseDashboard
     error_class
     error_message
     page_class
+    backtrace
     page_html
     created_at
     updated_at
