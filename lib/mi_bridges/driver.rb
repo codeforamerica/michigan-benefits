@@ -101,16 +101,8 @@ module MiBridges
 
     def run
       setup
-      begin
-        sign_up_for_account
-        complete_application
-      rescue MiBridges::Errors::TooManyAttempts => e
-        save_error(e, @page)
-        raise e
-      rescue StandardError => e
-        save_error(e, @page)
-        debug(e)
-      end
+      sign_up_for_account
+      complete_application
       teardown
     end
 
@@ -142,10 +134,18 @@ module MiBridges
 
     def run_flow(flow)
       flow.each do |klass|
-        @page = klass.new(@snap_application, logger: logger)
-        @page.setup
-        @page.fill_in_required_fields
-        @page.continue
+        begin
+          @page = klass.new(@snap_application, logger: logger)
+          @page.setup
+          @page.fill_in_required_fields
+          @page.continue
+        rescue MiBridges::Errors::TooManyAttempts => e
+          save_error(e, @page)
+          raise e
+        rescue StandardError => e
+          save_error(e, @page)
+          debug(e)
+        end
       end
     end
 
@@ -180,11 +180,12 @@ module MiBridges
     end
 
     def debug(e)
-      if ENV["DEBUG_DRIVE"]
+      if ENV["DEBUG_DRIVE"] == "true"
         # rubocop:disable Debugger
         binding.pry
         # rubocop:enable Debugger
       else
+        logger.log(e.backtrace)
         raise e
       end
     end
