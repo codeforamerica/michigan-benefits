@@ -1,11 +1,15 @@
 module Medicaid
   class IncomeJobNumberController < MedicaidStepsController
+    def edit
+      @step = step_class.new(employed_number_of_jobs: number_of_jobs)
+    end
+
+    private
+
     def update_application
       member.update!(step_params)
       member.modify_employments
     end
-
-    private
 
     def member
       current_application.primary_member
@@ -13,10 +17,6 @@ module Medicaid
 
     def skip?
       multi_member_household? || nobody_employed?
-    end
-
-    def existing_attributes
-      HashWithIndifferentAccess.new(employed_number_of_jobs: number_of_jobs)
     end
 
     def number_of_jobs
