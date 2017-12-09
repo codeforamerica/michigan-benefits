@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20171202001534) do
   end
 
   create_table "driver_errors", force: :cascade do |t|
+    t.string "backtrace"
     t.datetime "created_at", null: false
     t.datetime "driven_at", null: false
     t.bigint "driver_application_id", null: false

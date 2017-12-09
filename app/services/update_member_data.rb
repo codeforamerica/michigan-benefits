@@ -15,7 +15,6 @@ class UpdateMemberData
           member.other_income_types = []
         end
 
-        puts "Updating member # #{member.id}"
         member.save!
       rescue OpenSSL::Cipher::CipherError
         member.encrypted_last_four_ssn = nil
