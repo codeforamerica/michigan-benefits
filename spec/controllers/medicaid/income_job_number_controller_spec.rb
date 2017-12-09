@@ -46,7 +46,7 @@ RSpec.describe Medicaid::IncomeJobNumberController do
       end
 
       context "someone in household is employed" do
-        it "renders edit " do
+        it "renders edit" do
           medicaid_application = create(
             :medicaid_application,
             :with_member,
@@ -55,8 +55,25 @@ RSpec.describe Medicaid::IncomeJobNumberController do
           session[:medicaid_application_id] = medicaid_application.id
 
           get :edit
+          expect(response).to render_template(:edit)
+        end
+      end
+
+      context "client has already selected less than 4 jobs" do
+        it "sets the job number" do
+          member = build(:member, employed_number_of_jobs: 2)
+          medicaid_application = create(
+            :medicaid_application,
+            members: [member],
+            anyone_employed: true,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+          step = assigns(:step)
 
           expect(response).to render_template(:edit)
+          expect(step.employed_number_of_jobs).to eq(2)
         end
       end
 

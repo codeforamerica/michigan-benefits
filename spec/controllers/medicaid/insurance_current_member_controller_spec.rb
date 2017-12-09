@@ -62,7 +62,9 @@ RSpec.describe Medicaid::InsuranceCurrentMemberController, type: :controller do
 
         session[:medicaid_application_id] = medicaid_application.id
 
-        expect(subject.members_not_needing_insurance).to eq [member_not_requesting_insurance]
+        expect(subject.members_not_needing_insurance).to eq(
+          [member_not_requesting_insurance],
+        )
       end
     end
   end
@@ -85,8 +87,8 @@ RSpec.describe Medicaid::InsuranceCurrentMemberController, type: :controller do
           step: {
             members: {
               member.id => { insured: 1 },
-            }
-          }
+            },
+          },
         }
 
         member.reload
