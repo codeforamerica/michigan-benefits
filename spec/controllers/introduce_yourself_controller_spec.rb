@@ -38,6 +38,26 @@ RSpec.describe IntroduceYourselfController do
   end
 
   describe "#update" do
+    context "name contains leading or trailing whitespace" do
+      it "strips whitespace" do
+        params = {
+          step: {
+            first_name: " Space ",
+            last_name: " Case ",
+            "birthday(3i)" => "31",
+            "birthday(2i)" => "1",
+            "birthday(1i)" => "1950",
+          },
+        }
+
+        put :update, params: params
+        member.reload
+
+        expect(member.first_name).to eq "Space"
+        expect(member.last_name).to eq "Case"
+      end
+    end
+
     context "no office location present" do
       context "valid params" do
         it "updates the application" do
@@ -85,7 +105,12 @@ RSpec.describe IntroduceYourselfController do
   end
 
   def member
-    build(:member, first_name: "bob", last_name: "booboo", birthday: birthday)
+    @_member ||= build(
+      :member,
+      first_name: "bob",
+      last_name: "booboo",
+      birthday: birthday,
+    )
   end
 
   def valid_params
