@@ -36,15 +36,15 @@ module MiBridges
       end
 
       def check_drug_felonies
-        check_in_section "starDrugFelonies"
+        check_no_one_in_section "starDrugFelonies"
       end
 
       def check_probation_or_parole
-        check_in_section "starProbationorParole"
+        check_no_one_in_section "starProbationorParole"
       end
 
       def check_other_food_assistence_benefits
-        check_in_section "starOtherFoodAssistanceBenefits"
+        check_no_one_in_section "starOtherFoodAssistanceBenefits"
       end
 
       def check_ssi_benefit
@@ -56,11 +56,13 @@ module MiBridges
       end
 
       def check_cash_benefit_from_mdhhs
-        check_in_section "starCashBenefitfromMDHHS"
+        check_no_one_in_section "starCashBenefitfromMDHHS"
       end
 
       def check_refugee_asylee_or_victim
-        check_in_section "starRefugeeAsyleeorVictimofTraffickingInformation"
+        check_no_one_in_section(
+          "starRefugeeAsyleeorVictimofTraffickingInformation",
+        )
       end
     end
   end
