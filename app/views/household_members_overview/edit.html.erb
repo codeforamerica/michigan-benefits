@@ -16,14 +16,14 @@
       <div class="card card--narrow">
         <p>
           <i class="button__icon--left icon-check icon-check--color"></i>
-          <%= "#{@step.first_name.titleize} (that’s you!)" %>
+          <%= "#{current_application.primary_member.display_name} (that’s you!)" %>
         </p>
 
-        <% @step.non_applicant_members.each do |member| %>
+        <% current_application.non_applicant_members.each do |member| %>
           <div>
             <p>
               <i class="button__icon--left icon-check icon-check--color"></i>
-              <%= member.first_name.titleize %>
+              <%= member.display_name %>
             </p>
           </div>
         <% end %>
