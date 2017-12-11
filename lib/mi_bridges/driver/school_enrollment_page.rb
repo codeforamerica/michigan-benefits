@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class SchoolDetailsPage < ClickNextPage
+    class SchoolEnrollmentPage < ClickNextPage
       def self.title
         "School Enrollment"
       end

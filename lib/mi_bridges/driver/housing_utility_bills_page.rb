@@ -39,7 +39,7 @@ module MiBridges
       end
 
       def check_room_and_meals
-        check_in_section "starRoomandMeals"
+        check_no_one_in_section "starRoomandMeals"
       end
 
       def select_home_heating_payment

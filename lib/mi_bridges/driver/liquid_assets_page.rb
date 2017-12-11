@@ -52,7 +52,7 @@ module MiBridges
       end
 
       def check_other_liquid_assets
-        check_in_section "starOtherLiquidAssets"
+        check_no_one_in_section "starOtherLiquidAssets"
       end
     end
   end

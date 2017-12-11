@@ -47,7 +47,7 @@ module MiBridges
       end
 
       def check_burial_assets
-        check_in_section "starBurialAssets"
+        check_no_one_in_section "starBurialAssets"
       end
 
       def check_life_insurance
@@ -59,11 +59,11 @@ module MiBridges
       end
 
       def check_additional_assets
-        check_in_section "starAdditionalAssets"
+        check_no_one_in_section "starAdditionalAssets"
       end
 
       def check_selling_or_giving_away
-        check_in_section "starSellingorGivingAwayAssets"
+        check_no_one_in_section "starSellingorGivingAwayAssets"
       end
     end
   end
