@@ -77,6 +77,14 @@ class Member < ApplicationRecord
     key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
 
+  def first_name=(value)
+    super(value.try(:strip))
+  end
+
+  def last_name=(value)
+    super(value.try(:strip))
+  end
+
   def other_income_types_inclusion
     if (other_income_types - OTHER_INCOME_TYPES).any?
       errors.add(:other_income_types, "Not a valid income type")
