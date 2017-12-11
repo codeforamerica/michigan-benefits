@@ -11,7 +11,9 @@ module MiBridges
       def fill_in_required_fields; end
 
       def continue
-        close unless ENV["PRE_DEPLOY_TEST"] == "true"
+        unless ENV["RUN_MI_BRIDGES_TEST"] == "true"
+          close
+        end
       end
     end
   end
