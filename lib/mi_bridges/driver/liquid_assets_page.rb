@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class LiquidAssetsPage < BasePage
+    class LiquidAssetsPage < FillInAndClickNextPage
       def self.title
         "Liquid Assets"
       end
@@ -12,17 +12,11 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup; end
-
       def fill_in_required_fields
         check_cash_on_hand
         check_savings_account
         check_checking_account
         check_other_liquid_assets
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

@@ -1,18 +1,12 @@
 module MiBridges
   class Driver
-    class InformationAboutTheChildPage < BasePage
+    class InformationAboutTheChildPage < FillInAndClickNextPage
       def self.title
         "Information About the Child"
       end
 
-      def setup; end
-
       def fill_in_required_fields
         select "Single-Never Married", from: marital_status_question
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

@@ -1,19 +1,13 @@
 module MiBridges
   class Driver
-    class BenefitsSelectorPage < BasePage
+    class BenefitsSelectorPage < FillInAndClickNextPage
       def self.title
         "Which Benefits Would You Like to Apply For? (All Programs)"
       end
 
-      def setup; end
-
       def fill_in_required_fields
         click_id(food_assistance_checkbox)
         click_id(no_dont_contact_my_energy_provider_radio)
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

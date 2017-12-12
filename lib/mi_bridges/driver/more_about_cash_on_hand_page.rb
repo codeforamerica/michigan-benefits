@@ -1,11 +1,9 @@
 module MiBridges
   class Driver
-    class MoreAboutCashOnHandPage < BasePage
+    class MoreAboutCashOnHandPage < FillInAndClickNextPage
       def self.title
         /More About (.*)'s Cash on Hand/
       end
-
-      def setup; end
 
       def fill_in_required_fields
         if snap_application.total_money.present?
@@ -13,10 +11,6 @@ module MiBridges
         else
           click_id("#iDontknow")
         end
-      end
-
-      def continue
-        click_on "Next"
       end
     end
   end

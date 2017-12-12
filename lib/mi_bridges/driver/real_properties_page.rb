@@ -1,18 +1,12 @@
 module MiBridges
   class Driver
-    class RealPropertiesPage < BasePage
+    class RealPropertiesPage < FillInAndClickNextPage
       def self.title
         "Real Properties"
       end
 
-      def setup; end
-
       def fill_in_required_fields
         click_other_real_properties_box
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

@@ -1,18 +1,12 @@
 module MiBridges
   class Driver
-    class PrivacyPinPage < BasePage
+    class PrivacyPinPage < FillInAndClickNextPage
       def self.title
         "Privacy PIN"
       end
 
-      def setup; end
-
       def fill_in_required_fields
         click_id(this_is_a_private_computer_id)
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

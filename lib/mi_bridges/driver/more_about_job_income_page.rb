@@ -1,13 +1,11 @@
 module MiBridges
   class Driver
-    class MoreAboutJobIncomePage < BasePage
+    class MoreAboutJobIncomePage < FillInAndClickNextPage
       def self.title
         /More About (.*)'s Job/
       end
 
       delegate :members, to: :snap_application
-
-      def setup; end
 
       def fill_in_required_fields
         fill_in(
@@ -25,10 +23,6 @@ module MiBridges
         else
           fill_in_salary
         end
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

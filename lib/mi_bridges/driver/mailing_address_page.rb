@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class MailingAddressPage < BasePage
+    class MailingAddressPage < FillInAndClickNextPage
       def self.title
         "Mailing Address"
       end
@@ -15,17 +15,11 @@ module MiBridges
         to: :mailing_address,
       )
 
-      def setup; end
-
       def fill_in_required_fields
         fill_in "Street Address or P.O. Box Number", with: street_address
         select county, from: "County"
         fill_in "City", with: city
         fill_in "Zip Code", with: zip
-      end
-
-      def continue
-        click_on "Next"
       end
     end
   end
