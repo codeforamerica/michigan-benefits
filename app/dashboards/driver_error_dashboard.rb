@@ -3,6 +3,7 @@ require "administrate/base_dashboard"
 class DriverErrorDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     driver_application: Field::BelongsTo,
+    snap_application: Field::HasOne,
     id: Field::Number,
     error_class: Field::String,
     error_message: Field::String,
@@ -14,6 +15,7 @@ class DriverErrorDashboard < Administrate::BaseDashboard
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
+    snap_application
     error_class
     error_message
     page_class
@@ -28,5 +30,6 @@ class DriverErrorDashboard < Administrate::BaseDashboard
     page_html
     created_at
     updated_at
+    snap_application
   ].freeze
 end
