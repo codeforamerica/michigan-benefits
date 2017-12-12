@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class MoneyOtherSourcesPage < BasePage
+    class MoneyOtherSourcesPage < FillInAndClickNextPage
       def self.title
         "Money From Other Sources"
       end
@@ -13,18 +13,12 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup; end
-
       def fill_in_required_fields
         check_retirement_survivors_disability_insurance
         check_child_support_income
         check_other_income
         check_supplemental_security_income
         check_room_and_meals
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

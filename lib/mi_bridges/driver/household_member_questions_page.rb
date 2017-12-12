@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class HouseholdMemberQuestionsPage < BasePage
+    class HouseholdMemberQuestionsPage < FillInAndClickNextPage
       def self.title
         "Household Member Questions"
       end
@@ -10,8 +10,6 @@ module MiBridges
         :primary_member,
         to: :snap_application,
       )
-
-      def setup; end
 
       def fill_in_required_fields
         check_blindness_or_disability
@@ -23,9 +21,7 @@ module MiBridges
         check_refugee_asylee_or_victim
       end
 
-      def continue
-        click_on "Next"
-      end
+      private
 
       def check_blindness_or_disability
         check_in_section(

@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class YourOtherBillsExpensesPage < BasePage
+    class YourOtherBillsExpensesPage < FillInAndClickNextPage
       def self.title
         "Your Other Bills / Expenses"
       end
@@ -13,17 +13,11 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup; end
-
       def fill_in_required_fields
         check_child_spousal_payments
         check_dependent_care_bills
         check_medical_bills
         check_medicare
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

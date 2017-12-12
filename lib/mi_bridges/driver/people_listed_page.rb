@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class PeopleListedPage < BasePage
+    class PeopleListedPage < FillInAndClickNextPage
       def self.title
         "People Listed On Your Application"
       end
@@ -33,10 +33,6 @@ module MiBridges
         else
           fill_in "peopleInYourHome", with: snap_application.members.size
         end
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

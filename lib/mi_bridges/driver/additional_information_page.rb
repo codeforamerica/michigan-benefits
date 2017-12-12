@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class AdditionalInformationPage < ClickNextPage
+    class AdditionalInformationPage < FillInAndClickNextPage
       def self.title
         "Additional Information"
       end

@@ -1,20 +1,14 @@
 module MiBridges
   class Driver
-    class HousingBillsPage < BasePage
+    class HousingBillsPage < FillInAndClickNextPage
       def self.title
         "Housing Bills"
       end
 
       delegate :primary_member, to: :snap_application
 
-      def setup; end
-
       def fill_in_required_fields
         check_housing_bills
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class MedicalBillsPage < BasePage
+    class MedicalBillsPage < FillInAndClickNextPage
       def self.title
         "Medical Bills"
       end
@@ -11,18 +11,12 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup; end
-
       def fill_in_required_fields
         check_health_insurance
         check_prescriptions
         check_dental
         check_in_home_care
         check_hospital_bills
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

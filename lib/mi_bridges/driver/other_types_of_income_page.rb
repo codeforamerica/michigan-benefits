@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class OtherTypesOfIncomePage < BasePage
+    class OtherTypesOfIncomePage < FillInAndClickNextPage
       def self.title
         "Other Types of Income"
       end
@@ -11,17 +11,11 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup; end
-
       def fill_in_required_fields
         check_unemployment
         check_workers_compensation
         check_pension_or_retirement
         check_other_income
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

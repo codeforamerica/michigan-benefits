@@ -1,18 +1,12 @@
 module MiBridges
   class Driver
-    class VehiclesPage < BasePage
+    class VehiclesPage < FillInAndClickNextPage
       def self.title
         "Vehicles"
       end
 
-      def setup; end
-
       def fill_in_required_fields
         click_other_vehicles_box
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

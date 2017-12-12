@@ -1,23 +1,17 @@
 module MiBridges
   class Driver
-    class MoreAboutSelfEmploymentPage < BasePage
+    class MoreAboutSelfEmploymentPage < FillInAndClickNextPage
       def self.title
         /More About (.*)'s Self-Employment/
       end
 
       delegate :members, to: :snap_application
 
-      def setup; end
-
       def fill_in_required_fields
         members.each do |member|
           fill_in_all_programs_for(member)
           fill_in_fap_program_benefits_for(member)
         end
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

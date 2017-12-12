@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class OtherAssetsPage < BasePage
+    class OtherAssetsPage < FillInAndClickNextPage
       def self.title
         "Other Assets"
       end
@@ -13,8 +13,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup; end
-
       def fill_in_required_fields
         check_vehicles
         check_real_estate
@@ -22,10 +20,6 @@ module MiBridges
         check_life_insurance
         check_additional_assets
         check_selling_or_giving_away
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private

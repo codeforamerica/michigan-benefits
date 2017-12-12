@@ -1,6 +1,6 @@
 module MiBridges
   class Driver
-    class UtilityBillsPage < BasePage
+    class UtilityBillsPage < FillInAndClickNextPage
       def self.title
         "Utility Bills"
       end
@@ -16,8 +16,6 @@ module MiBridges
         to: :snap_application,
       )
 
-      def setup; end
-
       def fill_in_required_fields
         check_heat
         check_cooling
@@ -26,10 +24,6 @@ module MiBridges
         check_trash
         check_phone
         check_none
-      end
-
-      def continue
-        click_on "Next"
       end
 
       private
