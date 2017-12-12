@@ -7,6 +7,7 @@ module MiBridges
 
       delegate(
         :court_ordered?,
+        :dependent_care?,
         :monthly_medical_expenses?,
         :primary_member,
         to: :snap_application,
@@ -36,7 +37,11 @@ module MiBridges
       end
 
       def check_dependent_care_bills
-        check_no_one_in_section "starDependentCareBills"
+        check_in_section(
+          "starDependentCareBills",
+          condition: dependent_care?,
+          for_label: primary_member.mi_bridges_formatted_name,
+        )
       end
 
       def check_medical_bills

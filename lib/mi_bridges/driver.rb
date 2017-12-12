@@ -37,6 +37,7 @@ module MiBridges
       BenefitsOverviewPage,
       BenefitsSelectorPage,
       ConceptionPage,
+      DependentCarePage,
       DisabilityOrBlindnessReviewPage,
       FinishPage,
       HealthHospitalizationInsurancePremiumsPage,
