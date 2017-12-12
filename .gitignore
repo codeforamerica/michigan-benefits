@@ -16,3 +16,4 @@
 mkmf.log
 Guardfile
 .idea
+.DS_Store
