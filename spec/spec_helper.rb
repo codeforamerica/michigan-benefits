@@ -38,7 +38,7 @@ RSpec.configure do |config|
 
   config.filter_run :focus
 
-  if ENV["PRE_DEPLOY_TEST"] == "true"
+  if ENV["RUN_MI_BRIDGES_TEST"] == "true"
     config.filter_run :driving
   else
     config.filter_run_excluding :driving
