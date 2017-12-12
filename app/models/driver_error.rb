@@ -1,5 +1,6 @@
 class DriverError < ApplicationRecord
   belongs_to :driver_application
+  has_one :snap_application, through: :driver_application
 
   validates :driver_application, presence: true
   validates :error_class, presence: true
