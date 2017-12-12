@@ -7,4 +7,8 @@ class DriverError < ApplicationRecord
   validates :error_message, presence: true
   validates :page_class, presence: true
   validates :page_html, presence: true
+
+  def page_history
+    driver_application.page_history.join("<br>").html_safe
+  end
 end

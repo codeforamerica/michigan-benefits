@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212175033) do
+ActiveRecord::Schema.define(version: 20171212193613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20171212175033) do
     t.string "encrypted_secret_question_2_answer_iv", null: false
     t.string "encrypted_user_id", null: false
     t.string "encrypted_user_id_iv", null: false
+    t.string "page_history", default: [], array: true
     t.bigint "snap_application_id", null: false
     t.string "tracking_number"
     t.datetime "updated_at", null: false

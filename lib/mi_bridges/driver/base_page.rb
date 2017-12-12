@@ -9,6 +9,7 @@ module MiBridges
 
       def initialize(snap_application, logger: nil)
         @logger = logger
+        snap_application.latest_drive_attempt.page_history << self.class.name
         log("filling out page")
         @snap_application = snap_application
         return if skip_infinite_loop_check?
