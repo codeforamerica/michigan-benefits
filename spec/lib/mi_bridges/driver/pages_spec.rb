@@ -9,6 +9,9 @@ RSpec.describe "Driver pages" do
     describe "methods" do
       it "setup, fill_in_required_fields, continue are defined" do
         snap_application = double
+        driver = double(page_history: [])
+        allow(snap_application).to receive(:latest_drive_attempt).
+          and_return(driver)
         page = page.new(snap_application)
 
         expect(page).to respond_to(:setup)
@@ -21,6 +24,9 @@ RSpec.describe "Driver pages" do
   context "when instantiating a page too many times" do
     it "raises an exception" do
       snap_application = double
+      driver = double(page_history: [])
+      allow(snap_application).to receive(:latest_drive_attempt).
+        and_return(driver)
       limit = MiBridges::Driver::BasePage::INSTANTIATION_LIMIT + 1
 
       expect do
@@ -33,6 +39,9 @@ RSpec.describe "Driver pages" do
 
     it "passes the name of the child class name to the error" do
       snap_application = double
+      driver = double(page_history: [])
+      allow(snap_application).to receive(:latest_drive_attempt).
+        and_return(driver)
       limit = MiBridges::Driver::BasePage::INSTANTIATION_LIMIT + 1
 
       module MiBridges
@@ -53,6 +62,9 @@ RSpec.describe "Driver pages" do
 
     it "ignores the limit on pages that are instantiated many times" do
       snap_application = double
+      driver = double(page_history: [])
+      allow(snap_application).to receive(:latest_drive_attempt).
+        and_return(driver)
       limit = MiBridges::Driver::BasePage::INSTANTIATION_LIMIT + 1
 
       module MiBridges

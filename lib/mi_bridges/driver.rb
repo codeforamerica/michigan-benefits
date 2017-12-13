@@ -169,8 +169,6 @@ module MiBridges
     end
 
     def save_error(e, page)
-      return if latest_drive_attempt.nil?
-
       latest_drive_attempt.
         driver_errors.
         create(
@@ -197,6 +195,11 @@ module MiBridges
 
     def setup
       Capybara.default_driver = ENV.fetch("WEB_DRIVER", "chrome").to_sym
+      if latest_drive_attempt.blank?
+        MiBridges::Driver::Services::DriverApplicationFactory.new(
+          snap_application: snap_application,
+        ).run
+      end
     end
 
     def find_page_klass

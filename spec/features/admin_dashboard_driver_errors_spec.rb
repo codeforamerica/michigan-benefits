@@ -15,6 +15,11 @@ RSpec.feature "Admin viewing driver errors dashboard", type: :feature do
       backtrace: "the error happened on a line right here, see?!",
     )
 
+    driver_application = driver_error.driver_application
+    driver_application.update(
+      page_history: ["FirstPage", "SecondPage"],
+    )
+
     visit admin_root_path
 
     click_on "Driver Errors"
@@ -32,5 +37,8 @@ RSpec.feature "Admin viewing driver errors dashboard", type: :feature do
     expect(page).to have_link(
       driver_error.driver_application.snap_application_id,
     )
+
+    expect(page).to have_content("FirstPage")
+    expect(page).to have_content("SecondPage")
   end
 end
