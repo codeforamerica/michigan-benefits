@@ -1,14 +1,9 @@
 <div class="uploadable-preview dz-preview dz-file-preview dz-details">
   <div class="uploadable-preview__info">
-    <h4>Uploading <div class="dz-filename"><span data-dz-name></span></div></h4>
-
+    <h4>Uploading...</h4>
     <%= hidden_field_tag attribute_name,
       '#',
       name: "step[#{attribute_name}][]" %>
-
-    <p class="text--help">
-      <%= link_to 'Delete', '#', class: "link--subtle link--delete" %>
-    </p>
   </div>
   <p class="text--error is-hidden"></p>
   <div class="uploadable-preview__thumb"><img data-dz-thumbnail /></div>
