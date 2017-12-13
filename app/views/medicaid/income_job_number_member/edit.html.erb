@@ -13,14 +13,12 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <% @step.members.each do |member| %>
-        <fieldset class="form-group">
+        <fieldset class="form-group household-member-group" data-member-name="<%= member.display_name %>">
+          <legend class="text--section-header"><%= member.display_name %></legend>
           <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
-              <div class="household-member-group" data-member-name="<%= member.display_name %>">
-                <p class="text--section-header"><%= member.display_name %></p>
-                <%= ff.mb_select :employed_number_of_jobs,
-                  "",
-                  (0..10).map { |number| [pluralize(number, "job"), number] } %>
-              </div>
+              <%= ff.mb_select :employed_number_of_jobs,
+                "",
+                (0..10).map { |number| [pluralize(number, "job"), number] } %>
           <% end %>
         </fieldset>
       <% end %>

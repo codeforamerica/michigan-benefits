@@ -11,50 +11,46 @@
 
       <% if !current_application.everyone_a_citizen? %>
         <fieldset class="form-group">
-          <legend class="sr-only">
+          <legend class="form-question">
             <%= t("snap.household_more_info_per_member.edit.prompt") %>
+            <span class="form-card__optional">(optional)</span>
           </legend>
-
-          <p class="form-question">
-          <%= t("snap.household_more_info_per_member.edit.prompt") %>
-          <span class="form-card__optional">(optional)</span>
-          </p>
-            <% @step.members.each do |member| %>
-              <%= f.fields_for('members[]', member) do |ff| %>
-                <%= ff.mb_checkbox(
-                  :citizen,
-                  member.display_name,
-                  { checked_value: "0", unchecked_value: "1" },
-                ) %>
-              <% end %>
+          <% @step.members.each do |member| %>
+            <%= f.fields_for('members[]', member) do |ff| %>
+              <%= ff.mb_checkbox(
+                :citizen,
+                member.display_name,
+                { checked_value: "0", unchecked_value: "1" },
+              ) %>
             <% end %>
+          <% end %>
         </fieldset>
       <% end %>
 
       <% if current_application.anyone_disabled? %>
         <fieldset class="form-group">
-          <p class="form-question">Who has a disability?<span class="form-card__optional">(optional)</span></p>
+          <legend class="form-question">Who has a disability?<span class="form-card__optional">(optional)</span></legend>
           <%= render 'member_checkboxes', f: f, step: @step, method: :disabled %>
         </fieldset>
       <% end %>
 
       <% if current_application.anyone_new_mom? %>
         <fieldset class="form-group">
-          <p class="form-question">Who is pregnant or has been pregnant recently?<span class="form-card__optional">(optional)</span></p>
+          <legend class="form-question">Who is pregnant or has been pregnant recently?<span class="form-card__optional">(optional)</span></legend>
           <%= render 'member_checkboxes', f: f, step: @step, method: :new_mom %>
         </fieldset>
       <% end %>
 
       <% if current_application.anyone_in_college? %>
         <fieldset class="form-group">
-          <p class="form-question">Who is enrolled in college?<span class="form-card__optional">(optional)</span></p>
+          <legend class="form-question">Who is enrolled in college?<span class="form-card__optional">(optional)</span></legend>
           <%= render 'member_checkboxes', f: f, step: @step, method: :in_college %>
         </fieldset>
       <% end %>
 
       <% if current_application.anyone_living_elsewhere? %>
         <fieldset class="form-group">
-          <p class="form-question">Who is temporarily living outside the home?<span class="form-card__optional">(optional)</span></p>
+          <legend class="form-question">Who is temporarily living outside the home?<span class="form-card__optional">(optional)</span></legend>
           <%= render 'member_checkboxes', f: f, step: @step, method: :living_elsewhere %>
         </fieldset>
       <% end %>

@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Who in your household needs healthcare coverage?
+      <%= t("medicaid.insurance_needed.edit.title") %>
     </div>
     <p class="text--help text--centered">
       Even if they have insurance, there might be a better program with better
@@ -14,6 +14,9 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <fieldset class="form-group">
+        <legend class="sr-only">
+          <%= t("medicaid.insurance_needed.edit.title") %>
+        </legend>
         <% @step.members.each do |member| %>
           <%= f.fields_for("members[]", member) do |ff| %>
             <%= ff.mb_checkbox(

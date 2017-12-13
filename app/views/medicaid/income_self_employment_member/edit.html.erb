@@ -3,13 +3,16 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Tell us who in the household self-employed.
+      <%= t("medicaid.income_self_employment_member.edit.title") %>
     </div>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
         <fieldset class="form-group">
+          <legend class="sr-only">
+            <%= t("medicaid.income_self_employment_member.edit.title") %>
+          </legend>
           <% @step.members.each do |member| %>
               <%= f.fields_for("members[]", member) do |ff| %>
                   <%= ff.mb_checkbox(

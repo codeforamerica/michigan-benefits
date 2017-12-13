@@ -173,7 +173,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{label(method, label_contents(label_text, notes))}
+        #{fieldset_label_contents(label_text, notes)}
         <div class="input-group--inline">
           <div class="select">
             #{date_select(method, { autofocus: autofocus, date_separator: '</div><div class="select">' }.merge(options), class: 'select__element')}
@@ -194,7 +194,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   )
     <<-HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{fieldset_label_contents(label_text, notes, legend_class)}
+        #{fieldset_label_contents(label_text, notes, legend_class: legend_class)}
         #{radio_buttons(method, collection, layout)}
         #{errors_for(object, method)}
       </fieldset>
@@ -220,7 +220,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     <<-HTML.html_safe
       <fieldset class="input-group">
-        #{fieldset_label_contents(label_text, notes, legend_class, optional: optional)}
+        #{fieldset_label_contents(label_text, notes, legend_class: legend_class, optional: optional)}
         #{checkbox_html}
       </fieldset>
     HTML
@@ -254,7 +254,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       <label class="checkbox">
         #{check_box_with_label(label_text, method, options)}
       </label>
-    #{errors_for(object, method)}
+      #{errors_for(object, method)}
     HTML
   end
 
@@ -276,7 +276,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   private
 
-  def fieldset_label_contents(label_text, notes, legend_class, optional: false)
+  def fieldset_label_contents(
+    label_text,
+    notes,
+    legend_class: "",
+    optional: false
+  )
     notes = Array(notes)
     label_text = <<-HTML
       <legend class="form-question #{legend_class}">#{label_text + optional_text(optional)}</legend>

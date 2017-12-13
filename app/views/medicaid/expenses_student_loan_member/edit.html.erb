@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Tell us who pays student loan interest.
+      <%= t('medicaid.expenses_student_loan_member.edit.title') %>
     </div>
   </header>
 
@@ -15,6 +15,9 @@
       method: :put do |f| %>
 
       <fieldset class="form-group">
+        <legend class="sr-only">
+          <%= t('medicaid.expenses_student_loan_member.edit.title') %>
+        </legend>
         <% @step.members.each do |member| %>
           <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
             <%= ff.mb_checkbox(:pay_student_loan_interest, member.display_name) %>

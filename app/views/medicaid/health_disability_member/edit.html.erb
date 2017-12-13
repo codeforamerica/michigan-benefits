@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Who has a disability?
+      <%= t('medicaid.health_disability_member.edit.title') %>
     </div>
   </header>
 
@@ -16,6 +16,9 @@
 
 
       <fieldset class="form-group">
+        <legend class="sr-only">
+          <%= t('medicaid.health_disability_member.edit.title') %>
+        </legend>
         <% @step.members.each do |member| %>
           <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
             <%= ff.mb_checkbox :disabled, member.display_name %>

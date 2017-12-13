@@ -2,7 +2,9 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Tell us who is a caretaker or parent of others in the household.</div>
+    <div class="form-card__title">
+      <%= t("medicaid.intro_caretaker_member.edit.title") %>
+    </div>
   </header>
 
   <div class="form-card__content">
@@ -13,6 +15,9 @@
                  method: :put do |f| %>
 
         <fieldset class="form-group">
+          <legend class="sr-only">
+            <%= t("medicaid.intro_caretaker_member.edit.title") %>
+          </legend>
           <% @step.members.each do |member| %>
               <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
                   <%= ff.mb_checkbox :caretaker_or_parent, member.display_name %>
