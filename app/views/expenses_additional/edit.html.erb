@@ -15,11 +15,10 @@
 
       <div class="form-card__content">
         <% if current_application.dependent_care? %>
-          <p class="text--section-header">
-            Care expenses
-          </p>
-
-          <fieldset class="form-group">
+          <div class="form-group">
+            <p class="text--section-header">
+              Care expenses
+            </p>
             <%= f.mb_money_field :monthly_care_expenses,
               "In total, how much do you pay in care expenses each month?",
               autofocus: true,
@@ -31,15 +30,15 @@
             ],
             label_text: "What kind of care expenses do you have?",
             optional: true %>
-        </fieldset>
+          </div>
         <% end %>
 
         <% if current_application.medical? %>
-          <p class="text--section-header">
-            Medical Expenses
-          </p>
+          <div class="form-group">
+            <p class="text--section-header">
+              Medical Expenses
+            </p>
 
-          <fieldset class="form-group">
             <%= f.mb_money_field :monthly_medical_expenses,
               "In total, how much do you pay in ongoing medical expenses each month?",
             optional: true %>
@@ -56,15 +55,15 @@
             ],
             label_text: "What kind of ongoing medical expenses do you have?",
             optional: true %>
-          </fieldset>
+          </div>
         <% end %>
 
         <% if current_application.court_ordered? %>
-          <p class="text--section-header">
-            Court-ordered expenses
-          </p>
 
-          <fieldset class="form-group">
+          <div class="form-group">
+            <p class="text--section-header">
+              Court-ordered expenses
+            </p>
             <%= f.mb_money_field :monthly_court_ordered_expenses,
               "In total, how much do you pay in court-ordered expenses each month",
             optional: true %>
@@ -74,7 +73,7 @@
               { method: :alimony, label: "Alimony" },
             ], label_text: "What kind of court-ordered expenses do you have?",
             optional: true %>
-            </fieldset>
+          </div>
         <% end %>
       </div>
 

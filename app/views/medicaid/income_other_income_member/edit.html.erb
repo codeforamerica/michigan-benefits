@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Tell us who gets income that’s not from a job.
+      <%= t("medicaid.income_other_income_member.edit.title") %>
     </div>
   </header>
 
@@ -14,6 +14,9 @@
       url: current_path,
       method: :put do |f| %>
       <fieldset class="form-group">
+        <legend class="sr-only">
+          <%= t("medicaid.income_other_income_member.edit.title") %>
+        </legend>
         <% @step.members.each do |member| %>
           <%= f.fields_for("members[]", member) do |ff| %>
             <%= ff.mb_checkbox(

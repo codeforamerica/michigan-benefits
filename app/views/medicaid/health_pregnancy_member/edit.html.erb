@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Tell us who has been pregnant recently.
+      <%= t("medicaid.health_pregnancy_member.edit.title") %>
     </div>
     <p class="text--help text--centered">
       Currently pregnant or pregnant in the past three months.
@@ -18,6 +18,9 @@
       method: :put do |f| %>
 
       <fieldset class="form-group">
+        <legend class="sr-only">
+          <%= t("medicaid.health_pregnancy_member.edit.title") %>
+        </legend>
         <% @step.members.each do |member| %>
           <%= f.fields_for("members[]", member) do |ff| %>
             <%= ff.mb_checkbox(

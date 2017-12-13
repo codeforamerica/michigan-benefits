@@ -14,6 +14,18 @@ en:
         past 30 days?"
         title_help: Employment includes temporary or contract jobs. Self employment includes odd jobs, home businesses, online businesses, etc.
   medicaid:
+    expenses_alimony_member:
+      edit:
+        title: Tell us who pays child support, alimony, or arrears.
+    expenses_student_loan_member:
+      edit:
+        title: Tell us who pays student loan interest.
+    income_other_income_member:
+      edit:
+        title: Tell us who gets income that’s not from a job.
+    income_self_employment_member:
+      edit:
+        title: Tell us who in the household self-employed.
     intro_marital_status:
       edit:
         title:
@@ -32,6 +44,12 @@ en:
         title:
           one: Are you currently a US citizen?
           other: Is everyone in your household currently a US citizen?
+    health_disability_member:
+      edit:
+        title: Who has a disability?
+    health_pregnancy_member:
+      edit:
+        title: Tell us who has been pregnant recently.
     health_flint_water_crisis:
       edit:
         title:
@@ -85,6 +103,21 @@ en:
     insurance_current_type:
       edit:
         title: "What type of insurance plan is %{name} currently enrolled in?"
+    insurance_needed:
+      edit:
+        title: Who in your household needs healthcare coverage?
+    intro_caretaker_member:
+      edit:
+        title: Tell us who is a caretaker or parent of others in the household.
+    intro_citizen_member:
+      edit:
+        title: Tell us who in your household is not currently a US citizen.
+    intro_college_member:
+      edit:
+        title: Tell us who is currently a college student.
+    intro_marital_status_member:
+      edit:
+        title: Who in the household is currently married?
     expenses_alimony:
       edit:
         title:
@@ -117,6 +150,9 @@ en:
         title:
           one: Tell us your specific expenses.
           other: "Tell us %{name}’s specific expenses."
+    tax_filing_with_household_members_member:
+      edit:
+        title: Tell us which family members you file taxes with.
     tax_filing_with_household_members_relationship:
       edit:
         title: Tell us your tax relationships with each person that you file

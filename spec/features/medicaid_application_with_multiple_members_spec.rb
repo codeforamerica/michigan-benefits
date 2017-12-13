@@ -48,7 +48,7 @@ RSpec.feature "Medicaid app" do
 
     on_page "Introduction" do
       expect(page).to have_content(
-        "Who in the household is currently married?",
+        t("medicaid.intro_marital_status_member.edit.title"),
       )
       check "Jessie Tester"
       check "Christa Tester"
@@ -79,7 +79,7 @@ RSpec.feature "Medicaid app" do
 
     on_page "Introduction" do
       expect(page).to have_content(
-        "Tell us who is currently a college student.",
+        t("medicaid.intro_college_member.edit.title"),
       )
       check "Jessie Tester"
       click_on "Next"
@@ -94,7 +94,7 @@ RSpec.feature "Medicaid app" do
 
     on_page "Introduction" do
       expect(page).to have_content(
-        "Tell us who in your household is not currently a US citizen",
+        t("medicaid.intro_citizen_member.edit.title"),
       )
       check "Jessie Tester"
       click_on "Next"
@@ -109,7 +109,7 @@ RSpec.feature "Medicaid app" do
 
     on_page "Introduction" do
       expect(page).to have_content(
-        "Tell us who is a caretaker or parent of others in the household.",
+        t("medicaid.intro_caretaker_member.edit.title"),
       )
       check "Joel Tester"
       check "Jessie Tester"
@@ -123,7 +123,7 @@ RSpec.feature "Medicaid app" do
 
       click_on "Next"
       expect(page).to have_content(
-        "Who in your household needs healthcare coverage?",
+        t("medicaid.insurance_needed.edit.title"),
       )
       uncheck "Jessie Tester"
       uncheck "Christa Tester"
@@ -191,15 +191,19 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content(
-        "Who has a disability?",
+        t("medicaid.health_disability_member.edit.title"),
       )
       check "Jessie Tester"
       click_on "Next"
 
-      expect(page).to have_content("Has anyone been pregnant recently?")
+      expect(page).to have_content(
+        "Has anyone been pregnant recently?",
+      )
       click_on "Yes"
 
-      expect(page).to have_content("Tell us who has been pregnant recently.")
+      expect(page).to have_content(
+        t("medicaid.health_pregnancy_member.edit.title"),
+      )
       check "Jessie Tester"
       click_on "Next"
 
@@ -233,7 +237,7 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content(
-        "Tell us which family members you file taxes with.",
+        t("medicaid.tax_filing_with_household_members_member.edit.title"),
       )
       check "Joel Tester"
       click_on "Next"
@@ -277,7 +281,7 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content(
-        "Tell us who in the household self-employed.",
+        t("medicaid.income_self_employment_member.edit.title"),
       )
       check "Jessie Tester"
       click_on "Next"
@@ -288,7 +292,7 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content(
-        "Tell us who gets income that’s not from a job.",
+        t("medicaid.income_other_income_member.edit.title"),
       )
       check "Jessie Tester"
       check "Christa Tester"
@@ -315,7 +319,7 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content(
-        "Tell us who pays child support, alimony, or arrears.",
+        t("medicaid.expenses_alimony_member.edit.title"),
       )
       check "Jessie Tester"
       check "Christa Tester"
@@ -327,7 +331,7 @@ RSpec.feature "Medicaid app" do
       click_on "Yes"
 
       expect(page).to have_content(
-        "Tell us who pays student loan interest.",
+        t("medicaid.expenses_student_loan_member.edit.title"),
       )
       check "Jessie Tester"
       click_on "Next"

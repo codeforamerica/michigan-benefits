@@ -13,11 +13,11 @@
         autofocus: true,
         options: { maxlength: 10 },
         notes: "No dashes or spaces (example: 5555555555).",
-      optional: true %>
+        optional: true %>
 
-      <%= f.mb_checkbox_set [
-        { method: :sms_consented, label: "I'd like to receive SMS reminders at key moments in the enrollment process." }
-      ] %>
+      <%= f.mb_checkbox :sms_consented,
+        "I'd like to receive SMS reminders at key moments in the enrollment process." %>
+
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>
