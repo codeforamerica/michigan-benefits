@@ -13,9 +13,7 @@ module MichiganBenefits
     config.project_description = ""
     config.active_job.queue_adapter = :delayed_job
 
-    config.autoload_paths << Rails.root.join("app/steps")
     config.filter_parameters += [:ssn]
-    config.autoload_paths << Rails.root.join("lib")
     config.middleware.insert_after Warden::Manager, DelayedJobWebLogger
   end
 end

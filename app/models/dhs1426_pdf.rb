@@ -1,5 +1,5 @@
 class Dhs1426Pdf
-  PDF_DIRECTORY = "lib/pdfs".freeze
+  PDF_DIRECTORY = "app/lib/pdfs".freeze
   SOURCE_PDF = "#{PDF_DIRECTORY}/DHS_1426.pdf".freeze
   COVERSHEET_PDF = "#{PDF_DIRECTORY}/DHS_1426_cover_letter.pdf".freeze
   STEP_2_ADDITIONAL_MEMBER_PDF =
