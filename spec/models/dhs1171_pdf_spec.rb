@@ -13,6 +13,8 @@ RSpec.describe Dhs1171Pdf do
         :snap_application,
         addresses: [mailing_address, residential_address],
         members: [member],
+        authorized_representative: true,
+        authorized_representative_name: "Adult Face",
       )
       expected_client_data = {
         applying_for_food_assistance: "Yes",
@@ -57,6 +59,9 @@ RSpec.describe Dhs1171Pdf do
         primary_member_ssn_6: "6",
         primary_member_ssn_7: "7",
         primary_member_ssn_8: "8",
+        authorized_representative_yes: "Yes",
+        authorized_representative_no: nil,
+        authorized_representative_name: "Adult Face",
       }
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file

@@ -169,6 +169,12 @@ accounts?",
     end
 
     on_page "Other Details" do
+      choose "Yes"
+      fill_in "What is their full legal name?", with: "Annie Dog"
+      click_on "Continue"
+    end
+
+    on_page "Other Details" do
       fill_in "Anything else?", with: "This is helpful, thank you!"
       click_on "Continue"
     end

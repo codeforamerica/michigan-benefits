@@ -6,138 +6,154 @@ class SnapApplicationAttributes
   end
 
   def to_h
-    {
-      applying_for_food_assistance: "Yes",
-      email: snap_application.email,
-      mailing_address_city: snap_application.mailing_address.city,
-      mailing_address_county: snap_application.mailing_address.county,
-      mailing_address_state: snap_application.mailing_address.state,
-      mailing_address_street_address:
-        full_street_address(snap_application.mailing_address),
-      mailing_address_zip: snap_application.mailing_address.zip,
-      members_buy_food_with_no:
-        bool_to_checkbox(any_members_not_buy_food_with?),
-      members_buy_food_with_yes:
-        bool_to_checkbox(all_members_buy_food_with?),
-      members_not_buy_food_with: members_not_buy_food_with,
-      more_than_six_members_yes: more_than_six_members_yes,
-      more_than_six_members_no: more_than_six_members_no,
-      homeless: bool_to_checkbox(!snap_application.stable_housing?),
-      not_homeless: bool_to_checkbox(snap_application.stable_housing?),
-      residential_address_city: snap_application.residential_address.city,
-      residential_address_county: snap_application.residential_address.county,
-      residential_address_state: snap_application.residential_address.state,
-      residential_address_street_address: residential_or_homeless,
-      residential_address_zip: snap_application.mailing_address.zip,
-      signature: snap_application.signature,
-      signature_date: snap_application.signed_at_est,
-      monthly_rent_taxes_and_insurance: monthly_rent_taxes_and_insurance,
-      total_money: snap_application.total_money,
-      monthly_gross_income: snap_application.monthly_gross_income,
-      members_with_disability_no:
-        bool_to_checkbox(!snap_application.anyone_disabled?),
-      first_member_with_disability_name: first_member_with_disability_name,
-      second_member_with_disability_name: second_member_with_disability_name,
-      third_member_with_disability_name: third_member_with_disability_name,
-      financial_accounts_checking_or_savings_account:
-        financial_accounts(:checking_account, :savings_account),
-      financial_accounts_trusts: financial_accounts(:trusts),
-      financial_accounts_life_insurance: financial_accounts(:life_insurnace),
-      financial_accounts_other: financial_accounts(:other),
-      financial_accounts_mutual_funds_or_stocks:
-        financial_accounts(:mutual_funds, :stocks),
-      financial_accounts_four_oh_one_k_or_iras:
-        financial_accounts(:four_oh_one_k, :iras),
-      monthly_additional_income: snap_application.monthly_additional_income,
-      vehicle_income_yes: bool_to_checkbox(snap_application.vehicle_income?),
-      vehicle_income_no: bool_to_checkbox(!snap_application.vehicle_income?),
-      income_change_yes: bool_to_checkbox(snap_application.income_change?),
-      income_change_no: bool_to_checkbox(!snap_application.income_change?),
-      income_change_explanation: snap_application.income_change_explanation,
-      more_than_two_self_employed_yes: more_than_two_self_employed_yes,
-      more_than_two_self_employed_no: more_than_two_self_employed_no,
-      self_employed_household_members_yes:
-        bool_to_checkbox(self_employed_household_members.any?),
-      self_employed_household_members_no:
-        bool_to_checkbox(self_employed_household_members.empty?),
-      more_than_two_employed_yes: more_than_two_employed_yes,
-      more_than_two_employed_no: more_than_two_employed_no,
-      employed_household_members_yes:
-        bool_to_checkbox(employed_household_members.any?),
-      employed_household_members_no:
-        bool_to_checkbox(employed_household_members.empty?),
-      additional_income_yes:
-        bool_to_checkbox(snap_application.additional_income.any?),
-      additional_income_no:
-        bool_to_checkbox(snap_application.additional_income.empty?),
-      additional_income_social_security: additional_income?("social_security"),
-      additional_income_pension: additional_income?("pension"),
-      additional_income_unemployment:
-        additional_income?("unemployment_insurance"),
-      additional_income_ssi: additional_income?("ssi_or_disability"),
-      additional_income_workers_compensation:
-        additional_income?("workers_compensation"),
-      additional_income_child_support: additional_income?("child_support"),
-      additional_income_other: additional_income?("other"),
-      court_ordered_expenses_child_support:
-        court_ordered_expense?("child_support"),
-      court_ordered_expenses_alimony: court_ordered_expense?("alimony"),
-      court_ordered_expenses_yes:
-        bool_to_checkbox(snap_application.court_ordered?),
-      court_ordered_expenses_no:
-        bool_to_checkbox(!snap_application.court_ordered?),
-      monthly_court_ordered_expenses:
-        snap_application.monthly_court_ordered_expenses,
-      court_ordered_expenses_interval: bool_to_checkbox(
-        snap_application.monthly_court_ordered_expenses.present?,
-      ),
-      medical_expenses_yes: bool_to_checkbox(snap_application.medical?),
-      medical_expenses_no: bool_to_checkbox(!snap_application.medical?),
-      medical_expenses_health_insurance: medical_expense?("health_insurance"),
-      medical_expenses_prescriptions: medical_expense?("prescriptions"),
-      medical_expenses_dental: medical_expense?("dental"),
-      medical_expenses_transportation: medical_expense?("transportation"),
-      medical_expenses_hospital_bills: medical_expense?("hospital_bills"),
-      medical_expenses_other: other_medical_expense?,
-      monthly_medical_expenses: snap_application.monthly_medical_expenses,
-      dependent_care_yes: bool_to_checkbox(snap_application.dependent_care?),
-      dependent_care_no: bool_to_checkbox(!snap_application.dependent_care?),
-      care_expenses_childcare: care_expense?("childcare"),
-      care_expenses_disabled: care_expense?("disabled_adult_care"),
-      monthly_care_expenses: snap_application.monthly_care_expenses,
-      care_expenses_interval: bool_to_checkbox(
-        snap_application.monthly_care_expenses.present?,
-      ),
-      rent_expense_yes: rent_expense_yes,
-      rent_expense: rent_expense,
-      rent_expense_interval: bool_to_checkbox(rent_expense.present?),
-      mortgage_expense_yes: mortgage_expense_yes,
-      mortgage_expense: mortgage_expense,
-      mortgage_expense_interval: bool_to_checkbox(mortgage_expense.present?),
-      property_tax_expense_yes:
-        bool_to_checkbox(snap_application.property_tax_expense.present?),
-      annual_property_tax_expense: annual_property_tax_expense,
-      annual_insurance_expense: annual_insurance_expense,
-      insurance_expense_yes:
-        bool_to_checkbox(snap_application.insurance_expense.present?),
-      utility_heat: bool_to_checkbox(snap_application.utility_heat?),
-      utility_heat_no: bool_to_checkbox(!snap_application.utility_heat?),
-      utility_cooling: bool_to_checkbox(snap_application.utility_cooling?),
-      utility_cooling_no:
-        bool_to_checkbox(!snap_application.utility_cooling?),
-      utility_electricity:
-        bool_to_checkbox(snap_application.utility_electrity?),
-      utility_water_sewer:
-        bool_to_checkbox(snap_application.utility_water_sewer?),
-      utility_trash: bool_to_checkbox(snap_application.utility_trash?),
-      utility_phone: bool_to_checkbox(snap_application.utility_phone?),
-      utility_other: bool_to_checkbox(snap_application.utility_other?),
-    }.merge(phone_attributes).symbolize_keys
+    attributes.
+      reduce { |accum, attribute_hash| accum.merge(attribute_hash) }.
+      symbolize_keys
   end
 
   private
 
   attr_reader :snap_application
+
+  def attributes
+    [
+      {
+        applying_for_food_assistance: "Yes",
+        email: snap_application.email,
+        mailing_address_city: snap_application.mailing_address.city,
+        mailing_address_county: snap_application.mailing_address.county,
+        mailing_address_state: snap_application.mailing_address.state,
+        mailing_address_street_address:
+          full_street_address(snap_application.mailing_address),
+        mailing_address_zip: snap_application.mailing_address.zip,
+        members_buy_food_with_no:
+          bool_to_checkbox(any_members_not_buy_food_with?),
+        members_buy_food_with_yes:
+          bool_to_checkbox(all_members_buy_food_with?),
+        members_not_buy_food_with: members_not_buy_food_with,
+        more_than_six_members_yes: more_than_six_members_yes,
+        more_than_six_members_no: more_than_six_members_no,
+        homeless: bool_to_checkbox(!snap_application.stable_housing?),
+        not_homeless: bool_to_checkbox(snap_application.stable_housing?),
+        residential_address_city: snap_application.residential_address.city,
+        residential_address_county: snap_application.residential_address.county,
+        residential_address_state: snap_application.residential_address.state,
+        residential_address_street_address: residential_or_homeless,
+        residential_address_zip: snap_application.mailing_address.zip,
+        signature: snap_application.signature,
+        signature_date: snap_application.signed_at_est,
+        monthly_rent_taxes_and_insurance: monthly_rent_taxes_and_insurance,
+        total_money: snap_application.total_money,
+        monthly_gross_income: snap_application.monthly_gross_income,
+        members_with_disability_no:
+          bool_to_checkbox(!snap_application.anyone_disabled?),
+        first_member_with_disability_name: first_member_with_disability_name,
+        second_member_with_disability_name: second_member_with_disability_name,
+        third_member_with_disability_name: third_member_with_disability_name,
+        financial_accounts_checking_or_savings_account:
+          financial_accounts(:checking_account, :savings_account),
+        financial_accounts_trusts: financial_accounts(:trusts),
+        financial_accounts_life_insurance: financial_accounts(:life_insurnace),
+        financial_accounts_other: financial_accounts(:other),
+        financial_accounts_mutual_funds_or_stocks:
+          financial_accounts(:mutual_funds, :stocks),
+        financial_accounts_four_oh_one_k_or_iras:
+          financial_accounts(:four_oh_one_k, :iras),
+        monthly_additional_income: snap_application.monthly_additional_income,
+        vehicle_income_yes: bool_to_checkbox(snap_application.vehicle_income?),
+        vehicle_income_no: bool_to_checkbox(!snap_application.vehicle_income?),
+        income_change_yes: bool_to_checkbox(snap_application.income_change?),
+        income_change_no: bool_to_checkbox(!snap_application.income_change?),
+        income_change_explanation: snap_application.income_change_explanation,
+        more_than_two_self_employed_yes: more_than_two_self_employed_yes,
+        more_than_two_self_employed_no: more_than_two_self_employed_no,
+        self_employed_household_members_yes:
+          bool_to_checkbox(self_employed_household_members.any?),
+        self_employed_household_members_no:
+          bool_to_checkbox(self_employed_household_members.empty?),
+        more_than_two_employed_yes: more_than_two_employed_yes,
+        more_than_two_employed_no: more_than_two_employed_no,
+        employed_household_members_yes:
+          bool_to_checkbox(employed_household_members.any?),
+        employed_household_members_no:
+          bool_to_checkbox(employed_household_members.empty?),
+        additional_income_yes:
+          bool_to_checkbox(snap_application.additional_income.any?),
+        additional_income_no:
+          bool_to_checkbox(snap_application.additional_income.empty?),
+        additional_income_social_security:
+          additional_income?("social_security"),
+        additional_income_pension: additional_income?("pension"),
+        additional_income_unemployment:
+          additional_income?("unemployment_insurance"),
+        additional_income_ssi: additional_income?("ssi_or_disability"),
+        additional_income_workers_compensation:
+          additional_income?("workers_compensation"),
+        additional_income_child_support: additional_income?("child_support"),
+        additional_income_other: additional_income?("other"),
+        court_ordered_expenses_child_support:
+          court_ordered_expense?("child_support"),
+        court_ordered_expenses_alimony: court_ordered_expense?("alimony"),
+        court_ordered_expenses_yes:
+          bool_to_checkbox(snap_application.court_ordered?),
+        court_ordered_expenses_no:
+          bool_to_checkbox(!snap_application.court_ordered?),
+        monthly_court_ordered_expenses:
+          snap_application.monthly_court_ordered_expenses,
+        court_ordered_expenses_interval: bool_to_checkbox(
+          snap_application.monthly_court_ordered_expenses.present?,
+        ),
+        medical_expenses_yes: bool_to_checkbox(snap_application.medical?),
+        medical_expenses_no: bool_to_checkbox(!snap_application.medical?),
+        medical_expenses_health_insurance: medical_expense?("health_insurance"),
+        medical_expenses_prescriptions: medical_expense?("prescriptions"),
+        medical_expenses_dental: medical_expense?("dental"),
+        medical_expenses_transportation: medical_expense?("transportation"),
+        medical_expenses_hospital_bills: medical_expense?("hospital_bills"),
+        medical_expenses_other: other_medical_expense?,
+        monthly_medical_expenses: snap_application.monthly_medical_expenses,
+        dependent_care_yes: bool_to_checkbox(snap_application.dependent_care?),
+        dependent_care_no: bool_to_checkbox(!snap_application.dependent_care?),
+        care_expenses_childcare: care_expense?("childcare"),
+        care_expenses_disabled: care_expense?("disabled_adult_care"),
+        monthly_care_expenses: snap_application.monthly_care_expenses,
+        care_expenses_interval: bool_to_checkbox(
+          snap_application.monthly_care_expenses.present?,
+        ),
+        rent_expense_yes: rent_expense_yes,
+        rent_expense: rent_expense,
+        rent_expense_interval: bool_to_checkbox(rent_expense.present?),
+        mortgage_expense_yes: mortgage_expense_yes,
+        mortgage_expense: mortgage_expense,
+        mortgage_expense_interval: bool_to_checkbox(mortgage_expense.present?),
+        property_tax_expense_yes:
+          bool_to_checkbox(snap_application.property_tax_expense.present?),
+        annual_property_tax_expense: annual_property_tax_expense,
+        annual_insurance_expense: annual_insurance_expense,
+        insurance_expense_yes:
+          bool_to_checkbox(snap_application.insurance_expense.present?),
+        utility_heat: bool_to_checkbox(snap_application.utility_heat?),
+        utility_heat_no: bool_to_checkbox(!snap_application.utility_heat?),
+        utility_cooling: bool_to_checkbox(snap_application.utility_cooling?),
+        utility_cooling_no:
+          bool_to_checkbox(!snap_application.utility_cooling?),
+        utility_electricity:
+          bool_to_checkbox(snap_application.utility_electrity?),
+        utility_water_sewer:
+          bool_to_checkbox(snap_application.utility_water_sewer?),
+        utility_trash: bool_to_checkbox(snap_application.utility_trash?),
+        utility_phone: bool_to_checkbox(snap_application.utility_phone?),
+        utility_other: bool_to_checkbox(snap_application.utility_other?),
+        authorized_representative_name:
+          snap_application.authorized_representative_name,
+      },
+      phone_attributes,
+      yes_no_checkbox_attribute(
+        "authorized_representative",
+        snap_application.authorized_representative,
+      ),
+    ]
+  end
 
   def benefit_application
     snap_application

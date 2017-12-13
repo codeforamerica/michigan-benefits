@@ -1,0 +1,29 @@
+<% content_for :header_title, "Other Details" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Would you like to designate someone else to be your authorized representative?
+    </div>
+    <p class="text--help text--centered">
+      This should be someone you trust. They would
+      have access to your food benefits, a Bridge card, and help shop for you.
+    </p>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+    <%= f.mb_radio_set(
+      :authorized_representative,
+      "Would you like to designate someone else to be your authorized representative?",
+      [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+      layout: "inline") %>
+    <%= f.mb_input_field :authorized_representative_name, "What is their full legal name?" %>
+    <%= render "shared/next_step" %>
+    <% end %>
+  </div>
+</div>

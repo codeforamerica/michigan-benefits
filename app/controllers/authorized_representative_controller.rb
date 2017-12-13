@@ -1,0 +1,2 @@
+class AuthorizedRepresentativeController < SnapStepsController
+end

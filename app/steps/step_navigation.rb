@@ -34,6 +34,7 @@ class StepNavigation
     "General" => [
       ContactPreferenceController,
       ContactConfirmPhoneNumberController,
+      AuthorizedRepresentativeController,
       GeneralAnythingElseController,
     ],
     "Submit Documents" => [
