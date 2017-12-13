@@ -14,7 +14,6 @@ module MichiganBenefits
     config.active_job.queue_adapter = :delayed_job
 
     config.filter_parameters += [:ssn]
-    config.eager_load_paths << Rails.root.join("lib")
     config.middleware.insert_after Warden::Manager, DelayedJobWebLogger
   end
 end

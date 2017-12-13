@@ -1,5 +1,5 @@
 class Dhs1171Pdf
-  PDF_DIRECTORY = "lib/pdfs".freeze
+  PDF_DIRECTORY = "app/lib/pdfs".freeze
   SOURCE_PDF = "#{PDF_DIRECTORY}/DHS_1171.pdf".freeze
   COVERSHEET_PDF = "#{PDF_DIRECTORY}/DHS_1171_cover_letter.pdf".freeze
   MAXIMUM_HOUSEHOLD_MEMBERS = 6

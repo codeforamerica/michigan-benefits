@@ -1,3 +1,5 @@
+require_relative "../summarizer/application_summary"
+
 namespace :summarizer do
   desc "Posts an update about the last day's app activity"
   task :post_update, [:channel] => [:environment] do |_, args|
