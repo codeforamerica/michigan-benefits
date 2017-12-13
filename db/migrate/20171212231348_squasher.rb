@@ -1,6 +1,5 @@
-class SquasherClean < ActiveRecord::Migration[5.1]
-  class SchemaMigration < ActiveRecord::Base
-  end
+class Squasher < ActiveRecord::Migration[5.1]
+  class SchemaMigration < ActiveRecord::Base; end
 
   def up
     migrations = Dir.glob(File.join(File.dirname(__FILE__), "*.rb"))
