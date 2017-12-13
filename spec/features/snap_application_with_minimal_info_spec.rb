@@ -93,6 +93,10 @@ RSpec.feature "Submit application with minimal information" do
       click_on "Continue"
     end
 
+    on_page "Other Details" do
+      click_on "Continue"
+    end
+
     on_page "Documents" do
       click_on "I'll do this later"
     end

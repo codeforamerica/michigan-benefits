@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212193613) do
+ActiveRecord::Schema.define(version: 20171213212138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,6 +232,8 @@ ActiveRecord::Schema.define(version: 20171212193613) do
     t.boolean "anyone_in_college"
     t.boolean "anyone_living_elsewhere"
     t.boolean "anyone_new_mom"
+    t.boolean "authorized_representative"
+    t.string "authorized_representative_name"
     t.string "care_expenses", default: [], array: true
     t.boolean "consent_to_terms"
     t.boolean "court_ordered"

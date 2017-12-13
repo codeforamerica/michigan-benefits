@@ -16,6 +16,8 @@ RSpec.describe SnapApplicationAttributes do
         phone_number: "2222222222",
         rent_expense: 100,
         stable_housing: false,
+        authorized_representative: true,
+        authorized_representative_name: "aBenny",
       )
 
       member = snap_application.members.first
@@ -132,6 +134,8 @@ RSpec.describe SnapApplicationAttributes do
         utility_trash: nil,
         utility_phone: nil,
         utility_other: nil,
+        authorized_representative_yes: "Yes",
+        authorized_representative_name: "aBenny",
       )
     end
   end
