@@ -5,12 +5,6 @@ class MedicaidApplicationAttributes
     @medicaid_application = medicaid_application
   end
 
-  def to_h
-    attributes.
-      reduce { |accum, attribute_hash| accum.merge(attribute_hash) }.
-      symbolize_keys
-  end
-
   private
 
   attr_reader :medicaid_application
@@ -45,26 +39,17 @@ class MedicaidApplicationAttributes
       },
       phone_attributes,
       insurance_attributes,
-      yes_no_checkbox_attribute(
-        "flint_water",
-        medicaid_application.flint_water_crisis,
-      ),
-      yes_no_checkbox_attribute(
+      yes_no_checkbox("flint_water", medicaid_application.flint_water_crisis),
+      yes_no_checkbox(
         "need_medical_expense_help_3_months",
         medicaid_application.need_medical_expense_help_3_months,
       ),
-      yes_no_checkbox_attribute(
-        "anyone_insured",
-        medicaid_application.anyone_insured,
-      ),
-      yes_no_checkbox_attribute(
+      yes_no_checkbox("anyone_insured", medicaid_application.anyone_insured),
+      yes_no_checkbox(
         "filing_federal_taxes_next_year",
         medicaid_application.filing_federal_taxes_next_year,
       ),
-      yes_no_checkbox_attribute(
-        "any_member_tax_relationship_dependent",
-        dependents.any?,
-      ),
+      yes_no_checkbox("any_member_tax_relationship_dependent", dependents.any?),
       dependent_member_names: first_names(dependents),
     ]
   end
