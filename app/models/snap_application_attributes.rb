@@ -5,12 +5,6 @@ class SnapApplicationAttributes
     @snap_application = snap_application
   end
 
-  def to_h
-    attributes.
-      reduce { |accum, attribute_hash| accum.merge(attribute_hash) }.
-      symbolize_keys
-  end
-
   private
 
   attr_reader :snap_application
@@ -26,15 +20,7 @@ class SnapApplicationAttributes
         mailing_address_street_address:
           full_street_address(snap_application.mailing_address),
         mailing_address_zip: snap_application.mailing_address.zip,
-        members_buy_food_with_no:
-          bool_to_checkbox(any_members_not_buy_food_with?),
-        members_buy_food_with_yes:
-          bool_to_checkbox(all_members_buy_food_with?),
         members_not_buy_food_with: members_not_buy_food_with,
-        more_than_six_members_yes: more_than_six_members_yes,
-        more_than_six_members_no: more_than_six_members_no,
-        homeless: bool_to_checkbox(!snap_application.stable_housing?),
-        not_homeless: bool_to_checkbox(snap_application.stable_housing?),
         residential_address_city: snap_application.residential_address.city,
         residential_address_county: snap_application.residential_address.county,
         residential_address_state: snap_application.residential_address.state,
@@ -60,27 +46,6 @@ class SnapApplicationAttributes
         financial_accounts_four_oh_one_k_or_iras:
           financial_accounts(:four_oh_one_k, :iras),
         monthly_additional_income: snap_application.monthly_additional_income,
-        vehicle_income_yes: bool_to_checkbox(snap_application.vehicle_income?),
-        vehicle_income_no: bool_to_checkbox(!snap_application.vehicle_income?),
-        income_change_yes: bool_to_checkbox(snap_application.income_change?),
-        income_change_no: bool_to_checkbox(!snap_application.income_change?),
-        income_change_explanation: snap_application.income_change_explanation,
-        more_than_two_self_employed_yes: more_than_two_self_employed_yes,
-        more_than_two_self_employed_no: more_than_two_self_employed_no,
-        self_employed_household_members_yes:
-          bool_to_checkbox(self_employed_household_members.any?),
-        self_employed_household_members_no:
-          bool_to_checkbox(self_employed_household_members.empty?),
-        more_than_two_employed_yes: more_than_two_employed_yes,
-        more_than_two_employed_no: more_than_two_employed_no,
-        employed_household_members_yes:
-          bool_to_checkbox(employed_household_members.any?),
-        employed_household_members_no:
-          bool_to_checkbox(employed_household_members.empty?),
-        additional_income_yes:
-          bool_to_checkbox(snap_application.additional_income.any?),
-        additional_income_no:
-          bool_to_checkbox(snap_application.additional_income.empty?),
         additional_income_social_security:
           additional_income?("social_security"),
         additional_income_pension: additional_income?("pension"),
@@ -94,17 +59,12 @@ class SnapApplicationAttributes
         court_ordered_expenses_child_support:
           court_ordered_expense?("child_support"),
         court_ordered_expenses_alimony: court_ordered_expense?("alimony"),
-        court_ordered_expenses_yes:
-          bool_to_checkbox(snap_application.court_ordered?),
-        court_ordered_expenses_no:
-          bool_to_checkbox(!snap_application.court_ordered?),
         monthly_court_ordered_expenses:
           snap_application.monthly_court_ordered_expenses,
         court_ordered_expenses_interval: bool_to_checkbox(
           snap_application.monthly_court_ordered_expenses.present?,
         ),
-        medical_expenses_yes: bool_to_checkbox(snap_application.medical?),
-        medical_expenses_no: bool_to_checkbox(!snap_application.medical?),
+        income_change_explanation: snap_application.income_change_explanation,
         medical_expenses_health_insurance: medical_expense?("health_insurance"),
         medical_expenses_prescriptions: medical_expense?("prescriptions"),
         medical_expenses_dental: medical_expense?("dental"),
@@ -112,8 +72,6 @@ class SnapApplicationAttributes
         medical_expenses_hospital_bills: medical_expense?("hospital_bills"),
         medical_expenses_other: other_medical_expense?,
         monthly_medical_expenses: snap_application.monthly_medical_expenses,
-        dependent_care_yes: bool_to_checkbox(snap_application.dependent_care?),
-        dependent_care_no: bool_to_checkbox(!snap_application.dependent_care?),
         care_expenses_childcare: care_expense?("childcare"),
         care_expenses_disabled: care_expense?("disabled_adult_care"),
         monthly_care_expenses: snap_application.monthly_care_expenses,
@@ -132,11 +90,6 @@ class SnapApplicationAttributes
         annual_insurance_expense: annual_insurance_expense,
         insurance_expense_yes:
           bool_to_checkbox(snap_application.insurance_expense.present?),
-        utility_heat: bool_to_checkbox(snap_application.utility_heat?),
-        utility_heat_no: bool_to_checkbox(!snap_application.utility_heat?),
-        utility_cooling: bool_to_checkbox(snap_application.utility_cooling?),
-        utility_cooling_no:
-          bool_to_checkbox(!snap_application.utility_cooling?),
         utility_electricity:
           bool_to_checkbox(snap_application.utility_electrity?),
         utility_water_sewer:
@@ -148,10 +101,40 @@ class SnapApplicationAttributes
           snap_application.authorized_representative_name,
       },
       phone_attributes,
-      yes_no_checkbox_attribute(
+      yes_no_checkbox("homeless", !snap_application.stable_housing?),
+      yes_no_checkbox(
         "authorized_representative",
         snap_application.authorized_representative,
       ),
+      yes_no_checkbox("more_than_six_members", more_than_six_members_yes),
+      yes_no_checkbox("dependent_care", snap_application.dependent_care?),
+      yes_no_checkbox("medical_expenses", snap_application.medical?),
+      yes_no_checkbox(
+        "court_ordered_expenses",
+        snap_application.court_ordered?,
+      ),
+      yes_no_checkbox(
+        "employed_household_members",
+        employed_household_members.any?,
+      ),
+      yes_no_checkbox(
+        "additional_income",
+        snap_application.additional_income.any?,
+      ),
+      yes_no_checkbox("vehicle_income", snap_application.vehicle_income?),
+      yes_no_checkbox("income_change", snap_application.income_change?),
+      yes_no_checkbox(
+        "more_than_two_self_employed",
+        more_than_two_self_employed_yes,
+      ),
+      yes_no_checkbox(
+        "self_employed_household_members",
+        self_employed_household_members.any?,
+      ),
+      yes_no_checkbox("more_than_two_employed", more_than_two_employed_yes),
+      yes_no_checkbox("members_buy_food_with", all_members_buy_food_with?),
+      yes_no_checkbox("utility_heat", snap_application.utility_heat?),
+      yes_no_checkbox("utility_cooling", snap_application.utility_cooling?),
     ]
   end
 
@@ -191,10 +174,6 @@ class SnapApplicationAttributes
     !buy_food_with.include?(false)
   end
 
-  def any_members_not_buy_food_with?
-    buy_food_with.include?(false)
-  end
-
   def buy_food_with
     snap_application.members.map(&:buy_food_with?)
   end
@@ -209,44 +188,16 @@ class SnapApplicationAttributes
   end
 
   def more_than_six_members_yes
-    bool_to_checkbox(
-      snap_application.members_count > Dhs1171Pdf::MAXIMUM_HOUSEHOLD_MEMBERS,
-    )
-  end
-
-  def more_than_six_members_no
-    bool_to_checkbox(
-      snap_application.members_count <=
-        Dhs1171Pdf::MAXIMUM_HOUSEHOLD_MEMBERS,
-    )
+    snap_application.members_count > Dhs1171Pdf::MAXIMUM_HOUSEHOLD_MEMBERS
   end
 
   def more_than_two_self_employed_yes
-    bool_to_checkbox(
-      self_employed_household_members.length >
-        Dhs1171Pdf::MAXIMUM_SELF_EMPLOYED_MEMBERS,
-    )
-  end
-
-  def more_than_two_self_employed_no
-    bool_to_checkbox(
-      self_employed_household_members.length <=
-        Dhs1171Pdf::MAXIMUM_SELF_EMPLOYED_MEMBERS,
-    )
+    self_employed_household_members.length >
+      Dhs1171Pdf::MAXIMUM_SELF_EMPLOYED_MEMBERS
   end
 
   def more_than_two_employed_yes
-    bool_to_checkbox(
-      employed_household_members.length >
-        Dhs1171Pdf::MAXIMUM_EMPLOYED_MEMBERS,
-    )
-  end
-
-  def more_than_two_employed_no
-    bool_to_checkbox(
-      employed_household_members.length <=
-        Dhs1171Pdf::MAXIMUM_EMPLOYED_MEMBERS,
-    )
+    employed_household_members.length > Dhs1171Pdf::MAXIMUM_EMPLOYED_MEMBERS
   end
 
   def financial_accounts(*types)

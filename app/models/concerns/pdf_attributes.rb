@@ -1,6 +1,12 @@
 module PdfAttributes
   extend ActiveSupport::Concern
 
+  def to_h
+    attributes.
+      reduce { |accum, attribute_hash| accum.merge(attribute_hash) }.
+      symbolize_keys
+  end
+
   def bool_to_checkbox(statement)
     if statement
       "Yes"
@@ -11,7 +17,7 @@ module PdfAttributes
     statement ? "yes" : "no"
   end
 
-  def yes_no_checkbox_attribute(field_name, boolean_value)
+  def yes_no_checkbox(field_name, boolean_value)
     { "#{field_name}_#{yes_no(boolean_value)}".to_sym => "Yes" }
   end
 

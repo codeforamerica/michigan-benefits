@@ -15,8 +15,19 @@ RSpec.describe Dhs1171Pdf do
         members: [member],
         authorized_representative: true,
         authorized_representative_name: "Adult Face",
+        stable_housing: true,
       )
       expected_client_data = {
+        homeless_yes: nil,
+        homeless_no: "Yes",
+        medical_expenses_no: "Yes",
+        medical_expenses_yes: nil,
+        dependent_care_no: "Yes",
+        dependent_care_yes: nil,
+        income_change_no: "Yes",
+        income_change_yes: nil,
+        additional_income_no: "Yes",
+        additional_income_yes: nil,
         applying_for_food_assistance: "Yes",
         phone_number: snap_application.phone_number,
         mailing_address_street_address:
