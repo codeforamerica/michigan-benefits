@@ -175,9 +175,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       <fieldset class="form-group#{error_state(object, method)}">
         #{fieldset_label_contents(label_text, notes)}
         <div class="input-group--inline">
-          <div class="select">
-            #{date_select(method, { autofocus: autofocus, date_separator: '</div><div class="select">' }.merge(options), class: 'select__element')}
-          </div>
+          #{date_select(
+            method,
+            { autofocus: autofocus }.merge(options),
+            class: 'select__element',
+          )}
         </div>
         #{errors_for(object, method)}
       </fieldset>
@@ -395,5 +397,41 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     <<-HTML.html_safe
       #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
     HTML
+  end
+end
+
+module ActionView
+  module Helpers
+    class DateTimeSelector
+
+      # Given an ordering of datetime components, create the selection HTML
+      # and join them with their appropriate separators.
+      def build_selects_from_types(order)
+        select = ""
+        order.reverse_each do |type|
+          separator = separator(type)
+          select.insert(0, separator.to_s + send("select_#{type}").to_s + "</div>")
+        end
+        select.html_safe
+      end
+
+      # Returns the separator for a given datetime component.
+      def separator(type)
+        return "" if @options[:use_hidden]
+        field_name = "#{@options[:prefix]}_#{@options[:field_name]}"
+        case type
+          when :year
+            "<div class='select'><label for='#{field_name}_1i' class='sr-only'>Year</label>"
+          when :month
+            "<div class='select'><label for='#{field_name}_2i' class='sr-only'>Month</label>"
+          when :day
+            "<div class='select'><label for='#{field_name}_3i' class='sr-only'>Day</label>"
+          when :hour
+            (@options[:discard_year] && @options[:discard_day]) ? "" : @options[:datetime_separator]
+          when :minute, :second
+            @options[:"discard_#{type}"] ? "" : @options[:time_separator]
+        end
+      end
+    end
   end
 end
