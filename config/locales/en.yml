@@ -17,7 +17,19 @@ en:
       edit:
         title: In your own words, tell us about the recent change in your
           household’s income.
+    income_change:
+      edit:
+        title: Has your household had a change in income in the past 30 days?
+    income_additional_sources:
+      edit:
+        title: Check all additional sources of income received by your household, if any.
+    introduction_change_office_location:
+      edit:
+        title: Where would you like to submit your application?
   medicaid:
+    income_job_number:
+      edit:
+        title: Tell us how many jobs you currently have.
     expenses_alimony_member:
       edit:
         title: Tell us who pays child support, alimony, or arrears.
@@ -27,6 +39,9 @@ en:
     income_other_income_member:
       edit:
         title: Tell us who gets income that’s not from a job.
+    income_job_number_continued:
+      edit:
+        title: Tell us how many jobs you currently have.
     income_self_employment_member:
       edit:
         title: Tell us who in the household self-employed.

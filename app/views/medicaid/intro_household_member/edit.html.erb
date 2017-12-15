@@ -12,8 +12,8 @@
         autofocus: true %>
       <%= f.mb_input_field :last_name, "What is their last name?" %>
       <%= f.mb_radio_set :sex,
-        'What is their gender?',
-        [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
+        label_text: "What is their gender?",
+        collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
         notes: ["As it appears on official government documents"],
         layout: "inline" %>
 

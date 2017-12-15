@@ -3,8 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Check all additional sources of income received by your household, if
-      any.
+      <%= t("snap.income_additional_sources.edit.title") %>
     </div>
     <p class="text--help text--centered">
       If you don't have additional income, just click Continue.
@@ -22,8 +21,11 @@
           { label: "Social Security", method: :social_security },
           { label: "Child Support", method: :child_support },
           { label: "Other Income", method: :other },
-        ]) %>
-    <%= render 'shared/next_step' %>
+        ],
+        label_text: t("snap.income_additional_sources.edit.title"),
+        legend_class: "sr-only",
+      ) %>
+    <%= render "shared/next_step" %>
     <% end %>
   </div>
 </div>

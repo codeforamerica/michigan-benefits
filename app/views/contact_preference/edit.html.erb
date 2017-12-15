@@ -15,10 +15,9 @@
       builder: MbFormBuilder,
       url: current_path,
       method: :put do |f| %>
-    <%= f.mb_radio_set(
-      :sms_consented,
-      "Would you like text message reminders about key steps and documents required to help you through the enrollment process?",
-      [{ value: :true, label: "Yes" }, { value: :false, label: "No" }]) %>
+    <%= f.mb_radio_set :sms_consented,
+      label_text: "Would you like text message reminders about key steps and documents required to help you through the enrollment process?",
+      collection: [{ value: :true, label: "Yes" }, { value: :false, label: "No" }] %>
 
     <p class='text--secure'>
     <i class='illustration illustration--safety'></i>

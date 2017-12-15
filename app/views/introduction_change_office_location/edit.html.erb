@@ -3,18 +3,19 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Where would you like to submit your application?
+      <%= t("snap.introduction_change_office_location.edit.title") %>
     </div>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_radio_set :office_location,
-          "",
-        [
-         { value: "clio", label: "Clio Road" },
-         { value: "union", label: "Union Street" },
-        ] %>
+        label_text: t("snap.introduction_change_office_location.edit.title"),
+        collection: [
+          { value: "clio", label: "Clio Road" },
+          { value: "union", label: "Union Street" },
+        ],
+        legend_class: "sr-only" %>
       <%= render 'shared/next_step' %>
     <% end %>
 </div>

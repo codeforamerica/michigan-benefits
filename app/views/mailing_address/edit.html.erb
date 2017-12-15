@@ -11,9 +11,9 @@
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= render "shared/address", f: f %>
       <%= f.mb_radio_set :mailing_address_same_as_residential_address,
-          'Is this address the same as your home address?',
-          [{ value: true, label: "Yes" }, { value: false, label: "No" }],
-          layout: "inline" %>
+        label_text: "Is this address the same as your home address?",
+        collection: [{ value: true, label: "Yes" }, { value: false, label: "No" }],
+        layout: "inline" %>
       <%= render 'shared/next_step' %>
     <% end %>
   </div>

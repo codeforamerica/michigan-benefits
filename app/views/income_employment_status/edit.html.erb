@@ -15,8 +15,12 @@
       <% @step.members.each do |member| %>
         <%= f.fields_for("members[]", member, hidden_field_id: true) do |ff| %>
           <%= ff.mb_radio_set :employment_status,
-            member.display_name,
-            [{ value: :employed, label: "Employed" }, { value: :self_employed, label: "Self Employed" }, { value: :not_employed, label: "Not Employed" }],
+            label_text: member.display_name,
+            collection: [
+              { value: :employed, label: "Employed", },
+              { value: :self_employed, label: "Self Employed" },
+              { value: :not_employed, label: "Not Employed" },
+            ],
             legend_class: "text--section-header" %>
         <% end %>
       <% end %>
