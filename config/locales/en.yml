@@ -13,6 +13,10 @@ en:
         title: "Who in your household is currently employed, or has been in the
         past 30 days?"
         title_help: Employment includes temporary or contract jobs. Self employment includes odd jobs, home businesses, online businesses, etc.
+    income_change_explanation:
+      edit:
+        title: In your own words, tell us about the recent change in your
+          household’s income.
   medicaid:
     expenses_alimony_member:
       edit:

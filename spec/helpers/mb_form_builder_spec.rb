@@ -77,6 +77,26 @@ RSpec.describe MbFormBuilder do
     end
   end
 
+  describe "#mb_textarea" do
+    it "renders a label with the sr-only class when hide_label set to true" do
+      class SampleStep < Step
+        step_attributes(:name)
+      end
+      sample = SampleStep.new
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_textarea(:name, "Write a lot?", hide_label: true)
+      expect(output).to be_html_safe
+      expect(output).to match_html <<-HTML
+        <div class="form-group">
+         <label class="sr-only" for="sample_name">
+           <p class="form-question">Write a lot?</p>
+         </label>
+         <textarea class="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name="sample[name]" id="sample_name"></textarea>
+       </div>
+      HTML
+    end
+  end
+
   describe "#mb_phone_field" do
     it "renders a tel input with a '+1' prefix" do
       class SampleStep < Step
@@ -102,7 +122,7 @@ RSpec.describe MbFormBuilder do
   end
 
   describe "#mb_select" do
-    it "can render a range of numeric options with an empty label" do
+    it "renders a range of numeric options with a screen-reader only label" do
       class SampleStep < Step
         step_attributes(:how_many)
       end
@@ -111,15 +131,16 @@ RSpec.describe MbFormBuilder do
       form = MbFormBuilder.new("sample", sample, template, {})
       output = form.mb_select(
         :how_many,
-        "",
+        "This is for screen readers!",
         (0..10).map { |number| [pluralize(number, "thing"), number] },
+        hide_label: true,
       )
       expect(output).to be_html_safe
 
       expect(output).to match_html <<-HTML
         <div class="form-group">
-          <label for="sample_how_many">
-            <p class="form-question"></p>
+          <label class="sr-only" for="sample_how_many">
+            <p class="form-question">This is for screen readers!</p>
           </label>
           <div class="select">
             <select class="select__element" name="sample[how_many]" id="sample_how_many">

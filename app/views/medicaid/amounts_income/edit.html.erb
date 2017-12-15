@@ -29,24 +29,13 @@
           <legend class="text--section-header">Job #<%= index %></legend>
 
           <%= f.fields_for('employments[]', employment, hidden_field_id: true) do |ff| %>
-
-            <%= ff.mb_input_field(
-              :employer_name,
-              "Employer name",
-            ) %>
-
-            <%= ff.mb_money_field(
-              :pay_quantity,
-              "Average amount / paycheck",
-            ) %>
-
+            <%= ff.mb_input_field(:employer_name, "Employer name") %>
+            <%= ff.mb_money_field(:pay_quantity, "Average amount / paycheck") %>
             <%= ff.mb_select(
               :payment_frequency,
               "How often are you paid that amount?",
               Member::PAYMENT_INTERVALS,
-              {
-                layout: "inline",
-              }
+              { layout: "inline" }
             ) %>
           <% end %>
 

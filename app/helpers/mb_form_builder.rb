@@ -136,9 +136,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     options: {},
     classes: [],
     placeholder: nil,
-    autofocus: nil
+    autofocus: nil,
+    hide_label: false
   )
     classes = classes.append(%w[textarea])
+
     <<-HTML.html_safe
       <div class="form-group#{error_state(object, method)}">
       #{label_and_field(
@@ -157,6 +159,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
           }.merge(options),
         ),
         notes: notes,
+        options: { class: hide_label ? 'sr-only' : '' },
       )}
       #{errors_for(object, method)}
       </div>
@@ -226,7 +229,13 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
-  def mb_select(method, label_text, collection, options = {}, &block)
+  def mb_select(
+    method,
+    label_text,
+    collection,
+    options = {},
+    &block
+  )
     field_values(options, method).map.with_index do |value, i|
       html_options = { class: "select__element" }
 
@@ -238,11 +247,22 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
       field_index = (i + 1).to_s
       rendered_label_text = label_text&.gsub("{index}", field_index)
+      formatted_label = label(
+        method,
+        label_contents(
+          rendered_label_text,
+          options[:notes],
+          options[:optional],
+        ),
+        class: options[:hide_label] ? "sr-only" : "",
+      )
 
       <<~HTML
         <div class="form-group#{error_state(object, method)}">
-          #{label(method, label_contents(rendered_label_text, options[:notes], options[:optional]))}
-          <div class="select">#{select(method, collection, options, html_options, &block)}</div>
+          #{formatted_label}
+          <div class="select">
+            #{select(method, collection, options, html_options, &block)}
+          </div>
           #{errors_for(object, method)}
         </div>
       HTML

@@ -14,7 +14,7 @@
           [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
           notes: [" As it appears on your driver’s license"],
           layout: "inline" %>
-        <%= f.mb_select :marital_status,
+      <%= f.mb_select :marital_status,
         'What is your marital status?',
         Member::MARITAL_STATUSES,
         include_blank: "Choose one" %>
