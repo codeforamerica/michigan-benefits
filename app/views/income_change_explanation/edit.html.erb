@@ -3,8 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      In your own words, tell us about the recent change in your household’s
-      income.
+      <%= t("snap.income_change_explanation.edit.title") %>
     </div>
     <p class="text--help text--centered">
       This will help us understand how to interpret other financial information.
@@ -13,7 +12,10 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_textarea :income_change_explanation, '', options: { rows: 6 } %>
+      <%= f.mb_textarea :income_change_explanation,
+        t("snap.income_change_explanation.edit.title"),
+        options: { rows: 6 },
+        hide_label: true %>
       <%= render 'shared/next_step' %>
     <% end %>
   </div>

@@ -17,8 +17,9 @@
           <legend class="text--section-header"><%= member.display_name %></legend>
           <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
               <%= ff.mb_select :employed_number_of_jobs,
-                "",
-                (0..10).map { |number| [pluralize(number, "job"), number] } %>
+                "Number of jobs",
+                (0..10).map { |number| [pluralize(number, "job"), number] },
+                hide_label: true %>
           <% end %>
         </fieldset>
       <% end %>
