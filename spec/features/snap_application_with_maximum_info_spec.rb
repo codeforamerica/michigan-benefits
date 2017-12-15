@@ -170,7 +170,7 @@ accounts?",
 
     on_page "Other Details" do
       choose "Yes"
-      fill_in "What is their full legal name?", with: "Annie Dog"
+      fill_in "If yes, what is their full legal name?", with: "Annie Dog"
       click_on "Continue"
     end
 

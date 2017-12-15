@@ -90,6 +90,7 @@ RSpec.feature "Submit application with minimal information" do
     end
 
     on_page "Other Details" do
+      choose "No"
       click_on "Continue"
     end
 
