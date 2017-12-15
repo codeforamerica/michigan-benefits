@@ -23,16 +23,34 @@ RSpec.describe Medicaid::IntroLocationController do
       end
     end
 
-    context "with office location get param" do
-      it "updates the office location" do
-        medicaid_application = create(:medicaid_application)
-        session[:medicaid_application_id] = medicaid_application.id
+    context "with existing application" do
+      context "with office location get param" do
+        it "updates the office location" do
+          medicaid_application = create(:medicaid_application)
+          session[:medicaid_application_id] = medicaid_application.id
 
-        get :edit, params: { office_location: "my office" }
+          get :edit, params: { office_location: "my office" }
 
-        medicaid_application.reload
+          medicaid_application.reload
 
-        expect(medicaid_application.office_location).to eq("my office")
+          expect(medicaid_application.office_location).to eq("my office")
+        end
+      end
+
+      context "with empty param" do
+        it "does not delete existing location" do
+          medicaid_application = create(
+            :medicaid_application,
+            office_location: "bajora",
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          get :edit
+
+          medicaid_application.reload
+
+          expect(medicaid_application.office_location).to eq("bajora")
+        end
       end
     end
   end

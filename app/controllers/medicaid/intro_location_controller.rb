@@ -4,11 +4,11 @@ module Medicaid
 
     def edit
       super
-      app = current_or_new_medicaid_application
-      app.update!(
-        office_location: params[:office_location],
-      )
-      set_current_application(app)
+      if params[:office_location].present?
+        app = current_or_new_medicaid_application
+        app.update!(office_location: params[:office_location])
+        set_current_application(app)
+      end
     end
 
     def update
