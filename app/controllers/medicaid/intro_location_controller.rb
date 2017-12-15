@@ -2,6 +2,15 @@ module Medicaid
   class IntroLocationController < MedicaidStepsController
     skip_before_action :ensure_application_present
 
+    def edit
+      super
+      app = current_or_new_medicaid_application
+      app.update!(
+        office_location: params[:office_location],
+      )
+      set_current_application(app)
+    end
+
     def update
       @step = step_class.new(step_params)
 

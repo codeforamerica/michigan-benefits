@@ -16,7 +16,7 @@
   </div>
 
   <footer class="form-card__button_right">
-    <%= link_to next_path, class: "button button--nav  button--cta button--full-mobile" do %>
+    <%= link_to(next_path(office_location: params[:office_location]), class: "button button--nav  button--cta button--full-mobile") do %>
       Next
     <% end %>
   </footer>
