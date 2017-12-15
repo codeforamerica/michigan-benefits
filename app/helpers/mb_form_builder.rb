@@ -121,7 +121,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_form_errors(method)
     errors = object.errors[method]
     if errors.any?
-      <<-HTML.html_safe
+      <<~HTML.html_safe
         <div class="form-group#{error_state(object, method)}">
           #{errors_for(object, method)}
         </div>
@@ -141,7 +141,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   )
     classes = classes.append(%w[textarea])
 
-    <<-HTML.html_safe
+    <<~HTML.html_safe
       <div class="form-group#{error_state(object, method)}">
       #{label_and_field(
         method,
@@ -174,12 +174,19 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     autofocus: nil
   )
 
-    <<-HTML.html_safe
+    <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
         #{fieldset_label_contents(label_text, notes)}
         <div class="input-group--inline">
           <div class="select">
-            #{date_select(method, { autofocus: autofocus, date_separator: '</div><div class="select">' }.merge(options), class: 'select__element')}
+            #{date_select(
+              method,
+              {
+                autofocus: autofocus,
+                date_separator: '</div><div class="select">',
+              }.merge(options),
+              class: 'select__element',
+            )}
           </div>
         </div>
         #{errors_for(object, method)}
@@ -195,7 +202,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     layout: "block",
     legend_class: ""
   )
-    <<-HTML.html_safe
+    <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
         #{fieldset_label_contents(label_text, notes, legend_class: legend_class)}
         #{radio_buttons(method, collection, layout)}
@@ -213,15 +220,16 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   )
     checkbox_html = ""
     collection.map do |item|
-      checkbox_html << <<-HTML.html_safe
+      checkbox = <<~HTML.html_safe
         <label class="checkbox">
-          #{check_box_with_label(item[:label], item[:method])}
+        #{check_box_with_label(item[:label], item[:method])}
         </label>
-      #{errors_for(object, item[:method])}
+        #{errors_for(object, item[:method])}
       HTML
+      checkbox_html << checkbox
     end
 
-    <<-HTML.html_safe
+    <<~HTML.html_safe
       <fieldset class="input-group">
         #{fieldset_label_contents(label_text, notes, legend_class: legend_class, optional: optional)}
         #{checkbox_html}
@@ -270,7 +278,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def mb_checkbox(method, label_text, options = {})
-    <<-HTML.html_safe
+    <<~HTML.html_safe
       <label class="checkbox">
         #{check_box_with_label(label_text, method, options)}
       </label>
@@ -303,11 +311,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     optional: false
   )
     notes = Array(notes)
-    label_text = <<-HTML
+    label_text = <<~HTML
       <legend class="form-question #{legend_class}">#{label_text + optional_text(optional)}</legend>
     HTML
     notes.each do |note|
-      label_text << <<-HTML
+      label_text << <<~HTML
         <p class="text--help">#{note}</p>
       HTML
     end
@@ -318,11 +326,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def label_contents(label_text, notes, optional = false)
     notes = Array(notes)
 
-    label_text = <<-HTML
+    label_text = <<~HTML
       <p class="form-question">#{label_text + optional_text(optional)}</p>
     HTML
     notes.each do |note|
-      label_text << <<-HTML
+      label_text << <<~HTML
         <p class="text--help">#{note}</p>
       HTML
     end
@@ -358,7 +366,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       (for_options || options),
     )
     if prefix
-      <<-HTML
+      <<~HTML
         #{formatted_label}
         <div class="text-input-group">
           <div class="text-input-group__prefix">#{prefix}</div>
@@ -373,7 +381,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def errors_for(object, method)
     errors = object.errors[method]
     if errors.any?
-      <<-HTML
+      <<~HTML
         <div class="text--error">
           <i class="icon-warning"></i>
           #{errors.join(', ')}
@@ -388,7 +396,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def radio_buttons(method, collection, layout)
-    radio_html = <<-HTML
+    radio_html = <<~HTML
       <radiogroup class="input-group--#{layout}">
     HTML
     collection.map do |item|
@@ -396,14 +404,14 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
       input_html = item.fetch(:input_html, {})
 
-      radio_html << <<-HTML.html_safe
+      radio_html << <<~HTML.html_safe
         <label class="radio-button">
           #{radio_button(method, item[:value], input_html)}
           #{item[:label]}
         </label>
       HTML
     end
-    radio_html << <<-HTML
+    radio_html << <<~HTML
       </radiogroup>
     HTML
     radio_html
@@ -412,7 +420,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def check_box_with_label(label_text, method, options = {})
     checked_value = options[:checked_value] || "1"
     unchecked_value = options[:unchecked_value] || "0"
-    <<-HTML.html_safe
+    <<~HTML.html_safe
       #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
     HTML
   end
