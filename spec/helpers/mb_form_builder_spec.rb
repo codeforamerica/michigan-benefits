@@ -133,7 +133,6 @@ RSpec.describe MbFormBuilder do
         :how_many,
         "This is for screen readers!",
         (0..10).map { |number| [pluralize(number, "thing"), number] },
-        {},
         hide_label: true,
       )
       expect(output).to be_html_safe
