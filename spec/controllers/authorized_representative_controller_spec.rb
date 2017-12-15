@@ -34,16 +34,16 @@ RSpec.describe AuthorizedRepresentativeController do
         session[:snap_application_id] = snap_application.id
 
         params = {
-          authorized_representative: "true",
-          authorized_representative_name: "Child F",
+          authorized_representative: "false",
+          authorized_representative_name: "",
         }
         put :update, params: { step: params }
 
         snap_application.reload
 
         expect(response).to redirect_to(subject.next_path)
-        expect(snap_application.authorized_representative).to eq(true)
-        expect(snap_application.authorized_representative_name).to eq("Child F")
+        expect(snap_application.authorized_representative).to eq(false)
+        expect(snap_application.authorized_representative_name).to eq("")
       end
     end
 
