@@ -1,4 +1,6 @@
 class MbFormBuilder < ActionView::Helpers::FormBuilder
+  include ActionView::Helpers::DateHelper
+
   def mb_input_field(
     method,
     label_text,
@@ -173,18 +175,38 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     options: {},
     autofocus: nil
   )
-
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
         #{fieldset_label_contents(label_text, notes)}
         <div class="input-group--inline">
           <div class="select">
-            #{date_select(
-              method,
-              {
-                autofocus: autofocus,
-                date_separator: '</div><div class="select">',
-              }.merge(options),
+            <label for="#{object_name}_#{select_field_id(method, '2i')}" class="sr-only">Month</label>
+            #{select_month(
+              options[:default],
+              { field_name: select_field_name(method, '2i'),
+                field_id: select_field_id(method, '2i'),
+                prefix: object_name }.merge(options),
+              class: 'select__element',
+              autofocus: autofocus,
+            )}
+          </div>
+          <div class="select">
+            <label for="#{object_name}_#{select_field_id(method, '3i')}" class="sr-only">Day</label>
+            #{select_day(
+              options[:default],
+              { field_name: select_field_name(method, '3i'),
+                field_id: select_field_id(method, '3i'),
+                prefix: object_name }.merge(options),
+              class: 'select__element',
+            )}
+          </div>
+          <div class="select">
+            <label for="#{object_name}_#{select_field_id(method, '1i')}" class="sr-only">Year</label>
+            #{select_year(
+              options[:default],
+              { field_name: select_field_name(method, '1i'),
+                field_id: select_field_id(method, '1i'),
+                prefix: object_name }.merge(options),
               class: 'select__element',
             )}
           </div>
@@ -423,5 +445,13 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     <<~HTML.html_safe
       #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
     HTML
+  end
+
+  def select_field_id(method, position)
+    "#{method}_#{position}"
+  end
+
+  def select_field_name(method, position)
+    "#{method}(#{position})"
   end
 end
