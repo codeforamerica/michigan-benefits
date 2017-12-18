@@ -77,14 +77,14 @@ module Medicaid
         Medicaid::ContactSsDobController,
         Medicaid::ContactSocialSecurityController,
       ],
-      "Paperwork" => [
-        Medicaid::PaperworkAndLegalIntroductionController,
-        Medicaid::PaperworkGuideController,
-        Medicaid::PaperworkController,
-      ],
       "Legal" => [
+        Medicaid::PaperworkAndLegalIntroductionController,
         Medicaid::LegalAgreementController,
         Medicaid::SignAndSubmitController,
+      ],
+      "Paperwork" => [
+        Medicaid::PaperworkGuideController,
+        Medicaid::PaperworkController,
       ],
       "Success" => [
         Medicaid::SuccessController,

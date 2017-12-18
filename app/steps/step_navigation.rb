@@ -37,13 +37,15 @@ class StepNavigation
       AuthorizedRepresentativeController,
       GeneralAnythingElseController,
     ],
+    "Legal" => [
+      LegalAgreementController,
+      SignAndSubmitController,
+    ],
     "Submit Documents" => [
       DocumentGuideController,
       DocumentsController,
     ],
-    "Legal" => [
-      LegalAgreementController,
-      SignAndSubmitController,
+    "Success" => [
       SuccessController,
     ],
   }.freeze

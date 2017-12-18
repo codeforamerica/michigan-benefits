@@ -98,10 +98,6 @@ RSpec.feature "Submit application with minimal information" do
       click_on "Continue"
     end
 
-    on_page "Documents" do
-      click_on "I'll do this later"
-    end
-
     on_page "Rights and Responsibilities" do
       consent_to_terms
     end
@@ -109,6 +105,10 @@ RSpec.feature "Submit application with minimal information" do
     on_page "Sign and Submit" do
       fill_in "Sign by typing your full legal name", with: "Jessie Tester"
       click_on "Sign and submit"
+    end
+
+    on_page "Documents" do
+      click_on "I'll do this later"
     end
 
     on_page "Application Submitted" do
