@@ -5,29 +5,29 @@ RSpec.feature "medicaid address flows" do
     visit medicaid_root_path
 
     within(".slab--hero") do
-      click_on "Apply for Medicaid"
+      proceed_with "Apply for Medicaid"
     end
 
     on_pages "Introduction" do
       expect(page).to have_content("Welcome to the Medicaid application")
-      click_on "Next"
+      proceed_with "Next"
 
-      click_on "Yes"
+      proceed_with "Yes"
 
       fill_in "What is your first name?", with: "Jessie"
       fill_in "What is your last name?", with: "Tester"
       select_radio(question: "What is your gender?", answer: "Female")
-      click_on "Next"
+      proceed_with "Next"
     end
 
     visit "steps/medicaid/contact"
     expect(page).to have_content("Do you have stable housing right now?")
-    click_on "No"
+    proceed_with "No"
 
     expect(page).to have_content(
       "Is there a reliable place to send you mail?",
     )
-    click_on "No"
+    proceed_with "No"
 
     expect(page).to have_content(
       "What is the best number for you to receive phone calls?",
@@ -38,29 +38,29 @@ RSpec.feature "medicaid address flows" do
     visit medicaid_root_path
 
     within(".slab--hero") do
-      click_on "Apply for Medicaid"
+      proceed_with "Apply for Medicaid"
     end
 
     on_pages "Introduction" do
       expect(page).to have_content("Welcome to the Medicaid application")
-      click_on "Next"
+      proceed_with "Next"
 
-      click_on "Yes"
+      proceed_with "Yes"
 
       fill_in "What is your first name?", with: "Jessie"
       fill_in "What is your last name?", with: "Tester"
       select_radio(question: "What is your gender?", answer: "Female")
-      click_on "Next"
+      proceed_with "Next"
     end
 
     visit "steps/medicaid/contact"
     expect(page).to have_content("Do you have stable housing right now?")
-    click_on "No"
+    proceed_with "No"
 
     expect(page).to have_content(
       "Is there a reliable place to send you mail?",
     )
-    click_on "Yes"
+    proceed_with "Yes"
 
     expect(page).to have_content(
       "What is your mailing address?",
@@ -70,7 +70,7 @@ RSpec.feature "medicaid address flows" do
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "48501"
 
-    click_on "Next"
+    proceed_with "Next"
 
     expect(page).to have_content(
       "What is the best number for you to receive phone calls?",
@@ -81,28 +81,28 @@ RSpec.feature "medicaid address flows" do
     visit medicaid_root_path
 
     within(".slab--hero") do
-      click_on "Apply for Medicaid"
+      proceed_with "Apply for Medicaid"
     end
 
     on_pages "Introduction" do
       expect(page).to have_content("Welcome to the Medicaid application")
-      click_on "Next"
+      proceed_with "Next"
 
       expect(page).to have_content(
         "Before we get started, do you currently reside in Michigan?",
       )
 
-      click_on "Yes"
+      proceed_with "Yes"
 
       fill_in "What is your first name?", with: "Jessie"
       fill_in "What is your last name?", with: "Tester"
       select_radio(question: "What is your gender?", answer: "Female")
-      click_on "Next"
+      proceed_with "Next"
     end
 
     visit "steps/medicaid/contact"
     expect(page).to have_content("Do you have stable housing right now?")
-    click_on "Yes"
+    proceed_with "Yes"
 
     expect(page).to have_content("What is your home address?")
 
@@ -110,7 +110,7 @@ RSpec.feature "medicaid address flows" do
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "48501"
 
-    click_on "Next"
+    proceed_with "Next"
 
     expect(page).to have_content(
       "What is the best number for you to receive phone calls?",

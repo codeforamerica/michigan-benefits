@@ -23,6 +23,19 @@ module FeatureHelper
     end
   end
 
+  def proceed_with(submit_button_text, scroll_to_top: false)
+    check_accessibility(scroll_to_top)
+    click_on submit_button_text
+  end
+
+  def check_accessibility(scroll_to_top)
+    expect(page).to be_accessible
+
+    if scroll_to_top
+      page.execute_script "window.scrollTo(0,0)"
+    end
+  end
+
   def on_page(page_title)
     expect(page.title.strip).to eq page_title
     yield
