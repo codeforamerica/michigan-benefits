@@ -189,6 +189,7 @@ RSpec.describe MbFormBuilder do
           <p class="text--help">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
+              <label for="sample_birthday_2i" class="sr-only">Month</label>
               <select id="sample_birthday_2i" name="sample[birthday(2i)]" class="select__element">
                 <option value="1">January</option>
                 <option value="2">February</option>
@@ -205,6 +206,7 @@ RSpec.describe MbFormBuilder do
               </select>
             </div>
             <div class="select">
+              <label for="sample_birthday_3i" class="sr-only">Day</label>
               <select id="sample_birthday_3i" name="sample[birthday(3i)]" class="select__element">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -240,6 +242,7 @@ RSpec.describe MbFormBuilder do
               </select>
             </div>
             <div class="select">
+              <label for="sample_birthday_1i" class="sr-only">Year</label>
               <select id="sample_birthday_1i" name="sample[birthday(1i)]" class="select__element">
                 <option value="1990" selected="selected">1990</option>
                 <option value="1991">1991</option>
