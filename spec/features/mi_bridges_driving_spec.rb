@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "MI Bridges Driving" do
+  # you can run this test via the rake task `rake mi_bridges:run`
   # to run this in a non-headless way, remove the `:js` flag below
   scenario "successfully drives, then re-drives a SNAP App", :js, :driving do
     WebMock.disable!
