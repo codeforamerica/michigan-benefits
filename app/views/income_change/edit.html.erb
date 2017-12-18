@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Has your household had a change in income <br> in the past 30 days?
+      <%= t("snap.income_change.edit.title") %>
     </div>
     <p class="text--help text--centered">
       This includes change of jobs, job loss, change in hours or wages, strikes,
@@ -14,8 +14,9 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_radio_set :income_change,
-        '',
-        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }] %>
+        label_text: t("snap.income_change.edit.title"),
+        collection: [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        legend_class: "sr-only" %>
       <%= render 'shared/next_step' %>
     <% end %>
   </div>

@@ -3,7 +3,7 @@
 <div class="form-card">
   <header class="form-card__header">
     <div class="form-card__title">
-      Tell us how many jobs you currently have.
+      <%= t("medicaid.income_job_number.edit.title") %>
     </div>
   </header>
 
@@ -15,13 +15,14 @@
       method: :put do |f| %>
 
       <%= f.mb_radio_set :employed_number_of_jobs,
-        "",
-        [
+        label_text: t("medicaid.income_job_number.edit.title"),
+        collection: [
           { value: "1", label: "1 job" },
           { value: "2", label: "2 jobs" },
           { value: "3", label: "3 jobs" },
           { value: "4", label: "4 or more jobs" },
-        ] %>
+        ],
+        legend_class: "sr-only" %>
 
       <%= render "medicaid/next_step" %>
     <% end %>

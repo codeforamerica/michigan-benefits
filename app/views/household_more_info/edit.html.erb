@@ -14,28 +14,29 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_radio_set :everyone_a_citizen,
-        "Is each person a US citizen/national?",
-        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        label_text: "Is each person a US citizen/national?",
+        collection: [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
         layout: "inline" %>
       <%= f.mb_radio_set :anyone_disabled,
-        "Does anyone have a disability?",
-        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        label_text: "Does anyone have a disability?",
+        collection: [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
         notes: ["This includes physical, mental, or emotional health challenges."],
         layout: "inline" %>
       <%= f.mb_radio_set :anyone_new_mom,
-        "Is anyone pregnant or has been pregnant recently?",
-        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        label_text: "Is anyone pregnant or has been pregnant recently?",
+        collection: [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
         notes: ["This includes anyone who has been pregnant in the last two months"],
         layout: "inline" %>
       <%= f.mb_radio_set :anyone_in_college,
-        "Is anyone enrolled in college or vocational school?",
-        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        label_text: "Is anyone enrolled in college or vocational school?",
+        collection: [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
         layout: "inline" %>
       <%= f.mb_radio_set :anyone_living_elsewhere,
-        "Is anyone temporarily living outside the home?",
-        [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
+        label_text: "Is anyone temporarily living outside the home?",
+        collection: [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
         layout: "inline" %>
-      <%= render 'shared/next_step' %>
+
+      <%= render "shared/next_step" %>
     <% end %>
   </div>
 </div>

@@ -176,7 +176,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{fieldset_label_contents(label_text, notes)}
+        #{fieldset_label_contents(label_text: label_text, notes: notes)}
         <div class="input-group--inline">
           <div class="select">
             #{date_select(
@@ -196,16 +196,20 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   def mb_radio_set(
     method,
-    label_text,
-    collection,
+    label_text:,
+    collection:,
     notes: [],
     layout: "block",
     legend_class: ""
   )
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{fieldset_label_contents(label_text, notes, legend_class: legend_class)}
-        #{radio_buttons(method, collection, layout)}
+        #{fieldset_label_contents(
+          label_text: label_text,
+          notes: notes,
+          legend_class: legend_class,
+        )}
+        #{mb_radio_button(method, collection, layout)}
         #{errors_for(object, method)}
       </fieldset>
     HTML
@@ -213,7 +217,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   def mb_checkbox_set(
     collection,
-    label_text: "",
+    label_text:,
     notes: [],
     optional: false,
     legend_class: ""
@@ -231,7 +235,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     <<~HTML.html_safe
       <fieldset class="input-group">
-        #{fieldset_label_contents(label_text, notes, legend_class: legend_class, optional: optional)}
+        #{fieldset_label_contents(
+          label_text: label_text,
+          notes: notes,
+          legend_class: legend_class,
+          optional: optional,
+        )}
         #{checkbox_html}
       </fieldset>
     HTML
@@ -302,14 +311,37 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       object.hash_key_attribute?(attribute)
   end
 
+  def mb_radio_button(method, collection, layout)
+    radio_html = <<~HTML
+      <radiogroup class="input-group--#{layout}">
+    HTML
+    collection.map do |item|
+      item = { value: item, label: item } unless item.is_a?(Hash)
+
+      input_html = item.fetch(:input_html, {})
+
+      radio_html << <<~HTML.html_safe
+        <label class="radio-button">
+          #{radio_button(method, item[:value], input_html)}
+          #{item[:label]}
+        </label>
+      HTML
+    end
+    radio_html << <<~HTML
+      </radiogroup>
+    HTML
+    radio_html.html_safe
+  end
+
   private
 
   def fieldset_label_contents(
-    label_text,
-    notes,
+    label_text:,
+    notes:,
     legend_class: "",
     optional: false
   )
+
     notes = Array(notes)
     label_text = <<~HTML
       <legend class="form-question #{legend_class}">#{label_text + optional_text(optional)}</legend>
@@ -393,28 +425,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def error_state(object, method)
     errors = object.errors[method]
     " form-group--error" if errors.any?
-  end
-
-  def radio_buttons(method, collection, layout)
-    radio_html = <<~HTML
-      <radiogroup class="input-group--#{layout}">
-    HTML
-    collection.map do |item|
-      item = { value: item, label: item } unless item.is_a?(Hash)
-
-      input_html = item.fetch(:input_html, {})
-
-      radio_html << <<~HTML.html_safe
-        <label class="radio-button">
-          #{radio_button(method, item[:value], input_html)}
-          #{item[:label]}
-        </label>
-      HTML
-    end
-    radio_html << <<~HTML
-      </radiogroup>
-    HTML
-    radio_html
   end
 
   def check_box_with_label(label_text, method, options = {})

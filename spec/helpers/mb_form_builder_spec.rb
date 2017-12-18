@@ -262,8 +262,11 @@ RSpec.describe MbFormBuilder do
       form = MbFormBuilder.new("sample", sample, template, {})
       output = form.mb_radio_set(
         :dependent_care,
-        "Does your household have dependent care expenses?",
-        [{ label: "Yep", value: true }, { label: "Nope", value: false }],
+        label_text: "Does your household have dependent care expenses?",
+        collection: [
+          { label: "Yep", value: true },
+          { label: "Nope", value: false },
+        ],
         notes: <<~NOTE
           This includes child care (including day care and after school
           programs) and adult disabled care.

@@ -26,7 +26,10 @@
           { method: :retirement, label: "Retirement" },
           { method: :alimony, label: "Alimony" },
           { method: :other, label: "Other" },
-        ]) %>
+        ],
+        label_text: t("medicaid.income_other_income_type.edit.title", count: current_application.members_count, name: current_member.display_name),
+        legend_class: "sr-only",
+      ) %>
 
       <%= render "medicaid/next_step" %>
     <% end %>

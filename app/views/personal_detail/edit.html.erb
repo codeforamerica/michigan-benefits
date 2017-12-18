@@ -10,23 +10,23 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_radio_set :sex,
-          'What is your sex?',
-          [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
-          notes: [" As it appears on your driver’s license"],
-          layout: "inline" %>
+        label_text: "What is your sex?",
+        collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
+        notes: [" As it appears on your driver’s license"],
+        layout: "inline" %>
       <%= f.mb_select :marital_status,
-        'What is your marital status?',
+        "What is your marital status?",
         Member::MARITAL_STATUSES,
         include_blank: "Choose one" %>
       <%= f.mb_input_field :ssn,
-      "What is your Social Security Number?",
-      type: :tel,
-      options: { maxlength: 9 },
-      notes: ["If you don’t have one or don’t want to answer now it’s okay to skip this"],
-      append_html: "<p class='text--secure'><i class='illustration illustration--safety'></i>#{t('ssn.description')}</p>",
-      optional: true %>
+        "What is your Social Security Number?",
+        type: :tel,
+        options: { maxlength: 9 },
+        notes: ["If you don’t have one or don’t want to answer now it’s okay to skip this"],
+        append_html: "<p class='text--secure'><i class='illustration illustration--safety'></i>#{t("ssn.description")}</p>",
+        optional: true %>
 
-    <%= render partial: 'shared/next_step' %>
+    <%= render partial: "shared/next_step" %>
     <% end %>
   </div>
 </div>
