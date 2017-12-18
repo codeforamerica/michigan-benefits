@@ -9,3 +9,15 @@
 .button--nav-center {
   margin: 0 auto;
 }
+
+.button--cta {
+  background-color: $button-cta-color;
+
+  &:hover {
+    background-color: tint($button-cta-color, 20%);
+  }
+
+  &:active {
+    background-color: shade($button-cta-color, 15%);
+  }
+}

@@ -28,5 +28,7 @@
 .uploadable-status {
   &.successful {
     color: $color-green;
+    font-size: 1.3em;
+    padding-right: 0.2em;
   }
 }
