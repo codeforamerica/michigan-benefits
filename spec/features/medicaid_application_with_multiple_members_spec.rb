@@ -448,18 +448,9 @@ RSpec.feature "Medicaid app" do
 
     on_page "Submit Paperwork & Sign" do
       expect(page).to have_content(
-        "Lastly, we need to review your paperwork and get your signature.",
+        "Lastly, we need to get your signature and review your paperwork.",
       )
       click_on "Next"
-    end
-
-    on_pages "Documents" do
-      expect(page).to have_content(
-        "Upload some paperwork if you can right now.",
-      )
-      click_on "Submit paperwork now"
-      upload_paperwork
-      click_on "Done uploading paperwork"
     end
 
     on_page "Rights and Responsibilities" do
@@ -473,6 +464,15 @@ RSpec.feature "Medicaid app" do
     on_page "Sign and Submit" do
       fill_in "Sign by typing your full legal name", with: "Jessie Tester"
       click_on "Sign and submit"
+    end
+
+    on_pages "Documents" do
+      expect(page).to have_content(
+        "Upload some paperwork if you can right now.",
+      )
+      click_on "Submit paperwork now"
+      upload_paperwork
+      click_on "Done uploading paperwork"
     end
 
     on_pages "Application Submitted" do

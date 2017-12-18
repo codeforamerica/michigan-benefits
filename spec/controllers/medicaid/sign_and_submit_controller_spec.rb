@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe Medicaid::SignAndSubmitController do
   describe "#next_path" do
-    it "is the success path" do
+    it "is the paperwork guide path" do
       expect(subject.next_path).to eq(
-        "/steps/medicaid/success",
+        "/steps/medicaid/paperwork-guide",
       )
     end
   end

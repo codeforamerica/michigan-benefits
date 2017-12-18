@@ -179,16 +179,16 @@ accounts?",
       click_on "Continue"
     end
 
-    on_page "Documents" do
-      upload_documents
-      click_on "Done uploading documents"
-    end
-
     consent_to_terms
 
     on_page "Sign and Submit" do
       fill_in "Sign by typing your full legal name", with: "Jessie Tester"
       click_on "Sign and submit"
+    end
+
+    on_page "Documents" do
+      upload_documents
+      click_on "Done uploading documents"
     end
 
     on_page "Application Submitted" do
