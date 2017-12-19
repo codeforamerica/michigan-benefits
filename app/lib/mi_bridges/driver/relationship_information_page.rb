@@ -13,15 +13,17 @@ module MiBridges
       end
 
       def fill_in_required_fields
-        second_members.each do |member|
-          MiBridges::Driver::Services::SubmitRelationship.new(
-            first_member: first_member,
-            second_member: member,
-          ).run
-          MiBridges::Driver::Services::SubmitBuyFoodWith.new(
-            first_member: first_member,
-            second_member: member,
-          ).run
+        if page_asks_about_relationships?
+          second_members.each do |member|
+            MiBridges::Driver::Services::SubmitRelationship.new(
+              first_member: first_member,
+              second_member: member,
+            ).run
+            MiBridges::Driver::Services::SubmitBuyFoodWith.new(
+              first_member: first_member,
+              second_member: member,
+            ).run
+          end
         end
       end
 
@@ -32,6 +34,10 @@ module MiBridges
       private
 
       attr_reader :first_member, :second_members
+
+      def page_asks_about_relationships?
+        !page.has_css?("#MoreAboutChildren")
+      end
 
       def find_first_member
         name = page.first(:xpath, first_member_name_label).text
