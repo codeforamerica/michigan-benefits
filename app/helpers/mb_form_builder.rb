@@ -180,7 +180,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         #{fieldset_label_contents(label_text: label_text, notes: notes)}
         <div class="input-group--inline">
           <div class="select">
-            <label for="#{object_name}_#{select_field_id(method, '2i')}" class="sr-only">Month</label>
+            <label for="#{select_label_for(object_name, method, '2i')}" class="sr-only">Month</label>
             #{select_month(
               options[:default],
               { field_name: select_field_name(method, '2i'),
@@ -191,7 +191,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             )}
           </div>
           <div class="select">
-            <label for="#{object_name}_#{select_field_id(method, '3i')}" class="sr-only">Day</label>
+            <label for="#{select_label_for(object_name, method, '3i')}" class="sr-only">Day</label>
             #{select_day(
               options[:default],
               { field_name: select_field_name(method, '3i'),
@@ -201,7 +201,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             )}
           </div>
           <div class="select">
-            <label for="#{object_name}_#{select_field_id(method, '1i')}" class="sr-only">Year</label>
+            <label for="#{select_label_for(object_name, method, '1i')}" class="sr-only">Year</label>
             #{select_year(
               options[:default],
               { field_name: select_field_name(method, '1i'),
@@ -463,5 +463,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   def select_field_name(method, position)
     "#{method}(#{position})"
+  end
+
+  def select_label_for(object_name, method, position)
+    object_name.gsub(/([\[\(])|(\]\[)/, "_").gsub(/[\]\)]/, "") + "_" +
+      select_field_id(method, position)
   end
 end
