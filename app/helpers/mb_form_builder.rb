@@ -466,7 +466,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def select_label_for(object_name, method, position)
-    object_name.gsub(/([\[\(])|(\]\[)/, "_").gsub(/[\]\)]/, "") + "_" +
+    object_name.to_s.gsub(/([\[\(])|(\]\[)/, "_").gsub(/[\]\)]/, "") + "_" +
       select_field_id(method, position)
   end
 end

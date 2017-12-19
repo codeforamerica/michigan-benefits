@@ -169,7 +169,7 @@ RSpec.describe MbFormBuilder do
       end
 
       sample = SampleStep.new
-      form = MbFormBuilder.new("sample", sample, template, {})
+      form = MbFormBuilder.new(:sample, sample, template, {})
       output = form.mb_date_select(
         :birthday,
         "What is your birthday?",
@@ -266,7 +266,7 @@ RSpec.describe MbFormBuilder do
 
       sample = SampleManyStep.new(members: [create(:member, id: 72, benefit_application: medicaid_application)])
       member = sample.members.first
-      form = MbFormBuilder.new("sample", sample, template, {})
+      form = MbFormBuilder.new(:sample, sample, template, {})
 
       output = form.fields_for('members[]', member, builder: MbFormBuilder) do |ff|
         ff.mb_date_select(
