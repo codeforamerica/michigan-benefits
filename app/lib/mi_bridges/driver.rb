@@ -28,12 +28,10 @@ module MiBridges
     ].freeze
 
     APPLY_FLOW = [
+      SummaryPage,
       AbsentParentDetailsPage,
-      AbsentParentDetailsSummaryPage,
       AbsentParentInformationPage,
-      AbsentParentSummaryPage,
       AdditionalInformationPage,
-      BasicInformationSummaryPage,
       BenefitsOverviewPage,
       BenefitsSelectorPage,
       ConceptionPage,
@@ -42,16 +40,12 @@ module MiBridges
       FinishPage,
       HealthHospitalizationInsurancePremiumsPage,
       HouseholdMemberQuestionsPage,
-      HouseholdMembersSummaryPage,
       HousingBillsPage,
       HousingUtilityBillsPage,
-      HousingUtilityBillsSummaryPage,
       InformationAboutTheChildPage,
       InpatientHospitalizationNursingCarePage,
       JobIncomeInformationPage,
-      JobIncomeSummaryPage,
       LiquidAssetsPage,
-      LiquidAssetsSummaryPage,
       MailingAddressPage,
       MedicalBillsPage,
       MedicalDentalVisionServicesPage,
@@ -72,10 +66,7 @@ module MiBridges
       MoreAboutWorkersCompensationPage,
       MoreAboutYourPregnancyPage,
       OtherAssetsPage,
-      OtherAssetsSummaryPage,
-      OtherIncomeSummaryPage,
       OtherInformationPage,
-      OtherInformationSummaryPage,
       OtherTypesOfIncomePage,
       PeopleListedPage,
       PersonalCareServicesProvidedInHomePage,
@@ -94,7 +85,6 @@ module MiBridges
       VeteranInformationPage,
       ViewTrackAndPrintYourApplicationPage,
       YourOtherBillsExpensesPage,
-      YourOtherBillsExpensesSummaryPage,
     ].freeze
 
     def initialize(snap_application:, logger: nil)
