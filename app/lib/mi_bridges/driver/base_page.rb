@@ -52,7 +52,6 @@ module MiBridges
                    else
                      selector_for_radio("No one")
                    end
-
         widget = "[aria-labelledby='#{section}']"
         js_click_selector("#{widget} #{selector}")
       end
