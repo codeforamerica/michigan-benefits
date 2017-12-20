@@ -8,8 +8,10 @@ module MiBridges
       def skip_infinite_loop_check; end
 
       def setup
-        @first_member = find_first_member
-        @second_members = find_second_members
+        if page_asks_about_relationships?
+          @first_member = find_first_member
+          @second_members = find_second_members
+        end
       end
 
       def fill_in_required_fields
@@ -36,7 +38,7 @@ module MiBridges
       attr_reader :first_member, :second_members
 
       def page_asks_about_relationships?
-        !page.has_css?("#MoreAboutChildren")
+        @_page_asks_about_relationships ||= !page.has_css?("#MoreAboutChildren")
       end
 
       def find_first_member

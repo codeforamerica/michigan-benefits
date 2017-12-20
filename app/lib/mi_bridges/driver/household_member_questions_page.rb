@@ -44,11 +44,21 @@ module MiBridges
       end
 
       def check_ssi_benefit
-        check_in_section(
-          "starSSIBenefit",
-          condition: anyone_disabled?,
-          for_label: primary_member.mi_bridges_formatted_name,
-        )
+        if anyone_disabled?
+          check_disabled_members
+        else
+          check_no_one_in_section("starSSIBenefit")
+        end
+      end
+
+      def check_disabled_members
+        snap_application.members.where(disabled: true).each do |member|
+          check_in_section(
+            "starSSIBenefit",
+            condition: true,
+            for_label: member.mi_bridges_formatted_name,
+          )
+        end
       end
 
       def check_cash_benefit_from_mdhhs
