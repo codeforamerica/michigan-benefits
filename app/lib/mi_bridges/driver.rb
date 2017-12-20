@@ -42,6 +42,7 @@ module MiBridges
       HouseholdMemberQuestionsPage,
       HousingBillsPage,
       HousingUtilityBillsPage,
+      ImportantInformationPage,
       InformationAboutTheChildPage,
       InpatientHospitalizationNursingCarePage,
       JobIncomeInformationPage,
@@ -79,7 +80,7 @@ module MiBridges
       RentOrLotRentPage,
       SchoolEnrollmentPage,
       StartPage,
-      SubmitPage,
+      BeforeSubmitPage,
       UtilityBillsPage,
       VehiclesPage,
       VeteranInformationPage,
@@ -117,12 +118,12 @@ module MiBridges
     end
 
     def complete_application
-      while page_title != SubmitPage.title
+      while page_title != ImportantInformationPage.title
         klass = find_page_klass
         run_flow([klass])
       end
 
-      run_flow([SubmitPage])
+      run_flow([ImportantInformationPage])
     end
 
     def run_flow(flow)
