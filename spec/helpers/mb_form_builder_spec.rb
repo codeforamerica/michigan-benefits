@@ -259,16 +259,20 @@ RSpec.describe MbFormBuilder do
         step_attributes :members
       end
 
-      medicaid_application = create(
+      medicaid_app = create(
         :medicaid_application,
         anyone_other_income: true,
-        )
+      )
 
-      sample = SampleManyStep.new(members: [create(:member, id: 72, benefit_application: medicaid_application)])
+      sample = SampleManyStep.new(
+        members: [create(:member, id: 72, benefit_application: medicaid_app)],
+      )
       member = sample.members.first
       form = MbFormBuilder.new(:sample, sample, template, {})
 
-      output = form.fields_for('members[]', member, builder: MbFormBuilder) do |ff|
+      output = form.fields_for("members[]",
+                               member,
+                               builder: MbFormBuilder) do |ff|
         ff.mb_date_select(
           :birthday,
           "What is your birthday?",
@@ -279,7 +283,7 @@ RSpec.describe MbFormBuilder do
             default: Date.new(1990, 3, 25),
             order: %i{month day year},
           },
-          )
+        )
       end
 
       expect(output).to be_html_safe
