@@ -51,6 +51,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "uglifier", ">= 1.3.0"
 
 group :test do
+  gem "axe-matchers"
   gem "database_cleaner"
   gem "launchy"
   gem "pdf-reader"

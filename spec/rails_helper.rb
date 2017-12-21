@@ -7,6 +7,7 @@ require "capybara/rspec"
 require "selenium/webdriver"
 require "capybara/drivers/chrome"
 require "capybara/drivers/headless_chrome"
+require "axe/rspec"
 require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
