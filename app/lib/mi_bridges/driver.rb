@@ -129,15 +129,15 @@ module MiBridges
     def run_flow(flow)
       flow.each do |klass|
         begin
-          @page = klass.new(@snap_application, logger: logger)
-          @page.setup
-          @page.fill_in_required_fields
-          @page.continue
+          mi_bridges_page = klass.new(snap_application, logger: logger)
+          mi_bridges_page.setup
+          mi_bridges_page.fill_in_required_fields
+          mi_bridges_page.continue
         rescue MiBridges::Errors::TooManyAttempts => e
-          save_error(e, @page)
+          save_error(e, mi_bridges_page)
           raise e
         rescue StandardError => e
-          save_error(e, @page)
+          save_error(e, mi_bridges_page)
           debug(e)
         end
       end
@@ -159,13 +159,13 @@ module MiBridges
       end
     end
 
-    def save_error(e, page)
+    def save_error(e, mi_bridges_page)
       latest_drive_attempt.
         driver_errors.
         create(
           error_class: e.class.to_s,
           error_message: e.message,
-          page_class: page.class.to_s,
+          page_class: mi_bridges_page.class.to_s,
           page_html: page.html,
           driven_at: latest_drive_attempt.driven_at,
         )
@@ -207,13 +207,17 @@ module MiBridges
     end
 
     def page_title
-      @page.find("h1").text
+      page.find("h1").text
     end
 
     def teardown
       if ENV["RUN_MI_BRIDGES_TEST"] != "true"
-        MiBridges::Driver::BasePage.new(snap_application, logger: logger).close
+        base_page.close
       end
+    end
+
+    def base_page
+      MiBridges::Driver::BasePage.new(snap_application, logger: logger)
     end
   end
 end
