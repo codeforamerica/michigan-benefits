@@ -19,14 +19,14 @@ RSpec.feature "MI Bridges Driving" do
 
     MiBridges::Driver.new(snap_application: snap_application).run
     expect(snap_application.driver_applications.count).to eq 1
-    expect(page).to have_content("Before You Submit the Application")
+    expect(page).to have_content("Important Information and Signature")
 
     browser = Capybara.current_session.driver.browser
     browser.manage.delete_all_cookies
 
     MiBridges::Driver.new(snap_application: snap_application).re_run
     expect(snap_application.driver_applications.count).to eq 1
-    expect(page).to have_content("Before You Submit the Application")
+    expect(page).to have_content("Important Information and Signature")
 
     WebMock.enable!
   end
