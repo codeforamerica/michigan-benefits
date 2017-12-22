@@ -13,6 +13,7 @@ class ApplicationMailer < ActionMailer::Base
   def office_snap_application_notification(
     file_name:,
     recipient_email:,
+    applicant_name:,
     office_location: nil
   )
     attachments["snap_application.pdf"] = File.read(file_name)
@@ -21,29 +22,33 @@ class ApplicationMailer < ActionMailer::Base
     mail(
       from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
       to: recipient_email,
-      subject: subject(office_location),
+      subject: subject(office_location, applicant_name),
       template_name: template_name(office_location),
     )
   end
 
-  def office_medicaid_application_notification(file_name:, recipient_email:)
+  def office_medicaid_application_notification(
+    file_name:,
+    recipient_email:,
+    applicant_name:
+  )
     attachments["medicaid_application.pdf"] = File.read(file_name)
 
     mail(
       from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
       to: recipient_email,
-      subject: "A new 1426 from someone online has been submitted!",
+      subject: "A new 1426 from #{applicant_name} has been submitted!",
       template_name: "office_medicaid_application_notification",
     )
   end
 
   private
 
-  def subject(office_location)
+  def subject(office_location, applicant_name)
     if office_location.present?
-      "A new 1171 from someone in the lobby has been submitted!"
+      "A new 1171 from #{applicant_name} (in the lobby) has been submitted!"
     else
-      "A new 1171 from someone online has been submitted!"
+      "A new 1171 from #{applicant_name} (online) has been submitted!"
     end
   end
 
