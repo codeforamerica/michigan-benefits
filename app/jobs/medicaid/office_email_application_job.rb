@@ -5,6 +5,7 @@ module Medicaid
         ApplicationMailer.office_medicaid_application_notification(
           file_name: medicaid_application.pdf.path,
           recipient_email: medicaid_application.receiving_office_email,
+          applicant_name: medicaid_application.primary_member.display_name,
         ).deliver
 
         logger.info(

@@ -4,6 +4,7 @@ RSpec.describe OfficeEmailApplicationJob do
   describe "#perform" do
     it "sends an email" do
       snap_application = create(:snap_application, :with_member)
+      primary_member = snap_application.primary_member
       export = Export.create(
         benefit_application: snap_application,
         destination: :office_email,
@@ -23,6 +24,7 @@ RSpec.describe OfficeEmailApplicationJob do
           hash_including(
             recipient_email: snap_application.receiving_office_email,
             office_location: snap_application.office_location,
+            applicant_name: primary_member.display_name,
           ),
         )
     end

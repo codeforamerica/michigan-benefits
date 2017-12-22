@@ -4,6 +4,7 @@ RSpec.describe Medicaid::OfficeEmailApplicationJob do
   describe "#perform" do
     it "sends an email" do
       medicaid_application = create(:medicaid_application, :with_member)
+      primary_member = medicaid_application.primary_member
       export = Export.create(
         benefit_application: medicaid_application,
         destination: :office_email,
@@ -22,6 +23,7 @@ RSpec.describe Medicaid::OfficeEmailApplicationJob do
         with(
           hash_including(
             recipient_email: medicaid_application.receiving_office_email,
+            applicant_name: primary_member.display_name,
           ),
         )
     end
