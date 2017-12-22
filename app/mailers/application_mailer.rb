@@ -16,7 +16,7 @@ class ApplicationMailer < ActionMailer::Base
     applicant_name:,
     office_location: nil
   )
-    attachments["snap_application.pdf"] = File.read(file_name)
+    attachments[attachment_name(applicant_name, "1171")] = File.read(file_name)
     @office_location = office_location
 
     mail(
@@ -32,12 +32,12 @@ class ApplicationMailer < ActionMailer::Base
     recipient_email:,
     applicant_name:
   )
-    attachments["medicaid_application.pdf"] = File.read(file_name)
+    attachments[attachment_name(applicant_name, "1426")] = File.read(file_name)
 
     mail(
       from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
       to: recipient_email,
-      subject: "A new 1426 from #{applicant_name} has been submitted!",
+      subject: "A new 1426 from #{applicant_name} was submitted!",
       template_name: "office_medicaid_application_notification",
     )
   end
@@ -46,9 +46,9 @@ class ApplicationMailer < ActionMailer::Base
 
   def subject(office_location, applicant_name)
     if office_location.present?
-      "A new 1171 from #{applicant_name} (in the lobby) has been submitted!"
+      "A new 1171 from #{applicant_name} (in the lobby) was submitted!"
     else
-      "A new 1171 from #{applicant_name} (online) has been submitted!"
+      "A new 1171 from #{applicant_name} (online) was submitted!"
     end
   end
 
@@ -58,5 +58,13 @@ class ApplicationMailer < ActionMailer::Base
     else
       "office_snap_application_notification"
     end
+  end
+
+  def attachment_name(applicant_name, type)
+    "#{formatted_date} #{applicant_name} #{type}.pdf"
+  end
+
+  def formatted_date
+    Date.current.in_time_zone("Eastern Time (US & Canada)").strftime("%Y-%m-%d")
   end
 end
