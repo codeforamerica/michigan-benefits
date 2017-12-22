@@ -8,3 +8,11 @@
   font-size: $font-size-small;
   color: #FFFFFF;
 }
+/* Used for warning users on the staging instance */
+.demo-banner.staging-warning {
+  background-color: $color-bright-yellow;
+  color: black;
+  a {
+    color: inherit;
+  }
+}
