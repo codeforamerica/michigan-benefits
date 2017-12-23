@@ -3,7 +3,9 @@ require "rails_helper"
 RSpec.feature "Warn users on staging only" do
   scenario "Renders the staging warning message", :js do
     # Stub out Rails.env to "staging"
-    allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("staging"))
+    allow(Rails).to receive(:env).and_return(
+      ActiveSupport::StringInquirer.new("staging"),
+    )
 
     visit root_path
     expect(page).to have_content("This is an example website")
@@ -11,7 +13,7 @@ RSpec.feature "Warn users on staging only" do
     within(".slab--hero") { proceed_with "Apply now" }
     expect(page).to have_content("This is an example website")
 
-    visit '/clio'
+    visit "/clio"
     expect(page).to have_content("This is an example website")
   end
 
