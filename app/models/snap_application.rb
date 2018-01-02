@@ -147,12 +147,8 @@ class SnapApplication < ApplicationRecord
     signed_at.present?
   end
 
-  def emailed?
-    emailed_at.present?
-  end
-
-  def emailed_at
-    exports.emailed.succeeded.first&.completed_at
+  def last_emailed_office_at
+    exports.emailed_office.succeeded.first&.completed_at
   end
 
   def signed_at_est

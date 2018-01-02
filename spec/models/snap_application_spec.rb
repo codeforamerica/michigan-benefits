@@ -244,4 +244,36 @@ RSpec.describe SnapApplication do
       expect(app.latest_drive_attempt).to eq latest
     end
   end
+
+  describe "#emailed_office_at" do
+    it "returns time application was last successfully emailed to office" do
+      snap_application = create(:snap_application)
+
+      completed_at_time = DateTime.new(2018, 1, 1, 1, 30)
+
+      create(:export,
+        :emailed_office,
+        :succeeded,
+        completed_at: completed_at_time - 1.day,
+        benefit_application: snap_application)
+      create(:export,
+        :emailed_office,
+        :succeeded,
+        completed_at: completed_at_time,
+        benefit_application: snap_application)
+
+      create(:export,
+        :emailed_client,
+        :succeeded,
+        completed_at: completed_at_time - 1.day,
+        benefit_application: snap_application)
+      create(:export,
+        :emailed_office,
+        :failed,
+        completed_at: completed_at_time - 1.day,
+        benefit_application: snap_application)
+
+      expect(snap_application.last_emailed_office_at).to eq(completed_at_time)
+    end
+  end
 end
