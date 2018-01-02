@@ -14,6 +14,7 @@ class ExportDashboard < Administrate::BaseDashboard
   }.freeze
 
   COLLECTION_ATTRIBUTES = %i[
+    id
     completed_at
     destination
     metadata
