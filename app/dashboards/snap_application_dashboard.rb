@@ -17,7 +17,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     dependent_care: Field::Boolean,
     documents: Field::String.with_options(searchable: false),
     email: Field::String,
-    emailed_at: Field::DateTime,
+    last_emailed_office_at: Field::DateTime,
     everyone_a_citizen: Field::Boolean,
     fax_metadata: Field::String.with_options(searchable: false),
     faxed_successfully_at: Field::DateTime,
@@ -73,7 +73,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     faxed_successfully_at
     fax_metadata
     signed_at
-    emailed_at
+    last_emailed_office_at
   ].freeze
 
   SHOW_PAGE_ATTRIBUTES = %i[

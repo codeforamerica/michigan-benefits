@@ -1,9 +1,19 @@
 require "rails_helper"
 
-RSpec.feature "Submit application with minimal information" do
+RSpec.feature "Submit snap application with minimal information" do
   before do
     user = create(:admin_user)
     login_as(user)
+  end
+
+  scenario "logging out", javascript: true do
+    visit admin_root_path
+
+    click_link "Sign Out"
+
+    visit admin_root_path
+
+    expect(page).to have_content("Log in")
   end
 
   scenario "The stats are accurate", javascript: true do
@@ -57,15 +67,5 @@ RSpec.feature "Submit application with minimal information" do
     expect(page).to have_content("Created At 04/04/2017 at 09:30PM EDT")
     expect(page).to have_content("Updated At 04/04/2017 at 10:30PM EDT")
     expect(page).to have_content("Signed At 04/04/2017 at 11:30PM EDT")
-  end
-
-  scenario "logging out", javascript: true do
-    visit admin_root_path
-
-    click_link "Sign Out"
-
-    visit admin_root_path
-
-    expect(page).to have_content("Log in")
   end
 end
