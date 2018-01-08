@@ -9,10 +9,6 @@ class MedicaidStepsController < StepsController
     "Medicaid Application"
   end
 
-  def set_current_application(application)
-    session[:medicaid_application_id] = application.try(:id)
-  end
-
   def current_medicaid_application_id
     session[:medicaid_application_id]
   end

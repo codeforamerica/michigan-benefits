@@ -27,7 +27,7 @@ RSpec.feature "Office-specific landing pages", :js do
     end
   end
 
-  xcontext "applying for Medicaid" do
+  context "applying for Medicaid" do
     scenario "clio road" do
       visit "/clio"
       proceed_with "Apply for Medicaid"
