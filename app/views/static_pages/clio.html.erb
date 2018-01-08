@@ -13,15 +13,23 @@ end %>
         Get the support your family needs
       </h1>
       <p class="hero--subheader">
-        Complete an application for food stamps (FAP) here, and get interviewed
-        at the Clio Rd office within 30 minutes.
+        Complete applications for food stamps (FAP) and Medicaid here, and get interviewed
+        at the Clio Road office within 30 minutes.
       </p>
     </div>
 
-    <%= link_to step_path(StepNavigation.first, office_location: "clio"), class: "button button--cta button--fully-width hero--cta" do %>
-      Apply at this office
-      <i class="button__icon icon-arrow_forward"></i>
+      <div class="hero--cta-options grid__item">
+    <%= link_to step_path(StepNavigation.first, office_location: "clio") do %>
+      <p class="button button--cta button--fully-width">Apply for FAP</p>
+      <p class="text--help">Food Stamps</p>
     <% end %>
+
+    <%= link_to step_path(Medicaid::StepNavigation.first, office_location: "clio") do %>
+      <p class="button button--cta button--fully-width">Apply for Medicaid</p>
+      <p class="text--help">Health insurance</p>
+    <% end %>
+  </div>    
+
     <p class="text--small">
       Not at the Clio Road office? <%= link_to "Apply anywhere", root_path %>.
     </p>
@@ -29,5 +37,5 @@ end %>
   </div>
 </div>
 
-<%= render "home_page_bottom_section", office_location: "clio" %>
+<%= render "home_page_bottom_section_dual", office_location: "clio" %>
 <%= render 'shared/footer' %>

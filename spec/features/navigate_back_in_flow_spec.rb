@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Navigate back in flow" do
   scenario "saves user data across steps" do
     visit root_path
-    within(".slab--hero") { click_on "Apply now" }
+    within(".slab--hero") { click_on "Apply for FAP" }
 
     fill_in_name_and_birthday
     click_on "Continue"
