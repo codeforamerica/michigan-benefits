@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "medicaid address flows" do
   scenario "client is homeless", :js do
-    visit medicaid_root_path
+    visit root_path
 
     within(".slab--hero") do
       proceed_with "Apply for Medicaid"
@@ -35,7 +35,7 @@ RSpec.feature "medicaid address flows" do
   end
 
   scenario "client does not have stable housing", :js do
-    visit medicaid_root_path
+    visit root_path
 
     within(".slab--hero") do
       proceed_with "Apply for Medicaid"
@@ -78,7 +78,7 @@ RSpec.feature "medicaid address flows" do
   end
 
   scenario "client has same home and mailing addresses", :js do
-    visit medicaid_root_path
+    visit root_path
 
     within(".slab--hero") do
       proceed_with "Apply for Medicaid"

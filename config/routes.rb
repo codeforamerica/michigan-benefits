@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   get "/privacy" => "static_pages#privacy"
   get "/terms" => "static_pages#terms"
   get "/union" => "static_pages#union"
-  get "/dual-index" => "static_pages#dual_index", as: :medicaid_root
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Medicaid app" do
   scenario "with multiple members", :js do
-    visit medicaid_root_path
+    visit root_path
 
     within(".slab--hero") do
       proceed_with "Apply for Medicaid"
