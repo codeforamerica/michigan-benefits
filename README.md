@@ -9,14 +9,11 @@ Code repository for [MichiganBenefits.org](michiganbenefits.org), a multi-benefi
 
 * [GitHub](https://github.com/codeforamerica/michigan-benefits)
 * [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2123705)
-* [Trello - legacy](https://trello.com/b/aBqTrqaJ/the-digital-assister)
-* [Trello - prototype](https://trello.com/b/aN8DB2pN/medicaid-application-arrives-via-online-search)
 * [Trello - design](https://trello.com/b/TIKaeN1c/michiganbenefitsorg-design-board)
 * [InVision](https://projects.invisionapp.com/d/main#/projects/prototypes/10425326)
 * [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits)
 * [Staging (staging.michiganbenefits.org, not the herokuapp url)](https://staging.michiganbenefits.org)
 * [Production](https://michigan-benefits-production.herokuapp.com)
-* [Prototype demo](https://michigan-benefits-prod.herokuapp.com/)
 
 ## Documentation
 
