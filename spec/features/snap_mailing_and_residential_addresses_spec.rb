@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Mailing and residential addresses" do
   scenario "home address not same as mailing address" do
     visit root_path
-    within(".slab--hero") { click_on "Apply now" }
+    within(".slab--hero") { click_on "Apply for FAP" }
 
     fill_in_name_and_birthday
     click_on "Continue"
@@ -30,7 +30,7 @@ RSpec.feature "Mailing and residential addresses" do
 
   scenario "goes back after skipping residential address step" do
     visit root_path
-    within(".slab--hero") { click_on "Apply now" }
+    within(".slab--hero") { click_on "Apply for FAP" }
 
     fill_in_name_and_birthday
     click_on "Continue"

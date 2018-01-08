@@ -149,11 +149,22 @@
       clear: both;
     }
   }
-
-  .hero--cta {
-    float: left;
+.hero--cta-options{
+  a {
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-block;
+    margin: .5em .5em .5em 0;
   }
-
+  .button {
+    margin-bottom: 0;
+  }
+  .text--help {
+    color: $color-white;
+  }
+  p {
+  }
+}
   @for $i from 1 through 3 {
     .slab--hero-#{$i} {
       &:before {
