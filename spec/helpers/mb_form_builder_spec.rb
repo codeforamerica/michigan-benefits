@@ -68,10 +68,38 @@ RSpec.describe MbFormBuilder do
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
         <div class="form-group">
-          <label for="sample_name">
+          <label for="sample_name" id="sample_name__label">
             <p class="form-question">How is name?</p>
           </label>
-          <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="" name="sample[name]" id="sample_name" />
+          <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" value="" aria-labelledby="sample_name__label" name="sample[name]" />
+        </div>
+      HTML
+    end
+
+    it "adds help text and error ids to aria-labelledby" do
+      class SampleStep < Step
+        step_attributes(:name)
+        validates_presence_of :name
+      end
+      sample = SampleStep.new
+      sample.validate
+
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_input_field(:name, "How is name?", notes: ["Note 1", "Note 2"])
+      expect(output).to be_html_safe
+      expect(output).to match_html <<-HTML
+        <div class="form-group form-group--error">
+          <div class="field_with_errors">
+            <label for="sample_name" id="sample_name__label">
+              <p class="form-question">How is name?</p>
+              <p class="text--help" id="sample_name__note-1">Note 1</p>
+              <p class="text--help" id="sample_name__note-2">Note 2</p>
+            </label>
+          </div>
+          <div class="field_with_errors">
+            <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" value="" aria-labelledby="sample_name__errors sample_name__label sample_name__note-1 sample_name__note-2" name="sample[name]" />
+          </div>
+          <div class="text--error" id="sample_name__errors"><i class="icon-warning"></i> can't be blank </div>
         </div>
       HTML
     end
@@ -109,12 +137,12 @@ RSpec.describe MbFormBuilder do
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
         <div class="form-group">
-          <label for="sample_phone_number">
+          <label for="sample_phone_number" id="sample_phone_number__label">
             <p class="form-question">What is phone?</p>
           </label>
           <div class="text-input-group">
             <div class="text-input-group__prefix">+1</div>
-            <input type="tel" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="" name="sample[phone_number]" id="sample_phone_number" />
+            <input type="tel" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_phone_number" value="" aria-labelledby="sample_phone_number__label" name="sample[phone_number]" />
           </div>
         </div>
       HTML

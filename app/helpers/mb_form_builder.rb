@@ -27,13 +27,25 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     }.merge(options)
 
     field_values(text_field_options, method).map.with_index do |value, i|
+      text_field_options[:id] ||= "#{object_name}_#{method}"
+      options[:input_id] ||= "#{object_name}_#{method}"
+
       if array_of_values?(method)
         text_field_options[:name] = "#{object_name}[#{method}][]"
         text_field_options[:id] = "#{object_name}_#{method}_#{i}"
-        options[:id] = "#{object_name}_#{method}_#{i}"
+        options[:input_id] = "#{object_name}_#{method}_#{i}"
       end
 
       text_field_options[:value] = value
+
+      aria_labels = ["#{text_field_options[:id]}__label"]
+      notes.each.with_index(1) do |note, i|
+        aria_labels << "#{text_field_options[:id]}__note-#{i}"
+      end
+      if object.errors.present?
+        aria_labels.unshift("#{text_field_options[:id]}__errors")
+      end
+      text_field_options["aria-labelledby"] = aria_labels.join(" ")
 
       text_field_html = text_field(method, text_field_options)
 
@@ -377,15 +389,15 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     label_text.html_safe
   end
 
-  def label_contents(label_text, notes, optional = false)
+  def label_contents(label_text, notes, optional = false, method = nil)
     notes = Array(notes)
 
     label_text = <<~HTML
       <p class="form-question">#{label_text + optional_text(optional)}</p>
     HTML
-    notes.each do |note|
+    notes.each.with_index(1) do |note, i|
       label_text << <<~HTML
-        <p class="text--help">#{note}</p>
+        <p class="text--help" id="#{object_name}_#{method}__note-#{i}">#{note}</p>
       HTML
     end
 
@@ -409,14 +421,17 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     optional: false,
     options: {}
   )
-    if options[:id]
-      for_options = options.merge(for: options[:id])
-      for_options.delete(:id)
+    if options[:input_id]
+      for_options = options.merge(
+        for: options[:input_id],
+        id: "#{options[:input_id]}__label",
+      )
+      for_options.delete(:input_id)
     end
 
     formatted_label = label(
       method,
-      label_contents(label_text, notes, optional),
+      label_contents(label_text, notes, optional, method),
       (for_options || options),
     )
     if prefix
@@ -436,7 +451,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     errors = object.errors[method]
     if errors.any?
       <<~HTML
-        <div class="text--error">
+        <div class="text--error" id="#{object_name}_#{method}__errors">
           <i class="icon-warning"></i>
           #{errors.join(', ')}
         </div>
