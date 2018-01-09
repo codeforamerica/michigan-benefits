@@ -9,54 +9,6 @@ RSpec.describe MbFormBuilder do
     template.extend ActionView::Helpers::FormOptionsHelper
   end
 
-  describe "#field_values" do
-    it "returns value that is present wrapped in an array" do
-      class SampleStep < Step
-        step_attributes(:phone_number)
-      end
-
-      sample = SampleStep.new
-      sample.phone_number = "5551009000"
-      form = MbFormBuilder.new("sample", sample, nil, {})
-
-      expect(form.field_values({}, :phone_number)).to eq ["5551009000"]
-    end
-
-    it "returns existing array of values" do
-      class SampleStep < Step
-        step_attributes(numbers: [])
-      end
-
-      sample = SampleStep.new
-      sample.numbers = [1, 2]
-      form = MbFormBuilder.new("sample", sample, nil, {})
-
-      expect(form.field_values({}, :numbers)).to eq [1, 2]
-    end
-
-    it "returns a single empty string if attribute is not set" do
-      class SampleStep < Step
-        step_attributes(numbers: [])
-      end
-
-      sample = SampleStep.new
-      form = MbFormBuilder.new("sample", sample, nil, {})
-
-      expect(form.field_values({}, :numbers)).to eq [""]
-    end
-
-    it "returns however many blank strings according to options[:count]" do
-      class SampleStep < Step
-        step_attributes(numbers: [])
-      end
-
-      sample = SampleStep.new
-      form = MbFormBuilder.new("sample", sample, nil, {})
-
-      expect(form.field_values({ count: 3 }, :numbers)).to eq ["", "", ""]
-    end
-  end
-
   describe "#mb_input_field" do
     it "renders a label that contains a p tag" do
       class SampleStep < Step
@@ -71,7 +23,7 @@ RSpec.describe MbFormBuilder do
           <label for="sample_name" id="sample_name__label">
             <p class="form-question">How is name?</p>
           </label>
-          <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" value="" aria-labelledby="sample_name__label" name="sample[name]" />
+          <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" aria-labelledby="sample_name__label" name="sample[name]" />
         </div>
       HTML
     end
@@ -101,7 +53,7 @@ RSpec.describe MbFormBuilder do
             </label>
           </div>
           <div class="field_with_errors">
-            <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" value="" aria-labelledby="sample_name__errors sample_name__label sample_name__note-1 sample_name__note-2" name="sample[name]" />
+            <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" aria-labelledby="sample_name__errors sample_name__label sample_name__note-1 sample_name__note-2" name="sample[name]" />
           </div>
           <div class="text--error" id="sample_name__errors"><i class="icon-warning"></i> can't be blank </div>
         </div>
@@ -146,7 +98,7 @@ RSpec.describe MbFormBuilder do
           </label>
           <div class="text-input-group">
             <div class="text-input-group__prefix">+1</div>
-            <input type="tel" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_phone_number" value="" aria-labelledby="sample_phone_number__label" name="sample[phone_number]" />
+            <input type="tel" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_phone_number" aria-labelledby="sample_phone_number__label" name="sample[phone_number]" />
           </div>
         </div>
       HTML

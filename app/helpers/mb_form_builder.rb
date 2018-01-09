@@ -10,7 +10,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: nil,
     autofocus: nil,
-    append_html: "",
     optional: false
   )
     classes = classes.append(%w[text-input])
@@ -25,44 +24,37 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       spellcheck: "false",
     }.merge(options)
 
-    field_values(text_field_options, method).map.with_index do |value, i|
-      text_field_options[:id] ||= "#{object_name}_#{method}"
-      options[:input_id] ||= "#{object_name}_#{method}"
-      text_field_options[:value] = value
+    text_field_options[:id] ||= "#{object_name}_#{method}"
+    options[:input_id] ||= "#{object_name}_#{method}"
 
-      aria_labels = ["#{text_field_options[:id]}__label"]
-      notes.each.with_index(1) do |_, j|
-        aria_labels << "#{text_field_options[:id]}__note-#{j}"
-      end
-      if object.errors.present?
-        aria_labels.unshift("#{text_field_options[:id]}__errors")
-      end
-      text_field_options["aria-labelledby"] = aria_labels.join(" ")
+    aria_labels = ["#{text_field_options[:id]}__label"]
+    notes.each.with_index(1) do |_, j|
+      aria_labels << "#{text_field_options[:id]}__note-#{j}"
+    end
+    if object.errors.present?
+      aria_labels.unshift("#{text_field_options[:id]}__errors")
+    end
+    text_field_options["aria-labelledby"] = aria_labels.join(" ")
 
-      text_field_html = text_field(method, text_field_options)
+    text_field_html = text_field(method, text_field_options)
 
-      field_index = (i + 1).to_s
-      rendered_append_html = append_html&.gsub("{index}", field_index)
-      rendered_label_text = label_text&.gsub("{index}", field_index)
+    label_and_field_html = label_and_field(
+      method,
+      label_text,
+      text_field_html,
+      notes: notes,
+      prefix: prefix,
+      optional: optional,
+      options: options,
+    )
 
-      label_and_field_html = label_and_field(
-        method,
-        rendered_label_text,
-        text_field_html,
-        notes: notes,
-        prefix: prefix,
-        optional: optional,
-        options: options,
-      )
-
-      <<~HTML
-        <div class="form-group#{error_state(object, method)}">
-        #{label_and_field_html}
-        #{errors_for(object, method)}
-        #{rendered_append_html}
-        </div>
-      HTML
-    end.join.html_safe
+    html_output = <<~HTML
+      <div class="form-group#{error_state(object, method)}">
+      #{label_and_field_html}
+      #{errors_for(object, method)}
+      </div>
+    HTML
+    html_output.html_safe
   end
 
   def mb_money_field(
@@ -74,7 +66,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: "$",
     autofocus: nil,
-    append_html: "",
     optional: false
   )
 
@@ -87,7 +78,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
-      append_html: append_html,
       optional: optional,
     )
   end
@@ -101,7 +91,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: "+1",
     autofocus: nil,
-    append_html: "",
     optional: false
   )
     mb_input_field(
@@ -113,7 +102,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
-      append_html: append_html,
       optional: optional,
     )
   end
@@ -276,31 +264,29 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     options = {},
     &block
   )
-    field_values(options, method).map.with_index do |_, i|
-      html_options = { class: "select__element" }
+    html_options = { class: "select__element" }
 
-      field_index = (i + 1).to_s
-      rendered_label_text = label_text&.gsub("{index}", field_index)
-      formatted_label = label(
-        method,
-        label_contents(
-          rendered_label_text,
-          options[:notes],
-          options[:optional],
-        ),
-        class: options[:hide_label] ? "sr-only" : "",
-      )
+    formatted_label = label(
+      method,
+      label_contents(
+        label_text,
+        options[:notes],
+        options[:optional],
+      ),
+      class: options[:hide_label] ? "sr-only" : "",
+    )
 
-      <<~HTML
-        <div class="form-group#{error_state(object, method)}">
-          #{formatted_label}
-          <div class="select">
-            #{select(method, collection, options, html_options, &block)}
-          </div>
-          #{errors_for(object, method)}
+    html_output = <<~HTML
+      <div class="form-group#{error_state(object, method)}">
+        #{formatted_label}
+        <div class="select">
+          #{select(method, collection, options, html_options, &block)}
         </div>
-      HTML
-    end.join.html_safe
+        #{errors_for(object, method)}
+      </div>
+    HTML
+
+    html_output.html_safe
   end
 
   def mb_checkbox(method, label_text, options = {})
@@ -310,17 +296,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       </label>
       #{errors_for(object, method)}
     HTML
-  end
-
-  def field_values(options, method)
-    current_value = object.send(method)
-    return Array.wrap(current_value) if current_value.present?
-
-    if options[:count] && current_value.blank?
-      Array.new(options[:count], "")
-    else
-      [""]
-    end
   end
 
   private
