@@ -65,6 +65,6 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def formatted_date
-    Date.current.in_time_zone("Eastern Time (US & Canada)").strftime("%Y-%m-%d")
+    TimeZoneHelper.date_in_est(DateTime.now).strftime("%Y-%m-%d")
   end
 end
