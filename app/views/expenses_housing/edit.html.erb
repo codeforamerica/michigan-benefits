@@ -29,7 +29,7 @@
           "If you do not pay homeowners insurance, you can leave this blank.",
         ] %>
 
-      <%= f.mb_checkbox_set(
+      <%= f.mb_checkbox_set(:utility_expenses,
         [
           { method: :utility_heat, label: "Heat" },
           { method: :utility_cooling, label: "Air Conditioning" },

@@ -85,7 +85,11 @@ RSpec.describe MbFormBuilder do
       sample.validate
 
       form = MbFormBuilder.new("sample", sample, template, {})
-      output = form.mb_input_field(:name, "How is name?", notes: ["Note 1", "Note 2"])
+      output = form.mb_input_field(
+        :name,
+        "How is name?",
+        notes: ["Note 1", "Note 2"],
+      )
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
         <div class="form-group form-group--error">
@@ -213,8 +217,8 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group">
-          <legend class="form-question ">What is your birthday?</legend>
-          <p class="text--help">(For surprises)</p>
+          <legend class="form-question " id="sample_birthday__label">What is your birthday?</legend>
+          <p class="text--help" id="sample_birthday__note-1">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
               <label for="sample_birthday_2i" class="sr-only">Month</label>
@@ -318,8 +322,8 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group">
-          <legend class="form-question ">What is your birthday?</legend>
-          <p class="text--help">(For surprises)</p>
+          <legend class="form-question " id="sample[members][72]_birthday__label">What is your birthday?</legend>
+          <p class="text--help" id="sample[members][72]_birthday__note-1">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
               <label for="sample_members_72_birthday_2i" class="sr-only">Month</label>
@@ -392,9 +396,11 @@ RSpec.describe MbFormBuilder do
     it "renders an accessible set of radio inputs" do
       class SampleStep < Step
         step_attributes(:dependent_care)
+        validates_presence_of :dependent_care
       end
 
       sample = SampleStep.new
+      sample.validate
       form = MbFormBuilder.new("sample", sample, template, {})
       output = form.mb_radio_set(
         :dependent_care,
@@ -403,21 +409,19 @@ RSpec.describe MbFormBuilder do
           { label: "Yep", value: true },
           { label: "Nope", value: false },
         ],
-        notes: <<~NOTE
-          This includes child care (including day care and after school
-          programs) and adult disabled care.
-        NOTE
+        notes: ["This includes child care."],
       )
       expect(output).to be_html_safe
 
       expect(output).to match_html <<-HTML
-        <fieldset class="form-group">
-          <legend class="form-question ">Does your household have dependent care expenses?</legend>
-          <p class="text--help">This includes child care (including day care and after school programs) and adult disabled care. </p>
+        <fieldset class="form-group form-group--error">
+          <legend class="form-question " id="sample_dependent_care__label">Does your household have dependent care expenses?</legend>
+          <p class="text--help" id="sample_dependent_care__note-1">This includes child care.</p>
           <radiogroup class="input-group--block">
-            <label class="radio-button"><input type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true" /> Yep </label>
-            <label class="radio-button"><input type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false" /> Nope </label>
+            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__note-1 sample_dependent_care_true__label" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
+            <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__note-1 sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
           </radiogroup>
+          <div class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </div>
         </fieldset>
       HTML
     end
@@ -437,6 +441,7 @@ RSpec.describe MbFormBuilder do
       sample = SampleStep.new
       form = MbFormBuilder.new("sample", sample, template, {})
       output = form.mb_checkbox_set(
+        :captains,
         [
           { method: :tng, label: "Picard" },
           { method: :ds9, label: "Sisko" },
@@ -450,7 +455,7 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="input-group">
-          <legend class="form-question ">Which captains do you think are cool?</legend>
+          <legend class="form-question " id="sample_captains__label">Which captains do you think are cool?</legend>
           <label class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[tng]" id="sample_tng" /> Picard </label>
           <label class="checkbox"><input name="sample[ds9]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[ds9]" id="sample_ds9" /> Sisko </label>
           <label class="checkbox"><input name="sample[voyager]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[voyager]" id="sample_voyager" /> Janeway </label>

@@ -10,7 +10,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: nil,
     autofocus: nil,
-    prepend_html: "",
     append_html: "",
     optional: false
   )
@@ -29,18 +28,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     field_values(text_field_options, method).map.with_index do |value, i|
       text_field_options[:id] ||= "#{object_name}_#{method}"
       options[:input_id] ||= "#{object_name}_#{method}"
-
-      if array_of_values?(method)
-        text_field_options[:name] = "#{object_name}[#{method}][]"
-        text_field_options[:id] = "#{object_name}_#{method}_#{i}"
-        options[:input_id] = "#{object_name}_#{method}_#{i}"
-      end
-
       text_field_options[:value] = value
 
       aria_labels = ["#{text_field_options[:id]}__label"]
-      notes.each.with_index(1) do |note, i|
-        aria_labels << "#{text_field_options[:id]}__note-#{i}"
+      notes.each.with_index(1) do |_, j|
+        aria_labels << "#{text_field_options[:id]}__note-#{j}"
       end
       if object.errors.present?
         aria_labels.unshift("#{text_field_options[:id]}__errors")
@@ -50,7 +42,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       text_field_html = text_field(method, text_field_options)
 
       field_index = (i + 1).to_s
-      rendered_prepend_html = prepend_html&.gsub("{index}", field_index)
       rendered_append_html = append_html&.gsub("{index}", field_index)
       rendered_label_text = label_text&.gsub("{index}", field_index)
 
@@ -66,7 +57,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
       <<~HTML
         <div class="form-group#{error_state(object, method)}">
-        #{rendered_prepend_html}
         #{label_and_field_html}
         #{errors_for(object, method)}
         #{rendered_append_html}
@@ -84,7 +74,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: "$",
     autofocus: nil,
-    prepend_html: "",
     append_html: "",
     optional: false
   )
@@ -98,7 +87,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
-      prepend_html: prepend_html,
       append_html: append_html,
       optional: optional,
     )
@@ -113,7 +101,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes: [],
     prefix: "+1",
     autofocus: nil,
-    prepend_html: "",
     append_html: "",
     optional: false
   )
@@ -126,7 +113,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
-      prepend_html: prepend_html,
       append_html: append_html,
       optional: optional,
     )
@@ -189,7 +175,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   )
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{fieldset_label_contents(label_text: label_text, notes: notes)}
+        #{fieldset_label_contents(method: method, label_text: label_text, notes: notes)}
         <div class="input-group--inline">
           <div class="select">
             <label for="#{select_label_for(object_name, method, '2i')}" class="sr-only">Month</label>
@@ -239,17 +225,19 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
         #{fieldset_label_contents(
+          method: method,
           label_text: label_text,
           notes: notes,
           legend_class: legend_class,
         )}
-        #{mb_radio_button(method, collection, layout)}
+        #{mb_radio_button(method, collection, layout, notes)}
         #{errors_for(object, method)}
       </fieldset>
     HTML
   end
 
   def mb_checkbox_set(
+    method,
     collection,
     label_text:,
     notes: [],
@@ -274,6 +262,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
           notes: notes,
           legend_class: legend_class,
           optional: optional,
+          method: method,
         )}
         #{checkbox_html}
       </fieldset>
@@ -287,14 +276,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     options = {},
     &block
   )
-    field_values(options, method).map.with_index do |value, i|
+    field_values(options, method).map.with_index do |_, i|
       html_options = { class: "select__element" }
-
-      if array_of_values?(method)
-        html_options[:name] = "#{object_name}[#{method}][]"
-        html_options[:id] = "#{object_name}_#{method}_#{i}"
-        options[:selected] = value
-      end
 
       field_index = (i + 1).to_s
       rendered_label_text = label_text&.gsub("{index}", field_index)
@@ -340,23 +323,35 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def array_of_values?(attribute)
-    object.respond_to?(:hash_key_attribute?) &&
-      object.hash_key_attribute?(attribute)
-  end
+  private
 
-  def mb_radio_button(method, collection, layout)
+  def mb_radio_button(method, collection, layout, notes)
     radio_html = <<~HTML
       <radiogroup class="input-group--#{layout}">
     HTML
     collection.map do |item|
       item = { value: item, label: item } unless item.is_a?(Hash)
 
-      input_html = item.fetch(:input_html, {})
+      notes_labels = notes.map.with_index(1) do |_, i|
+        "#{object_name}_#{method}__note-#{i}"
+      end
+
+      snake_case_value = sanitized_value(item[:value])
+
+      aria_labels = [
+        object.errors.present? ? "#{object_name}_#{method}__errors" : nil,
+        "#{object_name}_#{method}__label",
+        notes_labels,
+        "#{object_name}_#{method}_#{snake_case_value}__label",
+      ].compact.flatten
+
+      options = {
+        'aria-labelledby': aria_labels.join(" "),
+      }
 
       radio_html << <<~HTML.html_safe
-        <label class="radio-button">
-          #{radio_button(method, item[:value], input_html)}
+        <label class="radio-button" id="#{object_name}_#{method}_#{snake_case_value}__label">
+          #{radio_button(method, item[:value], options)}
           #{item[:label]}
         </label>
       HTML
@@ -367,9 +362,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     radio_html.html_safe
   end
 
-  private
-
   def fieldset_label_contents(
+    method:,
     label_text:,
     notes:,
     legend_class: "",
@@ -378,11 +372,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     notes = Array(notes)
     label_text = <<~HTML
-      <legend class="form-question #{legend_class}">#{label_text + optional_text(optional)}</legend>
+      <legend class="form-question #{legend_class}" id="#{object_name}_#{method}__label">#{label_text + optional_text(optional)}</legend>
     HTML
-    notes.each do |note|
+    notes.each.with_index(1) do |note, i|
       label_text << <<~HTML
-        <p class="text--help">#{note}</p>
+        <p class="text--help" id="#{object_name}_#{method}__note-#{i}">#{note}</p>
       HTML
     end
 
@@ -483,5 +477,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def select_label_for(object_name, method, position)
     object_name.to_s.gsub(/([\[\(])|(\]\[)/, "_").gsub(/[\]\)]/, "") + "_" +
       select_field_id(method, position)
+  end
+
+  # copied from ActionView::FormHelpers in order to coerce strings with spaces
+  # and capitalization to snake case, using the same logic as Rails
+  def sanitized_value(value)
+    value.to_s.gsub(/\s/, "_").gsub(/[^-[[:word:]]]/, "").mb_chars.downcase.to_s
   end
 end
