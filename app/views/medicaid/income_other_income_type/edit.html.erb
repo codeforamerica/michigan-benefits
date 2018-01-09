@@ -19,6 +19,7 @@
       <%= f.mb_form_errors :other_income_types %>
 
       <%= f.mb_checkbox_set(
+        :other_income_types,
         [
           { method: :unemployment, label: "Unemployment" },
           { method: :pension, label: "Pension" },

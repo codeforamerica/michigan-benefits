@@ -28,9 +28,14 @@
     </p>
 
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-     <%= f.mb_radio_button :consent_to_terms,
-       [{ value: true, label: "I agree" }],
-       layout: "inline" %>
+      <%= f.mb_radio_set(
+        :consent_to_terms,
+        label_text: "Do you agree to the legal terms?",
+        collection: [{value: true, label: "I agree"}],
+        layout: "inline",
+        notes: [],
+        legend_class: "sr-only",
+      ) %>
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>
