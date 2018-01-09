@@ -40,7 +40,7 @@ RSpec.describe MbFormBuilder do
       output = form.mb_input_field(
         :name,
         "How is name?",
-        notes: ["Note 1", "Note 2"],
+        help_text: "Name is name",
       )
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
@@ -48,12 +48,11 @@ RSpec.describe MbFormBuilder do
           <div class="field_with_errors">
             <label for="sample_name" id="sample_name__label">
               <p class="form-question">How is name?</p>
-              <p class="text--help" id="sample_name__note-1">Note 1</p>
-              <p class="text--help" id="sample_name__note-2">Note 2</p>
+              <p class="text--help" id="sample_name__help">Name is name</p>
             </label>
           </div>
           <div class="field_with_errors">
-            <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" aria-labelledby="sample_name__errors sample_name__label sample_name__note-1 sample_name__note-2" name="sample[name]" />
+            <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" aria-labelledby="sample_name__errors sample_name__label sample_name__help" name="sample[name]" />
           </div>
           <div class="text--error" id="sample_name__errors"><i class="icon-warning"></i> can't be blank </div>
         </div>
@@ -157,7 +156,7 @@ RSpec.describe MbFormBuilder do
       output = form.mb_date_select(
         :birthday,
         "What is your birthday?",
-        notes: ["(For surprises)"],
+        help_text: "(For surprises)",
         options: {
           start_year: 1990,
           end_year: 1992,
@@ -170,7 +169,7 @@ RSpec.describe MbFormBuilder do
       expect(output).to match_html <<-HTML
         <fieldset class="form-group">
           <legend class="form-question " id="sample_birthday__label">What is your birthday?</legend>
-          <p class="text--help" id="sample_birthday__note-1">(For surprises)</p>
+          <p class="text--help" id="sample_birthday__help">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
               <label for="sample_birthday_2i" class="sr-only">Month</label>
@@ -260,7 +259,7 @@ RSpec.describe MbFormBuilder do
         ff.mb_date_select(
           :birthday,
           "What is your birthday?",
-          notes: ["(For surprises)"],
+          help_text: "(For surprises)",
           options: {
             start_year: 1990,
             end_year: 1992,
@@ -275,7 +274,7 @@ RSpec.describe MbFormBuilder do
       expect(output).to match_html <<-HTML
         <fieldset class="form-group">
           <legend class="form-question " id="sample[members][72]_birthday__label">What is your birthday?</legend>
-          <p class="text--help" id="sample[members][72]_birthday__note-1">(For surprises)</p>
+          <p class="text--help" id="sample[members][72]_birthday__help">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
               <label for="sample_members_72_birthday_2i" class="sr-only">Month</label>
@@ -361,17 +360,17 @@ RSpec.describe MbFormBuilder do
           { label: "Yep", value: true },
           { label: "Nope", value: false },
         ],
-        notes: ["This includes child care."],
+        help_text: "This includes child care.",
       )
       expect(output).to be_html_safe
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group form-group--error">
           <legend class="form-question " id="sample_dependent_care__label">Does your household have dependent care expenses?</legend>
-          <p class="text--help" id="sample_dependent_care__note-1">This includes child care.</p>
+          <p class="text--help" id="sample_dependent_care__help">This includes child care.</p>
           <radiogroup class="input-group--block">
-            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__note-1 sample_dependent_care_true__label" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
-            <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__note-1 sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
+            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_true__label" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
+            <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
           </radiogroup>
           <div class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </div>
         </fieldset>

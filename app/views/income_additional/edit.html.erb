@@ -13,7 +13,7 @@
       <% @income_fields.each do |method, label| %>
         <%= f.mb_money_field method,
           label,
-          notes: ["Monthly amount"],
+          help_text: "Monthly amount",
           optional: true %>
       <% end %>
 

@@ -21,7 +21,7 @@
                   optional: true %>
                 <%= ff.mb_money_field :employed_pay_quantity,
                   "Pay (before tax)",
-                  notes: ["This includes money withheld from paychecks"],
+                  help_text: "This includes money withheld from paychecks",
                   optional: true %>
                 <%= ff.mb_select :employed_pay_interval,
                   "How often are you paid that amount?",

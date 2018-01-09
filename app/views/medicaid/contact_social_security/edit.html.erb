@@ -27,7 +27,8 @@
                 "Social Security Number",
                 type: :tel,
                 options: { maxlength: 9 },
-                notes: ["If you don’t know it you can skip this"] %>
+                help_text: "If you don’t know it you can skip this"
+              %>
 
               <%= ff.mb_date_select :birthday,
                 "Date of birth",

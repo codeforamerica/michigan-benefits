@@ -22,19 +22,19 @@
         <%= f.mb_radio_set :dependent_care,
           label_text: "Does your household have dependent care expenses?",
           collection: [{ label: "Yes", value: true }, { label: "No", value: false }],
-          notes: ["This includes child care (including day care and after school programs) and adult disabled care."]
+          help_text: "This includes child care (including day care and after school programs) and adult disabled care."
         %>
 
         <%= f.mb_radio_set :medical,
           label_text: "Does your household have ongoing medical expenses?",
           collection: [{ label: "Yes", value: true }, { label: "No", value: false }],
-          notes: ["This includes health insurance, co-pays, prescriptions, dental, hospital bills, etc."]
+          help_text: "This includes health insurance, co-pays, prescriptions, dental, hospital bills, etc."
         %>
 
         <%= f.mb_radio_set :court_ordered,
           label_text: "Does your household have court-ordered expenses?",
           collection: [{ label: "Yes", value: true }, { label: "No", value: false }],
-          notes: ["This includes child support, alimony, arrearages, etc."] %>
+          help_text: "This includes child support, alimony, arrearages, etc." %>
     </div>
 
     <%= render "shared/next_step" %>

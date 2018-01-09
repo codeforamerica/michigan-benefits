@@ -5,7 +5,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     method,
     label_text,
     type: "text",
-    notes: [],
+    help_text: nil,
     options: {},
     classes: [],
     prefix: nil,
@@ -28,9 +28,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     options[:input_id] ||= "#{object_name}_#{method}"
 
     aria_labels = ["#{text_field_options[:id]}__label"]
-    notes.each.with_index(1) do |_, j|
-      aria_labels << "#{text_field_options[:id]}__note-#{j}"
-    end
+    aria_labels << "#{text_field_options[:id]}__help" if help_text
     if object.errors.present?
       aria_labels.unshift("#{text_field_options[:id]}__errors")
     end
@@ -42,7 +40,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       method,
       label_text,
       text_field_html,
-      notes: notes,
+      help_text: help_text,
       prefix: prefix,
       optional: optional,
       options: options,
@@ -61,7 +59,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     method,
     label_text,
     type: :tel,
-    notes: [],
+    help_text: nil,
     options: {},
     classes: [],
     prefix: "$",
@@ -73,7 +71,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       method,
       label_text,
       type: type,
-      notes: notes,
+      help_text: help_text,
       options: options,
       classes: classes,
       prefix: prefix,
@@ -86,7 +84,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     method,
     label_text,
     type: :tel,
-    notes: [],
+    help_text: nil,
     options: {},
     classes: [],
     prefix: "+1",
@@ -97,7 +95,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       method,
       label_text,
       type: type,
-      notes: notes,
+      help_text: help_text,
       options: options,
       classes: classes,
       prefix: prefix,
@@ -120,7 +118,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_textarea(
     method,
     label_text,
-    notes: [],
+    help_text: nil,
     options: {},
     classes: [],
     placeholder: nil,
@@ -146,7 +144,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             placeholder: placeholder,
           }.merge(options),
         ),
-        notes: notes,
+        help_text: help_text,
         options: { class: hide_label ? 'sr-only' : '' },
       )}
       #{errors_for(object, method)}
@@ -157,13 +155,13 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_date_select(
     method,
     label_text,
-    notes: [],
+    help_text: nil,
     options: {},
     autofocus: nil
   )
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{fieldset_label_contents(method: method, label_text: label_text, notes: notes)}
+        #{fieldset_label_contents(method: method, label_text: label_text, help_text: help_text)}
         <div class="input-group--inline">
           <div class="select">
             <label for="#{select_label_for(object_name, method, '2i')}" class="sr-only">Month</label>
@@ -206,7 +204,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     method,
     label_text:,
     collection:,
-    notes: [],
+    help_text: nil,
     layout: "block",
     legend_class: ""
   )
@@ -215,10 +213,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         #{fieldset_label_contents(
           method: method,
           label_text: label_text,
-          notes: notes,
+          help_text: help_text,
           legend_class: legend_class,
         )}
-        #{mb_radio_button(method, collection, layout, notes)}
+        #{mb_radio_button(method, collection, layout, help_text)}
         #{errors_for(object, method)}
       </fieldset>
     HTML
@@ -228,7 +226,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     method,
     collection,
     label_text:,
-    notes: [],
+    help_text: nil,
     optional: false,
     legend_class: ""
   )
@@ -247,7 +245,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       <fieldset class="input-group">
         #{fieldset_label_contents(
           label_text: label_text,
-          notes: notes,
+          help_text: help_text,
           legend_class: legend_class,
           optional: optional,
           method: method,
@@ -270,7 +268,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       method,
       label_contents(
         label_text,
-        options[:notes],
+        options[:help_text],
         options[:optional],
       ),
       class: options[:hide_label] ? "sr-only" : "",
@@ -300,23 +298,20 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   private
 
-  def mb_radio_button(method, collection, layout, notes)
+  def mb_radio_button(method, collection, layout, help_text)
     radio_html = <<~HTML
       <radiogroup class="input-group--#{layout}">
     HTML
     collection.map do |item|
       item = { value: item, label: item } unless item.is_a?(Hash)
 
-      notes_labels = notes.map.with_index(1) do |_, i|
-        "#{object_name}_#{method}__note-#{i}"
-      end
-
+      help_text_label = help_text ? "#{object_name}_#{method}__help" : nil
       snake_case_value = sanitized_value(item[:value])
 
       aria_labels = [
         object.errors.present? ? "#{object_name}_#{method}__errors" : nil,
         "#{object_name}_#{method}__label",
-        notes_labels,
+        help_text_label,
         "#{object_name}_#{method}_#{snake_case_value}__label",
       ].compact.flatten
 
@@ -340,33 +335,31 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def fieldset_label_contents(
     method:,
     label_text:,
-    notes:,
+    help_text:,
     legend_class: "",
     optional: false
   )
 
-    notes = Array(notes)
     label_text = <<~HTML
       <legend class="form-question #{legend_class}" id="#{object_name}_#{method}__label">#{label_text + optional_text(optional)}</legend>
     HTML
-    notes.each.with_index(1) do |note, i|
+    if help_text
       label_text << <<~HTML
-        <p class="text--help" id="#{object_name}_#{method}__note-#{i}">#{note}</p>
+        <p class="text--help" id="#{object_name}_#{method}__help">#{help_text}</p>
       HTML
     end
 
     label_text.html_safe
   end
 
-  def label_contents(label_text, notes, optional = false, method = nil)
-    notes = Array(notes)
-
+  def label_contents(label_text, help_text, optional = false, method = nil)
     label_text = <<~HTML
       <p class="form-question">#{label_text + optional_text(optional)}</p>
     HTML
-    notes.each.with_index(1) do |note, i|
+
+    if help_text
       label_text << <<~HTML
-        <p class="text--help" id="#{object_name}_#{method}__note-#{i}">#{note}</p>
+        <p class="text--help" id="#{object_name}_#{method}__help">#{help_text}</p>
       HTML
     end
 
@@ -385,7 +378,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     method,
     label_text,
     field,
-    notes: [],
+    help_text: nil,
     prefix: nil,
     optional: false,
     options: {}
@@ -400,7 +393,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     formatted_label = label(
       method,
-      label_contents(label_text, notes, optional, method),
+      label_contents(label_text, help_text, optional, method),
       (for_options || options),
     )
     if prefix
