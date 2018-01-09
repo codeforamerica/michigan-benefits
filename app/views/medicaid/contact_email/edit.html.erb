@@ -7,7 +7,11 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_input_field :email, "Email address", notes: ["If you don’t have one or you don’t want to receive emails from us you can leave this blank."], optional: true %>
+      <%= f.mb_input_field :email,
+        "Email address",
+        help_text: "If you don’t have one or you don’t want to receive emails from us you can leave this blank.",
+        optional: true
+      %>
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>

@@ -21,13 +21,12 @@
 
       <%= f.mb_money_field :property_tax_expense,
         "How much do you pay in property tax each month?",
-        notes: ["If you do not pay property tax, you can leave this blank."] %>
+        help_text: "If you do not pay property tax, you can leave this blank." %>
 
       <%= f.mb_money_field :insurance_expense,
         "How much do you pay in home owners insurance each month?",
-        notes: [
-          "If you do not pay homeowners insurance, you can leave this blank.",
-        ] %>
+        help_text: "If you do not pay homeowners insurance, you can leave this blank."
+      %>
 
       <%= f.mb_checkbox_set(:utility_expenses,
         [
@@ -40,9 +39,8 @@
           { method: :utility_other, label: "Other" }
         ],
         label_text: "What utilities do you pay?",
-        notes: [
-          "Only check utilities that are not included in your mortgage/rent payments."
-        ]) %>
+        help_text: "Only check utilities that are not included in your mortgage/rent payments."
+        ) %>
 
       <%= render "shared/next_step" %>
     <% end %>

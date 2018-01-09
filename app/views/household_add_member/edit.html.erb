@@ -19,7 +19,7 @@
       <%= f.mb_radio_set :sex,
         label_text: "What is their sex?",
         collection:  [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
-        notes: ["As it appears on your driver’s license"],
+        help_text: "As it appears on your driver’s license",
         layout: "inline" %>
       <%= f.mb_select :relationship,
         "What is their relationship to you?",
@@ -37,7 +37,7 @@
         "What is their Social Security Number?",
         type: :tel,
         options: { maxlength: 9 },
-        notes: ["If they don’t have one or you don’t know it you can skip this"]
+        help_text: "If they don’t have one or you don’t know it you can skip this"
       %>
       <p class="text--secure"><i class="illustration illustration--safety"></i><%= t("ssn.description") %></p>
       <%= f.mb_radio_set :requesting_food_assistance,

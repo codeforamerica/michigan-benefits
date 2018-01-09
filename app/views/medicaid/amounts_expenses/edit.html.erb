@@ -34,7 +34,7 @@
         </p>
         <%= f.mb_money_field :self_employed_monthly_expenses,
           "Average monthly expenses",
-          notes: ["If you have no self-employment expenses, please indicate that by entering 0"] %>
+          help_text: "If you have no self-employment expenses, please indicate that by entering 0" %>
       <% end %>
 
       <%= render "medicaid/next_step" %>
