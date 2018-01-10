@@ -58,6 +58,7 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     mailing_address_same_as_residential_address: Field::Boolean,
     stable_housing: Field::Boolean,
     anyone_married: Field::Boolean,
+    exports: Field::HasMany,
   }.freeze
 
   # COLLECTION_ATTRIBUTES

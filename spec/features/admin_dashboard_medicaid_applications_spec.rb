@@ -9,6 +9,21 @@ RSpec.feature "Admin viewing medicaid applications dashboard", type: :feature do
     login_as(user)
   end
 
+  scenario "viewing details for a medicaid application" do
+    application = create(
+      :medicaid_application,
+      email: "christa@example.com",
+    )
+
+    visit admin_root_path
+
+    click_on "Medicaid Applications"
+
+    click_on "christa@example.com"
+
+    expect(page).to have_content("Medicaid Application ##{application.id}")
+  end
+
   scenario "downloads the 1426 PDF application", javascript: true do
     application = create(
       :medicaid_application,
