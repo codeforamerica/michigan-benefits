@@ -230,16 +230,22 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     optional: false,
     legend_class: ""
   )
-    checkbox_html = ""
-    collection.map do |item|
-      checkbox = <<~HTML.html_safe
-        <label class="checkbox">
-        #{check_box_with_label(item[:label], item[:method])}
+    aria_labels = ["#{object_name}_#{method}__label"]
+    aria_labels << "#{object_name}_#{method}__help" if help_text
+
+    checkbox_html = collection.map do |item|
+      checkbox_label_id = "#{object_name}_#{method}_#{item[:method]}__label"
+      options = {
+        'aria-labelledby': (aria_labels + [checkbox_label_id]).join(" "),
+      }
+
+      <<~HTML.html_safe
+        <label id="#{checkbox_label_id}" class="checkbox">
+          #{check_box(item[:method], options)} #{item[:label]}
         </label>
         #{errors_for(object, item[:method])}
       HTML
-      checkbox_html << checkbox
-    end
+    end.join.html_safe
 
     <<~HTML.html_safe
       <fieldset class="input-group">
@@ -288,9 +294,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def mb_checkbox(method, label_text, options = {})
+    checked_value = options[:checked_value] || "1"
+    unchecked_value = options[:unchecked_value] || "0"
+
     <<~HTML.html_safe
       <label class="checkbox">
-        #{check_box_with_label(label_text, method, options)}
+        #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
       </label>
       #{errors_for(object, method)}
     HTML
@@ -424,14 +433,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def error_state(object, method)
     errors = object.errors[method]
     " form-group--error" if errors.any?
-  end
-
-  def check_box_with_label(label_text, method, options = {})
-    checked_value = options[:checked_value] || "1"
-    unchecked_value = options[:unchecked_value] || "0"
-    <<~HTML.html_safe
-      #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
-    HTML
   end
 
   def select_field_id(method, position)
