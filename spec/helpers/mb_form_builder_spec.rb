@@ -20,8 +20,8 @@ RSpec.describe MbFormBuilder do
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
         <div class="form-group">
-          <label for="sample_name" id="sample_name__label">
-            <p class="form-question">How is name?</p>
+          <label for="sample_name">
+            <p class="form-question" id="sample_name__label">How is name?</p>
           </label>
           <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" aria-labelledby="sample_name__label" name="sample[name]" />
         </div>
@@ -46,8 +46,8 @@ RSpec.describe MbFormBuilder do
       expect(output).to match_html <<-HTML
         <div class="form-group form-group--error">
           <div class="field_with_errors">
-            <label for="sample_name" id="sample_name__label">
-              <p class="form-question">How is name?</p>
+            <label for="sample_name">
+              <p class="form-question" id="sample_name__label">How is name?</p>
               <p class="text--help" id="sample_name__help">Name is name</p>
             </label>
           </div>
@@ -63,18 +63,32 @@ RSpec.describe MbFormBuilder do
   describe "#mb_textarea" do
     it "renders a label with the sr-only class when hide_label set to true" do
       class SampleStep < Step
-        step_attributes(:name)
+        step_attributes(:description)
+        validates_presence_of :description
       end
       sample = SampleStep.new
+      sample.validate
+
       form = MbFormBuilder.new("sample", sample, template, {})
-      output = form.mb_textarea(:name, "Write a lot?", hide_label: true)
+      output = form.mb_textarea(
+        :description,
+        "Write a lot?",
+        help_text: "Name for texting",
+        hide_label: true,
+      )
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
-        <div class="form-group">
-         <label class="sr-only" for="sample_name">
-           <p class="form-question">Write a lot?</p>
-         </label>
-         <textarea class="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name="sample[name]" id="sample_name"></textarea>
+        <div class="form-group form-group--error">
+         <div class="field_with_errors">
+           <label class="sr-only" for="sample_description">
+             <p class="form-question" id="sample_description__label">Write a lot?</p>
+             <p class="text--help" id="sample_description__help">Name for texting</p>
+           </label>
+         </div>
+         <div class="field_with_errors">
+           <textarea class="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_description__errors sample_description__label sample_description__help" name="sample[description]" id="sample_description"></textarea>
+         </div>
+         <div class="text--error" id="sample_description__errors"><i class="icon-warning"></i> can't be blank </div>
        </div>
       HTML
     end
@@ -92,8 +106,8 @@ RSpec.describe MbFormBuilder do
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
         <div class="form-group">
-          <label for="sample_phone_number" id="sample_phone_number__label">
-            <p class="form-question">What is phone?</p>
+          <label for="sample_phone_number">
+            <p class="form-question" id="sample_phone_number__label">What is phone?</p>
           </label>
           <div class="text-input-group">
             <div class="text-input-group__prefix">+1</div>
@@ -108,38 +122,47 @@ RSpec.describe MbFormBuilder do
     it "renders a range of numeric options with a screen-reader only label" do
       class SampleStep < Step
         step_attributes(:how_many)
+        validates_presence_of :how_many
       end
 
       sample = SampleStep.new
+      sample.validate
       form = MbFormBuilder.new("sample", sample, template, {})
       output = form.mb_select(
         :how_many,
         "This is for screen readers!",
         (0..10).map { |number| [pluralize(number, "thing"), number] },
         hide_label: true,
+        help_text: "Choose how many",
       )
       expect(output).to be_html_safe
 
       expect(output).to match_html <<-HTML
-        <div class="form-group">
-          <label class="sr-only" for="sample_how_many">
-            <p class="form-question">This is for screen readers!</p>
-          </label>
-          <div class="select">
-            <select class="select__element" name="sample[how_many]" id="sample_how_many">
-              <option value="0">0 things</option>
-              <option value="1">1 thing</option>
-              <option value="2">2 things</option>
-              <option value="3">3 things</option>
-              <option value="4">4 things</option>
-              <option value="5">5 things</option>
-              <option value="6">6 things</option>
-              <option value="7">7 things</option>
-              <option value="8">8 things</option>
-              <option value="9">9 things</option>
-              <option value="10">10 things</option>
-            </select>
+        <div class="form-group form-group--error">
+          <div class="field_with_errors">
+            <label class="sr-only" for="sample_how_many">
+              <p class="form-question" id="sample_how_many__label">This is for screen readers!</p>
+              <p class="text--help" id="sample_how_many__help">Choose how many</p>
+            </label>
           </div>
+          <div class="select">
+            <div class="field_with_errors">
+              <select class="select__element" aria-labelledby="sample_how_many__errors sample_how_many__label sample_how_many__help" name="sample[how_many]" id="sample_how_many">
+                <option value="0">0 things</option>
+                <option value="1">1 thing</option>
+                <option value="2">2 things</option>
+                <option value="3">3 things</option>
+                <option value="4">4 things</option>
+                <option value="5">5 things</option>
+                <option value="6">6 things</option>
+                <option value="7">7 things</option>
+                <option value="8">8 things</option>
+                <option value="9">9 things</option>
+                <option value="10">10 things</option>
+              </select>
+            </div>
+          </div>
+          <div class="text--error" id="sample_how_many__errors"><i class="icon-warning"></i> can't be blank </div>
         </div>
       HTML
     end
