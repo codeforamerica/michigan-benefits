@@ -16,7 +16,7 @@ RSpec.feature "Admins can view exports" do
 
     within "[data-url='#{admin_export_path(medicaid_export)}']" do
       expect(page).to have_content(
-        "MedicaidApplication ##{medicaid_application.id}",
+        "Medicaid Application ##{medicaid_application.id}",
       )
     end
 

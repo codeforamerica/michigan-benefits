@@ -19,8 +19,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     email: Field::String,
     last_emailed_office_at: Field::DateTime,
     everyone_a_citizen: Field::Boolean,
-    fax_metadata: Field::String.with_options(searchable: false),
-    faxed_successfully_at: Field::DateTime,
     financial_accounts: Field::String.with_options(searchable: false),
     income_change: Field::Boolean,
     income_change_explanation: Field::Text.with_options(searchable: false),
@@ -70,8 +68,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     phone_number
     office_location
     email
-    faxed_successfully_at
-    fax_metadata
     signed_at
     last_emailed_office_at
   ].freeze

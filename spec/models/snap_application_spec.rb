@@ -1,6 +1,13 @@
 require "rails_helper"
 
 RSpec.describe SnapApplication do
+  describe "common benefit application" do
+    let(:subject) do
+      create(:medicaid_application)
+    end
+
+    it_should_behave_like "common benefit application"
+  end
   describe "validations" do
     [
       [:care_expenses, SnapApplication::CARE_EXPENSES],
@@ -127,50 +134,6 @@ RSpec.describe SnapApplication do
     end
   end
 
-  describe "#mailing_address" do
-    context "mailing address exists" do
-      it "returns mailing address" do
-        app = create(:snap_application)
-        mailing_address = create(:mailing_address, benefit_application: app)
-
-        expect(app.mailing_address).to eq(mailing_address)
-      end
-    end
-
-    context "mailing address does not exist" do
-      it "returns NullAddress" do
-        app = create(:snap_application)
-        create(:residential_address, benefit_application: app)
-
-        expect(app.mailing_address.class).to eq(NullAddress)
-      end
-    end
-  end
-
-  describe "#signed_at_est" do
-    context "signed_at present" do
-      it "returns the UTC time in EST" do
-        # September 1, 2008 10:05:00 AM UTC
-        time = Time.utc(2008, 9, 1, 10, 5, 0)
-        snap_app = build(:snap_application, signed_at: time)
-
-        Timecop.freeze(time) do
-          expect(snap_app.signed_at_est).to eq(
-            "09/01/2008 at 06:05AM EDT",
-          )
-        end
-      end
-    end
-
-    context "signed_at not present" do
-      it "returns nil" do
-        snap_app = build(:snap_application, signed_at: nil)
-
-        expect(snap_app.signed_at_est).to eq(nil)
-      end
-    end
-  end
-
   describe "#faxed?" do
     context "when no fax attempts have been made" do
       it "returns false" do
@@ -242,38 +205,6 @@ RSpec.describe SnapApplication do
       latest = create(:driver_application, snap_application: app)
 
       expect(app.latest_drive_attempt).to eq latest
-    end
-  end
-
-  describe "#emailed_office_at" do
-    it "returns time application was last successfully emailed to office" do
-      snap_application = create(:snap_application)
-
-      completed_at_time = DateTime.new(2018, 1, 1, 1, 30)
-
-      create(:export,
-        :emailed_office,
-        :succeeded,
-        completed_at: completed_at_time - 1.day,
-        benefit_application: snap_application)
-      create(:export,
-        :emailed_office,
-        :succeeded,
-        completed_at: completed_at_time,
-        benefit_application: snap_application)
-
-      create(:export,
-        :emailed_client,
-        :succeeded,
-        completed_at: completed_at_time - 1.day,
-        benefit_application: snap_application)
-      create(:export,
-        :emailed_office,
-        :failed,
-        completed_at: completed_at_time - 1.day,
-        benefit_application: snap_application)
-
-      expect(snap_application.last_emailed_office_at).to eq(completed_at_time)
     end
   end
 end
