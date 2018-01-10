@@ -30,23 +30,6 @@ RSpec.feature "Submit snap application with minimal information" do
     expect(page).to have_content "1 Faxed (4.5%)"
   end
 
-  scenario "resending a fax", javascript: true do
-    application = create(:snap_application, :faxed, signed_at: 5.days.ago)
-    visit admin_root_path
-
-    click_link_or_button "Resend email to office"
-
-    confirmation = "Resent email to #{application.receiving_office.email}" \
-                   " for #{application.signature}!"
-
-    expect(page).to have_content(confirmation)
-
-    faxes = application.exports.for_destination(:fax)
-    emails = application.exports.for_destination(:office_email)
-    expect(faxes.count).to eq 1
-    expect(emails.count).to eq 1
-  end
-
   scenario "dashboard timestamps are converted to EST", javascript: true do
     date = DateTime.new(2017, 4, 5, 1, 30)
 
