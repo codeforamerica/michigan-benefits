@@ -27,12 +27,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     text_field_options[:id] ||= "#{object_name}_#{method}"
     options[:input_id] ||= "#{object_name}_#{method}"
 
-    aria_labels = ["#{text_field_options[:id]}__label"]
-    aria_labels << "#{text_field_options[:id]}__help" if help_text
-    if object.errors.present?
-      aria_labels.unshift("#{text_field_options[:id]}__errors")
-    end
-    text_field_options["aria-labelledby"] = aria_labels.join(" ")
+    text_field_options["aria-labelledby"] =
+      aria_labelledby(method: method, help_text: help_text)
 
     text_field_html = text_field(method, text_field_options)
 
@@ -142,6 +138,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             autocapitalize: 'off',
             spellcheck: 'false',
             placeholder: placeholder,
+            'aria-labelledby':
+              aria_labelledby(method: method, help_text: help_text),
           }.merge(options),
         ),
         help_text: help_text,
@@ -268,7 +266,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     options = {},
     &block
   )
-    html_options = { class: "select__element" }
+
+    html_options = {
+      class: "select__element",
+      "aria-labelledby":
+        aria_labelledby(method: method, help_text: options[:help_text]),
+    }
 
     formatted_label = label(
       method,
@@ -276,6 +279,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         label_text,
         options[:help_text],
         options[:optional],
+        method,
       ),
       class: options[:hide_label] ? "sr-only" : "",
     )
@@ -314,19 +318,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     collection.map do |item|
       item = { value: item, label: item } unless item.is_a?(Hash)
 
-      help_text_label = help_text ? "#{object_name}_#{method}__help" : nil
       snake_case_value = sanitized_value(item[:value])
 
-      aria_labels = [
-        object.errors.present? ? "#{object_name}_#{method}__errors" : nil,
-        "#{object_name}_#{method}__label",
-        help_text_label,
-        "#{object_name}_#{method}_#{snake_case_value}__label",
-      ].compact.flatten
+      aria_labels = aria_labelledby(method: method, help_text: help_text)
+      aria_labels += " #{object_name}_#{method}_#{snake_case_value}__label"
 
-      options = {
-        'aria-labelledby': aria_labels.join(" "),
-      }
+      options = { 'aria-labelledby': aria_labels }
 
       radio_html << <<~HTML.html_safe
         <label class="radio-button" id="#{object_name}_#{method}_#{snake_case_value}__label">
@@ -361,9 +358,9 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     label_text.html_safe
   end
 
-  def label_contents(label_text, help_text, optional = false, method = nil)
+  def label_contents(label_text, help_text, optional, method)
     label_text = <<~HTML
-      <p class="form-question">#{label_text + optional_text(optional)}</p>
+      <p class="form-question" id="#{object_name}_#{method}__label">#{label_text + optional_text(optional)}</p>
     HTML
 
     if help_text
@@ -395,7 +392,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     if options[:input_id]
       for_options = options.merge(
         for: options[:input_id],
-        id: "#{options[:input_id]}__label",
       )
       for_options.delete(:input_id)
     end
@@ -446,6 +442,18 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def select_label_for(object_name, method, position)
     object_name.to_s.gsub(/([\[\(])|(\]\[)/, "_").gsub(/[\]\)]/, "") + "_" +
       select_field_id(method, position)
+  end
+
+  def aria_labelledby(method:, help_text:)
+    aria_labels = []
+    if object.errors.present?
+      aria_labels << "#{object_name}_#{method}__errors"
+    end
+
+    aria_labels << "#{object_name}_#{method}__label"
+    aria_labels << "#{object_name}_#{method}__help" if help_text
+
+    aria_labels.join(" ")
   end
 
   # copied from ActionView::FormHelpers in order to coerce strings with spaces
