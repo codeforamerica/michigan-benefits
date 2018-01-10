@@ -400,6 +400,7 @@ RSpec.describe MbFormBuilder do
           { method: :tos, label: "Kirk" },
         ],
         label_text: "Which captains do you think are cool?",
+        help_text: "like, really cool",
       )
 
       expect(output).to be_html_safe
@@ -407,10 +408,11 @@ RSpec.describe MbFormBuilder do
       expect(output).to match_html <<-HTML
         <fieldset class="input-group">
           <legend class="form-question " id="sample_captains__label">Which captains do you think are cool?</legend>
-          <label class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[tng]" id="sample_tng" /> Picard </label>
-          <label class="checkbox"><input name="sample[ds9]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[ds9]" id="sample_ds9" /> Sisko </label>
-          <label class="checkbox"><input name="sample[voyager]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[voyager]" id="sample_voyager" /> Janeway </label>
-          <label class="checkbox"><input name="sample[tos]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[tos]" id="sample_tos" /> Kirk </label>
+          <p class="text--help" id="sample_captains__help">like, really cool</p>
+          <label id="sample_captains_tng__label" class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_tng__label" type="checkbox" value="1" name="sample[tng]" id="sample_tng"/> Picard </label>
+          <label id="sample_captains_ds9__label" class="checkbox"><input name="sample[ds9]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_ds9__label" type="checkbox" value="1" name="sample[ds9]" id="sample_ds9"/> Sisko </label>
+          <label id="sample_captains_voyager__label" class="checkbox"><input name="sample[voyager]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_voyager__label" type="checkbox" value="1" name="sample[voyager]" id="sample_voyager"/> Janeway </label>
+          <label id="sample_captains_tos__label" class="checkbox"><input name="sample[tos]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_tos__label" type="checkbox" value="1" name="sample[tos]" id="sample_tos"/> Kirk </label>
         </fieldset>
       HTML
     end
