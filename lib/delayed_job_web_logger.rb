@@ -5,7 +5,12 @@ class DelayedJobWebLogger
 
   def call(env)
     if in_delayed_job?(env) && env["warden"].authenticated?
-      Rails.logger.tagged(env["warden"].user.email) do
+      email = env["warden"].user.email
+      path = env["REQUEST_PATH"]
+      unless path.match?(/\.(css|js|png|poll)/)
+        Rails.logger.info("delayed_job_web | #{email} requested #{path}")
+      end
+      Rails.logger.tagged(email) do
         @app.call(env)
       end
     else
