@@ -8,7 +8,9 @@ class DelayedJobWebLogger
       email = env["warden"].user.email
       path = env["REQUEST_PATH"]
       unless path.match?(/\.(css|js|png|poll)/)
-        Rails.logger.info("delayed_job_web | #{email} requested #{path}")
+        # Using a puts because Rails.logger.info isn't working
+        # on staging/production
+        puts "delayed_job_web | #{email} requested #{path}"
       end
       Rails.logger.tagged(email) do
         @app.call(env)
