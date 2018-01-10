@@ -17,21 +17,6 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
-    def resend_email
-      application = SnapApplication.find(params[:id])
-
-      ExportFactory.create!(
-        benefit_application: application,
-        destination: :office_email,
-        force: true,
-      )
-
-      confirmation = "Resent email to #{application.receiving_office.email}" \
-                     " for #{application.signature}!"
-      flash[:notice] = confirmation
-      redirect_to admin_root_path
-    end
-
     def pdf
       application = SnapApplication.find(params[:id])
       send_data(application.pdf.read,

@@ -71,18 +71,6 @@ to display a collection of resources in an HTML table.
           </td>
         <% end %>
 
-        <td>
-          <% if resource.is_a? SnapApplication  -%>
-            <%= button_to(
-                 "Resend email to office",
-                 resend_email_admin_snap_application_path(resource),
-                 class: "button",
-                 method: :post,
-                 data: { confirm: "This will resend the office email for additional processing. Are you sure?" }
-            ) %>
-          <% end -%>
-        </td>
-
         <% if resource.is_a? SnapApplication -%>
           <td><%= link_to("Download", pdf_admin_snap_application_path(resource)) %></td>
         <% end -%>

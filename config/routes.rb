@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :snap_applications do
-        post "resend_email", on: :member
         get "pdf", on: :member
       end
       resources :medicaid_applications do
