@@ -1,5 +1,6 @@
 class MedicaidApplication < ApplicationRecord
   include Submittable
+  include CommonBenefitApplication
 
   has_many(
     :members,
@@ -48,24 +49,8 @@ class MedicaidApplication < ApplicationRecord
     !anyone_caretaker_or_parent?
   end
 
-  def display_name
-    primary_member.display_name
-  end
-
-  def primary_member
-    members.order(:id).first || NullMember.new
-  end
-
-  def non_applicant_members
-    members - [primary_member]
-  end
-
   def residential_address
     addresses.where(mailing: false).first || NullAddress.new
-  end
-
-  def mailing_address
-    addresses.where(mailing: true).first || NullAddress.new
   end
 
   def pdf
@@ -75,10 +60,6 @@ class MedicaidApplication < ApplicationRecord
   end
 
   private
-
-  def unstable_housing?
-    !stable_housing?
-  end
 
   def no_self_employment?
     !anyone_self_employed?

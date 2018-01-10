@@ -1,6 +1,14 @@
 require "rails_helper"
 
 RSpec.describe MedicaidApplication do
+  describe "common benefit application" do
+    let(:subject) do
+      create(:medicaid_application)
+    end
+
+    it_should_behave_like "common benefit application"
+  end
+
   describe "#members" do
     it "returns them created_at ascending order" do
       old_member = build(:member, created_at: 1.year.ago)

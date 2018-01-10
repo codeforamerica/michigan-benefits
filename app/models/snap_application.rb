@@ -1,5 +1,6 @@
 class SnapApplication < ApplicationRecord
   include Submittable
+  include CommonBenefitApplication
 
   CARE_EXPENSES = %w[
     childcare
@@ -27,9 +28,10 @@ class SnapApplication < ApplicationRecord
   validate :court_ordered_expenses_values
 
   has_many :addresses, as: :benefit_application, dependent: :destroy
+  has_many :members, as: :benefit_application, dependent: :destroy
+
   has_many :driver_applications, dependent: :destroy
   has_many :driver_errors, through: :driver_applications
-  has_many :members, as: :benefit_application, dependent: :destroy
 
   scope :signed, -> { where.not(signed_at: nil) }
   scope :unsigned, -> { where(signed_at: nil) }
@@ -101,34 +103,14 @@ class SnapApplication < ApplicationRecord
     ].flatten.compact.reduce(:+)
   end
 
-  def mailing_address
-    addresses.where(mailing: true).first || NullAddress.new
-  end
-
   def residential_address
     return NullAddress.new if unstable_housing?
     return mailing_address if mailing_address_same_as_residential_address?
     addresses.where.not(mailing: true).first || NullAddress.new
   end
 
-  def unstable_housing?
-    !stable_housing?
-  end
-
   def zip
     residential_address.zip
-  end
-
-  def display_name
-    primary_member.display_name
-  end
-
-  def primary_member
-    members.order(:id).first || NullMember.new
-  end
-
-  def non_applicant_members
-    members - [primary_member]
   end
 
   def faxed?
@@ -145,16 +127,6 @@ class SnapApplication < ApplicationRecord
 
   def signed?
     signed_at.present?
-  end
-
-  def last_emailed_office_at
-    exports.emailed_office.succeeded.first&.completed_at
-  end
-
-  def signed_at_est
-    signed_at&.
-      in_time_zone("Eastern Time (US & Canada)")&.
-      strftime("%m/%d/%Y at %I:%M%p %Z")
   end
 
   private

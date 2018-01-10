@@ -14,11 +14,7 @@ module Medicaid
     end
 
     def skip?
-      unstable_housing?
-    end
-
-    def unstable_housing?
-      !current_application&.stable_housing?
+      current_application.unstable_housing?
     end
 
     def update_application

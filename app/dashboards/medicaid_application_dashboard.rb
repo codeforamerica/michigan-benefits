@@ -30,6 +30,7 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     phone_number: Field::String,
     sms_phone_number: Field::String,
     email: Field::String,
+    last_emailed_office_at: Field::DateTime,
     sms_consented: Field::Boolean,
     birthday: Field::DateTime,
     self_employment_expenses: Field::Number,
@@ -67,15 +68,19 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     phone_number
+    office_location
+    email
     signed_at
+    last_emailed_office_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    members
-    addresses
     id
+    members
+    exports
+    addresses
     michigan_resident
     created_at
     updated_at
@@ -176,10 +181,7 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     anyone_married
   ].freeze
 
-  # Overwrite this method to customize how medicaid applications are displayed
-  # across all pages of the admin dashboard.
-  #
-  # def display_resource(medicaid_application)
-  #   "MedicaidApplication ##{medicaid_application.id}"
-  # end
+  def display_resource(medicaid_application)
+    "Medicaid Application ##{medicaid_application.id}"
+  end
 end
