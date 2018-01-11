@@ -307,12 +307,16 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     html_output.html_safe
   end
 
-  def mb_checkbox(method, label_text, options = {})
+  def mb_checkbox(method, label_text, legend_id: nil, options: {})
     checked_value = options[:checked_value] || "1"
     unchecked_value = options[:unchecked_value] || "0"
 
+    options["aria-labelledby"] = aria_labelledby(method: method,
+                                                 help_text: nil,
+                                                 prefix: legend_id)
+
     <<~HTML.html_safe
-      <label class="checkbox">
+      <label class="checkbox" id="#{sanitized_id(method)}__label">
         #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
       </label>
       #{errors_for(object, method)}
@@ -455,8 +459,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     position ? "#{name}_#{method}_#{position}" : "#{name}_#{method}"
   end
 
-  def aria_labelledby(method:, help_text:)
+  def aria_labelledby(method:, help_text:, prefix: "")
     aria_labels = []
+
+    aria_labels << prefix if prefix.present?
+
     if object.errors.present?
       aria_labels << "#{sanitized_id(method)}__errors"
     end

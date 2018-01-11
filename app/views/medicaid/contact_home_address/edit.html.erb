@@ -16,7 +16,7 @@
 
       <%= f.mb_checkbox :mailing_address_same_as_residential_address,
         "This is the same as my mailing address",
-        { checked_value: "1", unchecked_value: "0" } %>
+        options: { checked_value: "1", unchecked_value: "0" } %>
 
       <%= render "medicaid/next_step" %>
     <% end %>

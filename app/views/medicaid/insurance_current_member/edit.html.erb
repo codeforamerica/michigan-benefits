@@ -17,7 +17,7 @@
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
         <fieldset class="form-group">
-          <legend class="sr-only">
+          <legend class="sr-only" id="enrolled__legend">
             <%= t("medicaid.insurance_current_member.edit.title") %>
           </legend>
           <% @step.members.each do |member| %>
@@ -25,7 +25,8 @@
                 <%= ff.mb_checkbox(
                     :insured,
                     member.display_name,
-                    { checked_value: "1", unchecked_value: "0" },
+                    legend_id: "enrolled__legend",
+                    options: { checked_value: "1", unchecked_value: "0" },
                 ) %>
               <% end %>
           <% end %>

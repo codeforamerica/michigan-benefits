@@ -440,4 +440,60 @@ RSpec.describe MbFormBuilder do
       HTML
     end
   end
+
+  describe "#mb_checkbox" do
+    it "renders an accessible checkbox input" do
+      class SampleStep < Step
+        step_attributes(:read_tos)
+        validates_presence_of :read_tos
+      end
+
+      sample = SampleStep.new
+      sample.validate
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_checkbox(
+        :read_tos,
+        "Confirm that you agree to Terms of Service",
+      )
+
+      expect(output).to be_html_safe
+
+      expect(output).to match_html <<-HTML
+        <label class="checkbox" id="sample_read_tos__label">
+          <input name="sample[read_tos]" type="hidden" value="0" />
+          <div class="field_with_errors">
+            <input aria-labelledby="sample_read_tos__errors sample_read_tos__label" type="checkbox" value="1" name="sample[read_tos]" id="sample_read_tos" />
+          </div>
+          Confirm that you agree to Terms of Service
+        </label>
+        <div class="text--error" id="sample_read_tos__errors">
+          <i class="icon-warning"></i> can't be blank
+        </div>
+      HTML
+    end
+
+    it "prefixes aria-labelledby with custom legend id" do
+      class SampleStep < Step
+        step_attributes(:read_tos)
+      end
+
+      sample = SampleStep.new
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_checkbox(
+        :read_tos,
+        "Confirm that you agree to Terms of Service",
+        legend_id: "legend__label",
+      )
+
+      expect(output).to be_html_safe
+
+      expect(output).to match_html <<-HTML
+        <label class="checkbox" id="sample_read_tos__label">
+          <input name="sample[read_tos]" type="hidden" value="0" />
+          <input aria-labelledby="legend__label sample_read_tos__label" type="checkbox" value="1" name="sample[read_tos]" id="sample_read_tos" />
+          Confirm that you agree to Terms of Service
+        </label>
+      HTML
+    end
+  end
 end
