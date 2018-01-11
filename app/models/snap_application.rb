@@ -79,9 +79,16 @@ class SnapApplication < ApplicationRecord
   end
 
   def pdf
-    @_pdf ||= Dhs1171Pdf.new(
-      snap_application: self,
-    ).completed_file
+    @_pdf ||=
+      if Feature.enabled?("NEW_FORM")
+        NewDhs1171Pdf.new(
+          snap_application: self,
+        ).completed_file
+      else
+        Dhs1171Pdf.new(
+          snap_application: self,
+        ).completed_file
+      end
   end
 
   def monthly_gross_income
