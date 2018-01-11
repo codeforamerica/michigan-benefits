@@ -18,7 +18,7 @@
       method: :put do |f| %>
 
       <fieldset class="form-group">
-        <legend class="sr-only">
+        <legend class="sr-only" id="pregnant__legend">
           <%= t("medicaid.health_pregnancy_member.edit.title") %>
         </legend>
         <% @step.members.each do |member| %>
@@ -26,11 +26,12 @@
             <%= ff.mb_checkbox(
               :new_mom,
               member.display_name,
-              { checked_value: "1", unchecked_value: "0" },
+              legend_id: "pregnant__legend",
+              options: { checked_value: "1", unchecked_value: "0" }
             ) %>
           <% end %>
         <% end %>
-        <%= f.mb_form_errors :recently_pregnanct %>
+        <%= f.mb_form_errors :recently_pregnancy %>
       </fieldset>
 
      <%= render "medicaid/next_step" %>
