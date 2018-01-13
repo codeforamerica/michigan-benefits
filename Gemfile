@@ -63,6 +63,7 @@ end
 
 group :development, :test do
   gem "awesome_print", require: false
+  gem "brakeman", require: false
   gem "bundler-audit"
   gem "climate_control"
   gem "codeclimate-test-reporter"

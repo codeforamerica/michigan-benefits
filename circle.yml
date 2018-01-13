@@ -10,6 +10,7 @@ dependencies:
     - rm google-chrome.deb
   post:
     - bundle exec bundle-audit update && bundle exec bundle-audit check
+    - bundle exec brakeman
 
 test:
   override:

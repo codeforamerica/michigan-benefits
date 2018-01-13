@@ -5,7 +5,11 @@ task(:rubocop) do
   RuboCop::RakeTask.new
 end
 
-task default: %w(spec rubocop bundler:audit)
+task(:brakeman) do
+  sh "brakeman"
+end
+
+task default: %w(rubocop bundler:audit brakeman spec)
 
 Rails.application.load_tasks
 

@@ -1,26 +1,26 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "9dbd16606d77f5894544b049241d32224b1363e2927c972701d97bb5e690c418",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/models/dhs1171_pdf.rb",
-      "line": 31,
-      "link": "http://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(((\"pdftk #{\"#{\"lib/pdfs\".freeze}/michigan_snap_fax_cover_letter.pdf\".freeze} #{filled_in_form.path} #{additional_pages}\" + \" cat output\") + \" #{complete_form_with_cover.path}\"))",
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "e75c62e0e7160bd72858bba33cda03a1d0a37bb08fc64c57d1c890bde59169a2",
+      "check_name": "MassAssignment",
+      "message": "Parameters should be whitelisted for mass assignment",
+      "file": "app/controllers/medicaid/amounts_income_controller.rb",
+      "line": 39,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.fetch(:step, {}).permit!",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Dhs1171Pdf",
-        "method": "prepend_cover_sheet_to_completed_form"
+        "class": "Medicaid::AmountsIncomeController",
+        "method": "step_params"
       },
-      "user_input": "complete_form_with_cover.path",
+      "user_input": null,
       "confidence": "Medium",
       "note": ""
     }
   ],
-  "updated": "2017-08-28 14:35:58 -0700",
-  "brakeman_version": "3.7.0"
+  "updated": "2018-01-12 17:05:12 -0800",
+  "brakeman_version": "4.1.1"
 }
