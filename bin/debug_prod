@@ -1,0 +1,45 @@
+#!/bin/bash
+
+get_var_from_production_env () {
+    heroku config:get $1 -r production
+}
+
+read -p "WARNING: you are about to access the PRODUCTION database directly!
+This is only intended to be used for debugging purposes.
+
+Are you sure you want to proceed?(y/n) " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]];then
+  echo "OK, proceeding with accessing $HEROKU_REMOTE database..."
+else
+  echo "OK, bye bye!"
+  exit 1
+fi
+echo
+
+echo "RECOMMEND: change the color of this terminal to red as a reminder that you're in prod!"
+echo
+echo "============= STARTING FOREMAN IN PRODUCTION ================"
+echo
+
+SECRET_KEY_BASE=$(get_var_from_production_env SECRET_KEY_BASE) \
+    DATABASE_URL=$(get_var_from_production_env DATABASE_URL) \
+    SECRET_KEY_FOR_DRIVER_APPLICATION=$(get_var_from_production_env SECRET_KEY_FOR_DRIVER_APPLICATION) \
+    SECRET_KEY_FOR_SSN_ENCRYPTION=$(get_var_from_production_env SECRET_KEY_FOR_SSN_ENCRYPTION) \
+    SFAX_API_KEY=$(get_var_from_production_env SFAX_API_KEY) \
+    SFAX_ENCRYPTION_KEY=$(get_var_from_production_env SFAX_ENCRYPTION_KEY) \
+    SFAX_INIT_VECTOR=$(get_var_from_production_env SFAX_INIT_VECTOR) \
+    SFAX_USERNAME=$(get_var_from_production_env SFAX_USERNAME) \
+    SHUBOX_JS_ID=$(get_var_from_production_env SHUBOX_JS_ID) \
+    TWILIO_PHONE_NUMBER=$(get_var_from_production_env TWILIO_PHONE_NUMBER) \
+    TWILIO_ACCOUNT_SID=$(get_var_from_production_env TWILIO_ACCOUNT_SID) \
+    TWILIO_AUTH_TOKEN=$(get_var_from_production_env TWILIO_AUTH_TOKEN) \
+    BUCKETEER_AWS_ACCESS_KEY_ID=$(get_var_from_production_env BUCKETEER_AWS_ACCESS_KEY_ID) \
+    BUCKETEER_AWS_SECRET_ACCESS_KEY=$(get_var_from_production_env BUCKETEER_AWS_SECRET_ACCESS_KEY) \
+    BUCKETEER_BUCKET_NAME=$(get_var_from_production_env BUCKETEER_BUCKET_NAME) \
+    BUCKETEER_REGION=$(get_var_from_production_env BUCKETEER_REGION) \
+    OPEN_CAGE_DATA_API_KEY=$(get_var_from_production_env OPEN_CAGE_DATA_API_KEY) \
+    SLACK_API_TOKEN=$(get_var_from_production_env SLACK_API_TOKEN) \
+    RAILS_ENV=production_debug \
+    foreman start
