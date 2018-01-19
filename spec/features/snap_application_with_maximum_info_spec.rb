@@ -1,6 +1,8 @@
 require "rails_helper"
 
 feature "SNAP application with maximum info" do
+  include PdfHelper
+
   scenario "successfully submits application", :js do
     visit root_path
     within(".slab--hero") { proceed_with "Apply for FAP" }
@@ -192,11 +194,22 @@ accounts?",
     expect(page).to have_text(
       "Your application has been sent to your email inbox",
     )
+
+    emails = ActionMailer::Base.deliveries
+    expect(emails.count).to eq(2)
+    expect(emails.first.attachments.count).to eq(1)
+    expect(emails.second.attachments.count).to eq(1)
+
+    raw_application_pdf = emails.first.attachments.first.body.raw_source
+    temp_file = write_raw_pdf_to_temp_file(source: raw_application_pdf)
+    pdf_values = filled_in_values(file: temp_file.path)
+
+    expect(pdf_values["primary_member_full_name"]).to include("Jessie Tester")
   end
 
   def upload_documents
-    add_document_photo "https://example.com/images/drivers_license.jpg"
-    add_document_photo "https://example.com/images/proof_of_income.jpg"
+    add_document_photo "https://example.com/images/image_1.jpg"
+    add_document_photo "https://example.com/images/image_2.jpg"
   end
 
   def add_document_photo(url)

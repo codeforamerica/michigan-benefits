@@ -33,6 +33,17 @@ RSpec.configure do |config|
     DatabaseCleaner.start
   end
 
+  config.before :all, type: :feature do
+    stub_request(:get, /example\.com\/images/).
+      to_return(File.new("spec/fixtures/test_remote_image.jpg"))
+
+    Delayed::Worker.delay_jobs = false
+  end
+
+  config.after :each, type: feature do
+    ActionMailer::Base.deliveries.clear
+  end
+
   config.after(:each) do
     DatabaseCleaner.clean
     FakeTwilioClient.clear!

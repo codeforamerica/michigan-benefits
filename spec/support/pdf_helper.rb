@@ -11,9 +11,9 @@ module PdfHelper
     @_pdftk ||= PdfForms.new
   end
 
-  def write_response_to_temp_file
-    temp_pdf = Tempfile.new("pdf")
-    temp_pdf << page.source.force_encoding("UTF-8")
+  def write_raw_pdf_to_temp_file(source:)
+    temp_pdf = Tempfile.new("pdf", encoding: "ascii-8bit")
+    temp_pdf << source
     temp_pdf
   end
 end

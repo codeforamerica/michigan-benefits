@@ -39,7 +39,7 @@ RSpec.feature "Admin viewing medicaid applications dashboard", type: :feature do
     expect(current_path).to eq(
       "/admin/medicaid_applications/#{application.id}/pdf",
     )
-    temp_pdf = write_response_to_temp_file
+    temp_pdf = write_raw_pdf_to_temp_file(source: page.source)
     results = filled_in_values(file: temp_pdf)
     expect(results.values).to include("Christa Tester")
   end
