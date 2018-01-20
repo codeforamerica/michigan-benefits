@@ -40,7 +40,7 @@ RSpec.configure do |config|
     Delayed::Worker.delay_jobs = false
   end
 
-  config.after :each, type: feature do
+  config.after :each, type: :feature do
     ActionMailer::Base.deliveries.clear
   end
 
