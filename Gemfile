@@ -2,13 +2,13 @@
 
 source "https://rubygems.org"
 
-ruby "2.4.2"
+ruby "~> 2.5.0"
 
 gem "activemodel_type_symbol"
 gem "administrate"
 gem "attr_encrypted"
 gem "auto_strip_attributes"
-gem "aws-sdk", "~> 2.10"
+gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "capybara"
 gem "delayed_job_active_record"
@@ -27,7 +27,7 @@ gem "mimemagic"
 gem "mini_magick"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
 gem "pdf-forms"
-gem "pg", "~> 0.18"
+gem "pg", "~> 0.21"
 gem "prawn"
 gem "pry-rails"
 gem "puma"
@@ -35,7 +35,7 @@ gem "rails", "~> 5.1"
 gem "responders"
 gem "route_downcaser"
 gem "ruby-filemagic"
-gem "sass-rails", "~> 5.0"
+gem "sass-rails"
 gem "selenium-webdriver", "3.4.3"
 gem "sfax",
   git: "https://github.com/codeforamerica/sfax",
@@ -56,7 +56,7 @@ group :test do
   gem "launchy"
   gem "pdf-reader"
   gem "rails-controller-testing"
-  gem "shoulda-matchers", "~> 3.1"
+  gem "shoulda-matchers"
   gem "timecop"
   gem "webmock"
 end
@@ -70,7 +70,7 @@ group :development, :test do
   gem "dotenv-rails" # useful for when running dev server w/o foreman
   gem "factory_bot_rails"
   gem "listen"
-  gem "mailcatcher", "~> 0.2"
+  gem "mailcatcher"
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
