@@ -48,6 +48,9 @@ module MultiparameterAttributeAssignment
   end
 
   def execute_callstack_for_multiparameter_attributes(callstack)
+    # Disabling Rubcop below because Brakeman is failing to parse the
+    #  when we remove the 'begin' keyword
+    # rubocop:disable Style/RedundantBegin
     errors = []
 
     callstack.each do |name, values_with_empty_parameters|
@@ -80,6 +83,7 @@ module MultiparameterAttributeAssignment
         "#{errors.size} error(s): [#{messages}]",
       )
     end
+    # rubocop:enable Style/RedundantBegin
   end
 
   def extract_callstack_for_multiparameter_attributes(pairs)

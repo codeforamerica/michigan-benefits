@@ -128,18 +128,16 @@ module MiBridges
 
     def run_flow(flow)
       flow.each do |klass|
-        begin
-          @page = klass.new(@snap_application, logger: logger)
-          @page.setup
-          @page.fill_in_required_fields
-          @page.continue
-        rescue MiBridges::Errors::TooManyAttempts => e
-          save_error(e, @page)
-          raise e
-        rescue StandardError => e
-          save_error(e, @page)
-          debug(e)
-        end
+        @page = klass.new(@snap_application, logger: logger)
+        @page.setup
+        @page.fill_in_required_fields
+        @page.continue
+      rescue MiBridges::Errors::TooManyAttempts => e
+        save_error(e, @page)
+        raise e
+      rescue StandardError => e
+        save_error(e, @page)
+        debug(e)
       end
     end
 

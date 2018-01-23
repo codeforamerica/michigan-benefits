@@ -116,6 +116,11 @@ Style/PreferredHashMethods:
   StyleGuide: '#hash-key'
   Enabled: false
 
+Style/DateTime:
+  Description: 'Use Date or Time over DateTime.'
+  StyleGuide: '#date--time'
+  Enabled: false
+
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: false
@@ -481,16 +486,6 @@ Lint/FormatParameterMismatch:
 Lint/HandleExceptions:
   Description: "Don't suppress exception."
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions'
-  Enabled: false
-
-Lint/InvalidCharacterLiteral:
-  Description: >-
-                 Checks for invalid character literals with a non-escaped
-                 whitespace character.
-  Enabled: false
-
-Lint/LiteralInCondition:
-  Description: 'Checks of literals used in conditions.'
   Enabled: false
 
 Lint/LiteralInInterpolation:
