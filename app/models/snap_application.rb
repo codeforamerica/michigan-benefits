@@ -81,9 +81,9 @@ class SnapApplication < ApplicationRecord
   def pdf
     @_pdf ||=
       if Feature.enabled?("NEW_FORM")
-        NewDhs1171Pdf.new(
+        ApplicationPdfAssembler.new(
           snap_application: self,
-        ).completed_file
+        ).run
       else
         Dhs1171Pdf.new(
           snap_application: self,

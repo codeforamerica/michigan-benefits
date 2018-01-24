@@ -5,10 +5,10 @@ module CommonBenefitApplication
     exports.emailed_office.succeeded.first&.completed_at
   end
 
-  def signed_at_est
+  def signed_at_est(fmt = "%m/%d/%Y at %I:%M%p %Z")
     signed_at&.
       in_time_zone("Eastern Time (US & Canada)")&.
-      strftime("%m/%d/%Y at %I:%M%p %Z")
+      strftime(fmt)
   end
 
   def primary_member

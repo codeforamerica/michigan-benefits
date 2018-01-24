@@ -42,6 +42,16 @@ RSpec.shared_examples "common benefit application" do
           )
         end
       end
+
+      it "returns the UTC time in EST with custom format" do
+        # September 1, 2008 10:05:00 AM UTC
+        time = Time.utc(2008, 9, 1, 10, 5, 0)
+        subject.update(signed_at: time)
+
+        Timecop.freeze(time) do
+          expect(subject.signed_at_est("%m/%d/%Y")).to eq("09/01/2008")
+        end
+      end
     end
 
     context "signed_at not present" do

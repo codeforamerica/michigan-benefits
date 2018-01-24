@@ -47,15 +47,15 @@ RSpec.describe SnapApplication do
 
   describe "#pdf" do
     context "when using new civilla form" do
-      it "delegates to the New1171Pdf class" do
+      it "delegates to the PdfComposer class" do
         app = build(:snap_application)
 
-        fake_pdf_builder = double(completed_file: "I am fake. It's OK")
-        allow(NewDhs1171Pdf).to receive(:new).with(snap_application: app).
+        fake_pdf_builder = double(run: "I am fake. It's OK")
+        allow(ApplicationPdfAssembler).to receive(:new).with(snap_application: app).
           and_return(fake_pdf_builder)
 
         with_modified_env NEW_FORM_ENABLED: "true" do
-          expect(app.pdf).to eql(fake_pdf_builder.completed_file)
+          expect(app.pdf).to eql(fake_pdf_builder.run)
         end
       end
     end
