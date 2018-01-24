@@ -1,5 +1,4 @@
 require "rails_helper"
-require_relative "../support/pdf_helper"
 
 RSpec.describe Dhs1426Pdf do
   include PdfHelper
@@ -245,7 +244,7 @@ RSpec.describe Dhs1426Pdf do
         medicaid_application: medicaid_application,
       ).completed_file
 
-      result = filled_in_values(file: file.path)
+      result = filled_in_values(file.path)
 
       [
         expected_client_data,
@@ -314,7 +313,7 @@ RSpec.describe Dhs1426Pdf do
 
       file = Dhs1426Pdf.new(medicaid_application: medicaid_application).
         completed_file
-      result = filled_in_values(file: file.path)
+      result = filled_in_values(file.path)
       expect(result["primary_member_full_name"]).to include("Primera")
       expect(result["second_member_full_name"]).to include("Segunda")
       expect(result["1.second_member_full_name"]).to include("Tercera")
@@ -336,7 +335,7 @@ RSpec.describe Dhs1426Pdf do
       paperwork_path = "http://example.com"
       verification_document = double
       allow(verification_document).to receive(:file).and_return(
-        File.open("spec/fixtures/test_pdf.pdf"),
+        temp_pdf_file,
       )
       medicaid_application =
         create(:medicaid_application, :with_member, paperwork: [paperwork_path])

@@ -3,7 +3,7 @@ class RemoteDocument
 
   def initialize(url)
     @url = url
-    @tempfile = Tempfile.new.tap(&:binmode)
+    @tempfile = Tempfile.new.binmode
   end
 
   def download
@@ -39,7 +39,8 @@ class RemoteDocument
 
   def file_type
     @_file_type ||= FileMagic.open(:mime) do |fm|
-      fm.file(tempfile.tap(&:rewind).path, true)
+      tempfile.rewind
+      fm.file(tempfile.path, true)
     end
   end
 

@@ -1,6 +1,6 @@
 class PdfBuilder
-  def initialize(file_paths:, output_file:)
-    @file_paths = file_paths
+  def initialize(files:, output_file:)
+    @files = files
     @output_file = output_file
   end
 
@@ -12,7 +12,7 @@ class PdfBuilder
 
   private
 
-  attr_accessor :output_file, :file_paths
+  attr_accessor :output_file, :files
 
   def conjoin_files
     system(
@@ -23,6 +23,6 @@ class PdfBuilder
   end
 
   def paths_to_pdfs
-    file_paths.join(" ")
+    files.map(&:path).join(" ")
   end
 end

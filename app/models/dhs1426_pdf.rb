@@ -13,10 +13,12 @@ class Dhs1426Pdf
   def completed_file
     fill_template_pdf_with_client_data
     fill_step_2_pdf_for_additional_members
-    assemble_complete_application
+    assemble_complete_application(temp_pdf_files)
   ensure
-    filled_in_application.close
-    filled_in_application.unlink
+    temp_pdf_files.map do |t|
+      t.close
+      t.unlink
+    end
   end
 
   private
@@ -34,11 +36,13 @@ class Dhs1426Pdf
         member_tax_data = MedicaidApplicationAdditionalMemberTaxAttributes.
           new(member: record[:member]).to_h
         data = member_data.merge(member_tax_data)
-        output_path = additional_member_pdf_output(index).path
+        output_file = additional_member_pdf_output(index)
 
-        PdfForms.new.fill_form(STEP_2_ADDITIONAL_MEMBER_PDF, output_path, data)
+        PdfForms.new.fill_form(STEP_2_ADDITIONAL_MEMBER_PDF,
+                               output_file.path,
+                               data)
 
-        additional_member_pdf_paths << output_path
+        additional_household_member_pages << output_file
       end
     end
   end
@@ -49,15 +53,18 @@ class Dhs1426Pdf
     end
   end
 
-  def assemble_complete_application
+  def temp_pdf_files
+    @_temp_pdf_files ||= [
+      filled_in_application,
+      additional_household_member_pages,
+      verification_documents,
+    ].reject(&:blank?).flatten
+  end
+
+  def assemble_complete_application(filled_in_pdfs)
     PdfBuilder.new(
       output_file: complete_application,
-      file_paths: [
-        COVERSHEET_PDF,
-        filled_in_application.path,
-        additional_member_pdf_paths,
-        verification_paperwork_paths,
-      ].reject(&:blank?).flatten,
+      files: [File.open(COVERSHEET_PDF)] + filled_in_pdfs,
     ).pdf
   end
 
@@ -69,8 +76,8 @@ class Dhs1426Pdf
     Tempfile.new(["medicaid_additional_member_#{index}", ".pdf"], "tmp/")
   end
 
-  def additional_member_pdf_paths
-    @_additional_member_pdf_paths ||= []
+  def additional_household_member_pages
+    @_additional_household_member_pages ||= []
   end
 
   def complete_application
@@ -142,13 +149,13 @@ class Dhs1426Pdf
     application_members[1]
   end
 
-  def verification_paperwork_paths
+  def verification_documents
     verification_paperwork.map do |document|
       VerificationDocument.new(
         url: document,
         benefit_application: medicaid_application,
-      ).file.path
-    end.reject(&:nil?)
+      ).file
+    end.reject { |document| document.path.nil? }
   end
 
   def verification_paperwork
