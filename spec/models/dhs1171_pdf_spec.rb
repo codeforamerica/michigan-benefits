@@ -1,5 +1,4 @@
 require "rails_helper"
-require_relative "../support/pdf_helper"
 
 RSpec.describe Dhs1171Pdf do
   include PdfHelper
@@ -77,7 +76,7 @@ RSpec.describe Dhs1171Pdf do
 
       file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
 
-      result = filled_in_values(file: file.path)
+      result = filled_in_values(file.path)
       expected_client_data.each do |field, entered_data|
         expect(result[field.to_s].to_s).to eq entered_data.to_s
       end
@@ -91,7 +90,7 @@ RSpec.describe Dhs1171Pdf do
           create(:snap_application, members: [first_member, second_member])
 
         file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
-        result = filled_in_values(file: file.path)
+        result = filled_in_values(file.path)
 
         first_member_expected_data = {
           primary_member_full_name: first_member.display_name,
@@ -138,7 +137,7 @@ RSpec.describe Dhs1171Pdf do
         )
 
         file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
-        result = filled_in_values(file: file.path)
+        result = filled_in_values(file.path)
 
         expect(result["first_employed_full_name"]).to eq(
           employed_member.display_name,
@@ -160,7 +159,7 @@ RSpec.describe Dhs1171Pdf do
         )
 
         file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
-        result = filled_in_values(file: file.path)
+        result = filled_in_values(file.path)
 
         expect(result["first_additional_income_type"]).to eq(
           "Child Support",
@@ -220,24 +219,32 @@ RSpec.describe Dhs1171Pdf do
       expect(new_pdf.page_count).to eq(original_length + 2)
     end
 
-    it "appends pages if there are verification documents" do
-      document_path = "http://example.com"
-      verification_document = double
-      allow(verification_document).to receive(:file).and_return(
-        File.open("spec/fixtures/test_pdf.pdf"),
-      )
-      snap_application =
+    context "with verification documents" do
+      before do
+        allow(VerificationDocument).to receive(:new).with(
+          url: document_path,
+          benefit_application: snap_application,
+        ).and_return(verification_document)
+      end
+
+      let!(:temp_file) { temp_pdf_file }
+      let(:verification_document) do
+        double("verification document", file: temp_file)
+      end
+
+      let(:document_path) { "http://example.com" }
+      let(:snap_application) do
         create(:snap_application, :with_member, documents: [document_path])
-      allow(VerificationDocument).to receive(:new).with(
-        url: document_path,
-        benefit_application: snap_application,
-      ).and_return(verification_document)
-      original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
+      end
 
-      file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
-      new_pdf = PDF::Reader.new(file.path)
+      it "appends pages if there are verification documents" do
+        original_length = PDF::Reader.new(Dhs1171Pdf::SOURCE_PDF).page_count
 
-      expect(new_pdf.page_count).to eq(original_length + 2)
+        file = Dhs1171Pdf.new(snap_application: snap_application).completed_file
+        new_pdf = PDF::Reader.new(file.path)
+
+        expect(new_pdf.page_count).to eq(original_length + 2)
+      end
     end
 
     it "returns the tempfile" do

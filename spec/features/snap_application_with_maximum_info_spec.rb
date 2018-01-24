@@ -202,7 +202,7 @@ accounts?",
 
     raw_application_pdf = emails.first.attachments.first.body.raw_source
     temp_file = write_raw_pdf_to_temp_file(source: raw_application_pdf)
-    pdf_values = filled_in_values(file: temp_file.path)
+    pdf_values = filled_in_values(temp_file.path)
 
     expect(pdf_values["primary_member_full_name"]).to include("Jessie Tester")
   end

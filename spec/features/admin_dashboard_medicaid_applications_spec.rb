@@ -1,5 +1,4 @@
 require "rails_helper"
-require_relative "../support/pdf_helper"
 
 RSpec.feature "Admin viewing medicaid applications dashboard", type: :feature do
   include PdfHelper
@@ -40,7 +39,7 @@ RSpec.feature "Admin viewing medicaid applications dashboard", type: :feature do
       "/admin/medicaid_applications/#{application.id}/pdf",
     )
     temp_pdf = write_raw_pdf_to_temp_file(source: page.source)
-    results = filled_in_values(file: temp_pdf)
+    results = filled_in_values(temp_pdf)
     expect(results.values).to include("Christa Tester")
   end
 end

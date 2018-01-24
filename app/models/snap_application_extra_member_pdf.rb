@@ -33,21 +33,16 @@ class SnapApplicationExtraMemberPdf
     end
 
     add_footer(pdf)
-    pdf.render_file(file_path)
-    file_path
+    pdf.render_file(temp_file.path)
+    temp_file
   end
 
   private
 
   attr_reader :members, :attributes_class, :title
 
-  def file_path
-    "tmp/#{filename}.pdf"
-  end
-
-  def filename
-    @filename ||=
-      "#{SecureRandom.hex}#{Time.now.strftime('%Y%m%d%H%M%S%L')}"
+  def temp_file
+    @_temp_file ||= Tempfile.new(["snap-extra-member", ".pdf"], "tmp/")
   end
 
   def add_footer(pdf)

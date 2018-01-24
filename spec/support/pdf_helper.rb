@@ -1,6 +1,6 @@
 module PdfHelper
-  def filled_in_values(file:)
-    filled_in_fields = pdftk.get_fields(file)
+  def filled_in_values(file_path)
+    filled_in_fields = pdftk.get_fields(file_path)
 
     filled_in_fields.each_with_object({}) do |field, hash|
       hash[field.name] = field.value
@@ -15,5 +15,11 @@ module PdfHelper
     temp_pdf = Tempfile.new("pdf", encoding: "ascii-8bit")
     temp_pdf << source
     temp_pdf
+  end
+
+  def temp_pdf_file
+    Tempfile.new(["doc", ".pdf"]).tap do |f|
+      f.write(File.read("spec/fixtures/test_pdf.pdf"))
+    end.tap(&:rewind)
   end
 end

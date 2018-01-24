@@ -9,7 +9,7 @@ describe PdfBuilder do
         second_pdf = File.open("spec/fixtures/test_pdf.pdf")
 
         pdf = PdfBuilder.new(
-          file_paths: [pdf.path, second_pdf.path],
+          files: [pdf, second_pdf],
           output_file: output_file,
         ).pdf
 

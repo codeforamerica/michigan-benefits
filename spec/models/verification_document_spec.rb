@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe VerificationDocument do
+  include PdfHelper
+
   describe "#file" do
     context "files are png/jpg format" do
       it "returns a pdf tempfile" do
@@ -86,12 +88,6 @@ describe VerificationDocument do
     def temp_image_file
       Tempfile.new(["image", ".jpg"]).tap do |f|
         f.write(File.read("spec/fixtures/image.jpg"))
-      end.tap(&:rewind)
-    end
-
-    def temp_pdf_file
-      Tempfile.new(["doc", ".pdf"]).tap do |f|
-        f.write(File.read("spec/fixtures/test_pdf.pdf"))
       end.tap(&:rewind)
     end
 
