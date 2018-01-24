@@ -9,6 +9,19 @@ RSpec.describe MedicaidApplication do
     it_should_behave_like "common benefit application"
   end
 
+  describe "scopes" do
+    describe ".signed" do
+      it "returns applications that have been signed" do
+        signed_application = create(:medicaid_application, signed_at: Time.now)
+        create(:medicaid_application, signed_at: nil)
+
+        signed_applications = MedicaidApplication.signed
+        expect(signed_applications.count).to eq(1)
+        expect(signed_applications.first).to eq(signed_application)
+      end
+    end
+  end
+
   describe "#members" do
     it "returns them created_at ascending order" do
       old_member = build(:member, created_at: 1.year.ago)
