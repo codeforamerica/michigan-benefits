@@ -11,6 +11,8 @@ class MedicaidApplication < ApplicationRecord
 
   has_many :addresses, as: :benefit_application, dependent: :destroy
 
+  scope :signed, -> { where.not(signed_at: nil) }
+
   attribute :ssn
   attr_encrypted(
     :ssn,
