@@ -1,11 +1,13 @@
 require "rails_helper"
 
 RSpec.describe ApplicationMailer do
+  let(:application_pdf) { Tempfile.new }
+
   describe ".snap_application_notification" do
     it "sets the correct headers" do
       with_modified_env EMAIL_DOMAIN: "example.com" do
         email = ApplicationMailer.snap_application_notification(
-          file_name: "#{Rails.root}/spec/fixtures/image.jpg",
+          application_pdf: application_pdf,
           recipient_email: "user@example.com",
         )
         from_header = email.header.select do |header|
@@ -18,6 +20,17 @@ RSpec.describe ApplicationMailer do
         expect(email.subject).to eq("Your SNAP application")
       end
     end
+
+    it "attaches the application PDF with correct name" do
+      email = ApplicationMailer.snap_application_notification(
+        application_pdf: application_pdf,
+        recipient_email: "user@example.com",
+      )
+      attachment_filename = email.attachments.first.filename
+
+      expect(email.attachments.count).to eq(1)
+      expect(attachment_filename).to eq("snap_application.pdf")
+    end
   end
 
   describe ".office_snap_application_notification" do
@@ -27,7 +40,7 @@ RSpec.describe ApplicationMailer do
         Timecop.freeze(time) do
           with_modified_env EMAIL_DOMAIN: "example.com" do
             email = ApplicationMailer.office_snap_application_notification(
-              file_name: "#{Rails.root}/spec/fixtures/image.jpg",
+              application_pdf: application_pdf,
               recipient_email: "user@example.com",
               applicant_name: "Alice Algae",
             )
@@ -58,7 +71,7 @@ RSpec.describe ApplicationMailer do
         Timecop.freeze(time) do
           with_modified_env EMAIL_DOMAIN: "example.com" do
             email = ApplicationMailer.office_snap_application_notification(
-              file_name: "#{Rails.root}/spec/fixtures/image.jpg",
+              application_pdf: application_pdf,
               recipient_email: "user@example.com",
               office_location: "union",
               applicant_name: "Freddy Fungus",
@@ -95,7 +108,7 @@ RSpec.describe ApplicationMailer do
       Timecop.freeze(time) do
         with_modified_env EMAIL_DOMAIN: "example.com" do
           email = ApplicationMailer.office_medicaid_application_notification(
-            file_name: "#{Rails.root}/spec/fixtures/image.jpg",
+            application_pdf: application_pdf,
             recipient_email: "user@example.com",
             applicant_name: "Larry Lichen",
           )

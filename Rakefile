@@ -1,15 +1,13 @@
 require_relative "config/application"
+require "rubocop/rake_task"
 
-task(:rubocop) do
-  require "rubocop/rake_task"
-  RuboCop::RakeTask.new
-end
+RuboCop::RakeTask.new
 
 task(:brakeman) do
   sh "brakeman"
 end
 
-task default: %w(rubocop bundler:audit brakeman spec)
+task default: %w(rubocop:auto_correct bundler:audit brakeman spec)
 
 Rails.application.load_tasks
 

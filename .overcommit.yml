@@ -20,17 +20,6 @@ PreCommit:
     enabled: true
     quiet: true
 
-  RuboCop:
-    enabled: true
-    command: ['bundle', 'exec', 'rubocop']
-    include:
-      - '**/*.gemspec'
-      - '**/*.rb'
-      - '**/Gemfile'
-      - template-dir/hooks/overcommit-hook
-    exclude:
-      - 'spec/fixtures/*'
-
   TrailingWhitespace:
     enabled: true
     exclude:

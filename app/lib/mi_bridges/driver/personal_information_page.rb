@@ -65,11 +65,8 @@ module MiBridges
       end
 
       def click_same_address_answer
-        if snap_application.mailing_address_same_as_residential_address?
-          same_address_letter = "Y"
-        else
-          same_address_letter = "N"
-        end
+        same_address = snap_application.mailing_address_same_as_residential_address?
+        same_address_letter = same_address ? "Y" : "N"
 
         click_id "mailInSameAddress_#{same_address_letter}"
       end

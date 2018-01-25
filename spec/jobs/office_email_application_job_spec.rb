@@ -3,30 +3,32 @@ require "rails_helper"
 RSpec.describe OfficeEmailApplicationJob do
   describe "#perform" do
     it "sends an email" do
-      snap_application = create(:snap_application, :with_member)
-      primary_member = snap_application.primary_member
-      export = Export.create(
-        benefit_application: snap_application,
-        destination: :office_email,
-      )
-      job = OfficeEmailApplicationJob.new
-      deliver_double = double(deliver: true)
+      tempfile = Tempfile.new
+      snap_application = double("snap_application",
+        id: 1,
+        office_location: "Tlön",
+        receiving_office_email: "official@stable.gov",
+        primary_member: double("member", display_name: "Henry Horse"),
+        pdf: tempfile)
+      export = double("export")
+      logger = double("logger").as_null_object
+
+      allow(export).to receive(:execute).and_yield(snap_application, logger)
+
+      fake_mailer = double("mailer", deliver: nil)
       allow(ApplicationMailer).to receive(
         :office_snap_application_notification,
-      ).and_return(deliver_double)
+      ).and_return(fake_mailer)
 
-      job.perform(export: export)
+      OfficeEmailApplicationJob.new.perform(export: export)
 
-      snap_application.reload
-      expect(ApplicationMailer).
-        to have_received(:office_snap_application_notification).
-        with(
-          hash_including(
-            recipient_email: snap_application.receiving_office_email,
-            office_location: snap_application.office_location,
-            applicant_name: primary_member.display_name,
-          ),
-        )
+      expect(ApplicationMailer).to have_received(:office_snap_application_notification).
+        with(recipient_email: "official@stable.gov",
+             office_location: "Tlön",
+             applicant_name: "Henry Horse",
+             application_pdf: tempfile)
+
+      expect(fake_mailer).to have_received(:deliver)
     end
   end
 end

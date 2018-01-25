@@ -3,29 +3,29 @@ require "rails_helper"
 RSpec.describe Medicaid::OfficeEmailApplicationJob do
   describe "#perform" do
     it "sends an email" do
-      medicaid_application = create(:medicaid_application, :with_member)
-      primary_member = medicaid_application.primary_member
-      export = Export.create(
-        benefit_application: medicaid_application,
-        destination: :office_email,
-      )
-      job = Medicaid::OfficeEmailApplicationJob.new
-      deliver_double = double(deliver: true)
-      allow(ApplicationMailer).to receive(
-        :office_medicaid_application_notification,
-      ).and_return(deliver_double)
+      tempfile = Tempfile.new
+      medicaid_application = double("medicaid_application",
+        id: 1,
+        receiving_office_email: "official@stable.gov",
+        primary_member: double("member", display_name: "Henry Horse"),
+        pdf: tempfile)
+      export = double("export")
+      logger = double("logger").as_null_object
 
-      job.perform(export: export)
+      allow(export).to receive(:execute).and_yield(medicaid_application, logger)
 
-      medicaid_application.reload
-      expect(ApplicationMailer).
-        to have_received(:office_medicaid_application_notification).
-        with(
-          hash_including(
-            recipient_email: medicaid_application.receiving_office_email,
-            applicant_name: primary_member.display_name,
-          ),
-        )
+      fake_mailer = double("mailer", deliver: nil)
+      allow(ApplicationMailer).to receive(:office_medicaid_application_notification).
+        and_return(fake_mailer)
+
+      Medicaid::OfficeEmailApplicationJob.new.perform(export: export)
+
+      expect(ApplicationMailer).to have_received(:office_medicaid_application_notification).
+        with(recipient_email: "official@stable.gov",
+             applicant_name: "Henry Horse",
+             application_pdf: tempfile)
+
+      expect(fake_mailer).to have_received(:deliver)
     end
   end
 end
