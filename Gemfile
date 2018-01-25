@@ -70,7 +70,6 @@ group :development, :test do
   gem "dotenv-rails" # useful for when running dev server w/o foreman
   gem "factory_bot_rails"
   gem "listen"
-  gem "mailcatcher"
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
