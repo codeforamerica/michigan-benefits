@@ -9,11 +9,14 @@ RSpec.describe SuccessController do
       and_return(run_double)
   end
 
+  let(:attributes) { { email: "test@example.com" } }
+  let(:current_app) { create(:snap_application, attributes: attributes) }
+
   describe "#edit" do
     it "assigns the attributes to the step" do
       get :edit
 
-      expect(step.email).to eq "test@example.com"
+      expect(assigns(:step).email).to eq "test@example.com"
     end
 
     it "emails the snap application to the office" do
@@ -181,17 +184,5 @@ RSpec.describe SuccessController do
         expect(response).to render_template(:edit)
       end
     end
-  end
-
-  def step
-    @_step ||= assigns(:step)
-  end
-
-  def attributes
-    { email: "test@example.com" }
-  end
-
-  def current_app
-    @_current_app ||= create(:snap_application, attributes)
   end
 end
