@@ -1,8 +1,8 @@
 class ApplicationMailer < ActionMailer::Base
   layout "mailer"
 
-  def snap_application_notification(file_name:, recipient_email:)
-    attachments["snap_application.pdf"] = File.read(file_name)
+  def snap_application_notification(application_pdf:, recipient_email:)
+    attachments["snap_application.pdf"] = application_pdf.read
     mail(
       from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
       to: recipient_email,
@@ -11,12 +11,12 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def office_snap_application_notification(
-    file_name:,
+    application_pdf:,
     recipient_email:,
     applicant_name:,
     office_location: nil
   )
-    attachments[attachment_name(applicant_name, "1171")] = File.read(file_name)
+    attachments[attachment_name(applicant_name, "1171")] = application_pdf.read
     @office_location = office_location
 
     mail(
@@ -28,11 +28,11 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def office_medicaid_application_notification(
-    file_name:,
+    application_pdf:,
     recipient_email:,
     applicant_name:
   )
-    attachments[attachment_name(applicant_name, "1426")] = File.read(file_name)
+    attachments[attachment_name(applicant_name, "1426")] = application_pdf.read
 
     mail(
       from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),

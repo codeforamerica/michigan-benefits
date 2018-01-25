@@ -2,7 +2,7 @@ class ClientEmailApplicationJob < ApplicationJob
   def perform(export:)
     export.execute do |snap_application, logger|
       ApplicationMailer.snap_application_notification(
-        file_name: snap_application.pdf.path,
+        application_pdf: snap_application.pdf,
         recipient_email: snap_application.email,
       ).deliver
 
