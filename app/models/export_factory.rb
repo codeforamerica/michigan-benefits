@@ -21,8 +21,6 @@ class ExportFactory
     export.transaction do
       export.save!
       case export.destination
-      when :fax
-        FaxApplicationJob.perform_later(export: export)
       when :client_email
         ClientEmailApplicationJob.perform_later(export: export)
       when :office_email

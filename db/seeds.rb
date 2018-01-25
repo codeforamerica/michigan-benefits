@@ -229,16 +229,6 @@ complete_third_member.update!(
 
 complete_application.
   exports.
-  where(destination: :fax).
-  first_or_initialize(
-    metadata: "Faxed to Michigan Benefits (+15551112345)",
-    force: false,
-    status: :succeeded,
-    completed_at: Time.current,
-  ).save
-
-complete_application.
-  exports.
   where(destination: :client_email).
   first_or_initialize(
     metadata: "I, [2017-10-10T14:29:39.397443 #4]  INFO -- : [ActiveJob] "\

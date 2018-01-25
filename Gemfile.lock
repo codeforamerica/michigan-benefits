@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/codeforamerica/sfax
-  revision: da88847faaf5ab51255e4d7e47d76493d05113b1
-  ref: da88847faaf5ab51255e4d7e47d76493d05113b1
-  specs:
-    sfax (0.1.0)
-
-GIT
   remote: https://github.com/pynixwang/devise-otp
   revision: a181217a2d436de7ebb9a278bcb326bbddefa514
   ref: a181217a2d436de7ebb9a278bcb326bbddefa514
@@ -1033,7 +1026,6 @@ DEPENDENCIES
   sass-rails
   selenium-webdriver (= 3.4.3)
   sentry-raven
-  sfax!
   shoulda-matchers
   simplecov
   slack-ruby-client

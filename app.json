@@ -11,12 +11,6 @@
     "EMAIL_DOMAIN": {
       "required": true
     },
-    "FAX_ENABLED": {
-      "required": true
-    },
-    "FAX_RECIPIENT": {
-      "required": true
-    },
     "GOOGLE_ANALYTICS_ID": {
       "required": true
     },
