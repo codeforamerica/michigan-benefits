@@ -10,114 +10,62 @@ RSpec.describe OfficeRecipient do
           residential_zip: OFFICE_TO_ZIP_MAPPING[:clio],
           office_location: nil,
         )
-        fax_recipient = described_class.new(benefit_application: application)
+        recipent = described_class.new(benefit_application: application)
 
-        expect(fax_recipient.office).to eq(
+        expect(recipent.office).to eq(
           "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
           "name" => "Clio",
-          "fax_number" => clio_fax_number,
           "phone_number" => clio_phone_number,
         )
       end
     end
 
     context "office location is present" do
-      it "priotizes to office location over residential address" do
+      it "prioritizes to office location over residential address" do
         application = app(from_zip_covered_by: :clio, office_location: "union")
-        fax_recipient = described_class.new(benefit_application: application)
+        recipent = described_class.new(benefit_application: application)
 
-        expect(fax_recipient.office).to eq(
+        expect(recipent.office).to eq(
           "email" => "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov",
           "name" => "Union",
-          "fax_number" => union_fax_number,
           "phone_number" => union_phone_number,
         )
       end
     end
 
-    it "uses the real fax number when the address is in clio" do
-      fax_recipient = described_class.new(
-        benefit_application: app(from_zip_covered_by: :clio),
-      )
-
-      expect(fax_recipient.office).to eq(
-        "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
-        "name" => "Clio",
-        "fax_number" => clio_fax_number,
-        "phone_number" => clio_phone_number,
-      )
-    end
-
-    it "uses the real fax number when the address is in union" do
-      fax_recipient = described_class.new(
-        benefit_application: app(from_zip_covered_by: :union),
-      )
-
-      expect(fax_recipient.office).to eq(
-        "email" => "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov",
-        "name" => "Union",
-        "fax_number" => union_fax_number,
-        "phone_number" => union_phone_number,
-      )
-    end
-
     it "falls back to the clio office" do
-      fax_recipient = described_class.new(
+      recipent = described_class.new(
         benefit_application: app(from_zip_covered_by: :nobody),
       )
 
-      expect(fax_recipient.office).to eq(
+      expect(recipent.office).to eq(
         "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
         "name" => "Clio",
-        "fax_number" => clio_fax_number,
         "phone_number" => clio_phone_number,
       )
     end
 
     it "allows for testing via zip 12345" do
-      fax_recipient = described_class.new(
+      recipent = described_class.new(
         benefit_application: app(from_zip_covered_by: :testing),
       )
 
-      expect(fax_recipient.office).to eq(
+      expect(recipent.office).to eq(
         "email" => "hello@michiganbenefits.org",
         "name" => "Test Office",
-        "fax_number" => staging_fax_number,
         "phone_number" => test_office_phone_number,
       )
     end
   end
 
-  describe "#fax_number" do
-    it "is whatever the office fax number is" do
-      fax_recipient = described_class.new(
-        benefit_application: app(from_zip_covered_by: :testing),
-      )
-
-      expect(fax_recipient.fax_number).to eq fax_recipient.office["fax_number"]
-    end
-  end
-
   describe "#name" do
     it "is whatever the office name is" do
-      fax_recipient = described_class.new(
+      recipent = described_class.new(
         benefit_application: app(from_zip_covered_by: :testing),
       )
 
-      expect(fax_recipient.name).to eq fax_recipient.office["name"]
+      expect(recipent.name).to eq recipent.office["name"]
     end
-  end
-
-  def clio_fax_number
-    "+18107602310"
-  end
-
-  def union_fax_number
-    "+18107607372"
-  end
-
-  def staging_fax_number
-    "+18888433549"
   end
 
   def clio_phone_number

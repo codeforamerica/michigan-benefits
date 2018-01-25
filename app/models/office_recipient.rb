@@ -3,10 +3,6 @@ class OfficeRecipient
     @benefit_application = benefit_application
   end
 
-  def fax_number
-    office["fax_number"]
-  end
-
   def phone_number
     office["phone_number"]
   end

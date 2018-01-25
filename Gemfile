@@ -37,9 +37,6 @@ gem "route_downcaser"
 gem "ruby-filemagic"
 gem "sass-rails"
 gem "selenium-webdriver", "3.4.3"
-gem "sfax",
-  git: "https://github.com/codeforamerica/sfax",
-  ref: "da88847faaf5ab51255e4d7e47d76493d05113b1"
 gem "slack-ruby-client"
 gem "strong_migrations"
 gem "token_phrase"

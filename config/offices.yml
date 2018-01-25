@@ -1,6 +1,6 @@
 # APP_RELEASE_STAGE
 defaults: &defaults
-  # Which office to send the fax to in the event the submitted
+  # Which office to send application to
   # zip code is not in our mapping
   fallback_office: "clio"
   covered_zip_codes:
@@ -46,44 +46,35 @@ development:
   <<: *defaults
   offices:
     test_office:
-      fax_number: "+16173963015"
       phone_number: "5555551111"
       email: "staging@example.com"
     union:
-      fax_number: "+16173963015"
       phone_number: "5555552222"
       email: "union@example.com"
     clio:
-      fax_number: "+16173963015"
       phone_number: "5555553333"
       email: "clio@example.com"
 staging:
   <<: *defaults
   offices:
     test_office:
-      fax_number: "+18448487565" # sends to sfax production
       phone_number: "5555555555"
       email: "hello@michiganbenefits.org"
     union:
-      fax_number: "+16173963015"
       phone_number: "8107607300"
       email: "union@example.com"
     clio:
-      fax_number: "+16173963015"
       phone_number: "8107877101"
       email: "clio@example.com"
 production:
   <<: *defaults
   offices:
     test_office:
-      fax_number: "+18888433549" # sends to sfax staging
       phone_number: "5555555555"
       email: "hello@michiganbenefits.org"
     union:
-      fax_number: "+18107607372"
       phone_number: "8107607300"
       email: "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov"
     clio:
-      fax_number: "+18107602310"
       phone_number: "8107877101"
       email: "MDHHS-Genesee-Clio-App@michigan.gov"

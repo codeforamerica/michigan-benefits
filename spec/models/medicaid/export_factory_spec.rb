@@ -29,7 +29,6 @@ RSpec.describe Medicaid::ExportFactory do
     end
 
     it "raises an exception if the export isn't valid" do
-      allow(FaxApplicationJob).to receive(:perform_later)
       allow(ClientEmailApplicationJob).to receive(:perform_later)
       allow(SubmitApplicationViaMiBridgesJob).to receive(:perform_later)
       enqueuer = ExportFactory.new
@@ -41,7 +40,6 @@ RSpec.describe Medicaid::ExportFactory do
       end.to raise_error(ActiveRecord::RecordInvalid)
 
       expect(export).not_to be_persisted
-      expect(FaxApplicationJob).not_to have_received(:perform_later)
       expect(ClientEmailApplicationJob).not_to have_received(:perform_later)
       expect(SubmitApplicationViaMiBridgesJob).
         not_to have_received(:perform_later)
