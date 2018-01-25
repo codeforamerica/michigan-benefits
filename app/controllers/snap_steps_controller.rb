@@ -20,7 +20,7 @@ class SnapStepsController < StepsController
   end
 
   def after_submit_path
-    if current_application.office_location.present?
+    if current_application&.office_location.present?
       public_send("#{current_application.office_location}_path", anchor: "fold")
     else
       root_path(anchor: "fold")
