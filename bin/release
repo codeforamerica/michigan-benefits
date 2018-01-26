@@ -28,6 +28,7 @@ function check_environments {
       echo $env_diff
       echo "Any keys listed above exist on either ${1} or ${2}, but not the other."
       read -p "Are you okay with these differences? (y/N)" -n 1 -r
+      echo    # (optional) move to a new line
       if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "Great!"
       else
@@ -46,6 +47,8 @@ check_environments staging production
 check_environments staging demo
 
 read -p "Ready to deploy to production and demo? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   heroku pipelines:promote -a michigan-benefits-staging
   echo "Success! Application deployed to Production and Demo!"
