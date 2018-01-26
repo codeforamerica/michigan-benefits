@@ -66,7 +66,7 @@ GEM
       selectize-rails (~> 0.6)
     afm (0.2.2)
     arel (8.0.0)
-    ast (2.3.0)
+    ast (2.4.0)
     attr_encrypted (3.0.3)
       encryptor (~> 3.0.0)
     auto_strip_attributes (2.2.0)
@@ -994,6 +994,7 @@ DEPENDENCIES
   route_downcaser
   rspec-rails
   rspec_junit_formatter
+  rubocop
   rubocop-rspec
   ruby-filemagic
   sass-rails
