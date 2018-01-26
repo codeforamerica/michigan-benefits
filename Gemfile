@@ -70,6 +70,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rspec_junit_formatter"
+  gem "rubocop", require: false
   gem "rubocop-rspec", require: false
   gem "simplecov"
 end
