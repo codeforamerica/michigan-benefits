@@ -4,7 +4,11 @@ class VerificationDocument
     @benefit_application = benefit_application
   end
 
-  def file
+  def fill?
+    false
+  end
+
+  def output_file
     downloaded_document = RemoteDocument.new(url).download
     return if downloaded_document.nil?
     return downloaded_document.tempfile if downloaded_document.pdf?

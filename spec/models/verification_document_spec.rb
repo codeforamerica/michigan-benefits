@@ -3,7 +3,23 @@ require "rails_helper"
 describe VerificationDocument do
   include PdfHelper
 
-  describe "#file" do
+  describe "pdf component" do
+    let(:subject) do
+      VerificationDocument.new(url: "nowhere.com", benefit_application: "nothing")
+    end
+
+    it_should_behave_like "pdf component"
+  end
+
+  describe "#fill?" do
+    it "returns false" do
+      document = VerificationDocument.new(url: "nowhere.com", benefit_application: "nothing")
+
+      expect(document.fill?).to be_falsey
+    end
+  end
+
+  describe "#output_file" do
     context "files are png/jpg format" do
       it "returns a pdf tempfile" do
         snap_application = create(:snap_application, :with_member)
@@ -21,8 +37,8 @@ describe VerificationDocument do
           benefit_application: snap_application,
         )
 
-        expect(document.file).to be_a(Tempfile)
-        expect(pdf?(document.file.path)).to eq true
+        expect(document.output_file).to be_a(Tempfile)
+        expect(pdf?(document.output_file.path)).to eq true
       end
     end
 
@@ -41,8 +57,8 @@ describe VerificationDocument do
           benefit_application: snap_application,
         )
 
-        expect(document.file).to be_a(Tempfile)
-        expect(pdf?(document.file.path)).to eq true
+        expect(document.output_file).to be_a(Tempfile)
+        expect(pdf?(document.output_file.path)).to eq true
       end
     end
 
@@ -56,7 +72,7 @@ describe VerificationDocument do
           benefit_application: "snap application",
         )
 
-        expect(document.file).to be_nil
+        expect(document.output_file).to be_nil
       end
     end
 
@@ -80,8 +96,8 @@ describe VerificationDocument do
           benefit_application: medicaid_application,
         )
 
-        expect(document.file).to be_a(Tempfile)
-        expect(pdf?(document.file.path)).to eq true
+        expect(document.output_file).to be_a(Tempfile)
+        expect(pdf?(document.output_file.path)).to eq true
       end
     end
 

@@ -334,7 +334,7 @@ RSpec.describe Dhs1426Pdf do
     it "appends pages if there are verification documents" do
       paperwork_path = "http://example.com"
       verification_document = double
-      allow(verification_document).to receive(:file).and_return(
+      allow(verification_document).to receive(:output_file).and_return(
         temp_pdf_file,
       )
       medicaid_application =

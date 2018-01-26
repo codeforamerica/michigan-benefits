@@ -229,7 +229,7 @@ RSpec.describe Dhs1171Pdf do
 
       let!(:temp_file) { temp_pdf_file }
       let(:verification_document) do
-        double("verification document", file: temp_file)
+        double("verification document", output_file: temp_file)
       end
 
       let(:document_path) { "http://example.com" }

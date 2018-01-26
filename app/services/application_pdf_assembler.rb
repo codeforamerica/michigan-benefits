@@ -1,23 +1,30 @@
 class ApplicationPdfAssembler
-  def initialize(snap_application:)
-    @snap_application = snap_application
+  def initialize(benefit_application:)
+    @benefit_application = benefit_application
   end
 
   def run
-    PdfConcatenator.new(forms).run
+    PdfConcatenator.new(components).run
   end
 
-  attr_reader :snap_application
+  attr_reader :benefit_application
 
   private
 
-  def forms
+  def components
     [
-      AssistanceApplicationForm.new(snap_application),
-      # CommonApplicationAdditionalMembers.new(snap_application.members),
+      Coversheet.new,
+      AssistanceApplicationForm.new(benefit_application),
+      # CommonApplicationAdditionalMembers.new(benefit_application.members),
       # MedicaidSupplement.new(medicaid_application) if medicaid_application,
-      # FoodAssistanceSupplement.new(snap_application) if snap_application,
-      # VerificationPaperwork.new(snap_application.documents),
-    ]
+      # FoodAssistanceSupplement.new(benefit_application) if benefit_application,
+      verification_documents,
+    ].flatten
+  end
+
+  def verification_documents
+    benefit_application.documents.map do |document_url|
+      VerificationDocument.new(url: document_url, benefit_application: benefit_application)
+    end
   end
 end

@@ -1,6 +1,10 @@
 class AssistanceApplicationForm
   include PdfAttributes
 
+  def fill?
+    true
+  end
+
   def initialize(benefit_application)
     @benefit_application = benefit_application
   end
