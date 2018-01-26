@@ -38,7 +38,7 @@ class OfficeRecipient
   end
 
   def self.configuration
-    full_configuration[release_stage]
+    full_configuration[GateKeeper.application_routing_environment]
   end
 
   def self.full_configuration
@@ -60,10 +60,6 @@ class OfficeRecipient
 
   def self.configuration_file
     File.read(Rails.root.join("config", "offices.yml"))
-  end
-
-  def self.release_stage
-    ENV.fetch("APP_RELEASE_STAGE", "development")
   end
 
   private

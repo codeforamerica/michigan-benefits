@@ -2,10 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Warn users on staging only" do
   scenario "Renders the staging warning message", :js do
-    # Stub out Rails.env to "staging"
-    allow(Rails).to receive(:env).and_return(
-      ActiveSupport::StringInquirer.new("staging"),
-    )
+    allow(GateKeeper).to receive(:demo_environment?).and_return(true)
 
     visit root_path
     expect(page).to have_content("This is an example website")

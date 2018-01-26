@@ -3,13 +3,11 @@ class GateKeeper
     ENV["#{feature}_ENABLED"] == "true"
   end
 
+  def self.application_routing_environment
+    ENV.fetch("APP_RELEASE_STAGE", "development")
+  end
+
   def self.demo_environment?
-    if ENV["DEMO_SITE"] == "true"
-      true
-    elsif Rails.env.staging?
-      true
-    else
-      false
-    end
+    application_routing_environment == "staging"
   end
 end
