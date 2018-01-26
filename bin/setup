@@ -10,6 +10,7 @@ chdir APP_ROOT do
   step "Adding heroku git remotes" do
     system!("heroku git:remote -a michigan-benefits-staging -r staging")
     system!("heroku git:remote -a michigan-benefits-production -r production")
+    system!("heroku git:remote -a michigan-benefits-demo -r demo")
   end
 
   step "Install dependencies from Brewfile" do

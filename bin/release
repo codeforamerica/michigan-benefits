@@ -2,44 +2,56 @@
 
 set -e
 
-echo "Checking for buildpack changes between staging and production."
-buildpack_diff=$(echo $(diff <( heroku buildpacks -r staging | tail -n +2 ) <( heroku buildpacks -r production | tail -n +2 )))
+function check_buildpacks {
+    echo "Checking for buildpack changes between ${1} and ${2}."
+    buildpack_diff=$(echo $(diff <( heroku buildpacks -r ${1} | tail -n +2 ) <( heroku buildpacks -r ${2} | tail -n +2 )))
 
-if [[ $buildpack_diff ]]; then
-  echo $buildpack_diff
-  echo "Update buildpacks on Heroku so that they are consistent across envs and try again"
-  echo "We're bailing out!"
-  exit 1
-else
-  echo "Great! Buildpacks are the same between envs!"
-fi
+    if [[ $buildpack_diff ]]; then
+      echo $buildpack_diff
+      echo "Update buildpacks on Heroku so that they are consistent across ${1} and ${2} envs and try again"
+      echo "We're bailing out!"
+      exit 1
+    else
+      echo "Great! Buildpacks are the same between ${1} and ${2} envs!"
+    fi
+}
 
-echo "Comparing ENV variables between staging and production..."
-staging_env=$(heroku config -r staging --json | jq -S 'keys')
-production_env=$(heroku config -r production --json | jq -S 'keys')
+function check_environments {
+    echo "Comparing ENV variables between ${1} and ${2}..."
+    env_one=$(heroku config -r ${1} --json | jq -S 'keys')
+    env_two=$(heroku config -r ${2} --json | jq -S 'keys')
 
-env_diff=$(echo ${staging_env[@]} ${production_env[@]} | tr ' ' '\n' | sort | uniq -u)
+    echo "Difference between ${1} and ${2}:"
+    env_diff=$(echo ${env_one[@]} ${env_two[@]} | tr ' ' '\n' | sort | uniq -u)
 
-if [[ $env_diff ]]; then
-  echo $env_diff
-  echo "Any keys listed above exist on one env but not the other."
-  read -p "Are you okay with these differences? (y/N)" -n 1 -r
-  echo # (optional) move to a new line
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Great!"
-  else
-    echo "We're bailing out!"
-    exit 1;
-  fi
-else
-  echo "Great! ENV variables are the same between envs!"
-fi
+    if [[ $env_diff ]]; then
+      echo $env_diff
+      echo "Any keys listed above exist on either ${1} or ${2}, but not the other."
+      read -p "Are you okay with these differences? (y/N)" -n 1 -r
+      echo    # (optional) move to a new line
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "Great!"
+      else
+        echo "We're bailing out!"
+        exit 1;
+      fi
+    else
+      echo "Great! ENV variables are the same between ${1} and ${2} envs!"
+    fi
+}
 
-read -p "Ready to deploy to production? (y/N) " -n 1 -r
-echo # (optional) move to a new line
+check_buildpacks staging production
+check_buildpacks staging demo
+
+check_environments staging production
+check_environments staging demo
+
+read -p "Ready to deploy to production and demo? (y/N) " -n 1 -r
+echo    # (optional) move to a new line
+
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   heroku pipelines:promote -a michigan-benefits-staging
-  echo "Success! Application deployed to Production!"
+  echo "Success! Application deployed to Production and Demo!"
   echo "Please do some testing on production! (use zip 12345 to prevent actual submission)"
 else
   echo "Okay, I won't deploy. Thank you for being thoughtful and careful!"

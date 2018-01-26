@@ -2,7 +2,10 @@ require "rails_helper"
 
 RSpec.describe OfficeRecipient do
   describe "#office" do
-    before { stub_const("ENV", "APP_RELEASE_STAGE" => "production") }
+    before do
+      allow(GateKeeper).
+        to receive(:application_routing_environment) { "production" }
+    end
 
     context "medicaid app" do
       it "finds the office without raising an error" do

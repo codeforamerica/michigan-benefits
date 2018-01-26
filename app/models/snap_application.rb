@@ -80,7 +80,7 @@ class SnapApplication < ApplicationRecord
 
   def pdf
     @_pdf ||=
-      if Feature.enabled?("NEW_FORM")
+      if GateKeeper.feature_enabled?("NEW_FORM")
         ApplicationPdfAssembler.new(
           benefit_application: self,
         ).run
