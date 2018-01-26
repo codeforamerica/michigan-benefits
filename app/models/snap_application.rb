@@ -82,7 +82,7 @@ class SnapApplication < ApplicationRecord
     @_pdf ||=
       if Feature.enabled?("NEW_FORM")
         ApplicationPdfAssembler.new(
-          snap_application: self,
+          benefit_application: self,
         ).run
       else
         Dhs1171Pdf.new(

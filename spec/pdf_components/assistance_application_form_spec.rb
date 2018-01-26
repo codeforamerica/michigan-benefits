@@ -1,9 +1,25 @@
 require "spec_helper"
 require_relative "../../app/models/concerns/pdf_attributes"
+require_relative "../support/shared_examples/pdf_component"
 require_relative "../../app/models/null_address"
-require_relative "../../app/forms/assistance_application_form"
+require_relative "../../app/pdf_components/assistance_application_form"
 
 RSpec.describe AssistanceApplicationForm do
+  describe "pdf component" do
+    let(:subject) do
+      AssistanceApplicationForm.new(double("fake application"))
+    end
+
+    it_should_behave_like "pdf component"
+  end
+
+  describe "#fill?" do
+    it "responds to fill? and returns true" do
+      form = AssistanceApplicationForm.new(double("fake application"))
+      expect(form.fill?).to be_truthy
+    end
+  end
+
   describe "#attributes" do
     let(:residential_address) { NullAddress.new }
     let(:mailing_address) { NullAddress.new }

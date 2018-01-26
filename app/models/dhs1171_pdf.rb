@@ -89,7 +89,7 @@ class Dhs1171Pdf
       VerificationDocument.new(
         url: document,
         benefit_application: snap_application,
-      ).file
+      ).output_file
     end.reject { |document| document.path.nil? }
   end
 

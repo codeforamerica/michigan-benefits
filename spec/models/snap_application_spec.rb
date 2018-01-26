@@ -51,7 +51,7 @@ RSpec.describe SnapApplication do
         app = build(:snap_application)
 
         fake_pdf_builder = double(run: "I am fake. It's OK")
-        allow(ApplicationPdfAssembler).to receive(:new).with(snap_application: app).
+        allow(ApplicationPdfAssembler).to receive(:new).with(benefit_application: app).
           and_return(fake_pdf_builder)
 
         with_modified_env NEW_FORM_ENABLED: "true" do
