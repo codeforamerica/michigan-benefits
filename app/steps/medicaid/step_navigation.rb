@@ -74,7 +74,7 @@ module Medicaid
         Medicaid::ContactPhoneController,
         Medicaid::ContactTextMessagesController,
         Medicaid::ContactEmailController,
-        Medicaid::ContactSsDobController,
+        Medicaid::ContactSsIntroController,
         Medicaid::ContactSocialSecurityController,
       ],
       "Legal" => [

@@ -1,14 +1,7 @@
 module Medicaid
   class IntroHouseholdMemberController < MedicaidStepsController
-    def update
-      @step = step_class.new(step_params)
-
-      if @step.valid?
-        member.update!(step_params)
-        redirect_to next_path
-      else
-        render :edit
-      end
+    def update_application
+      member.update!(step_params)
     end
 
     private
@@ -22,6 +15,7 @@ module Medicaid
         first_name: member.first_name,
         last_name: member.last_name,
         sex: member.sex,
+        birthday: member.birthday,
       }
     end
 

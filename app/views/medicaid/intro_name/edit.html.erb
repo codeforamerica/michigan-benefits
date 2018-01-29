@@ -18,7 +18,16 @@
         collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
         help_text: "As it appears on official government documents",
         layout: "inline" %>
-      <%= render "medicaid/next_step" %>
+      <%= f.mb_date_select :birthday,
+        "Date of birth",
+        options: {
+          start_year: 1900,
+          end_year: Time.now.year,
+          default: Date.new(1990,1,15),
+          order: [:month, :day, :year],
+        } %>
+
+        <%= render "medicaid/next_step" %>
     <% end %>
   </div>
 </div>
