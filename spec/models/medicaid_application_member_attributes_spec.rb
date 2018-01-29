@@ -3,9 +3,8 @@ require "rails_helper"
 RSpec.describe MedicaidApplicationMemberAttributes do
   describe "#to_h" do
     it "returns the member attributes as a hash" do
-      medicaid_application = create(:medicaid_application)
-      member = build(
-        :member,
+      medicaid_application = build(:medicaid_application)
+      member = create(:member,
         first_name: "First",
         last_name: "Last",
         birthday: Date.new(1991, 10, 18),
@@ -13,7 +12,6 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         married: true,
         caretaker_or_parent: true,
         in_college: true,
-        spouse: build(:member, first_name: "Candy", last_name: "Crush"),
         ssn: "111223333",
         new_mom: true,
         requesting_health_insurance: true,
@@ -48,8 +46,14 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         child_support_alimony_arrears_expenses: 100,
         pay_student_loan_interest: true,
         student_loan_interest_expenses: 70,
-        benefit_application: medicaid_application,
-      )
+        benefit_application: medicaid_application)
+
+      spouse = build(:member,
+                     first_name: "Candy",
+                     last_name: "Crush",
+                     benefit_application: medicaid_application)
+
+      member.update(spouse: spouse)
 
       result = MedicaidApplicationMemberAttributes.new(
         member: member,

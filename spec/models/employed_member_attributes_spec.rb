@@ -12,6 +12,7 @@ RSpec.describe EmployedMemberAttributes do
         employed_hours_per_week: 20,
         employed_pay_quantity: 100,
         employed_pay_interval: "Weekly",
+        benefit_application: build(:snap_application),
       )
 
       position = "second"

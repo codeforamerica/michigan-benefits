@@ -11,6 +11,7 @@ RSpec.describe SelfEmployedMemberAttributes do
         self_employed_profession: "Lampshade shaper",
         self_employed_monthly_income: 100,
         self_employed_monthly_expenses: 50,
+        benefit_application: build(:snap_application),
       )
 
       position = "first"

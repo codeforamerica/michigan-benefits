@@ -16,6 +16,7 @@ RSpec.describe SnapApplicationMemberAttributes do
         new_mom: true,
         in_college: true,
         requesting_food_assistance: true,
+        benefit_application: build(:snap_application),
       )
       position = "primary"
 
@@ -55,6 +56,7 @@ RSpec.describe SnapApplicationMemberAttributes do
       it "does not error" do
         member = build(
           :member,
+          benefit_application: build(:snap_application),
           ssn: nil,
         )
         position = "anything"

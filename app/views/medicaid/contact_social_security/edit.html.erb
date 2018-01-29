@@ -2,7 +2,7 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Tell us your Social Security Number and Date of Birth</div>
+    <div class="form-card__title">Tell us your Social Security Number</div>
   </header>
 
   <div class="form-card__content">
@@ -29,15 +29,6 @@
                 options: { maxlength: 9 },
                 help_text: "If you don’t know it you can skip this"
               %>
-
-              <%= ff.mb_date_select :birthday,
-                "Date of birth",
-                options: {
-                  start_year: 1900,
-                  end_year: Time.now.year,
-                  default: Date.new(1990,1,15),
-                  order: [:month, :day, :year],
-                } %>
             </div>
           <% end %>
         </div>

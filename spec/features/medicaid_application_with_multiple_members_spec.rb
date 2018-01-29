@@ -24,6 +24,9 @@ RSpec.feature "Medicaid app" do
       fill_in "What is their first name?", with: "Christa"
       fill_in "What is their last name?", with: "Tester"
       select_radio(question: "What is their gender?", answer: "Female")
+      select "December"
+      select "25"
+      select "1987"
       proceed_with "Next"
 
       click_on "Add a member"
@@ -31,6 +34,9 @@ RSpec.feature "Medicaid app" do
       fill_in "What is their first name?", with: "Joel"
       fill_in "What is their last name?", with: "Tester"
       select_radio(question: "What is their gender?", answer: "Male")
+      select "September"
+      select "17"
+      select "1980"
       proceed_with "Next"
     end
 
@@ -430,7 +436,7 @@ RSpec.feature "Medicaid app" do
 
     on_page "Contact Information & Followup" do
       expect(page).to have_content(
-        "Provide the Social Security Numbers and Dates of Birth "\
+        "Provide the Social Security Numbers "\
         "for your household members if you’re ready",
       )
       proceed_with "Yes"
@@ -438,10 +444,10 @@ RSpec.feature "Medicaid app" do
 
     on_page "Contact Information & Followup" do
       expect(page).to have_content(
-        "Tell us your Social Security Number and Date of Birth",
+        "Tell us your Social Security Number",
       )
-      enter_dob_and_ssn(display_name: "Jessie Tester", ssn: "123456789")
-      enter_dob_and_ssn(display_name: "Christa Tester", ssn: "011100000")
+      enter_ssn(display_name: "Jessie Tester", ssn: "123456789")
+      enter_ssn(display_name: "Christa Tester", ssn: "011100000")
 
       proceed_with "Next"
     end

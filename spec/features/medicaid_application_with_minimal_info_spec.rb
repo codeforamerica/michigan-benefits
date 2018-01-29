@@ -142,7 +142,7 @@ RSpec.feature "Medicaid app" do
       proceed_with "Next"
 
       expect(page).to have_content(
-        "Provide your Social Security Number and Date of Birth if you’re ready",
+        "Provide your Social Security Number if you’re ready",
       )
       proceed_with "No"
     end

@@ -116,7 +116,7 @@ class Member < ApplicationRecord
   end
 
   def display_name
-    "#{first_name.upcase_first} #{last_name.upcase_first}"
+    @_display_name ||= generate_unique_display_name
   end
 
   def self.filing_taxes
@@ -206,6 +206,24 @@ class Member < ApplicationRecord
   end
 
   private
+
+  def generate_unique_display_name
+    other_members = benefit_application.members - [self]
+    other_member_names = other_members.map do |m|
+      formatted_name(m.first_name, m.last_name)
+    end
+    my_name = formatted_name(first_name, last_name)
+
+    if other_member_names.include?(my_name)
+      my_name + " (#{birthday.strftime('%-m/%-d/%Y')})"
+    else
+      my_name
+    end
+  end
+
+  def formatted_name(first_name, last_name)
+    "#{first_name.upcase_first} #{last_name.upcase_first}"
+  end
 
   def receiving_income?
     employed? ||

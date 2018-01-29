@@ -22,6 +22,7 @@ RSpec.describe ExtraMemberAttributes do
         birthday: DateTime.parse("June 20, 1900"),
         relationship: nil,
         requesting_food_assistance: true,
+        benefit_application: build(:snap_application),
       )
 
       array = ExtraMemberAttributes.new(member: member).to_a

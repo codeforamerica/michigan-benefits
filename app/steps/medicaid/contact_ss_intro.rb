@@ -1,5 +1,5 @@
 module Medicaid
-  class ContactSsDob < Step
+  class ContactSsIntro < Step
     step_attributes(:submit_ssn)
   end
 end
