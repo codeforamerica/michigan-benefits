@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     resource :file_preview, only: %i[show]
   end
 
+  resources :numbers, module: :stats, only: %i[index]
+
   resource :resource, only: %i[show]
   resource :sessions, only: %i[new destroy] do
     collection do
