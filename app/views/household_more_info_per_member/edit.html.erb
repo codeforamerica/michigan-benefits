@@ -13,7 +13,6 @@
         <fieldset class="form-group">
           <legend class="form-question" id="citizen__legend">
             <%= t("snap.household_more_info_per_member.edit.prompt") %>
-            <span class="form-card__optional">(optional)</span>
           </legend>
           <% @step.members.each do |member| %>
             <%= f.fields_for('members[]', member) do |ff| %>
@@ -30,28 +29,28 @@
 
       <% if current_application.anyone_disabled? %>
         <fieldset class="form-group">
-          <legend class="form-question" id="disabled__legend">Who has a disability?<span class="form-card__optional">(optional)</span></legend>
+          <legend class="form-question" id="disabled__legend">Who has a disability?</legend>
           <%= render 'member_checkboxes', f: f, step: @step, method: :disabled, legend_id: "disabled__legend" %>
         </fieldset>
       <% end %>
 
       <% if current_application.anyone_new_mom? %>
         <fieldset class="form-group">
-          <legend class="form-question" id="pregnant__legend">Who is pregnant or has been pregnant recently?<span class="form-card__optional">(optional)</span></legend>
+          <legend class="form-question" id="pregnant__legend">Who is pregnant or has been pregnant recently?</legend>
           <%= render 'member_checkboxes', f: f, step: @step, method: :new_mom, legend_id: "pregnant__legend"  %>
         </fieldset>
       <% end %>
 
       <% if current_application.anyone_in_college? %>
         <fieldset class="form-group">
-          <legend class="form-question" id="college__legend">Who is enrolled in college?<span class="form-card__optional">(optional)</span></legend>
+          <legend class="form-question" id="college__legend">Who is enrolled in college?</legend>
           <%= render 'member_checkboxes', f: f, step: @step, method: :in_college, legend_id: "college__legend"  %>
         </fieldset>
       <% end %>
 
       <% if current_application.anyone_living_elsewhere? %>
         <fieldset class="form-group">
-          <legend class="form-question" id="elsewhere__legend">Who is temporarily living outside the home?<span class="form-card__optional">(optional)</span></legend>
+          <legend class="form-question" id="elsewhere__legend">Who is temporarily living outside the home?</legend>
           <%= render 'member_checkboxes', f: f, step: @step, method: :living_elsewhere, legend_id: "elsewhere__legend"  %>
         </fieldset>
       <% end %>
