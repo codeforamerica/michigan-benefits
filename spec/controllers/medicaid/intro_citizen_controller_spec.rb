@@ -8,7 +8,7 @@ RSpec.describe Medicaid::IntroCitizenController, type: :controller do
   end
 
   describe "#update" do
-    context "multi member househoold" do
+    context "multi member household" do
       context "everyone a citizen" do
         it "updates the members" do
           members = build_list(:member, 2)
@@ -19,12 +19,32 @@ RSpec.describe Medicaid::IntroCitizenController, type: :controller do
           )
           session[:medicaid_application_id] = medicaid_application.id
 
-          put :update, params: { step: { everyone_a_citizen: true } }
+          put :update, params: { step: { everyone_a_citizen: "true" } }
 
           members.each(&:reload)
 
           members.each do |member|
             expect(member).to be_citizen
+          end
+        end
+      end
+
+      context "not everyone is a citizen" do
+        it "does not update the members" do
+          members = build_list(:member, 2)
+
+          medicaid_application = create(
+            :medicaid_application,
+            members: members,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          put :update, params: { step: { everyone_a_citizen: "false" } }
+
+          members.each(&:reload)
+
+          members.each do |member|
+            expect(member.citizen).to eq(nil)
           end
         end
       end
@@ -41,7 +61,7 @@ RSpec.describe Medicaid::IntroCitizenController, type: :controller do
           )
           session[:medicaid_application_id] = medicaid_application.id
 
-          put :update, params: { step: { everyone_a_citizen: true } }
+          put :update, params: { step: { everyone_a_citizen: "true" } }
 
           member.reload
 

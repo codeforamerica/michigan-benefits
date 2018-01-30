@@ -56,7 +56,7 @@ module FeatureHelper
   def login_with_basic_auth
     page.driver.browser.basic_authorize(
       Rails.application.secrets.basic_auth_user,
-      Rails.application.secrets.basic_auth_password
+      Rails.application.secrets.basic_auth_password,
     )
   end
 

@@ -13,14 +13,6 @@ class MedicaidStepsController < StepsController
     session[:medicaid_application_id]
   end
 
-  def single_member_household?
-    current_application.members_count == 1
-  end
-
-  def multi_member_household?
-    current_application.members_count > 1
-  end
-
   def step_navigation
     @step_navigation ||= Medicaid::StepNavigation.new(self)
   end
