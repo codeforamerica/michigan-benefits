@@ -4,6 +4,8 @@ RSpec.feature "viewing Numbers dashboard" do
   before do
     create_list(:snap_application, 3, :signed)
     create_list(:medicaid_application, 2, :signed)
+
+    login_with_basic_auth
   end
 
   scenario "viewing total SNAP and Medicaid apps submitted" do
