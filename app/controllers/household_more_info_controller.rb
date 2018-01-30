@@ -4,12 +4,26 @@ class HouseholdMoreInfoController < SnapStepsController
   def update_application
     super
 
-    current_application.members.each do |member|
-      member.update!(member_attrs)
+    if single_member_household?
+      current_application.primary_member.update!(member_attrs)
+    else
+      current_application.members.each do |member|
+        member.update!(multi_member_attrs)
+      end
     end
   end
 
   def member_attrs
+    {
+      citizen: step_params[:everyone_a_citizen],
+      disabled: step_params[:anyone_disabled],
+      new_mom: step_params[:anyone_new_mom],
+      in_college: step_params[:anyone_in_college],
+      living_elsewhere: step_params[:anyone_living_elsewhere],
+    }
+  end
+
+  def multi_member_attrs
     construct_positive_attributes("citizen").
       merge(construct_negative_attributes("disabled")).
       merge(construct_negative_attributes("new_mom")).

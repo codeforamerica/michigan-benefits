@@ -28,6 +28,26 @@ RSpec.describe Medicaid::IntroCitizenController, type: :controller do
           end
         end
       end
+
+      context "not everyone is a citizen" do
+        it "does not update the members" do
+          members = build_list(:member, 2)
+
+          medicaid_application = create(
+            :medicaid_application,
+            members: members,
+          )
+          session[:medicaid_application_id] = medicaid_application.id
+
+          put :update, params: { step: { everyone_a_citizen: "false" } }
+
+          members.each(&:reload)
+
+          members.each do |member|
+            expect(member.citizen).to eq(nil)
+          end
+        end
+      end
     end
 
     context "single member household" do
