@@ -85,6 +85,14 @@ class StepsController < ApplicationController
 
   # Probably don't redefine me
 
+  def single_member_household?
+    current_application.members_count == 1
+  end
+
+  def multi_member_household?
+    current_application.members_count > 1
+  end
+
   def step_params
     params.fetch(:step, {}).permit(*step_attrs)
   end
