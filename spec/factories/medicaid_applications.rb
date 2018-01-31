@@ -15,5 +15,11 @@ FactoryBot.define do
         create(:member, benefit_application: app)
       end
     end
+
+    trait :multimember do
+      after :create do |app|
+        create_list(:member, 2, benefit_application: app)
+      end
+    end
   end
 end
