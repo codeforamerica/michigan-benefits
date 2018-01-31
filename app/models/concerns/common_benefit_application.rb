@@ -27,7 +27,11 @@ module CommonBenefitApplication
     addresses.where(mailing: true).first || NullAddress.new
   end
 
+  def stable_housing?
+    stable_housing == true || stable_housing == nil
+  end
+
   def unstable_housing?
-    !stable_housing?
+    stable_housing == false
   end
 end
