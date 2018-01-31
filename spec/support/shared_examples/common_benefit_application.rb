@@ -144,5 +144,39 @@ RSpec.shared_examples "common benefit application" do
         expect(subject.unstable_housing?).to eq(true)
       end
     end
+
+    context "when stable_housing is nil" do
+      it "returns false" do
+        subject.stable_housing = nil
+
+        expect(subject.unstable_housing?).to eq(false)
+      end
+    end
+  end
+
+  describe "#stable_housing?" do
+    context "when stable_housing is true" do
+      it "returns true" do
+        subject.stable_housing = true
+
+        expect(subject.stable_housing?).to eq(true)
+      end
+    end
+
+    context "when stable_housing is false" do
+      it "returns false" do
+        subject.stable_housing = false
+
+        expect(subject.stable_housing?).to eq(false)
+      end
+    end
+
+    context "when stable_housing is nil" do
+      it "returns true" do
+        subject.stable_housing = nil
+
+        expect(subject.stable_housing?).to eq(true)
+      end
+    end
   end
 end
