@@ -85,11 +85,11 @@ class SnapApplicationAttributes
         mortgage_expense: mortgage_expense,
         mortgage_expense_interval: bool_to_checkbox(mortgage_expense.present?),
         property_tax_expense_yes:
-          bool_to_checkbox(snap_application.property_tax_expense.present?),
+          bool_to_checkbox(annual_property_tax_expense.present?),
         annual_property_tax_expense: annual_property_tax_expense,
         annual_insurance_expense: annual_insurance_expense,
         insurance_expense_yes:
-          bool_to_checkbox(snap_application.insurance_expense.present?),
+          bool_to_checkbox(annual_insurance_expense.present?),
         utility_electricity:
           bool_to_checkbox(snap_application.utility_electrity?),
         utility_water_sewer:
@@ -243,44 +243,44 @@ class SnapApplicationAttributes
   end
 
   def annual_property_tax_expense
-    if snap_application.property_tax_expense
+    if nil_if_zero(snap_application.property_tax_expense)
       snap_application.property_tax_expense * 12
     end
   end
 
   def annual_insurance_expense
-    if snap_application.insurance_expense
+    if nil_if_zero(snap_application.insurance_expense)
       snap_application.insurance_expense * 12
     end
   end
 
   def rent_expense_yes
     if !homeowner?
-      bool_to_checkbox(snap_application.rent_expense.present?)
+      bool_to_checkbox(rent_expense.present?)
     end
   end
 
   def mortgage_expense_yes
     if homeowner?
-      bool_to_checkbox(snap_application.rent_expense.present?)
+      bool_to_checkbox(mortgage_expense.present?)
     end
   end
 
   def rent_expense
     if !homeowner?
-      snap_application.rent_expense
+      nil_if_zero(snap_application.rent_expense)
     end
   end
 
   def mortgage_expense
     if homeowner?
-      snap_application.rent_expense
+      nil_if_zero(snap_application.rent_expense)
     end
   end
 
   def homeowner?
-    snap_application.insurance_expense.present? ||
-      snap_application.property_tax_expense.present?
+    nil_if_zero(snap_application.insurance_expense).present? ||
+      nil_if_zero(snap_application.property_tax_expense).present?
   end
 
   def residential_or_homeless
@@ -295,5 +295,9 @@ class SnapApplicationAttributes
     [address.street_address, address.street_address_2].
       reject(&:blank?).
       join(", ")
+  end
+
+  def nil_if_zero(value)
+    value&.zero? ? nil : value
   end
 end

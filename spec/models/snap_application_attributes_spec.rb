@@ -15,6 +15,8 @@ RSpec.describe SnapApplicationAttributes do
         financial_accounts: [:four_oh_one_k],
         phone_number: "2222222222",
         rent_expense: 100,
+        property_tax_expense: 0,
+        insurance_expense: 0,
         stable_housing: false,
         authorized_representative: true,
         authorized_representative_name: "aBenny",
