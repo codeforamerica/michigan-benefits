@@ -1,20 +1,44 @@
-<% content_for :template_name, "Numbers"  %>
+<% content_for :template_name, "numbers"  %>
 
 <section class="slab">
   <div class="grid grid-padded">
     <h1>MichiganBenefits Numbers</h1>
+  </div>
+</section>
 
+<section class="slab">
+  <div class="grid grid-padded">
+    <h2>Completed Applications</h2>
     <div id="total-snap-applications" class="grid__item width-one-half">
       <div class="card">
-        <h4>Total Completed SNAP Applications</h4>
+        <h4>Total SNAP</h4>
         <p class="big-number"><%= @snap_count %></p>
       </div>
     </div>
 
     <div id="total-medicaid-applications" class="grid__item width-one-half">
       <div class="card">
-        <h4>Total Completed Medicaid Applications</h4>
+        <h4>Total Medicaid</h4>
         <p class="big-number"><%= @medicaid_count %></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slab">
+  <div class="grid grid-padded">
+    <h2>Median Minutes to Complete (last 30 days)</h2>
+    <div id="snap-time-to-complete" class="grid__item width-one-half">
+      <div class="card">
+        <h4>SNAP</h4>
+        <p class="big-number"><%= @snap_median || "-" %></p>
+      </div>
+    </div>
+
+    <div id="medicaid-time-to-complete" class="grid__item width-one-half">
+      <div class="card">
+        <h4>Medicaid</h4>
+        <p class="big-number"><%= @medicaid_median || "-" %></p>
       </div>
     </div>
   </div>
