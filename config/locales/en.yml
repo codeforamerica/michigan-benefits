@@ -7,7 +7,7 @@ en:
     household_more_info_per_member:
       edit:
         title: Ok, let us know which people these situations apply to.
-        prompt: Who is not a citizen?
+        prompt: Who is a citizen?
     income_employment_status:
       edit:
         title: "Who in your household is currently employed, or has been in the
