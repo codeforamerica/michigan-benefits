@@ -9,14 +9,6 @@ RSpec.describe SignAndSubmitController do
 
   include_examples "step controller", "param validation"
 
-  describe "#next_path" do
-    it "is the document guide path" do
-      expect(subject.next_path).to eq(
-        "/steps/document-guide",
-      )
-    end
-  end
-
   describe "#edit" do
     it "assigns the attributes to the step" do
       get :edit

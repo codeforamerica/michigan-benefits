@@ -10,6 +10,7 @@ gem "attr_encrypted"
 gem "auto_strip_attributes"
 gem "aws-sdk"
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
+gem "browser"
 gem "capybara"
 gem "delayed_job_active_record"
 gem "delayed_job_web"

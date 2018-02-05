@@ -173,17 +173,26 @@ accounts?",
       proceed_with "Continue"
     end
 
+    on_page "Paperwork" do
+      expect(page).to have_content(
+        "Do you have paperwork with you?",
+      )
+      proceed_with "Upload paperwork now"
+    end
+
+    on_page "Paperwork" do
+      expect(page).to have_content(
+        "Upload paperwork",
+      )
+      upload_paperwork
+      proceed_with "Finish"
+    end
+
     consent_to_terms
 
     on_page "Sign and Submit" do
       fill_in "Sign by typing your full legal name", with: "Jessie Tester"
       proceed_with "Sign and submit"
-    end
-
-    on_page "Documents" do
-      proceed_with "Submit documents now", scroll_to_top: true
-      upload_documents
-      proceed_with "Done uploading documents"
     end
 
     on_page "Application Submitted" do
@@ -207,7 +216,7 @@ accounts?",
     expect(pdf_values["primary_member_full_name"]).to include("Jessie Tester")
   end
 
-  def upload_documents
+  def upload_paperwork
     add_document_photo "https://example.com/images/image_1.jpg"
     add_document_photo "https://example.com/images/image_2.jpg"
   end
