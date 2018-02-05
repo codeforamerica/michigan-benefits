@@ -52,6 +52,7 @@ class StepNavigation
 
   SUBSTEPS = {
     HouseholdAddMemberController => HouseholdMembersOverviewController,
+    HouseholdRemoveMemberController => HouseholdMembersOverviewController,
     IntroductionChangeOfficeLocationController =>
       IntroductionCompleteController,
   }.freeze
