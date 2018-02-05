@@ -94,6 +94,8 @@ module Medicaid
     SUBSTEPS = {
       Medicaid::IntroHouseholdMemberController =>
         Medicaid::IntroHouseholdController,
+      Medicaid::IntroHouseholdRemoveMemberController =>
+        Medicaid::IntroHouseholdController,
     }.freeze
 
     class << self
