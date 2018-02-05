@@ -215,6 +215,21 @@ RSpec.feature "Medicaid app" do
       proceed_with "Next"
     end
 
+    on_page "Paperwork" do
+      expect(page).to have_content(
+        "Do you have paperwork with you?",
+      )
+      proceed_with "Upload paperwork now"
+    end
+
+    on_page "Paperwork" do
+      expect(page).to have_content(
+        "Upload paperwork",
+      )
+      upload_paperwork
+      proceed_with "Finish"
+    end
+
     on_page "Rights and Responsibilities" do
       expect(page).to have_content(
         "Before you finish, read and agree to the legal terms.",
@@ -228,17 +243,25 @@ RSpec.feature "Medicaid app" do
       proceed_with "Sign and submit"
     end
 
-    on_pages "Documents" do
-      expect(page).to have_content(
-        "Upload some paperwork if you can right now.",
-      )
-      proceed_with "I'll do this later", scroll_to_top: true
-    end
-
     on_pages "Application Submitted" do
       expect(page).to have_content(
         "Your application has been successfully submitted",
       )
     end
+  end
+
+  def upload_paperwork
+    add_paperwork_photo "https://example.com/images/drivers_license.jpg"
+    add_paperwork_photo "https://example.com/images/proof_of_income.jpg"
+  end
+
+  def add_paperwork_photo(url)
+    input = %(<input type="hidden" name="step[paperwork][]" value="#{url}">)
+    page.execute_script(
+      <<~JAVASCRIPT
+        document.querySelector('[data-uploadables-form]').
+          insertAdjacentHTML('beforeend', '#{input}')
+    JAVASCRIPT
+    )
   end
 end

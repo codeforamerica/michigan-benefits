@@ -622,6 +622,7 @@ GEM
       sass (~> 3.4)
       thor (~> 0.19)
     brakeman (4.1.1)
+    browser (2.5.2)
     builder (3.2.3)
     bundler-audit (0.6.0)
       bundler (~> 1.2)
@@ -958,6 +959,7 @@ DEPENDENCIES
   axe-matchers
   bourbon (~> 4.2.0)
   brakeman
+  browser
   bundler-audit
   capybara
   climate_control

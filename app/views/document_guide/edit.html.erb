@@ -1,45 +1,36 @@
-<% content_for :header_title, "Documents" %>
+<% content_for :header_title, "Paperwork" %>
 
 <div class="form-card" id="uploadables-drop">
   <header class="form-card__header">
+    <div class="pre-title">
+      Almost done!
+    </div>
     <div class="form-card__title">
-      Upload some documents if you can right now.
+      Do you have paperwork with you?
     </div>
   </header>
 
   <div class="form-card__content">
-    <div class="text--centered">
-      <p>
-        You can do this later but this will help speed up the process.
-      </p>
-    </div>
+    <p>
+      This includes documents like IDs, proof of income, and proof of
+      expenses.
+    </p>
+    <p>
+      After reviewing your application, staff will five you a list of
+      exactly what paperwork you need to provide. However,
+      <strong>we recommend uploading anything you have with you now</strong>.
+      It will help your application get processed faster
+    </p>
+  </div>
 
-    <%= form_for @step,
-      as: :step,
-      builder: MbFormBuilder,
-      url: current_path,
-      method: :put do |f| %>
-
-      <div class="text--centered">
-        <%= link_to skip_path, class: "button button--full-mobile" do %>
-          I'll do this later
-        <% end %>
-
-        <%= link_to next_path, class: "button button--full-mobile button--cta" do %>
-          Submit documents now
-        <% end %>
-      </div>
+  <footer class="form-card__footer">
+    <%= link_to next_path, class: "button button--full-mobile button--cta" do %>
+        Upload paperwork now
     <% end %>
 
-    <p class='text--secure'>
-      <i class='illustration illustration--safety'></i>
-      Both MichiganBenefits.org and MDHHS maintain strict security guidelines
-      to protect the identities of Michigan residents.
-    </p>
-
-    <div class='slab'>
-      <%= render 'shared/commonly_requested_uploadables',
-        uploadable_name: "documents" %>
-    </div>
-  </div>
+    <%= link_to skip_path, class: "button button--full-mobile" do %>
+      I'll do this later
+      <span class="icon-arrow_forward"></span>
+    <% end %>
+  </footer>
 </div>

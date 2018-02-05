@@ -1,12 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Medicaid::PaperworkController, type: :controller do
-  describe "#next_path" do
-    it "is the success path" do
-      expect(subject.next_path).to eq "/steps/medicaid/success"
-    end
-  end
-
   describe "#edit" do
     context "client doesn't want to upload docs at that time" do
       it "redirects to next step" do

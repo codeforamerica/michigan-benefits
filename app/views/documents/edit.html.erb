@@ -1,31 +1,42 @@
-<% content_for :header_title, "Documents" %>
+<% content_for :header_title, "Paperwork" %>
+
 <% content_for :header_javascript do %>
-  <%= javascript_include_tag "https://js.shubox.io/v1/#{Rails.application.secrets.shubox_js_id}.js", defer: true %>
+    <%= javascript_include_tag "https://js.shubox.io/v1/#{Rails.application.secrets.shubox_js_id}.js", defer: true %>
 <% end %>
 
-<div class="form-card" id="uploadables-drop">
-  <header class="form-card__header">
-    <div class="form-card__title">
-      Submit Documents
-    </div>
-  </header>
-  <div class="form-card__content">
-    <p>
-      If you can, we suggest submitting documents like a copy of your ID, proof
-      of income, or proof of residency. You can also do this later if now is
-      not a good time.
-    </p>
-    <p>
-      Clicking the "Upload documents" button below, or dragging and dropping
-      photos or documents onto this area of the page, will upload them.
-    </p>
+<%= form_for @step,
+  as: :step,
+  builder: MbFormBuilder,
+  url: current_path,
+  method: :put,
+  html: { data: { 'uploadables-form' => 'true' } } do |f| %>
 
-    <%= form_for @step,
-      as: :step,
-      builder: MbFormBuilder,
-      url: current_path,
-      method: :put,
-      html: { data: { 'uploadables-form' => 'true' } } do |f| %>
+  <div class="form-card" id="uploadables-drop">
+    <header class="form-card__header">
+      <div class="form-card__title">
+        Upload paperwork
+      </div>
+    </header>
+    <div class="form-card__content">
+      <div class="form-group">
+        <% if browser.device.tablet? || browser.device.mobile? %>
+          <p>
+            Click the button below to take a photo or upload your paperwork.
+          </p>
+          <p>Make sure your photos are clear and easy to read:</p>
+          <ul class="list--bulleted">
+            <li>Hold your phone still</li>
+            <li>Choose a well-lit location</li>
+            <li>Include the whole page</li>
+          </ul>
+
+        <% else %>
+          <p>
+            Click the "Upload paperwork” button below, or drag and drop photos or
+            documents onto this area of the page.
+          </p>
+        <% end %>
+      </div>
 
       <div class="form-card__uploadables" id="form-card__uploadables">
         <%= render partial: 'shared/uploadable',
@@ -34,19 +45,35 @@
           as: :url %>
       </div>
 
-      <div class="form-card__uploadables__ctas">
-        <button type="button" class="button button--full-mobile button--cta" id="click-to-upload">
-          <i class="icon-file_upload"></i>
-          Upload documents
-        </button>
 
-        <button class="button button--full-mobile button--cta" type="submit" data-done-uploading>
-          Done uploading documents
-        </button>
+      <button type="button" class="button button--full-mobile button--cta" id="click-to-upload">
+        <i class="icon-file_upload"></i>
+        <% if browser.device.tablet? || browser.device.mobile? %>
+            Take a photo
+        <% else %>
+            Upload paperwork
+        <% end %>
+      </button>
+
+      <button class="button button--full-mobile" type="submit" data-done-uploading>
+        Finish <span class="icon-arrow_forward"></span>
+      </button>
+
+      <p class='text--secure'>
+        <i class='illustration illustration--safety'></i>
+        Both MichiganBenefits.org and MDHHS maintain strict security guidelines
+        to protect the identities of Michigan residents.
+      </p>
+
+      <div class='slab'>
+        <%= render "shared/commonly_requested_uploadables",
+          uploadable_name: "documents" %>
       </div>
-    <% end %>
-  </div>
-</div>
+    </div>
+
+
+    </div>
+<% end %>
 
 <% unless Rails.env.test? -%>
   <script>

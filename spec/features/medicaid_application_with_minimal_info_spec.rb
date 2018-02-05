@@ -154,6 +154,13 @@ RSpec.feature "Medicaid app" do
       proceed_with "Next"
     end
 
+    on_pages "Paperwork" do
+      expect(page).to have_content(
+        "Do you have paperwork with you?",
+      )
+      proceed_with "I'll do this later", scroll_to_top: true
+    end
+
     on_page "Rights and Responsibilities" do
       expect(page).to have_content(
         "Before you finish, read and agree to the legal terms.",
@@ -165,13 +172,6 @@ RSpec.feature "Medicaid app" do
     on_page "Sign and Submit" do
       fill_in "Sign by typing your full legal name", with: "Jessie Tester"
       proceed_with "Sign and submit"
-    end
-
-    on_pages "Documents" do
-      expect(page).to have_content(
-        "Upload some paperwork if you can right now.",
-      )
-      proceed_with "I'll do this later", scroll_to_top: true
     end
 
     on_pages "Application Submitted" do

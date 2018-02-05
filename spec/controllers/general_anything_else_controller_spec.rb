@@ -6,12 +6,6 @@ RSpec.describe GeneralAnythingElseController do
 
   include_examples "step controller"
 
-  describe "#next_path" do
-    it "is the legal agreement page" do
-      expect(subject.next_path).to eq "/steps/legal-agreement"
-    end
-  end
-
   describe "#edit" do
     it "assigns the attributes to the step" do
       session[:snap_application_id] = current_app.id

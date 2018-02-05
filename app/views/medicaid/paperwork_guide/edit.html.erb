@@ -1,14 +1,13 @@
-<% content_for :header_title, "Documents" %>
+<% content_for :header_title, "Paperwork" %>
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">
-      Upload some paperwork if you can right now.
+    <div class="pre-title">
+      Almost done!
     </div>
-
-    <p class="text--help text--centered">
-      You can do this later but this will help speed up the process.
-    </p>
+    <div class="form-card__title">
+      Do you have paperwork with you?
+    </div>
   </header>
 
   <%= form_for @step,
@@ -18,30 +17,32 @@
     method: :put do |f| %>
 
     <div class="form-card__content">
-      <footer class="text--centered">
-        <%= f.hidden_field(:upload_paperwork, class: 'boolean-answer') %>
-
-        <button
-          type="submit"
-          class="button button--full-mobile"
-          data-no> I'll do this later </button>
-
-        <button
-          type="submit"
-          class="button button--full-mobile button--cta"
-          data-yes> Submit paperwork now </button>
-      </footer>
+      <p>
+        This includes documents like IDs, proof of income, and proof of
+        expenses.
+      </p>
+      <p>
+        After reviewing your application, staff will five you a list of
+        exactly what paperwork you need to provide. However,
+        <strong>we recommend uploading anything you have with you now</strong>.
+        It will help your application get processed faster
+      </p>
     </div>
+
+    <footer class="form-card__footer">
+      <%= f.hidden_field(:upload_paperwork, class: 'boolean-answer') %>
+
+      <button
+        type="submit"
+        class="button button--full-mobile button--cta"
+        data-yes> Upload paperwork now </button>
+
+      <button
+        type="submit"
+        class="button button--full-mobile"
+        data-no> I'll do this later
+        <span class="icon-arrow_forward"></span>
+      </button>
+    </footer>
   <% end %>
-
-  <p class='text--secure'>
-    <i class='illustration illustration--safety'></i>
-    Both MichiganBenefits.org and MDHHS maintain strict security guidelines
-    to protect the identities of Michigan residents.
-  </p>
-
-  <div class='slab'>
-    <%= render "shared/commonly_requested_uploadables",
-      uploadable_name: "paperwork" %>
-  </div>
 </div>
