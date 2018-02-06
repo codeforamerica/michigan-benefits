@@ -27,6 +27,7 @@ gem "lograge"
 gem "mimemagic"
 gem "mini_magick"
 gem "neat", "~> 1.8" # to keep in sync with getcalfresh
+gem "nokogiri", "~> 1.8.2"
 gem "pdf-forms"
 gem "pg", "~> 0.21"
 gem "prawn"

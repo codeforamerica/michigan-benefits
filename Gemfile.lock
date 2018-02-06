@@ -753,7 +753,7 @@ GEM
       sass (>= 3.3)
       thor (~> 0.19)
     nio4r (2.2.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     overcommit (0.41.0)
@@ -982,6 +982,7 @@ DEPENDENCIES
   mimemagic
   mini_magick
   neat (~> 1.8)
+  nokogiri (~> 1.8.2)
   overcommit
   pdf-forms
   pdf-reader
