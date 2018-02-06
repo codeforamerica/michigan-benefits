@@ -24,10 +24,10 @@
             <p>
               <i class="button__icon--left icon-check icon-check--color"></i>
               <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
-              <%= link_to "(remove)", household_remove_member_steps_path(member_id: member.id),
+              (<%= link_to "remove", household_remove_member_steps_path(member_id: member.id),
                                       method: :put,
                                       class: "remove",
-                                      "aria-labelledby": "member-name-#{member.id}" %>
+                                      "aria-labelledby": "member-name-#{member.id}" %>)
             </p>
           </div>
         <% end %>
