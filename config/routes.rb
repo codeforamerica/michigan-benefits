@@ -12,7 +12,8 @@ Rails.application.routes.draw do
         get "pdf", on: :member
       end
       resources :exports, only: %i[index show]
-      resources :members
+      resources :members, only: %i[index show]
+      resources :employments, only: %i[index show]
       resources :driver_errors, only: %i[index show]
       resources :addresses, only: %i[index show]
 

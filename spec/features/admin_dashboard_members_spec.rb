@@ -32,13 +32,13 @@ RSpec.feature "Admins can view members" do
     visit admin_members_path
 
     within "[data-url='#{admin_member_path(john)}']" do
-      expect(page).to have_content "john"
-      expect(page).to have_content "doe"
+      expect(page).to have_content "John"
+      expect(page).to have_content "Doe"
     end
 
     within "[data-url='#{admin_member_path(joe)}']" do
-      expect(page).to have_content "joe"
-      expect(page).to have_content "schmoe"
+      expect(page).to have_content "Joe"
+      expect(page).to have_content "Schmoe"
     end
   end
 end

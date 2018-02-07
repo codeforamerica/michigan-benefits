@@ -183,3 +183,7 @@ en:
           and your household typically file taxes."
   ssn:
     description: "Providing Social Security numbers ensures you receive the correct benefits. Even if you've applied before, this helps connect this application to the right file. MDHHS maintains strict security guidelines to protect the identities of our residents."
+  helpers:
+    label:
+      member:
+        ssn: SSN?

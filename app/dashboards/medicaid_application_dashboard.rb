@@ -10,6 +10,7 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     members: Field::HasMany,
     addresses: Field::HasMany,
+    employments: Field::HasMany,
     id: Field::Number,
     michigan_resident: Field::Boolean,
     created_at: Field::DateTime,
@@ -24,7 +25,6 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     income_retirement: Field::Boolean,
     income_alimony: Field::Boolean,
     filing_federal_taxes_next_year: Field::Boolean,
-    self_employed_monthly_income: Field::Number,
     college_loan_interest_expenses: Field::Number,
     child_support_alimony_arrears_expenses: Field::Number,
     phone_number: Field::String,
@@ -82,6 +82,7 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     members
     exports
     addresses
+    employments
     michigan_resident
     created_at
     updated_at
@@ -95,7 +96,6 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     income_retirement
     income_alimony
     filing_federal_taxes_next_year
-    self_employed_monthly_income
     college_loan_interest_expenses
     child_support_alimony_arrears_expenses
     phone_number
@@ -147,7 +147,6 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     income_retirement
     income_alimony
     filing_federal_taxes_next_year
-    self_employed_monthly_income
     college_loan_interest_expenses
     child_support_alimony_arrears_expenses
     phone_number

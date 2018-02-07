@@ -16,6 +16,7 @@ class MemberDashboard < Administrate::BaseDashboard
     sex: Field::String,
     first_name: Field::String,
     last_name: Field::String,
+    display_name: Field::String,
     birthday: Field::DateTime,
     buy_food_with: Field::Boolean,
     relationship: Field::String,
@@ -25,14 +26,16 @@ class MemberDashboard < Administrate::BaseDashboard
     employed_hours_per_week: Field::Number,
     employed_pay_quantity: Field::Number,
     employed_pay_interval: Field::String,
+    employed_monthly_income: Field::Number,
     self_employed_profession: Field::String,
     self_employed_monthly_income: Field::Number,
-    self_employed_monthly_expenses: Field::String,
+    self_employed_monthly_expenses: Field::Number,
     citizen: Field::Boolean,
     disabled: Field::Boolean,
     new_mom: Field::Boolean,
     in_college: Field::Boolean,
     living_elsewhere: Field::Boolean,
+    ssn: PresenceField,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -41,10 +44,11 @@ class MemberDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    first_name
-    last_name
-    created_at
-    benefit_application
+    display_name
+    employment_status
+    employed_monthly_income
+    self_employed_monthly_income
+    ssn
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
