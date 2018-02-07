@@ -2,6 +2,8 @@ class MedicaidApplication < ApplicationRecord
   include Submittable
   include CommonBenefitApplication
 
+  enum applied_before: { unfilled: 0, yes: 1, no: 2 }, _prefix: :applied_before
+
   has_many(
     :members,
     -> { order(created_at: :asc) },

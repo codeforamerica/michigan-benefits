@@ -23,6 +23,8 @@ class SnapApplication < ApplicationRecord
     alimony
   ].freeze
 
+  enum applied_before: { unfilled: 0, yes: 1, no: 2 }, _prefix: :applied_before
+
   validate :care_expenses_values
   validate :medical_expenses_values
   validate :court_ordered_expenses_values

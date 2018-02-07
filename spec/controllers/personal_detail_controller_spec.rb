@@ -36,7 +36,7 @@ RSpec.describe PersonalDetailController do
           expect(current_app_member.send(key)).to eq(value)
         end
 
-        expect(response).to redirect_to("/steps/household-members-overview")
+        expect(response).to redirect_to("/steps/introduction-applied-before")
       end
     end
   end

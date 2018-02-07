@@ -8,6 +8,16 @@ RSpec.describe SnapApplication do
 
     it_should_behave_like "common benefit application"
   end
+
+  describe "enums" do
+    context "applied_before" do
+      it "should be 'unfilled' by default" do
+        app = build(:snap_application)
+        expect(app.applied_before_unfilled?).to be(true)
+      end
+    end
+  end
+
   describe "validations" do
     [
       [:care_expenses, SnapApplication::CARE_EXPENSES],
