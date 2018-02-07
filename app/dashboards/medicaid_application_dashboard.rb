@@ -59,6 +59,7 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     stable_housing: Field::Boolean,
     anyone_married: Field::Boolean,
     exports: Field::HasMany,
+    applied_before: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -87,6 +88,7 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     created_at
     updated_at
     submit_ssn
+    applied_before
     homeless
     reliable_mail_address
     need_medical_expense_help_3_months

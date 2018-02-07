@@ -43,6 +43,13 @@ feature "SNAP application with maximum info" do
       proceed_with "Continue"
     end
 
+    on_page "Case Details" do
+      expect(page).to have_content(
+        "Have you applied for benefits in Michigan before?",
+      )
+      proceed_with "Yes"
+    end
+
     on_pages "Your Household" do
       click_on "Add a member"
 

@@ -86,9 +86,27 @@ var yesNoButtons = (function () {
   }
 })()
 
+var yesNoEnumButtons = (function () {
+  var yne = {
+    init: function () {
+      $('[data-enum-no]').on('click', function () {
+        $('input.boolean-answer').val('no')
+      })
+
+      $('[data-enum-yes]').on('click', function () {
+        $('input.boolean-answer').val('yes')
+      })
+    }
+  }
+  return {
+    init: yne.init
+  }
+})()
+
 $(document).ready(function () {
   radioSelector.init()
   checkboxSelector.init()
   textWell.init()
   yesNoButtons.init()
+  yesNoEnumButtons.init()
 })

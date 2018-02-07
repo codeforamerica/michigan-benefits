@@ -32,6 +32,13 @@ RSpec.feature "Submit application with minimal information" do
     select "Divorced", from: "What is your marital status?"
     proceed_with "Continue"
 
+    on_page "Case Details" do
+      expect(page).to have_content(
+        "Have you applied for benefits in Michigan before?",
+      )
+      proceed_with "No"
+    end
+
     on_page("Your Household") do
       proceed_with "Continue"
     end

@@ -61,6 +61,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     employments: Field::HasMany,
     driver_errors: Field::HasMany,
     exports: Field::HasMany,
+    applied_before: Field::String,
   }.freeze
   # rubocop:enable LineLength
 
@@ -88,6 +89,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     documents
     phone_number
     sms_consented
+    applied_before
     consent_to_terms
     mailing_address_same_as_residential_address
     unstable_housing

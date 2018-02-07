@@ -1,0 +1,12 @@
+<% content_for :header_title, "Case Details" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Have you applied for benefits in Michigan before?
+    </div>
+    <p class="text--help text--centered">If you’ve applied before, you might be able to submit less paperwork.</p>
+  </header>
+
+  <%= render 'shared/yes_no_enum_form', step: @step, field: :applied_before %>
+</div>

@@ -19,6 +19,8 @@ RSpec.feature "Medicaid app" do
       select_radio(question: "What is your gender?", answer: "Female")
       proceed_with "Next"
 
+      proceed_with "No"
+
       click_on "Add a member"
 
       fill_in "What is their first name?", with: "Christa"

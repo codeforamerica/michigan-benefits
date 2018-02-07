@@ -1,0 +1,1 @@
+class IntroductionAppliedBeforeController < SnapStepsController; end
