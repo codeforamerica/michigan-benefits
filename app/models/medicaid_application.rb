@@ -10,6 +10,7 @@ class MedicaidApplication < ApplicationRecord
   )
 
   has_many :addresses, as: :benefit_application, dependent: :destroy
+  has_many :employments, as: :benefit_application, through: :members
 
   scope :signed, -> { where.not(signed_at: nil) }
 

@@ -29,6 +29,7 @@ class SnapApplication < ApplicationRecord
 
   has_many :addresses, as: :benefit_application, dependent: :destroy
   has_many :members, as: :benefit_application, dependent: :destroy
+  has_many :employments, as: :benefit_application, through: :members
 
   has_many :driver_applications, dependent: :destroy
   has_many :driver_errors, through: :driver_applications

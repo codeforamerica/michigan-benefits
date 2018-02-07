@@ -5,6 +5,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     additional_income: Field::Text.with_options(searchable: false),
+    additional_information: Field::Text.with_options(searchable: false),
     anyone_disabled: Field::Boolean,
     anyone_in_college: Field::Boolean,
     anyone_living_elsewhere: Field::Boolean,
@@ -57,6 +58,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     utility_water_sewer: Field::Boolean,
     vehicle_income: Field::Boolean,
     members: Field::HasMany.with_options(limit: 20),
+    employments: Field::HasMany,
     driver_errors: Field::HasMany,
     exports: Field::HasMany,
   }.freeze
@@ -76,6 +78,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     id
     members
     exports
+    employments
     driver_errors
     created_at
     updated_at
@@ -127,6 +130,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     vehicle_income
     financial_accounts
     total_money
+    additional_information
   ].freeze
 
   FORM_ATTRIBUTES = %i[
