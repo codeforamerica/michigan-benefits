@@ -1,0 +1,18 @@
+<% content_for :content do %>
+  <% content_for :template_name, 'form' %>
+  <div class="step-header">
+    <h4 class="step-header__title step-header__title--centered">
+      <%= content_for :header_title %>
+    </h4>
+  </div>
+  <%= yield %>
+  <div class="form-card--meta-data">
+    <div class="form-card--benefit-label">
+      <%= application_title %>
+    </div>
+    <div class="form-card--security-message">Your information is always kept safe and secure</div>
+  </div>
+  <%= render 'shared/footer' %>
+<% end %>
+
+<%= render template: 'layouts/application' %>

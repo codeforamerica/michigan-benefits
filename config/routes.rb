@@ -67,5 +67,16 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sections, only: %[index show] do
+    collection do
+      { get: :edit, put: :update }.each do |method, action|
+        match "/benefits-intro",
+          action: action,
+          controller: "integrated/benefits_intro",
+          via: method
+      end
+    end
+  end
+
   get "/styleguide", to: "styleguides#index"
 end
