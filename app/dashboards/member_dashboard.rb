@@ -16,7 +16,6 @@ class MemberDashboard < Administrate::BaseDashboard
     sex: Field::String,
     first_name: Field::String,
     last_name: Field::String,
-    display_name: Field::String,
     birthday: Field::DateTime,
     buy_food_with: Field::Boolean,
     relationship: Field::String,
@@ -44,7 +43,8 @@ class MemberDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    display_name
+    first_name
+    last_name
     employment_status
     employed_monthly_income
     self_employed_monthly_income
@@ -111,6 +111,6 @@ class MemberDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how members are displayed
   # across all pages of the admin dashboard.
   def display_resource(member)
-    member.display_name
+    "#{member.first_name} #{member.last_name} (##{member.id})"
   end
 end
