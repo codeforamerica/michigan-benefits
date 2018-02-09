@@ -187,4 +187,4 @@ en:
     label:
       member:
         ssn: SSN?
-  real_phone_number: "Please use a real phone number."
+  real_phone_number: "This number looks wrong. Please use a real phone number."
