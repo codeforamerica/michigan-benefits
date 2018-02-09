@@ -80,7 +80,7 @@ RSpec.describe OfficeRecipient do
   end
 
   def test_office_phone_number
-    "5555555555"
+    "2024561111"
   end
 
   OFFICE_TO_ZIP_MAPPING = {

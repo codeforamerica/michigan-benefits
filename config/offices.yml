@@ -46,19 +46,19 @@ development:
   <<: *defaults
   offices:
     test_office:
-      phone_number: "5555551111"
+      phone_number: "2024561111"
       email: "staging@example.com"
     union:
-      phone_number: "5555552222"
+      phone_number: "2024561112"
       email: "union@example.com"
     clio:
-      phone_number: "5555553333"
+      phone_number: "2024561113"
       email: "clio@example.com"
 staging:
   <<: *defaults
   offices:
     test_office:
-      phone_number: "5555555555"
+      phone_number: "2024561111"
       email: "hello@michiganbenefits.org"
     union:
       phone_number: "8107607300"
@@ -70,7 +70,7 @@ production:
   <<: *defaults
   offices:
     test_office:
-      phone_number: "5555555555"
+      phone_number: "2024561111"
       email: "hello@michiganbenefits.org"
     union:
       phone_number: "8107607300"

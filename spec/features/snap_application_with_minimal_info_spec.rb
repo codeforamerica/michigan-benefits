@@ -11,7 +11,7 @@ RSpec.feature "Submit application with minimal information" do
       proceed_with "Continue"
     end
 
-    fill_in "What is the best phone number to reach you?", with: "2222222222"
+    fill_in "What is the best phone number to reach you?", with: "2024561111"
     proceed_with "Continue"
 
     fill_in "Address", with: "123 Main St"

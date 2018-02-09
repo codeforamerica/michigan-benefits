@@ -773,6 +773,7 @@ GEM
       ruby-rc4
       ttfunk
     pg (0.21.0)
+    phonelib (0.6.18)
     powerpack (0.1.1)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
@@ -987,6 +988,7 @@ DEPENDENCIES
   pdf-forms
   pdf-reader
   pg (~> 0.21)
+  phonelib
   prawn
   pry-byebug
   pry-rails

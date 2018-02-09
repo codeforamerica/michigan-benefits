@@ -15,8 +15,8 @@ RSpec.describe Medicaid::ContactTextMessages do
         step = Medicaid::ContactTextMessages.new(sms_phone_number: "123123")
 
         expect(step).to be_invalid
-        expect(step.errors[:sms_phone_number]).to eq(
-          ["Make sure your phone number is 10 digits long"],
+        expect(step.errors[:sms_phone_number]).to include(
+          "Make sure your phone number is 10 digits long",
         )
       end
     end

@@ -13,7 +13,7 @@ RSpec.describe ContactInformationController do
     it "assigns the fields to the step" do
       get :edit
 
-      expect(step.phone_number).to eq "11122233333"
+      expect(step.phone_number).to eq "2024561111"
       expect(step.email).to eq("test@example.com")
     end
   end
@@ -22,7 +22,7 @@ RSpec.describe ContactInformationController do
     context "when valid" do
       it "redirects to the next step" do
         valid_params = {
-          phone_number: "2222222222",
+          phone_number: "2024561111",
         }
 
         put :update, params: { step: valid_params }
@@ -35,7 +35,7 @@ RSpec.describe ContactInformationController do
   def current_app
     @_current_app ||= create(
       :snap_application,
-      phone_number: "11122233333",
+      phone_number: "2024561111",
       email: "test@example.com",
     )
   end

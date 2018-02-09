@@ -8,7 +8,7 @@ RSpec.feature "Mailing and residential addresses" do
     fill_in_name_and_birthday
     click_on "Continue"
 
-    fill_in "What is the best phone number to reach you?", with: "2223334444"
+    fill_in "What is the best phone number to reach you?", with: "2024561111"
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
@@ -35,7 +35,7 @@ RSpec.feature "Mailing and residential addresses" do
     fill_in_name_and_birthday
     click_on "Continue"
 
-    fill_in "What is the best phone number to reach you?", with: "2223334444"
+    fill_in "What is the best phone number to reach you?", with: "2024561111"
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 

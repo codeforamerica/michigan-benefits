@@ -8,7 +8,7 @@ RSpec.feature "Missing required fields" do
     fill_in_name_and_birthday
     proceed_with "Continue"
 
-    fill_in "What is the best phone number to reach you?", with: "2223334444"
+    fill_in "What is the best phone number to reach you?", with: "2024561111"
     proceed_with "Continue"
 
     fill_in "Address", with: "123 Main St."

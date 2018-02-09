@@ -418,7 +418,7 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "What is the best number for you to receive phone calls?",
       )
-      fill_in "Phone number", with: "5555555555"
+      fill_in "Phone number", with: "2024561111"
       proceed_with "Next"
     end
 
