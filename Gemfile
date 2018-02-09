@@ -30,6 +30,7 @@ gem "neat", "~> 1.8" # to keep in sync with getcalfresh
 gem "nokogiri", "~> 1.8.2"
 gem "pdf-forms"
 gem "pg", "~> 0.21"
+gem "phonelib"
 gem "prawn"
 gem "pry-rails"
 gem "puma"

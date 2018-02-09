@@ -101,7 +101,7 @@ RSpec.describe Dhs1426Pdf do
         :medicaid_application,
         members: [primary_member, secondary_member],
         stable_housing: true,
-        phone_number: "0123456789",
+        phone_number: "2024561111",
         flint_water_crisis: true,
         need_medical_expense_help_3_months: true,
         anyone_insured: true,
@@ -186,16 +186,16 @@ RSpec.describe Dhs1426Pdf do
       }
 
       expected_phone_data = {
-        phone_number_0: "0",
-        phone_number_1: "1",
+        phone_number_0: "2",
+        phone_number_1: "0",
         phone_number_2: "2",
-        phone_number_3: "3",
-        phone_number_4: "4",
-        phone_number_5: "5",
-        phone_number_6: "6",
-        phone_number_7: "7",
-        phone_number_8: "8",
-        phone_number_9: "9",
+        phone_number_3: "4",
+        phone_number_4: "5",
+        phone_number_5: "6",
+        phone_number_6: "1",
+        phone_number_7: "1",
+        phone_number_8: "1",
+        phone_number_9: "1",
       }
 
       expected_primary_member_income_and_expenses = {

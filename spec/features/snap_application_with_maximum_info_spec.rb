@@ -13,7 +13,7 @@ feature "SNAP application with maximum info" do
     end
 
     on_page "Contact Information" do
-      fill_in "What is the best phone number to reach you?", with: "2223334444"
+      fill_in "What is the best phone number to reach you?", with: "2024561111"
       fill_in "What is your email address?", with: "test@example.com"
       proceed_with "Continue"
     end

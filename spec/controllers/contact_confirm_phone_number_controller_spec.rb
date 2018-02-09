@@ -10,7 +10,7 @@ RSpec.describe ContactConfirmPhoneNumberController do
   describe "#update" do
     it "updates the phone number" do
       session[:snap_application_id] = current_app.id
-      new_phone_number = "4443332222"
+      new_phone_number = "2024561112"
       params = { step: { phone_number: new_phone_number } }
 
       put :update, params: params
@@ -23,7 +23,7 @@ RSpec.describe ContactConfirmPhoneNumberController do
     @_current_app ||= create(
       :snap_application,
       sms_consented: true,
-      phone_number: "2223334444",
+      phone_number: "2024561111",
     )
   end
 end

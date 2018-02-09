@@ -13,7 +13,7 @@ minimal_application = SnapApplication.find_or_initialize_by(
 minimal_application.update!(
   signature: "Minimal Application",
   signed_at: Time.current,
-  phone_number: "5551230000",
+  phone_number: "2024561111",
   sms_consented: false,
   consent_to_terms: true,
   everyone_a_citizen: true,
@@ -85,7 +85,7 @@ complete_application.update!(
   signature: "Complete Testapp",
   signed_at: Time.current,
   documents: [flint_driver_license],
-  phone_number: "5550001234",
+  phone_number: "2024561111",
   sms_consented: true,
   consent_to_terms: true,
   mailing_address_same_as_residential_address: false,

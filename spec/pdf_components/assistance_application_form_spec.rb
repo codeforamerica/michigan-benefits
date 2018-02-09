@@ -37,7 +37,7 @@ RSpec.describe AssistanceApplicationForm do
         residential_address: residential_address,
         mailing_address: mailing_address,
         primary_member: primary_member,
-        phone_number: "8005551234",
+        phone_number: "2024561111",
         email: "hello@multibenefits.org",
         signature: "Octopus G Cuttlefish",
         signed_at_est: "01/22/2018",
@@ -53,7 +53,7 @@ RSpec.describe AssistanceApplicationForm do
         expect(subject).to include(
           legal_name: "Octopus Cuttlefish",
           dob: "10/18/1991",
-          phone_home: "(800) 555-1234",
+          phone_home: "(202) 456-1111",
           email: "hello@multibenefits.org",
           applying_for_food: "Yes",
           signature_applicant: "Octopus G Cuttlefish",
