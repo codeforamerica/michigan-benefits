@@ -14,6 +14,12 @@ RSpec.feature "Admins can view members" do
     end
   end
 
+  scenario "searching isn't broken", javascript: true do
+    visit admin_members_path(search: "adsf")
+
+    expect(page).to have_content("Members")
+  end
+
   scenario "Members are listed" do
     benefit_application = build(:medicaid_application)
     john = create(
@@ -32,13 +38,13 @@ RSpec.feature "Admins can view members" do
     visit admin_members_path
 
     within "[data-url='#{admin_member_path(john)}']" do
-      expect(page).to have_content "John"
-      expect(page).to have_content "Doe"
+      expect(page).to have_content "john"
+      expect(page).to have_content "doe"
     end
 
     within "[data-url='#{admin_member_path(joe)}']" do
-      expect(page).to have_content "Joe"
-      expect(page).to have_content "Schmoe"
+      expect(page).to have_content "joe"
+      expect(page).to have_content "schmoe"
     end
   end
 end
