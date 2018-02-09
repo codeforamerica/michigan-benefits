@@ -6,6 +6,12 @@ RSpec.feature "Admins can view exports" do
     login_as(user)
   end
 
+  scenario "searching isn't broken", javascript: true do
+    visit admin_exports_path(search: "asdf")
+
+    expect(page).to have_content("Exports")
+  end
+
   scenario "Exports are listed" do
     medicaid_application = build(:medicaid_application)
     snap_application = build(:snap_application)

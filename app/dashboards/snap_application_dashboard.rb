@@ -40,13 +40,13 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     monthly_medical_expenses: Field::String.with_options(searchable: false),
     office_location: Field::String,
     phone_number: Field::String,
-    property_tax_expense: Field::Number,
+    property_tax_expense: Field::Number.with_options(searchable: false),
     real_estate_income: Field::Boolean,
-    rent_expense: Field::Number,
+    rent_expense: Field::Number.with_options(searchable: false),
     signature: Field::String,
     signed_at: Field::DateTime,
     sms_consented: Field::Boolean,
-    total_money: Field::Number,
+    total_money: Field::Number.with_options(searchable: false),
     unstable_housing: Field::Boolean,
     updated_at: Field::DateTime,
     utility_cooling: Field::Boolean,
@@ -61,7 +61,7 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     employments: Field::HasMany,
     driver_errors: Field::HasMany,
     exports: Field::HasMany,
-    applied_before: Field::String,
+    applied_before: Field::String.with_options(searchable: false),
   }.freeze
   # rubocop:enable LineLength
 

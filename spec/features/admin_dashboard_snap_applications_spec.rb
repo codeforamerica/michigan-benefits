@@ -16,6 +16,12 @@ RSpec.feature "Submit snap application with minimal information" do
     expect(page).to have_content("Log in")
   end
 
+  scenario "searching isn't broken", javascript: true do
+    visit admin_root_path(search: "asdf")
+
+    expect(page).to have_content("Snap Applications")
+  end
+
   scenario "The stats are accurate", javascript: true do
     10.times { create(:snap_application, signed_at: nil) }
     1.times { create(:snap_application, :emailed_client, signed_at: nil) }

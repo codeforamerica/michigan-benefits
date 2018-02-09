@@ -23,6 +23,12 @@ RSpec.feature "Admin viewing medicaid applications dashboard", type: :feature do
     expect(page).to have_content("Medicaid Application ##{application.id}")
   end
 
+  scenario "searching isn't broken", javascript: true do
+    visit admin_medicaid_applications_path(search: "asdf")
+
+    expect(page).to have_content("Medicaid Applications")
+  end
+
   scenario "downloads the 1426 PDF application", javascript: true do
     application = create(
       :medicaid_application,

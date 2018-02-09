@@ -8,6 +8,12 @@ RSpec.feature "Admin viewing driver errors dashboard", type: :feature do
     login_as(user)
   end
 
+  scenario "searching isn't broken", javascript: true do
+    visit admin_driver_errors_path(search: "asdf")
+
+    expect(page).to have_content("Driver Errors")
+  end
+
   scenario "show", javascript: true do
     driver_error = create(
       :driver_error,

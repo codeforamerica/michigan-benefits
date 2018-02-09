@@ -34,7 +34,7 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     sms_consented: Field::Boolean,
     birthday: Field::DateTime,
     self_employment_expenses: Field::Number,
-    employed_monthly_income: Field::String,
+    employed_monthly_income: Field::String.with_options(searchable: false),
     anyone_in_college: Field::Boolean,
     flint_water_crisis: Field::Boolean,
     anyone_employed: Field::Boolean,
@@ -53,13 +53,13 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     signature: Field::String,
     signed_at: Field::DateTime,
     upload_paperwork: Field::Boolean,
-    paperwork: Field::String,
+    paperwork: Field::String.with_options(searchable: false),
     office_location: Field::String,
     mailing_address_same_as_residential_address: Field::Boolean,
     stable_housing: Field::Boolean,
     anyone_married: Field::Boolean,
     exports: Field::HasMany,
-    applied_before: Field::String,
+    applied_before: Field::String.with_options(searchable: false),
   }.freeze
 
   # COLLECTION_ATTRIBUTES

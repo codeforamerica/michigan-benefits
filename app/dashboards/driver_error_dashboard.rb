@@ -2,7 +2,7 @@ require "administrate/base_dashboard"
 
 class DriverErrorDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
-    page_history: Field::String,
+    page_history: Field::String.with_options(searchable: false),
     snap_application: Field::HasOne,
     id: Field::Number,
     error_class: Field::String,
