@@ -1,4 +1,5 @@
 class MessagesController < ActionController::Base
+  protect_from_forgery with: :exception
   layout "application"
 
   def new
@@ -8,6 +9,7 @@ class MessagesController < ActionController::Base
   def create
     @message = Message.new(permitted_params)
     if @message.save
+      SmsMessageJob.perform_later(message: @message)
       flash[:success] = "Your message to #{@message.phone} has been sent!"
       redirect_to new_message_path
     else
