@@ -1,4 +1,4 @@
-class Casenote
+class Message
   include ActiveModel::Model
   include ActiveModel::Validations
 

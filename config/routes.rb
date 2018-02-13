@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :casenotes
+  resources :messages
 
   root "static_pages#index"
   get "/clio" => "static_pages#clio"

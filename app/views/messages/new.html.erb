@@ -7,7 +7,7 @@ end %>
 
 <div class="slab">
   <div class="grid">
-    <%= form_for @casenote do |f| %>
+    <%= form_for @message do |f| %>
       <legend>Send client message</legend>
       <%= f.label :phone, 'Client' %>
       <%= f.select(:phone, [['Alan W. - 817-713-6264', '8177136264'],
