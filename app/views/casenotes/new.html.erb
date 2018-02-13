@@ -7,9 +7,15 @@ end %>
 
 <div class="slab">
   <div class="grid">
-    <h1>Send client message</h1>
+    <%= form_for @casenote do |f| %>
+      <legend>Send client message</legend>
+      <%= f.label :phone, 'Client' %>
+      <%= f.select(:phone, [['Alan W. - 817-713-6264', '8177136264'],
+                           ['Ben G. - 831-420-7603', '8314207603'],
+                           ['Luigi R. - 848-702-4594', '8487024594']]) %>
+
+    <% end %>
   </div>
 </div>
-
 
 <%= render 'shared/footer' %>

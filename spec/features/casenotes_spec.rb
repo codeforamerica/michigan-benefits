@@ -5,5 +5,7 @@ RSpec.feature "Anonymous caseworker sends a message to client" do
     visit new_casenote_path
 
     expect(page).to have_text("Send client message")
+
+    select('Alan W. - 817-713-6264', :from => 'Client')
   end
 end
