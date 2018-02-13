@@ -18,17 +18,17 @@ end %>
       </p>
     </div>
 
-      <div class="hero--cta-options grid__item">
-    <%= link_to step_path(StepNavigation.first, office_location: "union") do %>
-      <p class="button button--cta button--fully-width">Apply for FAP</p>
-      <p class="text--help">Food Stamps</p>
-    <% end %>
+    <div class="hero--cta-options grid__item">
+      <%= link_to step_path(StepNavigation.first, office_location: "union") do %>
+        <p class="button button--cta button--fully-width">Apply for FAP</p>
+        <p class="text--help">Food Stamps</p>
+      <% end %>
 
-    <%= link_to step_path(Medicaid::StepNavigation.first, office_location: "union") do %>
-      <p class="button button--cta button--fully-width">Apply for Medicaid</p>
-      <p class="text--help">Health insurance</p>
-    <% end %>
-  </div>    
+      <%= link_to step_path(Medicaid::StepNavigation.first, office_location: "union") do %>
+        <p class="button button--cta button--fully-width">Apply for Medicaid</p>
+        <p class="text--help">Health insurance</p>
+      <% end %>
+    </div>
 
     <p class="text--small">
       Not at the Union Street office? <%= link_to "Apply anywhere", root_path %>.

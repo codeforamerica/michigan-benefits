@@ -1,0 +1,15 @@
+<% content_for :template_name, 'homepage' %>
+<% content_for :banner do
+  render "shared/banner", banner_text: "You are logged in as Example Caseworker at Clio Road"
+end %>
+
+<%= render 'shared/flashes' %>
+
+<div class="slab">
+  <div class="grid">
+    <h1>Send client message</h1>
+  </div>
+</div>
+
+
+<%= render 'shared/footer' %>
