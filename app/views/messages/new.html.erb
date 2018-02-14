@@ -1,3 +1,7 @@
+<% content_for :header_javascript do %>
+    <%= javascript_include_tag "https://js.shubox.io/v1/#{Rails.application.secrets.shubox_js_id}.js", defer: true %>
+<% end %>
+
 <% content_for :template_name, 'homepage' %>
 <% content_for :banner do
   render "shared/banner", banner_text: "You are logged in as Example Caseworker at Clio Road"
@@ -7,31 +11,55 @@ end %>
 
 <div class="slab">
   <div class="grid">
+    <%= form_for @message, builder: MbFormBuilder, html: { data: { 'uploadables-form' => 'true' } } do |f| %>
 
-    <div class="form-card">
-      <div class="form-card__header">
-        <h1 class="form-card__title">Send client message</h1>
-      </div>
-      <div class="form-card__content">
+      <div id="uploadables-drop" class="form-card">
+        <div class="form-card__header">
+          <h1 class="form-card__title">Send client message</h1>
+        </div>
+        <div class="form-card__content">
 
-        <%= form_for @message, builder: MbFormBuilder do |f| %>
 
           <%= f.mb_select :phone, 'Client', [
             ['Alan W. - 817-713-6264', '8177136264'],
             ['Ben G. - 831-420-7603', '8314207603'],
             ['Luigi R. - 848-702-4594', '8487024594']] %>
 
+          <div class="form-group">
+            <p>
+              Paste screenshots onto this page using Ctrl + V or click the "Upload screenshots" button below.
+            </p>
+            <div class="form-card__uploadables" id="form-card__uploadables">
+              <%= render partial: 'shared/uploadable',
+                collection: @message.screenshots,
+                locals: { attribute_name: "screenshots" },
+                as: :url %>
+            </div>
+            <button type="button" class="button button--full-mobile button--cta" id="click-to-upload">
+              <i class="icon-file_upload"></i>
+              Upload screenshots
+            </button>
+          </div>
+
           <%= f.mb_textarea :body, 'Message', options: {rows: '5'} %>
 
           <button class="button button--full-mobile button--cta" type="submit">
             Send
           </button>
-        <% end %>
 
-      </div>
+        </div>
     </div>
+    <% end %>
 
   </div>
 </div>
 
 <%= render 'shared/footer' %>
+
+<% unless Rails.env.test? -%>
+<script>
+  window.onload = function() {
+    uploadSetup("<%= j render "shared/uploadable_uploading", object_name: "message", attribute_name: "screenshots" %>")
+  }
+</script>
+<% end -%>

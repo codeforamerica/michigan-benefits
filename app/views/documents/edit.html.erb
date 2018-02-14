@@ -78,7 +78,7 @@
 <% unless Rails.env.test? -%>
   <script>
     window.onload = function() {
-      uploadSetup("<%= j render "shared/uploadable_uploading", attribute_name: "documents" %>")
+      uploadSetup("<%= j render "shared/uploadable_uploading", object_name: "step", attribute_name: "documents" %>")
     }
   </script>
 <% end -%>
