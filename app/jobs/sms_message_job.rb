@@ -5,6 +5,7 @@ class SmsMessageJob < ApplicationJob
       to: message.phone,
       from: Rails.application.secrets.twilio_phone_number,
       body: message.body,
+      media_url: message.screenshots,
     )
   end
 end

@@ -20,6 +20,6 @@ class MessagesController < ActionController::Base
   private
 
   def permitted_params
-    params.require(:message).permit(:phone, :body)
+    params.require(:message).permit(:phone, :body, screenshots: [])
   end
 end
