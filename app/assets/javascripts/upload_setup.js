@@ -11,6 +11,9 @@ var uploadSetup = function (previewTemplate) {
       var error = '<i class="icon-warning"></i> ' + msg
       $(file.previewElement).find('.text--error').html(error).show()
     },
+    sending: function(file, xhr, formData) {
+      file.postData['Content-Type'] = file.type
+    },
     success: function (file) {
       var button = $('#click-to-upload')
       var buttonHtml = button.html()
