@@ -31,7 +31,7 @@ RSpec.describe MedianTimeToCompleteCalculator do
 
         time = MedianTimeToCompleteCalculator.new(applications).run
 
-        expect(time).to eq(14)
+        expect(time).to eq("13m 35s")
       end
     end
 
@@ -60,7 +60,7 @@ RSpec.describe MedianTimeToCompleteCalculator do
 
         time = MedianTimeToCompleteCalculator.new(applications).run
 
-        expect(time).to eq(14)
+        expect(time).to eq("14m 15s")
       end
     end
   end
