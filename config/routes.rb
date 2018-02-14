@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :messages
+
   root "static_pages#index"
   get "/clio" => "static_pages#clio"
   get "/privacy" => "static_pages#privacy"

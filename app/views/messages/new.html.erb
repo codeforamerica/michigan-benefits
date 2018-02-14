@@ -1,0 +1,37 @@
+<% content_for :template_name, 'homepage' %>
+<% content_for :banner do
+  render "shared/banner", banner_text: "You are logged in as Example Caseworker at Clio Road"
+end %>
+
+<%= render 'shared/flashes' %>
+
+<div class="slab">
+  <div class="grid">
+
+    <div class="form-card">
+      <div class="form-card__header">
+        <h1 class="form-card__title">Send client message</h1>
+      </div>
+      <div class="form-card__content">
+
+        <%= form_for @message, builder: MbFormBuilder do |f| %>
+
+          <%= f.mb_select :phone, 'Client', [
+            ['Alan W. - 817-713-6264', '8177136264'],
+            ['Ben G. - 831-420-7603', '8314207603'],
+            ['Luigi R. - 848-702-4594', '8487024594']] %>
+
+          <%= f.mb_textarea :body, 'Message', options: {rows: '5'} %>
+
+          <button class="button button--full-mobile button--cta" type="submit">
+            Send
+          </button>
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%= render 'shared/footer' %>
