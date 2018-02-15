@@ -94,7 +94,7 @@ RSpec.describe MbFormBuilder do
     end
   end
 
-  describe "#mb_phone_field" do
+  describe "#mb_phone_number_field" do
     it "renders a tel input with a '+1' prefix" do
       class SampleStep < Step
         step_attributes(:phone_number)
@@ -111,7 +111,7 @@ RSpec.describe MbFormBuilder do
           </label>
           <div class="text-input-group">
             <div class="text-input-group__prefix">+1</div>
-            <input type="tel" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_phone_number" aria-labelledby="sample_phone_number__label" name="sample[phone_number]" />
+            <input type="tel" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  maxlength="10" id="sample_phone_number" aria-labelledby="sample_phone_number__label" size="10" name="sample[phone_number]" />
           </div>
         </div>
       HTML
