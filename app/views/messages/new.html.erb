@@ -19,11 +19,13 @@ end %>
         </div>
         <div class="form-card__content">
 
-
           <%= f.mb_select :phone, 'Client', [
-            ['Alan W. - 817-713-6264', '8177136264'],
-            ['Ben G. - 831-420-7603', '8314207603'],
-            ['Luigi R. - 848-702-4594', '8487024594']] %>
+                ['Alan W. - 817-713-6264', '8177136264'],
+                ['Ben G. - 831-420-7603', '8314207603'],
+                ['Luigi R. - 848-702-4594', '8487024594']],
+                include_blank: "Choose one" %>
+
+          <%= f.mb_phone_number_field :custom_phone, "Or enter a custom phone number", help_text: "This is a proof of concept service, and is not ready for use with clients — but you should try it with your colleagues! Add a valid telephone number to send them notes or screenshots via text message." %>
 
           <div class="form-group">
             <p>

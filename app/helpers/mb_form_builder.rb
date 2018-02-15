@@ -92,7 +92,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       label_text,
       type: type,
       help_text: help_text,
-      options: options,
+      options: options.reverse_merge(maxlength: 10),
       classes: classes,
       prefix: prefix,
       autofocus: autofocus,
@@ -408,6 +408,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         for: options[:input_id],
       )
       for_options.delete(:input_id)
+      for_options.delete(:maxlength)
     end
 
     formatted_label = label(

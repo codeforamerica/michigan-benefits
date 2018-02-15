@@ -60,5 +60,12 @@ module FeatureHelper
     )
   end
 
+  def login_with_basic_caseworker_auth
+    page.driver.browser.basic_authorize(
+      Rails.application.secrets.basic_auth_caseworker_user,
+      Rails.application.secrets.basic_auth_caseworker_password,
+    )
+  end
+
   alias on_pages on_page
 end
