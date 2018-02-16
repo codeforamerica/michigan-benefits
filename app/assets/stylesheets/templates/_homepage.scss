@@ -178,6 +178,19 @@
     }
   }
 
+  @each $office in clio, union {
+    .slab--hero-#{$office} {
+      &:before {
+        background-image: image-url('hero-#{$office}-mobile');
+        @include media($tablet-up) {
+          background-image: image-url('hero-#{$office}-landscape');
+        }
+      }
+    }
+  }
+
+
+
   .slab--faq {
     background-color: $color-light-grey;
   }
