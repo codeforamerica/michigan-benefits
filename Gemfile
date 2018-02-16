@@ -76,6 +76,9 @@ group :development, :test do
   gem "rubocop", require: false
   gem "rubocop-rspec", require: false
   gem "simplecov"
+  gem "spring"
+  gem "spring-commands-rspec"
+  gem "spring-commands-rubocop"
 end
 
 group :production do
