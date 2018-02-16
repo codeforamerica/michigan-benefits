@@ -9,6 +9,7 @@ gem "administrate"
 gem "attr_encrypted"
 gem "auto_strip_attributes"
 gem "aws-sdk"
+gem 'bootsnap', require: false
 gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "browser"
 gem "capybara"
