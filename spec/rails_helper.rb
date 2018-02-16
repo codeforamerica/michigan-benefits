@@ -5,13 +5,11 @@ require "rspec/rails"
 require "capybara/rails"
 require "capybara/rspec"
 require "selenium/webdriver"
-require "capybara/drivers/chrome"
-require "capybara/drivers/headless_chrome"
 require "axe/rspec"
 require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-Capybara.javascript_driver = :headless_chrome # or `:chrome` for full browser
+Capybara.javascript_driver = :selenium_chrome_headless # or `:chrome` for full browser
 
 ActiveRecord::Migration.maintain_test_schema!
 
