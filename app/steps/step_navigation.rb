@@ -38,6 +38,9 @@ class StepNavigation
       AuthorizedRepresentativeController,
       GeneralAnythingElseController,
     ],
+    "Paperwork Guide" => [
+      PaperworkIdentificationController,
+    ],
     "Submit Documents" => [
       DocumentGuideController,
       DocumentsController,

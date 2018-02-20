@@ -36,7 +36,7 @@ RSpec.feature "Submit application with minimal information" do
       expect(page).to have_content(
         "Have you applied for benefits in Michigan before?",
       )
-      proceed_with "No"
+      proceed_with "Yes"
     end
 
     on_page("Your Household") do

@@ -22,7 +22,7 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Have you applied for benefits in Michigan before?",
       )
-      proceed_with "No"
+      proceed_with "Yes"
 
       expect(page).to have_content(
         "Now tell us about any other people residing in your household.",

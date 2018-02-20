@@ -22,7 +22,7 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Have you applied for benefits in Michigan before?",
       )
-      proceed_with "Yes"
+      proceed_with "No"
 
       expect(page).to have_content(
         "Now tell us about any other people residing in your household.",
@@ -217,6 +217,15 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Lastly, we need to get your signature and review your paperwork.",
       )
+      proceed_with "Next"
+    end
+
+    on_page "Paperwork Guide" do
+      expect(page).to have_content(
+        "Collect and submit the following paperwork",
+      )
+      select_radio(question: "A picture ID for everyone", answer: "I need help or can't get this")
+
       proceed_with "Next"
     end
 

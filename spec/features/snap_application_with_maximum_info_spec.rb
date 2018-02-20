@@ -47,7 +47,7 @@ feature "SNAP application with maximum info" do
       expect(page).to have_content(
         "Have you applied for benefits in Michigan before?",
       )
-      proceed_with "Yes"
+      proceed_with "No"
     end
 
     on_pages "Your Household" do
@@ -177,6 +177,15 @@ accounts?",
 
     on_page "Other Details" do
       fill_in "Anything else?", with: "This is helpful, thank you!"
+      proceed_with "Continue"
+    end
+
+    on_page "Paperwork Guide" do
+      expect(page).to have_content(
+        "Collect and submit the following paperwork",
+      )
+      select_radio(question: "A picture ID for everyone", answer: "I need help or can't get this")
+
       proceed_with "Continue"
     end
 
