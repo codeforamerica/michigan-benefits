@@ -751,7 +751,7 @@ GEM
       railties (>= 3.1)
     msgpack (1.2.2)
     multipart-post (2.0.0)
-    mustermann (1.0.1)
+    mustermann (1.0.2)
     neat (1.9.0)
       sass (>= 3.3)
       thor (~> 0.19)
@@ -791,8 +791,8 @@ GEM
       pry (>= 0.10.4)
     public_suffix (3.0.1)
     puma (3.11.2)
-    rack (2.0.3)
-    rack-protection (2.0.0)
+    rack (2.0.4)
+    rack-protection (2.0.1)
       rack
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
@@ -895,10 +895,10 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    sinatra (2.0.0)
+    sinatra (2.0.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.0)
+      rack-protection (= 2.0.1)
       tilt (~> 2.0)
     slack-ruby-client (0.11.0)
       activesupport
@@ -1017,6 +1017,7 @@ DEPENDENCIES
   sentry-raven
   shoulda-matchers
   simplecov
+  sinatra (~> 2.0.1)
   slack-ruby-client
   spring
   spring-commands-rspec
