@@ -461,6 +461,15 @@ RSpec.feature "Medicaid app" do
       proceed_with "Next"
     end
 
+    on_page "Paperwork Guide" do
+      expect(page).to have_content(
+        "Collect and submit the following paperwork",
+      )
+      select_radio(question: "A picture ID for everyone", answer: "I can get this soon")
+
+      proceed_with "Next"
+    end
+
     on_pages "Paperwork" do
       expect(page).to have_content(
         "Do you have paperwork with you?",
