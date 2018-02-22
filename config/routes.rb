@@ -11,6 +11,9 @@ Rails.application.routes.draw do
       resources :medicaid_applications do
         get "pdf", on: :member
       end
+      resources :common_applications do
+        get "pdf", on: :member
+      end
       resources :exports, only: %i[index show]
       resources :members, only: %i[index show]
       resources :employments, only: %i[index show]
