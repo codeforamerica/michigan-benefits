@@ -72,6 +72,17 @@ RSpec.describe Member do
         expect(Member.after(jessie)).to eq [christa]
       end
     end
+
+    describe ".employed_or_self_employed" do
+      it "returns members who are either employed or self employed" do
+        christa = build(:member, employed: true)
+        ben = build(:member, self_employed: true)
+        luigi = build(:member)
+        create(:snap_application, members: [christa, ben, luigi])
+
+        expect(Member.employed_or_self_employed).to eq [christa, ben]
+      end
+    end
   end
 
   describe "#female?" do

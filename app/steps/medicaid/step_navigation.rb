@@ -83,6 +83,7 @@ module Medicaid
       ],
       "Paperwork Guide" => [
         Medicaid::PaperworkIdentificationController,
+        Medicaid::PaperworkIncomeProofController,
       ],
       "Paperwork" => [
         Medicaid::PaperworkGuideController,

@@ -45,6 +45,9 @@ class Member < ApplicationRecord
     unemployment
   ].freeze
 
+  enum has_proof_of_income: { unfilled: 0, today: 1, soon: 2, need_help: 3 },
+       _prefix: :has_proof_of_income
+
   belongs_to :benefit_application, polymorphic: true, counter_cache: true
   has_one :spouse, class_name: "Member", foreign_key: "spouse_id"
   has_many :employments, dependent: :destroy
@@ -138,6 +141,15 @@ class Member < ApplicationRecord
           members.self_employed = true OR
           'unemployment' = ANY (members.other_income_types)
       SQL
+    )
+  end
+
+  def self.employed_or_self_employed
+    where(
+      <<~SQL
+        members.employed = true OR
+          members.self_employed = true
+    SQL
     )
   end
 

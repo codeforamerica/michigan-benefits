@@ -1,0 +1,23 @@
+<% content_for :header_title, "Paperwork Guide" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">Collect and submit the following paperwork right away to speed things up.</div>
+    <p class="text--centered">Your caseworker may ask for other paperwork.</p>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.hidden_field :id %>
+      <%= f.mb_radio_set :has_proof_of_income,
+        label_text: "Proof of all pay received by #{current_member.display_name} from the last 30 days",
+        collection: [{value: :today, label: "I have this today"},
+         {value: :soon, label: "I can get this soon"},
+         {value: :need_help, label: "I need help or can't get this"},
+        ],
+        help_text: "<strong>Qualifies</strong>: paychecks, statements from employers<br><strong>Doesn't Qualify</strong>: bank statements, screenshots of deposits"
+      %>
+      <%= render "medicaid/next_step" %>
+    <% end %>
+  </div>
+</div>
