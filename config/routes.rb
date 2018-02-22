@@ -69,13 +69,18 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :sections, only: %[index show] do
+  resources :sections, controller: :forms, only: %i[index show] do
     collection do
-      { get: :edit, put: :update }.each do |method, action|
-        match "/benefits-intro",
-          action: action,
-          controller: "integrated/benefits_intro",
-          via: method
+      [
+        Integrated::IntroduceYourselfController,
+        Integrated::BenefitsIntroController,
+      ].each do |controller_class|
+        { get: :edit, put: :update }.each do |method, action|
+          match "/#{controller_class.to_param}",
+            action: action,
+            controller: controller_class.controller_path,
+            via: method
+        end
       end
     end
   end

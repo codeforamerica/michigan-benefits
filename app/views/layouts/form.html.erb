@@ -1,9 +1,9 @@
 <% content_for :content do %>
   <% content_for :template_name, 'form' %>
   <div class="step-header">
-    <h4 class="step-header__title step-header__title--centered">
+    <div class="step-header__title step-header__title--centered">
       <%= content_for :header_title %>
-    </h4>
+    </div>
   </div>
   <%= yield %>
   <div class="form-card--meta-data">

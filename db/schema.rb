@@ -58,6 +58,12 @@ ActiveRecord::Schema.define(version: 20180221190925) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+
+  create_table "common_applications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "attempts", default: 0, null: false
     t.datetime "created_at"
@@ -125,6 +131,17 @@ ActiveRecord::Schema.define(version: 20180221190925) do
     t.string "status", default: "new"
     t.datetime "updated_at", null: false
     t.index ["benefit_application_type", "benefit_application_id"], name: "index_exports_on_benefit_app_type_and_benefit_app_id"
+  end
+
+  create_table "household_members", force: :cascade do |t|
+    t.datetime "birthday"
+    t.bigint "common_application_id"
+    t.datetime "created_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "sex"
+    t.datetime "updated_at", null: false
+    t.index ["common_application_id"], name: "index_household_members_on_common_application_id"
   end
 
   create_table "medicaid_applications", force: :cascade do |t|
