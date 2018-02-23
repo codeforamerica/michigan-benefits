@@ -40,6 +40,7 @@ class StepNavigation
     ],
     "Paperwork Guide" => [
       PaperworkIdentificationController,
+      PaperworkIncomeProofController,
     ],
     "Submit Documents" => [
       DocumentGuideController,

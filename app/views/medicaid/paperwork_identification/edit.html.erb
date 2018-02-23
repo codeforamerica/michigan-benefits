@@ -2,21 +2,24 @@
 
 <div class="form-card">
   <header class="form-card__header">
-    <div class="form-card__title">Collect and submit the following paperwork right away to speed things up.</div>
-    <p class="text--centered">Your caseworker may ask for other paperwork.</p>
+    <div class="form-card__title">Do you have a picture ID for everyone in your household?</div>
+    <p class="text--centered">For example: a Driver's License, Passport, or State ID.</p>
   </header>
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
       <%= f.mb_radio_set :has_picture_id_for_everyone,
-        label_text: "A picture ID for everyone",
+        label_text: "Do you have a picture ID for everyone in your household?",
         collection: [{value: :today, label: "I have this today"},
          {value: :soon, label: "I can get this soon"},
          {value: :need_help, label: "I need help or can't get this"},
         ],
-        help_text: "For example: a Driver's License, Passport, or State ID"
+        legend_class: "sr-only"
       %>
-      <%= render "medicaid/next_step" %>
+
+      <div class="form-card__footer">
+        <%= render "medicaid/next_step" %>
+      </div>
     <% end %>
   </div>
 </div>

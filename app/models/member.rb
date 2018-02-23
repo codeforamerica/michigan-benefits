@@ -148,7 +148,8 @@ class Member < ApplicationRecord
     where(
       <<~SQL
         members.employed = true OR
-          members.self_employed = true
+          members.self_employed = true OR
+          members.employment_status in ('employed', 'self_employed')
     SQL
     )
   end
@@ -240,6 +241,7 @@ class Member < ApplicationRecord
   def receiving_income?
     employed? ||
       self_employed? ||
+      %w{employed self_employed}.include?(employment_status) ||
       receives_unemployment_income?
   end
 

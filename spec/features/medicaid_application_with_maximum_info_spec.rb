@@ -222,18 +222,19 @@ RSpec.feature "Medicaid app" do
 
     on_page "Paperwork Guide" do
       expect(page).to have_content(
-        "Collect and submit the following paperwork",
+        "Do you have a picture ID for everyone in your household?",
       )
-      select_radio(question: "A picture ID for everyone", answer: "I need help or can't get this")
+      select_radio(question: "Do you have a picture ID for everyone in your household?",
+                   answer: "I need help or can't get this")
 
       proceed_with "Next"
     end
 
     on_page "Paperwork Guide" do
       expect(page).to have_content(
-        "Collect and submit the following paperwork",
+        "Do you have proof of all pay you received in the last 30 days?",
       )
-      select_radio(question: "Proof of all pay received by Jessie Tester from the last 30 days",
+      select_radio(question: "Do you have proof of all pay you received in the last 30 days?",
                    answer: "I need help or can't get this")
 
       proceed_with "Next"

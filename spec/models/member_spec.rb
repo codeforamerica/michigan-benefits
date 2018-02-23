@@ -74,14 +74,49 @@ RSpec.describe Member do
     end
 
     describe ".employed_or_self_employed" do
-      it "returns members who are either employed or self employed" do
+      it "returns members where employed: true or self_employed: true" do
         christa = build(:member, employed: true)
         ben = build(:member, self_employed: true)
+        luigi = build(:member)
+        create(:medicaid_application, members: [christa, ben, luigi])
+
+        expect(Member.employed_or_self_employed).to eq [christa, ben]
+      end
+
+      it "returns members where employment_status is employed or self_employed" do
+        christa = build(:member, employment_status: "employed")
+        ben = build(:member, employment_status: "self_employed")
         luigi = build(:member)
         create(:snap_application, members: [christa, ben, luigi])
 
         expect(Member.employed_or_self_employed).to eq [christa, ben]
       end
+    end
+  end
+
+  describe "#not_receiving_income?" do
+    it "is true by default" do
+      expect(build(:member).not_receiving_income?).to be true
+    end
+
+    it "is false if employed?" do
+      expect(build(:member, employed: true).not_receiving_income?).to be false
+    end
+
+    it "is false if self_employed?" do
+      expect(build(:member, self_employed: true).not_receiving_income?).to be false
+    end
+
+    it "is false if employment_status is employed?" do
+      expect(build(:member, employment_status: "employed").not_receiving_income?).to be false
+    end
+
+    it "is false if employment_status is self_employed?" do
+      expect(build(:member, employment_status: "self_employed").not_receiving_income?).to be false
+    end
+
+    it "is false if other_income_types includes unemployment" do
+      expect(build(:member, other_income_types: ["unemployment"]).not_receiving_income?).to be false
     end
   end
 
