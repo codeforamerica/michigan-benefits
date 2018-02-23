@@ -10,10 +10,6 @@ module Integrated
       end
     end
 
-    def next_path
-      benefits_intro_sections_path
-    end
-
     private
 
     def existing_attributes

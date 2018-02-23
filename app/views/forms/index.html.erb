@@ -1,0 +1,16 @@
+<% content_for :header_title, 'Navigation' %>
+<div class="slab">
+  <% FormNavigation.forms_with_groupings.each do |group_header, forms| %>
+    <h3>
+      <%= group_header %>
+    </h3>
+
+    <% forms.each do |form| %>
+      <div>
+        <%= link_to form.to_param.titleize,
+          section_path(form.to_param),
+          class: 'button button--small button--full-mobile' %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

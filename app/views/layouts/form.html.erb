@@ -1,6 +1,13 @@
 <% content_for :content do %>
   <% content_for :template_name, 'form' %>
   <div class="step-header">
+    <% back_path = content_for(:back_path) || previous_path(rel: 'back') %>
+    <% if back_path.present? %>
+        <%= link_to back_path, class: 'step-header__back-link' do %>
+            <span>Back</span>
+            <i class="button__icon icon-arrow_back"></i>
+        <% end %>
+    <% end %>
     <div class="step-header__title step-header__title--centered">
       <%= content_for :header_title %>
     </div>

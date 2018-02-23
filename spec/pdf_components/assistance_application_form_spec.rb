@@ -25,15 +25,13 @@ RSpec.describe AssistanceApplicationForm do
       instance_double("household_member",
         birthday: DateTime.new(1991, 10, 18),
         sex_male?: true,
-        sex_female?: false,
-      )
+        sex_female?: false)
     end
 
     let(:common_application) do
       instance_double("common_application",
         display_name: "Octopus Cuttlefish",
-        primary_member: primary_member,
-      )
+        primary_member: primary_member)
     end
 
     subject do

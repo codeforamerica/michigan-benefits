@@ -22,6 +22,16 @@ RSpec.feature "Integrated application" do
     on_page "Introduction" do
       expect(page).to have_content("Every family is different")
 
+      click_on "Back"
+
+      expect(page).to have_content("To start, please introduce yourself")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Introduction" do
+      expect(page).to have_content("Every family is different")
+
       proceed_with "Continue"
     end
   end
