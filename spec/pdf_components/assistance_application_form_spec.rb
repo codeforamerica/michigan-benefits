@@ -21,10 +21,18 @@ RSpec.describe AssistanceApplicationForm do
   end
 
   describe "#attributes" do
+    let(:primary_member) do
+      instance_double("household_member",
+        birthday: DateTime.new(1991, 10, 18),
+        sex_male?: true,
+        sex_female?: false,
+      )
+    end
+
     let(:common_application) do
-      double(
-        :common_application,
+      instance_double("common_application",
         display_name: "Octopus Cuttlefish",
+        primary_member: primary_member,
       )
     end
 
@@ -33,9 +41,19 @@ RSpec.describe AssistanceApplicationForm do
     end
 
     context "an application with one member" do
+      it "defaults to requesting food" do
+        expect(subject).to include(
+          applying_for_food: "Yes",
+          first_member_requesting_food: PdfAttributes::UNDERLINED,
+        )
+      end
+
       it "returns a hash with basic information" do
         expect(subject).to include(
           legal_name: "Octopus Cuttlefish",
+          first_member_dob: "10/18/1991",
+          first_member_male: PdfAttributes::CIRCLED,
+          first_member_female: nil,
         )
       end
     end
