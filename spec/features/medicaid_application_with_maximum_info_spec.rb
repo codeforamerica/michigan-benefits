@@ -242,7 +242,16 @@ RSpec.feature "Medicaid app" do
 
     on_page "Paperwork" do
       expect(page).to have_content(
-        "Do you have paperwork with you?",
+        "Review your paperwork",
+      )
+      expect(page).to have_content(
+        "Ask a lobby navigator for help with:",
+      )
+      expect(page).to have_content(
+        "Proof of all pay you received in the last 30 days.",
+      )
+      expect(page).to have_content(
+        "A picture ID for everyone in your household.",
       )
       proceed_with "Upload paperwork now"
     end

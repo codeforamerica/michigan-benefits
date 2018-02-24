@@ -2,25 +2,54 @@
 
 <div class="form-card" id="uploadables-drop">
   <header class="form-card__header">
-    <div class="pre-title">
-      Almost done!
-    </div>
-    <div class="form-card__title">
-      Do you have paperwork with you?
-    </div>
+    <h1 class="form-card__title">
+      Review your paperwork
+    </h1>
+    <p class="text--centered">
+      Ask a lobby navigator for help if you need it.
+    </p>
   </header>
 
   <div class="form-card__content">
-    <p>
-      This includes documents like IDs, proof of income, and proof of
-      expenses.
+    <% if @doc_guide[:today].empty? && @doc_guide[:soon].empty? && @doc_guide[:need_help].empty? %>
+        <p>
+          Do you have any paperwork with you? You can upload it now.
+        </p>
+    <% else %>
+
+      <% if @doc_guide[:need_help].present? %>
+        <h2 class="h4">Ask a lobby navigator for help with:</h2>
+        <ul class="list--bulleted">
+          <% @doc_guide[:need_help].each do |message| %>
+          <li><%= raw(message) %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <% if @doc_guide[:soon].present? %>
+          <h2 class="h4">Make a plan to get:</h2>
+          <ul class="list--bulleted">
+            <% @doc_guide[:soon].each do |message| %>
+                <li><%= raw(message) %></li>
+            <% end %>
+          </ul>
+      <% end %>
+
+      <% if @doc_guide[:today].present? %>
+          <h2 class="h4">Upload now:</h2>
+          <ul class="list--bulleted">
+            <% @doc_guide[:today].each do |message| %>
+                <li><%= raw(message) %></li>
+            <% end %>
+          </ul>
+      <% end %>
+
+    <% end %>
+
+    <p class="notice">
+      Your caseworker may ask for other paperwork after they review your application.
     </p>
-    <p>
-      After reviewing your application, staff will five you a list of
-      exactly what paperwork you need to provide. However,
-      <strong>we recommend uploading anything you have with you now</strong>.
-      It will help your application get processed faster
-    </p>
+
   </div>
 
   <footer class="form-card__footer">

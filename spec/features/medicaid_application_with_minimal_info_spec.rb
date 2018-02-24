@@ -159,10 +159,8 @@ RSpec.feature "Medicaid app" do
       proceed_with "Next"
     end
 
-    on_pages "Paperwork" do
-      expect(page).to have_content(
-        "Do you have paperwork with you?",
-      )
+    on_page "Paperwork" do
+      expect(page).to have_content("Do you have any paperwork with you? You can upload it now.")
       proceed_with "I'll do this later", scroll_to_top: true
     end
 

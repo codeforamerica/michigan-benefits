@@ -474,7 +474,7 @@ RSpec.feature "Medicaid app" do
         "Do you have proof of all pay you received in the last 30 days?",
       )
       select_radio(question: "Do you have proof of all pay you received in the last 30 days?",
-                   answer: "I need help or can't get this")
+                   answer: "I have this today")
 
       proceed_with "Next"
 
@@ -482,14 +482,32 @@ RSpec.feature "Medicaid app" do
         "Do you have proof of all pay Christa Tester received in the last 30 days?",
       )
       select_radio(question: "Do you have proof of all pay Christa Tester received in the last 30 days?",
-                   answer: "I need help or can't get this")
+                   answer: "I can get this soon")
 
       proceed_with "Next"
     end
 
     on_pages "Paperwork" do
       expect(page).to have_content(
-        "Do you have paperwork with you?",
+        "Review your paperwork",
+      )
+      expect(page).to have_content(
+        "Ask a lobby navigator for help with:",
+      )
+      expect(page).to have_content(
+        "A picture ID for everyone in your household.",
+      )
+      expect(page).to have_content(
+        "Make a plan to get:",
+      )
+      expect(page).to have_content(
+        "Proof of all pay Christa Tester received in the last 30 days.",
+      )
+      expect(page).to have_content(
+        "Upload now:",
+      )
+      expect(page).to have_content(
+        "Proof of all pay you received in the last 30 days.",
       )
       proceed_with "I'll do this later"
     end

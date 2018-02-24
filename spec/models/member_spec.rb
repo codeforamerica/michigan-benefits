@@ -353,6 +353,36 @@ RSpec.describe Member do
     end
   end
 
+  describe "#display_name_or_you" do
+    let(:app) do
+      create(
+        :medicaid_application,
+        members: [
+          build(:member,
+            first_name: "anne",
+            last_name: "mcDog",
+            birthday: Date.new(1980, 1, 2)),
+          build(:member,
+            first_name: "Anne",
+            last_name: "McDog",
+            birthday: Date.new(1990, 3, 14)),
+        ],
+      )
+    end
+
+    context "member is primary" do
+      it "returns 'you'" do
+        expect(app.primary_member.display_name_or_you).to eq("you")
+      end
+    end
+    context "member is not primary" do
+      it "returns 'display_name'" do
+        secondary = app.members.last
+        expect(secondary.display_name_or_you).to eq(secondary.display_name)
+      end
+    end
+  end
+
   describe "#modify_employments" do
     it "creates employment from employed_number_of_jobs" do
       member = build(:member, employed_number_of_jobs: 3)

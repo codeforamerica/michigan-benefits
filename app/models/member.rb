@@ -122,6 +122,10 @@ class Member < ApplicationRecord
     @_display_name ||= generate_unique_display_name
   end
 
+  def display_name_or_you
+    benefit_application.primary_member == self ? "you" : display_name
+  end
+
   def self.filing_taxes
     where "members.tax_relationship in ('Single', 'Joint')"
   end

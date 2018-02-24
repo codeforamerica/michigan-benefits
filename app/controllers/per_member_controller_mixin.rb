@@ -7,10 +7,6 @@ module PerMemberControllerMixin
     next_member_path || super
   end
 
-  def you_or_member_display
-    current_member == current_application.primary_member ? "you" : current_member.display_name
-  end
-
   private
 
   def next_member_path
