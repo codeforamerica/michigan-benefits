@@ -81,6 +81,10 @@ module Medicaid
       "Finishing Up" => [
         Medicaid::PaperworkAndLegalIntroductionController,
       ],
+      "Paperwork Guide" => [
+        Medicaid::PaperworkIdentificationController,
+        Medicaid::PaperworkIncomeProofController,
+      ],
       "Paperwork" => [
         Medicaid::PaperworkGuideController,
         Medicaid::PaperworkController,

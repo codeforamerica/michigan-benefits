@@ -45,6 +45,9 @@ class Member < ApplicationRecord
     unemployment
   ].freeze
 
+  enum has_proof_of_income: { unfilled: 0, today: 1, soon: 2, need_help: 3 },
+       _prefix: :has_proof_of_income
+
   belongs_to :benefit_application, polymorphic: true, counter_cache: true
   has_one :spouse, class_name: "Member", foreign_key: "spouse_id"
   has_many :employments, dependent: :destroy
@@ -119,6 +122,10 @@ class Member < ApplicationRecord
     @_display_name ||= generate_unique_display_name
   end
 
+  def display_name_or_you
+    benefit_application.primary_member == self ? "you" : display_name
+  end
+
   def self.filing_taxes
     where "members.tax_relationship in ('Single', 'Joint')"
   end
@@ -138,6 +145,16 @@ class Member < ApplicationRecord
           members.self_employed = true OR
           'unemployment' = ANY (members.other_income_types)
       SQL
+    )
+  end
+
+  def self.employed_or_self_employed
+    where(
+      <<~SQL
+        members.employed = true OR
+          members.self_employed = true OR
+          members.employment_status in ('employed', 'self_employed')
+    SQL
     )
   end
 
@@ -228,6 +245,7 @@ class Member < ApplicationRecord
   def receiving_income?
     employed? ||
       self_employed? ||
+      %w{employed self_employed}.include?(employment_status) ||
       receives_unemployment_income?
   end
 

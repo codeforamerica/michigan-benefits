@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213225556) do
+ActiveRecord::Schema.define(version: 20180221190925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 20180213225556) do
     t.boolean "filing_federal_taxes_next_year"
     t.boolean "filing_taxes_with_household_members"
     t.boolean "flint_water_crisis"
+    t.integer "has_picture_id_for_everyone", default: 0
     t.boolean "homeless"
     t.boolean "income_alimony"
     t.boolean "income_pension"
@@ -199,6 +200,7 @@ ActiveRecord::Schema.define(version: 20180213225556) do
     t.string "encrypted_ssn_iv"
     t.boolean "filing_taxes_with_primary_member"
     t.string "first_name"
+    t.integer "has_proof_of_income", default: 0
     t.boolean "in_college"
     t.string "insurance_type"
     t.boolean "insured", default: false
@@ -254,6 +256,7 @@ ActiveRecord::Schema.define(version: 20180213225556) do
     t.string "email"
     t.boolean "everyone_a_citizen"
     t.string "financial_accounts", default: [], array: true
+    t.integer "has_picture_id_for_everyone", default: 0
     t.boolean "income_change"
     t.text "income_change_explanation"
     t.integer "income_child_support"

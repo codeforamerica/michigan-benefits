@@ -1,0 +1,29 @@
+<% content_for :header_title, "Paperwork Guide" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">Do you have proof of all pay <strong><%= current_member.display_name_or_you %></strong> received in the last 30 days?</div>
+    <p class="text--centered">
+      <strong>Qualifies:</strong> paychecks, statements from employers<br>
+      <strong>Doesn't Qualify:</strong> bank statements, screenshots of deposits
+    </p>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+      <%= f.hidden_field :id %>
+      <%= f.mb_radio_set :has_proof_of_income,
+        label_text: "Do you have proof of all pay #{current_member.display_name_or_you} received in the last 30 days?",
+        collection: [{value: :today, label: "I have this today"},
+         {value: :soon, label: "I can get this soon"},
+         {value: :need_help, label: "I need help or can't get this"},
+        ],
+        legend_class: "sr-only"
+      %>
+
+      <div class="form-card__footer">
+        <%= render "medicaid/next_step" %>
+      </div>
+    <% end %>
+  </div>
+</div>

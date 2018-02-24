@@ -24,6 +24,8 @@ class SnapApplication < ApplicationRecord
   ].freeze
 
   enum applied_before: { unfilled: 0, yes: 1, no: 2 }, _prefix: :applied_before
+  enum has_picture_id_for_everyone: { unfilled: 0, today: 1, soon: 2, need_help: 3 },
+       _prefix: :has_picture_id_for_everyone
 
   validate :care_expenses_values
   validate :medical_expenses_values

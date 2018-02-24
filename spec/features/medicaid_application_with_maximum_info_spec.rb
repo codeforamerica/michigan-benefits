@@ -22,7 +22,7 @@ RSpec.feature "Medicaid app" do
       expect(page).to have_content(
         "Have you applied for benefits in Michigan before?",
       )
-      proceed_with "Yes"
+      proceed_with "No"
 
       expect(page).to have_content(
         "Now tell us about any other people residing in your household.",
@@ -220,9 +220,38 @@ RSpec.feature "Medicaid app" do
       proceed_with "Next"
     end
 
+    on_page "Paperwork Guide" do
+      expect(page).to have_content(
+        "Do you have a picture ID for everyone in your household?",
+      )
+      select_radio(question: "Do you have a picture ID for everyone in your household?",
+                   answer: "I need help or can't get this")
+
+      proceed_with "Next"
+    end
+
+    on_page "Paperwork Guide" do
+      expect(page).to have_content(
+        "Do you have proof of all pay you received in the last 30 days?",
+      )
+      select_radio(question: "Do you have proof of all pay you received in the last 30 days?",
+                   answer: "I need help or can't get this")
+
+      proceed_with "Next"
+    end
+
     on_page "Paperwork" do
       expect(page).to have_content(
-        "Do you have paperwork with you?",
+        "Review your paperwork",
+      )
+      expect(page).to have_content(
+        "Ask a lobby navigator for help with:",
+      )
+      expect(page).to have_content(
+        "Proof of all pay you received in the last 30 days.",
+      )
+      expect(page).to have_content(
+        "A picture ID for everyone in your household.",
       )
       proceed_with "Upload paperwork now"
     end
