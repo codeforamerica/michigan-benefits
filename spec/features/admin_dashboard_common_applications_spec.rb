@@ -8,6 +8,18 @@ RSpec.feature "Admin viewing common applications dashboard", type: :feature do
     login_as(user)
   end
 
+  scenario "viewing details for a common application" do
+    application = create(:common_application)
+
+    visit admin_root_path
+
+    click_on "Common Applications"
+
+    click_on application.id
+
+    expect(page).to have_content("Common Application ##{application.id}")
+  end
+
   scenario "downloads the Integrated PDF application", javascript: true do
     application = create(
       :common_application,

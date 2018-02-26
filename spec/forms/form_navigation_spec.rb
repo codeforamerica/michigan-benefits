@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "FormNavigation" do
+RSpec.describe FormNavigation do
   before(:each) do
     class SkippedController
       def self.skip?(_)
@@ -23,7 +23,7 @@ RSpec.describe "FormNavigation" do
     class ThirdMainController < NonSkippedController; end
     class FirstOffMainController < NonSkippedController; end
 
-    stub_const("#{FormNavigation}::MAIN",
+    stub_const("FormNavigation::MAIN",
                  "Foo" => [
                    FirstMainController,
                    SecondMainController,
@@ -49,16 +49,16 @@ RSpec.describe "FormNavigation" do
     end
   end
 
-  describe ".forms_with_groupings" do
+  describe ".form_controllers_with_groupings" do
     it "returns the main flow, including groupings" do
-      expect(FormNavigation.forms_with_groupings).to be_a(Hash)
-      expect(FormNavigation.forms_with_groupings).to eq(FormNavigation::MAIN)
+      expect(FormNavigation.form_controllers_with_groupings).to be_a(Hash)
+      expect(FormNavigation.form_controllers_with_groupings).to eq(FormNavigation::MAIN)
     end
   end
 
   describe ".forms" do
     it "returns the main flow, not including groupings" do
-      expect(FormNavigation.forms).to match_array(
+      expect(FormNavigation.form_controllers).to match_array(
         [
           FirstMainController,
           SecondMainController,
@@ -69,28 +69,28 @@ RSpec.describe "FormNavigation" do
   end
 
   describe "#next" do
-    context "when current form is second to last or before" do
+    context "when current controller is second to last or before" do
       before do
         allow(SecondMainController).to receive(:skip?) { true }
       end
 
-      it "returns numeric index for next non-skipped form in main flow" do
-        form = FormNavigation.new(FirstMainController.new)
-        expect(form.next).to eq(ThirdMainController)
+      it "returns numeric index for next non-skipped controller in main flow" do
+        navigation = FormNavigation.new(FirstMainController.new)
+        expect(navigation.next).to eq(ThirdMainController)
       end
     end
 
-    context "when current form is the last to not be skipped" do
+    context "when current controller is the last to not be skipped" do
       it "returns nil" do
-        form = FormNavigation.new(ThirdMainController.new)
-        expect(form.next).to be_nil
+        navigation = FormNavigation.new(ThirdMainController.new)
+        expect(navigation.next).to be_nil
       end
     end
 
-    context "when current form is not in main list" do
+    context "when current controller is not in main list" do
       it "returns nil" do
-        form = FormNavigation.new("boop")
-        expect(form.previous).to be_nil
+        navigation = FormNavigation.new("boop")
+        expect(navigation.next).to be_nil
       end
     end
   end
@@ -101,31 +101,31 @@ RSpec.describe "FormNavigation" do
         allow(SecondMainController).to receive(:skip?) { true }
       end
 
-      it "returns numeric index for preceding non-skipped form in main flow" do
-        form = FormNavigation.new(ThirdMainController.new)
-        expect(form.previous).to eq(FirstMainController)
+      it "returns numeric index for preceding non-skipped controller in main flow" do
+        navigation = FormNavigation.new(ThirdMainController.new)
+        expect(navigation.previous).to eq(FirstMainController)
       end
     end
 
-    context "when current form is the first" do
+    context "when current controller is the first" do
       it "returns nil" do
-        form = FormNavigation.new(FirstMainController.new)
-        expect(form.previous).to be_nil
+        navigation = FormNavigation.new(FirstMainController.new)
+        expect(navigation.previous).to be_nil
       end
     end
 
-    context "when current form is not in main list" do
+    context "when current controller is not in main list" do
       it "returns nil" do
-        form = FormNavigation.new("boop")
-        expect(form.previous).to be_nil
+        navigation = FormNavigation.new("boop")
+        expect(navigation.previous).to be_nil
       end
     end
   end
 
   describe "#index" do
     it "returns the numeric index in the main flow for a given step" do
-      form = FormNavigation.new(SecondMainController.new)
-      expect(form.index).to eq(1)
+      navigation = FormNavigation.new(SecondMainController.new)
+      expect(navigation.index).to eq(1)
     end
   end
 end

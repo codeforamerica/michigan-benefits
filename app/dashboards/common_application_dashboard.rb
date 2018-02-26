@@ -20,7 +20,6 @@ class CommonApplicationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    members
     id
     created_at
     updated_at
@@ -45,7 +44,7 @@ class CommonApplicationDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how common applications are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(common_application)
-  #   "CommonApplication ##{common_application.id}"
-  # end
+  def display_resource(common_application)
+    "Common Application ##{common_application.id}"
+  end
 end

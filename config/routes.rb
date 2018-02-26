@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :employments, only: %i[index show]
       resources :driver_errors, only: %i[index show]
       resources :addresses, only: %i[index show]
+      resources :household_members, only: %i[index show]
 
       root to: "snap_applications#index"
     end

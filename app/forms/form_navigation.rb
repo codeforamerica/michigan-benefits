@@ -11,12 +11,12 @@ class FormNavigation
   class << self
     delegate :first, to: :forms
 
-    def forms_with_groupings
+    def form_controllers_with_groupings
       MAIN
     end
 
-    def forms
-      @forms ||= MAIN.values.flatten.freeze
+    def form_controllers
+      MAIN.values.flatten.freeze
     end
 
     def all
@@ -24,34 +24,34 @@ class FormNavigation
     end
   end
 
-  delegate :forms, to: :class
+  delegate :form_controllers, to: :class
 
   def initialize(form_controller)
-    @controller = form_controller
+    @form_controller = form_controller
   end
 
   def next
     return unless index
-    forms_until_end = forms[index + 1..-1]
-    seek(forms_until_end)
+    form_controllers_until_end = form_controllers[index + 1..-1]
+    seek(form_controllers_until_end)
   end
 
   def previous
     return unless index
     return if index.zero?
-    forms_to_beginning = forms[0..index - 1].reverse
-    seek(forms_to_beginning)
+    form_controllers_to_beginning = form_controllers[0..index - 1].reverse
+    seek(form_controllers_to_beginning)
   end
 
   def index
-    forms.index(@controller.class)
+    form_controllers.index(@form_controller.class)
   end
 
   private
 
   def seek(list)
-    list.detect do |controller_class|
-      !controller_class.skip?(@controller.current_application)
+    list.detect do |form_controller_class|
+      !form_controller_class.skip?(@form_controller.current_application)
     end
   end
 end
