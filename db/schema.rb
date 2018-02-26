@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221190925) do
+ActiveRecord::Schema.define(version: 20180222180237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,12 @@ ActiveRecord::Schema.define(version: 20180221190925) do
     t.index ["otp_challenge_expires"], name: "index_admin_users_on_otp_challenge_expires"
     t.index ["otp_session_challenge"], name: "index_admin_users_on_otp_session_challenge", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+
+  create_table "common_applications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -125,6 +131,17 @@ ActiveRecord::Schema.define(version: 20180221190925) do
     t.string "status", default: "new"
     t.datetime "updated_at", null: false
     t.index ["benefit_application_type", "benefit_application_id"], name: "index_exports_on_benefit_app_type_and_benefit_app_id"
+  end
+
+  create_table "household_members", force: :cascade do |t|
+    t.datetime "birthday"
+    t.bigint "common_application_id"
+    t.datetime "created_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "sex"
+    t.datetime "updated_at", null: false
+    t.index ["common_application_id"], name: "index_household_members_on_common_application_id"
   end
 
   create_table "medicaid_applications", force: :cascade do |t|

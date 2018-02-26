@@ -11,11 +11,15 @@ Rails.application.routes.draw do
       resources :medicaid_applications do
         get "pdf", on: :member
       end
+      resources :common_applications do
+        get "pdf", on: :member
+      end
       resources :exports, only: %i[index show]
       resources :members, only: %i[index show]
       resources :employments, only: %i[index show]
       resources :driver_errors, only: %i[index show]
       resources :addresses, only: %i[index show]
+      resources :household_members, only: %i[index show]
 
       root to: "snap_applications#index"
     end
@@ -69,13 +73,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :sections, only: %[index show] do
+  resources :sections, controller: :forms, only: %i[index show] do
     collection do
-      { get: :edit, put: :update }.each do |method, action|
-        match "/benefits-intro",
-          action: action,
-          controller: "integrated/benefits_intro",
-          via: method
+      FormNavigation.all.each do |controller_class|
+        { get: :edit, put: :update }.each do |method, action|
+          match "/#{controller_class.to_param}",
+            action: action,
+            controller: controller_class.controller_path,
+            via: method
+        end
       end
     end
   end
