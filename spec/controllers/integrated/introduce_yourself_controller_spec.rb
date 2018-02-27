@@ -15,6 +15,14 @@ RSpec.describe Integrated::IntroduceYourselfController do
         expect(form.first_name).to eq("Juan")
       end
     end
+
+    context "without a current application" do
+      it "renders edit" do
+        get :edit
+
+        expect(response).to render_template(:edit)
+      end
+    end
   end
 
   describe "update" do

@@ -3,9 +3,5 @@ module Integrated
     def form_class
       NullStep
     end
-
-    def edit
-      render :edit
-    end
   end
 end

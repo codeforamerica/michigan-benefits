@@ -12,14 +12,6 @@ RSpec.describe FormsController do
         expect(response).to render_template(:index)
       end
     end
-
-    context "no current application" do
-      it "redirects to the root path" do
-        get :index
-
-        expect(response).to redirect_to(introduce_yourself_sections_path)
-      end
-    end
   end
 
   describe ".skip?" do

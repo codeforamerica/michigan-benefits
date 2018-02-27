@@ -1,5 +1,7 @@
 module Integrated
   class IntroduceYourselfController < FormsController
+    skip_before_action :ensure_application_present
+
     def update_models
       if current_application
         current_application.primary_member.update(form_params)

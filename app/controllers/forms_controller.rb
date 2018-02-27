@@ -1,7 +1,7 @@
 class FormsController < ApplicationController
   layout "form"
 
-  before_action :ensure_application_present, only: %i[index]
+  before_action :ensure_application_present, only: %i[edit update]
 
   helper_method :application_title
 
@@ -60,7 +60,9 @@ class FormsController < ApplicationController
 
   # Override in subclasses
 
-  def existing_attributes; end
+  def existing_attributes
+    {}
+  end
 
   def update_models; end
 
@@ -73,7 +75,7 @@ class FormsController < ApplicationController
   end
 
   def first_step_path
-    introduce_yourself_sections_path
+    before_you_start_sections_path
   end
 
   def form_attrs
