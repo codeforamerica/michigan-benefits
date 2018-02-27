@@ -1,6 +1,6 @@
 <% content_for :header_title, 'Navigation' %>
 <div class="slab">
-  <% FormNavigation.forms_with_groupings.each do |group_header, forms| %>
+  <% FormNavigation.form_controllers_with_groupings.each do |group_header, forms| %>
     <h3>
       <%= group_header %>
     </h3>

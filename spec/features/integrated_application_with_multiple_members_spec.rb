@@ -2,7 +2,13 @@ require "rails_helper"
 
 RSpec.feature "Integrated application" do
   scenario "with multiple members", :js do
-    visit introduce_yourself_sections_path
+    visit before_you_start_sections_path
+
+    on_page "Introduction" do
+      expect(page).to have_content("Welcome")
+
+      proceed_with "Continue"
+    end
 
     on_page "Introduction" do
       expect(page).to have_content("To start, please introduce yourself")

@@ -1,6 +1,7 @@
 class FormNavigation
   MAIN = {
     "Introduction" => [
+      Integrated::BeforeYouStartController,
       Integrated::IntroduceYourselfController,
       Integrated::BenefitsIntroController,
     ],
