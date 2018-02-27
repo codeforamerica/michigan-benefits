@@ -24,5 +24,13 @@ FactoryBot.define do
     trait :failed do
       status :failed
     end
+
+    trait :medicaid_application do
+      benefit_application { create(:medicaid_application) }
+    end
+
+    trait :common_application do
+      benefit_application { create(:common_application) }
+    end
   end
 end

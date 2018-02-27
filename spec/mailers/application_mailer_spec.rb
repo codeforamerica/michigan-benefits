@@ -130,4 +130,33 @@ RSpec.describe ApplicationMailer do
       end
     end
   end
+
+  describe ".office_integrated_application_notification" do
+    it "sets the correct headers" do
+      time = Time.utc(1999, 1, 1, 10, 5, 0)
+      Timecop.freeze(time) do
+        with_modified_env EMAIL_DOMAIN: "example.com" do
+          email = ApplicationMailer.office_integrated_application_notification(
+            application_pdf: application_pdf,
+            recipient_email: "user@example.com",
+            applicant_name: "Larry Lichen",
+          )
+
+          from_header = email.header.select do |header|
+            header.name == "From"
+          end.first.value
+
+          expect(from_header).to eq %("Michigan Benefits" <hello@example.com>)
+          expect(email.from).to eq(["hello@example.com"])
+          expect(email.to).to eq(["user@example.com"])
+          expect(email.subject).to eq(
+            "A new 1171 from Larry Lichen was submitted!",
+          )
+          expect(email.attachments[0].filename).to eq(
+            "1999-01-01 Larry Lichen 1171.pdf",
+          )
+        end
+      end
+    end
+  end
 end

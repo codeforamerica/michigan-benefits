@@ -260,9 +260,6 @@ accounts?",
     )
 
     emails = ActionMailer::Base.deliveries
-    expect(emails.count).to eq(2)
-    expect(emails.first.attachments.count).to eq(1)
-    expect(emails.second.attachments.count).to eq(1)
 
     raw_application_pdf = emails.first.attachments.first.body.raw_source
     temp_file = write_raw_pdf_to_temp_file(source: raw_application_pdf)

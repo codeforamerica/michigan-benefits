@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Medicaid::OfficeEmailApplicationJob do
+RSpec.describe Integrated::OfficeEmailApplicationJob do
   describe "#perform" do
     it "sends an email" do
       tempfile = double("tempfile")
-      medicaid_application = double("medicaid_application",
+      integrated_application = instance_double(CommonApplication,
         id: 1,
         receiving_office_email: "official@stable.gov",
         primary_member: double("member", display_name: "Henry Horse"),
@@ -12,18 +12,18 @@ RSpec.describe Medicaid::OfficeEmailApplicationJob do
       export = double("export")
 
       allow(export).to receive(:execute).and_yield(
-        medicaid_application, double("logger").as_null_object
+        integrated_application, double("logger").as_null_object
       )
 
       fake_message = double("message", deliver: nil)
-      expect(ApplicationMailer).to receive(:office_medicaid_application_notification).
+      expect(ApplicationMailer).to receive(:office_integrated_application_notification).
         with(recipient_email: "official@stable.gov",
              applicant_name: "Henry Horse",
              application_pdf: tempfile) { fake_message }
 
       expect(fake_message).to receive(:deliver)
 
-      Medicaid::OfficeEmailApplicationJob.new.perform(export: export)
+      Integrated::OfficeEmailApplicationJob.new.perform(export: export)
     end
   end
 end

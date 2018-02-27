@@ -42,6 +42,21 @@ class ApplicationMailer < ActionMailer::Base
     )
   end
 
+  def office_integrated_application_notification(
+    application_pdf:,
+    recipient_email:,
+    applicant_name:
+  )
+    attachments[attachment_name(applicant_name, "1171")] = application_pdf.read
+
+    mail(
+      from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
+      to: recipient_email,
+      subject: "A new 1171 from #{applicant_name} was submitted!",
+      template_name: "office_integrated_application_notification",
+    )
+  end
+
   private
 
   def subject(office_location, applicant_name)
