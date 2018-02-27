@@ -1,0 +1,15 @@
+<% content_for :header_title, "Introduction" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <h1 class="form-card__title">Do you currently reside in Michigan?</h1>
+
+    <p class="text--help text--centered">
+      If not, we’ll help point you in the right direction. However, this
+      application for health coverage is specifically for current residents of
+      Michigan.
+    </p>
+  </header>
+
+  <%= render "integrated/yes_no_form", form: @form, field: :resides_in_state %>
+</div>

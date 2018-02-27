@@ -1,0 +1,35 @@
+<div class="form-card__content">
+  <footer class="form-card__buttons">
+    <%= form_for form,
+      as: :form,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put,
+      namespace: "no" do |f| %>
+
+      <%= f.hidden_field field, value: false %>
+
+      <button
+        type="submit"
+        class="button button--nav button--full-mobile">
+          No
+      </button>
+    <% end %>
+
+    <%= form_for form,
+      as: :form,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put,
+      namespace: "yes" do |f| %>
+
+      <%= f.hidden_field field, value: true %>
+
+      <button
+        type="submit"
+        class="button button--nav button--cta button--full-mobile">
+          Yes
+      </button>
+    <% end %>
+  </footer>
+</div>
