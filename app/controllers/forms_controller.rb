@@ -42,6 +42,10 @@ class FormsController < ApplicationController
     section_path(previous_step.to_param, params) if previous_step
   end
 
+  def first_step_path
+    before_you_start_sections_path
+  end
+
   def self.form_class
     (controller_name + "_form").classify.constantize
   end
@@ -72,10 +76,6 @@ class FormsController < ApplicationController
     if current_application.blank?
       redirect_to first_step_path
     end
-  end
-
-  def first_step_path
-    before_you_start_sections_path
   end
 
   def form_attrs

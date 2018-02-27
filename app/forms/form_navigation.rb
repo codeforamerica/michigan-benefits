@@ -4,6 +4,7 @@ class FormNavigation
       Integrated::BeforeYouStartController,
       Integrated::IntroduceYourselfController,
       Integrated::BenefitsIntroController,
+      Integrated::ApplicationSubmittedController,
     ],
   }.freeze
 
