@@ -34,6 +34,10 @@ class AssistanceApplicationForm
         yes: benefit_application.previously_received_assistance_yes?,
         no: benefit_application.previously_received_assistance_no?,
       ),
+      is_homeless: yes_no_or_unfilled(
+        yes: benefit_application.homeless? || benefit_application.temporary_address?,
+        no: benefit_application.stable_address?,
+      ),
     }
   end
 
