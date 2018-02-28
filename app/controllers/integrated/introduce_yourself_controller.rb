@@ -4,21 +4,30 @@ module Integrated
 
     def update_models
       if current_application
-        current_application.primary_member.update(form_params)
+        current_application.primary_member.update(member_params)
+        current_application.update(application_params)
       else
-        application = CommonApplication.create
-        application.members.create(form_params)
+        application = CommonApplication.create(application_params)
+        application.members.create(member_params)
         session[:current_application_id] = application.id
       end
     end
 
     private
 
+    def member_params
+      form_params.except(*form_class.application_attributes)
+    end
+
+    def application_params
+      form_params.slice(*form_class.application_attributes)
+    end
+
     def existing_attributes
       if current_application
-        HashWithIndifferentAccess.new(
-          current_application.primary_member.attributes,
-        )
+        attributes = current_application.attributes.
+          merge(current_application.primary_member.attributes)
+        HashWithIndifferentAccess.new(attributes)
       else
         {}
       end

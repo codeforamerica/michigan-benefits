@@ -25,6 +25,11 @@
           help_text: "As it appears on your ID",
           layout: "inline" %>
 
+        <%= f.mb_radio_set :previously_received_assistance,
+          label_text: "Have you received assistance in Michigan in the past (or currently)?",
+          collection: [{ value: :yes, label: "Yes" }, { value: :no, label: "No" }],
+          layout: "inline" %>
+
       <%= render "integrated/next_step" %>
     <% end %>
   </div>

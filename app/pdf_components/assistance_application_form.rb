@@ -1,5 +1,5 @@
 class AssistanceApplicationForm
-  include PdfAttributes
+  include Integrated::PdfAttributes
 
   def initialize(benefit_application)
     @benefit_application = benefit_application
@@ -30,6 +30,10 @@ class AssistanceApplicationForm
     {
       applying_for_food: "Yes",
       legal_name: benefit_application.display_name,
+      received_assistance: yes_no_or_unfilled(
+        yes: benefit_application.previously_received_assistance_yes?,
+        no: benefit_application.previously_received_assistance_no?,
+      ),
     }
   end
 
@@ -38,7 +42,7 @@ class AssistanceApplicationForm
       first_member_dob: mmddyyyy_date(benefit_application.primary_member.birthday),
       first_member_male: circle_if_true(benefit_application.primary_member.sex_male?),
       first_member_female: circle_if_true(benefit_application.primary_member.sex_female?),
-      first_member_requesting_food: PdfAttributes::UNDERLINED,
+      first_member_requesting_food: Integrated::PdfAttributes::UNDERLINED,
     }
   end
 end

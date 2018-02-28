@@ -24,6 +24,11 @@ RSpec.feature "Integrated application" do
 
       select_radio(question: "What's your sex?", answer: "Female")
 
+      select_radio(
+        question: "Have you received assistance in Michigan in the past (or currently)?",
+        answer: "Yes",
+      )
+
       proceed_with "Continue"
     end
 

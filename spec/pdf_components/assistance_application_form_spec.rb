@@ -31,6 +31,8 @@ RSpec.describe AssistanceApplicationForm do
     let(:common_application) do
       instance_double("common_application",
         display_name: "Octopus Cuttlefish",
+        previously_received_assistance_yes?: true,
+        previously_received_assistance_no?: false,
         primary_member: primary_member)
     end
 
@@ -42,15 +44,16 @@ RSpec.describe AssistanceApplicationForm do
       it "defaults to requesting food" do
         expect(subject).to include(
           applying_for_food: "Yes",
-          first_member_requesting_food: PdfAttributes::UNDERLINED,
+          first_member_requesting_food: Integrated::PdfAttributes::UNDERLINED,
         )
       end
 
       it "returns a hash with basic information" do
         expect(subject).to include(
           legal_name: "Octopus Cuttlefish",
+          received_assistance: "Yes",
           first_member_dob: "10/18/1991",
-          first_member_male: PdfAttributes::CIRCLED,
+          first_member_male: Integrated::PdfAttributes::CIRCLED,
           first_member_female: nil,
         )
       end
