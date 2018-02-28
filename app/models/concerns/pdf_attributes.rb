@@ -1,7 +1,4 @@
 module PdfAttributes
-  CIRCLED = "O".freeze
-  UNDERLINED = "------------".freeze
-
   def to_h
     attributes.
       reduce { |accum, attribute_hash| accum.merge(attribute_hash) }.
@@ -12,10 +9,6 @@ module PdfAttributes
     if statement
       "Yes"
     end
-  end
-
-  def circle_if_true(statement)
-    CIRCLED if statement
   end
 
   def yes_no(statement)

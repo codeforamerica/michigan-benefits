@@ -12,6 +12,9 @@ class CommonApplication < ApplicationRecord
     foreign_key: "common_application_id",
     dependent: :destroy
 
+  enum previously_received_assistance: { unfilled: 0, yes: 1, no: 2 },
+       _prefix: :previously_received_assistance
+
   def pdf
     @_pdf ||= ApplicationPdfAssembler.new(benefit_application: self).run
   end
