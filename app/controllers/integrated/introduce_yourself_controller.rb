@@ -15,14 +15,6 @@ module Integrated
 
     private
 
-    def member_params
-      form_params.except(*form_class.application_attributes)
-    end
-
-    def application_params
-      form_params.slice(*form_class.application_attributes)
-    end
-
     def existing_attributes
       if current_application
         attributes = current_application.attributes.
