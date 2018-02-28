@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Integrated application" do
   include PdfHelper
 
-  scenario "with multiple members", :js do
+  scenario "where applicant is not a resident", :js do
     visit before_you_start_sections_path
 
     on_page "Introduction" do
@@ -30,27 +30,11 @@ RSpec.feature "Integrated application" do
     on_page "Introduction" do
       expect(page).to have_content("Do you currently reside in Michigan?")
 
-      proceed_with "Yes"
+      proceed_with "No"
     end
 
     on_page "Introduction" do
-      expect(page).to have_content("Every family is different")
-
-      proceed_with "Continue"
+      expect(page).to have_content("Visit Healthcare.gov to apply for health coverage.")
     end
-
-    on_page "Application Submitted" do
-      expect(page).to have_content(
-        "Congratulations",
-      )
-    end
-
-    emails = ActionMailer::Base.deliveries
-
-    raw_application_pdf = emails.last.attachments.first.body.raw_source
-    temp_file = write_raw_pdf_to_temp_file(source: raw_application_pdf)
-    pdf_values = filled_in_values(temp_file.path)
-
-    expect(pdf_values["legal_name"]).to include("Jessie Tester")
   end
 end

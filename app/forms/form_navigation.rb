@@ -3,6 +3,8 @@ class FormNavigation
     "Introduction" => [
       Integrated::BeforeYouStartController,
       Integrated::IntroduceYourselfController,
+      Integrated::ResideInStateController,
+      Integrated::ResideOutOfStateController,
       Integrated::BenefitsIntroController,
       Integrated::ApplicationSubmittedController,
     ],

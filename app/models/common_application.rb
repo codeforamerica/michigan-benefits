@@ -2,7 +2,15 @@ class CommonApplication < ApplicationRecord
   include CommonBenefitApplication
   include Submittable
 
-  has_many :members, class_name: "HouseholdMember", foreign_key: "common_application_id"
+  has_one :navigator,
+    class_name: "ApplicationNavigator",
+    foreign_key: "common_application_id",
+    dependent: :destroy
+
+  has_many :members,
+    class_name: "HouseholdMember",
+    foreign_key: "common_application_id",
+    dependent: :destroy
 
   def pdf
     @_pdf ||= ApplicationPdfAssembler.new(benefit_application: self).run
