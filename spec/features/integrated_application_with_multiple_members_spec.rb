@@ -39,6 +39,17 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
+      expect(page).to have_content("What's your current living situation?")
+
+      select_radio(
+        question: "What's your current living situation?",
+        answer: "Temporary address",
+      )
+
+      proceed_with "Continue"
+    end
+
+    on_page "Introduction" do
       expect(page).to have_content("Every family is different")
 
       proceed_with "Continue"
@@ -57,5 +68,6 @@ RSpec.feature "Integrated application" do
     pdf_values = filled_in_values(temp_file.path)
 
     expect(pdf_values["legal_name"]).to include("Jessie Tester")
+    expect(pdf_values["is_homeless"]).to eq("Yes")
   end
 end

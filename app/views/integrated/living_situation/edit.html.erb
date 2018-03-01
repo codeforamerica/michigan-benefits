@@ -1,0 +1,21 @@
+<% content_for :header_title, "Introduction" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <h1 class="form-card__title">Tell us about your living situation.</h1>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @form, as: :form, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+
+      <%= f.mb_radio_set :living_situation,
+                         label_text: "What's your current living situation?",
+                         collection: [{ value: :stable_address, label: "Stable address" },
+                                      { value: :temporary_address, label: "Temporary address" },
+                                      { value: :homeless, label: "Homeless" }]
+      %>
+
+      <%= render "integrated/next_step" %>
+    <% end %>
+  </div>
+</div>

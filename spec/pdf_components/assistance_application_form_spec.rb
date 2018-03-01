@@ -33,6 +33,9 @@ RSpec.describe AssistanceApplicationForm do
         display_name: "Octopus Cuttlefish",
         previously_received_assistance_yes?: true,
         previously_received_assistance_no?: false,
+        temporary_address?: true,
+        homeless?: false,
+        stable_address?: false,
         primary_member: primary_member)
     end
 
@@ -52,6 +55,7 @@ RSpec.describe AssistanceApplicationForm do
         expect(subject).to include(
           legal_name: "Octopus Cuttlefish",
           received_assistance: "Yes",
+          is_homeless: "Yes",
           first_member_dob: "10/18/1991",
           first_member_male: Integrated::PdfAttributes::CIRCLED,
           first_member_female: nil,

@@ -89,4 +89,12 @@ class FormsController < ApplicationController
   def form_navigation
     @form_navigation ||= FormNavigation.new(self)
   end
+
+  def member_params
+    form_params.except(*form_class.application_attributes)
+  end
+
+  def application_params
+    form_params.slice(*form_class.application_attributes)
+  end
 end
