@@ -91,10 +91,19 @@ class FormsController < ApplicationController
   end
 
   def member_params
-    form_params.except(*form_class.application_attributes)
+    filter_params(form_class.member_attributes)
   end
 
   def application_params
-    form_params.slice(*form_class.application_attributes)
+    filter_params(form_class.application_attributes)
+  end
+
+  def filter_params(attributes)
+    return unless attributes.present?
+    form_params.select do |key, _|
+      attributes.any? do |attr|
+        key.match(/^#{attr}(\(.+\))?\z/) # Match single and multi-attribute keys
+      end
+    end
   end
 end

@@ -1,20 +1,14 @@
-class IntroduceYourselfForm < Step
+class IntroduceYourselfForm < Form
   include MultiparameterAttributeAssignment
 
-  def self.application_attributes
-    [:previously_received_assistance]
-  end
+  set_application_attributes(:previously_received_assistance)
 
-  def self.member_attributes
-    %i[
-      first_name
-      last_name
-      birthday
-      sex
-    ]
-  end
-
-  form_attributes(*(member_attributes + application_attributes))
+  set_member_attributes(
+    :first_name,
+    :last_name,
+    :birthday,
+    :sex,
+  )
 
   validates :first_name,
     presence: { message: "Make sure to provide a first name" }

@@ -1,5 +1,5 @@
-class ResideInStateForm < Step
-  form_attributes(
+class ResideInStateForm < Form
+  set_application_attributes(
     :resides_in_state,
   )
 end
