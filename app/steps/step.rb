@@ -15,7 +15,5 @@ class Step
 
       attr_accessor(*attribute_strings)
     end
-
-    alias_method :form_attributes, :step_attributes
   end
 end

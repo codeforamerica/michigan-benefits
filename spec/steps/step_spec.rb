@@ -28,16 +28,6 @@ RSpec.describe Step, type: :model do
       expect(TestStep.new.methods).to include(*expected_methods)
     end
 
-    it "aliases step_attributes as form_attributes" do
-      class TestStep < Step
-        form_attributes(:foo, :bar)
-      end
-
-      expected_methods = %i[foo foo= bar bar=]
-
-      expect(TestStep.new.methods).to include(*expected_methods)
-    end
-
     it "exposes attribute names on the class" do
       class TestStep < Step
         step_attributes(:foo, :bar)

@@ -1,9 +1,5 @@
-class LivingSituationForm < Step
-  def self.application_attributes
-    [:living_situation]
-  end
-
-  form_attributes(*application_attributes)
+class LivingSituationForm < Form
+  set_application_attributes(:living_situation)
 
   validates :living_situation, inclusion: {
     in: %w(stable_address temporary_address homeless),
