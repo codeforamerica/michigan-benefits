@@ -3,6 +3,9 @@ require "rails_helper"
 RSpec.feature "Integrated application" do
   include PdfHelper
 
+  CIRCLED = Integrated::PdfAttributes::CIRCLED
+  UNDERLINED = Integrated::PdfAttributes::UNDERLINED
+
   scenario "with multiple members", :js do
     visit before_you_start_sections_path
 
@@ -55,6 +58,81 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Your Household" do
+      expect(page).to have_content(
+        "Who do you want to include on your Food Assistance application?",
+      )
+
+      click_on "Add a member"
+    end
+
+    members = [
+      {
+        first_name: "Jonny",
+        last_name: "Tester",
+        dob: ["January", "1", "1969"],
+        sex: "Female",
+        relation: "Roommate",
+      },
+      {
+        first_name: "Jackie",
+        last_name: "Tester",
+        dob: ["January", "1", "1970"],
+        sex: "Male",
+        relation: "Sibling",
+      },
+      {
+        first_name: "Joe",
+        last_name: "Schmoe",
+        dob: ["Month", "Day", "Year"],
+        sex: "Female",
+        relation: "Parent",
+      },
+      {
+        first_name: "Apples",
+        last_name: "McMackintosh",
+        dob: ["Month", "Day", "Year"],
+        sex: "Male",
+        relation: "Other",
+      },
+      {
+        first_name: "Pupper",
+        last_name: "McDog",
+        dob: ["December", "30", "2016"],
+        sex: "Male",
+        relation: "Child",
+      },
+    ]
+
+    members.each do |member|
+      on_page "Your Household" do
+        expect(page).to have_content("Add a person you want to apply with")
+
+        fill_in "What's their first name?", with: member[:first_name]
+        fill_in "What's their last name?", with: member[:last_name]
+
+        select member[:dob][0], from: "form_birthday_2i"
+        select member[:dob][1], from: "form_birthday_3i"
+        select member[:dob][2], from: "form_birthday_1i"
+
+        select_radio(question: "What's their sex?", answer: member[:sex])
+
+        select member[:relation], from: "form_relationship"
+
+        proceed_with "Continue"
+      end
+
+      on_page "Your Household" do
+        expect(page).to have_content(
+          "Who do you want to include on your Food Assistance application?",
+        )
+
+        expect(page).to have_content("#{member[:first_name]} #{member[:last_name]}")
+
+        member == members.last ? click_on("Continue") : click_on("Add a member")
+      end
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",
@@ -69,5 +147,36 @@ RSpec.feature "Integrated application" do
 
     expect(pdf_values["legal_name"]).to include("Jessie Tester")
     expect(pdf_values["is_homeless"]).to eq("Yes")
+    expect(pdf_values["dob"]).to eq("01/01/1969")
+    expect(pdf_values["received_assistance"]).to eq("Yes")
+    expect(pdf_values["applying_for_food"]).to eq("Yes")
+    expect(pdf_values["first_member_legal_name"]).to include("Jessie Tester")
+    expect(pdf_values["first_member_female"]).to eq(CIRCLED)
+    expect(pdf_values["first_member_dob"]).to eq("01/01/1969")
+    expect(pdf_values["first_member_requesting_food"]).to eq(UNDERLINED)
+
+    expect(pdf_values["second_member_relation"]).to eq("Roommate")
+    expect(pdf_values["second_member_legal_name"]).to include("Jonny Tester")
+    expect(pdf_values["second_member_female"]).to eq(CIRCLED)
+    expect(pdf_values["second_member_dob"]).to eq("01/01/1969")
+    expect(pdf_values["second_member_requesting_food"]).to eq(UNDERLINED)
+
+    expect(pdf_values["third_member_relation"]).to eq("Sibling")
+    expect(pdf_values["third_member_legal_name"]).to include("Jackie Tester")
+    expect(pdf_values["third_member_male"]).to eq(CIRCLED)
+    expect(pdf_values["third_member_dob"]).to eq("01/01/1970")
+    expect(pdf_values["third_member_requesting_food"]).to eq(UNDERLINED)
+
+    expect(pdf_values["fourth_member_relation"]).to eq("Parent")
+    expect(pdf_values["fourth_member_legal_name"]).to include("Joe Schmoe")
+    expect(pdf_values["fourth_member_female"]).to eq(CIRCLED)
+    expect(pdf_values["fourth_member_dob"]).to eq("")
+    expect(pdf_values["fourth_member_requesting_food"]).to eq(UNDERLINED)
+
+    expect(pdf_values["fifth_member_relation"]).to eq("Other")
+    expect(pdf_values["fifth_member_legal_name"]).to include("Apples McMackintosh")
+    expect(pdf_values["fifth_member_male"]).to eq(CIRCLED)
+    expect(pdf_values["fifth_member_dob"]).to eq("")
+    expect(pdf_values["fifth_member_requesting_food"]).to eq(UNDERLINED)
   end
 end

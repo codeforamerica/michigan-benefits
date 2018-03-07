@@ -7,9 +7,11 @@ if ENV["CI"]
   SimpleCov.coverage_dir(File.join(ENV["CIRCLE_ARTIFACTS"], "coverage"))
 end
 
-SimpleCov.start("rails") do
-  # To exclude files from coverage analysis:
-  # add_filter "/app/path/to/directory/"
+unless ENV["SKIP_COVERAGE"]
+  SimpleCov.start("rails") do
+    # To exclude files from coverage analysis:
+    # add_filter "/app/path/to/directory/"
+  end
 end
 
 WebMock.disable_net_connect!(allow_localhost: true)

@@ -3,12 +3,14 @@ module Integrated
     skip_before_action :ensure_application_present
 
     def update_models
+      member_data = member_params.merge(relationship: "primary")
+
       if current_application
-        current_application.primary_member.update(member_params)
+        current_application.primary_member.update(member_data)
         current_application.update(application_params)
       else
         application = CommonApplication.create(application_params)
-        application.members.create(member_params)
+        application.members.create(member_data)
         session[:current_application_id] = application.id
       end
     end

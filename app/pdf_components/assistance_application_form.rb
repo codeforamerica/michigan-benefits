@@ -1,4 +1,5 @@
 class AssistanceApplicationForm
+  include AssistanceApplicationFormDefaults
   include Integrated::PdfAttributes
 
   def initialize(benefit_application)
@@ -15,7 +16,7 @@ class AssistanceApplicationForm
 
   def attributes
     applicant_registration_attributes.
-      merge(first_member_attributes)
+      merge(member_attributes)
   end
 
   def output_file
@@ -30,6 +31,7 @@ class AssistanceApplicationForm
     {
       applying_for_food: "Yes",
       legal_name: benefit_application.display_name,
+      dob: mmddyyyy_date(benefit_application.primary_member.birthday),
       received_assistance: yes_no_or_unfilled(
         yes: benefit_application.previously_received_assistance_yes?,
         no: benefit_application.previously_received_assistance_no?,
@@ -41,12 +43,18 @@ class AssistanceApplicationForm
     }
   end
 
-  def first_member_attributes
-    {
-      first_member_dob: mmddyyyy_date(benefit_application.primary_member.birthday),
-      first_member_male: circle_if_true(benefit_application.primary_member.sex_male?),
-      first_member_female: circle_if_true(benefit_application.primary_member.sex_female?),
-      first_member_requesting_food: Integrated::PdfAttributes::UNDERLINED,
-    }
+  def member_attributes
+    ordinals = ["first", "second", "third", "fourth", "fifth"]
+    hash = {}
+    benefit_application.members.first(5).each_with_index do |member, i|
+      prefix = "#{ordinals[i]}_member_"
+      hash[:"#{prefix}relation"] = member.relationship_label
+      hash[:"#{prefix}legal_name"] = member.display_name
+      hash[:"#{prefix}dob"] = mmddyyyy_date(member.birthday)
+      hash[:"#{prefix}male"] = circle_if_true(member.sex_male?)
+      hash[:"#{prefix}female"] = circle_if_true(member.sex_female?)
+      hash[:"#{prefix}requesting_food"] = Integrated::PdfAttributes::UNDERLINED
+    end
+    hash
   end
 end

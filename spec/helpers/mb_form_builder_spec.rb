@@ -197,6 +197,7 @@ RSpec.describe MbFormBuilder do
             <div class="select">
               <label for="sample_birthday_2i" class="sr-only" id="sample_birthday_2i__label">Month</label>
               <select id="sample_birthday_2i" name="sample[birthday(2i)]" class="select__element" aria-labelledby="sample_birthday__label sample_birthday__help sample_birthday_2i__label">
+                <option value="">Month</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3" selected="selected">March</option>
@@ -214,6 +215,7 @@ RSpec.describe MbFormBuilder do
             <div class="select">
               <label for="sample_birthday_3i" class="sr-only" id="sample_birthday_3i__label">Day</label>
               <select id="sample_birthday_3i" name="sample[birthday(3i)]" class="select__element" aria-labelledby="sample_birthday__label sample_birthday__help sample_birthday_3i__label">
+                <option value="">Day</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -250,6 +252,7 @@ RSpec.describe MbFormBuilder do
             <div class="select">
               <label for="sample_birthday_1i" class="sr-only" id="sample_birthday_1i__label">Year</label>
               <select id="sample_birthday_1i" name="sample[birthday(1i)]" class="select__element" aria-labelledby="sample_birthday__label sample_birthday__help sample_birthday_1i__label">
+                <option value="">Year</option>
                 <option value="1990" selected="selected">1990</option>
                 <option value="1991">1991</option>
                 <option value="1992">1992</option>
@@ -302,6 +305,7 @@ RSpec.describe MbFormBuilder do
             <div class="select">
               <label for="sample_members_72_birthday_2i" class="sr-only" id="sample_members_72_birthday_2i__label">Month</label>
               <select id="sample_members_72_birthday_2i" name="sample[members][72][birthday(2i)]" class="select__element" aria-labelledby="sample_members_72_birthday__label sample_members_72_birthday__help sample_members_72_birthday_2i__label">
+                <option value="">Month</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3" selected="selected">March</option>
@@ -319,6 +323,7 @@ RSpec.describe MbFormBuilder do
             <div class="select">
               <label for="sample_members_72_birthday_3i" class="sr-only" id="sample_members_72_birthday_3i__label">Day</label>
               <select id="sample_members_72_birthday_3i" name="sample[members][72][birthday(3i)]" class="select__element" aria-labelledby="sample_members_72_birthday__label sample_members_72_birthday__help sample_members_72_birthday_3i__label">
+                <option value="">Day</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -355,6 +360,7 @@ RSpec.describe MbFormBuilder do
             <div class="select">
               <label for="sample_members_72_birthday_1i" class="sr-only" id="sample_members_72_birthday_1i__label">Year</label>
               <select id="sample_members_72_birthday_1i" name="sample[members][72][birthday(1i)]" class="select__element" aria-labelledby="sample_members_72_birthday__label sample_members_72_birthday__help sample_members_72_birthday_1i__label">
+                <option value="">Year</option>
                 <option value="1990" selected="selected">1990</option>
                 <option value="1991">1991</option>
                 <option value="1992">1992</option>
