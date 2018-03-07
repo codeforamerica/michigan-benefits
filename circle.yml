@@ -1,7 +1,7 @@
 dependencies:
   pre:
     - sudo apt-get update; sudo apt-get install pdftk
-    - wget https://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip
+    - wget https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip
     - unzip chromedriver_linux64.zip
     - sudo cp chromedriver /usr/local/bin/chromedriver
     - curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
