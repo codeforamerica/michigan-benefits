@@ -27,7 +27,7 @@ class Form
     private
 
     def form_attributes(attribute_names)
-      self.attribute_names = (self.application_attributes + self.member_attributes)
+      self.attribute_names = (application_attributes + member_attributes)
 
       attribute_strings = attribute_names.map(&:to_s)
 
