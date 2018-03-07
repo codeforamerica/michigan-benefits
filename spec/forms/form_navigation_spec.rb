@@ -30,10 +30,7 @@ RSpec.describe FormNavigation do
                    ThirdMainController,
                  ])
 
-    stub_const("FormNavigation::OFF_MAIN",
-                 "Bar" => [
-                   FirstOffMainController,
-                 ])
+    stub_const("FormNavigation::OFF_MAIN", [FirstOffMainController])
   end
 
   describe ".all" do

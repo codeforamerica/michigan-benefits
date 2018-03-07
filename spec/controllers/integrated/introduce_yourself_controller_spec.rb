@@ -56,13 +56,14 @@ RSpec.describe Integrated::IntroduceYourselfController do
           expect(primary_member.last_name).to eq("McTester")
           expect(primary_member.sex).to eq("male")
           expect(primary_member.birthday).to eq(DateTime.new(1950, 1, 31))
+          expect(primary_member.relationship).to eq("primary")
         end
       end
 
       context "with a current application" do
         it "modifies member information" do
           current_app = create(:common_application,
-            members: [build(:household_member, first_name: "Juan")])
+            members: [create(:household_member, first_name: "Juan")])
 
           session[:current_application_id] = current_app.id
 
@@ -72,6 +73,9 @@ RSpec.describe Integrated::IntroduceYourselfController do
 
           expect(current_app.primary_member.first_name).to eq("Gary")
           expect(current_app.previously_received_assistance).to eq("yes")
+
+          primary_member = current_app.primary_member
+          expect(primary_member.relationship).to eq("primary")
         end
       end
     end

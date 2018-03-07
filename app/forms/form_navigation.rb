@@ -7,11 +7,15 @@ class FormNavigation
       Integrated::ResideOutOfStateController,
       Integrated::LivingSituationController,
       Integrated::BenefitsIntroController,
+      Integrated::HouseholdMembersOverviewController,
       Integrated::ApplicationSubmittedController,
     ],
   }.freeze
 
-  OFF_MAIN = {}.freeze
+  OFF_MAIN = [
+    Integrated::AddHouseholdMemberController,
+    Integrated::RemoveHouseholdMemberController,
+  ].freeze
 
   class << self
     delegate :first, to: :forms
@@ -25,7 +29,7 @@ class FormNavigation
     end
 
     def all
-      (MAIN.values + OFF_MAIN.values).flatten.freeze
+      (MAIN.values + OFF_MAIN).flatten.freeze
     end
   end
 

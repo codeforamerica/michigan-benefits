@@ -1,0 +1,39 @@
+<% content_for :header_title, "Your Household" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <h1 class="form-card__title">
+      Add a person you want to apply with.
+    </h1>
+    <p class="text--help text--centered">
+      Skip any questions you don't currently know the answer to.
+    </p>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @form, as: :form, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+        <%= f.mb_input_field :first_name,
+          "What's their first name?",
+          autofocus: true %>
+        <%= f.mb_input_field :last_name, "What's their last name?" %>
+        <%= f.mb_date_select :birthday,
+          "When is their birthday?",
+          options: {
+            start_year: 1900,
+            end_year: Time.now.year,
+            order: [:month, :day, :year]
+          } %>
+        <%= f.mb_radio_set :sex,
+          label_text: "What's their sex?",
+          collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
+          help_text: "As it appears on their ID",
+          layout: "inline" %>
+
+        <%= f.mb_select :relationship,
+          "What is their relationship to you?", HouseholdMember::RELATIONSHIP_LABELS_AND_KEYS,
+          help_text: "They are my..." %>
+
+      <%= render "integrated/next_step" %>
+    <% end %>
+  </div>
+</div>
