@@ -115,8 +115,7 @@ RSpec.describe AssistanceApplicationForm do
                                     display_name: "Willy Whale",
                                     relationship_label: "Child",
                                     birthday: DateTime.new(1995, 10, 18),
-                                    sex_male?: true,
-                                    sex_female?: false)])
+                                    sex: "male")])
       end
 
       let(:attributes) do
@@ -160,6 +159,13 @@ RSpec.describe AssistanceApplicationForm do
           fifth_member_dob: "10/18/1991",
           fifth_member_male: Integrated::PdfAttributes::CIRCLED,
           fifth_member_female: nil,
+          household_added_notes: "Yes",
+        )
+        expect(attributes[:notes]).to eq(
+          <<~NOTES
+            Additional Household Members:
+            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Applying for: Food
+          NOTES
         )
       end
     end

@@ -178,5 +178,11 @@ RSpec.feature "Integrated application" do
     expect(pdf_values["fifth_member_male"]).to eq(CIRCLED)
     expect(pdf_values["fifth_member_dob"]).to eq("")
     expect(pdf_values["fifth_member_requesting_food"]).to eq(UNDERLINED)
+
+    expect(pdf_values["household_added_notes"]).to eq("Yes")
+    expect(pdf_values["notes"]).to include("Additional Household Members:")
+    expect(pdf_values["notes"]).to include(
+      "Relation: Child, Legal name: Pupper McDog, Sex: Male, DOB: 12/30/2016, Applying for: Food",
+    )
   end
 end
