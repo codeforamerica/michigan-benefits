@@ -36,16 +36,42 @@ RSpec.describe OfficeRecipient do
       end
     end
 
-    it "falls back to the clio office" do
-      recipent = described_class.new(
-        benefit_application: app(from_zip_covered_by: :nobody),
-      )
+    context "office location is not present" do
+      context "with in-range zip code" do
+        it "routes to the appropriate office" do
+          clio_recipent = described_class.new(
+            benefit_application: app(from_zip_covered_by: :clio),
+          )
+          union_recipent = described_class.new(
+            benefit_application: app(from_zip_covered_by: :union),
+          )
 
-      expect(recipent.office).to eq(
-        "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
-        "name" => "Clio",
-        "phone_number" => clio_phone_number,
-      )
+          expect(clio_recipent.office).to eq(
+            "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
+            "name" => "Clio",
+            "phone_number" => clio_phone_number,
+          )
+          expect(union_recipent.office).to eq(
+            "email" => "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov",
+            "name" => "Union",
+            "phone_number" => union_phone_number,
+          )
+        end
+      end
+
+      context "with out-of-range zip code" do
+        it "sends an email to review the app" do
+          recipent = described_class.new(
+            benefit_application: app(from_zip_covered_by: :nobody),
+          )
+
+          expect(recipent.office).to eq(
+            "email" => "hello@michiganbenefits.org",
+            "name" => "Test Office",
+            "phone_number" => test_office_phone_number,
+          )
+        end
+      end
     end
 
     it "allows for testing via zip 12345" do
