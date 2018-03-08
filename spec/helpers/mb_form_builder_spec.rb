@@ -502,4 +502,33 @@ RSpec.describe MbFormBuilder do
       HTML
     end
   end
+
+  describe "#mb_yes_no_buttons" do
+    it "returns valid submit buttons" do
+      class SampleForm < Form
+        set_application_attributes(:lives_in_michigan)
+      end
+
+      sample = SampleForm.new
+      form = MbFormBuilder.new("form", sample, template, {})
+      output = form.mb_yes_no_buttons(:lives_in_michigan)
+
+      expect(output).to be_html_safe
+
+      expect(output).to match_html <<-HTML
+        <div class="form-card__buttons">
+          <div>
+            <button class="button button--nav button--full-mobile" type="submit" value="false" name="form[lives_in_michigan]">
+              No
+            </button>
+          </div>
+          <div>
+            <button class="button button--nav button--full-mobile button--cta" type="submit" value="true" name="form[lives_in_michigan]">
+              Yes
+            </button>
+          </div>
+        </div>
+      HTML
+    end
+  end
 end

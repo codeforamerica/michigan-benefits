@@ -1,16 +1,17 @@
 <% content_for :header_title, "Introduction" %>
 
-<div class="form-card">
-  <header class="form-card__header">
-    <div class="form-card__title">Visit Healthcare.gov to apply for health coverage.</div>
-    <p class="text--help text--centered">
-      This site is for Michigan residents only. To apply for coverage in your state:
-    </p>
-  </header>
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">Visit Healthcare.gov to apply for health coverage.</h1>
+  <p class="text--centered text--help">
+    This site is for Michigan residents only. To apply for coverage in your state:
+  </p>
+<% end %>
 
-  <footer class="form-card__button_centered">
+<% content_for :form_card_body do %>
+  <div class="form-card__button_centered">
     <a href="https://www.healthcare.gov/medicaid-chip/getting-medicaid-chip/" class="button button--nav  button--cta button--full-mobile">
       Visit Healthcare.gov
     </a>
-  </footer>
-</div>
+  </div>
+<% end %>
+<% content_for :skip_footer, true %>

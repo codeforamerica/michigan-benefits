@@ -1,15 +1,19 @@
 <% content_for :header_title, "Introduction" %>
 
-<div class="form-card">
-  <header class="form-card__header">
-    <h1 class="form-card__title">Do you currently reside in Michigan?</h1>
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">Do you currently reside in Michigan?</h1>
 
-    <p class="text--help text--centered">
-      If not, we’ll help point you in the right direction. However, this
-      application for health coverage is specifically for current residents of
-      Michigan.
-    </p>
-  </header>
+  <p class="text--help text--centered">
+    If not, we’ll help point you in the right direction. However, this
+    application for health coverage is specifically for current residents of
+    Michigan.
+  </p>
+<% end %>
 
-  <%= render "integrated/yes_no_form", form: @form, field: :resides_in_state %>
-</div>
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :resides_in_state %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

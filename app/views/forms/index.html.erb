@@ -1,16 +1,25 @@
 <% content_for :header_title, 'Navigation' %>
-<div class="slab">
-  <% FormNavigation.form_controllers_with_groupings.each do |group_header, forms| %>
-    <h3>
-      <%= group_header %>
-    </h3>
 
-    <% forms.each do |form| %>
-      <div>
-        <%= link_to form.to_param.titleize,
-          section_path(form.to_param),
-          class: 'button button--small button--full-mobile' %>
-      </div>
+<% content_for :form_card_title, 'Form Section Navigation' %>
+
+<% content_for :form_card_body do %>
+  <div class="slab">
+    <% FormNavigation.form_controllers_with_groupings.each do |group_header, forms| %>
+      <h3>
+        <%= group_header %>
+      </h3>
+
+      <% forms.each do |form| %>
+        <div>
+          <%= link_to form.to_param.titleize,
+            section_path(form.to_param),
+            class: 'button button--small button--full-mobile' %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
+
+<% content_for :form_card_footer do %>
+  <p>Please select the page you'd like to view 😌</p>
+<% end %>

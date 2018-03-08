@@ -1,11 +1,7 @@
 <% content_for :header_title, "Introduction" %>
 
-<div class="form-card">
-  <header class="form-card__header">
-    <h1 class="form-card__title">Welcome</h1>
-  </header>
+<% content_for :form_card_title, "Welcome" %>
 
-  <div class="form-card__content">
-    <%= render "integrated/next_step_link" %>
-  </div>
-</div>
+<% content_for :form_card_body do %>
+  <p>This is a placeholder page</p>
+<% end %>

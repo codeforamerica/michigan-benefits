@@ -1,14 +1,9 @@
 <% content_for :header_title, "Introduction" %>
 
-<div class="form-card">
-  <header class="form-card__header">
-    <h1 class="form-card__title">Every family is different.</h1>
-  </header>
+<% content_for :form_card_title, "Every family is different" %>
 
-  <div class="form-card__content">
-    <p>Food Assistance and Medicaid calculate households differently.</p>
-    <div class="illustration illustration--venn-diagram"></div>
-    <p>We'll ask you questions about all the important people in your life.</p>
-    <%= render "integrated/next_step_link" %>
-  </div>
-</div>
+<% content_for :form_card_body do %>
+  <p>Food Assistance and Medicaid calculate households differently.</p>
+  <div class="illustration illustration--venn-diagram"></div>
+  <p>We'll ask you questions about all the important people in your life.</p>
+<% end %>

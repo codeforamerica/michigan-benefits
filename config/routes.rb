@@ -87,6 +87,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  get "/styleguide", to: "styleguides#index"
 end
