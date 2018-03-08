@@ -11,13 +11,17 @@ Are you sure you want to proceed?(y/n) " -n 1 -r
 echo
 
 if [[ $REPLY =~ ^[Yy]$ ]];then
-  echo "OK, proceeding with accessing $HEROKU_REMOTE database..."
+  echo "OK, proceeding with accessing the PRODUCTION database..."
 else
   echo "OK, bye bye!"
   exit 1
 fi
 echo
 
+echo "Stopping Spring..."
+bin/spring stop
+
+echo
 echo "RECOMMEND: change the color of this terminal to red as a reminder that you're in prod!"
 echo
 echo "============= STARTING FOREMAN IN PRODUCTION ================"
@@ -38,4 +42,5 @@ SECRET_KEY_BASE=$(get_var_from_production_env SECRET_KEY_BASE) \
     OPEN_CAGE_DATA_API_KEY=$(get_var_from_production_env OPEN_CAGE_DATA_API_KEY) \
     SLACK_API_TOKEN=$(get_var_from_production_env SLACK_API_TOKEN) \
     RAILS_ENV=production_debug \
+    DISABLE_SPRING=true \
     foreman start

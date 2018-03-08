@@ -46,7 +46,6 @@ class MemberDashboard < Administrate::BaseDashboard
     first_name
     last_name
     employment_status
-    employed_monthly_income
     self_employed_monthly_income
     ssn
   ].freeze
@@ -69,8 +68,8 @@ class MemberDashboard < Administrate::BaseDashboard
     employment_status
     employed_employer_name
     employed_hours_per_week
-    employed_pay_quantity
     employed_pay_interval
+    employed_pay_quantity
     self_employed_profession
     self_employed_monthly_income
     self_employed_monthly_expenses
