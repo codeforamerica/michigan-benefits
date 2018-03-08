@@ -19,7 +19,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: $padding-med;
 
   @include media($mobile-up) {
     flex-direction: row;
@@ -29,7 +28,6 @@
 .form-card__button_right {
   display: flex;
   justify-content: flex-end;
-  padding-top: $padding-med;
 }
 
 .form-card__button_centered {
