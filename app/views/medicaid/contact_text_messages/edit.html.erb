@@ -5,20 +5,22 @@
     <div class="form-card__title">What is the best number for you to receive text messages?</div>
   </header>
 
-  <div class="form-card__content">
-    <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_phone_number_field :sms_phone_number,
-        "Phone number",
-        type: :tel,
-        autofocus: true,
-        options: { maxlength: 10 },
-        help_text: "No dashes or spaces (example: 5555555555).",
-        optional: true %>
+  <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
+    <div class="form-card__content">
+        <%= f.mb_phone_number_field :sms_phone_number,
+          "Phone number",
+          type: :tel,
+          autofocus: true,
+          options: { maxlength: 10 },
+          help_text: "No dashes or spaces (example: 5555555555).",
+          optional: true %>
 
-      <%= f.mb_checkbox :sms_consented,
-        "I'd like to receive SMS reminders at key moments in the enrollment process." %>
+        <%= f.mb_checkbox :sms_consented,
+          "I'd like to receive SMS reminders at key moments in the enrollment process." %>
+    </div>
 
+    <div class="form-card__footer">
       <%= render "medicaid/next_step" %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
