@@ -1,6 +1,23 @@
 <% content_for :header_title, "Your Household" %>
 
-<% content_for :form_card_title, "Who do you want to include on your Food Assistance application?" %>
+<% if current_application.stable_address? %>
+  <% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Who do you currently live with?
+    </h1>
+
+    <p class="text--help text--centered">
+      Tell us about everyone who lives in your home, even if they're not there all the time.
+    </p>
+
+    <p class="text--help text--centered">
+      We'll ask about people outside the home later.
+    </p>
+  <% end %>
+<% else %>
+  <% content_for :form_card_title, "Who do you want to include on your Food Assistance application?" %>
+<% end %>
+
 
 <% content_for :form_card_body do %>
   <div class="slab slab--not-padded">

@@ -8,6 +8,7 @@ class CommonApplication < ApplicationRecord
     dependent: :destroy
 
   has_many :members,
+    -> { order "created_at" },
     class_name: "HouseholdMember",
     foreign_key: "common_application_id",
     dependent: :destroy
