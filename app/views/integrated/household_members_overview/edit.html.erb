@@ -1,41 +1,33 @@
 <% content_for :header_title, "Your Household" %>
 
-<%= render 'shared/flashes' %>
+<% content_for :form_card_title, "Who do you want to include on your Food Assistance application?" %>
 
-<div class="form-card">
-  <header class="form-card__header">
-    <h1 class="form-card__title">Who do you want to include on your Food Assistance application?</h1>
-  </header>
+<% content_for :form_card_body do %>
+  <div class="slab slab--not-padded">
+    <div class="card card--narrow">
+      <p>
+        <i class="button__icon--left icon-check icon-check--color"></i>
+        <%= "#{current_application.primary_member.display_name} (that’s you!)" %>
+      </p>
+      <% current_application.non_applicant_members.each do |member| %>
+        <div>
+          <p>
+            <i class="button__icon--left icon-check icon-check--color"></i>
+            <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
+            (<%= link_to "remove", remove_household_member_sections_path(form: { member_id: member.id }),
+                         method: :put,
+                         class: "remove",
+                         "aria-labelledby": "member-name-#{member.id}" %>)
+          </p>
+        </div>
+      <% end %>
 
-  <div class="form-card__content">
-    <div class="slab slab--not-padded">
-      <div class="card card--narrow">
-        <p>
-          <i class="button__icon--left icon-check icon-check--color"></i>
-          <%= "#{current_application.primary_member.display_name} (that’s you!)" %>
-        </p>
-        <% current_application.non_applicant_members.each do |member| %>
-          <div>
-            <p>
-              <i class="button__icon--left icon-check icon-check--color"></i>
-              <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
-              (<%= link_to "remove", remove_household_member_sections_path(form: { member_id: member.id }),
-                           method: :put,
-                           class: "remove",
-                           "aria-labelledby": "member-name-#{member.id}" %>)
-            </p>
-          </div>
-        <% end %>
-
-        <%= link_to(
-              section_path(Integrated::AddHouseholdMemberController),
-              class: 'button button-full-width button-bold') do %>
-            <i class="button__icon--left icon-add"></i>
-            Add a member
-        <% end %>
-      </div>
+      <%= link_to(
+            section_path(Integrated::AddHouseholdMemberController),
+            class: 'button button-full-width button-bold') do %>
+          <i class="button__icon--left icon-add"></i>
+          Add a member
+      <% end %>
     </div>
-
-    <%= render "integrated/next_step_link" %>
   </div>
-</div>
+<% end %>

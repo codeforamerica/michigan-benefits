@@ -1,36 +1,29 @@
 <% content_for :header_title, "Introduction" %>
 
-<div class="form-card">
-  <header class="form-card__header">
-    <h1 class="form-card__title">To start, please introduce yourself.</h1>
-  </header>
+<% content_for :form_card_title, "To start, please introduce yourself." %>
 
-  <div class="form-card__content">
-    <%= form_for @form, as: :form, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-        <%= f.mb_input_field :first_name,
-          "What's your first name?",
-          autofocus: true %>
-        <%= f.mb_input_field :last_name, "What's your last name?" %>
-        <%= f.mb_date_select :birthday,
-          "When is your birthday?",
-          options: {
-            start_year: 1900,
-            end_year: Time.now.year,
-            default: Date.new(1990,1,15),
-            order: [:month, :day, :year],
-          } %>
-        <%= f.mb_radio_set :sex,
-          label_text: "What's your sex?",
-          collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
-          help_text: "As it appears on your ID",
-          layout: "inline" %>
-
-        <%= f.mb_radio_set :previously_received_assistance,
-          label_text: "Have you received assistance in Michigan in the past (or currently)?",
-          collection: [{ value: :yes, label: "Yes" }, { value: :no, label: "No" }],
-          layout: "inline" %>
-
-      <%= render "integrated/next_step" %>
-    <% end %>
-  </div>
-</div>
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_input_field :first_name,
+      "What's your first name?",
+      autofocus: true %>
+    <%= f.mb_input_field :last_name, "What's your last name?" %>
+    <%= f.mb_date_select :birthday,
+      "When is your birthday?",
+      options: {
+        start_year: 1900,
+        end_year: Time.now.year,
+        default: Date.new(1990,1,15),
+        order: [:month, :day, :year],
+      } %>
+    <%= f.mb_radio_set :sex,
+      label_text: "What's your sex?",
+      collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
+      help_text: "As it appears on your ID",
+      layout: "inline" %>
+    <%= f.mb_radio_set :previously_received_assistance,
+      label_text: "Have you received assistance in Michigan in the past (or currently)?",
+      collection: [{ value: :yes, label: "Yes" }, { value: :no, label: "No" }],
+      layout: "inline" %>
+  <% end %>
+<% end %>
