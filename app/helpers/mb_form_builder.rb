@@ -328,18 +328,18 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   def mb_yes_no_buttons(method)
     <<~HTML.html_safe
-    <div class="form-card__buttons">
-      <div>
-        <button class="button button--nav button--full-mobile" type="submit" value="false" name="#{object_name}[#{method}]">
-          No
-        </button>
+      <div class="form-card__buttons">
+        <div>
+          <button class="button button--nav button--full-mobile" type="submit" value="false" name="#{object_name}[#{method}]">
+            No
+          </button>
+        </div>
+        <div>
+          <button class="button button--nav button--full-mobile button--cta" type="submit" value="true" name="#{object_name}[#{method}]">
+            Yes
+          </button>
+        </div>
       </div>
-      <div>
-        <button class="button button--nav button--full-mobile button--cta" type="submit" value="true" name="#{object_name}[#{method}]">
-          Yes
-        </button>
-      </div>
-    </div>
     HTML
   end
 
