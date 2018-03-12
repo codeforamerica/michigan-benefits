@@ -15,6 +15,8 @@ class HouseholdMember < ApplicationRecord
     other_relation: 8,
   }, _prefix: :is
 
+  enum requesting_food: { unfilled: 0, yes: 1, no: 2 }, _prefix: :requesting_food
+
   RELATIONSHIP_LABELS_AND_KEYS = [
     ["Choose one", "unknown_relation"],
     ["Roommate", "roommate"],

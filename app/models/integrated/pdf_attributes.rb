@@ -11,6 +11,10 @@ module Integrated
       end
     end
 
+    def underline_if_true(statement)
+      UNDERLINED if statement
+    end
+
     def circle_if_true(statement)
       CIRCLED if statement
     end

@@ -46,7 +46,7 @@ RSpec.feature "Integrated application" do
 
       select_radio(
         question: "What's your current living situation?",
-        answer: "Temporary address",
+        answer: "Stable address",
       )
 
       proceed_with "Continue"
@@ -60,8 +60,9 @@ RSpec.feature "Integrated application" do
 
     on_page "Your Household" do
       expect(page).to have_content(
-        "Who do you want to include on your Food Assistance application?",
+        "Who do you currently live with?",
       )
+      expect(page).to have_content("Jessie Tester (that’s you!)")
 
       click_on "Add a member"
     end
@@ -124,13 +125,27 @@ RSpec.feature "Integrated application" do
 
       on_page "Your Household" do
         expect(page).to have_content(
-          "Who do you want to include on your Food Assistance application?",
+          "Who do you currently live with?",
         )
 
         expect(page).to have_content("#{member[:first_name]} #{member[:last_name]}")
 
         member == members.last ? click_on("Continue") : click_on("Add a member")
       end
+    end
+
+    on_page "Your Household" do
+      expect(page).to have_content(
+        "Who do you want to include on your Food Assistance application?",
+      )
+
+      # Jessie Tester checked by default
+      check "Jonny Tester"
+      check "Jackie Tester"
+      check "Joe Schmoe"
+      check "Pupper McDog"
+
+      proceed_with "Continue"
     end
 
     on_page "Application Submitted" do
@@ -146,7 +161,7 @@ RSpec.feature "Integrated application" do
     pdf_values = filled_in_values(temp_file.path)
 
     expect(pdf_values["legal_name"]).to include("Jessie Tester")
-    expect(pdf_values["is_homeless"]).to eq("Yes")
+    expect(pdf_values["is_homeless"]).to eq("No")
     expect(pdf_values["dob"]).to eq("01/01/1969")
     expect(pdf_values["received_assistance"]).to eq("Yes")
     expect(pdf_values["applying_for_food"]).to eq("Yes")
@@ -177,7 +192,7 @@ RSpec.feature "Integrated application" do
     expect(pdf_values["fifth_member_legal_name"]).to include("Apples McMackintosh")
     expect(pdf_values["fifth_member_male"]).to eq(CIRCLED)
     expect(pdf_values["fifth_member_dob"]).to eq("")
-    expect(pdf_values["fifth_member_requesting_food"]).to eq(UNDERLINED)
+    expect(pdf_values["fifth_member_requesting_food"]).to eq("")
 
     expect(pdf_values["household_added_notes"]).to eq("Yes")
     expect(pdf_values["notes"]).to include("Additional Household Members:")

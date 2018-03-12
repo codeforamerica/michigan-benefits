@@ -1,0 +1,29 @@
+<% content_for :header_title, "Your Household" %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">
+    Who do you want to include on your Food Assistance application?
+  </h1>
+
+  <p class="text--help text--centered">
+    Below is a list of the people you currently live with. Choose who needs Food Assistance.
+  </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <fieldset class="input-group">
+      <legend class="sr-only" id="requesting_food__legend">
+        Choose who needs Food Assistance.
+      </legend>
+      <% @form.members.each do |member| %>
+        <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+          <%= ff.mb_checkbox :requesting_food,
+                             member.display_name,
+                             legend_id: "requesting_food__legend",
+                             options: { checked_value: "yes", unchecked_value: "no" } %>
+        <% end %>
+      <% end %>
+    </fieldset>
+  <% end %>
+<% end %>
