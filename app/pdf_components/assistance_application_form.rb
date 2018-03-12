@@ -53,7 +53,7 @@ class AssistanceApplicationForm
       hash[:"#{prefix}dob"] = mmddyyyy_date(member.birthday)
       hash[:"#{prefix}male"] = circle_if_true(member.sex_male?)
       hash[:"#{prefix}female"] = circle_if_true(member.sex_female?)
-      hash[:"#{prefix}requesting_food"] = Integrated::PdfAttributes::UNDERLINED
+      hash[:"#{prefix}requesting_food"] = underline_if_true(member.requesting_food_yes?)
     end
     if benefit_application.members.count > 5
       hash[:household_added_notes] = "Yes"
@@ -63,7 +63,9 @@ class AssistanceApplicationForm
         hash[:notes] += "Legal name: #{extra_member.display_name}, "
         hash[:notes] += "Sex: #{extra_member.sex.titleize}, "
         hash[:notes] += "DOB: #{mmddyyyy_date(extra_member.birthday)}, "
-        hash[:notes] += "Applying for: Food\n"
+        if extra_member.requesting_food_yes?
+          hash[:notes] += "Applying for: Food\n"
+        end
       end
     end
     hash

@@ -18,6 +18,10 @@ class CommonApplication < ApplicationRecord
 
   enum living_situation: { unknown_living_situation: 0, stable_address: 1, temporary_address: 2, homeless: 3 }
 
+  def unstable_housing?
+    temporary_address? || homeless?
+  end
+
   def pdf
     @_pdf ||= ApplicationPdfAssembler.new(benefit_application: self).run
   end

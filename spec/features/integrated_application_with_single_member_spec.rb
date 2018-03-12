@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Integrated application" do
   include PdfHelper
 
-  scenario "with multiple members", :js do
+  scenario "with one member", :js do
     visit before_you_start_sections_path
 
     on_page "Introduction" do
@@ -43,7 +43,7 @@ RSpec.feature "Integrated application" do
 
       select_radio(
         question: "What's your current living situation?",
-        answer: "Stable address",
+        answer: "Temporary address",
       )
 
       proceed_with "Continue"
@@ -57,9 +57,8 @@ RSpec.feature "Integrated application" do
 
     on_page "Your Household" do
       expect(page).to have_content(
-        "Who do you currently live with?",
+        "Who do you want to include on your Food Assistance application?",
       )
-      expect(page).to have_content("Jessie Tester (that’s you!)")
 
       proceed_with "Continue"
     end
