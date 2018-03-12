@@ -1,12 +1,12 @@
 class IntroduceYourselfForm < Form
-  include MultiparameterAttributeAssignment
-
   set_application_attributes(:previously_received_assistance)
 
   set_member_attributes(
     :first_name,
     :last_name,
-    :birthday,
+    :birthday_year,
+    :birthday_month,
+    :birthday_day,
     :sex,
   )
 
@@ -21,11 +21,18 @@ class IntroduceYourselfForm < Form
     message: "Make sure to answer this question",
   }
 
-  validates :birthday,
-    presence: { message: "Make sure to provide a birthday" }
+  validate :birthday_must_be_present_and_valid_date
 
-  # https://github.com/rails/rails/pull/8189#issuecomment-10329403
-  def class_for_attribute(attr)
-    return Date if attr == "birthday"
+  def birthday_must_be_present_and_valid_date
+    all_present = %i[birthday_year birthday_month birthday_day].all? { |att| send(att).present? }
+    if all_present
+      begin
+        DateTime.new(birthday_year.to_i, birthday_month.to_i, birthday_day.to_i)
+      rescue ArgumentError
+        errors.add(:birthday, "Make sure to provide a real birthday")
+      end
+    else
+      errors.add(:birthday, "Make sure to provide a full birthday")
+    end
   end
 end

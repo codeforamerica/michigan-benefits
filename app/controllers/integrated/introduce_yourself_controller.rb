@@ -8,7 +8,7 @@ module Integrated
         requesting_food: "yes",
         buy_and_prepare_food_together: "yes",
       )
-
+      combine_birthday_fields(member_data)
       if current_application
         current_application.primary_member.update(member_data)
         current_application.update(application_params)
@@ -21,10 +21,21 @@ module Integrated
 
     private
 
+    def combine_birthday_fields(data)
+      data[:birthday] = DateTime.new(
+        data.delete(:birthday_year).to_i,
+        data.delete(:birthday_month).to_i,
+        data.delete(:birthday_day).to_i,
+      )
+    end
+
     def existing_attributes
       if current_application
         attributes = current_application.attributes.
           merge(current_application.primary_member.attributes)
+        %i[year month day].each do |sym|
+          attributes["birthday_#{sym}"] = current_application.primary_member.birthday.try(sym)
+        end
         HashWithIndifferentAccess.new(attributes)
       else
         {}

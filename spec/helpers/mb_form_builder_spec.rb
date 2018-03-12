@@ -54,7 +54,7 @@ RSpec.describe MbFormBuilder do
           <div class="field_with_errors">
             <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" aria-labelledby="sample_name__errors sample_name__label sample_name__help" name="sample[name]" />
           </div>
-          <div class="text--error" id="sample_name__errors"><i class="icon-warning"></i> can't be blank </div>
+          <span class="text--error" id="sample_name__errors"><i class="icon-warning"></i> can't be blank </div>
         </div>
       HTML
     end
@@ -88,7 +88,7 @@ RSpec.describe MbFormBuilder do
          <div class="field_with_errors">
            <textarea class="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_description__errors sample_description__label sample_description__help" name="sample[description]" id="sample_description"></textarea>
          </div>
-         <div class="text--error" id="sample_description__errors"><i class="icon-warning"></i> can't be blank </div>
+         <span class="text--error" id="sample_description__errors"><i class="icon-warning"></i> can't be blank </span>
        </div>
       HTML
     end
@@ -162,7 +162,7 @@ RSpec.describe MbFormBuilder do
               </select>
             </div>
           </div>
-          <div class="text--error" id="sample_how_many__errors"><i class="icon-warning"></i> can't be blank </div>
+          <span class="text--error" id="sample_how_many__errors"><i class="icon-warning"></i> can't be blank </span>
         </div>
       HTML
     end
@@ -191,7 +191,7 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group">
-          <legend class="form-question " id="sample_birthday__label">What is your birthday?</legend>
+          <legend class="form-question " id="sample_birthday__label"> What is your birthday? </legend>
           <p class="text--help" id="sample_birthday__help">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
@@ -299,7 +299,7 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group">
-          <legend class="form-question " id="sample_members_72_birthday__label">What is your birthday?</legend>
+          <legend class="form-question " id="sample_members_72_birthday__label"> What is your birthday? </legend>
           <p class="text--help" id="sample_members_72_birthday__help">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
@@ -372,6 +372,87 @@ RSpec.describe MbFormBuilder do
     end
   end
 
+  describe "#mb_date_input" do
+    it "renders an accessible trio of text fields for month, day, and year" do
+      class SampleStep < Step
+        step_attributes(:birthday_year)
+        step_attributes(:birthday_month)
+        step_attributes(:birthday_day)
+      end
+
+      sample = SampleStep.new
+      form = MbFormBuilder.new(:sample, sample, template, {})
+      output = form.mb_date_input(
+        :birthday,
+        "What is your birthday?",
+        help_text: "(For surprises)",
+        options: {
+          start_year: 1990,
+          end_year: 1992,
+        },
+      )
+      expect(output).to be_html_safe
+
+      expect(output).to match_html <<-HTML
+      <fieldset class="form-group">
+        <legend class="form-question " id="sample_birthday__label"> What is your birthday? </legend>
+        <p class="text--help" id="sample_birthday__help">(For surprises)</p>
+        <div class="input-group--inline">
+          <div class="form-group">
+            <label class="text--help form-subquestion" for="sample_birthday_month" id="sample_birthday_month__label">Month</label>
+            <input class="form-width--month text-input" min="1" max="12" id="sample_birthday_month" name="sample[birthday_month]" type="number" />
+          </div>
+          <div class="form-group">
+            <label class="text--help form-subquestion" for="sample_birthday_day" id="sample_birthday_day__label">Day</label>
+            <input class="form-width--day text-input" min="1" max="31" id="sample_birthday_day" name="sample[birthday_day]" type="number" />
+          </div>
+          <div class="form-group">
+            <label class="text--help form-subquestion" for="sample_birthday_year" id="sample_birthday_year__label">Year</label>
+            <input class="form-width--year text-input" min="1990" max="1992" id="sample_birthday_year" name="sample[birthday_year]" type="number" />
+          </div>
+        </div>
+      </fieldset>
+      HTML
+    end
+
+    it "displays errors on the containing field" do
+      class SampleForm < Form
+        set_member_attributes(
+          :birthday_year,
+          :birthday_month,
+          :birthday_day,
+        )
+
+        validate :birthday_should_be_valid
+
+        def birthday_should_be_valid
+          errors.add(:birthday, "Not a great birthday tbh")
+        end
+      end
+
+      sample = SampleForm.new
+
+      expect(sample).not_to be_valid
+
+      form = MbFormBuilder.new(:sample, sample, template, {})
+      output = form.mb_date_input(
+        :birthday,
+        "What is your birthday?",
+        help_text: "(For surprises)",
+        options: {
+          start_year: 1990,
+          end_year: 1992,
+        },
+      )
+
+      expect(output).to be_html_safe
+
+      expect(output).to include_html <<-HTML
+        <span class="text--error" id="sample_birthday__errors"><i class="icon-warning"></i> Not a great birthday tbh </div>
+      HTML
+    end
+  end
+
   describe "#mb_radio_set" do
     it "renders an accessible set of radio inputs" do
       class SampleStep < Step
@@ -395,13 +476,15 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group form-group--error">
-          <legend class="form-question " id="sample_dependent_care__label">Does your household have dependent care expenses?</legend>
+          <legend class="form-question " id="sample_dependent_care__label">
+            <span class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </span>
+            Does your household have dependent care expenses?
+          </legend>
           <p class="text--help" id="sample_dependent_care__help">This includes child care.</p>
           <radiogroup class="input-group--block">
             <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_true__label" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
             <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
           </radiogroup>
-          <div class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </div>
         </fieldset>
       HTML
     end
@@ -436,7 +519,7 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="input-group">
-          <legend class="form-question " id="sample_captains__label">Which captains do you think are cool?</legend>
+          <legend class="form-question " id="sample_captains__label"> Which captains do you think are cool? </legend>
           <p class="text--help" id="sample_captains__help">like, really cool</p>
           <label id="sample_captains_tng__label" class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_tng__label" type="checkbox" value="1" name="sample[tng]" id="sample_tng"/> Picard </label>
           <label id="sample_captains_ds9__label" class="checkbox"><input name="sample[ds9]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_ds9__label" type="checkbox" value="1" name="sample[ds9]" id="sample_ds9"/> Sisko </label>
@@ -472,9 +555,9 @@ RSpec.describe MbFormBuilder do
           </div>
           Confirm that you agree to Terms of Service
         </label>
-        <div class="text--error" id="sample_read_tos__errors">
+        <span class="text--error" id="sample_read_tos__errors">
           <i class="icon-warning"></i> can't be blank
-        </div>
+        </span>
       HTML
     end
 

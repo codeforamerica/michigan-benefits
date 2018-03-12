@@ -21,9 +21,9 @@ RSpec.feature "Integrated application" do
       fill_in "What's your first name?", with: "Jessie"
       fill_in "What's your last name?", with: "Tester"
 
-      select "January", from: "form_birthday_2i"
-      select "1", from: "form_birthday_3i"
-      select "1969", from: "form_birthday_1i"
+      fill_in "Month", with: "1"
+      fill_in "Day", with: "1"
+      fill_in "Year", with: "1969"
 
       select_radio(question: "What's your sex?", answer: "Female")
 
@@ -71,35 +71,35 @@ RSpec.feature "Integrated application" do
       {
         first_name: "Jonny",
         last_name: "Tester",
-        dob: ["January", "1", "1969"],
+        dob: ["1", "1", "1969"],
         sex: "Female",
         relation: "Roommate",
       },
       {
         first_name: "Jackie",
         last_name: "Tester",
-        dob: ["January", "1", "1970"],
+        dob: ["1", "1", "1970"],
         sex: "Male",
         relation: "Sibling",
       },
       {
         first_name: "Joe",
         last_name: "Schmoe",
-        dob: ["Month", "Day", "Year"],
+        dob: ["", "", ""],
         sex: "Female",
         relation: "Parent",
       },
       {
         first_name: "Apples",
         last_name: "McMackintosh",
-        dob: ["Month", "Day", "Year"],
+        dob: ["", "", ""],
         sex: "Male",
         relation: "Other",
       },
       {
         first_name: "Pupper",
         last_name: "McDog",
-        dob: ["December", "30", "2016"],
+        dob: ["12", "30", "2016"],
         sex: "Male",
         relation: "Child",
       },
@@ -112,9 +112,9 @@ RSpec.feature "Integrated application" do
         fill_in "What's their first name?", with: member[:first_name]
         fill_in "What's their last name?", with: member[:last_name]
 
-        select member[:dob][0], from: "form_birthday_2i"
-        select member[:dob][1], from: "form_birthday_3i"
-        select member[:dob][2], from: "form_birthday_1i"
+        fill_in "Month", with: member[:dob][0]
+        fill_in "Day", with: member[:dob][1]
+        fill_in "Year", with: member[:dob][2]
 
         select_radio(question: "What's their sex?", answer: member[:sex])
 

@@ -8,9 +8,9 @@ RSpec.describe Integrated::AddHouseholdMemberController do
           form: {
             first_name: "Gary",
             last_name: "McTester",
-            "birthday(3i)" => "31",
-            "birthday(2i)" => "1",
-            "birthday(1i)" => "1950",
+            birthday_day: "31",
+            birthday_month: "1",
+            birthday_year: "1950",
             sex: "male",
             relationship: "roommate",
           },
