@@ -1,0 +1,15 @@
+Description:
+    Create files for adding a new section to the integrated benefit application.
+
+Example:
+    rails generate section FoodAssistance
+
+    This will create:
+        app/forms/food_assistance_form.rb
+        app/controllers/integrated/food_assistance_controller.rb
+        app/views/integrated/food_assistance/edit.html.erb
+        spec/forms/food_assistance_form_spec.rb
+        spec/controllers/integrated/food_assistance_controller_spec.rb
+
+    This will add:
+        * TBD

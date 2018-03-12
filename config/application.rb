@@ -15,5 +15,13 @@ module MichiganBenefits
 
     config.filter_parameters += [:ssn]
     config.middleware.insert_after Warden::Manager, DelayedJobWebLogger
+
+    config.generators do |g|
+      g.orm             :active_record
+      g.template_engine :erb
+      g.test_framework  :rspec, fixture: true
+      g.stylesheets     false
+      g.javascripts     false
+    end
   end
 end
