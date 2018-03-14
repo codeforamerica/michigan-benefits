@@ -4,6 +4,7 @@ AllCops:
     - bin/stubs/*
     - bin/*
     - config/initializers/*
+    - lib/generators/*/templates/*
 
 Naming/AccessorMethodName:
   Description: Check the naming of accessor methods for get_/set_.
