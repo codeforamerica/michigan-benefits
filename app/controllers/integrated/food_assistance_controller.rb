@@ -3,7 +3,9 @@ module Integrated
     def self.skip?(current_application)
       if current_application.members.count == 1 || current_application.unstable_housing?
         ActiveRecord::Base.transaction do
-          current_application.members.each { |member| member.update!(requesting_food: "yes") }
+          current_application.members.each do |member|
+            member.update!(requesting_food: "yes", buy_and_prepare_food_together: "yes")
+          end
         end
         true
       else
