@@ -12,14 +12,15 @@ class ApplicationPdfAssembler
   private
 
   def components
-    [
+    components = [
       Coversheet.new,
       AssistanceApplicationForm.new(benefit_application),
-      # CommonApplicationAdditionalMembers.new(benefit_application.members),
-      # MedicaidSupplement.new(medicaid_application) if medicaid_application,
-      # FoodAssistanceSupplement.new(benefit_application) if benefit_application,
-      verification_documents,
-    ].flatten
+    ]
+    if benefit_application.applying_for_food_assistance?
+      components << FoodAssistanceSupplement.new(benefit_application)
+    end
+    components << verification_documents
+    components.flatten
   end
 
   def verification_documents

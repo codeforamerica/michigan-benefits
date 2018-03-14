@@ -13,6 +13,20 @@ class CommonApplication < ApplicationRecord
     foreign_key: "common_application_id",
     dependent: :destroy
 
+  has_many :snap_applying_members,
+    -> {
+      requesting_food
+    },
+    class_name: "HouseholdMember",
+    foreign_key: "common_application_id"
+
+  has_many :snap_household_members,
+    -> {
+      requesting_food.buy_and_prepare_food_together
+    },
+    class_name: "HouseholdMember",
+    foreign_key: "common_application_id"
+
   enum previously_received_assistance: { unfilled: 0, yes: 1, no: 2 },
        _prefix: :previously_received_assistance
 
@@ -32,5 +46,12 @@ class CommonApplication < ApplicationRecord
 
   def documents
     []
+  end
+
+  def applying_for_food_assistance?
+    members.each do |member|
+      return true if member.requesting_food_yes?
+    end
+    false
   end
 end

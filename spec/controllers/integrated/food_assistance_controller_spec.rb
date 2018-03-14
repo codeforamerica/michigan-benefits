@@ -4,42 +4,43 @@ RSpec.describe Integrated::FoodAssistanceController do
   describe "#skip?" do
     context "when housing is stable" do
       context "for single member household" do
-        it "returns true" do
+        it "returns true and updates member" do
           application = create(:common_application,
             living_situation: "stable_address",
-            members: [
-              build(:household_member),
-            ])
-          expect(described_class.skip?(application)).to eq(true)
-          expect(application.primary_member.requesting_food_yes?).to be_truthy
+            members: build_list(:household_member, 1))
+
+          to_skip = nil
+          expect do
+            to_skip = described_class.skip?(application)
+          end.to change { application.primary_member.requesting_food }.to("yes")
+          expect(to_skip).to eq(true)
         end
       end
 
-      context "for multi-member household" do
-        it "returns false" do
+      context "for household with more than one member" do
+        it "returns false and does not update members" do
           application = create(:common_application,
             living_situation: "stable_address",
-            members: [
-              build(:household_member),
-              build(:household_member),
-            ])
-          expect(described_class.skip?(application)).to eq(false)
+            members: build_list(:household_member, 3))
+
+          to_skip = nil
+          expect do
+            to_skip = described_class.skip?(application)
+          end.to_not(change { application.primary_member.requesting_food })
+          expect(to_skip).to eq(false)
         end
       end
     end
 
     context "when housing is unstable" do
-      it "returns true" do
+      it "returns true and updates members" do
         application = create(:common_application,
           living_situation: "temporary_address",
-          members: [
-            build(:household_member),
-            build(:household_member),
-          ])
-        expect(described_class.skip?(application)).to eq(true)
+          members: build_list(:household_member, 1))
         application.reload
+
+        expect(described_class.skip?(application)).to eq(true)
         expect(application.members[0].requesting_food_yes?).to be_truthy
-        expect(application.members[1].requesting_food_yes?).to be_truthy
       end
     end
   end

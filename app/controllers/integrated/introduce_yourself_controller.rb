@@ -3,7 +3,11 @@ module Integrated
     skip_before_action :ensure_application_present
 
     def update_models
-      member_data = member_params.merge(relationship: "primary")
+      member_data = member_params.merge(
+        relationship: "primary",
+        requesting_food: "yes",
+        buy_and_prepare_food_together: "yes",
+      )
 
       if current_application
         current_application.primary_member.update(member_data)
