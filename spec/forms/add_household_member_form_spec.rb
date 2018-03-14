@@ -16,6 +16,13 @@ RSpec.describe AddHouseholdMemberForm do
       expect(form.errors[:last_name]).to be_present
     end
 
+    it "does accept empty birthday" do
+      form = AddHouseholdMemberForm.new(first_name: "Gary", last_name: "Tester")
+
+      expect(form).to be_valid
+      expect(form.errors[:birthday]).to_not be_present
+    end
+
     it "does not accept invalid dates for birthday" do
       form = AddHouseholdMemberForm.new(birthday_year: 1992, birthday_month: 2, birthday_day: 30)
 

@@ -21,14 +21,6 @@ module Integrated
 
     private
 
-    def combine_birthday_fields(data)
-      data[:birthday] = DateTime.new(
-        data.delete(:birthday_year).to_i,
-        data.delete(:birthday_month).to_i,
-        data.delete(:birthday_day).to_i,
-      )
-    end
-
     def existing_attributes
       if current_application
         attributes = current_application.attributes.

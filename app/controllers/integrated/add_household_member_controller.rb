@@ -13,16 +13,5 @@ module Integrated
     def next_path
       household_members_overview_sections_path
     end
-
-    private
-
-    def combine_birthday_fields(data)
-      year = data.delete(:birthday_year)
-      month = data.delete(:birthday_month)
-      day = data.delete(:birthday_day)
-      if [year, month, day].all? &:present?
-        data[:birthday] = DateTime.new(year.to_i, month.to_i, day.to_i)
-      end
-    end
   end
 end

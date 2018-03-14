@@ -188,3 +188,5 @@ en:
       member:
         ssn: SSN?
   real_phone_number: "This number looks wrong. Please use a real phone number."
+  full_birthday: "Make sure to provide a full birthday."
+  real_birthday: "Make sure to provide a real birthday."
