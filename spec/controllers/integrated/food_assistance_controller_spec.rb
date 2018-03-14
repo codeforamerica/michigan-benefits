@@ -4,16 +4,17 @@ RSpec.describe Integrated::FoodAssistanceController do
   describe "#skip?" do
     context "when housing is stable" do
       context "for single member household" do
-        it "returns true and updates member" do
+        it "returns true and includes member in snap household" do
           application = create(:common_application,
             living_situation: "stable_address",
             members: build_list(:household_member, 1))
 
-          to_skip = nil
-          expect do
-            to_skip = described_class.skip?(application)
-          end.to change { application.primary_member.requesting_food }.to("yes")
-          expect(to_skip).to eq(true)
+          expect(described_class.skip?(application)).to eq(true)
+
+          application.primary_member.reload
+
+          expect(application.primary_member.requesting_food).to eq("yes")
+          expect(application.primary_member.buy_and_prepare_food_together).to eq("yes")
         end
       end
 
@@ -33,14 +34,17 @@ RSpec.describe Integrated::FoodAssistanceController do
     end
 
     context "when housing is unstable" do
-      it "returns true and updates members" do
+      it "returns true and includes member in snap household" do
         application = create(:common_application,
           living_situation: "temporary_address",
           members: build_list(:household_member, 1))
-        application.reload
 
         expect(described_class.skip?(application)).to eq(true)
-        expect(application.members[0].requesting_food_yes?).to be_truthy
+
+        application.members.map(&:reload)
+
+        expect(application.members[0].requesting_food).to eq("yes")
+        expect(application.members[0].buy_and_prepare_food_together).to eq("yes")
       end
     end
   end
