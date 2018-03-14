@@ -9,6 +9,7 @@ class FormNavigation
       Integrated::BenefitsIntroController,
       Integrated::HouseholdMembersOverviewController,
       Integrated::FoodAssistanceController,
+      Integrated::BuyAndPrepareFoodWithOtherPersonController,
       Integrated::ApplicationSubmittedController,
     ],
   }.freeze

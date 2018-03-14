@@ -22,5 +22,9 @@ module Integrated
     def mmddyyyy_date(date)
       date&.strftime("%m/%d/%Y")
     end
+
+    def member_names(members)
+      members.map(&:display_name).join(", ")
+    end
   end
 end

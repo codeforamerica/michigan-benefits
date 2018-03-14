@@ -1,6 +1,17 @@
 require "rails_helper"
 
 RSpec.describe Integrated::<%= model.camelcase %>Controller do
+  describe "#skip?" do
+    context "when applicant has stable housing" do
+      xit "returns true" do
+        application = create(:common_application, living_situation: "stable_address")
+
+        skip_step = Integrated::<%= model.camelcase %>Controller.skip?(application)
+        expect(skip_step).to eq(true)
+      end
+    end
+  end
+
   describe "edit" do
     context "with a current application" do
       xit "assigns existing attributes" do

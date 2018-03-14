@@ -1,6 +1,12 @@
 module Integrated
   class <%= model.camelcase %>Controller < FormsController
     <%- if options.doc? -%>
+    # If controller should be skipped for any reason, uncomment the following and modify logic:
+    #
+    #   def self.skip?(application)
+    #     application.stable_housing?
+    #   end
+    #
     # If updating models, uncomment the following and modify required logic:
     #
     #   def update_models

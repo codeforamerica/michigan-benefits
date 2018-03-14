@@ -1,6 +1,14 @@
 class HouseholdMember < ApplicationRecord
   belongs_to :common_application
 
+  scope :requesting_food, -> {
+    where(requesting_food: "yes").order("created_at")
+  }
+
+  scope :buy_and_prepare_food_together, -> {
+    where(buy_and_prepare_food_together: "yes").order("created_at")
+  }
+
   enum sex: { unfilled: 0, male: 1, female: 2 }, _prefix: :sex
 
   enum relationship: {
@@ -16,6 +24,9 @@ class HouseholdMember < ApplicationRecord
   }, _prefix: :is
 
   enum requesting_food: { unfilled: 0, yes: 1, no: 2 }, _prefix: :requesting_food
+
+  enum buy_and_prepare_food_together: { unfilled: 0, yes: 1, no: 2 },
+       _prefix: :buy_and_prepare_food_together
 
   RELATIONSHIP_LABELS_AND_KEYS = [
     ["Choose one", "unknown_relation"],

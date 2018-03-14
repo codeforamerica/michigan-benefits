@@ -2,7 +2,9 @@ module Integrated
   class FoodAssistanceController < FormsController
     def self.skip?(current_application)
       if current_application.members.count == 1 || current_application.unstable_housing?
-        current_application.members.each { |member| member.update(requesting_food: "yes") }
+        ActiveRecord::Base.transaction do
+          current_application.members.each { |member| member.update!(requesting_food: "yes") }
+        end
         true
       else
         false
@@ -10,9 +12,6 @@ module Integrated
     end
 
     def edit
-      if members.first.requesting_food_unfilled?
-        members.first.update(requesting_food: "yes")
-      end
       @form = form_class.new(members: members)
     end
 
