@@ -148,6 +148,24 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Your Household" do
+      expect(page).to have_content(
+        "Do all of you share meals and food costs?",
+      )
+
+      proceed_with "No"
+    end
+
+    on_page "Your Household" do
+      expect(page).to have_content(
+        "Who buys and makes food separately?",
+      )
+
+      check "Jonny Tester"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",
@@ -199,5 +217,8 @@ RSpec.feature "Integrated application" do
     expect(pdf_values["notes"]).to include(
       "Relation: Child, Legal name: Pupper McDog, Sex: Male, DOB: 12/30/2016, Applying for: Food",
     )
+
+    expect(pdf_values["anyone_buys_food_separately"]).to eq("Yes")
+    expect(pdf_values["anyone_buys_food_separately_names"]).to include("Jonny Tester")
   end
 end

@@ -1,0 +1,18 @@
+<% content_for :header_title, "Your Household" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Do all of you share meals and food costs?
+    </h1>
+    <p class="text--centered text--help">
+      Include people you buy food for.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :all_share_food_costs %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

@@ -16,6 +16,11 @@ class Form
       form_attributes(member_attributes)
     end
 
+    def set_navigator_attributes(*navigator_attributes)
+      @navigator_attributes = navigator_attributes
+      form_attributes(navigator_attributes)
+    end
+
     def application_attributes
       @application_attributes || []
     end
@@ -24,10 +29,15 @@ class Form
       @member_attributes || []
     end
 
+    def navigator_attributes
+      @navigator_attributes || []
+    end
+
     private
 
     def form_attributes(attribute_names)
-      self.attribute_names = (application_attributes + member_attributes)
+      attributes = (application_attributes + member_attributes + navigator_attributes)
+      self.attribute_names = attributes
 
       attribute_strings = attribute_names.map(&:to_s)
 
