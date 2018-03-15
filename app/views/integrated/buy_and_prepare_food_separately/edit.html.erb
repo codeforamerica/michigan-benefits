@@ -1,0 +1,21 @@
+<% content_for :header_title, "Your Household" %>
+
+<% content_for :form_card_title, "Who buys and makes food separately?" %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <fieldset class="input-group">
+      <legend class="sr-only" id="buy_and_prepare_food_together__legend">
+        Who buys and makes food separately?
+      </legend>
+      <% @form.members.each do |member| %>
+        <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+          <%= ff.mb_checkbox :buy_and_prepare_food_together,
+                             member.display_name,
+                             legend_id: "buy_and_prepare_food_together__legend",
+                             options: { checked_value: "no", unchecked_value: "yes" } %>
+        <% end %>
+      <% end %>
+    </fieldset>
+    <% end %>
+<% end %>

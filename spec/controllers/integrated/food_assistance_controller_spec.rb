@@ -7,7 +7,8 @@ RSpec.describe Integrated::FoodAssistanceController do
         it "returns true and includes member in snap household" do
           application = create(:common_application,
             living_situation: "stable_address",
-            members: build_list(:household_member, 1))
+            members: build_list(:household_member, 1),
+            navigator: create(:application_navigator))
 
           expect(described_class.skip?(application)).to eq(true)
 
@@ -53,7 +54,8 @@ RSpec.describe Integrated::FoodAssistanceController do
     context "with valid params" do
       it "marks members as requesting food" do
         current_app = create(:common_application,
-                             members: [create(:household_member), create(:household_member)])
+                             members: [create(:household_member), create(:household_member)],
+                             navigator: create(:application_navigator))
         session[:current_application_id] = current_app.id
 
         member1 = current_app.members[0]

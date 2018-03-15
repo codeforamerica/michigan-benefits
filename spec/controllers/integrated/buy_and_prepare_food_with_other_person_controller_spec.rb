@@ -54,7 +54,7 @@ RSpec.describe Integrated::BuyAndPrepareFoodWithOtherPersonController do
       context "when client indicates they buy and prepare food with person" do
         it "updates trait on member to 'yes'" do
           members = build_list(:household_member, 2, requesting_food: "yes")
-          current_app = create(:common_application, members: members)
+          current_app = create(:common_application, members: members, navigator: create(:application_navigator))
 
           session[:current_application_id] = current_app.id
 
@@ -71,7 +71,7 @@ RSpec.describe Integrated::BuyAndPrepareFoodWithOtherPersonController do
       context "when client indicates they do not buy and prepare food with person" do
         it "updates trait on second member to 'no'" do
           members = build_list(:household_member, 2, requesting_food: "yes")
-          current_app = create(:common_application, members: members)
+          current_app = create(:common_application, members: members, navigator: create(:application_navigator))
 
           session[:current_application_id] = current_app.id
 

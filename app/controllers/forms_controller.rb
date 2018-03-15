@@ -98,6 +98,10 @@ class FormsController < ApplicationController
     filter_params(form_class.application_attributes)
   end
 
+  def navigator_params
+    filter_params(form_class.navigator_attributes)
+  end
+
   def filter_params(attributes)
     return unless attributes.present?
     form_params.select do |key, _|
