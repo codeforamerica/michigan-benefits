@@ -40,8 +40,8 @@ RSpec.describe Form do
 
   describe ".navigator_attributes" do
     it "defaults to an empty array" do
-      class TestFormOne < Form; end
-      expect(TestFormOne.navigator_attributes).to eq([])
+      class TestFormThree < Form; end
+      expect(TestFormThree.navigator_attributes).to eq([])
     end
 
     it "creates a getter that returns passed in attributes as keys" do
@@ -58,16 +58,16 @@ RSpec.describe Form do
 
   describe ".attribute_names" do
     it "returns what is set by application and member attributes" do
-      class TestFormOne < Form; end
+      class TestFormFour < Form; end
 
-      TestFormOne.set_application_attributes(:foo)
-      TestFormOne.set_member_attributes(:bar)
-      TestFormOne.set_navigator_attributes(:baz)
+      TestFormFour.set_application_attributes(:foo)
+      TestFormFour.set_member_attributes(:bar)
+      TestFormFour.set_navigator_attributes(:baz)
 
-      expect(TestFormOne.attribute_names).to match_array(%i[foo bar baz])
-      expect { TestFormOne.new.foo }.not_to raise_error
-      expect { TestFormOne.new.bar }.not_to raise_error
-      expect { TestFormOne.new.baz }.not_to raise_error
+      expect(TestFormFour.attribute_names).to match_array(%i[foo bar baz])
+      expect { TestFormFour.new.foo }.not_to raise_error
+      expect { TestFormFour.new.bar }.not_to raise_error
+      expect { TestFormFour.new.baz }.not_to raise_error
     end
   end
 end
