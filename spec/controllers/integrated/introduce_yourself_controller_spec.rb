@@ -6,7 +6,11 @@ RSpec.describe Integrated::IntroduceYourselfController do
       it "assigns existing attributes" do
         current_app = create(:common_application,
           previously_received_assistance: "yes",
-          members: [build(:household_member, first_name: "Juan")])
+          members: [build(:household_member,
+            first_name: "Juan",
+            last_name: "Two",
+            birthday: DateTime.new(1950, 1, 31),
+            sex: "male")])
         session[:current_application_id] = current_app.id
 
         get :edit
@@ -14,6 +18,9 @@ RSpec.describe Integrated::IntroduceYourselfController do
         form = assigns(:form)
 
         expect(form.first_name).to eq("Juan")
+        expect(form.birthday_year).to eq(1950)
+        expect(form.birthday_month).to eq(1)
+        expect(form.birthday_day).to eq(31)
         expect(form.previously_received_assistance).to eq("yes")
       end
     end
@@ -34,9 +41,9 @@ RSpec.describe Integrated::IntroduceYourselfController do
           form: {
             first_name: "Gary",
             last_name: "McTester",
-            "birthday(3i)" => "31",
-            "birthday(2i)" => "1",
-            "birthday(1i)" => "1950",
+            birthday_day: "31",
+            birthday_month: "1",
+            birthday_year: "1950",
             sex: "male",
             previously_received_assistance: "yes",
           },

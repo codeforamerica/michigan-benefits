@@ -1,12 +1,14 @@
 class IntroduceYourselfForm < Form
-  include MultiparameterAttributeAssignment
+  include BirthdayValidations
 
   set_application_attributes(:previously_received_assistance)
 
   set_member_attributes(
     :first_name,
     :last_name,
-    :birthday,
+    :birthday_year,
+    :birthday_month,
+    :birthday_day,
     :sex,
   )
 
@@ -21,11 +23,6 @@ class IntroduceYourselfForm < Form
     message: "Make sure to answer this question",
   }
 
-  validates :birthday,
-    presence: { message: "Make sure to provide a birthday" }
-
-  # https://github.com/rails/rails/pull/8189#issuecomment-10329403
-  def class_for_attribute(attr)
-    return Date if attr == "birthday"
-  end
+  validate :birthday_must_be_present
+  validate :birthday_must_be_valid_date
 end

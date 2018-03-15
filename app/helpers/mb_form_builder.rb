@@ -150,6 +150,59 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
+  def mb_date_input(
+    base_method,
+    label_text,
+    help_text: nil,
+    options: {},
+    autofocus: nil
+  )
+    year_method, month_method, day_method = *%i[year month day].map { |unit| :"#{base_method}_#{unit}" }
+
+    <<~HTML.html_safe
+      <fieldset class="form-group#{error_state(object, base_method)}">
+        #{fieldset_label_contents(method: base_method, label_text: label_text, help_text: help_text)}
+        <div class="input-group--inline">
+          <div class="form-group">
+            <label class="text--help form-subquestion" for="#{sanitized_id(month_method)}" id="#{sanitized_id(month_method)}__label">Month</label>
+            #{number_field(
+              month_method,
+              class: 'form-width--month text-input',
+              min: 1,
+              max: 12,
+              id: sanitized_id(month_method),
+              name: "#{object_name}[#{month_method}]",
+              autofocus: autofocus,
+            )}
+          </div>
+          <div class="form-group">
+            <label class="text--help form-subquestion" for="#{sanitized_id(day_method)}" id="#{sanitized_id(day_method)}__label">Day</label>
+            #{number_field(
+              day_method,
+                class: 'form-width--day text-input',
+                min: 1,
+                max: 31,
+                id: sanitized_id(day_method),
+                name: "#{object_name}[#{day_method}]",
+            )}
+          </div>
+          <div class="form-group">
+            <label class="text--help form-subquestion" for="#{sanitized_id(year_method)}" id="#{sanitized_id(year_method)}__label">Year</label>
+            #{number_field(
+              year_method,
+              class: 'form-width--year text-input',
+              min: options[:start_year],
+              max: options[:end_year],
+              id: sanitized_id(year_method),
+              name: "#{object_name}[#{year_method}]",
+            )}
+          </div>
+        </div>
+
+      </fieldset>
+    HTML
+  end
+
   def mb_date_select(
     method,
     label_text,
@@ -172,8 +225,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             <label for="#{sanitized_id(method, '2i')}" class="sr-only" id="#{sanitized_id(method, '2i')}__label">Month</label>
             #{select_month(
               options[:default],
-              { field_name: select_field_name(method, '2i'),
-                field_id: select_field_id(method, '2i'),
+              { field_name: subfield_name(method, '2i'),
+                field_id: subfield_id(method, '2i'),
                 prefix: object_name,
                 prompt: 'Month' }.reverse_merge(options),
               class: 'select__element',
@@ -185,8 +238,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             <label for="#{sanitized_id(method, '3i')}" class="sr-only" id="#{sanitized_id(method, '3i')}__label">Day</label>
             #{select_day(
               options[:default],
-              { field_name: select_field_name(method, '3i'),
-                field_id: select_field_id(method, '3i'),
+              { field_name: subfield_name(method, '3i'),
+                field_id: subfield_id(method, '3i'),
                 prefix: object_name,
                 prompt: 'Day' }.merge(options),
               class: 'select__element',
@@ -197,8 +250,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             <label for="#{sanitized_id(method, '1i')}" class="sr-only" id="#{sanitized_id(method, '1i')}__label">Year</label>
             #{select_year(
               options[:default],
-              { field_name: select_field_name(method, '1i'),
-                field_id: select_field_id(method, '1i'),
+              { field_name: subfield_name(method, '1i'),
+                field_id: subfield_id(method, '1i'),
                 prefix: object_name,
                 prompt: 'Year' }.merge(options),
               class: 'select__element',
@@ -228,7 +281,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
           legend_class: legend_class,
         )}
         #{mb_radio_button(method, collection, layout, help_text)}
-        #{errors_for(object, method)}
       </fieldset>
     HTML
   end
@@ -380,16 +432,20 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     optional: false
   )
 
-    label_text = <<~HTML
-      <legend class="form-question #{legend_class}" id="#{sanitized_id(method)}__label">#{label_text + optional_text(optional)}</legend>
+    label_html = <<~HTML
+      <legend class="form-question #{legend_class}" id="#{sanitized_id(method)}__label">
+        #{errors_for(object, method)}
+        #{label_text + optional_text(optional)}
+      </legend>
     HTML
+
     if help_text
-      label_text << <<~HTML
+      label_html += <<~HTML
         <p class="text--help" id="#{sanitized_id(method)}__help">#{help_text}</p>
       HTML
     end
 
-    label_text.html_safe
+    label_html.html_safe
   end
 
   def label_contents(label_text, help_text, optional, method)
@@ -453,10 +509,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     errors = object.errors[method]
     if errors.any?
       <<~HTML
-        <div class="text--error" id="#{sanitized_id(method)}__errors">
+        <span class="text--error" id="#{sanitized_id(method)}__errors">
           <i class="icon-warning"></i>
           #{errors.join(', ')}
-        </div>
+        </span>
       HTML
     end
   end
@@ -466,11 +522,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     " form-group--error" if errors.any?
   end
 
-  def select_field_id(method, position)
+  def subfield_id(method, position)
     "#{method}_#{position}"
   end
 
-  def select_field_name(method, position)
+  def subfield_name(method, position)
     "#{method}(#{position})"
   end
 

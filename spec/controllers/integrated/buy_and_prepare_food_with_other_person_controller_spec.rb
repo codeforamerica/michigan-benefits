@@ -60,7 +60,7 @@ RSpec.describe Integrated::BuyAndPrepareFoodWithOtherPersonController do
 
           expect do
             put :update, params: { form: { buy_and_prepare_food_together: "yes" } }
-          end.to_not change { current_app.primary_member.buy_and_prepare_food_together }
+          end.to_not(change { current_app.primary_member.buy_and_prepare_food_together })
 
           members.map(&:reload)
 
@@ -77,7 +77,7 @@ RSpec.describe Integrated::BuyAndPrepareFoodWithOtherPersonController do
 
           expect do
             put :update, params: { form: { buy_and_prepare_food_together: "no" } }
-          end.to_not change { current_app.primary_member.buy_and_prepare_food_together }
+          end.to_not(change { current_app.primary_member.buy_and_prepare_food_together })
 
           members.map(&:reload)
 

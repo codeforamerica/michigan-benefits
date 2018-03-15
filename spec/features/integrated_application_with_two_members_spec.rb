@@ -18,9 +18,9 @@ RSpec.feature "Integrated application" do
       fill_in "What's your first name?", with: "Jessie"
       fill_in "What's your last name?", with: "Tester"
 
-      select "January", from: "form_birthday_2i"
-      select "1", from: "form_birthday_3i"
-      select "1969", from: "form_birthday_1i"
+      fill_in "Month", with: "1"
+      fill_in "Day", with: "1"
+      fill_in "Year", with: "1969"
 
       select_radio(question: "What's your sex?", answer: "Female")
 

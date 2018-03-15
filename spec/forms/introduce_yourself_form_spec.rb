@@ -30,8 +30,15 @@ RSpec.describe IntroduceYourselfForm do
       expect(form.errors[:sex]).to be_present
     end
 
-    it "requires birthday" do
+    it "requires birthday subfields" do
       form = IntroduceYourselfForm.new
+
+      expect(form).not_to be_valid
+      expect(form.errors[:birthday]).to be_present
+    end
+
+    it "does not accept invalid dates for birthday" do
+      form = IntroduceYourselfForm.new(birthday_year: 1992, birthday_month: 2, birthday_day: 30)
 
       expect(form).not_to be_valid
       expect(form.errors[:birthday]).to be_present

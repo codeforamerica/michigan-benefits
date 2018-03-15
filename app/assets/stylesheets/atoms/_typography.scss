@@ -101,6 +101,7 @@ ol, ul {
 }
 
 .text--error {
+  display: block;
   font-size: $font-size-small;
   line-height: $line-height-normal;
   color: $color-red;

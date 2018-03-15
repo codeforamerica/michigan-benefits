@@ -1,10 +1,12 @@
 class AddHouseholdMemberForm < Form
-  include MultiparameterAttributeAssignment
+  include BirthdayValidations
 
   set_member_attributes(
     :first_name,
     :last_name,
-    :birthday,
+    :birthday_year,
+    :birthday_month,
+    :birthday_day,
     :sex,
     :relationship,
   )
@@ -15,8 +17,5 @@ class AddHouseholdMemberForm < Form
   validates :last_name,
     presence: { message: "Make sure to provide a last name" }
 
-  # https://github.com/rails/rails/pull/8189#issuecomment-10329403
-  def class_for_attribute(attr)
-    return Date if attr == "birthday"
-  end
+  validate :birthday_must_be_valid_date
 end

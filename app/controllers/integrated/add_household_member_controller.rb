@@ -1,7 +1,9 @@
 module Integrated
   class AddHouseholdMemberController < FormsController
     def update_models
-      current_application.members.create(member_params)
+      member_data = member_params
+      combine_birthday_fields(member_data)
+      current_application.members.create(member_data)
     end
 
     def previous_path(*_args)
