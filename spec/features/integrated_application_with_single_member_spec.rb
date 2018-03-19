@@ -63,6 +63,18 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Review" do
+      expect(page).to have_content(
+        "Here's who's applying for Food Assistance with you:",
+      )
+
+      within "#applying-with-you" do
+        expect(page).to have_content("Jessie Tester (that's you!)")
+      end
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

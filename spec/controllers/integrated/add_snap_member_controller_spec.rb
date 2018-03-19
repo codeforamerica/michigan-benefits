@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Integrated::AddHouseholdMemberController do
+RSpec.describe Integrated::AddSnapMemberController do
   describe "#update" do
     context "with valid params" do
       let(:valid_params) do
@@ -19,7 +19,7 @@ RSpec.describe Integrated::AddHouseholdMemberController do
 
       it "creates a new member with given information" do
         current_app = create(:common_application,
-          members: [create(:household_member, first_name: "Juan")])
+                             members: [create(:household_member, first_name: "Juan")])
         session[:current_application_id] = current_app.id
 
         put :update, params: valid_params
@@ -32,6 +32,8 @@ RSpec.describe Integrated::AddHouseholdMemberController do
         expect(new_member.birthday).to eq(DateTime.new(1950, 1, 31))
         expect(new_member.sex).to eq("male")
         expect(new_member.relationship).to eq("roommate")
+        expect(new_member.requesting_food).to eq("yes")
+        expect(new_member.buy_and_prepare_food_together).to eq("yes")
       end
     end
 
@@ -47,7 +49,7 @@ RSpec.describe Integrated::AddHouseholdMemberController do
 
       it "creates a new member with given information" do
         current_app = create(:common_application,
-          members: [create(:household_member, first_name: "Juan")])
+                             members: [create(:household_member, first_name: "Juan")])
         session[:current_application_id] = current_app.id
 
         put :update, params: valid_params
@@ -60,19 +62,21 @@ RSpec.describe Integrated::AddHouseholdMemberController do
         expect(new_member.birthday).to be_nil
         expect(new_member.sex).to eq("unfilled")
         expect(new_member.relationship).to eq("unknown_relation")
+        expect(new_member.requesting_food).to eq("yes")
+        expect(new_member.buy_and_prepare_food_together).to eq("yes")
       end
     end
   end
 
   describe ".previous_path" do
     it "should be household overview path" do
-      expect(controller.previous_path).to eq(household_members_overview_sections_path)
+      expect(controller.previous_path).to eq(review_food_assistance_members_sections_path)
     end
   end
 
   describe ".next_path" do
     it "should be household overview path" do
-      expect(controller.next_path).to eq(household_members_overview_sections_path)
+      expect(controller.next_path).to eq(review_food_assistance_members_sections_path)
     end
   end
 end
