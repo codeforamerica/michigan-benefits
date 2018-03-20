@@ -28,16 +28,18 @@
       Add a person
       <% end %>
     </div>
-    <div class="card card--narrow card--bottom text--help" id="not-applying-with-you">
-      <p>Not applying with you:</p>
-      <% @non_household_members.each do |member| %>
-      <div>
-        <p>
-          <i class="button__icon--left icon-close icon-close--color"></i>
-          <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
-        </p>
+    <% if @non_household_members.present? %>
+      <div class="card card--narrow card--bottom text--help" id="not-applying-with-you">
+        <p>Not applying with you:</p>
+        <% @non_household_members.each do |member| %>
+        <div>
+          <p>
+            <i class="button__icon--left icon-close icon-close--color"></i>
+            <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
+          </p>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 <% end %>
