@@ -69,7 +69,7 @@ class AssistanceApplicationForm
           programs = %w{Food Healthcare}.select do |program|
             extra_member.public_send(:"requesting_#{program.downcase}_yes?")
           end
-          hash[:notes] += "Applying for: #{programs.join(", ")}\n"
+          hash[:notes] += "Applying for: #{programs.join(', ')}\n"
         end
       end
     end

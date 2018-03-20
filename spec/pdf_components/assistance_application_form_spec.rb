@@ -30,8 +30,7 @@ RSpec.describe AssistanceApplicationForm do
           sex_male?: true,
           sex_female?: false,
           requesting_food_yes?: true,
-          requesting_healthcare_yes?: true,
-        )
+          requesting_healthcare_yes?: true)
       end
 
       let(:common_application) do
