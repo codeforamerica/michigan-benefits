@@ -1,0 +1,44 @@
+<% content_for :header_title, "Review" %>
+
+<% content_for :form_card_title, "Here's who's applying for Food Assistance with you:" %>
+
+<% content_for :form_card_body do %>
+  <div class="slab slab--not-padded">
+    <div class="card card--narrow card--top" id="applying-with-you">
+      <p>
+        <i class="button__icon--left icon-check icon-check--color"></i>
+        <%= "#{@primary_member.display_name} (that's you!)" %>
+      </p>
+      <% @snap_household_members.each do |member| %>
+        <div>
+          <p>
+            <i class="button__icon--left icon-check icon-check--color"></i>
+            <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
+            (<%= link_to "remove", remove_snap_member_sections_path(form: { member_id: member.id }),
+                         method: :put,
+                         class: "remove",
+                         "aria-labelledby": "member-name-#{member.id}" %>)
+          </p>
+        </div>
+      <% end %>
+      <%= link_to(
+              section_path(Integrated::AddSnapMemberController),
+              class: 'button button-full-width button-bold') do %>
+        <i class="button__icon--left icon-add"></i>
+        Add a person
+      <% end %>
+    </div>
+    <div class="card card--narrow card--bottom text--help" id="not-applying-with-you">
+      <p>Not applying with you:</p>
+      <% @non_household_members.each do |member| %>
+        <div>
+          <p>
+            <i class="button__icon--left icon-close icon-close--color"></i>
+            <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
+          </p>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

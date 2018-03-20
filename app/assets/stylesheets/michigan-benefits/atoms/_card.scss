@@ -1,0 +1,11 @@
+.card {
+  &--top {
+    margin-bottom: 0 !important;
+    border-bottom-width: 1px;
+  }
+
+  &--bottom {
+    margin-top: 0 !important;
+  }
+}
+

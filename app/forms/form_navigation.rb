@@ -12,6 +12,7 @@ class FormNavigation
       Integrated::BuyAndPrepareFoodWithOtherPersonController,
       Integrated::ShareFoodCostsWithHouseholdController,
       Integrated::BuyAndPrepareFoodSeparatelyController,
+      Integrated::ReviewFoodAssistanceMembersController,
       Integrated::ApplicationSubmittedController,
     ],
   }.freeze
@@ -19,6 +20,8 @@ class FormNavigation
   OFF_MAIN = [
     Integrated::AddHouseholdMemberController,
     Integrated::RemoveHouseholdMemberController,
+    Integrated::AddSnapMemberController,
+    Integrated::RemoveSnapMemberController,
   ].freeze
 
   class << self
