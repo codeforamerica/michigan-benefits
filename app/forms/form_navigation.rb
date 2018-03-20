@@ -30,6 +30,7 @@ class FormNavigation
     Integrated::RemoveHouseholdMemberController,
     Integrated::AddSnapMemberController,
     Integrated::RemoveSnapMemberController,
+    Integrated::AddHealthcareMemberController,
   ].freeze
 
   class << self
