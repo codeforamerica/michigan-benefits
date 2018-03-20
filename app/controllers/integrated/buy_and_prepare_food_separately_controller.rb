@@ -19,7 +19,7 @@ module Integrated
     private
 
     def members
-      @_members ||= current_application.snap_applying_members - [current_application.primary_member]
+      @_members ||= current_application.food_applying_members - [current_application.primary_member]
     end
 
     def form_params

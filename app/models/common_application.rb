@@ -13,7 +13,7 @@ class CommonApplication < ApplicationRecord
     foreign_key: "common_application_id",
     dependent: :destroy
 
-  has_many :snap_applying_members,
+  has_many :food_applying_members,
     -> {
       requesting_food
     },
@@ -27,7 +27,7 @@ class CommonApplication < ApplicationRecord
     class_name: "HouseholdMember",
     foreign_key: "common_application_id"
 
-  has_many :snap_household_members,
+  has_many :food_household_members,
     -> {
       requesting_food.buy_and_prepare_food_together
     },

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe CommonApplication do
   describe "scopes" do
-    describe ".snap_household_members" do
+    describe ".food_household_members" do
       it "returns members applying for food assistance who buy and prepare food together" do
         in_household = build(:household_member, requesting_food: "yes", buy_and_prepare_food_together: "yes")
 
@@ -15,8 +15,8 @@ RSpec.describe CommonApplication do
             build(:household_member, requesting_food: "unfilled", buy_and_prepare_food_together: "yes"),
           ])
 
-        expect(application.snap_household_members.count).to eq(1)
-        expect(application.snap_household_members.first).to eq(in_household)
+        expect(application.food_household_members.count).to eq(1)
+        expect(application.food_household_members.first).to eq(in_household)
       end
 
       it "orders by time created at" do
@@ -28,12 +28,12 @@ RSpec.describe CommonApplication do
                                first_member,
                              ])
 
-        expect(application.snap_household_members.first).to eq(first_member)
-        expect(application.snap_household_members.second).to eq(second_member)
+        expect(application.food_household_members.first).to eq(first_member)
+        expect(application.food_household_members.second).to eq(second_member)
       end
     end
 
-    describe ".snap_applying_members" do
+    describe ".food_applying_members" do
       it "returns all members requesting food assistance" do
         in_household = build(:household_member, requesting_food: "yes")
 
@@ -44,8 +44,8 @@ RSpec.describe CommonApplication do
             build(:household_member),
           ])
 
-        expect(application.snap_applying_members.count).to eq(1)
-        expect(application.snap_applying_members.first).to eq(in_household)
+        expect(application.food_applying_members.count).to eq(1)
+        expect(application.food_applying_members.first).to eq(in_household)
       end
     end
 
