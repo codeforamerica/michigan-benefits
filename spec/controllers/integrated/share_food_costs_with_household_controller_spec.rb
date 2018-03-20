@@ -85,7 +85,7 @@ RSpec.describe Integrated::ShareFoodCostsWithHouseholdController do
         current_app.navigator.reload
 
         expect(current_app.navigator.all_share_food_costs).to be_truthy
-        current_app.snap_applying_members.each do |member|
+        current_app.food_applying_members.each do |member|
           expect(member.buy_and_prepare_food_together).to eq("yes")
         end
       end
