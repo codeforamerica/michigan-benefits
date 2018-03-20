@@ -477,7 +477,6 @@ RSpec.describe MbFormBuilder do
       expect(output).to match_html <<-HTML
         <fieldset class="form-group form-group--error">
           <legend class="form-question " id="sample_dependent_care__label">
-            <span class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </span>
             Does your household have dependent care expenses?
           </legend>
           <p class="text--help" id="sample_dependent_care__help">This includes child care.</p>
@@ -485,6 +484,7 @@ RSpec.describe MbFormBuilder do
             <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_true__label" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
             <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
           </radiogroup>
+          <span class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </span>
         </fieldset>
       HTML
     end

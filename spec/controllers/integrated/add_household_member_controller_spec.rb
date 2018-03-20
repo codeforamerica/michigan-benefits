@@ -61,7 +61,6 @@ RSpec.describe Integrated::AddHouseholdMemberController do
         expect(new_member.sex).to eq("unfilled")
         expect(new_member.relationship).to eq("unknown_relation")
       end
-
     end
   end
 

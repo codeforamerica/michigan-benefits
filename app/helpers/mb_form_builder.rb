@@ -198,7 +198,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             )}
           </div>
         </div>
-
+      #{errors_for(object, base_method)}
       </fieldset>
     HTML
   end
@@ -281,6 +281,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
           legend_class: legend_class,
         )}
         #{mb_radio_button(method, collection, layout, help_text)}
+        #{errors_for(object, method)}
       </fieldset>
     HTML
   end
@@ -434,7 +435,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     label_html = <<~HTML
       <legend class="form-question #{legend_class}" id="#{sanitized_id(method)}__label">
-        #{errors_for(object, method)}
         #{label_text + optional_text(optional)}
       </legend>
     HTML
