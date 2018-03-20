@@ -9,13 +9,13 @@ RSpec.describe Integrated::RemoveSnapMemberController do
                            members: [member_one, member_two])
 
       session[:current_application_id] = current_app.id
-      expect(current_app.snap_applying_members.count).to eq(2)
-      expect(current_app.snap_household_members.count).to eq(2)
+      expect(current_app.food_applying_members.count).to eq(2)
+      expect(current_app.food_household_members.count).to eq(2)
 
       put :update, params: { form: { member_id: member_two.id } }
       current_app.reload
-      expect(current_app.snap_applying_members.count).to eq(2)
-      expect(current_app.snap_household_members.count).to eq(1)
+      expect(current_app.food_applying_members.count).to eq(2)
+      expect(current_app.food_household_members.count).to eq(1)
     end
   end
 end

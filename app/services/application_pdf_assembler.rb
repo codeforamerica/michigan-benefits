@@ -19,6 +19,9 @@ class ApplicationPdfAssembler
     if benefit_application.applying_for_food_assistance?
       components << FoodAssistanceSupplement.new(benefit_application)
     end
+    if benefit_application.applying_for_healthcare?
+      components << HealthcareCoverageSupplement.new(benefit_application)
+    end
     components << verification_documents
     components.flatten
   end

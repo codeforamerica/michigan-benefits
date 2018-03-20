@@ -2,7 +2,7 @@ module Integrated
   class ShareFoodCostsWithHouseholdController < FormsController
     def self.skip?(application)
       return true if application.unstable_housing?
-      return true if application.snap_applying_members.count <= 2
+      return true if application.food_applying_members.count <= 2
     end
 
     def update_models

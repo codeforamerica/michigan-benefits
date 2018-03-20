@@ -8,21 +8,67 @@ require_relative "../../app/pdf_components/food_assistance_supplement"
 require_relative "../../app/models/verification_document"
 
 RSpec.describe ApplicationPdfAssembler do
-  context "food assistance application with no verification documents" do
-    it "returns a PDF that includes the assistance application form and no verification documents" do
-      fake_application = double("application", applying_for_food_assistance?: true, documents: [])
+  context "basic application" do
+    context "with verification documents" do
+      it "returns a PDF that includes the assistance application form and verification documents" do
+        fake_application = instance_double(CommonApplication,
+          applying_for_food_assistance?: false,
+          applying_for_healthcare?: false,
+          documents: ["example.com/images/test1.jpg", "example.com/images/test2.png"])
 
-      fake_coversheet = double("coversheet")
+        fake_coversheet = instance_double(Coversheet)
+        expect(Coversheet).to receive(:new).and_return(fake_coversheet)
+
+        fake_application_form = instance_double("application form")
+        expect(AssistanceApplicationForm).to receive(:new).with(fake_application).and_return(fake_application_form)
+
+        fake_verification_doc1 = instance_double(VerificationDocument)
+        fake_verification_doc2 = instance_double(VerificationDocument)
+
+        expect(VerificationDocument).to receive(:new).
+          with(url: "example.com/images/test1.jpg", benefit_application: fake_application).
+          and_return(fake_verification_doc1)
+        expect(VerificationDocument).to receive(:new).
+          with(url: "example.com/images/test2.png", benefit_application: fake_application).
+          and_return(fake_verification_doc2)
+
+        fake_complete_pdf = double("complete pdf")
+        fake_pdf_concatenator = instance_double(PdfConcatenator)
+
+        expected_components = [
+          fake_coversheet,
+          fake_application_form,
+          fake_verification_doc1,
+          fake_verification_doc2,
+        ]
+
+        expect(PdfConcatenator).to receive(:new).with(expected_components).and_return(fake_pdf_concatenator)
+
+        expect(fake_pdf_concatenator).to receive(:run).and_return(fake_complete_pdf)
+        result = ApplicationPdfAssembler.new(benefit_application: fake_application).run
+        expect(result).to be(fake_complete_pdf)
+      end
+    end
+  end
+
+  context "basic application with food assistance supplement" do
+    it "returns a PDF with both the basic application and food assistance supplement" do
+      fake_application = instance_double(CommonApplication,
+        applying_for_food_assistance?: true,
+        applying_for_healthcare?: false,
+        documents: [])
+
+      fake_coversheet = instance_double(Coversheet)
       expect(Coversheet).to receive(:new).and_return(fake_coversheet)
 
-      fake_application_form = double("application form")
+      fake_application_form = instance_double(AssistanceApplicationForm)
       expect(AssistanceApplicationForm).to receive(:new).with(fake_application).and_return(fake_application_form)
 
-      fake_snap_supplement = double("food assistance supplement")
+      fake_snap_supplement = instance_double(FoodAssistanceSupplement)
       expect(FoodAssistanceSupplement).to receive(:new).with(fake_application).and_return(fake_snap_supplement)
 
       fake_complete_pdf = double("complete pdf")
-      fake_pdf_concatenator = double("pdf concatenator")
+      fake_pdf_concatenator = instance_double(PdfConcatenator)
 
       expected_components = [fake_coversheet, fake_application_form, fake_snap_supplement]
 
@@ -34,41 +80,27 @@ RSpec.describe ApplicationPdfAssembler do
     end
   end
 
-  context "application with verification documents" do
-    it "returns a PDF that includes the assistance application form and verification documents" do
-      fake_application = double("snap application",
-                                applying_for_food_assistance?: true,
-                                documents: ["example.com/images/test1.jpg", "example.com/images/test2.png"])
+  context "basic application with healthcare supplement" do
+    it "returns a PDF with both the basic application and healthcare supplement" do
+      fake_application = instance_double(CommonApplication,
+        applying_for_food_assistance?: false,
+        applying_for_healthcare?: true,
+        documents: [])
 
-      fake_coversheet = double("coversheet")
+      fake_coversheet = instance_double(Coversheet)
       expect(Coversheet).to receive(:new).and_return(fake_coversheet)
 
-      fake_application_form = double("application form")
+      fake_application_form = instance_double(AssistanceApplicationForm)
       expect(AssistanceApplicationForm).to receive(:new).with(fake_application).and_return(fake_application_form)
 
-      fake_snap_supplement = double("food assistance supplement")
-      expect(FoodAssistanceSupplement).to receive(:new).with(fake_application).and_return(fake_snap_supplement)
-
-      fake_verification_doc1 = double("fake doc 1")
-      fake_verification_doc2 = double("fake doc 2")
-
-      expect(VerificationDocument).to receive(:new).
-        with(url: "example.com/images/test1.jpg", benefit_application: fake_application).
-        and_return(fake_verification_doc1)
-      expect(VerificationDocument).to receive(:new).
-        with(url: "example.com/images/test2.png", benefit_application: fake_application).
-        and_return(fake_verification_doc2)
+      fake_healthcare_supplement = instance_double(HealthcareCoverageSupplement)
+      expect(HealthcareCoverageSupplement).to receive(:new).with(fake_application).
+        and_return(fake_healthcare_supplement)
 
       fake_complete_pdf = double("complete pdf")
-      fake_pdf_concatenator = double("pdf concatenator")
+      fake_pdf_concatenator = instance_double(PdfConcatenator)
 
-      expected_components = [
-        fake_coversheet,
-        fake_application_form,
-        fake_snap_supplement,
-        fake_verification_doc1,
-        fake_verification_doc2,
-      ]
+      expected_components = [fake_coversheet, fake_application_form, fake_healthcare_supplement]
 
       expect(PdfConcatenator).to receive(:new).with(expected_components).and_return(fake_pdf_concatenator)
 

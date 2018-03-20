@@ -13,7 +13,7 @@ class CommonApplication < ApplicationRecord
     foreign_key: "common_application_id",
     dependent: :destroy
 
-  has_many :snap_applying_members,
+  has_many :food_applying_members,
     -> {
       requesting_food
     },
@@ -27,7 +27,7 @@ class CommonApplication < ApplicationRecord
     class_name: "HouseholdMember",
     foreign_key: "common_application_id"
 
-  has_many :snap_household_members,
+  has_many :food_household_members,
     -> {
       requesting_food.buy_and_prepare_food_together
     },
@@ -60,9 +60,10 @@ class CommonApplication < ApplicationRecord
   end
 
   def applying_for_food_assistance?
-    members.each do |member|
-      return true if member.requesting_food_yes?
-    end
-    false
+    members.any?(&:requesting_food_yes?)
+  end
+
+  def applying_for_healthcare?
+    members.any?(&:requesting_healthcare_yes?)
   end
 end

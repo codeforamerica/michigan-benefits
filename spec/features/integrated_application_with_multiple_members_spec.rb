@@ -197,6 +197,12 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Healthcare" do
+      expect(page).to have_content("Will you file taxes next year?")
+
+      proceed_with "Yes"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",
@@ -214,5 +220,6 @@ RSpec.feature "Integrated application" do
     expect(pdf_values["legal_name"]).to include("Jessie Tester") # Main application
     expect(pdf_values["notes"]).to include("Additional Household Members:") # Additional info
     expect(pdf_values["anyone_buys_food_separately"]).to eq("Yes") # Food assistance supplement
+    expect(pdf_values["anyone_filing_taxes"]).to eq("Yes") # Healthcare coverage supplement
   end
 end

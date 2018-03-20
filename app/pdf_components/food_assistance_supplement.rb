@@ -37,6 +37,6 @@ class FoodAssistanceSupplement
 
   def non_household_members_applying_for_snap
     @_non_household_members_applying_for_snap =
-      benefit_application.snap_applying_members - benefit_application.snap_household_members
+      benefit_application.food_applying_members - benefit_application.food_household_members
   end
 end

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe CommonApplication do
   describe "scopes" do
-    describe ".snap_household_members" do
+    describe ".food_household_members" do
       it "returns members applying for food assistance who buy and prepare food together" do
         in_household = build(:household_member, requesting_food: "yes", buy_and_prepare_food_together: "yes")
 
@@ -15,8 +15,8 @@ RSpec.describe CommonApplication do
             build(:household_member, requesting_food: "unfilled", buy_and_prepare_food_together: "yes"),
           ])
 
-        expect(application.snap_household_members.count).to eq(1)
-        expect(application.snap_household_members.first).to eq(in_household)
+        expect(application.food_household_members.count).to eq(1)
+        expect(application.food_household_members.first).to eq(in_household)
       end
 
       it "orders by time created at" do
@@ -28,12 +28,12 @@ RSpec.describe CommonApplication do
                                first_member,
                              ])
 
-        expect(application.snap_household_members.first).to eq(first_member)
-        expect(application.snap_household_members.second).to eq(second_member)
+        expect(application.food_household_members.first).to eq(first_member)
+        expect(application.food_household_members.second).to eq(second_member)
       end
     end
 
-    describe ".snap_applying_members" do
+    describe ".food_applying_members" do
       it "returns all members requesting food assistance" do
         in_household = build(:household_member, requesting_food: "yes")
 
@@ -44,8 +44,8 @@ RSpec.describe CommonApplication do
             build(:household_member),
           ])
 
-        expect(application.snap_applying_members.count).to eq(1)
-        expect(application.snap_applying_members.first).to eq(in_household)
+        expect(application.food_applying_members.count).to eq(1)
+        expect(application.food_applying_members.first).to eq(in_household)
       end
     end
 
@@ -123,16 +123,30 @@ RSpec.describe CommonApplication do
   end
 
   describe "#applying_for_food_assistance?" do
-    it "returns true when at least one household member is" do
+    it "returns true when at least one household member is applying for food" do
       application = create(:common_application,
                            members: [create(:household_member, requesting_food: "yes")])
       expect(application.applying_for_food_assistance?).to be_truthy
     end
 
-    it "returns false when no one is" do
+    it "returns false when no one is applying for food" do
       application = create(:common_application,
                            members: [create(:household_member, requesting_food: "no")])
       expect(application.applying_for_food_assistance?).to be_falsey
+    end
+  end
+
+  describe "#applying_for_healthcare?" do
+    it "returns true when at least one household member is applying for healthcare" do
+      application = create(:common_application,
+        members: [create(:household_member, requesting_healthcare: "yes")])
+      expect(application.applying_for_healthcare?).to be_truthy
+    end
+
+    it "returns false when no one is applying for healthcare" do
+      application = create(:common_application,
+        members: [create(:household_member, requesting_healthcare: "no")])
+      expect(application.applying_for_healthcare?).to be_falsey
     end
   end
 end
