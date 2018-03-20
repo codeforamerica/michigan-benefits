@@ -19,6 +19,7 @@ class FormNavigation
     "Healthcare" => [
       Integrated::HealthcareController,
       Integrated::FileTaxesNextYearController,
+      Integrated::IncludeAnyoneElseOnTaxesController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,

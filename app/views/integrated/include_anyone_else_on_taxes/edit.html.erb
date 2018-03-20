@@ -1,0 +1,19 @@
+<% content_for :header_title, "Healthcare" %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">
+    Is there anyone else who can be included on your tax return?
+  </h1>
+
+  <p class="text--help text--centered">
+    Include your spouse and all dependents — even if they aren't applying for health coverage today.
+  </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :anyone_else_on_tax_return %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

@@ -131,7 +131,7 @@ RSpec.feature "Integrated application" do
     on_page "Healthcare" do
       expect(page).to have_content("Will you file taxes next year?")
 
-      proceed_with "Yes"
+      proceed_with "No"
     end
 
     on_page "Application Submitted" do
