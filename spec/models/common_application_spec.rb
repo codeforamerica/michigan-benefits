@@ -123,16 +123,30 @@ RSpec.describe CommonApplication do
   end
 
   describe "#applying_for_food_assistance?" do
-    it "returns true when at least one household member is" do
+    it "returns true when at least one household member is applying for food" do
       application = create(:common_application,
                            members: [create(:household_member, requesting_food: "yes")])
       expect(application.applying_for_food_assistance?).to be_truthy
     end
 
-    it "returns false when no one is" do
+    it "returns false when no one is applying for food" do
       application = create(:common_application,
                            members: [create(:household_member, requesting_food: "no")])
       expect(application.applying_for_food_assistance?).to be_falsey
+    end
+  end
+
+  describe "#applying_for_healthcare?" do
+    it "returns true when at least one household member is applying for healthcare" do
+      application = create(:common_application,
+        members: [create(:household_member, requesting_healthcare: "yes")])
+      expect(application.applying_for_healthcare?).to be_truthy
+    end
+
+    it "returns false when no one is applying for healthcare" do
+      application = create(:common_application,
+        members: [create(:household_member, requesting_healthcare: "no")])
+      expect(application.applying_for_healthcare?).to be_falsey
     end
   end
 end

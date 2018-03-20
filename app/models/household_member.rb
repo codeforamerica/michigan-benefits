@@ -29,6 +29,7 @@ class HouseholdMember < ApplicationRecord
 
   enum requesting_food: { unfilled: 0, yes: 1, no: 2 }, _prefix: :requesting_food
   enum requesting_healthcare: { unfilled: 0, yes: 1, no: 2 }, _prefix: :requesting_healthcare
+  enum filing_taxes_next_year: { unfilled: 0, yes: 1, no: 2 }, _prefix: :filing_taxes_next_year
 
   enum buy_and_prepare_food_together: { unfilled: 0, yes: 1, no: 2 },
        _prefix: :buy_and_prepare_food_together

@@ -60,9 +60,10 @@ class CommonApplication < ApplicationRecord
   end
 
   def applying_for_food_assistance?
-    members.each do |member|
-      return true if member.requesting_food_yes?
-    end
-    false
+    members.any?(&:requesting_food_yes?)
+  end
+
+  def applying_for_healthcare?
+    members.any?(&:requesting_healthcare_yes?)
   end
 end
