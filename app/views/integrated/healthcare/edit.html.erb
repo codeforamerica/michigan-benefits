@@ -1,0 +1,35 @@
+<% content_for :header_title, "Healthcare" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Which people also need Healthcare Coverage?
+    </h1>
+    <p class="text--centered text--help">
+      If you do not file taxes with them, they may be asked to
+      apply for Healthcare Coverage on their own.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <fieldset class="input-group">
+          <legend class="sr-only" id="requesting_healthcare__legend">
+            Choose who needs Healthcare Coverage.
+          </legend>
+          <% @form.members.each do |member| %>
+              <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+                  <%= ff.mb_checkbox :requesting_healthcare,
+                    member.display_name,
+                    legend_id: "requesting_healthcare__legend",
+                    options: { checked_value: "yes", unchecked_value: "no" } %>
+              <% end %>
+          <% end %>
+        </fieldset>
+    <% end %>
+    <%= link_to(
+          '#', #section_path(Integrated::AddSnapMemberController),
+          class: 'button button-full-width button-bold') do %>
+        <i class="button__icon--left icon-add"></i>
+        Add a person
+    <% end %>
+<% end %>

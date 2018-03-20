@@ -29,7 +29,8 @@ class AssistanceApplicationForm
 
   def applicant_registration_attributes
     {
-      applying_for_food: "Yes",
+      applying_for_food: yes_if_true(benefit_application.primary_member.requesting_food_yes?),
+      applying_for_healthcare: yes_if_true(benefit_application.primary_member.requesting_healthcare_yes?),
       legal_name: benefit_application.display_name,
       dob: mmddyyyy_date(benefit_application.primary_member.birthday),
       received_assistance: yes_no_or_unfilled(
@@ -54,6 +55,7 @@ class AssistanceApplicationForm
       hash[:"#{prefix}male"] = circle_if_true(member.sex_male?)
       hash[:"#{prefix}female"] = circle_if_true(member.sex_female?)
       hash[:"#{prefix}requesting_food"] = underline_if_true(member.requesting_food_yes?)
+      hash[:"#{prefix}requesting_healthcare"] = underline_if_true(member.requesting_healthcare_yes?)
     end
     if benefit_application.members.count > 5
       hash[:household_added_notes] = "Yes"
@@ -63,8 +65,11 @@ class AssistanceApplicationForm
         hash[:notes] += "Legal name: #{extra_member.display_name}, "
         hash[:notes] += "Sex: #{extra_member.sex.titleize}, "
         hash[:notes] += "DOB: #{mmddyyyy_date(extra_member.birthday)}, "
-        if extra_member.requesting_food_yes?
-          hash[:notes] += "Applying for: Food\n"
+        if extra_member.requesting_food_yes? || extra_member.requesting_healthcare_yes?
+          programs = %w{Food Healthcare}.select do |program|
+            extra_member.public_send(:"requesting_#{program.downcase}_yes?")
+          end
+          hash[:notes] += "Applying for: #{programs.join(', ')}\n"
         end
       end
     end

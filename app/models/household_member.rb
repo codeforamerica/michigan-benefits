@@ -5,6 +5,10 @@ class HouseholdMember < ApplicationRecord
     where(requesting_food: "yes").order("created_at")
   }
 
+  scope :requesting_healthcare, -> {
+    where(requesting_healthcare: "yes").order("created_at")
+  }
+
   scope :buy_and_prepare_food_together, -> {
     where(buy_and_prepare_food_together: "yes").order("created_at")
   }
@@ -24,6 +28,7 @@ class HouseholdMember < ApplicationRecord
   }, _prefix: :is
 
   enum requesting_food: { unfilled: 0, yes: 1, no: 2 }, _prefix: :requesting_food
+  enum requesting_healthcare: { unfilled: 0, yes: 1, no: 2 }, _prefix: :requesting_healthcare
 
   enum buy_and_prepare_food_together: { unfilled: 0, yes: 1, no: 2 },
        _prefix: :buy_and_prepare_food_together

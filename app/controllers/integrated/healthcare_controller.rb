@@ -1,15 +1,9 @@
 module Integrated
-  class FoodAssistanceController < FormsController
-    def self.skip?(current_application)
-      if current_application.single_member_household? || current_application.unstable_housing?
-        ActiveRecord::Base.transaction do
-          current_application.members.each do |member|
-            member.update!(requesting_food: "yes", buy_and_prepare_food_together: "yes")
-          end
-        end
+  class HealthcareController < FormsController
+    def self.skip?(application)
+      if application.single_member_household?
+        application.primary_member.update!(requesting_healthcare: "yes")
         true
-      else
-        false
       end
     end
 

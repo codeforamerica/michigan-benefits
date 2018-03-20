@@ -80,14 +80,5 @@ RSpec.feature "Integrated application" do
         "Congratulations",
       )
     end
-
-    emails = ActionMailer::Base.deliveries
-
-    raw_application_pdf = emails.last.attachments.first.body.raw_source
-    temp_file = write_raw_pdf_to_temp_file(source: raw_application_pdf)
-    pdf_values = filled_in_values(temp_file.path)
-
-    # Verify the PDF is not corrupt by testing minimal information
-    expect(pdf_values["legal_name"]).to include("Jessie Tester")
   end
 end

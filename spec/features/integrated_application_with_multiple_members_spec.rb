@@ -185,6 +185,18 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Healthcare" do
+      expect(page).to have_content(
+        "Which people also need Healthcare Coverage?",
+      )
+
+      # Jessie Tester checked by default
+      check "Joe Schmoe"
+      check "Pupper McDog"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",
@@ -197,47 +209,10 @@ RSpec.feature "Integrated application" do
     temp_file = write_raw_pdf_to_temp_file(source: raw_application_pdf)
     pdf_values = filled_in_values(temp_file.path)
 
-    expect(pdf_values["legal_name"]).to include("Jessie Tester")
-    expect(pdf_values["is_homeless"]).to eq("No")
-    expect(pdf_values["dob"]).to eq("01/01/1969")
-    expect(pdf_values["received_assistance"]).to eq("Yes")
-    expect(pdf_values["applying_for_food"]).to eq("Yes")
-    expect(pdf_values["first_member_legal_name"]).to include("Jessie Tester")
-    expect(pdf_values["first_member_female"]).to eq(CIRCLED)
-    expect(pdf_values["first_member_dob"]).to eq("01/01/1969")
-    expect(pdf_values["first_member_requesting_food"]).to eq(UNDERLINED)
+    # Test minimal info to make sure PDF isn't corrupted
 
-    expect(pdf_values["second_member_relation"]).to eq("Roommate")
-    expect(pdf_values["second_member_legal_name"]).to include("Jonny Tester")
-    expect(pdf_values["second_member_female"]).to eq(CIRCLED)
-    expect(pdf_values["second_member_dob"]).to eq("01/01/1969")
-    expect(pdf_values["second_member_requesting_food"]).to eq(UNDERLINED)
-
-    expect(pdf_values["third_member_relation"]).to eq("Sibling")
-    expect(pdf_values["third_member_legal_name"]).to include("Jackie Tester")
-    expect(pdf_values["third_member_male"]).to eq(CIRCLED)
-    expect(pdf_values["third_member_dob"]).to eq("01/01/1970")
-    expect(pdf_values["third_member_requesting_food"]).to eq(UNDERLINED)
-
-    expect(pdf_values["fourth_member_relation"]).to eq("Parent")
-    expect(pdf_values["fourth_member_legal_name"]).to include("Joe Schmoe")
-    expect(pdf_values["fourth_member_female"]).to eq(CIRCLED)
-    expect(pdf_values["fourth_member_dob"]).to eq("")
-    expect(pdf_values["fourth_member_requesting_food"]).to eq(UNDERLINED)
-
-    expect(pdf_values["fifth_member_relation"]).to eq("Other")
-    expect(pdf_values["fifth_member_legal_name"]).to include("Apples McMackintosh")
-    expect(pdf_values["fifth_member_male"]).to eq(CIRCLED)
-    expect(pdf_values["fifth_member_dob"]).to eq("")
-    expect(pdf_values["fifth_member_requesting_food"]).to eq("")
-
-    expect(pdf_values["household_added_notes"]).to eq("Yes")
-    expect(pdf_values["notes"]).to include("Additional Household Members:")
-    expect(pdf_values["notes"]).to include(
-      "Relation: Child, Legal name: Pupper McDog, Sex: Male, DOB: 12/30/2016, Applying for: Food",
-    )
-
-    expect(pdf_values["anyone_buys_food_separately"]).to eq("Yes")
-    expect(pdf_values["anyone_buys_food_separately_names"]).to include("Jonny Tester")
+    expect(pdf_values["legal_name"]).to include("Jessie Tester") # Main application
+    expect(pdf_values["notes"]).to include("Additional Household Members:") # Additional info
+    expect(pdf_values["anyone_buys_food_separately"]).to eq("Yes") # Food assistance supplement
   end
 end
