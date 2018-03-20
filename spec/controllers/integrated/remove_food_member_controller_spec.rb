@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Integrated::RemoveSnapMemberController do
+RSpec.describe Integrated::RemoveFoodMemberController do
   describe "#update" do
     it "removes member from SNAP applying members" do
       member_one = build(:household_member, requesting_food: "yes", buy_and_prepare_food_together: "yes")

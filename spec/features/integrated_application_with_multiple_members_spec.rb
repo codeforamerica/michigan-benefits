@@ -190,9 +190,27 @@ RSpec.feature "Integrated application" do
         "Which people also need Healthcare Coverage?",
       )
 
+      click_on "Add a person"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content("Add a person.")
+
+      fill_in "What's their first name?", with: "Kitty"
+      fill_in "What's their last name?", with: "DeRat"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content(
+        "Which people also need Healthcare Coverage?",
+      )
+
       # Jessie Tester checked by default
       check "Joe Schmoe"
       check "Pupper McDog"
+      # Kitty DeRat checked by default
 
       proceed_with "Continue"
     end

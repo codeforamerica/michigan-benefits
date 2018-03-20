@@ -20,8 +20,8 @@ RSpec.describe CommonApplication do
       end
 
       it "orders by time created at" do
-        second_member = build(:household_member, :in_snap_household, created_at: Time.now)
-        first_member = build(:household_member, :in_snap_household, created_at: Time.now - 1.day)
+        second_member = build(:household_member, :in_food_household, created_at: Time.now)
+        first_member = build(:household_member, :in_food_household, created_at: Time.now - 1.day)
 
         application = create(:common_application, members: [
                                second_member,

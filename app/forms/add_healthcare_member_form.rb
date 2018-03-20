@@ -1,4 +1,4 @@
-class AddSnapMemberForm < Form
+class AddHealthcareMemberForm < Form
   include BirthdayValidations
 
   set_member_attributes(
@@ -12,10 +12,10 @@ class AddSnapMemberForm < Form
   )
 
   validates :first_name,
-            presence: { message: "Make sure to provide a first name" }
+    presence: { message: "Make sure to provide a first name" }
 
   validates :last_name,
-            presence: { message: "Make sure to provide a last name" }
+    presence: { message: "Make sure to provide a last name" }
 
   validate :birthday_must_be_valid_date
 end

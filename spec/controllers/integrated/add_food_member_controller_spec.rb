@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Integrated::AddSnapMemberController do
+RSpec.describe Integrated::AddFoodMemberController do
   describe "#update" do
     context "with valid params" do
       let(:valid_params) do
