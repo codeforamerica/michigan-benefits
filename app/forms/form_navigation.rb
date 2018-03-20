@@ -28,8 +28,8 @@ class FormNavigation
   OFF_MAIN = [
     Integrated::AddHouseholdMemberController,
     Integrated::RemoveHouseholdMemberController,
-    Integrated::AddSnapMemberController,
-    Integrated::RemoveSnapMemberController,
+    Integrated::AddFoodMemberController,
+    Integrated::RemoveFoodMemberController,
     Integrated::AddHealthcareMemberController,
   ].freeze
 

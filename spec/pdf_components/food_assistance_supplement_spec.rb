@@ -20,7 +20,7 @@ RSpec.describe FoodAssistanceSupplement do
     let(:attributes) do
       common_application = create(:common_application, members: [
                                     build(:household_member,
-                                      :in_snap_household,
+                                      :in_food_household,
                                       first_name: "Julie",
                                       last_name: "Tester"),
                                     build(:household_member,

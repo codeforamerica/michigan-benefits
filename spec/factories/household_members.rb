@@ -3,7 +3,7 @@ FactoryBot.define do
     first_name "Lilly"
     last_name "Pad"
 
-    trait :in_snap_household do
+    trait :in_food_household do
       buy_and_prepare_food_together "yes"
       requesting_food "yes"
     end

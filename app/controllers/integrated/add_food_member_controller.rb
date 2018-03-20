@@ -1,5 +1,5 @@
 module Integrated
-  class AddSnapMemberController < FormsController
+  class AddFoodMemberController < FormsController
     def update_models
       member_data = member_params
       combine_birthday_fields(member_data)

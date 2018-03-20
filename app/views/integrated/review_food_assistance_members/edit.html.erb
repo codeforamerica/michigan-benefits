@@ -14,7 +14,7 @@
         <p>
           <i class="button__icon--left icon-check icon-check--color"></i>
           <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
-          (<%= link_to "remove", remove_snap_member_sections_path(form: { member_id: member.id }),
+          (<%= link_to "remove", remove_food_member_sections_path(form: { member_id: member.id }),
                        method: :put,
                        class: "remove",
                        "aria-labelledby": "member-name-#{member.id}" %>)
@@ -22,7 +22,7 @@
       </div>
       <% end %>
       <%= link_to(
-              section_path(Integrated::AddSnapMemberController),
+              section_path(Integrated::AddFoodMemberController),
               class: 'button button-full-width button-bold') do %>
       <i class="button__icon--left icon-add"></i>
       Add a person

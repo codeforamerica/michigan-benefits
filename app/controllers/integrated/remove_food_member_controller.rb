@@ -1,5 +1,5 @@
 module Integrated
-  class RemoveSnapMemberController < FormsController
+  class RemoveFoodMemberController < FormsController
     def update_models
       flash[:notice] = if member&.update_attributes(buy_and_prepare_food_together: "no")
                          "Removed the household member from the Food Assistance application."

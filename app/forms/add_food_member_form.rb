@@ -1,4 +1,4 @@
-class AddSnapMemberForm < Form
+class AddFoodMemberForm < Form
   include BirthdayValidations
 
   set_member_attributes(
