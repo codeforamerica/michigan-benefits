@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320200147) do
+ActiveRecord::Schema.define(version: 20180320224323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180320200147) do
 
   create_table "application_navigators", force: :cascade do |t|
     t.boolean "all_share_food_costs", default: true
+    t.boolean "anyone_else_on_tax_return", default: true
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
     t.boolean "resides_in_state", default: true
