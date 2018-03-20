@@ -117,6 +117,17 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Healthcare" do
+      expect(page).to have_content(
+        "Which people also need Healthcare Coverage?",
+      )
+
+      # Jessie Tester checked by default
+      check "Jonny Tester"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

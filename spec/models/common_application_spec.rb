@@ -48,6 +48,48 @@ RSpec.describe CommonApplication do
         expect(application.snap_applying_members.first).to eq(in_household)
       end
     end
+
+    describe ".healthcare_applying_members" do
+      it "returns all members requesting food assistance" do
+        in_household = build(:household_member, requesting_healthcare: "yes")
+
+        application = create(:common_application,
+          members: [
+            in_household,
+            build(:household_member, requesting_healthcare: "no"),
+            build(:household_member),
+          ])
+
+        expect(application.healthcare_applying_members.count).to eq(1)
+        expect(application.healthcare_applying_members.first).to eq(in_household)
+      end
+    end
+  end
+
+  describe "#single_member_household?" do
+    context "when one member in household" do
+      it "returns true" do
+        application = create(:common_application, :single_member)
+
+        expect(application.single_member_household?).to be_truthy
+      end
+    end
+
+    context "when more than one member in household" do
+      it "returns false" do
+        application = create(:common_application, :multi_member)
+
+        expect(application.single_member_household?).to be_falsey
+      end
+    end
+
+    context "when zero members in household" do
+      it "returns false" do
+        application = create(:common_application)
+
+        expect(application.single_member_household?).to be_falsey
+      end
+    end
   end
 
   describe "#unstable_housing?" do

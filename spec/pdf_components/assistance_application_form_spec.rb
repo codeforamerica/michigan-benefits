@@ -29,7 +29,9 @@ RSpec.describe AssistanceApplicationForm do
           birthday: DateTime.new(1991, 10, 18),
           sex_male?: true,
           sex_female?: false,
-          requesting_food_yes?: true)
+          requesting_food_yes?: true,
+          requesting_healthcare_yes?: true,
+        )
       end
 
       let(:common_application) do
@@ -48,15 +50,12 @@ RSpec.describe AssistanceApplicationForm do
         AssistanceApplicationForm.new(common_application).attributes
       end
 
-      it "defaults to requesting food" do
-        expect(attributes).to include(
-          applying_for_food: "Yes",
-          first_member_requesting_food: Integrated::PdfAttributes::UNDERLINED,
-        )
-      end
-
       it "returns a hash with basic information" do
         expect(attributes).to include(
+          applying_for_food: "Yes",
+          applying_for_healthcare: "Yes",
+          first_member_requesting_food: Integrated::PdfAttributes::UNDERLINED,
+          first_member_requesting_healthcare: Integrated::PdfAttributes::UNDERLINED,
           legal_name: "Octopus Cuttlefish",
           dob: "10/18/1991",
           received_assistance: "Yes",
@@ -76,7 +75,8 @@ RSpec.describe AssistanceApplicationForm do
                         birthday: DateTime.new(1991, 10, 18),
                         sex_male?: true,
                         sex_female?: false,
-                        requesting_food_yes?: true)
+                        requesting_food_yes?: true,
+                        requesting_healthcare_yes?: true)
       end
 
       let(:common_application) do
@@ -95,34 +95,39 @@ RSpec.describe AssistanceApplicationForm do
                                     birthday: DateTime.new(1991, 10, 18),
                                     sex_male?: true,
                                     sex_female?: false,
-                                    requesting_food_yes?: true),
+                                    requesting_food_yes?: true,
+                                    requesting_healthcare_yes?: false),
                                   instance_double("household_member",
                                     display_name: "Coral Eel",
                                     relationship_label: "Parent",
                                     birthday: DateTime.new(1991, 10, 18),
                                     sex_male?: true,
                                     sex_female?: false,
-                                    requesting_food_yes?: true),
+                                    requesting_food_yes?: true,
+                                    requesting_healthcare_yes?: false),
                                   instance_double("household_member",
                                     display_name: "Snail Squid",
                                     relationship_label: "Parent",
                                     birthday: DateTime.new(1991, 10, 18),
                                     sex_male?: true,
                                     sex_female?: false,
-                                    requesting_food_yes?: true),
+                                    requesting_food_yes?: true,
+                                    requesting_healthcare_yes?: false),
                                   instance_double("household_member",
                                     display_name: "Flounder Halibut",
                                     relationship_label: "Sibling",
                                     birthday: DateTime.new(1991, 10, 18),
                                     sex_male?: true,
                                     sex_female?: false,
-                                    requesting_food_yes?: false),
+                                    requesting_food_yes?: false,
+                                    requesting_healthcare_yes?: false),
                                   instance_double("household_member",
                                     display_name: "Willy Whale",
                                     relationship_label: "Child",
                                     birthday: DateTime.new(1995, 10, 18),
                                     sex: "male",
-                                    requesting_food_yes?: true)])
+                                    requesting_food_yes?: true,
+                                    requesting_healthcare_yes?: true)])
       end
 
       let(:attributes) do
@@ -160,7 +165,7 @@ RSpec.describe AssistanceApplicationForm do
         expect(attributes[:notes]).to eq(
           <<~NOTES
             Additional Household Members:
-            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Applying for: Food
+            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Applying for: Food, Healthcare
           NOTES
         )
       end

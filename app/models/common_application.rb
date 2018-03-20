@@ -20,6 +20,13 @@ class CommonApplication < ApplicationRecord
     class_name: "HouseholdMember",
     foreign_key: "common_application_id"
 
+  has_many :healthcare_applying_members,
+    -> {
+      requesting_healthcare
+    },
+    class_name: "HouseholdMember",
+    foreign_key: "common_application_id"
+
   has_many :snap_household_members,
     -> {
       requesting_food.buy_and_prepare_food_together
@@ -31,6 +38,10 @@ class CommonApplication < ApplicationRecord
        _prefix: :previously_received_assistance
 
   enum living_situation: { unknown_living_situation: 0, stable_address: 1, temporary_address: 2, homeless: 3 }
+
+  def single_member_household?
+    members.count == 1
+  end
 
   def unstable_housing?
     temporary_address? || homeless?

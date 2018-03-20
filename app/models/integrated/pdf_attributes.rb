@@ -11,6 +11,10 @@ module Integrated
       end
     end
 
+    def yes_if_true(statement)
+      "Yes" if statement
+    end
+
     def underline_if_true(statement)
       UNDERLINED if statement
     end

@@ -6,6 +6,7 @@ module Integrated
       member_data = member_params.merge(
         relationship: "primary",
         requesting_food: "yes",
+        requesting_healthcare: "yes",
         buy_and_prepare_food_together: "yes",
       )
       combine_birthday_fields(member_data)

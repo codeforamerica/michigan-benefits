@@ -8,11 +8,18 @@ class FormNavigation
       Integrated::LivingSituationController,
       Integrated::BenefitsIntroController,
       Integrated::HouseholdMembersOverviewController,
+    ],
+    "Food Assistance" => [
       Integrated::FoodAssistanceController,
       Integrated::BuyAndPrepareFoodWithOtherPersonController,
       Integrated::ShareFoodCostsWithHouseholdController,
       Integrated::BuyAndPrepareFoodSeparatelyController,
       Integrated::ReviewFoodAssistanceMembersController,
+    ],
+    "Healthcare" => [
+      Integrated::HealthcareController,
+    ],
+    "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],
   }.freeze
