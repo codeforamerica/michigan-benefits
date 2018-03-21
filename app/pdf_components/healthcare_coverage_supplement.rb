@@ -32,6 +32,18 @@ class HealthcareCoverageSupplement
         no: benefit_application.primary_member.filing_taxes_next_year_no?,
       ),
       filing_taxes_primary_filer_name: primary_tax_filer_name,
+      primary_filer_filing_jointly: yes_no_or_unfilled(
+        yes: benefit_application.filing_taxes_jointly?,
+        no: !benefit_application.filing_taxes_jointly?,
+      ),
+      primary_filer_filing_jointly_spouse_name:
+        benefit_application.spouse_filing_taxes_jointly&.display_name,
+      primary_filer_claiming_dependents: yes_no_or_unfilled(
+        yes: benefit_application.filing_taxes_with_dependent?,
+        no: !benefit_application.filing_taxes_with_dependent?,
+      ),
+      primary_filer_claiming_dependents_dependents_names:
+        benefit_application.dependents&.map { |dep| dep.display_name }&.join(", "),
     }
   end
 

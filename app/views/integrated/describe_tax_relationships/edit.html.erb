@@ -1,0 +1,36 @@
+<% content_for :header_title, "Healthcare" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      How will you include others on your taxes?
+    </h1>
+    <p class="text--centered text--help">
+      You can add more people on the next page.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <% @form.members.each do |member| %>
+      <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+        <%  if member.is_spouse? %>
+          <%= ff.mb_radio_set :tax_relationship,
+                             label_text: member.display_name,
+                             collection: [
+                                 { value: "married_filing_jointly", label: "Married filing jointly" },
+                                 { value: "married_filing_separately", label: "Married filing separately" },
+                                 { value: "not_included", label: "Not included" },
+                             ] %>
+        <% else %>
+          <%= ff.mb_radio_set :tax_relationship,
+                             label_text: member.display_name,
+                             collection: [
+                                 { value: "dependent", label: "Dependent" },
+                                 { value: "not_included", label: "Not included" },
+                             ] %>
+        <% end %>
+
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
