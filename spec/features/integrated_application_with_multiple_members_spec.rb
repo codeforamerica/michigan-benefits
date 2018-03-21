@@ -73,7 +73,7 @@ RSpec.feature "Integrated application" do
         last_name: "Tester",
         dob: ["1", "1", "1969"],
         sex: "Female",
-        relation: "Roommate",
+        relation: "Spouse",
       },
       {
         first_name: "Jackie",
@@ -225,6 +225,19 @@ RSpec.feature "Integrated application" do
       expect(page).to have_content("Is there anyone else who can be included on your tax return?")
 
       proceed_with "Yes"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content("How will you include others on your taxes?")
+
+      select_radio(question: "Jonny Tester", answer: "Married filing jointly")
+      select_radio(question: "Jackie Tester", answer: "Dependent")
+      select_radio(question: "Joe Schmoe", answer: "Not included")
+      select_radio(question: "Apples McMackintosh", answer: "Not included")
+      select_radio(question: "Pupper McDog", answer: "Dependent")
+      select_radio(question: "Kitty DeRat", answer: "Not included")
+
+      proceed_with "Continue"
     end
 
     on_page "Application Submitted" do

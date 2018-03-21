@@ -14,8 +14,8 @@ RSpec.describe Integrated::IncludeAnyoneElseOnTaxesController do
     context "when primary member has indicated they aren't filing taxes" do
       it "returns true" do
         application = create(:common_application, members: [
-          build(:household_member, filing_taxes_next_year: "no")
-        ])
+                               build(:household_member, filing_taxes_next_year: "no"),
+                             ])
 
         skip_step = Integrated::IncludeAnyoneElseOnTaxesController.skip?(application)
         expect(skip_step).to eq(true)

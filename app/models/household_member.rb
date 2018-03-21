@@ -34,6 +34,14 @@ class HouseholdMember < ApplicationRecord
   enum buy_and_prepare_food_together: { unfilled: 0, yes: 1, no: 2 },
        _prefix: :buy_and_prepare_food_together
 
+  enum tax_relationship: {
+    unfilled: 0,
+    married_filing_jointly: 1,
+    married_filing_separately: 2,
+    dependent: 3,
+    not_included: 4,
+  }, _prefix: :tax_relationship
+
   RELATIONSHIP_LABELS_AND_KEYS = [
     ["Choose one", "unknown_relation"],
     ["Roommate", "roommate"],

@@ -66,4 +66,24 @@ class CommonApplication < ApplicationRecord
   def applying_for_healthcare?
     members.any?(&:requesting_healthcare_yes?)
   end
+
+  def filing_taxes_jointly?
+    members.any?(&:tax_relationship_married_filing_jointly?)
+  end
+
+  def filing_taxes_with_dependent?
+    members.any?(&:tax_relationship_dependent?)
+  end
+
+  def spouse_filing_taxes_jointly
+    if filing_taxes_jointly?
+      members.where(tax_relationship: "married_filing_jointly").first
+    end
+  end
+
+  def dependents
+    if filing_taxes_with_dependent?
+      members.where(tax_relationship: "dependent")
+    end
+  end
 end
