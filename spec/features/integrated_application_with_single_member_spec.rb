@@ -81,6 +81,16 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
+    on_page "Healthcare" do
+      expect(page).to have_content("Is there anyone else who can be included on your tax return?")
+
+      within "#tax-included" do
+        expect(page).to have_content("Jessie Tester")
+      end
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

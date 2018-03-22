@@ -13,6 +13,10 @@ class HouseholdMember < ApplicationRecord
     where(buy_and_prepare_food_together: "yes").order("created_at")
   }
 
+  scope :tax_household, -> {
+    where(tax_relationship: ["primary", "married_filing_jointly", "dependent"]).order("created_at")
+  }
+
   enum sex: { unfilled: 0, male: 1, female: 2 }, _prefix: :sex
 
   enum relationship: {
@@ -40,6 +44,7 @@ class HouseholdMember < ApplicationRecord
     married_filing_separately: 2,
     dependent: 3,
     not_included: 4,
+    primary: 5,
   }, _prefix: :tax_relationship
 
   RELATIONSHIP_LABELS_AND_KEYS = [
@@ -51,6 +56,13 @@ class HouseholdMember < ApplicationRecord
     ["Sibling", "sibling"],
     ["Child", "child"],
     ["Other", "other_relation"],
+  ].freeze
+
+  TAX_RELATIONSHIP_LABELS_AND_KEYS = [
+    ["Choose one", nil],
+    ["Married Filing Jointly", "married_filing_jointly"],
+    ["Married Filing Separately", "married_filing_separately"],
+    ["Dependent", "dependent"],
   ].freeze
 
   RELATION_LABEL_LOOKUP = RELATIONSHIP_LABELS_AND_KEYS.map(&:reverse).to_h

@@ -1,5 +1,5 @@
 module Integrated
-  class RemoveHouseholdMemberController < FormsController
+  class RemoveHouseholdMemberController < RemoveMemberController
     def update_models
       flash[:notice] = if member && current_application.members.delete(member)
                          "Removed the household member."
@@ -8,18 +8,8 @@ module Integrated
                        end
     end
 
-    def previous_path(*_args)
+    def overview_path
       household_members_overview_sections_path
-    end
-
-    def next_path
-      household_members_overview_sections_path
-    end
-
-    def member
-      if member_params[:member_id].present?
-        current_application.members.find_by(id: member_params[:member_id])
-      end
     end
   end
 end

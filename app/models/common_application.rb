@@ -27,6 +27,13 @@ class CommonApplication < ApplicationRecord
     class_name: "HouseholdMember",
     foreign_key: "common_application_id"
 
+  has_many :tax_household_members,
+    -> {
+      tax_household
+    },
+    class_name: "HouseholdMember",
+    foreign_key: "common_application_id"
+
   has_many :food_household_members,
     -> {
       requesting_food.buy_and_prepare_food_together

@@ -21,6 +21,7 @@ class FormNavigation
       Integrated::FileTaxesNextYearController,
       Integrated::IncludeAnyoneElseOnTaxesController,
       Integrated::DescribeTaxRelationshipsController,
+      Integrated::ReviewTaxRelationshipsController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
@@ -33,6 +34,8 @@ class FormNavigation
     Integrated::AddFoodMemberController,
     Integrated::RemoveFoodMemberController,
     Integrated::AddHealthcareMemberController,
+    Integrated::AddTaxMemberController,
+    Integrated::RemoveTaxMemberController,
   ].freeze
 
   class << self

@@ -1,4 +1,4 @@
-class AddHealthcareMemberForm < Form
+class AddMemberForm < Form
   include BirthdayValidations
 
   set_member_attributes(
