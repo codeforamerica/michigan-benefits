@@ -1,0 +1,27 @@
+<% content_for :header_title, "Healthcare" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Are you sure you don't want to apply for Healthcare Coverage?
+    </h1>
+    <p class="text--centered text--help">
+      If you continue, you'll only be applying for Food Assistance.
+      If you want to apply for Healthcare Coverage, go back and choose at
+      least one person you want to apply for.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <footer class="form-card__buttons">
+    <%= link_to previous_path, class: "button button--full-mobile" do %>
+        <i class="button__icon icon-arrow_back"></i>
+        <span>No, go back</span>
+    <% end %>
+
+    <%= link_to root_path, class: "button button--full-mobile button--cta" do %>
+        Yes, I'm sure
+    <% end %>
+  </footer>
+<% end %>
+
+<% content_for :skip_footer, true %>
