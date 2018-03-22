@@ -240,6 +240,44 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Healthcare" do
+      expect(page).to have_content("Is there anyone else who can be included on your tax return?")
+
+      within "#tax-included" do
+        expect(page).to have_content("Jessie Tester (that's you!)")
+        expect(page).to have_content("Jonny Tester")
+        expect(page).to have_content("Jackie Tester")
+        expect(page).to have_content("Pupper McDog")
+      end
+
+      within "#not-tax-included" do
+        expect(page).to have_content("Joe Schmoe")
+        expect(page).to have_content("Apples McMackintosh")
+        expect(page).to have_content("Kitty DeRat")
+      end
+
+      click_on "Add a person"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content("Add a person.")
+      fill_in "What's their first name?", with: "Ginny"
+      fill_in "What's their last name?", with: "Pig"
+      select("Dependent", from: "How are they included on your tax return?")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content("Is there anyone else who can be included on your tax return?")
+
+      within "#tax-included" do
+        expect(page).to have_content("Ginny Pig")
+      end
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

@@ -1,0 +1,52 @@
+<% content_for :header_title, "Healthcare" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Is there anyone else who can be included on your tax return?
+    </h1>
+    <p class="text--centered text--help">
+      Include your spouse and all dependents — even if they aren't applying for health coverage today.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <div class="slab slab--not-padded">
+    <div class="card card--narrow card--top" id="tax-included">
+      <p>
+        <i class="button__icon--left icon-check icon-check--color"></i>
+        <%= "#{@primary_member.display_name} (that's you!)" %>
+      </p>
+      <% @tax_household_members.each do |member| %>
+        <div>
+          <p>
+            <i class="button__icon--left icon-check icon-check--color"></i>
+            <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
+            (<%= link_to "remove", remove_tax_member_sections_path(form: { member_id: member.id }),
+                         method: :put,
+                         class: "remove",
+                         "aria-labelledby": "member-name-#{member.id}" %>)
+          </p>
+        </div>
+      <% end %>
+      <%= link_to(
+              section_path(Integrated::AddTaxMemberController),
+              class: 'button button-full-width button-bold') do %>
+        <i class="button__icon--left icon-add"></i>
+        Add a person
+      <% end %>
+    </div>
+    <% if @non_tax_household_members.present? %>
+      <div class="card card--narrow card--bottom text--help" id="not-tax-included">
+        <p>Not included:</p>
+        <% @non_tax_household_members.each do |member| %>
+          <div>
+            <p>
+              <i class="button__icon--left icon-close icon-close--color"></i>
+              <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

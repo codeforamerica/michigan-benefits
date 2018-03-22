@@ -50,7 +50,7 @@ RSpec.describe CommonApplication do
     end
 
     describe ".healthcare_applying_members" do
-      it "returns all members requesting food assistance" do
+      it "returns all members requesting healthcare coverage" do
         in_household = build(:household_member, requesting_healthcare: "yes")
 
         application = create(:common_application,
@@ -62,6 +62,27 @@ RSpec.describe CommonApplication do
 
         expect(application.healthcare_applying_members.count).to eq(1)
         expect(application.healthcare_applying_members.first).to eq(in_household)
+      end
+    end
+
+    describe ".tax_household_members" do
+      it "returns all members in the tax household" do
+        in_household = [
+          build(:household_member, tax_relationship: "primary"),
+          build(:household_member, tax_relationship: "married_filing_jointly"),
+          build(:household_member, tax_relationship: "dependent"),
+        ]
+
+        not_in_household = [
+          build(:household_member, tax_relationship: "unfilled"),
+          build(:household_member, tax_relationship: "married_filing_separately"),
+          build(:household_member, tax_relationship: "not_included"),
+        ]
+
+        application = create(:common_application, members: in_household + not_in_household)
+
+        expect(application.tax_household_members.count).to eq(3)
+        expect(application.tax_household_members).to match_array(in_household)
       end
     end
   end

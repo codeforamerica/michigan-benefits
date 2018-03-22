@@ -1,5 +1,5 @@
 module Integrated
-  class RemoveFoodMemberController < FormsController
+  class RemoveFoodMemberController < RemoveMemberController
     def update_models
       flash[:notice] = if member&.update_attributes(buy_and_prepare_food_together: "no")
                          "Removed the household member from the Food Assistance application."
@@ -8,18 +8,8 @@ module Integrated
                        end
     end
 
-    def previous_path(*_args)
+    def overview_path
       review_food_assistance_members_sections_path
-    end
-
-    def next_path
-      review_food_assistance_members_sections_path
-    end
-
-    def member
-      if member_params[:member_id].present?
-        current_application.members.find_by(id: member_params[:member_id])
-      end
     end
   end
 end

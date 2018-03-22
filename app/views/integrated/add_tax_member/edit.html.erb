@@ -1,0 +1,40 @@
+<% content_for :header_title, "Healthcare" %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">
+    Add a person.
+  </h1>
+
+  <p class="text--help text--centered">
+    Skip any questions you don't currently know the answer to.
+  </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_input_field :first_name,
+                         "What's their first name?",
+                         autofocus: true %>
+    <%= f.mb_input_field :last_name, "What's their last name?" %>
+    <%= f.mb_date_input :birthday,
+                        "When is their birthday?",
+                        help_text: "For example: 4 28 1970",
+                        options: {
+                            start_year: 1900,
+                            end_year: Time.now.year,
+                        } %>
+    <%= f.mb_radio_set :sex,
+                       label_text: "What's their sex?",
+                       collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
+                       help_text: "As it appears on their ID",
+                       layout: "inline" %>
+
+    <%= f.mb_select :relationship,
+                    "What is their relationship to you?", HouseholdMember::RELATIONSHIP_LABELS_AND_KEYS,
+                    help_text: "Choose one" %>
+
+    <%= f.mb_select :tax_relationship,
+                    "How are they included on your tax return?", HouseholdMember::TAX_RELATIONSHIP_LABELS_AND_KEYS,
+                    help_text: "Choose one" %>
+  <% end %>
+<% end %>

@@ -1,5 +1,5 @@
 module Integrated
-  class AddHealthcareMemberController < AddMemberController
+  class AddTaxMemberController < AddMemberController
     def update_models
       member_data = member_params
       combine_birthday_fields(member_data)
@@ -8,7 +8,11 @@ module Integrated
     end
 
     def overview_path
-      healthcare_sections_path
+      review_tax_relationships_sections_path
+    end
+
+    def form_class
+      AddTaxMemberForm
     end
   end
 end

@@ -6,7 +6,11 @@ module Integrated
     end
 
     def update_models
-      current_application.primary_member.update!(member_params)
+      member_data = member_params
+      if member_data[:filing_taxes_next_year] == "yes"
+        member_data[:tax_relationship] = "primary"
+      end
+      current_application.primary_member.update!(member_data)
     end
   end
 end
