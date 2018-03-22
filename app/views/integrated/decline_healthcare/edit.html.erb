@@ -18,8 +18,18 @@
         <span>No, go back</span>
     <% end %>
 
-    <%= link_to root_path, class: "button button--full-mobile button--cta" do %>
-        Yes, I'm sure
+    <%= form_for @form,
+      as: :form,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put,
+      namespace: "yes" do |f| %>
+
+        <button
+        type="submit"
+        class="button button--nav button--cta button--full-mobile">
+          Yes, I'm sure
+        </button>
     <% end %>
   </footer>
 <% end %>
