@@ -103,10 +103,27 @@ var yesNoEnumButtons = (function () {
   }
 })()
 
+var autoAdvanceTelInputs = (function() {
+  var autoAdvance = {
+    init: function () {
+      $(".form-group > input[type='tel']").keyup(function () {
+        if (this.value.length == this.maxLength) {
+          var nextInputGroup = $(this).parent(".form-group").next();
+          nextInputGroup.find("input").focus();
+        }
+      })
+    }
+  }
+  return {
+    init: autoAdvance.init
+  }
+})()
+
 $(document).ready(function () {
   radioSelector.init()
   checkboxSelector.init()
   textWell.init()
   yesNoButtons.init()
   yesNoEnumButtons.init()
+  autoAdvanceTelInputs.init()
 })

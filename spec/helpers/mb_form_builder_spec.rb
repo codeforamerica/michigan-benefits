@@ -386,10 +386,6 @@ RSpec.describe MbFormBuilder do
         :birthday,
         "What is your birthday?",
         help_text: "(For surprises)",
-        options: {
-          start_year: 1990,
-          end_year: 1992,
-        },
       )
       expect(output).to be_html_safe
 
@@ -400,15 +396,15 @@ RSpec.describe MbFormBuilder do
         <div class="input-group--inline">
           <div class="form-group">
             <label class="text--help form-subquestion" for="sample_birthday_month" id="sample_birthday_month__label">Month</label>
-            <input class="form-width--month text-input" min="1" max="12" id="sample_birthday_month" name="sample[birthday_month]" type="number" />
+            <input class="form-width--month text-input" id="sample_birthday_month" name="sample[birthday_month]" size="2" minlength="1" maxlength="2" type="tel" />
           </div>
           <div class="form-group">
             <label class="text--help form-subquestion" for="sample_birthday_day" id="sample_birthday_day__label">Day</label>
-            <input class="form-width--day text-input" min="1" max="31" id="sample_birthday_day" name="sample[birthday_day]" type="number" />
+            <input class="form-width--day text-input" id="sample_birthday_day" name="sample[birthday_day]" size="2" minlength="1" maxlength="2" type="tel" />
           </div>
           <div class="form-group">
             <label class="text--help form-subquestion" for="sample_birthday_year" id="sample_birthday_year__label">Year</label>
-            <input class="form-width--year text-input" min="1990" max="1992" id="sample_birthday_year" name="sample[birthday_year]" type="number" />
+            <input class="form-width--year text-input" id="sample_birthday_year" name="sample[birthday_year]" size="4" minlength="4" maxlength="4" type="tel" />
           </div>
         </div>
       </fieldset>
@@ -439,10 +435,6 @@ RSpec.describe MbFormBuilder do
         :birthday,
         "What is your birthday?",
         help_text: "(For surprises)",
-        options: {
-          start_year: 1990,
-          end_year: 1992,
-        },
       )
 
       expect(output).to be_html_safe
