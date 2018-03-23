@@ -154,7 +154,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     base_method,
     label_text,
     help_text: nil,
-    options: {},
     autofocus: nil
   )
     year_method, month_method, day_method = *%i[year month day].map { |unit| :"#{base_method}_#{unit}" }
@@ -165,36 +164,39 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         <div class="input-group--inline">
           <div class="form-group">
             <label class="text--help form-subquestion" for="#{sanitized_id(month_method)}" id="#{sanitized_id(month_method)}__label">Month</label>
-            #{number_field(
+            #{telephone_field(
               month_method,
               class: 'form-width--month text-input',
-              min: 1,
-              max: 12,
               id: sanitized_id(month_method),
               name: "#{object_name}[#{month_method}]",
+              size: 2,
+              minlength: 1,
+              maxlength: 2,
               autofocus: autofocus,
             )}
           </div>
           <div class="form-group">
             <label class="text--help form-subquestion" for="#{sanitized_id(day_method)}" id="#{sanitized_id(day_method)}__label">Day</label>
-            #{number_field(
+            #{telephone_field(
               day_method,
                 class: 'form-width--day text-input',
-                min: 1,
-                max: 31,
                 id: sanitized_id(day_method),
                 name: "#{object_name}[#{day_method}]",
+                size: 2,
+                minlength: 1,
+                maxlength: 2,
             )}
           </div>
           <div class="form-group">
             <label class="text--help form-subquestion" for="#{sanitized_id(year_method)}" id="#{sanitized_id(year_method)}__label">Year</label>
-            #{number_field(
+            #{telephone_field(
               year_method,
               class: 'form-width--year text-input',
-              min: options[:start_year],
-              max: options[:end_year],
               id: sanitized_id(year_method),
               name: "#{object_name}[#{year_method}]",
+              size: 4,
+              minlength: 4,
+              maxlength: 4,
             )}
           </div>
         </div>
