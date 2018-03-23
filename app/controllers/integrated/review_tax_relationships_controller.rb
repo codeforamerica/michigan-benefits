@@ -6,7 +6,7 @@ module Integrated
 
     def edit
       @primary_member = current_application.primary_member
-      @tax_household_members = current_application.tax_household_members
+      @tax_household_members = current_application.tax_household_members - [@primary_member]
       @non_tax_household_members = current_application.members - current_application.tax_household_members
     end
 
