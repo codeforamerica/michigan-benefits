@@ -44,7 +44,19 @@ class HealthcareCoverageSupplement
       ),
       primary_filer_claiming_dependents_dependents_names:
         benefit_application.dependents&.map { |dep| dep.display_name }&.join(", "),
-    }
+    }.merge(second_filer_attributes)
+  end
+
+  def second_filer_attributes
+    if benefit_application.filing_taxes_separately?
+      {
+        filing_taxes_second_filer_name:
+          benefit_application.spouse_filing_taxes_separately&.display_name,
+        second_filer_filing_jointly: "No",
+      }
+    else
+      {}
+    end
   end
 
   def primary_tax_filer_name

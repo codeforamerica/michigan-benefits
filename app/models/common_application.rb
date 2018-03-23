@@ -78,6 +78,10 @@ class CommonApplication < ApplicationRecord
     members.any?(&:tax_relationship_married_filing_jointly?)
   end
 
+  def filing_taxes_separately?
+    members.any?(&:tax_relationship_married_filing_separately?)
+  end
+
   def filing_taxes_with_dependent?
     members.any?(&:tax_relationship_dependent?)
   end
@@ -85,6 +89,12 @@ class CommonApplication < ApplicationRecord
   def spouse_filing_taxes_jointly
     if filing_taxes_jointly?
       members.where(tax_relationship: "married_filing_jointly").first
+    end
+  end
+
+  def spouse_filing_taxes_separately
+    if filing_taxes_separately?
+      members.where(tax_relationship: "married_filing_separately").first
     end
   end
 
