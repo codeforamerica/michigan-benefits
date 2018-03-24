@@ -5,13 +5,13 @@ Rails.application.routes.draw do
     # match "/delayed_job" => DelayedJobWeb, anchor: false, via: %i(get post)
 
     namespace :admin do
-      resources :snap_applications do
+      resources :snap_applications, only: %i[index show] do
         get "pdf", on: :member
       end
-      resources :medicaid_applications do
+      resources :medicaid_applications, only: %i[index show] do
         get "pdf", on: :member
       end
-      resources :common_applications do
+      resources :common_applications, only: %i[index show] do
         get "pdf", on: :member
       end
       resources :exports, only: %i[index show]
