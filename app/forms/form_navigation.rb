@@ -27,6 +27,9 @@ class FormNavigation
       Integrated::DescribeTaxRelationshipsController,
       Integrated::ReviewTaxRelationshipsController,
     ],
+    "Household" => [
+      Integrated::AreYouMarriedController,
+    ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],
