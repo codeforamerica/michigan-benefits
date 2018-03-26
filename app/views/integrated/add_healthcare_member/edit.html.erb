@@ -26,7 +26,8 @@
           layout: "inline" %>
 
         <%= f.mb_select :relationship,
-          "What is their relationship to you?", HouseholdMember::RELATIONSHIP_LABELS_AND_KEYS,
+          "What is their relationship to you?",
+          valid_relationship_options,
           help_text: "They are my..." %>
     <% end %>
 <% end %>
