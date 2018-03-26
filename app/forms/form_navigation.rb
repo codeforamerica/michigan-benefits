@@ -19,6 +19,9 @@ class FormNavigation
     "Healthcare" => [
       Integrated::HealthcareController,
       Integrated::DeclineHealthcareController,
+    ],
+    "Taxes" => [
+      Integrated::TaxHouseholdIntroController,
       Integrated::FileTaxesNextYearController,
       Integrated::IncludeAnyoneElseOnTaxesController,
       Integrated::DescribeTaxRelationshipsController,
