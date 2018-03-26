@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Integrated::AddHouseholdMemberController do
+  it_behaves_like "add member controller"
+
   describe "#update" do
     context "with valid params" do
       let(:valid_params) do
