@@ -17,5 +17,13 @@ class AddMemberForm < Form
   validates :last_name,
     presence: { message: "Make sure to provide a last name" }
 
+  validates :relationship,
+            presence: { message: "Make sure to choose a relationship" },
+            unless: :skip_relationship_validation?
+
   validate :birthday_must_be_valid_date
+
+  def skip_relationship_validation?
+    false
+  end
 end

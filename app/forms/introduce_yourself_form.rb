@@ -15,4 +15,8 @@ class IntroduceYourselfForm < AddMemberForm
   }
 
   validate :birthday_must_be_present
+
+  def skip_relationship_validation?
+    true
+  end
 end

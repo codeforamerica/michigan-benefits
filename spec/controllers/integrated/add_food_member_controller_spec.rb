@@ -45,6 +45,7 @@ RSpec.describe Integrated::AddFoodMemberController do
           form: {
             first_name: "Gary",
             last_name: "McTester",
+            relationship: "roommate",
           },
         }
       end
@@ -63,7 +64,7 @@ RSpec.describe Integrated::AddFoodMemberController do
         expect(new_member.last_name).to eq("McTester")
         expect(new_member.birthday).to be_nil
         expect(new_member.sex).to eq("unfilled")
-        expect(new_member.relationship).to eq("unknown_relation")
+        expect(new_member.relationship).to eq("roommate")
         expect(new_member.requesting_food).to eq("yes")
         expect(new_member.buy_and_prepare_food_together).to eq("yes")
       end

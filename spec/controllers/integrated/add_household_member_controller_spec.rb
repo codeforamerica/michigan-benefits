@@ -43,6 +43,7 @@ RSpec.describe Integrated::AddHouseholdMemberController do
           form: {
             first_name: "Gary",
             last_name: "McTester",
+            relationship: "roommate",
           },
         }
       end
@@ -61,7 +62,7 @@ RSpec.describe Integrated::AddHouseholdMemberController do
         expect(new_member.last_name).to eq("McTester")
         expect(new_member.birthday).to be_nil
         expect(new_member.sex).to eq("unfilled")
-        expect(new_member.relationship).to eq("unknown_relation")
+        expect(new_member.relationship).to eq("roommate")
       end
     end
   end

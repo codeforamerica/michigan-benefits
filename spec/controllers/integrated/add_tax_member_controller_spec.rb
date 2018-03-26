@@ -9,6 +9,7 @@ RSpec.describe Integrated::AddTaxMemberController do
         {
           first_name: "Princess",
           last_name: "Caroline",
+          relationship: "child",
           tax_relationship: "dependent",
         }
       end
@@ -24,6 +25,7 @@ RSpec.describe Integrated::AddTaxMemberController do
         member = current_app.members.last
         expect(member.first_name).to eq("Princess")
         expect(member.last_name).to eq("Caroline")
+        expect(member.relationship).to eq("child")
         expect(member.tax_relationship_dependent?).to be_truthy
       end
     end
@@ -33,6 +35,7 @@ RSpec.describe Integrated::AddTaxMemberController do
         {
           first_name: "Princess",
           last_name: "Caroline",
+          relationship: nil,
           tax_relationship: nil,
         }
       end

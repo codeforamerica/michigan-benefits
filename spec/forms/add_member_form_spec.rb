@@ -17,7 +17,7 @@ RSpec.describe AddMemberForm do
     end
 
     it "does accept empty birthday" do
-      form = AddMemberForm.new(first_name: "Gary", last_name: "Tester")
+      form = AddMemberForm.new(first_name: "Gary", last_name: "Tester", relationship: "roommate")
 
       expect(form).to be_valid
       expect(form.errors[:birthday]).to_not be_present
@@ -28,6 +28,24 @@ RSpec.describe AddMemberForm do
 
       expect(form).not_to be_valid
       expect(form.errors[:birthday]).to be_present
+    end
+
+    it "requires relationship" do
+      form = AddMemberForm.new
+
+      expect(form).not_to be_valid
+      expect(form.errors[:relationship]).to be_present
+    end
+
+    it "doesn't require relationship when set to skip" do
+      class CustomMemberForm < AddMemberForm
+        def skip_relationship_validation?
+          true
+        end
+      end
+      form = CustomMemberForm.new(first_name: "Gary", last_name: "Tester")
+
+      expect(form).to be_valid
     end
   end
 end

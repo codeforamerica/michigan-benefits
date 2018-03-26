@@ -118,7 +118,7 @@ RSpec.feature "Integrated application" do
 
         select_radio(question: "What's their sex?", answer: member[:sex])
 
-        select member[:relation], from: "form_relationship"
+        select member[:relation], from: "What is their relationship to you?"
 
         proceed_with "Continue"
       end
@@ -198,6 +198,7 @@ RSpec.feature "Integrated application" do
 
       fill_in "What's their first name?", with: "Kitty"
       fill_in "What's their last name?", with: "DeRat"
+      select "Roommate", from: "What is their relationship to you?"
 
       proceed_with "Continue"
     end
@@ -271,7 +272,8 @@ RSpec.feature "Integrated application" do
       expect(page).to have_content("Add a person.")
       fill_in "What's their first name?", with: "Ginny"
       fill_in "What's their last name?", with: "Pig"
-      select("Dependent", from: "How are they included on your tax return?")
+      select "Child", from: "What is their relationship to you?"
+      select "Dependent", from: "How are they included on your tax return?"
 
       proceed_with "Continue"
     end
