@@ -33,9 +33,9 @@ RSpec.describe Integrated::AreYouMarriedController do
         current_app = create(:common_application, members: build_list(:household_member, 1))
         session[:current_application_id] = current_app.id
 
-        expect {
+        expect do
           put :update, params: { form: valid_params }
-        }.to change{ current_app.primary_member.married_yes? }.to eq(true)
+        end.to change { current_app.primary_member.married_yes? }.to eq(true)
       end
     end
   end

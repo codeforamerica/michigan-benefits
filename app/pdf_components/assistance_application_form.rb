@@ -54,6 +54,8 @@ class AssistanceApplicationForm
       hash[:"#{prefix}dob"] = mmddyyyy_date(member.birthday)
       hash[:"#{prefix}male"] = circle_if_true(member.sex_male?)
       hash[:"#{prefix}female"] = circle_if_true(member.sex_female?)
+      hash[:"#{prefix}married_yes"] = circle_if_true(member.married_yes?)
+      hash[:"#{prefix}married_no"] = circle_if_true(member.married_no?)
       hash[:"#{prefix}requesting_food"] = underline_if_true(member.requesting_food_yes?)
       hash[:"#{prefix}requesting_healthcare"] = underline_if_true(member.requesting_healthcare_yes?)
     end
@@ -65,6 +67,7 @@ class AssistanceApplicationForm
         hash[:notes] += "Legal name: #{extra_member.display_name}, "
         hash[:notes] += "Sex: #{extra_member.sex.titleize}, "
         hash[:notes] += "DOB: #{mmddyyyy_date(extra_member.birthday)}, "
+        hash[:notes] += "Married: #{extra_member.married.titleize}, "
         if extra_member.requesting_food_yes? || extra_member.requesting_healthcare_yes?
           programs = %w{Food Healthcare}.select do |program|
             extra_member.public_send(:"requesting_#{program.downcase}_yes?")

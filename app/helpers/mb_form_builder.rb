@@ -373,8 +373,13 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
                                                  help_text: nil,
                                                  prefix: legend_id)
 
+    classes = ["checkbox"]
+    if options[:disabled] && object.public_send(method) == checked_value
+      classes.push("is-selected")
+    end
+
     <<~HTML.html_safe
-      <label class="checkbox" id="#{sanitized_id(method)}__label">
+      <label class="#{classes.join(' ')}" id="#{sanitized_id(method)}__label">
         #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
       </label>
       #{errors_for(object, method)}

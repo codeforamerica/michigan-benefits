@@ -1,5 +1,7 @@
 require "rails_helper"
 
+RSpec::Matchers.define_negated_matcher :not_change, :change
+
 RSpec.describe Integrated::RemoveFoodMemberController do
   describe "#update" do
     it "removes member from SNAP applying members" do
@@ -12,10 +14,13 @@ RSpec.describe Integrated::RemoveFoodMemberController do
       expect(current_app.food_applying_members.count).to eq(2)
       expect(current_app.food_household_members.count).to eq(2)
 
-      put :update, params: { form: { member_id: member_two.id } }
-      current_app.reload
-      expect(current_app.food_applying_members.count).to eq(2)
-      expect(current_app.food_household_members.count).to eq(1)
+      expect do
+        put :update, params: { form: { member_id: member_two.id } }
+      end.to not_change {
+        current_app.food_applying_members.count
+      }.and change {
+        current_app.food_household_members.count
+      }.by(-1)
     end
   end
 end

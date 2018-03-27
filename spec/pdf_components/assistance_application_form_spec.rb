@@ -30,7 +30,9 @@ RSpec.describe AssistanceApplicationForm do
           sex_male?: true,
           sex_female?: false,
           requesting_food_yes?: true,
-          requesting_healthcare_yes?: true)
+          requesting_healthcare_yes?: true,
+          married_yes?: true,
+          married_no?: false)
       end
 
       let(:common_application) do
@@ -62,20 +64,15 @@ RSpec.describe AssistanceApplicationForm do
           first_member_dob: "10/18/1991",
           first_member_male: Integrated::PdfAttributes::CIRCLED,
           first_member_female: nil,
+          first_member_married_yes: Integrated::PdfAttributes::CIRCLED,
+          first_member_married_no: nil,
         )
       end
     end
 
     context "an application with six members" do
       let(:primary_member) do
-        instance_double("household_member",
-                        display_name: "Octopus Cuttlefish",
-                        relationship_label: "You",
-                        birthday: DateTime.new(1991, 10, 18),
-                        sex_male?: true,
-                        sex_female?: false,
-                        requesting_food_yes?: true,
-                        requesting_healthcare_yes?: true)
+        instance_double("primary household_member").as_null_object
       end
 
       let(:common_application) do
@@ -88,45 +85,18 @@ RSpec.describe AssistanceApplicationForm do
                         stable_address?: false,
                         primary_member: primary_member,
                         members: [primary_member,
-                                  instance_double("household_member",
-                                    display_name: "Tuna Anemone",
-                                    relationship_label: "Spouse",
-                                    birthday: DateTime.new(1991, 10, 18),
-                                    sex_male?: true,
-                                    sex_female?: false,
-                                    requesting_food_yes?: true,
-                                    requesting_healthcare_yes?: false),
-                                  instance_double("household_member",
-                                    display_name: "Coral Eel",
-                                    relationship_label: "Parent",
-                                    birthday: DateTime.new(1991, 10, 18),
-                                    sex_male?: true,
-                                    sex_female?: false,
-                                    requesting_food_yes?: true,
-                                    requesting_healthcare_yes?: false),
-                                  instance_double("household_member",
-                                    display_name: "Snail Squid",
-                                    relationship_label: "Parent",
-                                    birthday: DateTime.new(1991, 10, 18),
-                                    sex_male?: true,
-                                    sex_female?: false,
-                                    requesting_food_yes?: true,
-                                    requesting_healthcare_yes?: false),
-                                  instance_double("household_member",
-                                    display_name: "Flounder Halibut",
-                                    relationship_label: "Sibling",
-                                    birthday: DateTime.new(1991, 10, 18),
-                                    sex_male?: true,
-                                    sex_female?: false,
-                                    requesting_food_yes?: false,
-                                    requesting_healthcare_yes?: false),
-                                  instance_double("household_member",
+                                  instance_double("household_member 2").as_null_object,
+                                  instance_double("household_member 3").as_null_object,
+                                  instance_double("household_member 4").as_null_object,
+                                  instance_double("household_member 5").as_null_object,
+                                  instance_double("household_member 6",
                                     display_name: "Willy Whale",
                                     relationship_label: "Child",
                                     birthday: DateTime.new(1995, 10, 18),
                                     sex: "male",
                                     requesting_food_yes?: true,
-                                    requesting_healthcare_yes?: true)])
+                                    requesting_healthcare_yes?: true,
+                                    married: "yes")])
       end
 
       let(:attributes) do
@@ -135,36 +105,12 @@ RSpec.describe AssistanceApplicationForm do
 
       it "returns a hash with basic information" do
         expect(attributes).to include(
-          first_member_legal_name: "Octopus Cuttlefish",
-          first_member_dob: "10/18/1991",
-          first_member_male: Integrated::PdfAttributes::CIRCLED,
-          first_member_female: nil,
-          second_member_legal_name: "Tuna Anemone",
-          second_member_relation: "Spouse",
-          second_member_dob: "10/18/1991",
-          second_member_male: Integrated::PdfAttributes::CIRCLED,
-          second_member_female: nil,
-          third_member_legal_name: "Coral Eel",
-          third_member_relation: "Parent",
-          third_member_dob: "10/18/1991",
-          third_member_male: Integrated::PdfAttributes::CIRCLED,
-          third_member_female: nil,
-          fourth_member_legal_name: "Snail Squid",
-          fourth_member_relation: "Parent",
-          fourth_member_dob: "10/18/1991",
-          fourth_member_male: Integrated::PdfAttributes::CIRCLED,
-          fourth_member_female: nil,
-          fifth_member_legal_name: "Flounder Halibut",
-          fifth_member_relation: "Sibling",
-          fifth_member_dob: "10/18/1991",
-          fifth_member_male: Integrated::PdfAttributes::CIRCLED,
-          fifth_member_female: nil,
           household_added_notes: "Yes",
         )
         expect(attributes[:notes]).to eq(
           <<~NOTES
             Additional Household Members:
-            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Applying for: Food, Healthcare
+            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Applying for: Food, Healthcare
           NOTES
         )
       end

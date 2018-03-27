@@ -29,6 +29,8 @@ class FormNavigation
     ],
     "Household" => [
       Integrated::AreYouMarriedController,
+      Integrated::AnyoneMarriedController,
+      Integrated::WhoIsMarriedController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
