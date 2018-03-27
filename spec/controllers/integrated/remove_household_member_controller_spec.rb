@@ -19,15 +19,38 @@ RSpec.describe Integrated::RemoveHouseholdMemberController do
       it "updates primary member to unmarried" do
         member_one = build(:household_member, married: "yes")
         member_two = build(:household_member, married: "yes", relationship: "spouse")
-        current_app = create(:common_application, members: [
-                               member_one, member_two
-                             ])
+        member_three = build(:household_member, married: "yes")
+        current_app = create(:common_application,
+          members: [
+            member_one, member_two, member_three
+          ])
 
         session[:current_application_id] = current_app.id
 
         expect do
           put :update, params: { form: { member_id: member_two.id } }
         end.to change { current_app.primary_member.married_no? }.from(false).to(true)
+      end
+
+      context "and no other members are married" do
+        it "updates the navigator to indicate no one is married" do
+          member_one = build(:household_member, married: "yes")
+          member_two = build(:household_member, married: "yes", relationship: "spouse")
+          current_app = create(:common_application,
+            navigator: build(:application_navigator, anyone_married: true),
+            members: [
+              member_one, member_two
+            ])
+
+          session[:current_application_id] = current_app.id
+
+          expect do
+            put :update, params: { form: { member_id: member_two.id } }
+          end.to change {
+            current_app.reload
+            current_app.navigator.anyone_married?
+          }.from(true).to(false)
+        end
       end
     end
   end

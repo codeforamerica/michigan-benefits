@@ -3,6 +3,10 @@ module Integrated
     def update_models
       if member.is_spouse?
         current_application.primary_member.update!(married: "no")
+
+        if (current_application.members - [member]).none?(&:married_yes?)
+          current_application.navigator.update!(anyone_married: false)
+        end
       end
 
       flash[:notice] = if member && current_application.members.delete(member)
