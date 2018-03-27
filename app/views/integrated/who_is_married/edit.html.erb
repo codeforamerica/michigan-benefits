@@ -1,0 +1,25 @@
+<% content_for :header_title, "Household" %>
+
+<% content_for :form_card_title, "Who in the household is currently married?" %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <fieldset class="input-group">
+        <legend class="sr-only" id="married__legend">
+          Choose who is married.
+        </legend>
+        <% @form.members.each do |member| %>
+          <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+              <%= ff.mb_checkbox :married,
+                member.display_name,
+                legend_id: "married__legend",
+                options: {
+                  checked_value: "yes",
+                  unchecked_value: "no",
+                  disabled: member.married_yes?,
+                } %>
+          <% end %>
+        <% end %>
+      </fieldset>
+    <% end %>
+<% end %>

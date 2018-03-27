@@ -111,12 +111,13 @@ class FormsController < ApplicationController
     end
   end
 
-  def combine_birthday_fields(data)
-    year = data.delete(:birthday_year)
-    month = data.delete(:birthday_month)
-    day = data.delete(:birthday_day)
+  def combined_birthday_fields(day: nil, month: nil, year: nil)
     if [year, month, day].all? &:present?
-      data[:birthday] = DateTime.new(year.to_i, month.to_i, day.to_i)
+      {
+        birthday: DateTime.new(year.to_i, month.to_i, day.to_i),
+      }
+    else
+      {}
     end
   end
 end

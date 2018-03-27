@@ -1,10 +1,9 @@
 module Integrated
   class AddTaxMemberController < AddMemberController
-    def update_models
-      member_data = member_params
-      combine_birthday_fields(member_data)
-      member_data[:requesting_healthcare] = "yes"
-      current_application.members.create(member_data)
+    def additional_model_attributes
+      {
+        requesting_healthcare: "yes",
+      }
     end
 
     def overview_path
