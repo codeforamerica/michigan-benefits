@@ -68,7 +68,7 @@ RSpec.feature "Integrated application" do
 
       fill_in "What's their first name?", with: "Jonny"
       fill_in "What's their last name?", with: "Tester"
-      select "Spouse", from: "What is their relationship to you?"
+      select "Roommate", from: "What is their relationship to you?"
 
       proceed_with "Continue"
     end
