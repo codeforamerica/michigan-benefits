@@ -30,12 +30,17 @@ RSpec.describe Integrated::AreYouMarriedController do
       end
 
       it "updates the models" do
-        current_app = create(:common_application, members: build_list(:household_member, 1))
+        current_app = create(:common_application,
+          navigator: build(:application_navigator),
+          members: build_list(:household_member, 1))
         session[:current_application_id] = current_app.id
 
-        expect do
-          put :update, params: { form: valid_params }
-        end.to change { current_app.primary_member.married_yes? }.to eq(true)
+        put :update, params: { form: valid_params }
+
+        current_app.reload
+
+        expect(current_app.primary_member.married_yes?).to eq(true)
+        expect(current_app.navigator.anyone_married?).to eq(true)
       end
     end
   end
