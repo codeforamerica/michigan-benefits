@@ -9,7 +9,7 @@ RSpec.describe Integrated::AddHealthcareMemberController do
         {
           first_name: "Princess",
           last_name: "Caroline",
-          relationship: "spouse"
+          relationship: "spouse",
         }
       end
 

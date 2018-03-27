@@ -1,5 +1,6 @@
 class IntroduceYourselfForm < AddMemberForm
   set_application_attributes(:previously_received_assistance)
+
   set_member_attributes(
     :first_name,
     :last_name,
@@ -7,6 +8,7 @@ class IntroduceYourselfForm < AddMemberForm
     :birthday_month,
     :birthday_day,
     :sex,
+    :relationship,
   )
 
   validates :sex, inclusion: {
@@ -15,8 +17,4 @@ class IntroduceYourselfForm < AddMemberForm
   }
 
   validate :birthday_must_be_present
-
-  def skip_relationship_validation?
-    true
-  end
 end

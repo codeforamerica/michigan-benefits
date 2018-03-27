@@ -10,7 +10,8 @@ RSpec.describe Integrated::IntroduceYourselfController do
             first_name: "Juan",
             last_name: "Two",
             birthday: DateTime.new(1950, 1, 31),
-            sex: "male")])
+            sex: "male",
+            relationship: "primary")])
         session[:current_application_id] = current_app.id
 
         get :edit
@@ -45,6 +46,7 @@ RSpec.describe Integrated::IntroduceYourselfController do
             birthday_month: "1",
             birthday_year: "1950",
             sex: "male",
+            relationship: "primary",
             previously_received_assistance: "yes",
           },
         }
