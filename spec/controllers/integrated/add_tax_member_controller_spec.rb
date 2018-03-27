@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Integrated::AddTaxMemberController do
-  it_behaves_like "add member controller"
+  it_behaves_like "add member controller", tax_relationship: "dependent"
 
   describe "#update" do
     context "with valid params" do
@@ -14,7 +14,7 @@ RSpec.describe Integrated::AddTaxMemberController do
         }
       end
 
-      it "updates the models" do
+      it "updates the tax relationship" do
         current_app = create(:common_application)
         session[:current_application_id] = current_app.id
 
@@ -23,30 +23,8 @@ RSpec.describe Integrated::AddTaxMemberController do
         end.to change { current_app.members.count }.by 1
 
         member = current_app.members.last
-        expect(member.first_name).to eq("Princess")
-        expect(member.last_name).to eq("Caroline")
-        expect(member.relationship).to eq("child")
+
         expect(member.tax_relationship_dependent?).to be_truthy
-      end
-    end
-
-    context "with invalid params" do
-      let(:invalid_params) do
-        {
-          first_name: "Princess",
-          last_name: "Caroline",
-          relationship: nil,
-          tax_relationship: nil,
-        }
-      end
-
-      it "renders edit without updating" do
-        current_app = create(:common_application)
-        session[:current_application_id] = current_app.id
-
-        put :update, params: { form: invalid_params }
-
-        expect(response).to render_template(:edit)
       end
     end
   end

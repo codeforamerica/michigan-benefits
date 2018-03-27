@@ -18,6 +18,7 @@ class HouseholdMember < ApplicationRecord
   }
 
   enum sex: { unfilled: 0, male: 1, female: 2 }, _prefix: :sex
+  enum married: { unfilled: 0, yes: 1, no: 2 }, _prefix: :married
 
   enum relationship: {
     unknown_relation: 0,

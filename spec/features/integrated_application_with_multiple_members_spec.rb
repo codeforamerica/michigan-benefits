@@ -288,6 +288,18 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Household" do
+      expect(page).to have_content(
+        "Who in the household is currently married?",
+      )
+
+      # Jessie Tester checked by default
+      # Jonny Tester checked by default
+      check "Joe Schmoe"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

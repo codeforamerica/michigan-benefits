@@ -45,7 +45,7 @@ RSpec.describe Integrated::<%= model.camelcase %>Controller do
         current_app = create(:common_application)
         session[:current_application_id] = current_app.id
 
-        put :update, params: valid_params
+        put :update, params: { form: valid_params }
 
         current_app.reload
 
@@ -62,7 +62,7 @@ RSpec.describe Integrated::<%= model.camelcase %>Controller do
         current_app = create(:common_application)
         session[:current_application_id] = current_app.id
 
-        put :update, params: invalid_params
+        put :update, params: { form: invalid_params }
 
         expect(response).to render_template(:edit)
       end

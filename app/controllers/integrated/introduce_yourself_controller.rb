@@ -9,7 +9,11 @@ module Integrated
         requesting_healthcare: "yes",
         buy_and_prepare_food_together: "yes",
       )
-      combine_birthday_fields(member_data)
+      member_data.merge!(combined_birthday_fields(
+                           day: member_data.delete(:birthday_day),
+                           month: member_data.delete(:birthday_month),
+                           year: member_data.delete(:birthday_year),
+      ))
       if current_application
         current_application.primary_member.update(member_data)
         current_application.update(application_params)
