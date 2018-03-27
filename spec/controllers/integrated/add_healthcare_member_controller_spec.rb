@@ -9,6 +9,7 @@ RSpec.describe Integrated::AddHealthcareMemberController do
         {
           first_name: "Princess",
           last_name: "Caroline",
+          relationship: "sibling",
         }
       end
 
@@ -33,6 +34,7 @@ RSpec.describe Integrated::AddHealthcareMemberController do
         member = current_app.members.last
         expect(member.first_name).to eq("Princess")
         expect(member.last_name).to eq("Caroline")
+        expect(member.relationship).to eq("sibling")
       end
     end
 

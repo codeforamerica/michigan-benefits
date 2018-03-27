@@ -49,7 +49,7 @@ class HouseholdMember < ApplicationRecord
   }, _prefix: :tax_relationship
 
   RELATIONSHIP_LABELS_AND_KEYS = [
-    ["Choose one", "unknown_relation"],
+    ["Choose one", ""],
     ["Roommate", "roommate"],
     ["Spouse", "spouse"],
     ["Unmarried Partner", "unmarried_partner"],

@@ -9,6 +9,7 @@ RSpec.describe Integrated::AddTaxMemberController do
         {
           first_name: "Princess",
           last_name: "Caroline",
+          relationship: "child",
           tax_relationship: "dependent",
         }
       end
@@ -22,6 +23,7 @@ RSpec.describe Integrated::AddTaxMemberController do
         end.to change { current_app.members.count }.by 1
 
         member = current_app.members.last
+
         expect(member.tax_relationship_dependent?).to be_truthy
       end
     end

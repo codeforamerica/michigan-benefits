@@ -4,6 +4,7 @@
 
 <% content_for :form_card_body do %>
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.hidden_field :relationship, value: "primary" %>
     <%= f.mb_input_field :first_name,
       "What's your first name?",
       autofocus: true %>

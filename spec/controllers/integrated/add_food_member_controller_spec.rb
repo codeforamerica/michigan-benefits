@@ -10,6 +10,7 @@ RSpec.describe Integrated::AddFoodMemberController do
           form: {
             first_name: "Gary",
             last_name: "McTester",
+            relationship: "roommate",
           },
         }
       end
