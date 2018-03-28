@@ -44,6 +44,11 @@ class HealthcareCoverageSupplement
       ),
       primary_filer_claiming_dependents_dependents_names:
         benefit_application.dependents&.map { |dep| dep.display_name }&.join(", "),
+      anyone_caretaker: yes_no_or_unfilled(
+        yes: benefit_application.members.any?(&:caretaker_yes?),
+        no: benefit_application.members.none?(&:caretaker_yes?),
+      ),
+      anyone_caretaker_names: member_names(benefit_application.members.select{|m| m.caretaker_yes? })
     }.merge(second_filer_attributes)
   end
 
