@@ -1,0 +1,23 @@
+<% content_for :header_title, "Caretaker" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Is anyone a caretaker or parent of other people in the household?
+    </h1>
+    <p class="text--centered text--help">
+      Caretakers can include those responsible for children or those who
+      provide unpaid assistance to a person with a chronic illness
+      or disabling condition.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :anyone_caretaker,
+          yes_value: true,
+          no_value: false
+        %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

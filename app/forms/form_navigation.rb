@@ -31,6 +31,8 @@ class FormNavigation
       Integrated::AreYouMarriedController,
       Integrated::AnyoneMarriedController,
       Integrated::WhoIsMarriedController,
+      Integrated::AnyoneCaretakerController,
+      Integrated::WhoIsCaretakerController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,

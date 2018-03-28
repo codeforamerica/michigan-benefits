@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326174327) do
+ActiveRecord::Schema.define(version: 20180328002301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180326174327) do
 
   create_table "application_navigators", force: :cascade do |t|
     t.boolean "all_share_food_costs", default: true
+    t.boolean "anyone_caretaker", default: true
     t.boolean "anyone_else_on_tax_return", default: true
     t.boolean "anyone_married", default: false
     t.bigint "common_application_id"
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(version: 20180326174327) do
   create_table "household_members", force: :cascade do |t|
     t.datetime "birthday"
     t.integer "buy_and_prepare_food_together", default: 0
+    t.integer "caretaker", default: 0
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
     t.integer "filing_taxes_next_year", default: 0
