@@ -1,8 +1,8 @@
 module Integrated
-  class WhoIsMarriedController < MultipleMembersController
+  class WhoIsCaretakerController < MultipleMembersController
     def self.skip?(application)
       return true if application.single_member_household?
-      return true unless application.navigator.anyone_married?
+      !application.navigator.anyone_caretaker?
     end
   end
 end

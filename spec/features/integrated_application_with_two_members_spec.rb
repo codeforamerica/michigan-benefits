@@ -151,6 +151,14 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Caretaker" do
+      expect(page).to have_content(
+        "Is anyone a caretaker or parent of other people in the household?",
+      )
+
+      proceed_with "No"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

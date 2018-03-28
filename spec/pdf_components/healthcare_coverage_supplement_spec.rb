@@ -24,17 +24,22 @@ RSpec.describe HealthcareCoverageSupplement do
                                         requesting_healthcare: "yes",
                                         filing_taxes_next_year: "yes",
                                         first_name: "Julie",
-                                        last_name: "Tester"),
+                                        last_name: "Tester",
+                                        caretaker: "yes",
+                                      ),
                                       build(:household_member,
                                         first_name: "Jonny",
                                         last_name: "Tester",
                                         requesting_food: "yes",
-                                        tax_relationship: "married_filing_jointly"),
+                                        tax_relationship: "married_filing_jointly",
+                                        caretaker: "yes",
+                                      ),
                                       build(:household_member,
                                         first_name: "Jimmy",
                                         last_name: "Tester",
                                         requesting_food: "yes",
-                                        tax_relationship: "dependent"),
+                                        tax_relationship: "dependent",
+                                      ),
                                     ])
         HealthcareCoverageSupplement.new(common_application).attributes
       end
@@ -47,6 +52,8 @@ RSpec.describe HealthcareCoverageSupplement do
           primary_filer_filing_jointly_spouse_name: "Jonny Tester",
           primary_filer_claiming_dependents: "Yes",
           primary_filer_claiming_dependents_dependents_names: "Jimmy Tester",
+          anyone_caretaker: "Yes",
+          anyone_caretaker_names: "Julie Tester, Jonny Tester"
         )
       end
     end
