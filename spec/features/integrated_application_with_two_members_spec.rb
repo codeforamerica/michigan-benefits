@@ -159,6 +159,14 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Students" do
+      expect(page).to have_content(
+        "Is anyone a college or vocational school student?",
+      )
+
+      proceed_with "No"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

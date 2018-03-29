@@ -48,7 +48,7 @@ class HealthcareCoverageSupplement
         yes: benefit_application.members.any?(&:caretaker_yes?),
         no: benefit_application.members.none?(&:caretaker_yes?),
       ),
-      anyone_caretaker_names: member_names(benefit_application.members.select{|m| m.caretaker_yes? })
+      anyone_caretaker_names: member_names(benefit_application.members.select(&:caretaker_yes?)),
     }.merge(second_filer_attributes)
   end
 

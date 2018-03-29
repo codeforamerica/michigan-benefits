@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328002301) do
+ActiveRecord::Schema.define(version: 20180329004046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20180328002301) do
     t.boolean "anyone_caretaker", default: true
     t.boolean "anyone_else_on_tax_return", default: true
     t.boolean "anyone_married", default: false
+    t.boolean "anyone_student", default: true
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
     t.boolean "resides_in_state", default: true
@@ -160,6 +161,7 @@ ActiveRecord::Schema.define(version: 20180328002301) do
     t.integer "requesting_food", default: 0
     t.integer "requesting_healthcare", default: 0
     t.integer "sex", default: 0, null: false
+    t.integer "student", default: 0
     t.integer "tax_relationship", default: 0
     t.datetime "updated_at", null: false
     t.index ["common_application_id"], name: "index_household_members_on_common_application_id"

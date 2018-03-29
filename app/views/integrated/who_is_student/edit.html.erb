@@ -1,18 +1,18 @@
-<% content_for :header_title, "Caretaker" %>
+<% content_for :header_title, "Students" %>
 
-<% content_for :form_card_title, "Who is a caretaker?" %>
+<% content_for :form_card_title, "Who is a college or vocational school student?" %>
 
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
         <fieldset class="input-group">
-          <legend class="sr-only" id="caretaker__legend">
-            Choose who is a caretaker.
+          <legend class="sr-only" id="student__legend">
+            Choose who is a student.
           </legend>
           <% @form.members.each do |member| %>
               <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
-                  <%= ff.mb_checkbox :caretaker,
+                  <%= ff.mb_checkbox :student,
                     member.display_name,
-                    legend_id: "caretaker__legend",
+                    legend_id: "student__legend",
                     options: {
                       checked_value: "yes",
                       unchecked_value: "no",

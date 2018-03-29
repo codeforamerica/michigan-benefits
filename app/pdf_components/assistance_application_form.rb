@@ -41,6 +41,11 @@ class AssistanceApplicationForm
         yes: benefit_application.homeless? || benefit_application.temporary_address?,
         no: benefit_application.stable_address?,
       ),
+      anyone_in_college: yes_no_or_unfilled(
+        yes: benefit_application.members.any?(&:student_yes?),
+        no: benefit_application.members.none?(&:student_yes?),
+      ),
+      anyone_in_college_names: member_names(benefit_application.members.select(&:student_yes?)),
     }
   end
 
@@ -68,6 +73,7 @@ class AssistanceApplicationForm
         hash[:notes] += "Sex: #{extra_member.sex.titleize}, "
         hash[:notes] += "DOB: #{mmddyyyy_date(extra_member.birthday)}, "
         hash[:notes] += "Married: #{extra_member.married.titleize}, "
+        hash[:notes] += "Student: #{extra_member.student.titleize}, "
         if extra_member.requesting_food_yes? || extra_member.requesting_healthcare_yes?
           programs = %w{Food Healthcare}.select do |program|
             extra_member.public_send(:"requesting_#{program.downcase}_yes?")
