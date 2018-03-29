@@ -273,7 +273,7 @@ RSpec.feature "Integrated application" do
       fill_in "What's their first name?", with: "Ginny"
       fill_in "What's their last name?", with: "Pig"
       select "Child", from: "What is their relationship to you?"
-      select "Dependent", from: "How are they included on your tax return?"
+      select_radio question: "How are they included on your tax return?", answer: "Dependent"
 
       proceed_with "Continue"
     end

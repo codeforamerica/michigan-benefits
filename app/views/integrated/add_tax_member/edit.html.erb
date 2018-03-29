@@ -17,21 +17,31 @@
                          autofocus: true %>
     <%= f.mb_input_field :last_name, "What's their last name?" %>
     <%= f.mb_date_input :birthday,
-                        "When is your birthday?",
+                        "When is their birthday?",
                         help_text: "For example: 4 28 1970" %>
     <%= f.mb_radio_set :sex,
                        label_text: "What's their sex?",
                        collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
                        help_text: "As it appears on their ID",
                        layout: "inline" %>
-
-    <%= f.mb_select :relationship,
-                    "What is their relationship to you?",
-                    valid_relationship_options,
-                    help_text: "Choose one" %>
-
-    <%= f.mb_select :tax_relationship,
-                    "How are they included on your tax return?", HouseholdMember::TAX_RELATIONSHIP_LABELS_AND_KEYS,
-                    help_text: "Choose one" %>
+    <div class="question-with-follow-up">
+      <div class="question-with-follow-up__question">
+        <%= f.mb_select :relationship,
+                        "What is their relationship to you?",
+                        valid_relationship_options_for_taxes,
+                        help_text: "Choose one" %>
+      </div>
+      <div class="question-with-follow-up__follow-up" id="nonspouse-follow-up">
+        <%= f.mb_radio_set :tax_relationship,
+                           label_text: "How are they included on your tax return?",
+                           collection: [{ value: :dependent, label: "Dependent" },
+                                        { value: :not_included, label: "Not included" }] %>
+      </div>
+      <div class="question-with-follow-up__follow-up" id="spouse-follow-up">
+        <%= f.mb_radio_set :tax_relationship_spouse,
+                           label_text: "How are they included on your tax return?",
+                           collection: [{ value: :married_filing_jointly, label: "Married filing jointly" },
+                                        { value: :married_filing_separately, label: "Married filing separately" }] %>
+      </div>
   <% end %>
 <% end %>
