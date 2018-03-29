@@ -1,0 +1,23 @@
+<% content_for :header_title, "Citizenship" %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">
+    Is everyone currently a US Citizen?
+  </h1>
+  <p class="text--centered text--help">
+    If you are not a citizen, you'll be asked to provide paperwork
+    about your immigration status.
+  </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <div class="notice">
+    <p>You don't always have to be a citizen to receive benefits.</p>
+  </div>
+
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :everyone_citizen %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

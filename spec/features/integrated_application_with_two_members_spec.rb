@@ -175,6 +175,12 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Citizenship" do
+      expect(page).to have_content("Is everyone currently a US Citizen?")
+
+      proceed_with "Yes"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

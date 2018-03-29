@@ -22,6 +22,7 @@ class HouseholdMember < ApplicationRecord
   enum caretaker: { unfilled: 0, yes: 1, no: 2 }, _prefix: :caretaker
   enum student: { unfilled: 0, yes: 1, no: 2 }, _prefix: :student
   enum disabled: { unfilled: 0, yes: 1, no: 2 }, _prefix: :disabled
+  enum citizen: { unfilled: 0, yes: 1, no: 2 }, _prefix: :citizen
 
   enum relationship: {
     unknown_relation: 0,

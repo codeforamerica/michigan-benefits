@@ -1,8 +1,4 @@
-require "spec_helper"
-require_relative "../../app/models/concerns/pdf_attributes"
-require_relative "../support/shared_examples/pdf_component"
-require_relative "../../app/models/null_address"
-require_relative "../../app/pdf_components/assistance_application_form"
+require "rails_helper"
 
 RSpec.describe AssistanceApplicationForm do
   describe "pdf component" do
@@ -23,32 +19,25 @@ RSpec.describe AssistanceApplicationForm do
   describe "#attributes" do
     context "an application with one member" do
       let(:primary_member) do
-        instance_double("household_member",
-          display_name: "Octopus Cuttlefish",
-          relationship_label: "You",
+        build(:household_member,
+          first_name: "Octopus",
+          last_name: "Cuttlefish",
+          relationship: "primary",
           birthday: DateTime.new(1991, 10, 18),
-          sex_male?: true,
-          sex_female?: false,
-          requesting_food_yes?: true,
-          requesting_healthcare_yes?: true,
-          married_yes?: true,
-          married_no?: false,
-          student_yes?: true,
-          student_no?: false,
-          disabled_yes?: true,
-          disabled_no?: false)
+          sex: "male",
+          requesting_food: "yes",
+          requesting_healthcare: "yes",
+          married: "yes",
+          student: "yes",
+          disabled: "yes",
+          citizen: "yes")
       end
 
       let(:common_application) do
-        instance_double("common_application",
-          display_name: "Octopus Cuttlefish",
-          previously_received_assistance_yes?: true,
-          previously_received_assistance_no?: false,
-          temporary_address?: true,
-          homeless?: false,
-          stable_address?: false,
-          primary_member: primary_member,
-          members: [primary_member])
+        create(:common_application,
+           members: [primary_member],
+           previously_received_assistance: "yes",
+           living_situation: "temporary_address")
       end
 
       let(:attributes) do
@@ -70,6 +59,8 @@ RSpec.describe AssistanceApplicationForm do
           first_member_female: nil,
           first_member_married_yes: Integrated::PdfAttributes::CIRCLED,
           first_member_married_no: nil,
+          first_member_citizen_yes: Integrated::PdfAttributes::CIRCLED,
+          first_member_citizen_no: nil,
           anyone_in_college: "Yes",
           anyone_in_college_names: "Octopus Cuttlefish",
           anyone_disabled: "Yes",
@@ -79,36 +70,27 @@ RSpec.describe AssistanceApplicationForm do
     end
 
     context "an application with six members" do
-      let(:primary_member) do
-        instance_double("primary household_member").as_null_object
-      end
-
       let(:common_application) do
-        instance_double("common_application",
-                        display_name: "Octopus Cuttlefish",
-                        previously_received_assistance_yes?: true,
-                        previously_received_assistance_no?: false,
-                        temporary_address?: true,
-                        homeless?: false,
-                        stable_address?: false,
-                        primary_member: primary_member,
-                        members: [primary_member,
-                                  instance_double("household_member 2").as_null_object,
-                                  instance_double("household_member 3").as_null_object,
-                                  instance_double("household_member 4").as_null_object,
-                                  instance_double("household_member 5").as_null_object,
-                                  instance_double("household_member 6",
-                                    display_name: "Willy Whale",
-                                    relationship_label: "Child",
-                                    birthday: DateTime.new(1995, 10, 18),
-                                    sex: "male",
-                                    requesting_food_yes?: true,
-                                    requesting_healthcare_yes?: true,
-                                    married: "yes",
-                                    student_yes?: true,
-                                    student: "yes",
-                                    disabled_yes?: true,
-                                    disabled: "yes")])
+        create(:common_application,
+                        previously_received_assistance: "yes",
+                        living_situation: "temporary_address",
+                        members: [build(:household_member),
+                                  build(:household_member),
+                                  build(:household_member),
+                                  build(:household_member),
+                                  build(:household_member),
+                                  build(:household_member,
+                                        first_name: "Willy",
+                                        last_name: "Whale",
+                                        relationship: "child",
+                                        birthday: DateTime.new(1995, 10, 18),
+                                        sex: "male",
+                                        requesting_food: "yes",
+                                        requesting_healthcare: "yes",
+                                        married: "yes",
+                                        student: "yes",
+                                        disabled: "yes",
+                                        citizen: "yes")])
       end
 
       let(:attributes) do
@@ -122,7 +104,7 @@ RSpec.describe AssistanceApplicationForm do
         expect(attributes[:notes]).to eq(
           <<~NOTES
             Additional Household Members:
-            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Student: Yes, Disabled: Yes, Applying for: Food, Healthcare
+            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Student: Yes, Disabled: Yes, Applying for: Food, Healthcare
           NOTES
         )
       end

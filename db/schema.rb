@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329180029) do
+ActiveRecord::Schema.define(version: 20180329203347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20180329180029) do
     t.boolean "anyone_student", default: true
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
+    t.boolean "everyone_citizen", default: true
+    t.boolean "immigration_info", default: false
     t.boolean "resides_in_state", default: true
     t.datetime "updated_at", null: false
     t.index ["common_application_id"], name: "index_application_navigators_on_common_application_id"
@@ -152,6 +154,7 @@ ActiveRecord::Schema.define(version: 20180329180029) do
     t.datetime "birthday"
     t.integer "buy_and_prepare_food_together", default: 0
     t.integer "caretaker", default: 0
+    t.integer "citizen", default: 0
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
     t.integer "disabled", default: 0
