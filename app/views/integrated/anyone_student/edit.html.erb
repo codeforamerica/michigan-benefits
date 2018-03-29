@@ -1,0 +1,22 @@
+<% content_for :header_title, "Students" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Is anyone a college or vocational school student?
+    </h1>
+    <p class="text--centered text--help">
+      Students may be eligible for different health care coverage
+      options than other adults.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :anyone_student,
+          yes_value: true,
+          no_value: false
+        %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
