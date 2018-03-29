@@ -1,0 +1,18 @@
+<% content_for :header_title, "Disability" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Does anyone have a disability?
+    </h1>
+    <p class="text--centered text--help">
+      Disabilities can include physical, mental, or emotional health conditions that limit activity.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :anyone_disabled %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
