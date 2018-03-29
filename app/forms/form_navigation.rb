@@ -36,6 +36,9 @@ class FormNavigation
       Integrated::AreYouStudentController,
       Integrated::AnyoneStudentController,
       Integrated::WhoIsStudentController,
+      Integrated::AreYouDisabledController,
+      Integrated::AnyoneDisabledController,
+      Integrated::WhoIsDisabledController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,

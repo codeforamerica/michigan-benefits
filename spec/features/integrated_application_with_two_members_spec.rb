@@ -167,6 +167,14 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Disability" do
+      expect(page).to have_content(
+        "Does anyone have a disability?",
+      )
+
+      proceed_with "No"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",
