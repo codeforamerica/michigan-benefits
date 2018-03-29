@@ -8,6 +8,18 @@ class AddTaxMemberForm < AddMemberForm
     :sex,
     :relationship,
     :tax_relationship,
+    :tax_relationship_spouse,
   )
-  validates :tax_relationship, presence: { message: "Make sure to specify tax filing status." }
+
+  validates :tax_relationship,
+            presence: { message: "Make sure to specify a tax filing status." },
+            unless: :spouse?
+
+  validates :tax_relationship_spouse,
+            presence: { message: "Make sure to specify a tax filing status." },
+            if: :spouse?
+
+  def spouse?
+    relationship == "spouse"
+  end
 end

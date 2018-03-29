@@ -1,0 +1,9 @@
+.question-with-follow-up__follow-up {
+  padding: {
+    bottom: 1em;
+  }
+  border-color: $color-light-grey;
+  &:before {
+    @include triangle(top, $color: $color-light-grey, $size: 12px);
+  }
+}

@@ -24,7 +24,7 @@ var textWell = (function () {
       })
     }
   }
-})()
+})();
 
 var radioSelector = (function () {
   var rs = {
@@ -40,11 +40,11 @@ var radioSelector = (function () {
         })
       })
     }
-  }
+  };
   return {
     init: rs.init
   }
-})()
+})();
 
 var checkboxSelector = (function () {
   var cs = {
@@ -63,11 +63,11 @@ var checkboxSelector = (function () {
         })
       })
     }
-  }
+  };
   return {
     init: cs.init
   }
-})()
+})();
 
 var yesNoButtons = (function () {
   var yn = {
@@ -80,11 +80,11 @@ var yesNoButtons = (function () {
         $('input.boolean-answer').val('1')
       })
     }
-  }
+  };
   return {
     init: yn.init
   }
-})()
+})();
 
 var yesNoEnumButtons = (function () {
   var yne = {
@@ -97,11 +97,11 @@ var yesNoEnumButtons = (function () {
         $('input.boolean-answer').val('yes')
       })
     }
-  }
+  };
   return {
     init: yne.init
   }
-})()
+})();
 
 var autoAdvanceTelInputs = (function() {
   var autoAdvance = {
@@ -113,17 +113,40 @@ var autoAdvanceTelInputs = (function() {
         }
       })
     }
-  }
+  };
   return {
     init: autoAdvance.init
   }
-})()
+})();
+
+var followUpQuestion = (function() {
+  var followUp = {
+    init: function() {
+      // any pre-selected?
+      $('.question-with-follow-up__question select').each(function(index, select) {
+        $($($(this).find('option:selected')).attr('data-follow-up')).show();
+      });
+      // handle selection events
+      $('.question-with-follow-up__question select').change(function(e) {
+        $('.question-with-follow-up__follow-up').hide();
+        $('.question-with-follow-up__follow-up input').each(function(index, radio) {
+          $(this).prop('checked', false);
+        });
+        $($($(this).find('option:selected')).attr('data-follow-up')).show();
+      });
+    }
+  };
+  return {
+    init: followUp.init
+  }
+})();
 
 $(document).ready(function () {
-  radioSelector.init()
-  checkboxSelector.init()
-  textWell.init()
-  yesNoButtons.init()
-  yesNoEnumButtons.init()
-  autoAdvanceTelInputs.init()
+  radioSelector.init();
+  checkboxSelector.init();
+  textWell.init();
+  yesNoButtons.init();
+  yesNoEnumButtons.init();
+  autoAdvanceTelInputs.init();
+  followUpQuestion.init();
 })
