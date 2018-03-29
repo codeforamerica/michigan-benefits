@@ -14,7 +14,7 @@ gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
 gem "browser"
 gem "capybara"
 gem "delayed_job_active_record"
-gem "delayed_job_web"
+# gem "delayed_job_web"
 gem "devise"
 gem "devise-otp",
   git: "https://github.com/pynixwang/devise-otp",
