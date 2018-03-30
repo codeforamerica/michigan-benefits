@@ -30,7 +30,8 @@ RSpec.describe AssistanceApplicationForm do
           married: "yes",
           student: "yes",
           disabled: "yes",
-          citizen: "yes")
+          citizen: "yes",
+          veteran: "yes")
       end
 
       let(:common_application) do
@@ -65,6 +66,8 @@ RSpec.describe AssistanceApplicationForm do
           anyone_in_college_names: "Octopus Cuttlefish",
           anyone_disabled: "Yes",
           anyone_disabled_names: "Octopus Cuttlefish",
+          anyone_a_veteran: "Yes",
+          anyone_a_veteran_names: "Octopus Cuttlefish",
         )
       end
     end
@@ -90,7 +93,8 @@ RSpec.describe AssistanceApplicationForm do
                                         married: "yes",
                                         student: "yes",
                                         disabled: "yes",
-                                        citizen: "yes")])
+                                        citizen: "yes",
+                                        veteran: "yes")])
       end
 
       let(:attributes) do
@@ -104,7 +108,7 @@ RSpec.describe AssistanceApplicationForm do
         expect(attributes[:notes]).to eq(
           <<~NOTES
             Additional Household Members:
-            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Student: Yes, Disabled: Yes, Applying for: Food, Healthcare
+            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Student: Yes, Disabled: Yes, Veteran: Yes, Applying for: Food, Healthcare
           NOTES
         )
       end

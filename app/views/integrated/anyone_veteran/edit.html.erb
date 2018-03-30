@@ -1,0 +1,10 @@
+<% content_for :header_title, "Veterans" %>
+<% content_for :form_card_title, "Is anyone a veteran of the military?" %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :anyone_veteran %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
