@@ -11,9 +11,9 @@
 <% end %>
 
 <% content_for :form_card_body do %>
-  <div class="notice">
-    <p>You don't always have to be a citizen to receive benefits.</p>
-  </div>
+  <p class="text--secure ">
+    You don't always have to be a citizen to receive benefits.
+  </p>
 
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
     <%= f.mb_yes_no_buttons :citizen,
