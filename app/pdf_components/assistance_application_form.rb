@@ -51,6 +51,11 @@ class AssistanceApplicationForm
         no: benefit_application.members.none?(&:disabled_yes?),
       ),
       anyone_disabled_names: member_names(benefit_application.members.select(&:disabled_yes?)),
+      anyone_a_veteran: yes_no_or_unfilled(
+        yes: benefit_application.members.any?(&:veteran_yes?),
+        no: benefit_application.members.none?(&:veteran_yes?),
+      ),
+      anyone_a_veteran_names: member_names(benefit_application.members.select(&:veteran_yes?)),
     }
   end
 
@@ -83,6 +88,7 @@ class AssistanceApplicationForm
         hash[:notes] += "Citizen: #{extra_member.citizen.titleize}, "
         hash[:notes] += "Student: #{extra_member.student.titleize}, "
         hash[:notes] += "Disabled: #{extra_member.disabled.titleize}, "
+        hash[:notes] += "Veteran: #{extra_member.veteran.titleize}, "
         if extra_member.requesting_food_yes? || extra_member.requesting_healthcare_yes?
           programs = %w{Food Healthcare}.select do |program|
             extra_member.public_send(:"requesting_#{program.downcase}_yes?")

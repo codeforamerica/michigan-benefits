@@ -43,6 +43,9 @@ class FormNavigation
       Integrated::EveryoneCitizenController,
       Integrated::WhoIsNotCitizenController,
       Integrated::ImmigrationInfoController,
+      Integrated::AreYouVeteranController,
+      Integrated::AnyoneVeteranController,
+      Integrated::WhoIsVeteranController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,

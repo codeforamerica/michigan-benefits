@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329203347) do
+ActiveRecord::Schema.define(version: 20180330193810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180329203347) do
     t.boolean "anyone_else_on_tax_return", default: true
     t.boolean "anyone_married", default: false
     t.boolean "anyone_student", default: true
+    t.boolean "anyone_veteran", default: true
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
     t.boolean "everyone_citizen", default: true
@@ -169,6 +170,7 @@ ActiveRecord::Schema.define(version: 20180329203347) do
     t.integer "student", default: 0
     t.integer "tax_relationship", default: 0
     t.datetime "updated_at", null: false
+    t.integer "veteran", default: 0
     t.index ["common_application_id"], name: "index_household_members_on_common_application_id"
   end
 

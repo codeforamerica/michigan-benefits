@@ -378,6 +378,22 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
+    on_page "Veterans" do
+      expect(page).to have_content("Is anyone a veteran of the military?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Veterans" do
+      expect(page).to have_content(
+        "Who is a veteran of the military?",
+      )
+
+      check "Joe Schmoe"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",
