@@ -1,0 +1,19 @@
+<% content_for :header_title, "Citizenship" %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">
+    Do you have any information about immigration status on hand? (like ID types and numbers)?
+  </h1>
+  <p class="text--centered text--help">
+    If so, we will gather this information from you at the end of this application.
+  </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :immigration_info %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

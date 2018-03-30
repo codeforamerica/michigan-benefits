@@ -66,6 +66,8 @@ class AssistanceApplicationForm
       hash[:"#{prefix}female"] = circle_if_true(member.sex_female?)
       hash[:"#{prefix}married_yes"] = circle_if_true(member.married_yes?)
       hash[:"#{prefix}married_no"] = circle_if_true(member.married_no?)
+      hash[:"#{prefix}citizen_yes"] = circle_if_true(member.citizen_yes?)
+      hash[:"#{prefix}citizen_no"] = circle_if_true(member.citizen_no?)
       hash[:"#{prefix}requesting_food"] = underline_if_true(member.requesting_food_yes?)
       hash[:"#{prefix}requesting_healthcare"] = underline_if_true(member.requesting_healthcare_yes?)
     end
@@ -78,6 +80,7 @@ class AssistanceApplicationForm
         hash[:notes] += "Sex: #{extra_member.sex.titleize}, "
         hash[:notes] += "DOB: #{mmddyyyy_date(extra_member.birthday)}, "
         hash[:notes] += "Married: #{extra_member.married.titleize}, "
+        hash[:notes] += "Citizen: #{extra_member.citizen.titleize}, "
         hash[:notes] += "Student: #{extra_member.student.titleize}, "
         hash[:notes] += "Disabled: #{extra_member.disabled.titleize}, "
         if extra_member.requesting_food_yes? || extra_member.requesting_healthcare_yes?
