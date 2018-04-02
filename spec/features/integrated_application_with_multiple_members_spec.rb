@@ -85,14 +85,14 @@ RSpec.feature "Integrated application" do
       {
         first_name: "Joe",
         last_name: "Schmoe",
-        dob: ["", "", ""],
+        dob: ["1", "1", "1998"],
         sex: "Female",
         relation: "Parent",
       },
       {
         first_name: "Apples",
         last_name: "McMackintosh",
-        dob: ["", "", ""],
+        dob: ["1", "1", "1998"],
         sex: "Male",
         relation: "Other",
       },
@@ -387,6 +387,22 @@ RSpec.feature "Integrated application" do
     on_page "Veterans" do
       expect(page).to have_content(
         "Who is a veteran of the military?",
+      )
+
+      check "Joe Schmoe"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Foster Care" do
+      expect(page).to have_content("Was anyone in foster care when they turned 18?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Foster Care" do
+      expect(page).to have_content(
+        "Who was in foster care when they turned 18?",
       )
 
       check "Joe Schmoe"

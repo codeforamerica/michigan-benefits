@@ -46,6 +46,9 @@ class FormNavigation
       Integrated::AreYouVeteranController,
       Integrated::AnyoneVeteranController,
       Integrated::WhoIsVeteranController,
+      Integrated::WereYouFosterCareController,
+      Integrated::AnyoneFosterCareController,
+      Integrated::WhoWasFosterCareController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,

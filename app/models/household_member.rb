@@ -24,6 +24,7 @@ class HouseholdMember < ApplicationRecord
   enum disabled: { unfilled: 0, yes: 1, no: 2 }, _prefix: :disabled
   enum citizen: { unfilled: 0, yes: 1, no: 2 }, _prefix: :citizen
   enum veteran: { unfilled: 0, yes: 1, no: 2 }, _prefix: :veteran
+  enum foster_care_at_18: { unfilled: 0, yes: 1, no: 2 }, _prefix: :foster_care_at_18
 
   enum relationship: {
     unknown_relation: 0,
@@ -81,6 +82,14 @@ class HouseholdMember < ApplicationRecord
     return "You" if relationship == "primary"
     return "" if relationship == "unknown_relation"
     RELATION_LABEL_LOOKUP[relationship]
+  end
+
+  def age
+    return nil if birthday.blank?
+    today = Date.today
+    age = today.year - birthday.year
+    before_birthday = today.strftime("%m%d") < birthday.strftime("%m%d")
+    age - (before_birthday ? 1 : 0)
   end
 
   private
