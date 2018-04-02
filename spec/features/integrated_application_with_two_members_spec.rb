@@ -187,6 +187,12 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Foster Care" do
+      expect(page).to have_content("Was anyone in foster care when they turned 18?")
+
+      proceed_with "No"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

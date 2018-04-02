@@ -20,6 +20,14 @@ RSpec.describe Integrated::AnyoneFosterCareController do
         expect(skip_step).to be_falsey
       end
 
+      it "returns false if anyone has no birthday specified" do
+        application = create(:common_application,
+                             members: build_list(:household_member, 2))
+
+        skip_step = Integrated::AnyoneFosterCareController.skip?(application)
+        expect(skip_step).to be_falsey
+      end
+
       it "returns true if no one is between the age of 18 and 26" do
         application = create(:common_application,
                              members: build_list(:household_member, 2, birthday: 30.years.ago))

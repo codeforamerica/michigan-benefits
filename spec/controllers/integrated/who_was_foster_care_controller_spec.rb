@@ -38,18 +38,22 @@ RSpec.describe Integrated::WhoWasFosterCareController do
 
   describe "edit" do
     context "with a current application" do
-      it "assigns existing attributes" do
+      it "assigns members between 18 and 26, or with no birthday" do
+        member1 = build(:household_member, birthday: 30.years.ago)
+        member2 = build(:household_member, birthday: 20.years.ago)
+        member3 = build(:household_member)
         current_app = create(:common_application,
           navigator: build(:application_navigator, anyone_foster_care_at_18: true),
-          members: build_list(:household_member, 2, foster_care_at_18: "yes"))
+          members: [ member1, member2, member3 ])
         session[:current_application_id] = current_app.id
 
         get :edit
 
         form = assigns(:form)
 
-        expect(form.members.first.foster_care_at_18_yes?).to eq(true)
-        expect(form.members.second.foster_care_at_18_yes?).to eq(true)
+        expect(form.members.count).to eq(2)
+        expect(form.members.first).to eq(member2)
+        expect(form.members.second).to eq(member3)
       end
     end
   end
