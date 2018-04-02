@@ -1,35 +1,35 @@
 require "rails_helper"
 
-RSpec.describe Integrated::WhoIsVeteranController do
+RSpec.describe Integrated::WhoWasFosterCareController do
   describe "#skip?" do
     context "when single member household" do
       it "returns true" do
         application = create(:common_application, :single_member)
 
-        skip_step = Integrated::WhoIsVeteranController.skip?(application)
+        skip_step = Integrated::WhoWasFosterCareController.skip?(application)
         expect(skip_step).to be_truthy
       end
     end
 
     context "when multi member household" do
-      context "when someone in household is veteran" do
+      context "when someone in household was in foster care at age 18" do
         it "returns false" do
           application = create(:common_application,
             :multi_member,
-            navigator: build(:application_navigator, anyone_veteran: true))
+            navigator: build(:application_navigator, anyone_foster_care_at_18: true))
 
-          skip_step = Integrated::WhoIsVeteranController.skip?(application)
+          skip_step = Integrated::WhoWasFosterCareController.skip?(application)
           expect(skip_step).to be_falsey
         end
       end
 
-      context "when no one in household is veteran" do
+      context "when no one in household was in foster care at age 18" do
         it "returns true" do
           application = create(:common_application,
             :multi_member,
-            navigator: build(:application_navigator, anyone_veteran: false))
+            navigator: build(:application_navigator, anyone_foster_care_at_18: false))
 
-          skip_step = Integrated::WhoIsVeteranController.skip?(application)
+          skip_step = Integrated::WhoWasFosterCareController.skip?(application)
           expect(skip_step).to be_truthy
         end
       end
@@ -40,16 +40,16 @@ RSpec.describe Integrated::WhoIsVeteranController do
     context "with a current application" do
       it "assigns existing attributes" do
         current_app = create(:common_application,
-          navigator: build(:application_navigator, anyone_veteran: true),
-          members: build_list(:household_member, 2, veteran: "yes"))
+          navigator: build(:application_navigator, anyone_foster_care_at_18: true),
+          members: build_list(:household_member, 2, foster_care_at_18: "yes"))
         session[:current_application_id] = current_app.id
 
         get :edit
 
         form = assigns(:form)
 
-        expect(form.members.first.veteran_yes?).to eq(true)
-        expect(form.members.second.veteran_yes?).to eq(true)
+        expect(form.members.first.foster_care_at_18_yes?).to eq(true)
+        expect(form.members.second.foster_care_at_18_yes?).to eq(true)
       end
     end
   end
@@ -68,19 +68,17 @@ RSpec.describe Integrated::WhoIsVeteranController do
         {
           members: {
             member_1.id => {
-              veteran: "no",
+              foster_care_at_18: "no",
             },
             member_2.id => {
-              veteran: "yes",
+              foster_care_at_18: "yes",
             },
           },
         }
       end
 
-      it "updates each member with veteran info" do
-        current_app = create(:common_application,
-                             members: [member_1, member_2],
-                             navigator: build(:application_navigator))
+      it "updates each member with foster care info" do
+        current_app = create(:common_application, members: [member_1, member_2])
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }
@@ -88,8 +86,8 @@ RSpec.describe Integrated::WhoIsVeteranController do
         member_1.reload
         member_2.reload
 
-        expect(member_1.veteran_no?).to be_truthy
-        expect(member_2.veteran_yes?).to be_truthy
+        expect(member_1.foster_care_at_18_no?).to be_truthy
+        expect(member_2.foster_care_at_18_yes?).to be_truthy
       end
     end
 
@@ -106,10 +104,10 @@ RSpec.describe Integrated::WhoIsVeteranController do
         {
           members: {
             member_1.id => {
-              veteran: "no",
+              foster_care_at_18: "no",
             },
             member_2.id => {
-              veteran: "no",
+              foster_care_at_18: "no",
             },
           },
         }
@@ -118,7 +116,7 @@ RSpec.describe Integrated::WhoIsVeteranController do
       it "renders edit without updating" do
         current_app = create(:common_application,
           members: [member_1, member_2],
-          navigator: build(:application_navigator, anyone_veteran: true))
+          navigator: build(:application_navigator, anyone_foster_care_at_18: true))
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: invalid_params }

@@ -20,7 +20,7 @@ RSpec.feature "Integrated application" do
 
       fill_in "Month", with: "1"
       fill_in "Day", with: "1"
-      fill_in "Year", with: "1969"
+      fill_in "Year", with: "1998"
 
       select_radio(question: "What's your sex?", answer: "Female")
 
@@ -125,6 +125,12 @@ RSpec.feature "Integrated application" do
 
     on_page "Veterans" do
       expect(page).to have_content("Are you a veteran of the military?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Foster Care" do
+      expect(page).to have_content("Were you in foster care when you turned 18?")
 
       proceed_with "Yes"
     end

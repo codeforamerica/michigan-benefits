@@ -49,6 +49,11 @@ class HealthcareCoverageSupplement
         no: benefit_application.members.none?(&:caretaker_yes?),
       ),
       anyone_caretaker_names: member_names(benefit_application.members.select(&:caretaker_yes?)),
+      anyone_fostercare_adult: yes_no_or_unfilled(
+        yes: benefit_application.members.any?(&:foster_care_at_18_yes?),
+        no: benefit_application.members.none?(&:foster_care_at_18_yes?),
+      ),
+      anyone_fostercare_adult_names: member_names(benefit_application.members.select(&:foster_care_at_18_yes?)),
     }.merge(second_filer_attributes)
   end
 

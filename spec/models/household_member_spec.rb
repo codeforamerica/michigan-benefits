@@ -105,4 +105,24 @@ RSpec.describe HouseholdMember do
       expect(member.relationship_label).to eq("Spouse")
     end
   end
+
+  describe "#age" do
+    it "returns nil if no birthday is set" do
+      member = build(:household_member)
+      expect(member.age).to be_nil
+    end
+
+    it "returns the member's age" do
+      time = Time.utc(2008, 1, 1, 10, 5, 0)
+      Timecop.freeze(time) do
+        member = build(
+          :member,
+          first_name: "Lala",
+          birthday: DateTime.parse("June 20, 1990"),
+        )
+
+        expect(member.age).to eq 17
+      end
+    end
+  end
 end

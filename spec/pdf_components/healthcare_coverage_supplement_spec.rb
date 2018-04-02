@@ -36,7 +36,8 @@ RSpec.describe HealthcareCoverageSupplement do
                                         first_name: "Jimmy",
                                         last_name: "Tester",
                                         requesting_food: "yes",
-                                        tax_relationship: "dependent"),
+                                        tax_relationship: "dependent",
+                                        foster_care_at_18: "yes"),
                                     ])
         HealthcareCoverageSupplement.new(common_application).attributes
       end
@@ -51,6 +52,8 @@ RSpec.describe HealthcareCoverageSupplement do
           primary_filer_claiming_dependents_dependents_names: "Jimmy Tester",
           anyone_caretaker: "Yes",
           anyone_caretaker_names: "Julie Tester, Jonny Tester",
+          anyone_fostercare_adult: "Yes",
+          anyone_fostercare_adult_names: "Jimmy Tester",
         )
       end
     end
