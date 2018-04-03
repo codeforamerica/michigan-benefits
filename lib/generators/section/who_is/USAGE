@@ -1,0 +1,31 @@
+Description:
+    Create files for adding a new section to the integrated benefit application.
+
+Example:
+    rails generate section:who_is Veteran
+
+    This will create:
+        # AreYouVeteran (for single-member household)
+
+        app/forms/are_you_veteran_form.rb
+        app/controllers/integrated/are_you_veteran_controller.rb
+        spec/controllers/integrated/are_you_veteran_controller_spec.rb
+        app/views/integrated/are_you_veteran/edit.html.erb
+
+        # AnyoneVeteran (for multi-member household)
+
+        app/forms/anyone_veteran_form.rb
+        app/controllers/integrated/anyone_veteran_controller.rb
+        spec/controllers/integrated/anyone_veteran_controller_spec.rb
+        app/views/integrated/anyone_veteran/edit.html.erb
+
+        # WhoIsVeteran (for multi-member household)
+
+        app/forms/who_is_veteran_form.rb
+        spec/forms/who_is_veteran_form_spec.rb
+        app/controllers/integrated/who_is_veteran_controller.rb
+        spec/controllers/integrated/who_is_veteran_controller_spec.rb
+        app/views/integrated/who_is_veteran/edit.html.erb
+
+    This will add:
+        * `veteran` enum to HouseholdMember
