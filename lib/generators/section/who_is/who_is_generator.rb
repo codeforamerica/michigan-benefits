@@ -11,8 +11,16 @@ module Section
       generate_section("WhoIs")
       add_enum_to_member
 
-      puts "\nDone generating the #{model_name} section!"
-      puts "Be sure to add Integrated::#{model_name}Controller in the desired application order in `form_navigation.rb`"
+      puts <<~MESSAGE
+
+        Done generating the #{model_name} section!
+
+        Be sure to add the following controllers in the desired application order in `form_navigation.rb`:
+
+        Integrated::AreYou#{model_name}Controller,
+        Integrated::Anyone#{model_name}Controller,
+        Integrated::WhoIs#{model_name}Controller,
+      MESSAGE
     end
 
     private
@@ -37,34 +45,35 @@ module Section
 
     def add_enum_to_member
       inject_into_file "app/models/household_member.rb",
-        before: "  # Generated enums added above\n" do <<-EOT
+        before: "  # Generated enums added above\n" do
+        <<-ENUM
   enum #{model_method}: { unfilled: 0, yes: 1, no: 2 }, _prefix: :#{model_method}
-        EOT
+        ENUM
       end
     end
 
     def generate_form_model(section_type, model_name)
-      template "#{section_type.underscore}/form_model.template.rb",
+      template "#{section_type.underscore}/form_model.template",
         "app/forms/#{model_name.underscore}_form.rb"
     end
 
     def generate_form_model_spec(section_type, model_name)
-      template "#{section_type.underscore}/form_model_spec.template.rb",
+      template "#{section_type.underscore}/form_model_spec.template",
         "spec/forms/#{model_name.underscore}_form_spec.rb"
     end
 
     def generate_form_controller(section_type, model_name)
-      template "#{section_type.underscore}/form_controller.template.rb",
+      template "#{section_type.underscore}/form_controller.template",
         "app/controllers/integrated/#{model_name.underscore}_controller.rb"
     end
 
     def generate_form_controller_spec(section_type, model_name)
-      template "#{section_type.underscore}/form_controller_spec.template.rb",
+      template "#{section_type.underscore}/form_controller_spec.template",
         "spec/controllers/integrated/#{model_name.underscore}_controller_spec.rb"
     end
 
     def generate_form_view(section_type, model_name)
-      template "#{section_type.underscore}/form_view.template.erb",
+      template "#{section_type.underscore}/form_view.template",
         "app/views/integrated/#{model_name.underscore}/edit.html.erb"
     end
   end

@@ -18,26 +18,26 @@ class SectionGenerator < Rails::Generators::NamedBase
   alias_method :model, :name
 
   def generate_form_model
-    template "form_model.template.rb", "app/forms/#{model.underscore}_form.rb"
+    template "form_model.template", "app/forms/#{model.underscore}_form.rb"
   end
 
   def generate_form_model_spec
-    template "form_model_spec.template.rb",
+    template "form_model_spec.template",
       "spec/forms/#{model.underscore}_form_spec.rb"
   end
 
   def generate_form_controller
-    template "form_controller.template.rb",
+    template "form_controller.template",
       "app/controllers/integrated/#{model.underscore}_controller.rb"
   end
 
   def generate_form_controller_spec
-    template "form_controller_spec.template.rb",
+    template "form_controller_spec.template",
       "spec/controllers/integrated/#{model.underscore}_controller_spec.rb"
   end
 
   def generate_form_view
-    template "form_view.template.erb",
+    template "form_view.template",
       "app/views/integrated/#{model.underscore}/edit.html.erb"
   end
 end
