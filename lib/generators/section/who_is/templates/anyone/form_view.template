@@ -1,13 +1,11 @@
 <%% content_for :header_title, "<%= model_name.titleize %>" %>
-<%% content_for :form_card_title, "TEMPLATE" %>
+<%% content_for :form_card_title, "TITLE TEMPLATE" %>
+<%% content_for :form_card_help, "HELP TEMPLATE" %>
 
 <%% content_for :form_card_body do %>
-    <%%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
-        <%%= f.mb_yes_no_buttons :anyone_<%= model_method %>,
-            yes_value: "yes",
-            no_value: "no"
-        %>
-    <%% end %>
+  <%%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%%= f.mb_yes_no_buttons :anyone_<%= model_method %> %>
+  <%% end %>
 <%% end %>
 
 <%% content_for :skip_footer, true %>
