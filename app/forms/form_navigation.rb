@@ -49,6 +49,9 @@ class FormNavigation
       Integrated::WereYouFosterCareController,
       Integrated::AnyoneFosterCareController,
       Integrated::WhoWasFosterCareController,
+      Integrated::AreYouPregnantController,
+      Integrated::AnyonePregnantController,
+      Integrated::WhoIsPregnantController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
