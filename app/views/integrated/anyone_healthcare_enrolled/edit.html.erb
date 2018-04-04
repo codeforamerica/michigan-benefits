@@ -1,0 +1,12 @@
+<% content_for :header_title, "Current Healthcare" %>
+<% content_for :form_card_title, "Is anyone currently enrolled in a health insurance plan?" %>
+<% content_for :form_card_help,
+               "You may be eligible for dual enrollment, which can help cover additional medical expenses." %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :anyone_healthcare_enrolled %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

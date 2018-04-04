@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404005005) do
+ActiveRecord::Schema.define(version: 20180404181931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180404005005) do
     t.boolean "anyone_disabled", default: true
     t.boolean "anyone_else_on_tax_return", default: true
     t.boolean "anyone_foster_care_at_18", default: false
+    t.boolean "anyone_healthcare_enrolled", default: true
     t.boolean "anyone_married", default: false
     t.boolean "anyone_pregnancy_expenses", default: true
     t.boolean "anyone_pregnant", default: false
@@ -155,7 +156,7 @@ ActiveRecord::Schema.define(version: 20180404005005) do
   end
 
   create_table "household_members", force: :cascade do |t|
-    t.integer "baby_count"
+    t.integer "baby_count", default: 0
     t.datetime "birthday"
     t.integer "buy_and_prepare_food_together", default: 0
     t.integer "caretaker", default: 0
@@ -166,6 +167,7 @@ ActiveRecord::Schema.define(version: 20180404005005) do
     t.integer "filing_taxes_next_year", default: 0
     t.string "first_name"
     t.integer "foster_care_at_18", default: 0
+    t.integer "healthcare_enrolled", default: 0
     t.string "last_name"
     t.integer "married", default: 0
     t.integer "pregnancy_expenses", default: 0

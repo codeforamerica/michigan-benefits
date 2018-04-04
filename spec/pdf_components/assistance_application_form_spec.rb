@@ -88,15 +88,18 @@ RSpec.describe AssistanceApplicationForm do
                         members: [build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wells",
-                                        pregnancy_expenses: "yes"),
+                                        pregnancy_expenses: "yes",
+                                        healthcare_enrolled: "yes"),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wiley",
-                                        pregnancy_expenses: "yes"),
+                                        pregnancy_expenses: "yes",
+                                        healthcare_enrolled: "yes"),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wonka",
-                                        pregnancy_expenses: "yes"),
+                                        pregnancy_expenses: "yes",
+                                        healthcare_enrolled: "yes"),
                                   build(:household_member),
                                   build(:household_member),
                                   build(:household_member,
@@ -107,6 +110,7 @@ RSpec.describe AssistanceApplicationForm do
                                         sex: "male",
                                         requesting_food: "yes",
                                         requesting_healthcare: "yes",
+                                        healthcare_enrolled: "yes",
                                         married: "yes",
                                         citizen: "yes")])
       end
@@ -125,6 +129,8 @@ RSpec.describe AssistanceApplicationForm do
             - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Applying for: Food, Healthcare
             Additional Medical Expenses:
             - Willy Wonka, Pregnancy-related
+            Additional Members Currently Enrolled in Health Coverage:
+            - Willy Whale
           NOTES
         )
       end

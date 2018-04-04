@@ -30,5 +30,12 @@ module Integrated
     def member_names(members)
       members.map(&:display_name).join(", ")
     end
+
+    def yes_no_for(field)
+      {
+        yes: benefit_application.members.any?(&:"#{field}_yes?"),
+        no: benefit_application.members.all?(&:"#{field}_no?"),
+      }
+    end
   end
 end

@@ -207,6 +207,12 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Current Healthcare" do
+      expect(page).to have_content("Is anyone currently enrolled in a health insurance plan?")
+
+      proceed_with "No"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

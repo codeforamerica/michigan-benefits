@@ -31,6 +31,7 @@ class HouseholdMember < ApplicationRecord
   enum foster_care_at_18: { unfilled: 0, yes: 1, no: 2 }, _prefix: :foster_care_at_18
   enum pregnant: { unfilled: 0, yes: 1, no: 2 }, _prefix: :pregnant
   enum pregnancy_expenses: { unfilled: 0, yes: 1, no: 2 }, _prefix: :pregnancy_expenses
+  enum healthcare_enrolled: { unfilled: 0, yes: 1, no: 2 }, _prefix: :healthcare_enrolled
   # Generated enums added above
 
   enum relationship: {
