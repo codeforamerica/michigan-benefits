@@ -76,6 +76,11 @@ class FormNavigation
       Integrated::AnyoneHealthcareEnrolledController,
       Integrated::WhoIsHealthcareEnrolledController,
     ],
+    "Medical Bills" => [
+      Integrated::DoYouHaveMedicalBillsController,
+      Integrated::AnyoneHaveMedicalBillsController,
+      Integrated::WhoHasMedicalBillsController,
+    ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],
