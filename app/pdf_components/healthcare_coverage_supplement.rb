@@ -14,7 +14,9 @@ class HealthcareCoverageSupplement
   end
 
   def attributes
-    supplement_attributes
+    supplement_attributes.
+      merge(second_filer_attributes).
+      merge(healthcare_enrolled_attributes)
   end
 
   def output_file
@@ -44,17 +46,12 @@ class HealthcareCoverageSupplement
       ),
       primary_filer_claiming_dependents_dependents_names:
         benefit_application.dependents&.map { |dep| dep.display_name }&.join(", "),
-      anyone_caretaker: yes_no_or_unfilled(
-        yes: benefit_application.members.any?(&:caretaker_yes?),
-        no: benefit_application.members.none?(&:caretaker_yes?),
-      ),
+      anyone_caretaker: yes_no_or_unfilled(yes_no_for(:caretaker)),
       anyone_caretaker_names: member_names(benefit_application.members.select(&:caretaker_yes?)),
-      anyone_fostercare_adult: yes_no_or_unfilled(
-        yes: benefit_application.members.any?(&:foster_care_at_18_yes?),
-        no: benefit_application.members.none?(&:foster_care_at_18_yes?),
-      ),
+      anyone_fostercare_adult: yes_no_or_unfilled(yes_no_for(:foster_care_at_18)),
       anyone_fostercare_adult_names: member_names(benefit_application.members.select(&:foster_care_at_18_yes?)),
-    }.merge(second_filer_attributes)
+      anyone_has_health_insurance: yes_no_or_unfilled(yes_no_for(:healthcare_enrolled)),
+    }
   end
 
   def second_filer_attributes
@@ -64,6 +61,20 @@ class HealthcareCoverageSupplement
           benefit_application.spouse_filing_taxes_separately&.display_name,
         second_filer_filing_jointly: "No",
       }
+    else
+      {}
+    end
+  end
+
+  def healthcare_enrolled_attributes
+    members = benefit_application.members.select(&:healthcare_enrolled_yes?)
+    if members.count.positive?
+      ordinals = ["first", "second", "third"]
+      hash = {}
+      members.first(3).each_with_index do |member, i|
+        hash[:"#{ordinals[i]}_member_has_health_insurance_name"] = member.display_name
+      end
+      hash
     else
       {}
     end

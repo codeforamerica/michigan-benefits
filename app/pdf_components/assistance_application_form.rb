@@ -58,7 +58,6 @@ class AssistanceApplicationForm
       anyone_recently_pregnant_names: member_names(recently_pregnant_members),
       anyone_medical_expenses: yes_no_or_unfilled(yes_no_for(:pregnancy_expenses)),
       medical_expenses_other: yes_if_true(benefit_application.members.any?(&:pregnancy_expenses_yes?)),
-
     }
   end
 
@@ -99,6 +98,7 @@ class AssistanceApplicationForm
       notes: "",
     }
 
+    # Additional Household Members
     if benefit_application.members.count > 5
       hash[:household_added_notes] = "Yes"
       hash[:notes] += "Additional Household Members:"
@@ -118,12 +118,23 @@ class AssistanceApplicationForm
       end
     end
 
+    # Additional Medical Expenses
     members_with_pregnancy_expenses = benefit_application.members.select(&:pregnancy_expenses_yes?)
     if members_with_pregnancy_expenses.count > 2
       hash[:household_added_notes] = "Yes"
       hash[:notes] += "Additional Medical Expenses:\n"
       hash[:notes] += members_with_pregnancy_expenses[2..-1].map do |extra_member|
         "- #{extra_member.display_name}, Pregnancy-related\n"
+      end.join
+    end
+
+    # Additional Members Currently Enrolled in Health Coverage
+    members_healthcare_enrolled = benefit_application.members.select(&:healthcare_enrolled_yes?)
+    if members_healthcare_enrolled.count > 3
+      hash[:household_added_notes] = "Yes"
+      hash[:notes] += "Additional Members Currently Enrolled in Health Coverage:\n"
+      hash[:notes] += members_healthcare_enrolled[3..-1].map do |extra_member|
+        "- #{extra_member.display_name}\n"
       end.join
     end
 
@@ -134,12 +145,5 @@ class AssistanceApplicationForm
     benefit_application.members.select do |member|
       member.pregnant_yes? || member.pregnancy_expenses_yes?
     end
-  end
-
-  def yes_no_for(field)
-    {
-      yes: benefit_application.members.any?(&:"#{field}_yes?"),
-      no: benefit_application.members.all?(&:"#{field}_no?"),
-    }
   end
 end

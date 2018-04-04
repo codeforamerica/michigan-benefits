@@ -25,13 +25,15 @@ RSpec.describe HealthcareCoverageSupplement do
                                         filing_taxes_next_year: "yes",
                                         first_name: "Julie",
                                         last_name: "Tester",
-                                        caretaker: "yes"),
+                                        caretaker: "yes",
+                                        healthcare_enrolled: "yes"),
                                       build(:household_member,
                                         first_name: "Jonny",
                                         last_name: "Tester",
                                         requesting_food: "yes",
                                         tax_relationship: "married_filing_jointly",
-                                        caretaker: "yes"),
+                                        caretaker: "yes",
+                                        healthcare_enrolled: "yes"),
                                       build(:household_member,
                                         first_name: "Jimmy",
                                         last_name: "Tester",
@@ -54,6 +56,9 @@ RSpec.describe HealthcareCoverageSupplement do
           anyone_caretaker_names: "Julie Tester, Jonny Tester",
           anyone_fostercare_adult: "Yes",
           anyone_fostercare_adult_names: "Jimmy Tester",
+          anyone_has_health_insurance: "Yes",
+          first_member_has_health_insurance_name: "Julie Tester",
+          second_member_has_health_insurance_name: "Jonny Tester",
         )
       end
     end

@@ -71,6 +71,11 @@ class FormNavigation
       Integrated::AnyoneHavePregnancyExpensesController,
       Integrated::WhoHasPregnancyExpensesController,
     ],
+    "Current Healthcare" => [
+      Integrated::AreYouHealthcareEnrolledController,
+      Integrated::AnyoneHealthcareEnrolledController,
+      Integrated::WhoIsHealthcareEnrolledController,
+    ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],
