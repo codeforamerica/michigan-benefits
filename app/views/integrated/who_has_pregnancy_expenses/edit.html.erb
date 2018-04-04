@@ -1,0 +1,25 @@
+<% content_for :header_title, "Pregnancy" %>
+<% content_for :form_card_title,
+  "Who has medical bills related to pregnancy from the last three months?" %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <fieldset class="input-group">
+      <legend class="sr-only" id="pregnancy_expenses__legend">
+        Choose who has pregnancy expenses from the last three months.
+      </legend>
+      <% @form.members.each do |member| %>
+        <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+          <%= ff.mb_checkbox :pregnancy_expenses,
+                             member.display_name,
+                             legend_id: "pregnancy_expenses__legend",
+                             options: {
+                               checked_value: "yes",
+                               unchecked_value: "no",
+                             } %>
+        <% end %>
+      <% end %>
+      <%= f.mb_form_errors :members %>
+    </fieldset>
+  <% end %>
+<% end %>

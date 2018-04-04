@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe Integrated::WhoIs<%= model_name %>>Controller do
+RSpec.describe Integrated::WhoIs<%= model_name %>Controller do
   describe "#skip?" do
     context "when single member household" do
       it "returns true" do
         application = create(:common_application, :single_member)
 
-        skip_step = Integrated::WhoIs<%= model_name %>>Controller.skip?(application)
+        skip_step = Integrated::WhoIs<%= model_name %>Controller.skip?(application)
         expect(skip_step).to be_truthy
       end
     end
@@ -18,7 +18,7 @@ RSpec.describe Integrated::WhoIs<%= model_name %>>Controller do
             :multi_member,
             navigator: build(:application_navigator, anyone_<%= model_method %>: true))
 
-          skip_step = Integrated::WhoIs<%= model_name %>>Controller.skip?(application)
+          skip_step = Integrated::WhoIs<%= model_name %>Controller.skip?(application)
           expect(skip_step).to be_falsey
         end
       end
@@ -29,7 +29,7 @@ RSpec.describe Integrated::WhoIs<%= model_name %>>Controller do
             :multi_member,
             navigator: build(:application_navigator, anyone_<%= model_method %>: false))
 
-          skip_step = Integrated::WhoIs<%= model_name %>>Controller.skip?(application)
+          skip_step = Integrated::WhoIs<%= model_name %>Controller.skip?(application)
           expect(skip_step).to be_truthy
         end
       end

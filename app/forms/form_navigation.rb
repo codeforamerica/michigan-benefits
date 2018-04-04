@@ -27,28 +27,49 @@ class FormNavigation
       Integrated::DescribeTaxRelationshipsController,
       Integrated::ReviewTaxRelationshipsController,
     ],
-    "Household" => [
+    "Married" => [
       Integrated::AreYouMarriedController,
       Integrated::AnyoneMarriedController,
       Integrated::WhoIsMarriedController,
+    ],
+    "Caretaker" => [
       Integrated::AnyoneCaretakerController,
       Integrated::WhoIsCaretakerController,
+    ],
+    "Student" => [
       Integrated::AreYouStudentController,
       Integrated::AnyoneStudentController,
       Integrated::WhoIsStudentController,
+    ],
+    "Disabled" => [
       Integrated::AreYouDisabledController,
       Integrated::AnyoneDisabledController,
       Integrated::WhoIsDisabledController,
+    ],
+    "Citizen" => [
       Integrated::AreYouCitizenController,
       Integrated::EveryoneCitizenController,
       Integrated::WhoIsNotCitizenController,
       Integrated::ImmigrationInfoController,
+    ],
+    "Veteran" => [
       Integrated::AreYouVeteranController,
       Integrated::AnyoneVeteranController,
       Integrated::WhoIsVeteranController,
+    ],
+    "Foster" => [
       Integrated::WereYouFosterCareController,
       Integrated::AnyoneFosterCareController,
       Integrated::WhoWasFosterCareController,
+    ],
+    "Pregnancy" => [
+      Integrated::AreYouPregnantController,
+      Integrated::AnyonePregnantController,
+      Integrated::WhoIsPregnantController,
+      Integrated::HowManyBabiesController,
+      Integrated::DoYouHavePregnancyExpensesController,
+      Integrated::AnyoneHavePregnancyExpensesController,
+      Integrated::WhoHasPregnancyExpensesController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,

@@ -1,0 +1,11 @@
+<% content_for :header_title, "Pregnancy" %>
+<% content_for :form_card_title,
+  "Does anyone have medical bills related to pregnancy from the last three months?" %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :anyone_pregnancy_expenses %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

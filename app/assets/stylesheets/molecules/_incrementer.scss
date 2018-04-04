@@ -22,7 +22,7 @@
   @include transition($animation-fast background-color);
   @include user-select(none);
   cursor: pointer;
-  color: $color-teal;
+  color: $color-dark-sky;
   display: table-cell;
   width: 1%;
   background-color: $color-light-grey;

@@ -17,6 +17,10 @@ class HouseholdMember < ApplicationRecord
     where(tax_relationship: ["primary", "married_filing_jointly", "dependent"]).order("created_at")
   }
 
+  scope :pregnant, -> { where(pregnant: "yes").order("created_at") }
+
+  scope :after, ->(member = nil) { where("created_at > ?", member&.created_at) }
+
   enum sex: { unfilled: 0, male: 1, female: 2 }, _prefix: :sex
   enum married: { unfilled: 0, yes: 1, no: 2 }, _prefix: :married
   enum caretaker: { unfilled: 0, yes: 1, no: 2 }, _prefix: :caretaker
@@ -25,6 +29,9 @@ class HouseholdMember < ApplicationRecord
   enum citizen: { unfilled: 0, yes: 1, no: 2 }, _prefix: :citizen
   enum veteran: { unfilled: 0, yes: 1, no: 2 }, _prefix: :veteran
   enum foster_care_at_18: { unfilled: 0, yes: 1, no: 2 }, _prefix: :foster_care_at_18
+  enum pregnant: { unfilled: 0, yes: 1, no: 2 }, _prefix: :pregnant
+  enum pregnancy_expenses: { unfilled: 0, yes: 1, no: 2 }, _prefix: :pregnancy_expenses
+  # Generated enums added above
 
   enum relationship: {
     unknown_relation: 0,

@@ -23,6 +23,11 @@
           <h1 class="form-card__title">
             <%= yield :form_card_title %>
           </h1>
+          <% if content_for? :form_card_help %>
+            <p class="text--centered text--help">
+              <%= yield :form_card_help %>
+            </p>
+          <% end %>
         <% end %>
       </header>
 
