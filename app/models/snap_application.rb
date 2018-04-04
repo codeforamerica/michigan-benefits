@@ -84,16 +84,9 @@ class SnapApplication < ApplicationRecord
   end
 
   def pdf
-    @_pdf ||=
-      if GateKeeper.feature_enabled?("NEW_FORM")
-        ApplicationPdfAssembler.new(
-          benefit_application: self,
-        ).run
-      else
-        Dhs1171Pdf.new(
-          snap_application: self,
-        ).completed_file
-      end
+    @_pdf ||= Dhs1171Pdf.new(
+                snap_application: self,
+              ).completed_file
   end
 
   def monthly_gross_income
