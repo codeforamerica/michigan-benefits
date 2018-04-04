@@ -10,4 +10,8 @@ class GateKeeper
   def self.demo_environment?
     application_routing_environment == "staging"
   end
+
+  def self.production_environment?
+    Rails.env.production? && !demo_environment?
+  end
 end
