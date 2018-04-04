@@ -452,7 +452,6 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
-
     on_page "Current Healthcare" do
       expect(page).to have_content("Is anyone currently enrolled in a health insurance plan?")
 
@@ -461,8 +460,8 @@ RSpec.feature "Integrated application" do
 
     on_page "Current Healthcare" do
       expect(page).to have_content(
-                        "Who is currently enrolled in a health insurance plan?",
-                        )
+        "Who is currently enrolled in a health insurance plan?",
+      )
 
       check "Pupper McDog"
 
