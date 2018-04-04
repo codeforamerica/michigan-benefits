@@ -26,7 +26,8 @@ RSpec.describe HealthcareCoverageSupplement do
                                         first_name: "Julie",
                                         last_name: "Tester",
                                         caretaker: "yes",
-                                        healthcare_enrolled: "yes"),
+                                        healthcare_enrolled: "yes",
+                                        medical_bills: "yes"),
                                       build(:household_member,
                                         first_name: "Jonny",
                                         last_name: "Tester",
@@ -59,6 +60,8 @@ RSpec.describe HealthcareCoverageSupplement do
           anyone_has_health_insurance: "Yes",
           first_member_has_health_insurance_name: "Julie Tester",
           second_member_has_health_insurance_name: "Jonny Tester",
+          anyone_need_medical_bill_help: "Yes",
+          anyone_need_medical_bill_help_names: "Julie Tester",
         )
       end
     end

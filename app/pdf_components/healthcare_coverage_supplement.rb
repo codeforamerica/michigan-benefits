@@ -51,6 +51,8 @@ class HealthcareCoverageSupplement
       anyone_fostercare_adult: yes_no_or_unfilled(yes_no_for(:foster_care_at_18)),
       anyone_fostercare_adult_names: member_names(benefit_application.members.select(&:foster_care_at_18_yes?)),
       anyone_has_health_insurance: yes_no_or_unfilled(yes_no_for(:healthcare_enrolled)),
+      anyone_need_medical_bill_help: yes_no_or_unfilled(yes_no_for(:medical_bills)),
+      anyone_need_medical_bill_help_names: member_names(benefit_application.members.select(&:medical_bills_yes?)),
     }
   end
 
