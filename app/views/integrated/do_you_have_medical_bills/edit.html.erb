@@ -1,0 +1,15 @@
+<% content_for :header_title, "Medical Bills" %>
+<% content_for :form_card_title,
+  "Do you need help paying for medical bills from the last 3 months?" %>
+<% content_for :form_card_help,
+  "If you have an unpaid medical bills from the last 3 months, you may be eligible for retroactive coverage" %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :medical_bills,
+                            yes_value: "yes",
+                            no_value: "no" %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
