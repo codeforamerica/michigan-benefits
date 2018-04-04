@@ -1,6 +1,24 @@
 require "rails_helper"
 
 RSpec.describe HouseholdMember do
+  describe "scopes" do
+    describe ".pregnant" do
+      it "returns members with pregnant 'yes'" do
+        pregnant_member = build(:household_member, pregnant: "yes")
+        members = [
+          pregnant_member,
+          build(:household_member, pregnant: "no"),
+          build(:household_member),
+        ]
+
+        members.map(&:save)
+
+        expect(HouseholdMember.pregnant.count).to eq(1)
+        expect(HouseholdMember.pregnant.first).to eq(pregnant_member)
+      end
+    end
+  end
+
   describe "#display_name" do
     it "only generates the display name once" do
       member = build(:household_member)

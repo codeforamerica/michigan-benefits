@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403180923) do
+ActiveRecord::Schema.define(version: 20180403213631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20180403180923) do
   end
 
   create_table "household_members", force: :cascade do |t|
+    t.integer "baby_count"
     t.datetime "birthday"
     t.integer "buy_and_prepare_food_together", default: 0
     t.integer "caretaker", default: 0

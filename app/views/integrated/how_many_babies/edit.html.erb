@@ -1,0 +1,15 @@
+<% content_for :header_title, "Pregnancy" %>
+<% content_for :form_card_title, t(".title", **member_appropriate_translation_data) %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.hidden_field :id %>
+
+    <%= f.mb_incrementer :baby_count,
+                         t(".title", **member_appropriate_translation_data),
+                         options: {
+                           min: "1",
+                           max: "9",
+                         } %>
+    <% end %>
+<% end %>

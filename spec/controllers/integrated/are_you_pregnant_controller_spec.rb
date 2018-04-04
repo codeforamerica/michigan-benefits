@@ -38,6 +38,7 @@ RSpec.describe Integrated::AreYouPregnantController do
         current_app.reload
 
         expect(current_app.primary_member.pregnant_yes?).to be_truthy
+        expect(current_app.navigator.anyone_pregnant?).to be_truthy
       end
     end
   end

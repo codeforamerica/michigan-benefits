@@ -60,6 +60,66 @@ RSpec.describe MbFormBuilder do
     end
   end
 
+  describe "#mb_incrementer" do
+    it "renders an incrementer with screenreader-only labels" do
+      class SampleStep < Step
+        step_attributes(:name)
+      end
+      sample = SampleStep.new
+
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_incrementer(
+        :name,
+        "How many puppies?",
+        classes: ["dog-styles"]
+      )
+      expect(output).to be_html_safe
+      expect(output).to match_html <<-HTML
+        <div class="form-group">
+          <label class="sr-only" id="sample_name__label" for="sample_name">How many puppies?</label>
+          <div class="incrementer">
+            <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_name__label" id="sample_name" name="sample[name]" />
+            <span class="incrementer__subtract">-</span>
+            <span class="incrementer__add">+</span>
+          </div>
+        </div>
+      HTML
+    end
+
+    it "displays errors" do
+      class SampleStep < Step
+        step_attributes(:name)
+        validates_presence_of :name
+      end
+      sample = SampleStep.new
+      sample.validate
+
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_incrementer(
+        :name,
+        "How many puppies?",
+        classes: ["dog-styles"]
+      )
+      expect(output).to be_html_safe
+
+      expect(output).to match_html <<-HTML
+        <div class="form-group form-group--error">
+          <div class="field_with_errors">
+            <label class="sr-only" id="sample_name__label" for="sample_name">How many puppies?</label>
+          </div>
+          <div class="incrementer">
+            <div class="field_with_errors">
+              <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_name__errors sample_name__label" id="sample_name" name="sample[name]" />
+            </div>
+            <span class="incrementer__subtract">-</span>
+            <span class="incrementer__add">+</span>
+          </div>
+          <span class="text--error" id="sample_name__errors"><i class="icon-warning"></i> can't be blank </span>
+        </div>
+      HTML
+    end
+  end
+
   describe "#mb_textarea" do
     it "renders a label with the sr-only class when hide_label set to true" do
       class SampleStep < Step

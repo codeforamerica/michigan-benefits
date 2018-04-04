@@ -51,6 +51,39 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     html_output.html_safe
   end
 
+  def mb_incrementer(
+    method,
+    label_text,
+    options: {},
+    classes: []
+  )
+    classes = classes.append(%w[text-input])
+
+    text_field_options = {
+      type: "number",
+      class: (classes + ["form-width--short"]).join(" "),
+      autocomplete: "off",
+      autocorrect: "off",
+      autocapitalize: "off",
+      spellcheck: "false",
+      "aria-labelledby": aria_labelledby(method: method),
+      id: sanitized_id(method),
+    }.merge(options)
+
+    html_output = <<~HTML
+      <div class="form-group#{error_state(object, method)}">
+        #{label(method, label_text, class: 'sr-only', id: aria_label(method))}
+        <div class="incrementer">
+          #{text_field(method, text_field_options)}
+          <span class="incrementer__subtract">-</span>
+          <span class="incrementer__add">+</span>
+        </div>
+        #{errors_for(object, method)}
+      </div>
+    HTML
+    html_output.html_safe
+  end
+
   def mb_money_field(
     method,
     label_text,
@@ -543,7 +576,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     position ? "#{name}_#{method}_#{position}" : "#{name}_#{method}"
   end
 
-  def aria_labelledby(method:, help_text:, prefix: "")
+  def aria_label(method)
+    "#{sanitized_id(method)}__label"
+  end
+
+  def aria_labelledby(method:, help_text: nil, prefix: "")
     aria_labels = []
 
     aria_labels << prefix if prefix.present?
@@ -552,7 +589,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       aria_labels << "#{sanitized_id(method)}__errors"
     end
 
-    aria_labels << "#{sanitized_id(method)}__label"
+    aria_labels << aria_label(method)
     aria_labels << "#{sanitized_id(method)}__help" if help_text
 
     aria_labels.join(" ")

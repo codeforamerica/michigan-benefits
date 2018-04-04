@@ -141,6 +141,54 @@ var followUpQuestion = (function() {
   }
 })();
 
+var incrementer = (function() {
+  var i = {
+    increment: function(input) {
+      var max = parseInt($(input).attr('max'));
+      var value = parseInt($(input).val());
+      if(max != undefined) {
+        if(value < max) {
+          $(input).val(value+1);
+        }
+      }
+      else {
+        $(input).val(parseInt($(input).val())+1);
+      }
+    },
+    decrement: function(input) {
+      var min = parseInt($(input).attr('min'));
+      var value = parseInt($(input).val());
+      if(min != undefined) {
+        if(value > min) {
+          $(input).val(value-1);
+        }
+      }
+      else {
+        $(input).val(value-1);
+      }
+
+    },
+    init: function() {
+      $('.incrementer').each(function(index, incrementer) {
+        var addButton = $(incrementer).find('.incrementer__add');
+        var subtractButton = $(incrementer).find('.incrementer__subtract');
+        var input = $(incrementer).find('.text-input');
+
+        $(addButton).click(function(e) {
+          i.increment(input);
+        });
+
+        $(subtractButton).click(function(e) {
+          i.decrement(input);
+        });
+      });
+    }
+  }
+  return {
+    init: i.init
+  }
+})();
+
 $(document).ready(function () {
   radioSelector.init();
   checkboxSelector.init();
@@ -149,4 +197,5 @@ $(document).ready(function () {
   yesNoEnumButtons.init();
   autoAdvanceTelInputs.init();
   followUpQuestion.init();
+  incrementer.init();
 })
