@@ -149,6 +149,14 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Pregnancy" do
+      expect(page).to have_content(
+        "Do you have medical bills related to pregnancy from the last three months?",
+      )
+
+      proceed_with "Yes"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

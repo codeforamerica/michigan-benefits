@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403213631) do
+ActiveRecord::Schema.define(version: 20180404005005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180403213631) do
     t.boolean "anyone_else_on_tax_return", default: true
     t.boolean "anyone_foster_care_at_18", default: false
     t.boolean "anyone_married", default: false
+    t.boolean "anyone_pregnancy_expenses", default: true
     t.boolean "anyone_pregnant", default: false
     t.boolean "anyone_student", default: true
     t.boolean "anyone_veteran", default: true
@@ -167,6 +168,7 @@ ActiveRecord::Schema.define(version: 20180403213631) do
     t.integer "foster_care_at_18", default: 0
     t.string "last_name"
     t.integer "married", default: 0
+    t.integer "pregnancy_expenses", default: 0
     t.integer "pregnant", default: 0
     t.integer "relationship", default: 0
     t.integer "requesting_food", default: 0

@@ -63,22 +63,22 @@ RSpec.describe MbFormBuilder do
   describe "#mb_incrementer" do
     it "renders an incrementer with screenreader-only labels" do
       class SampleStep < Step
-        step_attributes(:name)
+        step_attributes(:dog)
       end
-      sample = SampleStep.new
 
+      sample = SampleStep.new
       form = MbFormBuilder.new("sample", sample, template, {})
       output = form.mb_incrementer(
-        :name,
+        :dog,
         "How many puppies?",
-        classes: ["dog-styles"]
+        classes: ["dog-styles"],
       )
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
         <div class="form-group">
-          <label class="sr-only" id="sample_name__label" for="sample_name">How many puppies?</label>
+          <label class="sr-only" id="sample_dog__label" for="sample_dog">How many puppies?</label>
           <div class="incrementer">
-            <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_name__label" id="sample_name" name="sample[name]" />
+            <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_dog__label" id="sample_dog" name="sample[dog]" />
             <span class="incrementer__subtract">-</span>
             <span class="incrementer__add">+</span>
           </div>
@@ -88,33 +88,33 @@ RSpec.describe MbFormBuilder do
 
     it "displays errors" do
       class SampleStep < Step
-        step_attributes(:name)
-        validates_presence_of :name
+        step_attributes(:dog)
+        validates_presence_of :dog
       end
       sample = SampleStep.new
       sample.validate
 
       form = MbFormBuilder.new("sample", sample, template, {})
       output = form.mb_incrementer(
-        :name,
+        :dog,
         "How many puppies?",
-        classes: ["dog-styles"]
+        classes: ["dog-styles"],
       )
       expect(output).to be_html_safe
 
       expect(output).to match_html <<-HTML
         <div class="form-group form-group--error">
           <div class="field_with_errors">
-            <label class="sr-only" id="sample_name__label" for="sample_name">How many puppies?</label>
+            <label class="sr-only" id="sample_dog__label" for="sample_dog">How many puppies?</label>
           </div>
           <div class="incrementer">
             <div class="field_with_errors">
-              <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_name__errors sample_name__label" id="sample_name" name="sample[name]" />
+              <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_dog__errors sample_dog__label" id="sample_dog" name="sample[dog]" />
             </div>
             <span class="incrementer__subtract">-</span>
             <span class="incrementer__add">+</span>
           </div>
-          <span class="text--error" id="sample_name__errors"><i class="icon-warning"></i> can't be blank </span>
+          <span class="text--error" id="sample_dog__errors"><i class="icon-warning"></i> can't be blank </span>
         </div>
       HTML
     end

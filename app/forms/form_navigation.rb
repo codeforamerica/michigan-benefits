@@ -67,6 +67,9 @@ class FormNavigation
       Integrated::AnyonePregnantController,
       Integrated::WhoIsPregnantController,
       Integrated::HowManyBabiesController,
+      Integrated::DoYouHavePregnancyExpensesController,
+      Integrated::AnyoneHavePregnancyExpensesController,
+      Integrated::WhoHasPregnancyExpensesController,
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
