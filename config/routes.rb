@@ -73,7 +73,7 @@ Rails.application.routes.draw do
     end
   end
 
-  unless Rails.env.production?
+  unless GateKeeper.production_environment?
     resources :sections, controller: :forms, only: %i[index show] do
       collection do
         FormNavigation.all.each do |controller_class|
