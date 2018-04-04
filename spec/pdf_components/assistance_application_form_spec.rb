@@ -32,7 +32,8 @@ RSpec.describe AssistanceApplicationForm do
           disabled: "yes",
           citizen: "yes",
           veteran: "yes",
-          pregnant: "yes")
+          pregnant: "no",
+          pregnancy_expenses: "yes")
       end
 
       let(:common_application) do
@@ -71,6 +72,10 @@ RSpec.describe AssistanceApplicationForm do
           anyone_a_veteran_names: "Octopus Cuttlefish",
           anyone_recently_pregnant: "Yes",
           anyone_recently_pregnant_names: "Octopus Cuttlefish",
+          anyone_medical_expenses: "Yes",
+          medical_expenses_other: "Yes",
+          first_member_medical_expenses_name: "Octopus Cuttlefish",
+          first_member_medical_expenses_type: "Pregnancy-related",
         )
       end
     end
@@ -80,9 +85,18 @@ RSpec.describe AssistanceApplicationForm do
         create(:common_application,
                         previously_received_assistance: "yes",
                         living_situation: "temporary_address",
-                        members: [build(:household_member),
-                                  build(:household_member),
-                                  build(:household_member),
+                        members: [build(:household_member,
+                                        first_name: "Willy",
+                                        last_name: "Wells",
+                                        pregnancy_expenses: "yes"),
+                                  build(:household_member,
+                                        first_name: "Willy",
+                                        last_name: "Wiley",
+                                        pregnancy_expenses: "yes"),
+                                  build(:household_member,
+                                        first_name: "Willy",
+                                        last_name: "Wonka",
+                                        pregnancy_expenses: "yes"),
                                   build(:household_member),
                                   build(:household_member),
                                   build(:household_member,
@@ -94,25 +108,23 @@ RSpec.describe AssistanceApplicationForm do
                                         requesting_food: "yes",
                                         requesting_healthcare: "yes",
                                         married: "yes",
-                                        student: "yes",
-                                        disabled: "yes",
-                                        citizen: "yes",
-                                        veteran: "yes",
-                                        pregnant: "yes")])
+                                        citizen: "yes")])
       end
 
       let(:attributes) do
         AssistanceApplicationForm.new(common_application).attributes
       end
 
-      it "returns a hash with basic information" do
+      it "returns notes with different sections concatenated" do
         expect(attributes).to include(
           household_added_notes: "Yes",
         )
         expect(attributes[:notes]).to eq(
           <<~NOTES
             Additional Household Members:
-            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Student: Yes, Disabled: Yes, Veteran: Yes, Pregnant: Yes, Applying for: Food, Healthcare
+            - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Applying for: Food, Healthcare
+            Additional Medical Expenses:
+            - Willy Wonka, Pregnancy-related
           NOTES
         )
       end
