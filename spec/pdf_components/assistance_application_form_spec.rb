@@ -89,12 +89,14 @@ RSpec.describe AssistanceApplicationForm do
                                         first_name: "Willy",
                                         last_name: "Wells",
                                         pregnancy_expenses: "yes",
-                                        healthcare_enrolled: "yes"),
+                                        healthcare_enrolled: "yes",
+                                        flint_water: "yes"),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wiley",
                                         pregnancy_expenses: "yes",
-                                        healthcare_enrolled: "yes"),
+                                        healthcare_enrolled: "yes",
+                                        flint_water: "yes"),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wonka",
@@ -112,7 +114,8 @@ RSpec.describe AssistanceApplicationForm do
                                         requesting_healthcare: "yes",
                                         healthcare_enrolled: "yes",
                                         married: "yes",
-                                        citizen: "yes")])
+                                        citizen: "yes",
+                                        flint_water: "yes")])
       end
 
       let(:attributes) do
@@ -130,6 +133,8 @@ RSpec.describe AssistanceApplicationForm do
             Additional Medical Expenses:
             - Willy Wonka, Pregnancy-related
             Additional Members Currently Enrolled in Health Coverage:
+            - Willy Whale
+            Additional Members Affected by the Flint Water Crisis:
             - Willy Whale
           NOTES
         )

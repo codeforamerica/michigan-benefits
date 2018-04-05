@@ -81,6 +81,11 @@ class FormNavigation
       Integrated::AnyoneHaveMedicalBillsController,
       Integrated::WhoHasMedicalBillsController,
     ],
+    "Flint Water Crisis" => [
+      Integrated::AreYouFlintWaterController,
+      Integrated::AnyoneFlintWaterController,
+      Integrated::WhoIsFlintWaterController,
+    ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],

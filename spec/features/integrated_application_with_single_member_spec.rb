@@ -171,6 +171,14 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
+    on_page "Flint Water Crisis" do
+      expect(page).to have_content(
+        "Have you been affected by the Flint Water Crisis?",
+      )
+
+      proceed_with "Yes"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

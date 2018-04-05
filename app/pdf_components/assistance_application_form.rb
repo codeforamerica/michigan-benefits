@@ -138,6 +138,15 @@ class AssistanceApplicationForm
       end.join
     end
 
+    # Additional Members Affected by the Flint Water Crisis
+    members_flint_water = benefit_application.members.select(&:flint_water_yes?)
+    if members_flint_water.count > 2
+      hash[:household_added_notes] = "Yes"
+      hash[:notes] += "Additional Members Affected by the Flint Water Crisis:\n"
+      hash[:notes] += members_flint_water[2..-1].map do |extra_member|
+        "- #{extra_member.display_name}\n"
+      end.join
+    end
     hash
   end
 
