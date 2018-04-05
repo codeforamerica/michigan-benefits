@@ -16,7 +16,8 @@ class HealthcareCoverageSupplement
   def attributes
     supplement_attributes.
       merge(second_filer_attributes).
-      merge(healthcare_enrolled_attributes)
+      merge(name_field_attributes(:healthcare_enrolled, 3, :has_health_insurance)).
+      merge(name_field_attributes(:flint_water, 3, :affected_by_flint_water_crisis))
   end
 
   def output_file
@@ -53,6 +54,7 @@ class HealthcareCoverageSupplement
       anyone_has_health_insurance: yes_no_or_unfilled(yes_no_for(:healthcare_enrolled)),
       anyone_need_medical_bill_help: yes_no_or_unfilled(yes_no_for(:medical_bills)),
       anyone_need_medical_bill_help_names: member_names(benefit_application.members.select(&:medical_bills_yes?)),
+      anyone_affected_by_flint_water_crisis: yes_no_or_unfilled(yes_no_for(:flint_water)),
     }
   end
 
@@ -68,13 +70,13 @@ class HealthcareCoverageSupplement
     end
   end
 
-  def healthcare_enrolled_attributes
-    members = benefit_application.members.select(&:healthcare_enrolled_yes?)
+  def name_field_attributes(member_field, count, form_label)
+    members = benefit_application.members.select(&:"#{member_field}_yes?")
     if members.count.positive?
-      ordinals = ["first", "second", "third"]
+      ordinals = ["first", "second", "third", "fourth", "fifth"]
       hash = {}
-      members.first(3).each_with_index do |member, i|
-        hash[:"#{ordinals[i]}_member_has_health_insurance_name"] = member.display_name
+      members.first(count).each_with_index do |member, i|
+        hash[:"#{ordinals[i]}_member_#{form_label}_name"] = member.display_name
       end
       hash
     else

@@ -27,20 +27,23 @@ RSpec.describe HealthcareCoverageSupplement do
                                         last_name: "Tester",
                                         caretaker: "yes",
                                         healthcare_enrolled: "yes",
-                                        medical_bills: "yes"),
+                                        medical_bills: "yes",
+                                        flint_water: "yes"),
                                       build(:household_member,
                                         first_name: "Jonny",
                                         last_name: "Tester",
                                         requesting_food: "yes",
                                         tax_relationship: "married_filing_jointly",
                                         caretaker: "yes",
-                                        healthcare_enrolled: "yes"),
+                                        healthcare_enrolled: "yes",
+                                        flint_water: "yes"),
                                       build(:household_member,
                                         first_name: "Jimmy",
                                         last_name: "Tester",
                                         requesting_food: "yes",
                                         tax_relationship: "dependent",
-                                        foster_care_at_18: "yes"),
+                                        foster_care_at_18: "yes",
+                                        flint_water: "yes"),
                                     ])
         HealthcareCoverageSupplement.new(common_application).attributes
       end
@@ -62,6 +65,9 @@ RSpec.describe HealthcareCoverageSupplement do
           second_member_has_health_insurance_name: "Jonny Tester",
           anyone_need_medical_bill_help: "Yes",
           anyone_need_medical_bill_help_names: "Julie Tester",
+          anyone_affected_by_flint_water_crisis: "Yes",
+          first_member_affected_by_flint_water_crisis_name: "Julie Tester",
+          second_member_affected_by_flint_water_crisis_name: "Jonny Tester",
         )
       end
     end

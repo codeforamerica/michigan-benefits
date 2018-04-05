@@ -85,8 +85,8 @@ class SnapApplication < ApplicationRecord
 
   def pdf
     @_pdf ||= Dhs1171Pdf.new(
-                snap_application: self,
-              ).completed_file
+      snap_application: self,
+    ).completed_file
   end
 
   def monthly_gross_income

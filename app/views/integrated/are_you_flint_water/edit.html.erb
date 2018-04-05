@@ -1,0 +1,13 @@
+<% content_for :header_title, "Flint Water Crisis" %>
+<% content_for :form_card_title, "Have you been affected by the Flint Water Crisis?" %>
+<% content_for :form_card_help, "If you consumed water at a location that was serviced by the the Flint Water System between April 2014 and now, you may qualify for additional health coverage." %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :flint_water,
+                            yes_value: "yes",
+                            no_value: "no" %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
