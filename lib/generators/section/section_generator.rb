@@ -10,7 +10,7 @@ class SectionGenerator < Rails::Generators::NamedBase
     generate_form_controller_spec
 
     puts "\nDone generating the #{model} section!"
-    puts "Be sure to add #{model}Controller in the desired application order in `form_navigation.rb`"
+    puts "Be sure to add Integrated::#{model}Controller in the desired application order in `form_navigation.rb`"
   end
 
   private

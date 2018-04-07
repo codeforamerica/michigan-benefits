@@ -40,7 +40,9 @@ RSpec.describe AssistanceApplicationForm do
         create(:common_application,
            members: [primary_member],
            previously_received_assistance: "yes",
-           living_situation: "temporary_address")
+           living_situation: "temporary_address",
+           income_changed: "yes",
+           income_changed_explanation: "I lost my job.")
       end
 
       let(:attributes) do
@@ -76,6 +78,8 @@ RSpec.describe AssistanceApplicationForm do
           medical_expenses_other: "Yes",
           first_member_medical_expenses_name: "Octopus Cuttlefish",
           first_member_medical_expenses_type: "Pregnancy-related",
+          anyone_income_change: "Yes",
+          anyone_income_change_explanation: "I lost my job.",
         )
       end
     end

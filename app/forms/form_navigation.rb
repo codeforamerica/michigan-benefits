@@ -86,6 +86,10 @@ class FormNavigation
       Integrated::AnyoneFlintWaterController,
       Integrated::WhoIsFlintWaterController,
     ],
+    "Income Change" => [
+      Integrated::HasYourIncomeChangedController,
+      Integrated::TellUsIncomeChangedController,
+    ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],

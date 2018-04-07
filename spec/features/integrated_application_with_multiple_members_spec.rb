@@ -504,6 +504,24 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Income" do
+      expect(page).to have_content(
+        "Has your household had a change in income in the past 30 days?",
+      )
+
+      proceed_with "Yes"
+    end
+
+    on_page "Income" do
+      expect(page).to have_content(
+        "In your own words, tell us about the recent change in your household's income.",
+      )
+
+      fill_in "form[income_changed_explanation]", with: "I lost my job."
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

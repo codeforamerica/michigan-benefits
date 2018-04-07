@@ -229,6 +229,14 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Income" do
+      expect(page).to have_content(
+        "Has your household had a change in income in the past 30 days?",
+      )
+
+      proceed_with "No"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

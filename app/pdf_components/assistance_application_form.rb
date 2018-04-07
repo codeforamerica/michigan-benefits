@@ -58,6 +58,11 @@ class AssistanceApplicationForm
       anyone_recently_pregnant_names: member_names(recently_pregnant_members),
       anyone_medical_expenses: yes_no_or_unfilled(yes_no_for(:pregnancy_expenses)),
       medical_expenses_other: yes_if_true(benefit_application.members.any?(&:pregnancy_expenses_yes?)),
+      anyone_income_change: yes_no_or_unfilled(
+        yes: benefit_application.income_changed_yes?,
+        no: benefit_application.income_changed_no?,
+      ),
+      anyone_income_change_explanation: benefit_application.income_changed_explanation,
     }
   end
 

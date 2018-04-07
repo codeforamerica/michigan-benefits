@@ -1,0 +1,25 @@
+<% content_for :header_title, "Income" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      <% if current_application.single_member_household? %>
+        Has your income changed in the past 30 days?
+      <% else %>
+        Has your household had a change in income in the past 30 days?
+      <% end %>
+    </h1>
+    <p class="text--centered text--help">
+      This includes change of jobs, job loss, change in hours or wages, strikes, etc.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :income_changed,
+                            yes_value: "yes",
+                            no_value: "no"
+    %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
