@@ -9,7 +9,7 @@ require "axe/rspec"
 require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-Capybara.javascript_driver = :selenium_chrome_headless # or `:chrome` for full browser
+Capybara.javascript_driver = :selenium_chrome_headless # or `:selenium_chrome` for full browser
 
 ActiveRecord::Migration.maintain_test_schema!
 

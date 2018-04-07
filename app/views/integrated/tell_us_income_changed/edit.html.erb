@@ -1,0 +1,23 @@
+<% content_for :header_title, "Income" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      <% if current_application.single_member_household? %>
+        In your own words, tell us about the recent change in your income.
+      <% else %>
+        In your own words, tell us about the recent change in your household's income.
+      <% end %>
+    </h1>
+
+    <p class="text--centered text--help">
+      This will help us understand how to interpret other financial information.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <%= f.mb_textarea :income_changed_explanation, "Explain the change in income",
+                        options: { rows: "4" },
+                        hide_label: true %>
+    <% end %>
+<% end %>
