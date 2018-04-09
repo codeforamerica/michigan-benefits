@@ -1,0 +1,136 @@
+<% content_for :template_name, "homepage" %>
+<% content_for :banner do
+  render "shared/banner", banner_text: "Hello! Welcome to our beta website."
+end %>
+
+<%= render 'shared/flashes' %>
+
+<div class="slab--hero-<%= rand(1..3) %> slab slab--hero slab--hero-centered">
+  <div class="grid">
+    <div class="logo-hero">MichiganBenefits.org</div>
+    <h1>
+      Get the support your family needs
+    </h1>
+    <p>
+      Apply for benefits in 15 minutes
+    </p>
+    <div class="hero--cta-options grid__item  text--centered">
+      <%= link_to section_path(FormNavigation.first) do %>
+        <p class="button button--cta button--fully-width">Apply for FAP and Medicaid</p>
+        <p class="text--help">Food Stamps and Health Insurance</p>
+      <% end %>
+    </div>    
+
+  </div>
+</div>
+
+<section class="slab slab--white slab--padded" id="scroller-target">
+  <div class="grid">
+    <div class="grid__item width-seven-twelfths">
+      <p>
+        FAP is Michigan’s food stamps (SNAP) program. Most households receive
+        between $20 and $200 in food assistance each month.
+      </p>
+      <p>
+        Medicaid is health care coverage for eligible Michigan residents. There
+        are many plans available depending on your family’s needs.
+      </p>
+    </div>
+
+    <div class="grid__item width-one-fourth shift-one-sixth trust-badge">
+      <a href="http://www.michigan.gov/mdhhs/" class="illustration illustration--mi_mdhhs">MDHHS</a>
+      <p class="text--small">An official State of Michigan Community Partner.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slab slab--padded text--centered">
+  <div class="grid">
+    <div class="grid__item width-one-half">
+      <div class="emoji emoji--big emoji--apple"></div>
+      <h3>
+        Food Assistance Program
+      </h3>
+      <p class="text--small">
+        Buy groceries, shop farmers’ markets, and grow your own food – EBT and
+        SNAP benefits let you choose what works best for you.
+      </p>
+      <%= link_to section_path(FormNavigation.first), class: "button button--cta button--fully-width" do %>
+          Apply for FAP
+      <% end %>
+    </div>
+
+    <div class="grid__item width-one-half">
+      <div class="emoji emoji--big emoji--shield"></div>
+      <h3>
+        Medicaid
+      </h3>
+      <p class="text--small">
+        Health care is essential. If you need help paying for medical expenses
+        over the last three months, you may be eligible for retroactive coverage.
+      </p>
+      <%= link_to section_path(FormNavigation.first), class: "button button--cta button--fully-width" do %>
+          Apply for Medicaid
+      <% end %>
+    </div>
+</section>
+
+<section>
+  <div class="slab slab--white slab--padded text--centered">
+    <div class="grid">
+      <div class="grid__item width-five-sixths shift-one-twelfth">
+        <p>
+          How it works
+        </p>
+        <p class="text--help">
+          MichiganBenefits.org is an easy, safe and secure way to apply for
+          Michigan’s Food Assistance Program and Medicaid. Your information is
+          securely submitted as an official application with the Michigan Department
+          of Health and Human Services.
+        </p>
+        <p class="text--help">
+          For additional assistance email our
+          team at <a href="mailto:hello@michiganbenefits.org">hello@michiganbenefits.org</a>.
+        </p>
+        <p class="text--help">
+          To visit the official online application for food assistance, please visit
+          <%= link_to 'MI Bridges', 'https://www.michigan.gov/mibridges' %>.
+        </p>
+
+        <hr>
+
+        <p>
+          Private and Secure
+        </p>
+        <p class="text--help with-padding-large">
+          Your information is kept private and secure. MichiganBenefits
+          maintains strict security guidelines to protect your privacy and indentity.
+          For details, read the full <%= link_to "Privacy Policy", privacy_path, target: "_blank" %>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="main-footer">
+  <div class="grid">
+    <div class="footer--office-links">
+      <p class="footer--office-links-header text--small">
+        MDHHS Offices
+      </p>
+      <ul>
+        <li>Union Street Office</li>
+        <li>Clio Road Office</li>
+      </ul>
+    </div>
+
+    <div class="footer--partners">
+      <div class="illustration illustration--cfa"></div>
+      <div class="illustration illustration--civilla"></div>
+      <p class="text--small">
+        Michigan Benefits is a service delivered by
+        Code for America and Civilla on behalf of the people of Michigan.
+      </p>
+    </div>
+  </div>
+</div>

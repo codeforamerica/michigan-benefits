@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get "/privacy" => "static_pages#privacy"
   get "/terms" => "static_pages#terms"
   get "/union" => "static_pages#union"
+  get "/combined" => "static_pages#combined", as: "combined_home"
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]

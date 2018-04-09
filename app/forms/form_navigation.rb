@@ -1,7 +1,6 @@
 class FormNavigation
   MAIN = {
     "Introduction" => [
-      Integrated::BeforeYouStartController,
       Integrated::IntroduceYourselfController,
       Integrated::ResideInStateController,
       Integrated::ResideOutOfStateController,
@@ -106,7 +105,7 @@ class FormNavigation
   ].freeze
 
   class << self
-    delegate :first, to: :forms
+    delegate :first, to: :form_controllers
 
     def form_controllers_with_groupings
       MAIN

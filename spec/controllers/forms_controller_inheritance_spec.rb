@@ -34,7 +34,7 @@ RSpec.describe FormsController do
 
         get "edit"
 
-        expect(response).to redirect_to(before_you_start_sections_path)
+        expect(response).to redirect_to(combined_home_path)
       end
     end
   end
@@ -60,7 +60,7 @@ RSpec.describe FormsController do
 
         get "update"
 
-        expect(response).to redirect_to(before_you_start_sections_path)
+        expect(response).to redirect_to(combined_home_path)
       end
     end
   end
