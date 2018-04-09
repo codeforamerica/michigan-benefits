@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   get "/privacy" => "static_pages#privacy"
   get "/terms" => "static_pages#terms"
   get "/union" => "static_pages#union"
-  get "/combined" => "static_pages#combined", as: "combined_home"
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]
@@ -75,6 +74,8 @@ Rails.application.routes.draw do
   end
 
   unless GateKeeper.production_environment?
+    get "/combined" => "static_pages#combined", as: "combined_home"
+
     resources :sections, controller: :forms, only: %i[index show] do
       collection do
         FormNavigation.all.each do |controller_class|
