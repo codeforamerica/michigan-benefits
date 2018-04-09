@@ -7,12 +7,10 @@ RSpec.feature "Integrated application" do
   UNDERLINED = Integrated::PdfAttributes::UNDERLINED
 
   scenario "with multiple members", :js do
-    visit before_you_start_sections_path
+    visit combined_home_path
 
-    on_page "Introduction" do
-      expect(page).to have_content("Welcome")
-
-      proceed_with "Continue"
+    within(".slab--hero") do
+      proceed_with "Apply for FAP and Medicaid"
     end
 
     on_page "Introduction" do

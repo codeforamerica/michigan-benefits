@@ -9,6 +9,8 @@ class StaticPagesController < ApplicationController
 
   def clio; end
 
+  def combined; end
+
   def step_path(*args)
     super.gsub("%2F", "/")
   end
@@ -18,5 +20,6 @@ class StaticPagesController < ApplicationController
   def clear_session
     session[:snap_application_id] = nil
     session[:medicaid_application_id] = nil
+    session[:current_application_id] = nil
   end
 end

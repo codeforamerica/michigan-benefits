@@ -53,7 +53,7 @@ RSpec.describe FormNavigation do
     end
   end
 
-  describe ".forms" do
+  describe ".form_controllers" do
     it "returns the main flow, not including groupings" do
       expect(FormNavigation.form_controllers).to match_array(
         [
@@ -62,6 +62,12 @@ RSpec.describe FormNavigation do
           ThirdMainController,
         ],
       )
+    end
+  end
+
+  describe ".first" do
+    it "delegates to .form_controllers" do
+      expect(FormNavigation.first).to eq(FirstMainController)
     end
   end
 
