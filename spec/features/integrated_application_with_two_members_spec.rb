@@ -235,6 +235,17 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Jobs" do
+      expect(page).to have_content(
+        "Who currently has a job?",
+      )
+
+      fill_in "How many jobs do you have?", with: "0"
+      fill_in "How many jobs does Jonny Tester have?", with: "0"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

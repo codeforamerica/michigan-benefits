@@ -102,4 +102,8 @@ class CommonApplication < ApplicationRecord
       members.where(tax_relationship: "dependent")
     end
   end
+
+  def anyone_employed?
+    members.map { |member| member.job_count || 0 }.sum > 0
+  end
 end

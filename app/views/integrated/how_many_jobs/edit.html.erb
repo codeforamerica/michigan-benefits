@@ -1,0 +1,41 @@
+<% content_for :header_title, "Jobs" %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">
+    <% if current_application.single_member_household? %>
+      How many jobs do you have?
+    <% else %>
+      Who currently has a job?
+    <% end %>
+  </h1>
+  <p class="text--centered text--help">
+
+  </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <% @form.members.each do |member| %>
+        <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+          <% if member.primary_member? %>
+            <%= ff.mb_incrementer :job_count,
+                                 "How many jobs do you have?",
+                                 options: {
+                                     min: "0",
+                                     max: "9",
+                                 },
+                                 hide_label: current_application.single_member_household? ? true : false %>
+          <% else %>
+            <%= ff.mb_incrementer :job_count,
+                                  "How many jobs does #{member.display_name} have?",
+                                  options: {
+                                      min: "0",
+                                      max: "9",
+                                  },
+                                  hide_label: false %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+<% end %>
+

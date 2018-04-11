@@ -102,6 +102,10 @@ class HouseholdMember < ApplicationRecord
     age - (before_birthday ? 1 : 0)
   end
 
+  def primary_member?
+    common_application.primary_member.id == id
+  end
+
   private
 
   def formatted_name(first_name, last_name)

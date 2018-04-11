@@ -170,4 +170,24 @@ RSpec.describe CommonApplication do
       expect(application.applying_for_healthcare?).to be_falsey
     end
   end
+
+  describe "#anyone_employed?" do
+    it "returns true when at least one household member has a positive job count" do
+      application = create(:common_application,
+                           members: [create(:household_member, job_count: "1")])
+      expect(application.anyone_employed?).to be_truthy
+    end
+
+    it "returns false when no job count is set" do
+      application = create(:common_application,
+                           members: [create(:household_member)])
+      expect(application.anyone_employed?).to be_falsey
+    end
+
+    it "returns false when job count is 0" do
+      application = create(:common_application,
+                           members: [create(:household_member, job_count: "0")])
+      expect(application.anyone_employed?).to be_falsey
+    end
+  end
 end

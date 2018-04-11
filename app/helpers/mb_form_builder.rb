@@ -55,7 +55,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     method,
     label_text,
     options: {},
-    classes: []
+    classes: [],
+    hide_label: true
   )
     classes = classes.append(%w[text-input])
 
@@ -72,7 +73,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     html_output = <<~HTML
       <div class="form-group#{error_state(object, method)}">
-        #{label(method, label_text, class: 'sr-only', id: aria_label(method))}
+        #{label(method, label_text, class: hide_label ? 'sr-only' : '', id: aria_label(method))}
         <div class="incrementer">
           #{text_field(method, text_field_options)}
           <span class="incrementer__subtract">-</span>

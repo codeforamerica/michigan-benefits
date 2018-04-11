@@ -33,7 +33,8 @@ RSpec.describe AssistanceApplicationForm do
           citizen: "yes",
           veteran: "yes",
           pregnant: "no",
-          pregnancy_expenses: "yes")
+          pregnancy_expenses: "yes",
+          job_count: 1)
       end
 
       let(:common_application) do
@@ -80,6 +81,8 @@ RSpec.describe AssistanceApplicationForm do
           first_member_medical_expenses_type: "Pregnancy-related",
           anyone_income_change: "Yes",
           anyone_income_change_explanation: "I lost my job.",
+          anyone_employed: "Yes",
+          first_member_employment_name: "Octopus Cuttlefish",
         )
       end
     end
@@ -94,18 +97,21 @@ RSpec.describe AssistanceApplicationForm do
                                         last_name: "Wells",
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
-                                        flint_water: "yes"),
+                                        flint_water: "yes",
+                                        job_count: 1),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wiley",
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
-                                        flint_water: "yes"),
+                                        flint_water: "yes",
+                                        job_count: 1),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wonka",
                                         pregnancy_expenses: "yes",
-                                        healthcare_enrolled: "yes"),
+                                        healthcare_enrolled: "yes",
+                                        job_count: 1),
                                   build(:household_member),
                                   build(:household_member),
                                   build(:household_member,
@@ -140,6 +146,8 @@ RSpec.describe AssistanceApplicationForm do
             - Willy Whale
             Additional Members Affected by the Flint Water Crisis:
             - Willy Whale
+            Additional Employed Members:
+            - Willy Wonka
           NOTES
         )
       end
