@@ -19,6 +19,7 @@ class AssistanceApplicationForm
       merge(member_attributes).
       merge(medical_expenses_attributes).
       merge(employed_attributes).
+      merge(self_employed_attributes).
       merge(additional_notes_attributes)
   end
 
@@ -114,6 +115,21 @@ class AssistanceApplicationForm
     hash
   end
 
+  def self_employed_attributes
+    ordinals = ["first", "second"]
+    hash = {
+      anyone_self_employed: yes_no_or_unfilled(
+        yes: benefit_application.members.any?(&:self_employed_yes?),
+        no: benefit_application.members.none?(&:self_employed_yes?),
+      ),
+    }
+    members = benefit_application.members.select(&:self_employed_yes?)
+    members.first(2).each_with_index do |member, i|
+      hash[:"#{ordinals[i]}_member_self_employed_name"] = member.display_name
+    end
+    hash
+  end
+
   def additional_notes_attributes
     hash = {
       notes: "",
@@ -123,6 +139,7 @@ class AssistanceApplicationForm
     additional_members_healthcare_enrolled(hash)
     additional_members_flint_water(hash)
     additional_members_employed(hash)
+    additional_members_self_employed(hash)
     hash
   end
 
@@ -185,6 +202,17 @@ class AssistanceApplicationForm
     if members.count > 2
       hash[:household_added_notes] = "Yes"
       hash[:notes] += "Additional Employed Members:\n"
+      hash[:notes] += members[2..-1].map do |extra_member|
+        "- #{extra_member.display_name}\n"
+      end.join
+    end
+  end
+
+  def additional_members_self_employed(hash)
+    members = benefit_application.members.select(&:self_employed_yes?)
+    if members.count > 2
+      hash[:household_added_notes] = "Yes"
+      hash[:notes] += "Additional Self-Employed Members:\n"
       hash[:notes] += members[2..-1].map do |extra_member|
         "- #{extra_member.display_name}\n"
       end.join

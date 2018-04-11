@@ -93,6 +93,11 @@ class FormNavigation
       Integrated::DoYouHaveJobController,
       Integrated::HowManyJobsController,
     ],
+    "Self-Employment" => [
+      Integrated::AreYouSelfEmployedController,
+      Integrated::AnyoneSelfEmployedController,
+      Integrated::WhoIsSelfEmployedController,
+    ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],

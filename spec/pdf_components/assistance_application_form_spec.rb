@@ -34,7 +34,8 @@ RSpec.describe AssistanceApplicationForm do
           veteran: "yes",
           pregnant: "no",
           pregnancy_expenses: "yes",
-          job_count: 1)
+          job_count: 1,
+          self_employed: "yes")
       end
 
       let(:common_application) do
@@ -83,6 +84,8 @@ RSpec.describe AssistanceApplicationForm do
           anyone_income_change_explanation: "I lost my job.",
           anyone_employed: "Yes",
           first_member_employment_name: "Octopus Cuttlefish",
+          anyone_self_employed: "Yes",
+          first_member_self_employed_name: "Octopus Cuttlefish",
         )
       end
     end
@@ -98,20 +101,23 @@ RSpec.describe AssistanceApplicationForm do
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
                                         flint_water: "yes",
-                                        job_count: 1),
+                                        job_count: 1,
+                                        self_employed: "yes"),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wiley",
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
                                         flint_water: "yes",
-                                        job_count: 1),
+                                        job_count: 1,
+                                        self_employed: "yes"),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wonka",
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
-                                        job_count: 1),
+                                        job_count: 1,
+                                        self_employed: "yes"),
                                   build(:household_member),
                                   build(:household_member),
                                   build(:household_member,
@@ -147,6 +153,8 @@ RSpec.describe AssistanceApplicationForm do
             Additional Members Affected by the Flint Water Crisis:
             - Willy Whale
             Additional Employed Members:
+            - Willy Wonka
+            Additional Self-Employed Members:
             - Willy Wonka
           NOTES
         )
