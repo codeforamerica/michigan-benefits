@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405225938) do
+ActiveRecord::Schema.define(version: 20180410200150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20180405225938) do
     t.boolean "anyone_veteran", default: true
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
+    t.boolean "current_job", default: false
     t.boolean "everyone_citizen", default: true
     t.boolean "immigration_info", default: false
     t.boolean "resides_in_state", default: true
@@ -173,6 +174,7 @@ ActiveRecord::Schema.define(version: 20180405225938) do
     t.integer "flint_water", default: 0
     t.integer "foster_care_at_18", default: 0
     t.integer "healthcare_enrolled", default: 0
+    t.integer "job_count"
     t.string "last_name"
     t.integer "married", default: 0
     t.integer "medical_bills", default: 0

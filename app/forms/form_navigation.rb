@@ -89,6 +89,10 @@ class FormNavigation
       Integrated::HasYourIncomeChangedController,
       Integrated::TellUsIncomeChangedController,
     ],
+    "Jobs" => [
+      Integrated::DoYouHaveJobController,
+      Integrated::HowManyJobsController,
+    ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],

@@ -1,0 +1,11 @@
+<% content_for :header_title, "Jobs" %>
+<% content_for :form_card_title, "Do you currently have a job?" %>
+<% content_for :form_card_help, "This includes full time, part time, temporary, and contract jobs. This doesn't include self-employment. We'll ask you about that next." %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <%= f.mb_yes_no_buttons :current_job %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
