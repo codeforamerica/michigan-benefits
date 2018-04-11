@@ -213,6 +213,14 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Self-Employment" do
+      expect(page).to have_content(
+        "Are you self-employed in any way?",
+      )
+
+      proceed_with "Yes"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

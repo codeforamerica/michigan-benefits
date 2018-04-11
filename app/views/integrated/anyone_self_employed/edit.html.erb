@@ -1,0 +1,11 @@
+<% content_for :header_title, "Self-Employment" %>
+<% content_for :form_card_title, "Is anyone self-employed in any way?" %>
+<% content_for :form_card_help, "This includes owning your own business, have a home or online business, or performing odd jobs." %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_yes_no_buttons :anyone_self_employed %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
