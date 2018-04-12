@@ -1,5 +1,5 @@
 module Integrated
-  class MultipleMembersController < FormsController
+  class MultipleMembersPerPageController < FormsController
     def edit
       @form = form_class.new(members: members_to_update)
     end
