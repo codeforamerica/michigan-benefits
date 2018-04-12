@@ -190,4 +190,46 @@ RSpec.describe CommonApplication do
       expect(application.anyone_employed?).to be_falsey
     end
   end
+
+  describe "#primary_member" do
+    context "when at least one member is present" do
+      it "returns the member that was first created" do
+        application = create(:common_application, :multi_member)
+        expect(application.primary_member).to eq(application.members.first)
+      end
+    end
+
+    context "when no members are present" do
+      it "returns nil" do
+        application = create(:common_application)
+        expect(application.primary_member).to be_nil
+      end
+    end
+  end
+
+  describe "#non_applicant_members" do
+    context "when one member is present" do
+      it "returns an empty array" do
+        application = create(:common_application, :single_member)
+        expect(application.non_applicant_members).to eq([])
+      end
+    end
+
+    context "when 2 members are present" do
+      it "returns an array without the primary member" do
+        application = create(:common_application, :multi_member)
+
+        expect(application.non_applicant_members).to match_array([application.members.second,
+                                                                  application.members.third])
+      end
+    end
+  end
+
+  describe "#display_name" do
+    it "returns the display name of the primary member" do
+      application = create(:common_application,
+                           members: [build(:household_member, first_name: "Octopus", last_name: "Cuttlefish")])
+      expect(application.display_name).to eq("Octopus Cuttlefish")
+    end
+  end
 end
