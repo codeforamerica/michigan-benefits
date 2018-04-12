@@ -1,11 +1,12 @@
 class FormNavigation
   MAIN = {
-    "Introduction" => [
-      Integrated::IntroduceYourselfController,
+    "Welcome" => [
       Integrated::ResideInStateController,
       Integrated::ResideOutOfStateController,
+      Integrated::IntroduceYourselfController,
       Integrated::LivingSituationController,
-      Integrated::BenefitsIntroController,
+    ],
+    "Household" => [
       Integrated::HouseholdMembersOverviewController,
     ],
     "Food Assistance" => [
@@ -13,9 +14,9 @@ class FormNavigation
       Integrated::BuyAndPrepareFoodWithOtherPersonController,
       Integrated::ShareFoodCostsWithHouseholdController,
       Integrated::BuyAndPrepareFoodSeparatelyController,
-      Integrated::ReviewFoodAssistanceMembersController,
     ],
     "Healthcare" => [
+      Integrated::ReviewFoodAssistanceMembersController,
       Integrated::HealthcareController,
       Integrated::DeclineHealthcareController,
     ],
@@ -45,12 +46,6 @@ class FormNavigation
       Integrated::AnyoneDisabledController,
       Integrated::WhoIsDisabledController,
     ],
-    "Citizen" => [
-      Integrated::AreYouCitizenController,
-      Integrated::EveryoneCitizenController,
-      Integrated::WhoIsNotCitizenController,
-      Integrated::ImmigrationInfoController,
-    ],
     "Veteran" => [
       Integrated::AreYouVeteranController,
       Integrated::AnyoneVeteranController,
@@ -61,14 +56,20 @@ class FormNavigation
       Integrated::AnyoneFosterCareController,
       Integrated::WhoWasFosterCareController,
     ],
-    "Pregnancy" => [
-      Integrated::AreYouPregnantController,
-      Integrated::AnyonePregnantController,
-      Integrated::WhoIsPregnantController,
-      Integrated::HowManyBabiesController,
-      Integrated::DoYouHavePregnancyExpensesController,
-      Integrated::AnyoneHavePregnancyExpensesController,
-      Integrated::WhoHasPregnancyExpensesController,
+    "Citizen" => [
+      Integrated::AreYouCitizenController,
+      Integrated::EveryoneCitizenController,
+      Integrated::WhoIsNotCitizenController,
+      Integrated::ImmigrationInfoController,
+    ],
+    "Housing Expenses" => [
+
+    ],
+    "Dependent Expenses" => [
+
+    ],
+    "Student Loans" => [
+
     ],
     "Current Healthcare" => [
       Integrated::AreYouHealthcareEnrolledController,
@@ -79,6 +80,15 @@ class FormNavigation
       Integrated::DoYouHaveMedicalBillsController,
       Integrated::AnyoneHaveMedicalBillsController,
       Integrated::WhoHasMedicalBillsController,
+    ],
+    "Pregnancy" => [
+      Integrated::AreYouPregnantController,
+      Integrated::AnyonePregnantController,
+      Integrated::WhoIsPregnantController,
+      Integrated::HowManyBabiesController,
+      Integrated::DoYouHavePregnancyExpensesController,
+      Integrated::AnyoneHavePregnancyExpensesController,
+      Integrated::WhoHasPregnancyExpensesController,
     ],
     "Flint Water Crisis" => [
       Integrated::AreYouFlintWaterController,
@@ -97,6 +107,12 @@ class FormNavigation
       Integrated::AreYouSelfEmployedController,
       Integrated::AnyoneSelfEmployedController,
       Integrated::WhoIsSelfEmployedController,
+    ],
+    "Assets" => [
+
+    ],
+    "Specifics" => [
+
     ],
     "Finish" => [
       Integrated::ApplicationSubmittedController,

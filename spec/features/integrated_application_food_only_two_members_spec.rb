@@ -11,6 +11,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
+      expect(page).to have_content("Do you currently reside in Michigan?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Introduction" do
       expect(page).to have_content("To start, please introduce yourself")
 
       fill_in "What's your first name?", with: "Jessie"
@@ -31,24 +37,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
-      expect(page).to have_content("Do you currently reside in Michigan?")
-
-      proceed_with "Yes"
-    end
-
-    on_page "Introduction" do
       expect(page).to have_content("What's your current living situation?")
 
       select_radio(
         question: "What's your current living situation?",
         answer: "Stable address",
       )
-
-      proceed_with "Continue"
-    end
-
-    on_page "Introduction" do
-      expect(page).to have_content("Every family is different")
 
       proceed_with "Continue"
     end
