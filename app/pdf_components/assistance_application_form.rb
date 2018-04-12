@@ -131,89 +131,89 @@ class AssistanceApplicationForm
   end
 
   def additional_notes_attributes
-    hash = {
+    @_additional_notes = {
       notes: "",
     }
-    additional_household_members(hash)
-    additional_medical_expenses(hash)
-    additional_members_healthcare_enrolled(hash)
-    additional_members_flint_water(hash)
-    additional_members_employed(hash)
-    additional_members_self_employed(hash)
-    hash
+    add_additional_household_members
+    add_additional_medical_expenses
+    add_additional_members_healthcare_enrolled
+    add_additional_members_flint_water
+    add_additional_members_employed
+    add_additional_members_self_employed
+    @_additional_notes
   end
 
-  def additional_household_members(hash)
+  def add_additional_household_members
     if benefit_application.members.count > 5
-      hash[:household_added_notes] = "Yes"
-      hash[:notes] += "Additional Household Members:"
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Household Members:"
       benefit_application.members[5..-1].each do |extra_member|
-        hash[:notes] += "\n- Relation: #{extra_member.relationship_label}, "
-        hash[:notes] += "Legal name: #{extra_member.display_name}, "
-        hash[:notes] += "Sex: #{extra_member.sex.titleize}, "
-        hash[:notes] += "DOB: #{mmddyyyy_date(extra_member.birthday)}, "
-        hash[:notes] += "Married: #{extra_member.married.titleize}, "
-        hash[:notes] += "Citizen: #{extra_member.citizen.titleize}, "
+        @_additional_notes[:notes] += "\n- Relation: #{extra_member.relationship_label}, "
+        @_additional_notes[:notes] += "Legal name: #{extra_member.display_name}, "
+        @_additional_notes[:notes] += "Sex: #{extra_member.sex.titleize}, "
+        @_additional_notes[:notes] += "DOB: #{mmddyyyy_date(extra_member.birthday)}, "
+        @_additional_notes[:notes] += "Married: #{extra_member.married.titleize}, "
+        @_additional_notes[:notes] += "Citizen: #{extra_member.citizen.titleize}, "
         if extra_member.requesting_food_yes? || extra_member.requesting_healthcare_yes?
           programs = %w{Food Healthcare}.select do |program|
             extra_member.public_send(:"requesting_#{program.downcase}_yes?")
           end
-          hash[:notes] += "Applying for: #{programs.join(', ')}\n"
+          @_additional_notes[:notes] += "Applying for: #{programs.join(', ')}\n"
         end
       end
     end
   end
 
-  def additional_medical_expenses(hash)
+  def add_additional_medical_expenses
     members = benefit_application.members.select(&:pregnancy_expenses_yes?)
     if members.count > 2
-      hash[:household_added_notes] = "Yes"
-      hash[:notes] += "Additional Medical Expenses:\n"
-      hash[:notes] += members[2..-1].map do |extra_member|
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Medical Expenses:\n"
+      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
         "- #{extra_member.display_name}, Pregnancy-related\n"
       end.join
     end
   end
 
-  def additional_members_healthcare_enrolled(hash)
+  def add_additional_members_healthcare_enrolled
     members = benefit_application.members.select(&:healthcare_enrolled_yes?)
     if members.count > 3
-      hash[:household_added_notes] = "Yes"
-      hash[:notes] += "Additional Members Currently Enrolled in Health Coverage:\n"
-      hash[:notes] += members[3..-1].map do |extra_member|
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Members Currently Enrolled in Health Coverage:\n"
+      @_additional_notes[:notes] += members[3..-1].map do |extra_member|
         "- #{extra_member.display_name}\n"
       end.join
     end
   end
 
-  def additional_members_flint_water(hash)
+  def add_additional_members_flint_water
     members = benefit_application.members.select(&:flint_water_yes?)
     if members.count > 2
-      hash[:household_added_notes] = "Yes"
-      hash[:notes] += "Additional Members Affected by the Flint Water Crisis:\n"
-      hash[:notes] += members[2..-1].map do |extra_member|
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Members Affected by the Flint Water Crisis:\n"
+      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
         "- #{extra_member.display_name}\n"
       end.join
     end
   end
 
-  def additional_members_employed(hash)
+  def add_additional_members_employed
     members = benefit_application.members.select { |member| member if member.job_count&.nonzero? }
     if members.count > 2
-      hash[:household_added_notes] = "Yes"
-      hash[:notes] += "Additional Employed Members:\n"
-      hash[:notes] += members[2..-1].map do |extra_member|
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Employed Members:\n"
+      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
         "- #{extra_member.display_name}\n"
       end.join
     end
   end
 
-  def additional_members_self_employed(hash)
+  def add_additional_members_self_employed
     members = benefit_application.members.select(&:self_employed_yes?)
     if members.count > 2
-      hash[:household_added_notes] = "Yes"
-      hash[:notes] += "Additional Self-Employed Members:\n"
-      hash[:notes] += members[2..-1].map do |extra_member|
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Self-Employed Members:\n"
+      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
         "- #{extra_member.display_name}\n"
       end.join
     end

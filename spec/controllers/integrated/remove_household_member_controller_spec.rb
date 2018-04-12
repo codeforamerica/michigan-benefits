@@ -29,7 +29,10 @@ RSpec.describe Integrated::RemoveHouseholdMemberController do
 
         expect do
           put :update, params: { form: { member_id: member_two.id } }
-        end.to change { current_app.primary_member.married_no? }.from(false).to(true)
+        end.to change {
+          current_app.reload
+          current_app.primary_member.married_no?
+        }.from(false).to(true)
       end
 
       context "and no other members are married" do

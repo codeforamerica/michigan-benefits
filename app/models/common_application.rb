@@ -1,5 +1,4 @@
 class CommonApplication < ApplicationRecord
-  include CommonBenefitApplication
   include Submittable
 
   has_one :navigator,
@@ -45,6 +44,8 @@ class CommonApplication < ApplicationRecord
   enum living_situation: { unknown_living_situation: 0, stable_address: 1, temporary_address: 2, homeless: 3 }
   enum income_changed: { unfilled: 0, yes: 1, no: 2 }, _prefix: :income_changed
 
+  delegate :display_name, to: :primary_member
+
   def single_member_household?
     members.count == 1
   end
@@ -63,6 +64,14 @@ class CommonApplication < ApplicationRecord
 
   def documents
     []
+  end
+
+  def primary_member
+    members.first
+  end
+
+  def non_applicant_members
+    members - [primary_member]
   end
 
   def applying_for_food_assistance?

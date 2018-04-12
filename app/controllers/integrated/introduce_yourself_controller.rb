@@ -12,20 +12,19 @@ module Integrated
                            month: member_data.delete(:birthday_month),
                            year: member_data.delete(:birthday_year),
       ))
-      if current_application.primary_member.is_a?(HouseholdMember)
+      if current_application.primary_member
         current_application.primary_member.update(member_data)
-        current_application.update(application_params)
       else
         current_application.members.create(member_data)
       end
+      current_application.update(application_params)
     end
 
     private
 
     def existing_attributes
-      if current_application.primary_member.is_a?(HouseholdMember)
-        attributes = current_application.attributes.
-          merge(current_application.primary_member.attributes)
+      if current_application.primary_member
+        attributes = current_application.attributes.merge(current_application.primary_member.attributes)
         %i[year month day].each do |sym|
           attributes["birthday_#{sym}"] = current_application.primary_member.birthday.try(sym)
         end

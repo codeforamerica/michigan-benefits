@@ -62,15 +62,9 @@ class FormNavigation
       Integrated::WhoIsNotCitizenController,
       Integrated::ImmigrationInfoController,
     ],
-    "Housing Expenses" => [
-
-    ],
-    "Dependent Expenses" => [
-
-    ],
-    "Student Loans" => [
-
-    ],
+    "Housing Expenses" => [],
+    "Dependent Expenses" => [],
+    "Student Loans" => [],
     "Current Healthcare" => [
       Integrated::AreYouHealthcareEnrolledController,
       Integrated::AnyoneHealthcareEnrolledController,
@@ -108,12 +102,8 @@ class FormNavigation
       Integrated::AnyoneSelfEmployedController,
       Integrated::WhoIsSelfEmployedController,
     ],
-    "Assets" => [
-
-    ],
-    "Specifics" => [
-
-    ],
+    "Assets" => [],
+    "Specifics" => [],
     "Finish" => [
       Integrated::ApplicationSubmittedController,
     ],
