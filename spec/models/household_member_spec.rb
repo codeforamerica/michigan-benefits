@@ -42,6 +42,20 @@ RSpec.describe HouseholdMember do
         expect(member_one.display_name).to eq("Anne McDog")
         expect(member_two.display_name).to eq("Sophie Grey")
       end
+
+      context "when first_only is true" do
+        it "only provides the first name" do
+          member_one = build(:household_member, first_name: "anne", last_name: "mcDog")
+          member_two = build(:household_member, first_name: "sophie", last_name: "grey")
+          create(
+            :common_application,
+            members: [member_one, member_two],
+          )
+
+          expect(member_one.display_name(first_only: true)).to eq("Anne")
+          expect(member_two.display_name(first_only: true)).to eq("Sophie")
+        end
+      end
     end
 
     context "I have same first name but different last name than someone my household" do
@@ -55,6 +69,8 @@ RSpec.describe HouseholdMember do
 
         expect(member_one.display_name).to eq("Anne McDog")
         expect(member_two.display_name).to eq("Anne Grey")
+        expect(member_one.display_name(first_only: true)).to eq("Anne McDog")
+        expect(member_two.display_name(first_only: true)).to eq("Anne Grey")
       end
     end
 
@@ -75,7 +91,10 @@ RSpec.describe HouseholdMember do
 
         expect(member_one.display_name).to eq("Anne McDog (1/2/1980)")
         expect(member_two.display_name).to eq("Anne McDog (3/14/1990)")
+        expect(member_one.display_name(first_only: true)).to eq("Anne McDog (1/2/1980)")
+        expect(member_two.display_name(first_only: true)).to eq("Anne McDog (3/14/1990)")
       end
+
       context "but my birthday is nil" do
         it "something" do
           member_one = build(:household_member,
@@ -97,6 +116,8 @@ RSpec.describe HouseholdMember do
 
           expect(member_one.display_name).to eq("Anne McDog")
           expect(member_two.display_name).to eq("Anne McDog (3/14/1990)")
+          expect(member_one.display_name(first_only: true)).to eq("Anne McDog")
+          expect(member_two.display_name(first_only: true)).to eq("Anne McDog (3/14/1990)")
         end
       end
     end

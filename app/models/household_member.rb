@@ -85,8 +85,20 @@ class HouseholdMember < ApplicationRecord
 
   RELATION_LABEL_LOOKUP = RELATIONSHIP_LABELS_AND_KEYS.map(&:reverse).to_h
 
-  def display_name
-    @_display_name ||= generate_unique_display_name
+  def first_name=(value)
+    super(value.try(:strip))
+  end
+
+  def last_name=(value)
+    super(value.try(:strip))
+  end
+
+  def display_name(first_only: false)
+    @_display_name ||= if first_only
+        generate_unique_first_name
+      else
+        generate_unique_full_name
+      end
   end
 
   def relationship_label
@@ -109,19 +121,33 @@ class HouseholdMember < ApplicationRecord
 
   private
 
-  def formatted_name(first_name, last_name)
-    "#{first_name.upcase_first} #{last_name.upcase_first}"
+  def formatted_name(names)
+    names.map(&:upcase_first).join(" ")
   end
 
-  def generate_unique_display_name
+  def generate_unique_full_name
     other_members = common_application.members - [self]
     other_member_names = other_members.map do |m|
-      formatted_name(m.first_name, m.last_name)
+      formatted_name([m.first_name, m.last_name])
     end
-    my_name = formatted_name(first_name, last_name)
+    my_name = formatted_name([first_name, last_name])
 
     if other_member_names.include?(my_name) && birthday.present?
       my_name + " (#{birthday.strftime('%-m/%-d/%Y')})"
+    else
+      my_name
+    end
+  end
+
+  def generate_unique_first_name
+    other_members = common_application.members - [self]
+    other_member_names = other_members.map do |m|
+      formatted_name([m.first_name])
+    end
+    my_name = formatted_name([first_name])
+
+    if other_member_names.include?(my_name)
+      generate_unique_full_name
     else
       my_name
     end
