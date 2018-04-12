@@ -1,5 +1,5 @@
 module Integrated
-  class DescribeTaxRelationshipsController < MultipleMembersController
+  class DescribeTaxRelationshipsController < MultipleMembersPerPageController
     def self.skip?(application)
       application.single_member_household? ||
         application.primary_member.filing_taxes_next_year_no? ||

@@ -1,5 +1,5 @@
 module Integrated
-  class HowManyJobsController < MultipleMembersController
+  class HowManyJobsController < MultipleMembersPerPageController
     def self.skip?(application)
       application.single_member_household? && !application.navigator.current_job?
     end
