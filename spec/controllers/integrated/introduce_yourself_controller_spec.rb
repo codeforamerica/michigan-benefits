@@ -25,14 +25,6 @@ RSpec.describe Integrated::IntroduceYourselfController do
         expect(form.previously_received_assistance).to eq("yes")
       end
     end
-
-    context "without a current application" do
-      it "renders edit" do
-        get :edit
-
-        expect(response).to render_template(:edit)
-      end
-    end
   end
 
   describe "update" do
@@ -50,34 +42,6 @@ RSpec.describe Integrated::IntroduceYourselfController do
             previously_received_assistance: "yes",
           },
         }
-      end
-
-      context "without a current application" do
-        it "creates application and assigns to session" do
-          put :update, params: valid_params
-
-          current_app = CommonApplication.find(session[:current_application_id])
-
-          primary_member = current_app.primary_member
-
-          expect(current_app.previously_received_assistance).to eq("yes")
-          expect(primary_member.first_name).to eq("Gary")
-          expect(primary_member.last_name).to eq("McTester")
-          expect(primary_member.sex).to eq("male")
-          expect(primary_member.birthday).to eq(DateTime.new(1950, 1, 31))
-          expect(primary_member.relationship).to eq("primary")
-        end
-
-        it "indicates that member is seeking food and healthcare assistance, and buys food with themself" do
-          put :update, params: valid_params
-
-          current_app = CommonApplication.find(session[:current_application_id])
-
-          primary_member = current_app.primary_member
-          expect(primary_member.requesting_food).to eq("yes")
-          expect(primary_member.requesting_healthcare).to eq("yes")
-          expect(primary_member.buy_and_prepare_food_together).to eq("yes")
-        end
       end
 
       context "with a current application" do

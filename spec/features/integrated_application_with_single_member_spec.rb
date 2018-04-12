@@ -11,6 +11,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
+      expect(page).to have_content("Do you currently reside in Michigan?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Introduction" do
       expect(page).to have_content("To start, please introduce yourself")
 
       fill_in "What's your first name?", with: "Jessie"
@@ -31,24 +37,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
-      expect(page).to have_content("Do you currently reside in Michigan?")
-
-      proceed_with "Yes"
-    end
-
-    on_page "Introduction" do
       expect(page).to have_content("What's your current living situation?")
 
       select_radio(
         question: "What's your current living situation?",
         answer: "Temporary address",
       )
-
-      proceed_with "Continue"
-    end
-
-    on_page "Introduction" do
-      expect(page).to have_content("Every family is different")
 
       proceed_with "Continue"
     end
@@ -115,12 +109,6 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
-    on_page "Citizenship" do
-      expect(page).to have_content("Are you currently a US Citizen?")
-
-      proceed_with "Yes"
-    end
-
     on_page "Veterans" do
       expect(page).to have_content("Are you a veteran of the military?")
 
@@ -129,6 +117,26 @@ RSpec.feature "Integrated application" do
 
     on_page "Foster Care" do
       expect(page).to have_content("Were you in foster care when you turned 18?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Citizenship" do
+      expect(page).to have_content("Are you currently a US Citizen?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Current Healthcare" do
+      expect(page).to have_content("Are you currently enrolled in a health insurance plan?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Medical Bills" do
+      expect(page).to have_content(
+        "Do you need help paying for medical bills from the last 3 months?",
+      )
 
       proceed_with "Yes"
     end
@@ -150,20 +158,6 @@ RSpec.feature "Integrated application" do
     on_page "Pregnancy" do
       expect(page).to have_content(
         "Do you have medical bills related to pregnancy from the last three months?",
-      )
-
-      proceed_with "Yes"
-    end
-
-    on_page "Current Healthcare" do
-      expect(page).to have_content("Are you currently enrolled in a health insurance plan?")
-
-      proceed_with "Yes"
-    end
-
-    on_page "Medical Bills" do
-      expect(page).to have_content(
-        "Do you need help paying for medical bills from the last 3 months?",
       )
 
       proceed_with "Yes"

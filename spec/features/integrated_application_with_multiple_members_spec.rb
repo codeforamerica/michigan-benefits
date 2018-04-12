@@ -14,6 +14,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
+      expect(page).to have_content("Do you currently reside in Michigan?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Introduction" do
       expect(page).to have_content("To start, please introduce yourself")
 
       fill_in "What's your first name?", with: "Jessie"
@@ -34,24 +40,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
-      expect(page).to have_content("Do you currently reside in Michigan?")
-
-      proceed_with "Yes"
-    end
-
-    on_page "Introduction" do
       expect(page).to have_content("What's your current living situation?")
 
       select_radio(
         question: "What's your current living situation?",
         answer: "Stable address",
       )
-
-      proceed_with "Continue"
-    end
-
-    on_page "Introduction" do
-      expect(page).to have_content("Every family is different")
 
       proceed_with "Continue"
     end
@@ -352,30 +346,6 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Citizenship" do
-      expect(page).to have_content("Is everyone currently a US Citizen?")
-
-      proceed_with "No"
-    end
-
-    on_page "Citizenship" do
-      expect(page).to have_content(
-        "Who is not currently a US Citizen?",
-      )
-
-      check "Joe Schmoe"
-
-      proceed_with "Continue"
-    end
-
-    on_page "Citizenship" do
-      expect(page).to have_content(
-        "Do you have any information about immigration status on hand? (like ID types and numbers)",
-      )
-
-      proceed_with "Yes"
-    end
-
     on_page "Veterans" do
       expect(page).to have_content("Is anyone a veteran of the military?")
 
@@ -404,6 +374,64 @@ RSpec.feature "Integrated application" do
       )
 
       check "Joe Schmoe"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Citizenship" do
+      expect(page).to have_content("Is everyone currently a US Citizen?")
+
+      proceed_with "No"
+    end
+
+    on_page "Citizenship" do
+      expect(page).to have_content(
+        "Who is not currently a US Citizen?",
+      )
+
+      check "Joe Schmoe"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Citizenship" do
+      expect(page).to have_content(
+        "Do you have any information about immigration status on hand? (like ID types and numbers)",
+      )
+
+      proceed_with "Yes"
+    end
+
+    on_page "Current Healthcare" do
+      expect(page).to have_content("Is anyone currently enrolled in a health insurance plan?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Current Healthcare" do
+      expect(page).to have_content(
+        "Who is currently enrolled in a health insurance plan?",
+      )
+
+      check "Pupper McDog"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Medical Bills" do
+      expect(page).to have_content(
+        "Does anyone need help paying for medical bills from the last 3 months?",
+      )
+
+      proceed_with "Yes"
+    end
+
+    on_page "Medical Bills" do
+      expect(page).to have_content(
+        "Who has medical bills from the past 3 months?",
+      )
+
+      check "Jonny Tester"
 
       proceed_with "Continue"
     end
@@ -446,40 +474,6 @@ RSpec.feature "Integrated application" do
       )
 
       check "Pupper McDog"
-
-      proceed_with "Continue"
-    end
-
-    on_page "Current Healthcare" do
-      expect(page).to have_content("Is anyone currently enrolled in a health insurance plan?")
-
-      proceed_with "Yes"
-    end
-
-    on_page "Current Healthcare" do
-      expect(page).to have_content(
-        "Who is currently enrolled in a health insurance plan?",
-      )
-
-      check "Pupper McDog"
-
-      proceed_with "Continue"
-    end
-
-    on_page "Medical Bills" do
-      expect(page).to have_content(
-        "Does anyone need help paying for medical bills from the last 3 months?",
-      )
-
-      proceed_with "Yes"
-    end
-
-    on_page "Medical Bills" do
-      expect(page).to have_content(
-        "Who has medical bills from the past 3 months?",
-      )
-
-      check "Jonny Tester"
 
       proceed_with "Continue"
     end
