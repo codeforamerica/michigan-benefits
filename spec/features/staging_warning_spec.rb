@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Warn users on staging only" do
-  scenario "Renders the staging warning message", :js do
+  xscenario "Renders the staging warning message", :js do
     allow(GateKeeper).to receive(:demo_environment?).and_return(true)
 
     visit root_path
