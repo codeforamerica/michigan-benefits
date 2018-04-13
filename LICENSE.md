@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2017 Code for America
+Copyright (c) 2017-2018 Code for America
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
