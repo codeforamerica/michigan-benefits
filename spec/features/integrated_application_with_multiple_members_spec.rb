@@ -209,14 +209,6 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Healthcare" do
-      expect(page).to have_content(
-        "we'll ask you questions about how you file taxes",
-      )
-
-      proceed_with "Continue"
-    end
-
-    on_page "Healthcare" do
       expect(page).to have_content("Will you file taxes next year?")
 
       proceed_with "Yes"
