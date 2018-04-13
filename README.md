@@ -1,6 +1,6 @@
 # Michigan Benefits
 
-Code repository for [MichiganBenefits.org](michiganbenefits.org), a multi-benefit assistance application from
+Code repository for [MichiganBenefits.org](https://michiganbenefits.org), a multi-benefit assistance application from
 [Code for America](https://www.codeforamerica.org).
 
 [![CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits.svg?style=svg)](https://circleci.com/gh/codeforamerica/michigan-benefits)
@@ -12,8 +12,9 @@ Code repository for [MichiganBenefits.org](michiganbenefits.org), a multi-benefi
 * [Trello - design](https://trello.com/b/TIKaeN1c/michiganbenefitsorg-design-board)
 * [InVision](https://projects.invisionapp.com/d/main#/projects/prototypes/10425326)
 * [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits)
-* [Staging (staging.michiganbenefits.org, not the herokuapp url)](https://staging.michiganbenefits.org)
-* [Production](https://michigan-benefits-production.herokuapp.com)
+* [Demo](https://demo.michiganbenefits.org) - Try it out! Doesn't submit real applications.
+* [Staging](https://staging.michiganbenefits.org)
+* [Production](https://michiganbenefits.org) - Submits real applications to Michigan. Use with caution.
 
 ## Documentation
 

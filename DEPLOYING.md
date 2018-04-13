@@ -25,13 +25,11 @@ You can repeat the setup steps this way:
 
 ### Deploying to Production
 
-Our release process will promote the pre-production environment to production.
+Our release process will promote the pre-production environment to production and demo.
 
-Before production, we want to make sure that:
+Before deploying to production, we want to make sure that:
 
-* The `production` branch points to the desired commit hash that we want in production. This should only be done via a fast-forward merge from any more recent commit on `master`.
 * All tickets that are awaiting acceptance have been accepted
-* We've done a code review
 * All necessary configuration variables are set on production
 * All buildpacks are the same between staging and production
 

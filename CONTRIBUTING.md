@@ -11,7 +11,7 @@ America development team and other partners.
 While this project is open source,
 we are not currently seeking external contributions.
 If you would like to learn more about this project,
-please email <alanw@codeforamerica.org>.
+please email <hello@michiganbenefits.org>.
 
 ## Getting Set Up
 
@@ -50,21 +50,6 @@ If you do not have this binary, [use this guide to get set up on MacOS].
 
 * After cloning this repo, run: `bin/setup`.
 
-### Onboarding Checklist
-
-Ask the team for access to the following services to begin contributing:
-
-* [GitHub](https://github.com/codeforamerica/michigan-benefits)
-* Slack
-* [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2123705)
-* Twilio
-* Mailgun
-* Trello - Benefits Partnership org
-* Heroku
-* Password Manager
-* [multi-benefits-product Google Calendar](codeforamerica.org_jkbrndbh2ubvh6frucq6dc2chk@group.calendar.google.com)
-* Get calendar invites to: daily standup, weekly planning, weekly retro
-
 ## Day-to-day Development
 
 ### Local Server
@@ -87,7 +72,8 @@ without completing the whole application.
 
 After booting the server and filling out the first step,
 go to `http://localhost:3000/steps`
-to jump around.
+to jump around the SNAP and Medicaid flows, 
+or `http://localhost:3000/forms` for the Integrated application.
 
 
 ### Testing
@@ -185,14 +171,6 @@ Person who noticed the problem, writes a bug and puts it at the top of the Icebo
 A product manager should then review the bug and place it in proper priority in the Backlog, adding any steps
 necessary to reproduce the bug.
 
-#### Apply the correct Tracker label
-
-| Label      | Severity | Action |
-| ------------- | -----------| ----- |
-| P1 | Severe bug. (e.g. the site is down, apps are at risk of not being delivered) | Should be fixed immediately |
-| P2 | Some negative impact on users | Should be placed on top of Backlog (PM may increase priority) |
-| P3 | No big impact, low priority | Place in Icebox for prioritization |
-
 ### Work In Progress
 
 * When someone starts working on a task, they click "Start" on the Tracker story. This will assign the
@@ -205,7 +183,7 @@ necessary to reproduce the bug.
 * Call `binding.pry` anywhere in the code to stop execution and get a debugger console.
 * Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
 * To get a good look at and debug any emails that were sent from your running
-development environment visit your local [mailcatcher server](http://localhost:1080/).
+development environment visit your local [mailhog server](http://localhost:8025/).
 
 
 ### Code Review
@@ -235,18 +213,18 @@ build on Circle CI.
 * Once code completing a Tracker story is deployed to staging, mark the story as 'Delivered'. This
   indicates that it is ready for acceptance.
 * When two people are pairing on something, code can be merged to `master`
-  without an explicit PR / code review process.
+  without an explicit PR / code review process. A pull request should still be opened, to trigger 
+  Circle CI to run specs before merging to master.
 
 ### Acceptance Testing
 
 * Before deploying to production, we ask a teammate who _did not_ work on the feature to test our change on staging.
 * Ideally, the story author has put explicit acceptance steps into the card.
-* Assign yourself to the card, so others know you're testing.
-* Spin up staging and follow the acceptance tests.
-* If all looks well, click "Accept".
+* Review on [staging site](https://staging.michiganbenefits.org). If all looks well, click "Accept".
 * If you have a question, ask it in the card and leave in the Accept/Reject state.
 * If not, comment with specifics about what was incorrect and click "Reject". A developer will then pick up
 the story, fix the issues, and redeliver.
+* Once stories have been accepted, they are ready for deployment.
 
 #### Testing Document Uploads on Staging
 
@@ -284,14 +262,13 @@ When the PR is merged into master and the feature is deployed to staging, manual
 
 See [Acceptance Testing](#acceptance-testing)
 
-These tags can be applied to features, bugs, or chores.
-
 ## Driving Applications on MIBridges.org
 
-After clients complete our application form,
-      we use web driver software to fill in values
+In the past, after clients complete our application form,
+      we have used web driver software to fill in values
       on the [MIbridges.org](http://mibridges.org) application.
-
+      
+We have discontinued webdriving for the time being.
 
 ### Requirements
 
