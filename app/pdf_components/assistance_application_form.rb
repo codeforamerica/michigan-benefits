@@ -20,6 +20,7 @@ class AssistanceApplicationForm
       merge(medical_expenses_attributes).
       merge(employed_attributes).
       merge(self_employed_attributes).
+      merge(additional_income_attributes).
       merge(additional_notes_attributes)
   end
 
@@ -130,6 +131,25 @@ class AssistanceApplicationForm
     hash
   end
 
+  def additional_income_attributes
+    ordinals = ["first", "second"]
+    hash = {
+      anyone_additional_income: yes_no_or_unfilled(
+        yes: benefit_application.anyone_additional_income?,
+        no: !benefit_application.anyone_additional_income?,
+      ),
+    }
+    Income::INCOME_SOURCES.each_key do |key|
+      hash[:"additional_income_#{key}"] = yes_if_true(benefit_application.anyone_additional_income_of?(key))
+    end
+    members = benefit_application.members.select { |member| member if member.incomes&.count&.nonzero? }
+    members.first(2).each_with_index do |member, i|
+      hash[:"#{ordinals[i]}_member_additional_income_name"] = member.display_name
+      hash[:"#{ordinals[i]}_member_additional_income_type"] = member.incomes.map(&:display_name).join(", ")
+    end
+    hash
+  end
+
   def additional_notes_attributes
     @_additional_notes = {
       notes: "",
@@ -140,6 +160,7 @@ class AssistanceApplicationForm
     add_additional_members_flint_water
     add_additional_members_employed
     add_additional_members_self_employed
+    add_additional_members_additional_income
     @_additional_notes
   end
 
@@ -215,6 +236,17 @@ class AssistanceApplicationForm
       @_additional_notes[:notes] += "Additional Self-Employed Members:\n"
       @_additional_notes[:notes] += members[2..-1].map do |extra_member|
         "- #{extra_member.display_name}\n"
+      end.join
+    end
+  end
+
+  def add_additional_members_additional_income
+    members = benefit_application.members.select { |member| member if member.incomes&.count&.nonzero? }
+    if members.count > 2
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Members with Additional Income:\n"
+      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
+        "- #{extra_member.display_name} (#{extra_member.incomes.map(&:display_name).join(', ')})\n"
       end.join
     end
   end

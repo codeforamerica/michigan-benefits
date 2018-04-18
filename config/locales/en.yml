@@ -187,6 +187,11 @@ en:
         title:
           zero: Are you expecting more than one baby?
           one: Is %{name} expecting more than one baby?
+    income_sources:
+      edit:
+        title:
+          zero: Do you get income from any of these sources?
+          one: Does %{name} get income from any of these sources?
   ssn:
     description: "Providing Social Security numbers ensures you receive the correct benefits. Even if you've applied before, this helps connect this application to the right file. MDHHS maintains strict security guidelines to protect the identities of our residents."
   helpers:

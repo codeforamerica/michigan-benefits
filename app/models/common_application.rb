@@ -115,4 +115,12 @@ class CommonApplication < ApplicationRecord
   def anyone_employed?
     members.map { |member| member.job_count || 0 }.sum.positive?
   end
+
+  def anyone_additional_income?
+    members.map { |member| member.incomes.count || 0 }.sum.positive?
+  end
+
+  def anyone_additional_income_of?(income_type)
+    members.map { |member| member.incomes.where(income_type: income_type.to_s).count || 0 }.sum.positive?
+  end
 end

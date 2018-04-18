@@ -35,7 +35,8 @@ RSpec.describe AssistanceApplicationForm do
           pregnant: "no",
           pregnancy_expenses: "yes",
           job_count: 1,
-          self_employed: "yes")
+          self_employed: "yes",
+          incomes: [build(:income, income_type: "unemployment")])
       end
 
       let(:common_application) do
@@ -86,6 +87,10 @@ RSpec.describe AssistanceApplicationForm do
           first_member_employment_name: "Octopus Cuttlefish",
           anyone_self_employed: "Yes",
           first_member_self_employed_name: "Octopus Cuttlefish",
+          anyone_additional_income: "Yes",
+          additional_income_unemployment: "Yes",
+          first_member_additional_income_name: "Octopus Cuttlefish",
+          first_member_additional_income_type: "Unemployment",
         )
       end
     end
@@ -102,7 +107,8 @@ RSpec.describe AssistanceApplicationForm do
                                         healthcare_enrolled: "yes",
                                         flint_water: "yes",
                                         job_count: 1,
-                                        self_employed: "yes"),
+                                        self_employed: "yes",
+                                        incomes: [build(:income, income_type: "unemployment")]),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wiley",
@@ -110,14 +116,17 @@ RSpec.describe AssistanceApplicationForm do
                                         healthcare_enrolled: "yes",
                                         flint_water: "yes",
                                         job_count: 1,
-                                        self_employed: "yes"),
+                                        self_employed: "yes",
+                                        incomes: [build(:income, income_type: "pension")]),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wonka",
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
                                         job_count: 1,
-                                        self_employed: "yes"),
+                                        self_employed: "yes",
+                                        incomes: [build(:income, income_type: "retirement"),
+                                                  build(:income, income_type: "social_security")]),
                                   build(:household_member),
                                   build(:household_member),
                                   build(:household_member,
@@ -156,6 +165,8 @@ RSpec.describe AssistanceApplicationForm do
             - Willy Wonka
             Additional Self-Employed Members:
             - Willy Wonka
+            Additional Members with Additional Income:
+            - Willy Wonka (Retirement, Social Security)
           NOTES
         )
       end
