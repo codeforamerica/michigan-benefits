@@ -185,15 +185,21 @@ RSpec.feature "Integrated application" do
       click_on "Add a person"
     end
 
+    kitty = {
+      first_name: "Kitty",
+      last_name: "DeRat",
+      relationship: "Roommate",
+    }
     on_page "Healthcare" do
       expect(page).to have_content("Add a person.")
 
-      fill_in "What's their first name?", with: "Kitty"
-      fill_in "What's their last name?", with: "DeRat"
-      select "Roommate", from: "What is their relationship to you?"
+      fill_in "What's their first name?", with: kitty[:first_name]
+      fill_in "What's their last name?", with: kitty[:last_name]
+      select kitty[:relationship], from: "What is their relationship to you?"
 
       proceed_with "Continue"
     end
+    members << kitty
 
     on_page "Healthcare" do
       expect(page).to have_content(
@@ -260,15 +266,23 @@ RSpec.feature "Integrated application" do
       click_on "Add a person"
     end
 
+    ginny = {
+      first_name: "Ginny",
+      last_name: "Pig",
+      relationship: "Child",
+      tax_relationship: "Dependent",
+    }
     on_page "Healthcare" do
       expect(page).to have_content("Add a person.")
-      fill_in "What's their first name?", with: "Ginny"
-      fill_in "What's their last name?", with: "Pig"
-      select "Child", from: "What is their relationship to you?"
-      select_radio question: "How are they included on your tax return?", answer: "Dependent"
+
+      fill_in "What's their first name?", with: ginny[:first_name]
+      fill_in "What's their last name?", with: ginny[:last_name]
+      select ginny[:relationship], from: "What is their relationship to you?"
+      select_radio question: "How are they included on your tax return?", answer: ginny[:tax_relationship]
 
       proceed_with "Continue"
     end
+    members << ginny
 
     on_page "Healthcare" do
       expect(page).to have_content("Is there anyone else who can be included on your tax return?")
@@ -453,7 +467,7 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Pregnancy" do
-      expect(page).to have_content("Is Joe Schmoe expecting more than one baby?")
+      expect(page).to have_content("Is Joe expecting more than one baby?")
 
       fill_in "form[baby_count]", with: "2"
 
@@ -541,6 +555,27 @@ RSpec.feature "Integrated application" do
       check "Ginny Pig"
 
       proceed_with "Continue"
+    end
+
+    on_page "Income" do
+      expect(page).to have_content(
+        "Do you get income from any of these sources?",
+      )
+
+      check "Unemployment"
+      check "Child Support"
+
+      proceed_with "Continue"
+    end
+
+    members.each do |member|
+      on_page "Income" do
+        expect(page).to have_content(
+          "Does #{member[:first_name]} get income from any of these sources?",
+        )
+
+        proceed_with "Continue"
+      end
     end
 
     on_page "Application Submitted" do

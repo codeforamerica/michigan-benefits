@@ -1,5 +1,6 @@
 module Integrated
   class MemberPerPageController < FormsController
+    helper_method :current_member
     helper_method :member_appropriate_translation_data
 
     def update_models
@@ -7,7 +8,7 @@ module Integrated
     end
 
     def current_member
-      @_current_member ||= member_from_querystring || first_member
+      @_current_member ||= member_from_querystring || member_from_form || first_member
     end
 
     def next_path

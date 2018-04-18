@@ -1,5 +1,6 @@
 class HouseholdMember < ApplicationRecord
   belongs_to :common_application
+  has_many :incomes
 
   scope :requesting_food, -> {
     where(requesting_food: "yes").order("created_at")
@@ -95,10 +96,10 @@ class HouseholdMember < ApplicationRecord
 
   def display_name(first_only: false)
     @_display_name ||= if first_only
-        generate_unique_first_name
-      else
-        generate_unique_full_name
-      end
+                         generate_unique_first_name
+                       else
+                         generate_unique_full_name
+                       end
   end
 
   def relationship_label

@@ -89,18 +89,15 @@ class FormNavigation
       Integrated::AnyoneFlintWaterController,
       Integrated::WhoIsFlintWaterController,
     ],
-    "Income Change" => [
+    "Income and Employment" => [
       Integrated::HasYourIncomeChangedController,
       Integrated::TellUsIncomeChangedController,
-    ],
-    "Jobs" => [
       Integrated::DoYouHaveJobController,
       Integrated::HowManyJobsController,
-    ],
-    "Self-Employment" => [
       Integrated::AreYouSelfEmployedController,
       Integrated::AnyoneSelfEmployedController,
       Integrated::WhoIsSelfEmployedController,
+      Integrated::IncomeSourcesController,
     ],
     "Assets" => [],
     "Specifics" => [],

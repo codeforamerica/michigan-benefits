@@ -5,6 +5,10 @@ class Form
 
   class_attribute :attribute_names
 
+  def assign_attribute(name, value)
+    assign_attributes(name => value)
+  end
+
   class <<self
     def set_application_attributes(*application_attributes)
       @application_attributes = application_attributes

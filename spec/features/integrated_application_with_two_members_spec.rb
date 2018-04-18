@@ -248,6 +248,25 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Income" do
+      expect(page).to have_content(
+        "Do you get income from any of these sources?",
+      )
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income" do
+      expect(page).to have_content(
+        "Does Jonny get income from any of these sources?",
+      )
+
+      check "Unemployment"
+      check "Child Support"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",
