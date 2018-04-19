@@ -1,5 +1,4 @@
 class AssistanceApplicationForm
-  include AssistanceApplicationFormDefaults
   include Integrated::PdfAttributes
 
   def initialize(benefit_application)

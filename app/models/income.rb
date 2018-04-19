@@ -12,9 +12,14 @@ class Income < ApplicationRecord
     workers_comp: "Worker's Compensation",
   }.freeze
 
-  def income_label
-    INCOME_SOURCES[income_type.to_sym]
+  def self.all_income_types
+    INCOME_SOURCES.keys
   end
 
-  alias_method :display_name, :income_label
+  validates :income_type, inclusion: { in: all_income_types.map(&:to_s),
+    message: "%{value} is not a valid income source" }
+
+  def display_name
+    INCOME_SOURCES[income_type.to_sym]
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180412215226) do
+ActiveRecord::Schema.define(version: 20180419203222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,15 @@ ActiveRecord::Schema.define(version: 20180412215226) do
     t.string "pay_quantity"
     t.string "payment_frequency"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.integer "amount"
+    t.bigint "common_application_id"
+    t.datetime "created_at", null: false
+    t.string "expense_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["common_application_id"], name: "index_expenses_on_common_application_id"
   end
 
   create_table "exports", force: :cascade do |t|

@@ -172,16 +172,4 @@ RSpec.describe AssistanceApplicationForm do
       end
     end
   end
-
-  describe "defaults in pdf" do
-    it "returns default fields from pdf" do
-      fields = PdfForms.new.get_fields(AssistanceApplicationForm.new(double("fake application")).source_pdf_path)
-
-      data = {}
-      fields.each_with_object(data) do |field, hash|
-        hash[field.name] = field.value
-      end
-      expect(AssistanceApplicationForm::DEFAULTS).to eq(data)
-    end
-  end
 end
