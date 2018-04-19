@@ -32,8 +32,7 @@ RSpec.describe FoodAssistanceSupplement do
             first_name: "Jonny",
             last_name: "Tester",
             requesting_food: "yes"),
-        ],
-      )
+        ])
 
       FoodAssistanceSupplement.new(common_application).attributes
     end

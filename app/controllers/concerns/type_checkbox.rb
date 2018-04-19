@@ -8,7 +8,7 @@ module TypeCheckbox
   end
 
   def update_models
-    new_types = checkbox_options.select{ |key| form_params[key] == "1" }
+    new_types = checkbox_options.select { |key| form_params[key] == "1" }
     new_types.each do |type|
       checkbox_collection.find_or_create_by(checkbox_attribute => type)
     end
@@ -26,5 +26,4 @@ module TypeCheckbox
       @form.assign_attribute(expense.public_send(checkbox_attribute), true)
     end
   end
-
 end

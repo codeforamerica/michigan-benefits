@@ -17,7 +17,7 @@ class Income < ApplicationRecord
   end
 
   validates :income_type, inclusion: { in: all_income_types.map(&:to_s),
-    message: "%{value} is not a valid income source" }
+                                       message: "%{value} is not a valid income source" }
 
   def display_name
     INCOME_SOURCES[income_type.to_sym]

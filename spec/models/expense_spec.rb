@@ -32,7 +32,7 @@ RSpec.describe Expense do
   describe "scopes" do
     describe ".utilities" do
       it "returns utility expenses" do
-        non_utility = build(:expense, expense_type: "rent")
+        build(:expense, expense_type: "rent")
         utility = create(:expense, expense_type: "phone")
 
         expect(Expense.utilities.count).to eq(1)
@@ -42,7 +42,7 @@ RSpec.describe Expense do
 
     describe ".housing" do
       it "returns housing expenses" do
-        non_housing = build(:expense, expense_type: "mortgage")
+        build(:expense, expense_type: "mortgage")
         housing = create(:expense, expense_type: "rent")
 
         expect(Expense.housing.count).to eq(1)
