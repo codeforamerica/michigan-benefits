@@ -1,6 +1,10 @@
 class Expense < ApplicationRecord
   belongs_to :common_application
 
+  scope :utilities, -> {
+    where(expense_type: UTILITY_EXPENSES.keys)
+  }
+
   UTILITY_EXPENSES = {
     phone: "Phone (including cell phones)",
     heat: "Heat",
@@ -8,7 +12,7 @@ class Expense < ApplicationRecord
     electricity: "Electricity",
     water_sewer: "Water/Sewer",
     trash: "Trash",
-    other_utility: "Other",
+    cooking_fuel: "Cooking Fuel",
   }.freeze
 
   def self.all_expense_types

@@ -18,16 +18,19 @@ RSpec.describe FoodAssistanceSupplement do
 
   describe "#attributes" do
     let(:attributes) do
-      common_application = create(:common_application, members: [
-                                    build(:household_member,
-                                      :in_food_household,
-                                      first_name: "Julie",
-                                      last_name: "Tester"),
-                                    build(:household_member,
-                                      first_name: "Jonny",
-                                      last_name: "Tester",
-                                      requesting_food: "yes"),
-                                  ])
+      common_application = create(:common_application,
+        expenses: [build(:expense, expense_type: "phone")],
+        members: [
+          build(:household_member,
+            :in_food_household,
+            first_name: "Julie",
+            last_name: "Tester"),
+          build(:household_member,
+            first_name: "Jonny",
+            last_name: "Tester",
+            requesting_food: "yes"),
+        ],
+      )
       FoodAssistanceSupplement.new(common_application).attributes
     end
 
@@ -35,6 +38,8 @@ RSpec.describe FoodAssistanceSupplement do
       expect(attributes).to include(
         anyone_buys_food_separately: "Yes",
         anyone_buys_food_separately_names: "Jonny Tester",
+        anyone_pays_utilities: "Yes",
+        pays_utilities_phone: "Yes",
       )
     end
   end

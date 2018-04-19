@@ -26,4 +26,18 @@ RSpec.describe Expense do
       end
     end
   end
+
+  describe "scopes" do
+    describe ".utilities" do
+      it "returns utility expenses" do
+        non_utility = build(:expense, expense_type: "foo")
+        non_utility.save(:validate => false)
+
+        utility = create(:expense, expense_type: "phone")
+
+        expect(Expense.utilities.count).to eq(1)
+        expect(Expense.utilities).to match_array([utility])
+      end
+    end
+  end
 end
