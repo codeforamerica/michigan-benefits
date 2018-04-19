@@ -21,9 +21,9 @@
   <body class="<%= template_name_css_class %>">
 
     <div class="page-wrapper">
-      <%# if GateKeeper.demo_environment? %>
-        <!--<div class="demo-banner staging-warning">This is an <strong>example website</strong>. Visit <a href="https://www.michiganbenefits.org">www.michiganbenefits.org</a> for the real website.</div>-->
-      <%# end %>
+      <% if GateKeeper.demo_environment? %>
+        <div class="demo-banner staging-warning">This is an <strong>example website</strong>. Visit <a href="https://www.michiganbenefits.org">www.michiganbenefits.org</a> for the real website.</div>
+      <% end %>
       <%= content_for?(:banner) ? content_for(:banner) : '' %>
       <%= content_for?(:content) ? content_for(:content) : yield %>
     </div>
