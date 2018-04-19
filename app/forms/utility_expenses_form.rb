@@ -1,3 +1,3 @@
 class UtilityExpensesForm < Form
-  set_application_attributes(*Expense.all_expense_types)
+  set_application_attributes(*Expense::UTILITY_EXPENSES.keys)
 end

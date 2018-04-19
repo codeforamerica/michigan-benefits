@@ -1,5 +1,5 @@
 module Integrated
-  class UtilityExpensesController < FormsController
+  class HousingExpensesController < FormsController
     include TypeCheckbox
 
     def checkbox_attribute
@@ -7,11 +7,11 @@ module Integrated
     end
 
     def checkbox_options
-      Expense::UTILITY_EXPENSES.keys
+      Expense::HOUSING_EXPENSES.keys
     end
 
     def checkbox_collection
-      current_application.expenses.utilities
+      current_application.expenses.housing
     end
   end
 end

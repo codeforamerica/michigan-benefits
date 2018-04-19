@@ -36,12 +36,25 @@ class FoodAssistanceSupplement
         yes: benefit_application.expenses.utilities.any?,
         no: benefit_application.expenses.utilities.none?,
       ),
-    }.merge(utility_expense_attributes)
+      anyone_pays_housing_expenses: yes_no_or_unfilled(
+        yes: benefit_application.expenses.housing.any?,
+        no: benefit_application.expenses.housing.none?,
+      ),
+    }.merge(housing_expense_attributes).
+      merge(utility_expense_attributes)
   end
 
   def non_household_members_applying_for_snap
     @_non_household_members_applying_for_snap =
       benefit_application.food_applying_members - benefit_application.food_household_members
+  end
+
+  def housing_expense_attributes
+    {}.tap do |hash|
+      benefit_application.expenses.housing.map(&:expense_type).each do |expense|
+        hash["pays_housing_expenses_#{expense}".to_sym] = "Yes"
+      end
+    end
   end
 
   def utility_expense_attributes

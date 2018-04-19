@@ -120,6 +120,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household Expenses" do
+      expect(page).to have_content("What kind of housing expenses do you have?")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household Expenses" do
       expect(page).to have_content("Do you have any separate utility expenses?")
 
       proceed_with "Continue"

@@ -1,0 +1,23 @@
+<% content_for :header_title, "Household Expenses" %>
+<% content_for :form_card_title, "What kind of housing expenses do you have?"  %>
+<% content_for :form_card_help, "Check all that apply." %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <fieldset class="input-group">
+          <legend class="sr-only" id="housing-expenses__legend">
+            What kind of housing expenses do you have?
+          </legend>
+
+          <% Expense::HOUSING_EXPENSES.each do |name, label| %>
+              <%= f.mb_checkbox(name, label, legend_id: "housing-expenses__legend") %>
+          <% end %>
+          <hr>
+          <label class="checkbox" id="none__label">
+            <input aria-labelledby="housing-expenses__legend none__label" type="checkbox" name="" class="" id="none__checkbox">
+            None of the above
+          </label>
+
+        </fieldset>
+    <% end %>
+<% end %>
