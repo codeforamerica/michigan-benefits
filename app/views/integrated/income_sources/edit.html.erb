@@ -1,5 +1,6 @@
 <% content_for :header_title, "Income" %>
 <% content_for :form_card_title, t(".title", **member_appropriate_translation_data) %>
+<% content_for :form_card_help, "Check all that apply." %>
 
 <% content_for :form_card_body do %>
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
