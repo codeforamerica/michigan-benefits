@@ -9,7 +9,7 @@ namespace :lint do
 end
 
 task :brakeman do
-  sh "brakeman"
+  sh "brakeman --no-pager"
 end
 
 task default: %w(lint:autocorrect bundler:audit brakeman spec)
