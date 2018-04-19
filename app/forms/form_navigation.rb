@@ -61,7 +61,9 @@ class FormNavigation
       Integrated::WhoIsNotCitizenController,
       Integrated::ImmigrationInfoController,
     ],
-    "Housing Expenses" => [],
+    "Household Expenses" => [
+      Integrated::UtilityExpensesController,
+    ],
     "Dependent Expenses" => [],
     "Student Loans" => [],
     "Current Healthcare" => [

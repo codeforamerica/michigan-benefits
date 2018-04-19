@@ -1,17 +1,17 @@
 module Integrated
-  class IncomeSourcesController < MemberPerPageController
+  class UtilityExpensesController < FormsController
     include TypeCheckbox
 
     def checkbox_attribute
-      :income_type
+      :expense_type
     end
 
     def checkbox_options
-      Income::INCOME_SOURCES.keys
+      Expense::UTILITY_EXPENSES.keys
     end
 
     def checkbox_collection
-      current_member.incomes
+      current_application.expenses
     end
   end
 end
