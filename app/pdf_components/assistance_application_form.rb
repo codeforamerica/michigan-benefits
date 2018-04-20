@@ -70,8 +70,8 @@ class AssistanceApplicationForm
       ),
       anyone_income_change_explanation: benefit_application.income_changed_explanation,
       wants_authorized_representative: yes_no_or_unfilled(
-        yes: benefit_application.authorized_representative,
-        no: !benefit_application.authorized_representative,
+        yes: benefit_application.authorized_representative_yes?,
+        no: benefit_application.authorized_representative_no?,
       ),
       authorized_representative_full_name: benefit_application.authorized_representative_name,
       authorized_representative_phone_number: formatted_phone(benefit_application.authorized_representative_phone),

@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe Integrated::TellUsAuthorizedRepController do
   describe "#skip?" do
-    context "no authorize representative designated" do
+    context "no authorized representative designated" do
       it "returns true" do
-        application = create(:common_application, authorized_representative: false)
+        application = create(:common_application, authorized_representative: "no")
 
         skip_step = Integrated::TellUsAuthorizedRepController.skip?(application)
         expect(skip_step).to eq(true)

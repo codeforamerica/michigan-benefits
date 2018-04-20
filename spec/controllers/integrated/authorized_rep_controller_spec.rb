@@ -4,7 +4,7 @@ RSpec.describe Integrated::AuthorizedRepController do
   describe "#update" do
     context "with valid params" do
       let(:valid_params) do
-        { authorized_representative: true }
+        { authorized_representative: "yes" }
       end
 
       it "updates the models" do
@@ -14,7 +14,7 @@ RSpec.describe Integrated::AuthorizedRepController do
         put :update, params: { form: valid_params }
 
         current_app.reload
-        expect(current_app.authorized_representative).to be_truthy
+        expect(current_app.authorized_representative_yes?).to be_truthy
       end
     end
   end

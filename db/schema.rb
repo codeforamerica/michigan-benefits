@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419203222) do
+ActiveRecord::Schema.define(version: 20180420183245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20180419203222) do
   end
 
   create_table "common_applications", force: :cascade do |t|
-    t.boolean "authorized_representative", default: false
+    t.integer "authorized_representative", default: 0
     t.string "authorized_representative_name"
     t.string "authorized_representative_phone"
     t.datetime "created_at", null: false
