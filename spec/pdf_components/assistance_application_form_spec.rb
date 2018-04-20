@@ -47,7 +47,7 @@ RSpec.describe AssistanceApplicationForm do
            living_situation: "temporary_address",
            income_changed: "yes",
            income_changed_explanation: "I lost my job.",
-           authorized_representative: true,
+           authorized_representative: "yes",
            authorized_representative_name: "Trusty McTrusterson",
            authorized_representative_phone: "2024561111")
       end

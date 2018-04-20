@@ -4,7 +4,9 @@
 
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
-      <%= f.mb_yes_no_buttons :authorized_representative %>
+      <%= f.mb_yes_no_buttons :authorized_representative,
+                              yes_value: "yes",
+                              no_value: "no" %>
     <% end %>
 <% end %>
 
