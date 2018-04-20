@@ -139,6 +139,14 @@ RSpec.feature "Integrated application" do
 
     on_page "Medical Bills" do
       expect(page).to have_content(
+        "Do you pay for ongoing medical expenses?",
+      )
+
+      proceed_with "Continue"
+    end
+
+    on_page "Medical Bills" do
+      expect(page).to have_content(
         "Do you need help paying for medical bills from the last 3 months?",
       )
 

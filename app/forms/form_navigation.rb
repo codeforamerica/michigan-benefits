@@ -67,12 +67,11 @@ class FormNavigation
     ],
     "Dependent Expenses" => [],
     "Student Loans" => [],
-    "Current Healthcare" => [
+    "Medical Bills and Health Insurance" => [
       Integrated::AreYouHealthcareEnrolledController,
       Integrated::AnyoneHealthcareEnrolledController,
       Integrated::WhoIsHealthcareEnrolledController,
-    ],
-    "Medical Bills" => [
+      Integrated::OngoingMedicalExpensesController,
       Integrated::DoYouHaveMedicalBillsController,
       Integrated::AnyoneHaveMedicalBillsController,
       Integrated::WhoHasMedicalBillsController,

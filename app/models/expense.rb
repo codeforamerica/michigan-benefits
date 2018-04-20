@@ -7,6 +7,17 @@ class Expense < ApplicationRecord
     other_housing: "Other",
   }.freeze
 
+  MEDICAL_EXPENSES = {
+    health_insurance: "Health Insurance",
+    copays: "Co-pays",
+    prescriptions: "Prescriptions",
+    transportation: "Transportation for medical care",
+    dental: "Dental",
+    in_home_care: "In-home care",
+    hospital_bills: "Hospital bills",
+    other_medical: "Other ongoing medical expenses",
+  }.freeze
+
   UTILITY_EXPENSES = {
     phone: "Phone (including cell phones)",
     heat: "Heat",
@@ -23,12 +34,19 @@ class Expense < ApplicationRecord
     where(expense_type: HOUSING_EXPENSES.keys)
   }
 
+  scope :medical, -> {
+    where(expense_type: MEDICAL_EXPENSES.keys)
+  }
+
   scope :utilities, -> {
     where(expense_type: UTILITY_EXPENSES.keys)
   }
 
   def self.all_expenses
-    HOUSING_EXPENSES.merge(UTILITY_EXPENSES)
+    HOUSING_EXPENSES.merge(
+      **MEDICAL_EXPENSES,
+      **UTILITY_EXPENSES,
+    )
   end
 
   def self.all_expense_types
