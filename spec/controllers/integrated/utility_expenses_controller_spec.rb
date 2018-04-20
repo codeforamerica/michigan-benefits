@@ -4,8 +4,7 @@ RSpec.describe Integrated::UtilityExpensesController do
   describe "edit" do
     it "assigns existing utility expenses" do
       current_app = create(:common_application,
-        expenses: [build(:expense, expense_type: "phone")],
-      )
+        expenses: [build(:expense, expense_type: "phone")])
 
       session[:current_application_id] = current_app.id
 
@@ -39,8 +38,8 @@ RSpec.describe Integrated::UtilityExpensesController do
 
       it "overwrites all existing expenses" do
         current_app = create(:common_application, expenses: [
-          build(:expense, expense_type: "trash"),
-        ])
+                               build(:expense, expense_type: "trash"),
+                             ])
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }

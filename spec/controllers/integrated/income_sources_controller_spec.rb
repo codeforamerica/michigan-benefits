@@ -4,8 +4,7 @@ RSpec.describe Integrated::IncomeSourcesController do
   describe "edit" do
     it "assigns existing income sources" do
       primary_member = build(:household_member,
-        incomes: [build(:income, income_type: "unemployment")],
-      )
+        incomes: [build(:income, income_type: "unemployment")])
       current_app = create(
         :common_application,
         members: [primary_member],

@@ -4,8 +4,7 @@ RSpec.describe Integrated::HousingExpensesController do
   describe "edit" do
     it "assigns existing housing expenses" do
       current_app = create(:common_application,
-        expenses: [build(:expense, expense_type: "rent")],
-      )
+        expenses: [build(:expense, expense_type: "rent")])
 
       session[:current_application_id] = current_app.id
 
@@ -39,9 +38,9 @@ RSpec.describe Integrated::HousingExpensesController do
 
       it "overwrites all existing housing expenses" do
         current_app = create(:common_application, expenses: [
-          build(:expense, expense_type: "phone"),
-          build(:expense, expense_type: "mortgage"),
-        ])
+                               build(:expense, expense_type: "phone"),
+                               build(:expense, expense_type: "mortgage"),
+                             ])
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }
