@@ -1,0 +1,11 @@
+<% content_for :header_title, "Finishing Up" %>
+<% content_for :form_card_title, "Would you like to designate someone as your authorized representative?" %>
+<% content_for :form_card_help, "This should be someone you trust. They would have access to your food benefits, a Bridge card, and help shop for you." %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <%= f.mb_yes_no_buttons :authorized_representative %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

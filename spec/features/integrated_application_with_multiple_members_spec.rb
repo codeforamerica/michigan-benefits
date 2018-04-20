@@ -596,6 +596,25 @@ RSpec.feature "Integrated application" do
       end
     end
 
+    on_page "Finishing Up" do
+      expect(page).to have_content(
+        "Would you like to designate someone as your authorized representative?",
+      )
+
+      proceed_with "Yes"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content(
+        "Who would you like to be your authorized representative?",
+      )
+
+      fill_in "What's their full, legal name?", with: "Trusty McTrusterson"
+      fill_in "What's their phone number?", with: "2024561111"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

@@ -84,6 +84,9 @@ ActiveRecord::Schema.define(version: 20180419203222) do
   end
 
   create_table "common_applications", force: :cascade do |t|
+    t.boolean "authorized_representative", default: false
+    t.string "authorized_representative_name"
+    t.string "authorized_representative_phone"
     t.datetime "created_at", null: false
     t.integer "income_changed", default: 0
     t.text "income_changed_explanation"

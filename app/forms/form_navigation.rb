@@ -102,7 +102,9 @@ class FormNavigation
     ],
     "Assets" => [],
     "Specifics" => [],
-    "Finish" => [
+    "Finishing Up" => [
+      Integrated::AuthorizedRepController,
+      Integrated::TellUsAuthorizedRepController,
       Integrated::ApplicationSubmittedController,
     ],
   }.freeze

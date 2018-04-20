@@ -46,7 +46,10 @@ RSpec.describe AssistanceApplicationForm do
            previously_received_assistance: "yes",
            living_situation: "temporary_address",
            income_changed: "yes",
-           income_changed_explanation: "I lost my job.")
+           income_changed_explanation: "I lost my job.",
+           authorized_representative: true,
+           authorized_representative_name: "Trusty McTrusterson",
+           authorized_representative_phone: "2024561111")
       end
 
       let(:attributes) do
@@ -94,6 +97,9 @@ RSpec.describe AssistanceApplicationForm do
           first_member_additional_income_type: "Unemployment",
           anyone_medical_expenses: "Yes",
           medical_expenses_health_insurance: "Yes",
+          wants_authorized_representative: "Yes",
+          authorized_representative_full_name: "Trusty McTrusterson",
+          authorized_representative_phone_number: "(202) 456-1111",
         )
       end
     end

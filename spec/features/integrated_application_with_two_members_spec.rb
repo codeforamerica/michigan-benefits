@@ -279,6 +279,14 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Finishing Up" do
+      expect(page).to have_content(
+        "Would you like to designate someone as your authorized representative?",
+      )
+
+      proceed_with "No"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

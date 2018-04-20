@@ -69,6 +69,12 @@ class AssistanceApplicationForm
         no: benefit_application.income_changed_no?,
       ),
       anyone_income_change_explanation: benefit_application.income_changed_explanation,
+      wants_authorized_representative: yes_no_or_unfilled(
+        yes: benefit_application.authorized_representative,
+        no: !benefit_application.authorized_representative,
+      ),
+      authorized_representative_full_name: benefit_application.authorized_representative_name,
+      authorized_representative_phone_number: formatted_phone(benefit_application.authorized_representative_phone),
     }
   end
 
@@ -269,5 +275,10 @@ class AssistanceApplicationForm
     benefit_application.members.select do |member|
       member.pregnant_yes? || member.pregnancy_expenses_yes?
     end
+  end
+
+  def formatted_phone(phone)
+    return nil if phone.blank?
+    "(#{phone[0..2]}) #{phone[3..5]}-#{phone[6..9]}"
   end
 end
