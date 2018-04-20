@@ -2,8 +2,10 @@ class Expense < ApplicationRecord
   HOUSING_EXPENSES = {
     rent: "Rent",
     mortgage: "Mortgage",
+    mobile_home_lot_rent: "Mobile home lot rent",
     property_tax: "Property taxes",
     homeowners_insurance: "Homeowners or renters insurance",
+    land_contract: "Land contract",
     other_housing: "Other",
   }.freeze
 
