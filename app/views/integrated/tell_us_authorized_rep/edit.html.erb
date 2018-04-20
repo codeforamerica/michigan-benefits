@@ -1,0 +1,11 @@
+<% content_for :header_title, "Finishing Up" %>
+<% content_for :form_card_title, "Who would you like to be your authorized representative?" %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <%= f.mb_input_field :authorized_representative_name, "What's their full, legal name?" %>
+      <%= f.mb_phone_number_field :authorized_representative_phone,
+                                  "What's their phone number?",
+                                  help_text: "No dashes or spaces (example: 5555555555)." %>
+    <% end %>
+<% end %>
