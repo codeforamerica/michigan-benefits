@@ -64,9 +64,9 @@ class FormNavigation
     "Household Expenses" => [
       Integrated::HousingExpensesController,
       Integrated::UtilityExpensesController,
+      Integrated::DependentCareExpensesController,
+      Integrated::ChildcareExpensesController,
     ],
-    "Dependent Expenses" => [],
-    "Student Loans" => [],
     "Medical Bills and Health Insurance" => [
       Integrated::AreYouHealthcareEnrolledController,
       Integrated::AnyoneHealthcareEnrolledController,

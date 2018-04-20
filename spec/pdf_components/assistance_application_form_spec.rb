@@ -42,7 +42,10 @@ RSpec.describe AssistanceApplicationForm do
       let(:common_application) do
         create(:common_application,
            members: [primary_member],
-           expenses: [build(:expense, expense_type: "health_insurance")],
+           expenses: [
+             build(:expense, expense_type: "health_insurance"),
+             build(:expense, expense_type: "childcare"),
+           ],
            previously_received_assistance: "yes",
            living_situation: "temporary_address",
            income_changed: "yes",
@@ -100,6 +103,8 @@ RSpec.describe AssistanceApplicationForm do
           wants_authorized_representative: "Yes",
           authorized_representative_full_name: "Trusty McTrusterson",
           authorized_representative_phone_number: "(202) 456-1111",
+          anyone_expenses_dependent_care: "Yes",
+          dependent_care_childcare: "Yes",
         )
       end
     end

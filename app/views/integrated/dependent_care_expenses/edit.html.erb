@@ -1,0 +1,11 @@
+<% content_for :header_title, "Household Expenses" %>
+<% content_for :form_card_title, "Does anyone pay for dependent care?" %>
+<% content_for :form_card_help, "The care can be for an elderly, disabled, or ill family member." %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :disability_care %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

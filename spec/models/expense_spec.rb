@@ -60,5 +60,15 @@ RSpec.describe Expense do
         expect(Expense.utilities).to match_array([utility])
       end
     end
+
+    describe ".dependent_care" do
+      it "returns dependent care expenses" do
+        build(:expense, expense_type: "rent")
+        dependent_care = create(:expense, expense_type: "childcare")
+
+        expect(Expense.dependent_care.count).to eq(1)
+        expect(Expense.dependent_care).to match_array([dependent_care])
+      end
+    end
   end
 end

@@ -28,6 +28,11 @@ class Expense < ApplicationRecord
     cooking_fuel: "Cooking Fuel",
   }.freeze
 
+  DEPENDENT_CARE_EXPENSES = {
+    childcare: "",
+    disability_care: "",
+  }.freeze
+
   belongs_to :common_application
 
   scope :housing, -> {
@@ -42,10 +47,15 @@ class Expense < ApplicationRecord
     where(expense_type: UTILITY_EXPENSES.keys)
   }
 
+  scope :dependent_care, -> {
+    where(expense_type: DEPENDENT_CARE_EXPENSES.keys)
+  }
+
   def self.all_expenses
     HOUSING_EXPENSES.merge(
       **MEDICAL_EXPENSES,
       **UTILITY_EXPENSES,
+      **DEPENDENT_CARE_EXPENSES,
     )
   end
 
