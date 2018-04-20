@@ -18,6 +18,7 @@ class AssistanceApplicationForm
       merge(member_attributes).
       merge(medical_expenses_attributes).
       merge(medical_expenses_details).
+      merge(dependent_care_expenses_attributes).
       merge(employed_attributes).
       merge(self_employed_attributes).
       merge(additional_income_attributes).
@@ -75,6 +76,10 @@ class AssistanceApplicationForm
       ),
       authorized_representative_full_name: benefit_application.authorized_representative_name,
       authorized_representative_phone_number: formatted_phone(benefit_application.authorized_representative_phone),
+      anyone_expenses_dependent_care: yes_no_or_unfilled(
+        yes: benefit_application.expenses.dependent_care.any?,
+        no: benefit_application.expenses.dependent_care.none?,
+      ),
     }
   end
 
@@ -119,6 +124,14 @@ class AssistanceApplicationForm
       hash[:"#{prefix}_medical_expenses_type"] = "Pregnancy-related"
     end
     hash
+  end
+
+  def dependent_care_expenses_attributes
+    {}.tap do |hash|
+      benefit_application.expenses.dependent_care.map(&:expense_type).each do |expense|
+        hash["dependent_care_#{expense}".to_sym] = "Yes"
+      end
+    end
   end
 
   def employed_attributes

@@ -36,9 +36,10 @@ RSpec.describe Integrated::UtilityExpensesController do
         expect(expense_types).to match_array(["phone"])
       end
 
-      it "overwrites all existing expenses" do
+      it "overwrites all existing utility expenses" do
         current_app = create(:common_application, expenses: [
                                build(:expense, expense_type: "trash"),
+                               build(:expense, expense_type: "copays"),
                              ])
         session[:current_application_id] = current_app.id
 
@@ -47,7 +48,7 @@ RSpec.describe Integrated::UtilityExpensesController do
         current_app.reload
         expense_types = current_app.expenses.map(&:expense_type)
 
-        expect(expense_types).to match_array(["phone"])
+        expect(expense_types).to match_array(["phone", "copays"])
       end
     end
   end
