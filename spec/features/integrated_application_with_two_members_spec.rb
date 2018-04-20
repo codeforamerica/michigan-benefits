@@ -207,6 +207,12 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
+    on_page "Household Expenses" do
+      expect(page).to have_content("Does anyone pay for alimony or spousal support?")
+
+      proceed_with "No"
+    end
+
     on_page "Current Healthcare" do
       expect(page).to have_content("Is anyone currently enrolled in a health insurance plan?")
 
