@@ -1,7 +1,6 @@
 require "administrate/base_dashboard"
 
 class SnapApplicationDashboard < Administrate::BaseDashboard
-  # rubocop:disable LineLength
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     additional_income: Field::Text.with_options(searchable: false),
@@ -63,7 +62,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     exports: Field::HasMany,
     applied_before: Field::String.with_options(searchable: false),
   }.freeze
-  # rubocop:enable LineLength
 
   COLLECTION_ATTRIBUTES = %i[
     id

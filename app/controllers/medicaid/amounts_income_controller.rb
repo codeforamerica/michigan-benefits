@@ -61,7 +61,7 @@ module Medicaid
     def skip?
       current_application.no_one_with_income? ||
         current_member.nil? ||
-        current_member&.not_receiving_income?
+        current_member.not_receiving_income?
     end
   end
 end
