@@ -197,6 +197,11 @@ en:
         title:
           one: Do you pay for ongoing medical expenses?
           other: Does anyone in your household pay for ongoing medical expenses?
+    child_support:
+      edit:
+        title:
+          one: Do you pay for child support?
+          other: Does anyone pay for child support?
   ssn:
     description: "Providing Social Security numbers ensures you receive the correct benefits. Even if you've applied before, this helps connect this application to the right file. MDHHS maintains strict security guidelines to protect the identities of our residents."
   helpers:

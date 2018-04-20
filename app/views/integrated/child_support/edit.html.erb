@@ -1,0 +1,10 @@
+<% content_for :header_title, "Household Expenses" %>
+<% content_for :form_card_title, t(".title", count: current_application.members.count) %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :child_support %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

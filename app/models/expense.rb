@@ -33,6 +33,10 @@ class Expense < ApplicationRecord
     disability_care: "",
   }.freeze
 
+  COURT_ORDERED_EXPENSES = {
+    child_support: "",
+  }.freeze
+
   belongs_to :common_application
 
   scope :housing, -> {
@@ -51,11 +55,16 @@ class Expense < ApplicationRecord
     where(expense_type: DEPENDENT_CARE_EXPENSES.keys)
   }
 
+  scope :court_ordered, -> {
+    where(expense_type: COURT_ORDERED_EXPENSES.keys)
+  }
+
   def self.all_expenses
     HOUSING_EXPENSES.merge(
       **MEDICAL_EXPENSES,
       **UTILITY_EXPENSES,
       **DEPENDENT_CARE_EXPENSES,
+      **COURT_ORDERED_EXPENSES,
     )
   end
 
