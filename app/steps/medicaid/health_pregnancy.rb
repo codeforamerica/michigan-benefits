@@ -18,7 +18,7 @@ module Medicaid
     end
 
     def primary_member_is_female?
-      members.sort_by(&:id).first.female?
+      members.min_by(&:id).female?
     end
   end
 end

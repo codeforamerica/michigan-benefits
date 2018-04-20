@@ -7,12 +7,14 @@ class RemoteDocument
   end
 
   def download
+    # rubocop:disable Security/Open
     open(url) { |url_file| tempfile.write(url_file.read) }
     self
   rescue OpenURI::HTTPError
     return self if s3_download
   ensure
     rotate if landscape_image?
+    # rubocop:enable Security/Open
   end
 
   def pdf?

@@ -2,7 +2,7 @@ require_relative "../section_generator"
 
 module Section
   class WhoIsGenerator < Rails::Generators::NamedBase
-    source_root File.expand_path("../templates", __FILE__)
+    source_root File.expand_path("templates", __dir__)
     class_option :doc, type: :boolean, default: true, desc: "Include documentation."
 
     def generate_sections
