@@ -70,5 +70,15 @@ RSpec.describe Expense do
         expect(Expense.dependent_care).to match_array([dependent_care])
       end
     end
+
+    describe ".court_ordered" do
+      it "returns court ordered expenses" do
+        build(:expense, expense_type: "rent")
+        court_ordered = create(:expense, expense_type: "child_support")
+
+        expect(Expense.court_ordered.count).to eq(1)
+        expect(Expense.court_ordered).to match_array([court_ordered])
+      end
+    end
   end
 end

@@ -18,7 +18,7 @@ class AssistanceApplicationForm
       merge(member_attributes).
       merge(medical_expenses_attributes).
       merge(medical_expenses_details).
-      merge(dependent_care_expenses_attributes).
+      merge(additional_expenses_attributes).
       merge(employed_attributes).
       merge(self_employed_attributes).
       merge(additional_income_attributes).
@@ -80,6 +80,10 @@ class AssistanceApplicationForm
         yes: benefit_application.expenses.dependent_care.any?,
         no: benefit_application.expenses.dependent_care.none?,
       ),
+      anyone_court_expenses: yes_no_or_unfilled(
+        yes: benefit_application.expenses.court_ordered.any?,
+        no: benefit_application.expenses.court_ordered.none?,
+      ),
     }
   end
 
@@ -126,10 +130,14 @@ class AssistanceApplicationForm
     hash
   end
 
-  def dependent_care_expenses_attributes
+  def additional_expenses_attributes
     {}.tap do |hash|
       benefit_application.expenses.dependent_care.map(&:expense_type).each do |expense|
         hash["dependent_care_#{expense}".to_sym] = "Yes"
+      end
+
+      benefit_application.expenses.court_ordered.map(&:expense_type).each do |expense|
+        hash["court_expenses_#{expense}".to_sym] = "Yes"
       end
     end
   end

@@ -4,12 +4,14 @@ module Integrated
       application.single_member_household?
     end
 
-    def update_models
-      if form_params[:childcare] == "true"
-        current_application.expenses.dependent_care.find_or_create_by(expense_type: "childcare")
-      else
-        current_application.expenses.dependent_care.where(expense_type: "childcare").destroy_all
-      end
+    include SingleExpense
+
+    def expense_type
+      :childcare
+    end
+
+    def expense_collection
+      current_application.expenses.dependent_care
     end
   end
 end

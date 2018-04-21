@@ -45,6 +45,7 @@ RSpec.describe AssistanceApplicationForm do
            expenses: [
              build(:expense, expense_type: "health_insurance"),
              build(:expense, expense_type: "childcare"),
+             build(:expense, expense_type: "child_support"),
            ],
            previously_received_assistance: "yes",
            living_situation: "temporary_address",
@@ -105,6 +106,8 @@ RSpec.describe AssistanceApplicationForm do
           authorized_representative_phone_number: "(202) 456-1111",
           anyone_expenses_dependent_care: "Yes",
           dependent_care_childcare: "Yes",
+          anyone_court_expenses: "Yes",
+          court_expenses_child_support: "Yes",
         )
       end
     end
