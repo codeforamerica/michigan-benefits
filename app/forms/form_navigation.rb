@@ -67,6 +67,7 @@ class FormNavigation
       Integrated::DependentCareExpensesController,
       Integrated::ChildcareExpensesController,
       Integrated::ChildSupportController,
+      Integrated::AlimonyController,
     ],
     "Medical Bills and Health Insurance" => [
       Integrated::AreYouHealthcareEnrolledController,

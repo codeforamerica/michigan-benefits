@@ -37,6 +37,7 @@ class Expense < ApplicationRecord
 
   COURT_ORDERED_EXPENSES = {
     child_support: "",
+    alimony: "",
   }.freeze
 
   belongs_to :common_application
