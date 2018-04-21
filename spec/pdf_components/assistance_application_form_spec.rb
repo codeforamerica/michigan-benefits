@@ -46,6 +46,7 @@ RSpec.describe AssistanceApplicationForm do
              build(:expense, expense_type: "health_insurance"),
              build(:expense, expense_type: "childcare"),
              build(:expense, expense_type: "child_support"),
+             build(:expense, expense_type: "student_loan_interest"),
            ],
            previously_received_assistance: "yes",
            living_situation: "temporary_address",
@@ -108,6 +109,7 @@ RSpec.describe AssistanceApplicationForm do
           dependent_care_childcare: "Yes",
           anyone_court_expenses: "Yes",
           court_expenses_child_support: "Yes",
+          anyone_student_loans_deductions: "Yes",
         )
       end
     end

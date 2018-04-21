@@ -38,6 +38,8 @@ class Expense < ApplicationRecord
     alimony: "",
   }.freeze
 
+  OTHER_PERMITTED_EXPENSES = [:student_loan_interest].freeze
+
   belongs_to :common_application
 
   scope :housing, -> {
@@ -60,6 +62,10 @@ class Expense < ApplicationRecord
     where(expense_type: COURT_ORDERED_EXPENSES.keys)
   }
 
+  scope :student_loan_interest, -> {
+    where(expense_type: :student_loan_interest)
+  }
+
   def self.all_expenses
     HOUSING_EXPENSES.merge(
       **MEDICAL_EXPENSES,
@@ -70,7 +76,7 @@ class Expense < ApplicationRecord
   end
 
   def self.all_expense_types
-    all_expenses.keys
+    all_expenses.keys + OTHER_PERMITTED_EXPENSES
   end
 
   validates :expense_type, inclusion: { in: all_expense_types.map(&:to_s),

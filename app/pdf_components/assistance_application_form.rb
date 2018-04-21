@@ -84,6 +84,10 @@ class AssistanceApplicationForm
         yes: benefit_application.expenses.court_ordered.any?,
         no: benefit_application.expenses.court_ordered.none?,
       ),
+      anyone_student_loans_deductions: yes_no_or_unfilled(
+        yes: benefit_application.expenses.student_loan_interest.any?,
+        no: benefit_application.expenses.student_loan_interest.none?,
+      ),
     }
   end
 

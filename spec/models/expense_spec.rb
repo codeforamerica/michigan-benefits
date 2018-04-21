@@ -80,5 +80,15 @@ RSpec.describe Expense do
         expect(Expense.court_ordered).to match_array([court_ordered])
       end
     end
+
+    describe ".student_loan_interest" do
+      it "returns court ordered expenses" do
+        build(:expense, expense_type: "rent")
+        student_loan_interest = create(:expense, expense_type: "student_loan_interest")
+
+        expect(Expense.student_loan_interest.count).to eq(1)
+        expect(Expense.student_loan_interest).to match_array([student_loan_interest])
+      end
+    end
   end
 end
