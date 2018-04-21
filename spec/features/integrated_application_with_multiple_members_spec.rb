@@ -448,6 +448,12 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
+    on_page "Household Expenses" do
+      expect(page).to have_content("Does anyone pay for interest on student loans?")
+
+      proceed_with "Yes"
+    end
+
     on_page "Current Healthcare" do
       expect(page).to have_content("Is anyone currently enrolled in a health insurance plan?")
 
