@@ -642,6 +642,14 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Does anyone own vehicles?",
+      )
+
+      proceed_with "Yes"
+    end
+
     on_page "Finishing Up" do
       expect(page).to have_content(
         "Would you like to designate someone as your authorized representative?",

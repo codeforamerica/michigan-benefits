@@ -217,6 +217,14 @@ en:
         title:
           one: Do you have any money in accounts?
           other: Does anyone have money in accounts?
+    vehicles:
+      edit:
+        title:
+          one: Do you own any vehicles?
+          other: Does anyone own vehicles?
+        help:
+          one: Only list vehicles that are registered in your name.
+          other: Only list vehicles that are registered in their name.
   ssn:
     description: "Providing Social Security numbers ensures you receive the correct benefits. Even if you've applied before, this helps connect this application to the right file. MDHHS maintains strict security guidelines to protect the identities of our residents."
   helpers:

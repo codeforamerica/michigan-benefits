@@ -51,6 +51,15 @@
   }
 }
 
+.form-card__header {
+  .text--help {
+    margin-bottom: 1em;
+  }
+  .text--help:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
 .form-card--meta-data {
   margin-bottom: $padding-small;
   text-align: center;

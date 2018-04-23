@@ -1,0 +1,30 @@
+<% content_for :header_title, "Assets" %>
+
+<% content_for :form_card_title, t(".title", count: current_application.members.count) %>
+<% content_for :form_card_help_section do %>
+    <p class="text--centered text--help">
+      <%= t(".help", count: current_application.members.count) %>
+    </p>
+    <p class="text--centered text--help">
+      Don't worry — your first vehicle will not be counted against you.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <div class="form-group">
+      <p>This includes:</p>
+      <ul class="list--bulleted">
+        <li>Cars</li>
+        <li>Trucks</li>
+        <li>Motorcycles</li>
+        <li>Boats</li>
+        <li>Other vehicles</li>
+      </ul>
+    </div>
+
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :own_vehicles %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
