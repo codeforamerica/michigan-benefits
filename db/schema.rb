@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420183245) do
+ActiveRecord::Schema.define(version: 20180423214751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20180420183245) do
     t.boolean "current_job", default: false
     t.boolean "everyone_citizen", default: true
     t.boolean "immigration_info", default: false
+    t.boolean "money_in_accounts", default: false
     t.boolean "resides_in_state", default: true
     t.datetime "updated_at", null: false
     t.index ["common_application_id"], name: "index_application_navigators_on_common_application_id"
