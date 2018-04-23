@@ -28,6 +28,9 @@
               <%= yield :form_card_help %>
             </p>
           <% end %>
+          <% if content_for? :form_card_help_section %>
+            <%= yield :form_card_help_section %>
+          <% end %>
         <% end %>
       </header>
 
