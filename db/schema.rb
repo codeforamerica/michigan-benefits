@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423214751) do
+ActiveRecord::Schema.define(version: 20180423220751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20180423214751) do
     t.datetime "created_at", null: false
     t.integer "income_changed", default: 0
     t.text "income_changed_explanation"
+    t.integer "less_than_threshold_in_accounts", default: 0
     t.integer "living_situation", default: 0
     t.integer "previously_received_assistance", default: 0, null: false
     t.datetime "updated_at", null: false
