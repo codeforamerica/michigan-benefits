@@ -103,7 +103,9 @@ class FormNavigation
       Integrated::WhoIsSelfEmployedController,
       Integrated::IncomeSourcesController,
     ],
-    "Assets" => [],
+    "Assets" => [
+      Integrated::MoneyInAccountsController,
+    ],
     "Specifics" => [],
     "Finishing Up" => [
       Integrated::AuthorizedRepController,

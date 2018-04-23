@@ -1,0 +1,24 @@
+<% content_for :header_title, "Assets" %>
+
+<% content_for :form_card_title, t(".title", count: current_application.members.count) %>
+<% content_for :form_card_help,  "You will be asked to verify by providing bank and account statements." %>
+
+<% content_for :form_card_body do %>
+    <div class="form-group">
+      <p>This includes:</p>
+      <ul class="list--bulleted">
+        <li>Checking and savings accounts</li>
+        <li>Payroll/Benefits Card</li>
+        <li>Retirement plans</li>
+        <li>Investment accounts</li>
+        <li>Life Insurance</li>
+        <li>Other accounts with money in them</li>
+      </ul>
+    </div>
+
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_yes_no_buttons :money_in_accounts %>
+    <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>
