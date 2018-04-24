@@ -5,12 +5,12 @@
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
 
-        <%= f.mb_checkbox_set_with_none("properties",
+        <%= f.mb_checkbox_set_with_none(:properties,
           CommonApplication::PROPERTY_TYPES.map { |key, label|
-            { value: key, label: label }
+            { method: key, label: label }
           },
           label_text: t(".title", count: current_application.members.count),
-          options: { multiple: true } ) %>
+          value_is_array: true) %>
 
     <% end %>
 <% end %>

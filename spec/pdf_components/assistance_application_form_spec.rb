@@ -101,7 +101,6 @@ RSpec.describe AssistanceApplicationForm do
           additional_income_unemployment: "Yes",
           first_member_additional_income_name: "Octopus Cuttlefish",
           first_member_additional_income_type: "Unemployment",
-          anyone_medical_expenses: "Yes",
           medical_expenses_health_insurance: "Yes",
           wants_authorized_representative: "Yes",
           authorized_representative_full_name: "Trusty McTrusterson",

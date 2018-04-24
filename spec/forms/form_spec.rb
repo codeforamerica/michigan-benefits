@@ -11,9 +11,9 @@ RSpec.describe Form do
       Form.set_application_attributes(:foo, bar: [])
 
       expect(Form.application_attributes).to match_array([
-        :foo,
-        {:bar=>[]},
-      ])
+                                                           :foo,
+                                                           { bar: [] },
+                                                         ])
     end
   end
 
@@ -28,9 +28,9 @@ RSpec.describe Form do
       Form.set_member_attributes(:foo, bar: [])
 
       expect(Form.member_attributes).to match_array([
-        :foo,
-        {:bar=>[]},
-      ])
+                                                      :foo,
+                                                      { bar: [] },
+                                                    ])
     end
   end
 
@@ -44,9 +44,9 @@ RSpec.describe Form do
       Form.set_navigator_attributes(:foo, bar: [])
 
       expect(Form.navigator_attributes).to match_array([
-        :foo,
-        {:bar=>[]},
-      ])
+                                                         :foo,
+                                                         { bar: [] },
+                                                       ])
     end
   end
 
