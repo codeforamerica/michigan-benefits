@@ -1,6 +1,15 @@
 class CommonApplication < ApplicationRecord
   include Submittable
 
+  PROPERTY_TYPES = {
+    house: "House(s)",
+    building: "Buildings",
+    rental: "Rental property",
+    land: "Land/lot",
+    burial: "Burial plot",
+    other_property: "Other",
+  }.freeze
+
   has_one :navigator,
     class_name: "ApplicationNavigator",
     foreign_key: "common_application_id",

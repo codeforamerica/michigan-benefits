@@ -361,6 +361,43 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
+  def mb_checkbox_set_with_none(
+    method,
+    collection,
+    label_text:,
+    options: {}
+  )
+    legend_id = aria_label(method)
+
+    checkbox_html = collection.map do |item|
+      checkbox_label_id = "#{sanitized_id(item[:value])}__label"
+      local_options = options.merge(
+        'aria-labelledby': [legend_id, checkbox_label_id].join(" "),
+      )
+
+      <<~HTML.html_safe
+        <label id="#{checkbox_label_id}" class="checkbox">
+          #{check_box(method, local_options, item[:value].to_s, "")} #{item[:label]}
+        </label>
+      HTML
+    end.join.html_safe
+
+    <<~HTML.html_safe
+      <fieldset class="input-group">
+        <legend class="sr-only" id="#{legend_id}">
+          #{label_text}
+        </legend>
+        #{errors_for(object, method)}
+        #{checkbox_html}
+        <hr>
+        <label class="checkbox" id="none__label">
+          <input aria-labelledby="#{legend_id} none__label" type="checkbox" name="" class="" id="none__checkbox">
+          None of the above
+        </label>
+      </fieldset>
+    HTML
+  end
+
   def mb_select(
     method,
     label_text,

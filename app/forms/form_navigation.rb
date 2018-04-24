@@ -107,6 +107,7 @@ class FormNavigation
       Integrated::MoneyInAccountsController,
       Integrated::AmountInAccountsController,
       Integrated::VehiclesController,
+      Integrated::PropertyController,
     ],
     "Specifics" => [],
     "Finishing Up" => [

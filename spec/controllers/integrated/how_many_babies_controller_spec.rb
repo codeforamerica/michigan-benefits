@@ -35,7 +35,7 @@ RSpec.describe Integrated::HowManyBabiesController do
 
         session[:current_application_id] = current_app.id
 
-        get :edit, params: {}
+        get :edit
 
         expect(assigns[:form].id).to eq(pregnant_member.id)
       end
