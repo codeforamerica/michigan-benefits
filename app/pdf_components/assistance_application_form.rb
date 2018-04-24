@@ -39,6 +39,7 @@ class AssistanceApplicationForm
       applying_for_healthcare: yes_if_true(benefit_application.primary_member.requesting_healthcare_yes?),
       legal_name: benefit_application.display_name,
       dob: mmddyyyy_date(benefit_application.primary_member.birthday),
+      ssn: formatted_ssn(benefit_application.primary_member.ssn),
       received_assistance: yes_no_or_unfilled(
         yes: benefit_application.previously_received_assistance_yes?,
         no: benefit_application.previously_received_assistance_no?,
@@ -305,5 +306,10 @@ class AssistanceApplicationForm
   def formatted_phone(phone)
     return nil if phone.blank?
     "(#{phone[0..2]}) #{phone[3..5]}-#{phone[6..9]}"
+  end
+
+  def formatted_ssn(ssn)
+    return nil if ssn.blank?
+    "#{ssn[0..2]}-#{ssn[3..4]}-#{ssn[5..8]}"
   end
 end

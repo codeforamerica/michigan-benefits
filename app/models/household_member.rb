@@ -1,4 +1,5 @@
 class HouseholdMember < ApplicationRecord
+  include SocialSecurityNumber
   belongs_to :common_application
   has_many :incomes
 
@@ -85,6 +86,12 @@ class HouseholdMember < ApplicationRecord
   ].freeze
 
   RELATION_LABEL_LOOKUP = RELATIONSHIP_LABELS_AND_KEYS.map(&:reverse).to_h
+
+  attribute :ssn
+  attr_encrypted(
+    :ssn,
+    key: Rails.application.secrets.secret_key_for_ssn_encryption,
+  )
 
   def first_name=(value)
     super(value.try(:strip))
