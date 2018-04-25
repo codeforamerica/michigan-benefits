@@ -1,0 +1,16 @@
+<% content_for :header_title, "Assets" %>
+<% content_for :form_card_title, t(".title", count: current_application.members.count)  %>
+<% content_for :form_card_help, "You should include your primary home, if you own it. But don't worry — it won't be counted against you." %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+
+        <%= f.mb_checkbox_set_with_none(:properties,
+          CommonApplication::PROPERTY_TYPES.map { |key, label|
+            { method: key, label: label }
+          },
+          label_text: t(".title", count: current_application.members.count),
+          value_is_array: true) %>
+
+    <% end %>
+<% end %>

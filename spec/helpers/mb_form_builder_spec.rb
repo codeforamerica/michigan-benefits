@@ -582,6 +582,74 @@ RSpec.describe MbFormBuilder do
     end
   end
 
+  describe "#mb_checkbox_set_with_none" do
+    it "renders an accessible set of checkbox inputs" do
+      class SampleStep < Step
+        step_attributes(
+          :tng,
+          :voyager,
+        )
+      end
+
+      sample = SampleStep.new(tng: true)
+      form = MbFormBuilder.new("sample", sample, template, {})
+      output = form.mb_checkbox_set_with_none(
+        :captains,
+        [
+          { method: :tng, label: "Picard" },
+          { method: :voyager, label: "Janeway" },
+        ],
+        label_text: "Which captains do you think are cool?",
+      )
+
+      expect(output).to be_html_safe
+
+      expect(output).to match_html <<-HTML
+        <fieldset class="input-group">
+          <legend class="sr-only" id="sample_captains__label"> Which captains do you think are cool? </legend>
+          <label id="sample_tng__label" class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_tng__label" type="checkbox" value="1" checked="checked" name="sample[tng]" id="sample_tng" /> Picard </label>
+          <label id="sample_voyager__label" class="checkbox"><input name="sample[voyager]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_voyager__label" type="checkbox" value="1" name="sample[voyager]" id="sample_voyager" /> Janeway </label>
+          <hr />
+          <label class="checkbox" id="none__label"><input aria-labelledby="sample_captains__label none__label" type="checkbox" name="" class="" id="none__checkbox" /> None of the above </label>
+        </fieldset>
+      HTML
+    end
+
+    context "when value is an array on the model" do
+      it "renders an accessible set of checkbox inputs" do
+        class SampleStep < Step
+          step_attributes(
+            captains: [],
+          )
+        end
+
+        sample = SampleStep.new(captains: ["tng"])
+        form = MbFormBuilder.new("sample", sample, template, {})
+        output = form.mb_checkbox_set_with_none(
+          :captains,
+          [
+            { method: :tng, label: "Picard" },
+            { method: :ds9, label: "Sisko" },
+          ],
+          label_text: "Which captains do you think are cool?",
+          value_is_array: true,
+        )
+
+        expect(output).to be_html_safe
+
+        expect(output).to match_html <<-HTML
+          <fieldset class="input-group">
+            <legend class="sr-only" id="sample_captains__label"> Which captains do you think are cool? </legend>
+            <label id="sample_tng__label" class="checkbox"><input name="sample[captains][]" type="hidden" value="" /><input aria-labelledby="sample_captains__label sample_tng__label" type="checkbox" value="tng" checked="checked" name="sample[captains][]" id="sample_captains_tng" /> Picard </label>
+            <label id="sample_ds9__label" class="checkbox"><input name="sample[captains][]" type="hidden" value="" /><input aria-labelledby="sample_captains__label sample_ds9__label" type="checkbox" value="ds9" name="sample[captains][]" id="sample_captains_ds9" /> Sisko </label>
+            <hr />
+            <label class="checkbox" id="none__label"><input aria-labelledby="sample_captains__label none__label" type="checkbox" name="" class="" id="none__checkbox" /> None of the above </label>
+          </fieldset>
+        HTML
+      end
+    end
+  end
+
   describe "#mb_checkbox" do
     it "renders an accessible checkbox input" do
       class SampleStep < Step

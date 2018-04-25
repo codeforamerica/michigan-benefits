@@ -8,14 +8,12 @@ RSpec.describe Form do
     end
 
     it "creates a getter that returns passed in attributes as keys" do
-      Form.set_application_attributes(:foo, :bar)
+      Form.set_application_attributes(:foo, bar: [])
 
-      expect(Form.application_attributes).to match_array(
-        %i[
-          foo
-          bar
-        ],
-      )
+      expect(Form.application_attributes).to match_array([
+                                                           :foo,
+                                                           { bar: [] },
+                                                         ])
     end
   end
 
@@ -27,14 +25,12 @@ RSpec.describe Form do
     end
 
     it "creates a getter that returns passed in attributes as keys" do
-      Form.set_member_attributes(:foo, :bar)
+      Form.set_member_attributes(:foo, bar: [])
 
-      expect(Form.member_attributes).to match_array(
-        %i[
-          foo
-          bar
-        ],
-      )
+      expect(Form.member_attributes).to match_array([
+                                                      :foo,
+                                                      { bar: [] },
+                                                    ])
     end
   end
 
@@ -45,14 +41,12 @@ RSpec.describe Form do
     end
 
     it "creates a getter that returns passed in attributes as keys" do
-      Form.set_navigator_attributes(:foo, :bar)
+      Form.set_navigator_attributes(:foo, bar: [])
 
-      expect(Form.navigator_attributes).to match_array(
-        %i[
-          foo
-          bar
-        ],
-      )
+      expect(Form.navigator_attributes).to match_array([
+                                                         :foo,
+                                                         { bar: [] },
+                                                       ])
     end
   end
 

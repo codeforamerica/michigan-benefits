@@ -21,6 +21,7 @@ class AssistanceApplicationForm
       merge(additional_expenses_attributes).
       merge(employed_attributes).
       merge(self_employed_attributes).
+      merge(assets_attributes).
       merge(additional_income_attributes).
       merge(additional_notes_attributes)
   end
@@ -175,6 +176,19 @@ class AssistanceApplicationForm
       hash[:"#{ordinals[i]}_member_self_employed_name"] = member.display_name
     end
     hash
+  end
+
+  def assets_attributes
+    {}.tap do |hash|
+      hash[:anyone_assets_property] = yes_no_or_unfilled(
+        yes: benefit_application.properties.any?,
+        no: benefit_application.properties.none?,
+      )
+
+      benefit_application.properties.each do |property_type|
+        hash["assets_property_#{property_type}".to_sym] = "Yes"
+      end
+    end
   end
 
   def additional_income_attributes

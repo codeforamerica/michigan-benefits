@@ -225,6 +225,11 @@ en:
         help:
           one: Only list vehicles that are registered in your name.
           other: Only list vehicles that are registered in their name.
+    property:
+      edit:
+        title:
+          one: Do you own any real estate or property?
+          other: Does anyone own real estate or property?
   ssn:
     description: "Providing Social Security numbers ensures you receive the correct benefits. Even if you've applied before, this helps connect this application to the right file. MDHHS maintains strict security guidelines to protect the identities of our residents."
   helpers:

@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20180424014105) do
     t.integer "less_than_threshold_in_accounts", default: 0
     t.integer "living_situation", default: 0
     t.integer "previously_received_assistance", default: 0, null: false
+    t.string "properties", default: [], array: true
     t.datetime "updated_at", null: false
   end
 
