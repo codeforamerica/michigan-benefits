@@ -15,10 +15,11 @@
         <li>Other accounts with money in them</li>
       </ul>
     </div>
+<% end %>
 
+<% content_for :form_card_footer do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
         <%= f.mb_yes_no_buttons :money_in_accounts %>
     <% end %>
 <% end %>
 
-<% content_for :skip_footer, true %>
