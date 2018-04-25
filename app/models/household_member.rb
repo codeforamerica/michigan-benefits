@@ -87,19 +87,13 @@ class HouseholdMember < ApplicationRecord
 
   RELATION_LABEL_LOOKUP = RELATIONSHIP_LABELS_AND_KEYS.map(&:reverse).to_h
 
+  auto_strip_attributes :first_name, :last_name
+
   attribute :ssn
   attr_encrypted(
     :ssn,
     key: Rails.application.secrets.secret_key_for_ssn_encryption,
   )
-
-  def first_name=(value)
-    super(value.try(:strip))
-  end
-
-  def last_name=(value)
-    super(value.try(:strip))
-  end
 
   def display_name(first_only: false)
     @_display_name ||= if first_only
