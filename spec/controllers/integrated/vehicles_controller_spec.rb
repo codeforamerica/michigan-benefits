@@ -5,7 +5,7 @@ RSpec.describe Integrated::VehiclesController do
     context "with valid params" do
       let(:valid_params) do
         {
-          own_vehicles: "true"
+          own_vehicles: "true",
         }
       end
 

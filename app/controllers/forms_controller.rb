@@ -91,24 +91,15 @@ class FormsController < ApplicationController
   end
 
   def member_params
-    filter_params(form_class.member_attributes)
+    filtered_params(form_class.member_attributes)
   end
 
   def application_params
-    filter_params(form_class.application_attributes)
+    filtered_params(form_class.application_attributes)
   end
 
   def navigator_params
-    filter_params(form_class.navigator_attributes)
-  end
-
-  def filter_params(attributes)
-    return unless attributes.present?
-    form_params.select do |key, _|
-      attributes.any? do |attr|
-        key.match(/^#{attr}(\(.+\))?\z/) # Match single and multi-attribute keys
-      end
-    end
+    filtered_params(form_class.navigator_attributes)
   end
 
   def combined_birthday_fields(day: nil, month: nil, year: nil)
@@ -119,5 +110,9 @@ class FormsController < ApplicationController
     else
       {}
     end
+  end
+
+  def filtered_params(attrs)
+    form_params.slice(*Step::Attributes.new(attrs).to_s)
   end
 end

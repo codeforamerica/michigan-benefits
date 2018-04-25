@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423223206) do
+ActiveRecord::Schema.define(version: 20180423230634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20180423223206) do
     t.integer "less_than_threshold_in_accounts", default: 0
     t.integer "living_situation", default: 0
     t.integer "previously_received_assistance", default: 0, null: false
+    t.string "properties", default: [], array: true
     t.datetime "updated_at", null: false
   end
 

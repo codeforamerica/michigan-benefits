@@ -43,7 +43,9 @@ class Form
       attributes = (application_attributes + member_attributes + navigator_attributes)
       self.attribute_names = attributes
 
-      attribute_strings = attribute_names.map(&:to_s)
+      attribute_strings = Step::Attributes.
+        new(attribute_names).
+        to_s
 
       attr_accessor(*attribute_strings)
     end
