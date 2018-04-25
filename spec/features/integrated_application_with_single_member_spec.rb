@@ -298,6 +298,16 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Finishing Up" do
+      expect(page).to have_content(
+        "Provide your Social Security Number if you're ready",
+      )
+
+      fill_in "Social Security Number", with: "123456789"
+
+      proceed_with "Continue"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

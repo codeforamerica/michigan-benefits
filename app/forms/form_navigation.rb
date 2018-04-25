@@ -113,6 +113,7 @@ class FormNavigation
     "Finishing Up" => [
       Integrated::AuthorizedRepController,
       Integrated::TellUsAuthorizedRepController,
+      Integrated::ProvideSsnController,
       Integrated::ApplicationSubmittedController,
     ],
   }.freeze

@@ -1,0 +1,25 @@
+<% content_for :header_title, "Finishing Up" %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">
+    Provide your Social Security Number if you're ready
+  </h1>
+  <p class="text--centered text--help">
+    If you don't have one or don't want to answer now it's okay to skip this.
+    But if you submit it now, the application process will go faster.
+  </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_input_field :ssn,
+                         "Social Security Number",
+                         type: :tel,
+                         options: { maxlength: 9 },
+                         optional: true %>
+  <% end %>
+
+  <p class="text--secure"><i class="illustration illustration--safety"></i><%= t("ssn.description") %></p>
+<% end %>
+
+
