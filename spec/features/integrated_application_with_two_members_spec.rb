@@ -351,6 +351,22 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Finishing Up" do
+      expect(page).to have_content("Before you finish, read and agree to the legal terms.")
+
+      choose "I agree"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content("Enter your full legal name here to sign this application.")
+
+      fill_in "Sign by typing your full legal name", with: "Jessie Tester"
+
+      proceed_with "Sign and submit"
+    end
+
     on_page "Application Submitted" do
       expect(page).to have_content(
         "Congratulations",

@@ -41,6 +41,8 @@ class AssistanceApplicationForm
       legal_name: benefit_application.display_name,
       dob: mmddyyyy_date(benefit_application.primary_member.birthday),
       ssn: formatted_ssn(benefit_application.primary_member.ssn),
+      completion_signature_applicant: benefit_application.signature,
+      completion_signature_date: mmddyyyy_date(benefit_application.signed_at),
       received_assistance: yes_no_or_unfilled(
         yes: benefit_application.previously_received_assistance_yes?,
         no: benefit_application.previously_received_assistance_no?,

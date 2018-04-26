@@ -59,6 +59,8 @@ class CommonApplication < ApplicationRecord
 
   delegate :display_name, to: :primary_member
 
+  auto_strip_attributes :signature
+
   def single_member_household?
     members.count == 1
   end

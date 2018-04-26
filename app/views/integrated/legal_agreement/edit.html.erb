@@ -1,0 +1,33 @@
+<% content_for :header_title, "Finishing Up" %>
+<% content_for :form_card_title, "Before you finish, read and agree to the legal terms." %>
+
+<% content_for :form_card_body do %>
+
+  <div class="textwell">
+    <section class="legal textwell__content">
+      <%= render "shared/terms" %>
+    </section>
+    <button class="textwell__expander button button--cta button--full-mobile">Show More</button>
+  </div>
+
+  <p class="legal-agreement">
+    MichiganBenefits.org is a non-profit dedicated
+    to providing safe, secure access to benefits delivered by the Michigan
+    Department of Health and Human Services. By continuing, you agree to the
+    MichiganBenefits.org <%= link_to "Privacy Policy", privacy_path, target:
+      "_blank" %>
+    <span class="legal-agreement--terms">, as well as the
+      <%= link_to "MDHHS Rights and Responsibilities", terms_path, target: "_blank" %>
+    </span>
+  </p>
+
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_radio_set(
+      :agree_to_terms,
+      label_text: "Do you agree to the legal terms?",
+      collection: [{value: true, label: "I agree"}],
+      layout: "inline",
+      legend_class: "sr-only",
+    ) %>
+  <% end %>
+<% end %>
