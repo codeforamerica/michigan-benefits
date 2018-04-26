@@ -1,0 +1,18 @@
+<% content_for :header_title, "Finishing Up" %>
+<% content_for :form_card_title, "Enter your full legal name here to sign this application." %>
+
+<% content_for :form_card_body do %>
+  <p>
+    By entering your name you agree that you want to apply for
+    Medical Assistance and Food Assistance, that you have been honest on this application.
+  </p>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_input_field :signature,
+                         "Sign by typing your full legal name",
+                         autofocus: true,
+                         options: { placeholder: "Your full legal name" } %>
+    <%= render 'shared/next_step', button_label: "Sign and submit" %>
+  <% end %>
+<% end %>
+
+<% content_for :skip_footer, true %>

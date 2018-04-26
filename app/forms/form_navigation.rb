@@ -114,6 +114,8 @@ class FormNavigation
       Integrated::AuthorizedRepController,
       Integrated::TellUsAuthorizedRepController,
       Integrated::ProvideSsnController,
+      Integrated::LegalAgreementController,
+      Integrated::SignSubmitController,
       Integrated::ApplicationSubmittedController,
     ],
   }.freeze

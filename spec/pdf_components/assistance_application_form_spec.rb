@@ -56,7 +56,9 @@ RSpec.describe AssistanceApplicationForm do
            income_changed_explanation: "I lost my job.",
            authorized_representative: "yes",
            authorized_representative_name: "Trusty McTrusterson",
-           authorized_representative_phone: "2024561111")
+           authorized_representative_phone: "2024561111",
+           signature: "Octopus Cuttlefish",
+           signed_at: DateTime.new(2018, 4, 1))
       end
 
       let(:attributes) do
@@ -114,6 +116,8 @@ RSpec.describe AssistanceApplicationForm do
           anyone_student_loans_deductions: "Yes",
           anyone_assets_property: "Yes",
           assets_property_rental: "Yes",
+          completion_signature_applicant: "Octopus Cuttlefish",
+          completion_signature_date: "04/01/2018",
         )
       end
     end
