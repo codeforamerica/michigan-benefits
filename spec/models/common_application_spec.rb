@@ -172,22 +172,56 @@ RSpec.describe CommonApplication do
   end
 
   describe "#anyone_employed?" do
-    it "returns true when at least one household member has a positive job count" do
+    it "returns true when at least one household member has a job" do
       application = create(:common_application,
-                           members: [create(:household_member, job_count: "1")])
+                           members: [
+                             create(:household_member,
+                               employments: [build(:employment)]),
+                           ])
       expect(application.anyone_employed?).to be_truthy
     end
 
-    it "returns false when no job count is set" do
+    it "returns false when no one has any jobs" do
       application = create(:common_application,
                            members: [create(:household_member)])
       expect(application.anyone_employed?).to be_falsey
     end
+  end
 
-    it "returns false when job count is 0" do
+  describe "#anyone_additional_income?" do
+    it "returns true when at least one household member has an income" do
       application = create(:common_application,
-                           members: [create(:household_member, job_count: "0")])
-      expect(application.anyone_employed?).to be_falsey
+                           members: [
+                             create(:household_member,
+                               incomes: [build(:income, income_type: "unemployment")]),
+                           ])
+      expect(application.anyone_additional_income?).to be_truthy
+    end
+
+    it "returns false when no one has an income" do
+      application = create(:common_application,
+                           members: [create(:household_member)])
+      expect(application.anyone_additional_income?).to be_falsey
+    end
+  end
+
+  describe "#anyone_additional_income_of?" do
+    it "returns true when at least one household member has an income of type" do
+      application = create(:common_application,
+                           members: [
+                             create(:household_member,
+                               incomes: [build(:income, income_type: "unemployment")]),
+                           ])
+      expect(application.anyone_additional_income_of?("unemployment")).to be_truthy
+    end
+
+    it "returns false when no one has an income of type" do
+      application = create(:common_application,
+        members: [
+          create(:household_member,
+            incomes: [build(:income, income_type: "pension")]),
+        ])
+      expect(application.anyone_additional_income_of?("unemployment")).to be_falsey
     end
   end
 

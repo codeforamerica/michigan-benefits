@@ -1,7 +1,10 @@
 class HouseholdMember < ApplicationRecord
   include SocialSecurityNumber
+
   belongs_to :common_application
-  has_many :incomes
+
+  has_many :employments, as: :application_member, dependent: :destroy
+  has_many :incomes, dependent: :destroy
 
   scope :requesting_food, -> {
     where(requesting_food: "yes").order("created_at")

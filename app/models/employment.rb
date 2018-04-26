@@ -1,3 +1,3 @@
 class Employment < ApplicationRecord
-  belongs_to :member
+  belongs_to :application_member, polymorphic: true
 end

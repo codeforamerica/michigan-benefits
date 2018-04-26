@@ -165,7 +165,7 @@ class AssistanceApplicationForm
         no: !benefit_application.anyone_employed?,
       ),
     }
-    members = benefit_application.members.select { |member| member if member.job_count&.nonzero? }
+    members = benefit_application.members.select { |member| member.employments.any? }
     members.first(2).each_with_index do |member, i|
       hash[:"#{ordinals[i]}_member_employment_name"] = member.display_name
     end
@@ -211,7 +211,7 @@ class AssistanceApplicationForm
     Income::INCOME_SOURCES.each_key do |key|
       hash[:"additional_income_#{key}"] = yes_if_true(benefit_application.anyone_additional_income_of?(key))
     end
-    members = benefit_application.members.select { |member| member if member.incomes&.count&.nonzero? }
+    members = benefit_application.members.select { |member| member.incomes.any? }
     members.first(2).each_with_index do |member, i|
       hash[:"#{ordinals[i]}_member_additional_income_name"] = member.display_name
       hash[:"#{ordinals[i]}_member_additional_income_type"] = member.incomes.map(&:display_name).join(", ")
@@ -288,7 +288,7 @@ class AssistanceApplicationForm
   end
 
   def add_additional_members_employed
-    members = benefit_application.members.select { |member| member if member.job_count&.nonzero? }
+    members = benefit_application.members.select { |member| member.employments.any? }
     if members.count > 2
       @_additional_notes[:household_added_notes] = "Yes"
       @_additional_notes[:notes] += "Additional Employed Members:\n"
@@ -310,7 +310,7 @@ class AssistanceApplicationForm
   end
 
   def add_additional_members_additional_income
-    members = benefit_application.members.select { |member| member if member.incomes&.count&.nonzero? }
+    members = benefit_application.members.select { |member| member.incomes.any? }
     if members.count > 2
       @_additional_notes[:household_added_notes] = "Yes"
       @_additional_notes[:notes] += "Additional Members with Additional Income:\n"

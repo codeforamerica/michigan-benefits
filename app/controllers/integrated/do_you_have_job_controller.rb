@@ -5,7 +5,13 @@ module Integrated
     end
 
     def update_models
-      current_application.navigator.update(navigator_params)
+      if navigator_params[:current_job] == "false"
+        current_application.primary_member.employments.delete_all
+      elsif current_application.primary_member.employments.count.zero?
+        current_application.primary_member.employments.create
+      end
+
+      current_application.navigator.update!(navigator_params)
     end
   end
 end

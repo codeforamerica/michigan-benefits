@@ -151,13 +151,15 @@ ActiveRecord::Schema.define(version: 20180508220008) do
   end
 
   create_table "employments", force: :cascade do |t|
+    t.bigint "application_member_id"
+    t.string "application_member_type"
     t.datetime "created_at", null: false
     t.string "employer_name"
-    t.integer "hours_per_week"
-    t.integer "member_id", null: false
+    t.integer "member_id"
     t.string "pay_quantity"
     t.string "payment_frequency"
     t.datetime "updated_at", null: false
+    t.index ["application_member_id"], name: "index_employments_on_application_member_id"
   end
 
   create_table "expenses", force: :cascade do |t|
@@ -183,7 +185,7 @@ ActiveRecord::Schema.define(version: 20180508220008) do
   end
 
   create_table "household_members", force: :cascade do |t|
-    t.integer "baby_count", default: 0
+    t.integer "baby_count"
     t.datetime "birthday"
     t.integer "buy_and_prepare_food_together", default: 0
     t.integer "caretaker", default: 0
