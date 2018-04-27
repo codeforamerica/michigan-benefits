@@ -5,34 +5,38 @@ module Integrated
     end
 
     def edit
-      job_counts = current_application.members.map do |member|
-        member.employments.count
-      end
-
-      @form = form_class.new(members: current_application.members, job_counts: job_counts)
+      @form = form_class.new(members: current_application.members)
     end
 
-    def update_models
+    def update
       members_to_update = []
 
-      application_params.fetch(:job_counts, []).each_with_index do |job_count, index|
-        current_member = current_application.members[index]
-        if current_member.employments.count != job_count.to_i
-          members_to_update << { member: current_member, job_count: job_count.to_i }
+      @form = form_class.new(members: current_application.members)
+      @form.members.each do |member|
+        attrs = params.dig(:form, :members, member.to_param)
+        if attrs.present?
+          if member.employments.count != attrs[:employments_count].to_i
+            members_to_update << {
+              member: member,
+              employments_count: attrs[:employments_count].to_i,
+            }
+          end
         end
       end
 
       ActiveRecord::Base.transaction do
         members_to_update.each do |member_attributes|
           member = member_attributes.fetch(:member)
-          member.employments.delete_all
+          member.employments.each(&:destroy!)
 
-          member_attributes.fetch(:job_count).times do
+          member_attributes.fetch(:employments_count).times do
             member.employments << Employment.new
           end
           member.save!
         end
       end
+
+      redirect_to(next_path)
     end
   end
 end

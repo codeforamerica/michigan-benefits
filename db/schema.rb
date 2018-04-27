@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 20180508220008) do
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
     t.integer "disabled", default: 0
+    t.integer "employments_count", default: 0
     t.string "encrypted_ssn"
     t.string "encrypted_ssn_iv"
     t.integer "filing_taxes_next_year", default: 0

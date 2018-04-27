@@ -14,7 +14,7 @@ RSpec.describe Integrated::HowManyJobsController do
   end
 
   describe "#edit" do
-    it "assigns members and an accurate job count array" do
+    it "assigns members" do
       member_one = build(:household_member, employments: build_list(:employment, 3))
       member_two = build(:household_member, employments: [])
 
@@ -28,8 +28,8 @@ RSpec.describe Integrated::HowManyJobsController do
 
       form = assigns(:form)
 
-      expect(form.members).to match_array([member_one, member_two])
-      expect(form.job_counts).to match_array([3, 0])
+      expect(form.members.first).to eq(member_one)
+      expect(form.members.second).to eq(member_two)
     end
   end
 
@@ -45,7 +45,10 @@ RSpec.describe Integrated::HowManyJobsController do
 
       let(:valid_params) do
         {
-          job_counts: ["1", "2"],
+          members: {
+            member_1.id => { employments_count: "1" },
+            member_2.id => { employments_count: "2" },
+          },
         }
       end
 
@@ -64,6 +67,18 @@ RSpec.describe Integrated::HowManyJobsController do
         expect(member_1.employments.count).to eq(1)
         expect(member_2.employments.count).to eq(2)
       end
+
+      it "redirects to next step" do
+        current_app = create(:common_application,
+          members: [member_1, member_2],
+          navigator: build(:application_navigator))
+
+        session[:current_application_id] = current_app.id
+
+        put :update, params: { form: valid_params }
+
+        expect(response).to redirect_to(subject.next_path)
+      end
     end
 
     context "when job count does not change" do
@@ -81,7 +96,10 @@ RSpec.describe Integrated::HowManyJobsController do
 
       let(:valid_params) do
         {
-          job_counts: ["1", "1"],
+          members: {
+            member_1.id => { employments_count: "1" },
+            member_2.id => { employments_count: "1" },
+          },
         }
       end
 

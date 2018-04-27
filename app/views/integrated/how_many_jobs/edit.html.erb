@@ -10,29 +10,27 @@
 
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
-      <% @form.members.each_with_index do |member, index| %>
-        <% if member.primary_member? %>
-          <%= f.mb_incrementer :job_counts,
-                               "How many jobs do you have?",
-                               options: {
-                                   min: "0",
-                                   max: "9",
-                               },
-                               hide_label: current_application.single_member_household?,
-                               value_is_array: true,
-                               value: @form.job_counts[index],
-                               id_suffix: index %>
-        <% else %>
-          <%= f.mb_incrementer :job_counts,
-                                "How many jobs does #{member.display_name} have?",
-                                options: {
-                                    min: "0",
-                                    max: "9",
-                                },
-                                hide_label: false,
-                                value_is_array: true,
-                                value: @form.job_counts[index],
-                                id_suffix: index %>
+      <% @form.members.each_with_index do |member| %>
+        <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
+          <% if member.primary_member? %>
+            <%= ff.hidden_field :id %>
+
+            <%= ff.mb_incrementer :employments_count,
+                                 "How many jobs do you have?",
+                                 options: {
+                                     min: "0",
+                                     max: "10",
+                                 },
+                                 hide_label: current_application.single_member_household? %>
+          <% else %>
+            <%= ff.mb_incrementer :employments_count,
+                                  "How many jobs does #{member.display_name} have?",
+                                  options: {
+                                      min: "0",
+                                      max: "10",
+                                  },
+                                  hide_label: false %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
