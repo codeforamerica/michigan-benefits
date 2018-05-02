@@ -25,6 +25,11 @@ class Form
       form_attributes(navigator_attributes)
     end
 
+    def set_address_attributes(*address_attributes)
+      @address_attributes = address_attributes
+      form_attributes(address_attributes)
+    end
+
     def application_attributes
       @application_attributes || []
     end
@@ -37,10 +42,14 @@ class Form
       @navigator_attributes || []
     end
 
+    def address_attributes
+      @address_attributes || []
+    end
+
     private
 
     def form_attributes(attribute_names)
-      attributes = (application_attributes + member_attributes + navigator_attributes)
+      attributes = (application_attributes + member_attributes + navigator_attributes + address_attributes)
       self.attribute_names = attributes
 
       attribute_strings = Step::Attributes.

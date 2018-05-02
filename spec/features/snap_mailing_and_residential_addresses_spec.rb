@@ -12,14 +12,14 @@ RSpec.feature "Mailing and residential addresses" do
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
-    fill_in "Address", with: "123 Main St"
+    fill_in "Street address", with: "123 Main St"
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "12345"
     select_address_not_same_as_home_address
     click_on "Continue"
 
     expect(current_path).to eq "/steps/residential-address"
-    fill_in "Address", with: "456 Hello St"
+    fill_in "Street address", with: "456 Hello St"
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "12345"
     select_unstable_address
@@ -39,7 +39,7 @@ RSpec.feature "Mailing and residential addresses" do
     fill_in "What is your email address?", with: "test@example.com"
     click_on "Continue"
 
-    fill_in "Address", with: "123 Main St"
+    fill_in "Street address", with: "123 Main St"
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "12345"
     select_address_same_as_home_address
