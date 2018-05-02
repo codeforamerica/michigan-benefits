@@ -11,12 +11,12 @@ RSpec.feature "Missing required fields" do
     fill_in "What is the best phone number to reach you?", with: "2024561111"
     proceed_with "Continue"
 
-    fill_in "Address", with: "123 Main St."
+    fill_in "Street address", with: "123 Main St."
     proceed_with "Continue"
 
     on_page("Your Location") do
       expect(
-        find_field("Address").value,
+        find_field("Street address").value,
       ).to eq "123 Main St."
     end
   end

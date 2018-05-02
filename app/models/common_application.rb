@@ -15,6 +15,18 @@ class CommonApplication < ApplicationRecord
     foreign_key: "common_application_id",
     dependent: :destroy
 
+  has_one :residential_address,
+    -> { where(address_type: "residential") },
+    class_name: "Address",
+    as: "benefit_application",
+    dependent: :destroy
+
+  has_one :mailing_address,
+    -> { where(address_type: "mailing") },
+    class_name: "Address",
+    as: "benefit_application",
+    dependent: :destroy
+
   has_many :members,
     -> { order "created_at" },
     class_name: "HouseholdMember",

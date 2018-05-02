@@ -14,7 +14,7 @@ RSpec.feature "Submit application with minimal information" do
     fill_in "What is the best phone number to reach you?", with: "2024561111"
     proceed_with "Continue"
 
-    fill_in "Address", with: "123 Main St"
+    fill_in "Street address", with: "123 Main St"
     fill_in "City", with: "Flint"
     fill_in "ZIP code", with: "12345"
     select_address_same_as_home_address
