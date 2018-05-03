@@ -47,6 +47,17 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Introduction" do
+      expect(page).to have_content("Tell us where to send your postal mail.")
+
+      fill_in "Street address", with: "123 Main St"
+      fill_in "Street address 2", with: "Floor 2"
+      fill_in "City", with: "Flint"
+      fill_in "ZIP code", with: "48550"
+
+      proceed_with "Continue"
+    end
+
     on_page "Your Household" do
       expect(page).to have_content(
         "Who do you want to include on your Food Assistance application?",

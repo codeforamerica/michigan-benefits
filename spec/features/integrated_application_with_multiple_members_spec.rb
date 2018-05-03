@@ -60,8 +60,18 @@ RSpec.feature "Integrated application" do
 
       select_radio(
         question: "Is this also your mailing address?",
-        answer: "Yes",
+        answer: "No",
       )
+
+      proceed_with "Continue"
+    end
+
+    on_page "Introduction" do
+      expect(page).to have_content("Tell us where to send your postal mail.")
+
+      fill_in "Street address", with: "PO Box 123"
+      fill_in "City", with: "Flint"
+      fill_in "ZIP code", with: "48550"
 
       proceed_with "Continue"
     end

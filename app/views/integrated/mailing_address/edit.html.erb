@@ -1,0 +1,8 @@
+<% content_for :header_title, "Introduction" %>
+<% content_for :form_card_title, "Tell us where to send your postal mail." %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= render "shared/address", f: f %>
+  <% end %>
+<% end %>
