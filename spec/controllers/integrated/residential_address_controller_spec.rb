@@ -43,7 +43,7 @@ RSpec.describe Integrated::ResidentialAddressController do
           street_address: "123 Main St",
           city: "Flint",
           zip: "48480",
-          residential_mailing_same: "true",
+          residential_mailing_same: "false",
         }
       end
 
@@ -55,7 +55,8 @@ RSpec.describe Integrated::ResidentialAddressController do
 
         current_app.reload
 
-        # expectation
+        expect(current_app.residential_address.street_address).to eq("123 Main St")
+        expect(current_app.navigator.residential_mailing_same).to be_falsey
       end
     end
 

@@ -45,6 +45,7 @@ class AssistanceApplicationForm
       residential_address_county: benefit_application.residential_address&.county,
       residential_address_state: benefit_application.residential_address&.state,
       residential_address_zip: benefit_application.residential_address&.zip,
+      mailing_address: formatted_full_address(benefit_application.mailing_address),
       dob: mmddyyyy_date(benefit_application.primary_member.birthday),
       ssn: formatted_ssn(benefit_application.primary_member.ssn),
       completion_signature_applicant: benefit_application.signature,
@@ -333,5 +334,13 @@ class AssistanceApplicationForm
   def formatted_ssn(ssn)
     return nil if ssn.blank?
     "#{ssn[0..2]}-#{ssn[3..4]}-#{ssn[5..8]}"
+  end
+
+  def formatted_full_address(address)
+    return "" if address.nil?
+    [address.street_address, address.street_address_2, address.city, address.state].
+      reject(&:blank?).
+      join(", ").
+      concat(" #{address.zip}")
   end
 end

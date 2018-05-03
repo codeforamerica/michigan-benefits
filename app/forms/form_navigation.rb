@@ -6,6 +6,7 @@ class FormNavigation
       Integrated::IntroduceYourselfController,
       Integrated::LivingSituationController,
       Integrated::ResidentialAddressController,
+      Integrated::MailingAddressController,
     ],
     "Household" => [
       Integrated::HouseholdMembersOverviewController,
