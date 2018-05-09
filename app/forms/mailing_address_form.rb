@@ -7,11 +7,15 @@ class MailingAddressForm < Form
   )
 
   validates :street_address,
-            presence: { message: "Make sure to provide a street address", allow_blank: false }
+            presence: { message: "Make sure to provide a street address" }
 
   validates :city,
-            presence: { message: "Make sure to provide a city", allow_blank: false }
+            presence: { message: "Make sure to provide a city" }
 
   validates :zip,
+            numericality: {
+              only_integer: true,
+              message: "Make sure the ZIP code is a number",
+            },
             length: { is: 5, message: "Make sure the ZIP code is 5 digits long" }
 end

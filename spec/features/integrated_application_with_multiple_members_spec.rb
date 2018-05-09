@@ -67,7 +67,7 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
-      expect(page).to have_content("Tell us where to send your postal mail.")
+      expect(page).to have_content("Tell us where to send you postal mail.")
 
       fill_in "Street address", with: "PO Box 123"
       fill_in "City", with: "Flint"
