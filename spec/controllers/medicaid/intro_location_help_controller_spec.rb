@@ -20,7 +20,7 @@ RSpec.describe Medicaid::IntroLocationHelpController do
 
         get :edit
 
-        expect(response).to redirect_to("/steps/medicaid/intro-name")
+        expect(response).to redirect_to(controller.next_path)
       end
     end
 

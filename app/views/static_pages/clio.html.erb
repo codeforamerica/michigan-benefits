@@ -19,12 +19,12 @@ end %>
     </div>
 
       <div class="hero--cta-options grid__item">
-    <%= link_to step_path(StepNavigation.first, office_location: "clio") do %>
+    <%= link_to step_path(StepNavigation.first, office_page: "clio") do %>
       <p class="button button--cta button--fully-width">Apply for FAP</p>
       <p class="text--help">Food Stamps</p>
     <% end %>
 
-    <%= link_to step_path(Medicaid::StepNavigation.first, office_location: "clio") do %>
+    <%= link_to step_path(Medicaid::StepNavigation.first, office_page: "clio") do %>
       <p class="button button--cta button--fully-width">Apply for Medicaid</p>
       <p class="text--help">Health insurance</p>
     <% end %>
@@ -37,5 +37,5 @@ end %>
   </div>
 </div>
 
-<%= render "home_page_bottom_section_dual", office_location: "clio" %>
+<%= render "home_page_bottom_section_dual", office_page: "clio" %>
 <%= render 'shared/footer' %>

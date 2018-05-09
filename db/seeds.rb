@@ -133,7 +133,7 @@ complete_application.update!(
   financial_accounts: ["checking_account", "four_oh_one_k"],
   total_money: 2000,
   additional_information: "N/A",
-  office_location: "union",
+  office_page: "union",
 )
 
 complete_mailing = Address.find_or_initialize_by(

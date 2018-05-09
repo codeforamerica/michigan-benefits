@@ -12,9 +12,9 @@ RSpec.describe IntroduceYourselfController do
   describe "#edit" do
     context "office location in params" do
       it "assigns office location" do
-        get :edit, params: { office_location: "clio" }
+        get :edit, params: { office_page: "clio" }
 
-        expect(step.office_location).to eq "clio"
+        expect(step.office_page).to eq "clio"
       end
     end
 
@@ -77,7 +77,7 @@ RSpec.describe IntroduceYourselfController do
         it "redirects to the next step" do
           put :update, params: valid_params
 
-          expect(response).to redirect_to("/steps/contact-information")
+          expect(response).to redirect_to(controller.next_path)
         end
       end
     end
@@ -90,12 +90,12 @@ RSpec.describe IntroduceYourselfController do
           "birthday(3i)" => "31",
           "birthday(2i)" => "1",
           "birthday(1i)" => "1950",
-          office_location: "union",
+          office_page: "union",
         } }
 
         put :update, params: params
 
-        expect(current_app.reload.office_location).to eq "union"
+        expect(current_app.reload.office_page).to eq "union"
       end
     end
   end

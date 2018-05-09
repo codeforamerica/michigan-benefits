@@ -17,7 +17,7 @@
 
   <div class="form-card__footer">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.hidden_field :office_location, value: @step.office_location %>
+      <%= f.hidden_field :office_page, value: @step.office_page %>
       <%= render "medicaid/next_step" %>
     <% end %>
   </div>

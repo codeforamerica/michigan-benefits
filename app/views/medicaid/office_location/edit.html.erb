@@ -1,0 +1,30 @@
+<% content_for :header_title, "Office" %>
+
+<div class="form-card">
+  <header class="form-card__header">
+    <div class="form-card__title">
+      Which office are you in?
+    </div>
+  </header>
+
+  <div class="form-card__content">
+    <%= form_for @step,
+      as: :step,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put do |f| %>
+
+      <%= f.mb_radio_set :selected_office_location,
+        label_text: "Which office are you in?",
+        legend_class: "sr-only",
+        collection: [
+          { value: :clio, label: "Clio Road" },
+          { value: :union, label: "Union Street" },
+          { value: :other, label: "Other" },
+          { value: :not_in_office, label: "I'm not in an office" },
+        ] %>
+
+      <%= render "medicaid/next_step" %>
+    <% end %>
+  </div>
+</div>

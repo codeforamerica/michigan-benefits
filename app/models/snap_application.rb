@@ -134,6 +134,14 @@ class SnapApplication < ApplicationRecord
     signed_at.present?
   end
 
+  def office_location
+    if selected_office_location == "clio" || selected_office_location == "union"
+      selected_office_location
+    else
+      office_page
+    end
+  end
+
   private
 
   def care_expenses_values

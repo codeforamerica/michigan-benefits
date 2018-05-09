@@ -3,16 +3,16 @@ module Medicaid
     skip_before_action :ensure_application_present
 
     def edit
-      @step = step_class.new(office_location: office_location)
+      @step = step_class.new(office_page: office_page)
     end
 
     private
 
-    def office_location
-      if params[:office_location].present?
-        params[:office_location]
+    def office_page
+      if params[:office_page].present?
+        params[:office_page]
       elsif current_application
-        current_application.office_location
+        current_application.office_page
       end
     end
 

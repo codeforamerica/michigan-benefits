@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501041944) do
+ActiveRecord::Schema.define(version: 20180508220008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -259,10 +259,11 @@ ActiveRecord::Schema.define(version: 20180501041944) do
     t.integer "members_count", default: 0
     t.boolean "michigan_resident"
     t.boolean "need_medical_expense_help_3_months"
-    t.string "office_location"
+    t.string "office_page"
     t.string "paperwork", array: true
     t.string "phone_number"
     t.boolean "reliable_mail_address"
+    t.string "selected_office_location"
     t.integer "self_employed_monthly_income"
     t.string "signature"
     t.datetime "signed_at"
@@ -373,11 +374,12 @@ ActiveRecord::Schema.define(version: 20180501041944) do
     t.integer "monthly_care_expenses"
     t.integer "monthly_court_ordered_expenses"
     t.integer "monthly_medical_expenses"
-    t.string "office_location"
+    t.string "office_page"
     t.string "phone_number"
     t.integer "property_tax_expense"
     t.boolean "real_estate_income"
     t.integer "rent_expense"
+    t.string "selected_office_location"
     t.string "signature"
     t.datetime "signed_at"
     t.boolean "sms_consented"

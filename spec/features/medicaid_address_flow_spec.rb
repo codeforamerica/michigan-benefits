@@ -13,7 +13,17 @@ RSpec.feature "medicaid address flows" do
       proceed_with "Next"
 
       proceed_with "Yes"
+    end
 
+    on_page "Office" do
+      select_radio(
+        question: "Which office are you in?",
+        answer: "I'm not in an office",
+      )
+      proceed_with "Next"
+    end
+
+    on_page "Introduction" do
       fill_in "What is your first name?", with: "Jessie"
       fill_in "What is your last name?", with: "Tester"
       select_radio(question: "What is your gender?", answer: "Female")
@@ -46,7 +56,17 @@ RSpec.feature "medicaid address flows" do
       proceed_with "Next"
 
       proceed_with "Yes"
+    end
 
+    on_page "Office" do
+      select_radio(
+        question: "Which office are you in?",
+        answer: "I'm not in an office",
+      )
+      proceed_with "Next"
+    end
+
+    on_page "Introduction" do
       fill_in "What is your first name?", with: "Jessie"
       fill_in "What is your last name?", with: "Tester"
       select_radio(question: "What is your gender?", answer: "Female")
@@ -88,12 +108,18 @@ RSpec.feature "medicaid address flows" do
       expect(page).to have_content("Welcome to the Medicaid application")
       proceed_with "Next"
 
-      expect(page).to have_content(
-        "Before we get started, do you currently reside in Michigan?",
-      )
-
       proceed_with "Yes"
+    end
 
+    on_page "Office" do
+      select_radio(
+        question: "Which office are you in?",
+        answer: "I'm not in an office",
+      )
+      proceed_with "Next"
+    end
+
+    on_page "Introduction" do
       fill_in "What is your first name?", with: "Jessie"
       fill_in "What is your last name?", with: "Tester"
       select_radio(question: "What is your gender?", answer: "Female")

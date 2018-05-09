@@ -6,7 +6,7 @@ class IntroduceYourselfController < SnapStepsController
 
     if @step.valid?
       app = current_or_new_snap_application
-      app.update!(office_location: step_params[:office_location])
+      app.update!(office_page: step_params[:office_page])
       set_current_application(app)
       member.update!(member_update_params)
       redirect_to(next_path)
@@ -19,11 +19,11 @@ class IntroduceYourselfController < SnapStepsController
 
   def existing_attributes
     HashWithIndifferentAccess.new(member.attributes).
-      merge(office_location_params)
+      merge(office_page_params)
   end
 
   def member_update_params
-    step_params.except(:office_location)
+    step_params.except(:office_page)
   end
 
   def member
@@ -35,7 +35,7 @@ class IntroduceYourselfController < SnapStepsController
     current_application || SnapApplication.new
   end
 
-  def office_location_params
-    { office_location: params[:office_location] }
+  def office_page_params
+    { office_page: params[:office_page] }
   end
 end
