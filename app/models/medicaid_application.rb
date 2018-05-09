@@ -66,6 +66,14 @@ class MedicaidApplication < ApplicationRecord
     ).completed_file
   end
 
+  def office_location
+    if selected_office_location == "clio" || selected_office_location == "union"
+      selected_office_location
+    else
+      office_page
+    end
+  end
+
   private
 
   def no_self_employment?

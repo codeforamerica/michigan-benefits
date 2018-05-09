@@ -12,6 +12,14 @@ feature "SNAP application with maximum info" do
       proceed_with "Continue"
     end
 
+    on_page "Office" do
+      select_radio(
+        question: "Which office are you in?",
+        answer: "I'm not in an office",
+      )
+      proceed_with "Continue"
+    end
+
     on_page "Contact Information" do
       fill_in "What is the best phone number to reach you?", with: "2024561111"
       fill_in "What is your email address?", with: "test@example.com"

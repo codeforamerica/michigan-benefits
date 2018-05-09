@@ -9,7 +9,7 @@
 
   <div class="form-card__content">
     <%= form_for @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put do |f| %>
-      <%= f.mb_radio_set :office_location,
+      <%= f.mb_radio_set :selected_office_location,
         label_text: t("snap.introduction_change_office_location.edit.title"),
         collection: [
           { value: "clio", label: "Clio Road" },

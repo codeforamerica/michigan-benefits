@@ -139,4 +139,38 @@ RSpec.describe MedicaidApplication do
       expect(app.members_count).to eq 5
     end
   end
+
+  describe "#office_location" do
+    context "when selected office location clio or union" do
+      it "returns selected office location" do
+        app1 = create(:medicaid_application,
+          selected_office_location: "clio",
+          office_page: "foo")
+        app2 = create(:medicaid_application,
+          selected_office_location: "union",
+          office_page: "foo")
+
+        expect(app1.office_location).to eq("clio")
+        expect(app2.office_location).to eq("union")
+      end
+    end
+
+    context "when selected office location is not clio or union" do
+      it "returns nil" do
+        app = create(:medicaid_application, selected_office_location: "other")
+
+        expect(app.office_location).to eq(nil)
+      end
+    end
+
+    context "when selected office location not present" do
+      it "returns office page" do
+        app = create(:medicaid_application,
+          selected_office_location: nil,
+          office_page: "union")
+
+        expect(app.office_location).to eq("union")
+      end
+    end
+  end
 end

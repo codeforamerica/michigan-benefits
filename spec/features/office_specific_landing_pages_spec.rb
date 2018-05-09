@@ -7,7 +7,7 @@ RSpec.feature "Office-specific landing pages", :js do
       proceed_with "Apply for FAP"
 
       expect(current_path).to eq "/steps/introduce-yourself"
-      expect(find("#step_office_location", visible: false).value).to eq("clio")
+      expect(find("#step_office_page", visible: false).value).to eq("clio")
     end
 
     scenario "union street" do
@@ -15,7 +15,7 @@ RSpec.feature "Office-specific landing pages", :js do
       proceed_with "Apply for FAP"
 
       expect(current_path).to eq "/steps/introduce-yourself"
-      expect(find("#step_office_location", visible: false).value).to eq("union")
+      expect(find("#step_office_page", visible: false).value).to eq("union")
     end
 
     scenario "regular home page" do
@@ -23,7 +23,7 @@ RSpec.feature "Office-specific landing pages", :js do
       within(".slab--hero") { proceed_with "Apply for FAP" }
 
       expect(current_path).to eq "/steps/introduce-yourself"
-      expect(find("#step_office_location", visible: false).value).to eq("")
+      expect(find("#step_office_page", visible: false).value).to eq("")
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.feature "Office-specific landing pages", :js do
       proceed_with "Apply for Medicaid"
 
       expect(current_path).to eq "/steps/medicaid/welcome"
-      expect(find("#step_office_location", visible: false).value).to eq("clio")
+      expect(find("#step_office_page", visible: false).value).to eq("clio")
     end
 
     scenario "union street" do
@@ -41,7 +41,7 @@ RSpec.feature "Office-specific landing pages", :js do
       proceed_with "Apply for Medicaid"
 
       expect(current_path).to eq "/steps/medicaid/welcome"
-      expect(find("#step_office_location", visible: false).value).to eq("union")
+      expect(find("#step_office_page", visible: false).value).to eq("union")
     end
 
     scenario "regular home page" do
@@ -49,7 +49,7 @@ RSpec.feature "Office-specific landing pages", :js do
       within(".slab--hero") { proceed_with "Apply for Medicaid" }
 
       expect(current_path).to eq "/steps/medicaid/welcome"
-      expect(find("#step_office_location", visible: false).value).to eq("")
+      expect(find("#step_office_page", visible: false).value).to eq("")
     end
   end
 end

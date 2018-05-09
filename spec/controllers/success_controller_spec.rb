@@ -142,7 +142,7 @@ RSpec.describe SuccessController do
 
     context "office location present" do
       it "redirects to the office specific landing page" do
-        current_app.update(office_location: "union")
+        current_app.update(office_page: "union")
         params = { step: attributes }
 
         put :update, params: params

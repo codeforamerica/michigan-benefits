@@ -5,7 +5,7 @@ class IntroduceYourself < Step
     :birthday,
     :first_name,
     :last_name,
-    :office_location,
+    :office_page,
   )
 
   validates :first_name,
@@ -18,7 +18,7 @@ class IntroduceYourself < Step
     presence: { message: "Make sure to provide a birthday" }
 
   validates(
-    :office_location,
+    :office_page,
     allow_blank: true,
     inclusion: {
       in: %w(clio union),

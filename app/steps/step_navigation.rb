@@ -2,6 +2,7 @@ class StepNavigation
   ALL = {
     "Introduction" => [
       IntroduceYourselfController,
+      OfficeLocationController,
       ContactInformationController,
       MailingAddressController,
       ResidentialAddressController,

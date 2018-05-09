@@ -37,7 +37,8 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     monthly_care_expenses: Field::String.with_options(searchable: false),
     monthly_court_ordered_expenses: Field::String.with_options(searchable: false),
     monthly_medical_expenses: Field::String.with_options(searchable: false),
-    office_location: Field::String,
+    office_page: Field::String,
+    selected_office_location: Field::String,
     phone_number: Field::String,
     property_tax_expense: Field::Number.with_options(searchable: false),
     real_estate_income: Field::Boolean,
@@ -67,7 +68,8 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     id
     sms_consented
     phone_number
-    office_location
+    office_page
+    selected_office_location
     email
     signed_at
     last_emailed_office_at

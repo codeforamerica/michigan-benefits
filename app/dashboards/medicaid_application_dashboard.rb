@@ -54,7 +54,8 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     signed_at: Field::DateTime,
     upload_paperwork: Field::Boolean,
     paperwork: Field::String.with_options(searchable: false),
-    office_location: Field::String,
+    office_page: Field::String,
+    selected_office_location: Field::String,
     mailing_address_same_as_residential_address: Field::Boolean,
     stable_housing: Field::Boolean,
     anyone_married: Field::Boolean,
@@ -70,7 +71,8 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     phone_number
-    office_location
+    office_page
+    selected_office_location
     email
     signed_at
     last_emailed_office_at
@@ -126,7 +128,8 @@ class MedicaidApplicationDashboard < Administrate::BaseDashboard
     signed_at
     upload_paperwork
     paperwork
-    office_location
+    office_page
+    selected_office_location
     mailing_address_same_as_residential_address
     stable_housing
     anyone_married

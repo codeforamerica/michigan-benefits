@@ -5,6 +5,7 @@ module Medicaid
         Medicaid::WelcomeController,
         Medicaid::IntroLocationController,
         Medicaid::IntroLocationHelpController,
+        Medicaid::OfficeLocationController,
         Medicaid::IntroNameController,
         Medicaid::IntroAppliedBeforeController,
         Medicaid::IntroHouseholdController,
