@@ -97,6 +97,29 @@ RSpec.describe OfficeRecipient do
     end
   end
 
+  describe "#residential_or_mailing_zip" do
+    let(:application) do
+    end
+
+    it "returns the residential zip if it exists" do
+      application = double("application",
+                           residential_address: double(zip: "12345"),
+                           mailing_address: double(zip: "98765"))
+      recipient = described_class.new(benefit_application: application)
+
+      expect(recipient.residential_or_mailing_zip).to eq("12345")
+    end
+
+    it "returns the mailing zip if no residential address exists" do
+      application = double("application",
+                           residential_address: nil,
+                           mailing_address: double(zip: "98765"))
+      recipient = described_class.new(benefit_application: application)
+
+      expect(recipient.residential_or_mailing_zip).to eq("98765")
+    end
+  end
+
   def clio_phone_number
     "8107877101"
   end

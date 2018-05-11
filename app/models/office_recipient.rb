@@ -19,7 +19,17 @@ class OfficeRecipient
     if office_location.present?
       self.class.offices[office_location]
     else
-      self.class.find_by(zip: residential_address_zip)
+      self.class.find_by(zip: residential_or_mailing_zip)
+    end
+  end
+
+  def residential_or_mailing_zip
+    if benefit_application.respond_to?(:residential_zip)
+      benefit_application.residential_zip
+    elsif residential_address&.zip
+      residential_address.zip
+    elsif mailing_address&.zip
+      mailing_address.zip
     end
   end
 
@@ -66,16 +76,12 @@ class OfficeRecipient
 
   attr_reader :benefit_application
 
-  def residential_address_zip
-    if benefit_application.respond_to?(:residential_zip)
-      benefit_application.residential_zip
-    else
-      residential_address.zip
-    end
-  end
-
   def residential_address
     benefit_application.residential_address
+  end
+
+  def mailing_address
+    benefit_application.mailing_address
   end
 
   def office_location
