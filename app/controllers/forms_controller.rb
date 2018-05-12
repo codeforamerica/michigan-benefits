@@ -15,7 +15,7 @@ class FormsController < ApplicationController
   end
 
   def update
-    @form = form_class.new(form_params)
+    assign_attributes_to_form
     if @form.valid?
       update_models
       redirect_to(next_path)
@@ -68,6 +68,10 @@ class FormsController < ApplicationController
     {}
   end
 
+  def assign_attributes_to_form
+    @form = form_class.new(form_params)
+  end
+
   def update_models; end
 
   # Don't override in subclasses
@@ -100,6 +104,10 @@ class FormsController < ApplicationController
 
   def navigator_params
     filtered_params(form_class.navigator_attributes)
+  end
+
+  def employment_params
+    filtered_params(form_class.employment_attributes)
   end
 
   def address_params

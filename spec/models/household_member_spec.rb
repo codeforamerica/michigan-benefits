@@ -17,6 +17,21 @@ RSpec.describe HouseholdMember do
         expect(HouseholdMember.pregnant.first).to eq(pregnant_member)
       end
     end
+
+    describe ".employed" do
+      it "returns members with one or more employments" do
+        employed_member = build(:household_member, employments: build_list(:employment, 2))
+        members = [
+          employed_member,
+          build(:household_member, employments: []),
+        ]
+
+        members.map(&:save)
+
+        expect(HouseholdMember.employed.count).to eq(1)
+        expect(HouseholdMember.employed.first).to eq(employed_member)
+      end
+    end
   end
 
   describe "#display_name" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508220008) do
+ActiveRecord::Schema.define(version: 20180510210317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 20180508220008) do
     t.string "application_member_type"
     t.datetime "created_at", null: false
     t.string "employer_name"
+    t.integer "hourly_or_salary", default: 0
+    t.integer "hours_per_week"
     t.integer "member_id"
     t.string "pay_quantity"
     t.string "payment_frequency"
@@ -296,6 +298,7 @@ ActiveRecord::Schema.define(version: 20180508220008) do
     t.string "employed_pay_interval"
     t.integer "employed_pay_quantity"
     t.string "employment_status"
+    t.integer "employments_count", default: 0
     t.string "encrypted_last_four_ssn"
     t.string "encrypted_last_four_ssn_iv"
     t.string "encrypted_ssn"

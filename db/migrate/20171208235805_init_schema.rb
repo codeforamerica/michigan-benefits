@@ -2,7 +2,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
   def up
     # rubocop:disable BlockLength
     # These are extensions that must be enabled in order to support this database
-    safety_assured {
+    safety_assured do
       enable_extension "plpgsql"
       create_table "addresses", force: :cascade do |t|
         t.bigint "benefit_application_id", null: false
@@ -264,7 +264,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
       # rubocop:enable BlockLength
       add_foreign_key "driver_applications", "snap_applications"
       add_foreign_key "driver_errors", "driver_applications"
-    }
+    end
   end
 
   def down

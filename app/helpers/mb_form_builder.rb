@@ -96,7 +96,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_money_field(
     method,
     label_text,
-    type: :tel,
+    type: :number,
     help_text: nil,
     options: {},
     classes: [],
@@ -507,7 +507,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       aria_labels = aria_labelledby(method: method, help_text: help_text)
       aria_labels += " #{sanitized_id(method)}_#{snake_case_value}__label"
 
-      options = { 'aria-labelledby': aria_labels }
+      options = { 'aria-labelledby': aria_labels }.merge(item[:options].to_h)
 
       radio_html << <<~HTML.html_safe
         <label class="radio-button" id="#{sanitized_id(method)}_#{snake_case_value}__label">

@@ -290,6 +290,7 @@ RSpec.feature "Integrated application" do
       relationship: "Child",
       tax_relationship: "Dependent",
     }
+
     on_page "Healthcare" do
       expect(page).to have_content("Add a person.")
 
@@ -609,6 +610,41 @@ RSpec.feature "Integrated application" do
 
       fill_in "How many jobs do you have?", with: "1"
       fill_in "How many jobs does Jonny Tester have?", with: "2"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
+      expect(page).to have_content(
+        "Tell us about your job.",
+      )
+
+      fill_in "Employer Name", with: "Cogswell's Cogs"
+      select_radio(question: "Are you hourly or salaried?", answer: "Hourly")
+      fill_in "How much do you make an hour?", with: "20"
+      select_radio(question: "How often do you get a paycheck?", answer: "Every two weeks")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
+      expect(page).to have_content(
+        "Tell us about Jonny's jobs.",
+      )
+
+      within "#job-1" do
+        fill_in "Employer Name", with: "Cogswell's Cogs"
+        select_radio(question: "Is Jonny hourly or salaried?", answer: "Hourly")
+        fill_in "How much does Jonny make an hour?", with: "20"
+        select_radio(question: "How often does Jonny get a paycheck?", answer: "Every two weeks")
+      end
+
+      within "#job-2" do
+        fill_in "Employer Name", with: "Cogswell's Cogs"
+        select_radio(question: "Is Jonny hourly or salaried?", answer: "Hourly")
+        fill_in "How much does Jonny make an hour?", with: "20"
+        select_radio(question: "How often does Jonny get a paycheck?", answer: "Every two weeks")
+      end
 
       proceed_with "Continue"
     end

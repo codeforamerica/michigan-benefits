@@ -250,6 +250,19 @@ RSpec.feature "Integrated application" do
 
     on_page "Income and Employment" do
       expect(page).to have_content(
+        "Tell us about your job.",
+      )
+
+      fill_in "Employer Name", with: "Cogswell's Cogs"
+      select_radio(question: "Are you hourly or salaried?", answer: "Hourly")
+      fill_in "How much do you make an hour?", with: "20"
+      select_radio(question: "How often do you get a paycheck?", answer: "Every two weeks")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
+      expect(page).to have_content(
         "Are you self-employed in any way?",
       )
 

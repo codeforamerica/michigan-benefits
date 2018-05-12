@@ -122,17 +122,35 @@ var autoAdvanceTelInputs = (function() {
 var followUpQuestion = (function() {
   var followUp = {
     init: function() {
+      // disable all fields
+      $('.question-with-follow-up .question-with-follow-up__follow-up input').prop('disabled', true);
+
       // any pre-selected?
       $('.question-with-follow-up__question select').each(function(index, select) {
+        $($($(this).find('option:selected')).attr('data-follow-up')).find('input').prop('disabled', false);
         $($($(this).find('option:selected')).attr('data-follow-up')).show();
       });
+      $('.question-with-follow-up__question input:checked').each(function(index, input) {
+        $($(this).attr('data-follow-up')).find('input').prop('disabled', false); // enable visible fields
+        $($(this).attr('data-follow-up')).show();
+      });
+
       // handle selection events
       $('.question-with-follow-up__question select').change(function(e) {
-        $('.question-with-follow-up__follow-up').hide();
-        $('.question-with-follow-up__follow-up input').each(function(index, radio) {
-          $(this).prop('checked', false);
-        });
+        var $followUpFields = $(this).parents('.question-with-follow-up').find('.question-with-follow-up__follow-up');
+        $followUpFields.hide();
+        $followUpFields.find('input').prop('disabled', true);
+        $($($(this).find('option:selected')).attr('data-follow-up')).find('input').prop('disabled', false);
         $($($(this).find('option:selected')).attr('data-follow-up')).show();
+      });
+
+      // handle checkbox and radio button clicks
+      $('.question-with-follow-up__question input').click(function(e) {
+        var $followUpFields = $(this).parents('.question-with-follow-up').find('.question-with-follow-up__follow-up');
+        $followUpFields.hide();
+        $followUpFields.find('input').prop('disabled', true); // disable all fields
+        $($(this).attr('data-follow-up')).find('input').prop('disabled', false); // enable visible fields
+        $($(this).attr('data-follow-up')).show();
       });
     }
   };

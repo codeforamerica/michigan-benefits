@@ -548,7 +548,7 @@ RSpec.describe MbFormBuilder do
         :dependent_care,
         label_text: "Does your household have dependent care expenses?",
         collection: [
-          { label: "Yep", value: true },
+          { label: "Yep", value: true, options: { "data-follow-up": "#yep-follow-up" } },
           { label: "Nope", value: false },
         ],
         help_text: "This includes child care.",
@@ -562,7 +562,7 @@ RSpec.describe MbFormBuilder do
           </legend>
           <p class="text--help" id="sample_dependent_care__help">This includes child care.</p>
           <radiogroup class="input-group--block">
-            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_true__label" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
+            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_true__label" data-follow-up="#yep-follow-up" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
             <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
           </radiogroup>
           <span class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </span>

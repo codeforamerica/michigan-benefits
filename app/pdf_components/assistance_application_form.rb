@@ -165,9 +165,25 @@ class AssistanceApplicationForm
         no: !benefit_application.anyone_employed?,
       ),
     }
-    members = benefit_application.members.select { |member| member.employments.any? }
-    members.first(2).each_with_index do |member, i|
-      hash[:"#{ordinals[i]}_member_employment_name"] = member.display_name
+    jobs = benefit_application.members.map(&:employments).flatten
+    jobs.first(2).each_with_index do |job, i|
+      hash[:"#{ordinals[i]}_member_employment_name"] = job.application_member.display_name
+      hash[:"#{ordinals[i]}_member_employment_employer_name"] = job.employer_name
+      hash[:"#{ordinals[i]}_member_employment_hrs_per_wk"] = job.hours_per_week
+      hash[:"#{ordinals[i]}_member_employment_amount"] = job.pay_quantity
+
+      hash[:"#{ordinals[i]}_member_employment_frequency_hour"] =
+        circle_if_true(job.hourly? || job.payment_frequency == "hour")
+      hash[:"#{ordinals[i]}_member_employment_frequency_week"] =
+        circle_if_true(job.payment_frequency == "week")
+      hash[:"#{ordinals[i]}_member_employment_frequency_two_weeks"] =
+        circle_if_true(job.payment_frequency == "two_weeks")
+      hash[:"#{ordinals[i]}_member_employment_frequency_twice_a_month"] =
+        circle_if_true(job.payment_frequency == "twice_a_month")
+      hash[:"#{ordinals[i]}_member_employment_frequency_month"] =
+        circle_if_true(job.payment_frequency == "month")
+      hash[:"#{ordinals[i]}_member_employment_frequency_year"] =
+        circle_if_true(job.salaried? || job.payment_frequency == "year")
     end
     hash
   end
@@ -288,13 +304,21 @@ class AssistanceApplicationForm
   end
 
   def add_additional_members_employed
-    members = benefit_application.members.select { |member| member.employments.any? }
-    if members.count > 2
+    jobs = benefit_application.members.map(&:employments).flatten
+    if jobs.count > 2
       @_additional_notes[:household_added_notes] = "Yes"
-      @_additional_notes[:notes] += "Additional Employed Members:\n"
-      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
-        "- #{extra_member.display_name}\n"
-      end.join
+      @_additional_notes[:notes] += "Additional Jobs:\n"
+      @_additional_notes[:notes] += jobs[2..-1].map do |job|
+        [
+          "- #{job.application_member.display_name}",
+          job.employer_name,
+          job.hourly_or_salary&.titleize,
+          job.payment_frequency.present? ? "Paycheck received #{job.paycheck_interval_label}" : nil,
+          job.pay_quantity.present? ? "Rate: #{job.pay_quantity}" : nil,
+          job.hours_per_week.present? ? "#{job.hours_per_week} hours/week" : nil,
+        ].compact.join(", ")
+      end.join("\n")
+      @_additional_notes[:notes] += "\n"
     end
   end
 
