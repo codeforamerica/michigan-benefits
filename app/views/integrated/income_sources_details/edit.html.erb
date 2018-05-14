@@ -1,0 +1,26 @@
+<% content_for :header_title, "Income and Employment" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      <% if current_member == current_application.primary_member %>
+        <%= t(".title.primary_member") %>
+      <% else %>
+        <%= t(".title.other_member", name: current_member.display_name(first_only: true)) %>
+      <% end %>
+    </h1>
+    <p class="text--centered text--help">
+      If you don't have all this information on hand, skip this question for now. A caseworker will ask you about it later.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.hidden_field(:id) %>
+
+    <% @form.incomes.each do |income| %>
+      <%= f.fields_for("incomes[]", income, hidden_field_id: true) do |ff| %>
+        <%= ff.mb_money_field(:amount, income.display_name, help_text: "Monthly amount") %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

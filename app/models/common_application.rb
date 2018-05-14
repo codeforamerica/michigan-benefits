@@ -63,6 +63,8 @@ class CommonApplication < ApplicationRecord
 
   has_many :expenses
 
+  has_many :incomes, through: :members
+
   enum previously_received_assistance: { unfilled: 0, yes: 1, no: 2 }, _prefix: :previously_received_assistance
   enum living_situation: { unknown_living_situation: 0, stable_address: 1, temporary_address: 2, homeless: 3 }
   enum income_changed: { unfilled: 0, yes: 1, no: 2 }, _prefix: :income_changed
