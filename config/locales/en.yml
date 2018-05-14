@@ -187,6 +187,30 @@ en:
         title:
           zero: Are you expecting more than one baby?
           one: Is %{name} expecting more than one baby?
+    job_details:
+      edit:
+        title:
+          primary_member:
+            one: Tell us about your job.
+            other: Tell us about your jobs.
+          other_member:
+            one: Tell us about %{name}'s job.
+            other: Tell us about %{name}'s jobs.
+        hourly_or_salary_label:
+          zero: Are you hourly or salaried?
+          one: Is %{name} hourly or salaried?
+        hourly_rate_label:
+          zero: How much do you make an hour? (before taxes)
+          one: How much does %{name} make an hour? (before taxes)
+        hours_per_week_label:
+          zero: How many hours do you usually work a week?
+          one: How many hours does %{name} usually work a week?
+        salary_rate_label:
+          zero: What is your yearly salary? (before taxes)
+          one: What is %{name}'s yearly salary? (before taxes)
+        payment_frequency_label:
+          zero: How often do you get a paycheck?
+          one: How often does %{name} get a paycheck?
     income_sources:
       edit:
         title:

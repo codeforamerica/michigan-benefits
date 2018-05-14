@@ -7,3 +7,27 @@
     @include triangle(top, $color: $color-light-grey, $size: 12px);
   }
 }
+
+.question-with-follow-up__follow-up-two {
+  &:before {
+    left: $site-margins/2+168;
+    @include media($tablet-up) {
+      left: $site-margins+168;
+    }
+  }
+
+  &:after {
+    left: $site-margins/2+170;
+    @include media($tablet-up) {
+      left: $site-margins+170;
+    }
+  }
+}
+
+.employment-form-group {
+  border-bottom: 2px solid $border-color;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}

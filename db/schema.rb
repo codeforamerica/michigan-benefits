@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508220008) do
+ActiveRecord::Schema.define(version: 20180510210317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,13 +151,17 @@ ActiveRecord::Schema.define(version: 20180508220008) do
   end
 
   create_table "employments", force: :cascade do |t|
+    t.bigint "application_member_id"
+    t.string "application_member_type"
     t.datetime "created_at", null: false
     t.string "employer_name"
+    t.integer "hourly_or_salary", default: 0
     t.integer "hours_per_week"
-    t.integer "member_id", null: false
+    t.integer "member_id"
     t.string "pay_quantity"
     t.string "payment_frequency"
     t.datetime "updated_at", null: false
+    t.index ["application_member_id"], name: "index_employments_on_application_member_id"
   end
 
   create_table "expenses", force: :cascade do |t|
@@ -183,7 +187,7 @@ ActiveRecord::Schema.define(version: 20180508220008) do
   end
 
   create_table "household_members", force: :cascade do |t|
-    t.integer "baby_count", default: 0
+    t.integer "baby_count"
     t.datetime "birthday"
     t.integer "buy_and_prepare_food_together", default: 0
     t.integer "caretaker", default: 0
@@ -191,6 +195,7 @@ ActiveRecord::Schema.define(version: 20180508220008) do
     t.bigint "common_application_id"
     t.datetime "created_at", null: false
     t.integer "disabled", default: 0
+    t.integer "employments_count", default: 0
     t.string "encrypted_ssn"
     t.string "encrypted_ssn_iv"
     t.integer "filing_taxes_next_year", default: 0
@@ -293,6 +298,7 @@ ActiveRecord::Schema.define(version: 20180508220008) do
     t.string "employed_pay_interval"
     t.integer "employed_pay_quantity"
     t.string "employment_status"
+    t.integer "employments_count", default: 0
     t.string "encrypted_last_four_ssn"
     t.string "encrypted_last_four_ssn_iv"
     t.string "encrypted_ssn"

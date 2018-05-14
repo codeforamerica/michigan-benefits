@@ -100,6 +100,7 @@ class FormNavigation
       Integrated::TellUsIncomeChangedController,
       Integrated::DoYouHaveJobController,
       Integrated::HowManyJobsController,
+      Integrated::JobDetailsController,
       Integrated::AreYouSelfEmployedController,
       Integrated::AnyoneSelfEmployedController,
       Integrated::WhoIsSelfEmployedController,

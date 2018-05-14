@@ -1,0 +1,62 @@
+<% content_for :header_title, "Income and Employment" %>
+
+<% content_for :form_card_title do %>
+  <% if current_member == current_application.primary_member %>
+      <%= t(".title.primary_member", count: current_member.employments_count) %>
+  <% else %>
+      <%= t(".title.other_member",
+        name: current_member.display_name(first_only: true),
+        count: current_member.employments_count) %>
+  <% end %>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <%= f.hidden_field(:id) %>
+
+      <% @form.employments.each_with_index do |job, index| %>
+      <%= f.fields_for("employments[]", job, hidden_field_id: true) do |ff| %>
+      <div class="employment-form-group form-group" id="job-<%= index + 1 %>">
+        <% if @form.employments.count > 1 %>
+          <legend class="text--section-header">Job #<%= index + 1 %></legend>
+        <% end %>
+
+        <%= ff.mb_input_field :employer_name,
+          "Employer Name",
+          autofocus: true %>
+        <div class="question-with-follow-up">
+          <div class="question-with-follow-up__question">
+            <%= ff.mb_radio_set :hourly_or_salary,
+              label_text: t(".hourly_or_salary_label", **member_appropriate_translation_data),
+              collection: [
+                  {
+                    value: :hourly,
+                    label: "Hourly",
+                    options: {"data-follow-up": "#hourly-follow-up-#{index}"}
+                  },
+                  {
+                    value: :salaried,
+                    label: "Salaried",
+                    options: {"data-follow-up": "#salaried-follow-up-#{index}"}
+                  },
+              ],
+              layout: "inline" %>
+          </div>
+          <div class="question-with-follow-up__follow-up" id="hourly-follow-up-<%=index%>">
+            <%= ff.mb_money_field :pay_quantity_hourly, t(".hourly_rate_label", **member_appropriate_translation_data),
+                                 help_text: "This includes money withheld from paychecks." %>
+            <%= ff.mb_input_field :hours_per_week, t(".hours_per_week_label", **member_appropriate_translation_data) %>
+          </div>
+          <div class="question-with-follow-up__follow-up question-with-follow-up__follow-up-two" id="salaried-follow-up-<%=index%>">
+            <%= ff.mb_money_field :pay_quantity_salary,  t(".salary_rate_label", **member_appropriate_translation_data),
+                                 help_text: "This includes money withheld from paychecks." %>
+          </div>
+        </div>
+        <%= ff.mb_radio_set :payment_frequency,
+          label_text: t(".payment_frequency_label", **member_appropriate_translation_data),
+          collection: Employment::PAYCHECK_INTERVALS.map{|key, value| { value: key, label: value }} %>
+      </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

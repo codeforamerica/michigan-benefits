@@ -15,6 +15,10 @@ module Integrated
       next_member_path || super
     end
 
+    def previous_path(*)
+      previous_member_path || super
+    end
+
     def member_appropriate_translation_data
       {
         count: current_application.primary_member == current_member ? 0 : 1,
@@ -46,6 +50,12 @@ module Integrated
       section_path(self.class.to_param, params: { member: next_member.id })
     end
 
+    def previous_member_path
+      return if previous_member.nil?
+
+      section_path(self.class.to_param, params: { member: previous_member.id })
+    end
+
     def existing_attributes
       set_default_values
       HashWithIndifferentAccess.new(current_member.attributes)
@@ -73,8 +83,19 @@ module Integrated
 
       member_scope.
         after(current_member).
-        limit(1).
         first
+    end
+
+    def previous_member
+      current_member = member_from_form ||
+        member_from_querystring ||
+        first_member
+
+      return if current_member.nil?
+
+      member_scope.
+        before(current_member).
+        last
     end
   end
 end

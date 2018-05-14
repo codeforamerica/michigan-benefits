@@ -1,7 +1,10 @@
 class HouseholdMember < ApplicationRecord
   include SocialSecurityNumber
+
   belongs_to :common_application
-  has_many :incomes
+
+  has_many :employments, as: :application_member, dependent: :destroy
+  has_many :incomes, dependent: :destroy
 
   scope :requesting_food, -> {
     where(requesting_food: "yes").order("created_at")
@@ -19,7 +22,11 @@ class HouseholdMember < ApplicationRecord
     where(tax_relationship: ["primary", "married_filing_jointly", "dependent"]).order("created_at")
   }
 
+  scope :employed, -> { where("employments_count > 0") }
+
   scope :pregnant, -> { where(pregnant: "yes").order("created_at") }
+
+  scope :before, ->(member = nil) { where("created_at < ?", member&.created_at) }
 
   scope :after, ->(member = nil) { where("created_at > ?", member&.created_at) }
 

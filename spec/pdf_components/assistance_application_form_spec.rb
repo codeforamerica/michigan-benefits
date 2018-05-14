@@ -35,7 +35,14 @@ RSpec.describe AssistanceApplicationForm do
           veteran: "yes",
           pregnant: "no",
           pregnancy_expenses: "yes",
-          job_count: 1,
+          employments: [
+            build(:employment,
+              employer_name: "Sunnydale High School",
+              hourly_or_salary: "hourly",
+              hours_per_week: 20,
+              pay_quantity: "15",
+              payment_frequency: "week"),
+          ],
           self_employed: "yes",
           incomes: [build(:income, income_type: "unemployment")])
       end
@@ -122,6 +129,11 @@ RSpec.describe AssistanceApplicationForm do
           anyone_income_change_explanation: "I lost my job.",
           anyone_employed: "Yes",
           first_member_employment_name: "Octopus Cuttlefish",
+          first_member_employment_frequency_hour: Integrated::PdfAttributes::CIRCLED,
+          first_member_employment_frequency_week: Integrated::PdfAttributes::CIRCLED,
+          first_member_employment_employer_name: "Sunnydale High School",
+          first_member_employment_hrs_per_wk: 20,
+          first_member_employment_amount: "15",
           anyone_self_employed: "Yes",
           first_member_self_employed_name: "Octopus Cuttlefish",
           anyone_additional_income: "Yes",
@@ -156,7 +168,7 @@ RSpec.describe AssistanceApplicationForm do
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
                                         flint_water: "yes",
-                                        job_count: 1,
+                                        employments: [build(:employment)],
                                         self_employed: "yes",
                                         incomes: [build(:income, income_type: "unemployment")]),
                                   build(:household_member,
@@ -165,7 +177,7 @@ RSpec.describe AssistanceApplicationForm do
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
                                         flint_water: "yes",
-                                        job_count: 1,
+                                        employments: [build(:employment)],
                                         self_employed: "yes",
                                         incomes: [build(:income, income_type: "pension")]),
                                   build(:household_member,
@@ -173,7 +185,14 @@ RSpec.describe AssistanceApplicationForm do
                                         last_name: "Wonka",
                                         pregnancy_expenses: "yes",
                                         healthcare_enrolled: "yes",
-                                        job_count: 1,
+                                        employments: [
+                                          build(:employment,
+                                            employer_name: "Oompa Co",
+                                            hourly_or_salary: "hourly",
+                                            pay_quantity: 20,
+                                            payment_frequency: "twice_a_month",
+                                            hours_per_week: 10),
+                                        ],
                                         self_employed: "yes",
                                         incomes: [build(:income, income_type: "retirement"),
                                                   build(:income, income_type: "social_security")]),
@@ -211,8 +230,8 @@ RSpec.describe AssistanceApplicationForm do
             - Willy Whale
             Additional Members Affected by the Flint Water Crisis:
             - Willy Whale
-            Additional Employed Members:
-            - Willy Wonka
+            Additional Jobs:
+            - Willy Wonka, Oompa Co, Hourly, Paycheck received Twice a month, Rate: 20, 10 hours/week
             Additional Self-Employed Members:
             - Willy Wonka
             Additional Members with Additional Income:

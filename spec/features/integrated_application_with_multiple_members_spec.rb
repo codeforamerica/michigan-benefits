@@ -290,6 +290,7 @@ RSpec.feature "Integrated application" do
       relationship: "Child",
       tax_relationship: "Dependent",
     }
+
     on_page "Healthcare" do
       expect(page).to have_content("Add a person.")
 
@@ -584,7 +585,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Income" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Has your household had a change in income in the past 30 days?",
       )
@@ -592,7 +593,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
-    on_page "Income" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "In your own words, tell us about the recent change in your household's income.",
       )
@@ -602,7 +603,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Jobs" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Who currently has a job?",
       )
@@ -613,7 +614,42 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Self-Employment" do
+    on_page "Income and Employment" do
+      expect(page).to have_content(
+        "Tell us about your job.",
+      )
+
+      fill_in "Employer Name", with: "Cogswell's Cogs"
+      select_radio(question: "Are you hourly or salaried?", answer: "Hourly")
+      fill_in "How much do you make an hour?", with: "20"
+      select_radio(question: "How often do you get a paycheck?", answer: "Every two weeks")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
+      expect(page).to have_content(
+        "Tell us about Jonny's jobs.",
+      )
+
+      within "#job-1" do
+        fill_in "Employer Name", with: "Cogswell's Cogs"
+        select_radio(question: "Is Jonny hourly or salaried?", answer: "Hourly")
+        fill_in "How much does Jonny make an hour?", with: "20"
+        select_radio(question: "How often does Jonny get a paycheck?", answer: "Every two weeks")
+      end
+
+      within "#job-2" do
+        fill_in "Employer Name", with: "Cogswell's Cogs"
+        select_radio(question: "Is Jonny hourly or salaried?", answer: "Hourly")
+        fill_in "How much does Jonny make an hour?", with: "20"
+        select_radio(question: "How often does Jonny get a paycheck?", answer: "Every two weeks")
+      end
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Is anyone self-employed in any way?",
       )
@@ -621,7 +657,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
-    on_page "Self-Employment" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Who is self-employed?",
       )
@@ -631,7 +667,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Income" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Do you get income from any of these sources?",
       )
@@ -643,7 +679,7 @@ RSpec.feature "Integrated application" do
     end
 
     members.each do |member|
-      on_page "Income" do
+      on_page "Income and Employment" do
         expect(page).to have_content(
           "Does #{member[:first_name]} get income from any of these sources?",
         )

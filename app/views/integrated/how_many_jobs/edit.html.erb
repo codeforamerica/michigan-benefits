@@ -1,36 +1,33 @@
-<% content_for :header_title, "Jobs" %>
+<% content_for :header_title, "Income and Employment" %>
 
-<% content_for :form_card_header do %>
-  <h1 class="form-card__title">
-    <% if current_application.single_member_household? %>
-      How many jobs do you have?
-    <% else %>
-      Who currently has a job?
-    <% end %>
-  </h1>
-  <p class="text--centered text--help">
-
-  </p>
+<% content_for :form_card_title do %>
+  <% if current_application.single_member_household? %>
+    How many jobs do you have?
+  <% else %>
+    Who currently has a job?
+  <% end %>
 <% end %>
 
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
-      <% @form.members.each do |member| %>
+      <% @form.members.each_with_index do |member| %>
         <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
           <% if member.primary_member? %>
-            <%= ff.mb_incrementer :job_count,
+            <%= ff.hidden_field :id %>
+
+            <%= ff.mb_incrementer :employments_count,
                                  "How many jobs do you have?",
                                  options: {
                                      min: "0",
-                                     max: "9",
+                                     max: "10",
                                  },
-                                 hide_label: current_application.single_member_household? ? true : false %>
+                                 hide_label: current_application.single_member_household? %>
           <% else %>
-            <%= ff.mb_incrementer :job_count,
+            <%= ff.mb_incrementer :employments_count,
                                   "How many jobs does #{member.display_name} have?",
                                   options: {
                                       min: "0",
-                                      max: "9",
+                                      max: "10",
                                   },
                                   hide_label: false %>
           <% end %>

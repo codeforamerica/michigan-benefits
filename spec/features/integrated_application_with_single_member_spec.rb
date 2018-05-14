@@ -212,7 +212,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
-    on_page "Income" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Has your income changed in the past 30 days?",
       )
@@ -220,7 +220,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
-    on_page "Income" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "In your own words, tell us about the recent change in your income.",
       )
@@ -230,7 +230,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Jobs" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Do you currently have a job?",
       )
@@ -238,7 +238,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
-    on_page "Jobs" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "How many jobs do you have?",
       )
@@ -248,7 +248,20 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Self-Employment" do
+    on_page "Income and Employment" do
+      expect(page).to have_content(
+        "Tell us about your job.",
+      )
+
+      fill_in "Employer Name", with: "Cogswell's Cogs"
+      select_radio(question: "Are you hourly or salaried?", answer: "Hourly")
+      fill_in "How much do you make an hour?", with: "20"
+      select_radio(question: "How often do you get a paycheck?", answer: "Every two weeks")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Are you self-employed in any way?",
       )
@@ -256,7 +269,7 @@ RSpec.feature "Integrated application" do
       proceed_with "Yes"
     end
 
-    on_page "Income" do
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Do you get income from any of these sources?",
       )

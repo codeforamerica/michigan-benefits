@@ -56,24 +56,32 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     label_text,
     options: {},
     classes: [],
-    hide_label: true
+    hide_label: true,
+    value_is_array: false,
+    id_suffix: nil,
+    value: 0
   )
-    classes = classes.append(%w[text-input])
+    classes = classes.append(%w[text-input form-width--short])
+    slug = [method.to_s, id_suffix].compact.join("_")
 
     text_field_options = {
       type: "number",
-      class: (classes + ["form-width--short"]).join(" "),
+      class: classes.join(" "),
       autocomplete: "off",
       autocorrect: "off",
       autocapitalize: "off",
       spellcheck: "false",
-      "aria-labelledby": aria_labelledby(method: method),
-      id: sanitized_id(method),
+      id: sanitized_id(slug),
     }.merge(options)
+
+    if value_is_array
+      text_field_options[:multiple] = "true"
+      text_field_options[:value] = value
+    end
 
     html_output = <<~HTML
       <div class="form-group#{error_state(object, method)}">
-        #{label(method, label_text, class: hide_label ? 'sr-only' : '', id: aria_label(method))}
+        #{label(method, label_text, class: hide_label ? 'sr-only' : '', for: sanitized_id(slug))}
         <div class="incrementer">
           #{text_field(method, text_field_options)}
           <span class="incrementer__subtract">-</span>
@@ -88,7 +96,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_money_field(
     method,
     label_text,
-    type: :tel,
+    type: :number,
     help_text: nil,
     options: {},
     classes: [],
@@ -499,7 +507,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       aria_labels = aria_labelledby(method: method, help_text: help_text)
       aria_labels += " #{sanitized_id(method)}_#{snake_case_value}__label"
 
-      options = { 'aria-labelledby': aria_labels }
+      options = { 'aria-labelledby': aria_labels }.merge(item[:options].to_h)
 
       radio_html << <<~HTML.html_safe
         <label class="radio-button" id="#{sanitized_id(method)}_#{snake_case_value}__label">

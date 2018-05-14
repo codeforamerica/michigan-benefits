@@ -76,9 +76,9 @@ RSpec.describe MbFormBuilder do
       expect(output).to be_html_safe
       expect(output).to match_html <<-HTML
         <div class="form-group">
-          <label class="sr-only" id="sample_dog__label" for="sample_dog">How many puppies?</label>
+          <label class="sr-only" for="sample_dog">How many puppies?</label>
           <div class="incrementer">
-            <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_dog__label" id="sample_dog" name="sample[dog]" />
+            <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_dog" name="sample[dog]" />
             <span class="incrementer__subtract">-</span>
             <span class="incrementer__add">+</span>
           </div>
@@ -105,11 +105,11 @@ RSpec.describe MbFormBuilder do
       expect(output).to match_html <<-HTML
         <div class="form-group form-group--error">
           <div class="field_with_errors">
-            <label class="sr-only" id="sample_dog__label" for="sample_dog">How many puppies?</label>
+            <label class="sr-only" for="sample_dog">How many puppies?</label>
           </div>
           <div class="incrementer">
             <div class="field_with_errors">
-              <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_dog__errors sample_dog__label" id="sample_dog" name="sample[dog]" />
+              <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_dog" name="sample[dog]" />
             </div>
             <span class="incrementer__subtract">-</span>
             <span class="incrementer__add">+</span>
@@ -117,6 +117,35 @@ RSpec.describe MbFormBuilder do
           <span class="text--error" id="sample_dog__errors"><i class="icon-warning"></i> can't be blank </span>
         </div>
       HTML
+    end
+
+    context "when value is an array on the model" do
+      it "renders an accessible incrementer" do
+        class SampleStep < Step
+          step_attributes(dogs: [])
+        end
+
+        sample = SampleStep.new
+        form = MbFormBuilder.new("sample", sample, template, {})
+        output = form.mb_incrementer(
+          :dogs,
+          "How many puppies?",
+          value_is_array: true,
+          value: 3,
+          id_suffix: "greyhound",
+        )
+        expect(output).to be_html_safe
+        expect(output).to match_html <<-HTML
+          <div class="form-group">
+            <label class="sr-only" for="sample_dogs_greyhound">How many puppies?</label>
+            <div class="incrementer">
+              <input type="number" class="text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_dogs_greyhound" multiple="multiple" value="3" name="sample[dogs][]" />
+              <span class="incrementer__subtract">-</span>
+              <span class="incrementer__add">+</span>
+            </div>
+          </div>
+        HTML
+      end
     end
   end
 
@@ -519,7 +548,7 @@ RSpec.describe MbFormBuilder do
         :dependent_care,
         label_text: "Does your household have dependent care expenses?",
         collection: [
-          { label: "Yep", value: true },
+          { label: "Yep", value: true, options: { "data-follow-up": "#yep-follow-up" } },
           { label: "Nope", value: false },
         ],
         help_text: "This includes child care.",
@@ -533,7 +562,7 @@ RSpec.describe MbFormBuilder do
           </legend>
           <p class="text--help" id="sample_dependent_care__help">This includes child care.</p>
           <radiogroup class="input-group--block">
-            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_true__label" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
+            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_true__label" data-follow-up="#yep-follow-up" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
             <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
           </radiogroup>
           <span class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </span>

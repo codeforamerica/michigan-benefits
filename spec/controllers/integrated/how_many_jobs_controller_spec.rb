@@ -14,50 +14,29 @@ RSpec.describe Integrated::HowManyJobsController do
   end
 
   describe "#edit" do
-    context "when no job counts are set" do
-      it "sets a job count of 1 for a solo applicant" do
-        current_app = create(:common_application, :single_member,
-                             navigator: build(:application_navigator, current_job: true))
-        session[:current_application_id] = current_app.id
+    it "assigns members" do
+      member_one = build(:household_member, employments: build_list(:employment, 3))
+      member_two = build(:household_member, employments: [])
 
-        get :edit
+      current_app = create(:common_application,
+                           members: [member_one, member_two],
+                           navigator: build(:application_navigator))
 
-        form = assigns(:form)
-        expect(form.members.first.job_count).to eq(1)
-      end
+      session[:current_application_id] = current_app.id
 
-      it "sets a job count of 0 for all in a multi-member household" do
-        current_app = create(:common_application, :multi_member,
-                             navigator: build(:application_navigator))
-        session[:current_application_id] = current_app.id
+      get :edit
 
-        get :edit
+      form = assigns(:form)
 
-        form = assigns(:form)
-        expect(form.members.first.job_count).to eq(0)
-        expect(form.members.second.job_count).to eq(0)
-      end
-    end
-
-    context "when a job count is already set" do
-      it "respects the count" do
-        current_app = create(:common_application,
-                             members: [build(:household_member, job_count: 3)],
-                             navigator: build(:application_navigator, current_job: true))
-        session[:current_application_id] = current_app.id
-
-        get :edit
-
-        form = assigns(:form)
-        expect(form.members.first.job_count).to eq(3)
-      end
+      expect(form.members.first).to eq(member_one)
+      expect(form.members.second).to eq(member_two)
     end
   end
 
   describe "#update" do
-    context "with valid params" do
+    context "when job count changes" do
       let(:member_1) do
-        create(:household_member)
+        create(:household_member, employments: build_list(:employment, 3))
       end
 
       let(:member_2) do
@@ -67,20 +46,17 @@ RSpec.describe Integrated::HowManyJobsController do
       let(:valid_params) do
         {
           members: {
-            member_1.id => {
-              job_count: "1",
-            },
-            member_2.id => {
-              job_count: "2",
-            },
+            member_1.id => { employments_count: "1" },
+            member_2.id => { employments_count: "2" },
           },
         }
       end
 
-      it "updates each member with job count" do
+      it "creates the correct number of employments for submitted number of jobs" do
         current_app = create(:common_application,
                              members: [member_1, member_2],
                              navigator: build(:application_navigator))
+
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }
@@ -88,8 +64,61 @@ RSpec.describe Integrated::HowManyJobsController do
         member_1.reload
         member_2.reload
 
-        expect(member_1.job_count).to eq(1)
-        expect(member_2.job_count).to eq(2)
+        expect(member_1.employments.count).to eq(1)
+        expect(member_2.employments.count).to eq(2)
+      end
+
+      it "redirects to next step" do
+        current_app = create(:common_application,
+          members: [member_1, member_2],
+          navigator: build(:application_navigator))
+
+        session[:current_application_id] = current_app.id
+
+        put :update, params: { form: valid_params }
+
+        expect(response).to redirect_to(subject.next_path)
+      end
+    end
+
+    context "when job count does not change" do
+      let(:member_1) do
+        create(:household_member, employments: [
+                 build(:employment, employer_name: "Cogsworth's Cogs"),
+               ])
+      end
+
+      let(:member_2) do
+        create(:household_member, employments: [
+                 build(:employment, employer_name: "Spatula City"),
+               ])
+      end
+
+      let(:valid_params) do
+        {
+          members: {
+            member_1.id => { employments_count: "1" },
+            member_2.id => { employments_count: "1" },
+          },
+        }
+      end
+
+      it "does not overwrite the existing jobs" do
+        current_app = create(:common_application,
+          members: [member_1, member_2],
+          navigator: build(:application_navigator))
+
+        session[:current_application_id] = current_app.id
+
+        put :update, params: { form: valid_params }
+
+        member_1.reload
+        member_2.reload
+
+        expect(member_1.employments.count).to eq(1)
+        expect(member_1.employments.first.employer_name).to eq("Cogsworth's Cogs")
+        expect(member_2.employments.count).to eq(1)
+        expect(member_2.employments.first.employer_name).to eq("Spatula City")
       end
     end
   end
