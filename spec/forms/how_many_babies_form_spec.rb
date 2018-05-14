@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe HowManyBabiesForm do
   describe "validations" do
-    context "when baby count is less than 0" do
+    context "when baby count is 0" do
       it "is invalid" do
         form = HowManyBabiesForm.new(baby_count: 0)
 
