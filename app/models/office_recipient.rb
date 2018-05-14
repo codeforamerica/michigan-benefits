@@ -24,13 +24,7 @@ class OfficeRecipient
   end
 
   def residential_or_mailing_zip
-    if benefit_application.respond_to?(:residential_zip)
-      benefit_application.residential_zip
-    elsif residential_address&.zip
-      residential_address.zip
-    elsif mailing_address&.zip
-      mailing_address.zip
-    end
+    residential_address&.zip || mailing_address&.zip
   end
 
   def self.find_by(zip:)
