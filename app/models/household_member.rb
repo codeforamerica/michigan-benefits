@@ -25,6 +25,8 @@ class HouseholdMember < ApplicationRecord
   scope :employed, -> { where("employments_count > 0").order("created_at") }
   scope :self_employed, -> { where(self_employed: "yes").order("created_at") }
 
+  scope :with_additional_income, -> { where(id: Income.all.pluck(:household_member_id)) }
+
   scope :pregnant, -> { where(pregnant: "yes").order("created_at") }
 
   scope :before, ->(member = nil) { where("created_at < ?", member&.created_at) }

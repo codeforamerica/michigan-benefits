@@ -47,6 +47,17 @@ RSpec.describe HouseholdMember do
         expect(HouseholdMember.self_employed.first).to eq(employed_member)
       end
     end
+
+    describe ".with_additional_income" do
+      it "returns members who have additional income sources" do
+        member = build(:household_member, incomes: build_list(:income, 1))
+        members = [member, build(:household_member)]
+        members.map(&:save)
+
+        expect(HouseholdMember.with_additional_income.count).to eq(1)
+        expect(HouseholdMember.with_additional_income.first).to eq(member)
+      end
+    end
   end
 
   describe "#display_name" do

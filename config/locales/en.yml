@@ -187,6 +187,11 @@ en:
         title:
           zero: Are you expecting more than one baby?
           one: Is %{name} expecting more than one baby?
+    income_sources_details:
+      edit:
+        title:
+          primary_member: Tell us about your income sources.
+          other_member: Tell us about %{name}'s income sources.
     job_details:
       edit:
         title:
