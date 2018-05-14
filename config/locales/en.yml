@@ -211,6 +211,20 @@ en:
         payment_frequency_label:
           zero: How often do you get a paycheck?
           one: How often does %{name} get a paycheck?
+    self_employment_details:
+      edit:
+        title:
+          zero: Tell us about your self-employment.
+          one: Tell us about %{name}'s self-employment.
+        income_label:
+          zero: About how much income do you make per month?
+          one: About how much income does %{name} make per month? (before taxes)
+        expense_label:
+          zero: About how much do you spend on business expenses per month?
+          one: About how much does %{name} spend on business expenses per month?
+        expense_help:
+          zero: These are things you would deduct as a business expense on your taxes. If you have none, please enter 0.
+          one: These are things they would deduct as a business expense on their taxes. If they have none, please enter 0.
     income_sources:
       edit:
         title:

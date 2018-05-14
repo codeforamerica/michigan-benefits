@@ -1,0 +1,20 @@
+<% content_for :header_title, "Income and Employment" %>
+
+<% content_for :form_card_title, t(".title", **member_appropriate_translation_data) %>
+<% content_for :form_card_help, "If you don't have all this information on hand, skip this question for now. A caseworker will ask you about it later." %>
+
+<% content_for :form_card_body do %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.hidden_field(:id) %>
+
+    <%= f.mb_input_field :self_employment_description,
+    "What type of work is it?",
+    autofocus: true %>
+
+    <%= f.mb_money_field(:self_employment_income, t(".income_label", **member_appropriate_translation_data)) %>
+
+    <%= f.mb_money_field(:self_employment_expense,
+      t(".expense_label", **member_appropriate_translation_data),
+      help_text: "These are things you would deduct as a business expense on your taxes. If you have none, please enter 0.") %>
+  <% end %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180510210317) do
+ActiveRecord::Schema.define(version: 20180514181239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,9 @@ ActiveRecord::Schema.define(version: 20180510210317) do
     t.integer "requesting_food", default: 0
     t.integer "requesting_healthcare", default: 0
     t.integer "self_employed", default: 0
+    t.string "self_employment_description"
+    t.integer "self_employment_expense"
+    t.integer "self_employment_income"
     t.integer "sex", default: 0, null: false
     t.integer "student", default: 0
     t.integer "tax_relationship", default: 0
