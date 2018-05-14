@@ -32,6 +32,21 @@ RSpec.describe HouseholdMember do
         expect(HouseholdMember.employed.first).to eq(employed_member)
       end
     end
+
+    describe ".self_employed" do
+      it "returns members who are self-employed" do
+        employed_member = build(:household_member, self_employed: "yes")
+        members = [
+          employed_member,
+          build(:household_member, self_employed: "no"),
+        ]
+
+        members.map(&:save)
+
+        expect(HouseholdMember.self_employed.count).to eq(1)
+        expect(HouseholdMember.self_employed.first).to eq(employed_member)
+      end
+    end
   end
 
   describe "#display_name" do

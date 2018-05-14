@@ -104,6 +104,7 @@ class FormNavigation
       Integrated::AreYouSelfEmployedController,
       Integrated::AnyoneSelfEmployedController,
       Integrated::WhoIsSelfEmployedController,
+      Integrated::SelfEmploymentDetailsController,
       Integrated::IncomeSourcesController,
     ],
     "Assets" => [

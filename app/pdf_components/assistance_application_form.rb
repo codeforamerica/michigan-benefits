@@ -199,6 +199,9 @@ class AssistanceApplicationForm
     members = benefit_application.members.select(&:self_employed_yes?)
     members.first(2).each_with_index do |member, i|
       hash[:"#{ordinals[i]}_member_self_employed_name"] = member.display_name
+      hash[:"#{ordinals[i]}_member_self_employed_type"] = member.self_employment_description
+      hash[:"#{ordinals[i]}_member_self_employed_monthly_income"] = member.self_employment_income
+      hash[:"#{ordinals[i]}_member_self_employed_monthly_expenses"] = member.self_employment_expense
     end
     hash
   end
@@ -328,8 +331,14 @@ class AssistanceApplicationForm
       @_additional_notes[:household_added_notes] = "Yes"
       @_additional_notes[:notes] += "Additional Self-Employed Members:\n"
       @_additional_notes[:notes] += members[2..-1].map do |extra_member|
-        "- #{extra_member.display_name}\n"
-      end.join
+        [
+          "- #{extra_member.display_name}",
+          extra_member.self_employment_description&.titleize,
+          extra_member.self_employment_income.present? ? "Income: $#{extra_member.self_employment_income}" : nil,
+          extra_member.self_employment_expense.present? ? "Expense: $#{extra_member.self_employment_expense}" : nil,
+        ].compact.join(", ")
+      end.join("\n")
+      @_additional_notes[:notes] += "\n"
     end
   end
 

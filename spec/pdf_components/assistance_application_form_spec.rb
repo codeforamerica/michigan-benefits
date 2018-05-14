@@ -44,6 +44,9 @@ RSpec.describe AssistanceApplicationForm do
               payment_frequency: "week"),
           ],
           self_employed: "yes",
+          self_employment_description: "cake maker",
+          self_employment_income: 100,
+          self_employment_expense: 50,
           incomes: [build(:income, income_type: "unemployment")])
       end
 
@@ -136,6 +139,9 @@ RSpec.describe AssistanceApplicationForm do
           first_member_employment_amount: "15",
           anyone_self_employed: "Yes",
           first_member_self_employed_name: "Octopus Cuttlefish",
+          first_member_self_employed_type: "cake maker",
+          first_member_self_employed_monthly_income: 100,
+          first_member_self_employed_monthly_expenses: 50,
           anyone_additional_income: "Yes",
           additional_income_unemployment: "Yes",
           first_member_additional_income_name: "Octopus Cuttlefish",
@@ -194,6 +200,9 @@ RSpec.describe AssistanceApplicationForm do
                                             hours_per_week: 10),
                                         ],
                                         self_employed: "yes",
+                                        self_employment_description: "cake maker",
+                                        self_employment_income: 100,
+                                        self_employment_expense: 50,
                                         incomes: [build(:income, income_type: "retirement"),
                                                   build(:income, income_type: "social_security")]),
                                   build(:household_member),
@@ -209,6 +218,7 @@ RSpec.describe AssistanceApplicationForm do
                                         healthcare_enrolled: "yes",
                                         married: "yes",
                                         citizen: "yes",
+                                        self_employed: "yes",
                                         flint_water: "yes")])
       end
 
@@ -233,7 +243,8 @@ RSpec.describe AssistanceApplicationForm do
             Additional Jobs:
             - Willy Wonka, Oompa Co, Hourly, Paycheck received Twice a month, Rate: 20, 10 hours/week
             Additional Self-Employed Members:
-            - Willy Wonka
+            - Willy Wonka, Cake Maker, Income: $100, Expense: $50
+            - Willy Whale
             Additional Members with Additional Income:
             - Willy Wonka (Retirement, Social Security)
           NOTES

@@ -669,6 +669,18 @@ RSpec.feature "Integrated application" do
 
     on_page "Income and Employment" do
       expect(page).to have_content(
+        "Tell us about Ginny's self-employment",
+      )
+
+      fill_in "What type of work is it?", with: "Cake making"
+      fill_in "About how much income does Ginny make per month", with: "400"
+      fill_in "About how much does Ginny spend on business expenses per month", with: "300"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
+      expect(page).to have_content(
         "Do you get income from any of these sources?",
       )
 
