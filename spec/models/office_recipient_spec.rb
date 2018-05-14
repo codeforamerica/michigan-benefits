@@ -7,22 +7,6 @@ RSpec.describe OfficeRecipient do
         to receive(:application_routing_environment) { "production" }
     end
 
-    context "medicaid app" do
-      it "finds the office without raising an error" do
-        application = double(
-          residential_zip: OFFICE_TO_ZIP_MAPPING[:clio],
-          office_location: nil,
-        )
-        recipent = described_class.new(benefit_application: application)
-
-        expect(recipent.office).to eq(
-          "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
-          "name" => "Clio",
-          "phone_number" => clio_phone_number,
-        )
-      end
-    end
-
     context "office location is present" do
       it "prioritizes to office location over residential address" do
         application = app(from_zip_covered_by: :clio, office_location: "union")

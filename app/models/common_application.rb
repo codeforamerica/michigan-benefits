@@ -85,8 +85,6 @@ class CommonApplication < ApplicationRecord
     @_pdf ||= ApplicationPdfAssembler.new(benefit_application: self).run
   end
 
-  def residential_zip; end
-
   def office_location; end
 
   def documents
