@@ -50,7 +50,7 @@ RSpec.describe HouseholdMember do
 
     describe ".with_additional_income" do
       it "returns members who have additional income sources" do
-        member = build(:household_member, incomes: build_list(:income, 1))
+        member = build(:household_member, additional_incomes: build_list(:additional_income, 1))
         members = [member, build(:household_member)]
         members.map(&:save)
 

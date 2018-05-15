@@ -193,7 +193,7 @@ RSpec.describe CommonApplication do
       application = create(:common_application,
                            members: [
                              create(:household_member,
-                               incomes: [build(:income, income_type: "unemployment")]),
+                               additional_incomes: [build(:additional_income, income_type: "unemployment")]),
                            ])
       expect(application.anyone_additional_income?).to be_truthy
     end
@@ -210,7 +210,7 @@ RSpec.describe CommonApplication do
       application = create(:common_application,
                            members: [
                              create(:household_member,
-                               incomes: [build(:income, income_type: "unemployment")]),
+                               additional_incomes: [build(:additional_income, income_type: "unemployment")]),
                            ])
       expect(application.anyone_additional_income_of?("unemployment")).to be_truthy
     end
@@ -219,7 +219,7 @@ RSpec.describe CommonApplication do
       application = create(:common_application,
         members: [
           create(:household_member,
-            incomes: [build(:income, income_type: "pension")]),
+            additional_incomes: [build(:additional_income, income_type: "pension")]),
         ])
       expect(application.anyone_additional_income_of?("unemployment")).to be_falsey
     end

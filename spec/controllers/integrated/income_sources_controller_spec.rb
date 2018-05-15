@@ -4,7 +4,7 @@ RSpec.describe Integrated::IncomeSourcesController do
   describe "edit" do
     it "assigns existing income sources" do
       primary_member = build(:household_member,
-        incomes: [build(:income, income_type: "unemployment")])
+        additional_incomes: [build(:additional_income, income_type: "unemployment")])
       current_app = create(
         :common_application,
         members: [primary_member],
@@ -37,14 +37,14 @@ RSpec.describe Integrated::IncomeSourcesController do
         }
 
         current_app.reload
-        income_types = current_app.members[1].incomes.map(&:income_type)
+        income_types = current_app.members[1].additional_incomes.map(&:income_type)
 
         expect(income_types).to match_array(["unemployment", "pension"])
       end
 
       it "destroys incomes from params" do
-        primary_member = build(:household_member, incomes: [
-                                 build(:income, income_type: "ssi"),
+        primary_member = build(:household_member, additional_incomes: [
+                                 build(:additional_income, income_type: "ssi"),
                                ])
         current_app = create(:common_application, members: [primary_member])
         session[:current_application_id] = current_app.id
@@ -54,7 +54,7 @@ RSpec.describe Integrated::IncomeSourcesController do
         }
 
         primary_member.reload
-        income_types = primary_member.incomes.map(&:income_type)
+        income_types = primary_member.additional_incomes.map(&:income_type)
 
         expect(income_types).to match_array(["unemployment", "pension"])
       end

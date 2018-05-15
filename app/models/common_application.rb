@@ -63,7 +63,7 @@ class CommonApplication < ApplicationRecord
 
   has_many :expenses
 
-  has_many :incomes, through: :members
+  has_many :additional_incomes, through: :members
 
   enum previously_received_assistance: { unfilled: 0, yes: 1, no: 2 }, _prefix: :previously_received_assistance
   enum living_situation: { unknown_living_situation: 0, stable_address: 1, temporary_address: 2, homeless: 3 }
@@ -144,10 +144,10 @@ class CommonApplication < ApplicationRecord
   end
 
   def anyone_additional_income?
-    members.any? { |member| member.incomes.any? }
+    members.any? { |member| member.additional_incomes.any? }
   end
 
   def anyone_additional_income_of?(income_type)
-    members.any? { |member| member.incomes.where(income_type: income_type.to_s).any? }
+    members.any? { |member| member.additional_incomes.where(income_type: income_type.to_s).any? }
   end
 end

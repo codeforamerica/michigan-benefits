@@ -47,7 +47,7 @@ RSpec.describe AssistanceApplicationForm do
           self_employment_description: "cake maker",
           self_employment_income: 100,
           self_employment_expense: 50,
-          incomes: [build(:income, income_type: "unemployment", amount: 100)])
+          additional_incomes: [build(:additional_income, income_type: "unemployment", amount: 100)])
       end
 
       let(:common_application) do
@@ -178,7 +178,9 @@ RSpec.describe AssistanceApplicationForm do
                                         flint_water: "yes",
                                         employments: [build(:employment)],
                                         self_employed: "yes",
-                                        incomes: [build(:income, income_type: "unemployment", amount: 100)]),
+                                        additional_incomes: [build(:additional_income,
+                                          income_type: "unemployment",
+                                          amount: 100)]),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wiley",
@@ -187,7 +189,9 @@ RSpec.describe AssistanceApplicationForm do
                                         flint_water: "yes",
                                         employments: [build(:employment)],
                                         self_employed: "yes",
-                                        incomes: [build(:income, income_type: "pension", amount: 50)]),
+                                        additional_incomes: [build(:additional_income,
+                                          income_type: "pension",
+                                          amount: 50)]),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wonka",
@@ -205,8 +209,14 @@ RSpec.describe AssistanceApplicationForm do
                                         self_employment_description: "cake maker",
                                         self_employment_income: 100,
                                         self_employment_expense: 50,
-                                        incomes: [build(:income, income_type: "retirement", amount: 100),
-                                                  build(:income, income_type: "social_security", amount: 200)]),
+                                        additional_incomes: [
+                                          build(:additional_income,
+                                            income_type: "retirement",
+                                            amount: 100),
+                                          build(:additional_income,
+                                            income_type: "social_security",
+                                            amount: 200),
+                                        ]),
                                   build(:household_member),
                                   build(:household_member),
                                   build(:household_member,

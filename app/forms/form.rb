@@ -35,9 +35,9 @@ class Form
       form_attributes(address_attributes)
     end
 
-    def set_income_attributes(*income_attributes)
-      @income_attributes = income_attributes
-      form_attributes(income_attributes)
+    def set_additional_income_attributes(*additional_income_attributes)
+      @additional_income_attributes = additional_income_attributes
+      form_attributes(additional_income_attributes)
     end
 
     def application_attributes
@@ -60,8 +60,8 @@ class Form
       @address_attributes || []
     end
 
-    def income_attributes
-      @income_attributes || []
+    def additional_income_attributes
+      @additional_income_attributes || []
     end
 
     private
@@ -72,7 +72,7 @@ class Form
         navigator_attributes +
         employment_attributes +
         address_attributes +
-        income_attributes)
+        additional_income_attributes)
       self.attribute_names = attributes
 
       attribute_strings = Step::Attributes.

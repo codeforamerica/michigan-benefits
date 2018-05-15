@@ -4,7 +4,7 @@ class HouseholdMember < ApplicationRecord
   belongs_to :common_application
 
   has_many :employments, as: :application_member, dependent: :destroy
-  has_many :incomes, dependent: :destroy
+  has_many :additional_incomes, dependent: :destroy
 
   scope :requesting_food, -> {
     where(requesting_food: "yes").order("created_at")
@@ -25,7 +25,7 @@ class HouseholdMember < ApplicationRecord
   scope :employed, -> { where("employments_count > 0").order("created_at") }
   scope :self_employed, -> { where(self_employed: "yes").order("created_at") }
 
-  scope :with_additional_income, -> { where(id: Income.all.pluck(:household_member_id)) }
+  scope :with_additional_income, -> { where(id: AdditionalIncome.all.pluck(:household_member_id)) }
 
   scope :pregnant, -> { where(pregnant: "yes").order("created_at") }
 

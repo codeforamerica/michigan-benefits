@@ -115,7 +115,7 @@ class FormsController < ApplicationController
   end
 
   def income_params
-    filtered_params(form_class.income_attributes)
+    filtered_params(form_class.additional_income_attributes)
   end
 
   def combined_birthday_fields(day: nil, month: nil, year: nil)
