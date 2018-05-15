@@ -33,7 +33,6 @@ module Integrated
       params.fetch(:form, {}).permit(*form_attrs, incomes: {})
     end
 
-
     def member_scope
       current_application.members.with_additional_income
     end

@@ -47,7 +47,7 @@ RSpec.describe AssistanceApplicationForm do
           self_employment_description: "cake maker",
           self_employment_income: 100,
           self_employment_expense: 50,
-          incomes: [build(:income, income_type: "unemployment")])
+          incomes: [build(:income, income_type: "unemployment", amount: 100)])
       end
 
       let(:common_application) do
@@ -146,6 +146,8 @@ RSpec.describe AssistanceApplicationForm do
           additional_income_unemployment: "Yes",
           first_member_additional_income_name: "Octopus Cuttlefish",
           first_member_additional_income_type: "Unemployment",
+          first_member_additional_income_amount: 100,
+          first_member_additional_income_frequency_month: Integrated::PdfAttributes::CIRCLED,
           medical_expenses_health_insurance: "Yes",
           wants_authorized_representative: "Yes",
           authorized_representative_full_name: "Trusty McTrusterson",
@@ -176,7 +178,7 @@ RSpec.describe AssistanceApplicationForm do
                                         flint_water: "yes",
                                         employments: [build(:employment)],
                                         self_employed: "yes",
-                                        incomes: [build(:income, income_type: "unemployment")]),
+                                        incomes: [build(:income, income_type: "unemployment", amount: 100)]),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wiley",
@@ -185,7 +187,7 @@ RSpec.describe AssistanceApplicationForm do
                                         flint_water: "yes",
                                         employments: [build(:employment)],
                                         self_employed: "yes",
-                                        incomes: [build(:income, income_type: "pension")]),
+                                        incomes: [build(:income, income_type: "pension", amount: 50)]),
                                   build(:household_member,
                                         first_name: "Willy",
                                         last_name: "Wonka",
@@ -203,8 +205,8 @@ RSpec.describe AssistanceApplicationForm do
                                         self_employment_description: "cake maker",
                                         self_employment_income: 100,
                                         self_employment_expense: 50,
-                                        incomes: [build(:income, income_type: "retirement"),
-                                                  build(:income, income_type: "social_security")]),
+                                        incomes: [build(:income, income_type: "retirement", amount: 100),
+                                                  build(:income, income_type: "social_security", amount: 200)]),
                                   build(:household_member),
                                   build(:household_member),
                                   build(:household_member,
@@ -245,8 +247,9 @@ RSpec.describe AssistanceApplicationForm do
             Additional Self-Employed Members:
             - Willy Wonka, Cake Maker, Income: $100, Expense: $50
             - Willy Whale
-            Additional Members with Additional Income:
-            - Willy Wonka (Retirement, Social Security)
+            Additional Income Sources:
+            - Willy Wonka, Retirement, $100 per month
+            - Willy Wonka, Social Security, $200 per month
           NOTES
         )
       end

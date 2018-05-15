@@ -700,6 +700,17 @@ RSpec.feature "Integrated application" do
       end
     end
 
+    on_page "Income and Employment" do
+      expect(page).to have_content(
+        "Tell us about your income sources",
+      )
+
+      fill_in "Unemployment", with: "100"
+      fill_in "Child Support", with: "50"
+
+      proceed_with "Continue"
+    end
+
     on_page "Assets" do
       expect(page).to have_content(
         "Does anyone have money in accounts?",
