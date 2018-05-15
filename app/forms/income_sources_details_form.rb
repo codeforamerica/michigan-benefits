@@ -1,7 +1,7 @@
 class IncomeSourcesDetailsForm < Form
-  set_member_attributes(:id, :incomes)
+  set_member_attributes(:id, :additional_incomes)
 
-  set_income_attributes(:amount)
+  set_additional_income_attributes(:amount)
 
   validates :amount, numericality: {
     allow_nil: true,

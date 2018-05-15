@@ -7,11 +7,11 @@ module Integrated
     end
 
     def checkbox_options
-      Income::INCOME_SOURCES.keys
+      AdditionalIncome::INCOME_SOURCES.keys
     end
 
     def checkbox_collection
-      current_member.incomes
+      current_member.additional_incomes
     end
   end
 end

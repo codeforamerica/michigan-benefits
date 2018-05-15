@@ -1,4 +1,4 @@
-class Income < ApplicationRecord
+class AdditionalIncome < ApplicationRecord
   belongs_to :household_member
 
   INCOME_SOURCES = {

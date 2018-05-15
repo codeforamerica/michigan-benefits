@@ -227,10 +227,10 @@ class AssistanceApplicationForm
         no: !benefit_application.anyone_additional_income?,
       ),
     }
-    Income::INCOME_SOURCES.each_key do |key|
+    AdditionalIncome::INCOME_SOURCES.each_key do |key|
       hash[:"additional_income_#{key}"] = yes_if_true(benefit_application.anyone_additional_income_of?(key))
     end
-    incomes = benefit_application.members.map(&:incomes).flatten
+    incomes = benefit_application.members.map(&:additional_incomes).flatten
     incomes.first(2).each_with_index do |income, i|
       hash[:"#{ordinals[i]}_member_additional_income_name"] = income.household_member.display_name
       hash[:"#{ordinals[i]}_member_additional_income_type"] = income.display_name
@@ -345,11 +345,11 @@ class AssistanceApplicationForm
   end
 
   def add_additional_members_additional_income
-    incomes = benefit_application.members.map(&:incomes).flatten
-    if incomes.count > 2
+    additional_incomes = benefit_application.members.map(&:additional_incomes).flatten
+    if additional_incomes.count > 2
       @_additional_notes[:household_added_notes] = "Yes"
       @_additional_notes[:notes] += "Additional Income Sources:\n"
-      @_additional_notes[:notes] += incomes[2..-1].map do |extra_income|
+      @_additional_notes[:notes] += additional_incomes[2..-1].map do |extra_income|
         [
           "- #{extra_income.household_member.display_name}",
           extra_income.display_name,

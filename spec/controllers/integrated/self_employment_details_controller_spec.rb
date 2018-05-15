@@ -8,8 +8,7 @@ RSpec.describe Integrated::SelfEmploymentDetailsController do
           members: [
             build(:household_member, self_employed: "no"),
             build(:household_member, self_employed: nil),
-          ]
-        )
+          ])
 
         skip_step = Integrated::SelfEmploymentDetailsController.skip?(application)
         expect(skip_step).to eq(true)

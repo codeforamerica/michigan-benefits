@@ -12,7 +12,7 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
 
     context "one applicant has an additional income source" do
       it "returns false" do
-        member = create(:household_member, incomes: [build(:income, income_type: "unemployment")])
+        member = create(:household_member, additional_incomes: [build(:additional_income, income_type: "unemployment")])
         application = create(:common_application, members: [member])
 
         skip_step = Integrated::IncomeSourcesDetailsController.skip?(application)
@@ -24,8 +24,8 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
   describe "edit" do
     context "when primary member has an additional income source" do
       it "assigns primary member's additional income sources" do
-        primary_member = build(:household_member, incomes: build_list(:income, 2))
-        secondary_member = build(:household_member, incomes: [])
+        primary_member = build(:household_member, additional_incomes: build_list(:additional_income, 2))
+        secondary_member = build(:household_member, additional_incomes: [])
         current_app = create(:common_application, members: [primary_member, secondary_member])
         session[:current_application_id] = current_app.id
 
@@ -33,15 +33,15 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
 
         form = assigns(:form)
 
-        expect(form.incomes.count).to eq(2)
+        expect(form.additional_incomes.count).to eq(2)
         expect(form.id).to eq(primary_member.id)
       end
     end
 
     context "when primary member does not have an additional income source" do
       it "assigns the next member's additional income source" do
-        primary_member = build(:household_member, incomes: [])
-        secondary_member = build(:household_member, incomes: build_list(:income, 2))
+        primary_member = build(:household_member, additional_incomes: [])
+        secondary_member = build(:household_member, additional_incomes: build_list(:additional_income, 2))
         current_app = create(:common_application, members: [primary_member, secondary_member])
         session[:current_application_id] = current_app.id
 
@@ -49,7 +49,7 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
 
         form = assigns(:form)
 
-        expect(form.incomes.count).to eq(2)
+        expect(form.additional_incomes.count).to eq(2)
         expect(form.id).to eq(secondary_member.id)
       end
     end
@@ -57,22 +57,22 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
 
   describe "#update" do
     let(:member) do
-      create(:household_member, incomes: [income_1, income_2])
+      create(:household_member, additional_incomes: [income_1, income_2])
     end
 
     let(:income_1) do
-      build(:income)
+      build(:additional_income)
     end
 
     let(:income_2) do
-      build(:income)
+      build(:additional_income)
     end
 
     context "with valid params" do
       let(:valid_params) do
         {
           id: member.id,
-          incomes: {
+          additional_incomes: {
             income_1.id => {
               amount: "100.30",
             },
@@ -91,8 +91,8 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
 
         member.reload
 
-        first_income = member.incomes.find(income_1.id)
-        second_income = member.incomes.find(income_2.id)
+        first_income = member.additional_incomes.find(income_1.id)
+        second_income = member.additional_incomes.find(income_2.id)
 
         expect(first_income.amount).to eq(100)
         expect(second_income.amount).to be_nil
@@ -103,7 +103,7 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
       let(:invalid_params) do
         {
           id: "no one",
-          incomes: {
+          additional_incomes: {
             income_1.id => {
               amount: "",
             },

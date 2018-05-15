@@ -17,8 +17,8 @@
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
     <%= f.hidden_field(:id) %>
 
-    <% @form.incomes.each do |income| %>
-      <%= f.fields_for("incomes[]", income, hidden_field_id: true) do |ff| %>
+    <% @form.additional_incomes.each do |income| %>
+      <%= f.fields_for("additional_incomes[]", income, hidden_field_id: true) do |ff| %>
         <%= ff.mb_money_field(:amount, income.display_name, help_text: "Monthly amount") %>
       <% end %>
     <% end %>

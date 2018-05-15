@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :income do
+  factory :additional_income do
     income_type "unemployment"
   end
 end
