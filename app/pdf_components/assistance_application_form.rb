@@ -230,10 +230,12 @@ class AssistanceApplicationForm
     Income::INCOME_SOURCES.each_key do |key|
       hash[:"additional_income_#{key}"] = yes_if_true(benefit_application.anyone_additional_income_of?(key))
     end
-    members = benefit_application.members.select { |member| member.incomes.any? }
-    members.first(2).each_with_index do |member, i|
-      hash[:"#{ordinals[i]}_member_additional_income_name"] = member.display_name
-      hash[:"#{ordinals[i]}_member_additional_income_type"] = member.incomes.map(&:display_name).join(", ")
+    incomes = benefit_application.members.map(&:incomes).flatten
+    incomes.first(2).each_with_index do |income, i|
+      hash[:"#{ordinals[i]}_member_additional_income_name"] = income.household_member.display_name
+      hash[:"#{ordinals[i]}_member_additional_income_type"] = income.display_name
+      hash[:"#{ordinals[i]}_member_additional_income_amount"] = income.amount
+      hash[:"#{ordinals[i]}_member_additional_income_frequency_month"] = circle_if_true(income.amount?)
     end
     hash
   end
@@ -343,13 +345,18 @@ class AssistanceApplicationForm
   end
 
   def add_additional_members_additional_income
-    members = benefit_application.members.select { |member| member.incomes.any? }
-    if members.count > 2
+    incomes = benefit_application.members.map(&:incomes).flatten
+    if incomes.count > 2
       @_additional_notes[:household_added_notes] = "Yes"
-      @_additional_notes[:notes] += "Additional Members with Additional Income:\n"
-      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
-        "- #{extra_member.display_name} (#{extra_member.incomes.map(&:display_name).join(', ')})\n"
-      end.join
+      @_additional_notes[:notes] += "Additional Income Sources:\n"
+      @_additional_notes[:notes] += incomes[2..-1].map do |extra_income|
+        [
+          "- #{extra_income.household_member.display_name}",
+          extra_income.display_name,
+          extra_income.amount.present? ? "$#{extra_income.amount} per month" : nil,
+        ].compact.join(", ")
+      end.join("\n")
+      @_additional_notes[:notes] += "\n"
     end
   end
 

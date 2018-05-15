@@ -22,53 +22,64 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
   end
 
   describe "edit" do
-    context "with a current application" do
-      xit "assigns existing attributes" do
-        current_app = create(:common_application)
+    context "when primary member has an additional income source" do
+      it "assigns primary member's additional income sources" do
+        primary_member = build(:household_member, incomes: build_list(:income, 2))
+        secondary_member = build(:household_member, incomes: [])
+        current_app = create(:common_application, members: [primary_member, secondary_member])
         session[:current_application_id] = current_app.id
 
         get :edit
 
         form = assigns(:form)
 
-        # expectation
+        expect(form.incomes.count).to eq(2)
+        expect(form.id).to eq(primary_member.id)
       end
     end
 
-    context "without a current application" do
-      it "renders edit" do
+    context "when primary member does not have an additional income source" do
+      it "assigns the next member's additional income source" do
+        primary_member = build(:household_member, incomes: [])
+        secondary_member = build(:household_member, incomes: build_list(:income, 2))
+        current_app = create(:common_application, members: [primary_member, secondary_member])
+        session[:current_application_id] = current_app.id
+
         get :edit
 
-        expect(response).to render_template(:edit)
+        form = assigns(:form)
+
+        expect(form.incomes.count).to eq(2)
+        expect(form.id).to eq(secondary_member.id)
       end
     end
   end
 
   describe "#update" do
+    let(:member) do
+      create(:household_member, incomes: [income_1, income_2])
+    end
+
+    let(:income_1) do
+      build(:income)
+    end
+
+    let(:income_2) do
+      build(:income)
+    end
+
     context "with valid params" do
-      let(:member) do
-        create(:household_member, incomes: [income_1, income_2])
-      end
-
-      let(:income_1) do
-        build(:income)
-      end
-
-      let(:income_2) do
-        build(:income)
-      end
-
       let(:valid_params) do
         {
           id: member.id,
           incomes: {
             income_1.id => {
-              amount: "100.30"
+              amount: "100.30",
             },
             income_2.id => {
-              amount: ""
-            }
-          }
+              amount: "",
+            },
+          },
         }
       end
 
@@ -90,11 +101,21 @@ RSpec.describe Integrated::IncomeSourcesDetailsController do
 
     context "with invalid params" do
       let(:invalid_params) do
-        { }
+        {
+          id: "no one",
+          incomes: {
+            income_1.id => {
+              amount: "",
+            },
+            income_2.id => {
+              amount: "",
+            },
+          },
+        }
       end
 
-      xit "renders edit without updating" do
-        current_app = create(:common_application)
+      it "renders edit without updating" do
+        current_app = create(:common_application, members: [member])
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: invalid_params }

@@ -16,10 +16,11 @@ RSpec.describe Integrated::JobDetailsController do
   describe "edit" do
     context "when primary member has at least one job" do
       it "assigns the primary member's employments" do
+        primary_member = build(:household_member, employments: build_list(:employment, 2))
         current_app = create(:common_application,
           members: [
+            primary_member,
             build(:household_member, employments: []),
-            build(:household_member, employments: build_list(:employment, 2)),
           ])
 
         session[:current_application_id] = current_app.id
@@ -29,15 +30,17 @@ RSpec.describe Integrated::JobDetailsController do
         form = assigns(:form)
 
         expect(form.employments.count).to eq(2)
+        expect(form.id).to eq(primary_member.id)
       end
     end
 
     context "when primary member does not have a job" do
       it "assigns the next member's employments" do
+        secondary_member = build(:household_member, employments: build_list(:employment, 2))
         current_app = create(:common_application,
           members: [
             build(:household_member, employments: []),
-            build(:household_member, employments: build_list(:employment, 2)),
+            secondary_member,
           ])
 
         session[:current_application_id] = current_app.id
@@ -47,6 +50,7 @@ RSpec.describe Integrated::JobDetailsController do
         form = assigns(:form)
 
         expect(form.employments.count).to eq(2)
+        expect(form.id).to eq(secondary_member.id)
       end
     end
   end
