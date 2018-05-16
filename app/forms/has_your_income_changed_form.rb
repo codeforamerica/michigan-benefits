@@ -1,3 +1,3 @@
 class HasYourIncomeChangedForm < Form
-  set_application_attributes(:income_changed)
+  set_attributes_for :application, :income_changed
 end

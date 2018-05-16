@@ -1,12 +1,8 @@
 class ResidentialAddressForm < Form
-  set_navigator_attributes(:residential_mailing_same)
+  set_attributes_for :navigator, :residential_mailing_same
 
-  set_address_attributes(
-    :street_address,
-    :street_address_2,
-    :city,
-    :zip,
-  )
+  set_attributes_for :address,
+                     :street_address, :street_address_2, :city, :zip
 
   validates :street_address,
     presence: { message: "Make sure to provide a street address" }

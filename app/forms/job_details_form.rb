@@ -1,27 +1,12 @@
-class JobDetailsForm < Form
-  set_member_attributes(:id, :employments)
+class JobDetailsForm < MemberPerPageForm
+  set_attributes_for :member,
+                     :id, :employments
 
-  set_employment_attributes(
-    :employer_name,
-    :hourly_or_salary,
-    :payment_frequency,
-    :pay_quantity_hourly,
-    :pay_quantity_salary,
-    :hours_per_week,
-  )
+  set_attributes_for :employment,
+                     :employer_name, :hourly_or_salary, :payment_frequency,
+                     :pay_quantity_hourly, :pay_quantity_salary, :hours_per_week
 
   validate :employments_valid
-  validate :current_member_id_valid
-
-  def valid_members=(members)
-    @valid_members = members
-  end
-
-  def current_member_id_valid
-    return true if @valid_members.map { |m| m.id.to_s }.include?(id)
-    errors.add(:id, "Can't update that household member.")
-    false
-  end
 
   private
 

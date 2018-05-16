@@ -1,3 +1,3 @@
 class EveryoneCitizenForm < Form
-  set_navigator_attributes(:everyone_citizen)
+  set_attributes_for :navigator, :everyone_citizen
 end

@@ -1,3 +1,3 @@
 class AnyonePregnantForm < Form
-  set_navigator_attributes(:anyone_pregnant)
+  set_attributes_for :navigator, :anyone_pregnant
 end

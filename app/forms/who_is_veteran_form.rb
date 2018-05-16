@@ -1,6 +1,6 @@
 class WhoIsVeteranForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:veteran)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :veteran
 
   validate :at_least_one_person_veteran
 

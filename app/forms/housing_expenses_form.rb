@@ -1,3 +1,3 @@
 class HousingExpensesForm < Form
-  set_application_attributes(*Expense::HOUSING_EXPENSES.keys)
+  set_attributes_for :application, *Expense::HOUSING_EXPENSES.keys
 end

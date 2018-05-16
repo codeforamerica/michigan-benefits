@@ -1,3 +1,3 @@
 class VehiclesForm < Form
-  set_navigator_attributes(:own_vehicles)
+  set_attributes_for :navigator, :own_vehicles
 end

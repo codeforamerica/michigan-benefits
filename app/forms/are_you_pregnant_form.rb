@@ -1,3 +1,3 @@
 class AreYouPregnantForm < Form
-  set_member_attributes(:pregnant)
+  set_attributes_for :member, :pregnant
 end

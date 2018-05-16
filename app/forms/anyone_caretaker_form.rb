@@ -1,3 +1,3 @@
 class AnyoneCaretakerForm < Form
-  set_navigator_attributes(:anyone_caretaker)
+  set_attributes_for :navigator, :anyone_caretaker
 end

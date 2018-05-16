@@ -20,7 +20,8 @@ RSpec.describe IncomeSourcesDetailsForm do
 
     context "when id is not included in member ids" do
       it "is invalid" do
-        form = JobDetailsForm.new(id: "foo", employments: [], valid_members: [create(:household_member)])
+        form = IncomeSourcesDetailsForm.new(id: "foo", additional_incomes: [],
+                                            valid_members: [create(:household_member)])
 
         expect(form).to_not be_valid
         expect(form.errors[:id]).to be_present

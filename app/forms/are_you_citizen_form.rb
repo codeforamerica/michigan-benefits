@@ -1,3 +1,3 @@
 class AreYouCitizenForm < Form
-  set_member_attributes(:citizen)
+  set_attributes_for :member, :citizen
 end

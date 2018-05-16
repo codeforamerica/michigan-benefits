@@ -6,7 +6,7 @@ module Integrated
     end
 
     def update_models
-      member_data = member_params
+      member_data = params_for(:member)
       if member_data[:filing_taxes_next_year] == "yes"
         member_data[:tax_relationship] = "primary"
       end

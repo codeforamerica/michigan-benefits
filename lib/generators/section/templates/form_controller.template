@@ -12,8 +12,8 @@ module Integrated
     <%- end -%>
 
     def update_models
-      # current_application.primary_member.update(member_params)
-      # current_application.update(application_params)
+      # current_application.primary_member.update(params_for(:member))
+      # current_application.update(params_for(:application))
     end
 
     <%- if options.doc? -%>

@@ -1,4 +1,4 @@
 class HowManyJobsForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:employments_count)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :employments_count
 end

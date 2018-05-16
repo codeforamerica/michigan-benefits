@@ -1,3 +1,3 @@
 class DoYouHavePregnancyExpensesForm < Form
-  set_member_attributes(:pregnancy_expenses)
+  set_attributes_for :member, :pregnancy_expenses
 end

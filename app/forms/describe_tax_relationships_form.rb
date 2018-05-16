@@ -1,6 +1,6 @@
 class DescribeTaxRelationshipsForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:tax_relationship)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :tax_relationship
 
   validate :members_valid
 

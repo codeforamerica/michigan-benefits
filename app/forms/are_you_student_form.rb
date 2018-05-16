@@ -1,3 +1,3 @@
 class AreYouStudentForm < Form
-  set_member_attributes(:student)
+  set_attributes_for :member, :student
 end

@@ -9,7 +9,7 @@ module Integrated
     end
 
     def update
-      current_application.food_applying_members.second.update(member_params)
+      current_application.food_applying_members.second.update(params_for(:member))
       redirect_to(next_path)
     end
   end

@@ -5,11 +5,11 @@ module Integrated
     end
 
     def update_models
-      if navigator_params[:anyone_pregnancy_expenses] == "false"
+      if params_for(:navigator)[:anyone_pregnancy_expenses] == "false"
         current_application.members.update_all(pregnancy_expenses: "no")
       end
 
-      current_application.navigator.update!(navigator_params)
+      current_application.navigator.update!(params_for(:navigator))
     end
   end
 end

@@ -1,6 +1,6 @@
 class WhoIsFlintWaterForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:flint_water)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :flint_water
 
   validate :at_least_one_person
 

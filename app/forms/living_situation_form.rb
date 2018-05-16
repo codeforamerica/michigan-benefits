@@ -1,5 +1,5 @@
 class LivingSituationForm < Form
-  set_application_attributes(:living_situation)
+  set_attributes_for :application, :living_situation
 
   validates :living_situation, inclusion: {
     in: %w(stable_address temporary_address homeless),

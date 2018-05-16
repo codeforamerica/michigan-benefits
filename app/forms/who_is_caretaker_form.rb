@@ -1,6 +1,6 @@
 class WhoIsCaretakerForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:caretaker)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :caretaker
 
   validate :at_least_one_person_caretaker
 

@@ -1,3 +1,3 @@
 class RemoveFoodMemberForm < Form
-  set_member_attributes(:member_id)
+  set_attributes_for :member, :member_id
 end

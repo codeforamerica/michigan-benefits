@@ -1,3 +1,3 @@
 class ChildSupportForm < Form
-  set_application_attributes(:child_support)
+  set_attributes_for :application, :child_support
 end

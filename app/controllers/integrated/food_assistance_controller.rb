@@ -20,7 +20,7 @@ module Integrated
     def update_models
       members.each do |member|
         attrs = params.dig(:form, :members, member.to_param)
-        member.assign_attributes(attrs.permit(form_class.member_attributes))
+        member.assign_attributes(attrs.permit(form_class.attributes_for(:member)))
       end
       ActiveRecord::Base.transaction { members.each(&:save!) }
     end

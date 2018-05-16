@@ -1,7 +1,7 @@
 module Integrated
   class IntroduceYourselfController < FormsController
     def update_models
-      member_data = member_params.merge(
+      member_data = params_for(:member).merge(
         relationship: "primary",
         requesting_food: "yes",
         requesting_healthcare: "yes",
@@ -17,7 +17,7 @@ module Integrated
       else
         current_application.members.create(member_data)
       end
-      current_application.update(application_params)
+      current_application.update(params_for(:application))
     end
 
     private

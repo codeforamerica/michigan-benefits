@@ -9,8 +9,8 @@ module Integrated
     end
 
     def member
-      if member_params[:member_id].present?
-        current_application.members.find_by(id: member_params[:member_id])
+      if params_for(:member)[:member_id].present?
+        current_application.members.find_by(id: params_for(:member)[:member_id])
       end
     end
 

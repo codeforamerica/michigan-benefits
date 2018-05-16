@@ -1,6 +1,6 @@
 class WhoIsDisabledForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:disabled)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :disabled
 
   validate :at_least_one_person_disabled
 

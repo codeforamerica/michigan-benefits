@@ -1,6 +1,6 @@
 class WhoIsMarriedForm < Form
-  set_member_attributes(:married)
-  set_application_attributes(:members)
+  set_attributes_for :member, :married
+  set_attributes_for :application, :members
 
   validate :at_least_one_person_married
 

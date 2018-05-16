@@ -1,3 +1,3 @@
 class AreYouVeteranForm < Form
-  set_member_attributes(:veteran)
+  set_attributes_for :member, :veteran
 end
