@@ -1,3 +1,3 @@
 class FileTaxesNextYearForm < Form
-  set_member_attributes(:filing_taxes_next_year)
+  set_attributes_for :member, :filing_taxes_next_year
 end

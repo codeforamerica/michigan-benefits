@@ -7,7 +7,7 @@ module Integrated
     end
 
     def update_models
-      member_data = combined_attributes(member_params)
+      member_data = combined_attributes(params_for(:member))
       if member_data[:relationship] == "spouse"
         member_data[:married] = "yes"
         current_application.navigator.update!(anyone_married: true)

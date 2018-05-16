@@ -1,3 +1,3 @@
 class ChildcareExpensesForm < Form
-  set_application_attributes(:childcare)
+  set_attributes_for :application, :childcare
 end

@@ -1,7 +1,7 @@
 module Integrated
   class PropertyController < FormsController
     def update_models
-      selected_types = application_params.fetch(:properties, {}).
+      selected_types = params_for(:application).fetch(:properties, {}).
         reject(&:empty?)
 
       current_application.update!(properties: selected_types)

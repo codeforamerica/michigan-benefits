@@ -1,3 +1,3 @@
 class UtilityExpensesForm < Form
-  set_application_attributes(*Expense::UTILITY_EXPENSES.keys)
+  set_attributes_for :application, *Expense::UTILITY_EXPENSES.keys
 end

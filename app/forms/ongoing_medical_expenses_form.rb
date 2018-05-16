@@ -1,3 +1,3 @@
 class OngoingMedicalExpensesForm < Form
-  set_application_attributes(*Expense::MEDICAL_EXPENSES.keys)
+  set_attributes_for :application, *Expense::MEDICAL_EXPENSES.keys
 end

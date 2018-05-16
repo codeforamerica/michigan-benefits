@@ -5,7 +5,7 @@ module Integrated
     end
 
     def update_models
-      current_member.update(member_params.slice(:baby_count))
+      current_member.update(params_for(:member).slice(:baby_count))
     end
 
     private

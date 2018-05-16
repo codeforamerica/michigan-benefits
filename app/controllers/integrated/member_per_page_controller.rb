@@ -4,7 +4,7 @@ module Integrated
     helper_method :member_appropriate_translation_data
 
     def update_models
-      current_member.update(member_params)
+      current_member.update(params_for(:member))
     end
 
     def current_member

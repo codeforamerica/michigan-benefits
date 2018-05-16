@@ -1,3 +1,3 @@
 class TellUsIncomeChangedForm < Form
-  set_application_attributes(:income_changed_explanation)
+  set_attributes_for :application, :income_changed_explanation
 end

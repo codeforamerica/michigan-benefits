@@ -1,3 +1,3 @@
 class PropertyForm < Form
-  set_application_attributes(properties: [])
+  set_attributes_for :application, properties: []
 end

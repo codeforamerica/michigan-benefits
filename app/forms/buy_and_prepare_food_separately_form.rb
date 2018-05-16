@@ -1,4 +1,4 @@
 class BuyAndPrepareFoodSeparatelyForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:buy_and_prepare_food_together)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :buy_and_prepare_food_together
 end

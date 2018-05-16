@@ -1,3 +1,3 @@
 class MoneyInAccountsForm < Form
-  set_navigator_attributes(:money_in_accounts)
+  set_attributes_for :navigator, :money_in_accounts
 end

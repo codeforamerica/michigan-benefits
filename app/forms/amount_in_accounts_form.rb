@@ -1,3 +1,3 @@
 class AmountInAccountsForm < Form
-  set_application_attributes(:less_than_threshold_in_accounts)
+  set_attributes_for :application, :less_than_threshold_in_accounts
 end

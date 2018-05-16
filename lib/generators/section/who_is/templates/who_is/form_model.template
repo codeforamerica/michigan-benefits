@@ -1,6 +1,6 @@
 class WhoIs<%= model_name %>Form < Form
-  set_application_attributes(:members)
-  set_member_attributes(:<%= model_method %>)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :<%= model_method %>
 
   validate :at_least_one_person
 

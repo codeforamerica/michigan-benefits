@@ -502,11 +502,10 @@ RSpec.describe MbFormBuilder do
 
     it "displays errors on the containing field" do
       class SampleForm < Form
-        set_member_attributes(
+        set_attributes_for :member,
           :birthday_year,
           :birthday_month,
-          :birthday_day,
-        )
+          :birthday_day
 
         validate :birthday_should_be_valid
 
@@ -766,7 +765,7 @@ RSpec.describe MbFormBuilder do
   describe "#mb_yes_no_buttons" do
     it "returns valid submit buttons" do
       class SampleForm < Form
-        set_application_attributes(:lives_in_michigan)
+        set_attributes_for :application, :lives_in_michigan
       end
 
       sample = SampleForm.new
@@ -793,7 +792,7 @@ RSpec.describe MbFormBuilder do
 
     it "accepts alternate values for inputs" do
       class SampleForm < Form
-        set_application_attributes(:lives_in_michigan)
+        set_attributes_for :application, :lives_in_michigan
       end
 
       sample = SampleForm.new

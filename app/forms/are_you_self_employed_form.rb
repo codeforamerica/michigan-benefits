@@ -1,3 +1,3 @@
 class AreYouSelfEmployedForm < Form
-  set_member_attributes(:self_employed)
+  set_attributes_for :member, :self_employed
 end

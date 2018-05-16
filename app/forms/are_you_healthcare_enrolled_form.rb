@@ -1,3 +1,3 @@
 class AreYouHealthcareEnrolledForm < Form
-  set_member_attributes(:healthcare_enrolled)
+  set_attributes_for :member, :healthcare_enrolled
 end

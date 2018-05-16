@@ -1,15 +1,9 @@
 class IntroduceYourselfForm < AddMemberForm
-  set_application_attributes(:previously_received_assistance)
+  set_attributes_for :application, :previously_received_assistance
 
-  set_member_attributes(
-    :first_name,
-    :last_name,
-    :birthday_year,
-    :birthday_month,
-    :birthday_day,
-    :sex,
-    :relationship,
-  )
+  set_attributes_for :member,
+                     :first_name, :last_name, :birthday_year, :birthday_month, :birthday_day,
+                     :sex, :relationship
 
   validates :sex, inclusion: {
     in: %w(male female),

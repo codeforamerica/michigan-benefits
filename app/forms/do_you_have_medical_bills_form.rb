@@ -1,3 +1,3 @@
 class DoYouHaveMedicalBillsForm < Form
-  set_member_attributes(:medical_bills)
+  set_attributes_for :member, :medical_bills
 end

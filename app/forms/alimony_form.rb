@@ -1,3 +1,3 @@
 class AlimonyForm < Form
-  set_application_attributes(:alimony)
+  set_attributes_for :application, :alimony
 end

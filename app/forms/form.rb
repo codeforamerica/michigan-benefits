@@ -9,77 +9,21 @@ class Form
     assign_attributes(name => value)
   end
 
-  class <<self
-    def set_application_attributes(*application_attributes)
-      @application_attributes = application_attributes
-      form_attributes(application_attributes)
-    end
-
-    def set_member_attributes(*member_attributes)
-      @member_attributes = member_attributes
-      form_attributes(member_attributes)
-    end
-
-    def set_navigator_attributes(*navigator_attributes)
-      @navigator_attributes = navigator_attributes
-      form_attributes(navigator_attributes)
-    end
-
-    def set_employment_attributes(*employment_attributes)
-      @employment_attributes = employment_attributes
-      form_attributes(employment_attributes)
-    end
-
-    def set_address_attributes(*address_attributes)
-      @address_attributes = address_attributes
-      form_attributes(address_attributes)
-    end
-
-    def set_additional_income_attributes(*additional_income_attributes)
-      @additional_income_attributes = additional_income_attributes
-      form_attributes(additional_income_attributes)
-    end
-
-    def application_attributes
-      @application_attributes || []
-    end
-
-    def member_attributes
-      @member_attributes || []
-    end
-
-    def navigator_attributes
-      @navigator_attributes || []
-    end
-
-    def employment_attributes
-      @employment_attributes || []
-    end
-
-    def address_attributes
-      @address_attributes || []
-    end
-
-    def additional_income_attributes
-      @additional_income_attributes || []
-    end
-
-    private
-
-    def form_attributes(attribute_names)
-      attributes = (application_attributes +
-        member_attributes +
-        navigator_attributes +
-        employment_attributes +
-        address_attributes +
-        additional_income_attributes)
-      self.attribute_names = attributes
-
-      attribute_strings = Step::Attributes.
-        new(attribute_names).
-        to_s
+  class << self
+    def set_attributes_for(model, *attributes)
+      scoped_attributes[model] = attributes
+      self.attribute_names = scoped_attributes.values.flatten
+      attribute_strings = Step::Attributes.new(attributes).to_s
 
       attr_accessor(*attribute_strings)
+    end
+
+    def scoped_attributes
+      @scoped_attributes ||= {}
+    end
+
+    def attributes_for(model)
+      scoped_attributes[model] || []
     end
   end
 end

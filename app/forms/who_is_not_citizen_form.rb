@@ -1,6 +1,6 @@
 class WhoIsNotCitizenForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:citizen)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :citizen
 
   validate :at_least_one_person_not_citizen
 

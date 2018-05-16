@@ -94,28 +94,9 @@ class FormsController < ApplicationController
     @form_navigation ||= FormNavigation.new(self)
   end
 
-  def member_params
-    filtered_params(form_class.member_attributes)
-  end
-
-  def application_params
-    filtered_params(form_class.application_attributes)
-  end
-
-  def navigator_params
-    filtered_params(form_class.navigator_attributes)
-  end
-
-  def employment_params
-    filtered_params(form_class.employment_attributes)
-  end
-
-  def address_params
-    filtered_params(form_class.address_attributes)
-  end
-
-  def income_params
-    filtered_params(form_class.additional_income_attributes)
+  def params_for(model)
+    attrs = form_class.attributes_for(model)
+    form_params.slice(*Step::Attributes.new(attrs).to_s)
   end
 
   def combined_birthday_fields(day: nil, month: nil, year: nil)
@@ -126,9 +107,5 @@ class FormsController < ApplicationController
     else
       {}
     end
-  end
-
-  def filtered_params(attrs)
-    form_params.slice(*Step::Attributes.new(attrs).to_s)
   end
 end

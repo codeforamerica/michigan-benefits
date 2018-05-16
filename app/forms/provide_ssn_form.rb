@@ -2,5 +2,5 @@ class ProvideSsnForm < Form
   extend AutoStripAttributes
   include StepSocialSecurityNumber
 
-  set_member_attributes(:ssn)
+  set_attributes_for :member, :ssn
 end

@@ -5,7 +5,7 @@ module Integrated
     end
 
     def update_models
-      current_application.primary_member.update!(member_params)
+      current_application.primary_member.update!(params_for(:member))
     end
   end
 end

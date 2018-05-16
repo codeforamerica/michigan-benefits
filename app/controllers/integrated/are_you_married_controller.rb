@@ -5,6 +5,7 @@ module Integrated
     end
 
     def update_models
+      member_params = params_for(:member)
       current_application.primary_member.update(member_params)
       if member_params[:married] == "yes"
         current_application.navigator.update(anyone_married: true)

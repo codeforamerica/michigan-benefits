@@ -5,6 +5,7 @@ module Integrated
     end
 
     def update_models
+      address_params = params_for(:address)
       merged_params = address_params.merge(
         mailing: false,
         state: "MI",
@@ -15,7 +16,7 @@ module Integrated
       else
         current_application.create_residential_address(merged_params)
       end
-      current_application.navigator.update(navigator_params)
+      current_application.navigator.update(params_for(:navigator))
     end
 
     private

@@ -1,3 +1,3 @@
 class ImmigrationInfoForm < Form
-  set_navigator_attributes(:immigration_info)
+  set_attributes_for :navigator, :immigration_info
 end

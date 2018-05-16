@@ -1,10 +1,6 @@
 class SelfEmploymentDetailsForm < Form
-  set_member_attributes(
-    :id,
-    :self_employment_description,
-    :self_employment_income,
-    :self_employment_expense,
-  )
+  set_attributes_for :member,
+                     :id, :self_employment_description, :self_employment_income, :self_employment_expense
 
   validates :self_employment_income, numericality: {
     allow_nil: true,

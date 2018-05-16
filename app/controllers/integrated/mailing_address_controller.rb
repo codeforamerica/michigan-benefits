@@ -5,6 +5,7 @@ module Integrated
     end
 
     def update_models
+      address_params = params_for(:address)
       merged_params = address_params.merge(
         mailing: true,
         state: "MI",

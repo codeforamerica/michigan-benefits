@@ -1,4 +1,4 @@
 class FoodAssistanceForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:requesting_food)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :requesting_food
 end

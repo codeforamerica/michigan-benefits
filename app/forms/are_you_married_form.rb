@@ -1,3 +1,3 @@
 class AreYouMarriedForm < Form
-  set_member_attributes(:married)
+  set_attributes_for :member, :married
 end

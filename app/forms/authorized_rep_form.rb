@@ -1,3 +1,3 @@
 class AuthorizedRepForm < Form
-  set_application_attributes(:authorized_representative)
+  set_attributes_for :application, :authorized_representative
 end

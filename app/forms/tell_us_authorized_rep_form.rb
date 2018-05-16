@@ -1,8 +1,6 @@
 class TellUsAuthorizedRepForm < Form
-  set_application_attributes(
-    :authorized_representative_name,
-    :authorized_representative_phone,
-  )
+  set_attributes_for :application,
+                     :authorized_representative_name, :authorized_representative_phone
 
   validates :authorized_representative_name,
     presence: { message: "Please provide their name" }

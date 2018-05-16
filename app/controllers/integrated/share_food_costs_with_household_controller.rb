@@ -6,8 +6,8 @@ module Integrated
     end
 
     def update_models
-      current_application.navigator.update(navigator_params)
-      if navigator_params[:all_share_food_costs]
+      current_application.navigator.update(params_for(:navigator))
+      if params_for(:navigator)[:all_share_food_costs]
         current_application.food_applying_members.each do |member|
           member.update_attributes(buy_and_prepare_food_together: "yes")
         end

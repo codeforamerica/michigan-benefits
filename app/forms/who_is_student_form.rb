@@ -1,6 +1,6 @@
 class WhoIsStudentForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:student)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :student
 
   validate :at_least_one_person_student
 

@@ -1,3 +1,3 @@
 class AreYouDisabledForm < Form
-  set_member_attributes(:disabled)
+  set_attributes_for :member, :disabled
 end

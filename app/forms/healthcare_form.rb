@@ -1,4 +1,4 @@
 class HealthcareForm < Form
-  set_application_attributes(:members)
-  set_member_attributes(:requesting_healthcare)
+  set_attributes_for :application, :members
+  set_attributes_for :member, :requesting_healthcare
 end
