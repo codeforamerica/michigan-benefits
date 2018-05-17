@@ -15,6 +15,10 @@ class JobDetailsForm < MemberPerPageForm
       employment.errors.clear
       employment.valid?
 
+      if employment.employer_name.blank?
+        employment.errors.add(:employer_name, "Make sure to enter an employer name.")
+      end
+
       # TODO: Below validation should be moved to model when we remove old flows.
       # Right now the valid values can differ between SNAP/Medicaid and SNAP + Medicaid,
       # so we keep the validations in the form object.

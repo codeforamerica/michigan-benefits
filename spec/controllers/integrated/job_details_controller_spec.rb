@@ -90,7 +90,7 @@ RSpec.describe Integrated::JobDetailsController do
                 pay_quantity_salary: "2000.00",
               },
               employment_3.id => {
-                employer_name: "",
+                employer_name: "E Corp",
                 pay_quantity_salary: "",
               },
             },
