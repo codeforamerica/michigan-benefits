@@ -2,6 +2,7 @@ module Integrated
   module PdfAttributes
     CIRCLED = "O".freeze
     UNDERLINED = "------------".freeze
+    ORDINALS = %w[first second third fourth fifth].freeze
 
     def yes_no_or_unfilled(yes: nil, no: nil)
       if yes
@@ -29,6 +30,10 @@ module Integrated
 
     def member_names(members)
       members.map(&:display_name).join(", ")
+    end
+
+    def ordinal_member(i)
+      "#{ORDINALS[i]}_member"
     end
 
     def yes_no_for(field)

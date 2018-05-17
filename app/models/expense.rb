@@ -44,6 +44,10 @@ class Expense < ApplicationRecord
 
   belongs_to :common_application
 
+  has_and_belongs_to_many :members,
+    class_name: "HouseholdMember",
+    foreign_key: "expense_id"
+
   scope :housing, -> {
     where(expense_type: HOUSING_EXPENSES.keys)
   }

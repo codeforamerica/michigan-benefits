@@ -25,11 +25,6 @@ class Employment < ApplicationRecord
     message: "Make sure to enter a number",
   }
 
-  def valid_pay_quantity?(employment)
-    return true unless employment.pay_quantity.present?
-    employment.pay_quantity.match?(DOLLAR_REGEX)
-  end
-
   def paycheck_interval_label
     PAYCHECK_INTERVALS[payment_frequency.to_sym]
   end

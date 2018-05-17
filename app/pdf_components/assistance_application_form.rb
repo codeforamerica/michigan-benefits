@@ -103,10 +103,9 @@ class AssistanceApplicationForm
   end
 
   def member_attributes
-    ordinals = ["first", "second", "third", "fourth", "fifth"]
     hash = {}
     benefit_application.members.first(5).each_with_index do |member, i|
-      prefix = "#{ordinals[i]}_member"
+      prefix = ordinal_member(i)
       hash[:"#{prefix}_relation"] = member.relationship_label
       hash[:"#{prefix}_legal_name"] = member.display_name
       hash[:"#{prefix}_dob"] = mmddyyyy_date(member.birthday)
@@ -134,11 +133,10 @@ class AssistanceApplicationForm
   end
 
   def medical_expenses_details
-    ordinals = ["first", "second"]
     hash = {}
     members = benefit_application.members.select(&:pregnancy_expenses_yes?)
     members.first(2).each_with_index do |member, i|
-      prefix = "#{ordinals[i]}_member"
+      prefix = ordinal_member(i)
       hash[:"#{prefix}_medical_expenses_name"] = member.display_name
       hash[:"#{prefix}_medical_expenses_type"] = "Pregnancy-related"
     end
@@ -147,8 +145,12 @@ class AssistanceApplicationForm
 
   def additional_expenses_attributes
     {}.tap do |hash|
-      benefit_application.expenses.dependent_care.map(&:expense_type).each do |expense|
-        hash["dependent_care_#{expense}".to_sym] = "Yes"
+      benefit_application.expenses.dependent_care.each_with_index do |expense, i|
+        prefix = ordinal_member(i)
+        hash["dependent_care_#{expense.expense_type}".to_sym] = "Yes"
+        hash[:"#{prefix}_dependent_care_name"] = member_names(expense.members)
+        hash[:"#{prefix}_dependent_care_amount"] = expense.amount
+        hash[:"#{prefix}_dependent_care_payment_frequency"] = "Monthly"
       end
 
       benefit_application.expenses.court_ordered.map(&:expense_type).each do |expense|
@@ -158,7 +160,6 @@ class AssistanceApplicationForm
   end
 
   def employed_attributes
-    ordinals = ["first", "second"]
     hash = {
       anyone_employed: yes_no_or_unfilled(
         yes: benefit_application.anyone_employed?,
@@ -167,29 +168,29 @@ class AssistanceApplicationForm
     }
     jobs = benefit_application.members.map(&:employments).flatten
     jobs.first(2).each_with_index do |job, i|
-      hash[:"#{ordinals[i]}_member_employment_name"] = job.application_member.display_name
-      hash[:"#{ordinals[i]}_member_employment_employer_name"] = job.employer_name
-      hash[:"#{ordinals[i]}_member_employment_hrs_per_wk"] = job.hours_per_week
-      hash[:"#{ordinals[i]}_member_employment_amount"] = job.pay_quantity
+      prefix = ordinal_member(i)
+      hash[:"#{prefix}_employment_name"] = job.application_member.display_name
+      hash[:"#{prefix}_employment_employer_name"] = job.employer_name
+      hash[:"#{prefix}_employment_hrs_per_wk"] = job.hours_per_week
+      hash[:"#{prefix}_employment_amount"] = job.pay_quantity
 
-      hash[:"#{ordinals[i]}_member_employment_frequency_hour"] =
+      hash[:"#{prefix}_employment_frequency_hour"] =
         circle_if_true(job.hourly? || job.payment_frequency == "hour")
-      hash[:"#{ordinals[i]}_member_employment_frequency_week"] =
+      hash[:"#{prefix}_employment_frequency_week"] =
         circle_if_true(job.payment_frequency == "week")
-      hash[:"#{ordinals[i]}_member_employment_frequency_two_weeks"] =
+      hash[:"#{prefix}_employment_frequency_two_weeks"] =
         circle_if_true(job.payment_frequency == "two_weeks")
-      hash[:"#{ordinals[i]}_member_employment_frequency_twice_a_month"] =
+      hash[:"#{prefix}_employment_frequency_twice_a_month"] =
         circle_if_true(job.payment_frequency == "twice_a_month")
-      hash[:"#{ordinals[i]}_member_employment_frequency_month"] =
+      hash[:"#{prefix}_employment_frequency_month"] =
         circle_if_true(job.payment_frequency == "month")
-      hash[:"#{ordinals[i]}_member_employment_frequency_year"] =
+      hash[:"#{prefix}_employment_frequency_year"] =
         circle_if_true(job.salaried? || job.payment_frequency == "year")
     end
     hash
   end
 
   def self_employed_attributes
-    ordinals = ["first", "second"]
     hash = {
       anyone_self_employed: yes_no_or_unfilled(
         yes: benefit_application.members.any?(&:self_employed_yes?),
@@ -198,10 +199,10 @@ class AssistanceApplicationForm
     }
     members = benefit_application.members.select(&:self_employed_yes?)
     members.first(2).each_with_index do |member, i|
-      hash[:"#{ordinals[i]}_member_self_employed_name"] = member.display_name
-      hash[:"#{ordinals[i]}_member_self_employed_type"] = member.self_employment_description
-      hash[:"#{ordinals[i]}_member_self_employed_monthly_income"] = member.self_employment_income
-      hash[:"#{ordinals[i]}_member_self_employed_monthly_expenses"] = member.self_employment_expense
+      hash[:"#{ordinal_member(i)}_self_employed_name"] = member.display_name
+      hash[:"#{ordinal_member(i)}_self_employed_type"] = member.self_employment_description
+      hash[:"#{ordinal_member(i)}_self_employed_monthly_income"] = member.self_employment_income
+      hash[:"#{ordinal_member(i)}_self_employed_monthly_expenses"] = member.self_employment_expense
     end
     hash
   end
@@ -220,7 +221,6 @@ class AssistanceApplicationForm
   end
 
   def additional_income_attributes
-    ordinals = ["first", "second"]
     hash = {
       anyone_additional_income: yes_no_or_unfilled(
         yes: benefit_application.anyone_additional_income?,
@@ -232,10 +232,10 @@ class AssistanceApplicationForm
     end
     incomes = benefit_application.members.map(&:additional_incomes).flatten
     incomes.first(2).each_with_index do |income, i|
-      hash[:"#{ordinals[i]}_member_additional_income_name"] = income.household_member.display_name
-      hash[:"#{ordinals[i]}_member_additional_income_type"] = income.display_name
-      hash[:"#{ordinals[i]}_member_additional_income_amount"] = income.amount
-      hash[:"#{ordinals[i]}_member_additional_income_frequency_month"] = circle_if_true(income.amount?)
+      hash[:"#{ordinal_member(i)}_additional_income_name"] = income.household_member.display_name
+      hash[:"#{ordinal_member(i)}_additional_income_type"] = income.display_name
+      hash[:"#{ordinal_member(i)}_additional_income_amount"] = income.amount
+      hash[:"#{ordinal_member(i)}_additional_income_frequency_month"] = circle_if_true(income.amount?)
     end
     hash
   end

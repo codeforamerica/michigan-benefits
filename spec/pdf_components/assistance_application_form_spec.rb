@@ -54,10 +54,10 @@ RSpec.describe AssistanceApplicationForm do
         create(:common_application,
            members: [primary_member],
            expenses: [
-             build(:expense, expense_type: "health_insurance"),
-             build(:expense, expense_type: "childcare"),
-             build(:expense, expense_type: "child_support"),
-             build(:expense, expense_type: "student_loan_interest"),
+             build(:expense, expense_type: "health_insurance", amount: 100, members: [primary_member]),
+             build(:expense, expense_type: "childcare", amount: 100, members: [primary_member]),
+             build(:expense, expense_type: "child_support", amount: 100, members: [primary_member]),
+             build(:expense, expense_type: "student_loan_interest", amount: 100, members: [primary_member]),
            ],
            residential_address: build(:residential_address,
                                       address_type: "residential",
@@ -154,6 +154,9 @@ RSpec.describe AssistanceApplicationForm do
           authorized_representative_phone_number: "(202) 456-1111",
           anyone_expenses_dependent_care: "Yes",
           dependent_care_childcare: "Yes",
+          first_member_dependent_care_name: "Octopus Cuttlefish",
+          first_member_dependent_care_amount: 100,
+          first_member_dependent_care_payment_frequency: "Monthly",
           anyone_court_expenses: "Yes",
           court_expenses_child_support: "Yes",
           anyone_student_loans_deductions: "Yes",
@@ -167,7 +170,7 @@ RSpec.describe AssistanceApplicationForm do
 
     context "an application with six members" do
       let(:common_application) do
-        create(:common_application,
+        app = create(:common_application,
                         previously_received_assistance: "yes",
                         living_situation: "temporary_address",
                         members: [build(:household_member,
@@ -232,10 +235,21 @@ RSpec.describe AssistanceApplicationForm do
                                         citizen: "yes",
                                         self_employed: "yes",
                                         flint_water: "yes")])
+        app.expenses << build(:expense,
+          expense_type: "childcare",
+          amount: 100,
+          members: [app.members.first, app.members.second])
+        app
       end
 
       let(:attributes) do
         AssistanceApplicationForm.new(common_application).attributes
+      end
+
+      it "returns a hash with key information for multimember households" do
+        expect(attributes).to include(
+          first_member_dependent_care_name: "Willy Wells, Willy Wiley",
+        )
       end
 
       it "returns notes with different sections concatenated" do
