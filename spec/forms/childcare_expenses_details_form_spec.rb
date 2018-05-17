@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe ChildcareExpensesDetailsForm do
+RSpec.describe ExpensesDetailsForm do
   describe "validations" do
     context "valid" do
       it "is valid with all required inputs" do
         member = create(:household_member)
 
-        form = ChildcareExpensesDetailsForm.new(
+        form = ExpensesDetailsForm.new(
           member_ids: [member.id.to_s],
           valid_members: [member],
         )
@@ -19,7 +19,7 @@ RSpec.describe ChildcareExpensesDetailsForm do
       it "requires amount to be a number" do
         member = create(:household_member)
 
-        form = ChildcareExpensesDetailsForm.new(
+        form = ExpensesDetailsForm.new(
           amount: "gobbledygook",
           member_ids: [member.id.to_s],
           valid_members: [member],
@@ -33,7 +33,7 @@ RSpec.describe ChildcareExpensesDetailsForm do
         valid_member = create(:household_member)
         invalid_member = create(:household_member)
 
-        form = ChildcareExpensesDetailsForm.new(
+        form = ExpensesDetailsForm.new(
           member_ids: [valid_member.id.to_s, invalid_member.id.to_s],
           valid_members: [valid_member],
         )
@@ -43,7 +43,7 @@ RSpec.describe ChildcareExpensesDetailsForm do
       end
 
       it "requires member_ids" do
-        form = ChildcareExpensesDetailsForm.new(
+        form = ExpensesDetailsForm.new(
           valid_members: [create(:household_member)],
         )
 
