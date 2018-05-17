@@ -678,6 +678,40 @@ RSpec.describe MbFormBuilder do
     end
   end
 
+  describe "#mb_collection_check_boxes" do
+    it "renders an accessible set of checkboxes" do
+      class SampleStep < Step
+        step_attributes(captain_ids: [])
+      end
+
+      class Captain
+        def initialize(id, name)
+          @id = id
+          @name = name
+        end
+        attr_reader :id, :name
+      end
+
+      sample = SampleStep.new(captain_ids: [1])
+      form = MbFormBuilder.new("sample", sample, template, {})
+      captains = [Captain.new(1, "Ben"), Captain.new(2, "Christa")]
+
+      output = form.mb_collection_check_boxes(
+        :captain_ids, captains, :id, :name, label_text: "Who's the captain?"
+      )
+
+      expect(output).to be_html_safe
+      expect(output).to match_html <<~HTML
+        <fieldset class="input-group form-group">
+          <legend class="form-question"> Who's the captain? </legend>
+          <input type="hidden" name="sample[captain_ids][]" value="" />
+          <label class="checkbox"><input type="checkbox" value="1" checked="checked" name="sample[captain_ids][]" id="sample_captain_ids_1" /> Ben </label>
+          <label class="checkbox"><input type="checkbox" value="2" name="sample[captain_ids][]" id="sample_captain_ids_2" /> Christa </label>
+        </fieldset>
+      HTML
+    end
+  end
+
   describe "#mb_checkbox" do
     it "renders an accessible checkbox input" do
       class SampleStep < Step

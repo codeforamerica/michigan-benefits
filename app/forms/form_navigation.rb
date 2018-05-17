@@ -68,6 +68,7 @@ class FormNavigation
       Integrated::UtilityExpensesController,
       Integrated::DependentCareExpensesController,
       Integrated::ChildcareExpensesController,
+      Integrated::ChildcareExpensesDetailsController,
       Integrated::ChildSupportController,
       Integrated::AlimonyController,
       Integrated::StudentLoanInterestController,

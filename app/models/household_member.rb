@@ -6,6 +6,8 @@ class HouseholdMember < ApplicationRecord
   has_many :employments, as: :application_member, dependent: :destroy
   has_many :additional_incomes, dependent: :destroy
 
+  has_and_belongs_to_many :expenses
+
   scope :requesting_food, -> {
     where(requesting_food: "yes").order("created_at")
   }

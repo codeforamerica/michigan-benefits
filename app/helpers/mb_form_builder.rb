@@ -417,6 +417,26 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     HTML
   end
 
+  def mb_collection_check_boxes(method, collection, value_method, text_method, label_text:, options: {})
+    checkbox_collection_html = collection_check_boxes(method, collection, value_method, text_method, options) do |b|
+      <<~HTML.html_safe
+        <label class="checkbox">
+          #{b.check_box} #{b.text}
+        </label>
+      HTML
+    end
+
+    <<~HTML.html_safe
+      <fieldset class="input-group form-group#{error_state(object, method)}">
+        <legend class="form-question">
+          #{label_text}
+        </legend>
+        #{checkbox_collection_html}
+        #{errors_for(object, method)}
+      </fieldset>
+    HTML
+  end
+
   def mb_select(
     method,
     label_text,
