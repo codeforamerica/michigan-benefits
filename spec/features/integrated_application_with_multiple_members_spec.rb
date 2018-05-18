@@ -625,7 +625,7 @@ RSpec.feature "Integrated application" do
 
     on_page "Income and Employment" do
       expect(page).to have_content(
-        "Who currently has a job?",
+        "Tell us how many jobs everyone has.",
       )
 
       fill_in "How many jobs do you have?", with: "1"
