@@ -16,9 +16,7 @@ class AssistanceApplicationForm
   def attributes
     applicant_registration_attributes.
       merge(member_attributes).
-      merge(medical_expenses_attributes).
-      merge(medical_expenses_details).
-      merge(additional_expenses_attributes).
+      merge(expenses_attributes).
       merge(employed_attributes).
       merge(self_employed_attributes).
       merge(assets_attributes).
@@ -72,10 +70,9 @@ class AssistanceApplicationForm
       ),
       anyone_recently_pregnant_names: member_names(recently_pregnant_members),
       anyone_medical_expenses: yes_no_or_unfilled(
-        yes: benefit_application.expenses.medical.any? || benefit_application.members.any?(&:pregnancy_expenses_yes?),
-        no: benefit_application.expenses.medical.none? && benefit_application.members.none(&:pregnancy_expenses_yes?),
+        yes: benefit_application.expenses.medical.any?,
+        no: benefit_application.expenses.medical.none?,
       ),
-      medical_expenses_other: yes_if_true(benefit_application.members.any?(&:pregnancy_expenses_yes?)),
       anyone_income_change: yes_no_or_unfilled(
         yes: benefit_application.income_changed_yes?,
         no: benefit_application.income_changed_no?,
@@ -121,30 +118,21 @@ class AssistanceApplicationForm
     hash
   end
 
-  def medical_expenses_attributes
+  def expenses_attributes
     {}.tap do |hash|
-      if benefit_application.members.any?(&:pregnancy_expenses_yes?)
-        hash["medical_expenses_other_medical"] = "Yes"
+      medical_expenses = benefit_application.expenses.medical.map do |expense|
+        hash["medical_expenses_#{expense.expense_type}".to_sym] = "Yes"
+        expense
       end
-      benefit_application.expenses.medical.map(&:expense_type).each do |expense|
-        hash["medical_expenses_#{expense}".to_sym] = "Yes"
+
+      medical_expenses.first(2).each_with_index do |expense, i|
+        prefix = ordinal_member(i)
+        hash[:"#{prefix}_medical_expenses_name"] = member_names(expense.members)
+        hash[:"#{prefix}_medical_expenses_type"] = expense.display_name
+        hash[:"#{prefix}_medical_expenses_amount"] = expense.amount
+        hash[:"#{prefix}_medical_payment_frequency"] = "Monthly"
       end
-    end
-  end
 
-  def medical_expenses_details
-    hash = {}
-    members = benefit_application.members.select(&:pregnancy_expenses_yes?)
-    members.first(2).each_with_index do |member, i|
-      prefix = ordinal_member(i)
-      hash[:"#{prefix}_medical_expenses_name"] = member.display_name
-      hash[:"#{prefix}_medical_expenses_type"] = "Pregnancy-related"
-    end
-    hash
-  end
-
-  def additional_expenses_attributes
-    {}.tap do |hash|
       benefit_application.expenses.dependent_care.each_with_index do |expense, i|
         prefix = ordinal_member(i)
         hash["dependent_care_#{expense.expense_type}".to_sym] = "Yes"
@@ -299,13 +287,19 @@ class AssistanceApplicationForm
   end
 
   def add_additional_medical_expenses
-    members = benefit_application.members.select(&:pregnancy_expenses_yes?)
-    if members.count > 2
+    expenses = benefit_application.expenses.medical
+    if expenses.count > 2
       @_additional_notes[:household_added_notes] = "Yes"
-      @_additional_notes[:notes] += "Additional Medical Expenses:\n"
-      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
-        "- #{extra_member.display_name}, Pregnancy-related\n"
-      end.join
+      @_additional_notes[:notes] += "Additional Expenses:\n"
+      @_additional_notes[:notes] += expenses[2..-1].map do |expense|
+        [
+          "- #{expense.display_name}",
+          member_names(expense.members),
+          expense.amount.present? ? "$#{expense.amount}" : nil,
+          "Monthly",
+        ].compact.join(". ")
+      end.join("\n")
+      @_additional_notes[:notes] += "\n"
     end
   end
 

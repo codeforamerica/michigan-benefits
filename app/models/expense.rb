@@ -91,4 +91,6 @@ class Expense < ApplicationRecord
   def display_name
     all_expenses[expense_type.to_sym]
   end
+
+  delegate :all_expenses, to: :class
 end

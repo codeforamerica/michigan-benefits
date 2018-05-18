@@ -136,9 +136,6 @@ RSpec.describe AssistanceApplicationForm do
           second_member_assets_vehicles_name: "Octopus Cuttlefish",
           second_member_assets_vehicles_year_make_model: "1952 Vincent HRD",
           anyone_medical_expenses: "Yes",
-          medical_expenses_other: "Yes",
-          first_member_medical_expenses_name: "Octopus Cuttlefish",
-          first_member_medical_expenses_type: "Pregnancy-related",
           anyone_income_change: "Yes",
           anyone_income_change_explanation: "I lost my job.",
           anyone_employed: "Yes",
@@ -168,6 +165,10 @@ RSpec.describe AssistanceApplicationForm do
           first_member_dependent_care_name: "Octopus Cuttlefish",
           first_member_dependent_care_amount: 100,
           first_member_dependent_care_payment_frequency: "Monthly",
+          first_member_medical_expenses_name: "Octopus Cuttlefish",
+          first_member_medical_expenses_type: "Health Insurance",
+          first_member_medical_expenses_amount: 100,
+          first_member_medical_payment_frequency: "Monthly",
           anyone_court_expenses: "Yes",
           court_expenses_child_support: "Yes",
           anyone_student_loans_deductions: "Yes",
@@ -180,6 +181,15 @@ RSpec.describe AssistanceApplicationForm do
     end
 
     context "an application with six members" do
+      let(:transportation_expense) do
+        create(:expense, expense_type: :transportation, amount: 100)
+      end
+      let(:copay_expense) do
+        create(:expense, expense_type: :copays, amount: 100)
+      end
+      let(:health_insurance_expense) do
+        create(:expense, expense_type: :health_insurance, amount: 100)
+      end
       let(:childcare_expense) do
         create(:expense, expense_type: :childcare, amount: 100)
       end
@@ -202,11 +212,10 @@ RSpec.describe AssistanceApplicationForm do
         create(:common_application,
           previously_received_assistance: "yes",
           living_situation: "temporary_address",
-          expenses: [childcare_expense],
+          expenses: [health_insurance_expense, copay_expense, transportation_expense],
           members: [build(:household_member,
             first_name: "Willy",
             last_name: "Wells",
-            pregnancy_expenses: "yes",
             healthcare_enrolled: "yes",
             flint_water: "yes",
             employments: [build(:employment)],
@@ -217,20 +226,18 @@ RSpec.describe AssistanceApplicationForm do
                     build(:household_member,
                       first_name: "Willy",
                       last_name: "Wiley",
-                      pregnancy_expenses: "yes",
                       healthcare_enrolled: "yes",
                       flint_water: "yes",
                       employments: [build(:employment)],
                       self_employed: "yes",
+                      expenses: [health_insurance_expense, childcare_expense],
                       additional_incomes: [build(:additional_income,
                         income_type: "pension",
                         amount: 50)],
-                      expenses: [childcare_expense],
                       vehicles: [vehicles[0], vehicles[2]]),
                     build(:household_member,
                       first_name: "Willy",
                       last_name: "Wonka",
-                      pregnancy_expenses: "yes",
                       healthcare_enrolled: "yes",
                       employments: [
                         build(:employment,
@@ -244,6 +251,7 @@ RSpec.describe AssistanceApplicationForm do
                       self_employment_description: "cake maker",
                       self_employment_income: 100,
                       self_employment_expense: 50,
+                      expenses: [copay_expense, childcare_expense],
                       additional_incomes: [
                         build(:additional_income,
                           income_type: "retirement",
@@ -268,7 +276,7 @@ RSpec.describe AssistanceApplicationForm do
                       citizen: "yes",
                       self_employed: "yes",
                       flint_water: "yes",
-                      expenses: [childcare_expense])])
+                      expenses: [transportation_expense])])
       end
 
       let(:attributes) do
@@ -277,7 +285,7 @@ RSpec.describe AssistanceApplicationForm do
 
       it "returns a hash with key information for multimember households" do
         expect(attributes).to include(
-          first_member_dependent_care_name: "Willy Wiley, Willy Whale",
+          first_member_dependent_care_name: "Willy Wiley, Willy Wonka",
           first_member_assets_vehicles_name: "Willy Wiley, Willy Wonka",
         )
       end
@@ -296,8 +304,8 @@ RSpec.describe AssistanceApplicationForm do
           <<~NOTES
             Additional Household Members:
             - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Applying for: Food, Healthcare
-            Additional Medical Expenses:
-            - Willy Wonka, Pregnancy-related
+            Additional Expenses:
+            - Health Insurance. Willy Wiley. $100. Monthly
             Additional Members Currently Enrolled in Health Coverage:
             - Willy Whale
             Additional Members Affected by the Flint Water Crisis:
