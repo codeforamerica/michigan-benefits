@@ -1,4 +1,4 @@
-class ChildcareExpensesDetailsForm < Form
+class ExpensesDetailsForm < Form
   set_attributes_for :expense,
                      :amount, member_ids: []
 
@@ -20,10 +20,9 @@ class ChildcareExpensesDetailsForm < Form
       end
       return true if (member_ids - valid_member_ids).empty?
       errors.add(:member_ids, "Can only update members from this application")
-      false
     else
       errors.add(:member_ids, "Please select at least one person.")
-      false
     end
+    false
   end
 end

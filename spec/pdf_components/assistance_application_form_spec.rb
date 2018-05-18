@@ -168,78 +168,21 @@ RSpec.describe AssistanceApplicationForm do
       end
     end
 
-    context "an application with six members" do
+    context "an application with between one and six members" do
       let(:common_application) do
-        app = create(:common_application,
-                        previously_received_assistance: "yes",
-                        living_situation: "temporary_address",
-                        members: [build(:household_member,
-                                        first_name: "Willy",
-                                        last_name: "Wells",
-                                        pregnancy_expenses: "yes",
-                                        healthcare_enrolled: "yes",
-                                        flint_water: "yes",
-                                        employments: [build(:employment)],
-                                        self_employed: "yes",
-                                        additional_incomes: [build(:additional_income,
-                                          income_type: "unemployment",
-                                          amount: 100)]),
-                                  build(:household_member,
-                                        first_name: "Willy",
-                                        last_name: "Wiley",
-                                        pregnancy_expenses: "yes",
-                                        healthcare_enrolled: "yes",
-                                        flint_water: "yes",
-                                        employments: [build(:employment)],
-                                        self_employed: "yes",
-                                        additional_incomes: [build(:additional_income,
-                                          income_type: "pension",
-                                          amount: 50)]),
-                                  build(:household_member,
-                                        first_name: "Willy",
-                                        last_name: "Wonka",
-                                        pregnancy_expenses: "yes",
-                                        healthcare_enrolled: "yes",
-                                        employments: [
-                                          build(:employment,
-                                            employer_name: "Oompa Co",
-                                            hourly_or_salary: "hourly",
-                                            pay_quantity: 20,
-                                            payment_frequency: "twice_a_month",
-                                            hours_per_week: 10),
-                                        ],
-                                        self_employed: "yes",
-                                        self_employment_description: "cake maker",
-                                        self_employment_income: 100,
-                                        self_employment_expense: 50,
-                                        additional_incomes: [
-                                          build(:additional_income,
-                                            income_type: "retirement",
-                                            amount: 100),
-                                          build(:additional_income,
-                                            income_type: "social_security",
-                                            amount: 200),
-                                        ]),
-                                  build(:household_member),
-                                  build(:household_member),
-                                  build(:household_member,
-                                        first_name: "Willy",
-                                        last_name: "Whale",
-                                        relationship: "child",
-                                        birthday: DateTime.new(1995, 10, 18),
-                                        sex: "male",
-                                        requesting_food: "yes",
-                                        requesting_healthcare: "yes",
-                                        healthcare_enrolled: "yes",
-                                        married: "yes",
-                                        citizen: "yes",
-                                        self_employed: "yes",
-                                        flint_water: "yes")])
-        app.expenses << build(:expense,
-          expense_type: "childcare",
-          amount: 100,
-          members: [app.members.first, app.members.second])
-        app
+        expense = build(:expense, expense_type: "childcare", amount: 100)
+        create(:common_application,
+          members: [
+            build(:household_member,
+              first_name: "Willy",
+              last_name: "Wells",
+              expenses: [expense]),
+            build(:household_member,
+              first_name: "Willy",
+              last_name: "Wiley",
+              expenses: [expense]),
+          ],
+          expenses: [expense])
       end
 
       let(:attributes) do
@@ -249,6 +192,91 @@ RSpec.describe AssistanceApplicationForm do
       it "returns a hash with key information for multimember households" do
         expect(attributes).to include(
           first_member_dependent_care_name: "Willy Wells, Willy Wiley",
+        )
+      end
+    end
+
+    context "an application with six members" do
+      let(:childcare_expense) do
+        create(:expense, expense_type: :childcare, amount: 100)
+      end
+
+      let(:common_application) do
+        create(:common_application,
+          previously_received_assistance: "yes",
+          living_situation: "temporary_address",
+          members: [build(:household_member,
+            first_name: "Willy",
+            last_name: "Wells",
+            pregnancy_expenses: "yes",
+            healthcare_enrolled: "yes",
+            flint_water: "yes",
+            employments: [build(:employment)],
+            self_employed: "yes",
+            additional_incomes: [build(:additional_income,
+              income_type: "unemployment",
+              amount: 100)]),
+                    build(:household_member,
+                      first_name: "Willy",
+                      last_name: "Wiley",
+                      pregnancy_expenses: "yes",
+                      healthcare_enrolled: "yes",
+                      flint_water: "yes",
+                      employments: [build(:employment)],
+                      self_employed: "yes",
+                      additional_incomes: [build(:additional_income,
+                        income_type: "pension",
+                        amount: 50)]),
+                    build(:household_member,
+                      first_name: "Willy",
+                      last_name: "Wonka",
+                      pregnancy_expenses: "yes",
+                      healthcare_enrolled: "yes",
+                      employments: [
+                        build(:employment,
+                          employer_name: "Oompa Co",
+                          hourly_or_salary: "hourly",
+                          pay_quantity: 20,
+                          payment_frequency: "twice_a_month",
+                          hours_per_week: 10),
+                      ],
+                      self_employed: "yes",
+                      self_employment_description: "cake maker",
+                      self_employment_income: 100,
+                      self_employment_expense: 50,
+                      additional_incomes: [
+                        build(:additional_income,
+                          income_type: "retirement",
+                          amount: 100),
+                        build(:additional_income,
+                          income_type: "social_security",
+                          amount: 200),
+                      ]),
+                    build(:household_member),
+                    build(:household_member),
+                    build(:household_member,
+                      first_name: "Willy",
+                      last_name: "Whale",
+                      relationship: "child",
+                      birthday: DateTime.new(1995, 10, 18),
+                      sex: "male",
+                      requesting_food: "yes",
+                      requesting_healthcare: "yes",
+                      healthcare_enrolled: "yes",
+                      married: "yes",
+                      citizen: "yes",
+                      self_employed: "yes",
+                      flint_water: "yes",
+                      expenses: [childcare_expense])])
+      end
+
+      let(:attributes) do
+        AssistanceApplicationForm.new(common_application).attributes
+      end
+
+      it "returns notes with different sections concatenated" do
+        expect(attributes).to include(
+          household_added_notes: "Yes",
         )
       end
 

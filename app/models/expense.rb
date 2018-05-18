@@ -31,13 +31,13 @@ class Expense < ApplicationRecord
   }.freeze
 
   DEPENDENT_CARE_EXPENSES = {
-    childcare: "",
-    disability_care: "",
+    childcare: "Childcare",
+    disability_care: "Dependent Care",
   }.freeze
 
   COURT_ORDERED_EXPENSES = {
-    child_support: "",
-    alimony: "",
+    child_support: "Child Support",
+    alimony: "Alimony",
   }.freeze
 
   OTHER_PERMITTED_EXPENSES = [:student_loan_interest].freeze

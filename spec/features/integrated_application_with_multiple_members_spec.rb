@@ -458,6 +458,16 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household Expenses" do
+      expect(page).to have_content("Tell us about your dependent care expenses")
+
+      fill_in "Monthly amount", with: "100"
+      check "Jessie Tester"
+      check "Jonny Tester"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household Expenses" do
       expect(page).to have_content("Does anyone pay for child care?")
 
       proceed_with "Yes"

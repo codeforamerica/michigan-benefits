@@ -1,10 +1,12 @@
 module Integrated
-  class ChildcareExpensesDetailsController < FormsController
+  class DependentCareExpensesDetailsController < FormsController
     include ExpensesDetails
     extend ExpensesDetails::ClassMethods
 
+    private
+
     def self.expense_type
-      :childcare
+      :disability_care
     end
   end
 end
