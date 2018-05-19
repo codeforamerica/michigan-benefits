@@ -141,8 +141,16 @@ class AssistanceApplicationForm
         hash[:"#{prefix}_dependent_care_payment_frequency"] = "Monthly"
       end
 
-      benefit_application.expenses.court_ordered.map(&:expense_type).each do |expense|
-        hash["court_expenses_#{expense}".to_sym] = "Yes"
+      court_ordered_expenses = benefit_application.expenses.court_ordered.map do |expense|
+        hash["court_expenses_#{expense.expense_type}".to_sym] = "Yes"
+        hash
+      end
+
+      court_ordered_expenses.first(2).each_with_index do |expense, i|
+        prefix = ordinal_member(i)
+        hash[:"#{prefix}_court_expenses_name"] = member_names(expense.members)
+        hash[:"#{prefix}_court_expenses_amount"] = expense.amount
+        hash[:"#{prefix}_court_expenses_payment_frequency"] = "Monthly"
       end
     end
   end
@@ -245,7 +253,7 @@ class AssistanceApplicationForm
       notes: "",
     }
     add_additional_household_members
-    add_additional_medical_expenses
+    add_additional_expenses
     add_additional_members_healthcare_enrolled
     add_additional_members_flint_water
     add_additional_vehicle_assets
@@ -286,12 +294,15 @@ class AssistanceApplicationForm
     end
   end
 
-  def add_additional_medical_expenses
-    expenses = benefit_application.expenses.medical
-    if expenses.count > 2
+  def add_additional_expenses
+    medical_expenses = benefit_application.expenses.medical[2..-1] || []
+    court_ordered_expenses = benefit_application.expenses.court_ordered[2..-1] || []
+
+    additional_expenses = medical_expenses + court_ordered_expenses
+    if additional_expenses.any?
       @_additional_notes[:household_added_notes] = "Yes"
       @_additional_notes[:notes] += "Additional Expenses:\n"
-      @_additional_notes[:notes] += expenses[2..-1].map do |expense|
+      @_additional_notes[:notes] += additional_expenses.map do |expense|
         [
           "- #{expense.display_name}",
           member_names(expense.members),

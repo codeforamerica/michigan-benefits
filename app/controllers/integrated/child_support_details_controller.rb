@@ -1,10 +1,10 @@
 module Integrated
-  class OtherMedicalExpensesDetailsController < FormsController
+  class ChildSupportDetailsController < FormsController
     include ExpensesDetails
     extend ExpensesDetails::ClassMethods
 
     def self.expense_type
-      :other_medical
+      :child_support
     end
   end
 end
