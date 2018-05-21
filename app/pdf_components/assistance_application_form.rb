@@ -213,9 +213,21 @@ class AssistanceApplicationForm
         yes: benefit_application.properties.any?,
         no: benefit_application.properties.none?,
       )
-
       benefit_application.properties.each do |property_type|
-        hash["assets_property_#{property_type}".to_sym] = "Yes"
+        hash[:"assets_property_#{property_type}"] = "Yes"
+      end
+
+      hash[:anyone_assets_vehicles] = yes_no_or_unfilled(
+        yes: benefit_application.vehicles.any?,
+        no: benefit_application.vehicles.none?,
+      )
+      benefit_application.vehicles.each_with_index do |vehicle, i|
+        hash[:"assets_vehicles_#{vehicle.vehicle_type}"] = "Yes"
+        if i < 2
+          prefix = "#{ordinal_member(i)}_assets_vehicles"
+          hash[:"#{prefix}_name"] = vehicle.member_names
+          hash[:"#{prefix}_year_make_model"] = vehicle.year_make_model
+        end
       end
     end
   end
@@ -248,6 +260,7 @@ class AssistanceApplicationForm
     add_additional_medical_expenses
     add_additional_members_healthcare_enrolled
     add_additional_members_flint_water
+    add_additional_vehicle_assets
     add_additional_members_employed
     add_additional_members_self_employed
     add_additional_members_additional_income
@@ -272,6 +285,16 @@ class AssistanceApplicationForm
           @_additional_notes[:notes] += "Applying for: #{programs.join(', ')}\n"
         end
       end
+    end
+  end
+
+  def add_additional_vehicle_assets
+    if benefit_application.vehicles.count > 2
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Assets:\n"
+      @_additional_notes[:notes] += benefit_application.vehicles[2..-1].map do |extra_vehicle|
+        "- #{extra_vehicle.display_name_and_make} (#{extra_vehicle.member_names})\n"
+      end.join
     end
   end
 
