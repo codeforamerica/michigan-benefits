@@ -172,6 +172,10 @@ RSpec.describe AssistanceApplicationForm do
           anyone_court_expenses: "Yes",
           court_expenses_child_support: "Yes",
           anyone_student_loans_deductions: "Yes",
+          first_member_student_loans_deductions_name: "Octopus Cuttlefish",
+          first_member_student_loans_deductions_type: "Student loan interest",
+          first_member_student_loans_deductions_amount: 100,
+          first_member_student_loans_deductions_payment_frequency: "Monthly",
           anyone_assets_property: "Yes",
           assets_property_rental: "Yes",
           completion_signature_applicant: "Octopus Cuttlefish",
@@ -181,9 +185,6 @@ RSpec.describe AssistanceApplicationForm do
     end
 
     context "an application with six members" do
-      let(:transportation_expense) do
-        create(:expense, expense_type: :transportation, amount: 100)
-      end
       let(:copay_expense) do
         create(:expense, expense_type: :copays, amount: 100)
       end
@@ -192,6 +193,9 @@ RSpec.describe AssistanceApplicationForm do
       end
       let(:childcare_expense) do
         create(:expense, expense_type: :childcare, amount: 100)
+      end
+      let(:transportation_expense) do
+        create(:expense, expense_type: :transportation, amount: 100)
       end
 
       let(:vehicles) do
@@ -212,7 +216,7 @@ RSpec.describe AssistanceApplicationForm do
         create(:common_application,
           previously_received_assistance: "yes",
           living_situation: "temporary_address",
-          expenses: [health_insurance_expense, copay_expense, transportation_expense],
+          expenses: [health_insurance_expense, copay_expense, transportation_expense, childcare_expense],
           members: [build(:household_member,
             first_name: "Willy",
             last_name: "Wells",
@@ -305,7 +309,7 @@ RSpec.describe AssistanceApplicationForm do
             Additional Household Members:
             - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Applying for: Food, Healthcare
             Additional Expenses:
-            - Health Insurance. Willy Wiley. $100. Monthly
+            - Transportation for medical care. Willy Whale. $100. Monthly
             Additional Members Currently Enrolled in Health Coverage:
             - Willy Whale
             Additional Members Affected by the Flint Water Crisis:

@@ -490,15 +490,44 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household Expenses" do
+      expect(page).to have_content("Tell us about any child support expenses")
+
+      fill_in "Monthly amount", with: "50"
+      check "Jessie Tester"
+      check "Jonny Tester"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household Expenses" do
       expect(page).to have_content("Does anyone pay for alimony or spousal support?")
 
       proceed_with "Yes"
     end
 
     on_page "Household Expenses" do
+      expect(page).to have_content("Tell us about any alimony expenses")
+
+      fill_in "Monthly amount", with: "50"
+      check "Jessie Tester"
+      check "Jonny Tester"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household Expenses" do
       expect(page).to have_content("Does anyone pay for interest on student loans?")
 
       proceed_with "Yes"
+    end
+
+    on_page "Household Expenses" do
+      expect(page).to have_content("Tell us about any student loan interest expenses")
+
+      fill_in "Monthly amount", with: "700"
+      check "Jessie Tester"
+
+      proceed_with "Continue"
     end
 
     on_page "Current Healthcare" do
@@ -523,6 +552,15 @@ RSpec.feature "Integrated application" do
       )
 
       check "Dental"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Medical Bills" do
+      expect(page).to have_content("Tell us about any dental expenses.")
+
+      fill_in "Monthly amount", with: "30"
+      check "Jessie Tester"
 
       proceed_with "Continue"
     end

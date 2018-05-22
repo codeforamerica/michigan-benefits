@@ -50,7 +50,7 @@ class Member < ApplicationRecord
 
   belongs_to :benefit_application, polymorphic: true, counter_cache: true
   has_one :spouse, class_name: "Member", foreign_key: "spouse_id"
-  has_many :employments, as: :application_member, dependent: :destroy
+  has_many :employments, -> { order(created_at: :asc) }, as: :application_member, dependent: :destroy
 
   validates :employed_pay_interval,
     inclusion: { in: PAYMENT_INTERVALS },

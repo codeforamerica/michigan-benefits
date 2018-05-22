@@ -40,11 +40,14 @@ class Expense < ApplicationRecord
     alimony: "Alimony",
   }.freeze
 
-  OTHER_PERMITTED_EXPENSES = [:student_loan_interest].freeze
+  OTHER_PERMITTED_EXPENSES = {
+    student_loan_interest: "Student Loan Interest",
+  }.freeze
 
   belongs_to :common_application
 
   has_and_belongs_to_many :members,
+    -> { order(created_at: :asc) },
     class_name: "HouseholdMember",
     foreign_key: "expense_id"
 
@@ -72,21 +75,30 @@ class Expense < ApplicationRecord
     where(expense_type: :student_loan_interest)
   }
 
+  scope :court_ordered_or_other, -> {
+    where(expense_type: COURT_ORDERED_EXPENSES.keys + OTHER_PERMITTED_EXPENSES.keys)
+  }
+
   def self.all_expenses
     HOUSING_EXPENSES.merge(
       **MEDICAL_EXPENSES,
       **UTILITY_EXPENSES,
       **DEPENDENT_CARE_EXPENSES,
       **COURT_ORDERED_EXPENSES,
+      **OTHER_PERMITTED_EXPENSES,
     )
   end
 
   def self.all_expense_types
-    all_expenses.keys + OTHER_PERMITTED_EXPENSES
+    all_expenses.keys
   end
 
   validates :expense_type, inclusion: { in: all_expense_types.map(&:to_s),
                                         message: "%<value>s is not a valid expense type" }
+  validates :amount, numericality: {
+    allow_nil: true,
+    message: "Make sure to enter a number",
+  }
 
   def display_name
     all_expenses[expense_type.to_sym]

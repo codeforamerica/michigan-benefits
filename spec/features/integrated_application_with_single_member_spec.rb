@@ -151,13 +151,22 @@ RSpec.feature "Integrated application" do
     on_page "Household Expenses" do
       expect(page).to have_content("Do you pay for alimony or spousal support?")
 
-      proceed_with "No"
+      proceed_with "Yes"
     end
 
     on_page "Household Expenses" do
       expect(page).to have_content("Do you pay for interest on student loans?")
 
-      proceed_with "No"
+      proceed_with "Yes"
+    end
+
+    on_page "Household Expenses" do
+      expect(page).to have_content("Tell us about your expenses")
+
+      fill_in "Alimony", with: "200"
+      fill_in "Student Loan Interest", with: "50"
+
+      proceed_with "Continue"
     end
 
     on_page "Current Healthcare" do
