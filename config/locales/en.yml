@@ -260,6 +260,14 @@ en:
         title:
           one: Do you have any money in accounts?
           other: Does anyone have money in accounts?
+    vehicles_overview:
+      edit:
+        title:
+          one: Tell us about your vehicles.
+          other: Tell us about your household's vehicles
+        help_text:
+          one: Only list vehicles that are registered in your name.
+          other: Only list vehicles that are registered in the names of people in your household.
     vehicles:
       edit:
         title:

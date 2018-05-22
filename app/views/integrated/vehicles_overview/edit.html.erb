@@ -1,0 +1,41 @@
+<% content_for :header_title, "Assets" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      <%= t(".title", count: current_application.members.count) %>
+    </h1>
+    <p class="text--centered text--help">
+      Don't worry - your first vehicle will not be counted against you.
+    </p>
+    <p class="text--centered text--help">
+      <%= t(".help_text", count: current_application.members.count) %>
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <div class="slab slab--not-padded">
+    <div class="card card--narrow">
+      <% current_application.vehicles.each do |vehicle| %>
+        <div>
+          <p>
+            <i class="button__icon--left icon-check icon-check--color"></i>
+            <span id="vehicle-name-<%= vehicle.id %>">
+              <%= vehicle.display_name_and_make %>
+            </span>
+            (<%= link_to "remove", remove_vehicle_sections_path(form: { vehicle_id: vehicle.id }),
+              method: :put,
+              class: "remove",
+              "aria-labelledby": "vehicle-name-#{vehicle.id}" %>)
+          </p>
+        </div>
+      <% end %>
+
+      <%= link_to(
+            section_path(Integrated::AddVehicleController),
+            class: 'button button-full-width button-bold') do %>
+        <i class="button__icon--left icon-add"></i>
+        Add a vehicle
+      <% end %>
+    </div>
+  </div>
+<% end %>

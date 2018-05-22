@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516184028) do
+ActiveRecord::Schema.define(version: 20180518004805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,13 @@ ActiveRecord::Schema.define(version: 20180516184028) do
     t.index ["common_application_id"], name: "index_household_members_on_common_application_id"
   end
 
+  create_table "household_members_vehicles", id: false, force: :cascade do |t|
+    t.bigint "household_member_id"
+    t.bigint "vehicle_id"
+    t.index ["household_member_id"], name: "index_household_members_vehicles_on_household_member_id"
+    t.index ["vehicle_id"], name: "index_household_members_vehicles_on_vehicle_id"
+  end
+
   create_table "medicaid_applications", force: :cascade do |t|
     t.boolean "anyone_caretaker_or_parent"
     t.boolean "anyone_disabled"
@@ -410,6 +417,13 @@ ActiveRecord::Schema.define(version: 20180516184028) do
     t.boolean "utility_trash"
     t.boolean "utility_water_sewer"
     t.boolean "vehicle_income"
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "vehicle_type", null: false
+    t.string "year_make_model"
   end
 
   add_foreign_key "driver_applications", "snap_applications"

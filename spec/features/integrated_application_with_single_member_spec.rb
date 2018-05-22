@@ -314,7 +314,35 @@ RSpec.feature "Integrated application" do
         "Do you own any vehicles?",
       )
 
-      proceed_with "No"
+      proceed_with "Yes"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Tell us about your vehicles",
+      )
+
+      proceed_with "Add a vehicle"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Add a vehicle",
+      )
+
+      select_radio(question: "What type of vehicle is it?", answer: "Truck")
+      fill_in "Year, make, and model", with: "1989 Toyota pickup"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Tell us about your vehicles",
+        "Truck: 1989 Toyota pickup",
+      )
+
+      proceed_with "Continue"
     end
 
     on_page "Assets" do

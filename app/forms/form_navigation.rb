@@ -114,6 +114,7 @@ class FormNavigation
       Integrated::MoneyInAccountsController,
       Integrated::AmountInAccountsController,
       Integrated::VehiclesController,
+      Integrated::VehiclesOverviewController,
       Integrated::PropertyController,
     ],
     "Specifics" => [],
@@ -135,6 +136,8 @@ class FormNavigation
     Integrated::AddHealthcareMemberController,
     Integrated::AddTaxMemberController,
     Integrated::RemoveTaxMemberController,
+    Integrated::AddVehicleController,
+    Integrated::RemoveVehicleController,
   ].freeze
 
   class << self

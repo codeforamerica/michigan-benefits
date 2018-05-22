@@ -47,7 +47,11 @@ RSpec.describe AssistanceApplicationForm do
           self_employment_description: "cake maker",
           self_employment_income: 100,
           self_employment_expense: 50,
-          additional_incomes: [build(:additional_income, income_type: "unemployment", amount: 100)])
+          additional_incomes: [build(:additional_income, income_type: "unemployment", amount: 100)],
+          vehicles: [
+            build(:vehicle, vehicle_type: "car", year_make_model: "1990 Toyota Corolla"),
+            build(:vehicle, vehicle_type: "motorcycle", year_make_model: "1952 Vincent HRD"),
+          ])
       end
 
       let(:common_application) do
@@ -124,6 +128,13 @@ RSpec.describe AssistanceApplicationForm do
           anyone_a_veteran_names: "Octopus Cuttlefish",
           anyone_recently_pregnant: "Yes",
           anyone_recently_pregnant_names: "Octopus Cuttlefish",
+          anyone_assets_vehicles: "Yes",
+          assets_vehicles_car: "Yes",
+          assets_vehicles_motorcycle: "Yes",
+          first_member_assets_vehicles_name: "Octopus Cuttlefish",
+          first_member_assets_vehicles_year_make_model: "1990 Toyota Corolla",
+          second_member_assets_vehicles_name: "Octopus Cuttlefish",
+          second_member_assets_vehicles_year_make_model: "1952 Vincent HRD",
           anyone_medical_expenses: "Yes",
           medical_expenses_other: "Yes",
           first_member_medical_expenses_name: "Octopus Cuttlefish",
@@ -168,43 +179,30 @@ RSpec.describe AssistanceApplicationForm do
       end
     end
 
-    context "an application with between one and six members" do
-      let(:common_application) do
-        expense = build(:expense, expense_type: "childcare", amount: 100)
-        create(:common_application,
-          members: [
-            build(:household_member,
-              first_name: "Willy",
-              last_name: "Wells",
-              expenses: [expense]),
-            build(:household_member,
-              first_name: "Willy",
-              last_name: "Wiley",
-              expenses: [expense]),
-          ],
-          expenses: [expense])
-      end
-
-      let(:attributes) do
-        AssistanceApplicationForm.new(common_application).attributes
-      end
-
-      it "returns a hash with key information for multimember households" do
-        expect(attributes).to include(
-          first_member_dependent_care_name: "Willy Wells, Willy Wiley",
-        )
-      end
-    end
-
     context "an application with six members" do
       let(:childcare_expense) do
         create(:expense, expense_type: :childcare, amount: 100)
+      end
+
+      let(:vehicles) do
+        [
+          create(:vehicle,
+            vehicle_type: "car",
+            year_make_model: "1990 Toyota Corolla"),
+          create(:vehicle,
+            vehicle_type: "other",
+            year_make_model: "1933 Airship ZRS-4"),
+          create(:vehicle,
+            vehicle_type: "other",
+            year_make_model: "1800 Fulton Nautilus Submarine"),
+        ]
       end
 
       let(:common_application) do
         create(:common_application,
           previously_received_assistance: "yes",
           living_situation: "temporary_address",
+          expenses: [childcare_expense],
           members: [build(:household_member,
             first_name: "Willy",
             last_name: "Wells",
@@ -226,7 +224,9 @@ RSpec.describe AssistanceApplicationForm do
                       self_employed: "yes",
                       additional_incomes: [build(:additional_income,
                         income_type: "pension",
-                        amount: 50)]),
+                        amount: 50)],
+                      expenses: [childcare_expense],
+                      vehicles: [vehicles[0], vehicles[2]]),
                     build(:household_member,
                       first_name: "Willy",
                       last_name: "Wonka",
@@ -251,7 +251,8 @@ RSpec.describe AssistanceApplicationForm do
                         build(:additional_income,
                           income_type: "social_security",
                           amount: 200),
-                      ]),
+                      ],
+                      vehicles: [vehicles[0], vehicles[1]]),
                     build(:household_member),
                     build(:household_member),
                     build(:household_member,
@@ -274,6 +275,13 @@ RSpec.describe AssistanceApplicationForm do
         AssistanceApplicationForm.new(common_application).attributes
       end
 
+      it "returns a hash with key information for multimember households" do
+        expect(attributes).to include(
+          first_member_dependent_care_name: "Willy Wiley, Willy Whale",
+          first_member_assets_vehicles_name: "Willy Wiley, Willy Wonka",
+        )
+      end
+
       it "returns notes with different sections concatenated" do
         expect(attributes).to include(
           household_added_notes: "Yes",
@@ -294,6 +302,8 @@ RSpec.describe AssistanceApplicationForm do
             - Willy Whale
             Additional Members Affected by the Flint Water Crisis:
             - Willy Whale
+            Additional Assets:
+            - Other vehicle: 1800 Fulton Nautilus Submarine (Willy Wiley)
             Additional Jobs:
             - Willy Wonka, Oompa Co, Hourly, Paycheck received Twice a month, Rate: 20, 10 hours/week
             Additional Self-Employed Members:
