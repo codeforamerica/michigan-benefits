@@ -17,8 +17,9 @@ class AssistanceApplicationForm
     applicant_registration_attributes.
       merge(member_attributes).
       merge(medical_expenses_attributes).
-      merge(medical_expenses_details).
-      merge(additional_expenses_attributes).
+      merge(care_expenses_attributes).
+      merge(court_expenses_attributes).
+      merge(student_loan_interest_expense_attributes).
       merge(employed_attributes).
       merge(self_employed_attributes).
       merge(assets_attributes).
@@ -72,10 +73,9 @@ class AssistanceApplicationForm
       ),
       anyone_recently_pregnant_names: member_names(recently_pregnant_members),
       anyone_medical_expenses: yes_no_or_unfilled(
-        yes: benefit_application.expenses.medical.any? || benefit_application.members.any?(&:pregnancy_expenses_yes?),
-        no: benefit_application.expenses.medical.none? && benefit_application.members.none(&:pregnancy_expenses_yes?),
+        yes: benefit_application.expenses.medical.any?,
+        no: benefit_application.expenses.medical.none?,
       ),
-      medical_expenses_other: yes_if_true(benefit_application.members.any?(&:pregnancy_expenses_yes?)),
       anyone_income_change: yes_no_or_unfilled(
         yes: benefit_application.income_changed_yes?,
         no: benefit_application.income_changed_no?,
@@ -103,47 +103,25 @@ class AssistanceApplicationForm
   end
 
   def member_attributes
-    hash = {}
-    benefit_application.members.first(5).each_with_index do |member, i|
-      prefix = ordinal_member(i)
-      hash[:"#{prefix}_relation"] = member.relationship_label
-      hash[:"#{prefix}_legal_name"] = member.display_name
-      hash[:"#{prefix}_dob"] = mmddyyyy_date(member.birthday)
-      hash[:"#{prefix}_male"] = circle_if_true(member.sex_male?)
-      hash[:"#{prefix}_female"] = circle_if_true(member.sex_female?)
-      hash[:"#{prefix}_married_yes"] = circle_if_true(member.married_yes?)
-      hash[:"#{prefix}_married_no"] = circle_if_true(member.married_no?)
-      hash[:"#{prefix}_citizen_yes"] = circle_if_true(member.citizen_yes?)
-      hash[:"#{prefix}_citizen_no"] = circle_if_true(member.citizen_no?)
-      hash[:"#{prefix}_requesting_food"] = underline_if_true(member.requesting_food_yes?)
-      hash[:"#{prefix}_requesting_healthcare"] = underline_if_true(member.requesting_healthcare_yes?)
-    end
-    hash
-  end
-
-  def medical_expenses_attributes
     {}.tap do |hash|
-      if benefit_application.members.any?(&:pregnancy_expenses_yes?)
-        hash["medical_expenses_other_medical"] = "Yes"
-      end
-      benefit_application.expenses.medical.map(&:expense_type).each do |expense|
-        hash["medical_expenses_#{expense}".to_sym] = "Yes"
+      benefit_application.members.first(5).each_with_index do |member, i|
+        prefix = ordinal_member(i)
+        hash[:"#{prefix}_relation"] = member.relationship_label
+        hash[:"#{prefix}_legal_name"] = member.display_name
+        hash[:"#{prefix}_dob"] = mmddyyyy_date(member.birthday)
+        hash[:"#{prefix}_male"] = circle_if_true(member.sex_male?)
+        hash[:"#{prefix}_female"] = circle_if_true(member.sex_female?)
+        hash[:"#{prefix}_married_yes"] = circle_if_true(member.married_yes?)
+        hash[:"#{prefix}_married_no"] = circle_if_true(member.married_no?)
+        hash[:"#{prefix}_citizen_yes"] = circle_if_true(member.citizen_yes?)
+        hash[:"#{prefix}_citizen_no"] = circle_if_true(member.citizen_no?)
+        hash[:"#{prefix}_requesting_food"] = underline_if_true(member.requesting_food_yes?)
+        hash[:"#{prefix}_requesting_healthcare"] = underline_if_true(member.requesting_healthcare_yes?)
       end
     end
   end
 
-  def medical_expenses_details
-    hash = {}
-    members = benefit_application.members.select(&:pregnancy_expenses_yes?)
-    members.first(2).each_with_index do |member, i|
-      prefix = ordinal_member(i)
-      hash[:"#{prefix}_medical_expenses_name"] = member.display_name
-      hash[:"#{prefix}_medical_expenses_type"] = "Pregnancy-related"
-    end
-    hash
-  end
-
-  def additional_expenses_attributes
+  def care_expenses_attributes
     {}.tap do |hash|
       benefit_application.expenses.dependent_care.each_with_index do |expense, i|
         prefix = ordinal_member(i)
@@ -152,9 +130,51 @@ class AssistanceApplicationForm
         hash[:"#{prefix}_dependent_care_amount"] = expense.amount
         hash[:"#{prefix}_dependent_care_payment_frequency"] = "Monthly"
       end
+    end
+  end
 
-      benefit_application.expenses.court_ordered.map(&:expense_type).each do |expense|
-        hash["court_expenses_#{expense}".to_sym] = "Yes"
+  def medical_expenses_attributes
+    {}.tap do |hash|
+      medical_expenses = benefit_application.expenses.medical.map do |expense|
+        hash["medical_expenses_#{expense.expense_type}".to_sym] = "Yes"
+        expense
+      end
+
+      medical_expenses.first(2).each_with_index do |expense, i|
+        prefix = ordinal_member(i)
+        hash[:"#{prefix}_medical_expenses_name"] = member_names(expense.members)
+        hash[:"#{prefix}_medical_expenses_type"] = expense.display_name
+        hash[:"#{prefix}_medical_expenses_amount"] = expense.amount
+        hash[:"#{prefix}_medical_payment_frequency"] = "Monthly"
+      end
+    end
+  end
+
+  def court_expenses_attributes
+    {}.tap do |hash|
+      court_ordered_expenses = benefit_application.expenses.court_ordered.map do |expense|
+        hash["court_expenses_#{expense.expense_type}".to_sym] = "Yes"
+        expense
+      end
+
+      court_ordered_expenses.first(2).each_with_index do |expense, i|
+        prefix = ordinal_member(i)
+        hash[:"#{prefix}_court_expenses_name"] = member_names(expense.members)
+        hash[:"#{prefix}_court_expenses_amount"] = expense.amount
+        hash[:"#{prefix}_court_expenses_payment_frequency"] = "Monthly"
+      end
+    end
+  end
+
+  def student_loan_interest_expense_attributes
+    {}.tap do |hash|
+      benefit_application.expenses.student_loan_interest.each_with_index do |expense, i|
+        prefix = ordinal_member(i)
+        hash["dependent_care_#{expense.expense_type}".to_sym] = "Yes"
+        hash[:"#{prefix}_student_loans_deductions_name"] = member_names(expense.members)
+        hash[:"#{prefix}_student_loans_deductions_type"] = "Student loan interest"
+        hash[:"#{prefix}_student_loans_deductions_amount"] = expense.amount
+        hash[:"#{prefix}_student_loans_deductions_payment_frequency"] = "Monthly"
       end
     end
   end
@@ -257,7 +277,7 @@ class AssistanceApplicationForm
       notes: "",
     }
     add_additional_household_members
-    add_additional_medical_expenses
+    add_additional_expenses
     add_additional_members_healthcare_enrolled
     add_additional_members_flint_water
     add_additional_vehicle_assets
@@ -298,14 +318,23 @@ class AssistanceApplicationForm
     end
   end
 
-  def add_additional_medical_expenses
-    members = benefit_application.members.select(&:pregnancy_expenses_yes?)
-    if members.count > 2
+  def add_additional_expenses
+    medical_expenses = benefit_application.expenses.medical[2..-1] || []
+    court_ordered_expenses = benefit_application.expenses.court_ordered[2..-1] || []
+
+    additional_expenses = medical_expenses + court_ordered_expenses
+    if additional_expenses.any?
       @_additional_notes[:household_added_notes] = "Yes"
-      @_additional_notes[:notes] += "Additional Medical Expenses:\n"
-      @_additional_notes[:notes] += members[2..-1].map do |extra_member|
-        "- #{extra_member.display_name}, Pregnancy-related\n"
-      end.join
+      @_additional_notes[:notes] += "Additional Expenses:\n"
+      @_additional_notes[:notes] += additional_expenses.map do |expense|
+        [
+          "- #{expense.display_name}",
+          member_names(expense.members),
+          expense.amount.present? ? "$#{expense.amount}" : nil,
+          "Monthly",
+        ].compact.join(". ")
+      end.join("\n")
+      @_additional_notes[:notes] += "\n"
     end
   end
 

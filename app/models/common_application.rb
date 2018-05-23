@@ -61,7 +61,7 @@ class CommonApplication < ApplicationRecord
     class_name: "HouseholdMember",
     foreign_key: "common_application_id"
 
-  has_many :expenses
+  has_many :expenses, -> { order(created_at: :asc) }
 
   has_many :additional_incomes, through: :members
   has_many :vehicles, -> { distinct }, through: :members

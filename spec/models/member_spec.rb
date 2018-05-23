@@ -409,7 +409,7 @@ RSpec.describe Member do
       member.modify_employments
 
       expect(member.employments.count).to eq 3
-      expect(member.employments[0..1]).to eq existing_employments
+      expect(member.employments[0..1]).to match_array(existing_employments)
     end
 
     it "destroys records if number of jobs is less than employments count" do
@@ -428,7 +428,7 @@ RSpec.describe Member do
       member.modify_employments
       member.reload
       expect(Employment.count).to eq 2
-      expect(member.employments).to eq existing_employments[0..1]
+      expect(member.employments).to match_array(existing_employments[0..1])
     end
   end
 end

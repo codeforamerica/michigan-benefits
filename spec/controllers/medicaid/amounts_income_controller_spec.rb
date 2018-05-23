@@ -95,7 +95,7 @@ RSpec.describe Medicaid::AmountsIncomeController do
           get :edit
 
           expect(response).to render_template(:edit)
-          expect(assigns[:step].employments).to eq existing_employments
+          expect(assigns[:step].employments).to match_array(existing_employments)
         end
       end
     end

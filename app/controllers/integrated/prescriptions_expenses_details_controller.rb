@@ -1,10 +1,10 @@
 module Integrated
-  class DependentCareExpensesDetailsController < FormsController
+  class PrescriptionsExpensesDetailsController < FormsController
     include ExpensesDetails
     extend ExpensesDetails::ClassMethods
 
     def self.expense_type
-      :disability_care
+      :prescriptions
     end
   end
 end

@@ -2,15 +2,4 @@
 
 <% content_for :form_card_title, "Tell us about your dependent care expenses." %>
 
-<% content_for :form_card_body do %>
-    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
-      <%= f.mb_money_field :amount, "Monthly amount" %>
-      <%= f.mb_collection_check_boxes(
-            :member_ids,
-            current_application.members,
-            :id,
-            :display_name,
-            label_text: "Paid for by",
-            options: {include_hidden: false}) %>
-    <% end %>
-<% end %>
+<%= render "integrated/expense_details_form" %>
