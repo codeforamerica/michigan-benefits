@@ -1,6 +1,21 @@
 require "rails_helper"
 
 RSpec.describe Expense do
+  describe ".members" do
+    it "orders members by created_at" do
+      member1 = create(:household_member)
+      member2 = Timecop.freeze(1.hour.ago) do
+        create(:household_member)
+      end
+      expense = create(:expense, members: [member1, member2])
+
+      expense.reload
+
+      expect(expense.members.first).to eq(member2)
+      expect(expense.members.last).to eq(member1)
+    end
+  end
+
   describe "validations" do
     context "when expense type is a permitted type" do
       it "is valid" do

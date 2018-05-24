@@ -51,8 +51,13 @@ class FoodAssistanceSupplement
 
   def housing_expense_attributes
     {}.tap do |hash|
-      benefit_application.expenses.housing.map(&:expense_type).each do |expense|
-        hash["pays_housing_expenses_#{expense}".to_sym] = "Yes"
+      benefit_application.expenses.housing.first(2).each_with_index do |expense, i|
+        hash[:"pays_housing_expenses_#{expense.expense_type}"] = "Yes"
+        prefix = "#{ordinal_member(i)}_pays_housing_expenses"
+        hash[:"#{prefix}_name"] = member_names(expense.members)
+        hash[:"#{prefix}_expense_type"] = expense.display_name
+        hash[:"#{prefix}_amount"] = expense.amount
+        hash[:"#{prefix}_payment_frequency"] = "Monthly"
       end
     end
   end
@@ -60,7 +65,7 @@ class FoodAssistanceSupplement
   def utility_expense_attributes
     {}.tap do |hash|
       benefit_application.expenses.utilities.map(&:expense_type).each do |expense|
-        hash["pays_utilities_#{expense}".to_sym] = "Yes"
+        hash[:"pays_utilities_#{expense}"] = "Yes"
       end
     end
   end

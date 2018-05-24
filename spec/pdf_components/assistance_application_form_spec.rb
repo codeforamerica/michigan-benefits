@@ -197,6 +197,15 @@ RSpec.describe AssistanceApplicationForm do
       let(:transportation_expense) do
         create(:expense, expense_type: :transportation, amount: 100)
       end
+      let(:rent_expense) do
+        create(:expense, expense_type: :rent, amount: 600)
+      end
+      let(:homeowners_insurance_expense) do
+        create(:expense, expense_type: :homeowners_insurance, amount: 78)
+      end
+      let(:mobile_home_lot_expense) do
+        create(:expense, expense_type: :mobile_home_lot_rent, amount: 300)
+      end
 
       let(:vehicles) do
         [
@@ -216,7 +225,15 @@ RSpec.describe AssistanceApplicationForm do
         create(:common_application,
           previously_received_assistance: "yes",
           living_situation: "temporary_address",
-          expenses: [health_insurance_expense, copay_expense, transportation_expense, childcare_expense],
+          expenses: [
+            health_insurance_expense,
+            copay_expense,
+            transportation_expense,
+            childcare_expense,
+            rent_expense,
+            homeowners_insurance_expense,
+            mobile_home_lot_expense,
+          ],
           members: [build(:household_member,
             first_name: "Willy",
             last_name: "Wells",
@@ -280,7 +297,7 @@ RSpec.describe AssistanceApplicationForm do
                       citizen: "yes",
                       self_employed: "yes",
                       flint_water: "yes",
-                      expenses: [transportation_expense])])
+                      expenses: [transportation_expense, mobile_home_lot_expense])])
       end
 
       let(:attributes) do
@@ -310,6 +327,7 @@ RSpec.describe AssistanceApplicationForm do
             - Relation: Child, Legal name: Willy Whale, Sex: Male, DOB: 10/18/1995, Married: Yes, Citizen: Yes, Applying for: Food, Healthcare
             Additional Expenses:
             - Transportation for medical care. Willy Whale. $100. Monthly
+            - Mobile home lot rent. Willy Whale. $300. Monthly
             Additional Members Currently Enrolled in Health Coverage:
             - Willy Whale
             Additional Members Affected by the Flint Water Crisis:

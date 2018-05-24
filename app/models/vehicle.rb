@@ -8,6 +8,7 @@ class Vehicle < ApplicationRecord
   }.freeze
 
   has_and_belongs_to_many :members,
+    -> { order(created_at: :asc) },
     class_name: "HouseholdMember",
     foreign_key: "vehicle_id"
 

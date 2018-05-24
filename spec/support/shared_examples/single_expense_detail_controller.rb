@@ -90,6 +90,23 @@ RSpec.shared_examples_for "single expense detail controller" do |expense_type, o
         expect(expense.amount).to eq(100)
         expect(expense.members).to match_array([member1, member2])
       end
+
+      context "with existing member relationships" do
+        it "overwrites the member relationships for the given expense" do
+          member3 = build(:household_member)
+          current_app = create(:common_application,
+            expenses: [build(:expense, expense_type: expense_type, members: [member2, member3])],
+            members: [member1, member2, member3])
+
+          session[:current_application_id] = current_app.id
+
+          put :update, params: { form: valid_params }
+
+          expense = current_app.expenses.find_by(expense_type: expense_type)
+
+          expect(expense.members).to match_array([member1, member2])
+        end
+      end
     end
 
     context "with invalid params" do

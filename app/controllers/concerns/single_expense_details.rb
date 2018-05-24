@@ -8,6 +8,10 @@ module SingleExpenseDetails
     end
   end
 
+  included do
+    helper_method :expense
+  end
+
   private
 
   delegate :expense_type, to: :class

@@ -321,8 +321,9 @@ class AssistanceApplicationForm
   def add_additional_expenses
     medical_expenses = benefit_application.expenses.medical[2..-1] || []
     court_ordered_expenses = benefit_application.expenses.court_ordered[2..-1] || []
+    housing_expenses = benefit_application.expenses.housing[2..-1] || []
 
-    additional_expenses = medical_expenses + court_ordered_expenses
+    additional_expenses = medical_expenses + court_ordered_expenses + housing_expenses
     if additional_expenses.any?
       @_additional_notes[:household_added_notes] = "Yes"
       @_additional_notes[:notes] += "Additional Expenses:\n"

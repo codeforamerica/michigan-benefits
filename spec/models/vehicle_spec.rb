@@ -1,6 +1,21 @@
 require "rails_helper"
 
 RSpec.describe Vehicle do
+  describe ".members" do
+    it "orders members by created_at" do
+      member1 = create(:household_member)
+      member2 = Timecop.freeze(1.hour.ago) do
+        create(:household_member)
+      end
+      vehicle = create(:vehicle, members: [member1, member2])
+
+      vehicle.reload
+
+      expect(vehicle.members.first).to eq(member2)
+      expect(vehicle.members.last).to eq(member1)
+    end
+  end
+
   describe "validations" do
     context "when vehicle type is a permitted type" do
       it "is valid" do

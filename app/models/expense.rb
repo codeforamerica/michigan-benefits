@@ -6,7 +6,7 @@ class Expense < ApplicationRecord
     property_tax: "Property taxes",
     homeowners_insurance: "Homeowners or renters insurance",
     land_contract: "Land contract",
-    other_housing: "Other",
+    other_housing: "Other housing expenses",
   }.freeze
 
   MEDICAL_EXPENSES = {
