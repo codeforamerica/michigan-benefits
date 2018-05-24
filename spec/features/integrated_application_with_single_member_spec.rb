@@ -360,7 +360,7 @@ RSpec.feature "Integrated application" do
         "Tell us about your vehicles",
       )
       expect(page).to have_content(
-      "Truck: 1989 Toyota pickup",
+        "Truck: 1989 Toyota pickup",
       )
 
       proceed_with "Continue"

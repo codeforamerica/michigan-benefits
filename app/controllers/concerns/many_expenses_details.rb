@@ -26,7 +26,7 @@ module ManyExpensesDetails
       expense_params = form_params.dig(:expenses, expense.to_param)
       if expense_params.present?
         expense.assign_attributes(expense_params)
-        expense.members << current_application.primary_member
+        expense.members = [current_application.primary_member]
       end
     end
   end

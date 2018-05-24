@@ -1,0 +1,5 @@
+<% content_for :header_title, "Household Expenses" %>
+
+<% content_for :form_card_title, "Tell us about any #{expense.display_name.downcase} expenses." %>
+
+<%= render "integrated/expense_details_form" %>

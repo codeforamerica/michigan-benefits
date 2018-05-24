@@ -99,13 +99,15 @@ RSpec.shared_examples_for "many expenses details controller" do |expense_type, o
       end
 
       it "assigns the expense to the primary member" do
+        relevant_expense.members << application.primary_member
+
         session[:current_application_id] = application.id
 
         put :update, params: { form: valid_params }
 
         relevant_expense.reload
 
-        expect(relevant_expense.members).to include(application.primary_member)
+        expect(relevant_expense.members).to match_array([application.primary_member])
       end
     end
 
