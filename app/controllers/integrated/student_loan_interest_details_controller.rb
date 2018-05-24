@@ -1,7 +1,7 @@
 module Integrated
   class StudentLoanInterestDetailsController < FormsController
-    include ExpensesDetails
-    extend ExpensesDetails::ClassMethods
+    include SingleExpenseDetails
+    extend SingleExpenseDetails::ClassMethods
 
     def self.expense_type
       :student_loan_interest

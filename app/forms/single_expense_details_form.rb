@@ -1,4 +1,4 @@
-class ExpensesDetailsForm < Form
+class SingleExpenseDetailsForm < Form
   set_attributes_for :expense,
                      :amount, member_ids: []
 

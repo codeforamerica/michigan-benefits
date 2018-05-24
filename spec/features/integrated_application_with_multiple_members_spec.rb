@@ -824,9 +824,14 @@ RSpec.feature "Integrated application" do
     on_page "Assets" do
       expect(page).to have_content(
         "Tell us about your household's vehicles",
+      )
+      expect(page).to have_content(
         "Motorcycle: 1979 Kawasaki 750",
+      )
+      expect(page).to have_content(
         "Truck: 1989 Toyota pickup",
       )
+
 
       proceed_with "Continue"
     end

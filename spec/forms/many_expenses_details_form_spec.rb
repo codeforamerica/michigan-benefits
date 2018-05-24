@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe YourExpensesDetailsForm do
+RSpec.describe ManyExpensesDetailsForm do
   describe "validations" do
     context "when amount is a string" do
       it "is not valid" do
-        form = YourExpensesDetailsForm.new(
+        form = ManyExpensesDetailsForm.new(
           expenses: [
             build(:expense, amount: "a gazillion"),
             build(:expense, amount: 100),
@@ -19,7 +19,7 @@ RSpec.describe YourExpensesDetailsForm do
 
     context "when no amount is provided" do
       it "is valid" do
-        form = YourExpensesDetailsForm.new(
+        form = ManyExpensesDetailsForm.new(
           expenses: [
             build(:expense, amount: nil),
             build(:expense, amount: nil),
@@ -32,7 +32,7 @@ RSpec.describe YourExpensesDetailsForm do
 
     context "when all details are present" do
       it "is valid" do
-        form = YourExpensesDetailsForm.new(
+        form = ManyExpensesDetailsForm.new(
           expenses: [
             build(:expense, amount: 100),
             build(:expense, amount: 100),
