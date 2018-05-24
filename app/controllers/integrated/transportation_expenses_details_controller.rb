@@ -1,7 +1,7 @@
 module Integrated
   class TransportationExpensesDetailsController < FormsController
-    include ExpensesDetails
-    extend ExpensesDetails::ClassMethods
+    include SingleExpenseDetails
+    extend SingleExpenseDetails::ClassMethods
 
     def self.expense_type
       :transportation

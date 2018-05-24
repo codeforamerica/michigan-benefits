@@ -65,6 +65,7 @@ class FormNavigation
     ],
     "Household Expenses" => [
       Integrated::HousingExpensesController,
+      Integrated::YourHousingExpensesDetailsController,
       Integrated::UtilityExpensesController,
       Integrated::DependentCareExpensesController,
       Integrated::DependentCareExpensesDetailsController,

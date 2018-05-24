@@ -1,10 +1,10 @@
 module Integrated
-  class YourExpensesDetailsController < FormsController
+  class YourHousingExpensesDetailsController < FormsController
     include ManyExpensesDetails
     extend ManyExpensesDetails::ClassMethods
 
     def self.expenses_scope
-      :court_ordered_or_other
+      :housing
     end
   end
 end

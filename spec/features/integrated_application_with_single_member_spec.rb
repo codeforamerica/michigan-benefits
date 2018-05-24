@@ -133,6 +133,16 @@ RSpec.feature "Integrated application" do
     on_page "Household Expenses" do
       expect(page).to have_content("What kind of housing expenses do you have?")
 
+      check "Rent"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household Expenses" do
+      expect(page).to have_content("Tell us about your housing expenses.")
+
+      fill_in "Rent", with: "400"
+
       proceed_with "Continue"
     end
 
@@ -348,7 +358,9 @@ RSpec.feature "Integrated application" do
     on_page "Assets" do
       expect(page).to have_content(
         "Tell us about your vehicles",
-        "Truck: 1989 Toyota pickup",
+      )
+      expect(page).to have_content(
+      "Truck: 1989 Toyota pickup",
       )
 
       proceed_with "Continue"

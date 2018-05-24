@@ -1,4 +1,4 @@
-module ExpensesDetails
+module SingleExpenseDetails
   extend ActiveSupport::Concern
 
   module ClassMethods
@@ -13,7 +13,7 @@ module ExpensesDetails
   delegate :expense_type, to: :class
 
   def form_class
-    ExpensesDetailsForm
+    SingleExpenseDetailsForm
   end
 
   def existing_attributes

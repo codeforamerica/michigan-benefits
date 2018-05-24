@@ -1,7 +1,7 @@
 module Integrated
   class PrescriptionsExpensesDetailsController < FormsController
-    include ExpensesDetails
-    extend ExpensesDetails::ClassMethods
+    include SingleExpenseDetails
+    extend SingleExpenseDetails::ClassMethods
 
     def self.expense_type
       :prescriptions

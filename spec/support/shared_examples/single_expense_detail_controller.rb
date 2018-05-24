@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.shared_examples_for "expense detail controller" do |expense_type, other_expense_type|
+RSpec.shared_examples_for "single expense detail controller" do |expense_type, other_expense_type|
   describe "#skip?" do
     context "with a single member household" do
       it "returns true" do

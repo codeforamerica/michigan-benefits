@@ -1,7 +1,5 @@
-class YourExpensesDetailsForm < Form
-  set_attributes_for :application, :expenses
-
-  set_attributes_for :expense, :amount
+class ManyExpensesDetailsForm < Form
+  attr_accessor :expenses
 
   validate :expenses_valid?
 
