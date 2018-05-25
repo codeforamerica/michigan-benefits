@@ -1,9 +1,70 @@
 <% content_for :header_title, "Application Submitted" %>
 
-<% content_for :form_card_title, "Congratulations" %>
+<% content_for :form_card_header do %>
+    <div class="illustration illustration--success"></div>
+    <div class="pre-title">Congratulations</div>
+    <div class="form-card__title">
+      Your application has been successfully submitted to MDHHS.
+    </div>
+    <div class="text--caps text--centered text--little-help nudge--med">
+      You applied for:
+    </div>
+    <div class="program-selector--container">
+      <label class="program-selector program-selector__unbordered">
+        <div class="illustration illustration--icn_food"></div>
+        <h4 class="program-selector__title">Food Assistance</h4>
+      </label>
+      <label class="program-selector program-selector__unbordered">
+        <div class="illustration illustration--icn_health"></div>
+        <h4 class="program-selector__title">Medicaid</h4>
+      </label>
+    </div>
+<% end %>
 
 <% content_for :form_card_body do %>
-  <p>You have submitted an application for Food Assistance and Medicaid.</p>
+    <h3 class="with-padding-med">What to expect next:</h3>
+
+    <div class="media-box with-padding-small">
+      <div class="media-box__media">
+        <div class="emoji emoji--med emoji--clipboard"></div>
+      </div>
+      <div class="media-box__content">
+        <p>
+          <b>The interview will take about 30 minutes.</b> A worker will ask you
+          about your household, income, expenses, and other eligibility
+          requirements.
+        </p>
+      </div>
+    </div>
+
+    <div class="media-box with-padding-small">
+      <div class="media-box__media">
+        <div class="emoji emoji--med emoji--page-facing-up"></div>
+      </div>
+      <div class="media-box__content">
+        <p>
+          <b>Your county will provide you with a list of paperwork</b> you may need to
+          submit to verify your eligibility. Commonly requested items are
+          identification, paystubs, and health insurance cards if you have
+          another plan currently.
+        </p>
+      </div>
+    </div>
+
+    <div class="media-box with-padding-med">
+      <div class="media-box__media">
+        <div class="emoji emoji--med emoji--modern-phone"></div>
+      </div>
+      <div class="media-box__content">
+        <div class="media-box__content">
+          <p>
+            <b>If you have questions about your application</b>
+            contact the <%= full_office_name(current_application)  %>
+            office at <%= number_to_phone(current_application.receiving_office_phone_number) %>.
+          </p>
+        </div>
+      </div>
+    </div>
 <% end %>
 
 <% content_for :skip_footer, true %>

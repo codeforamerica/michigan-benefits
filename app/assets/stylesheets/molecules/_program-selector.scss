@@ -42,3 +42,9 @@
     padding: 1em 0 0 0;
   }
 }
+
+.program-selector--container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
