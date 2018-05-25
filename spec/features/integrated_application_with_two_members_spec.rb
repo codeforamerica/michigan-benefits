@@ -206,13 +206,13 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household Expenses" do
-      expect(page).to have_content("Does anyone pay for dependent care?")
+      expect(page).to have_content("Does anyone pay for child care?")
 
       proceed_with "No"
     end
 
     on_page "Household Expenses" do
-      expect(page).to have_content("Does anyone pay for child care?")
+      expect(page).to have_content("Does anyone pay for dependent care?")
 
       proceed_with "No"
     end
