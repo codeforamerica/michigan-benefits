@@ -90,10 +90,6 @@ class CommonApplication < ApplicationRecord
 
   def office_location; end
 
-  def documents
-    []
-  end
-
   def primary_member
     members.first
   end

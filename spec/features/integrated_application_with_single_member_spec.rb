@@ -376,7 +376,7 @@ RSpec.feature "Integrated application" do
 
     on_page "Finishing Up" do
       expect(page).to have_content(
-        "Would you like to designate someone as your authorized representative?",
+        "Is there anyone you would like to make your official authorized representative?",
       )
 
       proceed_with "Yes"
@@ -401,6 +401,14 @@ RSpec.feature "Integrated application" do
       fill_in "Social Security Number", with: "123456789"
 
       proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content(
+        "Review your paperwork",
+      )
+
+      proceed_with "I'll do this later"
     end
 
     on_page "Finishing Up" do

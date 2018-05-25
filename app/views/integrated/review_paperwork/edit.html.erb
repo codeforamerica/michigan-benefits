@@ -1,0 +1,49 @@
+<% content_for :header_title, "Finishing Up" %>
+
+<% content_for :form_card_title, "Review your paperwork" %>
+<% content_for :form_card_help, "Ask a lobby navigator for help if you need it." %>
+
+<% content_for :form_card_body do %>
+  <p>
+    Do you have any paperwork with you? You can upload it now.
+  </p>
+  <p class="notice">
+    Your caseworker may ask for other paperwork after they review your application.
+  </p>
+<% end %>
+
+<% content_for :form_card_footer do %>
+  <div class="form-card__buttons">
+    <%= form_for @form,
+      as: :form,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put,
+      namespace: "no" do |f| %>
+
+        <%= f.hidden_field :upload_paperwork, value: false %>
+
+        <button
+        type="submit"
+        class="button button--full-mobile button--cta">
+          Upload paperwork now
+        </button>
+    <% end %>
+
+    <%= form_for @form,
+      as: :form,
+      builder: MbFormBuilder,
+      url: current_path,
+      method: :put,
+      namespace: "yes" do |f| %>
+
+        <%= f.hidden_field :upload_paperwork, value: true %>
+
+        <button
+        type="submit"
+        class="button button--full-mobile">
+          I'll do this later <span class="icon-arrow_forward"></span>
+        </button>
+    <% end %>
+  </div>
+<% end %>

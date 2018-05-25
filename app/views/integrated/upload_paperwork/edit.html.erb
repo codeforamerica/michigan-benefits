@@ -1,0 +1,6 @@
+<% content_for :header_title, "Finishing Up" %>
+
+<% content_for :form_card do %>
+  <%= render partial: "shared/paperwork_upload_form",
+    locals: { form_object: @form, object_name: :form } %>
+<% end %>

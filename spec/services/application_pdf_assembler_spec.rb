@@ -1,4 +1,5 @@
 require "spec_helper"
+require "rspec/rails"
 require_relative "../../app/services/application_pdf_assembler"
 require_relative "../../app/services/pdf_concatenator"
 require_relative "../../app/pdf_components/coversheet"
@@ -9,12 +10,12 @@ require_relative "../../app/models/verification_document"
 
 RSpec.describe ApplicationPdfAssembler do
   context "basic application" do
-    context "with verification documents" do
-      it "returns a PDF that includes the assistance application form and verification documents" do
+    context "with verification paperwork" do
+      it "returns a PDF that includes the assistance application form and verification paperwork" do
         fake_application = instance_double(CommonApplication,
           applying_for_food_assistance?: false,
           applying_for_healthcare?: false,
-          documents: ["example.com/images/test1.jpg", "example.com/images/test2.png"])
+          paperwork: ["example.com/images/test1.jpg", "example.com/images/test2.png"])
 
         fake_coversheet = instance_double(Coversheet)
         expect(Coversheet).to receive(:new).and_return(fake_coversheet)
@@ -56,7 +57,7 @@ RSpec.describe ApplicationPdfAssembler do
       fake_application = instance_double(CommonApplication,
         applying_for_food_assistance?: true,
         applying_for_healthcare?: false,
-        documents: [])
+        paperwork: [])
 
       fake_coversheet = instance_double(Coversheet)
       expect(Coversheet).to receive(:new).and_return(fake_coversheet)
@@ -85,7 +86,7 @@ RSpec.describe ApplicationPdfAssembler do
       fake_application = instance_double(CommonApplication,
         applying_for_food_assistance?: false,
         applying_for_healthcare?: true,
-        documents: [])
+        paperwork: [])
 
       fake_coversheet = instance_double(Coversheet)
       expect(Coversheet).to receive(:new).and_return(fake_coversheet)

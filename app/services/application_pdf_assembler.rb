@@ -27,7 +27,7 @@ class ApplicationPdfAssembler
   end
 
   def verification_documents
-    benefit_application.documents.map do |document_url|
+    benefit_application.paperwork.map do |document_url|
       VerificationDocument.new(url: document_url, benefit_application: benefit_application)
     end
   end

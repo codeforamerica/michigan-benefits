@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.feature "Medicaid app" do
+  include PaperworkHelper
+
   scenario "with maximum info", :js do
     visit root_path
 
@@ -292,20 +294,5 @@ RSpec.feature "Medicaid app" do
         "Your application has been successfully submitted",
       )
     end
-  end
-
-  def upload_paperwork
-    add_paperwork_photo "https://example.com/images/drivers_license.jpg"
-    add_paperwork_photo "https://example.com/images/proof_of_income.jpg"
-  end
-
-  def add_paperwork_photo(url)
-    input = %(<input type="hidden" name="step[paperwork][]" value="#{url}">)
-    page.execute_script(
-      <<~JAVASCRIPT
-        document.querySelector('[data-uploadables-form]').
-          insertAdjacentHTML('beforeend', '#{input}')
-    JAVASCRIPT
-    )
   end
 end
