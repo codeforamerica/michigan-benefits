@@ -133,6 +133,7 @@ class FormNavigation
     "Savings and Assets" => [
       Integrated::MoneyInAccountsController,
       Integrated::AmountInAccountsController,
+      Integrated::AccountsOverviewController,
       Integrated::VehiclesController,
       Integrated::VehiclesOverviewController,
       Integrated::PropertyController,
@@ -159,6 +160,8 @@ class FormNavigation
     Integrated::RemoveTaxMemberController,
     Integrated::AddVehicleController,
     Integrated::RemoveVehicleController,
+    Integrated::AddAccountController,
+    Integrated::RemoveAccountController,
   ].freeze
 
   class << self

@@ -1,0 +1,25 @@
+<% content_for :header_title, "Assets" %>
+
+<% content_for :form_card_title, "Add an account." %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <% if members.count > 1 %>
+        <%= f.mb_collection_check_boxes :member_ids,
+              members,
+              :id,
+              :display_name,
+              label_text: "Who does the account belong to?",
+              options: {include_hidden: false} %>
+      <% else %>
+        <%= f.hidden_field :member_ids, multiple: true, value: current_application.primary_member.id %>
+      <% end %>
+
+      <%= f.mb_select(:account_type,
+                      "What type of account is this?",
+                      Account.all_accounts.map { |k, v| [v, k] },
+                      { layout: "inline", include_blank: "Choose one" }) %>
+
+      <%= f.mb_input_field :institution, "What's the name of the bank or institution this account is at?" %>
+    <% end %>
+<% end %>

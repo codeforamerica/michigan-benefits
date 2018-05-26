@@ -15,6 +15,20 @@ ActiveRecord::Schema.define(version: 20180525195056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accounts", force: :cascade do |t|
+    t.string "account_type", null: false
+    t.datetime "created_at", null: false
+    t.string "institution"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "accounts_household_members", id: false, force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "household_member_id"
+    t.index ["account_id"], name: "index_accounts_household_members_on_account_id"
+    t.index ["household_member_id"], name: "index_accounts_household_members_on_household_member_id"
+  end
+
   create_table "additional_incomes", force: :cascade do |t|
     t.integer "amount"
     t.datetime "created_at", null: false

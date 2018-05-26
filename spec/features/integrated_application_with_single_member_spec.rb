@@ -325,7 +325,45 @@ RSpec.feature "Integrated application" do
         "Do you have any money in accounts?",
       )
 
-      proceed_with "No"
+      proceed_with "Yes"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Is there more than $100 in all of those accounts?",
+      )
+
+      proceed_with "Yes"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Tell us about your accounts.",
+      )
+
+      proceed_with "Add an account"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Add an account.",
+      )
+
+      fill_in "What's the name of the bank or institution this account is at?", with: "Test Credit Union"
+      select "Checking", from: "What type of account is this?"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Tell us about your accounts.",
+      )
+      expect(page).to have_content(
+        "Checking: Test Credit Union",
+      )
+
+      proceed_with "Continue"
     end
 
     on_page "Assets" do

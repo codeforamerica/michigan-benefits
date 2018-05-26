@@ -1,0 +1,44 @@
+<% content_for :header_title, "Assets" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      <%= t(".title", count: current_application.members.count) %>
+    </h1>
+    <p class="text--centered text--help">
+      This includes checkings/savings accounts, 401ks, trusts, stocks, etc.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <div class="slab slab--not-padded">
+    <div class="card card--narrow">
+      <% current_application.accounts.each do |account| %>
+        <div class="line-item">
+          <i class="line-item__icon button__icon--left icon-check icon-check--color grid__item width-one-twelfth" aria-hidden="true"></i>
+          <div id="item-label-<%= account.id %>" class="line-item__label">
+            <div><%= account.display_name %>: <%= account.institution %></div>
+            <div>
+              <em>
+                <%= account.members.map(&:display_name).join(", ") %>
+              </em>
+            </div>
+            <span class="line-item__removal-form">
+              (<%= link_to "remove",
+                remove_account_sections_path(form: { account_id: account.id }),
+                method: :put,
+                class: "remove",
+                "aria-labelledby": "item-label-#{account.id}" %>)
+            </span>
+          </div>
+        </div>
+      <% end %>
+
+      <%= link_to(
+            section_path(Integrated::AddAccountController),
+            class: 'button button-full-width button-bold') do %>
+        <i class="button__icon--left icon-add"></i>
+        Add an account
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+.line-item {
+  margin-bottom: 1.5em;
+  > * {
+    display: inline-block;
+    vertical-align: top;
+  }
+  &__icon {
+    width: 6%;
+    line-height: 1.5em;
+    margin: 0;
+  }
+  &__label {
+    max-width: 90%;
+  }
+}

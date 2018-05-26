@@ -797,6 +797,38 @@ RSpec.feature "Integrated application" do
 
     on_page "Assets" do
       expect(page).to have_content(
+        "Tell us about the accounts people in your household have.",
+      )
+
+      proceed_with "Add an account"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Add an account.",
+      )
+
+      check "Jessie Tester"
+      check "Jonny Tester"
+      fill_in "What's the name of the bank or institution this account is at?", with: "Test Credit Union"
+      select "Checking", from: "What type of account is this?"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
+        "Tell us about the accounts people in your household have.",
+      )
+
+      expect(page).to have_content("Checking: Test Credit Union")
+      expect(page).to have_content("Jessie Tester, Jonny Tester")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Assets" do
+      expect(page).to have_content(
         "Does anyone own vehicles?",
       )
 
@@ -832,15 +864,9 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Assets" do
-      expect(page).to have_content(
-        "Tell us about your household's vehicles",
-      )
-      expect(page).to have_content(
-        "Motorcycle: 1979 Kawasaki 750",
-      )
-      expect(page).to have_content(
-        "Truck: 1989 Toyota pickup",
-      )
+      expect(page).to have_content("Tell us about your household's vehicles")
+      expect(page).to have_content("Motorcycle: 1979 Kawasaki 750")
+      expect(page).to have_content("Truck: 1989 Toyota pickup")
 
       proceed_with "Continue"
     end

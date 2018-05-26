@@ -260,6 +260,11 @@ en:
         title:
           one: Do you have any money in accounts?
           other: Does anyone have money in accounts?
+    accounts_overview:
+      edit:
+        title:
+          one: Tell us about your accounts.
+          other: Tell us about the accounts people in your household have.
     vehicles_overview:
       edit:
         title:
