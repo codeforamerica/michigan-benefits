@@ -48,6 +48,10 @@ RSpec.describe AssistanceApplicationForm do
           self_employment_income: 100,
           self_employment_expense: 50,
           additional_incomes: [build(:additional_income, income_type: "unemployment", amount: 100)],
+          accounts: [
+            build(:account, account_type: "checking", institution: "Test Credit Union"),
+            build(:account, account_type: "payroll_benefits", institution: "Whalemart"),
+          ],
           vehicles: [
             build(:vehicle, vehicle_type: "car", year_make_model: "1990 Toyota Corolla"),
             build(:vehicle, vehicle_type: "motorcycle", year_make_model: "1952 Vincent HRD"),
@@ -128,6 +132,16 @@ RSpec.describe AssistanceApplicationForm do
           anyone_a_veteran_names: "Octopus Cuttlefish",
           anyone_recently_pregnant: "Yes",
           anyone_recently_pregnant_names: "Octopus Cuttlefish",
+          anyone_assets_accounts: "Yes",
+          assets_accounts_checking: "Yes",
+          assets_accounts_other: "Yes",
+          assets_accounts_other_payroll_benefits: Integrated::PdfAttributes::UNDERLINED,
+          first_member_assets_accounts_name: "Octopus Cuttlefish",
+          first_member_assets_accounts_account_type: "Checking",
+          first_member_assets_accounts_institution: "Test Credit Union",
+          second_member_assets_accounts_name: "Octopus Cuttlefish",
+          second_member_assets_accounts_account_type: "Payroll/Benefits card",
+          second_member_assets_accounts_institution: "Whalemart",
           anyone_assets_vehicles: "Yes",
           assets_vehicles_car: "Yes",
           assets_vehicles_motorcycle: "Yes",
@@ -221,6 +235,15 @@ RSpec.describe AssistanceApplicationForm do
         ]
       end
 
+      let(:accounts) do
+        [
+          create(:account, account_type: "checking", institution: "Bank of Hank"),
+          create(:account, account_type: "savings", institution: "Bank of Hank"),
+          create(:account, account_type: "checking", institution: "Bank of Hank"),
+          create(:account, account_type: "savings", institution: "Bank of Hank"),
+        ]
+      end
+
       let(:common_application) do
         create(:common_application,
           previously_received_assistance: "yes",
@@ -255,6 +278,7 @@ RSpec.describe AssistanceApplicationForm do
                       additional_incomes: [build(:additional_income,
                         income_type: "pension",
                         amount: 50)],
+                      accounts: [accounts[0], accounts[1]],
                       vehicles: [vehicles[0], vehicles[2]]),
                     build(:household_member,
                       first_name: "Willy",
@@ -281,6 +305,7 @@ RSpec.describe AssistanceApplicationForm do
                           income_type: "social_security",
                           amount: 200),
                       ],
+                      accounts: [accounts[0], accounts[2]],
                       vehicles: [vehicles[0], vehicles[1]]),
                     build(:household_member),
                     build(:household_member),
@@ -297,6 +322,7 @@ RSpec.describe AssistanceApplicationForm do
                       citizen: "yes",
                       self_employed: "yes",
                       flint_water: "yes",
+                      accounts: [accounts[2], accounts[3]],
                       expenses: [transportation_expense, mobile_home_lot_expense])])
       end
 
@@ -332,8 +358,10 @@ RSpec.describe AssistanceApplicationForm do
             - Willy Whale
             Additional Members Affected by the Flint Water Crisis:
             - Willy Whale
-            Additional Assets:
+            Additional Vehicles:
             - Other vehicle: 1800 Fulton Nautilus Submarine (Willy Wiley)
+            Additional Accounts:
+            - Savings: Bank of Hank (Willy Whale)
             Additional Jobs:
             - Willy Wonka, Oompa Co, Hourly, Paycheck received Twice a month, Rate: 20, 10 hours/week
             Additional Self-Employed Members:

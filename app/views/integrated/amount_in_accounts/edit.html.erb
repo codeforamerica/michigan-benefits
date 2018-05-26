@@ -5,8 +5,8 @@
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
         <%= f.mb_yes_no_buttons :less_than_threshold_in_accounts,
-          yes_value: "yes",
-          no_value: "no"
+          yes_value: "no",
+          no_value: "yes"
         %>
     <% end %>
 <% end %>

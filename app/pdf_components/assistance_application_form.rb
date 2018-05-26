@@ -23,6 +23,7 @@ class AssistanceApplicationForm
       merge(employed_attributes).
       merge(self_employed_attributes).
       merge(assets_attributes).
+      merge(account_assets_attributes).
       merge(additional_income_attributes).
       merge(additional_notes_attributes)
   end
@@ -252,6 +253,29 @@ class AssistanceApplicationForm
     end
   end
 
+  def account_assets_attributes
+    {}.tap do |hash|
+      accounts = benefit_application.accounts
+      hash[:anyone_assets_accounts] = yes_no_or_unfilled(
+        yes: accounts.any?,
+        no: accounts.none?,
+      )
+      accounts.cash.each do |cash_account|
+        hash[:"assets_accounts_#{cash_account.account_type}"] = "Yes"
+      end
+      hash[:assets_accounts_other] = "Yes" if accounts.other.any?
+      accounts.other.each do |other_account|
+        hash[:"assets_accounts_other_#{other_account.account_type}"] = UNDERLINED
+      end
+      accounts.first(3).each_with_index do |account, i|
+        prefix = "#{ordinal_member(i)}_assets_accounts"
+        hash[:"#{prefix}_name"] = member_names(account.members)
+        hash[:"#{prefix}_account_type"] = account.display_name
+        hash[:"#{prefix}_institution"] = account.institution
+      end
+    end
+  end
+
   def additional_income_attributes
     hash = {
       anyone_additional_income: yes_no_or_unfilled(
@@ -281,6 +305,7 @@ class AssistanceApplicationForm
     add_additional_members_healthcare_enrolled
     add_additional_members_flint_water
     add_additional_vehicle_assets
+    add_additional_account_assets
     add_additional_members_employed
     add_additional_members_self_employed
     add_additional_members_additional_income
@@ -311,9 +336,19 @@ class AssistanceApplicationForm
   def add_additional_vehicle_assets
     if benefit_application.vehicles.count > 2
       @_additional_notes[:household_added_notes] = "Yes"
-      @_additional_notes[:notes] += "Additional Assets:\n"
+      @_additional_notes[:notes] += "Additional Vehicles:\n"
       @_additional_notes[:notes] += benefit_application.vehicles[2..-1].map do |extra_vehicle|
         "- #{extra_vehicle.display_name_and_make} (#{extra_vehicle.member_names})\n"
+      end.join
+    end
+  end
+
+  def add_additional_account_assets
+    if benefit_application.accounts.count > 3
+      @_additional_notes[:household_added_notes] = "Yes"
+      @_additional_notes[:notes] += "Additional Accounts:\n"
+      @_additional_notes[:notes] += benefit_application.accounts[3..-1].map do |account|
+        "- #{account.display_name}: #{account.institution} (#{member_names(account.members)})\n"
       end.join
     end
   end
