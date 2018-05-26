@@ -14,6 +14,8 @@ module Integrated
       export.transaction do
         export.save!
         case export.destination
+        when :client_email
+          Integrated::ClientEmailApplicationJob.perform_later(export: export)
         when :office_email
           Integrated::OfficeEmailApplicationJob.perform_later(export: export)
         else

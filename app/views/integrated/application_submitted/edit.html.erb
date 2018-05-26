@@ -59,12 +59,35 @@
         <div class="media-box__content">
           <p>
             <b>If you have questions about your application</b>
-            contact the <%= full_office_name(current_application)  %>
+            contact the <%= full_office_name(current_application) %>
             office at <%= number_to_phone(current_application.receiving_office_phone_number) %>.
           </p>
         </div>
       </div>
     </div>
+
+    <section class="slab">
+      <%= form_for @form,
+        as: :form,
+        builder: MbFormBuilder,
+        url: current_path,
+        method: :put do |f| %>
+
+        <h3>Want a copy of your application?</h3>
+        <p>
+          Enter your email address below to receive an email with a copy of your
+          application.
+        </p>
+        <%= f.mb_input_field :email, "Your email address",
+          type: "email",
+          options: { placeholder: "me@example.com" } %>
+
+        <button class="button button--full-mobile button--cta" type="submit">
+          Submit
+          <i class="button__icon icon-arrow_forward"></i>
+        </button>
+      <% end %>
+    </section>
 <% end %>
 
 <% content_for :skip_footer, true %>

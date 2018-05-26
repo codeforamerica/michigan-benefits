@@ -10,6 +10,15 @@ class ApplicationMailer < ActionMailer::Base
     )
   end
 
+  def client_integrated_application_notification(application_pdf:, recipient_email:)
+    attachments["integrated_application.pdf"] = application_pdf.read
+    mail(
+      from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
+      to: recipient_email,
+      subject: "Your FAP + Medicaid application",
+    )
+  end
+
   def office_snap_application_notification(
     application_pdf:,
     recipient_email:,
@@ -38,7 +47,6 @@ class ApplicationMailer < ActionMailer::Base
       from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
       to: recipient_email,
       subject: "A new 1426 from #{applicant_name} was submitted!",
-      template_name: "office_medicaid_application_notification",
     )
   end
 
@@ -53,7 +61,6 @@ class ApplicationMailer < ActionMailer::Base
       from: %("Michigan Benefits" <hello@#{ENV['EMAIL_DOMAIN']}>),
       to: recipient_email,
       subject: "A new 1171 from #{applicant_name} was submitted!",
-      template_name: "office_integrated_application_notification",
     )
   end
 
