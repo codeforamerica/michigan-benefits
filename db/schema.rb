@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525195056) do
+ActiveRecord::Schema.define(version: 20180525233541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20180525195056) do
     t.string "authorized_representative_name"
     t.string "authorized_representative_phone"
     t.datetime "created_at", null: false
+    t.string "email"
     t.integer "income_changed", default: 0
     t.text "income_changed_explanation"
     t.integer "less_than_threshold_in_accounts", default: 0

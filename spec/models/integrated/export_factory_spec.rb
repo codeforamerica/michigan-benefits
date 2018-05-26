@@ -14,6 +14,18 @@ RSpec.describe Integrated::ExportFactory do
         with(export: export)
     end
 
+    it "sends email to client" do
+      allow(Integrated::ClientEmailApplicationJob).to receive(:perform_later)
+      enqueuer = Integrated::ExportFactory.new
+      export = build(:export, :common_application, destination: :client_email)
+
+      enqueuer.enqueue(export)
+
+      expect(Integrated::ClientEmailApplicationJob).
+        to have_received(:perform_later).
+        with(export: export)
+    end
+
     it "transitions status" do
       enqueuer = Integrated::ExportFactory.new
       export = build(:export, :common_application, destination: :office_email)

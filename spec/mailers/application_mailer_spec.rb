@@ -33,6 +33,36 @@ RSpec.describe ApplicationMailer do
     end
   end
 
+  describe ".client_integrated_application_notification" do
+    it "sets the correct headers" do
+      with_modified_env EMAIL_DOMAIN: "example.com" do
+        email = ApplicationMailer.client_integrated_application_notification(
+          application_pdf: application_pdf,
+          recipient_email: "user@example.com",
+        )
+        from_header = email.header.select do |header|
+          header.name == "From"
+        end.first.value
+
+        expect(from_header).to eq %("Michigan Benefits" <hello@example.com>)
+        expect(email.from).to eq(["hello@example.com"])
+        expect(email.to).to eq(["user@example.com"])
+        expect(email.subject).to eq("Your FAP + Medicaid application")
+      end
+    end
+
+    it "attaches the application PDF with correct name" do
+      email = ApplicationMailer.client_integrated_application_notification(
+        application_pdf: application_pdf,
+        recipient_email: "user@example.com",
+      )
+      attachment_filename = email.attachments.first.filename
+
+      expect(email.attachments.count).to eq(1)
+      expect(attachment_filename).to eq("integrated_application.pdf")
+    end
+  end
+
   describe ".office_snap_application_notification" do
     context "office_location not present" do
       it "sets the correct headers" do
