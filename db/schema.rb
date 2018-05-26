@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518004805) do
+ActiveRecord::Schema.define(version: 20180525195056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20180518004805) do
     t.boolean "residential_mailing_same", default: true
     t.boolean "resides_in_state", default: true
     t.datetime "updated_at", null: false
+    t.boolean "upload_paperwork", default: true
     t.index ["common_application_id"], name: "index_application_navigators_on_common_application_id"
   end
 
@@ -106,6 +107,7 @@ ActiveRecord::Schema.define(version: 20180518004805) do
     t.text "income_changed_explanation"
     t.integer "less_than_threshold_in_accounts", default: 0
     t.integer "living_situation", default: 0
+    t.string "paperwork", default: [], array: true
     t.integer "previously_received_assistance", default: 0, null: false
     t.string "properties", default: [], array: true
     t.string "signature"

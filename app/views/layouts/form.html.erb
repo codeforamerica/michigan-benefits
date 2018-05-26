@@ -13,47 +13,51 @@
     </div>
   </div>
 
-  <main id="main" class="form-card">
-    <%= form_tag @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put %>
+  <% if content_for? :form_card %>
+    <%= yield :form_card %>
+  <% else %>
+    <main id="main" class="form-card">
+      <%= form_tag @step, as: :step, builder: MbFormBuilder, url: current_path, method: :put %>
 
-      <header class="form-card__header">
-        <% if content_for? :form_card_header %>
-          <%= yield :form_card_header %>
-        <% else %>
-          <h1 class="form-card__title">
-            <%= yield :form_card_title %>
-          </h1>
-          <% if content_for? :form_card_help %>
-            <p class="text--centered text--help">
-              <%= yield :form_card_help %>
-            </p>
-          <% end %>
-          <% if content_for? :form_card_help_section %>
-            <%= yield :form_card_help_section %>
-          <% end %>
-        <% end %>
-      </header>
-
-      <div class="form-card__content">
-        <%= yield :form_card_body %>
-      </div>
-
-      <% unless content_for(:skip_footer) %>
-        <div class="form-card__footer">
-          <% if content_for? :form_card_footer %>
-            <%= yield :form_card_footer %>
+        <header class="form-card__header">
+          <% if content_for? :form_card_header %>
+            <%= yield :form_card_header %>
           <% else %>
-            <% if @form.is_a? NullStep %>
-              <%= render "integrated/next_step_link" %>
-            <% else %>
-              <%= render "integrated/next_step" %>
+            <h1 class="form-card__title">
+              <%= yield :form_card_title %>
+            </h1>
+            <% if content_for? :form_card_help %>
+              <p class="text--centered text--help">
+                <%= yield :form_card_help %>
+              </p>
+            <% end %>
+            <% if content_for? :form_card_help_section %>
+              <%= yield :form_card_help_section %>
             <% end %>
           <% end %>
-        </div>
-      <% end %>
+        </header>
 
-    </form>
-  </main>
+        <div class="form-card__content">
+          <%= yield :form_card_body %>
+        </div>
+
+        <% unless content_for(:skip_footer) %>
+          <div class="form-card__footer">
+            <% if content_for? :form_card_footer %>
+              <%= yield :form_card_footer %>
+            <% else %>
+              <% if @form.is_a? NullStep %>
+                <%= render "integrated/next_step_link" %>
+              <% else %>
+                <%= render "integrated/next_step" %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+
+      </form>
+    </main>
+  <% end %>
 
   <div class="form-card--meta-data">
     <div class="form-card--benefit-label">

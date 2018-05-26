@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Integrated application" do
   include PdfHelper
+  include PaperworkHelper
 
   CIRCLED = Integrated::PdfAttributes::CIRCLED
   UNDERLINED = Integrated::PdfAttributes::UNDERLINED
@@ -856,7 +857,7 @@ RSpec.feature "Integrated application" do
 
     on_page "Finishing Up" do
       expect(page).to have_content(
-        "Would you like to designate someone as your authorized representative?",
+        "Is there anyone you would like to make your official authorized representative?",
       )
 
       proceed_with "Yes"
@@ -881,6 +882,24 @@ RSpec.feature "Integrated application" do
       fill_in "Social Security Number", with: "123456789"
 
       proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content(
+        "Review your paperwork",
+      )
+
+      proceed_with "Upload paperwork now"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content(
+        "Upload paperwork",
+      )
+
+      upload_paperwork(object_name: "form")
+
+      proceed_with "Finish"
     end
 
     on_page "Finishing Up" do

@@ -130,18 +130,19 @@ class FormNavigation
       Integrated::IncomeSourcesController,
       Integrated::IncomeSourcesDetailsController,
     ],
-    "Assets" => [
+    "Savings and Assets" => [
       Integrated::MoneyInAccountsController,
       Integrated::AmountInAccountsController,
       Integrated::VehiclesController,
       Integrated::VehiclesOverviewController,
       Integrated::PropertyController,
     ],
-    "Specifics" => [],
     "Finishing Up" => [
       Integrated::AuthorizedRepController,
       Integrated::TellUsAuthorizedRepController,
       Integrated::ProvideSsnController,
+      Integrated::ReviewPaperworkController,
+      Integrated::UploadPaperworkController,
       Integrated::LegalAgreementController,
       Integrated::SignSubmitController,
       Integrated::ApplicationSubmittedController,
