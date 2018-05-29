@@ -1,0 +1,22 @@
+<% content_for :header_title, "Introduction" %>
+
+<% content_for :form_card_header do %>
+  <div class="illustration illustration--hello"></div>
+  <div class="pre-title">We're here to help.</div>
+  <div class="form-card__title">Welcome</div>
+<% end %>
+
+<% content_for :form_card_title, "Welcome" %>
+
+<% content_for :form_card_body do %>
+  <p>
+    It should take about 10 minutes to complete the whole application. If you
+    aren’t sure about any questions - that’s okay! Do your best and we’ll work
+    with you to clarify later. Let’s get started.
+  </p>
+
+<% end %>
+
+<% content_for :form_card_footer do %>
+  <%= render "integrated/next_step", button_label: "Continue" %>
+<% end %>

@@ -1,3 +1,3 @@
 class ResideInStateForm < Form
-  set_attributes_for :application, :resides_in_state
+  set_attributes_for :navigator, :resides_in_state
 end
