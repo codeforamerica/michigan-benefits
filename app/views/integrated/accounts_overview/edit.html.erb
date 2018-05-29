@@ -17,11 +17,13 @@
           <i class="line-item__icon button__icon--left icon-check icon-check--color grid__item width-one-twelfth" aria-hidden="true"></i>
           <div id="item-label-<%= account.id %>" class="line-item__label">
             <div><%= account.display_name %>: <%= account.institution %></div>
-            <div>
-              <em>
-                <%= account.members.map(&:display_name).join(", ") %>
-              </em>
-            </div>
+            <% if !current_application.single_member_household? %>
+              <div>
+                <em>
+                  <%= account.members.map(&:display_name).join(", ") %>
+                </em>
+              </div>
+            <% end %>
             <span class="line-item__removal-form">
               (<%= link_to "remove",
                 remove_account_sections_path(form: { account_id: account.id }),
