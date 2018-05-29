@@ -99,6 +99,7 @@ class FormNavigation
       Integrated::InHomeCareExpensesDetailsController,
       Integrated::HospitalBillsExpensesDetailsController,
       Integrated::OtherMedicalExpensesDetailsController,
+      Integrated::OngoingMedicalExpensesDetailsController,
       Integrated::DoYouHaveMedicalBillsController,
       Integrated::AnyoneHaveMedicalBillsController,
       Integrated::WhoHasMedicalBillsController,

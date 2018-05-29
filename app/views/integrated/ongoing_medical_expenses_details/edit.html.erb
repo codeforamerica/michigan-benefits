@@ -1,0 +1,13 @@
+<% content_for :header_title, "Medical Bills" %>
+
+<% content_for :form_card_title, "Tell us about your ongoing medical expenses." %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <% @form.expenses.each do |expense| %>
+        <%= f.fields_for("expenses[]", expense, hidden_field_id: true) do |ff| %>
+          <%= ff.mb_money_field :amount, expense.display_name, help_text: "Monthly amount" %>
+        <% end %>
+      <% end %>
+    <% end %>
+<% end %>
