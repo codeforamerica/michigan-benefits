@@ -361,6 +361,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Assets" do
+      expect(page).to have_content("Savings and assets")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Assets" do
       expect(page).to have_content(
         "Does anyone have money in accounts?",
       )

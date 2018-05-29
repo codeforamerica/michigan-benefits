@@ -1,0 +1,13 @@
+<% content_for :header_title, "Assets" %>
+
+<% content_for :form_card_header do %>
+  <div class="illustration illustration--celebrate"></div>
+  <%= render partial: "integrated/progress_bar", locals: {current_step:6} %>
+  <div class="form-card__title">Savings and assets</div>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <p>
+    Next, let's get some details about money you have saved and what you own.
+  </p>
+<% end %>

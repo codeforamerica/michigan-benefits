@@ -138,6 +138,7 @@ class FormNavigation
       Integrated::IncomeSourcesDetailsController,
     ],
     "Savings and Assets" => [
+      Integrated::SavingsAndAssetsController,
       Integrated::MoneyInAccountsController,
       Integrated::AmountInAccountsController,
       Integrated::AccountsOverviewController,
