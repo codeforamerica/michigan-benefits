@@ -449,6 +449,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household Expenses" do
+      expect(page).to have_content("Household bills")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household Expenses" do
       expect(page).to have_content("What kind of housing expenses do you have?")
 
       check "Rent"
