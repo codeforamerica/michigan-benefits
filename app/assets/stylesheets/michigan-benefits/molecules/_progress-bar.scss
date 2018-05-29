@@ -1,0 +1,33 @@
+.progress-bar {
+  text-align: center;
+  margin: 1em 0;
+  padding: 0 .5em;
+  svg {
+    max-width: 13.5em;
+  }
+  &__line {
+    stroke-width: 3px;
+    stroke: #deded1;
+    stroke-linecap: square;
+  }
+  &__circle {
+    stroke-width: 1px;
+    stroke: #deded1;
+    fill: #0080A7;
+    &.current {
+      stroke: #004C64;
+      stroke-width: 2px;
+    }
+    &.incomplete {
+      fill: #EAEAE9;
+    }
+  }
+}
+.completed-check-mark {
+  stroke-width: 2px;
+  stroke: #deded1;
+  fill: none;
+}
+.current-star-mark {
+  fill: #deded1;
+}
