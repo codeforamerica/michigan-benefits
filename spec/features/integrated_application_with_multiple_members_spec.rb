@@ -321,6 +321,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household" do
+      expect(page).to have_content("Getting to know you")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household" do
       expect(page).to have_content(
         "Who in the household is currently married?",
       )

@@ -1,0 +1,13 @@
+<% content_for :header_title, "Household" %>
+
+<% content_for :form_card_header do %>
+  <div class="illustration illustration--celebrate"></div>
+  <%= render partial: "integrated/progress_bar", locals: {current_step: 2} %>
+  <div class="form-card__title">Getting to know you</div>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <p>
+    Next, provide us with some personal information details.
+  </p>
+<% end %>
