@@ -558,6 +558,12 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Healthcare" do
+      expect(page).to have_content("Health and insurance")
+
+      proceed_with "Continue"
+    end
+
     on_page "Current Healthcare" do
       expect(page).to have_content("Is anyone currently enrolled in a health insurance plan?")
 

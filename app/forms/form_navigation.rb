@@ -92,6 +92,7 @@ class FormNavigation
       Integrated::YourExpensesDetailsController,
     ],
     "Medical Bills and Health Insurance" => [
+      Integrated::HealthAndInsuranceController,
       Integrated::AreYouHealthcareEnrolledController,
       Integrated::AnyoneHealthcareEnrolledController,
       Integrated::WhoIsHealthcareEnrolledController,
