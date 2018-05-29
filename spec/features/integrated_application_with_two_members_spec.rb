@@ -11,6 +11,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
+      expect(page).to have_content("Welcome")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Introduction" do
       expect(page).to have_content("Do you currently reside in Michigan?")
 
       proceed_with "Yes"

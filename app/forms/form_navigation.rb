@@ -1,6 +1,7 @@
 class FormNavigation
   MAIN = {
     "Welcome" => [
+      Integrated::WelcomeController,
       Integrated::ResideInStateController,
       Integrated::ResideOutOfStateController,
       Integrated::IntroduceYourselfController,
