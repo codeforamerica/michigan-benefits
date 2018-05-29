@@ -148,6 +148,7 @@ class FormNavigation
       Integrated::PropertyController,
     ],
     "Finishing Up" => [
+      Integrated::FinishingUpController,
       Integrated::AuthorizedRepController,
       Integrated::TellUsAuthorizedRepController,
       Integrated::ProvideSsnController,
