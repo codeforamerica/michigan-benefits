@@ -125,6 +125,7 @@ class FormNavigation
       Integrated::WhoIsFlintWaterController,
     ],
     "Income and Employment" => [
+      Integrated::IncomeAndEmploymentController,
       Integrated::HasYourIncomeChangedController,
       Integrated::TellUsIncomeChangedController,
       Integrated::DoYouHaveJobController,

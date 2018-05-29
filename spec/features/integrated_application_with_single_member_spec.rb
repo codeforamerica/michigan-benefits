@@ -268,6 +268,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Income and Employment" do
+      expect(page).to have_content("Income and employment")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
       expect(page).to have_content(
         "Has your income changed in the past 30 days?",
       )
