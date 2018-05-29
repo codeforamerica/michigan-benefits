@@ -190,6 +190,18 @@ RSpec.feature "Integrated application" do
         "Do you pay for ongoing medical expenses?",
       )
 
+      check "Prescriptions"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Medical Bills" do
+      expect(page).to have_content(
+        "Tell us about your ongoing medical expenses",
+      )
+
+      fill_in "Prescriptions", with: "200"
+
       proceed_with "Continue"
     end
 
