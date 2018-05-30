@@ -1,0 +1,14 @@
+<% content_for :header_title, "Your Household" %>
+
+<% content_for :form_card_header do %>
+  <div class="illustration illustration--celebrate"></div>
+  <%= render partial: "integrated/progress_bar", locals: {current_step: 1} %>
+  <div class="pre-title">Every family is different</div>
+  <div class="form-card__title">Okay thanks! Now tell us about your household.</div>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <p>
+    The people you live with and file taxes with are an important part of your application.
+  </p>
+<% end %>

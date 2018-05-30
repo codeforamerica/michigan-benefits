@@ -1,0 +1,23 @@
+<div class="progress-bar">
+  <span id="progress-bar__label" class="progress-bar__label sr-only">Section <%= current_step %> of 6</span>
+  <svg aria-labelledby="progress-bar__label" viewBox="0 0 318 39" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path class="progress-bar__line" d="M24.5,19.5 L294.516666,19.5" />
+    <% (1..6).each_with_index do |step_number, i| %>
+      <g transform="translate(<%= 18.5 + (i * 56) %>, 19.5)">
+      <% if step_number < current_step %>
+        <circle class="progress-bar__circle completed" r="17.5" />
+        <g transform="translate(-17.5,-17.5)">
+          <polyline class="completed-check-mark" points="25 12 15 23 10 18"/>
+        </g>
+      <% elsif step_number == current_step %>
+        <circle class="progress-bar__circle current" r="17.5" />
+          <g transform="translate(-73.5,-17.5)">
+            <polygon class="current-star-mark" points="73.6084521 22 68.9061701 24.472136 69.8042261 19.236068 66 15.527864 71.2573111 14.763932 73.6084521 10 75.9595931 14.763932 81.2169043 15.527864 77.4126782 19.236068 78.3107341 24.472136"/>
+          </g>
+      <% else %>
+        <circle class="progress-bar__circle incomplete" r="17.5" />
+      <% end %>
+      </g>
+    <% end %>
+  </svg>
+</div>

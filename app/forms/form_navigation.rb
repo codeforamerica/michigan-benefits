@@ -10,6 +10,7 @@ class FormNavigation
       Integrated::MailingAddressController,
     ],
     "Household" => [
+      Integrated::YourHouseholdController,
       Integrated::HouseholdMembersOverviewController,
     ],
     "Food Assistance" => [

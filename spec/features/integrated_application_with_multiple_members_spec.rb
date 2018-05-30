@@ -84,6 +84,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Your Household" do
+      expect(page).to have_content("Okay thanks! Now tell us about your household.")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Your Household" do
       expect(page).to have_content(
         "Who do you currently live with?",
       )
