@@ -13,7 +13,7 @@ Design tools we use:
 This application was designed using an Atomic design system.
 
 * [Styleguide](http://demo.getcalfresh.org/styleguide)
-* [Styleguide code](https://github.com/codeforamerica/gcf-backend/tree/master/app/views/styleguides)
+* Styleguide code (Currently in private repository, will update when repo is made public)
 
 # Day-to-Day
 
