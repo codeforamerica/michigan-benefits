@@ -1,0 +1,13 @@
+<% content_for :header_title, "Healthcare" %>
+
+<% content_for :form_card_header do %>
+  <div class="illustration illustration--celebrate"></div>
+  <%= render partial: "integrated/progress_bar", locals: {current_step: 4} %>
+  <div class="form-card__title">Health and insurance</div>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <p>
+    Your health needs and expenses help determine what you're eligible for.
+  </p>
+<% end %>

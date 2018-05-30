@@ -107,6 +107,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household" do
+      expect(page).to have_content("Getting to know you")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household" do
       expect(page).to have_content("Are you married?")
 
       proceed_with "Yes"
@@ -140,6 +146,12 @@ RSpec.feature "Integrated application" do
       expect(page).to have_content("Are you currently a US Citizen?")
 
       proceed_with "Yes"
+    end
+
+    on_page "Household Expenses" do
+      expect(page).to have_content("Household bills")
+
+      proceed_with "Continue"
     end
 
     on_page "Household Expenses" do
@@ -187,6 +199,12 @@ RSpec.feature "Integrated application" do
 
       fill_in "Alimony", with: "200"
       fill_in "Student Loan Interest", with: "50"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content("Health and insurance")
 
       proceed_with "Continue"
     end
@@ -253,6 +271,12 @@ RSpec.feature "Integrated application" do
       )
 
       proceed_with "Yes"
+    end
+
+    on_page "Income and Employment" do
+      expect(page).to have_content("Income and employment")
+
+      proceed_with "Continue"
     end
 
     on_page "Income and Employment" do
@@ -345,6 +369,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Assets" do
+      expect(page).to have_content("Savings and assets")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Assets" do
       expect(page).to have_content(
         "Do you have any money in accounts?",
       )
@@ -432,6 +462,12 @@ RSpec.feature "Integrated application" do
       expect(page).to have_content(
         "Do you own any real estate or property?",
       )
+
+      proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content("Finishing up")
 
       proceed_with "Continue"
     end

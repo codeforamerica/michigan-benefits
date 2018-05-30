@@ -1,0 +1,14 @@
+<% content_for :header_title, "Finishing Up" %>
+
+<% content_for :form_card_header do %>
+  <div class="illustration illustration--celebrate"></div>
+    <div class="pre-title">Almost done!</div>
+  <%= render partial: "integrated/progress_bar", locals: {current_step: 7} %>
+  <div class="form-card__title">Finishing up</div>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <p>
+    It's time to answer a few final questions, and upload any paperwork you have on hand.
+  </p>
+<% end %>

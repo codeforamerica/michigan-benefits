@@ -1,0 +1,14 @@
+<% content_for :header_title, "Income and Employment" %>
+
+<% content_for :form_card_header do %>
+  <div class="illustration illustration--celebrate"></div>
+  <div class="pre-title">You're halfway done!</div>
+  <%= render partial: "integrated/progress_bar", locals: {current_step: 5} %>
+  <div class="form-card__title">Income and employment</div>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <p>
+    Jobs and other sources of money are a key part of eligibility.
+  </p>
+<% end %>

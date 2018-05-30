@@ -1,0 +1,14 @@
+<% content_for :header_title, "Household Expenses" %>
+
+<% content_for :form_card_header do %>
+  <div class="illustration illustration--celebrate"></div>
+  <div class="pre-title">Great work so far!</div>
+  <%= render partial: "integrated/progress_bar", locals: {current_step: 3} %>
+  <div class="form-card__title">Household bills</div>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <p>
+    Your expenses give us a clearer picture of your financial situation.
+  </p>
+<% end %>

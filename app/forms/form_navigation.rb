@@ -30,6 +30,9 @@ class FormNavigation
       Integrated::DescribeTaxRelationshipsController,
       Integrated::ReviewTaxRelationshipsController,
     ],
+    "Household Details" => [
+      Integrated::GettingToKnowYouController,
+    ],
     "Married" => [
       Integrated::AreYouMarriedController,
       Integrated::AnyoneMarriedController,
@@ -66,6 +69,7 @@ class FormNavigation
       Integrated::ImmigrationInfoController,
     ],
     "Household Expenses" => [
+      Integrated::HouseholdBillsController,
       Integrated::HousingExpensesController,
       Integrated::RentDetailsController,
       Integrated::MortgageDetailsController,
@@ -89,6 +93,7 @@ class FormNavigation
       Integrated::YourExpensesDetailsController,
     ],
     "Medical Bills and Health Insurance" => [
+      Integrated::HealthAndInsuranceController,
       Integrated::AreYouHealthcareEnrolledController,
       Integrated::AnyoneHealthcareEnrolledController,
       Integrated::WhoIsHealthcareEnrolledController,
@@ -121,6 +126,7 @@ class FormNavigation
       Integrated::WhoIsFlintWaterController,
     ],
     "Income and Employment" => [
+      Integrated::IncomeAndEmploymentController,
       Integrated::HasYourIncomeChangedController,
       Integrated::TellUsIncomeChangedController,
       Integrated::DoYouHaveJobController,
@@ -134,6 +140,7 @@ class FormNavigation
       Integrated::IncomeSourcesDetailsController,
     ],
     "Savings and Assets" => [
+      Integrated::SavingsAndAssetsController,
       Integrated::MoneyInAccountsController,
       Integrated::AmountInAccountsController,
       Integrated::AccountsOverviewController,
@@ -142,6 +149,7 @@ class FormNavigation
       Integrated::PropertyController,
     ],
     "Finishing Up" => [
+      Integrated::FinishingUpController,
       Integrated::AuthorizedRepController,
       Integrated::TellUsAuthorizedRepController,
       Integrated::ProvideSsnController,

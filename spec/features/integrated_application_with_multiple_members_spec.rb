@@ -327,6 +327,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household" do
+      expect(page).to have_content("Getting to know you")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household" do
       expect(page).to have_content(
         "Who in the household is currently married?",
       )
@@ -449,6 +455,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household Expenses" do
+      expect(page).to have_content("Household bills")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Household Expenses" do
       expect(page).to have_content("What kind of housing expenses do you have?")
 
       check "Rent"
@@ -548,6 +560,12 @@ RSpec.feature "Integrated application" do
 
       fill_in "Monthly amount", with: "700"
       check "Jessie Tester"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content("Health and insurance")
 
       proceed_with "Continue"
     end
@@ -661,6 +679,12 @@ RSpec.feature "Integrated application" do
       )
 
       check "Ginny Pig"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Income and Employment" do
+      expect(page).to have_content("Income and employment")
 
       proceed_with "Continue"
     end
@@ -792,6 +816,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Assets" do
+      expect(page).to have_content("Savings and assets")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Assets" do
       expect(page).to have_content(
         "Does anyone have money in accounts?",
       )
@@ -889,6 +919,12 @@ RSpec.feature "Integrated application" do
       )
 
       check "House(s)"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content("Finishing up")
 
       proceed_with "Continue"
     end
