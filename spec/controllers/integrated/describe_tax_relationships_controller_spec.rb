@@ -2,36 +2,59 @@ require "rails_helper"
 
 RSpec.describe Integrated::DescribeTaxRelationshipsController do
   describe "#skip?" do
-    context "when single-member household" do
-      it "returns true" do
-        application = create(:common_application, :single_member)
+    context "when multi-member household" do
+      context "when primary member is applying for healthcare" do
+        context "when primary member is filing taxes" do
+          it "returns false" do
+            application = create(:common_application,
+              members: [
+                build(:household_member, requesting_healthcare: "yes", filing_taxes_next_year: "yes"),
+                build(:household_member),
+              ])
 
-        skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
-        expect(skip_step).to eq(true)
+            skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
+            expect(skip_step).to be_falsey
+          end
+
+          context "when no one else is on tax return" do
+            it "returns true" do
+              application = create(:common_application,
+                members: [
+                  build(:household_member, filing_taxes_next_year: "yes"),
+                ],
+                navigator: build(:application_navigator, anyone_else_on_tax_return: false))
+
+              skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
+              expect(skip_step).to eq(true)
+            end
+          end
+        end
+
+        context "when primary member is not filing taxes" do
+          it "returns true" do
+            application = create(:common_application, members: [
+                                   build(:household_member, filing_taxes_next_year: "no"),
+                                   build(:household_member),
+                                 ])
+
+            skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
+            expect(skip_step).to eq(true)
+          end
+        end
       end
-    end
 
-    context "when primary member has indicated they aren't filing taxes" do
-      it "returns true" do
-        application = create(:common_application, members: [
-                               build(:household_member, filing_taxes_next_year: "no"),
-                             ])
+      context "when primary member is not applying for healthcare" do
+        it "returns true" do
+          application = create(:common_application,
+            members: [
+              build(:household_member, requesting_healthcare: "no"),
+              build(:household_member),
+            ],
+            navigator: build(:application_navigator, anyone_else_on_tax_return: true))
 
-        skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
-        expect(skip_step).to eq(true)
-      end
-    end
-
-    context "when no one else is on tax return" do
-      it "returns true" do
-        application = create(:common_application,
-          members: [
-            build(:household_member, filing_taxes_next_year: "yes"),
-          ],
-          navigator: build(:application_navigator, anyone_else_on_tax_return: false))
-
-        skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
-        expect(skip_step).to eq(true)
+          skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
+          expect(skip_step).to eq(true)
+        end
       end
     end
   end

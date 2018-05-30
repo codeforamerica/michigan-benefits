@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.feature "Integrated application" do
-  scenario "with two members", :js do
+RSpec.feature "SNAP-only integrated application" do
+  scenario "applying with two members", :js do
     visit combined_home_path
 
     within(".slab--hero") do
@@ -12,7 +12,6 @@ RSpec.feature "Integrated application" do
       expect(page).to have_content("Which programs do you want to apply for today?")
 
       check "Food Assistance Program"
-      check "Healthcare Coverage"
 
       proceed_with "Continue"
     end
@@ -72,12 +71,6 @@ RSpec.feature "Integrated application" do
         question: "Is this also your mailing address?",
         answer: "Yes",
       )
-
-      proceed_with "Continue"
-    end
-
-    on_page "Introduction" do
-      expect(page).to have_content("What's the best number for you to receive phone calls?")
 
       proceed_with "Continue"
     end
@@ -156,16 +149,15 @@ RSpec.feature "Integrated application" do
         "Which people also need Healthcare Coverage?",
       )
 
-      # Jessie Tester checked by default
-      check "Jonny Tester"
-
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Healthcare" do
-      expect(page).to have_content("Will you file taxes next year?")
+      expect(page).to have_content(
+        "Are you sure you don't want to apply for Healthcare Coverage?",
+      )
 
-      proceed_with "No"
+      click_on "Yes, I'm sure"
     end
 
     on_page "Household" do
@@ -177,14 +169,6 @@ RSpec.feature "Integrated application" do
     on_page "Household" do
       expect(page).to have_content(
         "Is anyone in your household currently married?",
-      )
-
-      proceed_with "No"
-    end
-
-    on_page "Caretaker" do
-      expect(page).to have_content(
-        "Is anyone a caretaker or parent of other people in the household?",
       )
 
       proceed_with "No"
@@ -208,12 +192,6 @@ RSpec.feature "Integrated application" do
 
     on_page "Veterans" do
       expect(page).to have_content("Is anyone a veteran of the military?")
-
-      proceed_with "No"
-    end
-
-    on_page "Foster Care" do
-      expect(page).to have_content("Was anyone in foster care when they turned 18?")
 
       proceed_with "No"
     end
@@ -266,38 +244,12 @@ RSpec.feature "Integrated application" do
       proceed_with "No"
     end
 
-    on_page "Household Expenses" do
-      expect(page).to have_content("Does anyone pay for interest on student loans?")
-
-      proceed_with "No"
-    end
-
-    on_page "Healthcare" do
-      expect(page).to have_content("Health and insurance")
-
-      proceed_with "Continue"
-    end
-
-    on_page "Current Healthcare" do
-      expect(page).to have_content("Is anyone currently enrolled in a health insurance plan?")
-
-      proceed_with "No"
-    end
-
     on_page "Medical Bills" do
       expect(page).to have_content(
         "Does anyone in your household pay for ongoing medical expenses?",
       )
 
       proceed_with "Continue"
-    end
-
-    on_page "Medical Bills" do
-      expect(page).to have_content(
-        "Does anyone need help paying for medical bills from the last 3 months?",
-      )
-
-      proceed_with "No"
     end
 
     on_page "Pregnancy" do
@@ -309,14 +261,6 @@ RSpec.feature "Integrated application" do
     on_page "Pregnancy" do
       expect(page).to have_content(
         "Does anyone have medical bills related to pregnancy from the last three months?",
-      )
-
-      proceed_with "No"
-    end
-
-    on_page "Flint Water Crisis" do
-      expect(page).to have_content(
-        "Has anyone been affected by the Flint Water Crisis?",
       )
 
       proceed_with "No"
@@ -435,14 +379,6 @@ RSpec.feature "Integrated application" do
       )
 
       fill_in "Social Security Number", with: "123456789"
-
-      proceed_with "Continue"
-    end
-
-    on_page "Finishing Up" do
-      expect(page).to have_content(
-        "How can we follow up with you?",
-      )
 
       proceed_with "Continue"
     end

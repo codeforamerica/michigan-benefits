@@ -2,20 +2,11 @@ require "rails_helper"
 
 RSpec.describe Integrated::WhoHasMedicalBillsController do
   describe "#skip?" do
-    context "when single member household" do
-      it "returns true" do
-        application = create(:common_application, :single_member)
-
-        skip_step = Integrated::WhoHasMedicalBillsController.skip?(application)
-        expect(skip_step).to be_truthy
-      end
-    end
-
     context "when multi member household" do
       context "when someone in household is medical_bills" do
         it "returns false" do
           application = create(:common_application,
-            :multi_member,
+            members: build_list(:household_member, 2, requesting_healthcare: "yes"),
             navigator: build(:application_navigator, anyone_medical_bills: true))
 
           skip_step = Integrated::WhoHasMedicalBillsController.skip?(application)
@@ -26,7 +17,7 @@ RSpec.describe Integrated::WhoHasMedicalBillsController do
       context "when no one in household is medical_bills" do
         it "returns true" do
           application = create(:common_application,
-            :multi_member,
+            members: build_list(:household_member, 2, requesting_healthcare: "yes"),
             navigator: build(:application_navigator, anyone_medical_bills: false))
 
           skip_step = Integrated::WhoHasMedicalBillsController.skip?(application)

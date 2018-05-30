@@ -1,11 +1,16 @@
 module Integrated
   class WereYouFosterCareController < FormsController
-    def self.skip?(application)
-      return true unless application.single_member_household?
+    def self.skip_rule_sets(application)
+      [
+        SkipRules.single_member_only(application),
+        SkipRules.must_be_applying_for_healthcare(application),
+      ]
+    end
+
+    def self.custom_skip_rule_set(application)
       if age = application.primary_member.age
-        return age >= 18 && age <= 26 ? false : true
+        true if age < 18 || age > 26
       end
-      true
     end
 
     def update_models

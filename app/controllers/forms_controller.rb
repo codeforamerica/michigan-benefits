@@ -54,8 +54,17 @@ class FormsController < ApplicationController
     controller_name.dasherize
   end
 
-  def self.skip?(_)
+  def self.skip?(application)
+    return true if skip_rule_sets(application).any?
+    custom_skip_rule_set(application)
+  end
+
+  def self.custom_skip_rule_set(_)
     false
+  end
+
+  def self.skip_rule_sets(_)
+    []
   end
 
   private

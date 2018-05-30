@@ -5,30 +5,24 @@ RSpec.describe Integrated::WereYouFosterCareController do
     context "when household has one member" do
       context "when member is between 18 and 26 years old" do
         it "returns false" do
-          application = create(:common_application,
-                               members: [build(:household_member, birthday: 20.years.ago)])
+          application = create(:common_application, members: [
+                                 build(:household_member, requesting_healthcare: "yes", birthday: 20.years.ago),
+                               ])
 
           skip_step = Integrated::WereYouFosterCareController.skip?(application)
           expect(skip_step).to be_falsey
         end
       end
+
       context "when member is not between 18 and 26 years old" do
         it "returns true" do
-          application = create(:common_application,
-                               members: [build(:household_member, birthday: 30.years.ago)])
+          application = create(:common_application, members: [
+                                 build(:household_member, requesting_healthcare: "yes", birthday: 30.years.ago),
+                               ])
 
           skip_step = Integrated::WereYouFosterCareController.skip?(application)
           expect(skip_step).to be_truthy
         end
-      end
-    end
-
-    context "when household has more than one member" do
-      it "returns true" do
-        application = create(:common_application, members: build_list(:household_member, 2))
-
-        skip_step = Integrated::WereYouFosterCareController.skip?(application)
-        expect(skip_step).to be_truthy
       end
     end
   end

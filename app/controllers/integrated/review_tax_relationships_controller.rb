@@ -1,7 +1,8 @@
 module Integrated
   class ReviewTaxRelationshipsController < FormsController
     def self.skip?(application)
-      application.primary_member.filing_taxes_next_year_no?
+      application.primary_member.requesting_healthcare_no? ||
+        application.primary_member.filing_taxes_next_year_no?
     end
 
     def edit

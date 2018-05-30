@@ -2,36 +2,25 @@ require "rails_helper"
 
 RSpec.describe Integrated::WhoWasFosterCareController do
   describe "#skip?" do
-    context "when single member household" do
-      it "returns true" do
-        application = create(:common_application, :single_member)
+    context "when someone in household was in foster care at age 18" do
+      it "returns false" do
+        application = create(:common_application,
+          members: build_list(:household_member, 2, requesting_healthcare: "yes"),
+          navigator: build(:application_navigator, anyone_foster_care_at_18: true))
 
         skip_step = Integrated::WhoWasFosterCareController.skip?(application)
-        expect(skip_step).to be_truthy
+        expect(skip_step).to be_falsey
       end
     end
 
-    context "when multi member household" do
-      context "when someone in household was in foster care at age 18" do
-        it "returns false" do
-          application = create(:common_application,
-            :multi_member,
-            navigator: build(:application_navigator, anyone_foster_care_at_18: true))
+    context "when no one in household was in foster care at age 18" do
+      it "returns true" do
+        application = create(:common_application,
+          members: build_list(:household_member, 2, requesting_healthcare: "yes"),
+          navigator: build(:application_navigator, anyone_foster_care_at_18: false))
 
-          skip_step = Integrated::WhoWasFosterCareController.skip?(application)
-          expect(skip_step).to be_falsey
-        end
-      end
-
-      context "when no one in household was in foster care at age 18" do
-        it "returns true" do
-          application = create(:common_application,
-            :multi_member,
-            navigator: build(:application_navigator, anyone_foster_care_at_18: false))
-
-          skip_step = Integrated::WhoWasFosterCareController.skip?(application)
-          expect(skip_step).to be_truthy
-        end
+        skip_step = Integrated::WhoWasFosterCareController.skip?(application)
+        expect(skip_step).to be_truthy
       end
     end
   end

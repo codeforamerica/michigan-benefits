@@ -3,19 +3,20 @@ require "rails_helper"
 RSpec.describe Integrated::HealthcareController do
   describe "#skip?" do
     context "when single-member household" do
-      it "returns true and marks primary member as applying for healthcare" do
+      it "returns true" do
         application = create(:common_application, :single_member)
 
         skip_step = Integrated::HealthcareController.skip?(application)
         expect(skip_step).to eq(true)
       end
+    end
 
-      it "marks primary member as applying for healthcare" do
-        application = create(:common_application, :single_member)
+    context "when multi-member household" do
+      it "returns false" do
+        application = create(:common_application, :multi_member)
 
-        expect { Integrated::HealthcareController.skip?(application) }.
-          to change { application.primary_member.requesting_healthcare }.from("unfilled").to("yes").
-          and change { application.healthcare_applying_members.count }.by(1)
+        skip_step = Integrated::HealthcareController.skip?(application)
+        expect(skip_step).to be_falsey
       end
     end
   end

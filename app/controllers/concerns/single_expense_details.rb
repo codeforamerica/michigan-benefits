@@ -2,9 +2,12 @@ module SingleExpenseDetails
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def skip?(application)
-      application.single_member_household? ||
-        application.expenses.where(expense_type: expense_type).none?
+    def skip_rule_sets(application)
+      [SkipRules.multi_member_only(application)]
+    end
+
+    def custom_skip_rule_set(application)
+      application.expenses.where(expense_type: expense_type).none?
     end
   end
 

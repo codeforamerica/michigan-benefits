@@ -2,19 +2,10 @@ require "rails_helper"
 
 RSpec.describe Integrated::AnyoneFosterCareController do
   describe "#skip?" do
-    context "when single member household" do
-      it "returns true" do
-        application = create(:common_application, :single_member)
-
-        skip_step = Integrated::AnyoneFosterCareController.skip?(application)
-        expect(skip_step).to be_truthy
-      end
-    end
-
     context "when multi member household" do
       it "returns false if anyone is between the age of 18 and 26" do
         application = create(:common_application,
-                             members: build_list(:household_member, 2, birthday: 20.years.ago))
+          members: build_list(:household_member, 2, requesting_healthcare: "yes", birthday: 20.years.ago))
 
         skip_step = Integrated::AnyoneFosterCareController.skip?(application)
         expect(skip_step).to be_falsey
@@ -22,7 +13,7 @@ RSpec.describe Integrated::AnyoneFosterCareController do
 
       it "returns false if anyone has no birthday specified" do
         application = create(:common_application,
-                             members: build_list(:household_member, 2))
+          members: build_list(:household_member, 2, requesting_healthcare: "yes"))
 
         skip_step = Integrated::AnyoneFosterCareController.skip?(application)
         expect(skip_step).to be_falsey
@@ -30,7 +21,7 @@ RSpec.describe Integrated::AnyoneFosterCareController do
 
       it "returns true if no one is between the age of 18 and 26" do
         application = create(:common_application,
-                             members: build_list(:household_member, 2, birthday: 30.years.ago))
+           members: build_list(:household_member, 2, requesting_healthcare: "yes", birthday: 30.years.ago))
 
         skip_step = Integrated::AnyoneFosterCareController.skip?(application)
         expect(skip_step).to be_truthy

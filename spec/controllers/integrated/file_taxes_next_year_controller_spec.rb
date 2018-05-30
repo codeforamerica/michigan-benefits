@@ -2,14 +2,14 @@ require "rails_helper"
 
 RSpec.describe Integrated::FileTaxesNextYearController do
   describe "#skip?" do
-    context "when no one is requesting healthcare" do
-      it "returns true" do
+    context "when primary member is requesting healthcare" do
+      it "returns false" do
         application = create(:common_application, members: [
-                               create(:household_member, requesting_healthcare: "no"),
+                               create(:household_member, requesting_healthcare: "yes"),
                              ])
 
         skip_step = Integrated::FileTaxesNextYearController.skip?(application)
-        expect(skip_step).to be_truthy
+        expect(skip_step).to be_falsey
       end
     end
 
@@ -22,17 +22,6 @@ RSpec.describe Integrated::FileTaxesNextYearController do
 
         skip_step = Integrated::FileTaxesNextYearController.skip?(application)
         expect(skip_step).to be_truthy
-      end
-    end
-
-    context "when one or more members are requesting healthcare, including primary member" do
-      it "returns false" do
-        application = create(:common_application, members: [
-                               create(:household_member, requesting_healthcare: "yes"),
-                             ])
-
-        skip_step = Integrated::FileTaxesNextYearController.skip?(application)
-        expect(skip_step).to be_falsey
       end
     end
   end
