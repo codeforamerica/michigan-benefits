@@ -1,9 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-  include PdfHelper
-
-  scenario "with two members", :js do
+  scenario "with two members applying only for SNAP", :js do
     visit combined_home_path
 
     within(".slab--hero") do

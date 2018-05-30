@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-  include PdfHelper
-
   scenario "with two members", :js do
     visit combined_home_path
 
