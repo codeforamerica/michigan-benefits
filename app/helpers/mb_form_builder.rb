@@ -351,12 +351,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         <label id="#{checkbox_label_id}" class="checkbox">
           #{check_box(item[:method], options)} #{item[:label]}
         </label>
-        #{errors_for(object, item[:method])}
       HTML
     end.join.html_safe
 
     <<~HTML.html_safe
-      <fieldset class="input-group">
+      <fieldset class="input-group form-group#{error_state(object, method)}">
         #{fieldset_label_contents(
           label_text: label_text,
           help_text: help_text,
@@ -365,6 +364,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
           method: method,
         )}
         #{checkbox_html}
+        #{errors_for(object, method)}
       </fieldset>
     HTML
   end

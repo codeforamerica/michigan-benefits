@@ -44,7 +44,7 @@ RSpec.describe Integrated::IntroduceYourselfController do
         }
       end
 
-      context "with a current application" do
+      context "with an existing primary member" do
         it "modifies member information" do
           current_app = create(:common_application,
             members: [create(:household_member, first_name: "Juan")])
@@ -55,11 +55,29 @@ RSpec.describe Integrated::IntroduceYourselfController do
 
           current_app.reload
 
-          expect(current_app.primary_member.first_name).to eq("Gary")
-          expect(current_app.previously_received_assistance).to eq("yes")
-
           primary_member = current_app.primary_member
+          expect(primary_member.first_name).to eq("Gary")
           expect(primary_member.relationship).to eq("primary")
+          expect(current_app.previously_received_assistance).to eq("yes")
+        end
+      end
+
+      context "without an existing primary member" do
+        it "draws program information from the navigator" do
+          current_app = create(:common_application,
+                               navigator: build(:application_navigator,
+                                                applying_for_food: true,
+                                                applying_for_healthcare: false))
+
+          session[:current_application_id] = current_app.id
+
+          put :update, params: valid_params
+
+          current_app.reload
+
+          expect(current_app.primary_member.requesting_food).to eq("yes")
+          expect(current_app.primary_member.requesting_healthcare).to eq("no")
+          expect(current_app.primary_member.buy_and_prepare_food_together).to eq("yes")
         end
       end
     end
