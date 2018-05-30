@@ -15,6 +15,14 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
+      expect(page).to have_content("Which programs do you want to apply for today?")
+      check "Food Assistance Program"
+      check "Healthcare Coverage"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Introduction" do
       expect(page).to have_content("Welcome")
 
       proceed_with "Continue"

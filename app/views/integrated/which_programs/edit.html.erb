@@ -1,0 +1,28 @@
+<% content_for :header_title, "Introduction" %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">Which programs do you want to apply for today?</h1>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <div class="form-group">
+    <p>
+      FAP is Michigan's food stamps (SNAP) program.
+      Most households receive between $20 and $200 in food assistance each month.
+    </p>
+    <p>
+      Medicaid is health care coverage for eligible Michigan residents.
+      There are many plans available depending on your family's needs.
+    </p>
+  </div>
+
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_checkbox_set(:programs,
+                          [
+                              { method: :applying_for_food, label: "Food Assistance Program" },
+                              { method: :applying_for_healthcare, label: "Healthcare Coverage" },
+                          ],
+                          label_text: "Which programs do you want to apply for today?",
+                          legend_class: "sr-only") %>
+  <% end %>
+<% end %>

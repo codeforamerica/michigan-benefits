@@ -3,9 +3,9 @@ module Integrated
     def update_models
       member_data = params_for(:member).merge(
         relationship: "primary",
-        requesting_food: "yes",
-        requesting_healthcare: "yes",
-        buy_and_prepare_food_together: "yes",
+        requesting_food: yes_or_no(:applying_for_food),
+        requesting_healthcare: yes_or_no(:applying_for_healthcare),
+        buy_and_prepare_food_together: yes_or_no(:applying_for_food),
       )
       member_data.merge!(combined_birthday_fields(
                            day: member_data.delete(:birthday_day),
@@ -32,6 +32,10 @@ module Integrated
       else
         {}
       end
+    end
+
+    def yes_or_no(attribute)
+      current_application.navigator.public_send(attribute) ? "yes" : "no"
     end
   end
 end

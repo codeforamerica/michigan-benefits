@@ -598,7 +598,7 @@ RSpec.describe MbFormBuilder do
       expect(output).to be_html_safe
 
       expect(output).to match_html <<-HTML
-        <fieldset class="input-group">
+        <fieldset class="input-group form-group">
           <legend class="form-question " id="sample_captains__label"> Which captains do you think are cool? </legend>
           <p class="text--help" id="sample_captains__help">like, really cool</p>
           <label id="sample_captains_tng__label" class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_tng__label" type="checkbox" value="1" name="sample[tng]" id="sample_tng"/> Picard </label>
