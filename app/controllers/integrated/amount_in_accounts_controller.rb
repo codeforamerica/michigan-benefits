@@ -1,6 +1,6 @@
 module Integrated
   class AmountInAccountsController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       !application.navigator.money_in_accounts?
     end
 

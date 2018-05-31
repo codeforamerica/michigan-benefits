@@ -1,6 +1,6 @@
 module Integrated
   class SelfEmploymentDetailsController < MemberPerPageController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       application.members.self_employed.none?
     end
 

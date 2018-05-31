@@ -1,6 +1,6 @@
 module Integrated
   class FoodAssistanceController < FormsController
-    def self.skip?(current_application)
+    def self.custom_skip_rule_set(current_application)
       if current_application.single_member_household? || current_application.unstable_housing?
         ActiveRecord::Base.transaction do
           current_application.members.each do |member|

@@ -1,6 +1,6 @@
 module Integrated
   class TellUsAuthorizedRepController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       !application.authorized_representative_yes?
     end
 

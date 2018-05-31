@@ -1,6 +1,6 @@
 module Integrated
   class ResidentialAddressController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       application.unstable_housing?
     end
 

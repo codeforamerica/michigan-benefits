@@ -1,7 +1,7 @@
 module Integrated
   class DoYouHaveJobController < FormsController
-    def self.skip?(application)
-      !application.single_member_household?
+    def self.skip_rule_sets(application)
+      [SkipRules.single_member_only(application)]
     end
 
     def update_models

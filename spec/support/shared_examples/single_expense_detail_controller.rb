@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.shared_examples_for "single expense detail controller" do |expense_type, other_expense_type, additional_member_attributes|
+RSpec.shared_examples_for "single expense detail controller" do |expense_type, other_expense_type, attrs|
   let(:member_attributes) do
-    {}.merge(additional_member_attributes)
+    attrs || {}
   end
 
   describe "#skip?" do
