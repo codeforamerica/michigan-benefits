@@ -9,6 +9,7 @@ class FormNavigation
       Integrated::LivingSituationController,
       Integrated::ResidentialAddressController,
       Integrated::MailingAddressController,
+      Integrated::PhoneNumberController,
     ],
     "Household" => [
       Integrated::YourHouseholdController,
@@ -154,6 +155,8 @@ class FormNavigation
       Integrated::AuthorizedRepController,
       Integrated::TellUsAuthorizedRepController,
       Integrated::ProvideSsnController,
+      Integrated::HowElseContactController,
+      Integrated::TellUsContactController,
       Integrated::ReviewPaperworkController,
       Integrated::UploadPaperworkController,
       Integrated::LegalAgreementController,

@@ -50,6 +50,9 @@ class AssistanceApplicationForm
       mailing_address: formatted_full_address(benefit_application.mailing_address),
       dob: mmddyyyy_date(benefit_application.primary_member.birthday),
       ssn: formatted_ssn(benefit_application.primary_member.ssn),
+      phone_home: formatted_phone(benefit_application.phone_number),
+      phone_cell: formatted_phone(benefit_application.sms_phone_number),
+      email: benefit_application.email,
       completion_signature_applicant: benefit_application.signature,
       completion_signature_date: mmddyyyy_date(benefit_application.signed_at),
       received_assistance: yes_no_or_unfilled(

@@ -72,6 +72,8 @@ class CommonApplication < ApplicationRecord
   enum income_changed: { unfilled: 0, yes: 1, no: 2 }, _prefix: :income_changed
   enum authorized_representative: { unfilled: 0, yes: 1, no: 2 }, _prefix: :authorized_representative
   enum less_than_threshold_in_accounts: { unfilled: 0, yes: 1, no: 2 }, _prefix: :less_than_threshold_in_accounts
+  enum sms_consented: { unfilled: 0, yes: 1, no: 2 }, _prefix: :sms_consented
+  enum email_consented: { unfilled: 0, yes: 1, no: 2 }, _prefix: :email_consented
 
   delegate :display_name, to: :primary_member
 

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20180530183937) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "account_type", null: false
+    t.integer "amount"
     t.datetime "created_at", null: false
     t.string "institution"
     t.datetime "updated_at", null: false
@@ -120,15 +121,19 @@ ActiveRecord::Schema.define(version: 20180530183937) do
     t.string "authorized_representative_phone"
     t.datetime "created_at", null: false
     t.string "email"
+    t.integer "email_consented", default: 0
     t.integer "income_changed", default: 0
     t.text "income_changed_explanation"
     t.integer "less_than_threshold_in_accounts", default: 0
     t.integer "living_situation", default: 0
     t.string "paperwork", default: [], array: true
+    t.string "phone_number"
     t.integer "previously_received_assistance", default: 0, null: false
     t.string "properties", default: [], array: true
     t.string "signature"
     t.datetime "signed_at"
+    t.integer "sms_consented", default: 0
+    t.string "sms_phone_number"
     t.datetime "updated_at", null: false
   end
 

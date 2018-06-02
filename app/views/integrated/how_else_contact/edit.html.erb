@@ -1,0 +1,33 @@
+<% content_for :header_title, "Finishing Up" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      How can we follow up with you?
+    </h1>
+    <p class="text--centered text--help">
+      In addition to mail and phone calls,
+      how would you like to receive important
+      messages and reminders?
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder, hidden_field_id: true) do |f| %>
+      <%= f.mb_checkbox :postal_mail, "Postal mail",
+                        options: { disabled: true, checked: true } %>
+      <%= f.mb_checkbox :phone_call, "Phone call",
+                        options: { disabled: true, checked: true } %>
+      <%= f.mb_checkbox :sms_consented, "Text message",
+                        options: {checked_value: "yes", unchecked_value: "no" } %>
+      <%= f.mb_checkbox :email_consented, "Email",
+                        options: { checked_value: "yes", unchecked_value: "no" } %>
+    <% end %>
+
+  <p class='text--secure'>
+    <i class='illustration illustration--safety'></i>
+    No matter what, you will receive all official notices and legal
+    information via postal mail.
+  </p>
+
+<% end %>
+

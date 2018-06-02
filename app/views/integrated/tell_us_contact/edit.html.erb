@@ -1,0 +1,20 @@
+<% content_for :header_title, "Finishing Up" %>
+<% content_for :form_card_title, "Tell us where to reach you." %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <% if current_application.sms_consented_yes? %>
+        <%= f.mb_phone_number_field :sms_phone_number,
+                                    "Cell phone number",
+                                    type: :tel,
+                                    autofocus: true,
+                                    options: { maxlength: 10 },
+                                    help_text: "No dashes or spaces (example: 8105551234)." %>
+      <% end %>
+      <% if current_application.email_consented_yes? %>
+        <%= f.mb_input_field :email, "Email address",
+                             type: "email",
+                             options: { placeholder: "me@example.com" } %>
+      <% end %>
+    <% end %>
+<% end %>

@@ -74,6 +74,14 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Introduction" do
+      expect(page).to have_content("What's the best number for you to receive phone calls?")
+
+      fill_in "Phone number", with: "2024561111"
+
+      proceed_with "Continue"
+    end
+
     on_page "Your Household" do
       expect(page).to have_content("Okay thanks! Now tell us about your household.")
 
