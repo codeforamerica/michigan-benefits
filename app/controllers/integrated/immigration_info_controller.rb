@@ -1,6 +1,6 @@
 module Integrated
   class ImmigrationInfoController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       application.navigator.everyone_citizen?
     end
 

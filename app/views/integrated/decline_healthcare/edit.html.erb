@@ -18,19 +18,7 @@
         <span>No, go back</span>
     <% end %>
 
-    <%= form_for @form,
-      as: :form,
-      builder: MbFormBuilder,
-      url: current_path,
-      method: :put,
-      namespace: "yes" do |f| %>
-
-        <button
-        type="submit"
-        class="button button--nav button--cta button--full-mobile">
-          Yes, I'm sure
-        </button>
-    <% end %>
+    <%= render "integrated/next_step_link", button_label: "Yes, I'm sure" %>
   </footer>
 <% end %>
 

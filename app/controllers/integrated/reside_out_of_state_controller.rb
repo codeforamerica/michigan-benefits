@@ -1,6 +1,6 @@
 module Integrated
   class ResideOutOfStateController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       application.navigator.resides_in_state?
     end
 

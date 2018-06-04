@@ -1,6 +1,6 @@
 module Integrated
   class JobDetailsController < MemberPerPageController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       !application.anyone_employed?
     end
 

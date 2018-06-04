@@ -2,8 +2,13 @@ module ManyExpensesDetails
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def skip?(application)
-      return true if !application.single_member_household?
+    def skip_rule_sets(application)
+      [
+        SkipRules.single_member_only(application),
+      ]
+    end
+
+    def custom_skip_rule_set(application)
       application.expenses.public_send(expenses_scope).none?
     end
   end

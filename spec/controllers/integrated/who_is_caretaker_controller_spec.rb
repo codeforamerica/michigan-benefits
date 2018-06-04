@@ -2,35 +2,28 @@ require "rails_helper"
 
 RSpec.describe Integrated::WhoIsCaretakerController do
   describe "#skip?" do
-    context "when single member household" do
-      it "returns true" do
-        application = create(:common_application, :single_member)
-
-        skip_step = Integrated::WhoIsCaretakerController.skip?(application)
-        expect(skip_step).to be_truthy
-      end
-    end
-
     context "when multi member household" do
-      context "when someone in household is caretaker" do
-        it "returns false" do
-          application = create(:common_application,
-            :multi_member,
-            navigator: build(:application_navigator, anyone_caretaker: true))
+      context "when at least one person is applying for healthcare" do
+        context "when someone in household is caretaker" do
+          it "returns false" do
+            application = create(:common_application,
+              members: build_list(:household_member, 2, requesting_healthcare: "yes"),
+              navigator: build(:application_navigator, anyone_caretaker: true))
 
-          skip_step = Integrated::WhoIsCaretakerController.skip?(application)
-          expect(skip_step).to be_falsey
+            skip_step = Integrated::WhoIsCaretakerController.skip?(application)
+            expect(skip_step).to be_falsey
+          end
         end
-      end
 
-      context "when no one in household is caretaker" do
-        it "returns true" do
-          application = create(:common_application,
-            :multi_member,
-            navigator: build(:application_navigator, anyone_caretaker: false))
+        context "when no one in household is caretaker" do
+          it "returns true" do
+            application = create(:common_application,
+              members: build_list(:household_member, 2, requesting_healthcare: "yes"),
+              navigator: build(:application_navigator, anyone_caretaker: false))
 
-          skip_step = Integrated::WhoIsCaretakerController.skip?(application)
-          expect(skip_step).to be_truthy
+            skip_step = Integrated::WhoIsCaretakerController.skip?(application)
+            expect(skip_step).to be_truthy
+          end
         end
       end
     end

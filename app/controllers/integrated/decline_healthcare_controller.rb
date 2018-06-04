@@ -1,13 +1,7 @@
 module Integrated
   class DeclineHealthcareController < FormsController
-    def self.skip?(application)
-      application.healthcare_applying_members.count.positive?
-    end
-
-    def update
-      flash[:notice] = "Please select 'Apply for FAP'"
-      session[:current_application_id] = nil
-      redirect_to(root_path)
+    def self.skip_rule_sets(application)
+      [SkipRules.must_not_be_applying_for_healthcare(application)]
     end
 
     def form_class

@@ -1,12 +1,16 @@
 module Integrated
   class AnyoneFosterCareController < FormsController
-    def self.skip?(application)
-      return true if application.single_member_household?
-      application.members.map(&:age).each do |age|
-        return false unless age
-        return false if age >= 18 && age <= 26
+    def self.skip_rule_sets(application)
+      [
+        SkipRules.multi_member_only(application),
+        SkipRules.must_be_applying_for_healthcare(application),
+      ]
+    end
+
+    def self.custom_skip_rule_set(application)
+      application.members.all? do |member|
+        member.age.present? && (member.age < 18 || member.age > 26)
       end
-      true
     end
 
     def update_models

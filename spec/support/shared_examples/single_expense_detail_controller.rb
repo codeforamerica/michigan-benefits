@@ -1,10 +1,14 @@
 require "rails_helper"
 
-RSpec.shared_examples_for "single expense detail controller" do |expense_type, other_expense_type|
+RSpec.shared_examples_for "single expense detail controller" do |expense_type, other_expense_type, attrs|
+  let(:member_attributes) do
+    attrs || {}
+  end
+
   describe "#skip?" do
     context "with a single member household" do
       it "returns true" do
-        application = create(:common_application, members: [build(:household_member)])
+        application = create(:common_application, members: [build(:household_member, **member_attributes)])
 
         skip_step = controller.class.skip?(application)
         expect(skip_step).to eq(true)
@@ -15,7 +19,7 @@ RSpec.shared_examples_for "single expense detail controller" do |expense_type, o
       context "has relevant expenses" do
         it "returns false" do
           application = create(:common_application,
-            members: build_list(:household_member, 2),
+            members: build_list(:household_member, 2, **member_attributes),
             expenses: [build(:expense, expense_type: expense_type)])
 
           skip_step = controller.class.skip?(application)
@@ -26,7 +30,7 @@ RSpec.shared_examples_for "single expense detail controller" do |expense_type, o
       context "has no relevant expenses" do
         it "returns true" do
           application = create(:common_application,
-            members: build_list(:household_member, 2),
+            members: build_list(:household_member, 2, **member_attributes),
             expenses: [build(:expense, expense_type: other_expense_type)])
 
           skip_step = controller.class.skip?(application)
@@ -39,7 +43,7 @@ RSpec.shared_examples_for "single expense detail controller" do |expense_type, o
   describe "edit" do
     context "with existing expense details" do
       it "assigns previously entered details" do
-        members = build_list(:household_member, 4)
+        members = build_list(:household_member, 4, **member_attributes)
         application = create(:common_application,
           members: members,
           expenses: [build(:expense,

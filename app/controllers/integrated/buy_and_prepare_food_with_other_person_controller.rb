@@ -1,6 +1,6 @@
 module Integrated
   class BuyAndPrepareFoodWithOtherPersonController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       if application.unstable_housing? || application.food_applying_members.count != 2
         true
       else

@@ -1,8 +1,7 @@
 module Integrated
   class FileTaxesNextYearController < FormsController
-    def self.skip?(application)
-      return true if application.healthcare_applying_members.count < 1
-      return true unless application.primary_member.requesting_healthcare_yes?
+    def self.custom_skip_rule_set(application)
+      application.primary_member.requesting_healthcare_no?
     end
 
     def update_models

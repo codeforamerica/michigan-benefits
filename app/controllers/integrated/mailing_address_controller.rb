@@ -1,6 +1,6 @@
 module Integrated
   class MailingAddressController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       application.stable_address? && application.navigator.residential_mailing_same?
     end
 

@@ -1,6 +1,6 @@
 module Integrated
   class HowManyBabiesController < MemberPerPageController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       !application.navigator.anyone_pregnant?
     end
 

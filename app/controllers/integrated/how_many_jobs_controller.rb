@@ -1,6 +1,6 @@
 module Integrated
   class HowManyJobsController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       application.single_member_household? && !application.navigator.current_job?
     end
 

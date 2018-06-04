@@ -6,7 +6,7 @@ RSpec.describe Integrated::AreYouFlintWaterController do
       context "when member is pregnant" do
         it "returns false" do
           application = create(:common_application,
-                               members: build_list(:household_member, 1, pregnant: "yes"))
+             members: build_list(:household_member, 1, requesting_healthcare: "yes", pregnant: "yes"))
           skip_step = Integrated::AreYouFlintWaterController.skip?(application)
           expect(skip_step).to be_falsey
         end
@@ -15,7 +15,7 @@ RSpec.describe Integrated::AreYouFlintWaterController do
       context "when member has pregnancy expenses" do
         it "returns false" do
           application = create(:common_application,
-                               members: build_list(:household_member, 1, pregnancy_expenses: "yes"))
+            members: build_list(:household_member, 1, requesting_healthcare: "yes", pregnancy_expenses: "yes"))
           skip_step = Integrated::AreYouFlintWaterController.skip?(application)
           expect(skip_step).to be_falsey
         end
@@ -24,7 +24,7 @@ RSpec.describe Integrated::AreYouFlintWaterController do
       context "when member age is not set" do
         it "returns false" do
           application = create(:common_application,
-                               members: build_list(:household_member, 1))
+            members: build_list(:household_member, 1, requesting_healthcare: "yes"))
           skip_step = Integrated::AreYouFlintWaterController.skip?(application)
           expect(skip_step).to be_falsey
         end
@@ -33,7 +33,7 @@ RSpec.describe Integrated::AreYouFlintWaterController do
       context "when member is younger than 21" do
         it "returns false" do
           application = create(:common_application,
-                               members: build_list(:household_member, 1, birthday: 20.years.ago))
+            members: build_list(:household_member, 1, requesting_healthcare: "yes", birthday: 20.years.ago))
           skip_step = Integrated::AreYouFlintWaterController.skip?(application)
           expect(skip_step).to be_falsey
         end
@@ -41,20 +41,12 @@ RSpec.describe Integrated::AreYouFlintWaterController do
 
       context "when member is 21 or older" do
         it "returns true" do
-          application = create(:common_application, members: build_list(:household_member, 1, birthday: 22.years.ago))
+          application = create(:common_application,
+            members: build_list(:household_member, 1, requesting_healthcare: "yes", birthday: 22.years.ago))
 
           skip_step = Integrated::AreYouFlintWaterController.skip?(application)
           expect(skip_step).to be_truthy
         end
-      end
-    end
-
-    context "when household has more than one member" do
-      it "returns true" do
-        application = create(:common_application, members: build_list(:household_member, 2))
-
-        skip_step = Integrated::AreYouFlintWaterController.skip?(application)
-        expect(skip_step).to be_truthy
       end
     end
   end

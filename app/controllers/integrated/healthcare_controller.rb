@@ -1,10 +1,7 @@
 module Integrated
   class HealthcareController < FormsController
-    def self.skip?(application)
-      if application.single_member_household?
-        application.primary_member.update!(requesting_healthcare: "yes")
-        true
-      end
+    def self.skip_rule_sets(application)
+      [SkipRules.multi_member_only(application)]
     end
 
     def edit

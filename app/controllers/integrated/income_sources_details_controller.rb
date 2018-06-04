@@ -1,6 +1,6 @@
 module Integrated
   class IncomeSourcesDetailsController < MemberPerPageController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       application.additional_incomes.none?
     end
 
