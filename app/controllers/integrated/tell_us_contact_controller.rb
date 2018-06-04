@@ -1,6 +1,6 @@
 module Integrated
   class TellUsContactController < FormsController
-    def self.skip?(application)
+    def self.custom_skip_rule_set(application)
       application.sms_consented_no? && application.email_consented_no?
     end
 
