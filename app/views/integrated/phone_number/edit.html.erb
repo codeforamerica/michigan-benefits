@@ -1,0 +1,15 @@
+<% content_for :header_title, "Introduction" %>
+<% content_for :form_card_title, "What's the best number for you to receive phone calls?" %>
+
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <%= f.mb_phone_number_field :phone_number,
+                                  "Phone number",
+                                  type: :tel,
+                                  autofocus: true,
+                                  options: { maxlength: 10 },
+                                  help_text: "No dashes or spaces (example: 8105551234).",
+                                  optional: true %>
+    <% end %>
+<% end %>

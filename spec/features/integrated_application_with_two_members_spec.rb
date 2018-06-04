@@ -75,6 +75,12 @@ RSpec.feature "Integrated application" do
       proceed_with "Continue"
     end
 
+    on_page "Introduction" do
+      expect(page).to have_content("What's the best number for you to receive phone calls?")
+
+      proceed_with "Continue"
+    end
+
     on_page "Your Household" do
       expect(page).to have_content("Okay thanks! Now tell us about your household.")
 
@@ -428,6 +434,14 @@ RSpec.feature "Integrated application" do
       )
 
       fill_in "Social Security Number", with: "123456789"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content(
+        "How can we follow up with you?",
+      )
 
       proceed_with "Continue"
     end
