@@ -2,21 +2,23 @@ require "rails_helper"
 
 RSpec.describe Integrated::DependentCareExpensesController do
   describe "#skip?" do
-    context "when single-member household" do
-      it "returns true" do
-        application = create(:common_application, :single_member)
+    context "requesting food assistance" do
+      context "when single-member household" do
+        it "returns true" do
+          application = create(:common_application, :single_member_food)
 
-        skip_step = Integrated::DependentCareExpensesController.skip?(application)
-        expect(skip_step).to be_truthy
+          skip_step = Integrated::DependentCareExpensesController.skip?(application)
+          expect(skip_step).to be_truthy
+        end
       end
-    end
 
-    context "when two or more members in a household" do
-      it "returns false" do
-        application = create(:common_application, :multi_member)
+      context "when two or more members in a household" do
+        it "returns false" do
+          application = create(:common_application, :multi_member_food)
 
-        skip_step = Integrated::DependentCareExpensesController.skip?(application)
-        expect(skip_step).to be_falsey
+          skip_step = Integrated::DependentCareExpensesController.skip?(application)
+          expect(skip_step).to be_falsey
+        end
       end
     end
   end

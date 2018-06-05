@@ -6,10 +6,11 @@ RSpec.shared_examples_for "single expense detail controller" do |expense_type, o
   end
 
   describe "#skip?" do
-    context "with a single member household" do
+    context "with a single member household and relevant expenses" do
       it "returns true" do
-        application = create(:common_application, members: [build(:household_member, **member_attributes)])
-
+        application = create(:common_application,
+          members: [build(:household_member, **member_attributes)],
+          expenses: [build(:expense, expense_type: expense_type)])
         skip_step = controller.class.skip?(application)
         expect(skip_step).to eq(true)
       end

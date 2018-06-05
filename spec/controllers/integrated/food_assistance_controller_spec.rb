@@ -7,7 +7,7 @@ RSpec.describe Integrated::FoodAssistanceController do
         it "returns true and includes member in snap household" do
           application = create(:common_application,
             living_situation: "stable_address",
-            members: build_list(:household_member, 1),
+            members: build_list(:household_member, 1, requesting_food: "yes"),
             navigator: create(:application_navigator))
 
           expect(described_class.skip?(application)).to eq(true)
@@ -23,7 +23,7 @@ RSpec.describe Integrated::FoodAssistanceController do
         it "returns false and does not update members" do
           application = create(:common_application,
             living_situation: "stable_address",
-            members: build_list(:household_member, 3))
+            members: build_list(:household_member, 3, requesting_food: "yes"))
 
           to_skip = nil
           expect do
@@ -38,7 +38,7 @@ RSpec.describe Integrated::FoodAssistanceController do
       it "returns true and includes member in snap household" do
         application = create(:common_application,
           living_situation: "temporary_address",
-          members: build_list(:household_member, 1))
+          members: build_list(:household_member, 1, requesting_food: "yes"))
 
         expect(described_class.skip?(application)).to eq(true)
 

@@ -1,12 +1,16 @@
 require "rails_helper"
 
-RSpec.shared_examples_for "many expenses details controller" do |expense_type, other_expense_type|
+RSpec.shared_examples_for "many expenses details controller" do |expense_type, other_expense_type, attrs|
+  let(:member_attributes) do
+    attrs || {}
+  end
+
   describe "#skip?" do
-    context "with a multimember household" do
+    context "with a multimember household and relevant expenses" do
       it "returns true" do
         application = create(:common_application,
-          :multi_member,
-          expenses: [build(:expense, expense_type: expense_type)])
+                             members: build_list(:household_member, 3, **member_attributes),
+                             expenses: [build(:expense, expense_type: expense_type)])
 
         skip_step = controller.class.skip?(application)
         expect(skip_step).to eq(true)
@@ -17,8 +21,8 @@ RSpec.shared_examples_for "many expenses details controller" do |expense_type, o
       context "has relevant expenses" do
         it "returns false" do
           application = create(:common_application,
-            :single_member,
-            expenses: [build(:expense, expense_type: expense_type)])
+                               members: [build(:household_member, **member_attributes)],
+                               expenses: [build(:expense, expense_type: expense_type)])
 
           skip_step = controller.class.skip?(application)
           expect(skip_step).to eq(false)
@@ -28,8 +32,8 @@ RSpec.shared_examples_for "many expenses details controller" do |expense_type, o
       context "has no relevant expenses" do
         it "returns true" do
           application = create(:common_application,
-            :single_member,
-            expenses: [build(:expense, expense_type: other_expense_type)])
+                               members: [build(:household_member, **member_attributes)],
+                               expenses: [build(:expense, expense_type: other_expense_type)])
 
           skip_step = controller.class.skip?(application)
           expect(skip_step).to eq(true)

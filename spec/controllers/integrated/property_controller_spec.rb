@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Integrated::PropertyController do
-  describe "edit" do
+  describe "#edit" do
     it "assigns existing property types" do
       current_app = create(:common_application, properties: ["house"])
 

@@ -75,4 +75,40 @@ RSpec.describe SkipRules do
       end
     end
   end
+
+  describe "#must_be_applying_for_food_assistance" do
+    context "when not applying for food_assistance" do
+      it "returns true" do
+        application = instance_double(CommonApplication, applying_for_food_assistance?: false)
+
+        expect(SkipRules.must_be_applying_for_food_assistance(application)).to eq(true)
+      end
+    end
+
+    context "when applying for food_assistance" do
+      it "returns false" do
+        application = instance_double(CommonApplication, applying_for_food_assistance?: true)
+
+        expect(SkipRules.must_be_applying_for_food_assistance(application)).to be_falsey
+      end
+    end
+  end
+
+  describe "#must_not_be_applying_for_food_assistance" do
+    context "when applying for food_assistance" do
+      it "returns true" do
+        application = instance_double(CommonApplication, applying_for_food_assistance?: true)
+
+        expect(SkipRules.must_not_be_applying_for_food_assistance(application)).to eq(true)
+      end
+    end
+
+    context "when not applying for food_assistance" do
+      it "returns false" do
+        application = instance_double(CommonApplication, applying_for_food_assistance?: false)
+
+        expect(SkipRules.must_not_be_applying_for_food_assistance(application)).to be_falsey
+      end
+    end
+  end
 end

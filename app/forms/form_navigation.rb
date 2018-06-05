@@ -20,9 +20,9 @@ class FormNavigation
       Integrated::BuyAndPrepareFoodWithOtherPersonController,
       Integrated::ShareFoodCostsWithHouseholdController,
       Integrated::BuyAndPrepareFoodSeparatelyController,
+      Integrated::ReviewFoodAssistanceMembersController,
     ],
     "Healthcare" => [
-      Integrated::ReviewFoodAssistanceMembersController,
       Integrated::HealthcareController,
       Integrated::DeclineHealthcareController,
     ],

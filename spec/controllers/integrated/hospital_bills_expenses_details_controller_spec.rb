@@ -1,5 +1,5 @@
 require "rails_helper"
 
 RSpec.describe Integrated::HospitalBillsExpensesDetailsController do
-  it_behaves_like "single expense detail controller", :hospital_bills, :copays
+  it_behaves_like "single expense detail controller", :hospital_bills, :copays, requesting_food: "yes"
 end

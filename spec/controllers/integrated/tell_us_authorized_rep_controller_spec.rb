@@ -4,7 +4,9 @@ RSpec.describe Integrated::TellUsAuthorizedRepController do
   describe "#skip?" do
     context "no authorized representative designated" do
       it "returns true" do
-        application = create(:common_application, authorized_representative: "no")
+        application = create(:common_application,
+                             members: build_list(:household_member, 2, requesting_food: "yes"),
+                             authorized_representative: "no")
 
         skip_step = Integrated::TellUsAuthorizedRepController.skip?(application)
         expect(skip_step).to eq(true)
