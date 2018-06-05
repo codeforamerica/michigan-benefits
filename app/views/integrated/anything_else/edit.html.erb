@@ -1,0 +1,18 @@
+<% content_for :header_title, "Finishing Up" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Is there anything else you'd like us to know about your situation?
+    </h1>
+    <p class="text--centered text--help">
+      Feel free to give other details you think might be helpful for us to know. Otherwise, you can skip this question.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <%= f.mb_textarea(:additional_information,
+                        "Is there anything else you'd like us to know about your situation?",
+                        autofocus: true, hide_label: true) %>
+    <% end %>
+<% end %>

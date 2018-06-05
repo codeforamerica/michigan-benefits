@@ -374,6 +374,15 @@ RSpec.feature "SNAP-only integrated application" do
     end
 
     on_page "Finishing Up" do
+      expect(page).to have_content("Is there anything else you'd like us to know about your situation?")
+
+      fill_in "Is there anything else you'd like us to know about your situation?",
+              with: "Don't know if I'll have a job next month"
+
+      proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
       expect(page).to have_content(
         "Is there anyone you would like to make your official authorized representative?",
       )

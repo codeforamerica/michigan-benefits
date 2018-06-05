@@ -94,6 +94,7 @@ RSpec.describe AssistanceApplicationForm do
            authorized_representative: "yes",
            authorized_representative_name: "Trusty McTrusterson",
            authorized_representative_phone: "2024561111",
+           additional_information: "Lost my job, staying with a friend for two weeks",
            signature: "Octopus Cuttlefish",
            signed_at: DateTime.new(2018, 4, 1))
       end
@@ -200,6 +201,8 @@ RSpec.describe AssistanceApplicationForm do
           assets_property_rental: "Yes",
           completion_signature_applicant: "Octopus Cuttlefish",
           completion_signature_date: "04/01/2018",
+          has_additional_info: "Yes",
+          additional_info: "Lost my job, staying with a friend for two weeks",
         )
       end
     end

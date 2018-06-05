@@ -422,6 +422,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Finishing Up" do
+      expect(page).to have_content("Is there anything else you'd like us to know about your situation?")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
       expect(page).to have_content(
         "Is there anyone you would like to make your official authorized representative?",
       )
