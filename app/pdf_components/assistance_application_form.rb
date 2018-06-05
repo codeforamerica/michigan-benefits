@@ -55,6 +55,11 @@ class AssistanceApplicationForm
       email: benefit_application.email,
       completion_signature_applicant: benefit_application.signature,
       completion_signature_date: mmddyyyy_date(benefit_application.signed_at),
+      has_additional_info: yes_no_or_unfilled(
+        yes: benefit_application.additional_information.present?,
+        no: benefit_application.additional_information.blank?,
+      ),
+      additional_info: benefit_application.additional_information,
       received_assistance: yes_no_or_unfilled(
         yes: benefit_application.previously_received_assistance_yes?,
         no: benefit_application.previously_received_assistance_no?,
