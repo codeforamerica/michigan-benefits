@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users
 
   authenticate :admin_user do
-    # match "/delayed_job" => DelayedJobWeb, anchor: false, via: %i(get post)
+    match "/delayed_job" => DelayedJobWeb, anchor: false, via: %i(get post)
 
     namespace :admin do
       resources :snap_applications, only: %i[index show] do
