@@ -1,5 +1,11 @@
 module Integrated
   class BuyAndPrepareFoodSeparatelyController < FormsController
+    def self.skip_rule_sets(application)
+      [
+        SkipRules.must_be_applying_for_food_assistance(application),
+      ]
+    end
+
     def self.custom_skip_rule_set(application)
       application.navigator.all_share_food_costs?
     end

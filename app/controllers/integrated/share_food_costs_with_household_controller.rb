@@ -1,5 +1,11 @@
 module Integrated
   class ShareFoodCostsWithHouseholdController < FormsController
+    def self.skip_rule_sets(application)
+      [
+        SkipRules.must_be_applying_for_food_assistance(application),
+      ]
+    end
+
     def self.custom_skip_rule_set(application)
       return true if application.unstable_housing?
       return true if application.food_applying_members.count <= 2

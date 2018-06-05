@@ -13,7 +13,7 @@ RSpec.describe Integrated::ChildcareExpensesController do
 
     context "when two or more members in a household" do
       it "returns false" do
-        application = create(:common_application, :multi_member)
+        application = create(:common_application, :multi_member_food)
 
         skip_step = Integrated::ChildcareExpensesController.skip?(application)
         expect(skip_step).to be_falsey

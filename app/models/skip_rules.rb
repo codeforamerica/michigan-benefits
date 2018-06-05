@@ -14,4 +14,12 @@ module SkipRules
   def self.must_not_be_applying_for_healthcare(application)
     true if application.applying_for_healthcare?
   end
+
+  def self.must_be_applying_for_food_assistance(application)
+    true unless application.applying_for_food_assistance?
+  end
+
+  def self.must_not_be_applying_for_food_assistance(application)
+    true if application.applying_for_food_assistance?
+  end
 end

@@ -1,10 +1,13 @@
 module Integrated
   class ChildcareExpensesController < FormsController
-    def self.skip?(application)
-      application.single_member_household?
-    end
-
     include SingleExpense
+
+    def self.skip_rule_sets(application)
+      [
+        SkipRules.must_be_applying_for_food_assistance(application),
+        SkipRules.multi_member_only(application),
+      ]
+    end
 
     def expense_type
       :childcare
