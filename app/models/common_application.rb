@@ -101,6 +101,10 @@ class CommonApplication < ApplicationRecord
     members - [primary_member]
   end
 
+  def applying_for_both?
+    applying_for_food_assistance? && applying_for_healthcare?
+  end
+
   def applying_for_food_assistance?
     members.any?(&:requesting_food_yes?)
   end

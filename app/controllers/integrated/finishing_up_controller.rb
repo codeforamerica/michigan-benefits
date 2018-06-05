@@ -1,7 +1,7 @@
 module Integrated
-  class FinishingUpController < FormsController
-    def form_class
-      NullStep
+  class FinishingUpController < TransitionController
+    def current_step
+      step_count + 1
     end
   end
 end

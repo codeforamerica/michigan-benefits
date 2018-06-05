@@ -1,7 +1,7 @@
 module Integrated
-  class YourHouseholdController < FormsController
-    def form_class
-      NullStep
+  class YourHouseholdController < TransitionController
+    def current_step
+      1
     end
   end
 end
