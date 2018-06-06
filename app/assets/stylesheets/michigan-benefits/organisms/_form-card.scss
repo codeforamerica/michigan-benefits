@@ -32,7 +32,11 @@
 
 .form-card__button_centered {
   text-align: center;
+  + .form-card__button_centered {
+    margin-top: 1em;
+  }
 }
+
 
 .pre-title {
   font-weight: 600;
