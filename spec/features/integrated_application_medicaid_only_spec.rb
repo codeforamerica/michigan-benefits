@@ -189,12 +189,6 @@ RSpec.feature "Medicaid-only integrated application" do
     end
 
     on_page "Household Expenses" do
-      expect(page).to have_content("Household bills")
-
-      proceed_with "Continue"
-    end
-
-    on_page "Household Expenses" do
       expect(page).to have_content("Does anyone pay for interest on student loans?")
 
       proceed_with "No"
@@ -299,6 +293,12 @@ RSpec.feature "Medicaid-only integrated application" do
 
     on_page "Finishing Up" do
       expect(page).to have_content("Finishing up")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Finishing Up" do
+      expect(page).to have_content("Is there anything else you'd like us to know about your situation?")
 
       proceed_with "Continue"
     end
