@@ -7,22 +7,21 @@
   position: relative;
   margin-bottom: 1em;
   border-bottom: 1px solid $color-tan;
-}
-
-.uploadable-preview__info {
-  display: block;
-  margin-right: 150px;
-  min-height: 75px;
-}
-
-.uploadable-preview__thumb {
-  background-size: cover;
-  border-radius: $border-radius;
-  height: 75px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 75px;
+  &__info {
+    display: block;
+    margin-right: 150px;
+    min-height: 75px;
+    overflow-wrap: break-word;
+  }
+  &__thumb {
+    background-size: cover;
+    border-radius: $border-radius;
+    height: 75px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 75px;
+  }
 }
 
 .uploadable-status {
