@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Integrated::IncomeSourcesController do
-  describe "edit" do
+  describe "#edit" do
     it "assigns existing income sources" do
       primary_member = build(:household_member,
         additional_incomes: [build(:additional_income, income_type: "unemployment")])
@@ -57,6 +57,26 @@ RSpec.describe Integrated::IncomeSourcesController do
         income_types = primary_member.additional_incomes.map(&:income_type)
 
         expect(income_types).to match_array(["unemployment", "pension"])
+      end
+    end
+  end
+
+  describe "#income_sources" do
+    context "applying for food assistance" do
+      it "should include taxable income sources" do
+        current_app = create(:common_application, :multi_member_food)
+        session[:current_application_id] = current_app.id
+
+        expect(controller.income_sources.keys).to include(:ssi, :child_support, :workers_comp)
+      end
+    end
+
+    context "applying for health coverage only" do
+      it "should not include any taxable income sources" do
+        current_app = create(:common_application, :multi_member_healthcare)
+        session[:current_application_id] = current_app.id
+
+        expect(controller.income_sources.keys).to_not include(:ssi, :child_support, :workers_comp)
       end
     end
   end

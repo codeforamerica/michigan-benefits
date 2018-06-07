@@ -7,7 +7,7 @@
     <%= f.hidden_field :id %>
 
     <%= f.mb_checkbox_set_with_none(:income_sources,
-      AdditionalIncome::INCOME_SOURCES.map { |key, label|
+      income_sources.map { |key, label|
         { method: key, label: label }
       },
       label_text: t(".title", **member_appropriate_translation_data)) %>

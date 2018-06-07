@@ -12,6 +12,14 @@ class AdditionalIncome < ApplicationRecord
     workers_comp: "Worker's Compensation",
   }.freeze
 
+  INCOME_SOURCES_HEALTHCARE_ONLY = {
+    unemployment: "Unemployment",
+    pension: "Pension",
+    retirement: "Retirement",
+    social_security: "Social Security",
+    alimony: "Alimony",
+  }.freeze
+
   def self.all_income_types
     INCOME_SOURCES.keys
   end
