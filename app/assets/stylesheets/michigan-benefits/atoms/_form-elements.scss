@@ -12,3 +12,11 @@
   border: 0;
   outline: 0;
 }
+
+.checkbox {
+  &.is-disabled {
+    background-color: rgba($color-teal, .05);
+    border-color: rgba($color-teal, .05);
+    color: rgba(#000, .5);
+  }
+}

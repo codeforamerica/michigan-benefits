@@ -487,6 +487,9 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     if options[:disabled] && object.public_send(method) == checked_value
       classes.push("is-selected")
     end
+    if options[:disabled]
+      classes.push("is-disabled")
+    end
 
     <<~HTML.html_safe
       <label class="#{classes.join(' ')}" id="#{sanitized_id(method)}__label">

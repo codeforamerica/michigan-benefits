@@ -813,7 +813,7 @@ RSpec.describe MbFormBuilder do
         expect(output).to be_html_safe
 
         expect(output).to match_html <<-HTML
-        <label class="checkbox is-selected" id="sample_read_tos__label">
+        <label class="checkbox is-selected is-disabled" id="sample_read_tos__label">
           <input name="sample[read_tos]" disabled="disabled" type="hidden" value="no" />
           <input checked_value="yes" unchecked_value="no" disabled="disabled" aria-labelledby="sample_read_tos__label" type="checkbox" value="yes" checked="checked" name="sample[read_tos]" id="sample_read_tos" />
           Confirm that you agree to Terms of Service
