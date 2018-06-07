@@ -1,7 +1,7 @@
 <div class="uploadable-preview dz-preview dz-file-preview dz-details">
   <div class="uploadable-preview__info">
     <h4><span class="uploadable-status successful">✔</span><%= URI.unescape(File.basename(url)) %></h4>
-    <%= hidden_field_tag "form[#{attribute_name}][]", url %>
+    <%= hidden_field_tag "#{object_name}[#{attribute_name}][]", url %>
     <p class="text--help"><%= link_to 'Delete', '#', class: "link--subtle link--delete" %></p>
   </div>
 </div>

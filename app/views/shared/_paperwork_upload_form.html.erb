@@ -39,7 +39,7 @@
         <div class="form-card__uploadables" id="form-card__uploadables">
           <%= render partial: 'shared/uploadable',
             collection: current_application.paperwork,
-            locals: { attribute_name: "paperwork" },
+            locals: { object_name: object_name, attribute_name: "paperwork" },
             as: :url %>
         </div>
 
