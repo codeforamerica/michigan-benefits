@@ -275,7 +275,6 @@ RSpec.feature "Medicaid-only integrated application" do
       )
 
       check "Unemployment"
-      check "Child Support"
 
       proceed_with "Continue"
     end
@@ -286,7 +285,6 @@ RSpec.feature "Medicaid-only integrated application" do
       )
 
       fill_in "Unemployment", with: "100"
-      fill_in "Child Support", with: "50"
 
       proceed_with "Continue"
     end
