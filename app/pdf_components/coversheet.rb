@@ -4,6 +4,6 @@ class Coversheet
   end
 
   def output_file
-    @_output_file ||= open("app/lib/pdfs/DHS_1171_cover_letter.pdf")
+    @_output_file ||= open("app/lib/pdfs/AssistanceApplication_CoverSheet.pdf")
   end
 end
