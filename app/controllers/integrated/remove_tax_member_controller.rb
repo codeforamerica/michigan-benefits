@@ -9,7 +9,7 @@ module Integrated
     end
 
     def overview_path
-      review_tax_relationships_sections_path
+      review_tax_household_sections_path
     end
   end
 end

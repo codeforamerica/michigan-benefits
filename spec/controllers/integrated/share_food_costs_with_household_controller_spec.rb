@@ -57,8 +57,7 @@ RSpec.describe Integrated::ShareFoodCostsWithHouseholdController do
       end
 
       it "updates the models" do
-        current_app = create(:common_application,
-                             navigator: build(:application_navigator))
+        current_app = create(:common_application, :single_member)
         session[:current_application_id] = current_app.id
 
         put :update, params: valid_params
@@ -76,7 +75,6 @@ RSpec.describe Integrated::ShareFoodCostsWithHouseholdController do
 
       it "updates the models" do
         current_app = create(:common_application,
-                             navigator: build(:application_navigator),
                              members: build_list(:household_member, 3, requesting_food: "yes"))
         session[:current_application_id] = current_app.id
 

@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 20180613174159) do
     t.boolean "all_share_food_costs", default: true
     t.boolean "anyone_caretaker", default: true
     t.boolean "anyone_disabled", default: true
-    t.boolean "anyone_else_on_tax_return", default: true
     t.boolean "anyone_flint_water", default: false
     t.boolean "anyone_foster_care_at_18", default: false
     t.boolean "anyone_healthcare_enrolled", default: true
