@@ -15,7 +15,7 @@ module ApplicationHelper
     elsif application.receiving_office_name == "Union"
       "Union Street"
     else
-      application.receiving_office_name
+      "MDHHS"
     end
   end
 end
