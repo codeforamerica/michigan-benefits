@@ -1,7 +1,10 @@
 module Integrated
   class HealthcareController < FormsController
     def self.skip_rule_sets(application)
-      [SkipRules.multi_member_only(application)]
+      [
+        SkipRules.multi_member_only(application),
+        SkipRules.must_be_applying_for_healthcare(application)
+      ]
     end
 
     def edit

@@ -154,14 +154,6 @@ RSpec.feature "SNAP-only integrated application" do
 
     on_page "Healthcare" do
       expect(page).to have_content(
-        "Which people also need Healthcare Coverage?",
-      )
-
-      click_on "Continue"
-    end
-
-    on_page "Healthcare" do
-      expect(page).to have_content(
         "Are you sure you don't want to apply for Healthcare Coverage?",
       )
 

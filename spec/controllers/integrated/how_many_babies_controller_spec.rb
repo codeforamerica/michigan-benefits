@@ -2,23 +2,35 @@ require "rails_helper"
 
 RSpec.describe Integrated::HowManyBabiesController do
   describe "#skip?" do
-    context "when no one is pregnant" do
-      it "returns true" do
-        application = create(:common_application,
-          navigator: build(:application_navigator, anyone_pregnant: false))
+    context "when applying for healthcare" do
+      context "when someone is pregnant" do
+        it "returns false" do
+          application = create(:common_application, :multi_member_healthcare,
+                               navigator: build(:application_navigator, anyone_pregnant: true))
 
-        skip_step = Integrated::HowManyBabiesController.skip?(application)
-        expect(skip_step).to be_truthy
+          skip_step = Integrated::HowManyBabiesController.skip?(application)
+          expect(skip_step).to be_falsey
+        end
+      end
+
+      context "when no one is pregnant" do
+        it "returns true" do
+          application = create(:common_application, :multi_member_healthcare,
+                               navigator: build(:application_navigator, anyone_pregnant: false))
+
+          skip_step = Integrated::HowManyBabiesController.skip?(application)
+          expect(skip_step).to be_truthy
+        end
       end
     end
 
-    context "when someone is pregnant" do
-      it "returns false" do
-        application = create(:common_application,
-          navigator: build(:application_navigator, anyone_pregnant: true))
+    context "when applying for food only" do
+      it "returns true" do
+        application = create(:common_application, :multi_member_food,
+                             navigator: build(:application_navigator, anyone_pregnant: true))
 
         skip_step = Integrated::HowManyBabiesController.skip?(application)
-        expect(skip_step).to be_falsey
+        expect(skip_step).to be_truthy
       end
     end
   end
