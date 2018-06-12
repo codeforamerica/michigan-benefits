@@ -28,7 +28,6 @@ class FormNavigation
     ],
     "Taxes" => [
       Integrated::FileTaxesNextYearController,
-      Integrated::IncludeAnyoneElseOnTaxesController,
       Integrated::DescribeTaxRelationshipsController,
       Integrated::ReviewTaxRelationshipsController,
     ],

@@ -276,12 +276,6 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Healthcare" do
-      expect(page).to have_content("Is there anyone else who can be included on your tax return?")
-
-      proceed_with "Yes"
-    end
-
-    on_page "Healthcare" do
       expect(page).to have_content("How will you include others on your taxes?")
 
       select_radio(question: "Jonny Tester", answer: "Married filing jointly")
