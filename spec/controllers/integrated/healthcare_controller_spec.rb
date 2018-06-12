@@ -12,18 +12,29 @@ RSpec.describe Integrated::HealthcareController do
     end
 
     context "when multi-member household" do
-      it "returns false" do
-        application = create(:common_application, :multi_member)
+      context "when applying for healthcare" do
+        it "returns false" do
+          application = create(:common_application, :multi_member_healthcare)
 
-        skip_step = Integrated::HealthcareController.skip?(application)
-        expect(skip_step).to be_falsey
+          skip_step = Integrated::HealthcareController.skip?(application)
+          expect(skip_step).to be_falsey
+        end
+      end
+
+      context "when applying for food only" do
+        it "returns true" do
+          application = create(:common_application, :multi_member_food)
+
+          skip_step = Integrated::HealthcareController.skip?(application)
+          expect(skip_step).to be_truthy
+        end
       end
     end
   end
 
   describe "#update" do
     context "with valid params" do
-      it "marks members as requesting food" do
+      it "marks members as requesting healthcare" do
         current_app = create(:common_application,
           members: [create(:household_member), create(:household_member)])
         session[:current_application_id] = current_app.id
