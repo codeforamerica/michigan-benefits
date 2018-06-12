@@ -5,8 +5,15 @@ class FormsController < ApplicationController
 
   helper_method :application_title
 
-  def application_title
-    "Food + Health Assistance"
+  def application_title(separator = " + ")
+    if current_application&.navigator
+      programs = []
+      programs << "Food Assistance" if current_application.navigator.applying_for_food?
+      programs << "Healthcare Coverage" if current_application.navigator.applying_for_healthcare?
+      programs.join(separator)
+    else
+      "Food Assistance#{separator}Healthcare Coverage"
+    end
   end
 
   def edit

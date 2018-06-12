@@ -10,14 +10,18 @@
       You applied for:
     </div>
     <div class="program-selector--container">
-      <label class="program-selector program-selector__unbordered">
-        <div class="illustration illustration--icn_food"></div>
-        <h4 class="program-selector__title">Food Assistance</h4>
-      </label>
-      <label class="program-selector program-selector__unbordered">
-        <div class="illustration illustration--icn_health"></div>
-        <h4 class="program-selector__title">Medicaid</h4>
-      </label>
+      <% if current_application.navigator.applying_for_food? %>
+        <label class="program-selector program-selector__unbordered">
+          <div class="illustration illustration--icn_food"></div>
+          <h4 class="program-selector__title">Food Assistance</h4>
+        </label>
+      <% end %>
+      <% if current_application.navigator.applying_for_healthcare? %>
+        <label class="program-selector program-selector__unbordered">
+          <div class="illustration illustration--icn_health"></div>
+          <h4 class="program-selector__title">Medicaid</h4>
+        </label>
+      <% end %>
     </div>
 <% end %>
 
