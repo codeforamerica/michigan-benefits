@@ -4,7 +4,7 @@
 <% content_for :form_card_body do %>
   <p>
     By entering your name you agree that you want to apply for
-    Medical Assistance and Food Assistance, that you have been honest on this application.
+    <%= application_title(" and ") %>, that you have been honest on this application.
   </p>
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
     <%= f.mb_input_field :signature,
