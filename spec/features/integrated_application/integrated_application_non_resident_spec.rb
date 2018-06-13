@@ -55,7 +55,6 @@ RSpec.feature "Integrated application" do
       expect(page).to have_content("Which programs do you want to apply for today?")
 
       check "Food Assistance Program"
-      uncheck "Healthcare Coverage"
 
       proceed_with "Continue"
     end
@@ -88,7 +87,6 @@ RSpec.feature "Integrated application" do
     on_page "Introduction" do
       expect(page).to have_content("Which programs do you want to apply for today?")
 
-      uncheck "Food Assistance Program"
       check "Healthcare Coverage"
 
       proceed_with "Continue"

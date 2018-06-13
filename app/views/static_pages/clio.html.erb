@@ -20,7 +20,7 @@ end %>
 
     <% if GateKeeper.feature_enabled?("INTEGRATED_APPLICATION") %>
       <div class="hero--cta-options grid__item">
-        <%= link_to section_path(FormNavigation.first, office_page: "clio", applying_for_food: 1, applying_for_healthcare: 1) do %>
+        <%= link_to section_path(FormNavigation.first, office_page: "clio") do %>
             <p class="button button--cta button--fully-width">Start your application</p>
         <% end %>
       </div>

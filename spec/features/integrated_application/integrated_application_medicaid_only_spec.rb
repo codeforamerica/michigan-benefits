@@ -20,7 +20,6 @@ RSpec.feature "Medicaid-only integrated application" do
       expect(page).to have_content("Which programs do you want to apply for today?")
 
       check "Healthcare Coverage"
-      uncheck "Food Assistance Program"
 
       proceed_with "Continue"
     end
