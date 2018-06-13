@@ -91,7 +91,9 @@ class CommonApplication < ApplicationRecord
     @_pdf ||= ApplicationPdfAssembler.new(benefit_application: self).run
   end
 
-  def office_location; end
+  def office_location
+    office_page
+  end
 
   def primary_member
     members.first

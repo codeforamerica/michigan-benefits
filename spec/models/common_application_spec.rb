@@ -266,4 +266,12 @@ RSpec.describe CommonApplication do
       expect(application.display_name).to eq("Octopus Cuttlefish")
     end
   end
+
+  describe "#office_location" do
+    it "returns office page" do
+      app = create(:common_application, office_page: "union")
+
+      expect(app.office_location).to eq("union")
+    end
+  end
 end

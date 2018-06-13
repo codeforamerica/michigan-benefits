@@ -9,8 +9,6 @@ class StaticPagesController < ApplicationController
 
   def clio; end
 
-  def combined; end
-
   def step_path(*args)
     super.gsub("%2F", "/")
   end

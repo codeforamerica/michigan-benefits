@@ -3,7 +3,17 @@ class WhichProgramsForm < Form
                      :applying_for_food,
                      :applying_for_healthcare
 
+  set_attributes_for :application, :office_page
+
   validate :at_least_one_program_selected
+
+  validates(
+    :office_page,
+    allow_blank: true,
+    inclusion: {
+      in: %w(clio union)
+    },
+  )
 
   def at_least_one_program_selected
     return true if applying_for_anything?
