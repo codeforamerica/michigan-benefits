@@ -167,6 +167,12 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Healthcare" do
+      expect(page).to have_content("Will you file taxes next year?")
+
+      proceed_with "No"
+    end
+
+    on_page "Healthcare" do
       expect(page).to have_content(
         "Which people also need Healthcare Coverage?",
       )
@@ -175,12 +181,6 @@ RSpec.feature "Integrated application" do
       check "Jonny Tester"
 
       proceed_with "Continue"
-    end
-
-    on_page "Healthcare" do
-      expect(page).to have_content("Will you file taxes next year?")
-
-      proceed_with "No"
     end
 
     on_page "Household" do

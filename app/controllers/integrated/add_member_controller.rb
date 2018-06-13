@@ -1,6 +1,6 @@
 module Integrated
   class AddMemberController < FormsController
-    helper_method :valid_relationship_options, :valid_relationship_options_for_taxes
+    helper_method :valid_relationship_options
 
     def previous_path(*_args)
       overview_path
@@ -29,21 +29,6 @@ module Integrated
         HouseholdMember::RELATIONSHIP_LABELS_AND_KEYS.reject { |arr| arr.second == "spouse" }
       else
         HouseholdMember::RELATIONSHIP_LABELS_AND_KEYS
-      end
-    end
-
-    def valid_relationship_options_for_taxes
-      options_for_taxes = valid_relationship_options
-      options_for_taxes.each do |option|
-        case option[0]
-        when "Choose one"
-          option # do nothing
-        when "Spouse"
-          option << { "data-follow-up": "#spouse-follow-up" }
-        else
-          option << { "data-follow-up": "#nonspouse-follow-up" }
-        end
-        options_for_taxes
       end
     end
 

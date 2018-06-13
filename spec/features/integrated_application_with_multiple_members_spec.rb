@@ -248,46 +248,47 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Healthcare" do
-      expect(page).to have_content(
-        "Which people also need Healthcare Coverage?",
-      )
+      expect(page).to have_content("Will you file taxes next year?")
+
+      proceed_with "Yes"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content("Who will you file taxes with?")
+
+      expect(page).to have_content("Jessie Tester (that's you!)")
+      expect(page).to have_content("Jonny Tester")
+      expect(page).to have_content("Jackie Tester")
+      expect(page).to have_content("Pupper McDog")
+      expect(page).to have_content("Joe Schmoe")
+      expect(page).to have_content("Apples McMackintosh")
 
       click_on "Add a person"
     end
 
-    kitty = {
-      first_name: "Kitty",
-      last_name: "DeRat",
-      relationship: "Roommate",
+    ginny = {
+      first_name: "Ginny",
+      last_name: "Pig",
+      relationship: "Child",
     }
+
     on_page "Healthcare" do
       expect(page).to have_content("Add a person.")
 
-      fill_in "What's their first name?", with: kitty[:first_name]
-      fill_in "What's their last name?", with: kitty[:last_name]
-      select kitty[:relationship], from: "What is their relationship to you?"
+      fill_in "What's their first name?", with: ginny[:first_name]
+      fill_in "What's their last name?", with: ginny[:last_name]
+      select ginny[:relationship], from: "What is their relationship to you?"
 
       proceed_with "Continue"
     end
-    members << kitty
+    members << ginny
 
     on_page "Healthcare" do
-      expect(page).to have_content(
-        "Which people also need Healthcare Coverage?",
-      )
+      expect(page).to have_content("Who will you file taxes with?")
 
-      # Jessie Tester checked by default
-      check "Joe Schmoe"
-      check "Pupper McDog"
-      # Kitty DeRat checked by default
+      expect(page).to have_content("Ginny Pig")
 
       proceed_with "Continue"
-    end
-
-    on_page "Healthcare" do
-      expect(page).to have_content("Will you file taxes next year?")
-
-      proceed_with "Yes"
     end
 
     on_page "Healthcare" do
@@ -298,55 +299,20 @@ RSpec.feature "Integrated application" do
       select_radio(question: "Joe Schmoe", answer: "Not included")
       select_radio(question: "Apples McMackintosh", answer: "Not included")
       select_radio(question: "Pupper McDog", answer: "Dependent")
-      select_radio(question: "Kitty DeRat", answer: "Not included")
+      select_radio(question: "Ginny Pig", answer: "Dependent")
 
       proceed_with "Continue"
     end
 
     on_page "Healthcare" do
-      expect(page).to have_content("Is there anyone else who can be included on your tax return?")
+      expect(page).to have_content(
+        "Which people also need Healthcare Coverage?",
+      )
 
-      within "#tax-included" do
-        expect(page).to have_content("Jessie Tester (that's you!)")
-        expect(page).to have_content("Jonny Tester")
-        expect(page).to have_content("Jackie Tester")
-        expect(page).to have_content("Pupper McDog")
-      end
-
-      within "#not-tax-included" do
-        expect(page).to have_content("Joe Schmoe")
-        expect(page).to have_content("Apples McMackintosh")
-        expect(page).to have_content("Kitty DeRat")
-      end
-
-      click_on "Add a person"
-    end
-
-    ginny = {
-      first_name: "Ginny",
-      last_name: "Pig",
-      relationship: "Child",
-      tax_relationship: "Dependent",
-    }
-
-    on_page "Healthcare" do
-      expect(page).to have_content("Add a person.")
-
-      fill_in "What's their first name?", with: ginny[:first_name]
-      fill_in "What's their last name?", with: ginny[:last_name]
-      select ginny[:relationship], from: "What is their relationship to you?"
-      select_radio question: "How are they included on your tax return?", answer: ginny[:tax_relationship]
-
-      proceed_with "Continue"
-    end
-    members << ginny
-
-    on_page "Healthcare" do
-      expect(page).to have_content("Is there anyone else who can be included on your tax return?")
-
-      within "#tax-included" do
-        expect(page).to have_content("Ginny Pig")
-      end
+      # Jessie Tester checked by default
+      check "Joe Schmoe"
+      check "Pupper McDog"
+      check "Ginny Pig"
 
       proceed_with "Continue"
     end

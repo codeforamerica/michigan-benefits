@@ -15,19 +15,6 @@ RSpec.describe Integrated::DescribeTaxRelationshipsController do
             skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
             expect(skip_step).to be_falsey
           end
-
-          context "when no one else is on tax return" do
-            it "returns true" do
-              application = create(:common_application,
-                members: [
-                  build(:household_member, filing_taxes_next_year: "yes"),
-                ],
-                navigator: build(:application_navigator, anyone_else_on_tax_return: false))
-
-              skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
-              expect(skip_step).to eq(true)
-            end
-          end
         end
 
         context "when primary member is not filing taxes" do
@@ -49,9 +36,8 @@ RSpec.describe Integrated::DescribeTaxRelationshipsController do
             members: [
               build(:household_member, requesting_healthcare: "no"),
               build(:household_member),
-            ],
-            navigator: build(:application_navigator, anyone_else_on_tax_return: true))
-
+            ]
+          )
           skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
           expect(skip_step).to eq(true)
         end
@@ -131,9 +117,7 @@ RSpec.describe Integrated::DescribeTaxRelationshipsController do
       end
 
       it "renders edit without updating" do
-        current_app = create(:common_application,
-          members: [member_1, member_2],
-          navigator: build(:application_navigator, anyone_else_on_tax_return: "yes"))
+        current_app = create(:common_application, members: [member_1, member_2])
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: invalid_params }
