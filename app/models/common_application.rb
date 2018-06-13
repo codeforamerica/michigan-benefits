@@ -92,7 +92,11 @@ class CommonApplication < ApplicationRecord
   end
 
   def office_location
-    office_page
+    if selected_office_location == "clio" || selected_office_location == "union"
+      selected_office_location
+    else
+      office_page
+    end
   end
 
   def primary_member

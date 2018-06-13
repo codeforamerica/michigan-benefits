@@ -43,6 +43,13 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Introduction" do
+      expect(page).to have_content("Which office are you in?")
+
+      choose "Clio Road"
+      proceed_with "Continue"
+    end
+
+    on_page "Introduction" do
       expect(page).to have_content("To start, please introduce yourself")
 
       fill_in "What's your first name?", with: "Jessie"
