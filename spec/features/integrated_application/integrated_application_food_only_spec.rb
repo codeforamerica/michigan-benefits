@@ -20,7 +20,6 @@ RSpec.feature "SNAP-only integrated application" do
       expect(page).to have_content("Which programs do you want to apply for today?")
 
       check "Food Assistance Program"
-      uncheck "Healthcare Coverage"
 
       proceed_with "Continue"
     end
