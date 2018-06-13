@@ -5,6 +5,7 @@ class FormNavigation
       Integrated::WelcomeController,
       Integrated::ResideInStateController,
       Integrated::ResideOutOfStateController,
+      Integrated::OfficeLocationController,
       Integrated::IntroduceYourselfController,
       Integrated::LivingSituationController,
       Integrated::ResidentialAddressController,

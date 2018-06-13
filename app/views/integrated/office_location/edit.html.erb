@@ -1,0 +1,19 @@
+<% content_for :header_title, "Introduction" %>
+
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">Which office are you in?</h1>
+<% end %>
+
+<% content_for :form_card_body do %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+        <%= f.mb_radio_set :selected_office_location,
+                           label_text: "Which office are you in?",
+                           legend_class: "sr-only",
+                           collection: [
+                             { value: :clio, label: "Clio Road" },
+                             { value: :union, label: "Union Street" },
+                             { value: :other, label: "Other" },
+                             { value: :not_in_office, label: "I'm not in an office" },
+                           ] %>
+    <% end %>
+<% end %>

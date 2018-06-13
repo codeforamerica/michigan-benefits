@@ -268,10 +268,38 @@ RSpec.describe CommonApplication do
   end
 
   describe "#office_location" do
-    it "returns office page" do
-      app = create(:common_application, office_page: "union")
+    context "when selected office location clio or union" do
+      it "returns selected office location" do
+        app1 = create(:common_application,
+                      selected_office_location: "clio",
+                      office_page: "foo")
+        app2 = create(:common_application,
+                      selected_office_location: "union",
+                      office_page: "foo")
 
-      expect(app.office_location).to eq("union")
+        expect(app1.office_location).to eq("clio")
+        expect(app2.office_location).to eq("union")
+      end
+    end
+
+    context "when selected office location is not clio or union" do
+      context "the office page is present" do
+        it "returns office page" do
+          app = create(:common_application,
+                       selected_office_location: nil,
+                       office_page: "union")
+
+          expect(app.office_location).to eq("union")
+        end
+      end
+
+      context "the office page is not present" do
+        it "returns nil" do
+          app = create(:common_application, selected_office_location: "other", office_page: nil)
+
+          expect(app.office_location).to eq(nil)
+        end
+      end
     end
   end
 end
