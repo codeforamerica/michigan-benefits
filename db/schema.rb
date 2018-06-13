@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612175516) do
+ActiveRecord::Schema.define(version: 20180612233322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20180612175516) do
     t.text "income_changed_explanation"
     t.integer "less_than_threshold_in_accounts", default: 0
     t.integer "living_situation", default: 0
+    t.string "office_page"
     t.string "paperwork", default: [], array: true
     t.string "phone_number"
     t.integer "previously_received_assistance", default: 0, null: false

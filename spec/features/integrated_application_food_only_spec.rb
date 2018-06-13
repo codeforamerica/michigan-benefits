@@ -1,17 +1,26 @@
 require "rails_helper"
 
 RSpec.feature "SNAP-only integrated application" do
-  scenario "applying with two members", :js do
-    visit combined_home_path
+  before do
+    ENV["INTEGRATED_APPLICATION_ENABLED"] = "true"
+  end
+
+  after do
+    ENV["INTEGRATED_APPLICATION_ENABLED"] = "false"
+  end
+
+  scenario "with two members", :js do
+    visit root_path
 
     within(".slab--hero") do
-      proceed_with "Apply for FAP and Medicaid"
+      proceed_with "Start your application"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Which programs do you want to apply for today?")
 
       check "Food Assistance Program"
+      uncheck "Healthcare Coverage"
 
       proceed_with "Continue"
     end

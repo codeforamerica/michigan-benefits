@@ -7,11 +7,19 @@ RSpec.feature "Integrated application" do
   CIRCLED = Integrated::PdfAttributes::CIRCLED
   UNDERLINED = Integrated::PdfAttributes::UNDERLINED
 
+  before do
+    ENV["INTEGRATED_APPLICATION_ENABLED"] = "true"
+  end
+
+  after do
+    ENV["INTEGRATED_APPLICATION_ENABLED"] = "false"
+  end
+
   scenario "with multiple members", :js do
-    visit combined_home_path
+    visit root_path
 
     within(".slab--hero") do
-      proceed_with "Apply for FAP and Medicaid"
+      proceed_with "Start your application"
     end
 
     on_page "Introduction" do

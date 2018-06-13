@@ -43,7 +43,7 @@ class FormsController < ApplicationController
   end
 
   def first_step_path
-    combined_home_path
+    root_path
   end
 
   def self.form_class

@@ -17,7 +17,8 @@
   </div>
 
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
-    <%= f.mb_checkbox_set(:programs,
+        <%= f.hidden_field :office_page, value: @form.office_page %>
+        <%= f.mb_checkbox_set(:programs,
                           [
                               { method: :applying_for_food, label: "Food Assistance Program" },
                               { method: :applying_for_healthcare, label: "Healthcare Coverage" },

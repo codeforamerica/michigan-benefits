@@ -74,8 +74,6 @@ Rails.application.routes.draw do
   end
 
   unless GateKeeper.production_environment?
-    get "/combined" => "static_pages#combined", as: "combined_home"
-
     resources :sections, controller: :forms, only: %i[index show] do
       collection do
         FormNavigation.all.each do |controller_class|

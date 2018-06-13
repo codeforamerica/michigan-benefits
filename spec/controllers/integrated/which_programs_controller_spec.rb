@@ -14,6 +14,7 @@ RSpec.describe Integrated::WhichProgramsController do
     context "with an existing application" do
       it "assigns existing attributes" do
         current_app = create(:common_application,
+           office_page: "clio",
            navigator: build(:application_navigator,
                             applying_for_food: true,
                             applying_for_healthcare: true))
@@ -24,6 +25,7 @@ RSpec.describe Integrated::WhichProgramsController do
 
         form = assigns(:form)
 
+        expect(form.office_page).to eq("clio")
         expect(form.applying_for_food).to eq(true)
         expect(form.applying_for_healthcare).to eq(true)
       end
@@ -31,9 +33,18 @@ RSpec.describe Integrated::WhichProgramsController do
 
     context "without a current application" do
       it "renders edit" do
-        get :edit
+        get :edit, params: {
+          office_page: "clio",
+          applying_for_food: "true",
+          applying_for_healthcare: "true",
+        }
+
+        form = assigns(:form)
 
         expect(response).to render_template(:edit)
+        expect(form.office_page).to eq("clio")
+        expect(form.applying_for_food).to be_truthy
+        expect(form.applying_for_healthcare).to be_truthy
       end
     end
   end
@@ -44,6 +55,7 @@ RSpec.describe Integrated::WhichProgramsController do
         {
           applying_for_food: "1",
           applying_for_healthcare: "0",
+          office_page: "clio",
         }
       end
 
@@ -53,6 +65,7 @@ RSpec.describe Integrated::WhichProgramsController do
 
           current_app = CommonApplication.find(session[:current_application_id])
           expect(current_app.navigator.present?).to eq(true)
+          expect(current_app.office_page).to eq "clio"
         end
       end
 
@@ -67,6 +80,7 @@ RSpec.describe Integrated::WhichProgramsController do
 
           expect(current_app.navigator.applying_for_food).to eq(true)
           expect(current_app.navigator.applying_for_healthcare).to eq(false)
+          expect(current_app.office_page).to eq "clio"
         end
       end
     end

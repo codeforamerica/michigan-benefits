@@ -15,19 +15,5 @@ RSpec.describe StaticPagesController, type: :controller do
         expect(session[:current_application_id]).to be_nil
       end
     end
-
-    describe "#combined" do
-      it "clears applications from session" do
-        session[:snap_application_id] = 1
-        session[:medicaid_application_id] = 2
-        session[:current_application_id] = 3
-
-        get :combined
-
-        expect(session[:snap_application_id]).to be_nil
-        expect(session[:medicaid_application_id]).to be_nil
-        expect(session[:current_application_id]).to be_nil
-      end
-    end
   end
 end
