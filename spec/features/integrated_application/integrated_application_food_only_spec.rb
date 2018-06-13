@@ -168,14 +168,6 @@ RSpec.feature "SNAP-only integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Healthcare" do
-      expect(page).to have_content(
-        "Are you sure you don't want to apply for Healthcare Coverage?",
-      )
-
-      click_on "Yes, I'm sure"
-    end
-
     on_page "Household" do
       expect(page).to have_content("Getting to know you")
 

@@ -4,6 +4,10 @@ module Integrated
       [SkipRules.must_not_be_applying_for_healthcare(application)]
     end
 
+    def self.custom_skip_rule_set(application)
+      !application.navigator.applying_for_healthcare?
+    end
+
     def form_class
       NullStep
     end
