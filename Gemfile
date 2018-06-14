@@ -6,6 +6,7 @@ ruby "~> 2.5.1"
 
 gem "activemodel_type_symbol"
 gem "administrate"
+gem "administrate-field-enum"
 gem "attr_encrypted"
 gem "auto_strip_attributes"
 gem "aws-sdk"

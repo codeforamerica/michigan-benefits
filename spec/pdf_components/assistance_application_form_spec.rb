@@ -200,7 +200,7 @@ RSpec.describe AssistanceApplicationForm do
           anyone_assets_property: "Yes",
           assets_property_rental: "Yes",
           completion_signature_applicant: "Octopus Cuttlefish",
-          completion_signature_date: "04/01/2018",
+          completion_signature_date: "03/31/2018",
           has_additional_info: "Yes",
           additional_info: "Lost my job, staying with a friend for two weeks",
         )

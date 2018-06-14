@@ -302,4 +302,31 @@ RSpec.describe CommonApplication do
       end
     end
   end
+
+  describe "#last_emailed_office_at" do
+    it "returns time application was last successfully emailed to office" do
+      completed_at_time = DateTime.new(2018, 1, 1, 1, 30)
+      application = create(:common_application,
+        exports: [
+          create(:export,
+            :emailed_office,
+            :succeeded,
+            completed_at: completed_at_time - 1.day),
+          create(:export,
+            :emailed_office,
+            :succeeded,
+            completed_at: completed_at_time),
+          create(:export,
+            :emailed_client,
+            :succeeded,
+            completed_at: completed_at_time - 1.day),
+          create(:export,
+            :emailed_office,
+            :failed,
+            completed_at: completed_at_time - 1.day),
+        ])
+
+      expect(application.last_emailed_office_at).to eq(completed_at_time)
+    end
+  end
 end
