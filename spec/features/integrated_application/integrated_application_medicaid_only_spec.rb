@@ -102,16 +102,20 @@ RSpec.feature "Medicaid-only integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Your Household" do
-      expect(page).to have_content(
-        "Who do you currently live with?",
-      )
+    on_page "Healthcare" do
+      expect(page).to have_content("Will you file taxes next year?")
 
-      click_on "Add a member"
+      proceed_with "No"
     end
 
-    on_page "Your Household" do
-      expect(page).to have_content("Add a person you want to apply with")
+    on_page "Healthcare" do
+      expect(page).to have_content("Who is in your household?")
+
+      click_on "Add a person"
+    end
+
+    on_page "Healthcare" do
+      expect(page).to have_content("Add a person")
 
       fill_in "What's their first name?", with: "Jonny"
       fill_in "What's their last name?", with: "Tester"
@@ -120,20 +124,11 @@ RSpec.feature "Medicaid-only integrated application" do
       proceed_with "Continue"
     end
 
-    on_page "Your Household" do
-      expect(page).to have_content(
-        "Who do you currently live with?",
-      )
-
+    on_page "Healthcare" do
+      expect(page).to have_content("Who is in your household?")
       expect(page).to have_content("Jonny Tester")
 
       proceed_with "Continue"
-    end
-
-    on_page "Healthcare" do
-      expect(page).to have_content("Will you file taxes next year?")
-
-      proceed_with "No"
     end
 
     on_page "Healthcare" do

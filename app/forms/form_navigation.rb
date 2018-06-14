@@ -25,7 +25,7 @@ class FormNavigation
     ],
     "Taxes" => [
       Integrated::FileTaxesNextYearController,
-      Integrated::ReviewTaxHouseholdController,
+      Integrated::ReviewHealthcareHouseholdController,
       Integrated::DescribeTaxRelationshipsController,
     ],
     "Healthcare" => [
@@ -171,8 +171,8 @@ class FormNavigation
     Integrated::RemoveHouseholdMemberController,
     Integrated::AddFoodMemberController,
     Integrated::RemoveFoodMemberController,
-    Integrated::AddTaxMemberController,
-    Integrated::RemoveTaxMemberController,
+    Integrated::AddHealthcareMemberController,
+    Integrated::RemoveHealthcareMemberController,
     Integrated::AddVehicleController,
     Integrated::RemoveVehicleController,
     Integrated::AddAccountController,
