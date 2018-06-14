@@ -280,12 +280,12 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group">
-          <legend class="form-question " id="sample_birthday__label"> What is your birthday? </legend>
-          <p class="text--help" id="sample_birthday__help">(For surprises)</p>
+          <legend class="form-question"> What is your birthday? </legend>
+          <p class="text--help">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
-              <label for="sample_birthday_2i" class="sr-only" id="sample_birthday_2i__label">Month</label>
-              <select id="sample_birthday_2i" name="sample[birthday(2i)]" class="select__element" aria-labelledby="sample_birthday__label sample_birthday__help sample_birthday_2i__label">
+              <label for="sample_birthday_2i" class="sr-only">Month</label>
+              <select id="sample_birthday_2i" name="sample[birthday(2i)]" class="select__element">
                 <option value="">Month</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
@@ -302,8 +302,8 @@ RSpec.describe MbFormBuilder do
               </select>
             </div>
             <div class="select">
-              <label for="sample_birthday_3i" class="sr-only" id="sample_birthday_3i__label">Day</label>
-              <select id="sample_birthday_3i" name="sample[birthday(3i)]" class="select__element" aria-labelledby="sample_birthday__label sample_birthday__help sample_birthday_3i__label">
+              <label for="sample_birthday_3i" class="sr-only">Day</label>
+              <select id="sample_birthday_3i" name="sample[birthday(3i)]" class="select__element">
                 <option value="">Day</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -339,8 +339,8 @@ RSpec.describe MbFormBuilder do
               </select>
             </div>
             <div class="select">
-              <label for="sample_birthday_1i" class="sr-only" id="sample_birthday_1i__label">Year</label>
-              <select id="sample_birthday_1i" name="sample[birthday(1i)]" class="select__element" aria-labelledby="sample_birthday__label sample_birthday__help sample_birthday_1i__label">
+              <label for="sample_birthday_1i" class="sr-only">Year</label>
+              <select id="sample_birthday_1i" name="sample[birthday(1i)]" class="select__element">
                 <option value="">Year</option>
                 <option value="1990" selected="selected">1990</option>
                 <option value="1991">1991</option>
@@ -388,12 +388,12 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group">
-          <legend class="form-question " id="sample_members_72_birthday__label"> What is your birthday? </legend>
-          <p class="text--help" id="sample_members_72_birthday__help">(For surprises)</p>
+          <legend class="form-question"> What is your birthday? </legend>
+          <p class="text--help">(For surprises)</p>
           <div class="input-group--inline">
             <div class="select">
-              <label for="sample_members_72_birthday_2i" class="sr-only" id="sample_members_72_birthday_2i__label">Month</label>
-              <select id="sample_members_72_birthday_2i" name="sample[members][72][birthday(2i)]" class="select__element" aria-labelledby="sample_members_72_birthday__label sample_members_72_birthday__help sample_members_72_birthday_2i__label">
+              <label for="sample_members_72_birthday_2i" class="sr-only">Month</label>
+              <select id="sample_members_72_birthday_2i" name="sample[members][72][birthday(2i)]" class="select__element">
                 <option value="">Month</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
@@ -410,8 +410,8 @@ RSpec.describe MbFormBuilder do
               </select>
             </div>
             <div class="select">
-              <label for="sample_members_72_birthday_3i" class="sr-only" id="sample_members_72_birthday_3i__label">Day</label>
-              <select id="sample_members_72_birthday_3i" name="sample[members][72][birthday(3i)]" class="select__element" aria-labelledby="sample_members_72_birthday__label sample_members_72_birthday__help sample_members_72_birthday_3i__label">
+              <label for="sample_members_72_birthday_3i" class="sr-only">Day</label>
+              <select id="sample_members_72_birthday_3i" name="sample[members][72][birthday(3i)]" class="select__element">
                 <option value="">Day</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -447,8 +447,8 @@ RSpec.describe MbFormBuilder do
               </select>
             </div>
             <div class="select">
-              <label for="sample_members_72_birthday_1i" class="sr-only" id="sample_members_72_birthday_1i__label">Year</label>
-              <select id="sample_members_72_birthday_1i" name="sample[members][72][birthday(1i)]" class="select__element" aria-labelledby="sample_members_72_birthday__label sample_members_72_birthday__help sample_members_72_birthday_1i__label">
+              <label for="sample_members_72_birthday_1i" class="sr-only">Year</label>
+              <select id="sample_members_72_birthday_1i" name="sample[members][72][birthday(1i)]" class="select__element">
                 <option value="">Year</option>
                 <option value="1990" selected="selected">1990</option>
                 <option value="1991">1991</option>
@@ -480,19 +480,19 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
       <fieldset class="form-group">
-        <legend class="form-question " id="sample_birthday__label"> What is your birthday? </legend>
-        <p class="text--help" id="sample_birthday__help">(For surprises)</p>
+        <legend class="form-question"> What is your birthday? </legend>
+        <p class="text--help">(For surprises)</p>
         <div class="input-group--inline">
           <div class="form-group">
-            <label class="text--help form-subquestion" for="sample_birthday_month" id="sample_birthday_month__label">Month</label>
+            <label class="text--help form-subquestion" for="sample_birthday_month">Month</label>
             <input class="form-width--month text-input" id="sample_birthday_month" name="sample[birthday_month]" size="2" minlength="1" maxlength="2" type="tel" />
           </div>
           <div class="form-group">
-            <label class="text--help form-subquestion" for="sample_birthday_day" id="sample_birthday_day__label">Day</label>
+            <label class="text--help form-subquestion" for="sample_birthday_day">Day</label>
             <input class="form-width--day text-input" id="sample_birthday_day" name="sample[birthday_day]" size="2" minlength="1" maxlength="2" type="tel" />
           </div>
           <div class="form-group">
-            <label class="text--help form-subquestion" for="sample_birthday_year" id="sample_birthday_year__label">Year</label>
+            <label class="text--help form-subquestion" for="sample_birthday_year">Year</label>
             <input class="form-width--year text-input" id="sample_birthday_year" name="sample[birthday_year]" size="4" minlength="4" maxlength="4" type="tel" />
           </div>
         </div>
@@ -556,13 +556,13 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="form-group form-group--error">
-          <legend class="form-question " id="sample_dependent_care__label">
+          <legend class="form-question">
             Does your household have dependent care expenses?
           </legend>
-          <p class="text--help" id="sample_dependent_care__help">This includes child care.</p>
+          <p class="text--help">This includes child care.</p>
           <radiogroup class="input-group--block">
-            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_true__label" data-follow-up="#yep-follow-up" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
-            <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care__label sample_dependent_care__help sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
+            <label class="radio-button" id="sample_dependent_care_true__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care_true__label" data-follow-up="#yep-follow-up" type="radio" value="true" name="sample[dependent_care]" id="sample_dependent_care_true"/></div> Yep </label>
+            <label class="radio-button" id="sample_dependent_care_false__label"><div class="field_with_errors"><input aria-labelledby="sample_dependent_care__errors sample_dependent_care_false__label" type="radio" value="false" name="sample[dependent_care]" id="sample_dependent_care_false"/></div> Nope </label>
           </radiogroup>
           <span class="text--error" id="sample_dependent_care__errors"><i class="icon-warning"></i> can't be blank </span>
         </fieldset>
@@ -599,12 +599,12 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="input-group form-group">
-          <legend class="form-question " id="sample_captains__label"> Which captains do you think are cool? </legend>
-          <p class="text--help" id="sample_captains__help">like, really cool</p>
-          <label id="sample_captains_tng__label" class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_tng__label" type="checkbox" value="1" name="sample[tng]" id="sample_tng"/> Picard </label>
-          <label id="sample_captains_ds9__label" class="checkbox"><input name="sample[ds9]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_ds9__label" type="checkbox" value="1" name="sample[ds9]" id="sample_ds9"/> Sisko </label>
-          <label id="sample_captains_voyager__label" class="checkbox"><input name="sample[voyager]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_voyager__label" type="checkbox" value="1" name="sample[voyager]" id="sample_voyager"/> Janeway </label>
-          <label id="sample_captains_tos__label" class="checkbox"><input name="sample[tos]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_captains__help sample_captains_tos__label" type="checkbox" value="1" name="sample[tos]" id="sample_tos"/> Kirk </label>
+          <legend class="form-question"> Which captains do you think are cool? </legend>
+          <p class="text--help">like, really cool</p>
+          <label id="sample_captains_tng__label" class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[tng]" id="sample_tng"/> Picard </label>
+          <label id="sample_captains_ds9__label" class="checkbox"><input name="sample[ds9]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[ds9]" id="sample_ds9"/> Sisko </label>
+          <label id="sample_captains_voyager__label" class="checkbox"><input name="sample[voyager]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[voyager]" id="sample_voyager"/> Janeway </label>
+          <label id="sample_captains_tos__label" class="checkbox"><input name="sample[tos]" type="hidden" value="0" /><input type="checkbox" value="1" name="sample[tos]" id="sample_tos"/> Kirk </label>
         </fieldset>
       HTML
     end
@@ -634,11 +634,11 @@ RSpec.describe MbFormBuilder do
 
       expect(output).to match_html <<-HTML
         <fieldset class="input-group">
-          <legend class="sr-only" id="sample_captains__label"> Which captains do you think are cool? </legend>
-          <label id="sample_tng__label" class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_tng__label" type="checkbox" value="1" checked="checked" name="sample[tng]" id="sample_tng" /> Picard </label>
-          <label id="sample_voyager__label" class="checkbox"><input name="sample[voyager]" type="hidden" value="0" /><input aria-labelledby="sample_captains__label sample_voyager__label" type="checkbox" value="1" name="sample[voyager]" id="sample_voyager" /> Janeway </label>
+          <legend class="sr-only"> Which captains do you think are cool? </legend>
+          <label id="sample_tng__label" class="checkbox"><input name="sample[tng]" type="hidden" value="0" /><input aria-labelledby="sample_tng__label" type="checkbox" value="1" checked="checked" name="sample[tng]" id="sample_tng" /> Picard </label>
+          <label id="sample_voyager__label" class="checkbox"><input name="sample[voyager]" type="hidden" value="0" /><input aria-labelledby="sample_voyager__label" type="checkbox" value="1" name="sample[voyager]" id="sample_voyager" /> Janeway </label>
           <hr />
-          <label class="checkbox" id="none__label"><input aria-labelledby="sample_captains__label none__label" type="checkbox" name="" class="" id="none__checkbox" /> None of the above </label>
+          <label class="checkbox" id="none__label"><input aria-labelledby="none__label" type="checkbox" name="" class="" id="none__checkbox" /> None of the above </label>
         </fieldset>
       HTML
     end
@@ -667,11 +667,11 @@ RSpec.describe MbFormBuilder do
 
         expect(output).to match_html <<-HTML
           <fieldset class="input-group">
-            <legend class="sr-only" id="sample_captains__label"> Which captains do you think are cool? </legend>
-            <label id="sample_tng__label" class="checkbox"><input name="sample[captains][]" type="hidden" value="" /><input aria-labelledby="sample_captains__label sample_tng__label" type="checkbox" value="tng" checked="checked" name="sample[captains][]" id="sample_captains_tng" /> Picard </label>
-            <label id="sample_ds9__label" class="checkbox"><input name="sample[captains][]" type="hidden" value="" /><input aria-labelledby="sample_captains__label sample_ds9__label" type="checkbox" value="ds9" name="sample[captains][]" id="sample_captains_ds9" /> Sisko </label>
+            <legend class="sr-only"> Which captains do you think are cool? </legend>
+            <label id="sample_tng__label" class="checkbox"><input name="sample[captains][]" type="hidden" value="" /><input aria-labelledby="sample_tng__label" type="checkbox" value="tng" checked="checked" name="sample[captains][]" id="sample_captains_tng" /> Picard </label>
+            <label id="sample_ds9__label" class="checkbox"><input name="sample[captains][]" type="hidden" value="" /><input aria-labelledby="sample_ds9__label" type="checkbox" value="ds9" name="sample[captains][]" id="sample_captains_ds9" /> Sisko </label>
             <hr />
-            <label class="checkbox" id="none__label"><input aria-labelledby="sample_captains__label none__label" type="checkbox" name="" class="" id="none__checkbox" /> None of the above </label>
+            <label class="checkbox" id="none__label"><input aria-labelledby="none__label" type="checkbox" name="" class="" id="none__checkbox" /> None of the above </label>
           </fieldset>
         HTML
       end
@@ -740,30 +740,6 @@ RSpec.describe MbFormBuilder do
         <span class="text--error" id="sample_read_tos__errors">
           <i class="icon-warning"></i> can't be blank
         </span>
-      HTML
-    end
-
-    it "prefixes aria-labelledby with custom legend id" do
-      class SampleStep < Step
-        step_attributes(:read_tos)
-      end
-
-      sample = SampleStep.new
-      form = MbFormBuilder.new("sample", sample, template, {})
-      output = form.mb_checkbox(
-        :read_tos,
-        "Confirm that you agree to Terms of Service",
-        legend_id: "legend__label",
-      )
-
-      expect(output).to be_html_safe
-
-      expect(output).to match_html <<-HTML
-        <label class="checkbox" id="sample_read_tos__label">
-          <input name="sample[read_tos]" type="hidden" value="0" />
-          <input aria-labelledby="legend__label sample_read_tos__label" type="checkbox" value="1" name="sample[read_tos]" id="sample_read_tos" />
-          Confirm that you agree to Terms of Service
-        </label>
       HTML
     end
 

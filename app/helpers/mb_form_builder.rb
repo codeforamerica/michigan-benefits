@@ -313,8 +313,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     label_text:,
     collection:,
     help_text: nil,
-    layout: "block",
-    legend_class: ""
+    layout: "block"
   )
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
@@ -322,9 +321,8 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
           method: method,
           label_text: label_text,
           help_text: help_text,
-          legend_class: legend_class,
         )}
-        #{mb_radio_button(method, collection, layout, help_text)}
+        #{mb_radio_button(method, collection, layout)}
         #{errors_for(object, method)}
       </fieldset>
     HTML
@@ -335,17 +333,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     collection,
     label_text:,
     help_text: nil,
-    optional: false,
-    legend_class: ""
+    optional: false
   )
-    aria_labels = ["#{sanitized_id(method)}__label"]
-    aria_labels << "#{sanitized_id(method)}__help" if help_text
-
     checkbox_html = collection.map do |item|
       checkbox_label_id = "#{sanitized_id(method)}_#{item[:method]}__label"
-      options = {
-        'aria-labelledby': (aria_labels + [checkbox_label_id]).join(" "),
-      }
+      options = { 'aria-labelledby': checkbox_label_id }
 
       <<~HTML.html_safe
         <label id="#{checkbox_label_id}" class="checkbox">
@@ -359,7 +351,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         #{fieldset_label_contents(
           label_text: label_text,
           help_text: help_text,
-          legend_class: legend_class,
           optional: optional,
           method: method,
         )}
@@ -380,13 +371,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     if value_is_array
       options[:multiple] = true
     end
-    legend_id = aria_label(method)
-
     checkbox_collection_html = collection.map do |item|
       checkbox_label_id = aria_label(item[:method])
 
       local_options = options.merge(
-        'aria-labelledby': [legend_id, checkbox_label_id].join(" "),
+        'aria-labelledby': checkbox_label_id,
       )
 
       checkbox_html = if value_is_array
@@ -404,13 +393,13 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     <<~HTML.html_safe
       <fieldset class="input-group">
-        <legend class="sr-only" id="#{legend_id}">
+        <legend class="sr-only">
           #{label_text}
         </legend>
         #{checkbox_collection_html}
         <hr>
         <label class="checkbox" id="none__label">
-          <input aria-labelledby="#{legend_id} none__label" type="checkbox" name="" class="" id="none__checkbox">
+          <input aria-labelledby="none__label" type="checkbox" name="" class="" id="none__checkbox">
           None of the above
         </label>
       </fieldset>
@@ -475,13 +464,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     html_output.html_safe
   end
 
-  def mb_checkbox(method, label_text, legend_id: nil, options: {})
+  def mb_checkbox(method, label_text, options: {})
     checked_value = options[:checked_value] || "1"
     unchecked_value = options[:unchecked_value] || "0"
 
-    options["aria-labelledby"] = aria_labelledby(method: method,
-                                                 help_text: nil,
-                                                 prefix: legend_id)
+    options["aria-labelledby"] = aria_labelledby(method: method)
 
     classes = ["checkbox"]
     if options[:disabled] && object.public_send(method) == checked_value
@@ -518,20 +505,18 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   private
 
-  def mb_radio_button(method, collection, layout, help_text)
+  def mb_radio_button(method, collection, layout)
     radio_html = <<~HTML
       <radiogroup class="input-group--#{layout}">
     HTML
     collection.map do |item|
       item = { value: item, label: item } unless item.is_a?(Hash)
 
+      options = {
+        'aria-labelledby': aria_labelledby(method: method),
+      }.merge(item[:options].to_h)
+
       snake_case_value = sanitized_value(item[:value])
-
-      aria_labels = aria_labelledby(method: method, help_text: help_text)
-      aria_labels += " #{sanitized_id(method)}_#{snake_case_value}__label"
-
-      options = { 'aria-labelledby': aria_labels }.merge(item[:options].to_h)
-
       radio_html << <<~HTML.html_safe
         <label class="radio-button" id="#{sanitized_id(method)}_#{snake_case_value}__label">
           #{radio_button(method, item[:value], options)}
@@ -549,19 +534,18 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     method:,
     label_text:,
     help_text:,
-    legend_class: "",
     optional: false
   )
 
     label_html = <<~HTML
-      <legend class="form-question #{legend_class}" id="#{sanitized_id(method)}__label">
+      <legend class="form-question">
         #{label_text + optional_text(optional)}
       </legend>
     HTML
 
     if help_text
       label_html += <<~HTML
-        <p class="text--help" id="#{sanitized_id(method)}__help">#{help_text}</p>
+        <p class="text--help">#{help_text}</p>
       HTML
     end
 

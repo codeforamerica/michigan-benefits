@@ -4,14 +4,13 @@
 <% content_for :form_card_body do %>
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
     <fieldset class="input-group">
-      <legend class="sr-only" id="flint_water__legend">
+      <legend class="sr-only">
         Choose who is flint_water.
       </legend>
       <% @form.members.each do |member| %>
         <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
           <%= ff.mb_checkbox :flint_water,
                              member.display_name,
-                             legend_id: "flint_water__legend",
                              options: {
                                checked_value: "yes",
                                unchecked_value: "no",

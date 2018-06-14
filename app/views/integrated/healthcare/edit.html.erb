@@ -13,14 +13,13 @@
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
         <fieldset class="input-group">
-          <legend class="sr-only" id="requesting_healthcare__legend">
+          <legend class="sr-only">
             Choose who needs Healthcare Coverage.
           </legend>
           <% @form.members.each do |member| %>
               <%= f.fields_for('members[]', member, hidden_field_id: true) do |ff| %>
                   <%= ff.mb_checkbox :requesting_healthcare,
                     member.display_name,
-                    legend_id: "requesting_healthcare__legend",
                     options: { checked_value: "yes", unchecked_value: "no" } %>
               <% end %>
           <% end %>
