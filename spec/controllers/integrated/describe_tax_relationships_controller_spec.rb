@@ -36,8 +36,7 @@ RSpec.describe Integrated::DescribeTaxRelationshipsController do
             members: [
               build(:household_member, requesting_healthcare: "no"),
               build(:household_member),
-            ]
-          )
+            ])
           skip_step = Integrated::DescribeTaxRelationshipsController.skip?(application)
           expect(skip_step).to eq(true)
         end

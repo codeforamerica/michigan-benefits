@@ -11,7 +11,7 @@ class WhichProgramsForm < Form
     :office_page,
     allow_blank: true,
     inclusion: {
-      in: %w(clio union)
+      in: %w(clio union),
     },
   )
 

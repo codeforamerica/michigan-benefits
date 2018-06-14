@@ -160,4 +160,8 @@ class CommonApplication < ApplicationRecord
   def anyone_additional_income_of?(income_type)
     members.any? { |member| member.additional_incomes.where(income_type: income_type.to_s).any? }
   end
+
+  def last_emailed_office_at
+    exports.emailed_office.succeeded.first&.completed_at
+  end
 end

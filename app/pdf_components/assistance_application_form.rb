@@ -54,7 +54,7 @@ class AssistanceApplicationForm
       phone_cell: formatted_phone(benefit_application.sms_phone_number),
       email: benefit_application.email,
       completion_signature_applicant: benefit_application.signature,
-      completion_signature_date: mmddyyyy_date(benefit_application.signed_at),
+      completion_signature_date: mmddyyyy_date(benefit_application.signed_at, "Eastern Time (US & Canada)"),
       has_additional_info: yes_no_or_unfilled(
         yes: benefit_application.additional_information.present?,
         no: benefit_application.additional_information.blank?,

@@ -24,7 +24,11 @@ module Integrated
       CIRCLED if statement
     end
 
-    def mmddyyyy_date(date)
+    def mmddyyyy_date(date, timezone = nil)
+      if timezone
+        date = date&.in_time_zone("Eastern Time (US & Canada)")
+      end
+
       date&.strftime("%m/%d/%Y")
     end
 

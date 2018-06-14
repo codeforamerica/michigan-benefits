@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-
   before do
     ENV["INTEGRATED_APPLICATION_ENABLED"] = "true"
   end
