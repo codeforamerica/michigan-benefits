@@ -1,33 +1,32 @@
 <% content_for :header_title, "Healthcare" %>
 
 <% content_for :form_card_header do %>
-    <h1 class="form-card__title">
-      Add a person.
-    </h1>
+  <h1 class="form-card__title">
+    Add a person.
+  </h1>
 
-    <p class="text--help text--centered">
-      Skip any questions you don't currently know the answer to.
-    </p>
+  <p class="text--help text--centered">
+    Skip any questions you don't currently know the answer to.
+  </p>
 <% end %>
 
 <% content_for :form_card_body do %>
-    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
-        <%= f.mb_input_field :first_name,
-          "What's their first name?",
-          autofocus: true %>
-        <%= f.mb_input_field :last_name, "What's their last name?" %>
-        <%= f.mb_date_input :birthday,
-          "When is their birthday?",
-          help_text: "For example: 4 28 1970" %>
-        <%= f.mb_radio_set :sex,
-          label_text: "What's their sex?",
-          collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
-          help_text: "As it appears on their ID",
-          layout: "inline" %>
-
-        <%= f.mb_select :relationship,
-          "What is their relationship to you?",
-          valid_relationship_options,
-          help_text: "They are my..." %>
-    <% end %>
+  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <%= f.mb_input_field :first_name,
+                         "What's their first name?",
+                         autofocus: true %>
+    <%= f.mb_input_field :last_name, "What's their last name?" %>
+    <%= f.mb_date_input :birthday,
+                        "When is their birthday?",
+                        help_text: "For example: 4 28 1970" %>
+    <%= f.mb_radio_set :sex,
+                       label_text: "What's their sex?",
+                       collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
+                       help_text: "As it appears on their ID",
+                       layout: "inline" %>
+    <%= f.mb_select :relationship,
+                    "What is their relationship to you?",
+                    valid_relationship_options,
+                    help_text: "Choose one" %>
+  <% end %>
 <% end %>

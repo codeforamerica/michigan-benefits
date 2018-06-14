@@ -173,6 +173,13 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Healthcare" do
+      expect(page).to have_content("Who is in your household?")
+      expect(page).to have_content("Jonny Tester")
+
+      proceed_with "Continue"
+    end
+
+    on_page "Healthcare" do
       expect(page).to have_content(
         "Which people also need Healthcare Coverage?",
       )

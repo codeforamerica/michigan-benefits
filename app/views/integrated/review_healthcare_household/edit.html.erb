@@ -1,0 +1,66 @@
+<% content_for :header_title, "Healthcare" %>
+
+<% content_for :form_card_header do %>
+    <% if @primary_member.filing_taxes_next_year_no? %>
+        <h1 class="form-card__title">
+          Who is in your household?
+        </h1>
+        <p class="text--centered text--help">
+          Include your spouse and all dependents — even if they aren't applying for health coverage today.
+        </p>
+    <% else %>
+        <h1 class="form-card__title">
+          Who will you file taxes with?
+        </h1>
+        <p class="text--centered text--help">
+          List everyone who will be included on your federal tax return this year — even if they aren't applying for health coverage today.
+        </p>
+    <% end %>
+    <p class="text--centered text--help">
+      <a href="https://www.healthcare.gov/income-and-household-information/household-size/">Learn more</a> about who to include in your household.
+    </p>
+<% end %>
+
+<% content_for :form_card_body do %>
+  <div class="slab slab--not-padded">
+    <div class="card card--narrow card--top" id="tax-included">
+      <p>
+        <i class="button__icon--left icon-check icon-check--color"></i>
+        <%= "#{@primary_member.display_name} (that's you!)" %>
+      </p>
+      <% @removable_members.each do |member| %>
+          <div>
+            <p>
+              <i class="button__icon--left icon-check icon-check--color"></i>
+              <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
+              <% if @show_remove_links %>
+                (<%= link_to "remove", remove_healthcare_member_sections_path(form: { member_id: member.id }),
+                             method: :put,
+                             class: "remove",
+                             "aria-labelledby": "member-name-#{member.id}" %>)
+              <% end %>
+            </p>
+          </div>
+      <% end %>
+      <%= link_to(
+            section_path(Integrated::AddHealthcareMemberController),
+            class: 'button button-full-width button-bold') do %>
+          <i class="button__icon--left icon-add"></i>
+          Add a person
+      <% end %>
+    </div>
+    <% if @removed_household_members.present? %>
+        <div class="card card--narrow card--bottom text--help" id="not-tax-included">
+          <p>Not included:</p>
+          <% @removed_household_members.each do |member| %>
+              <div>
+                <p>
+                  <i class="button__icon--left icon-close icon-close--color"></i>
+                  <span id="member-name-<%= member.id %>"><%= member.display_name %></span>
+                </p>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+<% end %>
