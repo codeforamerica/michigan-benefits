@@ -85,6 +85,53 @@ RSpec.describe CommonApplication do
         expect(application.tax_household_members).to match_array(in_household)
       end
     end
+
+    describe ".signed" do
+      it "returns all signed application" do
+        signed = create(:common_application, signed_at: Time.now)
+        create(:common_application, signed_at: nil)
+
+        signed_apps = CommonApplication.signed
+
+        expect(signed_apps).to match_array([signed])
+      end
+    end
+
+    describe ".applying_for_healthcare_only" do
+      it "returns apps where at least one member is applying for healthcare" do
+        applying = create(:common_application, :multi_member_healthcare)
+        create(:common_application, :multi_member_food_and_healthcare)
+        create(:common_application, :single_member)
+
+        healthcare_apps = CommonApplication.applying_for_healthcare_only
+
+        expect(healthcare_apps).to match_array([applying])
+      end
+    end
+
+    describe ".applying_for_food_only" do
+      it "returns apps where at least one member is applying for food" do
+        applying = create(:common_application, :multi_member_food)
+        create(:common_application, :multi_member_food_and_healthcare)
+        create(:common_application, :single_member)
+
+        food_apps = CommonApplication.applying_for_food_only
+
+        expect(food_apps).to match_array([applying])
+      end
+    end
+
+    describe ".applying_for_food_and_healthcare" do
+      it "returns apps where at least one member is applying for both food and healthcare" do
+        applying = create(:common_application, :multi_member_food_and_healthcare)
+        create(:common_application, :single_member_food)
+        create(:common_application, :single_member_healthcare)
+
+        food_and_healthcare_apps = CommonApplication.applying_for_food_and_healthcare
+
+        expect(food_and_healthcare_apps).to match_array([applying])
+      end
+    end
   end
 
   describe "#single_member_household?" do
