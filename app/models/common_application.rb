@@ -75,6 +75,21 @@ class CommonApplication < ApplicationRecord
   enum sms_consented: { unfilled: 0, yes: 1, no: 2 }, _prefix: :sms_consented
   enum email_consented: { unfilled: 0, yes: 1, no: 2 }, _prefix: :email_consented
 
+  scope :signed, -> { where.not(signed_at: nil) }
+
+  scope :applying_for_healthcare_only, -> {
+    joins(:members).where(household_members: { requesting_healthcare: 1, requesting_food: [0, 2] }).distinct
+  }
+  scope :applying_for_food_only, -> {
+    joins(:members).where(household_members: { requesting_food: 1, requesting_healthcare: [0, 2] }).distinct
+  }
+  scope :applying_for_food_and_healthcare, -> {
+    joins(:members).
+      where(household_members: { requesting_food: 1 }).
+      where(household_members: { requesting_healthcare: 1 }).
+      distinct
+  }
+
   delegate :display_name, to: :primary_member
 
   auto_strip_attributes :signature
