@@ -19,7 +19,7 @@ Devise.setup do |config|
   # OTP is mandatory, users are going to be asked to
   # enroll OTP the next time they sign in, before they can successfully complete the session establishment.
   # This is the global value, can also be set on each user.
-  config.otp_mandatory = !Rails.env.test?
+  config.otp_mandatory = !(Rails.env.test? || Rails.env.development?)
 
   # Drift: a window which provides allowance for drift between a user's token device clock
   # (and therefore their OTP tokens) and the authentication server's clock.
@@ -41,6 +41,7 @@ Devise.setup do |config|
 
   # The name of the token issuer, to be added to the provisioning
   # url. Display will vary based on token application. (defaults to the Rails application class)
-  otp_env = Rails.env.production? ? "" : " - #{Rails.env}"
-  config.otp_issuer = "MichiganBenefits.org" + otp_env
+  opt_env = ENV.fetch("OTP_ENV", "unspecified")
+  opt_env_display = opt_env == "production" ? "" : " - #{opt_env}"
+  config.otp_issuer = "MichiganBenefits.org" + opt_env_display
 end

@@ -6,13 +6,10 @@ default: &default
 development:
   <<: *default
   database: michigan_prototype_development
+
 test:
   <<: *default
   database: michigan_prototype_test
-
-staging:
-  adapter: postgresql
-  url: <%= ENV["DATABASE_URL"] %>
 
 production:
   adapter: postgresql
