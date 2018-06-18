@@ -43,13 +43,16 @@
               layout: "inline" %>
           </div>
           <div class="question-with-follow-up__follow-up" id="hourly-follow-up-<%=index%>">
-            <%= ff.mb_money_field :pay_quantity_hourly, t(".hourly_rate_label", **member_appropriate_translation_data),
-                                 help_text: "This includes money withheld from paychecks." %>
+            <%= ff.mb_money_field :pay_quantity_hourly,
+              t(".hourly_rate_label", **member_appropriate_translation_data),
+              help_text: "This includes money withheld from paychecks.",
+              options: { step: "0.01" } %>
             <%= ff.mb_input_field :hours_per_week, t(".hours_per_week_label", **member_appropriate_translation_data) %>
           </div>
           <div class="question-with-follow-up__follow-up question-with-follow-up__follow-up-two" id="salaried-follow-up-<%=index%>">
-            <%= ff.mb_money_field :pay_quantity_salary,  t(".salary_rate_label", **member_appropriate_translation_data),
-                                 help_text: "This includes money withheld from paychecks." %>
+            <%= ff.mb_money_field :pay_quantity_salary,
+              t(".salary_rate_label", **member_appropriate_translation_data),
+              help_text: "This includes money withheld from paychecks." %>
           </div>
         </div>
         <%= ff.mb_radio_set :payment_frequency,
