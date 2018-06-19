@@ -199,8 +199,8 @@ RSpec.describe AssistanceApplicationForm do
           first_member_student_loans_deductions_payment_frequency: "Monthly",
           anyone_assets_property: "Yes",
           assets_property_rental: "Yes",
-          completion_signature_applicant: "Octopus Cuttlefish",
-          completion_signature_date: "03/31/2018",
+          signature_applicant: "Octopus Cuttlefish",
+          signature_date: "03/31/2018",
           has_additional_info: "Yes",
           additional_info: "Lost my job, staying with a friend for two weeks",
         )
