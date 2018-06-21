@@ -1,12 +1,15 @@
 <div class="main-footer">
   <div class="grid">
-    <div class="footer--office-links">
-      <p class="footer--office-links-header text--small">
-        MDHHS Offices
-      </p>
-      <%= link_to "Union Street Office", union_path, class: "text--small" %>
-      <%= link_to "Clio Road Office", clio_path, class: "text--small" %>
-    </div>
+
+    <% if office_links %>
+      <div class="footer--office-links">
+        <p class="footer--office-links-header text--small">
+          MDHHS Offices
+        </p>
+        <%= link_to "Union Street Office", union_path, class: "text--small" %>
+        <%= link_to "Clio Road Office", clio_path, class: "text--small" %>
+      </div>
+    <% end %>
 
     <div class="footer--partners">
       <div class="illustration illustration--cfa"></div>
