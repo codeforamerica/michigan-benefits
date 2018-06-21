@@ -19,9 +19,8 @@ class JobDetailsForm < MemberPerPageForm
         employment.errors.add(:employer_name, "Make sure to enter an employer name")
       end
 
-      if employment.pay_quantity_hourly.present? && employment.pay_quantity_hourly !~ Employment::DOLLAR_REGEX
-        employment.errors.add(:pay_quantity_hourly, "Make sure to enter a dollar amount")
-      end
+      validate_pay_quantity(employment, :hourly)
+      validate_pay_quantity(employment, :salary)
 
       if employment.pay_quantity_salary.present? && employment.pay_quantity_salary !~ Employment::DOLLAR_REGEX
         employment.errors.add(:pay_quantity_salary, "Make sure to enter a dollar amount")
@@ -43,5 +42,12 @@ class JobDetailsForm < MemberPerPageForm
   def valid_payment_frequency?(employment)
     return true unless employment.payment_frequency.present?
     Employment::PAYCHECK_INTERVALS.keys.map(&:to_s).include?(employment.payment_frequency)
+  end
+
+  def validate_pay_quantity(employment, hourly_or_salary)
+    field = :"pay_quantity_#{hourly_or_salary}"
+    if employment.send(field).present? && employment.send(field) !~ Employment::DOLLAR_REGEX
+      employment.errors.add(field, "Make sure to enter a dollar amount")
+    end
   end
 end

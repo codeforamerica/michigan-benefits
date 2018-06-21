@@ -31,7 +31,10 @@ FactoryBot.define do
     end
 
     trait :multi_member_food_and_healthcare do
-      after(:create)  { |app| create_list(:household_member, 3, common_application: app, requesting_food: "yes", requesting_healthcare: "yes") }
+      after(:create)  do |app|
+        create_list(:household_member, 3, common_application: app,
+                                          requesting_food: "yes", requesting_healthcare: "yes")
+      end
     end
   end
 end
