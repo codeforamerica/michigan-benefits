@@ -16,14 +16,22 @@ class JobDetailsForm < MemberPerPageForm
       employment.valid?
 
       if employment.employer_name.blank?
-        employment.errors.add(:employer_name, "Make sure to enter an employer name.")
+        employment.errors.add(:employer_name, "Make sure to enter an employer name")
+      end
+
+      if employment.pay_quantity_hourly.present? && employment.pay_quantity_hourly !~ Employment::DOLLAR_REGEX
+        employment.errors.add(:pay_quantity_hourly, "Make sure to enter a dollar amount")
+      end
+
+      if employment.pay_quantity_salary.present? && employment.pay_quantity_salary !~ Employment::DOLLAR_REGEX
+        employment.errors.add(:pay_quantity_salary, "Make sure to enter a dollar amount")
       end
 
       # TODO: Below validation should be moved to model when we remove old flows.
       # Right now the valid values can differ between SNAP/Medicaid and SNAP + Medicaid,
       # so we keep the validations in the form object.
       unless valid_payment_frequency?(employment)
-        employment.errors.add(:payment_frequency, "Make sure to choose a valid frequency.")
+        employment.errors.add(:payment_frequency, "Make sure to choose a valid frequency")
       end
     end
 
