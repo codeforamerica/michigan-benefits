@@ -73,5 +73,24 @@ RSpec.describe JobDetailsForm do
         expect(form.errors[:id]).to be_present
       end
     end
+
+    context "when a pay quantity is not a dollar amount" do
+      it "is invalid" do
+        member = create(:household_member)
+        form = JobDetailsForm.new(
+          id: member.id.to_s,
+          employments: [
+            Employment.new(employer_name: "ABC Corp",
+                           hourly_or_salary: "hourly",
+                           payment_frequency: "week",
+                           pay_quantity: "9.1",
+                           hours_per_week: 10),
+          ],
+          valid_members: [member],
+        )
+        expect(form).to_not be_valid
+        expect(form.employments.first.errors[:pay_quantity_hourly]).to be_present
+      end
+    end
   end
 end
