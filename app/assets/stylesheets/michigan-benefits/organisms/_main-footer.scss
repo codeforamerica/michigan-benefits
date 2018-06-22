@@ -1,5 +1,10 @@
 .main-footer {
   font-weight: 300;
+  height: $footer-height*1.2;
+
+  @include media($tablet-up) {
+    height: $footer-height;
+  }
 
   .text--small {
     clear: both;
