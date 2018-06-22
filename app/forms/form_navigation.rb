@@ -79,7 +79,6 @@ class FormNavigation
       Integrated::PropertyTaxDetailsController,
       Integrated::HomeownersInsuranceDetailsController,
       Integrated::LandContractDetailsController,
-      Integrated::OtherHousingDetailsController,
       Integrated::YourHousingExpensesDetailsController,
       Integrated::UtilityExpensesController,
       Integrated::ChildcareExpensesController,
