@@ -65,7 +65,7 @@
     </div>
     <div class="form-card--security-message">Your information is always kept safe and secure</div>
   </div>
-  <%= render 'shared/footer', office_links: false %>
+  <%= render 'shared/footer', office_links: (current_path == "/sections/application-submitted") ? true : false %>
 <% end %>
 
 <%= render template: 'layouts/application' %>
