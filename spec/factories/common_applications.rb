@@ -6,6 +6,10 @@ FactoryBot.define do
       signed_at Time.now
     end
 
+    trait :unsigned do
+      signed_at nil
+    end
+
     trait :single_member do
       after(:create)  { |app| create(:household_member, common_application: app) }
     end
