@@ -8,6 +8,13 @@
   <% end %>
 <% end %>
 
+<% unless current_application.single_member_household? %>
+  <% content_for :form_card_help do %>
+      This includes full time, part time, temporary, and contract jobs.
+      This doesn't include self-employment. We'll ask you about that next.
+  <% end %>
+<% end %>
+
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
       <% @form.members.each_with_index do |member| %>
