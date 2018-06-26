@@ -98,38 +98,61 @@ RSpec.describe CommonApplication do
     end
 
     describe ".applying_for_healthcare_only" do
-      it "returns apps where at least one member is applying for healthcare" do
-        applying = create(:common_application, :multi_member_healthcare)
-        create(:common_application, :multi_member_food_and_healthcare)
-        create(:common_application, :single_member)
+      it "returns apps where at least one member is applying for healthcare but no one is applying for food" do
+        applying_one = create(:common_application, :multi_member_healthcare)
+        applying_two = create(:common_application,
+          members: [
+            build(:household_member, requesting_healthcare: "yes", requesting_food: "no"),
+            build(:household_member, requesting_healthcare: "no", requesting_food: "no"),
+          ])
 
-        healthcare_apps = CommonApplication.applying_for_healthcare_only
+        create(:common_application,
+          members: [
+            build(:household_member, requesting_healthcare: "yes", requesting_food: "no"),
+            build(:household_member, requesting_healthcare: "no", requesting_food: "yes"),
+          ])
 
-        expect(healthcare_apps).to match_array([applying])
+        health_apps = CommonApplication.applying_for_healthcare_only
+
+        expect(health_apps).to match_array([applying_one, applying_two])
       end
     end
 
     describe ".applying_for_food_only" do
-      it "returns apps where at least one member is applying for food" do
-        applying = create(:common_application, :multi_member_food)
-        create(:common_application, :multi_member_food_and_healthcare)
-        create(:common_application, :single_member)
+      it "returns apps where at least one member is applying for food but no one is applying for healthcare" do
+        applying_one = create(:common_application, :multi_member_food)
+        applying_two = create(:common_application,
+               members: [
+                 build(:household_member, requesting_food: "yes", requesting_healthcare: "no"),
+                 build(:household_member, requesting_food: "no", requesting_healthcare: "no"),
+               ])
+
+        create(:common_application,
+               members: [
+                 build(:household_member, requesting_food: "yes", requesting_healthcare: "no"),
+                 build(:household_member, requesting_food: "no", requesting_healthcare: "yes"),
+               ])
 
         food_apps = CommonApplication.applying_for_food_only
 
-        expect(food_apps).to match_array([applying])
+        expect(food_apps).to match_array([applying_one, applying_two])
       end
     end
 
     describe ".applying_for_food_and_healthcare" do
-      it "returns apps where at least one member is applying for both food and healthcare" do
-        applying = create(:common_application, :multi_member_food_and_healthcare)
+      it "returns apps where members are applying for both food and healthcare" do
+        applying_one = create(:common_application, members: [
+          build(:household_member, requesting_food: "yes", requesting_healthcare: "no"),
+          build(:household_member, requesting_food: "no", requesting_healthcare: "yes")
+        ])
+        applying_two = create(:common_application, :multi_member_food_and_healthcare)
+
         create(:common_application, :single_member_food)
         create(:common_application, :single_member_healthcare)
 
         food_and_healthcare_apps = CommonApplication.applying_for_food_and_healthcare
 
-        expect(food_and_healthcare_apps).to match_array([applying])
+        expect(food_and_healthcare_apps).to match_array([applying_one, applying_two])
       end
     end
   end

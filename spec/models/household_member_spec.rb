@@ -58,6 +58,28 @@ RSpec.describe HouseholdMember do
         expect(HouseholdMember.with_additional_income.first).to eq(member)
       end
     end
+
+    describe ".requesting_food" do
+      it "returns members who are applying for food" do
+        food_members = [
+          create(:household_member, :requesting_food),
+        ]
+        create(:household_member)
+
+        expect(HouseholdMember.requesting_food).to match_array(food_members)
+      end
+    end
+
+    describe ".requesting_healthcare" do
+      it "returns members who are applying for healthcare" do
+        healthcare_members = [
+          create(:household_member, :requesting_healthcare),
+        ]
+        create(:household_member)
+
+        expect(HouseholdMember.requesting_healthcare).to match_array(healthcare_members)
+      end
+    end
   end
 
   describe "#display_name" do
