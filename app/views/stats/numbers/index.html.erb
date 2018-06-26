@@ -9,24 +9,24 @@
 <section class="slab">
   <div class="grid grid-padded">
     <h2>Completed Applications (<%= @total_apps_count %>)</h2>
+    <div id="total-combined-applications" class="grid__item width-one-third">
+      <div class="card">
+        <h4>Integrated Flow</h4>
+        <p class="big-number"><%= @combined_count %></p>
+      </div>
+    </div>
+
     <div id="total-snap-applications" class="grid__item width-one-third">
       <div class="card">
-        <h4>Total SNAP Flow</h4>
+        <h4>Old SNAP Flow</h4>
         <p class="big-number"><%= @snap_count %></p>
       </div>
     </div>
 
     <div id="total-medicaid-applications" class="grid__item width-one-third">
       <div class="card">
-        <h4>Total Medicaid Flow</h4>
+        <h4>Old Medicaid Flow</h4>
         <p class="big-number"><%= @medicaid_count %></p>
-      </div>
-    </div>
-
-    <div id="total-combined-applications" class="grid__item width-one-third">
-      <div class="card">
-        <h4>Total Combined Flow</h4>
-        <p class="big-number"><%= @combined_count %></p>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
 
 <section class="slab">
   <div class="grid grid-padded">
-    <h2>Combined Flow Types</h2>
+    <h2>Completed Integrated Applications - By Type</h2>
     <div id="total-combined-snap-only" class="grid__item width-one-third">
       <div class="card">
         <h4>SNAP Only</h4>
@@ -61,24 +61,25 @@
 <section class="slab">
   <div class="grid grid-padded">
     <h2>People Served (<%= @total_people_count %>)</h2>
+
+    <div id="total-combined-people" class="grid__item width-one-third">
+      <div class="card">
+        <h4>Integrated Flow</h4>
+        <p class="big-number"><%= @combined_people_count %></p>
+      </div>
+    </div>
+
     <div id="total-snap-people" class="grid__item width-one-third">
       <div class="card">
-        <h4>Total SNAP Flow</h4>
+        <h4>Old SNAP Flow</h4>
         <p class="big-number"><%= @snap_people_count %></p>
       </div>
     </div>
 
     <div id="total-medicaid-people" class="grid__item width-one-third">
       <div class="card">
-        <h4>Total Medicaid Flow</h4>
+        <h4>Old Medicaid Flow</h4>
         <p class="big-number"><%= @medicaid_people_count %></p>
-      </div>
-    </div>
-
-    <div id="total-combined-people" class="grid__item width-one-third">
-      <div class="card">
-        <h4>Total Combined Flow</h4>
-        <p class="big-number"><%= @combined_people_count %></p>
       </div>
     </div>
   </div>
@@ -86,26 +87,53 @@
 
 <section class="slab">
   <div class="grid grid-padded">
-    <h2>Median Minutes to Complete (last 30 days)</h2>
-    <div id="snap-time-to-complete" class="grid__item width-one-third">
+    <h2>Median Minutes to Complete (last 30 days) - Integrated Flow</h2>
+
+    <div id="snap-only-time-to-complete" class="grid__item width-one-third">
       <div class="card">
-        <h4>SNAP</h4>
-        <p class="big-number"><%= @snap_median || "-" %></p>
+        <h4>SNAP Only</h4>
+        <p class="big-number"><%= @snap_only_median || "-" %></p>
       </div>
     </div>
 
-    <div id="medicaid-time-to-complete" class="grid__item width-one-third">
+    <div id="medicaid-only-time-to-complete" class="grid__item width-one-third">
       <div class="card">
-        <h4>Medicaid</h4>
-        <p class="big-number"><%= @medicaid_median || "-" %></p>
+        <h4>Medicaid Only</h4>
+        <p class="big-number"><%= @medicaid_only_median || "-" %></p>
       </div>
     </div>
 
     <div id="combined-time-to-complete" class="grid__item width-one-third">
       <div class="card">
-        <h4>Combined</h4>
-        <p class="big-number"><%= @combined_median || "-" %></p>
+        <h4>SNAP and Medicaid</h4>
+        <p class="big-number"><%= @snap_and_medicaid_median || "-" %></p>
       </div>
     </div>
   </div>
+
+  <section class="slab">
+    <div class="grid grid-padded">
+      <h2>Median Minutes to Complete (all time)</h2>
+
+      <div id="integrated-time-to-complete" class="grid__item width-one-third">
+        <div class="card">
+          <h4>Integrated (all types)</h4>
+          <p class="big-number"><%= @integrated_median || "-" %></p>
+        </div>
+      </div>
+
+      <div id="snap-time-to-complete" class="grid__item width-one-third">
+        <div class="card">
+          <h4>Old SNAP</h4>
+          <p class="big-number"><%= @snap_median || "-" %></p>
+        </div>
+      </div>
+
+      <div id="medicaid-time-to-complete" class="grid__item width-one-third">
+        <div class="card">
+          <h4>Old Medicaid</h4>
+          <p class="big-number"><%= @medicaid_median || "-" %></p>
+        </div>
+      </div>
+    </div>
 </section>

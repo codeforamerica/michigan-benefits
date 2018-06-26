@@ -15,39 +15,22 @@ RSpec.feature "viewing Numbers dashboard" do
 
     expect(page).to have_content("Completed Applications (10)")
 
+    within "#total-combined-applications" do
+      expect(page).to have_content("Integrated Flow")
+      expect(page).to have_content("5")
+    end
+
     within "#total-snap-applications" do
-      expect(page).to have_content("Total SNAP Flow")
+      expect(page).to have_content("Old SNAP Flow")
       expect(page).to have_content("3")
     end
 
     within "#total-medicaid-applications" do
-      expect(page).to have_content("Total Medicaid Flow")
+      expect(page).to have_content("Old Medicaid Flow")
       expect(page).to have_content("2")
     end
 
-    within "#total-combined-applications" do
-      expect(page).to have_content("Total Combined Flow")
-      expect(page).to have_content("5")
-    end
-
-    expect(page).to have_content("People Served (20)")
-
-    within "#total-snap-people" do
-      expect(page).to have_content("Total SNAP Flow")
-      expect(page).to have_content("3")
-    end
-
-    within "#total-medicaid-people" do
-      expect(page).to have_content("Total Medicaid Flow")
-      expect(page).to have_content("2")
-    end
-
-    within "#total-combined-people" do
-      expect(page).to have_content("Total Combined Flow")
-      expect(page).to have_content("15")
-    end
-
-    expect(page).to have_content("Combined Flow Types")
+    expect(page).to have_content("Completed Integrated Applications - By Type")
 
     within "#total-combined-snap-only" do
       expect(page).to have_content("SNAP Only")
@@ -64,18 +47,49 @@ RSpec.feature "viewing Numbers dashboard" do
       expect(page).to have_content("3")
     end
 
-    expect(page).to have_content("Median Minutes to Complete (last 30 days)")
+    expect(page).to have_content("People Served (20)")
 
-    within "#snap-time-to-complete" do
-      expect(page).to have_content("SNAP")
+    within "#total-combined-people" do
+      expect(page).to have_content("Integrated Flow")
+      expect(page).to have_content("15")
     end
 
-    within "#medicaid-time-to-complete" do
-      expect(page).to have_content("Medicaid")
+    within "#total-snap-people" do
+      expect(page).to have_content("Old SNAP Flow")
+      expect(page).to have_content("3")
+    end
+
+    within "#total-medicaid-people" do
+      expect(page).to have_content("Old Medicaid Flow")
+      expect(page).to have_content("2")
+    end
+
+    expect(page).to have_content("Median Minutes to Complete (last 30 days)")
+
+    within "#snap-only-time-to-complete" do
+      expect(page).to have_content("SNAP Only")
+    end
+
+    within "#medicaid-only-time-to-complete" do
+      expect(page).to have_content("Medicaid Only")
     end
 
     within "#combined-time-to-complete" do
-      expect(page).to have_content("Combined")
+      expect(page).to have_content("SNAP and Medicaid")
+    end
+
+    expect(page).to have_content("Median Minutes to Complete (all time)")
+
+    within "#integrated-time-to-complete" do
+      expect(page).to have_content("Integrated (all types)")
+    end
+
+    within "#snap-time-to-complete" do
+      expect(page).to have_content("Old SNAP")
+    end
+
+    within "#medicaid-time-to-complete" do
+      expect(page).to have_content("Old Medicaid")
     end
   end
 end
