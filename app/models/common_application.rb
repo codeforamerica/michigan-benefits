@@ -77,18 +77,17 @@ class CommonApplication < ApplicationRecord
 
   scope :signed, -> { where.not(signed_at: nil) }
 
-  scope :applying_for_healthcare_only, -> {
-    joins(:members).where(household_members: { requesting_healthcare: 1, requesting_food: [0, 2] }).distinct
+  scope :applying_for_food, -> {
+    joins(:members).merge(HouseholdMember.requesting_food).distinct
   }
-  scope :applying_for_food_only, -> {
-    joins(:members).where(household_members: { requesting_food: 1, requesting_healthcare: [0, 2] }).distinct
+
+  scope :applying_for_healthcare, -> {
+    joins(:members).merge(HouseholdMember.requesting_healthcare).distinct
   }
-  scope :applying_for_food_and_healthcare, -> {
-    joins(:members).
-      where(household_members: { requesting_food: 1 }).
-      where(household_members: { requesting_healthcare: 1 }).
-      distinct
-  }
+
+  scope :applying_for_food_only, -> { applying_for_food - applying_for_healthcare }
+  scope :applying_for_healthcare_only, -> { applying_for_healthcare - applying_for_food }
+  scope :applying_for_food_and_healthcare, -> { applying_for_food & applying_for_healthcare }
 
   delegate :display_name, to: :primary_member
 
