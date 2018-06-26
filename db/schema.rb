@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180626001406) do
+ActiveRecord::Schema.define(version: 20180626222332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,11 +191,10 @@ ActiveRecord::Schema.define(version: 20180626001406) do
     t.datetime "created_at", null: false
     t.string "employer_name"
     t.integer "hourly_or_salary", default: 0
-    t.integer "hours_per_week_int"
+    t.string "hours_per_week"
     t.string "pay_quantity"
     t.string "payment_frequency"
     t.datetime "updated_at", null: false
-    t.string "hours_per_week"
     t.index ["application_member_id"], name: "index_employments_on_application_member_id"
   end
 
