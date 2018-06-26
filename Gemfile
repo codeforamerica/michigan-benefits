@@ -45,7 +45,6 @@ gem "selenium-webdriver", "3.4.3"
 gem "sinatra", "~> 2.0.2"
 gem "slack-ruby-client"
 gem "sprockets", "~> 3.7.2"
-gem "strong_migrations"
 gem "token_phrase"
 gem "twilio-ruby"
 
