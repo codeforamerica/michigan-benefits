@@ -24,14 +24,22 @@ module Stats
       @medicaid_only_count = common_apps.applying_for_healthcare_only.count
       @snap_and_medicaid_count = common_apps.applying_for_food_and_healthcare.count
 
-      snap_last_thirty = snap_apps.where("created_at > ?", 30.days.ago)
-      @snap_median = MedianTimeToCompleteCalculator.new(snap_last_thirty).run
+      @snap_median = MedianTimeToCompleteCalculator.new(snap_apps).run
+      @medicaid_median = MedianTimeToCompleteCalculator.new(medicaid_apps).run
+      @integrated_median = MedianTimeToCompleteCalculator.new(common_apps).run
 
-      medicaid_last_thirty = medicaid_apps.where("created_at > ?", 30.days.ago)
-      @medicaid_median = MedianTimeToCompleteCalculator.new(medicaid_last_thirty).run
+      combined_last_thirty = common_apps.where("common_applications.created_at > ?", 30.days.ago)
+      @snap_only_median = MedianTimeToCompleteCalculator.
+        new(combined_last_thirty.applying_for_food_only).
+        run
 
-      combined_last_thirty = common_apps.where("created_at > ?", 30.days.ago)
-      @combined_median = MedianTimeToCompleteCalculator.new(combined_last_thirty).run
+      @medicaid_only_median = MedianTimeToCompleteCalculator.
+        new(combined_last_thirty.applying_for_healthcare_only).
+        run
+
+      @snap_and_medicaid_median = MedianTimeToCompleteCalculator.
+        new(combined_last_thirty.applying_for_food_and_healthcare).
+        run
 
       render :index
     end
