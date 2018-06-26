@@ -14,11 +14,6 @@ class Employment < ApplicationRecord
 
   enum hourly_or_salary: { unfilled: 0, hourly: 1, salaried: 2 }
 
-  validates :hours_per_week, numericality: {
-    allow_nil: true,
-    message: "Must be a number",
-  }
-
   validates :pay_quantity, format: {
     with: DOLLAR_REGEX,
     allow_blank: true,

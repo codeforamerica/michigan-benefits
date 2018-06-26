@@ -208,8 +208,8 @@ en:
           zero: How much do you make an hour? (before taxes)
           one: How much does %{name} make an hour? (before taxes)
         hours_per_week_label:
-          zero: How many hours do you usually work a week?
-          one: How many hours does %{name} usually work a week?
+          zero: On average, how many hours do you work a week?
+          one: On average, how many hours does %{name} work a week?
         salary_rate_label:
           zero: What is your yearly salary? (before taxes)
           one: What is %{name}'s yearly salary? (before taxes)
