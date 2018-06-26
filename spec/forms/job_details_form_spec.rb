@@ -21,26 +21,12 @@ RSpec.describe JobDetailsForm do
                            hourly_or_salary: "hourly",
                            payment_frequency: "week",
                            pay_quantity: "100",
-                           hours_per_week: 10),
+                           hours_per_week: "ten"),
           ],
           valid_members: [member],
         )
 
         expect(form).to be_valid
-      end
-    end
-
-    context "when employment invalid" do
-      it "is invalid" do
-        form = JobDetailsForm.new(
-          employments: [
-            Employment.new(hours_per_week: "alsdkfjas"),
-          ],
-          valid_members: [create(:household_member)],
-        )
-
-        expect(form).not_to be_valid
-        expect(form.employments.first.errors[:hours_per_week]).to be_present
       end
     end
 
@@ -84,7 +70,7 @@ RSpec.describe JobDetailsForm do
                            hourly_or_salary: "hourly",
                            payment_frequency: "week",
                            pay_quantity: "9.1",
-                           hours_per_week: 10),
+                           hours_per_week: "10"),
           ],
           valid_members: [member],
         )

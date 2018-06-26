@@ -32,14 +32,5 @@ RSpec.describe Employment do
         expect(employment.errors[:pay_quantity]).to be_present
       end
     end
-
-    context "when hours are provided" do
-      it "is invalid if not a number" do
-        employment = Employment.new(hours_per_week: "woop")
-
-        expect(employment).not_to be_valid
-        expect(employment.errors[:hours_per_week]).to be_present
-      end
-    end
   end
 end

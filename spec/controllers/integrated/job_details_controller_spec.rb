@@ -83,7 +83,7 @@ RSpec.describe Integrated::JobDetailsController do
                 hourly_or_salary: "hourly",
                 payment_frequency: "week",
                 pay_quantity_hourly: "10",
-                hours_per_week: "30",
+                hours_per_week: "thirty",
               },
               employment_2.id => {
                 employer_name: "Deepscan",
@@ -112,7 +112,7 @@ RSpec.describe Integrated::JobDetailsController do
           expect(first_job.hourly?).to be_truthy
           expect(first_job.payment_frequency).to eq("week")
           expect(first_job.pay_quantity).to eq("10")
-          expect(first_job.hours_per_week).to eq(30)
+          expect(first_job.hours_per_week).to eq("thirty")
 
           expect(second_job.employer_name).to eq("Deepscan")
           expect(second_job.pay_quantity).to eq("2000.00")
@@ -125,7 +125,7 @@ RSpec.describe Integrated::JobDetailsController do
             id: member.id,
             employments: {
               employment_1.id => {
-                hours_per_week: "forty",
+                pay_quantity: "forty",
               },
             },
           }
