@@ -23,7 +23,7 @@ RSpec.describe MbFormBuilder do
           <label for="sample_name">
             <p class="form-question" id="sample_name__label">How is name?</p>
           </label>
-          <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" aria-labelledby="sample_name__label" name="sample[name]" />
+          <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" class="text-input" id="sample_name" aria-labelledby="sample_name__label" name="sample[name]" />
         </div>
       HTML
     end
@@ -52,7 +52,7 @@ RSpec.describe MbFormBuilder do
             </label>
           </div>
           <div class="field_with_errors">
-            <input type="text" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_name" aria-labelledby="sample_name__errors sample_name__label sample_name__help" name="sample[name]" />
+            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" class="text-input" id="sample_name" aria-labelledby="sample_name__errors sample_name__label sample_name__help" name="sample[name]" />
           </div>
           <span class="text--error" id="sample_name__errors"><i class="icon-warning"></i> can't be blank </div>
         </div>
@@ -78,7 +78,7 @@ RSpec.describe MbFormBuilder do
         <div class="form-group">
           <label class="sr-only" for="sample_dog">How many puppies?</label>
           <div class="incrementer">
-            <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_dog" name="sample[dog]" />
+            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" class="dog-styles text-input form-width--short" id="sample_dog" name="sample[dog]" />
             <span class="incrementer__subtract">-</span>
             <span class="incrementer__add">+</span>
           </div>
@@ -109,7 +109,7 @@ RSpec.describe MbFormBuilder do
           </div>
           <div class="incrementer">
             <div class="field_with_errors">
-              <input type="number" class="dog-styles text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_dog" name="sample[dog]" />
+              <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" class="dog-styles text-input form-width--short" id="sample_dog" name="sample[dog]" />
             </div>
             <span class="incrementer__subtract">-</span>
             <span class="incrementer__add">+</span>
@@ -139,7 +139,7 @@ RSpec.describe MbFormBuilder do
           <div class="form-group">
             <label class="sr-only" for="sample_dogs_greyhound">How many puppies?</label>
             <div class="incrementer">
-              <input type="number" class="text-input form-width--short" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="sample_dogs_greyhound" multiple="multiple" value="3" name="sample[dogs][]" />
+              <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" class="text-input form-width--short" id="sample_dogs_greyhound" multiple="multiple" value="3" name="sample[dogs][]" />
               <span class="incrementer__subtract">-</span>
               <span class="incrementer__add">+</span>
             </div>
@@ -175,7 +175,7 @@ RSpec.describe MbFormBuilder do
            </label>
          </div>
          <div class="field_with_errors">
-           <textarea class="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-labelledby="sample_description__errors sample_description__label sample_description__help" name="sample[description]" id="sample_description"></textarea>
+           <textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="textarea" aria-labelledby="sample_description__errors sample_description__label sample_description__help" name="sample[description]" id="sample_description"></textarea>
          </div>
          <span class="text--error" id="sample_description__errors"><i class="icon-warning"></i> can't be blank </span>
        </div>
@@ -200,7 +200,7 @@ RSpec.describe MbFormBuilder do
           </label>
           <div class="text-input-group">
             <div class="text-input-group__prefix">+1</div>
-            <input type="tel" class="text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  maxlength="10" id="sample_phone_number" aria-labelledby="sample_phone_number__label" size="10" name="sample[phone_number]" />
+            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="tel" class="text-input" maxlength="10" id="sample_phone_number" aria-labelledby="sample_phone_number__label" size="10" name="sample[phone_number]" />
           </div>
         </div>
       HTML
@@ -485,15 +485,15 @@ RSpec.describe MbFormBuilder do
         <div class="input-group--inline">
           <div class="form-group">
             <label class="text--help form-subquestion" for="sample_birthday_month" id="sample_birthday_month__label">Month</label>
-            <input class="form-width--month text-input" id="sample_birthday_month" name="sample[birthday_month]" size="2" minlength="1" maxlength="2" type="tel" />
+            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" size="2" minlength="1" maxlength="2" class="form-width--month text-input" id="sample_birthday_month" name="sample[birthday_month]" type="tel" />
           </div>
           <div class="form-group">
             <label class="text--help form-subquestion" for="sample_birthday_day" id="sample_birthday_day__label">Day</label>
-            <input class="form-width--day text-input" id="sample_birthday_day" name="sample[birthday_day]" size="2" minlength="1" maxlength="2" type="tel" />
+            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" size="2" minlength="1" maxlength="2" class="form-width--day text-input" id="sample_birthday_day" name="sample[birthday_day]" type="tel" />
           </div>
           <div class="form-group">
             <label class="text--help form-subquestion" for="sample_birthday_year" id="sample_birthday_year__label">Year</label>
-            <input class="form-width--year text-input" id="sample_birthday_year" name="sample[birthday_year]" size="4" minlength="4" maxlength="4" type="tel" />
+            <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-width--year text-input" id="sample_birthday_year" name="sample[birthday_year]" size="4" minlength="4" maxlength="4" type="tel" />
           </div>
         </div>
       </fieldset>
