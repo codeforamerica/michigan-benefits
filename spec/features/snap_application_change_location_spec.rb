@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Submit snap application" do
-  scenario "change office location", :js do
+  scenario "change office location", :js, :single_app_flow do
     visit root_path
     within(".slab--hero") { proceed_with "Apply for FAP" }
 

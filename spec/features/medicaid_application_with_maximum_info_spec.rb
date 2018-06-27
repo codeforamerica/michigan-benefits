@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Medicaid app" do
   include PaperworkHelper
 
-  scenario "with maximum info", :js do
+  scenario "with maximum info", :js, :single_app_flow do
     visit root_path
 
     within(".slab--hero") do

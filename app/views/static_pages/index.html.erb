@@ -15,23 +15,23 @@ end %>
       Apply for benefits in 15 minutes
     </p>
 
-    <% if GateKeeper.feature_enabled?("INTEGRATED_APPLICATION") %>
+    <% if GateKeeper.feature_enabled?("SINGLE_PROGRAM_APPLICATIONS") %>
       <div class="hero--cta-options grid__item  text--centered">
-        <%= link_to section_path(FormNavigation.first) do %>
-            <p class="button button--cta button--fully-width">Start your application</p>
-            <p class="text--help">Food Assistance and Health Insurance</p>
+        <%= link_to step_path(StepNavigation.first) do %>
+            <p class="button button--cta button--fully-width">Apply for FAP</p>
+            <p class="text--help">Food Stamps</p>
+        <% end %>
+
+        <%= link_to step_path(Medicaid::StepNavigation.first) do %>
+            <p class="button button--cta button--fully-width">Apply for Medicaid</p>
+            <p class="text--help">Health insurance</p>
         <% end %>
       </div>
     <% else %>
       <div class="hero--cta-options grid__item  text--centered">
-        <%= link_to step_path(StepNavigation.first) do %>
-          <p class="button button--cta button--fully-width">Apply for FAP</p>
-          <p class="text--help">Food Stamps</p>
-        <% end %>
-
-        <%= link_to step_path(Medicaid::StepNavigation.first) do %>
-          <p class="button button--cta button--fully-width">Apply for Medicaid</p>
-          <p class="text--help">Health insurance</p>
+        <%= link_to section_path(FormNavigation.first) do %>
+            <p class="button button--cta button--fully-width">Start your application</p>
+            <p class="text--help">Food Assistance and Health Insurance</p>
         <% end %>
       </div>
     <% end %>

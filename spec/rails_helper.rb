@@ -51,6 +51,14 @@ RSpec.configure do |config|
     FakeTwilioClient.clear!
   end
 
+  config.before :all, :single_app_flow do
+    ENV["SINGLE_PROGRAM_APPLICATIONS_ENABLED"] = "true"
+  end
+
+  config.after :all, :single_app_flow do
+    ENV["SINGLE_PROGRAM_APPLICATIONS_ENABLED"] = "false"
+  end
+
   config.infer_spec_type_from_file_location!
   config.include FeatureHelper, type: :feature
   config.include SnapApplicationFormHelper, type: :feature

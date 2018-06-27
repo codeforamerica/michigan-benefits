@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Office-specific landing pages" do
-  context "applying for FAP" do
+  context "applying for FAP", :single_app_flow do
     scenario "clio road" do
       visit "/clio"
       click_on "Apply for FAP"
@@ -27,7 +27,7 @@ RSpec.feature "Office-specific landing pages" do
     end
   end
 
-  context "applying for Medicaid" do
+  context "applying for Medicaid", :single_app_flow do
     scenario "clio road" do
       visit "/clio"
       click_on "Apply for Medicaid"
@@ -54,14 +54,6 @@ RSpec.feature "Office-specific landing pages" do
   end
 
   context "applying via integrated application" do
-    before do
-      ENV["INTEGRATED_APPLICATION_ENABLED"] = "true"
-    end
-
-    after do
-      ENV["INTEGRATED_APPLICATION_ENABLED"] = "false"
-    end
-
     scenario "clio road" do
       visit "/clio"
       click_on "Start your application"

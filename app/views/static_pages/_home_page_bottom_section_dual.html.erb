@@ -29,14 +29,14 @@
         Buy groceries, shop farmers’ markets, and grow your own food – EBT and
         SNAP benefits let you choose what works best for you.
       </p>
-      <% if GateKeeper.feature_enabled?("INTEGRATED_APPLICATION") %>
-        <%= link_to section_path(FormNavigation.first, office_page: office_page, applying_for_food: 1), class: "button button--cta button--fully-width" do %>
-            Apply for FAP
-        <% end %>
+      <% if GateKeeper.feature_enabled?("SINGLE_PROGRAM_APPLICATIONS") %>
+          <%= link_to step_path(StepNavigation.first, office_page: office_page), class: "button button--cta button--fully-width" do %>
+              Apply for FAP
+          <% end %>
       <% else %>
-        <%= link_to step_path(StepNavigation.first, office_page: office_page), class: "button button--cta button--fully-width" do %>
-            Apply for FAP
-        <% end %>
+          <%= link_to section_path(FormNavigation.first, office_page: office_page, applying_for_food: 1), class: "button button--cta button--fully-width" do %>
+              Apply for FAP
+          <% end %>
       <% end %>
     </div>
 
@@ -49,14 +49,15 @@
         Health care is essential. If you need help paying for medical expenses
         over the last three months, you may be eligible for retroactive coverage.
       </p>
-      <% if GateKeeper.feature_enabled?("INTEGRATED_APPLICATION") %>
-        <%= link_to section_path(FormNavigation.first, office_page: office_page, applying_for_healthcare: 1), class: "button button--cta button--fully-width" do %>
-            Apply for Medicaid
-        <% end %>
+      <% if GateKeeper.feature_enabled?("SINGLE_PROGRAM_APPLICATIONS") %>
+
+          <%= link_to step_path(Medicaid::StepNavigation.first, office_page: office_page), class: "button button--cta button--fully-width" do %>
+              Apply for Medicaid
+          <% end %>
       <% else %>
-        <%= link_to step_path(Medicaid::StepNavigation.first, office_page: office_page), class: "button button--cta button--fully-width" do %>
-          Apply for Medicaid
-        <% end %>
+          <%= link_to section_path(FormNavigation.first, office_page: office_page, applying_for_healthcare: 1), class: "button button--cta button--fully-width" do %>
+              Apply for Medicaid
+          <% end %>
       <% end %>
     </div>
 </section>

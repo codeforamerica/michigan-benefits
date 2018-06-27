@@ -1,14 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-  before do
-    ENV["INTEGRATED_APPLICATION_ENABLED"] = "true"
-  end
-
-  after do
-    ENV["INTEGRATED_APPLICATION_ENABLED"] = "false"
-  end
-
   scenario "with two members", :js do
     visit root_path
 

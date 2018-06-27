@@ -7,7 +7,7 @@ RSpec.feature "Warn users on staging only" do
     visit root_path
     expect(page).to have_content("This is an example website")
 
-    within(".slab--hero") { proceed_with "Apply for FAP" }
+    within(".slab--hero") { proceed_with "Start your application" }
     expect(page).to have_content("This is an example website")
 
     visit "/clio"

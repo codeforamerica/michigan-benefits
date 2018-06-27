@@ -1,14 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-  before do
-    ENV["INTEGRATED_APPLICATION_ENABLED"] = "true"
-  end
-
-  after do
-    ENV["INTEGRATED_APPLICATION_ENABLED"] = "false"
-  end
-
   scenario "where applicant is not a resident and is applying for both programs", :js do
     visit root_path
 
