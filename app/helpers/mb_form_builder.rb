@@ -14,15 +14,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   )
     classes = classes.append(%w[text-input])
 
-    text_field_options = {
+    text_field_options = standard_options.merge({
       autofocus: autofocus,
       type: type,
       class: classes.join(" "),
-      autocomplete: "off",
-      autocorrect: "off",
-      autocapitalize: "off",
-      spellcheck: "false",
-    }.merge(options)
+    }).merge(options)
 
     text_field_options[:id] ||= sanitized_id(method)
     options[:input_id] ||= sanitized_id(method)
@@ -64,15 +60,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     classes = classes.append(%w[text-input form-width--short])
     slug = [method.to_s, id_suffix].compact.join("_")
 
-    text_field_options = {
+    text_field_options = standard_options.merge({
       type: "number",
       class: classes.join(" "),
-      autocomplete: "off",
-      autocorrect: "off",
-      autocapitalize: "off",
-      spellcheck: "false",
       id: sanitized_id(slug),
-    }.merge(options)
+    }).merge(options)
 
     if value_is_array
       text_field_options[:multiple] = "true"
@@ -164,6 +156,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     hide_label: false
   )
     classes = classes.append(%w[textarea])
+    text_options = standard_options.merge({
+      autofocus: autofocus,
+      class: classes.join(' '),
+      placeholder: placeholder,
+      'aria-labelledby': aria_labelledby(method: method, help_text: help_text),
+    }).merge(options)
 
     <<~HTML.html_safe
       <div class="form-group#{error_state(object, method)}">
@@ -172,17 +170,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         label_text,
         text_area(
           method,
-          {
-            autofocus: autofocus,
-            class: classes.join(' '),
-            autocomplete: 'off',
-            autocorrect: 'off',
-            autocapitalize: 'off',
-            spellcheck: 'false',
-            placeholder: placeholder,
-            'aria-labelledby':
-              aria_labelledby(method: method, help_text: help_text),
-          }.merge(options),
+          text_options,
         ),
         help_text: help_text,
         options: { class: hide_label ? 'sr-only' : '' },
@@ -200,6 +188,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   )
     year_method, month_method, day_method = *%i[year month day].map { |unit| :"#{base_method}_#{unit}" }
 
+    options = standard_options.merge({
+      size: 2,
+      minlength: 1,
+      maxlength: 2,
+    })
+
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, base_method)}">
         #{fieldset_label_contents(method: base_method, label_text: label_text, help_text: help_text)}
@@ -208,37 +202,37 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             <label class="text--help form-subquestion" for="#{sanitized_id(month_method)}" id="#{sanitized_id(month_method)}__label">Month</label>
             #{telephone_field(
               month_method,
-              class: 'form-width--month text-input',
-              id: sanitized_id(month_method),
-              name: "#{object_name}[#{month_method}]",
-              size: 2,
-              minlength: 1,
-              maxlength: 2,
-              autofocus: autofocus,
+              options.merge({
+                class: 'form-width--month text-input',
+                id: sanitized_id(month_method),
+                name: "#{object_name}[#{month_method}]",
+                autofocus: autofocus,
+              })
             )}
           </div>
           <div class="form-group">
             <label class="text--help form-subquestion" for="#{sanitized_id(day_method)}" id="#{sanitized_id(day_method)}__label">Day</label>
             #{telephone_field(
               day_method,
+              options.merge({
                 class: 'form-width--day text-input',
                 id: sanitized_id(day_method),
                 name: "#{object_name}[#{day_method}]",
-                size: 2,
-                minlength: 1,
-                maxlength: 2,
+              })
             )}
           </div>
           <div class="form-group">
             <label class="text--help form-subquestion" for="#{sanitized_id(year_method)}" id="#{sanitized_id(year_method)}__label">Year</label>
             #{telephone_field(
               year_method,
-              class: 'form-width--year text-input',
-              id: sanitized_id(year_method),
-              name: "#{object_name}[#{year_method}]",
-              size: 4,
-              minlength: 4,
-              maxlength: 4,
+              standard_options.merge({
+                class: 'form-width--year text-input',
+                id: sanitized_id(year_method),
+                name: "#{object_name}[#{year_method}]",
+                size: 4,
+                minlength: 4,
+                maxlength: 4,
+              })
             )}
           </div>
         </div>
@@ -517,6 +511,15 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   private
+
+  def standard_options
+    {
+      autocomplete: "off",
+      autocorrect: "off",
+      autocapitalize: "off",
+      spellcheck: "false",
+    }
+  end
 
   def mb_radio_button(method, collection, layout, help_text)
     radio_html = <<~HTML
