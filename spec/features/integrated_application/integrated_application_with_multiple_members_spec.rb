@@ -7,14 +7,6 @@ RSpec.feature "Integrated application" do
   CIRCLED = Integrated::PdfAttributes::CIRCLED
   UNDERLINED = Integrated::PdfAttributes::UNDERLINED
 
-  before do
-    ENV["INTEGRATED_APPLICATION_ENABLED"] = "true"
-  end
-
-  after do
-    ENV["INTEGRATED_APPLICATION_ENABLED"] = "false"
-  end
-
   scenario "with multiple members", :js do
     visit root_path
 

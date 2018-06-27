@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Medicaid app" do
-  scenario "with multiple members", :js do
+  scenario "with multiple members", :js, :single_app_flow do
     visit root_path
 
     within(".slab--hero") do

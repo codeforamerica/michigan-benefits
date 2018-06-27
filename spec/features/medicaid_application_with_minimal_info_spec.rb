@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Medicaid app" do
-  scenario "with minimal info", :js do
+  scenario "with minimal info", :js, :single_app_flow do
     visit root_path
 
     within(".slab--hero") do

@@ -3,7 +3,7 @@ require "rails_helper"
 feature "SNAP application with maximum info" do
   include PdfHelper
 
-  scenario "successfully submits application", :js do
+  scenario "successfully submits application", :js, :single_app_flow do
     visit root_path
     within(".slab--hero") { proceed_with "Apply for FAP" }
 

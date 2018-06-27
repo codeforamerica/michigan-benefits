@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Submit application with minimal information" do
-  scenario "completes successfully", :js do
+  scenario "completes successfully", :js, :single_app_flow do
     visit root_path
     within(".slab--hero") { proceed_with "Apply for FAP" }
 
