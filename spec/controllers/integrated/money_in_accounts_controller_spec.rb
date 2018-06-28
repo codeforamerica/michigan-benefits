@@ -10,7 +10,7 @@ RSpec.describe Integrated::MoneyInAccountsController do
       end
 
       it "updates the navigator" do
-        current_app = create(:common_application)
+        current_app = create(:common_application, :with_navigator)
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }

@@ -30,7 +30,7 @@ RSpec.describe Integrated::AreYouPregnantController do
       end
 
       it "updates the model" do
-        current_app = create(:common_application, :single_member)
+        current_app = create(:common_application, :single_member, :with_navigator)
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }

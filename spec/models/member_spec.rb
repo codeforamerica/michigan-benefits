@@ -396,15 +396,12 @@ RSpec.describe Member do
     end
 
     it "creates records if number of jobs is greater than employments count" do
+      application = create(:medicaid_application, :with_member)
       existing_employments = build_list(:employment, 2)
-      member = build(
-        :member,
+      member = application.members.first
+      member.update(
         employed_number_of_jobs: 3,
         employments: existing_employments,
-      )
-      create(
-        :medicaid_application,
-        members: [member],
       )
       member.modify_employments
 
@@ -413,17 +410,15 @@ RSpec.describe Member do
     end
 
     it "destroys records if number of jobs is less than employments count" do
-      existing_employments = build_list(:employment, 4)
+      application = create(:medicaid_application, :with_member)
 
-      member = build(
-        :member,
+      existing_employments = build_list(:employment, 4)
+      member = application.members.first
+      member.update(
         employed_number_of_jobs: 2,
         employments: existing_employments,
       )
-      create(
-        :medicaid_application,
-        members: [member],
-      )
+
       expect(Employment.count).to eq 4
       member.modify_employments
       member.reload

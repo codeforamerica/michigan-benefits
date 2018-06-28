@@ -3,6 +3,8 @@ FactoryBot.define do
     first_name "Lilly"
     last_name "Pad"
 
+    common_application
+
     trait :requesting_food do
       requesting_food "yes"
     end

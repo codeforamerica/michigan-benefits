@@ -1,6 +1,10 @@
 FactoryBot.define do
   factory :common_application do
-    association :navigator, factory: :application_navigator
+    trait :with_navigator do
+      after(:create) do |common_application|
+        create(:application_navigator, common_application: common_application)
+      end
+    end
 
     trait :signed do
       signed_at Time.now

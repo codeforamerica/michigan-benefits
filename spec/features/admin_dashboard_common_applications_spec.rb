@@ -21,10 +21,8 @@ RSpec.feature "Admin viewing common applications dashboard", type: :feature do
   end
 
   scenario "downloads the Integrated PDF application", javascript: true do
-    application = create(
-      :common_application,
-      members: [build(:household_member, first_name: "Christa", last_name: "Tester")],
-    )
+    application = create(:common_application)
+    create(:household_member, first_name: "Christa", last_name: "Tester", common_application: application)
 
     visit admin_root_path
 

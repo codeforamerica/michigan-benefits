@@ -83,7 +83,7 @@ RSpec.describe Integrated::DescribeTaxRelationshipsController do
       end
 
       it "updates each non-primary member with tax relationship info" do
-        current_app = create(:common_application, members: [member_1, member_2])
+        current_app = create(:common_application, :with_navigator, members: [member_1, member_2])
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }

@@ -8,7 +8,7 @@ RSpec.describe Integrated::LegalAgreementController do
       end
 
       it "updates the models" do
-        current_app = create(:common_application)
+        current_app = create(:common_application, :with_navigator)
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }
@@ -25,7 +25,7 @@ RSpec.describe Integrated::LegalAgreementController do
       end
 
       it "renders edit without updating" do
-        current_app = create(:common_application)
+        current_app = create(:common_application, :with_navigator)
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: invalid_params }
