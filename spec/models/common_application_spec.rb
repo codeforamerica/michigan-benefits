@@ -142,9 +142,9 @@ RSpec.describe CommonApplication do
     describe ".applying_for_food_and_healthcare" do
       it "returns apps where members are applying for both food and healthcare" do
         applying_one = create(:common_application, members: [
-          build(:household_member, requesting_food: "yes", requesting_healthcare: "no"),
-          build(:household_member, requesting_food: "no", requesting_healthcare: "yes")
-        ])
+                                build(:household_member, requesting_food: "yes", requesting_healthcare: "no"),
+                                build(:household_member, requesting_food: "no", requesting_healthcare: "yes"),
+                              ])
         applying_two = create(:common_application, :multi_member_food_and_healthcare)
 
         create(:common_application, :single_member_food)
