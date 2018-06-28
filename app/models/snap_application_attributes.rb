@@ -183,8 +183,8 @@ class SnapApplicationAttributes
       members.
       where.
       not(buy_food_with: true).
-      pluck("concat(first_name, ' ', last_name) AS display_name").
-      to_sentence
+      map(&:display_name).
+      join(" ,")
   end
 
   def more_than_six_members_yes

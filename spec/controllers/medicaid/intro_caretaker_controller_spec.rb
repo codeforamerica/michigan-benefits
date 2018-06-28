@@ -13,7 +13,7 @@ RSpec.describe Medicaid::IntroCaretakerController do
         medicaid_application = create(
           :medicaid_application,
             members: [build(:member)],
-        )
+          )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
@@ -27,7 +27,7 @@ RSpec.describe Medicaid::IntroCaretakerController do
         medicaid_application = create(
           :medicaid_application,
             members: build_list(:member, 2),
-        )
+          )
         session[:medicaid_application_id] = medicaid_application.id
 
         get :edit
