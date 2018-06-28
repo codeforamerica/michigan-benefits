@@ -32,7 +32,7 @@ class Export < ApplicationRecord
   scope :completed, -> { where.not(completed_at: nil) }
   scope :application_ids, -> { pluck(:benefit_application_id) }
   scope :latest, -> { first }
-  scope :without, ->(export) { where.not(id: export.id) }
+  scope :except_for, ->(export) { where.not(id: export.id) }
   scope :successful_or_in_flight, -> {
     where(status: %i(new queued in_process
                      succeeded))
@@ -42,7 +42,7 @@ class Export < ApplicationRecord
     raise ArgumentError, "#export requires a block" unless block_given?
 
     if benefit_application.exports.for_destination(destination).
-        successful_or_in_flight.without(self).present? && !force
+        successful_or_in_flight.except_for(self).present? && !force
 
       transition_to new_status: :unnecessary
       update(metadata: "There is already another successful or in progress " \
