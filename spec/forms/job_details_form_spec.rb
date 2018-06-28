@@ -17,7 +17,8 @@ RSpec.describe JobDetailsForm do
         form = JobDetailsForm.new(
           id: member.id.to_s,
           employments: [
-            Employment.new(employer_name: "ABC Corp",
+            Employment.new(application_member: member,
+                           employer_name: "ABC Corp",
                            hourly_or_salary: "hourly",
                            payment_frequency: "week",
                            pay_quantity: "100",

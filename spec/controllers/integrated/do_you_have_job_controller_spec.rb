@@ -20,7 +20,7 @@ RSpec.describe Integrated::DoYouHaveJobController do
 
       it "updates the navigator and adds a job for primary member" do
         primary_member = build(:household_member, employments: [])
-        current_app = create(:common_application, members: [primary_member])
+        current_app = create(:common_application, :with_navigator, members: [primary_member])
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }
@@ -39,7 +39,7 @@ RSpec.describe Integrated::DoYouHaveJobController do
 
       it "updates the navigator and zeroes out jobs for primary member" do
         primary_member = build(:household_member, employments: build_list(:employment, 1))
-        current_app = create(:common_application, members: [primary_member])
+        current_app = create(:common_application, :with_navigator, members: [primary_member])
         session[:current_application_id] = current_app.id
 
         put :update, params: { form: valid_params }

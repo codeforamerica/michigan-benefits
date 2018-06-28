@@ -2,9 +2,11 @@ require "rails_helper"
 
 RSpec.describe Employment do
   describe "validations" do
-    context "when no info provided" do
+    let(:member) { build(:member) }
+
+    context "when only applicant member is provided" do
       it "is valid" do
-        employment = Employment.new
+        employment = Employment.new(application_member: member)
 
         expect(employment).to be_valid
       end
@@ -13,6 +15,7 @@ RSpec.describe Employment do
     context "when valid info provided" do
       it "is valid" do
         employment = Employment.new(
+          application_member: member,
           hourly_or_salary: "hourly",
           pay_quantity: "100",
           hours_per_week: 10,
@@ -25,6 +28,7 @@ RSpec.describe Employment do
     context "when pay quantity provided" do
       it "is invalid if invalid dollar amount" do
         employment = Employment.new(
+          application_member: member,
           pay_quantity: "1003aaa",
         )
 

@@ -5,6 +5,8 @@ FactoryBot.define do
     sex "female"
     birthday { DateTime.parse("August 18, 1990") }
 
+    association :benefit_application, factory: :snap_application
+
     trait :female do
       sex "female"
     end

@@ -76,20 +76,24 @@ RSpec.describe Medicaid::AmountsIncomeController do
         end
 
         it "assigns employments to step" do
-          existing_employments = build_list(:employment, 2)
-          member = build(
-            :member,
-            employed: true,
-            employed_number_of_jobs: 2,
-            employments: existing_employments,
-          )
           medicaid_application = create(
             :medicaid_application,
-            members: [member],
             anyone_employed: true,
             anyone_self_employed: false,
             anyone_other_income: false,
           )
+          medicaid_application.update(
+            members: [
+              create(
+                :member,
+                employed: true,
+                employed_number_of_jobs: 2,
+              )
+            ]
+          )
+          existing_employments = build_list(:employment, 2)
+          medicaid_application.members.first.update(employments: existing_employments)
+
           session[:medicaid_application_id] = medicaid_application.id
 
           get :edit
@@ -104,17 +108,13 @@ RSpec.describe Medicaid::AmountsIncomeController do
   describe "#update" do
     context "client has multiple jobs" do
       it "saves the income for each job" do
-        member = build(
-          :member,
-          employed: true,
-          employed_number_of_jobs: 2,
-          employments: build_list(:employment, 2),
-        )
         medicaid_application = create(
           :medicaid_application,
-          members: [member],
           anyone_employed: true,
         )
+        member = build(:member, employed: true, employed_number_of_jobs: 2)
+        medicaid_application.update(members: [member])
+        member.update(employments: build_list(:employment, 2))
         session[:medicaid_application_id] = medicaid_application.id
 
         member.reload

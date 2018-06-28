@@ -18,20 +18,6 @@ RSpec.describe MedicaidApplicationMemberAttributes do
         citizen: true,
         employed: true,
         self_employed: true,
-        employments: [
-          build(
-            :employment,
-            employer_name: "AA Accounting",
-            payment_frequency: "Hourly",
-            pay_quantity: "11",
-          ),
-          build(
-            :employment,
-            employer_name: "BB Burgers",
-            payment_frequency: "Weekly",
-            pay_quantity: "222",
-          ),
-        ],
         other_income: true,
         other_income_types: [
           "alimony",
@@ -53,7 +39,22 @@ RSpec.describe MedicaidApplicationMemberAttributes do
                      last_name: "Crush",
                      benefit_application: medicaid_application)
 
-      member.update(spouse: spouse)
+      member.update(
+        spouse: spouse,
+        employments: [
+          build(
+            :employment,
+            employer_name: "AA Accounting",
+            payment_frequency: "Hourly",
+            pay_quantity: "11",
+          ),
+          build(
+            :employment,
+            employer_name: "BB Burgers",
+            payment_frequency: "Weekly",
+            pay_quantity: "222",
+          ),
+        ])
 
       result = MedicaidApplicationMemberAttributes.new(
         member: member,
