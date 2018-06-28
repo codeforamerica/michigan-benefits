@@ -1065,7 +1065,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma
-  rails (~> 5.1)
+  rails (~> 5.2)
   rails-controller-testing
   responders
   route_downcaser
