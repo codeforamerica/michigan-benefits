@@ -159,7 +159,7 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Healthcare" do
-      expect(page).to have_content("Will you file taxes next year?")
+      expect(page).to have_content("Will you file taxes this year?")
 
       proceed_with "No"
     end
@@ -206,7 +206,7 @@ RSpec.feature "Integrated application" do
 
     on_page "Students" do
       expect(page).to have_content(
-        "Is anyone a college or vocational school student?",
+        "Is anyone in college?",
       )
 
       proceed_with "No"
@@ -330,7 +330,7 @@ RSpec.feature "Integrated application" do
 
     on_page "Flint Water Crisis" do
       expect(page).to have_content(
-        "Has anyone been affected by the Flint Water Crisis?",
+        "Has anyone drunk water in Flint since April 2014?",
       )
 
       proceed_with "No"

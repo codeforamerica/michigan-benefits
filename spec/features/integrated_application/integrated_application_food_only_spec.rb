@@ -175,7 +175,7 @@ RSpec.feature "SNAP-only integrated application" do
 
     on_page "Students" do
       expect(page).to have_content(
-        "Is anyone a college or vocational school student?",
+        "Is anyone in college?",
       )
 
       proceed_with "No"
