@@ -92,13 +92,6 @@ class HouseholdMember < ApplicationRecord
     ["Other", "other_relation"],
   ].freeze
 
-  TAX_RELATIONSHIP_LABELS_AND_KEYS = [
-    ["Choose one", nil],
-    ["Married Filing Jointly", "married_filing_jointly"],
-    ["Married Filing Separately", "married_filing_separately"],
-    ["Dependent", "dependent"],
-  ].freeze
-
   RELATION_LABEL_LOOKUP = RELATIONSHIP_LABELS_AND_KEYS.map(&:reverse).to_h
 
   auto_strip_attributes :first_name, :last_name

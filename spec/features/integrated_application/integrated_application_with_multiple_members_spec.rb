@@ -240,7 +240,7 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Healthcare" do
-      expect(page).to have_content("Will you file taxes next year?")
+      expect(page).to have_content("Will you file taxes this year?")
 
       proceed_with "Yes"
     end
@@ -287,11 +287,11 @@ RSpec.feature "Integrated application" do
       expect(page).to have_content("How will you include others on your taxes?")
 
       select_radio(question: "Jonny Tester", answer: "Married filing jointly")
-      select_radio(question: "Jackie Tester", answer: "Dependent")
+      select_radio(question: "Jackie Tester", answer: "Claimed as dependent")
       select_radio(question: "Joe Schmoe", answer: "Not included")
       select_radio(question: "Apples McMackintosh", answer: "Not included")
-      select_radio(question: "Pupper McDog", answer: "Dependent")
-      select_radio(question: "Ginny Pig", answer: "Dependent")
+      select_radio(question: "Pupper McDog", answer: "Claimed as dependent")
+      select_radio(question: "Ginny Pig", answer: "Claimed as dependent")
 
       proceed_with "Continue"
     end
@@ -347,7 +347,7 @@ RSpec.feature "Integrated application" do
 
     on_page "Students" do
       expect(page).to have_content(
-        "Is anyone a college or vocational school student?",
+        "Is anyone in college?",
       )
 
       proceed_with "Yes"
@@ -523,7 +523,7 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Household Expenses" do
-      expect(page).to have_content("Tell us about any alimony expenses")
+      expect(page).to have_content("Tell us about any alimony or spousal support expenses")
 
       fill_in "Monthly amount", with: "50"
       check "Jessie Tester"
@@ -650,7 +650,7 @@ RSpec.feature "Integrated application" do
 
     on_page "Flint Water Crisis" do
       expect(page).to have_content(
-        "Has anyone been affected by the Flint Water Crisis?",
+        "Has anyone drunk water in Flint since April 2014?",
       )
 
       proceed_with "Yes"
