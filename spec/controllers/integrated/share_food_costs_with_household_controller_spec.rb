@@ -77,7 +77,7 @@ RSpec.describe Integrated::ShareFoodCostsWithHouseholdController do
         current_app = create(
           :common_application,
           :with_navigator,
-          members: build_list(:household_member, 3, requesting_food: "yes")
+          members: build_list(:household_member, 3, requesting_food: "yes"),
         )
         session[:current_application_id] = current_app.id
 

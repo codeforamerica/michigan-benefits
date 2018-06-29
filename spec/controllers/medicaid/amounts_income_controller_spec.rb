@@ -88,8 +88,8 @@ RSpec.describe Medicaid::AmountsIncomeController do
                 :member,
                 employed: true,
                 employed_number_of_jobs: 2,
-              )
-            ]
+              ),
+            ],
           )
           existing_employments = build_list(:employment, 2)
           medicaid_application.members.first.update(employments: existing_employments)
