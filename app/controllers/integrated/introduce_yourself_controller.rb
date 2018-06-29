@@ -11,7 +11,7 @@ module Integrated
                            day: member_data.delete(:birthday_day),
                            month: member_data.delete(:birthday_month),
                            year: member_data.delete(:birthday_year),
-      ))
+                         ))
       if current_application.primary_member
         current_application.primary_member.update(member_data)
       else

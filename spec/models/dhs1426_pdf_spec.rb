@@ -98,19 +98,19 @@ RSpec.describe Dhs1426Pdf do
         filing_federal_taxes_next_year: true,
       )
       primary_member.update(employments: [
-        build(
-          :employment,
-          employer_name: "AA Accounting",
-          payment_frequency: "Hourly",
-          pay_quantity: "11",
-        ),
-        build(
-          :employment,
-          employer_name: "BB Burgers",
-          payment_frequency: "Weekly",
-          pay_quantity: "222",
-        ),
-      ])
+                              build(
+                                :employment,
+                                employer_name: "AA Accounting",
+                                payment_frequency: "Hourly",
+                                pay_quantity: "11",
+                              ),
+                              build(
+                                :employment,
+                                employer_name: "BB Burgers",
+                                payment_frequency: "Weekly",
+                                pay_quantity: "222",
+                              ),
+                            ])
 
       expected_client_data = {
         primary_member_full_name: "Christa Tester",
