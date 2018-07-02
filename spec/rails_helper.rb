@@ -9,7 +9,8 @@ require "axe/rspec"
 require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-Capybara.javascript_driver = :selenium_chrome_headless # or `:selenium_chrome` for full browser
+Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.default_max_wait_time = 0.2
 
 ActiveRecord::Migration.maintain_test_schema!
 
