@@ -54,7 +54,8 @@ RSpec.describe MedicaidApplicationMemberAttributes do
             payment_frequency: "Weekly",
             pay_quantity: "222",
           ),
-        ])
+        ],
+      )
 
       result = MedicaidApplicationMemberAttributes.new(
         member: member,

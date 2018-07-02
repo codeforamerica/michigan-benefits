@@ -28,10 +28,10 @@ RSpec.describe Integrated::ReviewHealthcareHouseholdController do
       it "sets removable members and removed members" do
         application = create(:common_application,
           members: [
-           create(:household_member, requesting_healthcare: "no", filing_taxes_next_year: "yes"),
-           create(:household_member, requesting_healthcare: "no"),
-           create(:household_member, requesting_healthcare: "no", tax_relationship: "not_included"),
-         ])
+            create(:household_member, requesting_healthcare: "no", filing_taxes_next_year: "yes"),
+            create(:household_member, requesting_healthcare: "no"),
+            create(:household_member, requesting_healthcare: "no", tax_relationship: "not_included"),
+          ])
         session[:current_application_id] = application.id
 
         get :edit
@@ -48,9 +48,9 @@ RSpec.describe Integrated::ReviewHealthcareHouseholdController do
         application = create(:common_application,
           :with_navigator,
           members: [
-           create(:household_member, requesting_healthcare: "no", filing_taxes_next_year: "no"),
-           create(:household_member, requesting_healthcare: "no"),
-         ])
+            create(:household_member, requesting_healthcare: "no", filing_taxes_next_year: "no"),
+            create(:household_member, requesting_healthcare: "no"),
+          ])
         session[:current_application_id] = application.id
 
         get :edit
