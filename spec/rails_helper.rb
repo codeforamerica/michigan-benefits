@@ -4,7 +4,6 @@ require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 require "capybara/rails"
 require "capybara/rspec"
-require "selenium/webdriver"
 require "axe/rspec"
 require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
