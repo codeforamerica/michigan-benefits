@@ -8,6 +8,15 @@ GIT
       rails (>= 3.2.6)
       rotp (>= 2.0.0)
 
+GIT
+  remote: https://github.com/thoughtbot/capybara-webkit.git
+  revision: 8329b19e94ff08eeb517cac49bfffd2f667ea90d
+  ref: 8329b19
+  specs:
+    capybara-webkit (1.15.0)
+      capybara (>= 2.3, < 4.0)
+      json
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -1035,6 +1044,7 @@ DEPENDENCIES
   browser
   bundler-audit
   capybara
+  capybara-webkit!
   climate_control
   codeclimate-test-reporter
   database_cleaner

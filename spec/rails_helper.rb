@@ -4,12 +4,13 @@ require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 require "capybara/rails"
 require "capybara/rspec"
-require "selenium/webdriver"
 require "axe/rspec"
 require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-Capybara.javascript_driver = :selenium_chrome_headless # or `:selenium_chrome` for full browser
+Capybara.javascript_driver = :webkit
+Capybara.default_max_wait_time = 0 # No JS (only used for axe-matchers), so no waiting!
+Capybara::Webkit.configure(&:block_unknown_urls)
 
 ActiveRecord::Migration.maintain_test_schema!
 

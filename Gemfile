@@ -55,6 +55,7 @@ gem "uglifier", ">= 1.3.0"
 
 group :test do
   gem "axe-matchers", "~> 1.3.4"
+  gem "capybara-webkit", git: "https://github.com/thoughtbot/capybara-webkit.git", ref: "8329b19" # Removes deprecation warnings, update to released Gem when >1.15 available
   gem "database_cleaner"
   gem "launchy"
   gem "pdf-reader"
