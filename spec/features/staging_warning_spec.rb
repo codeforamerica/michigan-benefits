@@ -14,7 +14,7 @@ RSpec.feature "Warn users on staging only" do
     expect(page).to have_content("This is an example website")
   end
 
-  scenario "Does not render warning message when not on staging", :js do
+  scenario "Does not render warning message when not on staging" do
     visit root_path
     expect(page).to_not have_content("This is an example website")
   end
