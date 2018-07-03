@@ -264,7 +264,7 @@ accounts?",
     end
 
     expect(page).to have_text(
-      "Your application has been sent to your email inbox",
+      "Your application has been sent to your email inbox", wait: 2
     )
 
     emails = ActionMailer::Base.deliveries
