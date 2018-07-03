@@ -46,10 +46,8 @@ module Section
     def add_enum_to_member
       inject_into_file "app/models/household_member.rb",
         before: "  # Generated enums added above\n" do
-        <<-ENUM
-  enum #{model_method}: { unfilled: 0, yes: 1, no: 2 }, _prefix: :#{model_method}
-        ENUM
-      end
+          "  enum #{model_method}: { unfilled: 0, yes: 1, no: 2 }, _prefix: :#{model_method}\n"
+        end
     end
 
     def generate_form_model(section_type, model_name)
