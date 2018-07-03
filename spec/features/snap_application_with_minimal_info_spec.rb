@@ -138,7 +138,7 @@ RSpec.feature "Submit application with minimal information" do
     end
 
     expect(page).to have_text(
-      "Your application has been submitted.",
+      "Your application has been submitted.", wait: 2
     )
   end
 end
