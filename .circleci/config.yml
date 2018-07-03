@@ -6,54 +6,33 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update; sudo apt-get install pdftk
-      - run: gem install bundler && bundle exec bundle install
-
-  check:
-    machine: true
-    steps:
+      - run: bundle check || bundle install
+      # Store bundle cache
+      - save_cache:
+          key: gem-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run: bundle exec bundle-audit update && bundle exec bundle-audit check
       - run: bundle exec brakeman
-
-  lint:
-    machine: true
-    steps:
       - run: bundle exec rubocop
+      # Database setup
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-  test:
-    machine: true
-    steps:
-      - run: RAILS_ENV=test bundle exec rspec
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+      # Run rspec in parallel
+      - run: |
+          bundle exec rspec --profile 10 \
+                            --format RspecJunitFormatter \
+                            --out test_results/rspec.xml \
+                            --format progress \
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-  deploy-staging:
-    machine: true
-    steps:
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results
       - run: "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
       - run: git push git@heroku.com:michigan-benefits-staging.git $CIRCLE_SHA1:refs/heads/master
-
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - /WIP-.*/
-                - /wip-.*/
-      - check:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
-      - test:
-          requires:
-            - build
-      - deploy-staging:
-          requires:
-            - check
-            - lint
-            - test
-          filters:
-            branches:
-              only: master
