@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update; sudo apt-get install pdftk
+      - run: gem install bundler && bundle exec bundle install
 
   check:
     machine: true
@@ -16,7 +17,7 @@ jobs:
   lint:
     machine: true
     steps:
-      - run: rubocop
+      - run: bundle exec rubocop
 
   test:
     machine: true
