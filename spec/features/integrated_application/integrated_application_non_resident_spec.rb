@@ -5,7 +5,7 @@ RSpec.feature "Integrated application" do
     visit root_path
 
     within(".slab--hero") do
-      proceed_with "Start your application"
+      click_on "Start your application"
     end
 
     on_page "Introduction" do
@@ -14,19 +14,19 @@ RSpec.feature "Integrated application" do
       check "Food Assistance Program"
       check "Healthcare Coverage"
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Welcome")
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Do you currently reside in Michigan?")
 
-      proceed_with "No"
+      click_on "No"
     end
 
     on_page "Introduction" do
@@ -39,7 +39,7 @@ RSpec.feature "Integrated application" do
     visit root_path
 
     within(".slab--hero") do
-      proceed_with "Start your application"
+      click_on "Start your application"
     end
 
     on_page "Introduction" do
@@ -47,19 +47,19 @@ RSpec.feature "Integrated application" do
 
       check "Food Assistance Program"
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Welcome")
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Do you currently reside in Michigan?")
 
-      proceed_with "No"
+      click_on "No"
     end
 
     on_page "Introduction" do
@@ -72,7 +72,7 @@ RSpec.feature "Integrated application" do
     visit root_path
 
     within(".slab--hero") do
-      proceed_with "Start your application"
+      click_on "Start your application"
     end
 
     on_page "Introduction" do
@@ -80,19 +80,19 @@ RSpec.feature "Integrated application" do
 
       check "Healthcare Coverage"
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Welcome")
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Do you currently reside in Michigan?")
 
-      proceed_with "No"
+      click_on "No"
     end
 
     on_page "Introduction" do
