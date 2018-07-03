@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-  scenario "with one member", :js do
+  scenario "with one member", :a11y do
     visit root_path
 
     within(".slab--hero") do

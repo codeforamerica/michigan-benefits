@@ -24,11 +24,15 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do |example|
-    DatabaseCleaner.strategy = if example.metadata[:js]
+    js_driver_enabled = example.metadata[:js] ||
+      (example.metadata[:a11y] && ENV["RUN_ACCESSIBILITY_SPECS"])
+
+    DatabaseCleaner.strategy = if js_driver_enabled
                                  :truncation
                                else
                                  :transaction
                                end
+
     DatabaseCleaner.start
   end
 
@@ -37,6 +41,12 @@ RSpec.configure do |config|
       to_return(File.new("spec/fixtures/test_remote_image.jpg"))
 
     Delayed::Worker.delay_jobs = false
+  end
+
+  config.before :all, :a11y do
+    if ENV["RUN_ACCESSIBILITY_SPECS"]
+      Capybara.current_driver = Capybara.javascript_driver
+    end
   end
 
   config.after :all, type: :feature do
@@ -50,6 +60,12 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
     FakeTwilioClient.clear!
+  end
+
+  config.after :all, :a11y do
+    if ENV["RUN_ACCESSIBILITY_SPECS"]
+      Capybara.use_default_driver
+    end
   end
 
   config.before :all, :single_app_flow do

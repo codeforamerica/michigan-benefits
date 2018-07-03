@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-  scenario "where applicant is not a resident and is applying for both programs", :js do
+  scenario "where applicant is not a resident and is applying for both programs" do
     visit root_path
 
     within(".slab--hero") do
-      proceed_with "Start your application"
+      click_on "Start your application"
     end
 
     on_page "Introduction" do
@@ -14,19 +14,19 @@ RSpec.feature "Integrated application" do
       check "Food Assistance Program"
       check "Healthcare Coverage"
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Welcome")
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Do you currently reside in Michigan?")
 
-      proceed_with "No"
+      click_on "No"
     end
 
     on_page "Introduction" do
@@ -35,11 +35,11 @@ RSpec.feature "Integrated application" do
     end
   end
 
-  scenario "where applicant is not a resident and is applying only for SNAP", :js do
+  scenario "where applicant is not a resident and is applying only for SNAP" do
     visit root_path
 
     within(".slab--hero") do
-      proceed_with "Start your application"
+      click_on "Start your application"
     end
 
     on_page "Introduction" do
@@ -47,19 +47,19 @@ RSpec.feature "Integrated application" do
 
       check "Food Assistance Program"
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Welcome")
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Do you currently reside in Michigan?")
 
-      proceed_with "No"
+      click_on "No"
     end
 
     on_page "Introduction" do
@@ -68,11 +68,11 @@ RSpec.feature "Integrated application" do
     end
   end
 
-  scenario "where applicant is not a resident and is applying only for Medicaid", :js do
+  scenario "where applicant is not a resident and is applying only for Medicaid" do
     visit root_path
 
     within(".slab--hero") do
-      proceed_with "Start your application"
+      click_on "Start your application"
     end
 
     on_page "Introduction" do
@@ -80,19 +80,19 @@ RSpec.feature "Integrated application" do
 
       check "Healthcare Coverage"
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Welcome")
 
-      proceed_with "Continue"
+      click_on "Continue"
     end
 
     on_page "Introduction" do
       expect(page).to have_content("Do you currently reside in Michigan?")
 
-      proceed_with "No"
+      click_on "No"
     end
 
     on_page "Introduction" do

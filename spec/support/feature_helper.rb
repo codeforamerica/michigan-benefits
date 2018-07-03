@@ -24,7 +24,10 @@ module FeatureHelper
   end
 
   def proceed_with(submit_button_text, scroll_to_top: false)
-    check_accessibility(scroll_to_top)
+    if ENV["RUN_ACCESSIBILITY_SPECS"] == "true"
+      check_accessibility(scroll_to_top)
+    end
+
     click_on submit_button_text
   end
 
