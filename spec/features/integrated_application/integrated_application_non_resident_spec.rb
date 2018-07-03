@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-  scenario "where applicant is not a resident and is applying for both programs", :js do
+  scenario "where applicant is not a resident and is applying for both programs" do
     visit root_path
 
     within(".slab--hero") do
@@ -35,7 +35,7 @@ RSpec.feature "Integrated application" do
     end
   end
 
-  scenario "where applicant is not a resident and is applying only for SNAP", :js do
+  scenario "where applicant is not a resident and is applying only for SNAP" do
     visit root_path
 
     within(".slab--hero") do
@@ -68,7 +68,7 @@ RSpec.feature "Integrated application" do
     end
   end
 
-  scenario "where applicant is not a resident and is applying only for Medicaid", :js do
+  scenario "where applicant is not a resident and is applying only for Medicaid" do
     visit root_path
 
     within(".slab--hero") do

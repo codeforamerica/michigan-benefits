@@ -7,7 +7,7 @@ RSpec.feature "Integrated application" do
   CIRCLED = Integrated::PdfAttributes::CIRCLED
   UNDERLINED = Integrated::PdfAttributes::UNDERLINED
 
-  scenario "with multiple members", :js do
+  scenario "with multiple members", :a11y do
     visit root_path
 
     within(".slab--hero") do
@@ -982,8 +982,6 @@ RSpec.feature "Integrated application" do
       expect(page).to have_content(
         "Upload paperwork",
       )
-
-      upload_paperwork(object_name: "form")
 
       proceed_with "Finish"
     end

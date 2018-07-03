@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Medicaid-only integrated application" do
-  scenario "with two members", :js do
+  scenario "with two members", :a11y do
     visit root_path
 
     within(".slab--hero") do
