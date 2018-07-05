@@ -13,7 +13,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: sudo apt-get update; sudo apt-get install pdftk libmagic-dev
+          command: sudo apt-get update; sudo apt-get install pdftk libmagic-dev nodejs
 
       - run:
           name: Install Bundler dependencies
@@ -29,10 +29,7 @@ jobs:
 #      - run: bundle exec brakeman
 #      - run: bundle exec rubocop
 
-      - run: |
-          bundle exec rspec --profile 10 \
-                            --format RspecJunitFormatter \
-                            --format progress
+      - run: bundle exec rspec spec
 
 #      - run: "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
 #      - run: git push git@heroku.com:michigan-benefits-staging.git $CIRCLE_SHA1:refs/heads/master
