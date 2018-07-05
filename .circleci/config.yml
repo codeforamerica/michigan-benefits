@@ -1,23 +1,27 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/ruby:2.5.1-browsers
+      environment:
+        PGHOST: 127.0.0.1
+        PGUSER: root
+        RAILS_ENV: test
+        RACK_ENV: test
+
+    - image: circleci/postgres:9.6.2-alpine
+      environment:
+        POSTGRES_USER: root
+        POSTGRES_DB: circle-test_test
+
 version: 2
 jobs:
-  build:
-    working_directory: ~/michigan-benefits
-
-    docker:
-      - image: circleci/ruby:2.5.1-browsers
-        environment:
-          PGHOST: 127.0.0.1
-          PGUSER: root
-          RAILS_ENV: test
-          RACK_ENV: test
-
-      - image: circleci/postgres:9.6.2-alpine
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle-test_test
-
+  install_dependencies:
+    <<: *defaults
     steps:
       - checkout
+
+      - attach_workspace:
+          at: ~/repo
 
       - restore_cache:
           keys:
@@ -37,23 +41,80 @@ jobs:
           paths:
             - vendor/bundle
 
+      - persist_to_workspace:
+          root: .
+          paths: vendor/bundle
+
+  run_checks:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: bundle --path vendor/bundle
+      - run: bundle exec bundle-audit update && bundle exec bundle-audit check
+      - run: bundle exec brakeman
+      - run: bundle exec rubocop
+
+  rake_test:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: bundle --path vendor/bundle
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
       - run:
-          name: Database Setup
+          name: run tests
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:test:prepare
-
-#      - run: bundle exec bundle-audit update && bundle exec bundle-audit check
-#      - run: bundle exec brakeman
-#      - run: bundle exec rubocop
-
-      - run:
-          name: Parallel RSpec
-          command: bin/rails spec
-
-      # Save artifacts
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format progress \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            -- \
+                            $TEST_FILES
+      # collect reports
       - store_test_results:
           path: /tmp/test-results
 
-#      - run: "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-#      - run: git push git@heroku.com:michigan-benefits-staging.git $CIRCLE_SHA1:refs/heads/master
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: bundle --path vendor/bundle
+      - run: "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - run:
+          name: Deploy to Heroku
+          command: git push git@heroku.com:michigan-benefits-staging.git $CIRCLE_SHA1:refs/heads/master
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - install_dependencies
+      - rake_test:
+          requires:
+            - install_dependencies
+      - run_checks:
+          requires:
+            - install_dependencies
+          filters:
+            branches:
+              ignore:
+                - master
+#      - deploy:
+#          requires:
+#            - rake_test
+#          filters:
+#            branches:
+#              only: master
