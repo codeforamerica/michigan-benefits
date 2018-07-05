@@ -50,7 +50,7 @@ jobs:
       - run: bundle --path vendor/bundle
       - run: bundle exec bundle-audit update && bundle exec bundle-audit check
       - run: bundle exec brakeman
-      - run: bundle exec rubocop
+      - run: ~/repo/bin/rubocop
 
   rake_test:
     <<: *defaults
@@ -108,9 +108,9 @@ workflows:
             branches:
               ignore:
                 - master
-#      - deploy:
-#          requires:
-#            - rake_test
-#          filters:
-#            branches:
-#              only: master
+      - deploy:
+          requires:
+            - rake_test
+          filters:
+            branches:
+              only: master
