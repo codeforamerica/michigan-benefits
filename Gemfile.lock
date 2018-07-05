@@ -1078,7 +1078,6 @@ DEPENDENCIES
   selenium-webdriver
   sentry-raven
   shoulda-matchers
-  simplecov
   sinatra
   slack-ruby-client
   spring
