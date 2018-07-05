@@ -69,7 +69,6 @@ group :development, :test do
   gem "brakeman", require: false
   gem "bundler-audit"
   gem "climate_control"
-  gem "codeclimate-test-reporter"
   gem "dotenv-rails" # useful for when running dev server w/o foreman
   gem "factory_bot_rails"
   gem "listen"
