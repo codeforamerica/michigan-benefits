@@ -1,35 +1,59 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/michigan-benefits
+
     docker:
       - image: circleci/ruby:2.5.1-browsers
-    working_directory: ~/michigan-benefits
+        environment:
+          PG_HOST: localhost
+          PG_USER: ubuntu
+          RAILS_ENV: test
+          RACK_ENV: test
+
+      - image: postgres:9.6-jessie
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: db_name
+
     steps:
       - checkout
 
       - restore_cache:
           keys:
-            - benefits-bundler-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - michigan-benefits-{{ checksum "Gemfile.lock" }}
+            - michigan-benefits-
 
       - run:
           name: Install dependencies
           command: sudo apt-get update; sudo apt-get install pdftk libmagic-dev nodejs
 
       - run:
-          name: Install Bundler dependencies
-          command: bundle install --deployment --retry=3
+          name: Install gem dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - save_cache:
-          key: benefits-bundler-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: michigan-benefits-{{ checksum "Gemfile.lock" }}
           paths:
-            # the --deployment flag tells bundler to install here
             - vendor/bundle
+
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:test:prepare
 
 #      - run: bundle exec bundle-audit update && bundle exec bundle-audit check
 #      - run: bundle exec brakeman
 #      - run: bundle exec rubocop
 
-      - run: bundle exec rspec spec
+      - run:
+          name: Parallel RSpec
+          command: bin/rails spec
+
+      # Save artifacts
+      - store_test_results:
+          path: /tmp/test-results
 
 #      - run: "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
 #      - run: git push git@heroku.com:michigan-benefits-staging.git $CIRCLE_SHA1:refs/heads/master
