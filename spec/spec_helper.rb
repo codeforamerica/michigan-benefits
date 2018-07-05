@@ -1,18 +1,5 @@
-require "simplecov"
 require "pry"
 require "webmock/rspec"
-
-# Run code coverage and save to CI's artifacts directory if we're on CircleCI
-if ENV["CI"]
-  SimpleCov.coverage_dir(File.join(ENV["CIRCLE_ARTIFACTS"], "coverage"))
-end
-
-unless ENV["SKIP_COVERAGE"]
-  SimpleCov.start("rails") do
-    # To exclude files from coverage analysis:
-    # add_filter "/app/path/to/directory/"
-  end
-end
 
 WebMock.disable_net_connect!(allow_localhost: true)
 

@@ -69,7 +69,6 @@ group :development, :test do
   gem "brakeman", require: false
   gem "bundler-audit"
   gem "climate_control"
-  gem "codeclimate-test-reporter"
   gem "dotenv-rails" # useful for when running dev server w/o foreman
   gem "factory_bot_rails"
   gem "listen"
@@ -78,7 +77,6 @@ group :development, :test do
   gem "rspec_junit_formatter"
   gem "rubocop", require: false
   gem "rubocop-rspec", require: false
-  gem "simplecov"
   gem "spring"
   gem "spring-commands-rspec"
   gem "spring-commands-rubocop"
