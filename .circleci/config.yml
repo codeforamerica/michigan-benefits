@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/ruby:2.5.1-browsers
+    - image: chartsockcfa/michigan-benefits-ci:initial
       environment:
         PGHOST: 127.0.0.1
         PGUSER: root
@@ -27,10 +27,6 @@ jobs:
           keys:
             - michigan-benefits-{{ checksum "Gemfile.lock" }}
             - michigan-benefits-
-
-      - run:
-          name: Install dependencies
-          command: sudo apt-get update; sudo apt-get install pdftk libmagic-dev nodejs
 
       - run:
           name: Install gem dependencies
