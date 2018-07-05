@@ -24,7 +24,7 @@ class FormNavigation
       Integrated::ReviewFoodAssistanceMembersController,
     ],
     "Taxes" => [
-      Integrated::FileTaxesNextYearController,
+      Integrated::FileTaxesThisYearController,
       Integrated::ReviewHealthcareHouseholdController,
       Integrated::DescribeTaxRelationshipsController,
     ],
