@@ -1,5 +1,5 @@
 module Integrated
-  class FileTaxesNextYearController < FormsController
+  class FileTaxesThisYearController < FormsController
     def self.custom_skip_rule_set(application)
       application.primary_member.requesting_healthcare_no?
     end
