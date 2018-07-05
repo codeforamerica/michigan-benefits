@@ -48,8 +48,8 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: bundle --path vendor/bundle
-      - run: bundle exec bundle-audit update && bundle exec bundle-audit check
-      - run: bundle exec brakeman
+#      - run: bundle exec bundle-audit update && bundle exec bundle-audit check
+#      - run: bundle exec brakeman
       - run: bundle exec rubocop
 
   rake_test:
@@ -98,9 +98,9 @@ workflows:
   build-and-deploy:
     jobs:
       - install_dependencies
-      - rake_test:
-          requires:
-            - install_dependencies
+#      - rake_test:
+#          requires:
+#            - install_dependencies
       - run_checks:
           requires:
             - install_dependencies
@@ -108,9 +108,9 @@ workflows:
             branches:
               ignore:
                 - master
-      - deploy:
-          requires:
-            - rake_test
-          filters:
-            branches:
-              only: master
+#      - deploy:
+#          requires:
+#            - rake_test
+#          filters:
+#            branches:
+#              only: master
