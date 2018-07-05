@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.5.0-browsers
+      - image: circleci/ruby:2.5.1-browsers
     working_directory: ~/michigan-benefits
     steps:
       - checkout
