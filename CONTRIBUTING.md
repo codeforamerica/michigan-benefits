@@ -122,12 +122,13 @@ that people are often taking photos or attaching documents larger than that.
 
 To run tests and other checks on Circle CI, we use a custom Docker image hosted on [Docker Hub](https://hub.docker.com/r/chartsockcfa/michigan-benefits-ci/).
 
-To update this image (for example, when we update our version of Ruby in the app), update the Dockerfile in our repository (`ci/Dockerfile`), rebuild the image and push to Docker Hub as follows:
+To update this image (for example, when we update our version of ruby in the app):
 
 * cd into `.ci`
-* Make any required updates to the Dockerfile (base image, dependencies, etc.)
+* Make any required updates to the Dockerfile (updating base image, adding dependencies, etc.)
 * With [Docker for Mac](https://www.docker.com/docker-mac) running, type `docker build` in Terminal to build the image
-* Push the image to Docker Hub (with tag) via instructions [here](https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html)
+* Push the image with a unique tag to Docker Hub (with tag) via instructions [here](https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html)
+* Update the image tag in our Circle CI config at `.circleci/config.yml`
 
 
 ### Admin dashboard
