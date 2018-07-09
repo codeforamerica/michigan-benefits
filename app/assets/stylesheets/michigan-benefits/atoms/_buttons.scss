@@ -2,7 +2,7 @@
   @include padding(null 1em);
 
   @include media($mobile-up) {
-    @include padding(null 5em);
+    @include padding(null 4em);
   }
 }
 
