@@ -14,7 +14,7 @@
       url: current_path,
       method: :put do |f| %>
       <fieldset class="form-group">
-        <legend class="sr-only" id="income__legend">
+        <legend class="sr-only">
           <%= t("medicaid.income_other_income_member.edit.title") %>
         </legend>
         <% @step.members.each do |member| %>
@@ -22,7 +22,6 @@
             <%= ff.mb_checkbox(
               :other_income,
               member.display_name,
-              legend_id: "income__legend",
               options: { checked_value: "1", unchecked_value: "0" },
             ) %>
           <% end %>

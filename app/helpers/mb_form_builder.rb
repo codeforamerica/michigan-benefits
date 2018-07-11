@@ -18,13 +18,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       autofocus: autofocus,
       type: type,
       class: classes.join(" "),
-    ).merge(options)
+    ).merge(options).merge(error_attributes(method: method))
 
     text_field_options[:id] ||= sanitized_id(method)
     options[:input_id] ||= sanitized_id(method)
-
-    text_field_options["aria-labelledby"] =
-      aria_labelledby(method: method, help_text: help_text)
 
     text_field_html = text_field(method, text_field_options)
 
@@ -64,7 +61,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       type: "number",
       class: classes.join(" "),
       id: sanitized_id(slug),
-    ).merge(options)
+    ).merge(options).merge(error_attributes(method: method))
 
     if value_is_array
       text_field_options[:multiple] = "true"
@@ -160,8 +157,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       autofocus: autofocus,
       class: classes.join(" "),
       placeholder: placeholder,
-      'aria-labelledby': aria_labelledby(method: method, help_text: help_text),
-    ).merge(options)
+    ).merge(options).merge(error_attributes(method: method))
 
     <<~HTML.html_safe
       <div class="form-group#{error_state(object, method)}">
@@ -196,10 +192,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, base_method)}">
-        #{fieldset_label_contents(method: base_method, label_text: label_text, help_text: help_text)}
+        #{fieldset_label_contents(label_text: label_text, help_text: help_text)}
         <div class="input-group--inline">
           <div class="form-group">
-            <label class="text--help form-subquestion" for="#{sanitized_id(month_method)}" id="#{sanitized_id(month_method)}__label">Month</label>
+            <label class="text--help form-subquestion" for="#{sanitized_id(month_method)}">Month</label>
             #{telephone_field(
               month_method,
               options.merge(
@@ -211,7 +207,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             )}
           </div>
           <div class="form-group">
-            <label class="text--help form-subquestion" for="#{sanitized_id(day_method)}" id="#{sanitized_id(day_method)}__label">Day</label>
+            <label class="text--help form-subquestion" for="#{sanitized_id(day_method)}">Day</label>
             #{telephone_field(
               day_method,
               options.merge(
@@ -222,7 +218,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
             )}
           </div>
           <div class="form-group">
-            <label class="text--help form-subquestion" for="#{sanitized_id(year_method)}" id="#{sanitized_id(year_method)}__label">Year</label>
+            <label class="text--help form-subquestion" for="#{sanitized_id(year_method)}">Year</label>
             #{telephone_field(
               year_method,
               standard_options.merge(
@@ -249,18 +245,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     autofocus: nil
   )
 
-    aria_field = aria_labelledby(method: method, help_text: help_text)
-
-    aria_month = "#{aria_field} #{sanitized_id(method, '2i')}__label"
-    aria_day = "#{aria_field} #{sanitized_id(method, '3i')}__label"
-    aria_year = "#{aria_field} #{sanitized_id(method, '1i')}__label"
-
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
-        #{fieldset_label_contents(method: method, label_text: label_text, help_text: help_text)}
+        #{fieldset_label_contents(label_text: label_text, help_text: help_text)}
         <div class="input-group--inline">
           <div class="select">
-            <label for="#{sanitized_id(method, '2i')}" class="sr-only" id="#{sanitized_id(method, '2i')}__label">Month</label>
+            <label for="#{sanitized_id(method, '2i')}" class="sr-only">Month</label>
             #{select_month(
               options[:default],
               { field_name: subfield_name(method, '2i'),
@@ -269,11 +259,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
                 prompt: 'Month' }.reverse_merge(options),
               class: 'select__element',
               autofocus: autofocus,
-              'aria-labelledby': aria_month,
             )}
           </div>
           <div class="select">
-            <label for="#{sanitized_id(method, '3i')}" class="sr-only" id="#{sanitized_id(method, '3i')}__label">Day</label>
+            <label for="#{sanitized_id(method, '3i')}" class="sr-only">Day</label>
             #{select_day(
               options[:default],
               { field_name: subfield_name(method, '3i'),
@@ -281,11 +270,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
                 prefix: object_name,
                 prompt: 'Day' }.merge(options),
               class: 'select__element',
-              'aria-labelledby': aria_day,
             )}
           </div>
           <div class="select">
-            <label for="#{sanitized_id(method, '1i')}" class="sr-only" id="#{sanitized_id(method, '1i')}__label">Year</label>
+            <label for="#{sanitized_id(method, '1i')}" class="sr-only">Year</label>
             #{select_year(
               options[:default],
               { field_name: subfield_name(method, '1i'),
@@ -293,7 +281,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
                 prefix: object_name,
                 prompt: 'Year' }.merge(options),
               class: 'select__element',
-              'aria-labelledby': aria_year,
             )}
           </div>
         </div>
@@ -304,7 +291,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
   def mb_radio_set(
     method,
-    label_text:,
+    label_text: "",
     collection:,
     help_text: nil,
     layout: "block",
@@ -313,12 +300,11 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     <<~HTML.html_safe
       <fieldset class="form-group#{error_state(object, method)}">
         #{fieldset_label_contents(
-          method: method,
           label_text: label_text,
           help_text: help_text,
           legend_class: legend_class,
         )}
-        #{mb_radio_button(method, collection, layout, help_text)}
+        #{mb_radio_button(method, collection, layout)}
         #{errors_for(object, method)}
       </fieldset>
     HTML
@@ -327,23 +313,15 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_checkbox_set(
     method,
     collection,
-    label_text:,
+    label_text: "",
     help_text: nil,
     optional: false,
     legend_class: ""
   )
-    aria_labels = ["#{sanitized_id(method)}__label"]
-    aria_labels << "#{sanitized_id(method)}__help" if help_text
-
     checkbox_html = collection.map do |item|
-      checkbox_label_id = "#{sanitized_id(method)}_#{item[:method]}__label"
-      options = {
-        'aria-labelledby': (aria_labels + [checkbox_label_id]).join(" "),
-      }
-
       <<~HTML.html_safe
-        <label id="#{checkbox_label_id}" class="checkbox">
-          #{check_box(item[:method], options)} #{item[:label]}
+        <label class="checkbox">
+          #{check_box(item[:method])} #{item[:label]}
         </label>
       HTML
     end.join.html_safe
@@ -355,7 +333,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
           help_text: help_text,
           legend_class: legend_class,
           optional: optional,
-          method: method,
         )}
         #{checkbox_html}
         #{errors_for(object, method)}
@@ -366,7 +343,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   def mb_checkbox_set_with_none(
     method,
     collection,
-    label_text:,
+    label_text: nil,
     value_is_array: false,
     options: {}
   )
@@ -374,39 +351,45 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     if value_is_array
       options[:multiple] = true
     end
-    legend_id = aria_label(method)
 
     checkbox_collection_html = collection.map do |item|
-      checkbox_label_id = aria_label(item[:method])
-
-      local_options = options.merge(
-        'aria-labelledby': [legend_id, checkbox_label_id].join(" "),
-      )
-
       checkbox_html = if value_is_array
-                        check_box(method, local_options, item[:method].to_s, "")
+                        check_box(method, options, item[:method].to_s, "")
                       else
-                        check_box(item[:method], local_options)
+                        check_box(item[:method], options)
                       end
 
       <<~HTML.html_safe
-        <label id="#{checkbox_label_id}" class="checkbox">
+        <label class="checkbox">
           #{checkbox_html} #{item[:label]}
         </label>
       HTML
     end.join.html_safe
 
+    none_html = if value_is_array
+                  <<~HTML.html_safe
+                    <label class="checkbox">
+                      <input type="checkbox" name="#{@object_name}[#{method}][]" class="" id="none__checkbox">
+                      None of the above
+                    </label>
+                  HTML
+                else
+                  <<~HTML.html_safe
+                    <label class="checkbox">
+                      <input type="checkbox" name="" class="" id="none__checkbox">
+                      None of the above
+                    </label>
+                  HTML
+                end
+
     <<~HTML.html_safe
       <fieldset class="input-group">
-        <legend class="sr-only" id="#{legend_id}">
+        <legend class="sr-only">
           #{label_text}
         </legend>
         #{checkbox_collection_html}
         <hr>
-        <label class="checkbox" id="none__label">
-          <input aria-labelledby="#{legend_id} none__label" type="checkbox" name="" class="" id="none__checkbox">
-          None of the above
-        </label>
+        #{none_html}
       </fieldset>
     HTML
   end
@@ -441,8 +424,6 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     html_options = {
       class: "select__element",
-      "aria-labelledby":
-        aria_labelledby(method: method, help_text: options[:help_text]),
     }
 
     formatted_label = label(
@@ -451,16 +432,16 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
         label_text,
         options[:help_text],
         options[:optional],
-        method,
       ),
       class: options[:hide_label] ? "sr-only" : "",
     )
+    html_options_with_errors = html_options.merge(error_attributes(method: method))
 
     html_output = <<~HTML
       <div class="form-group#{error_state(object, method)}">
         #{formatted_label}
         <div class="select">
-          #{select(method, collection, options, html_options, &block)}
+          #{select(method, collection, options, html_options_with_errors, &block)}
         </div>
         #{errors_for(object, method)}
       </div>
@@ -469,13 +450,9 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     html_output.html_safe
   end
 
-  def mb_checkbox(method, label_text, legend_id: nil, options: {})
+  def mb_checkbox(method, label_text, options: {})
     checked_value = options[:checked_value] || "1"
     unchecked_value = options[:unchecked_value] || "0"
-
-    options["aria-labelledby"] = aria_labelledby(method: method,
-                                                 help_text: nil,
-                                                 prefix: legend_id)
 
     classes = ["checkbox"]
     if options[:disabled] && object.public_send(method) == checked_value
@@ -485,9 +462,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
       classes.push("is-disabled")
     end
 
+    options_with_errors = options.merge(error_attributes(method: method))
     <<~HTML.html_safe
-      <label class="#{classes.join(' ')}" id="#{sanitized_id(method)}__label">
-        #{check_box(method, options, checked_value, unchecked_value)} #{label_text}
+      <label class="#{classes.join(' ')}">
+        #{check_box(method, options_with_errors, checked_value, unchecked_value)} #{label_text}
       </label>
       #{errors_for(object, method)}
     HTML
@@ -521,35 +499,31 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     }
   end
 
-  def mb_radio_button(method, collection, layout, help_text)
-    radio_html = <<~HTML
-      <radiogroup class="input-group--#{layout}">
-    HTML
-    collection.map do |item|
+  def mb_radio_button(method, collection, layout)
+    options = { class: "input-group--#{layout}" }.merge(error_attributes(method: method))
+
+    radiogroup_tag = @template.tag(:radiogroup, options, true)
+
+    radio_collection = collection.map do |item|
       item = { value: item, label: item } unless item.is_a?(Hash)
 
-      snake_case_value = sanitized_value(item[:value])
+      options = item[:options].to_h
 
-      aria_labels = aria_labelledby(method: method, help_text: help_text)
-      aria_labels += " #{sanitized_id(method)}_#{snake_case_value}__label"
-
-      options = { 'aria-labelledby': aria_labels }.merge(item[:options].to_h)
-
-      radio_html << <<~HTML.html_safe
-        <label class="radio-button" id="#{sanitized_id(method)}_#{snake_case_value}__label">
+      <<~HTML.html_safe
+        <label class="radio-button">
           #{radio_button(method, item[:value], options)}
           #{item[:label]}
         </label>
       HTML
     end
-    radio_html << <<~HTML
+    <<~HTML.html_safe
+      #{radiogroup_tag}
+        #{radio_collection.join}
       </radiogroup>
     HTML
-    radio_html.html_safe
   end
 
   def fieldset_label_contents(
-    method:,
     label_text:,
     help_text:,
     legend_class: "",
@@ -557,28 +531,28 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
   )
 
     label_html = <<~HTML
-      <legend class="form-question #{legend_class}" id="#{sanitized_id(method)}__label">
+      <legend class="form-question #{legend_class}">
         #{label_text + optional_text(optional)}
       </legend>
     HTML
 
     if help_text
       label_html += <<~HTML
-        <p class="text--help" id="#{sanitized_id(method)}__help">#{help_text}</p>
+        <p class="text--help">#{help_text}</p>
       HTML
     end
 
     label_html.html_safe
   end
 
-  def label_contents(label_text, help_text, optional, method)
+  def label_contents(label_text, help_text, optional)
     label_text = <<~HTML
-      <p class="form-question" id="#{sanitized_id(method)}__label">#{label_text + optional_text(optional)}</p>
+      <p class="form-question">#{label_text + optional_text(optional)}</p>
     HTML
 
     if help_text
       label_text << <<~HTML
-        <p class="text--help" id="#{sanitized_id(method)}__help">#{help_text}</p>
+        <p class="text--help">#{help_text}</p>
       HTML
     end
 
@@ -612,7 +586,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
     formatted_label = label(
       method,
-      label_contents(label_text, help_text, optional, method),
+      label_contents(label_text, help_text, optional),
       (for_options || options),
     )
     if prefix
@@ -632,7 +606,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     errors = object.errors[method]
     if errors.any?
       <<~HTML
-        <span class="text--error" id="#{sanitized_id(method)}__errors">
+        <span class="text--error" id="#{error_label(method)}">
           <i class="icon-warning"></i>
           #{errors.join(', ')}
         </span>
@@ -663,19 +637,12 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     "#{sanitized_id(method)}__label"
   end
 
-  def aria_labelledby(method:, help_text: nil, prefix: "")
-    aria_labels = []
+  def error_label(method)
+    "#{sanitized_id(method)}__errors"
+  end
 
-    aria_labels << prefix if prefix.present?
-
-    if object.errors.present?
-      aria_labels << "#{sanitized_id(method)}__errors"
-    end
-
-    aria_labels << aria_label(method)
-    aria_labels << "#{sanitized_id(method)}__help" if help_text
-
-    aria_labels.join(" ")
+  def error_attributes(method:)
+    object.errors.present? ? { "aria-describedby": error_label(method) } : {}
   end
 
   # copied from ActionView::FormHelpers in order to coerce strings with spaces
