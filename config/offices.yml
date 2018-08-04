@@ -77,4 +77,4 @@ production:
       email: "MDHHS-Genesee-UnionSt-DigitalAssisterApp@michigan.gov"
     clio:
       phone_number: "8107877101"
-      email: "MDHHS-Genesee-Clio-App@michigan.gov"
+      email: "MDHHS-Genesee-Clio@michigan.gov"
