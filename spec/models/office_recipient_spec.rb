@@ -31,7 +31,7 @@ RSpec.describe OfficeRecipient do
           )
 
           expect(clio_recipent.office).to eq(
-            "email" => "MDHHS-Genesee-Clio-App@michigan.gov",
+            "email" => "MDHHS-Genesee-Clio@michigan.gov",
             "name" => "Clio",
             "phone_number" => clio_phone_number,
           )
