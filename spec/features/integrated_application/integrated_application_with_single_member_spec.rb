@@ -286,7 +286,7 @@ RSpec.feature "Integrated application" do
 
     on_page "Flint Water Crisis" do
       expect(page).to have_content(
-        "Have you drunk water in Flint since April 2014?",
+        "Have you been affected by the Flint Water Crisis?",
       )
 
       proceed_with "Yes"
