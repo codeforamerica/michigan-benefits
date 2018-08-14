@@ -83,7 +83,10 @@
   font-size: $font-size-smallest;
 }
 
-
+.dark-background .form-card--security-message,
+.dark-background .form-card--benefit-label {
+  color: $color-grey;
+}
 .form-card--security-message {
   display: inline-block;
 
