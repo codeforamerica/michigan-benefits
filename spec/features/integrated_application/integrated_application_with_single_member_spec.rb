@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Integrated application" do
-  scenario "with one member", :a11y do
+  scenario "with one member", :js do
     visit root_path
 
     within(".slab--hero") do
@@ -576,9 +576,15 @@ RSpec.feature "Integrated application" do
     end
 
     on_page "Application Submitted" do
-      expect(page).to have_content(
-        "Congratulations",
-      )
+      expect(page).to have_content("Congratulations")
+
+      choose "Good", allow_label_click: true
+
+      fill_in "Do you have any feedback for us?", with: "My feedback"
+
+      proceed_with "Submit"
+
+      expect(page).to have_content("Thanks for your feedback")
     end
   end
 end

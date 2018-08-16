@@ -6,6 +6,11 @@ module Integrated
 
     helper_method :current_application
 
+    def edit
+      @feedback_form = FeedbackForm.new
+      super
+    end
+
     def previous_path(*_args)
       nil
     end
