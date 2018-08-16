@@ -13,7 +13,7 @@
       <%= f.mb_radio_set :mailing_address_same_as_residential_address,
         label_text: "Is this address the same as your home address?",
         collection: [{ value: true, label: "Yes" }, { value: false, label: "No" }],
-        layout: "inline" %>
+        layouts: ["inline"] %>
       <%= render 'shared/next_step' %>
     <% end %>
   </div>
