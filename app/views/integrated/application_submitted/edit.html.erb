@@ -74,6 +74,7 @@
         </div>
       </div>
     </div>
+    <div class="top-full-border"></div>
     <%= form_for @feedback_form, url: feedback_path, builder: MbFormBuilder, remote: true do |f| %>
       <div id="feedback-form" class="center">
         <%= f.mb_radio_set :feedback_rating,
