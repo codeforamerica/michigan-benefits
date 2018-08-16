@@ -22,7 +22,7 @@
       <%= f.mb_radio_set :authorized_representative,
         label_text: "Would you like to designate someone else to be your authorized representative?",
         collection: [{ value: :true, label: "Yes" }, { value: :false, label: "No" }],
-        layout: "inline" %>
+        layouts: ["inline"] %>
     </div>
 
     <%= f.mb_input_field :authorized_representative_name, "If yes, what is their full legal name?" %>

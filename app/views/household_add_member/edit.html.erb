@@ -20,7 +20,7 @@
         label_text: "What is their sex?",
         collection:  [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
         help_text: "As it appears on your ID",
-        layout: "inline" %>
+        layouts: ["inline"] %>
       <%= f.mb_select :relationship,
         "What is their relationship to you?",
         ["Spouse", "Parent", "Child", "Sibling", "Roommate", "Other"],
@@ -43,11 +43,11 @@
       <%= f.mb_radio_set :requesting_food_assistance,
         label_text: "Is this person requesting food assistance?",
         collection: [{ value: true, label: "Yes" }, { value: false, label: "No" }],
-        layout: "inline" %>
+        layouts: ["inline"] %>
       <%= f.mb_radio_set :buy_food_with,
         label_text: "Do you buy/make food with this person?",
         collection: [{ value: true, label: "Yes" }, { value: false, label: "No" }],
-        layout: "inline" %>
+        layouts: ["inline"] %>
       <%= render "shared/next_step" %>
     <% end %>
   </div>

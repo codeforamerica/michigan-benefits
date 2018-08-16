@@ -16,10 +16,10 @@
       label_text: "What's your sex?",
       collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
       help_text: "As it appears on your ID",
-      layout: "inline" %>
+      layouts: ["inline"] %>
     <%= f.mb_radio_set :previously_received_assistance,
       label_text: "Have you received assistance in Michigan in the past (or currently)?",
       collection: [{ value: :yes, label: "Yes" }, { value: :no, label: "No" }],
-      layout: "inline" %>
+      layouts: ["inline"] %>
   <% end %>
 <% end %>
