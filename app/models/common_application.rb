@@ -74,6 +74,7 @@ class CommonApplication < ApplicationRecord
   enum less_than_threshold_in_accounts: { unfilled: 0, yes: 1, no: 2 }, _prefix: :less_than_threshold_in_accounts
   enum sms_consented: { unfilled: 0, yes: 1, no: 2 }, _prefix: :sms_consented
   enum email_consented: { unfilled: 0, yes: 1, no: 2 }, _prefix: :email_consented
+  enum feedback_rating: { unfilled: 0, positive: 1, negative: 2, neutral: 3 }, _prefix: :feedback_rating
 
   scope :signed, -> { where.not(signed_at: nil) }
 
