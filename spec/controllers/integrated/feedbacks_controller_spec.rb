@@ -49,6 +49,8 @@ RSpec.describe FeedbacksController do
 
         current_app.reload
         expect(response).to have_http_status(:unprocessable_entity)
+        response_body = JSON.parse(response.body)
+        expect(response_body["errors"].count).to eq(1)
         expect(current_app.feedback_rating).to eq("unfilled")
       end
     end

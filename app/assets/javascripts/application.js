@@ -245,6 +245,19 @@ var feedbackForm = (function() {
           '<h3>Thanks for your feedback! It will help improve this application for people in the future.</h3>';
         $('#feedback-form').html(success);
       });
+      $('body').on('ajax:error', function(event, xhr, status, error) {
+        var feedbackRatingErrors = xhr.responseJSON.errors["feedback_rating"];
+        var generalErrors = xhr.responseJSON.errors["foo"];
+        var constructErrorHtml = function(errorArray) {
+          var errorHtml = [];
+          for (var i = 0; i < errorArray.length; i++) {
+            errorHtml.push("<div class='error'>" + errorArray[i] + "</div>");
+          }
+          return errorHtml.join(' ');
+        };
+        $('#feedback-ratings-errors').append(constructErrorHtml(feedbackRatingErrors));
+        $('#feedback-errors').append(constructErrorHtml(generalErrors));
+      });
     }
   };
   return {

@@ -6,7 +6,7 @@ class FeedbacksController < ApplicationController
       if @form.valid? && current_application&.update(form_params)
         format.json { render json: {}, status: :created }
       else
-        format.json { render json: {}, status: :unprocessable_entity }
+        format.json { render json: { errors: @form.errors.messages }, status: :unprocessable_entity }
       end
     end
   end

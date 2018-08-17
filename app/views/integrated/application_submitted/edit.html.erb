@@ -85,8 +85,10 @@
                                { value: "positive", label: '<span class="radio-button__image emoji emoji--med emoji--grinning-face">Good</span>' }
                            ],
                            layouts: ["inline", "image"] %>
+        <div id="feedback-ratings-errors"></div>
 
         <%= f.mb_textarea :feedback_comments, '<strong>Do you have any feedback for us?</strong>', options: {rows: '4'} %>
+        <div id="feedback-errors"></div>
         <button class="button button--full-mobile" type="submit">Submit</button>
       </div>
     <% end %>
