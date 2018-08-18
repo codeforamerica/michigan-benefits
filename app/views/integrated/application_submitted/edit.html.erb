@@ -1,99 +1,123 @@
 <% content_for :header_title, "Application Submitted" %>
 
-<% content_for :form_card_header do %>
-    <div class="illustration illustration--success"></div>
-    <div class="pre-title">Congratulations</div>
-    <div class="form-card__title">
-      Your application has been successfully submitted to MDHHS.
-    </div>
-    <div class="text--caps text--centered text--little-help nudge--med">
-      You applied for:
-    </div>
-    <div class="program-selector--container">
+<% content_for :form_card do %>
+  <main id="main" class="form-card">
+    <header class="form-card__header">
+      <div class="illustration illustration--success"></div>
+      <div class="pre-title">Congratulations</div>
+      <div class="form-card__title">
+        Your application has been successfully submitted to MDHHS.
+      </div>
+      <div class="text--caps text--centered text--little-help nudge--med">
+        You applied for:
+      </div>
+      <div class="program-selector--container">
+        <% if current_application.navigator.applying_for_food? %>
+            <label class="program-selector program-selector__unbordered">
+              <div class="illustration illustration--icn_food"></div>
+              <h4 class="program-selector__title">Food Assistance</h4>
+            </label>
+        <% end %>
+        <% if current_application.navigator.applying_for_healthcare? %>
+            <label class="program-selector program-selector__unbordered">
+              <div class="illustration illustration--icn_health"></div>
+              <h4 class="program-selector__title">Medicaid</h4>
+            </label>
+        <% end %>
+      </div>
+    </header>
+
+    <div class="form-card__content">
+      <h3 class="with-padding-med">What to expect next:</h3>
+
       <% if current_application.navigator.applying_for_food? %>
-        <label class="program-selector program-selector__unbordered">
-          <div class="illustration illustration--icn_food"></div>
-          <h4 class="program-selector__title">Food Assistance</h4>
-        </label>
+          <div class="media-box with-padding-small">
+            <div class="media-box__media">
+              <div class="emoji emoji--med emoji--clipboard"></div>
+            </div>
+            <div class="media-box__content">
+              <p>
+                <b>The interview will take about 30 minutes.</b> A worker will ask you
+                about your household, income, expenses, and other eligibility
+                requirements.
+              </p>
+            </div>
+          </div>
       <% end %>
-      <% if current_application.navigator.applying_for_healthcare? %>
-        <label class="program-selector program-selector__unbordered">
-          <div class="illustration illustration--icn_health"></div>
-          <h4 class="program-selector__title">Medicaid</h4>
-        </label>
-      <% end %>
-    </div>
-<% end %>
 
-<% content_for :form_card_body do %>
-    <h3 class="with-padding-med">What to expect next:</h3>
-
-    <% if current_application.navigator.applying_for_food? %>
       <div class="media-box with-padding-small">
         <div class="media-box__media">
-          <div class="emoji emoji--med emoji--clipboard"></div>
+          <div class="emoji emoji--med emoji--page-facing-up"></div>
         </div>
         <div class="media-box__content">
           <p>
-            <b>The interview will take about 30 minutes.</b> A worker will ask you
-            about your household, income, expenses, and other eligibility
-            requirements.
+            <b>Your county will provide you with a list of paperwork</b> you may need to
+            submit to verify your eligibility. Commonly requested items are
+            identification, paystubs, and health insurance cards if you have
+            another plan currently.
           </p>
         </div>
+      </div>
+
+      <div class="media-box with-padding-med">
+        <div class="media-box__media">
+          <div class="emoji emoji--med emoji--modern-phone"></div>
+        </div>
+        <div class="media-box__content">
+          <div class="media-box__content">
+            <p>
+              <b>If you have questions about your application</b>
+              contact the <%= full_office_name(current_application) %>
+              office at <%= number_to_phone(current_application.receiving_office_phone_number) %>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="top-full-border"></div>
+    <%= form_for @feedback_form, url: feedback_path, builder: MbFormBuilder, remote: true do |f| %>
+      <div id="feedback-form" class="center">
+        <%= f.mb_radio_set :feedback_rating,
+                           label_text: "<h3>How was your experience with this application?</h3>",
+                           collection: [
+                               { value: "negative", label: '<span class="radio-button__image emoji emoji--med emoji--frowning-face">Bad</span>' },
+                               { value: "neutral", label: '<span class="radio-button__image emoji emoji--med emoji--neutral-face">Ok</span>' },
+                               { value: "positive", label: '<span class="radio-button__image emoji emoji--med emoji--grinning-face">Good</span>' }
+                           ],
+                           layouts: ["inline", "image"] %>
+        <div id="feedback-ratings-errors"></div>
+
+        <%= f.mb_textarea :feedback_comments, '<strong>Do you have any feedback for us?</strong>', options: {rows: '4'} %>
+        <div id="feedback-errors"></div>
+        <button class="button button--full-mobile" type="submit">Submit</button>
       </div>
     <% end %>
-
-    <div class="media-box with-padding-small">
-      <div class="media-box__media">
-        <div class="emoji emoji--med emoji--page-facing-up"></div>
-      </div>
-      <div class="media-box__content">
-        <p>
-          <b>Your county will provide you with a list of paperwork</b> you may need to
-          submit to verify your eligibility. Commonly requested items are
-          identification, paystubs, and health insurance cards if you have
-          another plan currently.
-        </p>
-      </div>
-    </div>
-
-    <div class="media-box with-padding-med">
-      <div class="media-box__media">
-        <div class="emoji emoji--med emoji--modern-phone"></div>
-      </div>
-      <div class="media-box__content">
-        <div class="media-box__content">
-          <p>
-            <b>If you have questions about your application</b>
-            contact the <%= full_office_name(current_application) %>
-            office at <%= number_to_phone(current_application.receiving_office_phone_number) %>.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div>
+  </main>
+  <div class="form-card nudge--large">
+    <div class="form-card__content">
       <%= form_for @form,
-        as: :form,
-        builder: MbFormBuilder,
-        url: current_path,
-        method: :put do |f| %>
+                   as: :form,
+                   builder: MbFormBuilder,
+                   url: current_path,
+                   method: :put do |f| %>
 
-        <h3>Want a copy of your application?</h3>
-        <p>
-          Enter your email address below to receive an email with a copy of your
-          application.
-        </p>
-        <%= f.mb_input_field :email, "Your email address",
-          type: "email",
-          options: { placeholder: "me@example.com" } %>
+          <h3 class="nudge--tiny">Want a copy of your application?</h3>
+          <p>
+            Enter your email address below to receive an email with a copy of your
+            application.
+          </p>
+          <%= f.mb_input_field :email, "Your email address",
+                               type: "email",
+                               options: { placeholder: "me@example.com" } %>
 
-        <button class="button button--full-mobile button--cta" type="submit">
-          Submit
-          <i class="button__icon icon-arrow_forward"></i>
-        </button>
+          <button class="button button--full-mobile" type="submit">
+            Email me
+            <i class="button__icon icon-arrow_forward"></i>
+          </button>
       <% end %>
     </div>
+  </div>
+
 <% end %>
 
-<% content_for :skip_footer, true %>
+<% content_for :dark_background, true %>

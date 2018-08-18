@@ -13,7 +13,7 @@
         label_text: "What is your sex?",
         collection: [{ value: :male, label: "Male" }, { value: :female, label: "Female" }],
         help_text: " As it appears on your ID",
-        layout: "inline" %>
+        layouts: ["inline"] %>
       <%= f.mb_select :marital_status,
         "What is your marital status?",
         Member::MARITAL_STATUSES,

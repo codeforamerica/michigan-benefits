@@ -294,7 +294,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     label_text: "",
     collection:,
     help_text: nil,
-    layout: "block",
+    layouts: ["block"],
     legend_class: ""
   )
     <<~HTML.html_safe
@@ -304,7 +304,7 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
           help_text: help_text,
           legend_class: legend_class,
         )}
-        #{mb_radio_button(method, collection, layout)}
+        #{mb_radio_button(method, collection, layouts)}
         #{errors_for(object, method)}
       </fieldset>
     HTML
@@ -499,8 +499,9 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     }
   end
 
-  def mb_radio_button(method, collection, layout)
-    options = { class: "input-group--#{layout}" }.merge(error_attributes(method: method))
+  def mb_radio_button(method, collection, layouts)
+    classes = layouts.map { |layout| "input-group--#{layout}" }.join(" ")
+    options = { class: classes }.merge(error_attributes(method: method))
 
     radiogroup_tag = @template.tag(:radiogroup, options, true)
 

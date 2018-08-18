@@ -237,6 +237,34 @@ var noneOfTheAbove = (function() {
   }
 })();
 
+var feedbackForm = (function() {
+  var feedback = {
+    init: function () {
+      $('body').on('ajax:success', function(event, xhr, status, error) {
+        var success = '<span class="radio-button__image emoji emoji--med emoji--blush">Thank you</span>' +
+          '<h3>Thanks for your feedback! It will help improve this application for people in the future.</h3>';
+        $('#feedback-form').html(success);
+      });
+      $('body').on('ajax:error', function(event, xhr, status, error) {
+        var feedbackRatingErrors = xhr.responseJSON.errors["feedback_rating"];
+        var generalErrors = xhr.responseJSON.errors["foo"];
+        var constructErrorHtml = function(errorArray) {
+          var errorHtml = [];
+          for (var i = 0; i < errorArray.length; i++) {
+            errorHtml.push("<div class='error'>" + errorArray[i] + "</div>");
+          }
+          return errorHtml.join(' ');
+        };
+        $('#feedback-ratings-errors').append(constructErrorHtml(feedbackRatingErrors));
+        $('#feedback-errors').append(constructErrorHtml(generalErrors));
+      });
+    }
+  };
+  return {
+    init: feedback.init
+  }
+})();
+
 $(document).ready(function () {
   radioSelector.init();
   checkboxSelector.init();
@@ -247,4 +275,5 @@ $(document).ready(function () {
   followUpQuestion.init();
   incrementer.init();
   noneOfTheAbove.init();
+  feedbackForm.init();
 })
