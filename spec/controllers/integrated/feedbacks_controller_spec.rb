@@ -33,24 +33,5 @@ RSpec.describe FeedbacksController do
         end
       end
     end
-
-    context "with invalid params" do
-      let(:invalid_params) do
-        {
-          feedback_rating: "",
-        }
-      end
-
-      it "does not process the request" do
-        current_app = create(:common_application, :with_navigator)
-        session[:current_application_id] = current_app.id
-
-        post :create, xhr: true, params: { feedback_form: invalid_params }
-
-        current_app.reload
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(current_app.feedback_rating).to eq("unfilled")
-      end
-    end
   end
 end
