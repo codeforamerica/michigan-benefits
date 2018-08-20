@@ -1,5 +1,6 @@
 <% if @form.errors.any? %>
-  $('#feedback-form').html('<%= escape_javascript(render partial: "feedbacks/form", locals: { feedback_form: @form }) %>')
+  $('#feedback-form').html('<%= escape_javascript(render partial: "feedbacks/form", locals: { feedback_form: @form }) %>');
+  radioSelector.init();
 <% else %>
   $('#feedback-form').html('<%= escape_javascript(render partial: "feedbacks/success") %>');
 <% end %>
