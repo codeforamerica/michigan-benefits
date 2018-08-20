@@ -2,12 +2,12 @@ class FeedbacksController < ApplicationController
   def create
     @form = FeedbackForm.new(form_params)
 
+    if @form.valid?
+      current_application&.update!(form_params)
+    end
+
     respond_to do |format|
-      if @form.valid? && current_application&.update(form_params)
-        format.json { render json: {}, status: :created }
-      else
-        format.json { render json: {}, status: :unprocessable_entity }
-      end
+      format.js { render layout: false, locals: { feedback_form: @form } }
     end
   end
 

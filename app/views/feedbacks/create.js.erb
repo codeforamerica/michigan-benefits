@@ -1,0 +1,5 @@
+<% if @form.errors.any? %>
+  $('#feedback-form').html('<%= escape_javascript(render partial: "feedbacks/form", locals: { feedback_form: @form }) %>')
+<% else %>
+  $('#feedback-form').html('<%= escape_javascript(render partial: "feedbacks/success") %>');
+<% end %>
