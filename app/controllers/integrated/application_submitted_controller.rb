@@ -4,12 +4,9 @@ module Integrated
       :send_email,
       only: :edit
 
-    helper_method :current_application
+    before_action :assign_feedback_form, only: %i[edit update]
 
-    def edit
-      @feedback_form = FeedbackForm.new
-      super
-    end
+    helper_method :current_application
 
     def previous_path(*_args)
       nil
@@ -36,6 +33,10 @@ module Integrated
         destination: :office_email,
         benefit_application: current_application,
       )
+    end
+
+    def assign_feedback_form
+      @feedback_form = FeedbackForm.new
     end
   end
 end
