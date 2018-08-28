@@ -7,25 +7,15 @@
 ### Timing for Deploys
 
 * Staging: Deployed automatically on successful builds from `master`.
-* Pre-production: Deployed automatically on successful builds from `production`.
-* Production: Deployed after acceptance is empty. After standup is a great time to do this.
+* Production: Manually deployed by running `bin/release` after acceptance is cleared. After standup is a great time to do this.
 
 ### Deploying to Staging
 
 [CircleCI](https://circleci.com/gh/codeforamerica/michigan-benefits) is currently set up to deploy green builds to **staging**.
 
-You can repeat the setup steps this way:
-
-1. Get a Heroku API Key for a user from (https://dashboard.heroku.com/account)
-1. Paste API Key in the CircleCI account settings page (https://circleci.com/account/heroku)
-1. Set a user as the deploy user CircleCI per project settings page (https://circleci.com/gh/codeforamerica/michigan-benefits/edit#heroku)
-1. Ensure the <github username>@circleci.com and generated ssh key show up on heroku (https://dashboard.heroku.com/account)
-1. Click rebuild if necessary
-
-
 ### Deploying to Production
 
-Our release process will promote the pre-production environment to production and demo.
+Our release process will promote the staging environment to production and demo.
 
 Before deploying to production, we want to make sure that:
 

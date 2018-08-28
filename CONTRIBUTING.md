@@ -56,27 +56,56 @@ If you do not have this binary, [use this guide to get set up on MacOS].
 
 * Run the server(s): `foreman start`
 * Visit [your local server](http://localhost:3000)
-* To preview any emails that were sent while testing locally, visit the [running mailcatcher instance](http://localhost:1080/)
-* Run tests and Rubocop: `rake`
+* To preview any emails that were sent while testing locally, visit the [running mailhog instance](http://localhost:8025/)
+* Run tests, Rubocop, bundle audit, and Brakeman: `rake`
 
 ### Conventions
+
 * **Secrets** - api keys and secrets should be placed in `config/secrets.yml` and
   referenced via Rails' secrets api. Eg: `Rails.application.secrets.an_api_key`.
+* **Environment variables** - required environment variables for development should be included in the `.env` file.
+
+    When adding a new required environment variable, update `.env.sample`. When preparing a development environment for the first time, copy `.sample.env` as `.env` and replace any required values.
 
 
 ### Step Navigation
 
-This application is a long questionnaire.
-You will probably want to work on parts of it
-without completing the whole application.
+This application is a long questionnaire. You will probably want to work on parts of 
+it without completing the whole application.
 
-After booting the server and filling out the first step,
-go to `http://localhost:3000/steps`
-to jump around the SNAP and Medicaid flows, 
-or `http://localhost:3000/forms` for the Integrated application.
+After booting the server and filling out the first few questions,
+go to `http://localhost:3000/sections` to jump around.
 
+If [running the application in single-program application mode](#single-program-mode) 
+navigation can instead be found at `http://localhost:3000/steps` after completing 
+the first few questions.
+
+
+### Single-program mode
+
+A previous iteration of MichiganBenefits.org featured single-program applications 
+for SNAP and Medicaid, instead of one integrated application.
+
+It's still possible to run the application in single-program mode. To do set, set `SINGLE_PROGRAM_APPLICATIONS_ENABLED=true` in the environment before 
+starting the server (e.g. `SINGLE_PROGRAM_APPLICATIONS_ENABLED=true foreman start`).
 
 ### Testing
+
+#### Running specs
+
+For development purposes, we generally just run `rspec`.
+
+By default, running `rspec` excludes:
+
+* Specs for webdriving applications (enabled with `RUN_MI_BRIDGES_TEST=true`)
+* Accessibility checks (enabled with `RUN_ACCESSIBILITY_SPECS=true`)
+
+Because of the length of time it takes to run accessibility checks, we only run them on CI.
+
+Feature tests for single-program mode applications can be disabled by excluding specs
+with the `single_app_flow` tag (e.g. `rspec --tag ~single_app_flow`). Since this 
+codepath is no longer in active development, it's recommended to add the tag exclusion 
+to your local `.rspec` config.
 
 #### Spec Helpers
 
@@ -151,129 +180,22 @@ If you are creating an account for someone else, you can instruct them to visit
 https://staging.michiganbenefits.org/admin_users/password/new) and enter their
 email address. Submitting the form on that page triggers a password reset email.
 
+Require any users to enable two-factor authentication on account setup.
+
 [administrate]: https://github.com/thoughtbot/administrate
+
+
+### Styleguide/Branding
+This application was designed using an Atomic design system.
+
+The styleguide is a modified version of the [GetCalFresh Styleguide](http://demo.getcalfresh.org/styleguide).
+
+A Rails gem version of the base styles can be found at [https://github.com/codeforamerica/cfa-styleguide-gem](the CfA Styleguide Gem repository).
+
 
 ### Deploying
 
 See [DEPLOYING.md](DEPLOYING.md)
-
-## Workflow
-
-NOTE: See [DESIGN-README.md](DESIGN-README.md) for design-specific
-resources and workflow.
-
-### Planning
-
-* A change is initiated and discussed via a
-  [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2123705) story.
-* All new Tracker stories are added to the top of the Icebox
-* Before the weekly planning meeting, prioritized Tracker stories are written and moved over to the Backlog in order of priority.
- Cards in this list should have enough detail to be actionable. Top priority items are at the top of the list.
-* During the weekly planning meeting, stories are reviewed, clarified by product and design
- if necessary, and estimated by the engineering team.
-* Stories are estimated on a Fibonacci scale from 0 to 8 according to their perceived complexity.
-* During the team's weekly retro meetings, feedback about the workflow is noted
-  and related changes are incorporated into this document.
-
-
-### Bugs
-
-A problem is first noticed, e.g. Alert comes in, team member pings us "I haven't seen text messages coming in over the weekend. Something might be wrong."
-Person who noticed the problem, writes a bug and puts it at the top of the Icebox.
-
-A product manager should then review the bug and place it in proper priority in the Backlog, adding any steps
-necessary to reproduce the bug.
-
-### Work In Progress
-
-* When someone starts working on a task, they click "Start" on the Tracker story. This will assign the
-  task to them, and make it clear that the task is in progress.
-* All code is written on a branch *other* than `master`. The team is not picky
-  about branch naming.
-
-### Debugging
-
-* Call `binding.pry` anywhere in the code to stop execution and get a debugger console.
-* Access an IRB console on exception pages or by using `<%= console %>` anywhere in the code.
-* To get a good look at and debug any emails that were sent from your running
-development environment visit your local [mailhog server](http://localhost:8025/).
-
-
-### Code Review
-
-* A Pull Request (PR) is created on GitHub. All PRs should have [a good commit
-  message](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) and a
-  link to the Tracker story in the PR summary. When a PR completes a Tracker story, mark that story as 'Finished'
-  in Pivotal Tracker. [Here's a handy trick to do it automatically](#Finished)
-* The PR Author can request reviews via GitHub's [request a pull request
-  review](https://help.github.com/articles/requesting-a-pull-request-review/)
-feature. In general, the team prioritizes code reviews over other work.
-* Before a PR can be merged into `master` it must:
-  * Have been QA'd locally by the PR author.
-  * Pass checks for Circle CI (these can be seen in the PR itself via GitHub webhooks).
-  * Have the explicit approval of one or more teammates via GitHub's approval
-    feature.
-
-### Merging
-
-* By default, it is expected that the PR author will merge when ready. In some
-  cases, a reviewer may merge if merging is time-sensitive or the author is
-  unavailable to merge for some reason.
-* Whoever merges a branch into `master` deletes the branch after merging.
-* Merged code is automatically deployed to the [staging
-  environment](https://michigan-benefits-staging.herokuapp.com/) after a green
-build on Circle CI.
-* Once code completing a Tracker story is deployed to staging, mark the story as 'Delivered'. This
-  indicates that it is ready for acceptance.
-* When two people are pairing on something, code can be merged to `master`
-  without an explicit PR / code review process. A pull request should still be opened, to trigger 
-  Circle CI to run specs before merging to master.
-
-### Acceptance Testing
-
-* Before deploying to production, we ask a teammate who _did not_ work on the feature to test our change on staging.
-* Ideally, the story author has put explicit acceptance steps into the card.
-* Review on [staging site](https://staging.michiganbenefits.org). If all looks well, click "Accept".
-* If you have a question, ask it in the card and leave in the Accept/Reject state.
-* If not, comment with specifics about what was incorrect and click "Reject". A developer will then pick up
-the story, fix the issues, and redeliver.
-* Once stories have been accepted, they are ready for deployment.
-
-#### Testing Document Uploads on Staging
-
-NOTE: Document upload via [Shubox] on staging requires using this URL:
-
-[http://staging.michiganbenefits.org](http://staging.michiganbenefits.org)
-
-and will not work on this URL:
-
-[https://michigan-benefits-staging.herokuapp.com](https://michigan-benefits-staging.herokuapp.com)
-
-### Tracker flow and integrations
-
-Our Pivotal Tracker project is set up with the [Github integration](https://www.pivotaltracker.com/help/articles/githubs_service_hook_for_tracker/#formatting-your-commits), allowing developers to take
-automate some setting of status on stories. The Github integration is configured to listen for Tracker stories
-in commits pushed to any branch.
-
-#### Started/In Progress
-
-Regularly tag your commits with the Tracker story ID in Tracker ([#STORYID]). When pushed to a branch,
-these will post as comments on the Tracker story and indicate that the story is in progress. Pushing a tagged commit
-will automatically mark the story as "Started".
-
-#### Finished
-
-When a feature is complete and you're ready to open a PR, include the tag [Finishes #STORYID] in the commit message. When pushed, this will then mark
-the Tracker story as finished.
-
-#### Delivered
-
-When the PR is merged into master and the feature is deployed to staging, manually mark the story as
-"Delivered" in Tracker.
-
-#### Accepted/Rejected
-
-See [Acceptance Testing](#acceptance-testing)
 
 ## Driving Applications on MIBridges.org
 
