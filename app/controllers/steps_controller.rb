@@ -7,6 +7,8 @@ class StepsController < ApplicationController
   helper_method :decoded_step_path
   helper_method :application_title
 
+  class StepNotFoundError < StandardError; end
+
   def ensure_application_present
     if current_application.blank?
       redirect_to first_step_path
@@ -40,7 +42,7 @@ class StepsController < ApplicationController
   def self.step_class
     controller_path.classify.constantize
   rescue NameError
-    raise MiBridges::Errors::StepNotFoundError,
+    raise StepNotFoundError,
       "Step not found: #{controller_path.classify}. "\
       "Create the step or override `<controller>#step_class` "\
       "so that it returns `NullStep`"

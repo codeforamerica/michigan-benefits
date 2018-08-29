@@ -35,9 +35,6 @@ class SnapApplication < ApplicationRecord
   has_many :members, as: :benefit_application, dependent: :destroy
   has_many :employments, as: :benefit_application, through: :members
 
-  has_many :driver_applications, dependent: :destroy
-  has_many :driver_errors, through: :driver_applications
-
   scope :signed, -> { where.not(signed_at: nil) }
   scope :unsigned, -> { where(signed_at: nil) }
   scope :untouched_since, ->(threshold) { where("updated_at < ?", threshold) }
@@ -64,23 +61,6 @@ class SnapApplication < ApplicationRecord
 
   def self.step_navigation
     StepNavigation
-  end
-
-  def drive_status
-    if driver_applications.any? && latest_drive_attempt.driver_errors.empty?
-      :drive_success
-    elsif driver_applications.any? && latest_drive_attempt.driver_errors.any?
-      :drive_errors
-    else
-      :drive_none
-    end
-  end
-
-  def latest_drive_attempt
-    @_latest_drive_attempt ||= driver_applications.
-      order("id DESC").
-      limit(1).
-      first
   end
 
   def pdf

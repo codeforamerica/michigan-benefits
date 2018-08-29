@@ -25,14 +25,6 @@ class SuccessController < SnapStepsController
       destination: :office_email,
       benefit_application: current_application,
     )
-
-    if web_driving_enabled?
-      DriveApplicationJob.perform_later(snap_application: current_application)
-    end
-  end
-
-  def web_driving_enabled?
-    ENV.fetch("DRIVER_ENABLED", "false") == "true"
   end
 
   def update_application

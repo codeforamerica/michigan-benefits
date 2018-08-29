@@ -29,7 +29,6 @@ echo
 
 SECRET_KEY_BASE=$(get_var_from_production_env SECRET_KEY_BASE) \
     DATABASE_URL=$(get_var_from_production_env DATABASE_URL) \
-    SECRET_KEY_FOR_DRIVER_APPLICATION=$(get_var_from_production_env SECRET_KEY_FOR_DRIVER_APPLICATION) \
     SECRET_KEY_FOR_SSN_ENCRYPTION=$(get_var_from_production_env SECRET_KEY_FOR_SSN_ENCRYPTION) \
     SHUBOX_JS_ID=$(get_var_from_production_env SHUBOX_JS_ID) \
     TWILIO_PHONE_NUMBER=$(get_var_from_production_env TWILIO_PHONE_NUMBER) \

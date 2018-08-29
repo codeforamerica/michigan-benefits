@@ -19,7 +19,6 @@ Rails.application.routes.draw do
       resources :exports, only: %i[index show]
       resources :members, only: %i[index show]
       resources :employments, only: %i[index show]
-      resources :driver_errors, only: %i[index show]
       resources :addresses, only: %i[index show]
       resources :household_members, only: %i[index show]
 

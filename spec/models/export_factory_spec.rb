@@ -22,15 +22,6 @@ RSpec.describe ExportFactory do
         with(export: export)
     end
 
-    it "exports to MI Bridges" do
-      allow(SubmitApplicationViaMiBridgesJob).to receive(:perform_later)
-      enqueuer = ExportFactory.new
-      export = build(:export, destination: :mi_bridges)
-      enqueuer.enqueue(export)
-      expect(SubmitApplicationViaMiBridgesJob).to have_received(:perform_later).
-        with(export: export)
-    end
-
     it "transitions status" do
       enqueuer = ExportFactory.new
       export = build(:export)
@@ -47,7 +38,6 @@ RSpec.describe ExportFactory do
 
     it "raises an exception if the export isn't valid" do
       allow(ClientEmailApplicationJob).to receive(:perform_later)
-      allow(SubmitApplicationViaMiBridgesJob).to receive(:perform_later)
       enqueuer = ExportFactory.new
 
       export = build(:export, destination: nil)
@@ -58,8 +48,6 @@ RSpec.describe ExportFactory do
 
       expect(export).not_to be_persisted
       expect(ClientEmailApplicationJob).not_to have_received(:perform_later)
-      expect(SubmitApplicationViaMiBridgesJob).
-        not_to have_received(:perform_later)
     end
   end
 end
