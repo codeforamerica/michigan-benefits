@@ -1,13 +1,15 @@
-<%= form_for feedback_form, url: feedback_path, builder: MbFormBuilder, remote: true do |f| %>
-    <%= f.mb_radio_set :feedback_rating,
-      label_text: "<h3>How was your experience with this application?</h3>",
-      collection: [
-        { value: "negative", label: '<span class="radio-button__image emoji emoji--med emoji--frowning-face">Bad</span>' },
-        { value: "neutral", label: '<span class="radio-button__image emoji emoji--med emoji--neutral-face">Ok</span>' },
-        { value: "positive", label: '<span class="radio-button__image emoji emoji--med emoji--grinning-face">Good</span>' }
-      ],
-      layouts: ["inline", "image"] %>
+<div class="feedback-survey__form">
+  <%= form_for feedback_form, url: feedback_path, builder: MbFormBuilder, remote: true do |f| %>
+      <%= f.mb_radio_set :feedback_rating,
+        label_text: "<h3>How was your experience with this application?</h3>",
+        collection: [
+          { value: "negative", label: '<span class="radio-button__image emoji emoji--med emoji--frowning-face">Bad</span>' },
+          { value: "neutral", label: '<span class="radio-button__image emoji emoji--med emoji--neutral-face">Ok</span>' },
+          { value: "positive", label: '<span class="radio-button__image emoji emoji--med emoji--grinning-face">Good</span>' }
+        ],
+        layouts: ["inline", "image"] %>
 
-    <%= f.mb_textarea :feedback_comments, '<strong>Do you have any feedback for us?</strong>', options: {rows: '4'} %>
-    <button class="button button--full-mobile" type="submit">Submit</button>
-<% end %>
+      <%= f.mb_textarea :feedback_comments, '<strong>Do you have any feedback for us?</strong>', options: {rows: '2'} %>
+      <button class="button button--full-mobile" type="submit">Submit</button>
+  <% end %>
+</div>

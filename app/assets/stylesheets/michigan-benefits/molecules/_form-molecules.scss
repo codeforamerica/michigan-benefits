@@ -35,3 +35,17 @@
     border-bottom: none;
   }
 }
+
+.feedback-survey__form {
+  .input-group--inline .radio-button {
+    margin-right: 0;
+
+    @include media($tablet-up) {
+      margin-right: 0.3em;
+    }
+  }
+
+  textarea {
+    max-width: 400px;
+  }
+}
