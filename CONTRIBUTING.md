@@ -97,7 +97,6 @@ For development purposes, we generally just run `rspec`.
 
 By default, running `rspec` excludes:
 
-* Specs for webdriving applications (enabled with `RUN_MI_BRIDGES_TEST=true`)
 * Accessibility checks (enabled with `RUN_ACCESSIBILITY_SPECS=true`)
 
 Because of the length of time it takes to run accessibility checks, we only run them on CI.
@@ -196,39 +195,3 @@ A Rails gem version of the base styles can be found at [https://github.com/codef
 ### Deploying
 
 See [DEPLOYING.md](DEPLOYING.md)
-
-## Driving Applications on MIBridges.org
-
-In the past, after clients complete our application form,
-      we have used web driver software to fill in values
-      on the [MIbridges.org](http://mibridges.org) application.
-      
-We have discontinued webdriving for the time being.
-
-### Requirements
-
-1. A sufficiently complete `SnapApplication`
-2. Chrome and Chromedriver are installed (the latest versions). `./bin/setup`
-should get this set up for you automatically.
-
-### How to Drive Applications
-
-To run the driver code, use `bin/drive <id>` (where
-`<id>` is the id of a snap application record):
-
-There are three extra environment variables you can set to modify the behavior
-of the script.
-
-| Variable      | Purpose |
-| ------------- | -----------|
-| `WEB_DRIVER=chrome` | If you would like it to run in a FULL chrome browser instead of the headless version |
-| `DRIVER_SPEED=slow` or `medium` | If you'd like it to run a little slower, perhaps for demo purposes or to look more "human" |
-| `DEBUG_DRIVE=true` | If you would like to display a log of some of the things happening as it "drives" |
-
-Example:
-
-```sh
-DRIVER_SPEED=slow \
-  WEB_DRIVER=chrome \
-  DEBUG_DRIVE=true \
-  bin/drive 1234

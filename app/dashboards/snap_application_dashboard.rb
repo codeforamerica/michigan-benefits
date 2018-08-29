@@ -59,7 +59,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     vehicle_income: Field::Boolean,
     members: Field::HasMany.with_options(limit: 20),
     employments: Field::HasMany,
-    driver_errors: Field::HasMany,
     exports: Field::HasMany,
     applied_before: Field::String.with_options(searchable: false),
   }.freeze
@@ -80,7 +79,6 @@ class SnapApplicationDashboard < Administrate::BaseDashboard
     members
     exports
     employments
-    driver_errors
     created_at
     updated_at
     signature

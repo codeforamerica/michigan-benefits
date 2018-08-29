@@ -9,10 +9,11 @@ require "axe/rspec"
 require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-Capybara.javascript_driver = :selenium_chrome_headless
 Capybara.default_max_wait_time = 0.2
 
 ActiveRecord::Migration.maintain_test_schema!
+
+Capybara.javascript_driver = :selenium_chrome_headless
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
