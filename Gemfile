@@ -53,7 +53,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "uglifier", ">= 1.3.0"
 
 group :test do
-  gem "axe-matchers", "~> 1.3.4"
+  gem "axe-matchers", "~> 2.2.1"
   gem "capybara-selenium"
   gem "chromedriver-helper"
   gem "database_cleaner"
