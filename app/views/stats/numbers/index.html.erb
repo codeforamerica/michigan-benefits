@@ -136,4 +136,40 @@
         </div>
       </div>
     </div>
+
+
+    <section class="slab">
+      <div class="grid grid-padded">
+        <h2>Client Satisfaction</h2>
+
+        <div class="grid__item width-one-third">
+          <div class="card">
+            <h4>🙁</h4>
+            <p class="big-number"><%= @ratings_calculator.percentage("negative") %>%</p>
+          </div>
+        </div>
+
+        <div class="grid__item width-one-third">
+          <div class="card">
+            <h4>😐</h4>
+            <p class="big-number"><%= @ratings_calculator.percentage("neutral") %>%</p>
+          </div>
+        </div>
+
+        <div class="grid__item width-one-third">
+          <div class="card">
+            <h4>😀</h4>
+            <p class="big-number"><%= @ratings_calculator.percentage("positive") %>%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-padded">
+        <div class="grid__item width-one-third">
+          <div class="card">
+            <h4>Net Satisfaction Score</h4>
+            <p class="big-number"><%= @net_score&.positive? ? "+#{@net_score}" : @net_score %></p>
+          </div>
+        </div>
+      </div>
 </section>

@@ -41,6 +41,9 @@ module Stats
         new(combined_last_thirty.applying_for_food_and_healthcare).
         run
 
+      @ratings_calculator = FeedbackRatingsCalculator.new(common_apps)
+      @net_score = @ratings_calculator.net_satisfaction_score
+
       render :index
     end
   end
