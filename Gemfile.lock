@@ -842,7 +842,7 @@ GEM
       ruby-rc4
       ttfunk
     pg (0.21.0)
-    phonelib (0.6.22)
+    phonelib (0.6.24)
     powerpack (0.1.2)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
