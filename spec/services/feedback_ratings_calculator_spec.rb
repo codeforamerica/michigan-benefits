@@ -14,8 +14,10 @@ RSpec.describe FeedbackRatingsCalculator do
       end
     end
 
-    context "when no applications passed" do
+    context "when no applications have feedback" do
       it "returns nil" do
+        create(:common_application)
+
         calc = FeedbackRatingsCalculator.new(CommonApplication.all)
 
         expect(calc.percentage("neutral")).to be_nil
@@ -36,8 +38,10 @@ RSpec.describe FeedbackRatingsCalculator do
       end
     end
 
-    context "when no applications passed" do
+    context "when no applications have feedback" do
       it "returns nil" do
+        create(:common_application)
+
         calc = FeedbackRatingsCalculator.new(CommonApplication.all)
 
         expect(calc.net_satisfaction_score).to be_nil
