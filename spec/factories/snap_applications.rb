@@ -1,16 +1,16 @@
 FactoryBot.define do
   factory :snap_application do
-    email "test@example.com"
-    signature "Mr. RJD2"
-    mailing_address_same_as_residential_address false
+    email { "test@example.com" }
+    signature { "Mr. RJD2" }
+    mailing_address_same_as_residential_address { false }
     signed
 
     trait :signed do
-      signed_at Time.now
+      signed_at { Time.now }
     end
 
     trait :unsigned do
-      signed_at nil
+      signed_at { nil }
     end
 
     trait :with_member do
