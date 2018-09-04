@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :medicaid_application do
-    michigan_resident true
+    michigan_resident { true }
 
     trait :signed do
-      signed_at Time.now
+      signed_at { Time.now }
     end
 
     trait :unsigned do
-      signed_at nil
+      signed_at { nil }
     end
 
     trait :with_member do

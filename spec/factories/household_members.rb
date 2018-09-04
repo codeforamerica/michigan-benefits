@@ -1,20 +1,20 @@
 FactoryBot.define do
   factory :household_member do
-    first_name "Lilly"
-    last_name "Pad"
+    first_name { "Lilly" }
+    last_name { "Pad" }
 
     common_application
 
     trait :requesting_food do
-      requesting_food "yes"
+      requesting_food { "yes" }
     end
 
     trait :requesting_healthcare do
-      requesting_healthcare "yes"
+      requesting_healthcare { "yes" }
     end
 
     trait :in_food_household do
-      buy_and_prepare_food_together "yes"
+      buy_and_prepare_food_together { "yes" }
       requesting_food
     end
   end
