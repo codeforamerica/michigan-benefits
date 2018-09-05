@@ -841,7 +841,7 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
-    pg (0.21.0)
+    pg (1.1.2)
     phonelib (0.6.24)
     powerpack (0.1.2)
     prawn (2.2.2)
@@ -1060,7 +1060,7 @@ DEPENDENCIES
   overcommit
   pdf-forms
   pdf-reader
-  pg (~> 0.21)
+  pg (~> 1.1)
   phonelib
   prawn
   pry-byebug
