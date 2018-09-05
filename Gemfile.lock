@@ -832,7 +832,7 @@ GEM
     parser (2.5.1.2)
       ast (~> 2.4.0)
     pdf-core (0.7.0)
-    pdf-forms (1.1.1)
+    pdf-forms (1.1.2)
       cliver (~> 0.3.2)
       safe_shell (>= 1.0.3, < 2.0)
     pdf-reader (2.1.0)
