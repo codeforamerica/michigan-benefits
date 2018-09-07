@@ -11,7 +11,7 @@ gem "attr_encrypted"
 gem "auto_strip_attributes"
 gem "aws-sdk"
 gem "bootsnap", require: false
-gem "bourbon", "~> 4.2.0" # to keep in sync with getcalfresh
+gem "bourbon", "~> 5.1.0" # to keep in sync with getcalfresh
 gem "browser"
 gem "capybara"
 gem "delayed_job_active_record"
