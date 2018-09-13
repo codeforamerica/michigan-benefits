@@ -1,2 +1,2 @@
-FROM circleci/ruby:2.5.1-browsers
-RUN sudo apt-get update; sudo apt-get install pdftk libmagic-dev nodejs
+FROM circleci/ruby:2.5.1-node-browsers
+RUN sudo apt-get update; sudo apt-get install pdftk libmagic-dev
