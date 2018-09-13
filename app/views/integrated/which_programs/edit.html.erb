@@ -1,6 +1,7 @@
 <% content_for :header_title, "Introduction" %>
 
 <% content_for :form_card_header do %>
+  <%= render 'shared/tooltip', text: "💡 Like the paper application, this consists of a “base application” and “supplements”.  Applicants see only the questions related to the program they pick." %>
   <h1 class="form-card__title">Which programs do you want to apply for today?</h1>
 <% end %>
 
@@ -14,16 +15,16 @@
       Medicaid is health care coverage for eligible Michigan residents.
       There are many plans available depending on your family's needs.
     </p>
+    <%= render 'shared/tooltip', text: "✅ Select both programs to see the whole flow." %>
+    <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <%= f.hidden_field :office_page, value: @form.office_page %>
+      <%= f.mb_checkbox_set(:programs,
+                            [
+                                { method: :applying_for_food, label: "Food Assistance Program" },
+                                { method: :applying_for_healthcare, label: "Healthcare Coverage" },
+                            ],
+                            label_text: "Which programs do you want to apply for today?",
+                            legend_class: "sr-only") %>
+    <% end %>
   </div>
-
-  <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
-        <%= f.hidden_field :office_page, value: @form.office_page %>
-        <%= f.mb_checkbox_set(:programs,
-                          [
-                              { method: :applying_for_food, label: "Food Assistance Program" },
-                              { method: :applying_for_healthcare, label: "Healthcare Coverage" },
-                          ],
-                          label_text: "Which programs do you want to apply for today?",
-                          legend_class: "sr-only") %>
-  <% end %>
 <% end %>
