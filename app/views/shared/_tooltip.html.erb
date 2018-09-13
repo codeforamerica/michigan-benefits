@@ -1,0 +1,5 @@
+<% if GateKeeper.feature_enabled?('ANNOTATIONS') %>
+  <div class="tooltipped">
+    <span class="tooltipped__tip" aria-label="<%= text %>" tabindex="0"><%= text %></span>
+  </div>
+<% end %>

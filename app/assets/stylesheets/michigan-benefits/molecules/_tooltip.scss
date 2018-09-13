@@ -1,0 +1,28 @@
+.tooltipped {
+  cursor: default;
+  position: relative;
+
+  &:after {
+    display: none;
+  }
+}
+
+.tooltipped__tip {
+  display: block;
+  z-index: 99999;
+  padding: .5em .5em;
+  background-color: $color-dark-grey;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -$tooltip-width/2;
+  width: $tooltip-width;
+  margin-bottom: 0.6em;
+  &:before {
+    @include triangle(bottom, $color: $color-dark-grey, $size: 10px);
+    position: absolute;
+    left: 50%;
+    margin-left: -15px;
+    bottom: -10px;
+  }
+}

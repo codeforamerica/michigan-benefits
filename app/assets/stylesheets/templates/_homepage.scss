@@ -68,6 +68,7 @@
   .logo-hero {
     line-height: 1.2;
     text-align: left;
+    margin-bottom: 15rem;
 
     &:before {
       @include size(20px);
@@ -101,7 +102,6 @@
 
     h1 {
       max-width: 10em;
-      margin-top: 15rem;
     }
 
     p {
