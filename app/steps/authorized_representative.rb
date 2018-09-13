@@ -12,9 +12,9 @@ class AuthorizedRepresentative < Step
 
   def name_present_if_authorized_rep_true
     return true if authorized_representative == "false" ||
-        authorized_representative.nil?
+      authorized_representative.nil?
     return true if authorized_representative &&
-        authorized_representative_name.present?
+      authorized_representative_name.present?
     errors.add(
       :authorized_representative_name,
       "Make sure to enter your legal representative's full name",
