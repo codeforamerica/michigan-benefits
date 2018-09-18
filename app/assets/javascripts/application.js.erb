@@ -13,6 +13,7 @@
 // = require jquery
 // = require jquery_ujs
 // = require handlebars
+// = require tooltipster.bundle.min
 // = require devise-otp
 // = require_tree .
 
@@ -237,6 +238,33 @@ var noneOfTheAbove = (function() {
   }
 })();
 
+var tooltips = (function() {
+  var tip = {
+    init: function () {
+      <% if ENV["ANNOTATIONS_ENABLED"] == "true" %>
+        $('.tooltip').tooltipster({
+          maxWidth: 600,
+          trigger: 'custom',
+          triggerOpen: {},
+          triggerClose: {},
+          interactive: true
+        });
+
+        $('.tooltip').tooltipster('open', function() {
+          $('.tooltipster-base').each(function(index, tooltip) {
+            $(tooltip).click(function(e) {
+              $(this).hide();
+            });
+          });
+        });
+      <% end %>
+    }
+  };
+  return {
+    init: tip.init
+  }
+})();
+
 $(document).ready(function () {
   radioSelector.init();
   checkboxSelector.init();
@@ -247,4 +275,6 @@ $(document).ready(function () {
   followUpQuestion.init();
   incrementer.init();
   noneOfTheAbove.init();
+  tooltips.init();
 })
+

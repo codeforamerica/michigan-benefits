@@ -18,4 +18,8 @@ module ApplicationHelper
       "MDHHS"
     end
   end
+
+  def tooltip_title(text)
+    "title=\"#{text}\"".html_safe if GateKeeper.feature_enabled?("ANNOTATIONS")
+  end
 end
