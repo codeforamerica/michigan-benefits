@@ -22,9 +22,10 @@
 
     <div class="page-wrapper <%= content_for?(:dark_background) ? 'dark-background' : '' %>">
       <% if GateKeeper.demo_environment? %>
-        <div class="demo-banner staging-warning">This is an <strong>example website</strong>. Visit <a href="https://www.michiganbenefits.org">www.michiganbenefits.org</a> for the real website.</div>
+        <div class="demo-banner">
+          This site is for example purposes only. If you need to submit an application, apply on <a href="https://mibridges.michigan.gov">MI Bridges</a>.
+        </div>
       <% end %>
-      <%= content_for?(:banner) ? content_for(:banner) : '' %>
       <%= content_for?(:content) ? content_for(:content) : yield %>
     </div>
     <%= capture { content_for(:javascript) } %>

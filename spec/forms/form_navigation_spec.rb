@@ -34,22 +34,40 @@ RSpec.describe FormNavigation do
   end
 
   describe ".all" do
-    it "returns all of controllers for which routes should be created" do
-      expect(FormNavigation.all).to match_array(
-        [
-          FirstMainController,
-          SecondMainController,
-          ThirdMainController,
-          FirstOffMainController,
-        ],
-      )
+    context "when in demo environment" do
+      it "returns all of controllers for which routes should be created" do
+        allow(GateKeeper).to receive(:demo_environment?).and_return(true)
+
+        expect(FormNavigation.all).to match_array(
+          [
+            FirstMainController,
+            SecondMainController,
+            ThirdMainController,
+            FirstOffMainController,
+            Integrated::DemoSiteWarningController,
+          ],
+        )
+      end
+    end
+
+    context "when not in demo environment" do
+      it "returns all of controllers for which routes should be created" do
+        expect(FormNavigation.all).to match_array(
+          [
+            FirstMainController,
+            SecondMainController,
+            ThirdMainController,
+            FirstOffMainController,
+          ],
+        )
+      end
     end
   end
 
   describe ".form_controllers_with_groupings" do
     it "returns the main flow, including groupings" do
-      expect(FormNavigation.form_controllers_with_groupings).to be_a(Hash)
-      expect(FormNavigation.form_controllers_with_groupings).to eq(FormNavigation::MAIN)
+      expect(FormNavigation.screens_index).to be_a(Hash)
+      expect(FormNavigation.screens_index).to eq(FormNavigation::MAIN)
     end
   end
 
@@ -66,8 +84,19 @@ RSpec.describe FormNavigation do
   end
 
   describe ".first" do
-    it "delegates to .form_controllers" do
-      expect(FormNavigation.first).to eq(FirstMainController)
+    context "when in demo environment" do
+      it "delegates to .form_controllers and only inserts once" do
+        allow(GateKeeper).to receive(:demo_environment?).and_return(true)
+
+        expect(FormNavigation.first).to eq(Integrated::DemoSiteWarningController)
+        expect(FormNavigation.form_controllers.second).to eq(FirstMainController)
+      end
+    end
+
+    context "when not in demo environment" do
+      it "delegates to .form_controllers" do
+        expect(FormNavigation.first).to eq(FirstMainController)
+      end
     end
   end
 
