@@ -9,3 +9,9 @@
 .button--nav-center {
   margin: 0 auto;
 }
+
+.button--less-padding {
+  @include media($mobile-up) {
+    @include padding(null 1em);
+  }
+}

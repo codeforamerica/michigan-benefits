@@ -2,17 +2,13 @@
   @include full-bleed();
   position: relative;
   z-index: 2;
-  background-color: $color-dark-sky;
+  background-color: #D40000;
   padding: .5em;
   text-align: center;
   font-size: $font-size-small;
   color: #FFFFFF;
-}
-/* Used for warning users on the staging instance */
-.demo-banner.staging-warning {
-  background-color: $color-bright-yellow;
-  color: black;
+
   a {
-    color: inherit;
+    color: #FFFFFF;
   }
 }

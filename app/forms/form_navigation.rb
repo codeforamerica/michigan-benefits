@@ -181,16 +181,22 @@ class FormNavigation
   class << self
     delegate :first, to: :form_controllers
 
-    def form_controllers_with_groupings
+    def screens_index
       MAIN
     end
 
     def form_controllers
-      MAIN.values.flatten.freeze
+      main_controllers = MAIN.values.flatten
+
+      if GateKeeper.demo_environment?
+        ([Integrated::DemoSiteWarningController] + main_controllers).freeze
+      else
+        main_controllers.freeze
+      end
     end
 
     def all
-      (MAIN.values + OFF_MAIN).flatten.freeze
+      (form_controllers + OFF_MAIN).flatten.freeze
     end
   end
 

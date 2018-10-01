@@ -1,21 +1,27 @@
 require "rails_helper"
 
-RSpec.feature "Warn users on staging only" do
-  scenario "Renders the staging warning message" do
+RSpec.feature "Warn users on staging or demo only", :a11y do
+  before do
     allow(GateKeeper).to receive(:demo_environment?).and_return(true)
-
-    visit root_path
-    expect(page).to have_content("This is an example website")
-
-    within(".slab--hero") { click_on "Start your application" }
-    expect(page).to have_content("This is an example website")
-
-    visit "/clio"
-    expect(page).to have_content("This is an example website")
+    Rails.application.reload_routes!
   end
 
-  scenario "Does not render warning message when not on staging" do
+  scenario "Renders the staging warning message" do
     visit root_path
-    expect(page).to_not have_content("This is an example website")
+    expect(page).to have_content("This site is for example purposes only. ")
+
+    within(".slab--hero") do
+      proceed_with "Start your application"
+    end
+
+    on_page "Demo Confirmation Checkpoint" do
+      expect(page).to have_content("Michigan Benefits example application!")
+
+      proceed_with "Continue demo application"
+    end
+
+    on_page "Introduction" do
+      expect(page).to have_content("Which programs do you want to apply for today?")
+    end
   end
 end

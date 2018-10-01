@@ -4,7 +4,7 @@
 
 <% content_for :form_card_body do %>
   <div class="slab">
-    <% FormNavigation.form_controllers_with_groupings.each do |group_header, forms| %>
+    <% FormNavigation.screens_index.each do |group_header, forms| %>
       <h3>
         <%= group_header %>
       </h3>
