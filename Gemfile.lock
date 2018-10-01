@@ -963,7 +963,7 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.4)
       tilt (~> 2.0)
-    slack-ruby-client (0.13.0)
+    slack-ruby-client (0.13.1)
       activesupport
       faraday (>= 0.9)
       faraday_middleware
