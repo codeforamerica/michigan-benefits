@@ -1,40 +1,68 @@
 <% content_for :template_name, "homepage" %>
 
-<%= render 'shared/flashes' %>
+<% if GateKeeper.feature_enabled?("FLOW_CLOSED") %>
+  <main id="main" class="form-card">
+    <header class="form-card__header">
+      <h1 class="form-card__title">
+        Michigan Benefits is closed
+      </h1>
+    </header>
+    <div class="form-card__content">
+      <p>
+        Thank you to all clients and navigators who participated in the pilot! Applications are no longer being accepted.
+      </p>
 
-<div class="slab--hero-<%= rand(1..3) %> slab slab--hero slab--hero-centered">
-  <div class="grid">
-    <div class="logo-hero">MichiganBenefits.org</div>
-    <h1 class="tooltip" <%= tooltip_title "In order to combat stigma, materials related to benefits should incorporate positive and non-stigmatizing language and graphics." %> >
-      Get the support your family needs
-    </h1>
-    <p>
-      Apply for benefits in 15 minutes
-    </p>
+      <p>
+        If you're looking to submit an application for benefits in Michigan, apply on MI Bridges.
+      </p>
 
-    <% if GateKeeper.feature_enabled?("SINGLE_PROGRAM_APPLICATIONS") %>
-      <div class="hero--cta-options grid__item  text--centered">
-        <%= link_to step_path(StepNavigation.first) do %>
-            <p class="button button--cta button--fully-width">Apply for FAP</p>
-            <p class="text--help">Food Stamps</p>
+      <p>
+        If you're interested in learning more about our efforts, we've collected our insights on an annotated demo site.
+      </p>
+    </div>
+
+    <div class="form-card__footer">
+      <%= link_to "Apply on MI Bridges", "https://www.michigan.gov/mibridges", class: "button button--primary" %>
+      <%= link_to "Open demo site", "https://demo.michiganbenefits.org", class: "button" %>
+    </div>
+  </main>
+<% else %>
+    <%= render 'shared/flashes' %>
+
+    <div class="slab--hero-<%= rand(1..3) %> slab slab--hero slab--hero-centered">
+      <div class="grid">
+        <div class="logo-hero">MichiganBenefits.org</div>
+        <h1 class="tooltip" <%= tooltip_title "In order to combat stigma, materials related to benefits should incorporate positive and non-stigmatizing language and graphics." %> >
+          Get the support your family needs
+        </h1>
+        <p>
+          Apply for benefits in 15 minutes
+        </p>
+
+        <% if GateKeeper.feature_enabled?("SINGLE_PROGRAM_APPLICATIONS") %>
+            <div class="hero--cta-options grid__item  text--centered">
+              <%= link_to step_path(StepNavigation.first) do %>
+                  <p class="button button--cta button--fully-width">Apply for FAP</p>
+                  <p class="text--help">Food Stamps</p>
+              <% end %>
+
+              <%= link_to step_path(Medicaid::StepNavigation.first) do %>
+                  <p class="button button--cta button--fully-width">Apply for Medicaid</p>
+                  <p class="text--help">Health insurance</p>
+              <% end %>
+            </div>
+        <% else %>
+            <div class="hero--cta-options grid__item  text--centered">
+              <%= link_to section_path(FormNavigation.first) do %>
+                  <p class="button button--cta button--fully-width tooltip" <%= tooltip_title "A clear call to action is important. Applicants shouldn’t spend any time wondering what they can do, or how to do it." %>>Start your application</p>
+                  <p class="text--help">Food Assistance and Health Insurance</p>
+              <% end %>
+            </div>
         <% end %>
 
-        <%= link_to step_path(Medicaid::StepNavigation.first) do %>
-            <p class="button button--cta button--fully-width">Apply for Medicaid</p>
-            <p class="text--help">Health insurance</p>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="hero--cta-options grid__item  text--centered">
-        <%= link_to section_path(FormNavigation.first) do %>
-            <p class="button button--cta button--fully-width tooltip" <%= tooltip_title "A clear call to action is important. Applicants shouldn’t spend any time wondering what they can do, or how to do it." %>>Start your application</p>
-            <p class="text--help">Food Assistance and Health Insurance</p>
-        <% end %>
-      </div>
-    <% end %>
-
+    </div>
   </div>
-</div>
 
-<%= render "home_page_bottom_section_dual", office_page: nil %>
-<%= render "shared/footer", office_links: true %>
+  <%= render "home_page_bottom_section_dual", office_page: nil %>
+  <%= render "shared/footer", office_links: true %>
+<% end %>
