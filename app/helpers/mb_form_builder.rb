@@ -499,6 +499,10 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
     }
   end
 
+  def tooltip_title(text)
+    "title=\"#{text}\"".html_safe if GateKeeper.feature_enabled?("ANNOTATIONS")
+  end
+
   def mb_radio_button(method, collection, layouts)
     classes = layouts.map { |layout| "input-group--#{layout}" }.join(" ")
     options = { class: classes }.merge(error_attributes(method: method))
@@ -510,12 +514,21 @@ class MbFormBuilder < ActionView::Helpers::FormBuilder
 
       options = item[:options].to_h
 
-      <<~HTML.html_safe
-        <label class="radio-button">
-          #{radio_button(method, item[:value], options)}
+      if item[:tooltip].present?
+        <<~HTML.html_safe
+          <label class="radio-button tooltip" #{tooltip_title(item[:tooltip])}>
+            #{radio_button(method, item[:value], options)}
+            #{item[:label]}
+          </label>
+        HTML
+      else
+        <<~HTML.html_safe
+          <label class="radio-button">
+            #{radio_button(method, item[:value], options)}
           #{item[:label]}
-        </label>
-      HTML
+          </label>
+        HTML
+      end
     end
     <<~HTML.html_safe
       #{radiogroup_tag}

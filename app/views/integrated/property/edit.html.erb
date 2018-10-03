@@ -1,6 +1,14 @@
 <% content_for :header_title, "Assets" %>
-<% content_for :form_card_title, t(".title", count: current_application.members.count)  %>
-<% content_for :form_card_help, "You should include your primary home, if you own it. But don't worry — it won't be counted against you." %>
+
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title">
+    <%= t(".title", count: current_application.members.count) %>
+  </h1>
+
+  <p class="text--centered text--help tooltip" <%= tooltip_title "Applicants often don’t understand how complex eligibility rules work and are anxious about getting help. We should provide context when we can." %>>
+    You should include your primary home, if you own it. But don't worry — it won't be counted against you.
+  </p>
+<% end %>
 
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>

@@ -4,7 +4,7 @@
   <main id="main" class="form-card">
     <header class="form-card__header">
       <div class="illustration illustration--success"></div>
-      <div class="pre-title">Congratulations</div>
+      <div class="pre-title tooltip" <%= tooltip_title "Applicants didn’t always realize they had reached the true end of the application, so we changed the page’s background color for a more dramatic departure from the rest of the flow." %>>Congratulations</div>
       <div class="form-card__title">
         Your application has been successfully submitted to MDHHS.
       </div>
@@ -28,6 +28,7 @@
     </header>
 
     <div class="form-card__content">
+      <span class="tooltip" <%= tooltip_title "The whole benefits cycle needs to be addressed. Applicants need clear communication and timely updates of case status. Without this, they will lose trust in the process." %>></span>
       <h3 class="with-padding-med">What to expect next:</h3>
 
       <% if current_application.navigator.applying_for_food? %>

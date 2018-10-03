@@ -22,6 +22,7 @@
           <% if member.primary_member? %>
             <%= ff.hidden_field :id %>
 
+            <span class="tooltip" <%= tooltip_title "💡 Add a job." %>></span>
             <%= ff.mb_incrementer :employments_count,
                                  "How many jobs do you have?",
                                  options: {

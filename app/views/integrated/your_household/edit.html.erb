@@ -2,13 +2,15 @@
 
 <% content_for :form_card_header do %>
   <div class="illustration illustration--celebrate"></div>
+  <div class="tooltip" <%= tooltip_title "Our research showed that applicants want questions organized by topic so they didn’t have to context switch too often, and they can prepare themselves for each new section." %>></div>
+
   <%= render "integrated/progress_bar" %>
   <div class="pre-title">Every family is different</div>
   <div class="form-card__title">Okay thanks! Now tell us about your household.</div>
 <% end %>
 
 <% content_for :form_card_body do %>
-  <p>
+  <p class="tooltip" <%= tooltip_title "A major challenge was reconciling SNAP and Medicaid household definitions. After many rounds of iteration and testing with applicants, we came up with the following flow. It involves alternating “expanding” and “narrowing” steps." %>>
     The people you live with and file taxes with are an important part of your application.
   </p>
 <% end %>
