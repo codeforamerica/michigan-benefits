@@ -196,7 +196,7 @@ class FormNavigation
     end
 
     def all
-      (form_controllers + OFF_MAIN).flatten.freeze
+      (MAIN.values + OFF_MAIN + [Integrated::DemoSiteWarningController]).flatten.freeze
     end
   end
 

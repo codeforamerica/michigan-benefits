@@ -58,6 +58,7 @@ RSpec.describe FormNavigation do
             SecondMainController,
             ThirdMainController,
             FirstOffMainController,
+            Integrated::DemoSiteWarningController,
           ],
         )
       end

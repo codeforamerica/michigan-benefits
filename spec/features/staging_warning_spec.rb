@@ -3,7 +3,6 @@ require "rails_helper"
 RSpec.feature "Warn users on staging or demo only", :a11y do
   before do
     allow(GateKeeper).to receive(:demo_environment?).and_return(true)
-    Rails.application.reload_routes!
   end
 
   scenario "Renders the staging warning message" do
