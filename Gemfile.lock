@@ -668,7 +668,7 @@ GEM
       aws-sigv4 (~> 1.0)
     aws-sigv2 (1.0.1)
     aws-sigv4 (1.0.2)
-    axe-matchers (1.3.4)
+    axe-matchers (2.2.1)
       dumb_delegator (~> 0.8)
       virtus (~> 1.0)
     axiom-types (0.1.1)
@@ -1028,7 +1028,7 @@ DEPENDENCIES
   auto_strip_attributes
   awesome_print
   aws-sdk
-  axe-matchers (~> 1.3.4)
+  axe-matchers (~> 2.2.1)
   bootsnap
   bourbon (~> 4.2.0)
   brakeman
