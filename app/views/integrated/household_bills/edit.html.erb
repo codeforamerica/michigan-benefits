@@ -1,7 +1,7 @@
 <% content_for :header_title, "Household Expenses" %>
 
 <% content_for :form_card_header do %>
-  <div class="illustration illustration--celebrate"></div>
+  <div class="illustration illustration--celebrate tooltip" <%= tooltip_title "Clearly showing which steps have been completed and how many remain give applicants a sense of accomplishment and help set expectation for how much longer the task will take." %>></div>
   <div class="pre-title">Great work so far!</div>
   <%= render "integrated/progress_bar" %>
   <div class="form-card__title">Household bills</div>

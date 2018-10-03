@@ -11,6 +11,7 @@
 
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+      <div class="tooltip" <%= tooltip_title "Not everything can fit in a multiple choice question. Applicants appreciate having an open text option to explain their situation in their own words." %></div>
       <%= f.mb_textarea(:additional_information,
                         "Is there anything else you'd like us to know about your situation?",
                         autofocus: true, hide_label: true) %>

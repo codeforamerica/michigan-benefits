@@ -1,6 +1,10 @@
 <% content_for :header_title, "Healthcare" %>
 
-<% content_for :form_card_title, "Will you file taxes this year?" %>
+<% content_for :form_card_header do %>
+  <h1 class="form-card__title tooltip" <%= tooltip_title "Don’t depend on applicants understanding jargon. People who don’t regularly file taxes may be unfamiliar with terms like “tax dependent”." %>>
+    Will you file taxes this year?
+  </h1>
+<% end %>
 
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>

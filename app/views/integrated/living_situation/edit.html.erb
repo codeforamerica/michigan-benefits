@@ -1,9 +1,14 @@
 <% content_for :header_title, "Introduction" %>
 
-<% content_for :form_card_title, "Tell us about your living situation." %>
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title tooltip" <%= tooltip_title "Initial designs asked if clients had “stable housing”, but they found that hard to interpret. The word “temporary” can be ambiguous, so confusion may remain. A future iteration might involve listing more housing situations." %>>
+      Tell us about your living situation.
+    </h1>
+<% end %>
 
 <% content_for :form_card_body do %>
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
+    <div class="tooltip" <%= tooltip_title "Clients and caseworkers often have a disconnect about what is considered “homeless”. Selecting “temporary address” or “homeless” has the same result here, but it allows clients to be more confident in their choice." %>></div>
     <%= f.mb_radio_set :living_situation,
                        label_text: "What's your current living situation?",
                        collection: [{ value: :stable_address, label: "Stable address" },

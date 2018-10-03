@@ -2,7 +2,7 @@
 
 <% if current_application.stable_address? %>
   <% content_for :form_card_header do %>
-    <h1 class="form-card__title">
+    <h1 class="form-card__title tooltip" <%= tooltip_title "This flow allows the majority of applicants to easily complete an accurate list of household members. We start with a broad group, and then narrow it down." %>>
       Who do you currently live with?
     </h1>
 
@@ -22,7 +22,7 @@
 <% content_for :form_card_body do %>
   <div class="slab slab--not-padded">
     <div class="card card--narrow">
-      <p>
+      <p class="tooltip" <%= tooltip_title "💡 Add a household member to experience the full application." %>>
         <i class="button__icon--left icon-check icon-check--color"></i>
         <%= "#{current_application.primary_member.display_name} (that’s you!)" %>
       </p>

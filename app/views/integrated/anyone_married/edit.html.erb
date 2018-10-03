@@ -1,6 +1,10 @@
 <% content_for :header_title, "Household" %>
 
-<% content_for :form_card_title, "Is anyone in your household currently married?" %>
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title tooltip" <%= tooltip_title "Keeping to one question per screen decreases the impression of complexity, without adversely affecting the time it takes to complete the form." %>>
+      Is anyone in your household currently married?
+    </h1>
+<% end %>
 
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>

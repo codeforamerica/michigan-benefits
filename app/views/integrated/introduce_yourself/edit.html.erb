@@ -3,6 +3,8 @@
 <% content_for :form_card_title, "To start, please introduce yourself." %>
 
 <% content_for :form_card_body do %>
+  <div class="tooltip" <%= tooltip_title "Try navigating this page with only your tab key. This is an important part of accessibility for applicants with certain disabilities." %>></div>
+
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
     <%= f.hidden_field :relationship, value: "primary" %>
     <%= f.mb_input_field :first_name,

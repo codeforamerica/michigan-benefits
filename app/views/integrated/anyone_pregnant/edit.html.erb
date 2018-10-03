@@ -1,6 +1,12 @@
 <% content_for :header_title, "Pregnancy" %>
-<% content_for :form_card_title, "Is anyone pregnant?" %>
-<% content_for :form_card_help, "Children you're expecting will change the size of your household." %>
+<% content_for :form_card_header do %>
+    <h1 class="form-card__title">
+      Is anyone pregnant?
+    </h1>
+    <p class="text--centered text--help tooltip" <%= tooltip_title "Asking sensitive questions without context can make applicants uncomfortable. Applicants understand that they don’t have a lot of privacy when applying for government benefits, but a little additional information can help." %>>
+      Children you're expecting will change the size of your household.
+    </p>
+<% end %>
 
 <% content_for :form_card_body do %>
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
