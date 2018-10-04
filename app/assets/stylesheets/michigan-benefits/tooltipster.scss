@@ -1,12 +1,28 @@
+$color-tooltip-background: #f4df41;
+$color-tooltip-border: #ffc61e;
+
 .tooltipster-sidetip .tooltipster-content {
   font-size: $font-size-small;
-  background-color: $color-magenta;
+  background-color: $color-tooltip-background;
   line-height: 24px;
+  color: #000;
 }
 
 .tooltipster-sidetip.tooltipster-top .tooltipster-arrow-background {
-  border-top-color: $color-magenta;
+  border-top-color: $color-tooltip-background;
 }
 .tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow-background {
-  border-bottom-color: $color-magenta;
+  border-bottom-color: $color-tooltip-background;
+}
+
+.tooltipster-sidetip .tooltipster-box {
+  border-color: $color-tooltip-border;
+}
+
+.tooltipster-sidetip.tooltipster-top .tooltipster-arrow-border {
+  border-top-color: $color-tooltip-border;
+}
+
+.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow-border {
+  border-bottom-color: $color-tooltip-border;
 }
