@@ -29,10 +29,15 @@ Rails.application.routes.draw do
   resources :messages
 
   root "static_pages#index"
-  get "/clio" => "static_pages#clio"
   get "/privacy" => "static_pages#privacy"
   get "/terms" => "static_pages#terms"
-  get "/union" => "static_pages#union"
+  if GateKeeper.feature_enabled? "FLOW_CLOSED"
+    get "/clio" => redirect("/")
+    get "/union" => redirect("/")
+  else
+    get "/clio" => "static_pages#clio"
+    get "/union" => "static_pages#union"
+  end
 
   resource :confirmations, only: %i[show]
   resources :documents, only: %i[index new create destroy]
