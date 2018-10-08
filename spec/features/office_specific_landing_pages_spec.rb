@@ -54,28 +54,52 @@ RSpec.feature "Office-specific landing pages" do
   end
 
   context "applying via integrated application" do
-    scenario "clio road" do
-      visit "/clio"
-      click_on "Start your application"
+    context "when flow is closed" do
+      around do |example|
+        with_modified_env FLOW_CLOSED_ENABLED: "true" do
+          Rails.application.reload_routes!
+          example.run
+        end
+        Rails.application.reload_routes!
+      end
 
-      expect(current_path).to eq(section_path(FormNavigation.first))
-      expect(find("#form_office_page", visible: false).value).to eq("clio")
+      scenario "clio road" do
+        visit "/clio"
+
+        expect(page).to have_content("Michigan Benefits is closed")
+      end
+
+      scenario "union street" do
+        visit "/union"
+
+        expect(page).to have_content("Michigan Benefits is closed")
+      end
     end
 
-    scenario "union street" do
-      visit "/union"
-      click_on "Start your application"
+    context "when flow is open" do
+      scenario "clio road" do
+        visit "/clio"
+        click_on "Start your application"
 
-      expect(current_path).to eq(section_path(FormNavigation.first))
-      expect(find("#form_office_page", visible: false).value).to eq("union")
-    end
+        expect(current_path).to eq(section_path(FormNavigation.first))
+        expect(find("#form_office_page", visible: false).value).to eq("clio")
+      end
 
-    scenario "regular home page" do
-      visit root_path
-      click_on "Start your application"
+      scenario "union street" do
+        visit "/union"
+        click_on "Start your application"
 
-      expect(current_path).to eq(section_path(FormNavigation.first))
-      expect(find("#form_office_page", visible: false).value).to be_nil
+        expect(current_path).to eq(section_path(FormNavigation.first))
+        expect(find("#form_office_page", visible: false).value).to eq("union")
+      end
+
+      scenario "regular home page" do
+        visit root_path
+        click_on "Start your application"
+
+        expect(current_path).to eq(section_path(FormNavigation.first))
+        expect(find("#form_office_page", visible: false).value).to be_nil
+      end
     end
   end
 end
