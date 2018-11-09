@@ -13,10 +13,15 @@ RSpec.feature "Warn users on staging or demo only", :a11y do
       proceed_with "Start your application"
     end
 
-    on_page "Demo Confirmation Checkpoint" do
+    on_page "About This Demo" do
       expect(page).to have_content("Michigan Benefits example application!")
 
       proceed_with "Continue demo application"
+    end
+
+    on_page "About This Demo" do
+      expect(page).to have_content("A user-centered integrated benefits application")
+      proceed_with "Continue"
     end
 
     on_page "Introduction" do
