@@ -1,7 +1,7 @@
 <% content_for :header_title, "Introduction" %>
 
 <% content_for :form_card_header do %>
-  <h1 class="form-card__title tooltip" <%= tooltip_title "Applicants should only see questions related to the program they’re applying for. They also shouldn’t have to provide the same information multiple times. Like the paper application, this consists of a “base application” and “supplements”." %>>
+  <h1 class="form-card__title tooltip" <%= tooltip_title "Reduce the burden on the Applicant by only showing them the questions that relate to the program they are applying for." %>>
     Which programs do you want to apply for today?
   </h1>
 <% end %>
@@ -16,7 +16,7 @@
       Medicaid is health care coverage for eligible Michigan residents.
       There are many plans available depending on your family's needs.
     </p>
-    <div class="tooltip" <%= tooltip_title "💡 Select both programs to see the whole flow." %>></div>
+    <div class="tooltip" <%= tooltip_title "💡 Select both programs to see the whole flow. Like the paper application, this consists of a “base application” and “supplements”." %>></div>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
       <%= f.hidden_field :office_page, value: @form.office_page %>
       <%= f.mb_checkbox_set(:programs,

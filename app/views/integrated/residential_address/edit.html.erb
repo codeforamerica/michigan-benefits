@@ -4,7 +4,7 @@
 <% content_for :form_card_body do %>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
       <%= render "shared/address", f: f %>
-      <div class="tooltip" <%= tooltip_title "In addition to annoying applicants, asking for duplicate information introduces more opportunities for errors. Therefore we don’t require a mailing address to be entered unless we know it’s different." %>></div>
+      <div class="tooltip" <%= tooltip_title "Reducing the amount of duplicate information the Applicant has to enter also reduces the opportunity for errors." %>></div>
       <%= f.mb_radio_set :residential_mailing_same,
                          label_text: "Is this also your mailing address?",
                          collection: [{ value: "true", label: "Yes" }, { value: "false", label: "No" }],

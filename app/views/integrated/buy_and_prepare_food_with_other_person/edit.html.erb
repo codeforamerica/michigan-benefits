@@ -1,7 +1,7 @@
 <% content_for :header_title, "Your Household" %>
 
 <% content_for :form_card_header do %>
-    <h1 class="form-card__title tooltip" <%= tooltip_title "It can be hard for applicants to understand the multiple qualifications for someone to be part of their SNAP household. Splitting up residency and food costs into separate questions helps." %>>
+    <h1 class="form-card__title tooltip" <%= tooltip_title "Applicants were able to provide more accurate information about their eligible household members when the questions around residency and food costs were separate. Avoid multi-part questions." %>>
       Do you and <%= current_application.members.second.first_name %> share meals and food costs?
     </h1>
     <p class="text--centered text--help">

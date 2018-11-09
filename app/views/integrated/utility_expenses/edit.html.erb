@@ -5,7 +5,7 @@
 <% content_for :form_card_body do %>
   <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
 
-    <div class="tooltip" <%= tooltip_title "If a category is large or unintuitive, don’t expect applicants to guess what falls under it. We start the applicant off with the list. This is easier for them, and leads to more accurate answers." %></div>
+    <div class="tooltip" <%= tooltip_title "Applicants struggled to understand what was covered by “Utility expenses” as a general term. Providing a list of prompts led to answers being more accurate." %></div>
     <%= f.mb_checkbox_set_with_none(:utility_expenses,
       Expense::UTILITY_EXPENSES.map { |key, label|
         { method: key, label: label }

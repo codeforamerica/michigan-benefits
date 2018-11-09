@@ -5,7 +5,7 @@
 <% end %>
 
 <% content_for :form_card_body do %>
-    <div class="tooltip" <%= tooltip_title "As a limitation of the pilot model, we needed to restrict applications to certain MDHHS offices." %>></div>
+    <div class="tooltip" <%= tooltip_title "As a limitation of the pilot this application was built for, the location is restricted to certain Michigan Department of Health and Human Services (MDHHS) offices." %>></div>
     <%= fields_for(:form, @form, builder: MbFormBuilder) do |f| %>
         <%= f.mb_radio_set :selected_office_location,
                            label_text: "Which office are you in?",

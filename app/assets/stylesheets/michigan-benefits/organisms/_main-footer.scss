@@ -1,9 +1,8 @@
 .main-footer {
   font-weight: 300;
-  height: $footer-height*1.2;
 
   @include media($tablet-up) {
-    height: $footer-height;
+    height: $footer-height*1.2;
   }
 
   .text--small {
@@ -18,6 +17,10 @@
   .illustration--civilla {
     margin-left: 2rem;
   }
+
+  a {
+    color: $color-grey;
+  }
 }
 
 .footer--office-links {
@@ -26,7 +29,6 @@
   }
 
   a {
-    color: $color-grey;
     display: block;
   }
 }
