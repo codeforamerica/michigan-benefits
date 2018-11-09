@@ -45,6 +45,7 @@ RSpec.describe FormNavigation do
             ThirdMainController,
             FirstOffMainController,
             Integrated::DemoSiteWarningController,
+            Integrated::DemoSiteAboutController,
           ],
         )
       end
@@ -59,6 +60,7 @@ RSpec.describe FormNavigation do
             ThirdMainController,
             FirstOffMainController,
             Integrated::DemoSiteWarningController,
+            Integrated::DemoSiteAboutController,
           ],
         )
       end
@@ -90,7 +92,8 @@ RSpec.describe FormNavigation do
         allow(GateKeeper).to receive(:demo_environment?).and_return(true)
 
         expect(FormNavigation.first).to eq(Integrated::DemoSiteWarningController)
-        expect(FormNavigation.form_controllers.second).to eq(FirstMainController)
+        expect(FormNavigation.form_controllers.second).to eq(Integrated::DemoSiteAboutController)
+        expect(FormNavigation.form_controllers.third).to eq(FirstMainController)
       end
     end
 
