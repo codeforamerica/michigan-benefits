@@ -32,7 +32,7 @@
     <div class="slab--hero-<%= rand(1..3) %> slab slab--hero slab--hero-centered">
       <div class="grid">
         <div class="logo-hero">MichiganBenefits.org</div>
-        <h1 class="tooltip" <%= tooltip_title "In order to combat stigma, materials related to benefits should incorporate positive and non-stigmatizing language and graphics." %> >
+        <h1 class="tooltip" <%= tooltip_title "Use positive and non-stigmatizing language and graphics to ensure a positive experience for the Applicant." %> >
           Get the support your family needs
         </h1>
         <p>
@@ -54,7 +54,7 @@
         <% else %>
             <div class="hero--cta-options grid__item  text--centered">
               <%= link_to section_path(FormNavigation.first) do %>
-                  <p class="button button--cta button--fully-width tooltip" <%= tooltip_title "A clear call to action is important. Applicants shouldn’t spend any time wondering what they can do, or how to do it." %>>Start your application</p>
+                  <p class="button button--cta button--fully-width tooltip" <%= tooltip_title "This is an example of a tooltip. These are used throughout the site to provide insights or suggest actions. Click or tap on any tooltip to hide it." %>>Start your application</p>
                   <p class="text--help">Food Assistance and Health Insurance</p>
               <% end %>
             </div>

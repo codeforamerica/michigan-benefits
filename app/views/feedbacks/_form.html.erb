@@ -1,6 +1,6 @@
 <div class="feedback-survey__form">
   <%= form_for feedback_form, url: feedback_path, builder: MbFormBuilder, remote: true do |f| %>
-      <div class="tooltip" <%= tooltip_title "Applicants are often applying for benefits under stressful circumstances. Don’t distract them mid-application by asking them to improve it for other people. An optional survey at the very end is appropriate." %>></div>
+      <div class="tooltip" <%= tooltip_title "Applying for benefits is often stressful. Avoid distracting Applicants mid-way through their application by asking them to improve it for other people. Keep an optional survey at the end and they will be more willing to give feedback." %>></div>
       <%= f.mb_radio_set :feedback_rating,
         label_text: "<h3>How was your experience with this application?</h3>",
         collection: [

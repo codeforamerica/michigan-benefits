@@ -1,7 +1,7 @@
 <% content_for :header_title, "Income and Employment" %>
 
 <% content_for :form_card_header do %>
-    <h1 class="form-card__title tooltip" <%= tooltip_title "Getting accurate salary information is difficult. Applicants want to provide the right information, but the way caseworkers calculate income is different from how most people think about it. We help by asking different questions based on salary type." %>>
+    <h1 class="form-card__title tooltip" <%= tooltip_title "Getting accurate salary information is challenging. Applicants want to provide the right information, but the way caseworkers calculate income is different from how most people think about it. Breaking this down into questions about salary type led to more accurate results." %>>
       <% if current_member == current_application.primary_member %>
           <%= t(".title.primary_member", count: current_member.employments_count) %>
       <% else %>
@@ -34,7 +34,7 @@
                   {
                     value: :hourly,
                     label: "Hourly",
-                    tooltip: "Choose hourly: Initially this field only allowed numbers, but applicants naturally want to explain fluctuating hours by typing “10-15” or “30 to 35”. Requiring that certain questions only contain numbers can help reduce errors, but in this situation it was overly restrictive.",
+                    tooltip: "Initially this question only allowed numbers, but Applicants naturally want to explain fluctuating hours by typing “10-15” or “30 to 35”. Requiring that certain questions only contain numbers can help reduce errors, but in this situation it was overly restrictive.",
                     options: {"data-follow-up": "#hourly-follow-up-#{index}"}
                   },
                   {
