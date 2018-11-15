@@ -7,21 +7,14 @@ RSpec.feature "Warn users on staging or demo only", :a11y do
 
   scenario "Renders the staging warning message" do
     visit root_path
-    expect(page).to have_content("This site is for example purposes only. ")
+
+    expect(page).to have_content("A user-centered integrated benefits application")
+    proceed_with "Continue to demo"
+
+    expect(page).to have_content("This site is for example purposes only.")
 
     within(".slab--hero") do
       proceed_with "Start your application"
-    end
-
-    on_page "About This Demo" do
-      expect(page).to have_content("Michigan Benefits example application!")
-
-      proceed_with "Continue demo application"
-    end
-
-    on_page "About This Demo" do
-      expect(page).to have_content("A user-centered integrated benefits application")
-      proceed_with "Continue"
     end
 
     on_page "Introduction" do

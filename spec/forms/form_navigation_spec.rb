@@ -44,8 +44,6 @@ RSpec.describe FormNavigation do
             SecondMainController,
             ThirdMainController,
             FirstOffMainController,
-            Integrated::DemoSiteWarningController,
-            Integrated::DemoSiteAboutController,
           ],
         )
       end
@@ -59,8 +57,6 @@ RSpec.describe FormNavigation do
             SecondMainController,
             ThirdMainController,
             FirstOffMainController,
-            Integrated::DemoSiteWarningController,
-            Integrated::DemoSiteAboutController,
           ],
         )
       end
@@ -87,20 +83,8 @@ RSpec.describe FormNavigation do
   end
 
   describe ".first" do
-    context "when in demo environment" do
-      it "delegates to .form_controllers and only inserts once" do
-        allow(GateKeeper).to receive(:demo_environment?).and_return(true)
-
-        expect(FormNavigation.first).to eq(Integrated::DemoSiteWarningController)
-        expect(FormNavigation.form_controllers.second).to eq(Integrated::DemoSiteAboutController)
-        expect(FormNavigation.form_controllers.third).to eq(FirstMainController)
-      end
-    end
-
-    context "when not in demo environment" do
-      it "delegates to .form_controllers" do
-        expect(FormNavigation.first).to eq(FirstMainController)
-      end
+    it "delegates to .form_controllers" do
+      expect(FormNavigation.first).to eq(FirstMainController)
     end
   end
 
