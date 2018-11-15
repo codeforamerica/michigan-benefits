@@ -186,18 +186,11 @@ class FormNavigation
     end
 
     def form_controllers
-      main_controllers = MAIN.values.flatten
-
-      if GateKeeper.demo_environment?
-        ([Integrated::DemoSiteWarningController, Integrated::DemoSiteAboutController] + main_controllers).freeze
-      else
-        main_controllers.freeze
-      end
+      MAIN.values.flatten.freeze
     end
 
     def all
-      (MAIN.values + OFF_MAIN +
-        [Integrated::DemoSiteWarningController, Integrated::DemoSiteAboutController]).flatten.freeze
+      (MAIN.values + OFF_MAIN).flatten.freeze
     end
   end
 

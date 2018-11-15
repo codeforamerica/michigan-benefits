@@ -22,8 +22,41 @@
     </div>
 
     <div class="form-card__footer">
-      <%= link_to "Apply on MI Bridges", "https://www.michigan.gov/mibridges", class: "button button--primary" %>
+      <%= link_to "Apply on MI Bridges", "https://www.michigan.gov/mibridges", class: "button button--cta" %>
       <%= link_to "Open demo site", "https://demo.michiganbenefits.org", class: "button" %>
+    </div>
+  </main>
+<% elsif current_page?(root_path) && GateKeeper.demo_environment? %>
+  <main id="main" class="form-card">
+    <header class="form-card__header">
+      <h1 class="form-card__title">
+        A user-centered integrated benefits application
+      </h1>
+    </header>
+    <div class="form-card__content">
+      <p>
+        The following is an application for both food assistance (SNAP) and healthcare (Medicaid) that was designed,
+        built, and piloted for nine months with Applicants in Flint, Michigan. This work was a joint initiative between
+        Code for America and Civilla. It was funded by a Process and Technology Improvement Grant from the Food and
+        Nutrition Service.
+      </p>
+      <p>
+        Designed alongside people applying for services in Flint, this form aimed to be easier to understand, faster to
+        use, as well as deliver a more accurate application.
+      </p>
+      <p>
+        Early results from the pilot show this approach reduced the time it takes to complete an application to ten
+        minutes, improved approval rates by 35%, and earned a user satisfaction rate of 74%.
+      </p>
+      <p>
+        This site is for example purposes only. If you need to submit an application, apply on MI Bridges. Otherwise,
+        please continue to the demo.
+      </p>
+    </div>
+
+    <div class="form-card__footer">
+      <%= link_to "Apply on MI Bridges", "https://www.michigan.gov/mibridges", class: "button" %>
+      <%= link_to "Continue to demo →", start_path, class: "button button--cta" %>
     </div>
   </main>
 <% else %>

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   resources :messages
 
+  get "/start" => "static_pages#index"
   root "static_pages#index"
   get "/privacy" => "static_pages#privacy"
   get "/terms" => "static_pages#terms"
